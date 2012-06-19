@@ -1,0 +1,70 @@
+From ryani.spam at gmail.com  Tue Apr 26 04:26:17 2011
+From: ryani.spam at gmail.com (Ryan Ingram)
+Date: Mon, 25 Apr 2011 19:26:17 -0700
+Subject: [Haskell-cafe] Inputs to classic FRP:
+	unsafeInterleaveIO/unsafePerformIO
+In-Reply-To: <BANLkTikOtzMKT6iXxJDPEeSgfWPX55jc=w@mail.gmail.com>
+References: <BANLkTi=XMKwyeK8VK5kyYJRuP1JS4RZS4g@mail.gmail.com>
+	<BANLkTikOtzMKT6iXxJDPEeSgfWPX55jc=w@mail.gmail.com>
+Message-ID: <BANLkTimjrd2dsQk5WmNeMdaTAhX69wqPsw@mail.gmail.com>
+
+Mail fail, haha.  Code fixed.
+For example:
+
+-- Library functions for a hypothetical FRP system
+pollEvent :: IO [a] -> Event a
+behavior :: a -> Event a -> Behavior a
+accumB :: b -> (b -> a -> b) -> Event a -> Behavior b
+accumE :: b -> (b -> a -> b) -> Event a -> Event b
+union :: Event a -> Event a -> Event a
+runFRP :: (a -> IO Bool) -> Behavior a -> IO ()
+-- Event & Behavior become instances of Functor & Applicative
+
+-- and now a hypothetical implementation
+data Event a where
+   Event :: s -- initial state
+               -> (s -> IO ([a], s))  -- tick
+               -> Event a
+data Behavior a = Behavior a (Event a)
+
+pollEvent act = Event () $ \() -> do
+     xs <- act
+     return (xs, ())
+
+behavior = Behavior
+
+union (Event sL0 tickL) (Event sR0 tickR) = Event (sL0,sR0) tick where
+    tick (sL, sR) = do
+        (ls, sL') <- tickL sL
+        (rs, sR') <- tickR sR
+        return (ls ++ rs, (sL', sR'))
+
+accumB b0 f e = Behavior b0 $ accumE b f e
+
+accumE b0 f (Event s0 tickE) = Event (b0, s0) tick where
+    tick (b, s) = do
+        (as, s') <- tickE s
+        let bs = scanl f b as
+        return (bs, (last bs, s'))
+
+-- Functor, Applicative instances are pretty easy and left as an exercise
+
+runFRP tick (Behavior b0 (Event s0 e)) = runFRP' b0 s0 where
+    runFRP' b s = do
+        (bs, s') <- e s0
+        let b' = last (b:bs)
+        k <- tick b'
+        when k $ runFRP' b' s'
+
+-- sample application
+keypress :: Event Char
+keypress = pollEvent getCurrentPressedKeys where
+   getCurrentPressedKeys = undefined -- exercise for the reader
+
+-- application prints the last key you pressed until you press 'q'
+main = runFRP tick keypress where
+    tick k = print k >> return (k /= 'q')
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110425/f6d2fc6f/attachment.htm>
+

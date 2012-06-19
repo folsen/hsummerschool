@@ -1,0 +1,74 @@
+From illissius at gmail.com  Thu Dec 22 17:08:18 2011
+From: illissius at gmail.com (=?ISO-8859-1?Q?G=E1bor_Lehel?=)
+Date: Thu, 22 Dec 2011 17:08:18 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <1324322427.2233.6.camel@fuzxxl>
+References: <1324322427.2233.6.camel@fuzxxl>
+Message-ID: <CAPNUp08sh8UV2J0_MR67Gj6AWwNJjVhB+oWaf8tgy-stD+csGQ@mail.gmail.com>
+
+On Mon, Dec 19, 2011 at 8:20 PM, Robert Clausecker <fuzxxl at gmail.com> wrote:
+> Image you would create your own language with a paradigm similar to
+> Haskell or have to chance to change Haskell without the need to keep any
+> compatibility. What stuff would you add to your language, what stuff
+> would you remove and what problems would you solve completely different?
+>
+> Thanks in advance for all answers, yours
+>
+> ? ? ? ?Robert Clausecker
+
+A whole lot (a surprisingly very large amount) of things don't require
+breaking compatibility. Also a lot of things are really amazing but
+need smarter people than myself to invent them (the Constraint kind is
+a good example). And many things are trivial and superficial.
+
+I agree with everyone who mentioned it about giving things
+user-friendly names and leaving the mathematical connections to the
+documentation. I'm partial to Mappable/Sequenceable/Runnable for
+Functor/Applicative/Monad, but doubtless better ones are possible. I
+would define Monad in terms of join :p, and use (=<<) as the default
+bind.
+
+I also agree with name: Type instead of name :: Type. I would make :
+bind tighter. I would rename the * kind to Type, because (Type ->
+Constraint) looks less weird than (* -> Constraint). I would change
+some things to be just a little bit more C/Unix-like: != for
+inequality, allow (not require!) opening and closing braces on the
+same line, * instead of _ as the wildcard.
+
+Many things are in the realm of "this could definitely be done better,
+but I'm not sure how, either": tuples, records, and modules, in
+ascending order. Records would be lens-based because composability is
+nice, but that's about as far as I know. The operative principle with
+modules would be that after 'import Module' you should be good to go:
+manual intervention to avoid name clashes is a very nice feature, but
+you should only have to use it rarely. (In other words, much more
+control would be given to module authors over how things are
+exported.) Modules would be parametrizable on types - for example, for
+FRP libraries where every signature includes the Time type. (If I knew
+more about ML-style modules I might be advocating them.)
+
+I would make the whitespace around infix operators (and other
+punctuation like list literals) mandatory and significant. It's how
+you write it in most cases anyways, and how you should have in most of
+the rest. This frees up a lot of "syntax space" which could be used
+for various things: special built-in syntax, prefix/postfix operators,
+and you could have normal-looking array[and] record.access like every
+other language. (To be clear, list literals would still look [like,
+this], it's just the presence or absence of whitespace in between them
+and the preceding identifier which would be significant in this case.)
+
+Strictness types can be added as a language extension but either way I
+would add them. I would put greater emphasis on unboxed polymorphism
+by multiinstantiation over polymorphism by boxing and dictionary
+passing (it's not nice that abstract code is slower than monotyped
+code), but that's an implementation issue. I would add language
+support for mutating values without explicitly using an IORef,
+provided you're doing it in the right monad and the effects don't
+"leak", like what Disciple has but with better syntax. I would
+distinguish things which read from memory in an impure way from things
+which write to memory from things which Do Things In The Outside World
+like write a file. (Maybe by lifting Disciple's effect typing
+wholesale, but I'm attached to monads.)
+
+

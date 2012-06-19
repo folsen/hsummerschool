@@ -1,0 +1,20 @@
+From pocmatos at gmail.com  Fri Apr 15 17:40:25 2011
+From: pocmatos at gmail.com (Paulo J. Matos)
+Date: Fri, 15 Apr 2011 16:40:25 +0100
+Subject: [Haskell-cafe] Cairo and Haskell
+In-Reply-To: <BANLkTinWEM-xvjUO_TS2uOoMtv-xsqf3OQ@mail.gmail.com>
+References: <io9imb$1n8$1@dough.gmane.org>	<BANLkTikYTHOmmYOcxmxVk+YMRn2NE=D0Pw@mail.gmail.com>
+	<BANLkTinWEM-xvjUO_TS2uOoMtv-xsqf3OQ@mail.gmail.com>
+Message-ID: <io9ot9$9n9$2@dough.gmane.org>
+
+On 15/04/11 15:19, Chris Smith wrote:
+> To answer my own email, yes, PDF support is there.
+>
+
+Great, I assume it would also allow me to preview it on a GTK canvas, right?
+
+--
+PMatos
+
+
+

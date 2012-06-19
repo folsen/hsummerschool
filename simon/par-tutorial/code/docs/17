@@ -1,0 +1,120 @@
+From oleg at okmij.org  Fri Apr  1 11:23:24 2011
+From: oleg at okmij.org (oleg at okmij.org)
+Date: Fri,  1 Apr 2011 02:23:24 -0700 (PDT)
+Subject: [Haskell-cafe] Strictness is observable
+Message-ID: <20110401092324.93FB2172BC@Adric.ern.nps.edu>
+
+
+John Meacham wrote:
+> Error is not catchable in haskell 98. Only things thrown by raiseIO are.
+
+I see; so GHC, absent any LANGUAGE pragma, should have arranged for
+`error' to generate a non-catchable exception.
+
+Still, Haskell98 specifically allows for the behavior that lets us
+distinguish strict and non-strict functions (that is, the evaluation
+order in the pure code).
+
+Here is the relevant chapter and the verse from Haskell98 (PDF file
+found on Haskell.org)
+
+    21.2.3 File locking
+
+    Implementations should enforce as far as possible, at least locally to
+    the Haskell process, multiple- reader single-writer locking on
+    files. That is, there may either be many handles on the same file
+    which manage input, or just one handle on the file which manages
+    output. If any open or semi- closed handle is managing a file for
+    output, no new handle can be allocated for that file. If any open or
+    semi-closed handle is managing a file for input, new handles can only
+    be allocated if they do not manage output. Whether two files are the
+    same is implementation-dependent, but they should normally be the same
+    if they have the same absolute path name and neither has been renamed,
+    for example.
+
+    Warning: the readFile operation (Section 7.1) holds a semi-closed
+    handle on the file until the entire contents of the file have been
+    consumed. It follows that an attempt to write to a file (using
+    writeFile, for example) that was earlier opened by readFile will
+    usually result in failure with isAlreadyInUseError.
+
+The Report specifically warns of the possibility that an
+implementation that implements file locking, as encouraged by the
+Report, can distinguish if the entire contents has been consumed or
+not. The consumption happens in the pure code. Thus the pure Haskell
+evaluation order starts to matter for a Haskell98-compliant
+implementation. The following code demonstrates that fact.
+
+> -- Haskell98! -- at least as far as GHC implements the absence
+> -- of LANGUAGE pragmas
+> -- Strictness is observable
+> -- With no seq, no unsafe operations
+>
+> import System.IO
+> import Control.Exception
+>
+> -- fs and fns are both essentially (const True) functions, 
+> -- but differ in strictness
+> fs,fns :: Bool -> Bool
+>
+> -- non-strict
+> fns x = True
+>
+> -- strict
+> fs True = True
+> fs x    = True
+>
+> -- Any file name that one can create and not be sorry to override
+> file_name = "/tmp/foo" 
+>
+> prepare :: IO ()
+> prepare = writeFile file_name "xxx"
+>
+>
+> {-
+> test f = do
+>          h <- openFile file_name ReadMode
+> 	   lst <- hGetContents h >>= return . words
+> 	   ns <- if f (head lst == "") then return "non-strict" else return "" 
+> 	   hClose h
+>          if lst == [] then print ns else print "strict"
+> -}
+>
+> handler :: SomeException -> IO ()
+> handler _ = print "non-strict"
+>
+> test f = handle handler $ do
+>          h <- openFile file_name ReadMode
+>          lst <- hGetContents h
+>          ns <- if f (length lst == 0) then return "strict" else return "" 
+>          writeFile file_name ""
+>          print ns
+>
+> main_s = prepare >> test fs
+> -- prints "strict"
+>
+> main_ns = prepare >> test fns
+> -- "non-strict"
+
+
+
+Yves Pare`s wrote:
+> Then if you turn :
+> fs True = True
+> fs x = True
+> to:
+> fs x = case x of
+>     True -> True
+>     x' -> True  
+> Is it still strict, or does 'fs' wrap the case test and defer evaluation?
+
+Well, we have a test for that, don't we? 
+
+> fs1 x = case x of
+>     True -> True
+>     x' -> True  
+
+*Main> prepare >> test fs1
+"strict"
+
+

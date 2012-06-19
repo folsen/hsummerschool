@@ -1,0 +1,46 @@
+From svante.signell at telia.com  Tue Apr 12 18:18:31 2011
+From: svante.signell at telia.com (Svante Signell)
+Date: Tue, 12 Apr 2011 18:18:31 +0200
+Subject: [Haskell-cafe] ghc6: Re: Update: ... compiling ghc6
+In-Reply-To: <1302475337.17523.21.camel@hp.my.own.domain>
+References: <1301469485.21366.100.camel@hp.my.own.domain>
+	<20110330091340.GD5656@const.bordeaux.inria.fr>
+	<1301913325.32453.110.camel@s1499.it.kth.se>
+	<1302075048.6774.36.camel@hp.my.own.domain>
+	<1302475337.17523.21.camel@hp.my.own.domain>
+Message-ID: <1302625111.8135.25.camel@s1499.it.kth.se>
+
+On Mon, 2011-04-11 at 00:42 +0200, Svante Signell wrote:
+> Addressing both Haskell and Hurd people here. Any hints by anyone?
+> 
+> On Wed, 2011-04-06 at 09:30 +0200, Svante Signell wrote:
+> ...
+> > #5  0x011d3ce0 in __libc_read (fd=DWARF-2 expression error: DW_OP_reg
+> > operations must be used either alone or in conjuction with DW_OP_piece
+> > or DW_OP_bit_piece.
+> > ) at ../sysdeps/mach/hurd/read.c:27
+> > #6  0x084919c8 in s9qJ_ret ()
+> > #7  0x0861f842 in StgRun ()
+> > #8  0x087c44e0 in ?? ()
+> 
+> Looking into this further, this looks like an error. What does it mean?
+> from eglibc-2.11.2/sysdeps/mach/hurd/read.c
+> 
+> /* Read NBYTES into BUF from FD.  Return the number read or -1.  */
+> ssize_t
+> __libc_read (int fd, void *buf, size_t nbytes)
+> {
+>   error_t err = HURD_FD_USE (fd, _hurd_fd_read (descriptor, buf,
+> &nbytes, -1));
+>   return err ? __hurd_dfail (fd, err) : nbytes;
+> }
+
+Could not find any reference to __libc_read in either gnumach or hurd
+code. The only place was in the binary file
+hurd-20110319/ext2fs/ext2fs.static, but I assume this comes from a
+linkage with libc. Is the calling function in the Haskell cabal-bin
+binary linked with libc0.3 (and other libs)? How to enable debugging for
+Haskell binaries with gdb?
+
+
+

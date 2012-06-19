@@ -1,0 +1,18 @@
+From artyom.kazak at gmail.com  Thu Aug 11 14:06:21 2011
+From: artyom.kazak at gmail.com (Artyom Kazak)
+Date: Thu, 11 Aug 2011 15:06:21 +0300
+Subject: [Haskell-cafe] Additional functions of GMP
+Message-ID: <op.vz1s8vk7shvy2l@artyom-nbook>
+
+GMP has a lot of functions, such as extracting roots, primality test,  
+Legendre symbol, factorial and so on. These can be written in Haskell, of  
+course, but isn't it better to use existing functions? They are also much  
+faster than similar functions from NumericPrelude, I believe.
+
+I have heard GHC 7.2.1 now includes module named GHC.Integer.Logarithms,  
+but I can't find its description anywhere.
+
+So, my question is: can I use full power of GMP's functions, and if I can  
+? how?
+
+

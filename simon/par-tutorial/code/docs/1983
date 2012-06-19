@@ -1,0 +1,33 @@
+From acowley at gmail.com  Thu Dec 15 16:51:11 2011
+From: acowley at gmail.com (Anthony Cowley)
+Date: Thu, 15 Dec 2011 10:51:11 -0500
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <20111215151947.GB24931@seas.upenn.edu>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+Message-ID: <5E7ED349-3B28-4BE6-8B47-FBA763712A9E@gmail.com>
+
+On Dec 15, 2011, at 10:19 AM, Brent Yorgey wrote:
+
+> On Thu, Dec 15, 2011 at 06:49:13PM +1000, Gregory Crosswhite wrote:
+>> 
+>> So at the end of the day... what is the point of even making Maybe and [] instances of Alternative?
+> 
+> The Alternative and Monoid instances for [] are equivalent.  However,
+> the Alternative and Monoid instances for Maybe are not. To wit:
+> 
+>> (Just (Sum  4)) <|> (Just (Sum 3))
+>  Just (Sum {getSum = 4})
+> 
+>> (Just (Sum 4)) `mappend` (Just (Sum 3))
+>  Just (Sum {getSum = 7})
+
+We already have,
+
+> First (Just (Sum 4)) `mappend` First (Just (Sum 3))
+First {getFirst = Just (Sum {getSum = 4})}
+
+So the overlap of apparent Alternative and Monoid functionality remains. This just represents an opportunity for the caller to select the monoid they want.
+
+Anthony
+

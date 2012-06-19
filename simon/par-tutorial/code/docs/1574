@@ -1,0 +1,57 @@
+From mail at joachim-breitner.de  Thu Dec  1 11:28:19 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Thu, 01 Dec 2011 11:28:19 +0100
+Subject: [Haskell-cafe] List fusion of nested lists
+Message-ID: <1322735299.2990.26.camel@kirk>
+
+Dear Cafe,
+
+I?m trying to exploit list fusion as provided by GHC (build/foldr). One
+function that I want to get fusable is this, it splits a list of
+integeres into maximal monotonous subsequences:
+
+streaks :: [Integer] -> [[Integer]]
+streaks [] = []
+streaks (x:xs) = let (this,rest) = oneStreak (x:xs)
+                 in this:streaks rest
+
+oneStreak :: [Integer] -> ([Integer], [Integer])
+oneStreak [x] = ([x],[])
+oneStreak l@(x:y:_) = splitWhile2 (\a b -> a `compare` b == x `compare` y) l
+
+splitWhile2 :: (Integer -> Integer -> Bool) -> [Integer] -> ([Integer], [Integer])
+splitWhile2 p [x] = ([x],[])
+splitWhile2 p (x:y:xs) | p x y = let (s,r) = splitWhile2 p (y:xs) in (x:s,r)
+                       | otherwise = ([x],y:xs) 
+
+
+Now I?d like to implement streaks in terms of build and foldr such that
+it is subject to list fusion. Especially, when used in
+        concatMap (streaks . func) :: [X] -> [[Integer]]
+where
+        func :: X -> [Integer]
+is implemented with buildr, this should ideally remove all intermediate
+lists.
+
+Can this be done with list fusion at all? How would I go about it?
+
+If the above example is too complicated, known how it would work for
+Data.List.group would help me already a lot.
+
+Greetings,
+Joachim
+
+
+-- 
+Joachim "nomeata" Breitner
+  mail at joachim-breitner.de  |  nomeata at debian.org  |  GPG: 0x4743206C
+  xmpp: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111201/dbad9efd/attachment.pgp>
+

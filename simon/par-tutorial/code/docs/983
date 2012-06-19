@@ -1,0 +1,35 @@
+From alex.solla at gmail.com  Tue Aug  9 03:18:05 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Mon, 8 Aug 2011 18:18:05 -0700
+Subject: [Haskell-cafe] Declarative configuration languages?
+In-Reply-To: <5897AB6F-0A17-45FB-9E07-4BF4E9424AC2@cs.otago.ac.nz>
+References: <5897AB6F-0A17-45FB-9E07-4BF4E9424AC2@cs.otago.ac.nz>
+Message-ID: <CAO0Ooq2UagMTqHaQEoAKcrR7_4xeMSZsRpRwd+3HjYCK-wTsEQ@mail.gmail.com>
+
+On Sun, Aug 7, 2011 at 6:58 PM, Richard O'Keefe <ok at cs.otago.ac.nz> wrote:
+
+> A colleague just asked me
+>        I'm trying to kick off some work into middleware for configuration
+> of large-scale,
+>        distributed systems.  Have you come across any elegant, declarative
+> configuration
+>        languages used for this sort of job?
+>
+> I've found a couple of papers, but I've never _used_ any of the systems.
+> Any recommendations?
+>
+>
+I haven't used any "configuration languages" to develop my own configuration
+system.  But I have used a combination of Haskell and JSON to handle
+configuration in many applications.  (And I'm currently working on one for
+HandbrakeCLI, the video encoding tool)
+
+The general idea is straight forward.  Create configuration data types to
+represent the variable run-time data.  Read from JSON/YAML/etc and
+deserialize to the internal Haskell representation.  Let the configuration
+"runners" interpret the configuration in terms of IO actions calling to
+external tools.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110808/648d1ede/attachment.htm>
+

@@ -1,0 +1,37 @@
+From joey at kitenet.net  Tue Dec  6 16:37:50 2011
+From: joey at kitenet.net (Joey Hess)
+Date: Tue, 6 Dec 2011 11:37:50 -0400
+Subject: [Haskell-cafe] ANNOUNCE: monad-control-0.3
+In-Reply-To: <CADLz5wVXaXLHStgJs6m+=-_QpxDo6=2ntd41wVLdSo=CbipRFA@mail.gmail.com>
+References: <CADLz5wW4oZbBtKMb7UQ8qQdn3UayBSQ-TL66VLG3hGXCUk_npg@mail.gmail.com>
+	<CADLz5wVs3AGCagikDMJVKVm-RJjgMhCbs7LJtxGPqi_rLbjRqQ@mail.gmail.com>
+	<20111206030316.GA25805@gnu.kitenet.net>
+	<CADLz5wX6aSLyjxpjZ_H00e4vQdf=-6gAbMsXZ_vKrROWFrMzjQ@mail.gmail.com>
+	<CADLz5wVXaXLHStgJs6m+=-_QpxDo6=2ntd41wVLdSo=CbipRFA@mail.gmail.com>
+Message-ID: <20111206153750.GB2777@gnu.kitenet.net>
+
+Bas van Dijk wrote:
+> On 6 December 2011 09:12, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+> > instance MonadBaseControl IO Annex where
+> > ? ?newtype StM Annex a = StAnnex (StM (StateT AnnexState IO) a)
+> > ? ?liftBaseWith f = Annex $ liftBaseWith $ \runInIO ->
+> > ? ? ? ? ? ? ? ? ? ? ? f $ liftM StAnnex . runInIO . runAnnex
+> 
+> Oops forgot the restoreM method:
+> 
+>    restoreM = Annex . restoreM . unStAnnex
+> 
+> unStAnnex (StAnnex st) = st
+
+Aha! Thanks again.
+
+-- 
+see shy jo
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 828 bytes
+Desc: Digital signature
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111206/4f808e55/attachment.pgp>
+

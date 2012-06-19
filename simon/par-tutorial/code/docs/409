@@ -1,0 +1,63 @@
+From as at hacks.yi.org  Thu Apr 14 20:12:48 2011
+From: as at hacks.yi.org (austin seipp)
+Date: Thu, 14 Apr 2011 13:12:48 -0500
+Subject: [Haskell-cafe] Questioning seq
+In-Reply-To: <4DA7358F.1080501@btinternet.com>
+References: <4DA7358F.1080501@btinternet.com>
+Message-ID: <BANLkTikVHcCzv+YcxghP1y8es9N66VtZVA@mail.gmail.com>
+
+As usual, I'm foolish and forget to hit 'reply to all'. Original
+message unedited below, so it can be sent to -cafe.
+
+To answer question #3, pseq and seq are semantically equivalent
+(indeed, if you look at the source for Control.Parallel, if you are
+not using GHC, pseq is defined as 'pseq = seq'.) There is a subtle
+operational difference however: seq is strict in both of its
+arguments, while pseq is only strict in its first argument as far as
+GHC is concerned.
+
+When you annotate code for parallelism, seq is a little more
+problematic, because you want more control over the evaluation order.
+For example, given a `seq` b, the compiler can freely rearrange this
+in a number of ways - but if we are evaluating code in parallel,
+that's a little too strict. So typically you want to say a `pseq` b -
+you will strictly evaluate 'a' before 'b', presumably because 'b' has
+already been sparked off in parallel using `par`. If you were using
+seq, the compiler can rearrange a `seq` b into say, b `seq` a `seq` b.
+Which won't gain you anything from a parallel perspective, for the
+most part.
+
+For more info, see the Control.Parallel module:
+
+http://hackage.haskell.org/packages/archive/parallel/3.1.0.1/doc/html/Control-Parallel.html
+
+Also see Simon & Simon's paper, 'Runtime support for Multicore
+Haskell', particularly section 2, 'Background: programming model'.
+
+http://community.haskell.org/~simonmar/papers/multicore-ghc.pdf
+
+On Thu, Apr 14, 2011 at 12:57 PM, Andrew Coppin
+<andrewcoppin at btinternet.com> wrote:
+> A couple of questions:
+>
+> 1. Why is the existence of polymorphic seq bad?
+>
+> 2. Why would the existence of polymorphic rnf be worse?
+>
+> 3. How is pseq different from seq?
+>
+> That is all...
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Regards,
+Austin
+
+

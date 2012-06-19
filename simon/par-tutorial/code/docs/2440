@@ -1,0 +1,59 @@
+From conal at conal.net  Fri Dec 30 02:07:36 2011
+From: conal at conal.net (Conal Elliott)
+Date: Thu, 29 Dec 2011 17:07:36 -0800
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFD08E1.3080304@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<CAA+2x_VzE3zHgL89K8V+EQoPLMS89XtsTpU+Kn_aK6F1WKmObg@mail.gmail.com>
+	<4EFD08E1.3080304@blueyonder.co.uk>
+Message-ID: <CAD6SzRLDAf3XBcwNkA6bGFq5o9xeZ6k2W9MDTCs0Rr6bUtfiaw@mail.gmail.com>
+
+I wrote that post to point out the fuzziness that fuels many discussion
+threads like this one. See also
+http://conal.net/blog/posts/notions-of-purity-in-haskell/ and the comments.
+
+I almost never find value in discussion about whether language X is
+"functional", "pure", or even "referentially transparent", mainly because
+those terms are used so imprecisely. In the notions-of-purity post, I
+suggest another framing, as whether or not a language and/or collection of
+data types is/are "denotative", to use Peter Landin's recommended
+replacement for "functional", "declarative", etc. I included some quotes
+and a link in that post. so people can track down what "denotative" means.
+In my understanding, Haskell-with-IO is not denotative, simply because we
+do not have a (precise/mathematical) model for IO. And this lack is by
+design, as explained in the "toxic avenger" remarks in a comment on that
+post.
+
+I often hear explanations of what IO means (world-passing etc), but I don't
+hear any consistent with Haskell's actual IO, which includes
+nondeterministic concurrency. Perhaps the difficulties could be addressed,
+but I doubt it, and I haven't seen claims pursued far enough to find out.
+
+  - Conal
+
+On Thu, Dec 29, 2011 at 4:42 PM, Steve Horne <sh006d3592 at blueyonder.co.uk>wrote:
+
+>  On 30/12/2011 00:16, Sebastien Zany wrote:
+>
+> Steve Horne wrote:
+>
+>> I haven't seen this view explicitly articulated anywhere before
+>>
+>
+>  See Conal Elliott's blog post The C language is purely functional<http://conal.net/blog/posts/the-c-language-is-purely-functional>
+> .
+>
+> Thanks - yes, that's basically the same point. More concise - so clearer,
+> but not going into all the same issues - but still the same theme.
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111229/ab7be0ff/attachment.htm>
+

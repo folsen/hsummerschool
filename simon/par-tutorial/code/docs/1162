@@ -1,0 +1,190 @@
+From bgamari.foss at gmail.com  Tue Aug 16 18:32:13 2011
+From: bgamari.foss at gmail.com (Ben Gamari)
+Date: Tue, 16 Aug 2011 12:32:13 -0400
+Subject: [Haskell-cafe] Memory management issue in notmuch-haskell bindings
+Message-ID: <8739h1pbaq.fsf@gmail.com>
+
+It seems that the notmuch-haskell bindings (version 0.2.2 built against
+notmuch from git master; passes notmuch-test) aren't dealing with memory
+management properly. In particular, the attached test code[1] causes
+talloc to abort.  Unfortunately, while the issue is consistently
+reproducible, it only occurs with some queries (see source[1]). I have
+been unable to establish the exact criterion for failure.
+
+It seems that the crash is caused by an invalid access to a freed Query
+object while freeing a Messages object (see Valgrind trace[3]). I've
+taken a brief look at the bindings themselves but, being only minimally
+familiar with the FFI, there's nothing obviously wrong (the finalizers
+passed to newForeignPtr look sane). I was under the impression that
+talloc was reference counted, so the Query object shouldn't have been
+freed unless if there was still a Messages object holding a
+reference. Any idea what might have gone wrong here?  Thanks!
+
+Cheers,
+
+- Ben
+
+
+
+[1] Test case,
+
+import Data.List
+import Control.Monad
+import System.Environment
+import Foreign.Notmuch
+
+dbpath = "/home/ben/.mail"
+
+getAddresses :: Database -> String -> IO [String]
+getAddresses db q = do
+        query <- queryCreate db q
+        msgs <- queryMessages query
+        addrs <- mapM (flip messageGetHeader $ "From") msgs
+        return addrs
+
+main = do
+        db <- databaseOpen dbpath DatabaseModeReadOnly
+        --addrs2 <- getAddresses db "tag:haskell" -- This succeeds
+        addrs3 <- getAddresses db "to:dietz" -- This fails
+
+        --print addrs2
+        --print addrs3
+
+        databaseClose db
+
+
+
+[2] Crashed session and backtrace,
+
+[1217 ben at ben-laptop ~] $ ghc test.hs -auto-all -rtsopts -prof && gdb ./test 
+GNU gdb (Ubuntu/Linaro 7.2-1ubuntu11) 7.2
+Copyright (C) 2010 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>...
+Reading symbols from /home/ben/test...(no debugging symbols found)...done.
+(gdb) run
+Starting program: /home/ben/test 
+[Thread debugging using libthread_db enabled]
+
+Program received signal SIGABRT, Aborted.
+0x00007ffff5979d05 in raise (sig=6) at ../nptl/sysdeps/unix/sysv/linux/raise.c:64
+64	../nptl/sysdeps/unix/sysv/linux/raise.c: No such file or directory.
+	in ../nptl/sysdeps/unix/sysv/linux/raise.c
+(gdb) bt
+#0  0x00007ffff5979d05 in raise (sig=6) at ../nptl/sysdeps/unix/sysv/linux/raise.c:64
+#1  0x00007ffff597dab6 in abort () at abort.c:92
+#2  0x00007ffff6de038c in talloc_abort (reason=0x7ffff6de56e8 "Bad talloc magic value - access after free") at ../talloc.c:210
+#3  0x00007ffff6de0271 in talloc_abort_access_after_free (ptr=0x769190, location=0x7ffff7bd4e04 "lib/messages.c:142") at ../talloc.c:229
+#4  talloc_chunk_from_ptr (ptr=0x769190, location=0x7ffff7bd4e04 "lib/messages.c:142") at ../talloc.c:250
+#5  _talloc_free (ptr=0x769190, location=0x7ffff7bd4e04 "lib/messages.c:142") at ../talloc.c:1164
+#6  0x00007ffff7bc7e65 in notmuch_messages_destroy (messages=0x769190) at lib/messages.c:142
+#7  0x00000000004de1c9 in scheduleFinalizers ()
+#8  0x00000000004e013d in GarbageCollect ()
+#9  0x00000000004d9e40 in scheduleDoGC.clone.18 ()
+#10 0x00000000004db0e0 in exitScheduler ()
+#11 0x00000000004d9066 in hs_exit_ ()
+#12 0x00000000004d940a in shutdownHaskellAndExit ()
+#13 0x00000000004d8a91 in real_main ()
+#14 0x00000000004d8ade in hs_main ()
+#15 0x00007ffff5964eff in __libc_start_main (main=0x408ed0 <main>, argc=1, ubp_av=0x7fffffffe4f8, init=<value optimized out>, fini=<value optimized out>, 
+    rtld_fini=<value optimized out>, stack_end=0x7fffffffe4e8) at libc-start.c:226
+#16 0x0000000000407791 in _start ()
+(gdb) 
+
+
+[3] Valgrind output,
+
+==25241== Memcheck, a memory error detector
+==25241== Copyright (C) 2002-2010, and GNU GPL'd, by Julian Seward et al.
+==25241== Using Valgrind-3.6.1 and LibVEX; rerun with -h for copyright info
+==25241== Command: ./test
+==25241== 
+==25241== Conditional jump or move depends on uninitialised value(s)
+==25241==    at 0x52BB510: inflateReset2 (in /lib/x86_64-linux-gnu/libz.so.1.2.3.4)
+==25241==    by 0x52BB605: inflateInit2_ (in /lib/x86_64-linux-gnu/libz.so.1.2.3.4)
+==25241==    by 0x5F211BE: ChertTable::lazy_alloc_inflate_zstream() const (chert_table.cc:1672)
+==25241==    by 0x5F23B06: ChertTable::read_tag(Cursor*, std::string*, bool) const (chert_table.cc:1264)
+==25241==    by 0x5F260F9: ChertTable::get_exact_entry(std::string const&, std::string&) const (chert_table.cc:1210)
+==25241==    by 0x5F26DE2: ChertTermList::ChertTermList(Xapian::Internal::RefCntPtr<ChertDatabase const>, unsigned int) (chert_termlist.cc:44)
+==25241==    by 0x5EFF2E5: ChertDatabase::open_term_list(unsigned int) const (chert_database.cc:891)
+==25241==    by 0x5E7E7FB: Xapian::Document::termlist_begin() const (omdocument.cc:176)
+==25241==    by 0x4E41822: _notmuch_message_ensure_metadata(_notmuch_message*) (message.cc:309)
+==25241==    by 0x4E429DC: _notmuch_message_ensure_filename_list(_notmuch_message*) (message.cc:632)
+==25241==    by 0x4E42C37: notmuch_message_get_filename (message.cc:698)
+==25241==    by 0x4E41CA7: _notmuch_message_ensure_message_file(_notmuch_message*) (message.cc:403)
+==25241== 
+==25241== Invalid read of size 4
+==25241==    at 0x5C25DED: _talloc_free (talloc.c:242)
+==25241==    by 0x4E39E64: notmuch_messages_destroy (messages.c:142)
+==25241==    by 0x4DE1C8: scheduleFinalizers (in /home/ben/test)
+==25241==    by 0x4E013C: GarbageCollect (in /home/ben/test)
+==25241==    by 0x4D9E3F: scheduleDoGC.clone.18 (in /home/ben/test)
+==25241==    by 0x4DB0DF: exitScheduler (in /home/ben/test)
+==25241==    by 0x4D9065: hs_exit_ (in /home/ben/test)
+==25241==    by 0x4D9409: shutdownHaskellAndExit (in /home/ben/test)
+==25241==    by 0x4D8A90: real_main (in /home/ben/test)
+==25241==    by 0x4D8ADD: hs_main (in /home/ben/test)
+==25241==    by 0x6F4FEFE: (below main) (libc-start.c:226)
+==25241==  Address 0x8324e90 is 64 bytes inside a block of size 136 free'd
+==25241==    at 0x4C282ED: free (vg_replace_malloc.c:366)
+==25241==    by 0x5C29884: _talloc_free_internal (talloc.c:714)
+==25241==    by 0x5C25F22: _talloc_free (talloc.c:667)
+==25241==    by 0x4E452BF: notmuch_query_destroy (query.cc:358)
+==25241==    by 0x4DE1C8: scheduleFinalizers (in /home/ben/test)
+==25241==    by 0x4E013C: GarbageCollect (in /home/ben/test)
+==25241==    by 0x4D9E3F: scheduleDoGC.clone.18 (in /home/ben/test)
+==25241==    by 0x4DB0DF: exitScheduler (in /home/ben/test)
+==25241==    by 0x4D9065: hs_exit_ (in /home/ben/test)
+==25241==    by 0x4D9409: shutdownHaskellAndExit (in /home/ben/test)
+==25241==    by 0x4D8A90: real_main (in /home/ben/test)
+==25241==    by 0x4D8ADD: hs_main (in /home/ben/test)
+==25241== 
+==25241== Invalid read of size 8
+==25241==    at 0x5C26251: _talloc_free (talloc.c:249)
+==25241==    by 0x4E39E64: notmuch_messages_destroy (messages.c:142)
+==25241==    by 0x4DE1C8: scheduleFinalizers (in /home/ben/test)
+==25241==    by 0x4E013C: GarbageCollect (in /home/ben/test)
+==25241==    by 0x4D9E3F: scheduleDoGC.clone.18 (in /home/ben/test)
+==25241==    by 0x4DB0DF: exitScheduler (in /home/ben/test)
+==25241==    by 0x4D9065: hs_exit_ (in /home/ben/test)
+==25241==    by 0x4D9409: shutdownHaskellAndExit (in /home/ben/test)
+==25241==    by 0x4D8A90: real_main (in /home/ben/test)
+==25241==    by 0x4D8ADD: hs_main (in /home/ben/test)
+==25241==    by 0x6F4FEFE: (below main) (libc-start.c:226)
+==25241==  Address 0x8324e80 is 48 bytes inside a block of size 136 free'd
+==25241==    at 0x4C282ED: free (vg_replace_malloc.c:366)
+==25241==    by 0x5C29884: _talloc_free_internal (talloc.c:714)
+==25241==    by 0x5C25F22: _talloc_free (talloc.c:667)
+==25241==    by 0x4E452BF: notmuch_query_destroy (query.cc:358)
+==25241==    by 0x4DE1C8: scheduleFinalizers (in /home/ben/test)
+==25241==    by 0x4E013C: GarbageCollect (in /home/ben/test)
+==25241==    by 0x4D9E3F: scheduleDoGC.clone.18 (in /home/ben/test)
+==25241==    by 0x4DB0DF: exitScheduler (in /home/ben/test)
+==25241==    by 0x4D9065: hs_exit_ (in /home/ben/test)
+==25241==    by 0x4D9409: shutdownHaskellAndExit (in /home/ben/test)
+==25241==    by 0x4D8A90: real_main (in /home/ben/test)
+==25241==    by 0x4D8ADD: hs_main (in /home/ben/test)
+==25241== 
+==25241== 
+==25241== HEAP SUMMARY:
+==25241==     in use at exit: 192,328 bytes in 555 blocks
+==25241==   total heap usage: 19,852 allocs, 19,297 frees, 35,375,726 bytes allocated
+==25241== 
+==25241== LEAK SUMMARY:
+==25241==    definitely lost: 0 bytes in 0 blocks
+==25241==    indirectly lost: 0 bytes in 0 blocks
+==25241==      possibly lost: 27,799 bytes in 292 blocks
+==25241==    still reachable: 164,529 bytes in 263 blocks
+==25241==         suppressed: 0 bytes in 0 blocks
+==25241== Rerun with --leak-check=full to see details of leaked memory
+==25241== 
+==25241== For counts of detected and suppressed errors, rerun with: -v
+==25241== Use --track-origins=yes to see where uninitialised values come from
+==25241== ERROR SUMMARY: 4 errors from 3 contexts (suppressed: 4 from 4)
+
+

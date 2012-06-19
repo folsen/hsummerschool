@@ -1,0 +1,93 @@
+From strake888 at gmail.com  Sat Dec 17 03:51:54 2011
+From: strake888 at gmail.com (Matthew Farkas-Dyck)
+Date: Fri, 16 Dec 2011 21:51:54 -0500
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+Message-ID: <CAL3m8eALLyBZ69+uWFMTaiYCkqSNZ+p+2QgT0-YFece-Gxz48w@mail.gmail.com>
+
+On 15/12/2011, Conor McBride <conor at strictlypositive.org> wrote:
+>
+> On 15 Dec 2011, at 15:19, Brent Yorgey wrote:
+>
+>> On Thu, Dec 15, 2011 at 06:49:13PM +1000, Gregory Crosswhite wrote:
+>>>
+>>> So at the end of the day... what is the point of even making Maybe
+>>> and [] instances of Alternative?
+>>
+>> The Alternative and Monoid instances for [] are equivalent.  However,
+>> the Alternative and Monoid instances for Maybe are not. To wit:
+>>
+>>> (Just (Sum  4)) <|> (Just (Sum 3))
+>>  Just (Sum {getSum = 4})
+>>
+>>> (Just (Sum 4)) `mappend` (Just (Sum 3))
+>>  Just (Sum {getSum = 7})
+>
+> The current monoid instance for Maybe is, in my view, unfortunate.
+>
+> Types are about semantic purpose, not just data representation.
+> Many purposes can be represented in the same way. We should identify
+> the purpose of a type (or type constructor), then define instances
+> consistent with that purpose. And better, we acquire by instance
+> inference compound instances consistent with that purpose! (A similar
+> view is often articulated well by Conal Elliott. But perhaps it's
+> just a "Con" thing.)
+>
+> The purpose of Maybe, it seems to me, is to model failure and
+> prioritized choice, after the manner of exceptions. It's clear
+> what the failure-and-prioritized-choice monoid is.
+>
+> It so happens that the same data representation can be used to make
+> a semigroup into a monoid by attaching an identity element. That's
+> a different semantic purpose, which deserves a different type.
+>
+> This really bites. I really like being able to write things like
+>
+>    newtype P a x = P ([a] -> Maybe (x, [a])) deriving Monoid
+>
+> and then make MonadPlus/Alternative instances just by copying the
+> monoid that results, but it doesn't work!
+>
+> It's unfortunate that we don't have local quantification in
+> constraints, so we can't write (forall x. Monoid (f x)), hence the
+> need for constructor classes doing basically the same job, with,
+> of necessity, newly renamed members. I think it compounds the
+> problem to choose inconsistent behaviour between the constructor
+> class and the underlying type class.
+>
+> Maybe I'm an extremist, but I'd prefer it if every Alternative
+> instance was constructed by duplicating a polymorphic Monoid
+> instance.
+>
+> Meanwhile, as for the issue which kicked this off, I do think it's
+> good to document and enforce meaningful (i.e. total on total input)
+> usages of operations by types where practical. At present, refining
+> one type class into several to account for subtle issues (like
+> whether some/many actually work) is expensive, even if it's
+> desirable. I'd once again plug default superclass instances and
+> Control.Newtype, then suggest that the library might benefit from a
+> little pruning.
+>
+> All the best
+>
+> Conor
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+By my reason, the instance (Monoid a => Monoid (Maybe a)) is
+appropriate, since we have another class for inner-type-agnostic
+choice -- Alternative! (and MonadPlus, but that's essentially the
+same, and would be if (Functor m => Applicative m => Monad m), as it
+ought).
+
+Cheers,
+Matthew Farkas-Dyck
+
+

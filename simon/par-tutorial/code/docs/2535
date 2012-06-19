@@ -1,0 +1,24 @@
+From conrad at metadecks.org  Tue Feb  1 04:42:10 2011
+From: conrad at metadecks.org (Conrad Parker)
+Date: Tue, 1 Feb 2011 12:42:10 +0900
+Subject: [Haskell-cafe] Loading bitmap with xlib
+In-Reply-To: <loom.20110131T133959-495@post.gmane.org>
+References: <loom.20110129T151208-836@post.gmane.org>
+	<loom.20110131T133959-495@post.gmane.org>
+Message-ID: <AANLkTi=Oq8yAhaYbNg920OTsQ-B_U92q_kAazUFRjumo@mail.gmail.com>
+
+On 31 January 2011 21:40, Francesco Mazzoli <f at mazzo.li> wrote:
+> Francesco Mazzoli <f <at> mazzo.li> writes:
+>
+> At the end I gave up and I wrote the function myself:
+>
+> http://hpaste.org/43464/readbitmapfile
+>
+
+cool ... the listed maintainer for the Xlib bindings is
+libraries at haskell.org. Perhaps you could prepare a patch and send it
+there? (does anyone know if there is an actual maintainer?)
+
+Conrad.
+
+

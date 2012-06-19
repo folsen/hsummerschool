@@ -1,0 +1,22 @@
+From felipe.lessa at gmail.com  Wed Feb  2 22:01:17 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Wed, 2 Feb 2011 19:01:17 -0200
+Subject: [Haskell-cafe] [web-devel] http-enumerator: redirects,
+ streaming and keep-alive
+In-Reply-To: <AANLkTi=NJNaS7ucqq=mtr0wdZGSLcn6oJdXs4D1jd-WQ@mail.gmail.com>
+References: <AANLkTimXn=Dkb-eAkSUNMnVqs6wsT7DqG_UDBV4qyWzT@mail.gmail.com>
+	<AANLkTimwZVTvrSaTzRGQ+8XqAgL9Lyu3yC2ZaA=RfymD@mail.gmail.com>
+	<AANLkTikidKe2LHUv6Hc_VB5Bg4yH6meusY1hDyq0730z@mail.gmail.com>
+	<AANLkTi=NJNaS7ucqq=mtr0wdZGSLcn6oJdXs4D1jd-WQ@mail.gmail.com>
+Message-ID: <AANLkTiknCH6O20cDakf0jTUh80xP+whqpC20+rvUi=OL@mail.gmail.com>
+
+On Wed, Feb 2, 2011 at 6:30 PM, Antoine Latter <aslatter at gmail.com> wrote:
+> Or you could remove the socket from the map while it's in use.
+
+And what about connection limits?  We shouldn't create a thousand
+connections to the same host =).
+
+-- 
+Felipe.
+
+

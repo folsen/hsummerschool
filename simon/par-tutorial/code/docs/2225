@@ -1,0 +1,44 @@
+From apfelmus at quantentunnel.de  Thu Dec 22 10:19:56 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Thu, 22 Dec 2011 10:19:56 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>	<20111220070644.GA32105@sniper>	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>	<BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+	<CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+Message-ID: <jcusns$9cj$1@dough.gmane.org>
+
+Alexander Solla wrote:
+>> And denotational semantics is not just nice. It is useful. It's the best
+>> way to understand why the program we just wrote doesn't terminate.
+> 
+> Denotational semantics is unrealistic.  It is a Platonic model of
+> constructive computation.  Alan Turing introduced the notion of an "oracle"
+> to deal with what we are calling bottom.  An oracle is a "thing" that
+> (magically) "knows" what a bottom value denotes, without having to wait for
+> an infinite number of steps.  Does Haskell offer oracles?  If not, we
+> should abandon the use of distinct bottoms.  The /defining/ feature of a
+> bottom is that it doesn't have an interpretation.
+
+Huh? I don't see the problem.
+
+Introducing bottom as a value is a very practical way to assign a 
+well-defined mathematical object to each expression that you can write 
+down in Haskell. See
+
+   http://en.wikibooks.org/wiki/Haskell/Denotational_semantics
+
+It's irrelevant whether _|_ is "unrealistic", it's just a mathematical 
+model anyway, and a very useful one at that. For instance, we can use it 
+to reason about strictness, which gives us information about lazy 
+evaluation and operational semantics.
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

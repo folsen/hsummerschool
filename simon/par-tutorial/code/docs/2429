@@ -1,0 +1,55 @@
+From jerzy.karczmarczuk at unicaen.fr  Thu Dec 29 22:51:50 2011
+From: jerzy.karczmarczuk at unicaen.fr (Jerzy Karczmarczuk)
+Date: Thu, 29 Dec 2011 22:51:50 +0100
+Subject: [Haskell-cafe] On the purity of Haskell /Random generators
+In-Reply-To: <4EFCD5CC.8050803@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org> <4EFCC3CE.7050006@blueyonder.co.uk>
+	<451591325188516@web70.yandex.ru> <4EFCCFFD.9080908@unicaen.fr>
+	<4EFCD5CC.8050803@blueyonder.co.uk>
+Message-ID: <4EFCE0F6.8030604@unicaen.fr>
+
+Steve Horne :
+> I only meant that there's random number handling support in the 
+> Haskell library and, and least judging by type signatures, it's pure 
+> functional code with no hint of the IO monad.
+Look well at those functions, please.
+
+Within the RandomGen class you have pure members, such as next (an Int 
+instance of what I called rgen in my previous message. It propagates the 
+seed "g" ). The algorithmics of the random generation has no particular 
+"monadicity" in it, as I said, the IO (or State) monad serves to hide 
+the seed.
+
+The generator itself should not be confounded with its iterative, 
+sequential usage. If people wanted to do in their programmes just *one* 
+read or write, never repeated, no IO Monad would be necessary.
+
+On the other hand, for the IO, you can sequence the World instances 
+explicitly, without any Monads in a pure functional language, this is 
+the style used in Clean.
+
+==
+I am strongly convinced that ALL people who want to understand the 
+functional IO, refs, etc. should learn both, Haskell and Clean. Il might 
+help them to see better the relation between the programme, and its 
+environment.
+
+==========
+
+You say:
+/random numbers are in principle non-deterministic, not determined by 
+the current state of the outside world/
+
+Sorry, but I haven't a slightest idea what you are talking about. Dybbuks?
+
+Jerzy
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111229/ed398890/attachment-0001.htm>
+

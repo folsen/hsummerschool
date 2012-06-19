@@ -1,0 +1,31 @@
+From michael at snoyman.com  Tue Dec 27 17:38:59 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Tue, 27 Dec 2011 18:38:59 +0200
+Subject: [Haskell-cafe] GHC 7.4: Expected behavior or bug?
+Message-ID: <CAKA2JgKbsGFCSrQczzpZwwcxONW_8bNasifvEGp-qy_udJijbg@mail.gmail.com>
+
+Thanks to Mark Wright for pointing this out[1].
+
+We have the equivalent of the following code in persistent:
+
+{-# LANGUAGE MultiParamTypeClasses #-}
+data Key backend entity = Key
+
+class Monad (b m) => Foo b m where
+    func :: b m (Key b m)
+
+This code works fine with GHC 7.0, but I get the following message from GHC 7.4:
+
+    Expecting two more arguments to `b'
+    In the type `b m (Key b m)'
+    In the class declaration for `Foo'
+
+Is this expected behavior, or a bug? If the former, what would be a
+possible workaround?
+
+Thanks,
+Michael
+
+[1] https://github.com/yesodweb/persistent/issues/31
+
+

@@ -1,0 +1,35 @@
+From arseniy.alekseyev at gmail.com  Wed Aug 24 14:57:19 2011
+From: arseniy.alekseyev at gmail.com (Arseniy Alekseyev)
+Date: Wed, 24 Aug 2011 13:57:19 +0100
+Subject: [Haskell-cafe] different results after compilation
+In-Reply-To: <20110824164519.6841b6e4@mk.mtw.ru>
+References: <20110824164519.6841b6e4@mk.mtw.ru>
+Message-ID: <CAEnSgTkj=XmoypLGXvmQnBKEObuR+E-EaL40bPG_fsQeLuc-zg@mail.gmail.com>
+
+The reason may be that you are not printing the result in your program.
+runhaskell script prints the result of the "main" computation by default.
+The compiled programs don't do that.
+You'll have to call "print" in your program to achieve the same.
+
+On 24 August 2011 13:45, ????? ?????? <mk at mtw.ru> wrote:
+> I have some script:
+> $ runhaskell readfile.hs
+> fromList [(Merchant {nick = "01010", location = "prontera", x = 184, y
+> = 94},Shop {buy = ShopBuy {titleB = "AB> Green Salad=5k", itemsB =
+> fromList [(Item {itemId = 12065, price = 5000, refine = "", card1 = 0,
+> card2 = 0, card3 = 0, card4 = 0},(100,97))]}, sell = ShopSell {titleS =
+> "", itemsS = fromList []}})]
+> $ ghc --make readfile.hs
+> ?Linking readfile ...
+> $ ./readfile
+> $
+>
+> why results are different?
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

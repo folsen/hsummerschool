@@ -1,0 +1,32 @@
+From tphyahoo at gmail.com  Fri Apr 29 01:24:39 2011
+From: tphyahoo at gmail.com (Thomas Hartman)
+Date: Thu, 28 Apr 2011 16:24:39 -0700
+Subject: [Haskell-cafe] Trouble installing FileManipCompat
+In-Reply-To: <201101052006.53910.daniel.is.fischer@googlemail.com>
+References: <AANLkTi=_D_bwGyPNNuxKsMcVo9HXCzsg3jZ_f+_RrDc0@mail.gmail.com>
+	<201101050207.17424.daniel.is.fischer@googlemail.com>
+	<AANLkTi=tXLQ8gM+gEajDaVJ0DqYjmdx2+XV+9X5iW5u3@mail.gmail.com>
+	<201101052006.53910.daniel.is.fischer@googlemail.com>
+Message-ID: <BANLkTinKSkt41m9FCFbEvRXn-W95mLN8NQ@mail.gmail.com>
+
+I uploaded a new version of FileManipCompat which is mtl-2 compatible.
+
+2011/1/5 Daniel Fischer <daniel.is.fischer at googlemail.com>:
+> On Wednesday 05 January 2011 19:43:53, Tony Miller wrote:
+>> Thanks that works, but I have packages that rely on mtl>=2.0, so its
+>> not the best solution. Perhaps the maintainer of FileManipCompat could
+>> be contacted to update the package?
+>
+> Visiting http://hackage.haskell.org/package/FileManip reveals that that
+> package is obsolete, one should use filemanip (all lowercase) instead,
+> which has been built on 6.12 and 7.0, so that should work and it's rather
+> the maintainer(s) of HStringTemplateHelpers (and FileManipCompat) who
+> should be asked to update their package(s).
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

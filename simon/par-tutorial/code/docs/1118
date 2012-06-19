@@ -1,0 +1,43 @@
+From gale at sefer.org  Sun Aug 14 20:05:18 2011
+From: gale at sefer.org (Yitzchak Gale)
+Date: Sun, 14 Aug 2011 21:05:18 +0300
+Subject: [Haskell-cafe] Proposal #3339: Add (+>) as a synonym for mappend
+In-Reply-To: <CAKFCL4WAOj167ravBiouVN1DU5pjnF0zkcuRs3Nhn9nHhobH5Q@mail.gmail.com>
+References: <c290c4f20906301437y343da916x15ae9d02f1fad2a0@mail.gmail.com>
+	<20090917133748.GA20813@soi.city.ac.uk>
+	<alpine.DEB.2.00.0909250114400.30756@anubis.informatik.uni-halle.de>
+	<CAK-tuPbPB8iz8mNbYmOmS1ijssSQq=DJs1P1xxaH4ENvnDugZg@mail.gmail.com>
+	<4E47CC47.3080105@earth.li>
+	<CAOrUaLY-FPLtvCinx9ieSGmRZt+XMvF=FaJnz7MFw-995XS5eg@mail.gmail.com>
+	<CAKFCL4URAoH_10mC7bPFt_fDsb1KVgHJ-=meJzvwGbYf8__g-A@mail.gmail.com>
+	<CAOrUaLbs1Z5793Gn94D8AimdcgLABOpgF1C91UGaEXEXRxvJzg@mail.gmail.com>
+	<CAKFCL4WAOj167ravBiouVN1DU5pjnF0zkcuRs3Nhn9nHhobH5Q@mail.gmail.com>
+Message-ID: <CAOrUaLaGq1i6fkz0cE1MiJ28JLFJdBaLqCv2PhQ26oG2yz_puQ@mail.gmail.com>
+
+Brandon Allbery wrote:
+> Anything useful has to be modified to depend on SemiGroup as well to get
+> mconcat or its replacement; that's why you jumped the proposal to begin
+> with....
+
+Not at all. Types with Monoid instances need an additional
+instance, a Semgroup instance, in order to be able to use '<>' instead
+of mappend. mconcat is not involved in this discussion.
+
+That is the current situation. I am advocating leaving it that way.
+
+>?As others have noted, this is a rather intrusive change to the
+> Haskell ecosystem.
+
+Exporting <> from Data.Monoid is the intrusive change. I am strongly
+against it. In the long run, it will create ugliness and inconvenience
+to our class system, which has enough problems as it is. I advocate leaving
+things as they are.
+
+If individual library authors wish to add a Semigroup instance to their
+Monoid instances as a convenience, which is harmless, I think that
+would be wonderful. But that is a separate issue.
+
+Thanks,
+Yitz
+
+

@@ -1,0 +1,34 @@
+From Rene_de_Visser at hotmail.com  Sun Aug 28 20:43:11 2011
+From: Rene_de_Visser at hotmail.com (Rene de Visser)
+Date: Sun, 28 Aug 2011 20:43:11 +0200
+Subject: [Haskell-cafe] GHCI Feature Request: Last SuccessfulCompilation
+	State Saved
+References: <CAJrReygxTo_DVA6B4bNozP0WR+_X7ZqQs=ERdHhuXKJNc-3+0A@mail.gmail.com><CAM_wFVtTiY=gz7aA==5DZ5YEXxZeabECMhrO3FHKw7wmOdacuA@mail.gmail.com>
+	<201108272331.01371.daniel.is.fischer@googlemail.com>
+Message-ID: <j3e281$140$1@dough.gmane.org>
+
+"Daniel Fischer" <daniel.is.fischer at googlemail.com> schrieb im Newsbeitrag 
+news:201108272331.01371.daniel.is.fischer at googlemail.com...
+> On Saturday 27 August 2011, 23:10:17, David Virebayre wrote:
+>> 2011/8/27 aditya siram <aditya.siram at gmail.com>:
+>> > Hi all,
+>> > I would like for the GHCI interpreter to save its environment before
+>> > reloading a file and allowed the user to revert back to that state if
+>> > the compilation was unsuccessful.
+>>
+>> That would be awesome. I would like this too.
+>
+> http://hackage.haskell.org/trac/ghc/ticket/1896
+
++1 from me too.
+
+How do I go about registering my interest in the ticket?
+I though there was a way of adding myself on the CC: of the ticket?
+How does one do this? Does one need some sort of user?
+
+Rene. 
+
+
+
+
+

@@ -1,0 +1,51 @@
+From ketil at malde.org  Fri Feb 11 11:46:10 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Fri, 11 Feb 2011 11:46:10 +0100
+Subject: [Haskell-cafe] [Cabal-devel] Cabal && license combinations
+In-Reply-To: <1297353870.19300.88.camel@godel> (Chris Smith's message of "Thu, 
+	10 Feb 2011 09:04:30 -0700")
+References: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+	<1297178086.2402.5.camel@godel>
+	<AANLkTin-FnLkMpjvPSAOGo+7gS8UWhT2t7GdBiPn1K-u@mail.gmail.com>
+	<8739nw9v7a.fsf@malde.org> <1297353870.19300.88.camel@godel>
+Message-ID: <87hbcax30t.fsf@malde.org>
+
+Chris Smith <cdsmith at gmail.com> writes:
+
+> actually matter.  The instant anyone actually compiles an application
+> that uses your library, however indirectly, they are bound by the terms
+
+There are other uses for code than compilation.  Let's say I wrote a
+wrapper for a proprietary library that connects to Oracle databases.
+Any program using this would likely be undistributable.  Still, having
+the wrapper free would allow porting it to a free database back end or
+using it for teaching, so there's always added value in added freedom.
+
+>> So this may be a problem for distributions, which ship compiled and
+>> linked binaries.  But generally not for authors, darcs repositories or
+>> Hackage, which only ship source code.
+
+> Of course it is a concern for authors!
+
+I don't think you are contradicting me here.  My point is that authors
+are not likely to be liable or bound by other's licenses - whether they
+are concerned or not, is up to them.
+
+> The reasonable expectation in Haskell is that they'll probably
+> statically link; and you should read licenses of your dependencies,
+> and carefully choose dependencies, accordingly.
+
+I think usability goes way beyond redistributability, but I
+guess we should just agree to disagree on this.
+
+IMO, the important thing is that cabal avoids imposing legal
+straightjackets on authors, and that it avoids making legal
+interpretations.  Echoing facts from cabal files is okay, but drawing
+legal conclusions based on these facts should be the responsibility
+(i.e. both obligation and liability) of the individual user.
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

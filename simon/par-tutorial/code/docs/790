@@ -1,0 +1,32 @@
+From schlepptop at henning-thielemann.de  Wed Apr 27 12:00:54 2011
+From: schlepptop at henning-thielemann.de (Henning Thielemann)
+Date: Wed, 27 Apr 2011 12:00:54 +0200
+Subject: [Haskell-cafe] Comparison of common Haskell libraries (Was: Good
+	reads?)
+In-Reply-To: <BANLkTik71toDtgQoJY0q08Zkggi+G7jB7A@mail.gmail.com>
+References: <4DB73D9E.5080604@gmail.com>
+	<BANLkTimOotBg5WRFx7QY9fK3X5MrO=uaeQ@mail.gmail.com>
+	<BANLkTik71toDtgQoJY0q08Zkggi+G7jB7A@mail.gmail.com>
+Message-ID: <4DB7E956.1050003@henning-thielemann.de>
+
+Eric Rasmussen schrieb:
+
+> Also, in the spirit of this discussion, is there a resource that
+> attempts to compare libraries for common tasks so developers can make
+> informed decisions without having to research each library or approach
+> on their own? As an example, in other languages you might read about CSV
+> parsing from a few different sources and see a general consensus on how
+> to approach it. After hours of digging through code on Hackage and
+> reading up on different approaches, I can't seem to find a consensus in
+> Haskell.
+
+I think there won't be consensus in many cases, otherwise developers
+wouldn't have started to develop alternatives to existing packages.
+However if you did the work of comparing some libraries for the same
+purpose - how about writing a personal comparison in the HaskellWiki?
+
+For the special case of CSV parsing I would of course recommend my
+spreadsheet package because it parses lazily. :-)
+
+
+

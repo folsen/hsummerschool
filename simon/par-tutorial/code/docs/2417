@@ -1,0 +1,74 @@
+From leon.v.nikitin at pravmail.ru  Thu Dec 29 20:50:47 2011
+From: leon.v.nikitin at pravmail.ru (=?koi8-r?B?7snLydTJziDsxdc=?=)
+Date: Fri, 30 Dec 2011 02:50:47 +0700
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <980621325188016@web25.yandex.ru>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org> <980621325188016@web25.yandex.ru>
+Message-ID: <426291325188247@web44.yandex.ru>
+
+
+
+Of course we take in matter what computation "getStr :: IO [Char]" means.
+Of course we take in matter what computation "putStr :: String -> IO () means (I know, putStr is not computation, puStr x is computation, but it's not important)
+
+ And If I want to write "echo" program, I have to combine these computation in such manner:
+
+ echo = do
+ ??s <- getStr
+ ??putStr s
+
+ But for geometry I have similarly situation. I know arithmetics and I know Pythagoras theorem and I combine arithmetics operations to get length of hypot?inusa:
+
+ h x y = sqrt $ x * x + y * y.
+
+ What is difference of IO actions and PURE operation *? I have to know meaning of getStr action but I have to know meaning of * operation.
+
+ Side effects appears in impure languages when we can different results of function (procedure etc) with same parameters. For example, when our function use global (modifible) variable. But we WANT that ours function (Int -> Int, Char -> [a], b -> IO a - it's not matter) will be PURE, becourse it makes life of programmers easy.
+
+ But I don't understand importance of thinking about "side effects" in dilemma of language vs compiled pogramm.
+
+> 30.12.2011, 02:21, "Heinrich Apfelmus" <apfelmus at quantentunnel.de>:
+>
+>> ?Gregg Reynolds wrote:
+>>> ??Donn Cave wrote:
+>>>> ??Quoth Gregg Reynolds wrote:
+>>>>
+>>>> ??Look again at the sentence you trimmed off the end:
+>>>>>> ??Of course, the point is that this result is an *IO action* of
+>>>>>> ??type IO Int, it's not the Int you would get "when executing
+>>>>>> ??this action".
+>>>> ??I believe that more or less points to the key to this discussion.
+>>>> ??If it didn't make sense to you, or didn't seem relevant to the
+>>>> ??question of pure functions, then it would be worth while to think
+>>>> ??more about it.
+>>> ??Ok, let's parse it out. ?"?it's not the int you would get 'when
+>>> ??executing this action". ?Close, but no cooky: it's not any kind of
+>>> ??int at all (try doing arithmetic with it). ?"IO Int" is a piece of
+>>> ??rhetoric for the mental convenience of the user; Haskell does not and
+>>> ??cannot know what the result of an IO action is, because it's outside
+>>> ??the scope of the language (and computation). ?(The "Int" part of "IO
+>>> ??Int" refers to the input, not the output; it's just a sort of type
+>>> ??annotation.) ?It's not even a computation, unless you want to take a
+>>> ??broad view and include oracles, interaction, etc. in your definition
+>>> ??of computation.
+>> ?Why would ?IO Int ?be something special or mysterious? It's an ordinary
+>> ?value like everything else; it's on the same footing as [Char], Maybe
+>> ?Int, Int -> String, Bool, and so on. I see no difference between the
+>> ?list ?[1,2,3] :: [Int] ?and the action ?"pick a random number between 1
+>> ?and 6" :: IO Int ?.
+>>
+>> ?Best regards,
+>> ?Heinrich Apfelmus
+>>
+>> ?--
+>> ?http://apfelmus.nfshost.com
+>>
+>> ?_______________________________________________
+>> ?Haskell-Cafe mailing list
+>> ?Haskell-Cafe at haskell.org
+>> ?http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

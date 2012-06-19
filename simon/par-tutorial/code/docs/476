@@ -1,0 +1,26 @@
+From akamaus at gmail.com  Mon Apr 18 23:06:29 2011
+From: akamaus at gmail.com (Dmitry V'yal)
+Date: Tue, 19 Apr 2011 01:06:29 +0400
+Subject: [Haskell-cafe] HXT and xhtml page encoded in cp1251
+Message-ID: <4DACA7D5.1040206@gmail.com>
+
+Greetings,
+
+I'm writing a small webcrawler. Usually I used tagsoup for such tasks 
+but this time I decided to give hxt a try.
+
+Unfortunately, I ran into the troubles with character encodings. The 
+site I'm targeting uses cp1251, which is the one of the most popular 
+among sites in Russian. Pages contain the following meta tag
+<meta http-equiv="content-type" content="text/html; charset=windows-1251" />
+
+The readDocument arrow fails with the following message:
+
+fatal error: encoding scheme not supported: "WINDOWS-1251"
+
+Can someone suggest a workaround for my use case?
+
+Best regards,
+Dmitry
+
+

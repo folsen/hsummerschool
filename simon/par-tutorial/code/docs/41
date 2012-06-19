@@ -1,0 +1,37 @@
+From mle+hs at mega-nerd.com  Fri Apr  1 23:33:19 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Sat, 2 Apr 2011 08:33:19 +1100
+Subject: [Haskell-cafe] is ppc64 arch registerised
+In-Reply-To: <1301657428.14636.0.camel@skalniknb>
+References: <1301657428.14636.0.camel@skalniknb>
+Message-ID: <20110402083319.74b26ad0.mle+hs@mega-nerd.com>
+
+Jiri Skala wrote:
+
+> Hi all,
+> I've read on this page
+> 
+> http://hackage.haskell.org/trac/ghc/wiki/Platforms
+> 
+> the ppc64 arch is registerised.
+> 
+> I succeeded to build ghc-7.0.2 on ppc64 (Fedora) with
+> GhcUnregisterised=YES. Switching off this option currently leads to
+> failure. 
+
+ghc-7.0.2 is currenty broken on powerpc-linux:
+
+    http://hackage.haskell.org/trac/ghc/ticket/4999
+
+so I wouldn't be surpised if ppc64 is also broken.
+
+I'm woring sporadically on this bug, but really need a large block
+of time with no interruptions to make progress.
+
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

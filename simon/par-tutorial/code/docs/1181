@@ -1,0 +1,118 @@
+From creswick at gmail.com  Wed Aug 17 16:11:22 2011
+From: creswick at gmail.com (Rogan Creswick)
+Date: Wed, 17 Aug 2011 07:11:22 -0700
+Subject: [Haskell-cafe] writing a good Setup.hs is *hard* (was: broken on
+	install encoding 0.6.6)
+Message-ID: <CAHjep=zq26dxU0E8NwMkgvbn9rPPRo_1=7kjJC161PSw6ZC17A@mail.gmail.com>
+
+On Wed, Aug 17, 2011 at 6:29 AM, Gang <yugang.bj at gmail.com> wrote:
+>
+> sorry to bother
+>
+
+Not in the least!
+
+I was trying to figure out what problem you were encountering, and I
+learned a lot.  I never did recreate your problem, but in the process
+I ran into a whole host of other annoyances and strange situations
+relating to slightly broken cabal files and cabal build intricacies
+that confound our existing tools.
+
+I don't mean to pick on encoding or HaXml - I've seen the same kinds
+of issues in many, many Haskell packages (including most of the
+packages I've written myself) these are just the ones I ran into
+today. (and I am quite serious when I say that writing a good Setup.hs
+is very, very, difficult).  My objective is just to motivate a minor
+change to cabal that would help to make this easier.
+
+On to the build problems:
+
+encoding-0.6.6 uses it's own source during the build process! It
+actually has to be partially compiled before the build tool can build
+encoding (!).  I'm *amazed* that this actually works at all
+(impressed, too), and indeed, it doesn't work with cabal-dev, which is
+unfortunate: cabal-dev would have identified one of the dependency
+issues in HaXml 1.19 (pretty is an undocumented dependency, although I
+am unsure if that was true at the time 1.19 and encoding-0.6.6 were
+released.  I haven't tracked the pretty dependency down to the exact
+source - it could be a transitive dep introduced by a recent version
+of something HaXml 1.19 needs.  Per my subject line - this is
+amazingly difficult - keep in mind that we're not talking about
+building *packages*, this is just to build the *build tool*, and none
+of this is documented.  How long before it is effectively impossible
+to recreate the circumstances that result in a successful
+encoding-0.6.6 build?).
+
+cabal-dev can't build encoding-0.6.6 because the encoding source that
+is referenced from encoding's Setup.hs depends on (at least) HaXml >=
+1.19 && < 1.22.5; this is OK with cabal, since cabal-install installs
+a necessary HaXml into your user package db prior to building
+encoding's Setup.hs (modulo the missing upper version bound).
+Therefore HaXml "just happens" to be visible when cabal builds
+Setup.hs -- a build step that cabal-dev isn't capable of controlling
+(and probably never will be -- we could intercept system calls, but
+that's difficult when only supporting one OS, much less three).
+
+You can, of course, manually install HaXml to your local package db
+and then cabal-dev install encodings, but that's somewhat of a hack
+(and you'll find that the current HaXml won't work for the current
+encodings release, as Gang Yu did).
+
+Adding a section to the cabal file that specifies build dependencies
+for Setup.hs would make some very important parts of this process
+obvious - and it would *greatly* assist in debugging failing builds,
+not to mention allowing us to make use of the extensive libraries on
+hackage to write more expressive build systems.  (We could actually
+use openshake in Setup.hs, once it's released, for example!)
+
+I've floated the idea past a number of Haskell programmers with
+positive responses, and there is a GSOC ticket that provides some more
+details (the project was not selected - no students proposed to work
+on it):
+
+http://hackage.haskell.org/trac/summer-of-code/ticket/1602
+
+--Rogan
+
+> Regards
+> Gang
+> On 08/17/2011 04:59 PM, Gang Yu wrote:
+>
+> hi, cafe:
+>
+> ??? I go through to the encoding package installation problem again.
+>
+> ?cabal install encoding
+> Resolving dependencies...
+> /tmp/encoding-0.6.68093/encoding-0.6.6/dist/setup/setup: 4: Syntax error:
+> ";" unexpected
+>
+> when I have a check on the this issue, I get:
+>
+> file
+> ~/.cabal/packages/hackage.haskell.org/encoding/0.6.6/encoding-0.6.6/dist/setup/setup
+> /home/gang/.cabal/packages/hackage.haskell.org/encoding/0.6.6/encoding-0.6.6/dist/setup/setup:
+> ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked
+> (uses shared libs), for GNU/Linux 2.6.27, not stripped
+>
+> My machine is:
+>
+> gang at gang-laptop:~$ uname -a
+> Linux gang-laptop 2.6.38-8-generic #42-Ubuntu SMP Mon Apr 11 03:31:50 UTC
+> 2011 i686 i686 i386 GNU/Linux
+>
+> is this related? How can I manually install the package from scratch? Any
+> helps or directs will be appreciated
+>
+> Thanks
+> Gang
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

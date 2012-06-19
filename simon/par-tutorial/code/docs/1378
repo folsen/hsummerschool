@@ -1,0 +1,23 @@
+From trebla at vex.net  Fri Aug 26 00:32:57 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Thu, 25 Aug 2011 18:32:57 -0400
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <4E568D11.30800@btinternet.com>
+References: <4E568D11.30800@btinternet.com>
+Message-ID: <4E56CD99.6050703@vex.net>
+
+On 11-08-25 01:57 PM, Andrew Coppin wrote:
+> Does anybody else think it would be *far* more useful if bitSize applied
+> to an Integer would tell you how many bits that particular Integer is
+> using? Especially given that it can vary?
+
+It is useful to know the number of bits used in a value.
+
+It is useful to know the maximum number of bits storable in a type.
+
+It is useless to conflate the two into one single method.
+
+The name "bitSize" is already taken. Come up with another name, and I 
+will agree with you.
+
+

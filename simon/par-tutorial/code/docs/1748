@@ -1,0 +1,51 @@
+From sergueyz at gmail.com  Thu Dec  8 12:06:55 2011
+From: sergueyz at gmail.com (Serguey Zefirov)
+Date: Thu, 8 Dec 2011 15:06:55 +0400
+Subject: [Haskell-cafe] Disjunctive patterns
+In-Reply-To: <CALgsdJLSZvMjei3rW_Ppx65zDanSRNPza4x1uwx4EGnEUTJJOQ@mail.gmail.com>
+References: <CALgsdJLSZvMjei3rW_Ppx65zDanSRNPza4x1uwx4EGnEUTJJOQ@mail.gmail.com>
+Message-ID: <CABFQQ=DMrW1LWopBnyDxmZJGtJffQ9rOAonN-Egz9x_CO-+b1A@mail.gmail.com>
+
+2011/12/8 Asger Feldthaus <asger.feldthaus at gmail.com>:
+> Haskell doesn't seem to support disjunctive patterns, and I'm having a
+> difficult time writing good Haskell code in situations that would otherwise
+> call for that type of pattern.
+>
+> Suppose for an example I have this data type:
+>
+> data T =?Foo Int | Bar Int | Baz
+>
+> In OCaml I can write something like:
+>
+> (* foo : T -> T -> int *)
+> fun foo x y = match (x,y) with
+> ? | (Foo a | Bar a, Foo b | Bar b) -> a + b
+
+I solve that kind of problem by introducing operation enumerations.
+
+I can write expression definition like that:
+data Expr = Plus Int Int | Minus Int Int | Mul Int Int | Neg Int | Inv
+Int | Var String
+
+And then I will have exactly your problem.
+
+I prefer to write such definition like that:
+data Expr = Bin BinOp Int Int | Un UnOp Int | Var String
+data BinOp = Plus | Minus | Mul
+data UnOp = Neg | Inv
+
+And I have to write less code in all subsequent constructions and
+pattern matches.
+
+This is especially good when I used that method for an expression with
+result size:
+data Expr size where
+    Bin :: BinOp xSize ySize resultSize -> Expr xSize -> Expr ySize ->
+Expr resultSize
+
+data BinOp a b r where
+    Plus :: BinOp a a a
+    Concatenate :: BinOp a b (Plus a b)
+    Equal :: BinOp a a ONE
+
+

@@ -1,0 +1,50 @@
+From alex.solla at gmail.com  Tue Feb  8 20:01:32 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Tue, 8 Feb 2011 11:01:32 -0800
+Subject: [Haskell-cafe] semantics
+In-Reply-To: <4D515B8E.4050609@dit.ie>
+References: <4D515B8E.4050609@dit.ie>
+Message-ID: <AANLkTimPvOfRLqvR=csGY=KKnonHKWFGnRkdneV+Cg-g@mail.gmail.com>
+
+On Tue, Feb 8, 2011 at 7:04 AM, Patrick Browne <patrick.browne at dit.ie>wrote:
+
+> Consider the following definitions:
+> 1. Denotational semantics can be considered as relation between syntax
+> and mathematical objects (the meaning of the syntax).
+> 2. Operational semantics can be considered as set of rules for
+> performing computation.
+>
+> Question 1
+> Applying these definitions in a Haskell context can I say that the
+> lambda calculus provides both the operational and denotational
+> semantics for Haskell programs at value level for definition and
+> evaluations.
+>
+>
+Sure.  There are other, more-or-less equally applicable semantic frameworks.
+ My preferred framework is:
+
+
+> Question 2
+> Does it make sense to use these definitions at type level? If so, what
+> exactly do they represent?
+>
+>
+>
+Under the Howard-Curry Isomorphism, the type level definitions correspond to
+theorems in a typed logic, and the implementations (the value terms)
+correspond to proofs of the theorems.  I suppose this is more of a
+"denotational" interpretation.  The language of values and terms is more
+operational.
+
+If we really want to try to come up with an operational semantic for types,
+I suppose we should start with something along the lines of "a type
+represents an 'abstract set' or a 'category' of values.  I suppose some of
+these are indexed -- like the functorial types [a], Maybe a, etc.  It is
+hard to come up with a single operational semantic for types, because they
+do so many different things, and there is a semantic for each
+interpretation.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110208/ce03677b/attachment.htm>
+

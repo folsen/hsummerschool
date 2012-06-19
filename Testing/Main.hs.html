@@ -1,0 +1,136 @@
+<html><style type="text/css">
+span.lineno { color: white; background: #aaaaaa; border-right: solid white 12px }
+span.nottickedoff { background: yellow}
+span.istickedoff { background: white }
+span.tickonlyfalse { margin: -1px; border: 1px solid #f20913; background: #f20913 }
+span.tickonlytrue  { margin: -1px; border: 1px solid #60de51; background: #60de51 }
+span.funcount { font-size: small; color: orange; z-index: 2; position: absolute; right: 20 }
+span.decl { font-weight: bold }
+span.spaces    { background: white }
+</style>
+<pre>
+<span class="lineno">    1 </span>import qualified Data.List as L
+<span class="lineno">    2 </span>import Test.QuickCheck
+<span class="lineno">    3 </span>import qualified Data.Set as S
+<span class="lineno">    4 </span>import Control.Applicative
+<span class="lineno">    5 </span>
+<span class="lineno">    6 </span>-- sort :: [Int] -&gt; [Int]
+<span class="lineno">    7 </span>-- sort [ ]      = []
+<span class="lineno">    8 </span>-- sort (x : xs) = insert x (sort xs)
+<span class="lineno">    9 </span>
+<span class="lineno">   10 </span>insert :: Int -&gt; [Int] -&gt; [Int]
+<span class="lineno">   11 </span><span class="decl"><span class="nottickedoff">insert x [ ]                  = [x]</span>
+<span class="lineno">   12 </span><span class="spaces"></span><span class="nottickedoff">insert x (y : ys) </span>
+<span class="lineno">   13 </span><span class="spaces">  </span><span class="nottickedoff">| x &lt;= y       = x : y : ys</span>
+<span class="lineno">   14 </span><span class="spaces">  </span><span class="nottickedoff">| otherwise = y : insert x ys</span></span>
+<span class="lineno">   15 </span>
+<span class="lineno">   16 </span>sortPreservesLength :: [Int] -&gt; Bool
+<span class="lineno">   17 </span><span class="decl"><span class="istickedoff">sortPreservesLength xs = length xs == length (sort xs)</span></span>
+<span class="lineno">   18 </span>
+<span class="lineno">   19 </span>
+<span class="lineno">   20 </span>sorted :: [Int] -&gt; Bool
+<span class="lineno">   21 </span><span class="decl"><span class="istickedoff">sorted [ ]       = True</span>
+<span class="lineno">   22 </span><span class="spaces"></span><span class="istickedoff">sorted (x : [ ]) = True</span>
+<span class="lineno">   23 </span><span class="spaces"></span><span class="istickedoff">sorted (x : y : ys) = x &lt;= y &amp;&amp; sorted (y : ys)</span></span>
+<span class="lineno">   24 </span>
+<span class="lineno">   25 </span>sortEnsuresSorted :: [Int] -&gt; Bool
+<span class="lineno">   26 </span><span class="decl"><span class="istickedoff">sortEnsuresSorted xs = sorted (sort xs)</span></span>
+<span class="lineno">   27 </span>
+<span class="lineno">   28 </span>sortIdempotent :: [Int] -&gt; Bool
+<span class="lineno">   29 </span><span class="decl"><span class="istickedoff">sortIdempotent xs = sort xs == sort (sort xs)</span></span>
+<span class="lineno">   30 </span>
+<span class="lineno">   31 </span>sortSameDataList :: [Int] -&gt; Bool
+<span class="lineno">   32 </span><span class="decl"><span class="istickedoff">sortSameDataList xs = sort xs == L.sort xs</span></span>
+<span class="lineno">   33 </span>
+<span class="lineno">   34 </span>testPoly :: [a] -&gt; Bool
+<span class="lineno">   35 </span><span class="decl"><span class="nottickedoff">testPoly xs = length xs == 0</span></span>
+<span class="lineno">   36 </span>
+<span class="lineno">   37 </span>dropTwice :: Int -&gt; Int -&gt; [Int] -&gt; Property
+<span class="lineno">   38 </span><span class="decl"><span class="istickedoff">dropTwice m n xs = (m &gt;= 0 &amp;&amp; n &gt;= 0 &amp;&amp; m+n &gt;= 0 &amp;&amp; m + n &lt;= maxBound) ==&gt; drop m (drop n xs) == drop (m + n) xs</span></span>
+<span class="lineno">   39 </span>
+<span class="lineno">   40 </span>permutations :: Eq a =&gt; [a] -&gt; [[a]]
+<span class="lineno">   41 </span><span class="decl"><span class="nottickedoff">permutations []    = [[]]</span>
+<span class="lineno">   42 </span><span class="spaces"></span><span class="nottickedoff">permutations [x]   = [[x]]</span>
+<span class="lineno">   43 </span><span class="spaces"></span><span class="nottickedoff">permutations xs = [ x:ys | x &lt;- xs, ys &lt;- permutations (L.delete x xs) ]</span></span>
+<span class="lineno">   44 </span>
+<span class="lineno">   45 </span><span class="decl"><span class="nottickedoff">f `permutes` xs = f xs `elem` permutations xs</span></span>
+<span class="lineno">   46 </span><span class="decl"><span class="nottickedoff">sortPermutes xs = sort `permutes` xs</span></span>
+<span class="lineno">   47 </span>
+<span class="lineno">   48 </span>sameElems :: Eq a =&gt; [a] -&gt; [a] -&gt; Bool
+<span class="lineno">   49 </span><span class="decl"><span class="istickedoff">sameElems orig perm = osInPs &amp;&amp; psInOs</span>
+<span class="lineno">   50 </span><span class="spaces">  </span><span class="istickedoff">where</span>
+<span class="lineno">   51 </span><span class="spaces">    </span><span class="istickedoff">check l1 l2 = foldr (\p b -&gt; b &amp;&amp; elem p l1) True l2</span>
+<span class="lineno">   52 </span><span class="spaces">    </span><span class="istickedoff">osInPs = check perm orig</span>
+<span class="lineno">   53 </span><span class="spaces">    </span><span class="istickedoff">psInOs = check orig perm</span></span> 
+<span class="lineno">   54 </span>
+<span class="lineno">   55 </span>sortPermutes' :: [Integer] -&gt; Bool
+<span class="lineno">   56 </span><span class="decl"><span class="istickedoff">sortPermutes' xs = sameElems xs (sort xs)</span></span>
+<span class="lineno">   57 </span>
+<span class="lineno">   58 </span>sort :: Ord a =&gt; [a] -&gt; [a]
+<span class="lineno">   59 </span><span class="decl"><span class="istickedoff">sort [] = []</span>
+<span class="lineno">   60 </span><span class="spaces"></span><span class="istickedoff">sort [x]= [x]</span>
+<span class="lineno">   61 </span><span class="spaces"></span><span class="istickedoff">sort xs = merge (sort left) (sort right)</span>
+<span class="lineno">   62 </span><span class="spaces">  </span><span class="istickedoff">where</span>
+<span class="lineno">   63 </span><span class="spaces">    </span><span class="istickedoff">mid = length xs `div` 2</span>
+<span class="lineno">   64 </span><span class="spaces">    </span><span class="istickedoff">left = take mid xs</span>
+<span class="lineno">   65 </span><span class="spaces">    </span><span class="istickedoff">right = drop mid xs</span></span>
+<span class="lineno">   66 </span>
+<span class="lineno">   67 </span>merge :: Ord a =&gt; [a] -&gt; [a] -&gt; [a]
+<span class="lineno">   68 </span><span class="decl"><span class="istickedoff">merge [] r  = r</span>
+<span class="lineno">   69 </span><span class="spaces"></span><span class="istickedoff">merge l  [] = l</span>
+<span class="lineno">   70 </span><span class="spaces"></span><span class="istickedoff">merge (l:ls) (r:rs) </span>
+<span class="lineno">   71 </span><span class="spaces">  </span><span class="istickedoff">| l &lt;= r = l : merge ls (r:rs)</span>
+<span class="lineno">   72 </span><span class="spaces">  </span><span class="istickedoff">| <span class="tickonlytrue">otherwise</span> = r : merge (l:ls) rs</span></span>
+<span class="lineno">   73 </span>
+<span class="lineno">   74 </span>newtype EvenList a = Even [a]
+<span class="lineno">   75 </span>  deriving (Eq, Ord, <span class="decl"><span class="nottickedoff"><span class="decl"><span class="nottickedoff">Show</span></span></span></span>, <span class="decl"><span class="nottickedoff"><span class="decl"><span class="nottickedoff"><span class="decl"><span class="nottickedoff">Read</span></span></span></span></span></span>)
+<span class="lineno">   76 </span>
+<span class="lineno">   77 </span>instance (Arbitrary a, Integral a) =&gt; Arbitrary (EvenList a) where
+<span class="lineno">   78 </span>  <span class="decl"><span class="nottickedoff">arbitrary = fmap Even (arbitrary `suchThat` (\xs -&gt; not (null xs) &amp;&amp;  all even xs))</span></span>
+<span class="lineno">   79 </span>
+<span class="lineno">   80 </span>instance (Arbitrary a, Ord a) =&gt; Arbitrary (S.Set a) where
+<span class="lineno">   81 </span>  <span class="decl"><span class="nottickedoff">arbitrary = fmap S.fromList arbitrary</span></span>
+<span class="lineno">   82 </span>
+<span class="lineno">   83 </span>data Tree a = Leaf a | Node (Tree a) (Tree a)
+<span class="lineno">   84 </span>  deriving (<span class="decl"><span class="istickedoff"><span class="decl"><span class="nottickedoff">Eq</span></span></span></span>, <span class="decl"><span class="nottickedoff"><span class="decl"><span class="nottickedoff">Show</span></span></span></span>)
+<span class="lineno">   85 </span>
+<span class="lineno">   86 </span>instance Arbitrary a =&gt; Arbitrary (Tree a) where
+<span class="lineno">   87 </span>  <span class="decl"><span class="istickedoff">arbitrary = sized gen</span>
+<span class="lineno">   88 </span><span class="spaces">    </span><span class="istickedoff">where</span>
+<span class="lineno">   89 </span><span class="spaces">      </span><span class="istickedoff">gen :: Arbitrary a =&gt; Int -&gt; Gen (Tree a)</span>
+<span class="lineno">   90 </span><span class="spaces">      </span><span class="istickedoff">gen 0 = pure Leaf &lt;*&gt; arbitrary</span>
+<span class="lineno">   91 </span><span class="spaces">      </span><span class="istickedoff">gen n = let subtree = gen (n `div` 2)</span>
+<span class="lineno">   92 </span><span class="spaces">                  </span><span class="istickedoff">sub     = oneof [pure Leaf &lt;*&gt; arbitrary, subtree]</span>
+<span class="lineno">   93 </span><span class="spaces">              </span><span class="istickedoff">in pure Node &lt;*&gt; sub &lt;*&gt; sub</span></span>
+<span class="lineno">   94 </span>
+<span class="lineno">   95 </span>size :: Tree a -&gt; Int
+<span class="lineno">   96 </span><span class="decl"><span class="istickedoff">size (Leaf _) = 1</span>
+<span class="lineno">   97 </span><span class="spaces"></span><span class="istickedoff">size (Node l r) =  size l + size r</span></span>
+<span class="lineno">   98 </span>
+<span class="lineno">   99 </span>flatten :: Tree a -&gt; [a]
+<span class="lineno">  100 </span><span class="decl"><span class="istickedoff">flatten (Leaf n)   = [<span class="nottickedoff">n</span>]</span>
+<span class="lineno">  101 </span><span class="spaces"></span><span class="istickedoff">flatten (Node l r) = flatten l ++ flatten r</span></span>
+<span class="lineno">  102 </span>
+<span class="lineno">  103 </span>prop_sameLength :: Tree Int -&gt; Bool
+<span class="lineno">  104 </span><span class="decl"><span class="istickedoff">prop_sameLength t = size t == length (flatten t)</span></span>
+<span class="lineno">  105 </span>
+<span class="lineno">  106 </span>rev :: Tree a -&gt; Tree a
+<span class="lineno">  107 </span><span class="decl"><span class="istickedoff">rev (Leaf x)   = Leaf x</span>
+<span class="lineno">  108 </span><span class="spaces"></span><span class="istickedoff">rev (Node l r) = Node (rev r) (rev l)</span></span>
+<span class="lineno">  109 </span>
+<span class="lineno">  110 </span>prop_revTwice :: Tree Integer -&gt; Bool
+<span class="lineno">  111 </span><span class="decl"><span class="istickedoff">prop_revTwice t = (rev . rev) t == t</span></span>
+<span class="lineno">  112 </span>
+<span class="lineno">  113 </span>main :: IO ()
+<span class="lineno">  114 </span><span class="decl"><span class="istickedoff">main = do</span>
+<span class="lineno">  115 </span><span class="spaces">  </span><span class="istickedoff">quickCheck prop_revTwice</span>
+<span class="lineno">  116 </span><span class="spaces">  </span><span class="istickedoff">quickCheck prop_sameLength</span>
+<span class="lineno">  117 </span><span class="spaces">  </span><span class="istickedoff">quickCheck sortEnsuresSorted</span>
+<span class="lineno">  118 </span><span class="spaces">  </span><span class="istickedoff">quickCheck sortPreservesLength</span>
+<span class="lineno">  119 </span><span class="spaces">  </span><span class="istickedoff">quickCheck sortIdempotent</span>
+<span class="lineno">  120 </span><span class="spaces">  </span><span class="istickedoff">quickCheck sortSameDataList</span>
+<span class="lineno">  121 </span><span class="spaces">  </span><span class="istickedoff">quickCheck dropTwice</span>
+<span class="lineno">  122 </span><span class="spaces">  </span><span class="istickedoff">quickCheck sortPermutes'</span></span>
+
+</pre>
+</html>

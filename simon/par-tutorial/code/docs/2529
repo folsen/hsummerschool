@@ -1,0 +1,42 @@
+From quick at sparq.org  Sat Dec 31 18:33:29 2011
+From: quick at sparq.org (Kevin Quick)
+Date: Sat, 31 Dec 2011 10:33:29 -0700
+Subject: [Haskell-cafe] Avoiding parametric function binding
+In-Reply-To: <CAB2TPRBmHeX8eZyNuVvstwdRNX==f1fb9zJ5W+=R1BeYJqv2DA@mail.gmail.com>
+References: <op.v7c0dyztjmyckg@boqueron>
+	<CAB2TPRBmHeX8eZyNuVvstwdRNX==f1fb9zJ5W+=R1BeYJqv2DA@mail.gmail.com>
+Message-ID: <op.v7c613m3jmyckg@boqueron>
+
+On Sat, 31 Dec 2011 08:50:05 -0700, Stephen Tetley  
+<stephen.tetley at gmail.com> wrote:
+
+> Maybe you want a deconstructor (sometime called an eliminator)?
+>
+> deconsVar :: (Maybe Int -> a) -> (Maybe String -> a) -> Var -> a
+> deconsVar f g (V1 a) = f a
+> deconsVar f g (V2 b) = g b
+
+That works and has the advantage of allowing a single deconstructor  
+definition that can be reused in multiple places, but it requires me to  
+add an argument for each wrapped type, which causes some ripple effect if  
+the type changes.
+
+Also, if that argument is parametric over the possible inputs (as asserted  
+by a class restriction) then it starts to get a bit tedious:
+
+main = putStrLn . deconsVar elemStr elemStr $ test
+
+If I find myself adding a V3 and a V4 to my datatype in the future then  
+that would change to:
+
+main = putStrLn . deconsVar elemStr elemStr elemStr elemStr $ test
+
+I was hoping to find a way that would let the functor argument retain its  
+parametricity and therefore not need such repetition.
+
+-Kevin
+
+-- 
+-KQ
+
+

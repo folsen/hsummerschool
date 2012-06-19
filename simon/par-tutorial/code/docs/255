@@ -1,0 +1,38 @@
+From klondikehaskellcafe at xiscosoft.es  Sat Apr  9 02:37:29 2011
+From: klondikehaskellcafe at xiscosoft.es (klondike)
+Date: Sat, 09 Apr 2011 02:37:29 +0200
+Subject: [Haskell-cafe] Patch: adding CTR,
+	CMAC and SIV modes to the Crypto API
+Message-ID: <4D9FAA49.7030102@xiscosoft.es>
+
+Hi,
+
+After a few weeks of hard work I have managed to add the CTR, CMAC and
+SIV modes of operation. The implemententation passes all the KATS I
+could find and is made as efficiently as possible without forgetting the
+risk of timing attacks over them. The patch is attached here and you can
+free it along with your library  with a BSD-3 license as long as you
+recognize  the authorship.
+
+Francisco Blas Izquierdo Riera (klondike)
+
+PS: Attached is also a set of commands I used with ghci to check quickly
+the implementation and which contain parts of the KATS I used, feel free
+to use them.
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: crypto-api.patch
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110409/03a23828/attachment.txt>
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: pruebas.txt
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110409/03a23828/attachment-0001.txt>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 262 bytes
+Desc: OpenPGP digital signature
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110409/03a23828/attachment.pgp>
+

@@ -1,0 +1,27 @@
+From gale at sefer.org  Sun Apr  3 13:13:05 2011
+From: gale at sefer.org (Yitzchak Gale)
+Date: Sun, 3 Apr 2011 14:13:05 +0300
+Subject: [Haskell-cafe] Can't connect to local yackage server
+In-Reply-To: <BANLkTimrwYLx21=0P6Uzsw4_MAOWvL_Qew@mail.gmail.com>
+References: <BANLkTi=K_LxbjW6u2MvQifNtswTa9-5bRQ@mail.gmail.com>
+	<BANLkTimrwYLx21=0P6Uzsw4_MAOWvL_Qew@mail.gmail.com>
+Message-ID: <BANLkTi=j5Q-XAi8QVSqa5ZVSzsBd5+DotA@mail.gmail.com>
+
+I wrote:
+>> After running yackage -l, I cannot connect to it even directly
+>> from localhost. I get the message:
+>> ?This Yackage server only talks to local clients
+
+Michael Snoyman wrote:
+> ...it doesn't sound like your problem is caused by the mis-behaving
+> Yackage code: it *should* give you a "permission denied" error message. Does
+> the connection work if you just run yackage normally, i.e. without -l?
+
+Yes, as a work-around I'm running it without -l, with
+the firewall set to block incoming connections to the port.
+It's working fine that way.
+
+Thanks,
+Yitz
+
+

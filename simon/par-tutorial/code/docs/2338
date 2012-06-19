@@ -1,0 +1,72 @@
+From apfelmus at quantentunnel.de  Tue Dec 27 23:08:52 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Tue, 27 Dec 2011 23:08:52 +0100
+Subject: [Haskell-cafe] MIDI-controlled application
+In-Reply-To: <CAB2TPRBRpLECKtXB28MVjiRaz42+dP-TA930nQYkrf9vyqEDRA@mail.gmail.com>
+References: <CAE0Z8DEZwSXUn65q6nEhnHccZuQojg1softo3esh=Hc06yuY=g@mail.gmail.com>
+	<CAB2TPRBRpLECKtXB28MVjiRaz42+dP-TA930nQYkrf9vyqEDRA@mail.gmail.com>
+Message-ID: <jddflk$lt6$1@dough.gmane.org>
+
+Stephen Tetley wrote:
+> Events in FRP / Yampa are typically key presses / mouse movement, so a
+> MIDI controller generating Note-on / Note-off events would be a direct
+> analogue to key presses.
+> 
+> More problematic is that FRP models hybrid (continuous and discrete)
+> systems. For me at least, MIDI seems essentially discrete - a stream
+> of control events. In MIDI files control events are twinned with a
+> time stamp so they can be played. Presumably events are instantaneous
+> in real-time interactive MIDI - not something I've looked at.
+> 
+> Working with an FRP system like Yampa might add a lot of complexity,
+> which admittedly you should be able to ignore - but initially it might
+> be difficult to identify what parts are needed for a "mostly" discrete
+> system like MIDI. (If you are time-stamping MIDI events yourself you
+> will presumably need to sample a running clock which seems like a
+> continuous behaviour...)
+> 
+> Unfortunately I can't think of any systems in Haskell that are "more
+> discrete than continuous" so you might have to choose a FRP system
+> anyway.
+
+Concerning FRP, I would like to advertise my reactive-banana library
+here, which tries to follow Conal Elliott's semantics with behaviors and 
+events.
+
+   http://www.haskell.org/haskellwiki/Reactive-banana
+
+I intend to do audio / MIDI programming in the future, so it's going to
+be well-supported for your particular purpose, even. That said, I
+haven't started to use it for MIDI myself yet, so I appreciate any kind
+of feedback!
+
+If you want to learn reactive-banana, I recommend that you have a look
+at the source code of the model implementation in Reactive.Banana.Model.
+It's intended to be really simple to understand and it's the
+authoritative reference for the semantics of the actual implementation
+(which is far from simple to understand). As you can see, the model uses
+infinite lists. The advantage of the actual implementation, especially
+for MIDI, is that it is *real-time*, something which is tricky to do 
+with infinite lists. Still, you could probably use the model as a guide 
+for cooking up your own FRP library.
+
+
+> Incidentally, I've been working on a MIDI "animation language" for the
+> last couple of days based on the animation language in Paul Hudak's
+> book. I've wanted continuous behaviours to model modulating volumes
+> (crescendos, decrescendos) and panning, but I've found the work tough
+> going for modelling the note lists where I want the system discrete in
+> both input (specification) and output.
+
+Consider me interested. How does your approach compare to
+Conal-style FRP with behaviors and events?
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

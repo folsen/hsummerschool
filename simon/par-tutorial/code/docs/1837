@@ -1,0 +1,39 @@
+From aslatter at gmail.com  Sun Dec 11 17:35:24 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Sun, 11 Dec 2011 10:35:24 -0600
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+In-Reply-To: <CAKjSnQFotosUrLP3a5wkz_j1wr0mc-1YBr5GB50ZTk_Q1H1JKA@mail.gmail.com>
+References: <87k464b870.fsf@gnu.org> <87d3bw102d.fsf@write-only.cryp.to>
+	<CAKFCL4VhQe89QZmTM6Wxm+7KR6KOT7+qQe-xYCNBt8i3fR+zjg@mail.gmail.com>
+	<CAKjSnQEW6=iXAvRNPyGRHppv50papjAwvnp0DoeaBn-TEVf2VQ@mail.gmail.com>
+	<CAKFCL4X-Hd1RGd5+Wk949Cz2EZZM9tzCDGm6ptYDJT09nF=NLg@mail.gmail.com>
+	<CAKjSnQFotosUrLP3a5wkz_j1wr0mc-1YBr5GB50ZTk_Q1H1JKA@mail.gmail.com>
+Message-ID: <CAKjSnQEuqH==hivDS1He0CMser0Mugav35OfB_bhKiL95ghQzg@mail.gmail.com>
+
+On Sun, Dec 11, 2011 at 10:23 AM, Antoine Latter <aslatter at gmail.com> wrote:
+>
+> All of the imports in the ./src/Parsers.hs are from the
+> Text.ParserCombinators.Parsec.* module space, which was intended to be
+> a compatibility layer, and all of the parsers and parser-combinators
+> in ./ser/Parsers.hs appear to be written using the 'Parser' type
+> synonym, also from the compatibility layer, which has the same token
+> type in both parsec-2.x and parsec-3.x.
+>
+> So after digging deeper I'm even more curious :-)
+>
+
+Okay, I just wasn't reading closely enough.
+
+We generalized the type of 'notFollowedBy' in parsec-3 - the
+generalization isn't parsec-3 specific at all, it just hadn't been
+done yet.
+
+The intent of the compatibility module was to supply backwards
+compatibility - I never thought about the problems of forward
+compatibility.
+
+Maybe some warning or deprecation pragmas are in order.
+
+Antoine
+
+

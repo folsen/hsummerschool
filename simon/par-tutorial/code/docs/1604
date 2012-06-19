@@ -1,0 +1,95 @@
+From mail at joachim-breitner.de  Thu Dec  1 22:16:29 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Thu, 01 Dec 2011 22:16:29 +0100
+Subject: [Haskell-cafe] List Fusion of concatMap
+In-Reply-To: <1322772296.2990.60.camel@kirk>
+References: <1322772296.2990.60.camel@kirk>
+Message-ID: <1322774189.2990.71.camel@kirk>
+
+Hi,
+
+Am Donnerstag, den 01.12.2011, 21:44 +0100 schrieb Joachim Breitner:
+> Does ghc treat list comprehensions differently here?
+
+I could answer this by looking at compiler/deSugar/DsListComp.lhs in the
+GHC source:
+
+        List comprehensions may be desugared in one of two ways:
+        ``ordinary'' (as you would expect if you read SLPJ's book) and
+        ``with foldr/build turned on'' (if you read Gill {\em et al.}'s
+        paper on the subject).
+
+(and indeed the translation depends on the flags) and later on:
+
+        @dfListComp@ are the rules used with foldr/build turned on:
+        
+        TE[ e | ]            c n = c e n
+        TE[ e | b , q ]      c n = if b then TE[ e | q ] c n else n
+        TE[ e | p <- l , q ] c n = let 
+                                        f = \ x b -> case x of
+                                                          p -> TE[ e | q ] c b
+                                                          _ -> b
+                                   in
+                                   foldr f n l
+        
+So I could manually rewrite func3 to:
+
+func4 :: Int -> Bool
+func4 k = any (>5) (build (\c n ->
+    foldr (\x b -> case x of
+            m -> 
+                foldr (\x' b' -> case x' of 
+                        i -> c i b'
+                ) b [1..m]
+    ) n [1..k]
+    ))
+{-# NOINLINE func4 #-}
+
+and get identical core output. Having a case expression does not matter
+in this case, because the code does all calculations completely with
+unboxed integers anyways, so this can be written as follows, with still
+identical core:
+
+func5 :: Int -> Bool
+func5 k = any (>5) (build (\c n ->
+    foldr (\x b -> foldr c b [1..x]) n [1..k]
+    ))
+{-# NOINLINE func5 #-}
+
+
+
+This would motivate the following definition for a fusionable concatMap,
+going via list comprehensions and their translation to ideal list fusion
+consumers/producers:
+
+   concatMap f xs
+== [ y | x <- xs, y <- f x ]
+== build (\c n -> foldr (\x b -> foldr c b (f x)) n xs)
+
+And indeed, adding
+{-# RULES "myConcatMap" forall f xs . concatMap f xs = build (\c n -> foldr (\x b -> foldr c b (f x)) n xs) #-}
+
+to my file finally makes func1 behave the way I want it to, i.e. exactly
+the same core as the list comprehension variant, and no lists at all,
+only unboxed integers.
+
+Now I guess there is a reason why concatMap is not defined this way. But
+what is it?
+
+Greetings,
+Joachim
+
+
+-- 
+Joachim "nomeata" Breitner
+  mail at joachim-breitner.de  |  nomeata at debian.org  |  GPG: 0x4743206C
+  xmpp: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111201/c2a92f22/attachment.pgp>
+

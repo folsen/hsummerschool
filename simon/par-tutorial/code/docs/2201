@@ -1,0 +1,57 @@
+From conor at strictlypositive.org  Wed Dec 21 18:20:03 2011
+From: conor at strictlypositive.org (Conor McBride)
+Date: Wed, 21 Dec 2011 17:20:03 +0000
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <CAPeieQGPN34wzUQHjsJM3xo3ysm3DFMcNh6mAkji9cfev2gsvw@mail.gmail.com>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+	<20111216042614.GB15053@seas.upenn.edu>
+	<CADLz5wVmAYTjGq1+ST87=0oGmUoYdZUTCj=Xcv=u_5_8D3hWvQ@mail.gmail.com>
+	<CACqaG6wdMU=8+SH+n-cNmaPMHKEuv6UiWW3t6rFSYK06sw1t1Q@mail.gmail.com>
+	<CADLz5wWsWghpJim+28FtPy+RSXWjXvboX_KqNLmcho3Ugjno7w@mail.gmail.com>
+	<CAPeieQGPN34wzUQHjsJM3xo3ysm3DFMcNh6mAkji9cfev2gsvw@mail.gmail.com>
+Message-ID: <9BFF699B-2316-4615-8FCD-A34569181316@strictlypositive.org>
+
+
+
+
+
+On 21 Dec 2011, at 14:07, Erik Hesselink <hesselink at gmail.com> wrote:
+
+> On Wed, Dec 21, 2011 at 14:10, Bas van Dijk <v.dijk.bas at gmail.com>  
+> wrote:
+
+>  The semantics of Maybe are
+>>
+>> clear: it's failure-and-prioritized-choice.
+>
+> Are you sure?
+
+Yes.
+
+> There are (at least) four Monoid instances for Maybe
+> [1]. With a direct instance for Maybe and its Dual you have only
+> covered two.
+
+Types don't just give data a representation: types evoke structure.  
+The data stored by Maybe can be made into a monoid in several ways,  
+but the failure-management role of Maybe makes just one of them  
+appropriate.
+
+Cheers
+
+Conor
+
+
+>
+> Erik
+>
+> [1] https://byorgey.wordpress.com/2011/04/18/monoids-for-maybe/
+>
+> _______________________________________________
+> Libraries mailing list
+> Libraries at haskell.org
+> http://www.haskell.org/mailman/listinfo/libraries
+
+

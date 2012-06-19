@@ -1,0 +1,57 @@
+From evohunz at gmail.com  Thu Dec 29 01:57:01 2011
+From: evohunz at gmail.com (Thiago Negri)
+Date: Wed, 28 Dec 2011 22:57:01 -0200
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFBB2F3.6060905@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <4EFB91BA.5070003@unicaen.fr>
+	<4EFBAB99.4050605@blueyonder.co.uk>
+	<CADd9ORtkye6qV6P-8gnW_gX8qAQz-uwSnSfwzKM1HuwH4J6zDQ@mail.gmail.com>
+	<4EFBB2F3.6060905@blueyonder.co.uk>
+Message-ID: <CABLneZtbhXHMhMbLLhMQ0T9NJYQi4VxSOk06ZKHJA1VCMUS1LQ@mail.gmail.com>
+
+We can do functional programming on Java. We use all the design patterns
+for that.
+
+At the very end, everything is just some noisy, hairy, side-effectfull,
+gotofull machinery code.
+
+The beauty of Haskell is that it allows you to limit the things you need to
+reason about. If I see a function with the type "(a, b) -> a" I don't need
+to read a man page to see where I should use it or not. I know what it can
+do by its type. In C I can not do this. What can I say about a function
+"int foo(char* bar)"? Does it allocate memory? Does it asks a number for
+the user on stdin? Or does it returns the length of a zero-ending char
+sequence? In fact it can do anything, and I can't forbid that. I can't
+guarantee that my function has good behaviour. You need to trust the man
+page.
+Em 28/12/2011 22:24, "Steve Horne" <sh006d3592 at blueyonder.co.uk> escreveu:
+
+> On 28/12/2011 23:56, Bernie Pope wrote:
+>
+>> On 29 December 2011 10:51, Steve Horne<sh006d3592 at blueyonder.**co.uk<sh006d3592 at blueyonder.co.uk>>
+>>  wrote:
+>>
+>>  As Simon Baron-Cohen says in "Tackling the Awkward Squad"...
+>>>
+>> I think you've mixed up your Simons; that should be Simon Peyton Jones.
+>>
+>>  Oops - sorry about that.
+>
+> FWIW - I'm diagnosed Aspergers. SBC diagnosed me back in 2001, shortly
+> after 9/1/1.
+>
+> Yes, I *am* pedantic - which doesn't always mean right, of course.
+>
+> Not relevant, but what the hell.
+>
+>
+> ______________________________**_________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/**mailman/listinfo/haskell-cafe<http://www.haskell.org/mailman/listinfo/haskell-cafe>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111228/a417d08e/attachment.htm>
+

@@ -1,0 +1,63 @@
+From michael at snoyman.com  Wed Aug 17 07:16:39 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 17 Aug 2011 08:16:39 +0300
+Subject: [Haskell-cafe] ANNOUNCE: TKYProf
+In-Reply-To: <CALoEywOuRx5kX4PxFehspuP2kVZ9b-g6Vi1u2UYM1F10Wc4=NQ@mail.gmail.com>
+References: <96BB3D35-27F0-456B-B0CC-8EDE541C8347@foldr.in>
+	<CALoEywOuRx5kX4PxFehspuP2kVZ9b-g6Vi1u2UYM1F10Wc4=NQ@mail.gmail.com>
+Message-ID: <CAKA2JgKtbWECa-yZni3boH3CnaR-E5CrJRaAgOy6HZx=iw6Qsw@mail.gmail.com>
+
+The blaze-textual issue is intentional: There's a bug in GHC that
+prevents C++ code from working correctly with Template Haskell, and
+newer versions of blaze-textual use a C++ library for parsing doubles.
+I'm hoping that the defaults change on blaze-textual to use the native
+code instead so that I can relax this dependency.
+
+On Wed, Aug 17, 2011 at 7:31 AM, Sebastian Fischer <fischer at nii.ac.jp> wrote:
+>> I'm glad to announce the alpha release of TKYProf.
+>
+> This looks useful, thanks! I'll try it out and let you know if I have
+> problems.
+> Installing with GHC 7.2, I needed to relax some upper bounds in cabal files
+> of dependencies (maintainers CC'ed).
+> ? - email-validate and ranges specify base < 4.4 but also seem to work with
+> base < 5.
+> ? - yesod-json specifies blaze-textual < 0.2 but also seems to work with
+> blaze-textual < 0.3
+> Additionally, I linked /usr/lib/libstdc++.so.6 to /usr/lib/libstdc++.so
+> before I could successfully install tkyprof. Not sure about the
+> consequences..
+> Cheers,
+> Sebastian
+>>
+>> ?http://hackage.haskell.org/package/tkyprof
+>> ?https://github.com/maoe/tkyprof
+>>
+>> TKYprof is a web-based interacitve visualizer for GHC time and allocation
+>> profiling reports. It helps you to find the bottlenecks in your code
+>> quickly!
+>>
+>> Here is a blog post:
+>>
+>> ? http://blog.foldr.in/tkyprof-a-web-based-interactive-visualizer-fo
+>>
+>> It is still alpha and it have some bugs. I'm happy to hear your feedback.
+>>
+>> Thanks,
+>>
+>> --
+>> Mitsutoshi Aoe
+>> maoe at foldr.in
+>>
+>>
+>>
+>>
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

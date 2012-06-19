@@ -1,0 +1,74 @@
+From felipe.lessa at gmail.com  Wed Dec 21 10:09:14 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Wed, 21 Dec 2011 07:09:14 -0200
+Subject: [Haskell-cafe] Interruptible threads with IO loops
+In-Reply-To: <CAH-sQ5jrocgiuXiOmDaoaajkn7HRF5XWaXJK9kA2sE_cj4P0cQ@mail.gmail.com>
+References: <CAH-sQ5jrocgiuXiOmDaoaajkn7HRF5XWaXJK9kA2sE_cj4P0cQ@mail.gmail.com>
+Message-ID: <CANd=OGGib0V=q6EWXVMfZvaVh+u_HOYAKfAP07ebAyA9=v4HnQ@mail.gmail.com>
+
+Suggestion: use an IORef and asynchronous exceptions, see below for
+untested code.
+
+On Wed, Dec 21, 2011 at 6:52 AM, Fedor Gogolev <knsd at knsd.net> wrote:
+> Hello. I'm trying to get some threads that I can stop and get last
+> values that was computed (and that values are IO values, in fact).
+> Here is my first approach:
+>
+> module Main where
+>
+> import Control.Concurrent (MVar, threadDelay, forkIO, newMVar,
+> putMVar, readMVar)
+>
+> tick :: Int -> IO Int
+> tick v = return $ v + 1
+>
+> loop :: MVar Bool -> a -> (a -> IO a) ?-> IO a
+> loop var init loopfun = do
+> ? next <- loopfun init
+> ? shouldStop <- readMVar var
+> ? case shouldStop of
+> ? ? ? True -> return next
+> ? ? ? False -> loop var next loopfun
+
+loop :: IORef a -> (a -> IO a) -> IO ()
+loop var loopfun = readIORef var >>= go
+  where
+    go val = do
+      next <- loopfun val
+      writeIORef var next
+      go next
+
+> runLoop :: Int -> IO ()
+> runLoop timeout = do
+> ? var <- newMVar False
+> ? forkIO $ threadDelay timeout >> putMVar var True
+> ? value <- loop var 0 tick
+> ? print value
+
+runLoop timeout = do
+  var <- newIORef 0
+  lock <- newEmptyMVar
+  loopTid <- forkIO $ loop var tick >> putMVar lock ()
+  delayTid <- forkIO $ threadDelay timeout >> killThread loopTid >>
+putMVar lock ()
+  takeMVar lock
+  killThread delayTid
+  value <- readIORef var
+  print value
+
+> main :: IO ()
+> main = runLoop 30000000
+>
+> The problem is that it looks a little messy and what's worse it leaks
+> memory. So I'm wondering if there is a better approach to do so or
+> some fix to memory leak.
+
+Again, code above is untested and was written on my e-mail client =).
+But the idea seems fine.
+
+Cheers,
+
+-- 
+Felipe.
+
+

@@ -1,0 +1,54 @@
+From pumpkingod at gmail.com  Fri Feb  4 07:11:38 2011
+From: pumpkingod at gmail.com (Daniel Peebles)
+Date: Fri, 4 Feb 2011 06:11:38 +0000
+Subject: [Haskell-cafe] AES on 32-bit system
+In-Reply-To: <AANLkTi=BQsuAF-Hmp94n6NqKU_P_rrv+17_rfVHVkpo7@mail.gmail.com>
+References: <AANLkTi=BQsuAF-Hmp94n6NqKU_P_rrv+17_rfVHVkpo7@mail.gmail.com>
+Message-ID: <AANLkTik_b_hV=cAf-f_oSnzudZjcL8p-TATrvLqonocA@mail.gmail.com>
+
+Knowing nothing about the package or its code, it looks like a typo to me.
+The stdint.h naming of types would have it be uint64_t, not uint_64t. Could
+that be it?
+
+On Fri, Feb 4, 2011 at 6:00 AM, Michael Snoyman <michael at snoyman.com> wrote:
+
+> Hi everyone,
+>
+> Does anyone else have trouble installing the AES package on a 32-bit
+> system? My system at home installs it just fine, but my VPS chokes
+> with the following error messages (plus a bunch of warnings):
+>
+> cbits/ctr_inc.c:11:0:
+>     error: 'uint_64t' undeclared (first use in this function)
+>
+> cbits/ctr_inc.c:11:0:
+>     error: (Each undeclared identifier is reported only once
+>
+> cbits/ctr_inc.c:11:0:  error: for each function it appears in.)
+>
+> cbits/ctr_inc.c:11:0:
+>     error: 'ctr' undeclared (first use in this function)
+>
+> cbits/ctr_inc.c:11:0:  error: expected expression before ')' token
+>
+> It's actually for this very reason that I'm still maintaining the
+> OpenSSL backend for http-enumerator: I think the tls package is stable
+> enough now to be used in production environments (kudos to Vincent by
+> the way). However, I can't use it in production if I can't build one
+> of its dependencies. This bug is also preventing me from adding some
+> nice features to http-enumerator, such as checking validity of SSL
+> certificates.
+>
+> Anyone have any thoughts?
+>
+> Michael
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110204/094da1b0/attachment-0001.htm>
+

@@ -1,0 +1,55 @@
+From rendel at informatik.uni-marburg.de  Tue Dec 20 11:05:00 2011
+From: rendel at informatik.uni-marburg.de (Tillmann Rendel)
+Date: Tue, 20 Dec 2011 11:05:00 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <1324322427.2233.6.camel@fuzxxl>
+References: <1324322427.2233.6.camel@fuzxxl>
+Message-ID: <4EF05DCC.4040607@informatik.uni-marburg.de>
+
+Hi,
+
+Robert Clausecker wrote:
+> Image you would create your own language with a paradigm similar to
+> Haskell or have to chance to change Haskell without the need to keep any
+> compatibility. What stuff would you add to your language, what stuff
+> would you remove and what problems would you solve completely different?
+
+I would try to improve the language's support for the embedding of 
+domain-specific embedded languages (aka. combinator libraries). Such 
+embedding requires the integration of a domain-specific language's 
+syntax, static semantics and dynamic semantics. Some (more or less far 
+fetched) ideas about these three areas follow.
+
+
+To support better syntax for embedded languages, provide more rebindable 
+syntax ? la do-notation. For example, (if c then t else e) currently 
+desugars to (case c of False -> e; True -> t). But it could also desugar 
+to (if' c t e) where if' is a method of a type class. For (c : Bool), 
+the standard library would provide an instance of this type class, but 
+for other condition types, third-party libraries could provide it. 
+Alternatively, if-then-else could even desugar to whatever if' is in 
+scope. A similar idea is currently applied to Scala in the 
+scala-virtualized project. A large part of the language should be 
+virtualized this way, including pattern matching, lambda expressions, 
+maybe even type or class declarations.
+
+To support better static semantics for embedded languages, provide 
+better type-level computation, including some form of closed-world 
+reasoning (for example, backtracking or closed pattern matching) and a 
+reification of names at the type level, so that type-level computations 
+can reason about the binding structures of expressions-level code. Note 
+that I am interested in the static structure of terms, not their dynamic 
+behavior, so this is different from dependent types.
+
+With Haskell being a fine general-purpose programming language, and even 
+having a good foreign language interface, there is already plenty of 
+support for the specification of dynamic semantics. Nevertheless, for 
+domain-specific embedded compilers, it would possibly be nice to access 
+a Haskell compiler at runtime, to compile snippets of Haskell code and 
+dynamically link them into the currently running program.
+
+
+   Tillmann
+
+

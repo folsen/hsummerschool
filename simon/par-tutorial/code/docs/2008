@@ -1,0 +1,147 @@
+From ganesh at earth.li  Fri Dec 16 10:57:08 2011
+From: ganesh at earth.li (Ganesh Sittampalam)
+Date: Fri, 16 Dec 2011 09:57:08 +0000
+Subject: [Haskell-cafe] [Haskell] Proposal to incorporate Haskell.org
+In-Reply-To: <4EEB0A89.1090302@earth.li>
+References: <BANLkTi=Kf8eJAOpTEMo_1CtHCBEjV6-o1g@mail.gmail.com>
+	<4EEB0A89.1090302@earth.li>
+Message-ID: <4EEB15F4.3040704@earth.li>
+
+BTW as with the Don's original message about incorporating, I
+distributed this widely to increase awareness, but please restrict any
+feedback to haskell-cafe@ and committee at .
+
+Sorry for the noise!
+
+Ganesh
+
+On 16/12/2011 09:08, Ganesh Sittampalam wrote:
+> Hi,
+> 
+> As mentioned in the committee's annual report
+> (http://haskellorg.wordpress.com/2011/10/26/first-year-report/), our
+> attempt to join SFC has stalled because they don't have the capacity to
+> accept new projects at the moment.
+> 
+> We therefore applied to join SPI (http://www.spi-inc.org/), and they
+> have now offered us "associated project" status
+> (http://www.spi-inc.org/projects/associated-project-howto/).
+> 
+> We intend to accept this offer, but are taking this final opportunity to
+> seek feedback from the community before doing so.
+> 
+> SPI is very like SFC in what it does and how it operates, so we don't
+> expect this to make any substantial differences to the FAQ quoted below.
+> 
+> Regards,
+> 
+> Ganesh
+> on behalf of the haskell.org committee
+> 
+> On 10/05/2011 23:44, Don Stewart wrote:
+>> Hello everyone.
+>>
+>> The haskell.org committee[1], in the interest of the long-term stability
+>> of the open source Haskell community infrastructure, has decided to
+>> incorporate haskell.org as a legal entity. This email outlines our
+>> recommendation, and seeks input from the community on this decision.
+>>
+>> The committee's proposal is that haskell.org incorporate as an entity
+>> under the Software Freedom Conservancy umbrella organization (the same group
+>> that Darcs joined recently):
+>>
+>>     http://sfconservancy.org/
+>>
+>> If we proceed with this move, haskell.org will be a legal entity, and
+>> registered as a non-profit, allowing us to more directly accept
+>> (US tax-deductible) donations, and to invest in assets that benefit the
+>> Haskell open source community.
+>>
+>> We welcome your feedback on the proposal attached below.
+>>
+>> -- Don Stewart (on behalf of the Haskell.org committee)
+>>
+>>
+>>
+>> ------------------------------------------------------------------------
+>>
+>> = A proposal for the incorporation of Haskell.org =
+>>
+>> In recent years, haskell.org has started to receive assets, e.g. money from
+>> Google Summer Of Code, donations for Hackathons, and a Sparc machine for use in
+>> GHC development. We have also started spending this money: in particular, on
+>> hosting haskell.org itself. There is also interest in running fundraising
+>> drives for specific things such as Hackathon sponsorship and hosting fees.
+>>
+>> However, haskell.org doesn't currently exist as a legal entity, meaning that
+>> these assets have had to be held on our behalf by other entities, such as
+>> Galois and various universities. This leads to tricky situations, with no-one
+>> being sure who should decide how the haskell.org assets can be used.
+>>
+>> To solve these problems, we propose that haskell.org applies to become a member
+>> project of the Software Freedom Conservancy (SFC)
+>> <http://conservancy.softwarefreedom.org/>. The SFC is a non-profit organization
+>> that provides free financial and administrative services to open source
+>> projects. Additionally, it has 501(c)(3) status, meaning donations from the US
+>> are tax-deductible. The SFC would hold haskell.org's money and other assets,
+>> and would be able to accept donations on behalf of haskell.org.
+>>
+>> The haskell.org committee, as described here [2], will make decisions on
+>> spending assets and other decisions related to governing the non-profit.
+>>
+>>
+>> Before proceeding, we are inviting input from the community in the form
+>> of specific objections or queries regarding the plan.
+>>
+>> We've tried to answer some of the most likely questions:
+>>
+>> Q: Does this mean that my Haskell project must now be covered by a
+>>      copyleft licence such as GPL?
+>> A: No, but Haskell projects using haskell.org resource should use an
+>>     Open Source licence
+>>      <http://www.opensource.org/licenses/alphabetical>.
+>>
+>> Q: Will it still be possible to use community.h.o to host
+>>      non-open-source material, such as academic papers?
+>> A: An overall minority of such content, as is the current situation, is
+>>     not a problem.
+>>
+>> Q: Will it still be possible to have job ads on the haskell.org mailing
+>>     lists and website?
+>> A: Yes.
+>>
+>> Q: Will this affect our ability to host the Haskell Symposium
+>>     <http://www.haskell.org/haskell-symposium/>  and Industrial Haskell
+>>     Group<http://industry.haskell.org/>  webpages within haskell.org?
+>> A: No.
+>>
+>> Q: What will be the relationship between haskell.org and other
+>>     organizations such as the Haskell Symposium and Industrial Haskell
+>>     Group?
+>> A: Those organisations will continue to exist as separate entities.
+>>
+>> Q: If an umbrella non-profit organisation "The Haskell Foundation" was
+>>     created, would haskell.org be able to join it?
+>> A: Yes. It's likely that in such a scenario, the Haskell Foundation
+>>     would become the owner of the haskell.org domain name, with the cost
+>>     divided between the members. The entity that is part of the SFC would
+>>     be renamed "community.haskell.org" in order to avoid confusion.
+>>
+>> [1]: http://www.haskell.org/haskellwiki/Haskell.org_committee
+>> [2]: http://www.haskell.org/haskellwiki/Haskell.org_committee#Operation
+>>
+>> _______________________________________________
+>> Haskell mailing list
+>> Haskell at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell
+>>
+> 
+> 
+> _______________________________________________
+> Haskell mailing list
+> Haskell at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell
+> 
+
+
+

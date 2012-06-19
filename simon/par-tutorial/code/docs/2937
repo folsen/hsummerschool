@@ -1,0 +1,23 @@
+From ckkashyap at gmail.com  Fri Feb 11 12:06:58 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Fri, 11 Feb 2011 16:36:58 +0530
+Subject: [Haskell-cafe]  Proving correctness
+Message-ID: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+
+Hi Folks,
+
+I've come across this a few times - "In Haskell, once can prove the
+correctness of the code" - Is this true?
+
+I know that static typing and strong typing of Haskell eliminate a whole
+class of problems - is that related to the proving correctness?
+Is it about Quickcheck - if so, how is it different from having test sutites
+in projects using mainstream languages?
+
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110211/14dcd2cb/attachment.htm>
+

@@ -1,0 +1,111 @@
+From v.dijk.bas at gmail.com  Tue Dec 27 18:24:21 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Tue, 27 Dec 2011 18:24:21 +0100
+Subject: [Haskell-cafe] GHC 7.4: Expected behavior or bug?
+In-Reply-To: <CADLz5wVhqNAnA08d1rNDXVZUe9zDacSnbkoL1tkBHJM6EO4Muw@mail.gmail.com>
+References: <CAKA2JgKbsGFCSrQczzpZwwcxONW_8bNasifvEGp-qy_udJijbg@mail.gmail.com>
+	<CADLz5wVhqNAnA08d1rNDXVZUe9zDacSnbkoL1tkBHJM6EO4Muw@mail.gmail.com>
+Message-ID: <CADLz5wVxnPb2AcrwLL2ym0M5EYxcVsXRtXkJvCLLNz1pLe2a7A@mail.gmail.com>
+
+On 27 December 2011 17:47, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+> I fixed a similar breakage in the hmatrix library:
+>
+> https://github.com/AlbertoRuiz/hmatrix/commit/a4f38eb196209436f72b938f6355f6e28474bef3
+
+GHC-7.4.1-rc1 also reported another type error in code that was
+accepted by GHC <= 7.2.2. These were the type errors I got:
+
+[24 of 36] Compiling Numeric.LinearAlgebra.Algorithms (
+lib/Numeric/LinearAlgebra/Algorithms.hs,
+dist/build/Numeric/LinearAlgebra/Algorithms.o )
+
+lib/Numeric/LinearAlgebra/Algorithms.hs:576:23:
+    No instance for (RealFrac (RealOf t0))
+      arising from a use of `floor'
+    Possible fix:
+      add an instance declaration for (RealFrac (RealOf t0))
+    In the expression: floor
+    In the second argument of `($)', namely
+      `floor $ logBase 2 $ pnorm Infinity m'
+    In the expression: max 0 $ floor $ logBase 2 $ pnorm Infinity m
+
+lib/Numeric/LinearAlgebra/Algorithms.hs:576:31:
+    No instance for (Floating (RealOf t0))
+      arising from a use of `logBase'
+    Possible fix:
+      add an instance declaration for (Floating (RealOf t0))
+    In the expression: logBase 2
+    In the second argument of `($)', namely
+      `logBase 2 $ pnorm Infinity m'
+    In the second argument of `($)', namely
+      `floor $ logBase 2 $ pnorm Infinity m'
+
+lib/Numeric/LinearAlgebra/Algorithms.hs:576:39:
+    No instance for (Num (RealOf t0))
+      arising from the literal `2'
+    Possible fix: add an instance declaration for (Num (RealOf t0))
+    In the first argument of `logBase', namely `2'
+    In the expression: logBase 2
+    In the second argument of `($)', namely
+      `logBase 2 $ pnorm Infinity m'
+
+lib/Numeric/LinearAlgebra/Algorithms.hs:576:43:
+    No instance for (Normed Matrix t0)
+      arising from a use of `pnorm'
+    Possible fix: add an instance declaration for (Normed Matrix t0)
+    In the second argument of `($)', namely `pnorm Infinity m'
+    In the second argument of `($)', namely
+      `logBase 2 $ pnorm Infinity m'
+    In the second argument of `($)', namely
+      `floor $ logBase 2 $ pnorm Infinity m'
+
+lib/Numeric/LinearAlgebra/Algorithms.hs:593:19:
+    No instance for (Container Vector t0)
+      arising from a use of `add'
+    Possible fix: add an instance declaration for (Container Vector t0)
+    In the expression: add
+    In an equation for `|+|': |+| = add
+    In an equation for `expGolub':
+        expGolub m
+          = iterate msq f !! j
+          where
+              j = max 0 $ floor $ logBase 2 $ pnorm Infinity m
+              a = m */ fromIntegral ((2 :: Int) ^ j)
+              q = geps eps
+              eye = ident (rows m)
+              ....
+
+lib/Numeric/LinearAlgebra/Algorithms.hs:599:1:
+    Couldn't match type `t0' with `t'
+      because type variable `t' would escape its scope
+    This (rigid, skolem) type variable is bound by
+      the type signature for expm :: Field t => Matrix t -> Matrix t
+    The following variables have types that mention t0
+      expGolub :: Matrix t0 -> Matrix t0
+        (bound at lib/Numeric/LinearAlgebra/Algorithms.hs:575:1)
+
+Note that RealOf is a type family:
+
+type family RealOf x
+
+type instance RealOf Double = Double
+type instance RealOf (Complex Double) = Double
+
+type instance RealOf Float = Float
+type instance RealOf (Complex Float) = Float
+
+Adding the following explicit type signature fixed it:
+
+expGolub :: ( Fractional t, Element t, Field t
+            , Normed Matrix t
+            , RealFrac (RealOf t)
+            , Floating (RealOf t)
+            ) => Matrix t -> Matrix t
+
+I have no idea if this should be considered a bug.
+
+Regards,
+
+Bas
+
+

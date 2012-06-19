@@ -1,0 +1,35 @@
+From stephen.tetley at gmail.com  Fri Apr 22 20:14:38 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Fri, 22 Apr 2011 19:14:38 +0100
+Subject: [Haskell-cafe] fishing for ST mutable Vector examples
+In-Reply-To: <liliz22nuw.fsf@inside.sv3.smugmug.net>
+References: <liliz22nuw.fsf@inside.sv3.smugmug.net>
+Message-ID: <BANLkTimkfpSqLGnY3FDZWig=z1kT0MM-vw@mail.gmail.com>
+
+Hi Brad
+
+I think all you can do with an ST array is covered by the MArray class
+and its derived operations - note the class is exported opaquely from
+Data.Array.MArray - it has these two members that aren't exported so
+aren't documented:
+
+
+unsafeRead  :: Ix i => a i e -> Int -> m e
+unsafeWrite :: Ix i => a i e -> Int -> e -> m ()
+
+To actually read and write you have to use the safe derived operations
+which wrap the unsafe versions:
+
+readArray :: (MArray a e m, Ix i) => a i e -> i -> m e
+writeArray :: (MArray a e m, Ix i) => a i e -> i -> e -> m ()
+
+For practical purposes I've found STArray's a bit of a white elephant
+- I always use IOArray instead, as I've either needed to initially
+read an array from file or write one to file at the end. You can't do
+this with ST.
+
+Best wishes
+
+Stephen
+
+

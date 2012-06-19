@@ -1,0 +1,69 @@
+From michael at snoyman.com  Sat Dec 24 16:50:24 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Sat, 24 Dec 2011 17:50:24 +0200
+Subject: [Haskell-cafe] Composing Enumeratees in enumerator
+In-Reply-To: <20111224230046.4ca6219c47969005580a3491@mega-nerd.com>
+References: <CAHa9zAGkw7mOvhk+4Q6Xe_p67qyi2TASVJD3z6QeoXFFfU-wCA@mail.gmail.com>
+	<20111224230046.4ca6219c47969005580a3491@mega-nerd.com>
+Message-ID: <CAKA2JgKG2WzThmNsAyaWWo0fTeMJGGXcV9-2NeVdXVLeLmVbjw@mail.gmail.com>
+
+On Sat, Dec 24, 2011 at 2:00 PM, Erik de Castro Lopo
+<mle+hs at mega-nerd.com> wrote:
+> Michael Craig wrote:
+>
+>> I've been looking for a way to compose enumeratees in the enumerator
+>> package, but I've come up with nothing so far. I want this function
+>>
+>> (=$=) :: Monad m => Enumeratee a0 a1 m b -> Enumeratee a1 a2 m b ->
+>> Enumeratee a0 a2 m b
+>
+> I think part of the problem here is that Enumeratee is defined as:
+>
+> ? ?type Enumeratee ao ai m b = Step ai m b -> Iteratee ao m (Step ai m b)
+>
+> If you expand out your type signature you get:
+>
+> ? ?(=$=) :: Monad m
+> ? ? ? ? ?=> (Step a1 m b -> Iteratee a0 m (Step a1 m b))
+> ? ? ? ? ?-> (Step a2 m b -> Iteratee a1 m (Step a2 m b))
+> ? ? ? ? ?-> (Step a2 m b -> Iteratee a0 m (Step a2 m b))
+>
+> which to me looks rather painful to implement.
+>
+>> I've been looking at the iterIO package as a possible alternative, because
+>> it seems to allow easy composition of Inums (enumeratees). I'm a little
+>> skittish of it because it seems unpopular next to enumerator.
+>>
+>> Thoughts on these issues?
+>
+> I think these issues are actually common to all implementations of
+> the Iteratee concept. Basically they do not compose as nicely and
+> as cleanly as they would be expected to. I recently ran into this
+> difficulty in composition in my project which was solved by nesting
+> an iteratee inside an enumerator.
+>
+> ? https://github.com/erikd/http-proxy/commit/73775555c1cc695b21b7c13b823abc6c3358a978
+>
+> There is work being done to address these issues. See Michael
+> Snoyman's work on Conduits:
+>
+> ? https://github.com/snoyberg/conduit
+>
+> Cheers.
+> Erik
+> --
+> ----------------------------------------------------------------------
+> Erik de Castro Lopo
+> http://www.mega-nerd.com/
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+By the way, conduit defines *precisely* that operator, for "fusing"
+(iterIO's term) two conduits together.
+
+Michael
+
+

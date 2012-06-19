@@ -1,0 +1,19 @@
+From vandijk.roel at gmail.com  Mon Apr  4 11:50:03 2011
+From: vandijk.roel at gmail.com (Roel van Dijk)
+Date: Mon, 4 Apr 2011 11:50:03 +0200
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+Message-ID: <BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+
+2011/4/4 Colin Adams <colinpauladams at googlemail.com>:
+> Not from looking with your eyes perhaps. Does that matter? Your text editor,
+> and the compiler, can surely figure it out for themselves.
+I am not aware of any algorithm that can reliably infer the character
+encoding used by just looking at the raw data. Why would people bother
+with stuff like <?xml version="1.0" encoding="UTF-8"?> if
+automatically figuring out the encoding was easy?
+
+> There aren't many Unicode encoding formats
+

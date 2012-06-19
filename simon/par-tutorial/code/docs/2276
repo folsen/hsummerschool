@@ -1,0 +1,28 @@
+From aslatter at gmail.com  Sun Dec 25 07:02:57 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Sun, 25 Dec 2011 01:02:57 -0500
+Subject: [Haskell-cafe] Images in Haddock documentation: best practices?
+In-Reply-To: <20111225050401.GA8834@seas.upenn.edu>
+References: <20111225050401.GA8834@seas.upenn.edu>
+Message-ID: <CAKjSnQHatjFXroVLt8305W=3hs1_HoBXqtqO77VnMkwGyXGG9g@mail.gmail.com>
+
+On Sun, Dec 25, 2011 at 12:04 AM, Brent Yorgey <byorgey at seas.upenn.edu> wrote:
+> Hi all,
+>
+> Although it doesn't seem to be documented in the user manual (!),
+> Haddock supports inline images, using a <<url>> syntax. ?I'd like to
+> include some images in the documentation for a package I'm writing,
+> but not sure of the best way.
+>
+
+In case nothing else works out:
+
+http://en.wikipedia.org/wiki/Data_URI_scheme
+
+They do not work in IE 7, and in IE 9 they are limited to 32k.
+
+They also are not cached separately from the containing page.
+
+Antoine
+
+

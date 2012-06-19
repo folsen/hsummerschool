@@ -1,0 +1,72 @@
+From baumgartner.tim at googlemail.com  Tue Dec 27 15:36:48 2011
+From: baumgartner.tim at googlemail.com (Tim Baumgartner)
+Date: Tue, 27 Dec 2011 15:36:48 +0100
+Subject: [Haskell-cafe] MIDI-controlled application
+In-Reply-To: <CAB2TPRBRpLECKtXB28MVjiRaz42+dP-TA930nQYkrf9vyqEDRA@mail.gmail.com>
+References: <CAE0Z8DEZwSXUn65q6nEhnHccZuQojg1softo3esh=Hc06yuY=g@mail.gmail.com>
+	<CAB2TPRBRpLECKtXB28MVjiRaz42+dP-TA930nQYkrf9vyqEDRA@mail.gmail.com>
+Message-ID: <CAE0Z8DEf08QpDTrcot4mOaR6Dxv+TQTPV60op2X60UWhvG7ocQ@mail.gmail.com>
+
+Hi Stephen,
+
+2011/12/27 Stephen Tetley <stephen.tetley at gmail.com>
+
+> Hi Tim
+>
+> More problematic is that FRP models hybrid (continuous and discrete)
+> systems. For me at least, MIDI seems essentially discrete - a stream
+> of control events. In MIDI files control events are twinned with a
+> time stamp so they can be played. Presumably events are instantaneous
+> in real-time interactive MIDI - not something I've looked at.
+>
+
+The events all feature a time stamp and my drum set produces lots of
+"CRTClock" events for synchronization. I didn't use the time stamps in my
+Java application but I would have to for recording/recognizing rhythms.
+
+
+> Working with an FRP system like Yampa might add a lot of complexity,
+> which admittedly you should be able to ignore
+
+
+Yes, I'm a bit afraid of that.
+
+
+> but initially it might
+> be difficult to identify what parts are needed for a "mostly" discrete
+> system like MIDI. (If you are time-stamping MIDI events yourself you
+> will presumably need to sample a running clock which seems like a
+> continuous behaviour...)
+>
+> Unfortunately I can't think of any systems in Haskell that are "more
+> discrete than continuous" so you might have to choose a FRP system
+> anyway.
+>
+
+I just had a glance at Peakachu. It seemed easier than Yampa to me. I liked
+the Program abstraction. Perhaps I can use this...
+
+
+> Incidentally, I've been working on a MIDI "animation language" for the
+> last couple of days based on the animation language in Paul Hudak's
+> book. I've wanted continuous behaviours to model modulating volumes
+> (crescendos, decrescendos) and panning, but I've found the work tough
+> going for modelling the note lists where I want the system discrete in
+> both input (specification) and output.
+>
+
+This reminds me of the Yampa based synthesizer from the paper "Switched-On
+Yampa". I just looked into it.
+
+
+> Best wishes
+>
+> Stephen
+>
+
+Thanks
+Tim
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111227/7980d738/attachment.htm>
+

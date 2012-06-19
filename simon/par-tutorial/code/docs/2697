@@ -1,0 +1,101 @@
+From haskell.vivian.mcphail at gmail.com  Fri Feb  4 07:38:31 2011
+From: haskell.vivian.mcphail at gmail.com (Alexander McPhail)
+Date: Fri, 4 Feb 2011 19:38:31 +1300
+Subject: [Haskell-cafe] Problem cabal installing wxcore with ghc 7.0.1 on
+	linux x86_64
+Message-ID: <AANLkTincbYXnST5ZqmZmBvkHsq57W46R6jkw_oMbT6uc@mail.gmail.com>
+
+zen:~# cabal install wxcore --enable-documentation --global
+Resolving dependencies...
+[1 of 1] Compiling Main             (
+/tmp/wxcore-0.12.1.617977/wxcore-0.12.1.6/Setup.hs,
+/tmp/wxcore-0.12.1.617977/wxcore-0.12.1.6/dist/setup/Main.o )
+Linking /tmp/wxcore-0.12.1.617977/wxcore-0.12.1.6/dist/setup/setup ...
+generating: src/haskell/Graphics/UI/WXCore/WxcClassTypes.hs
+reading class definitions:
+parsing: src/include/wxc.h
+parsing: src/include/wxc_types.h
+parsing: src/include/wxc_glue.h
+parsing: src/include/db.h
+parsing: src/include/dragimage.h
+parsing: src/include/graphicscontext.h
+parsing: src/include/sound.h
+parsing: src/include/managed.h
+parsing: src/include/mediactrl.h
+parsing: src/include/previewframe.h
+parsing: src/include/printout.h
+parsing: src/include/textstream.h
+parsing: src/include/stc.h
+parsing: src/include/stc_gen.h
+generated 539 class definitions.
+ok.
+generating: src/haskell/Graphics/UI/WXCore/WxcClassInfo.hs
+reading class definitions:
+parsing: src/include/wxc.h
+parsing: src/include/wxc_types.h
+parsing: src/include/wxc_glue.h
+parsing: src/include/db.h
+parsing: src/include/dragimage.h
+parsing: src/include/graphicscontext.h
+parsing: src/include/sound.h
+parsing: src/include/managed.h
+parsing: src/include/mediactrl.h
+parsing: src/include/previewframe.h
+parsing: src/include/printout.h
+parsing: src/include/textstream.h
+parsing: src/include/stc.h
+parsing: src/include/stc_gen.h
+generated 381 class info definitions
+ok.
+parsing: src/include/wxc.h
+parsing: src/include/wxc_types.h
+parsing: src/include/wxc_glue.h
+parsing: src/include/db.h
+parsing: src/include/dragimage.h
+parsing: src/include/graphicscontext.h
+parsing: src/include/sound.h
+parsing: src/include/managed.h
+parsing: src/include/mediactrl.h
+parsing: src/include/previewframe.h
+parsing: src/include/printout.h
+parsing: src/include/textstream.h
+parsing: src/include/stc.h
+parsing: src/include/stc_gen.h
+ignore: parse error : //WXCOLORREF wxColour_GetPixel( TSelf(wxColour) _obj
+);
+generating: src/haskell/Graphics/UI/WXCore/WxcClassesAL.hs
+reading class definitions:
+parsing: src/include/wxc.h
+parsing: src/include/wxc_types.h
+parsing: src/include/wxc_glue.h
+parsing: src/include/db.h
+parsing: src/include/dragimage.h
+parsing: src/include/graphicscontext.h
+parsing: src/include/sound.h
+parsing: src/include/managed.h
+parsing: src/include/mediactrl.h
+parsing: src/include/previewframe.h
+parsing: src/include/printout.h
+parsing: src/include/textstream.h
+parsing: src/include/stc.h
+parsing: src/include/stc_gen.h
+generated 1560 methods for 120 classes.
+generating: src/haskell/Graphics/UI/WXCore/WxcClassesMZ.hs
+generated 2184 methods for 123 classes.
+generating: src/haskell/Graphics/UI/WXCore/WxcClasses.hs
+generated 3744 total methods for 243 total classes.
+ok.
+parsing: src/eiffel/wxc_defs.e
+parsing: src/eiffel/wx_defs.e
+parsing: src/eiffel/stc.e
+generating: src/haskell/Graphics/UI/WXCore/WxcDefs.hs
+generated 2454 constant definitions
+ok.
+setup: failed
+cabal: Error: some packages failed to install:
+wxcore-0.12.1.6 failed during the configure step. The exception was:
+ExitFailure 1
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110204/7ec8f89d/attachment.htm>
+

@@ -1,0 +1,27 @@
+From hvr at gnu.org  Tue Apr  5 09:22:01 2011
+From: hvr at gnu.org (Herbert Valerio Riedel)
+Date: Tue, 05 Apr 2011 09:22:01 +0200
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+	<BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+Message-ID: <1301988121.2459.9.camel@duo>
+
+On Mon, 2011-04-04 at 11:50 +0200, Roel van Dijk wrote:
+> I am not aware of any algorithm that can reliably infer the character
+> encoding used by just looking at the raw data. Why would people bother
+> with stuff like <?xml version="1.0" encoding="UTF-8"?> if
+> automatically figuring out the encoding was easy?
+
+It is possible, if the syntax/grammar of the encoded content restricts
+the set of allowed code-points in the first few characters.
+
+For instance, valid JSON (see RFC 4673 section 3) requires the first two
+characters to be plain "ASCII" code-points, thus which of the 5 BOM-less
+UTF-encodings is used is uniquely determined by inspecting the first 4
+bytes of the UTF encoded stream.
+
+
+
+

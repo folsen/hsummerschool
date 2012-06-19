@@ -1,0 +1,49 @@
+From hesselink at gmail.com  Sat Aug 20 13:41:22 2011
+From: hesselink at gmail.com (Erik Hesselink)
+Date: Sat, 20 Aug 2011 13:41:22 +0200
+Subject: [Haskell-cafe] custom SQL-to-Haskell type conversion in HDBC
+In-Reply-To: <CAKFCL4Xi9H-x4GPMjbzrRS9-tSSqdE4EsaV2_diQ=a4ObAL3bg@mail.gmail.com>
+References: <20110819052316.GA27130@houseag.com>
+	<CAPeieQEGXOJgfvA+FF2yTbhPnWA9vv7Xk8EghLj-2LiYy1Edyg@mail.gmail.com>
+	<20110819140939.GA27362@houseag.com>
+	<CAPeieQGnDo5TR6F1hWPjvWWV0+nrW0=6iPm9z-xxJ2HfiOkY4g@mail.gmail.com>
+	<20110819145341.GB27362@houseag.com>
+	<CAPeieQHBYE9f+QrJodRtFscdgy5+_hzUYR5YnDWRrCJCv9kUYw@mail.gmail.com>
+	<CAKFCL4Xi9H-x4GPMjbzrRS9-tSSqdE4EsaV2_diQ=a4ObAL3bg@mail.gmail.com>
+Message-ID: <CAPeieQEpqcF4FZm5L_VdYvDtCYRS=qJBbShaEq6rM_9GF5u5FA@mail.gmail.com>
+
+On Friday, August 19, 2011, Brandon Allbery <allbery.b at gmail.com> wrote:
+> On Fri, Aug 19, 2011 at 11:45, Erik Hesselink <hesselink at gmail.com> wrote:
+>>
+>> Note that PostgreSQL also doesn't work with decimals as precision:
+>>
+>> postgres=# select 1::decimal(4,2) * 1::decimal(4,2);
+>> ?column?
+>> ----------
+>>   1.0000
+>> (1 row)
+>>
+>> That should be 1.00 instead if you want the precision correctly
+represented.
+>
+> Er?  Last I checked, that was exactly how precision worked over
+multiplication; otherwise you are incorrectly discarding precision present
+in the original values.  Unless you're assuming the OP actually wants an
+incorrect flat precision model....
+
+This is the way I was taught to do it in physics. See also
+http://en.m.wikipedia.org/wiki/Significance_arithmetic
+
+Erik
+
+>
+> --
+> brandon s allbery                                      allbery.b at gmail.com
+> wandering unix systems administrator (available)     (412)
+475-9364 <tel:%28412%29%20475-9364> vm/sms
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110820/9101016e/attachment.htm>
+

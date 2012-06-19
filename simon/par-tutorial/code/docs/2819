@@ -1,0 +1,52 @@
+From magnus at therning.org  Tue Feb  8 00:10:29 2011
+From: magnus at therning.org (Magnus Therning)
+Date: Mon, 07 Feb 2011 23:10:29 +0000
+Subject: [Haskell-cafe] Building doc for yesod-json
+In-Reply-To: <AANLkTinot0PzEQ_KQDEyGCa0EnU+1Rq7KWCVUKepX9B_@mail.gmail.com>
+References: <4D4F38C3.60908@therning.org>
+	<AANLkTikn0wHPOfuTzAYe9TnfUF3YS-pTSsspwo1KDHs8@mail.gmail.com>
+	<AANLkTinot0PzEQ_KQDEyGCa0EnU+1Rq7KWCVUKepX9B_@mail.gmail.com>
+Message-ID: <4D507BE5.1070509@therning.org>
+
+On 07/02/11 04:19, Michael Snoyman wrote:
+> On Mon, Feb 7, 2011 at 2:36 AM, Ivan Lazar Miljenovic
+> <ivan.miljenovic at gmail.com> wrote:
+>> On 7 February 2011 11:11, Magnus Therning <magnus at therning.org> wrote:
+>>> Michael,
+>>>
+>>> I've now gotten part of the way through the *long* list of dependencies
+>>> for yesod 0.7.0, and I'm stuck on yesod-json.  It's the documentation
+>>> that fails actually, but I'm not sure why it would:
+>>>
+>>> dist/build/tmp20668/Yesod/Json.hs:4:6:
+>>>    parse error on input `-- ^ Convert from a JSON value'
+>>>
+>>> It's the very first bit in that file:
+>>>
+>>> module Yesod.Json
+>>>    ( -- ^ Convert from a JSON value
+>>>      defaultLayoutJson
+>>
+>> You want "-- *" for section headers: "-- ^" is only used to annotate
+>> constructors.
+>
+> Of all things to mess up... ok, I've uploaded yesod-json-0.0.0.1.
+> Hopefully that should work.
+
+That worked beautifully.  Thanks!
+
+/M
+
+-- 
+Magnus Therning                      OpenPGP: 0xAB4DFBA4
+email: magnus at therning.org   jabber: magnus at therning.org
+twitter: magthe               http://therning.org/magnus
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 262 bytes
+Desc: OpenPGP digital signature
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110207/4a7ce722/attachment.pgp>
+

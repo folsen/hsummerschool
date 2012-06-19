@@ -1,0 +1,24 @@
+From malcolm.wallace at me.com  Mon Feb  7 15:42:21 2011
+From: malcolm.wallace at me.com (Malcolm Wallace)
+Date: Mon, 07 Feb 2011 14:42:21 +0000
+Subject: [Haskell-cafe] Cabal && license combinations
+In-Reply-To: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+References: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+Message-ID: <DB2F8BA0-6AAE-4699-83F1-BCF070E76889@me.com>
+
+> It seems then that a package should be the least restrictive  
+> combination of all the licenses in all the contained modules.
+
+Omit the words "least restrictive" and I think you are correct.
+
+To combine licences, just aggregate them.  There is no lattice of  
+subsumption; no "more" or "less" restrictive ordering.  It's simple:  
+you must obey all of them.  Some aggregations introduce a  
+contradiction of terms, so you cannot legally aggregate those modules  
+without breaking some term.  But if the terms of the aggregated  
+licences are compatible rather than contradictory, then all is good.
+
+Regards,
+     Malcolm
+
+

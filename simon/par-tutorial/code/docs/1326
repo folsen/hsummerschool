@@ -1,0 +1,83 @@
+From andreas.voellmy at gmail.com  Wed Aug 24 15:26:50 2011
+From: andreas.voellmy at gmail.com (Andreas Voellmy)
+Date: Wed, 24 Aug 2011 09:26:50 -0400
+Subject: [Haskell-cafe] Performance of concurrent array access
+In-Reply-To: <CADdwyZniuhhoZ35BHApk7RCViegqnepfycxOaXSaYnWugCdrug@mail.gmail.com>
+References: <CADdwyZ=MTFYz8NZt_KxpH1VfvbkFfpnhRHamvJar_gS-fe-awg@mail.gmail.com>
+	<CAK-tuPZZM+_HJUFL7+Z0c6Nhxge2wEtaAwu5xKBi0KvdTtSJSw@mail.gmail.com>
+	<CADdwyZniuhhoZ35BHApk7RCViegqnepfycxOaXSaYnWugCdrug@mail.gmail.com>
+Message-ID: <CADdwyZnkXmgwX7rmTTyXy=-FueK_vzYOXaZ1QnJVus9dpufR8g@mail.gmail.com>
+
+One more observation... I tried a third variation in which the test program
+still uses a single shared IOArray but each thread writes to different
+indices in the array. In this case I get good scaling with performance
+similar to the use of IOUArray. In detail, I made the following two changes
+to give each thread a disjoint set of indices to write to:
+
+bunchOfKeys threadNum = take numElems $ zip (cycle $ indices numThreads
+threadNum) $ drop threadNum cyclicChars
+
+and
+
+indices :: Int -> Int -> [Int]
+indices numThreads threadNum =
+  let numixs      = arraySize `div` numThreads
+      startIx     = numixs * threadNum
+      allIndices  = [0..highestIndex]
+  in take numixs $ drop startIx allIndices
+
+
+--Andreas
+
+On Tue, Aug 23, 2011 at 5:07 PM, Andreas Voellmy
+<andreas.voellmy at gmail.com>wrote:
+
+> Thanks for the suggestions. I tried to add strictness in the following
+> ways:
+>
+> (1) Changing "insertDAT a j c" to "insertDAT a j $! c"
+> (2) Changing "insertDAT a j c" to "deepseq c (insertDAT a j c)"
+>
+> I also used Int instead of Int32 throughout and changed the DAT data type
+> to a newtype definition. These changes improved the performance slightly,
+> but still, the multithreaded runs perform significantly worse than the
+> single-threaded runs, by about the same amount (i.e. 0.5 seconds more for
+> the 2 core run than for the 1 core run).
+>
+> I used ghc 7.0.3 for the performance measurements I gave in my message.
+> I've also tried under 7.2.1, and I get basically the same behavior there.
+>
+> --Andreas
+>
+>
+> On Tue, Aug 23, 2011 at 4:38 PM, Johan Tibell <johan.tibell at gmail.com>wrote:
+>
+>> On Tue, Aug 23, 2011 at 10:04 PM, Andreas Voellmy
+>> <andreas.voellmy at gmail.com> wrote:
+>> > data DAT = DAT (IOArray Int32 Char)
+>>
+>> Try to make this a newtype instead. The data type adds a level of
+>> indirection.
+>>
+>> >   do let p j c = insertDAT a j c >> lookupDAT a j >>= \v -> v `pseq`
+>> return
+>> > ()
+>>
+>> You most likely want (insertDAT a j $! c) to make sure that the
+>> element is force, to avoid thunks building up in the array.
+>>
+>> > -- Parameters
+>> > arraySize :: Int32
+>>
+>> Int might work better than Int32. While they should behave the same on
+>> 32-bit machines Int might have a few more rewrite rules that makes it
+>> optimize better.
+>>
+>> -- Johan
+>>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110824/5655160d/attachment.htm>
+

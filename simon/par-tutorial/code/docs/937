@@ -1,0 +1,61 @@
+From byorgey at seas.upenn.edu  Thu Aug  4 23:20:24 2011
+From: byorgey at seas.upenn.edu (Brent Yorgey)
+Date: Thu, 4 Aug 2011 17:20:24 -0400
+Subject: [Haskell-cafe] weird type signature in Arrow Notation
+In-Reply-To: <4E386751.8060204@gmail.com>
+References: <4E386751.8060204@gmail.com>
+Message-ID: <20110804212024.GA17308@seas.upenn.edu>
+
+On Tue, Aug 02, 2011 at 05:08:33PM -0400, bob zhang wrote:
+> hi, all
+> testB :: (ArrowChoice t1, Num a1, Num a) => (a -> a1 -> t2) -> t1 a t3
+> -> t1 a1 t3 -> t1 (a, a1) t
+> testB f g h = proc (x,y) -> do
+> if (f x y)then g -< x + 1 else h -< y + 2
+> 
+> it's very strange that the type of _f_ is (a->a1->t2) which I thought
+> should be a -> a1 -> Bool,
+> 
+> btw, is there any way to get the output of preprocessing using -XArrow
+> extensions,
+> 
+> Thanks a lot
+> best, bob
+
+Congratulations, you have definitely found a GHC bug!  Note there are
+actually two things wrong with testB's type signature: first, t2 ought
+to be Bool, as you note.  But even worse, notice that the return type
+of the result arrow, t, has nothing to do with any of the other types!
+This means that we can use testB along with the (->) instance for
+Arrow to construct elements of arbitrary types:
+
+  ghci> let anythingYouWant = testB (\x y -> False) (const 3) (const 2) (2,2)
+  ghci> :t anythingYouWant
+  anythingYouWant :: t
+  ghci> anythingYouWant :: Integer
+  2
+  ghci> anythingYouWant :: Int
+  2
+  ghci> anythingYouWant :: Double
+  1.0e-323
+  ghci> anythingYouWant :: Char
+  '\STX'
+  ghci> (anythingYouWant :: (Double -> Double) -> [Double]) sqrt
+  [
+  [1]    17391 segmentation fault  ghci
+
+whoops!
+
+I'm using GHC 7.0.3, but Daniel Wagner and I also tried it (with the
+same results) on GHC 7.2.0rc1 and GHC HEAD.
+
+I wasn't able to find a ticket for this on the GHC bug tracker, I
+guess we should file one!
+
+I tried to find a way to get the output of preprocessing using -XArrow
+but wasn't able to find one (other than -ddump-ds which gives you the
+unoptimized *GHC core* output, which is quite hard to read).
+
+-Brent
+
+

@@ -1,0 +1,42 @@
+From eric.stansifer+haskell at gmail.com  Mon Apr 25 09:16:49 2011
+From: eric.stansifer+haskell at gmail.com (Eric Stansifer)
+Date: Mon, 25 Apr 2011 09:16:49 +0200
+Subject: [Haskell-cafe] converting prefixes of CString <-> String
+Message-ID: <BANLkTimZA8GuTN2oSWd-juDkbzu8vG_=Rg@mail.gmail.com>
+
+I have been reading Foreign.C.String but it does not seem to provide
+the functionality I was looking for.
+
+Let 'c2h' convert CStrings to Haskell Strings, and 'h2c' convert
+Haskell Strings to CStrings.  (If I understand correctly, c2h . h2c
+=== id, but h2c . c2h is not the identity on all inputs;  or perhaps
+c2h is not defined for all CStrings.  Probably this is all locale
+dependent.)
+
+I have an infinite Haskell String transferred byte-wise over a
+network;  I would like to convert some prefix of the bytes received
+into a prefix of the String I started with.  However, if I understand
+correctly, if "s" is a Haskell String it is not necessarily true that
+"c2h (take n (h2c s))" is a prefix of s for all n.  So I have two
+questions:
+
+Given a CString of the form "cs = take n (h2c s)", how do I know
+whether "c2h cs" is a prefix of s or not?  Is there a way to recognize
+whether a CString is "valid" as opposed to truncated in the middle of
+a code point, or is this impossible?  Better yet, given a CString "cs
+= take n (h2c s)", is there a way to find the maximal prefix cs' of cs
+such that c2h cs' is a prefix of s?
+
+If s == s1 ++ s2, is it necessarily true that s == (c2h (h2c s1)) ++
+(c2h (h2c s2))?  If so, then I can perform my conversion a bit at a
+time, otherwise I'd need to start from the beginning of the cstring
+each time I receive additional data.
+
+In practice, I think my solution will come down to restricting my
+program to only using the lower 128 characters, but I'd like to know
+how to handle this problem in full generality.
+
+Thanks,
+Eric
+
+

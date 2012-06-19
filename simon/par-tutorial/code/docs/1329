@@ -1,0 +1,35 @@
+From michael at snoyman.com  Wed Aug 24 16:02:49 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 24 Aug 2011 17:02:49 +0300
+Subject: [Haskell-cafe] Lifting an enumerator
+Message-ID: <CAKA2JgKF0dN4N8Ge1_q-zemLZM93bWg_FjMtbaZGzrC2Gqnq4w@mail.gmail.com>
+
+Hi all,
+
+Max asked earlier[1] how to create a new instance of a class in
+Persistent using a monad transformer. Without getting into the
+specific details of persistent, I wanted to pose a question based on a
+much more general question: how can we lift the inner monad of an
+enumerator? We can easily do so for an Iteratee[2], but there is
+nothing to allow it for an Enumerator.
+
+At first glance, this problem looks very similar to the shortcomings
+of MonadIO when dealing with callbacks. In that case, you cannot use
+liftIO on a function that takes an `IO a` as a parameter. A solution
+to this issue is monad-control[3], which can be used to allow
+exception catching, memory allocation, etc.
+
+So I'm wondering: can we come up with a similar solution to this issue
+with enumerators? I have a working solution for the specific case of
+the ErrorT monad[4], but it would be great to be able to generalize
+it. Bonus points if we could express this in terms of the typeclasses
+already provided by monad-control.
+
+Michael
+
+[1] http://groups.google.com/group/yesodweb/browse_thread/thread/be2a77217a7f3343
+[2] http://hackage.haskell.org/packages/archive/enumerator/0.4.14/doc/html/Data-Enumerator.html#v:liftTrans
+[3] http://hackage.haskell.org/package/monad-control
+[4] https://gist.github.com/1168128
+
+

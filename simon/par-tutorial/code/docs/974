@@ -1,0 +1,32 @@
+From simon at joyful.com  Mon Aug  8 19:59:13 2011
+From: simon at joyful.com (Simon Michael)
+Date: Mon, 8 Aug 2011 10:59:13 -0700
+Subject: [Haskell-cafe] extending and reusing cmdargs option specs ?
+Message-ID: <80E2AE06-10D5-404D-B08C-C1E14692922C@joyful.com>
+
+Hi Neil,
+
+I just spent a day converting hledger from getopt to cmdargs. cmdargs  
+feels more high level and featureful and nicer. And yet... I haven't  
+reduced the line count that much - nothing like your HLint 3:1 ratio.  
+And, I may have made things worse for myself in the reuse/avoiding  
+boilerplate department: I'm not sure how to reuse a cmdargs options  
+data structure, extending it with a few more options. Using getopt I  
+was able to do this without repeating myself (as long as I defined the  
+full set of Opt constructors in one place.) I've looked at the more  
+advanced cmdargs api, but don't see a way yet - would you have any  
+ideas ?
+
+I want this because I have multiple executables (hledger, hledger-vty,  
+hledger-web etc.) which should share most (but not all) options. Also,  
+I'd like to move a generic subset of report options, without the ui- 
+specific ones, into hledger-lib for use by all apps.
+
+Also, the hledger executable has multiple commands, so I'd like to  
+define a mode for each, but not have to redeclare all the same options  
+for each mode - I didn't see how to do that.
+
+As always, thanks a lot for cmdargs!
+-Simon
+
+

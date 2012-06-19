@@ -1,0 +1,33 @@
+From cdsmith at gmail.com  Thu Dec 29 22:26:41 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Thu, 29 Dec 2011 14:26:41 -0700
+Subject: [Haskell-cafe] On the purity of Haskell /Random generators
+In-Reply-To: <4EFCD5CC.8050803@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>
+	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org> <4EFCC3CE.7050006@blueyonder.co.uk>
+	<451591325188516@web70.yandex.ru> <4EFCCFFD.9080908@unicaen.fr>
+	<4EFCD5CC.8050803@blueyonder.co.uk>
+Message-ID: <1325194001.16545.60.camel@godel>
+
+On Thu, 2011-12-29 at 21:04 +0000, Steve Horne wrote:
+> AFAIK there's no hidden unsafePerformIO sneaking any entropy in behind
+> the scenes. Even if there was, it might be a legitimate reason for
+> unsafePerformIO - random numbers are in principle non-deterministic,
+> not determined by the current state of the outside world and
+> which-you-evaluate-first should be irrelevant.
+
+This is certainly not legitimate.  Anything that can't be memoized has
+no business advertising itself as a function in Haskell.  This matters
+quite a lot... programs might change from working to broken due to
+something as trivial as inlining by the compiler (see the ugly  NOINLINE
+annotations often used with unsafePerformIO tricks for initialization
+code for an example).
+
+-- 
+Chris Smith
+
+
+

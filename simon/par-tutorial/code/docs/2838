@@ -1,0 +1,46 @@
+From illissius at gmail.com  Tue Feb  8 11:52:27 2011
+From: illissius at gmail.com (=?ISO-8859-1?Q?G=E1bor_Lehel?=)
+Date: Tue, 8 Feb 2011 11:52:27 +0100
+Subject: [Haskell-cafe] Help needed for converting IOArray to ByteString
+In-Reply-To: <AANLkTi=Jcb3iFQ1Brbr5B0pQKcEGRHu7Z4AEbuy8g1=c@mail.gmail.com>
+References: <AANLkTimFRPKHbpL36uwim2GtTdknVY6pdK2-dJn7FwGU@mail.gmail.com>
+	<AANLkTin5aMcwt7UfP=PHVJOOwya9XttFC=gxDtkfR5nN@mail.gmail.com>
+	<AANLkTikhXnwh7FD+nE=tur-qZ5NB_XxaqEQEg+vR7TJS@mail.gmail.com>
+	<AANLkTi=kOA1NtuVuv=UVLZwmaDk2vE026BWcNPXUs-HS@mail.gmail.com>
+	<AANLkTi=Jcb3iFQ1Brbr5B0pQKcEGRHu7Z4AEbuy8g1=c@mail.gmail.com>
+Message-ID: <AANLkTiksSOzOWbKtAhzUaovdKxAfTyVj6q5-yh8Yq4MV@mail.gmail.com>
+
+On Tue, Feb 8, 2011 at 10:39 AM, C K Kashyap <ckkashyap at gmail.com> wrote:
+>>
+>> 1) Just use Data.Word.Word8 instead of the second Int in your type sig
+>> for IOArray
+>> 2) Use getElems to get a [Word8]
+>> 3) Data.ByteString.pack converts a [Word8] into a ByteString
+>>
+>> Michael
+>
+> I am currently using a list of tuples - [(Int,Int,Int)] to represent an
+> image buffer. You can see it in the?getImageByteString
+> function at https://github.com/ckkashyap/Chitra/blob/master/RFB/Encoding.hs
+> Looks like this is pretty slow, and hence I am exploring Arrays.
+> I wonder if working with [Word8] will also suffer from performance hit?
+> Regards,
+> Kashyap
+
+Using Data.ByteString.Internal.create along with readArray to fill in
+the contents seems like it would be a fast option (though I haven't
+tried it).
+
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+
+
+-- 
+Work is punishment for failing to procrastinate effectively.
+
+

@@ -1,0 +1,44 @@
+From daniel.is.fischer at googlemail.com  Thu Apr 28 17:37:38 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Thu, 28 Apr 2011 17:37:38 +0200
+Subject: [Haskell-cafe] Binary and Serialize classes
+In-Reply-To: <BANLkTinQ3xKU3Fu5N74oSM36sCDuPd7=rw@mail.gmail.com>
+References: <BANLkTinQ3xKU3Fu5N74oSM36sCDuPd7=rw@mail.gmail.com>
+Message-ID: <201104281737.39015.daniel.is.fischer@googlemail.com>
+
+On Thursday 28 April 2011 17:00:49, Evan Laforge wrote:
+> 
+> Speaking of that Double instance... both data-binary and cereal use
+> decodeFloat and encodeFloat which mean they suffer from the same
+> problems as realToFrac, namely that -0 becomes 0 and NaN becomes
+> -Infinity (I'm not sure why the latter happens since the decoded
+> values differ... must be a problem with encodeFloat).
+
+Yes, encodeFloat - at least in ghc - first converts the mantissa (while 
+there are words left, multiply the accumulator with 2^32 or 2^64, add next 
+word to it), then adjusts the exponent via ldexp. That process can't 
+produce NaNs. It would be possible to check for special patterns, but it's 
+impossible to know whether that pattern arose from a decodeFloat and hence 
+should be converted to NaN or from a calculation that simply overflowed and 
+should be converted to ?Infinity. 
+
+> It's tempting
+> to just get the ieee754 bitmap out and serialize that.
+
+binary-ieee754 does that, iirc.
+
+> I know I've
+> seen this question around before, but is it possible to somehow cast a
+> D# directly to bytes?
+
+Not safely. unsafeCoerce :: Double -> Word64 will usually work, but if you 
+wantsomething reliable, write your Double to an STUArray and read a 
+Word(64) from the result of castSTUArray. That's slower than unsafeCoerce, 
+but supposed to be reliable (unless I misremember).
+
+> I know I can write a C function and FFI that
+> in, but it would be tidier to do it all in haskell.  I guess I can
+> probably use castPtr and memCpy, but I don't see the required
+> addressOf.  I.e. how would I write 'memcpy(buf, &d, sizeof(double));'?
+
+

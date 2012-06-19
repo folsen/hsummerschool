@@ -1,0 +1,60 @@
+From creswick at gmail.com  Sun Apr 24 22:27:23 2011
+From: creswick at gmail.com (Rogan Creswick)
+Date: Sun, 24 Apr 2011 13:27:23 -0700
+Subject: [Haskell-cafe] How to keep cabal and ghci package versions in
+	sync?
+In-Reply-To: <loom.20110424T200650-84@post.gmane.org>
+References: <loom.20110424T200650-84@post.gmane.org>
+Message-ID: <BANLkTi=ydEhj+ornRrGrf9GSrfRkTZhKUw@mail.gmail.com>
+
+On Sun, Apr 24, 2011 at 11:13 AM, Gracjan Polak <gracjanpolak at gmail.com> wrote:
+> I have a project with a .cabal file listing package dependencies using
+> the usual version constraints ==X.Y.* <Z.W or >=K.J syntax.
+> Standard route cabal configure; cabal build works correctly as it is able
+> to select working set of package versions.
+>
+> I have also a .ghci file. When I run GHCi it uses all latest installed packages
+> in the system. This prevents the project from loading.
+>
+> I tried to use 'cabal-dev ghci', but this still selects latest global packages.
+
+This should only arise for the base ghc packages, which are tied
+closely enough to ghc that you should probably switch ghc versions if
+you want to work with different versions of those core packages.
+
+If you're installing additional packages globally, my only advice is:
+Beware, there be dragons!  I strongly recommend that you ghc-pkg
+unregister all the non-essential packages from your global package db
+because:
+
+ (1) cabal-dev will not bring you any benefit.
+ (2) you will eventually run into ugly unsatisfiable dependency issues
+between your local and global package databases.
+ (3) you may inadvertently cause a base package to be upgraded, which
+is somewhat easier to fix if it's installed to a local package db.
+
+cabal-dev ghci should be able to do what you want, but it has no
+control over the global db.  I'd be happy to send you a list of the
+packages that ghc comes with, if you choose to unregister packages
+from the global db (assuming you're using one of the OS/arch/ghc
+combinations I have available :)
+
+--Rogan
+
+>
+> So, how to I load up ghci with the same package versions as selected by cabal?
+>
+> Thanks!
+>
+> --
+> Gracjan
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

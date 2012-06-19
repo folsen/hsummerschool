@@ -1,0 +1,33 @@
+From leather at cs.uu.nl  Thu Dec 15 17:33:58 2011
+From: leather at cs.uu.nl (Sean Leather)
+Date: Thu, 15 Dec 2011 17:33:58 +0100
+Subject: [Haskell-cafe] Type checker for haskell-src-exts (was: Typechecking
+	Using GHC API)
+Message-ID: <CACz_ru0TWtc5a5ZCtXBXJYG+ikvYWwzGp707weqigNRwS4qfRQ@mail.gmail.com>
+
+On Thu, Dec 15, 2011 at 11:07, Niklas Broberg wrote:
+
+> Envisioned: The function you ask for can definitely be written for
+> haskell-src-exts, which I know you are currently using. I just need to
+> complete my type checker for haskell-src-exts first. Which is not a small
+> task, but one that has been started.
+
+
+That's good to know! I presume it's something like Haskell98 to start with?
+I'd be even more impressed (and possibly also concerned for your health) if
+you were going to tackle all of the extensions!
+
+I've been trying to find a student to write a haskell-src-exts type checker
+for me. It should use a particular kind of mechanism though, using
+constraints similar to [1]. Then, I want to adapt that to do
+transformations. What approach are you using? Maybe I can somehow steal
+your work... ;)
+
+Regards,
+Sean
+
+[1] http://www.staff.science.uu.nl/~heere112/phdthesis/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/7d99b5cf/attachment.htm>
+

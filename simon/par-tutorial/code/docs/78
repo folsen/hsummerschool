@@ -1,0 +1,19 @@
+From schlepptop at henning-thielemann.de  Sun Apr  3 21:37:18 2011
+From: schlepptop at henning-thielemann.de (Henning Thielemann)
+Date: Sun, 03 Apr 2011 21:37:18 +0200
+Subject: [Haskell-cafe] Unboxing CFloat and GLfloat
+In-Reply-To: <AANLkTikSETh+kpjPQBC8c7CxmDQ3yF-8gVfHLOGw0ag6@mail.gmail.com>
+References: <AANLkTikSETh+kpjPQBC8c7CxmDQ3yF-8gVfHLOGw0ag6@mail.gmail.com>
+Message-ID: <4D98CC6E.2010906@henning-thielemann.de>
+
+Jason Dagit schrieb:
+
+> While the GLfloat instances don't need to be in base, the CFloat
+> instance probably should be in base.  Is this something I should make a
+> library proposal for and submit patches?  Is there an easier way to get
+> these instances?  Has someone already done this?
+
+Maybe the CFloat instance can be in the 'array' package.
+
+
+

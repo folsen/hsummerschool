@@ -1,0 +1,20 @@
+From stephen.tetley at gmail.com  Sat Feb 12 16:45:34 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Sat, 12 Feb 2011 15:45:34 +0000
+Subject: [Haskell-cafe] GHC and MinGW
+In-Reply-To: <20110212151222.GA2516@malaquias.DHCP-GERAL>
+References: <20110212151222.GA2516@malaquias.DHCP-GERAL>
+Message-ID: <AANLkTikZOEVav0THUv+qJ3gX4ogE0rs+6XYJLinpHH=6@mail.gmail.com>
+
+Is pkg-config available for MSys? It might help matters if it is - I
+think Cabal has direct support for pkg-config.
+
+Otherwise point Cabal to the location of the .a file with
+--extra-lib-dirs. You will also have to point to the headers with
+--extra-include-dirs.
+
+If you are compiling with GHC straight rather than using a Cabal file,
+I think it will need a -l (lower L) flag for the lib and -I (upper i)
+for headers.
+
+

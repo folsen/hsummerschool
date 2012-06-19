@@ -1,0 +1,23 @@
+From v.dijk.bas at gmail.com  Sat Dec  3 12:22:49 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Sat, 3 Dec 2011 12:22:49 +0100
+Subject: [Haskell-cafe] ANNOUNCE: monad-control-0.3
+In-Reply-To: <1322903883.2138.2.camel@duo>
+References: <CADLz5wW4oZbBtKMb7UQ8qQdn3UayBSQ-TL66VLG3hGXCUk_npg@mail.gmail.com>
+	<CADLz5wVs3AGCagikDMJVKVm-RJjgMhCbs7LJtxGPqi_rLbjRqQ@mail.gmail.com>
+	<1322903883.2138.2.camel@duo>
+Message-ID: <CADLz5wV+PXH3x_o=482j88JonYM7YpaDnWDFD4o8UrZung=0KQ@mail.gmail.com>
+
+On 3 December 2011 10:18, Herbert Valerio Riedel <hvr at gnu.org> wrote:
+> btw, how did you manage to get measurements from 2 different versions of
+> the same library (monad-control 0.3 and 0.2.0.3) into a single report?
+
+By renaming the old package to monad-control2 and using the
+PackageImports extension.
+
+I do wonder why it's not possible to use two different versions of the
+same package at the same time.
+
+Bas
+
+

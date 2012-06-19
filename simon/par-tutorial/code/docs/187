@@ -1,0 +1,124 @@
+From dagitj at gmail.com  Wed Apr  6 23:45:35 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Wed, 6 Apr 2011 14:45:35 -0700
+Subject: [Haskell-cafe] How to contact OpenGL package maintainer (where
+	is Sven?)
+In-Reply-To: <BANLkTimoJy0sbWw7xb7JkdB+S5L0MZpR8A@mail.gmail.com>
+References: <AANLkTinoGT8qa10+ZO6PEG5EOeMm=r3Cf2Rpeoe7tEts@mail.gmail.com>
+	<BANLkTikBKDkFLViTqt+UoixiX9gUQi_Gqg@mail.gmail.com>
+	<BANLkTimoJy0sbWw7xb7JkdB+S5L0MZpR8A@mail.gmail.com>
+Message-ID: <BANLkTikQF5D+uj=yZ28eLq6yf_A98KaNaw@mail.gmail.com>
+
+On Wed, Apr 6, 2011 at 2:35 PM, Don Stewart <dons00 at gmail.com> wrote:
+
+> Note, there are some issues, as this is a package in the Haskell
+> Platform, to do with upgrading and dependent packages. We should talk
+> first about issues there.
+>
+
+An older version is in the HP, but Johan pointed out to me in a private
+email that the latest version is not in the HP.  Here are the results of my
+research into that:
+
+I'm not finding much in the way of reasons why the *Raw packages were not
+added or why OpenGL/GLUT were not updated.
+
+There are these:
+http://trac.haskell.org/haskell-platform/ticket/157
+http://trac.haskell.org/haskell-platform/ticket/158
+
+That's a request for the latest version of GLUT and OpenGL.  I found those
+via the archives but the threads are empty and no comments on the tickets.
+
+Magnus created those tickets as a result of this thread, I believe:
+http://projects.haskell.org/pipermail/haskell-platform/2011-February/001401.html
+
+Is that the thread in your memory?  Perhaps it was this one?
+http://www.haskell.org/pipermail/libraries/2009-June/011920.html
+
+That one turned into a discussion of the module system.
+
+I added a proposal to add OpenGLRaw, but no one commented on it:
+http://projects.haskell.org/pipermail/haskell-platform/2011-March/001506.html
+
+Based on that, it seems that Magnus wants the packages updated, and I'd like
+to see the *Raw packages added to the platform.  I don't see
+any dissenting public opinions on the libraries list or on the trac, other
+than tickets #57 and #58 that make a case for removing OpenGL and GLUT
+entirely from the platform.  Tickets #57 and #58 seem to be old though.
+
+
+If you have more information or I overlooked something, please let me know
+:)
+
+Thanks,
+Jason
+
+
+> On Wed, Apr 6, 2011 at 2:32 PM, Jason Dagit <dagitj at gmail.com> wrote:
+> > No response yet from Sven after about a month and no one seems to have
+> heard
+> > from him in over a year.
+> >
+> > I'm going to take over for now under the assumption that Sven is missing.
+> > == My plans for moving forward ==
+> >   * Assemble an opengl taskforce, a few people have already mentioned an
+> > interest in being on the team
+> >   * clean up the current cabal files (I already wrote patches for that)
+> >   * put the repos on github to make team collaboration easier
+> >   * add the RULES that Andy Gill suggested for realToFrac
+> >   * look at adding instances for MArray so that GLfloat et al can be
+> stored
+> > in IOUArrays
+> >   * add support for opengl 4.x
+> >   * look at adding deprecation pragmas for deprecated opengl calls
+> >   * new hackage releases
+> >   * anything else that comes up
+> > Thanks,
+> > Jason
+> >
+> > On Sun, Mar 27, 2011 at 2:11 PM, Jason Dagit <dagitj at gmail.com> wrote:
+> >>
+> >> I sent the message below to Haskell-Cafe about a week ago. I got one
+> >> response saying that Sven has disappeared in the past but reappeared
+> when
+> >> updates were necessary.  I still haven't heard from Sven.  Now I'm
+> widening
+> >> my search.  My original email to Sven was on March 11th.
+> >> It looks like the OpenGL packages on hackage[1,2,3,4] have not been
+> >> updated in some time.  No updates later than Oct 2009.  I tried to email
+> >> Sven directly using the email address listed on hackage but after over
+> two
+> >> weeks I still haven't heard from him.  I sent some patches to
+> >> the opengl list about a week ago but I noticed that Sven hasn't posted
+> on
+> >> that list since Oct 2009 when he released the current version of
+> OpenGLRaw.
+> >>  None of the public darcs repos have patches newer than Oct 2009.  Also,
+> the
+> >> homepage url listed in the packages is a 404:
+> >> http://www.haskell.org/HOpenGL/
+> >> My concern is that Sven has disappeared for some reason.  I hope he's
+> >> well.  He has always done top notch work in the past maintaining these
+> >> libraries.  Perhaps he's simply busy or lost interest?
+> >> Does anyone know if he was looking for a new maintainer?  Perhaps you've
+> >> heard from him more recently than Oct 2009?
+> >> If a new maintainer is needed, I would consider nominating myself :)
+> >> Thanks,
+> >> Jason
+> >> [1] http://hackage.haskell.org/package/OpenGLRaw
+> >> [2] http://hackage.haskell.org/package/OpenGL
+> >> [3] http://hackage.haskell.org/package/GLURaw
+> >> [4] http://hackage.haskell.org/package/GLUT
+> >
+> > _______________________________________________
+> > Libraries mailing list
+> > Libraries at haskell.org
+> > http://www.haskell.org/mailman/listinfo/libraries
+> >
+> >
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110406/5b38e7f2/attachment.htm>
+

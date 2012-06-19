@@ -1,0 +1,24 @@
+From felipe.lessa at gmail.com  Sun Dec 11 14:44:36 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Sun, 11 Dec 2011 11:44:36 -0200
+Subject: [Haskell-cafe] Hardware description in Haskell.
+In-Reply-To: <CABFQQ=C0ybeTt8mSi_d43FGHL+hCA6=_SwBLVD4AwLN9SCYoJw@mail.gmail.com>
+References: <CABFQQ=C0ybeTt8mSi_d43FGHL+hCA6=_SwBLVD4AwLN9SCYoJw@mail.gmail.com>
+Message-ID: <CANd=OGE_2di3S5XmBg-atCS3_Y1Ff4NC5ftb=wMnKFKJORmQpA@mail.gmail.com>
+
+On Sun, Dec 11, 2011 at 10:52 AM, Serguey Zefirov <sergueyz at gmail.com> wrote:
+> There is no package for Hackage, because I do not feel HHDL is worth
+> it right now. For example, I tested it on ghc 6.12.1, not later
+> versions, the library code is messy. But HHDL is good enough for some
+> scrutiny and critique by Haskell users who is into hardware
+> description.
+
+A two years-old project is more than ready to be on Hackage.  It will
+sure make it easier to use by prospective users.
+
+Cheers,
+
+-- 
+Felipe.
+
+

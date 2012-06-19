@@ -1,0 +1,66 @@
+From ryani.spam at gmail.com  Fri Feb  4 08:53:43 2011
+From: ryani.spam at gmail.com (Ryan Ingram)
+Date: Thu, 3 Feb 2011 23:53:43 -0800
+Subject: [Haskell-cafe] Instancing "Typeable" for monad transformers?
+In-Reply-To: <AANLkTimSRmKMaYe05YtKAyEQCsZ6Wb=RZOqCxZYmQ3AU@mail.gmail.com>
+References: <AANLkTimSRmKMaYe05YtKAyEQCsZ6Wb=RZOqCxZYmQ3AU@mail.gmail.com>
+Message-ID: <AANLkTimYeQCzK6K1eTOpikERS0Q1ceXcF+RfMXf7+FKh@mail.gmail.com>
+
+Can you just wrap it?  Something like this:
+
+-- put your monad type here
+type M a = Iteratee ... a
+
+data W a = W (Iteratee ... a) deriving Typeable
+unW (W x) = x
+
+toDynW :: Typeable a => M a -> Dynamic
+toDynW x = toDynamic (W x)
+
+castM :: (Typeable x, Typeable a) => x -> Maybe (M a)
+castM = unW . cast
+
+  -- ryan
+
+On Tue, Feb 1, 2011 at 10:02 PM, John Millikin <jmillikin at gmail.com> wrote:
+> Is there any reasonable way to do this if I want to cast a monadic
+> value? For example:
+>
+>> castState :: (Typeable a, Typeable s, Typeable1 m, Typeable b) => a -> Maybe (StateT s m b)
+>> castState = Data.Typeable.cast
+>
+> None of the common monad transformers declare instances of Typeable,
+> so I don't know if the concept itself even works.
+>
+> The use case here is one of my library users wants to return an
+> Iteratee from code running in "hint", which requires any extracted
+> values be typeable. My first attempt at an extension-free instance is
+> something like this:
+>
+>> import Data.Enumerator
+>> import Data.Typeable
+>>
+>> instance (Typeable a, Typeable1 m) => Typeable1 (Iteratee a m) where
+>> ? ? ? typeOf1 i = rep where
+>> ? ? ? ? ? ? ? typed :: (a -> b) -> b -> a -> a
+>> ? ? ? ? ? ? ? typed _ _ a = a
+>>
+>> ? ? ? ? ? ? ? ia :: a -> Iteratee a m b
+>> ? ? ? ? ? ? ? ia = undefined
+>>
+>> ? ? ? ? ? ? ? im :: m c -> Iteratee a m b
+>> ? ? ? ? ? ? ? im = undefined
+>>
+>> ? ? ? ? ? ? ? rep = mkTyConApp (mkTyCon "Data.Enumerator.Iteratee") [tyA, tyM]
+>> ? ? ? ? ? ? ? tyA = typeOf (typed ia i undefined)
+>> ? ? ? ? ? ? ? tyM = typeOf1 (typed im i undefined)
+>
+> which, besides being ugly, I have no idea if it's correct.
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

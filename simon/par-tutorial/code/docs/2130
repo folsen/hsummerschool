@@ -1,0 +1,48 @@
+From benl at ouroborus.net  Tue Dec 20 12:59:39 2011
+From: benl at ouroborus.net (Ben Lippmeier)
+Date: Tue, 20 Dec 2011 22:59:39 +1100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <AB9A308B-2896-47EB-B576-77D5DFC6917A@gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAF1yvAQJX+f-MigNFF=6be12Uka6y45QD6oys_NQpxgREkRbaQ@mail.gmail.com>
+	<653CD606-D8B6-4BD8-AFD4-46738AF49DB3@gmail.com>
+	<805BC021-352F-4FFF-81E5-966E67FF362B@ouroborus.net>
+	<AB9A308B-2896-47EB-B576-77D5DFC6917A@gmail.com>
+Message-ID: <8B2EF34D-7568-4146-8FE7-9084925F12A9@ouroborus.net>
+
+
+On 20/12/2011, at 21:52 , Gregory Crosswhite wrote:
+> 
+>> Some would say that non-termination is a computational effect, and I can argue either way depending on the day of the week.
+> 
+> *shrug*  I figure that whether you call _|_ a value is like whether you accept the Axiom of Choice:  it is a situational decision that depends on what you are trying to learn more about.
+
+I agree, but I'd like to have more control over my situation. Right now we have boxed and lifted Int, and unboxed and unlifted Int#, but not the boxed and unlifted version, which IMO is usually what you want.
+
+
+>> Of course, the history books show that monads were invented *after* it was decided that Haskell would be a lazy language. Talk about selection bias.
+> 
+> True, but I am not quite sure how that is relevant to _|_...
+
+I meant to address the implicit question "why doesn't Haskell use monads to describe non-termination already". The answer isn't necessarily "because it's not a good idea", it's because "that wasn't an option at the time".
+
+
+> Dec 20, 2011, ? 14:40, Jesse Schalken <jesseschalken at gmail.com> ???????(?):
+
+
+>> Including all possible manifestations of infinite loops?
+> 
+> So... this imaginary language of yours would be able to solve the halting problem?
+
+All type systems are incomplete. The idea is to do a termination analysis, and if the program can not be proved to terminate, then it is marked as "possibly non-terminating". This isn't the same as deciding something is "*definitely* non-terminating", which is what the halting problem is about. This "possibly non-terminating" approach is already used by Coq, Agda and other languages.
+
+Ben.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111220/1f307744/attachment.htm>
+

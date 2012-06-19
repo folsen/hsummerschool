@@ -1,0 +1,22 @@
+From shahn at cs.tu-berlin.de  Tue Aug 30 15:38:51 2011
+From: shahn at cs.tu-berlin.de (=?UTF-8?B?U8O2bmtl?= Hahn)
+Date: Tue, 30 Aug 2011 15:38:51 +0200
+Subject: [Haskell-cafe] Pointed, but not Applicative
+References: <j3d40s$nb1$1@dough.gmane.org> <4E5A1B5A.5060204@gmail.com>
+Message-ID: <j3ip5b$dtt$1@dough.gmane.org>
+
+Tony Morris wrote:
+
+> Pointed f => Pointed (StateT s f)
+> 
+> but not
+> 
+> Applicative f => Applicative (StateT s f)
+
+I see. So StateT cannot be what you could call an applicative transformer. 
+(Unlike for example ReaderT.)
+
+Thanks.
+
+
+

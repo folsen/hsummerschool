@@ -1,0 +1,23 @@
+From daniel.is.fischer at googlemail.com  Sat Aug 27 23:31:01 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sat, 27 Aug 2011 23:31:01 +0200
+Subject: [Haskell-cafe] GHCI Feature Request: Last Successful
+	Compilation State Saved
+In-Reply-To: <CAM_wFVtTiY=gz7aA==5DZ5YEXxZeabECMhrO3FHKw7wmOdacuA@mail.gmail.com>
+References: <CAJrReygxTo_DVA6B4bNozP0WR+_X7ZqQs=ERdHhuXKJNc-3+0A@mail.gmail.com>
+	<CAM_wFVtTiY=gz7aA==5DZ5YEXxZeabECMhrO3FHKw7wmOdacuA@mail.gmail.com>
+Message-ID: <201108272331.01371.daniel.is.fischer@googlemail.com>
+
+On Saturday 27 August 2011, 23:10:17, David Virebayre wrote:
+> 2011/8/27 aditya siram <aditya.siram at gmail.com>:
+> > Hi all,
+> > I would like for the GHCI interpreter to save its environment before
+> > reloading a file and allowed the user to revert back to that state if
+> > the compilation was unsuccessful.
+> 
+> That would be awesome. I would like this too.
+
+http://hackage.haskell.org/trac/ghc/ticket/1896
+
+
+

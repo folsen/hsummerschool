@@ -1,0 +1,61 @@
+From frodo at theshire.org  Fri Feb 11 19:33:27 2011
+From: frodo at theshire.org (Cristiano Paris)
+Date: Fri, 11 Feb 2011 19:33:27 +0100
+Subject: [Haskell-cafe] Is Show special? Of course not but...
+Message-ID: <AANLkTikfYO9WjuHe0QiygJsGFYZq5nswK6barGgpci5f@mail.gmail.com>
+
+Hi caf?,
+
+given the following toy code:
+
+---------------
+module Main where
+
+class Dumb p where
+	dumb :: p -> String
+
+newtype Branded a b = Branded b
+
+unbrand :: Branded a b -> b
+unbrand (Branded x) = x
+
+wrong :: Dumb a => b -> Branded a b
+wrong = Branded
+
+right :: Show a => b -> Branded a b
+right = Branded
+---------------
+
+Why:
+
+---------------
+quarry:Haskell paris$ ghci -O1
+GHCi, version 6.12.3: http://www.haskell.org/ghc/  :? for help
+*Main> unbrand $ right True
+True
+*Main> unbrand $ right "Foo"
+"Foo"
+---------------
+
+but:
+
+---------------
+*Main> unbrand $ wrong True
+
+<interactive>:1:10:
+    Ambiguous type variable `a' in the constraint:
+      `Dumb a' arising from a use of `wrong' at <interactive>:1:10-19
+    Probable fix: add a type signature that fixes these type variable(s)
+---------------
+
+?
+
+Maybe it's a dumb question but... thank you for any explanation...
+
+-- 
+Cristiano
+
+GPG Key: 4096R/C17E53C6 2010-02-22
+Fingerprint = 4575 4FB5 DC8E 7641 D3D8? 8EBE DF59 B4E9 C17E 53C6
+
+

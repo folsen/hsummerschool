@@ -1,0 +1,28 @@
+From ezyang at MIT.EDU  Fri Apr 29 10:47:21 2011
+From: ezyang at MIT.EDU (Edward Z. Yang)
+Date: Fri, 29 Apr 2011 04:47:21 -0400
+Subject: [Haskell-cafe] How to make ghc 7 with llvm?
+In-Reply-To: <BANLkTim17m2=ymk-f-ZcKQKbwF_Z5z=4Xg@mail.gmail.com>
+References: <BANLkTim17m2=ymk-f-ZcKQKbwF_Z5z=4Xg@mail.gmail.com>
+Message-ID: <1304066703-sup-9646@ezyang>
+
+Others have answered your real question (I think) adequately, but if I'm
+pedantic and answer precisely what you ask:
+
+You can compile GHC with llvm by adding -fllvm to your build.mk file:
+
+    GhcHcOpts += -fllvm
+
+Cheers,
+Edward
+
+Excerpts from Magicloud Magiclouds's message of Thu Apr 28 21:49:11 -0400 2011:
+> Hi,
+>   As I recalled, ghc started to support llvm from version 7.
+>   But there is a problem: there is no option to make ghc with llvm. So
+> Library within ghc source will be in gcc's binary format. Then when I
+> install other packages, they may complain that the binary format is
+> not llvm, so they install some libraries again.
+>   Any way I could make ghc 7 with llvm?
+
+

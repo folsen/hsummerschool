@@ -1,0 +1,65 @@
+From thomas.dubuisson at gmail.com  Thu Aug 18 23:00:32 2011
+From: thomas.dubuisson at gmail.com (Thomas DuBuisson)
+Date: Thu, 18 Aug 2011 14:00:32 -0700
+Subject: [Haskell-cafe] Compilation error in Chapter 5 of "Real World
+	Haskell"
+In-Reply-To: <CAGHv16t3VD14HbHu=kro_BoVNJr6DHxm6_9BsiAruwb+ABYVMQ@mail.gmail.com>
+References: <CAGHv16t3VD14HbHu=kro_BoVNJr6DHxm6_9BsiAruwb+ABYVMQ@mail.gmail.com>
+Message-ID: <CAOk36JgWA35-Kf2wNu8H-qukHLNtBvLKf91Qb8MbpVW0T95LXQ@mail.gmail.com>
+
+This is a linking issue.  It seems GHC 7 automatically feeds the
+linker SimpleJSON.o so when you explicitly provide it too then you get
+those conflicts.  All you need to do is call:
+
+> ghc -o simple Main.hs
+
+Unless you're using GHC 6, then the original command is correct:
+
+> ghc -o simple Main.hs SimpleJSON.o
+
+Or even better, use the --make flag as that works with either version:
+
+> ghc --make -o simple Main.hs
+
+Cheers,
+Thomas
+
+On Wed, Aug 17, 2011 at 10:37 AM, Paul Reiners <paul.reiners at gmail.com> wrote:
+> I'm trying to do the following from Chapter 5 of "Real World Haskell":
+>
+> Our choice of naming for the source file and function is deliberate. To
+> create an executable, ghc expects a module named Main that contains a
+> function named main. The main function is the one that will be called when
+> we run the program once we've built it. 6 comments
+>
+> ghc -o simple Main.hs SimpleJSON.o
+>
+> ---from
+> http://book.realworldhaskell.org/read/writing-a-library-working-with-json-data.html
+>
+> When I do that, I get this error:
+>
+> C:\ch05>ghc -o simple Main.hs SimpleJSON.o
+> [2 of 2] Compiling Main???????????? ( Main.hs, Main.o )
+> Linking simple.exe ...
+> SimpleJSON.o:fake:(.data+0x0): multiple definition of
+> `SimpleJSON_getArray_closure'
+> .\SimpleJSON.o:fake:(.data+0x0): first defined here
+> SimpleJSON.o:fake:(.text+0x54): multiple definition of
+> `SimpleJSON_getArray_info'
+> .\SimpleJSON.o:fake:(.text+0x54): first defined here
+> SimpleJSON.o:fake:(.data+0x4): multiple definition of
+> `SimpleJSON_getObject_closure'
+> .\SimpleJSON.o:fake:(.data+0x4): first defined here
+>
+> What's going wrong here?
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

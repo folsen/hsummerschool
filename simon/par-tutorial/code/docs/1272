@@ -1,0 +1,13 @@
+From ddssff at gmail.com  Mon Aug 22 18:50:21 2011
+From: ddssff at gmail.com (David Fox)
+Date: Mon, 22 Aug 2011 09:50:21 -0700
+Subject: [Haskell-cafe] Is it written down somewhere what sort of things
+	belong in Data.*?
+Message-ID: <CAJN_RF6rS-NEggRcm3ORJZpYFF56==5zauzsxU2Yb2rUF+e7Eg@mail.gmail.com>
+
+I'm never quite sure what the distinction is that defines the modules
+under Data.*.  Can anyone explain?
+
+-david
+
+

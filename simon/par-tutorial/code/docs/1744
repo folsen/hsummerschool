@@ -1,0 +1,41 @@
+From allbery.b at gmail.com  Thu Dec  8 05:46:44 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Wed, 7 Dec 2011 23:46:44 -0500
+Subject: [Haskell-cafe] Why doesn't this work? (palindrome :: IO)
+In-Reply-To: <BAY154-W299CF92BF320D6FE352A08A4B80@phx.gbl>
+References: <BAY154-W299CF92BF320D6FE352A08A4B80@phx.gbl>
+Message-ID: <CAKFCL4URW+=cq7MzWkj=-jJ-eO4_wdHDtAjiDTA=a2-+HX07Jw@mail.gmail.com>
+
+On Wed, Dec 7, 2011 at 23:24, Alexej Segeda
+<aloscha_den_store at hotmail.com>wrote:
+
+>                 case s of
+>                    (s == reverse s)    -> putStrLn (s ++ " is a
+> palindrome")
+>                    otherwise           -> putStrLn (s ++ " is not a
+> palindrome")
+>
+
+case does pattern matching, not Boolean expressions.  (s == reverse s) is
+not a useful pattern, and in fact is probably a syntax error because == is
+not a valid infix constructor.
+
+If you want to do Boolean comparisons in a case, you need to use something
+like
+
+> case () of
+>   () | s == reverse s -> putStrLn "palindrome"
+>   _                   -> putStrLn "nope"
+
+(otherwise isn't doing what you think there, either; it's exactly
+equivalent to the _ (unnamed placeholder) I used, since you aren't then
+using otherwise as the local binding (shadowing the Prelude one) that it
+is.)
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111207/318da476/attachment.htm>
+

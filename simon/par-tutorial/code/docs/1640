@@ -1,0 +1,64 @@
+From jv at informatik.uni-bonn.de  Sun Dec  4 08:49:40 2011
+From: jv at informatik.uni-bonn.de (=?ISO-8859-15?Q?Janis_Voigtl=E4nder?=)
+Date: Sun, 04 Dec 2011 08:49:40 +0100
+Subject: [Haskell-cafe] ANNOUNCE: Haskell Communities and Activities Report
+ (21st ed., November 2011)
+Message-ID: <4EDB2614.2010908@informatik.uni-bonn.de>
+
+On behalf of all the contributors, I am pleased to announce that the
+
+            Haskell Communities and Activities Report
+                  (21st edition, November 2011)
+
+is now available in PDF and HTML formats:
+
+   http://haskell.org/communities/11-2011/report.pdf
+   http://haskell.org/communities/11-2011/html/report.html
+
+Many thanks go to all the people that contributed to this report,
+both directly, by sending in descriptions, and indirectly, by doing
+all the interesting things that are reported. I hope you will find
+it as interesting a read as I did.
+
+If you have not encountered the Haskell Communities and Activities
+Reports before, you may like to know that the first of these reports
+was published in November 2001. Their goal is to improve the
+communication between the increasingly diverse groups, projects, and
+individuals working on, with, or inspired by Haskell. The idea behind
+these reports is simple:
+
+   Every six months, a call goes out to all of you enjoying Haskell to
+   contribute brief summaries of your own area of work. Many of you
+   respond (eagerly, unprompted, and sometimes in time for the actual
+   deadline to the call. The editor collects all the contributions
+   into a single report and feeds that back to the community.
+
+When I try for the next update, six months from now, you might want
+to report on your own work, project, research area or group as well.
+So, please put the following into your diaries now:
+
+            =========================================
+                       End of April 2012:
+            target deadline for contributions to the
+              May 2012 edition of the HC&A Report
+            =========================================
+
+Unfortunately, many Haskellers working on interesting projects are so
+busy with their work that they seem to have lost the time to follow
+the Haskell related mailing lists and newsgroups, and have trouble even
+finding time to report on their work. If you are a member, user or
+friend of a project so burdened, please find someone willing to make
+time to report and ask them to "register" with the editor for a simple
+e-mail reminder in April (you could point me to them as well, and I
+can then politely ask if they want to contribute, but it might work
+better if you do the initial asking). Of course, they will still have to
+find the ten to fifteen minutes to draw up their report, but maybe we
+can increase our coverage of all that is going on in the community.
+
+Feel free to circulate this announcement further in order to
+reach people who might otherwise not see it. Enjoy!
+
+Janis Voigtlaender
+<hcar at haskell.org>
+
+

@@ -1,0 +1,53 @@
+From ketil at malde.org  Tue Feb  8 12:00:02 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Tue, 08 Feb 2011 12:00:02 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTinHKiqD+-ySu2+190JH=tLOO9LUBbndvLJWX15P@mail.gmail.com>
+	(=?utf-8?Q?=22G=C3=A1bor?= Lehel"'s message of "Tue, 8 Feb 2011 11:36:44
+	+0100")
+References: <4D4B19DB.5000907@btinternet.com>
+	<AANLkTimTak3jHpg_RPattKoACvkUU31tQydCsgjjS=Oc@mail.gmail.com>
+	<4D4D6E48.3000903@btinternet.com> <4D4FC689.1080107@xyxyx.org>
+	<AANLkTinwgZZ=aTz4mAQiGU2M1j9OuPRnrS9O2Au=K+b3@mail.gmail.com>
+	<4D4FE75F.1000107@xyxyx.org>
+	<AANLkTi=5+umqSsdMudWGQgGkNWnp-rnTea+Ao=DZBgNe@mail.gmail.com>
+	<72E6D6A1-956D-425E-B933-6392C8CAA0F7@cs.otago.ac.nz>
+	<AANLkTinHKiqD+-ySu2+190JH=tLOO9LUBbndvLJWX15P@mail.gmail.com>
+Message-ID: <87bp2mn64t.fsf@malde.org>
+
+G?bor Lehel <illissius at gmail.com> writes:
+
+> Is there any sensible meaning for bangs on return types? I've been
+> trying to think this through but not necessarily succeeding.
+
+Not knowing Clean in any detail, I've always just thought that a type
+signature of, say:
+
+          something :: !Foo -> Bar
+
+would mean the same as, in Haskell:
+
+          something :: Foo -> Bar
+          something foo = foo `seq` ...
+
+In this case, there's no point to a strict return type, since it would
+boil down to "x `seq` x", which is just  "x".
+
+But it seems that a lot of these discussions are about considering Foo
+and !Foo distinct types, which would mean that you can no longer, say,
+add a strict and a lazy integer - at least not with the current Num
+instance.  I find this line of thought very confusing.
+
+> This does seem a bit excessive. As a start, I don't remember anyone
+> asking for control over (un)boxedness, so hopefully we could jettison
+> that part of it?
+
+Uh, you mean like in IOUArrays, the UNPACK pragma, or
+-funbox-strict-fields?  Unboxing is an important optimization, but
+perhaps the current feature set suffices.
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

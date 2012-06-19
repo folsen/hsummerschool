@@ -1,0 +1,27 @@
+From uzytkownik2 at gmail.com  Fri Apr 22 01:34:02 2011
+From: uzytkownik2 at gmail.com (Maciej Marcin Piechotka)
+Date: Fri, 22 Apr 2011 01:34:02 +0200
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <4DB093A6.8000303@btinternet.com>
+References: <4DB093A6.8000303@btinternet.com>
+Message-ID: <1303428842.3329.7.camel@localhost.localdomain>
+
+On Thu, 2011-04-21 at 21:29 +0100, Andrew Coppin wrote:
+> I'm sure this must be a VFAQ, but... There seems to be universal 
+> agreement that Darcs is a nice idea, but is unsuitable for "real" 
+> projects. Even GHC keeps talking about getting rid of Darcs. Can anybody 
+> tell me what the "problems" with Darcs actually are?
+
+I believe the biggest problem was (i.e. when migration started) that
+there is no big-name-hosting supporting darcs. When code.haskell.org
+went down people were cut off from code.
+
+Regards
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110422/b6e7b45b/attachment.pgp>
+

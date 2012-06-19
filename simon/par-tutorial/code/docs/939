@@ -1,0 +1,105 @@
+From fischer at nii.ac.jp  Fri Aug  5 03:43:36 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Fri, 5 Aug 2011 10:43:36 +0900
+Subject: [Haskell-cafe] weird type signature in Arrow Notation
+In-Reply-To: <CALoEywMZ9eEqSbudnWBQwp3h-6O-mpG4w8A4ZSUGnHDtwGYx9Q@mail.gmail.com>
+References: <4E386751.8060204@gmail.com>
+	<20110804212024.GA17308@seas.upenn.edu>
+	<CALoEywMZ9eEqSbudnWBQwp3h-6O-mpG4w8A4ZSUGnHDtwGYx9Q@mail.gmail.com>
+Message-ID: <CALoEywPk+Lnc6SaVThTFT3Gu-5vV1-MvzVhpbM=bSXBJACyiaQ@mail.gmail.com>
+
+I created a ticket with a slightly further simplified program:
+http://hackage.haskell.org/trac/ghc/ticket/5380
+
+On Fri, Aug 5, 2011 at 10:10 AM, Sebastian Fischer <fischer at nii.ac.jp>wrote:
+
+> here is a reduced program that still segfaults:
+>
+> {-# LANGUAGE Arrows #-}
+>
+> import Control.Arrow
+>
+> main :: IO ()
+> main = print segfault
+>
+> segfault :: [()]
+> segfault = anythingYouWant ()
+>
+> anythingYouWant :: a
+> anythingYouWant = testB False (const ()) ()
+>
+> testB :: ArrowChoice arrow
+>       => bool -> arrow () () -> arrow () anything
+> testB bool arrow =
+>   proc () ->
+>     do if bool then arrow -< ()
+>                else arrow -< ()
+>
+> Sebastian
+>
+> On Fri, Aug 5, 2011 at 6:20 AM, Brent Yorgey <byorgey at seas.upenn.edu>wrote:
+>
+>> On Tue, Aug 02, 2011 at 05:08:33PM -0400, bob zhang wrote:
+>> > hi, all
+>> > testB :: (ArrowChoice t1, Num a1, Num a) => (a -> a1 -> t2) -> t1 a t3
+>> > -> t1 a1 t3 -> t1 (a, a1) t
+>> > testB f g h = proc (x,y) -> do
+>> > if (f x y)then g -< x + 1 else h -< y + 2
+>> >
+>> > it's very strange that the type of _f_ is (a->a1->t2) which I thought
+>> > should be a -> a1 -> Bool,
+>> >
+>> > btw, is there any way to get the output of preprocessing using -XArrow
+>> > extensions,
+>> >
+>> > Thanks a lot
+>> > best, bob
+>>
+>> Congratulations, you have definitely found a GHC bug!  Note there are
+>> actually two things wrong with testB's type signature: first, t2 ought
+>> to be Bool, as you note.  But even worse, notice that the return type
+>> of the result arrow, t, has nothing to do with any of the other types!
+>> This means that we can use testB along with the (->) instance for
+>> Arrow to construct elements of arbitrary types:
+>>
+>>  ghci> let anythingYouWant = testB (\x y -> False) (const 3) (const 2)
+>> (2,2)
+>>  ghci> :t anythingYouWant
+>>  anythingYouWant :: t
+>>  ghci> anythingYouWant :: Integer
+>>  2
+>>  ghci> anythingYouWant :: Int
+>>  2
+>>  ghci> anythingYouWant :: Double
+>>  1.0e-323
+>>  ghci> anythingYouWant :: Char
+>>  '\STX'
+>>  ghci> (anythingYouWant :: (Double -> Double) -> [Double]) sqrt
+>>  [
+>>  [1]    17391 segmentation fault  ghci
+>>
+>> whoops!
+>>
+>> I'm using GHC 7.0.3, but Daniel Wagner and I also tried it (with the
+>> same results) on GHC 7.2.0rc1 and GHC HEAD.
+>>
+>> I wasn't able to find a ticket for this on the GHC bug tracker, I
+>> guess we should file one!
+>>
+>> I tried to find a way to get the output of preprocessing using -XArrow
+>> but wasn't able to find one (other than -ddump-ds which gives you the
+>> unoptimized *GHC core* output, which is quite hard to read).
+>>
+>> -Brent
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110805/60e20055/attachment.htm>
+

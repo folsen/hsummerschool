@@ -1,0 +1,40 @@
+From patrick.browne at dit.ie  Wed Aug 17 18:10:22 2011
+From: patrick.browne at dit.ie (Patrick Browne)
+Date: Wed, 17 Aug 2011 17:10:22 +0100
+Subject: [Haskell-cafe] Overloading in a sub-class
+Message-ID: <4E4BE7EE.6060801@dit.ie>
+
+Hi,
+Below are two questions concerning overloading in a sub-class.
+Thanks,
+Pat
+
+class Numb0 a where
+ (+) :: a -> a -> a
+ negate :: a -> a
+
+
+instance Numb0 Int where
+ x + y = y
+ negate x = x
+
+-- Are  + and negate part of the signature of Numb1?
+class Numb0 a  => Numb1 a where
+
+
+-- Is it possible to override these operations in instances of Numb1?
+-- Something like:
+-- instance Numb1 Float where
+--    x + y = y
+--    negate x =  x
+-- Or even using Int as in the super class instance:
+-- instance Numb1 Int where
+--    x + y = y
+--    negate x =  x
+
+
+
+
+This message has been scanned for content and viruses by the DIT Information Services E-Mail Scanning Service, and is believed to be clean. http://www.dit.ie
+
+

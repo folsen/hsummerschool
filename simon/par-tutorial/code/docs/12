@@ -1,0 +1,19 @@
+From kazu at iij.ad.jp  Fri Apr  1 09:04:31 2011
+From: kazu at iij.ad.jp (Kazu Yamamoto (=?iso-2022-jp?B?GyRCOzNLXE9CSScbKEI=?=))
+Date: Fri, 01 Apr 2011 16:04:31 +0900 (JST)
+Subject: [Haskell-cafe] A maintenance command of Haskell cabal packages
+In-Reply-To: <E80D4054-CDB2-4619-9112-BDE1A49505CF@gmail.com>
+References: <AANLkTi=dG8OV9XzB9KkcZOkdE-azR-b6MrnLbiGBbyEE@mail.gmail.com>
+	<20110401.143814.613498438030484319.kazu@iij.ad.jp>
+	<E80D4054-CDB2-4619-9112-BDE1A49505CF@gmail.com>
+Message-ID: <20110401.160431.1784138353624015729.kazu@iij.ad.jp>
+
+> My workaround was to create a link:
+> ln -s ~/Library/Haskell/repo-cache ~/.cabal/packages
+
+I have already done it. :)
+
+--Kazu
+
+
+

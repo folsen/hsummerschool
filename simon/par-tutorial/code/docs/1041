@@ -1,0 +1,52 @@
+From greg at gregweber.info  Thu Aug 11 16:52:17 2011
+From: greg at gregweber.info (Greg Weber)
+Date: Thu, 11 Aug 2011 07:52:17 -0700
+Subject: [Haskell-cafe] ANNOUNCE: Chell: A quiet test runner (low-output
+	alternative to test-framework)
+In-Reply-To: <CAL1ky9qJ2v=+QHYbLDiAfR9m4TdxBjKNa_mTLq_MDFFAVBB4Og@mail.gmail.com>
+References: <CAKRanNDhqzL-t1z-ykP0sHY1ktQqOLX6JwAONsCzHxRJhsNF8A@mail.gmail.com>
+	<CAL1ky9qJ2v=+QHYbLDiAfR9m4TdxBjKNa_mTLq_MDFFAVBB4Og@mail.gmail.com>
+Message-ID: <CAKRanNBtoZcbW2sTRMJAF_hpNjVYQ10pxe4i-wk=z9SfCqYHzg@mail.gmail.com>
+
+It silences HUnit's output, but will tell you what happens when there is a
+failure- which I think is what you want. There are a few available output
+formatters if you don't like the default output, or you can write your own
+output formatter.
+
+BDD is really a red herring. Instead of using function names to name tests
+you can use strings, which are inherently more descriptive. In chell you
+already have `assertions "numbers"`, in hspec it would be `it "numbers"`.
+The preferred style it to remove `test test_Numbers and the test_Numbers
+definition` which are redundant in this case, and instead place that inline
+where you define the suite, although that is optional.
+So I really can't tell any difference betwee "BDD"  and "pass/fail
+assertions". You still just use assertions in hspec.
+
+On Thu, Aug 11, 2011 at 7:36 AM, John Millikin <jmillikin at gmail.com> wrote:
+
+> I have, but it's not quite what I'm looking for:
+>
+> - I don't want to silence HUnit's output, I just don't want anything
+> to show on the console when a test *passes*. Showing output on a
+> failure is good.
+>
+> - I'm not interested in BDD. Not to say it's not useful, but it
+> doesn't match my style of testing (which uses mostly pass/fail
+> assertions and properties).
+>
+> On Thu, Aug 11, 2011 at 07:18, Greg Weber <greg at gregweber.info> wrote:
+> > Hi John,
+> > I am wondering if you have seen the hspec package? [1] It seems to solve
+> all
+> > the problems you are with chell, including that it silences Hunit output.
+> We
+> > are using it for all the Yesod tests now.
+> > Thanks,
+> > Greg Weber
+> > [1]:
+> http://hackage.haskell.org/packages/archive/hspec/0.6.1/doc/html/Test-Hspec.html
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110811/2aa0e988/attachment.htm>
+

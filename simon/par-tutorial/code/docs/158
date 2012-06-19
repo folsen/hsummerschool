@@ -1,0 +1,26 @@
+From wren at freegeek.org  Wed Apr  6 05:13:10 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Tue, 05 Apr 2011 23:13:10 -0400
+Subject: [Haskell-cafe] Using _ on the RHS of an equation?
+In-Reply-To: <BANLkTimKpc4MS6Odkk26OJK_OpNuMhhn8A@mail.gmail.com>
+References: <BANLkTimKpc4MS6Odkk26OJK_OpNuMhhn8A@mail.gmail.com>
+Message-ID: <4D9BDA46.9030500@freegeek.org>
+
+On 4/4/11 4:42 PM, Jason Dagit wrote:
+> Is this something people would be interested in having as an extension in
+> GHC?  Or is it just too fluffy for anyone to really care?
+
+I'd much rather have _ on the RHS of equations be a way of specifying 
+terms that the compiler should infer. This is pretty standard for 
+dependently typed languages, and more closely mimics the behavior of _ 
+on the LHS as a gensym-named pattern variable.
+
+For Haskell we could perhaps use Djinn to infer the term and have 
+compilation fail if there isn't a unique total function/value that can 
+be inferred for the missing term.
+
+-- 
+Live well,
+~wren
+
+

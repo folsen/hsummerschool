@@ -1,0 +1,31 @@
+From jmillikin at gmail.com  Thu Aug 11 17:03:27 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Thu, 11 Aug 2011 08:03:27 -0700
+Subject: [Haskell-cafe] ANNOUNCE: Chell: A quiet test runner (low-output
+	alternative to test-framework)
+In-Reply-To: <CAKRanNBtoZcbW2sTRMJAF_hpNjVYQ10pxe4i-wk=z9SfCqYHzg@mail.gmail.com>
+References: <CAKRanNDhqzL-t1z-ykP0sHY1ktQqOLX6JwAONsCzHxRJhsNF8A@mail.gmail.com>
+	<CAL1ky9qJ2v=+QHYbLDiAfR9m4TdxBjKNa_mTLq_MDFFAVBB4Og@mail.gmail.com>
+	<CAKRanNBtoZcbW2sTRMJAF_hpNjVYQ10pxe4i-wk=z9SfCqYHzg@mail.gmail.com>
+Message-ID: <CAL1ky9oEp_-hjDeEdWgd3bn-UxpHEN+AfOUGnfrO_XTyRjq+xw@mail.gmail.com>
+
+On Thu, Aug 11, 2011 at 07:52, Greg Weber <greg at gregweber.info> wrote:
+> It silences HUnit's output, but will tell you what happens when there is a
+> failure- which I think is what you want. There are a few available output
+> formatters if you don't like the default output, or you can write your own
+> output formatter.
+
+I'm a bit confused. From what I can tell, HUnit does not output
+*anything* just from running a test -- the result has to be printed
+manually. What are you silencing?
+
+> BDD is really a red herring. Instead of using function names to name tests
+> you can use strings, which are inherently more descriptive. In chell you
+> already have `assertions "numbers"`, in hspec it would be `it "numbers"`.
+> The preferred style it to remove `test test_Numbers and the test_Numbers
+> definition` which are redundant in this case, and instead place that inline
+> where you define the suite, although that is optional.
+> So I really can't tell any difference betwee "BDD" ?and "pass/fail
+> assertions". You still just use assertions in hspec.
+
+

@@ -1,0 +1,25 @@
+From spam at scientician.net  Thu Dec 29 20:55:15 2011
+From: spam at scientician.net (Bardur Arantsson)
+Date: Thu, 29 Dec 2011 20:55:15 +0100
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFCC3CE.7050006@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org> <4EFCC3CE.7050006@blueyonder.co.uk>
+Message-ID: <jdigj8$gie$1@dough.gmane.org>
+
+On 12/29/2011 08:47 PM, Steve Horne wrote:
+> On 29/12/2011 19:21, Heinrich Apfelmus wrote:
+>>
+> BTW - why use an IO action for random number generation? There's a
+> perfectly good pure generator. It's probably handy to treat it
+> monadically to sequence the generator state/seed/whatever but random
+> number generation can be completely pure.
+
+*Pseudo* random number generation can of course be pure (though 
+threading the state would be tedious and error-prone). If you want truly 
+random numbers you cannot avoid IO (the monad).
+
+
+

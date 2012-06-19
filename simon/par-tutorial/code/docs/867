@@ -1,0 +1,39 @@
+From qdunkan at gmail.com  Fri Apr 29 10:25:13 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Fri, 29 Apr 2011 13:55:13 +0530
+Subject: [Haskell-cafe] Binary and Serialize classes
+In-Reply-To: <BANLkTikf6VH2UTTnQ11ee5Vo9KYqWWFB0g@mail.gmail.com>
+References: <BANLkTinQ3xKU3Fu5N74oSM36sCDuPd7=rw@mail.gmail.com>
+	<BANLkTikf6VH2UTTnQ11ee5Vo9KYqWWFB0g@mail.gmail.com>
+Message-ID: <BANLkTi=UVJUX9sjdNmXGxbG5s-2z31B92g@mail.gmail.com>
+
+> When I need to comply with a specific binary format, I never rely on
+> Binary/Serialize class instances - I always fall back on the primitive
+> operations on Words of varying sizes (perhaps defining my own type
+> classes for convenience). The 'Builder' type makes this pretty easy.
+>
+> If I were writing binary data to disk, in my mind that would fall
+> under "complying with a specific binary format".
+
+Indeed, and I was starting to do that... well, I would make my own
+project specific Serialize class, since the type dispatch is useful.
+But copy pasting a UTF8 encoder, or the variable length Integer
+encoder, or whatever seemed kinda unpleasant.  Surely we could expose
+that stuff in a library, whose explicit goal was that they *would*
+remain compatible ways to serialize various basic types, and then just
+reuse those functions?  E.g. that is already done for words with the
+putWordN{be,le} functions, and is available separately for UTF8.
+
+> I do, however, rely on the SafeCopy class (or the equivalent
+> Happstack.Data.Serialize class) to be able to read it's own data back
+> from persistent storage - it is a specific design goal of the library
+
+Indeed, I also wound up inventing my own versioning format, which
+looks basically the same as safe copy, except much simpler, I just put
+a version byte, and then case on that for deserialization.  However, I
+only put the version on things I have reason to change, and that
+doesn't include built-in data types, like Integer or String.  So it's
+all my own data types, which I control the instance declarations for
+anyway, so I'm not really worried about those.
+
+

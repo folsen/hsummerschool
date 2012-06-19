@@ -1,0 +1,28 @@
+From es at ertes.de  Sun Apr  3 03:08:29 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Sun, 3 Apr 2011 03:08:29 +0200
+Subject: [Haskell-cafe] pool, persistent, persistent-sqlite: Space leak
+References: <20110331025210.0c936743@tritium.streitmacht.eu>
+	<AANLkTinsqzHNQq2ZZUWt9aknN+BmqSsUC22+MsOQru_z@mail.gmail.com>
+Message-ID: <20110403030829.28eeb1f8@angst.streitmacht.eu>
+
+Michael Snoyman <michael at snoyman.com> wrote:
+
+> Good catch, that was most definitely a space leak in pool. I've
+> uploaded version 0.0.1.1, would you mind testing?
+
+Great!  I will test it and report back, as soon as I'm at home.  Many
+thanks.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

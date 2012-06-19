@@ -1,0 +1,24 @@
+From sargrigory at ya.ru  Thu Aug 11 17:08:24 2011
+From: sargrigory at ya.ru (Grigory Sarnitskiy)
+Date: Thu, 11 Aug 2011 19:08:24 +0400
+Subject: [Haskell-cafe] Can I have a typeclass for topological spaces?
+In-Reply-To: <971591313070724@web40.yandex.ru>
+References: <971591313070724@web40.yandex.ru>
+Message-ID: <1006751313075304@web66.yandex.ru>
+
+Oh, I guess the class would look something like that:
+
+class TopologicalSpace a where
+    ifOpen :: (Subset a) -> Bool
+
+and Subset x is a type corresponding to subsets of x.
+
+11.08.2011, 17:52, "Grigory Sarnitskiy" <sargrigory at ya.ru>:
+> Hello! I just wonder whether it is possible to have a typeclass for topological spaces?
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

@@ -1,0 +1,31 @@
+From ivanperezdominguez at gmail.com  Wed Dec 14 18:18:07 2011
+From: ivanperezdominguez at gmail.com (Ivan Perez)
+Date: Wed, 14 Dec 2011 18:18:07 +0100
+Subject: [Haskell-cafe] ANNOUNCE: keera-network-sms-diamondcard
+Message-ID: <CACZKWEJo7kwvLgJF5m-F7H2VkqbZ_iCQ9Ni8TboZCV5jmzzi2w@mail.gmail.com>
+
+My fellow haskellers,
+
+I wrote a very simple library to send SMSs using the DiamondCard VoIP provider.
+At the present time, it uses the HTTP interface to contact the provider
+(there's a SOAP interface, but I haven't been able to make it play along
+with shoap).
+
+The current API is quite straightforward:
+
+sendSMS :: String -> String -> String -> String -> [ String ] -> IO
+SMSDeliveryResult
+sendSMS accountID pinCode message fromNumber toNumbers
+
+I don't like submitting alpha-stage software to hackage, so it's only in github
+for now: https://github.com/ivanperez-keera/keera-network-sms-diamondcard
+
+In a few days I plan to release a small GTK frontend that I've been using for a
+few months.
+
+If you give either of them a try, I'd be glad to know where it got you.
+
+Cheers,
+Ivan Perez
+
+

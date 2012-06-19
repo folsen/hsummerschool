@@ -1,0 +1,66 @@
+From aslatter at gmail.com  Thu Feb  3 06:38:11 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Wed, 2 Feb 2011 23:38:11 -0600
+Subject: [Haskell-cafe] [web-devel] http-enumerator: redirects,
+ streaming and keep-alive
+In-Reply-To: <AANLkTinniwufPY-Hionm891eqSW+NOk9rFz5z5DfgRgY@mail.gmail.com>
+References: <AANLkTimXn=Dkb-eAkSUNMnVqs6wsT7DqG_UDBV4qyWzT@mail.gmail.com>
+	<AANLkTimwZVTvrSaTzRGQ+8XqAgL9Lyu3yC2ZaA=RfymD@mail.gmail.com>
+	<AANLkTikidKe2LHUv6Hc_VB5Bg4yH6meusY1hDyq0730z@mail.gmail.com>
+	<AANLkTi=NJNaS7ucqq=mtr0wdZGSLcn6oJdXs4D1jd-WQ@mail.gmail.com>
+	<AANLkTiknCH6O20cDakf0jTUh80xP+whqpC20+rvUi=OL@mail.gmail.com>
+	<AANLkTimVSrVjuuNxXadE=YcCFyQ0c5Nk16Fh8bf36NCr@mail.gmail.com>
+	<AANLkTinniwufPY-Hionm891eqSW+NOk9rFz5z5DfgRgY@mail.gmail.com>
+Message-ID: <AANLkTi=G7-w2Faif9x1zpab3O-j_0TkpZQ70p2P4G6WZ@mail.gmail.com>
+
+On Wed, Feb 2, 2011 at 11:06 PM, Michael Snoyman <michael at snoyman.com> wrote:
+> On Thu, Feb 3, 2011 at 12:00 AM, Antoine Latter <aslatter at gmail.com> wrote:
+>> On Wed, Feb 2, 2011 at 3:01 PM, Felipe Almeida Lessa
+>> <felipe.lessa at gmail.com> wrote:
+>>> On Wed, Feb 2, 2011 at 6:30 PM, Antoine Latter <aslatter at gmail.com> wrote:
+>>>> Or you could remove the socket from the map while it's in use.
+>>>
+>>> And what about connection limits? ?We shouldn't create a thousand
+>>> connections to the same host =).
+>>>
+>>
+>> Not a bad idea, but that may be creeping outside the scope of the bug
+>> as reported.
+>>
+>> If you're writing a web-scraper/spider, it is true you might need some
+>> sort of higher-level manager to handle concurrent access. I'm not sure
+>> what that would look like, though
+>>
+>>> --
+>>> Felipe.
+>>>
+>>
+>
+> I think Felipe's point is that using the approach I outlined, we will
+> never spawn more than one connection to a single host. By simply
+> taking the socket out of the map, there's no limit to the number of
+> sockets that will be created.
+
+Ah, then you would block one thread on another if the host info is in
+the map? I get it.
+
+Strictly one socket per host might be a tricky invariant to maintain -
+you'd have to insert an empty socket MVar in the map on lookup
+failure, and the shuffling of the nested MVars seems tricky off the
+top of my head.
+
+But even without all of that I don't think you'd be flooding the host
+any more than without any keepalive support, which was what I was
+getting at.
+
+This is just speculation on my part - I don't have a stake in this, it
+just sounded like an interesting problem. I'd hate to be steering this
+into a design black hole.
+
+Antoine
+
+>
+> Michael
+>
+
+

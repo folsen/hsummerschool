@@ -1,0 +1,41 @@
+From ok at cs.otago.ac.nz  Fri Feb  4 02:44:11 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Fri, 4 Feb 2011 14:44:11 +1300
+Subject: [Haskell-cafe] OSX i386/x86 and x86_64 - time to switch
+	supported platforms?
+In-Reply-To: <4D4B5308.4000009@freegeek.org>
+References: <801E1648-B34B-4F93-9BAB-9A05EC77D747@gmail.com>
+	<C9311AB9-65D8-4ACE-B20B-F429039934CB@gmail.com>
+	<4D4B5308.4000009@freegeek.org>
+Message-ID: <3C972E29-7228-4F5F-84A7-4FC13C938B82@cs.otago.ac.nz>
+
+
+On 4/02/2011, at 2:14 PM, wren ng thornton wrote:
+
+> On 2/3/11 10:48 AM, Max Cantor wrote:
+>> Does it make sense to relegate OSX x86_64 to community status
+>> while the 32-bit version is considered a supported platform?
+> 
+> I'm not sure I can make sense of what you mean here. Given the preamble, I'd guess you're asking whether we should make x86_64 the targeted architecture for OSX support, and reclassify 32-bit OSX to unsupported or "hopefully it still works" status. (But in that case, it's the 32-bit which would be "relegated" to unsupported status while x86_64 is "considered a supported platform"...)
+> 
+> Can you clarify the question?
+
+Here's something that happened to me:  GHC was installed on this machine and worked fine,
+but when the operating system was upgraded to Mac OS X 10.6.something, GHC broke, with
+messages along the lines of "you can't use 32-bit absolute addresses in 64-bit code".
+The operating system is perfectly happy running both 32-bit and 64-code code and all
+the tool chain is happy working with either, but the *default* changed from "say nothing
+get 32-bit" to "say nothing get 64-bit".  I'm guessing that GHC gives the compiler some
+C code and some (32-bit) object files or libraries.
+
+So now I have *different* GHC setups on the 10.6.5 desktop machine and the
+10.5.8 laptop...  Since both machines have only 4GB of physical memory, 32-bit would be
+fine, except for all those lovely extra registers in x86_64 mode.
+
+I think the original poster is saying that the targeted architecture for OS X support
+should be the architecture that OS X assumes by default, and these days that's x86_64.
+
+It would be really nice for x86 mode to be well supported for a while longer.
+
+
+

@@ -1,0 +1,54 @@
+From dev at mobileink.com  Thu Dec 29 21:20:07 2011
+From: dev at mobileink.com (Gregg Reynolds)
+Date: Thu, 29 Dec 2011 14:20:07 -0600
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <20111229183312.B797D93C49@mail.avvanta.com>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>
+	<20111229132335.GY17094@google.com> <4EFC9AAD.5040906@unicaen.fr>
+	<20111229165524.GD17094@google.com>
+	<20111229170135.GE17094@google.com>
+	<F6E014FF-2550-4986-843F-B6FA64F596B6@mobileink.com>
+	<CAKjSnQEbRO4yx8bPu5B8UsgUNVtbC7vQg+76YYn0Oe0A_H1rOQ@mail.gmail.com>
+	<C44BA253-1F64-4409-8F4F-E15C85768077@mobileink.com>
+	<20111229183312.B797D93C49@mail.avvanta.com>
+Message-ID: <06952280-1366-4BAA-B6D2-055A62583C51@mobileink.com>
+
+
+On Dec 29, 2011, at 12:33 PM, Donn Cave wrote:
+
+> Quoth Gregg Reynolds <dev at mobileink.com>,
+> ..
+>> A minor point maybe, but germane to the original post (I hope).
+> 
+> It isn't - I mean, I'm not really sure what your point is, but
+> the example really returns the same IO value, not just one of
+> the same type.
+> 
+> Consider an example with implementation:
+> 
+>   wint :: Int -> IO Int
+>   wint a = let s = show a in do
+>       putStr s
+>       return (length s)
+> 
+> Now the expression "wint 994" is a value of type IO Int, and
+> any instance of that expression is the same value
+
+Ok, but if that were all there is to it we would not need monads.  I guess it may boil down to a matter of taste in definition and exposition - to me any account of stuff like IO Int that omits mention of the fact that, well, IO is involved, is incomplete.  But then I like the theoretical and even philosophical side of things where others tend to want to get on with writing useful code. ;)  And the original post was if I remember about purity/impurity etc.
+
+> - an action
+> is not the same as the action's result.
+
+Nor is a computation the same as the computation's result.  The critical difference is that computations are deterministic processes, and "actions" (IO, rand, etc.) are not.  Therefore they are not functions, their evaluation must be ordered, and they cannot even in principle be fully modeled in purely functional terms.  At least I don't see how they can.
+
+>  You can use this
+> value in pure Haskell expressions with confidence.
+
+Because they are monadic, not because they are values like other values.
+
+-Gregg
+
+
+
+

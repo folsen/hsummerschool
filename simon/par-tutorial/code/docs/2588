@@ -1,0 +1,78 @@
+From michael at snoyman.com  Wed Feb  2 14:57:30 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 2 Feb 2011 15:57:30 +0200
+Subject: [Haskell-cafe] http-enumerator: redirects, streaming and keep-alive
+Message-ID: <AANLkTimXn=Dkb-eAkSUNMnVqs6wsT7DqG_UDBV4qyWzT@mail.gmail.com>
+
+Hi all,
+
+There are a number of new feature requests for http-enumerator, and I
+wanted to discuss some possible API changes with everyone:
+
+* Allow keep-alive requests, which will reuse the same connection.
+* Allow client code to determine whether it accepts a server's SSL certificate.
+* Allow the request body to be an Enumerator so we can send large
+request bodies without using lazy IO. This is already implemented via
+streamingHttp, but it would make more sense to modify the Request
+datatype to replace L.ByteString with (Int, Enumerator ByteString IO
+()).
+* Fix redirect behavior. It seems that the right thing to do is change
+a POST into a GET and remove the request body for a 303, and resend
+the same request for all other 3xx codes. However, when using an
+Enumerator for the request body, it is not guaranteed that we can
+resend an Enumerator.
+
+For addressing the last two, my plan is to:
+
+* Change the Request datatype as mentioned, but provide a convenience
+method for converting a lazy ByteString into a (Int, Enumerator
+ByteString IO ()).
+* Implement redirecting as I have described, and explain in the
+documentation that automatic redirecting can only work with
+Enumerators that can be run multiple times. AFAIK, this works with
+most standard Enumerators, such as enumFile, and with the helper
+function I will provide to convert lazy ByteStrings to Enumerators.
+* Remove streamingHttp, as it will no longer be necessary.
+
+As far as keep-alive goes, I still need to do a bit more research, but
+my basic idea (with credit to Bryan O'Sullivan):
+
+* http (and family) will all take an extra argument, Maybe Manager.
+* Manager will be an abstract type that will keep an MVar (Map (Host,
+Port, IsSecure) Socket).
+* If http is provided with a Manager, then it uses the Socket
+available in the Manager. If none is available, it creates a new
+Socket and places it in the Manager.
+* If http is *not* provided with a Manager, then it creates a new
+socket and closes it before returning.
+* There will be a newManager :: IO Manager, and a closeManager ::
+Manager -> IO (), which closes all Sockets in the Manager and empties
+out the inner Map.
+
+Some open questions are:
+
+* Who is responsible to recover if a server is no longer responding on
+a Socket from the Manager: http or the client code? I would assume
+http.
+* I haven't fully thought through how this will work with secure
+connections: most likely in addition to storing the Socket in the
+Manager I will need to store some certificate data.
+
+And speaking of certificates, the main concern I have here is data
+types: since http-enumerator can use either tls or OpenSSL, there
+isn't a single certificate datatype I can use. If someone wants to
+help out and write some code to convert an OpenSSL X509 datatype into
+a Certificate from the certificate package (which tls uses), I will be
+very grateful.
+
+Assuming we had such a unified datatype, I would recommend changing
+Request's secure record to be Certificate -> IO Bool, where returning
+True means the certificate is accepted and False means it is rejected.
+To get the current functionality of trusting any certificate, we would
+use (const $ return True).
+
+Any thoughts?
+
+Michael
+
+

@@ -1,0 +1,29 @@
+From gwern0 at gmail.com  Thu Feb 10 00:18:17 2011
+From: gwern0 at gmail.com (Gwern Branwen)
+Date: Wed, 9 Feb 2011 18:18:17 -0500
+Subject: [Haskell-cafe] Haskell Summers of Code retrospective (updated for
+	2010)
+Message-ID: <AANLkTinJ6RN+2yu1Rb80YFyd2KA7rp4ao--gkEe8Caot@mail.gmail.com>
+
+2 years ago in February 2009, I wrote up a history of Summers of Code
+through 2008 (http://www.haskell.org/pipermail/haskell-cafe/2009-February/055489.html).
+But the Wheel turns, and years come and pass, leaving memories that
+fade into 404s; a wind rose in Mountain View, whispering of the coming
+Summer...
+
+I have considerably expanded and updated the coverage:
+http://www.gwern.net/Haskell%20Summer%20of%20Code.html
+
+It now covers the 2009 & 2010 SoCs, adds scads of links, flips the
+appraisal of some of the older SoCs as time passed and more info came
+to light, and adds a section discussing 12 proposals from the
+subreddit & Trac.
+
+(It's long enough that I don't feel comfortable copying it inline as I
+did 2 years ago.)
+
+-- 
+gwern
+http://www.gwern.net
+
+

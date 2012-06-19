@@ -1,0 +1,49 @@
+From alexey.skladnoy at gmail.com  Thu Dec  1 21:30:41 2011
+From: alexey.skladnoy at gmail.com (Alexey Khudyakov)
+Date: Fri, 02 Dec 2011 00:30:41 +0400
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAMXF=YDSCykcE9i-31ASqvzT-dJwOj0YbeRg_v77FVY98WRJcA@mail.gmail.com>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>	<CANd=OGGcwRC9FfTA8KJQyzsQBDL3YycF2MYx4hMiN7vxeBwTFg@mail.gmail.com>	<20111201174112.GA14096@x200>	<CANd=OGGXOQYrKrnw9QpDaqgjC-JGsH7jFJB8Hx-OJjCTZP7KGQ@mail.gmail.com>	<CAMXF=YCD8ODsmF53id9U=h+SsnuN1T8RvcvY2htwBgRFGgW85A@mail.gmail.com>	<CAJ9AoK8q_3pLsjob_mZHjU1Jr9ZkSig-wjjJiWZXB71mxL92GQ@mail.gmail.com>
+	<CAMXF=YDSCykcE9i-31ASqvzT-dJwOj0YbeRg_v77FVY98WRJcA@mail.gmail.com>
+Message-ID: <4ED7E3F1.5090202@gmail.com>
+
+On 01.12.2011 23:47, dokondr wrote:
+> To be precise, $0 always contains the path to the program called. You
+> are right, this path will change depending on location from which the
+> program was called. So $0 is OK for my case, while current directory  is
+> unrelated.
+>
+Actually it contains whatever was passed to exec. By convention this is 
+program name but it could be anything
+
+#include <stdio.h>
+#include <unistd.h>
+
+int main(int argc, char** argv)
+{
+     if( argc != 1 ) {
+         printf("%i: %s\n", argc, argv[0] );
+     } else {
+         execl("./argv","Random junk","",0);
+     }
+     return 0;
+}
+
+$ gcc argv.c -o argv && ./argv
+2: Random junk
+
+
+
+> Try this:
+>
+> #!/bin/sh
+> echo "Arg 0: $0"
+> echo "All Parameters:  [$@]"
+>
+> Again, any way to get the same functionality in GHC?
+>
+getArgs and getProgName should do the trick
+
+http://hackage.haskell.org/packages/archive/base/latest/doc/html/System-Environment.html
+
+

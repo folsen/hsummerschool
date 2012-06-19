@@ -1,0 +1,26 @@
+From gabor at mac.com  Thu Aug 25 20:09:14 2011
+From: gabor at mac.com (Gabor Greif)
+Date: Thu, 25 Aug 2011 20:09:14 +0200
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <4E568D11.30800@btinternet.com>
+References: <4E568D11.30800@btinternet.com>
+Message-ID: <CF217678-DC62-498B-B0EE-CCA77E09F5BA@mac.com>
+
+
+Am 25.08.2011 um 19:57 schrieb Andrew Coppin:
+
+> Is there a way to actually determine how many bits are in an Integer?
+
+
+occupiedBits :: Integer -> Int
+occupiedBits = (+1) . truncate . logBase 2 . (+1)
+
+Caveat: untested :-)
+
+Cheers,
+
+	Gabor
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110825/189b07ff/attachment.htm>
+

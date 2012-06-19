@@ -1,0 +1,101 @@
+From vigalchin at gmail.com  Mon Aug 29 03:27:17 2011
+From: vigalchin at gmail.com (Vasili I. Galchin)
+Date: Sun, 28 Aug 2011 20:27:17 -0500
+Subject: [Haskell-cafe] only anecdotal .... not a proof of a trend ...
+Message-ID: <CA+0XtC-o7jbZXzrEK+3Rwrx_cfTXLOMZe8yVWn2QciaS4d+H0A@mail.gmail.com>
+
+Hello,
+
+      I received two job postings ... my comments follows the postings:
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*#1 Software Developer*
+
+* *
+
+Location: Austin, TX
+
+Duration: 6 months
+
+Rate : $60/hr -$70/hr on w2
+
+
+
+*Required:*
+
+*- Straight C experience - Generally need a pure C programmer to ideally
+create 1 C file that can be compiled in Win32/Win64/Dos/Shell/Linux*
+
+a.       Prefer C, not C++, but if only C++ still consider it.
+
+b.      Past contractors tried to do too large of things like templates,
+huge class structures, etc. so we prefer C over C++
+
+c.       Upper level Windows programming such as .NET detracts because
+client wants them to think about all targets, not just Windows
+
+*- Linux experience ? Generally need to get a Windows GUI application to be
+re-compiled and run in Linux*
+
+a. Hard to find, so first do a key word search of Linux
+b. Programming applications background is a big plus
+c. Looking for GUI experience so they can scope how the Win32 app looks then
+implement the same experience in Linux
+d. Client is lacking in Linux background, so need someone that needs minimal
+help with Linux.
+
+
+
+*Desired:*
+
+- Application development ? Have several Win32 applications that need to be
+compiled as Win64 then tested
+
+a. Experience in testing and familiar with looking for corner case scenarios
+
+- Low level hardware/software interaction knowledge
+
+a. Apps require running a SMI to initiate contact, need candidate to
+understand difference between virtual and flat addressing
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*#2 SMTP EMAIL SERVER - C*
+Elance - United States
+See original job posting at Elance
+?<http://www.indeed.com/rc/clk?jk=6f0fdd27079eb247&from=vj&grandfrom=ja&tk=1687hjc6n069g1ia>
+Developer to provide ANSI C software to send (receive not required) email
+using an SMTP Server. This software must support: ? AUTH_LOGIN (base 64
+encoding) ? NTLM ?
+
+NTLM2 ? CRAM MD5 This software is targeted to run on an embedded
+microcontroller but can be developed in Linux or Windows. The following
+requirements MUST be met: ? No C++, No C++ Classes...etc ?
+
+No .NET ? No DLLs ? No Libraries ? No OS dependencies (Windows/QNX/MQX or
+any other OS) ?
+
+No OS Function Calls ? 100% ANSI C Source is required. Desired Skills: C
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Both seem to want to have nothing with C++ (dare I say OOPS?). I work in
+mainstream industry. Have others on the mail list seen such job postings
+recently?
+ Is there now a trend against C++ due to somewhat loose type checking and
+very statefullness? (Unlike Haskell which splits pure and monads very
+clearly vis strong types).
+
+
+#1
+To C++ templates are much more bulky(and ugly) compared Haskell's
+polymorphic types. However, it caused me to think where we Haskell
+programmers can do "too large of things". ??? Perhaps an unfair question
+given that I have no access to the current C++ code.
+
+
+
+
+#2
+

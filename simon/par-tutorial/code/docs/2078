@@ -1,0 +1,44 @@
+From gcrosswhite at gmail.com  Mon Dec 19 03:44:55 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Mon, 19 Dec 2011 12:44:55 +1000
+Subject: [Haskell-cafe] [Alternative] summary of my understanding so far
+In-Reply-To: <CAKFCL4X=ZhpiyMaCci6J5UAa-i-TFy_Tc+LbE37BDPHkepB0Cw@mail.gmail.com>
+References: <E6897C72-6886-4B18-9005-E6BDA3E92D76@gmail.com>
+	<CAL3m8eDmauVuJAn_qac7U3Su0A7qMuvPjz0efd7s=coEd6H6rw@mail.gmail.com>
+	<14CB30D2-F2CF-41DF-BBFA-FF9A3923AF67@cs.otago.ac.nz>
+	<CAKFCL4X=ZhpiyMaCci6J5UAa-i-TFy_Tc+LbE37BDPHkepB0Cw@mail.gmail.com>
+Message-ID: <02D04C33-5E50-4804-89C5-D15F0C2D4AA0@gmail.com>
+
+
+On Dec 19, 2011, at 12:39 PM, Brandon Allbery wrote:
+
+> On Sun, Dec 18, 2011 at 20:42, Richard O'Keefe <ok at cs.otago.ac.nz> wrote:
+> No.  Not by a country mile.
+> It's better than "non-existent".
+> It's better than "misleading".
+> But it's not even on the same *continent* as "adequate".
+> 
+> +1
+
+
+So what do you all think about my own suggestion for the documentation?  The following is the same as what I've posted before, but with some tweaks such as swapping the last two paragraphs.
+
+============================================================
+
+The Monoid instance for Maybe has the property that, for all x and y, (Just x) wins when combined (on either side) with Nothing values, and when (Just x) is combined with (Just y) then the result is (Just (x `mappend` y)).
+
+Note that the behavior of the Monoid instance of Maybe is *different* from the behavior of the MonadPlus and Alternative instance of Maybe.  For the latter two typeclasses, the behavior is that when (Just x) is combined with (Just y) the x and y values themselves are not combined but rather y is discarded so (Just x) simply wins;  put another way, for all x and z, we have that (Just x) `mappend` z is *always* equal to (Just x), regardless of whether z is equal to Nothing or whether it is equal to (Just y) for some y.  For this reason, unlike the instance for Monoid, the instances for these MonadPlus and Alternative place no additional constraints on the type lifted into Maybe.
+
+Incidentally, for the more mathematically inclined, you may think of this as being equivalent to the standard practice of turning an arbitrary semigroup into a monoid by simply adding a new element to the semigroup to serve as the identity element, where in this case the identity element is the Nothing value of Maybe;  unfortunately, since the base libraries do not come with a Semigroup typeclass, this process is expressed in code as lifting from the Monoid typeclass.
+
+============================================================
+
+I welcome any feedback that you all have to offer.  If some iteration of the above is considered an improvement, then I would be happy to submit a patch using whatever process someone is kind enough to point me towards.  :-)
+
+Cheers,
+Greg
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111219/23646ccf/attachment.htm>
+

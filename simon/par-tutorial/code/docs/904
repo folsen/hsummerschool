@@ -1,0 +1,83 @@
+From wren at freegeek.org  Mon Aug  1 08:57:23 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Mon, 01 Aug 2011 02:57:23 -0400
+Subject: [Haskell-cafe] logic and types
+In-Reply-To: <4E5EBA42.5060805@dit.ie>
+References: <4E5EBA42.5060805@dit.ie>
+Message-ID: <4E364E53.1050800@freegeek.org>
+
+On 8/31/11 6:48 PM, Patrick Browne wrote:
+> Hi,
+> Below are some questions about the logical interpretation of types and
+> type classes.
+>[...]
+>
+> -- Is this an axiom at type level?
+
+It depends how exactly you mean "axiom". Under some interpretations, 
+Haskell has no way to specify axioms, since all specifications are 
+accompanied by their definitions (e.g., types are defined by their 
+constructors, classes are defined by their members, functions are 
+defined by their expressions). In other words, there is nothing which 
+lacks computational content. In contrast, systems like Coq and Agda do 
+have mechanisms for asserting axioms.
+
+> -- forall a. (Pos a) =>  a ->  Position
+> -- How do I write this in logic? (e.g. implies, and, or, etc)
+> -- What exactly is being asserted about the type variable and/or about
+> the class?
+> -- I am not sure of the respective roles of =>  and ->  in a logical context
+
+Loosely speaking,
+
+     * forall translates to universal quantification,
+     * classes and type constructors translate to predicates,
+     * type/data families translate to functions in the logic,
+     * the arrows translate to implications,
+     * products/tuples translate to conjunction,
+     * coproducts/unions translate to disjunction,
+     ...
+
+I'm hedging here because the exact translation will depend on what sort 
+of semantics you want to get out of the logic. For example: the 
+distinction between the (=>) and (->) arrows could be ignored since they 
+both represent implication; however, there are distinctions about which 
+one can be used where, and that would be lost if we pretend they're 
+identical. Similarly, the extent to which tuples/unions are actually 
+con-/disjunction depends on what sort of entailments you want to 
+consider valid (consider, for example, if we moved to a language with 
+linear or affine types).
+
+
+> -- Is the following a fact at type level, class level or both?
+> instance Pos Person where
+>    getPos (Person i p) = p
+
+Types and classes are at the same level, they're just in different 
+syntactic categories. This instance is declaring the validity of the fact:
+
+     Pos Person
+
+And is proving that fact by giving a proof for all the type class 
+methods. In particular, it is giving the proof
+
+     \ (Person i p) -> p
+
+for getPos at Person.
+
+
+> -- Is it the evaluation or the type checking that provides a proof of
+> type correctness?
+> -- getPos(Person "1" 2)
+
+Type checking provides the proof of type correctness. However, note that 
+Haskell is an inconsistent logic--- all types are inhabited. So while we 
+can prove type correctness at compile time, that doesn't necessarily 
+guarantee logical correctness (since we may have used inconsistencies 
+somewhere important).
+
+-- 
+Live well,
+~wren
+
+

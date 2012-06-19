@@ -1,0 +1,37 @@
+From dagitj at gmail.com  Mon Apr  4 18:55:35 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Mon, 4 Apr 2011 09:55:35 -0700
+Subject: [Haskell-cafe] Fast conversion between Vector Double and Vector
+	CDouble
+In-Reply-To: <BANLkTi=weZmzsyiFyDR9Gj6A+0gBwbm_+w@mail.gmail.com>
+References: <BANLkTime8Omz8PAPtu_HVAQfhafR+=bsCg@mail.gmail.com>
+	<201104041441.30359.daniel.is.fischer@googlemail.com>
+	<BANLkTi=weZmzsyiFyDR9Gj6A+0gBwbm_+w@mail.gmail.com>
+Message-ID: <BANLkTikeemy2bz0aGn3NmrGgFMe3v6eV=A@mail.gmail.com>
+
+On Mon, Apr 4, 2011 at 6:41 AM, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+
+>
+>
+> Thanks for the clarification Daniel.
+>
+> I just read[1] it's also possible to directly use Double and Float in
+> an FFI import declaration. I always assumed you could only use the C
+> types from Foreign.C.Types.
+> So I think I'm going to change bindings-levmar[2] to use Double and
+> Float instead of CDouble and CFloat. This way I don't even need to
+> map.
+>
+
+It's just that on some platforms/Haskell implementations the Haskell
+Double/Float may not line up with the C side.  If you use CDouble/CFloat it
+will line up.  Compared to unsafeCoerce, I would hope you'd get a C compile
+error on those platforms, but I don't know for certain if that's the case.
+
+In my opinion, it's the conversion functions that need to be fixed.
+
+Jason
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110404/a4c8f6a8/attachment.htm>
+

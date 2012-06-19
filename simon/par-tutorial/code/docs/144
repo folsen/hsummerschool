@@ -1,0 +1,50 @@
+From daniel.is.fischer at googlemail.com  Tue Apr  5 15:05:10 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Tue, 5 Apr 2011 15:05:10 +0200
+Subject: [Haskell-cafe] Problems with haskell98 package in GHC
+In-Reply-To: <5F1FA166-405E-4130-86AA-22D709FC9874@porternet.org>
+References: <BANLkTinxDmbWVd8eQSMKNrQHgS7j5+2gMA@mail.gmail.com>
+	<BANLkTi=VhEpHw6d1b+3BMKyf05VnBZe+nw@mail.gmail.com>
+	<5F1FA166-405E-4130-86AA-22D709FC9874@porternet.org>
+Message-ID: <201104051505.10432.daniel.is.fischer@googlemail.com>
+
+On Tuesday 05 April 2011 14:20:52, Julian Porter wrote:
+> Hello,
+> 
+> I recently tried upgrading the package haskell98 to version 1.1.0.1. 
+
+Don't. Basically, don't upgrade any libraries that come with GHC itself 
+(afaik, Cabal can be upgraded without causing havoc, everything(?) else 
+should only be upgraded when you know exactly what you're doing).
+
+> Two things went wrong:
+> 
+> (1) Some of the time the build failed because it said it couldn't build
+> time-1.2.0.4 (which I already had installed)
+
+time is one of GHC's bootlibs, it shouldn't be upgraded either. You'll get 
+some stuff depending on the original time and other stuff depending on the 
+new one, it won't work together, so things will break - unless you know 
+exactly what you're doing.
+
+> (2) Even when I finally
+> managed to get it to build and install, compiling code led to this
+> error message:
+> 
+>  Bad interface file: /usr/local/lib/haskell98-1.1.0.1/ghc-6.12.3/IO.hi
+>         Something is amiss; requested module  haskell98:IO differs from
+> name found in the interface file haskell98-1.1.0.1:IO
+
+Something expected the haskell98 package that came with GHC and found the 
+newly installed, it seems.
+
+Looks like you've done a global install and thus have overwritten the 
+original. I'm afraid that means you have to reinstall GHC, I know of no way 
+to fix it.
+
+> 
+> I'm running GHC version 6.12.3.  Any help much appreciated.
+> 
+> Julian Porter
+
+

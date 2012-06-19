@@ -1,0 +1,122 @@
+From ok at cs.otago.ac.nz  Thu Feb  3 22:20:25 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Fri, 4 Feb 2011 10:20:25 +1300
+Subject: [Haskell-cafe] Another Question
+In-Reply-To: <759031.74723.qm@web120215.mail.ne1.yahoo.com>
+References: <759031.74723.qm@web120215.mail.ne1.yahoo.com>
+Message-ID: <3F233B9F-F186-4D23-B553-3233F2CF0184@cs.otago.ac.nz>
+
+
+On 3/02/2011, at 8:18 PM, Navin Rustagi wrote:
+
+> hi , 
+> 
+> I am stuck in the following problem. 
+> 
+> I am maintaining  a list of  tuples of the form 
+> ([Char],Int,Int, Int,Int) . The purpose of maintaining the tuples is that the 
+> program reads from a file line by line , Matches the contents with the first element of the tuple and updates the tuple respectively.
+> 
+> The precise function I am using is as follows 
+> 
+> 
+> tupup::Bool->[Char]->Int->Int->Int->Int->Char->([Char],Int,Int,Int,Int) 
+> tupup val elf els elr ell elx ys= if val then 
+>                                           case ys of  'A'  -> (elf, els+1,elr,ell,elx) 
+>                                                       'G'  -> (elf,els, elr +1,ell,elx)
+>                                                       'C'  -> (elf,els,elr,  ell +1,elx) 
+>                                                       'T'  -> (elf,els,elr,ell,  elx +1)
+>                                            else (elf,els,elr,ell,elx)
+> 
+> 
+> uptable::[[Char]]->[([Char],Int,Int,Int,Int)]->[([Char],Int,Int,Int,Int)]
+> uptable (xf:xs) main_array = map (\(x,y,z,r,t)-> tupup (x==xf) x y z r t (secvalue xs) ) main_array
+>    
+>  
+> It gives the error ERROR - Control stack overflow. I assume it is because of the lazy evaluation .
+
+The lazy evaluation of the ech+1 expressions, to be specific.
+
+By the way, could I make a plea for narrower lines in your source code?
+Ninety-nine columns is much wider than I find comfortable.
+
+A little white space helps readability too.
+
+I want to offer you a completely Haskell 98 solution.
+
+Step 1.
+
+    Let's look at the types.  Trust me, this WILL pay off.  Twice.
+
+    The type (String,Int,Int,Int,Int) occurs several times here.
+    In fact this appears to represent a "maplet" String :-> (Int,Int,Int,Int).
+    We'll refactor that and make a data type for the counts.
+
+data Codon_Counts = Codon_Counts Int Int Int Int
+
+type Codon_Map = [(String, Codon_Counts)]
+
+
+Step 2.
+
+   Two things are intermingled here: a control structure for applying a function
+   to the second part of maplets whose first part equals a given key, and what
+   to do to those second parts.  Let's factor out the control structure.
+
+map_matching_maplets :: Eq k => k -> (a -> a) -> [(k, a)] -> [(k, a)]
+
+map_matching_maplets k f = 
+  map (\maplet@(key,val) -> if key == k then (key,f val) else maplet)
+
+Step 3.
+
+    Write an 'update_codon_map' function.
+
+update_codon_map :: [String] -> Codon_Map -> Codon_Map
+
+update_codon_map (what:how) =
+    map_matching_maplets what $
+      case secvalue how of
+        'A' -> \(Codon_Counts a g c t) -> Codon_Counts (a+1) g c t
+        'G' -> \(Codon_Counts a g c t) -> Codon_Counts a (g+1) c t
+        'C' -> \(Codon_Counts a g c t) -> Codon_Counts a g (c+1) t
+        'T' -> \(Codon_Counts a g c t) -> Codon_Counts a g c (t+1)
+
+Step 4.
+
+    Add strictness annotations.  In Haskell 98, the only place you
+    can put strictness annotations is in types.   That's one of the
+    reasons I introduced the Codon_Counts type.  Change just one line
+    so the declaration reads
+
+data Codon_Counts
+   = Codon_Counts !Int !Int !Int !Int
+
+Step 5.
+
+    I suspect that there is still a big performance problem.
+    I *think* that this list of tuples is *really* a map from
+    some key to a set of codon counts, so that a call to
+    update_codon_map is expected to change just one maplet.
+
+    If that's so, then having a Codon_Map type has a big payoff, because
+    you can do
+
+import qualified Data.Map as Map
+
+type Codon_Map = Map.Map String Codon_Counts
+
+update_codon_map (what:how) map = Map.update f what
+  where f (Codon_Counts a g c t) =
+          Just $ case secvalue how of
+                   'A' -> Codon_Counts (a+1) g c t
+                   'G' -> Codon_Counts a (g+1) c t
+                   'C' -> Codon_Counts a g (c+1) t
+                   'T' -> Codon_Counts a g c (t+1)
+
+If there are n items in the map, the list based code is O(n),
+while this is O(log n).
+
+
+
+

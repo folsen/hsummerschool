@@ -1,0 +1,36 @@
+From allbery.b at gmail.com  Mon Aug 29 10:44:42 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Mon, 29 Aug 2011 04:44:42 -0400
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <4E5B4E9D.9090000@btinternet.com>
+References: <4E568D11.30800@btinternet.com> <4E56CD99.6050703@vex.net>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+	<nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+	<4E57F43A.9030800@btinternet.com>
+	<b25g57lk7fbp5td6lp31qigptnr6rvfh67@4ax.com>
+	<4E58CDB5.2010900@btinternet.com>
+	<CAKFCL4VsuQrdmfM5EfBK_DBokMTC7SVP=u_UTJZV+17vABOvCg@mail.gmail.com>
+	<4E5B427D.3040605@btinternet.com>
+	<CAKFCL4XkkudmL7r0r9VpzVDfyAn=GXBVF2oSTQUeGEWGeUOa4Q@mail.gmail.com>
+	<4E5B4E9D.9090000@btinternet.com>
+Message-ID: <CAKFCL4U5NETr1np9B1HUuAGx-Xb3kbfQUvdMrA5t569NgECcZA@mail.gmail.com>
+
+On Mon, Aug 29, 2011 at 04:32, Andrew Coppin <andrewcoppin at btinternet.com>wrote:
+
+> OK. But since there's no way of getting a byte count for an Integer
+> either...
+>
+
+The count depends on how you're serializing it; unless you are literally
+serializing to individual bits and sending them over a synchronous serial
+link, the correct answer is an integer logarithm by your word size + the
+current definition of bitSize applied to said word.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110829/a7397446/attachment.htm>
+

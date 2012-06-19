@@ -1,0 +1,47 @@
+From magnus at therning.org  Sun Dec 25 09:05:17 2011
+From: magnus at therning.org (Magnus Therning)
+Date: Sun, 25 Dec 2011 09:05:17 +0100
+Subject: [Haskell-cafe] Images in Haddock documentation: best practices?
+In-Reply-To: <CAKjSnQHatjFXroVLt8305W=3hs1_HoBXqtqO77VnMkwGyXGG9g@mail.gmail.com>
+References: <20111225050401.GA8834@seas.upenn.edu>
+	<CAKjSnQHatjFXroVLt8305W=3hs1_HoBXqtqO77VnMkwGyXGG9g@mail.gmail.com>
+Message-ID: <20111225080517.GA5225@ohann>
+
+On Sun, Dec 25, 2011 at 01:02:57AM -0500, Antoine Latter wrote:
+> On Sun, Dec 25, 2011 at 12:04 AM, Brent Yorgey <byorgey at seas.upenn.edu> wrote:
+> > Hi all,
+> >
+> > Although it doesn't seem to be documented in the user manual (!),
+> > Haddock supports inline images, using a <<url>> syntax. ?I'd like to
+> > include some images in the documentation for a package I'm writing,
+> > but not sure of the best way.
+> >
+> 
+> In case nothing else works out:
+> 
+> http://en.wikipedia.org/wiki/Data_URI_scheme
+> 
+> They do not work in IE 7, and in IE 9 they are limited to 32k.
+
+Just a small correction, the page on wikipedia says that *IE 8* is
+limited to 32k, and that *IE 9* doesn't have that limitation.
+
+/M
+
+-- 
+Magnus Therning                      OpenPGP: 0xAB4DFBA4 
+email: magnus at therning.org   jabber: magnus at therning.org
+twitter: magthe               http://therning.org/magnus
+
+
+Perl is another example of filling a tiny, short-term need, and then
+being a real problem in the longer term.
+     -- Alan Kay
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111225/6f7313ce/attachment-0001.pgp>
+

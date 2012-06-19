@@ -1,0 +1,43 @@
+From sh006d3592 at blueyonder.co.uk  Thu Dec 29 03:53:50 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Thu, 29 Dec 2011 02:53:50 +0000
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <CABLneZtbhXHMhMbLLhMQ0T9NJYQi4VxSOk06ZKHJA1VCMUS1LQ@mail.gmail.com>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <4EFB91BA.5070003@unicaen.fr>
+	<4EFBAB99.4050605@blueyonder.co.uk>
+	<CADd9ORtkye6qV6P-8gnW_gX8qAQz-uwSnSfwzKM1HuwH4J6zDQ@mail.gmail.com>
+	<4EFBB2F3.6060905@blueyonder.co.uk>
+	<CABLneZtbhXHMhMbLLhMQ0T9NJYQi4VxSOk06ZKHJA1VCMUS1LQ@mail.gmail.com>
+Message-ID: <4EFBD63E.7020606@blueyonder.co.uk>
+
+On 29/12/2011 00:57, Thiago Negri wrote:
+>
+> We can do functional programming on Java. We use all the design
+> patterns for that.
+>
+> At the very end, everything is just some noisy, hairy,
+> side-effectfull, gotofull machinery code.
+>
+> The beauty of Haskell is that it allows you to limit the things you
+> need to reason about. If I see a function with the type "(a, b) -> a"
+> I don't need to read a man page to see where I should use it or not. I
+> know what it can do by its type. In C I can not do this. What can I
+> say about a function "int foo(char* bar)"? Does it allocate memory?
+> Does it asks a number for the user on stdin? Or does it returns the
+> length of a zero-ending char sequence? In fact it can do anything, and
+> I can't forbid that. I can't guarantee that my function has good
+> behaviour. You need to trust the man page.
+>
+Well, I did say (an unoriginal point) that "The IO monad is explicit in 
+Haskell - side-effects are only permitted (even at run-time) where the 
+programmer has explicitly opted to allow them.". So yes.
+
+The "it could do anything!!!" claims are over the top and IMO 
+counterproductive, though. The type system doesn't help the way it does 
+in Haskell, but nevertheless, plenty of people reason about the 
+side-effects in C mostly-successfully.
+
+Mostly /= always, but bugs can occur in any language.
+
+

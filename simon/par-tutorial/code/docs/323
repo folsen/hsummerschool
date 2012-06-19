@@ -1,0 +1,21 @@
+From stephen.tetley at gmail.com  Tue Apr 12 09:09:51 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Tue, 12 Apr 2011 08:09:51 +0100
+Subject: [Haskell-cafe] Assimp FFI Library
+In-Reply-To: <BANLkTimW-71NcBRqnr68kRAvKZytE1uVwA@mail.gmail.com>
+References: <BANLkTimW-71NcBRqnr68kRAvKZytE1uVwA@mail.gmail.com>
+Message-ID: <BANLkTin887kO6M3ZajXkGpmApajewyUsRQ@mail.gmail.com>
+
+You might want to depend on Conal Elliott's vector-space library
+rather than implement your own vector space class. Then you don't need
+the associated datatype which might allow simpler datatypes for
+colours and vectors.
+
+Also Conal's library is quite well used, so it does mean the operator
+names will be familiar to other programmers.
+
+Best wishes
+
+Stephen
+
+

@@ -1,0 +1,95 @@
+From ezyang at MIT.EDU  Thu Dec 15 22:33:56 2011
+From: ezyang at MIT.EDU (Edward Z. Yang)
+Date: Thu, 15 Dec 2011 16:33:56 -0500
+Subject: [Haskell-cafe] ANNOUNCE: hxournal-0.5.0.0 - A pen notetaking
+	program written in haskell
+In-Reply-To: <1323738591-sup-9437@ezyang>
+References: <CAPNnnrV329dsY_cB=K7q1-REUE5os7+u+psqN=rWeq9Crz6JEQ@mail.gmail.com>
+	<1323738591-sup-9437@ezyang>
+Message-ID: <1323984811-sup-1712@ezyang>
+
+When I attempt to build on Ubuntu, I get:
+
+ezyang at javelin:~$ cabal install hxournal
+Resolving dependencies...
+Configuring hxournal-0.5.0.0...
+Preprocessing library hxournal-0.5.0.0...
+In file included from /usr/include/gtk-2.0/gdk/gdkscreen.h:32:0,
+                 from /usr/include/gtk-2.0/gdk/gdkapplaunchcontext.h:31,
+                 from /usr/include/gtk-2.0/gdk/gdk.h:32,
+                 from /usr/include/gtk-2.0/gtk/gtk.h:32,
+                 from Device.hsc:3:
+/usr/include/gtk-2.0/gdk/gdktypes.h:55:23: fatal error: gdkconfig.h: No such file or directory
+compilation terminated.
+compiling dist/build/Application/HXournal/Device_hsc_make.c failed (exit code 1)
+command was: /usr/bin/gcc -c dist/build/Application/HXournal/Device_hsc_make.c -o dist/build/Application/HXournal/Device_hsc_make.o -fno-stack-protector -fno-stack-protector -Wl,--hash-style=both,--no-copy-dt-needed-entries,--as-needed -D__GLASGOW_HASKELL__=700 -Dlinux_BUILD_OS -Dlinux_HOST_OS -Di386_BUILD_ARCH -Di386_HOST_ARCH -Icsrc -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/lib/ghc-7.0.3/process-1.0.1.5/include -I/usr/lib/ghc-7.0.3/directory-1.1.0.0/include -I/usr/lib/ghc-7.0.3/old-time-1.0.0.6/include -I/usr/lib/ghc-7.0.3/unix-2.4.2.0/include -I/usr/lib/ghc-7.0.3/time-1.2.0.3/include -I/usr/lib/ghc-7.0.3/bytestring-0.9.1.10/include -I/usr/lib/ghc-7.0.3/base-4.3.1.0/include -I/usr/lib/ghc-7.0.3/include -I/usr/lib/ghc-7.0.3/include/
+cabal: Error: some packages failed to install:
+hxournal-0.5.0.0 failed during the building phase. The exception was:
+ExitFailure 1
+
+This may be of interest:
+
+ezyang at javelin:~$ locate gdkconfig.h
+/home/ezyang/Dev/gtk+/gdk/gdkconfig.h.win32
+/usr/include/gtk-3.0/gdk/gdkconfig.h
+/usr/lib/i386-linux-gnu/gtk-2.0/include/gdkconfig.h
+
+Edward
+
+Excerpts from Edward Z. Yang's message of Mon Dec 12 20:10:19 -0500 2011:
+> Very fancy! I am a big fan of Xournal, so I will have to take this for a spin.
+> 
+> Edward
+> 
+> Excerpts from Ian-Woo Kim's message of Mon Dec 12 06:56:09 -0500 2011:
+> > Hi, everyone,
+> > 
+> > I am very pleased to announce a pen notetaking program: hxournal,
+> > which is written entirely in haskell using gtk2hs.
+> > 
+> > I uploaded the package on hackage. This program accompanies with
+> > two library packages, xournal-parser and xournal-render for parsing
+> > and rendering xournal format file.
+> > 
+> > http://hackage.haskell.org/package/hxournal
+> > http://hackage.haskell.org/package/xournal-parser
+> > http://hackage.haskell.org/package/xournal-render
+> > 
+> > Installing hxournal should be very simple:
+> > > cabal update
+> > > cabal install hxournal
+> > 
+> > hxournal can be currently regarded as a clone of xournal, which is a
+> > notetaking program developed in C. (See
+> > http://xournal.sourceforge.net)
+> > 
+> > As xournal, hxournal can take wacom tablet X11 input in subpixel unit
+> > so that it can result in very smooth notetaking experience.
+> > 
+> > Currently, basic pen operations and eraser operations, file open/save
+> > operations, rectangular selection, cut/copy/paste operations have been
+> > implemented. So the application is semi-usable. The file format is
+> > the same as xournal but gunzipped. So to view/edit xoj files generated
+> > from xournal, just gunzip the xoj files and read them in hxournal.
+> > Gunzipped xoj files generated from hxournal are readable in xournal
+> > program.
+> > 
+> > One NEW special feature of hxournal compared with xournal:
+> > This program can make a split view (horizontal and vertical and
+> > arbitrary combination of them) of the same document similarly to emacs
+> > buffers and windows. Please try Horizontal/Vertical Split in View menu
+> > of the program. This will be convenient when notetaking a long
+> > document.
+> > 
+> > The git repository is located at https://www.github.com/wavewave/hxournal
+> > The program web page and development web/wiki pages will be announced
+> > soon (it will be linked from package webpage on hackage anyway) and
+> > the detailed manual will be presented there.
+> > 
+> > Thank you for your interest.
+> > Enjoy haskell notetaking!
+> > 
+> > Ian-Woo Kim
+> > 
+
+

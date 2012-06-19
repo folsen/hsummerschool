@@ -1,0 +1,13 @@
+From ianwookim at gmail.com  Mon Aug  1 02:24:13 2011
+From: ianwookim at gmail.com (Ian-Woo Kim)
+Date: Sun, 31 Jul 2011 20:24:13 -0400
+Subject: [Haskell-cafe] ANNOUNCE: HROOT-0.5.0.1 - haskell binding to ROOT
+Message-ID: <CAPNnnrXhg7GjAc045Wz5oEjDSEhh+ixHemPAQ91ke8f25Usr1g@mail.gmail.com>
+
+Hi, everyone,
+
+I am pleased to announce a haskell binding to the ROOT analysis package, HROOT:
+
+    http://hackage.haskell.org/package/HROOT
+
+

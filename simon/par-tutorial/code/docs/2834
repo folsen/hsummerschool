@@ -1,0 +1,34 @@
+From ckkashyap at gmail.com  Tue Feb  8 10:39:00 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Tue, 8 Feb 2011 15:09:00 +0530
+Subject: [Haskell-cafe] Help needed for converting IOArray to ByteString
+In-Reply-To: <AANLkTi=kOA1NtuVuv=UVLZwmaDk2vE026BWcNPXUs-HS@mail.gmail.com>
+References: <AANLkTimFRPKHbpL36uwim2GtTdknVY6pdK2-dJn7FwGU@mail.gmail.com>
+	<AANLkTin5aMcwt7UfP=PHVJOOwya9XttFC=gxDtkfR5nN@mail.gmail.com>
+	<AANLkTikhXnwh7FD+nE=tur-qZ5NB_XxaqEQEg+vR7TJS@mail.gmail.com>
+	<AANLkTi=kOA1NtuVuv=UVLZwmaDk2vE026BWcNPXUs-HS@mail.gmail.com>
+Message-ID: <AANLkTi=Jcb3iFQ1Brbr5B0pQKcEGRHu7Z4AEbuy8g1=c@mail.gmail.com>
+
+>
+>
+> 1) Just use Data.Word.Word8 instead of the second Int in your type sig
+> for IOArray
+> 2) Use getElems to get a [Word8]
+> 3) Data.ByteString.pack converts a [Word8] into a ByteString
+>
+> Michael
+>
+
+I am currently using a list of tuples - [(Int,Int,Int)] to represent an
+image buffer. You can see it in the getImageByteString
+function at https://github.com/ckkashyap/Chitra/blob/master/RFB/Encoding.hs
+Looks like this is pretty slow, and hence I am exploring Arrays.
+
+I wonder if working with [Word8] will also suffer from performance hit?
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110208/94943df1/attachment.htm>
+

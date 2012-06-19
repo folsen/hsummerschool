@@ -1,0 +1,19 @@
+From kc1956 at gmail.com  Sat Dec 17 00:27:41 2011
+From: kc1956 at gmail.com (KC)
+Date: Fri, 16 Dec 2011 15:27:41 -0800
+Subject: [Haskell-cafe] I've just heard of a neat security measure that when
+ you compile the code it generates different object code...
+Message-ID: <CAMLKXy=8OLPP20cUPvATwFRkPbd3S0DOaE2F-kMo7C2vUDKV-w@mail.gmail.com>
+
+... with the same functionality.
+
+Thus, your program would be a moving target to hackers.
+
+Would this be challenging with ghc?
+
+-- 
+--
+Regards,
+KC
+
+

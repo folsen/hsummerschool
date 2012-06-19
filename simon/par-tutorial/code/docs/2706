@@ -1,0 +1,24 @@
+From tab at snarc.org  Fri Feb  4 10:09:13 2011
+From: tab at snarc.org (Vincent Hanquez)
+Date: Fri, 4 Feb 2011 09:09:13 +0000
+Subject: [Haskell-cafe] AES on 32-bit system
+In-Reply-To: <AANLkTik_b_hV=cAf-f_oSnzudZjcL8p-TATrvLqonocA@mail.gmail.com>
+References: <AANLkTi=BQsuAF-Hmp94n6NqKU_P_rrv+17_rfVHVkpo7@mail.gmail.com>
+	<AANLkTik_b_hV=cAf-f_oSnzudZjcL8p-TATrvLqonocA@mail.gmail.com>
+Message-ID: <20110204090913.GB20264@snarc.org>
+
+On Fri, Feb 04, 2011 at 06:11:38AM +0000, Daniel Peebles wrote:
+> Knowing nothing about the package or its code, it looks like a typo to me.
+> The stdint.h naming of types would have it be uint64_t, not uint_64t. Could
+> that be it?
+
+While it does indeed solve the problem, technically the whole code redefine
+stdint, so uint_64t is actually not a typo, but the way it's been defined.
+
+That's one of the reason I don't really like this implementation; looks like a
+#ifdef nightmare to support (too) old environment.
+
+-- 
+Vincent
+
+

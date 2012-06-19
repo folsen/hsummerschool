@@ -1,0 +1,23 @@
+From Christian.Maeder at dfki.de  Fri Feb 11 17:02:20 2011
+From: Christian.Maeder at dfki.de (Christian Maeder)
+Date: Fri, 11 Feb 2011 17:02:20 +0100
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <201102111348.48362.daniel.is.fischer@googlemail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+	<201102111348.48362.daniel.is.fischer@googlemail.com>
+Message-ID: <4D555D8C.5040804@dfki.de>
+
+Am 11.02.2011 13:48, schrieb Daniel Fischer:
+[...] +1
+> Testing can only prove code incorrect, it can never prove code correct 
+> (except for extremely simple cases where testing all possible inputs can be 
+> done; but guaranteeing that QuickCheck generates all possible inputs is 
+> generally harder than a proof without testing in those cases).
+
+Maybe smallcheck is better than QuickCheck for such (finite and simple)
+cases.
+http://hackage.haskell.org/package/smallcheck
+
+C.
+
+

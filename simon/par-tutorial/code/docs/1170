@@ -1,0 +1,23 @@
+From qdunkan at gmail.com  Tue Aug 16 23:42:12 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Tue, 16 Aug 2011 14:42:12 -0700
+Subject: [Haskell-cafe] why is Random in System?
+In-Reply-To: <CAKFCL4UtZAKrw-KazZtmCSi6cDZmb1mtm9of4E=0Ugr_9GXXvA@mail.gmail.com>
+References: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+	<A320995A-2DDA-4147-B804-098623C26914@deepbondi.net>
+	<CAKFCL4UtZAKrw-KazZtmCSi6cDZmb1mtm9of4E=0Ugr_9GXXvA@mail.gmail.com>
+Message-ID: <CACbaDy5AwqkGuu1xFRg0VcXUROfZn0eonubkS8cfKPHDFR9uFQ@mail.gmail.com>
+
+Yeah, fair enough about getting the seed.  I think I like the idea of
+breaking them into System.Entropy and then Random or Data.Random.  It
+feels odd to stick pure algorithm packages, which simply accept a
+random seed or stream from elsewhere, under System.Random.
+
+There are a fair number of alternate implementations on hackage which
+suggests people aren't satisfied with the stdlib one but haven't quite
+settled down on a standard alternative.
+
+James Cook, good point about Data.  I suppose that's also why it seems
+to be the catch all for everything in haskell.
+
+

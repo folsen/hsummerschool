@@ -1,0 +1,32 @@
+From gale at sefer.org  Thu Apr  7 12:06:59 2011
+From: gale at sefer.org (Yitzchak Gale)
+Date: Thu, 7 Apr 2011 13:06:59 +0300
+Subject: [Haskell-cafe] Local copy of hackageDB
+In-Reply-To: <BANLkTinpCiUGOyf2pvuL=yp8pSOh5HirdA@mail.gmail.com>
+References: <BANLkTi=dXeg+movZswKiaTavDNaJxhHOuQ@mail.gmail.com>
+	<BANLkTimnPo6rEa5bZV8ORez6KJrsvXKM1Q@mail.gmail.com>
+	<BANLkTinpCiUGOyf2pvuL=yp8pSOh5HirdA@mail.gmail.com>
+Message-ID: <BANLkTikdW__GyQDZoehCLmNg7YJqOfOc9g@mail.gmail.com>
+
+Jos? Pedro Magalh?es wrote:
+> Thanks, but I don't really need a functional server or anything; I just want
+> to have a local copy of Hackage on disk (latest versions only will do) and
+> tell cabal-install to use that instead of the web.
+
+If you have the package tarball, you can unpack it manually
+and then type "cabal install" (with no package name) inside that
+directory.
+
+> Regarding yackage, I don't think I can open ports on that machine either...
+
+You don't need to open the port. With the -l flag yackage
+only uses the port on localhost. There are sometimes problems
+with that in the latest version, but that will be fixed in the next
+release.
+
+But anyway, it sounds like you indeed may not need a server at all.
+
+Regards,
+Yitz
+
+

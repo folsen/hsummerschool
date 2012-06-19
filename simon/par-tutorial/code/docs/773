@@ -1,0 +1,27 @@
+From cpa at crans.org  Tue Apr 26 23:17:17 2011
+From: cpa at crans.org (Charles-Pierre Astolfi)
+Date: Tue, 26 Apr 2011 22:17:17 +0100
+Subject: [Haskell-cafe] Can't install haskellnet with ghc7
+Message-ID: <BANLkTi=nXEOT=tgMcXXmNzagNAjej+8c8w@mail.gmail.com>
+
+Hi -cafe,
+
+Did anybody managed to install haskellnet from hackage with ghc7?
+I tried on windows and mac?and I get the following type error:
+
+[ 4 of 11] Compiling Network.HaskellNet.SMTP (
+Network/HaskellNet/SMTP.hs, dist/build/Network/HaskellNet/SMTP.o )
+Network/HaskellNet/SMTP.hs:269:25:
+    Couldn't match expected type `Data.Text.Internal.Text'
+                with actual type `[Char]'
+    Expected type: Data.Text.Internal.Text
+      Actual type: String
+    In the first argument of `simpleMail', namely `to'
+    In a stmt of a 'do' expression:
+        myMail <- simpleMail to from subject plainBody htmlBody attachments
+
+Am I missing something?
+--
+Cp
+
+

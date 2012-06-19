@@ -1,0 +1,214 @@
+From andrew.pennebaker at gmail.com  Wed Apr  6 05:46:10 2011
+From: andrew.pennebaker at gmail.com (Andrew Pennebaker)
+Date: Tue, 5 Apr 2011 23:46:10 -0400
+Subject: [Haskell-cafe] ncurses trouble
+Message-ID: <BANLkTinND_BBdqOqYaGAG3SBd_rZgYNMxQ@mail.gmail.com>
+
+I'm having trouble using Haskell and ncurses Mac OS X (10.6.6 to be
+precise).
+
+GHC 6.12.3 gives me a lot of trouble, and GHC 7.0.2 even more.
+
+rogue.hs, is a text adventure game in the works.
+
+$ cat rogue.hs
+{-# LANGUAGE OverloadedStrings #-}
+import Data.Text
+import UI.NCurses
+
+main :: IO ()
+main = runCurses $ do
+    win <- defaultWindow
+    updateWindow win $ do
+        moveCursor 10 10
+        drawText "Hello world! Hit 'q' to exit"
+    render
+    waitForQ win
+
+waitForQ :: Window -> Curses ()
+waitForQ win = do
+    ev <- getEvent win Nothing
+    case ev of
+        Just (EventCharacter 'q') -> return ()
+        _ -> waitForQ win
+
+$ sudo port install ncurses ncursesw
+$ cabal install ncurses
+Resolving dependencies...
+Configuring ncurses-0.2...
+cabal: c2hs version >=0.15 is required but it could not be found.
+cabal: Error: some packages failed to install:
+ncurses-0.2 failed during the configure step. The exception was:
+ExitFailure 1
+
+Hmm. Cabal couldn't find a solution to the c2hs dependency. So I install it
+manually.
+
+$ cabal install c2hs
+$ cabal install ncurses
+Resolving dependencies...
+Configuring ncurses-0.2...
+cabal: Missing dependency on a foreign library:
+* Missing C library: ncursesw
+This problem can usually be solved by installing the system package that
+provides this library (you may need the "-dev" version). If the library is
+already installed but in a non-standard location then you can use the flags
+--extra-include-dirs= and --extra-lib-dirs= to specify where it is.
+cabal: Error: some packages failed to install:
+ncurses-0.2 failed during the configure step. The exception was:
+ExitFailure 1
+
+MacPorts' ncurses isn't detected by Haskell, so I use Homebrew's.
+
+$ brew install ncursesw
+$ ghc --make -o rogue rogue.hs
+[2 of 2] Compiling Main             ( rogue.hs, rogue.o )
+Linking rogue ...
+ld: warning: in /usr/local/lib/libncursesw.dylib, file was built for
+unsupported file format which is not the architecture being linked (i386)
+
+It appears that the Homebrew ncurses library is x86, and GHC is x86_64, or
+vice-versa.
+
+$ sudo port install ncurses +universal
+$ sudo port install ncursesw +universal
+$ brew install --universal ncursesw
+
+These don't visibly improve compilation in any way.
+
+I thought updating Haskell would fix the problem.
+
+$ wget
+http://lambda.galois.com/hp-tmp/2011.2.0.0/Haskell%20Platform%202011.2.0.0-i386.pkg
+$ sudo installer -pkg "Haskell Platform 2011.2.0.0-i386.pkg" -target /
+$ ghc --version
+The Glorious Glasgow Haskell Compilation System, version 7.0.2
+$ cabal --version
+cabal-install version 0.10.2
+using version 1.10.1.0 of the Cabal library
+
+But it only made the problem worse. Now ncurses won't even build.
+
+$ cabal install ncurses
+Resolving dependencies...
+Configuring ncurses-0.2...
+Preprocessing library ncurses-0.2...
+Building ncurses-0.2...
+[1 of 4] Compiling UI.NCurses.Enums ( dist/build/UI/NCurses/Enums.hs,
+dist/build/UI/NCurses/Enums.o )
+[2 of 4] Compiling UI.NCurses.Types ( UI/NCurses/Types.hs,
+dist/build/UI/NCurses/Types.o )
+[3 of 4] Compiling UI.NCurses       ( dist/build/UI/NCurses.hs,
+dist/build/UI/NCurses.o )
+[4 of 4] Compiling UI.NCurses.Panel ( dist/build/UI/NCurses/Panel.hs,
+dist/build/UI/NCurses/Panel.o )
+
+UI/NCurses/Panel.chs:49:1:
+    Warning: The import of `UI.NCurses' is redundant
+               except perhaps to import instances from `UI.NCurses'
+             To import instances alone, use: import UI.NCurses()
+
+hsncurses-shim.c:5:29:
+     error: ncursesw/curses.h: No such file or directory
+cabal: Error: some packages failed to install:
+ncurses-0.2 failed during the building phase. The exception was:
+ExitFailure 1
+
+I'd settle for using hscurses, but it won't compile with GHC 7, and it has
+its own internal bugs besides.
+
+$ cabal install hscurses
+Resolving dependencies...
+Configuring hscurses-1.4.0.0...
+configure: WARNING: unrecognized options: --with-gcc
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables...
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for addnstr in -lcurses... yes
+checking for addnstr in -lncurses... yes
+checking for waddnwstr in -lncursesw... yes
+checking for iconv in -liconv... yes
+checking for libiconv in -liconv... yes
+checking for libiconv... yes
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking iconv.h usability... yes
+checking iconv.h presence... yes
+checking for iconv.h... yes
+checking curses.h usability... yes
+checking curses.h presence... yes
+checking for curses.h... yes
+checking ncurses.h usability... yes
+checking ncurses.h presence... yes
+checking for ncurses.h... yes
+checking ncursesw/ncurses.h usability... no
+checking ncursesw/ncurses.h presence... yes
+configure: WARNING: ncursesw/ncurses.h: present but cannot be compiled
+configure: WARNING: ncursesw/ncurses.h:     check for missing prerequisite
+headers?
+configure: WARNING: ncursesw/ncurses.h: see the Autoconf documentation
+configure: WARNING: ncursesw/ncurses.h:     section "Present But Cannot Be
+Compiled"
+configure: WARNING: ncursesw/ncurses.h: proceeding with the preprocessor's
+result
+configure: WARNING: ncursesw/ncurses.h: in the future, the compiler will
+take precedence
+checking for ncursesw/ncurses.h... yes
+checking locale.h usability... yes
+checking locale.h presence... yes
+checking for locale.h... yes
+checking langinfo.h usability... yes
+checking langinfo.h presence... yes
+checking for langinfo.h... yes
+checking wchar.h usability... yes
+checking wchar.h presence... yes
+checking for wchar.h... yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking signal.h usability... yes
+checking signal.h presence... yes
+checking for signal.h... yes
+configure: creating ./config.status
+config.status: creating hscurses.buildinfo
+config.status: creating cbits/config.h
+configure: WARNING: unrecognized options: --with-gcc
+cabal: Missing dependency on a foreign library:
+* Missing (or bad) header file: HSCurses.h
+This problem can usually be solved by installing the system package that
+provides this library (you may need the "-dev" version). If the library is
+already installed but in a non-standard location then you can use the flags
+--extra-include-dirs= and --extra-lib-dirs= to specify where it is.
+If the header file does exist, it may contain errors that are caught by the
+C
+compiler at the preprocessing stage. In this case you can re-run configure
+with the verbosity flag -v3 to see the error messages.
+cabal: Error: some packages failed to install:
+hscurses-1.4.0.0 failed during the configure step. The exception was:
+ExitFailure 1
+
+Cheers,
+
+Andrew Pennebaker
+www.yellosoft.us
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110405/24f3807e/attachment.htm>
+

@@ -1,0 +1,22 @@
+From ok at cs.otago.ac.nz  Thu Dec  1 05:55:18 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Thu, 1 Dec 2011 17:55:18 +1300
+Subject: [Haskell-cafe] Using Data,TypeLevel.Num
+Message-ID: <B26461F6-5C11-4EFC-935C-7755BB0D3533@cs.otago.ac.nz>
+
+I'd like to write a small module using Data.TypeLevel.Num.
+It has type level constants, variables, addition, and maximum, which is pretty much
+all I need.  But I've never used it before, and there's one thing I want to do that
+I don't understand how to do.
+
+	val :: Nat t => t -> Int
+	val _ = t as an Int
+
+e.g., if x :: D8 then val x = 8.
+
+The "value-level reflection functions" in Data.TypeLevel.Num.Ops all seem to be
+'undefined'.
+
+
+
+

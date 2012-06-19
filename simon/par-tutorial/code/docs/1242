@@ -1,0 +1,32 @@
+From hajhouse at hajhouse.org  Sat Aug 20 16:37:04 2011
+From: hajhouse at hajhouse.org (Henry House)
+Date: Sat, 20 Aug 2011 07:37:04 -0700
+Subject: [Haskell-cafe] custom SQL-to-Haskell type conversion in HDBC
+In-Reply-To: <CAPeieQHBYE9f+QrJodRtFscdgy5+_hzUYR5YnDWRrCJCv9kUYw@mail.gmail.com>
+References: <20110819052316.GA27130@houseag.com>
+	<CAPeieQEGXOJgfvA+FF2yTbhPnWA9vv7Xk8EghLj-2LiYy1Edyg@mail.gmail.com>
+	<20110819140939.GA27362@houseag.com>
+	<CAPeieQGnDo5TR6F1hWPjvWWV0+nrW0=6iPm9z-xxJ2HfiOkY4g@mail.gmail.com>
+	<20110819145341.GB27362@houseag.com>
+	<CAPeieQHBYE9f+QrJodRtFscdgy5+_hzUYR5YnDWRrCJCv9kUYw@mail.gmail.com>
+Message-ID: <20110820143704.GB14268@houseag.com>
+
+On Friday, 19 August 2011, Erik Hesselink wrote:
+[...]
+> Perhaps a solution would be to not treat the database precision as
+> your primary source of information, but represent that in Haskell
+> using some data type that correctly propagates precision information,
+> and marshall your database data to and from that. This means some
+> duplication of information (precision in both database and Haskell)
+> but you do the same with NULL and Maybe, etc. I guess that's inherent
+> to (the way HDBC does) database access.
+
+That's exactly what I'm after: getting the data out of the db as a
+Haskell data type that preserves the precision information (which the
+use of Rational does not).
+
+-- 
+Henry House
++1 530 848-1238
+
+

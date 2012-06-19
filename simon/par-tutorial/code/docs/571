@@ -1,0 +1,70 @@
+From john at n-brain.net  Thu Apr 21 17:36:33 2011
+From: john at n-brain.net (John A. De Goes)
+Date: Thu, 21 Apr 2011 09:36:33 -0600
+Subject: [Haskell-cafe] Question about the Monad instance for Iteratee
+	(from the	enumerator package)
+In-Reply-To: <20110421063215.9E9A817116@Adric.ern.nps.edu>
+References: <20110421063215.9E9A817116@Adric.ern.nps.edu>
+Message-ID: <C1BF3801-9C43-48EB-A539-2BC2454FB861@n-brain.net>
+
+
+This is a much cleaner definition of Iteratee and I'm happy to see it.
+
+When are you going to move from your FTP site to Github, by the way? :)
+
+Regards,
+
+John A. De Goes
+Twitter: @jdegoes 
+LinkedIn: http://linkedin.com/in/jdegoes
+
+On Apr 21, 2011, at 12:32 AM, oleg at okmij.org wrote:
+
+> 
+> Daniel Schuessler wrote:
+> 
+>> The thing I don't understand yet is the last line: Why is it OK to discard the
+>> leftover input from the (f x) Iteratee and yield just the leftover input from
+>> the first one (m0)?
+> 
+> First of all, the question is about an older version of Iteratee. For
+> example, the following code 
+> 	http://okmij.org/ftp/Haskell/Iteratee/Iteratee.hs
+> defines Iteratee a bit differently so the question does not apply.
+> 
+>> data Iteratee a = IE_done a
+>>               | IE_cont (Maybe ErrMsg) (Stream -> (Iteratee a,Stream))
+>> 
+>> instance Monad Iteratee where
+>>   return = IE_done
+>>   IE_done a   >>= f = f a
+>>   IE_cont e k >>= f = IE_cont e (docase . k)
+>>    where
+>>    docase (IE_done a, stream)   = case f a of
+>>                  IE_cont Nothing k -> k stream
+>>                  i                 -> (i,stream)
+>>    docase (i, s)  = (i >>= f, s)
+> 
+> No left-over is discarded any more. 
+> 
+> Your question is about the previous design, called `The second design'
+> described in Iteratee.hs. The corresponding comment block answers your
+> question, please search for ``Justification for the case IE_done x
+> s >>= f''.
+> 
+> Please see
+> 	http://okmij.org/ftp/Haskell/Iteratee/IterateeM.hs
+> for the `production' case of Iteratee in a base monad. The file
+> IterateeM.hs talks about one more design, and its drawbacks. 
+> 
+> It's all about finding the optimal trade-off, I guess.
+> 
+> 
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+

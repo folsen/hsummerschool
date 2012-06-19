@@ -1,0 +1,73 @@
+From andressocrates90 at yahoo.com  Tue Feb  1 12:18:06 2011
+From: andressocrates90 at yahoo.com (Houdini)
+Date: Tue, 1 Feb 2011 03:18:06 -0800 (PST)
+Subject: [Haskell-cafe] Haskell function help
+Message-ID: <1296559086493-3365994.post@n5.nabble.com>
+
+
+I have a Question about haskell 
+
+1. is a something more complicated and I need some help with it if
+possible.. In order to check the satisfiability of a formula in a given
+model we propagate the effects of assigning a truth value to an atom in a
+formula. Assume an atom to which we assign the value True. The following
+effects can be applied to the formula: - The positive literals have the same
+True value and, therefore, any clauses that contain them are removed from
+the formula. This is to indicate that these clauses could be satisfied and
+hence no longer affect the satisfiability of the formula. - The negated
+literals have a value of False and are, therefore, removed from any clause
+they are in. This is to indicate that these clauses are still not satisfied
+and can only be made true by one of the other literals obtaining a value of
+True. In the case where False is assigned to the atom, the positive literals
+will now be false and should be removed from their clauses while the
+negative literals will become true and have their clauses removed from the
+formula. For example, in the formula (P _ Q _ R) ^ (:P _ Q _ :R) ^ (P _ :Q),
+assume we assign True to P. Then the clauses containing P, ie. (P _ Q _ R)
+and (P _ :Q) are removed from the formula, whereas :P is removed from any
+clause it is in, ie. (:P _ Q _ :R). This results in the formula (Q _ :R). On
+the other hand, if we assign False to P, we then remove (:P _ Q _ :R) from
+the formula and P from its clauses, thus obtaining (Q _ R) ^ (:Q). The
+overall formula is satisfiable if it can be reduced to the empty list since
+in this case all the clauses were satisfied. If there is an empty list
+within the overall formula then that means that a clause was not satisfied
+and hence the formula can not be satisfied with the assignment that led to
+this state. -assign :: (Atom,Bool)->Formula->Formula The assign function
+should take an (Atom,Bool) pair and a formula and propagate the effects of
+assigning the given truth value to the atom in the formula as described
+above The code(on which I received help from here also): module Algorithm
+where
+
+import System.Random import Data.Maybe import Data.List
+
+type Atom = String 
+type Literal = (Bool,Atom) 
+type Clause = [Literal] t
+ype Formula = [Clause] 
+type Model = [(Atom, Bool)] t
+ype Node = (Formula, ([Atom], Model))
+
+atomsClause :: Clause -> [Atom] -This function takess a Clause and return
+the set of Atoms of that Clause.
+atomsClause = nub . map snd
+
+atoms :: Formula -> [Atom] 
+atoms = nub . map snd -----This function takes a Formula returns the set of
+Atoms of a Formula
+
+isLiteral :: Literal -> Clause -> Bool 
+isLiteral = isLiteral = any . (==)----This function returns True if the
+given Literal can be found within the Clause.
+
+flipSymbol :: Model -> Atom -> Model--- f
+lipSymbol m a = map f m - where f (atom, value) = if a == atom then (atom,
+not value) else (atom, value)-this function takes a Model and an Atom and
+flip the truthvalue of the atom in the model
+
+assign :: (Atom,Bool)->Formula->Formula 
+assign = undefined--------any advice here? Thank you
+
+-- 
+View this message in context: http://haskell.1045720.n5.nabble.com/Haskell-function-help-tp3365994p3365994.html
+Sent from the Haskell - Haskell-Cafe mailing list archive at Nabble.com.
+
+

@@ -1,0 +1,30 @@
+From johan.tibell at gmail.com  Tue Aug 23 22:38:11 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Tue, 23 Aug 2011 22:38:11 +0200
+Subject: [Haskell-cafe] Performance of concurrent array access
+In-Reply-To: <CADdwyZ=MTFYz8NZt_KxpH1VfvbkFfpnhRHamvJar_gS-fe-awg@mail.gmail.com>
+References: <CADdwyZ=MTFYz8NZt_KxpH1VfvbkFfpnhRHamvJar_gS-fe-awg@mail.gmail.com>
+Message-ID: <CAK-tuPZZM+_HJUFL7+Z0c6Nhxge2wEtaAwu5xKBi0KvdTtSJSw@mail.gmail.com>
+
+On Tue, Aug 23, 2011 at 10:04 PM, Andreas Voellmy
+<andreas.voellmy at gmail.com> wrote:
+> data DAT = DAT (IOArray Int32 Char)
+
+Try to make this a newtype instead. The data type adds a level of indirection.
+
+> ? do let p j c = insertDAT a j c >> lookupDAT a j >>= \v -> v `pseq` return
+> ()
+
+You most likely want (insertDAT a j $! c) to make sure that the
+element is force, to avoid thunks building up in the array.
+
+> -- Parameters
+> arraySize :: Int32
+
+Int might work better than Int32. While they should behave the same on
+32-bit machines Int might have a few more rewrite rules that makes it
+optimize better.
+
+-- Johan
+
+

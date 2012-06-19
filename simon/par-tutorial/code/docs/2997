@@ -1,0 +1,47 @@
+From wren at freegeek.org  Sun Feb 13 11:06:05 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sun, 13 Feb 2011 05:06:05 -0500
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <AANLkTinqXo59gMxXSs5Rbjm9r8JjbEpv8FoToHa2-hXx@mail.gmail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>	<AANLkTinRwfq-hikWx=U-1hZvvyEwG=U4oL_ZypiayRye@mail.gmail.com>	<AANLkTi=sA-Mkfgd1e0kbij8P=w+e3DyTgqs5SYXsyXQ2@mail.gmail.com>
+	<AANLkTinqXo59gMxXSs5Rbjm9r8JjbEpv8FoToHa2-hXx@mail.gmail.com>
+Message-ID: <4D57AD0D.3080803@freegeek.org>
+
+On 2/12/11 11:41 AM, Tim Chevalier wrote:
+> What's important is not just that
+> Haskell has static typing, but that algebraic data types are a rich
+> enough language to let you express your intent in data and not just in
+> code. That helps you help the compiler help you.
+
+ADTs are an amazing thing to have. They directly express the types we 
+usually think in, which liberates us to think about those types.
+
+Conversely, in C we have to use structs, untagged unions, and pointers, 
+which makes us spend far too much time worrying about low-level 
+representation issues instead of being able to think about the types we 
+really care about (the lists, the nodes, graphs, trees,...) and worrying 
+about their high-level representation issues (does a list really capture 
+the shape of my data, or would it be better to use a tuple, a priority 
+queue,...?)
+
+Similarly in most OO languages there's no way to define a class which 
+has a fixed non-zero number of subclasses, so it's hard to match the 
+clarity of ADTs' "no junk, no confusion". Instead, we waste time 
+defensively programming against the subclasses our evil users will come 
+up with. This is especially problematic when designing datastructures 
+that have to maintain invariants. And this often causes folks to move 
+program logic from the type realm into the executable realm; how often 
+have you seen methods which simulate dynamic dispatch by case analysis 
+on a state or flag field?
+
+Static typing, type inference, and lambdas are all excellent things, but 
+I think the importance of ADTs is vastly underrated when comparing 
+functional languages (of the ML or Haskell tradition) to procedural 
+languages. Not only do they make life easier, but they also help with 
+proving correctness.
+
+-- 
+Live well,
+~wren
+
+

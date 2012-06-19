@@ -1,0 +1,23 @@
+From drcygnus at gmail.com  Wed Dec 28 22:45:25 2011
+From: drcygnus at gmail.com (Jonathan Daugherty)
+Date: Wed, 28 Dec 2011 13:45:25 -0800
+Subject: [Haskell-cafe] [ANNOUNCE] HaskellNet-0.3 released
+Message-ID: <CAG3npK_cg1wDSJZUvcZadZABdKmM=FPsHvE-bStBxubBAdiKwQ@mail.gmail.com>
+
+Hi all,
+
+I'm pleased to announce the release of HaskellNet, version 0.3.  Get
+it on Hackage:
+
+  http://hackage.haskell.org/package/HaskellNet-0.3
+
+This release has quite a few changes; to get a comprehensive summary,
+see the CHANGELOG included in the package.  My aim with this release
+was to get the code to a state where I could do further work on it and
+split it up into protocol-specific packages.  As a result, 0.3 is
+likely to be the last release of this code under this name.
+
+-- 
+? Jonathan Daugherty
+
+

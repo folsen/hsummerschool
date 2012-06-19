@@ -1,0 +1,44 @@
+From acowley at seas.upenn.edu  Mon Feb  7 17:10:32 2011
+From: acowley at seas.upenn.edu (Anthony Cowley)
+Date: Mon, 7 Feb 2011 11:10:32 -0500
+Subject: [Haskell-cafe] Extending GHCi
+In-Reply-To: <AANLkTikQ8cOnC=0Z-h3h3bFdJ9Jv=eauhC5CBNcjoZy6@mail.gmail.com>
+References: <AANLkTintbzM_qEmFH=ijc5NudTTuk=eHqLYX1SAcXZ__@mail.gmail.com>
+	<4D4BEE24.1020000@uni-bonn.de>
+	<AANLkTimY=7amY-NdvjivHS1RbjCVtL0UyjP=owmcRsNw@mail.gmail.com>
+	<AANLkTimg6gewbZpTDvfmUAL-7u0-SKcB5NNi0o6-x-JH@mail.gmail.com>
+	<AANLkTikQ8cOnC=0Z-h3h3bFdJ9Jv=eauhC5CBNcjoZy6@mail.gmail.com>
+Message-ID: <AANLkTinZ94HubQGR2KWH3EhF=Wm1of-h0s-+anWd=GCf@mail.gmail.com>
+
+On Sun, Feb 6, 2011 at 11:59 PM, C K Kashyap <ckkashyap at gmail.com> wrote:
+>>
+>> $ ghci
+>> GHCi, version 6.12.3: http://www.haskell.org/ghc/ ?:? for help
+>> Loading package ghc-prim ... linking ... done.
+>> Loading package integer-gmp ... linking ... done.
+>> Loading package base ... linking ... done.
+>> Loading package ffi-1.0 ... linking ... done.
+>> Prelude> :m +Data.IORef Control.Concurrent Control.Monad
+>> Prelude Data.IORef Control.Concurrent Control.Monad> msg <- newIORef
+>> "Hello"
+>> Prelude Data.IORef Control.Concurrent Control.Monad> let echo =
+>> forever $ readIORef msg >>= putStrLn >> threadDelay 3000000
+>> Prelude Data.IORef Control.Concurrent Control.Monad> t <- forkIO echo
+>> Hello
+>> Prelude Data.IORef Control.Concurrent Control.Monad> Hello
+>> Hello
+>> writeIORefHello msg "World"
+>> Prelude Data.IORef Control.Concurrent Control.Monad> World
+>> World
+>
+> Thanks ... this is the possibility I was looking for. Btw, I am thinking I'd
+> need to use STM to synchronize right?
+> Regards,
+> Kashyap
+
+You need STM when you need groups of references to change
+simultaneously as perceived by concurrent processes.
+
+Anthony
+
+

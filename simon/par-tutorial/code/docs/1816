@@ -1,0 +1,33 @@
+From allbery.b at gmail.com  Sun Dec 11 00:31:19 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Sat, 10 Dec 2011 18:31:19 -0500
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+In-Reply-To: <87d3bw102d.fsf@write-only.cryp.to>
+References: <87k464b870.fsf@gnu.org>
+	<87d3bw102d.fsf@write-only.cryp.to>
+Message-ID: <CAKFCL4VhQe89QZmTM6Wxm+7KR6KOT7+qQe-xYCNBt8i3fR+zjg@mail.gmail.com>
+
+On Sat, Dec 10, 2011 at 18:25, Peter Simons <simons at cryp.to> wrote:
+
+> previous versions of xmobar used to compile fine with GHC 6.10.4, but
+> the new version no longer does:
+>
+>    src/Parsers.hs:163:52:
+>        Couldn't match expected type `Char' against inferred type `[Char]'
+>          Expected type: GenParser Char st Char
+>          Inferred type: GenParser Char st String
+>        In the second argument of `($)', namely `wrapSkip $ string "Run"'
+>        In a stmt of a 'do' expression:
+>              notFollowedBy $ wrapSkip $ string "Run"
+>
+
+xmobar currently requires parsec 3.x; the above is the symptom of building
+it against 2.x.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111210/9093c331/attachment.htm>
+

@@ -1,0 +1,21 @@
+From tomahawkins at gmail.com  Sun Apr 10 16:24:03 2011
+From: tomahawkins at gmail.com (Tom Hawkins)
+Date: Sun, 10 Apr 2011 09:24:03 -0500
+Subject: [Haskell-cafe] ImProve Tutorial
+Message-ID: <BANLkTikr3RXVhxavocELJUqV5RJVbbWvBg@mail.gmail.com>
+
+ImProve is a Haskell eDSL for embedded control systems -- we use it
+for automotive and off-highway powertrain control.
+
+I've started writing a tutorial for ImProve.  So far it has a basic
+tour of the language and a handful of examples.  Comments and
+suggestions are welcome.
+
+In other recent news, ImProve can now generate models in Simulink and Modelica.
+
+-Tom
+
+
+[1] http://github.com/tomahawkins/improve/wiki/ImProve
+
+

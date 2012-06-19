@@ -1,0 +1,89 @@
+From ok at cs.otago.ac.nz  Mon Feb  7 02:46:30 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Mon, 7 Feb 2011 14:46:30 +1300
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4EF972.2060309@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>	<4D4D6B15.2060204@btinternet.com>
+	<AANLkTimj6PQP6o9NCcc+KXHJrc7+RwK3wQmg66KNMKur@mail.gmail.com>
+	<4D4EF972.2060309@btinternet.com>
+Message-ID: <B7DEC147-6002-49F7-B756-D4CFF93D6625@cs.otago.ac.nz>
+
+
+On 7/02/2011, at 8:41 AM, Andrew Coppin wrote:
+
+> On 06/02/2011 09:13 AM, Roel van Dijk wrote:
+> 
+>> Haskell en Clean are very much alike.
+> 
+> From what I could determine from a basic Clean introduction, Clean is very *unlike* Haskell, having a far more verbose and low-level syntax. (E.g., the compiler can't even determine whether a binding is recursive or not for itself. You have to say that manually.)
+
+I have no idea what you are talking about here.
+Clean is _very_ Haskell-like, including typeclasses.
+
+Here's the first few lines of code from a Clean file I wrote in 1998.
+
+// This is a 'data' declaration.
+  :: ArrTree a
+   = ArrEmpty
+   | ArrLeaf a
+   | ArrNode a (ArrTree a) (ArrTree a)
+
+// The parentheses were not necessary
+  empty :: (ArrTree a)
+  empty = ArrEmpty
+
+  asize :: (ArrTree a) -> Int
+  asize (ArrEmpty)      = 0
+  asize (ArrLeaf _)     = 1
+  asize (ArrNode _ l r) = 1 + asize l + asize r
+
+// In Haskell it would be Int -> (ArrTree a) -> Bool.
+// Leaving the first arrow out means that both arguments
+// must be present in each rule.
+// 'if' is a function.
+  known :: Int (ArrTree a) -> Bool
+  known i ArrEmpty        = False
+  known i (ArrLeaf _)     = i == 1
+  known i (ArrNode x l r) = i == 1 || known (i/2) (if (i mod 2 == 0) l r)
+
+  fetch :: Int (ArrTree a) -> a
+  fetch i (ArrLeaf x)     | i == 1 = x
+  fetch i (ArrNode x l r) | i == 1 = x
+                          | i mod 2 == 0 = fetch (i/2) l
+                          | otherwise    = fetch (i/2) r
+
+As for the compiler being unable to determine whether a binding is recursive,
+I cannot find any such restriction in the Clean 2.1.1 manual and don't remember
+one in Clean 1.  Here's an example straight out of the manual:
+
+primes :: [Int]
+primes = sieve [2..]
+  where
+    sieve :: [Int] -> [Int]
+    sieve [pr:r] = [pr:sieve (filter pr r)]
+
+    filter :: Int [Int] -> [Int]
+    filter pr [n:r]
+      | n mod pr == 0 = filter pr r
+      | otherwise     = [n:filter pr r]
+
+Clean uses [head : tail] where Haskell uses (head : tail).
+sieve and filter are both recursive (local) bindings, and the
+compiler manages just FINE.
+
+> It seems a very unecessarily complicated and messy language - which makes the name rather ironic.
+
+It would be if true.  There _are_ complexities in Clean, just as there are in
+Haskell.  For the most part, they are the same complexities (laziness, type classes,
+type inference, generic programming).
+
+> As I say, I thought the main difference is that Clean is strict
+
+Wrong.
+
+> (which is why you can get good performance). Uniqueness typing is an interesting idea, that looks like it might be useful for more than mere I/O.
+
+It has been much used for arrays and records...
+
+
+

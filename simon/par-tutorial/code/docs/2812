@@ -1,0 +1,37 @@
+From johan.tibell at gmail.com  Mon Feb  7 22:15:37 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Mon, 7 Feb 2011 22:15:37 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D505DC6.8050705@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<201102032237.33997.daniel.is.fischer@googlemail.com>
+	<4D4D69DF.5050002@btinternet.com>
+	<AANLkTikGbr6o=kU7m4Vubz4NXGKR5uzSBhx01vzLXm02@mail.gmail.com>
+	<4D4EFB05.2040902@btinternet.com>
+	<AANLkTik1NpiS-E5xV3hNQFO1-s8Vd4g_CJCPGJXM2J68@mail.gmail.com>
+	<4D4F0EC9.8060005@gmail.com>
+	<AANLkTi=ai-Fi-qSJNVtMdf-1jxLh5bjQ2QRCB9vn849E@mail.gmail.com>
+	<4D4F1913.1030500@gmail.com> <4D505DC6.8050705@btinternet.com>
+Message-ID: <AANLkTin4kvSq3VVGuKRPnpvWYh673UxFV8B=ErHXfGj-@mail.gmail.com>
+
+On Mon, Feb 7, 2011 at 10:01 PM, Andrew Coppin
+<andrewcoppin at btinternet.com> wrote:
+>> I think haskell2010's type system is just not expressive enough to
+>> create interface generic enough. It's not possible to create type class
+>> which will work for both ByteStrings (or IntSet) and lists.
+>
+> It seems that most people agree: The reason why we don't have container
+> classes is that it's difficult to define them in a completely type-safe
+> mannar.
+>
+> (The OOP people, of course, just don't bother trying. They use typecasts
+> everywhere...)
+>
+> Do associated types solve this? Or are there still problems?
+
+Duncan showed me a definition using associated types, which I have
+unfortunately forgotten.
+
+Johan
+
+

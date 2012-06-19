@@ -1,0 +1,52 @@
+From alex.solla at gmail.com  Thu Apr 28 22:47:46 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Thu, 28 Apr 2011 13:47:46 -0700
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <BANLkTin6STQHiQENUkzGPuQJDwJQZzQ08w@mail.gmail.com>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<87vcy0vxdq.fsf@malde.org> <loom.20110428T091338-92@post.gmane.org>
+	<20110428172708.22b30845@angst.streitmacht.eu>
+	<BANLkTinD=F-N_kkXf7ABoXVLjFnZ17KmLA@mail.gmail.com>
+	<BANLkTin6STQHiQENUkzGPuQJDwJQZzQ08w@mail.gmail.com>
+Message-ID: <BANLkTinKGNoMqit4yi3YbiVb9YB+xqWXow@mail.gmail.com>
+
+On Thu, Apr 28, 2011 at 1:18 PM, Dan Doel <dan.doel at gmail.com> wrote:
+
+> (Sorry if you get this twice, Ertugrul; and if I reply to top. I'm
+> stuck with the gmail interface and I'm not used to it.)
+>
+> On Thu, Apr 28, 2011 at 11:27 AM, Ertugrul Soeylemez <es at ertes.de> wrote:
+> > I don't see any problem with this.  Although I usually have a bottom-up
+> > approach, so I don't do this too often, it doesn't hurt, when I have to.
+>
+> I do. It's low tech and inconvenient.
+>
+> Whenever I program in Haskell, I miss Agda's editing features, where I
+> can write:
+>
+>    foo : Signature
+>    foo x y z = ?
+>
+> Then compile the file. The ? stands in for a term of any type, and
+> becomes a 'hole' in my code. The editing environment will then tell me
+> what type of term I have to fill into the hole, and give me
+> information on what is available in the scope. Then I can write:
+>
+>
+You can simulate that with a type class.  The "no instance" error
+substitutes for the "term".
+
+class Hole obj where hole :: obj
+
+foo :: Blah
+foo x y z = hole
+
+"No instance for type Blah"
+
+Presumably, you wouldn't want to make instances.  I use a similar construct
+for monic and epic functions, since the natural ones tend to be unique
+enough.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110428/a2866aca/attachment.htm>
+

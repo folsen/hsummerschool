@@ -1,0 +1,81 @@
+From jpm at cs.uu.nl  Tue Dec 27 19:41:58 2011
+From: jpm at cs.uu.nl (=?ISO-8859-1?Q?Jos=E9_Pedro_Magalh=E3es?=)
+Date: Tue, 27 Dec 2011 18:41:58 +0000
+Subject: [Haskell-cafe] GHC 7.4: Expected behavior or bug?
+In-Reply-To: <CADLz5wVhqNAnA08d1rNDXVZUe9zDacSnbkoL1tkBHJM6EO4Muw@mail.gmail.com>
+References: <CAKA2JgKbsGFCSrQczzpZwwcxONW_8bNasifvEGp-qy_udJijbg@mail.gmail.com>
+	<CADLz5wVhqNAnA08d1rNDXVZUe9zDacSnbkoL1tkBHJM6EO4Muw@mail.gmail.com>
+Message-ID: <CA+ZFbn_AhUKK7ccQ77KnkV34kCUPVORvE0CttTdnbD66o-y8ng@mail.gmail.com>
+
+Hi,
+
+This is a change in behavior. Previously GHC was more liberal than Haskell
+98 prescribed, and would not default the kind of otherwise unconstrained
+type variables to *. 7.4 does default to *, so you have to provide kind
+signatures when you want another kind (particularly in phantom type
+variables).
+
+
+Cheers,
+Pedro
+
+On Tue, Dec 27, 2011 at 16:47, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+
+> On 27 December 2011 17:38, Michael Snoyman <michael at snoyman.com> wrote:
+> > Thanks to Mark Wright for pointing this out[1].
+> >
+> > We have the equivalent of the following code in persistent:
+> >
+> > {-# LANGUAGE MultiParamTypeClasses #-}
+> > data Key backend entity = Key
+> >
+> > class Monad (b m) => Foo b m where
+> >    func :: b m (Key b m)
+> >
+> > This code works fine with GHC 7.0, but I get the following message from
+> GHC 7.4:
+> >
+> >    Expecting two more arguments to `b'
+> >    In the type `b m (Key b m)'
+> >    In the class declaration for `Foo'
+> >
+> > Is this expected behavior, or a bug? If the former, what would be a
+> > possible workaround?
+> >
+> > Thanks,
+> > Michael
+> >
+> > [1] https://github.com/yesodweb/persistent/issues/31
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+> I fixed a similar breakage in the hmatrix library:
+>
+>
+> https://github.com/AlbertoRuiz/hmatrix/commit/a4f38eb196209436f72b938f6355f6e28474bef3
+>
+> I don't know if it's a bug in GHC, but the workaround is to add an
+> explicit kind signature:
+>
+> {-# LANGUAGE KindSignatures, MultiParamTypeClasses #-}
+> data Key (backend :: * -> * -> *) entity = Key
+>
+> class Monad (b m) => Foo b m where
+>   func :: b m (Key b m)
+>
+> Cheers,
+>
+> Bas
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111227/a1c32d53/attachment.htm>
+

@@ -1,0 +1,81 @@
+From ericrasmussen at gmail.com  Wed Aug  3 02:53:59 2011
+From: ericrasmussen at gmail.com (Eric Rasmussen)
+Date: Tue, 2 Aug 2011 17:53:59 -0700
+Subject: [Haskell-cafe] Fractional Part
+In-Reply-To: <7A8FD5FE-2D70-4CAA-A829-8399C20EF3BC@chariot.net.au>
+References: <6753AB4C-1B54-402F-9384-5723C11FECBC@gmail.com>
+	<7A8FD5FE-2D70-4CAA-A829-8399C20EF3BC@chariot.net.au>
+Message-ID: <CAMysB06rcQ4FDMhZkctwuBQy+f4BDTmEGzyEYHe45__=kZqRfg@mail.gmail.com>
+
+Just a hint, but with Project Euler there's a chance you're headed in a
+difficult direction if you're working with the decimal parts directly.
+Usually (always?) you can approach the problem in a way that won't depend on
+something like decimal precision that can be different across
+systems/languages/etc.
+
+Best,
+Eric
+
+
+
+On Tue, Aug 2, 2011 at 4:36 PM, Mark Spezzano <valheru at chariot.net.au>wrote:
+
+> Hi Ata,
+>
+> You could write the following
+>
+> decimalPart :: Float -> Integer
+> decimalPart f = read (tail (tail (show (f)))) :: Integer
+>
+> This basically says "convert f into a String using the show function, and
+> then get the tail of that String twice to get rid of  the leading zero and
+> the decimal point then read the result back as an Integer".
+>
+> To use this function you would type at the prompt:
+>
+> decimalPart 0.123
+>
+> which gives
+>
+> 123
+>
+> This is probably not a very elegant solution, but it will work.
+>
+>
+> Cheers,
+>
+> Mark
+>
+>
+> On 03/08/2011, at 8:36 AM, Ata Jafari wrote:
+>
+> > Hi everyone,
+> > I'm totally new to Haskell and functional programming. I try to solve
+> some problems from Proejct Euler with Haskell so that I can improve myself
+> in functional programming.
+> > In the first step I want to write a little code that can give me only the
+> decimal part of a float. For instance:
+> > if the number is (0.123) I want to obtain only the (123) part to do some
+> processes on that. (I mean the result of this code must be an integer.)
+> > I don't expect any complete code, any suggestion and help will be
+> appreciated.
+> > Thanks
+> > Ata
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >
+> >
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110802/763703bb/attachment.htm>
+

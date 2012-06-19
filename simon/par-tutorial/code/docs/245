@@ -1,0 +1,32 @@
+From magnus at therning.org  Fri Apr  8 15:23:49 2011
+From: magnus at therning.org (Magnus Therning)
+Date: Fri, 8 Apr 2011 14:23:49 +0100
+Subject: [Haskell-cafe] Is there a way to find out the type inferred for
+ a local function inside another function? :)
+In-Reply-To: <4D9EFE90.2000106@henning-thielemann.de>
+References: <BANLkTik+PnKjxL2BxeA519EKMap-dqmfMA@mail.gmail.com>
+	<BANLkTikUdm3GQN6j1zEkk8OykXeVERgx6Q@mail.gmail.com>
+	<4D9EFE90.2000106@henning-thielemann.de>
+Message-ID: <BANLkTimJDnxF0CHVZzfX0ka5jzO_U9im2w@mail.gmail.com>
+
+On Fri, Apr 8, 2011 at 13:24, Henning Thielemann
+<schlepptop at henning-thielemann.de> wrote:
+> Magnus Therning schrieb:
+>> AFAIK there is no way to do that, thouhg scion[1] may offer it.
+>>
+>> Personally I develop more complex local functions at the top-level,
+>> and once I'm happy with it I perform some re-factoring and move it in.
+>
+> I would not write large local functions at all. I would leave them
+> top-level but do not export them. This also allows to test them from GHCi.
+
+Indeed, but complex /= large :-)
+
+/M
+
+-- 
+Magnus Therning ? ? ? ? ? ? ? ? ? ? ?OpenPGP: 0xAB4DFBA4
+email: magnus at therning.org ? jabber: magnus at therning.org
+twitter: magthe ? ? ? ? ? ? ? http://therning.org/magnus
+
+

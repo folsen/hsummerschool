@@ -1,0 +1,37 @@
+From shakthimaan at gmail.com  Tue Dec  6 08:00:59 2011
+From: shakthimaan at gmail.com (Shakthi Kannan)
+Date: Tue, 6 Dec 2011 12:30:59 +0530
+Subject: [Haskell-cafe] Complete package description list
+Message-ID: <CABG-yt094g5_Q4ZQh9+B9drQi4os+Wqm7O1t2TMkYyXDbTwvMQ@mail.gmail.com>
+
+Hi,
+
+I would like to know:
+
+1. The correct source to get the complete list of available Haskell
+package descriptions
+2. Any feed or notification mechanism to get newer updates on packages
+
+How often does the 00-index.tar.gz file from:
+
+  http://hackage.haskell.org/packages/archive/00-index.tar.gz
+
+get updated? Or if there is a newer version, where is it made available?
+
+Given 00-index.tar.gz, and using the following RSS feed:
+
+  http://hackage.haskell.org/packages/archive/recent.rss
+
+give me the complete list of available packages?
+
+Appreciate any suggestions in this regard,
+
+Thanks!
+
+SK
+
+-- 
+Shakthi Kannan
+http://www.shakthimaan.com
+
+

@@ -1,0 +1,36 @@
+From ivan.miljenovic at gmail.com  Fri Apr 22 06:02:23 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Fri, 22 Apr 2011 14:02:23 +1000
+Subject: [Haskell-cafe] QuickCheck, (Ord a)=> [a] -> Property problem
+In-Reply-To: <1303428988.3329.8.camel@localhost.localdomain>
+References: <78a0d4c2-d239-490c-a490-491f0dcabfd5@f11g2000vbx.googlegroups.com>
+	<87k4ep540u.fsf@eee.8325.org>
+	<8d6edbcb-16f1-4501-b790-f45835c1c001@d12g2000vbz.googlegroups.com>
+	<87ei4vl13w.fsf@eee.8325.org>
+	<1303428988.3329.8.camel@localhost.localdomain>
+Message-ID: <BANLkTim6S962ZKve7YWJrf2up3-VA23oQw@mail.gmail.com>
+
+On 22 April 2011 09:36, Maciej Marcin Piechotka <uzytkownik2 at gmail.com> wrote:
+> On Thu, 2011-04-21 at 23:56 +0200, Nick Smallbone wrote:
+>> "larry.liuxinyu" <liuxinyu95 at gmail.com> writes:
+>>
+>> > Somebody told me that:
+>> > *** Failed! Falsifiable (after 3 tests and 2 shrinks):
+>> > [0,1]
+>> > False
+>>
+>> I don't think this can be true: the problem occurs in GHCi and there's
+>> no way for QuickCheck to detect it. And when I tested it I got the same
+>> problem. There must be some difference between the properties you both
+>> tested...
+>>
+> There was an additional class contrain (Num a). Num default to Int IIRC.
+
+Integer I believe.
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

@@ -1,0 +1,41 @@
+From markus.l2ll at gmail.com  Sat Apr  2 15:49:12 2011
+From: markus.l2ll at gmail.com (=?ISO-8859-1?Q?Markus_L=E4ll?=)
+Date: Sat, 2 Apr 2011 16:49:12 +0300
+Subject: [Haskell-cafe] [Haskell-beginners] how to modify show for a
+	list of certain types
+In-Reply-To: <20110402153207.23f2cc1b@arcor.com>
+References: <20110402153207.23f2cc1b@arcor.com>
+Message-ID: <AANLkTi=ufF5k7ROrn7Eawcsgxi_vdkfyqaUp_C7CX4OZ@mail.gmail.com>
+
+Check out "unlines"!
+
+On Sat, Apr 2, 2011 at 4:32 PM, Manfred Lotz <manfred.lotz at arcor.de> wrote:
+
+> Hi there,
+> I have a list of say type  Record which I write to a file and
+> read back from the file if required.
+>
+> The list's content is a single line in the file it doesn't matter how
+> many records the list contains.
+>
+> I would like to modify show for type Record in a way that show does
+> work like the normal show but additionally adds a newline at the end of
+> the string.
+>
+> I'm a bit lost how to do that. Any idea?
+>
+>
+> --
+> Manfred
+>
+>
+>
+> _______________________________________________
+> Beginners mailing list
+> Beginners at haskell.org
+> http://www.haskell.org/mailman/listinfo/beginners
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110402/1261db28/attachment.htm>
+

@@ -1,0 +1,38 @@
+From travitch at cs.wisc.edu  Mon Aug 15 16:54:00 2011
+From: travitch at cs.wisc.edu (Tristan Ravitch)
+Date: Mon, 15 Aug 2011 09:54:00 -0500
+Subject: [Haskell-cafe] ANNOUNCE: taffybar: an alternative status bar
+ for xmonad
+In-Reply-To: <CAKdSjNE+bnhb7kZigLdyzT3gWiF-Ekkte=DnXKvJS0d4xo8Fyw@mail.gmail.com>
+References: <20110813155648.GE13469@cs.wisc.edu>
+	<CAKdSjNGhUvvr9T6b7vgrAe90hDJwp8up7Ap=GV5rD0wix=7V=w@mail.gmail.com>
+	<20110814215138.GI30981@cs.wisc.edu>
+	<CAKdSjNE+bnhb7kZigLdyzT3gWiF-Ekkte=DnXKvJS0d4xo8Fyw@mail.gmail.com>
+Message-ID: <20110815145358.GJ30981@cs.wisc.edu>
+
+On Sun, Aug 14, 2011 at 11:25:59PM -0700, Alexander Dunlap wrote:
+> Thanks, that worked! Also, is there a way to change the default color
+> of text printed by the bar? (I've added span tags with colors to the
+> different text widget formats, but it would be nice to be able to set
+> a default - it shows up as a nearly-impossible-to-read dark grey for
+> me.)
+>
+> Thanks a lot for the great program!
+
+Glad you find it useful.  The color thing is bothering me a bit too.
+I think I know how to fix it properly and hopefully I'll be able to in
+the next day or two.
+
+I should probably just not set any colors by default and follow the
+default GTK theme.  Then I should be able to provide some hook to use
+an alternate theme instead (something that lets you easily set text
+and background colors).
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110815/b0746ec2/attachment.pgp>
+

@@ -1,0 +1,39 @@
+From john.obbele at gmail.com  Sat Apr 30 13:40:28 2011
+From: john.obbele at gmail.com (John Obbele)
+Date: Sat, 30 Apr 2011 13:40:28 +0200
+Subject: [Haskell-cafe] Parsing binary 'hierachical' objects for lazy
+ developers
+In-Reply-To: <1303933570.25268.12.camel@localhost.localdomain>
+References: <20110427181603.GA16627@X52D.localdomain>
+	<1303933570.25268.12.camel@localhost.localdomain>
+Message-ID: <20110430114027.GA6522@X52D.localdomain>
+
+On Wed, Apr 27, 2011 at 09:46:08PM +0200, Maciej Marcin Piechotka wrote:
+> 
+> I believe following should work
+> 
+> class Serializer ObjectA where
+>     get = check =<< (ObjectA <$> get <*> get <*> get)
+>           where check obj@(ObjectA len id attr)
+>                   | len < 10 && id == 0 = return obj
+>                   | otherwise = empty
+> 
+> class Serializer ObjectB where
+>     get = check =<< (ObjectB <$> get <*> get <*> get)
+>           where check obj@(ObjectB len id attr)
+>                   | len > 10 && id == 1 = return obj
+>                   | otherwise = empty
+> 
+> parseEitherAB :: Get (Either ObjectA ObjectB)
+> parseEitherAB = (Left <$> get) <|> (Right <$> get)
+
+
+Hum, that's still not automatic but using Control.Applictive to
+write one-liners seems a good-enough solution.
+
+I will try it.
+
+thanks ,)
+/john
+
+

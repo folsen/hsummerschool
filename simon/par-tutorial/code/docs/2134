@@ -1,0 +1,110 @@
+From jesseschalken at gmail.com  Tue Dec 20 14:21:56 2011
+From: jesseschalken at gmail.com (Jesse Schalken)
+Date: Wed, 21 Dec 2011 00:21:56 +1100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <8DBF2B01-F624-4E53-926D-B96C4AD34576@gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAF1yvAQJX+f-MigNFF=6be12Uka6y45QD6oys_NQpxgREkRbaQ@mail.gmail.com>
+	<653CD606-D8B6-4BD8-AFD4-46738AF49DB3@gmail.com>
+	<CAF1yvAS6hc=tmmW74qvNdVXngCqV0LNNOXn2TUgckWHMJFszUA@mail.gmail.com>
+	<91793F0E-1C9F-4F4C-96F8-188A37273A21@gmail.com>
+	<CAF1yvAQL9t5jxXaCsDuOx7o4NgHD-O_RioRJ=Yc_RHj0_TerBg@mail.gmail.com>
+	<8DBF2B01-F624-4E53-926D-B96C4AD34576@gmail.com>
+Message-ID: <CAF1yvAS3YzNBSXRQh8dm3bAbfcoUK5WR7z86mweMJ7j+sWqhrQ@mail.gmail.com>
+
+On Tue, Dec 20, 2011 at 10:43 PM, Gregory Crosswhite
+<gcrosswhite at gmail.com>wrote:
+
+>
+> On Dec 20, 2011, at 9:18 PM, Jesse Schalken wrote:
+>
+> Why do you have to solve the halting problem?
+>
+>
+> You have to solve the halting problem if you want to replace every place
+> where _|_ could occur with an Error monad (or something similar), because
+> _|_ includes occasions when functions will never terminate.
+>
+
+I think we're talking about different things. By "bottom" I mean the
+function explicitly returns "error ..." or "undefined". In those cases, it
+should go in an error monad instead. In cases where there is an infinite
+loop, the function doesn't return anything because it never finishes, and
+indeed this separate problem will never be solved while remaining Turing
+complete because it is the halting problem.
+
+
+>
+> Consider integer division by 0.  [...]
+> This is all I was talking about.
+>
+>
+> But imagine there was an occasion where you *knew* that the divisor was
+> never zero --- say, because the divisor was constructed to be a natural
+> number.
+>
+
+Then use a separate type for natural numbers excluding 0. Then you can
+define a total integer division function on it (although the return value
+may be zero and so needs a different type).
+
+
+> Now there is no point in running in the Error monad because there will
+> never such a runtime error;  in fact, it is not clear what you would even
+> *do* with a Left value anyway, short of terminating the program and
+> printing and error, which is what would have happened anyway.
+>
+
+What you do with a Left value is up to you - that's the point, you now have
+a choice. In fact, the value might not even be being handled by you, in
+which case someone else now has a choice.  Handling of the error is done in
+the same place as handling of the result, no IO needed.
+
+
+> Furthermore, it is easy to imagine circumstances where you have now forced
+> your entire program to run in the Error monad, which makes everything
+> incredibly inconvenient with no benefit at all.
+>
+
+This "inconvenience" I imagine is the extra code required to compose
+functions which return values in a monad as opposed to straight values. To
+me this is a small price to pay for knowing my code won't randomly crash,
+and I would rather this be handled syntactically to make composing monadic
+values more concise.
+
+The point is your program shouldn't be able to make assumptions about
+values without proving them with types. It's often easier not to make the
+assumption and propagate some error in an error monad instead, but that's
+better than getting away with the assumption and having the program crash
+or behave erratically because the assumption turned out false.
+
+This is the problem with arguments against partial functions;  they don't
+> solve any problems at all except in the case where you have untrusted data
+> in which case you should be using a different function or manually checking
+> it anyway, and they add a lot of wasted overhead.
+>
+
+The whole term "untrusted data" baffles me. How often can you actually
+"trust" your data? When you send your software out into the wild, what
+assumptions can you make about its input? What assumptions can you make
+about the input to a small part of a larger program which is millions of
+lines? You can often deduce that certain values do/do not occur in small
+parts of code, but the difficulty of such deductions increases
+exponentially with the size of the codebase, and is a job done much better
+by a type system.
+
+Also I would like to think this "wasted overhead" can be optimised away at
+some stage of compilation, or somehow removed without the programmer
+needing to think about it. Maybe I'm just dreaming on those fronts, however.
+
+Cheers,
+> Greg
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111221/c62bcafe/attachment.htm>
+

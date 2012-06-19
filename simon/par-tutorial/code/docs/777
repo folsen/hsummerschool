@@ -1,0 +1,46 @@
+From eca7215 at cs.rit.edu  Wed Apr 27 00:52:11 2011
+From: eca7215 at cs.rit.edu (Edward Amsden)
+Date: Tue, 26 Apr 2011 18:52:11 -0400
+Subject: [Haskell-cafe] Good reads?
+In-Reply-To: <4DB73D9E.5080604@gmail.com>
+References: <4DB73D9E.5080604@gmail.com>
+Message-ID: <BANLkTimOotBg5WRFx7QY9fK3X5MrO=uaeQ@mail.gmail.com>
+
+On Tue, Apr 26, 2011 at 5:48 PM, Christopher Svanefalk
+<christopher.svanefalk at gmail.com> wrote:
+> I am currently reading through Peyton-Jones "Haskell: The Craft of
+> Functional Programming" (2nd ed.), as well as a great paper published by
+> one of my professors
+> (http://www.cse.chalmers.se/~rjmh/Papers/whyfp.html). However, what
+> other works, in your opinions, should I look into to get a more complete
+> understanding of functional programming?
+
+You might consult the Typeclassopedia (Brent Yorgey).
+
+Understanding these typeclasses helped me start understand the power
+of abstraction that Haskell (and FP in general) gives a programmer.
+
+quoth the abstract:
+"The standard Haskell libraries feature a number of type classes with
+algebraic or category-theoretic underpinnings. Becoming a ?uent
+Haskell hacker requires intimate familiarity with them all, yet
+acquiring this familiarity often involves combing through a mountain
+of tutorials, blog posts, mailing list archives, and IRC logs.
+
+"The goal of this article is to serve as a starting point for the
+student of Haskell wishing to gain a ?rm grasp of its standard type
+classes. The essentials of each type class are introduced, with
+examples, commentary, and extensive references for further reading."
+
+http://www.haskell.org/wikiupload/8/85/TMR-Issue13.pdf, page 13
+
+And from a fellow student: have fun!
+
+-- 
+Edward Amsden
+Student
+Computer Science
+Rochester Institute of Technology
+www.edwardamsden.com
+
+

@@ -1,0 +1,36 @@
+From jimbo.massive-haskell at xyxyx.org  Mon Feb  7 11:16:41 2011
+From: jimbo.massive-haskell at xyxyx.org (Jimbo Massive)
+Date: Mon, 07 Feb 2011 10:16:41 +0000
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4D6E48.3000903@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>	<AANLkTimTak3jHpg_RPattKoACvkUU31tQydCsgjjS=Oc@mail.gmail.com>
+	<4D4D6E48.3000903@btinternet.com>
+Message-ID: <4D4FC689.1080107@xyxyx.org>
+
+On 05/02/2011 15:35, Andrew Coppin wrote:
+
+>> At the very
+>> least we need to teach people how to tell which arguments a pure
+>> function is strict in by looking at its definition.
+> 
+> That's not necessarily tractible. It depends on what other functions you
+> call. Many functions have obvious strictness properties, but very few
+> have *documented* strictness properties.
+
+It's often struck me that, this information is clearly part of the
+interface to a function, given that correct operation of calls to that
+function may depend on it, yet we (implicitly) pretend that it's not (by
+rarely documenting it).
+
+Would it not be both incredibly useful and possible to automatically
+document information of this sort using tools like haddock?  Obviously,
+entirely accurate indicators of lazyness are not going to be computable,
+but it seems like we could at least get information of the type
+"argument never forced", "argument always forced", "argument may be
+forced".  It seems like this would be a huge step forward - data
+structures like map which are pure containers for their elements would
+be clearly indicated as such in their documentation.
+
+Jimbo
+
+

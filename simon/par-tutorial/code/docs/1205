@@ -1,0 +1,67 @@
+From aslatter at gmail.com  Thu Aug 18 13:41:58 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Thu, 18 Aug 2011 06:41:58 -0500
+Subject: [Haskell-cafe] conditionally exposing modules in cabal
+In-Reply-To: <CAHjep=wxNRG1Qxhdo3N+hsfcfHFSacMmob2EnVUdHmxsAfNeKQ@mail.gmail.com>
+References: <CAHjep=wxNRG1Qxhdo3N+hsfcfHFSacMmob2EnVUdHmxsAfNeKQ@mail.gmail.com>
+Message-ID: <CAKjSnQGSg4bAJv70WFV3o0XpMsBUSh3i6KhqcnsbY9yt18ioaw@mail.gmail.com>
+
+On Thu, Aug 18, 2011 at 3:33 AM, Rogan Creswick <creswick at gmail.com> wrote:
+> I would like to conditionally expose a number of internal modules in a
+> library depending on a cabal flag - the idea is that new features
+> could be implemented externally to the library without contaminating
+> the source with undesirable changes. ?However, I've been unable to
+> find a way to structure a cabal file that does not require repeating
+> the list of modules. ?For example, this works:
+>
+
+One problem to consider - a downstream user of the new features won't
+know that they need to pass special flags to your module, and may not
+even know that they are using your module if the dependency is a few
+steps removed.
+
+What some folks have taken to doing is to either turn of Haddock
+documentation for the modules (as in Data.ByteString.Internal) or just
+provide great big warning messages that the functions provided can be
+used in ways which do not provide key invariants and that the contents
+of the module is subject to change at any time.
+
+Antoine
+
+> ?exposed-modules:
+> ? ?Public.Stable.Module
+> ?if flag(exposeInternals)
+> ? ?exposed-modules:
+> ? ? ? <long list of internal modules>
+> ?else
+> ? ?other-modules:
+> ? ? ? <long list of internal modules, identical to above>
+>
+> But I don't want to maintain two identical lists of modules in the cabal file.
+>
+> I've tried putting the section headers in the if's, but this doesn't
+> appear to work (cabal doesn't complain, but the modules to be exposed
+> are not available as expected):
+>
+> ?exposed-modules:
+> ? ?Public.Stable.Module
+> ?if flag(exposeInternals) {
+> ?exposed-modules:
+> ?} else {
+> ?other-modules:
+> ?}
+> ? ?<long list of internal modules>
+>
+>
+> Does anyone have suggestions?
+>
+> Thanks!
+> Rogan
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

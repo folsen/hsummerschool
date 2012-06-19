@@ -1,0 +1,43 @@
+From donn at avvanta.com  Sun Dec  4 17:58:48 2011
+From: donn at avvanta.com (Donn Cave)
+Date: Sun,  4 Dec 2011 08:58:48 -0800 (PST)
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <4EDB13F7.3020308@freegeek.org>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+	<CANd=OGGcwRC9FfTA8KJQyzsQBDL3YycF2MYx4hMiN7vxeBwTFg@mail.gmail.com>
+	<20111201174112.GA14096@x200>
+	<CANd=OGGXOQYrKrnw9QpDaqgjC-JGsH7jFJB8Hx-OJjCTZP7KGQ@mail.gmail.com>
+	<CAMXF=YCD8ODsmF53id9U=h+SsnuN1T8RvcvY2htwBgRFGgW85A@mail.gmail.com>
+	<4EDB13F7.3020308@freegeek.org>
+Message-ID: <20111204165848.D0990276C4A@mail.avvanta.com>
+
+Quoth wren ng thornton <wren at freegeek.org>,
+
+> There was a discussion about this recently over on libraries@, IIRC. The 
+> short answer is that, at present, there is no function to give you $0. 
+> We'd like to add such a function, but it's not been done yet.
+>
+> Part of the problem is that, as Alexey says, the first element of argv 
+> is just whatever is passed to exec, which is not guaranteed to be a 
+> complete path, a canonical path, or any other specific thing we'd 
+> desire. It's not at all straightforward to determine the actual location 
+> of the executable, especially not in a platform-independent manner. 
+> argv[0] can't be trusted, scanning through $PATH isn't guaranteed to 
+> find it (and even if you find something of the right name, it's not 
+> guaranteed to be the correct executable), etc etc.
+
+This isn't your problem, though.
+
+I mean, if the proposed function is to return the path to the executable
+file, then indeed you have a big problem with argv[0].  argv[0] can be
+anything - or nothing (it can be a null string.)
+
+But if we've turned to the question of whether to return argv[0],
+that's much simpler:  you don't need to consider why a programmer
+might want it.  It's appalling to think that library developers
+would withhold access to standard POSIX 1003.1 features while they
+decide whether they approve of them.
+
+	Donn
+
+

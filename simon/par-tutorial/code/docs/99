@@ -1,0 +1,77 @@
+From Tillmann.Vogt at rwth-aachen.de  Mon Apr  4 11:36:27 2011
+From: Tillmann.Vogt at rwth-aachen.de (Tillmann Vogt)
+Date: Mon, 04 Apr 2011 11:36:27 +0200
+Subject: [Haskell-cafe] GSoC Proposal: A 3d visualization of code
+	(packages)
+In-Reply-To: <BANLkTikvbjKMwpaD=5fmFres3ZkTY32KYQ@mail.gmail.com>
+References: <4D993C84.8080501@freegeek.org> <4D9984D4.5080306@rwth-aachen.de>
+	<BANLkTikvbjKMwpaD=5fmFres3ZkTY32KYQ@mail.gmail.com>
+Message-ID: <4D99911B.3000906@rwth-aachen.de>
+
+Am 04.04.2011 11:06, schrieb Vo Minh Thu:
+> 2011/4/4 Tillmann Vogt<Tillmann.Vogt at rwth-aachen.de>:
+>> Dear Haskell Programmers,
+>>
+>> To get some feedback on my proposal here is posting that explains it more
+>> detailed:
+>> http://tillmannvogt.wordpress.com/2011/03/30/gsoc/
+>>
+>> If this succeeds it could become the poster child application for WebGL and
+>> there will be an immediate value to all Haskell programmers: Get an overview
+>> what is happening. In the long term there is the possibility to have a very
+>> powerful UI-library and to be able to combine visualizations with Code.
+>>
+>> The milestone plan is just to show that it should be doable. The part that
+>> is not so clear how to do is the integration with hackage2. It could even be
+>> a separate site like haskellers.com that links to various resources. Should
+>> a WebGL engine be used (then it should be easy to load a collada file) or
+>> can WebGL be integrated in a haskell web framework?
+> Hi,
+>
+> I'm happy to see someone interested in hacking 3D projects in Haskell.
+> But I'm failing at imagining your package visualization. Would it be
+> possible for you to craft some image with some real data from hackage,
+> and show how it would be more useful than, say, a normal web page?
+>
+> Let me quote the three points from your blog:
+>
+>      1. The visualization will let programmers quicker find a library
+> they need (see changes, etc. ), because the visualization algorithm is
+> like reversed pattern recognition to produce most recognizable shapes.
+>      2. The code size, popularity, dependencies, whatever the community
+> demands can be integrated or left away
+>      3. A general way to extend or change the visualization
+>
+> I really think a more concrete (manually crafted) image would help a
+> lot seeing what you mean by 1.
+  It would look a lot like the second picture with the ~300 blocks. I 
+would rather like to generate the picture automatically than to spend 
+some days with sketchup.
+> I'm wondering how, in 1., it makes it quicker to find what I need if
+> it is not clear what kind of information it will provide. I say it is
+> not clear as point 2 is asking the question of what data is available
+> in the visualization.
+The quickest way to find a library is to know the name and search it in 
+google or with Ctr+F on the website. But if you have forgotten the name 
+but roughly know the size or to what area it belonged (i.e. graphics) 
+you could find it in the overview mode. If you search for a tall green 
+building (assigning code size to building size) one can find it in an 
+instant on the second picture. Try to find a library in a listing of 300 
+names.
+
+> Point 3 doesn't seem realistic to me. It sounds like a 3d
+> visualization framework is on the way, which is a big undertaking.
+Graph drawing is hard, thats why I wouldn't try to reprogram Graphviz in 
+3 months, but softwarevisualization is in my impression not so hard. It 
+like the overly quoted Lindemayer-systems that you can achieve a lot 
+with very few commands. A framework sounds a little big. Currently I 
+just want to see some images like the second. But I have approached the 
+generation part as formally as possible to do it right.
+
+> Cheers,
+> Thu
+>
+>
+
+
+

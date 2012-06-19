@@ -1,0 +1,79 @@
+From limestrael at gmail.com  Wed Dec 28 11:28:42 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Wed, 28 Dec 2011 11:28:42 +0100
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+In-Reply-To: <4EFAD085.8000605@vex.net>
+References: <4EF57FC9.1030505@vex.net> <4EFAD085.8000605@vex.net>
+Message-ID: <CACqaG6xKd+-szRC9tjTZsgH-fq_HwDnUwV2LbX8n1hHs60SdxQ@mail.gmail.com>
+
+When I explain to people what strict/lazy/eager mean, I often say something
+like :
+
+- Adjectives eager and lazy apply *only* to a global evaluation method: *
+eager* is C evaluation style and *lazy* is that of Haskell.
+- Adjective strict can be applied *both* to a global evaluation method and
+a specific function: if applied to an eval method then it's a synonym of
+"strict", and if applied to a function f it means 'f ? = ?' (which I detail
+a little more), which is true for strict State monad for istance (>>= would
+not allow its left argument to return ?).
+
+Thus explaining why datatypes such as State or Bytestring exist in *strict *
+and* lazy *flavours.
+
+
+2011/12/28 Albert Y. C. Lai <trebla at vex.net>
+
+> There are two flavours of MonadState, Control.Monad.State.Lazy and
+> Control.Monad.State.Strict. There are two flavours of ByteString,
+> Data.ByteString.Lazy and Data.Bytestring (whose doc says "strict"). There
+> are two flavours of I/O libraries, lazy and strict. There are advices of
+> the form: "the program uses too much memory because it is too lazy; try
+> making this part more strict". Eventually, someone will ask what are "lazy"
+> and "strict". Perhaps you answer this (but there are other answers, we'll
+> see):
+>
+> "lazy refers to such-and-such evaluation order. strict refers to f ? = ?,
+> but it doesn't specify evaluation order."
+>
+> That doesn't answer the question. That begs the question: Why do libraries
+> seem to make them a dichotomy, when they don't even talk about the same
+> level? And the make-it-more-strict advice now becomes: "the program uses
+> too much memory because of the default, known evaluation order; try making
+> this part use an unknown evaluation order", and this unknown is supposed to
+> use less memory because...?
+>
+> I answer memory questions like this: the program uses too much memory
+> because it is too lazy---or nevermind "lazy", here is the current
+> evaluation order of the specific compiler, this is why it uses much memory;
+> now change this part to the other order, it uses less memory. I wouldn't
+> bring in the denotational level; there is no need.
+>
+> (Sure, I use seq to change evaluation order, which may be overriden by
+> optimizations in rare cases. So change my answer to: now add seq here,
+> which normally uses the other order, but optimizations may override it in
+> rare cases, so don't forget to test. Or use pseq.)
+>
+> I said "people, make up your mind". I do not mean a whole group of people
+> for the rest of their lives make up the same mind and choose the same one
+> semantics. I mean this: Each individual, in each context, for each problem,
+> just how many levels of semantics do you need to solve it? (Sure sure, I
+> know contexts that need 4. What about daily programming problems: time,
+> memory, I/O order?)
+>
+> MigMit questioned me on the importance of using the words properly.
+> Actually, I am fine with using the words improperly, too: "the program uses
+> too much memory because it is too lazy, lazy refers to such-and-such
+> evaluation order; try making this part more strict, strict refers to
+> so-and-so evaluation order".
+>
+>
+>
+> ______________________________**_________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/**mailman/listinfo/haskell-cafe<http://www.haskell.org/mailman/listinfo/haskell-cafe>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111228/fcce9526/attachment.htm>
+

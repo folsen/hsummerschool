@@ -1,0 +1,41 @@
+From dan.doel at gmail.com  Tue Dec  6 19:59:38 2011
+From: dan.doel at gmail.com (Dan Doel)
+Date: Tue, 6 Dec 2011 13:59:38 -0500
+Subject: [Haskell-cafe] More liberal than liberal type synonyms
+Message-ID: <CAHEA9tPH_uO0UjQ7yUe8j5fGC=NsqVAsodfVJS+x1e7LOhGxrw@mail.gmail.com>
+
+Greetings,
+
+In the process of working on a Haskell-alike language recently, Ed
+Kmett and I realized that we had (without really thinking about it)
+implemented type synonyms that are a bit more liberal than GHC's. With
+LiberalTypeSynonyms enabled, GHC allows:
+
+    type Foo a b = b -> a
+    type Bar f = f String Int
+
+    baz :: Bar Foo
+    baz = show
+
+because Bar expands to saturate Foo. However, we had also implemented
+the following, which fails in GHC:
+
+    type Foo a b = b -> a
+    type Bar f = f (Foo Int) (Foo Int)
+    type Baz f g = f Int -> g Int
+
+    quux :: Bar Baz
+    quux = id
+
+That is: type synonyms are allowed to be partially applied within
+other type synonyms, as long as similar transitive saturation
+guarantees are met during their use.
+
+I don't know how useful it is, but I was curious if anyone can see
+anything wrong with allowing this (it seems okay to me after a little
+thought), and thought I'd float the idea out to the GHC developers, in
+case they're interested in picking it up.
+
+-- Dan
+
+

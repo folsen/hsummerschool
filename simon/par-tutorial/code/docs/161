@@ -1,0 +1,66 @@
+From wren at freegeek.org  Wed Apr  6 05:47:43 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Tue, 05 Apr 2011 23:47:43 -0400
+Subject: [Haskell-cafe] Using _ on the RHS of an equation?
+In-Reply-To: <BANLkTim-0G+=58qubzF5RJRet0VxQ1g+mA@mail.gmail.com>
+References: <BANLkTimKpc4MS6Odkk26OJK_OpNuMhhn8A@mail.gmail.com>	<4D9BDA46.9030500@freegeek.org>
+	<BANLkTim-0G+=58qubzF5RJRet0VxQ1g+mA@mail.gmail.com>
+Message-ID: <4D9BE25F.9060500@freegeek.org>
+
+On 4/5/11 11:22 PM, Ivan Lazar Miljenovic wrote:
+> On 6 April 2011 13:13, wren ng thornton<wren at freegeek.org>  wrote:
+>> On 4/4/11 4:42 PM, Jason Dagit wrote:
+>>>
+>>> Is this something people would be interested in having as an extension in
+>>> GHC?  Or is it just too fluffy for anyone to really care?
+>>
+>> I'd much rather have _ on the RHS of equations be a way of specifying terms
+>> that the compiler should infer. This is pretty standard for dependently
+>> typed languages, and more closely mimics the behavior of _ on the LHS as a
+>> gensym-named pattern variable.
+>
+> Can you provide an example of this behaviour?
+
+Which behavior, the LHS or RHS?
+
+A canonical example for inferring RHS terms is handling the passing of 
+implicit arguments, e.g. the types passed in System F. Haskell already 
+does this inference for type passing--- though Haskell lacks the 
+explicit form that System F has for doing so.
+
+Another example is the inferences for passing around type-class 
+dictionaries. In Haskell-as-specified this isn't how it works, but it 
+would be easy to imagine a variant of Haskell where type-class 
+constraints are just there for inferring the implicit dictionary 
+argument--- which would allow us to unify the implementations of 
+functions which take a parameter (e.g., an equivalence predicate) and 
+those which take a type-class from which they extract the parameter 
+(e.g., taking an Eq dictionary in order to use (==)).
+
+Languages like Coq, Agda, Epigram, etc combine these ideas about 
+implicit argument passing and inference into a single system and extend 
+it to allow inferring all terms, not just types and type-class dictionaries.
+
+
+>> For Haskell we could perhaps use Djinn to infer the term and have
+>> compilation fail if there isn't a unique total function/value that can be
+>> inferred for the missing term.
+>
+> Doesn't Djinn also return a function in cases where there is more than
+> one possible value?
+
+I was just pointing out Djinn as prior art. In principle it shouldn't be 
+too hard to adjust it to complain when there are multiple solutions.
+
+Of course, we'd have to define "multiple solutions" in order to avoid 
+counting multiple terms which all normalize to the same thing; which is 
+undecidable in general since Haskell allows non-terminating functions. 
+But, in practice, we only need a semi-decidable inference mechanism; 
+it's fine for the compiler to give up and force the programmer to supply 
+the term.
+
+-- 
+Live well,
+~wren
+
+

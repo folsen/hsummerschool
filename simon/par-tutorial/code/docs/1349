@@ -1,0 +1,48 @@
+From jwlato at gmail.com  Thu Aug 25 02:46:02 2011
+From: jwlato at gmail.com (John Lato)
+Date: Thu, 25 Aug 2011 01:46:02 +0100
+Subject: [Haskell-cafe] Lifting an enumerator
+Message-ID: <CAJ727Ggvs=S375s=HESbNM7H3cqqttsaK6Meou=MbYrhedMgGA@mail.gmail.com>
+
+> Message: 17
+> Date: Wed, 24 Aug 2011 17:02:49 +0300
+> From: Michael Snoyman <michael at snoyman.com>
+> Subject: [Haskell-cafe] Lifting an enumerator
+> To: Haskell Cafe <haskell-cafe at haskell.org>
+> Cc: John Millikin <jmillikin at gmail.com>
+> Message-ID:
+> ? ? ? ?<CAKA2JgKF0dN4N8Ge1_q-zemLZM93bWg_FjMtbaZGzrC2Gqnq4w at mail.gmail.com>
+> Content-Type: text/plain; charset=ISO-8859-1
+>
+> Hi all,
+>
+> Max asked earlier[1] how to create a new instance of a class in
+> Persistent using a monad transformer. Without getting into the
+> specific details of persistent, I wanted to pose a question based on a
+> much more general question: how can we lift the inner monad of an
+> enumerator? We can easily do so for an Iteratee[2], but there is
+> nothing to allow it for an Enumerator.
+>
+> At first glance, this problem looks very similar to the shortcomings
+> of MonadIO when dealing with callbacks. In that case, you cannot use
+> liftIO on a function that takes an `IO a` as a parameter. A solution
+> to this issue is monad-control[3], which can be used to allow
+> exception catching, memory allocation, etc.
+>
+> So I'm wondering: can we come up with a similar solution to this issue
+> with enumerators? I have a working solution for the specific case of
+> the ErrorT monad[4], but it would be great to be able to generalize
+> it. Bonus points if we could express this in terms of the typeclasses
+> already provided by monad-control.
+
+Based upon a similar problem I worked on in the past, I suspect this
+isn't possible in the general case, at least not safely.  That is, any
+implementation (presuming it's possible at all) would violate the
+resource guarantees enumerators typically provide (an inner MonadCont
+is able to do this).
+
+Unfortunately I don't have a proof, so I'm open to counter-examples ;-)
+
+John L.
+
+

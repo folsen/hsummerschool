@@ -1,0 +1,85 @@
+From daniel.is.fischer at googlemail.com  Sat Aug 27 17:05:50 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sat, 27 Aug 2011 17:05:50 +0200
+Subject: [Haskell-cafe] Project Euler: request for comments
+In-Reply-To: <CAPkMFPnPMeoio49zKqfO3X+XX26s0vDAHBC6AAxiRs86Axey9A@mail.gmail.com>
+References: <CAPkMFPnCdD4Od5ff6AZ8pu5peR_puk2y+ygZeuPLPX_Y4tUPhw@mail.gmail.com>
+	<201108271047.39470.daniel.is.fischer@googlemail.com>
+	<CAPkMFPnPMeoio49zKqfO3X+XX26s0vDAHBC6AAxiRs86Axey9A@mail.gmail.com>
+Message-ID: <201108271705.50766.daniel.is.fischer@googlemail.com>
+
+On Saturday 27 August 2011, 16:03:46, Oscar Picasso wrote:
+> Daniel,
+> 
+> There are included as gists on the link provided. After your remark, I
+> looked at the generated html code in my blog. The gists are actually
+> displayed by running a javascript.
+> Maybe your browser settings don't allow to display them.
+
+NoScript :)
+I allowed oscarpicasso.com, but didn't look far enough to allow github.com.
+
+> On Sat, Aug 27, 2011 at 4:47 AM, Daniel Fischer
+> 
+> <daniel.is.fischer at googlemail.com> wrote:
+> > On Saturday 27 August 2011, 02:34:24, Oscar Picasso wrote:
+> >> Hi,
+> >> 
+> >> I order to improve my Haskell skills I started (again) to solve the
+> >> project euler problems with this language.
+> >> I am now at problem 11 and would really appreciate any comment about
+> >> my code in order to make it more elegant or efficient.
+
+In problem 11, by regarding all 4x4 subgrids separately, you recompute most 
+of the horizontal and vertical products up to four times. Also you 
+repeatedly use length and (!!). For a problem with such small parameters, 
+it doesn't matter much, but consider a 1000x1000 grid with 100x100 
+subgrids, it would really hurt then.
+You could get much better performance (and no worse code) by using an array 
+for the grid.
+
+horizontalProd size grid row col 
+    = product [grid!(row, col+i) | i <- [0 .. size-1]]
+
+verticalProd size grid row col
+    = product [grid!(row+i, col) | i <- [0 .. size-1]]
+
+seProd size grid row col
+    = product [grid!(row+i, col+i) | i <- [0 .. size-1]]
+
+neProd size grid row col
+    = product [grid!(row-i, col+i) | i <- [0 .. size-1]]
+
+maxProd size grid rows cols
+    = maximum $
+         [horizontalProd size grid row col 
+             | row <- [0 .. rows-1], col <- [0 .. cols-size]]
+      ++ [verticalProd size grid row col
+             | col <- [0 .. cols-1], row <- [0 .. rows-size]]
+      ++ [seProd size grid row col
+             | row <- [0 .. rows-size], col <- [0 .. cols-size]]
+      ++ [neProd size grid row col
+             | row <- [size-1 .. rows-1], col <- [0 .. cols-size]]
+
+
+
+Another thing,
+
+slice n = takeWhile ((n ==) . length) . map (take n) . tails
+
+if you also import tails from Data.List.
+
+Concerning the newly posted problem 12: Yes, it would be much faster to 
+count the divisors using the prime factorisation (plus, there's another 
+speedup available if you go that route).
+
+> > 
+> > I don't see any code, where would I have to look?
+> > 
+> >> My solutions can be found here:
+> >> http://fp.opicasso.com/tag/projecteuler
+> >> 
+> >> Oscar Picasso
+
+
+

@@ -1,0 +1,57 @@
+From mle+hs at mega-nerd.com  Tue Aug 30 06:48:35 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Tue, 30 Aug 2011 14:48:35 +1000
+Subject: [Haskell-cafe] Decompressing and http-enumerator
+In-Reply-To: <CAKA2JgJPzdkpv12We8xMnyoJcLpqUAfzvyOMmpgQ+Yp7Um1s=A@mail.gmail.com>
+References: <CAKA2Jg+u_BtN5WKrTc4T_mgmuxP5==ASbsh5rvxJaQhVK64MTg@mail.gmail.com>
+	<CAHZrzdqdDtoPa+eQS5XtyRFx-2=1WtOQf=eDERvQuzu_dsMwAw@mail.gmail.com>
+	<CAKA2JgJVLxsF3U4_zfMro=erD1tNiK88y+tVs5PkJrkPPQeMvg@mail.gmail.com>
+	<20110830132759.331944b38a09b32f8d27d8ac@mega-nerd.com>
+	<CAKA2JgJPzdkpv12We8xMnyoJcLpqUAfzvyOMmpgQ+Yp7Um1s=A@mail.gmail.com>
+Message-ID: <20110830144835.a6b865d0dc95c554dab55785@mega-nerd.com>
+
+Michael Snoyman wrote:
+
+> > I think we should invert the logic of this (to avoid
+> > double negatives) so we have:
+> >
+> > ? ? type ContentType = ByteString
+> > ? ? decompress :: ContentType -> Bool
+> >
+> > ? ? browserDecompress = (/== "application/x-tar")
+> > ? ? defaultDecompress = const True
+> 
+> No objections from me.
+> 
+> > Was the idea that this decompress field then gets added to
+> > the Request record?
+> 
+> Yes.
+> 
+> > If so, would simpleHttp be modified to be:
+> >
+> > ? simpleHttp :: String -> (ContentType -> Bool) -> m L.ByteString
+> >
+> > and exporting both browserDecompress and defaultDecompress so
+> > they can be used as two sane defaults for the second parameter?
+> 
+> I don't want to go this route actually. I think simpleHttp should have
+> the exact same type signature it has route now (thus living up to the
+> name "simple"). It likely makes sense to use browserDecompress as the
+> default for simpleHttp, and defaultDecompress as the default for
+> parseUrl. Though I don't really have a strong opinion on this either.
+> In either case, I'm thinking we should rename defaultDecompress to
+> alwaysDecompress (my mistake to start off with), to properly indicate
+> what it does.
+
+Ok, I'll prepare a patch along these lines and submit a github pull
+request.
+
+Cheers,
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

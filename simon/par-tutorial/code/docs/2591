@@ -1,0 +1,22 @@
+From itakingiteasy at gmail.com  Wed Feb  2 17:04:33 2011
+From: itakingiteasy at gmail.com (yukkuri yu!yu!yu!)
+Date: Wed, 2 Feb 2011 19:04:33 +0300
+Subject: [Haskell-cafe] Gedit Haskell mode plugin indentation
+In-Reply-To: <AANLkTimK4nTsm_THre4_Hw1TJSEjr-BxgWMe4UNUjw3i@mail.gmail.com>
+References: <AANLkTin5-7S8z8cXLngPidPbw9yBZvfH0b4b+yBngOKV@mail.gmail.com>
+	<AANLkTinjjvWmipvW98QybXue7+b95HaFdq73m2bEb6xo@mail.gmail.com>
+	<AANLkTimK4nTsm_THre4_Hw1TJSEjr-BxgWMe4UNUjw3i@mail.gmail.com>
+Message-ID: <AANLkTikqWA2UhvObEwVbNBtQsfKfVHiv-MRfY9unemOZ@mail.gmail.com>
+
+Update.
+
+Current version: v0.8
+
+Changelog:
+
+* Fixed some issues with nested lists
+
+---
+ftp://neverb.net/soft/mine/gedit_haskell_mode/haskell_indentation-latest.tar.gz
+
+

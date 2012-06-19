@@ -1,0 +1,28 @@
+From allbery.b at gmail.com  Sun Aug 21 08:23:30 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Sun, 21 Aug 2011 02:23:30 -0400
+Subject: [Haskell-cafe] Embedding Perl RegEx in Haskell
+In-Reply-To: <CAKFCL4Ufy+XjuK8hZz4cA7-PymOaVxq5X3b61_R+kBeF7csjQw@mail.gmail.com>
+References: <CAGdT1gqMvi3ihocy6Yg4A0z0C0uu0GVzSPStNCzZLrwCAbS=Ew@mail.gmail.com>
+	<CAKFCL4VrTnhzQwbp2N3RTL=4jzQT+6cUF9a814OgeHRSAZ1Adw@mail.gmail.com>
+	<CAGdT1gqXgEej_Z8ELZ8SncRNJ_iOmm92MPjTRP8oC73BY1P7-g@mail.gmail.com>
+	<CAKFCL4Ufy+XjuK8hZz4cA7-PymOaVxq5X3b61_R+kBeF7csjQw@mail.gmail.com>
+Message-ID: <CAKFCL4U9oRDUvfKKbrd2FUK3AQabYgXj+juqmHzwtyX+-e=0pg@mail.gmail.com>
+
+By the way, if what you're actually looking for on a high level is a
+Haskell-like string matching engine, it might be better to go back to the
+original sources.  Look up Kleene's work on string pattern matching; while
+regexes derive from it, its more direct descendants are the pattern matching
+mechanisms in SNOBOL and Icon.  I've thought for a while that the right way
+to do it in Haskell is not parsing a program encoded as a string/regex, but
+instead a monadic "Kleene machine"; but I've never managed to work out a
+decent functional implementation (too many irons in the fire, not enough
+spoons to even keep track of them much less do something useful with them).
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110821/2ef49354/attachment.htm>
+

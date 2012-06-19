@@ -1,0 +1,22 @@
+From alistair at abayley.org  Fri Dec  9 02:06:12 2011
+From: alistair at abayley.org (Alistair Bayley)
+Date: Fri, 9 Dec 2011 14:06:12 +1300
+Subject: [Haskell-cafe] Does anyone maintain trac.haskell.org?
+In-Reply-To: <CABPxb2kwxxkuvP2RcRqmDbMmVyob1dsxo2=BdOCdCpJ3etY8bQ@mail.gmail.com>
+References: <CABPxb2kwxxkuvP2RcRqmDbMmVyob1dsxo2=BdOCdCpJ3etY8bQ@mail.gmail.com>
+Message-ID: <CAKYODbj_HQYi0PjMsW5JHUCcBNzce+D+7UESZt_iJ2K7AdgVGQ@mail.gmail.com>
+
+On 9 December 2011 10:39, Justin Bailey <jgbailey at gmail.com> wrote:
+> The community Trac hosting server isn't sending email, which Trac requires.
+>
+> I've submitted several tickets to support at community.haskell.org but
+> gotten no response.
+>
+> Does anyone maintain that server anymore?
+
+Had the same problem in July. Raised a ticket etc. I don't think there
+is anyone actually responsible for the trac server.
+
+Alistair
+
+

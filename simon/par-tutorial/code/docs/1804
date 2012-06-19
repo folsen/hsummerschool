@@ -1,0 +1,23 @@
+From da.waterworth at gmail.com  Sat Dec 10 13:28:32 2011
+From: da.waterworth at gmail.com (Daniel Waterworth)
+Date: Sat, 10 Dec 2011 12:28:32 +0000
+Subject: [Haskell-cafe] Alternative STM implementation
+Message-ID: <CAP6oseTmmAkGfC_7MZw8zy2UFAeAAK7aa2+Gxt0zmLDZ9GgT+w@mail.gmail.com>
+
+Hi,
+
+This morning I have written an STM implementation as a learning
+exercise. I thought I'd share it here to get some critique and because
+it might be useful to others (consider it as being in the public
+domain). I haven't tested it thoroughly, so there may be edge cases
+that haven't been thought through. It should be a drop-in replacement
+(so long as you only use TVars), if anyone has any STM benchmarks
+already made, I'd love to see how it compares. Here it is:
+
+https://gist.github.com/1454995
+
+Thanks,
+
+Daniel
+
+

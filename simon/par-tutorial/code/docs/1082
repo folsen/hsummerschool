@@ -1,0 +1,40 @@
+From allbery.b at gmail.com  Sat Aug 13 01:08:50 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Fri, 12 Aug 2011 19:08:50 -0400
+Subject: [Haskell-cafe] type-class inference
+In-Reply-To: <4E45AEA7.4010302@dit.ie>
+References: <4E5EBA42.5060805@dit.ie>
+	<4E45AEA7.4010302@dit.ie>
+Message-ID: <CAKFCL4Vp-hxCMT7e5dQ1rChO+xAkDp4mjw=TT-jsj4gExEkgbQ@mail.gmail.com>
+
+On Fri, Aug 12, 2011 at 18:52, Patrick Browne <patrick.browne at dit.ie> wrote:
+
+> Why does the Haskell :type command only sometimes print the type-class?
+>
+
+Haskell infers the most specific type applicable.  If the most specific it
+can get is a typeclass, that's what it produces; if it can infer an explicit
+type, it will.
+
+
+> Should I expect type-class inference as well as type inference?
+> Maybe the type-class is inferred where possible, but not always printed?
+>
+
+Typeclasses are not independent of types, and are not inferred separately
+from types.  If you want to know what typeclasses a type is a member of, use
+:info.
+
+Haskell supports polymorphism:  a bound expression does not need to have a
+single specific type, it can apply to multiple types and adapt itself to the
+type at its use site.  Typeclasses are part of how this is accomplished.  So
+if a bound expression is polymorphic, you will see its type expressed in
+terms of type variables, possibly with typeclass contexts.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110812/56b94f3e/attachment.htm>
+

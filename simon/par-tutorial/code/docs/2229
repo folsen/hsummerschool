@@ -1,0 +1,26 @@
+From spam at scientician.net  Thu Dec 22 18:49:45 2011
+From: spam at scientician.net (Bardur Arantsson)
+Date: Thu, 22 Dec 2011 18:49:45 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+	<BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+	<CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+Message-ID: <jcvqjs$sb2$1@dough.gmane.org>
+
+Alexander Solla wrote:
+
+> I happen to only write Haskell programs that terminate.  It is not that
+> hard.  We must merely restrict ourselves to the total fragment of the
+> language, and there are straight-forward methods to do so.
+
+Do (web/XML-RPC/whatever) server type programs terminate?
+
+
+
+
+

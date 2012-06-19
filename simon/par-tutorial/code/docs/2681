@@ -1,0 +1,62 @@
+From wren at freegeek.org  Fri Feb  4 02:03:37 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Thu, 03 Feb 2011 20:03:37 -0500
+Subject: [Haskell-cafe] Problems with iteratees
+In-Reply-To: <AANLkTi=g_iLjNtW7Dx3EyXr0a3X7H-C1V4TNn-FrHHWk@mail.gmail.com>
+References: <AANLkTi=g_iLjNtW7Dx3EyXr0a3X7H-C1V4TNn-FrHHWk@mail.gmail.com>
+Message-ID: <4D4B5069.20108@freegeek.org>
+
+On 2/3/11 8:05 AM, John Lato wrote:
+> I don't have too much to add to Maciej and Oleg's reply, except that I'd
+> recommend looking at the Wave codec over the Tiff reader in those versions
+> of iteratee.  I don't think that's the only problem, though, because then
+> you'd be getting a "Divergent iteratee" error.
+
+I'll try taking a look at them. I hadn't because I know nothing about 
+Tiff and Wave formats, so I wouldn't know what I'm looking at regarding 
+the gritty details of iteratee semantics. The error handling stuff is by 
+far the murkiest part of the various iteratee designs IMO.
+
+
+> The "endOfInput" error is suspicious, and I think you'll need to track it
+> down to solve this problem.  It doesn't appear to be from either iteratee or
+> protocol-buffers.  Could it be coming from your IO library?  I wonder if the
+> enumerator is trying to force a read after EOF has been reached for some
+> reason?
+
+That's definitely the suspicious bit. It's not coming from any of my 
+code (including the hprotoc-generated code), and I didn't see anything 
+in iteratee nor protocol-buffers that could throw it either...
+
+I just got fed up with it and ran `strings` on all the libraries I link 
+against, and the only one that turns up with "endOfInput" is attoparsec 
+(which has a function by that name). But I'm not using attoparsec 
+anywhere near this segment of code... Well, it's a lead at least.
+
+
+> As an experiment, you could try using a custom convStream function like
+> this:
+>
+> convStream2
+>     :: Monad m
+>     => IterateeG s el m (Maybe (s' el'))
+>     -> EnumeratorN s el s' el' m a
+> convStream2 fi iter = fi >>= check
+>     where
+>     check (Just xs) = lift (runIter iter $ Chunk xs) >>= docase
+>     check (Nothing) = return iter
+>     docase (Done a _)                   = return $ return a
+>     docase (Cont k Nothing)             = convStream2 fi k
+>     docase (Cont k (Just "endOfInput")) = convStream2 (return Nothing) k
+>     docase (Cont _ (Just e))            = return $ throwErr e
+>
+> This may help determine if it's a problem with IO or with the message
+> parsing.
+
+Thanks, that's a good idea.
+
+-- 
+Live well,
+~wren
+
+

@@ -1,0 +1,27 @@
+From ivan.miljenovic at gmail.com  Tue Aug  9 04:26:03 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Tue, 9 Aug 2011 12:26:03 +1000
+Subject: [Haskell-cafe] Haskell syntax highlighting in a public blog
+In-Reply-To: <4E4095C7.1030808@sairyx.org>
+References: <CAPkMFP=hAnOKN2sxCB8=RbYwXEfePBRfNEFS_Ru=8WYt=Pif7Q@mail.gmail.com>
+	<4E4095C7.1030808@sairyx.org>
+Message-ID: <CA+u6gbz=-R4E539vBnOMh0hWAkcGjh53pxSBwCNh0EcQbkL1Kw@mail.gmail.com>
+
+On 9 August 2011 12:04, Arlen Cuss <celtic at sairyx.org> wrote:
+> 9/08/2011 11:54 AM, Oscar Picasso kirjutas:
+>> Hi,
+>>
+>> Is there a public blog that that allow syntax highlighting of Haskell code?
+>
+> Are you talking about a plugin for a blog engine? CodeColourer on
+> WordPress will do it.
+
+I think he meant more along the lines of wordpress.com, which as far
+as I know _doesn't_ support highlighting Haskell.
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

@@ -1,0 +1,105 @@
+From fuzxxl at gmail.com  Wed Dec 21 20:29:18 2011
+From: fuzxxl at gmail.com (Robert Clausecker)
+Date: Wed, 21 Dec 2011 20:29:18 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <CACZKWEK3uNB18WG9RDgb3J5rFugBb7oWebGYaqOXTHdAuAmySg@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CACZKWELLqTw3dzzuN412MGF9EBX-_S5kvoXjuyEoNKTjh-_9Dg@mail.gmail.com>
+	<CAKicEsNmJDy=Z5=5otZc6UUUwEN6=SoCCaQUQUjhfkpnsm7q2A@mail.gmail.com>
+	<CACZKWEK3uNB18WG9RDgb3J5rFugBb7oWebGYaqOXTHdAuAmySg@mail.gmail.com>
+Message-ID: <1324495758.2459.21.camel@fuzxxl>
+
+Am Mittwoch, den 21.12.2011, 20:05 +0100 schrieb Ivan Perez:
+> >> - Function overloading without classes. If it's not done, there must
+> >> be a good reason for it
+> >> (many good reasons, probably), but I really miss it.
+> >
+> > That does not play well with type inference.
+> 
+> I understand that. But it may be ok in many simple situations,
+> which is actually where I tend to "need" it. For instance,
+> the following wouldn't pose a problem, would it?
+> 
+> f  :: Int -> Int -> Int
+> f = (+)
+> f :: String -> String -> String
+> f = (++)
+>
+>(Not that I would use it for exactly that code, but anyway).
+> I know that one can write that with classes and instances, but I just
+> want to save myself the extra-coding when possible. In complex
+> situations (where it doesn't play well with type inference), that's
+> when I'd rather create classes and instances. Not for the
+type-checker,
+> but for myself.
+
+Of course it would! Consider the following code:
+
+    g = f
+
+What is the type of g? Without a typeclass, the compiler is unable to
+give a proper type to g since it can't decide between the two matching
+instances of f. Of course this example is ridiculous, but similiar but
+more convoluted specimens of this problem arise often in production
+code.
+
+You may now think: "Hey, why can't the compiler just automatically
+generate a typeclass for me in such a case?" This is impossible, since
+the compiler can't see your intentions. It can't decide what the
+type-variable should be etc. Consider again your f example. You expect
+the compiler to generate a typeclass like this:
+
+    class Foo a where
+      f :: a -> a -> a
+
+But how can the compiler see that what you want is actually the above
+and not the equally sensible typeclass
+
+    class Bar a where
+      f :: a
+
+You see, it's not so easy with type-inference. AFAIK TDNR solves this
+problem by requiring the first argument to have a monomorphic type. This
+type is used to pick an appropriate function. I dislike this approach;
+it is too limited in my opinion. The problem is, that you have much more
+information about a function in traditional languages, than in Haskell.
+Consider this slightly trivial example:
+
+    Java:    x = something(a,obj.toString(),2);
+    Haskell: x = something a (show obj) 2
+
+In Java, the compiler knows a lot about the method something from that
+single line:
+
+      * something() has three arguments
+      * The type of the first argument is known
+      * The second argument is a String
+      * The third one is an int
+
+In Haskell, most of these assumptions are invalid:
+
+      * something may be curried or member of a strange typeclass (like
+        printf). No assumptions about the number of arguments can be
+        made
+      * It may be possible that we do not yet know the type of a because
+        we can't infer it's type without knowing the type of x
+      * show obj is definitely a String
+      * 2 is of type Num a => a. What if there are two something, one
+        with a parameter of type Int and one with a Float?
+
+You see, It's not so easy.
+
+> > Also, see type-directed name resolution (TDNR)
+> Thanks for that pointer. I found that proposal a few months ago, but had
+> completely forgotten about it.
+> 
+> I don't really like the proposed syntax; it's very OO-like.
+> I agree with gabrielrf, who said "[...] I wonder if adding an obj.method
+> style will be a hinderance to beginners, as it obscures what type
+> inference can do."
+
+Full acknowledge.
+
+
+

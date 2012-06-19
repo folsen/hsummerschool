@@ -1,0 +1,51 @@
+From bobzhang1988 at gmail.com  Wed Aug 24 05:17:11 2011
+From: bobzhang1988 at gmail.com (bob zhang)
+Date: Tue, 23 Aug 2011 23:17:11 -0400
+Subject: [Haskell-cafe] a minor bug (memory leak) in ListLike package
+In-Reply-To: <CA+u6gbzyx=_d6BbGtZ86GYpfDx3jg8o6zpM8Tcu3958wPpOffg@mail.gmail.com>
+References: <4E544F7D.8030401@gmail.com>
+	<CA+u6gbzyx=_d6BbGtZ86GYpfDx3jg8o6zpM8Tcu3958wPpOffg@mail.gmail.com>
+Message-ID: <CANcqPu6BSBtbQwtwgvLH01tbN3MaXe=yknBMhrACShZNjyK3DQ@mail.gmail.com>
+
+Hi,
+  I think 3 < genericLength [1..] should fail, that laziness is not we
+want.
+  I can not derive ListLike  instance using GHC extensions, can you provide
+a working example?
+  Thanks
+On Tue, Aug 23, 2011 at 9:47 PM, Ivan Lazar Miljenovic <
+ivan.miljenovic at gmail.com> wrote:
+
+> On 24 August 2011 11:10, bob zhang <bobzhang1988 at gmail.com> wrote:
+> > Hi, John, there is a space leak problem in ListLike typeclass,
+> > in the method genericLength
+> > calclen !accum cl =
+> > calclen accum cl =
+>
+> I _think_ this may cause problems with some data types (e.g.
+>
+> http://hackage.haskell.org/packages/archive/numbers/2009.8.9/doc/html/Data-Number-Natural.html
+> ) that require the extra laziness (that is, you can do things like ` 3
+> < genericLength [1..] ' and have it return True).
+>
+> > --- thank you for your nice library
+> > btw, is there any way to derive ListLike interface automatically?
+> > for such type :
+> > newtype List a = List {[a]}
+>
+> GeneralizedNewtypeDeriving can do that.
+>
+> --
+> Ivan Lazar Miljenovic
+> Ivan.Miljenovic at gmail.com
+> IvanMiljenovic.wordpress.com
+>
+
+
+
+-- 
+Best, bob
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110823/e9ba5422/attachment.htm>
+

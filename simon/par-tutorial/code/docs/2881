@@ -1,0 +1,27 @@
+From mle+hs at mega-nerd.com  Wed Feb  9 09:57:43 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Wed, 9 Feb 2011 19:57:43 +1100
+Subject: [Haskell-cafe] Problems with (projects|community).haskell.org
+Message-ID: <20110209195743.1118db95.mle+hs@mega-nerd.com>
+
+Hi all,
+
+Still a couple of problems with these servers.
+
+Firstly, community.haskell.org shows the default Apache "It works"
+page. It would be nice to have something better there.
+
+Secondly the mailman web interface on projects.haskell.org [0] is
+giving a Service Temporarily Unavailable message (and has been
+for a couple of days).
+
+Cheers,
+Erik
+
+[0] http://projects.haskell.org/cgi-bin/mailman/admindb/haskell-llvm
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

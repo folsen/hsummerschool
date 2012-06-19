@@ -1,0 +1,38 @@
+From roma at ro-che.info  Tue Dec  6 18:44:12 2011
+From: roma at ro-che.info (Roman Cheplyaka)
+Date: Tue, 6 Dec 2011 19:44:12 +0200
+Subject: [Haskell-cafe] Complete package description list
+In-Reply-To: <562B8200B62844479E12147F0AA7B3B30B5D216789@NSQ161EX.enterprise.internal.city.ac.uk>
+References: <CABG-yt094g5_Q4ZQh9+B9drQi4os+Wqm7O1t2TMkYyXDbTwvMQ@mail.gmail.com>
+	<562B8200B62844479E12147F0AA7B3B30B5D216788@NSQ161EX.enterprise.internal.city.ac.uk>
+	<CABG-yt1gAjaCYi2DHwixbAVG7swsX2c6Q5wp08yP5mrtDgnFcA@mail.gmail.com>
+	<562B8200B62844479E12147F0AA7B3B30B5D216789@NSQ161EX.enterprise.internal.city.ac.uk>
+Message-ID: <20111206174412.GA28573@sniper>
+
+* Paterson, Ross <R.Paterson at city.ac.uk> [2011-12-06 09:09:36+0000]
+> Shakthi Kannan writes:
+> > So, how would I know if there is a new package in it, other than
+> > having to compare it to the previous snapshot? Does the filename
+> > (00-index.tar.gz) change?
+> 
+> The filename doesn't change.  You could use the RSS feed or the upload
+> log (http://hackage.haskell.org/packages/archive/log), both of which are
+> updated at the same time as the index.
+
+You can also try using Last-Modified or ETag information.
+
+% curl --head http://hackage.haskell.org/packages/archive/00-index.tar.gz
+HTTP/1.1 200 OK
+Date: Tue, 06 Dec 2011 17:41:50 GMT
+Server: Apache/2.2.9 (Debian) mod_python/3.3.1 Python/2.5.2
+Last-Modified: Tue, 06 Dec 2011 16:49:59 GMT
+ETag: "1888003-352566-4b36f39c81bc0"
+Accept-Ranges: bytes
+Content-Length: 3482982
+Content-Type: application/x-tar
+Content-Encoding: x-gzip
+
+-- 
+Roman I. Cheplyaka :: http://ro-che.info/
+
+

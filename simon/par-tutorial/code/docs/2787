@@ -1,0 +1,32 @@
+From ckkashyap at gmail.com  Mon Feb  7 06:08:06 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Mon, 7 Feb 2011 10:38:06 +0530
+Subject: [Haskell-cafe] Review request for "platform independent
+ interactive graphics" with VNC
+In-Reply-To: <4D4BB776.1090501@dfki.de>
+References: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>
+	<4D4ACEC4.3050608@dfki.de>
+	<AANLkTik3OuqBfZ2GVS7J-OJr4XHhXb6RQC=ieUK7aiQP@mail.gmail.com>
+	<4D4ADBD9.5050504@dfki.de>
+	<AANLkTimecmbjBJm+_b8Mtx43HDcZpmxQdTrrROpGz5oF@mail.gmail.com>
+	<4D4AE95C.9030009@dfki.de> <4D4AEA86.1000902@dfki.de>
+	<AANLkTimUbrS2cV+GeiDx00MOxo1+pw6Mr7WS0E6AZHei@mail.gmail.com>
+	<4D4BB776.1090501@dfki.de>
+Message-ID: <AANLkTimypzk3twXPOb0uA25Br71ErSFecL0DGjodLg7W@mail.gmail.com>
+
+>
+> After pulling in your changes and recompilation, your application runs
+> as expected. Thanks a lot!
+>
+>
+I look forward to some feedback on this.
+
+Also, I am thinking in the lines of changing the image representation in a
+"list"  to a mutable array - would that be the right approach?
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110207/513a799a/attachment.htm>
+

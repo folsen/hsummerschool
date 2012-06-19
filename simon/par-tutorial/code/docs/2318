@@ -1,0 +1,44 @@
+From greg at gregweber.info  Tue Dec 27 14:14:49 2011
+From: greg at gregweber.info (Greg Weber)
+Date: Tue, 27 Dec 2011 10:14:49 -0300
+Subject: [Haskell-cafe] ANNOUNCE: hxournal-0.5.0.0 - A pen notetaking
+In-Reply-To: <CAPNnnrVzMu1s=rjCmSiisWbsgGVmFnQWJjnuUGBjQvY7Rfv0hA@mail.gmail.com>
+References: <CAKRanNDoGRaGqT-f6Ry2XmR_S1_2reYEY9POQSDZP-d-=L8XTQ@mail.gmail.com>
+	<CAPNnnrVzMu1s=rjCmSiisWbsgGVmFnQWJjnuUGBjQvY7Rfv0hA@mail.gmail.com>
+Message-ID: <CAKRanNDrzeOBGr4QmNRk_sDMLbyFHmXko8HXNJmoikbmbTz2Ew@mail.gmail.com>
+
+yes it worked after your updates shortly after this. Thank you very much
+for checking up, and also for continuing to develop this - I may be able to
+replace xournal with it now.
+
+On Tue, Dec 27, 2011 at 10:03 AM, Ian-Woo Kim <ianwookim at gmail.com> wrote:
+
+> Hi, Greg,
+>
+> Sorry that I just missed to read your reply.
+> Since hxournal has a configuration file to specify input device and
+> also is activated on the toggle menu item "Use X Input," you should be
+> able to experiment pen drawing now.
+>
+> Did you succeed in using the latest version of hxournal?
+> I appreciate your report.
+>
+> Thanks very much.
+>
+> best,
+> Ian-Woo
+>
+> On Tue, Dec 13, 2011 at 5:22 AM, Greg Weber <greg at gregweber.info> wrote:
+> > I got the program installed after creating the libstdc++.so symlink.
+> > No ink shows up from my drawing though. I am on a Thinkpad X201 Tablet
+> and
+> > xournal works.
+> >
+> > I am glad you are experimenting with window splits. I think the worst
+> part
+> > of xournal is it constrains you to a notebook-width piece of paper.
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111227/87e4bd1d/attachment.htm>
+

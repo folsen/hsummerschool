@@ -1,0 +1,17 @@
+From permeakra at gmail.com  Tue Feb  8 16:15:53 2011
+From: permeakra at gmail.com (Permjacov Evgeniy)
+Date: Tue, 08 Feb 2011 18:15:53 +0300
+Subject: [Haskell-cafe] File position
+Message-ID: <4D515E29.8060704@gmail.com>
+
+Is there any way to get current position from System.IO.Handle as
+Integer? If no, what other <b> windows/unix portable</b> IO function set
+of file io with this functionality you can suggest? keeping track of
+current position by hand is not an option, sorry.
+
+I'm thinking about c's low-level functions such as open, read, write,
+but there is no such functions in windows and I do not know if libc from
+haskell platform provides emulation. If it does, I'll use lowlevel c
+functions brainfree.
+
+

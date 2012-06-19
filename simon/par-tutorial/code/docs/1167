@@ -1,0 +1,47 @@
+From thomas.dubuisson at gmail.com  Tue Aug 16 22:12:55 2011
+From: thomas.dubuisson at gmail.com (Thomas DuBuisson)
+Date: Tue, 16 Aug 2011 13:12:55 -0700
+Subject: [Haskell-cafe] why is Random in System?
+In-Reply-To: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+References: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+Message-ID: <CAOk36Jhpy38+DgjDjmYowriyhaRBq6YXx0Zn2iBzMhJEe_6UTw@mail.gmail.com>
+
+I think of it as natural for exactly the reason you stated (the data
+comes from the OS).  It seems even more natural to me in the entropy
+package module 'System.Entropy' as I am accustom to the phrase system
+entropy.  Equally, I would fine a 'Network.Entropy' module acceptable
+under the assumption it connects to one of the public random number
+servers for it's data.
+
+Perhaps a top level "Random." should be used, but that too can be
+questioned.  For example, when I import the module "Random" or perhaps
+"Random.Generators" would I get fast prngs?  Cryptographic prngs?
+Both?  Something else (both slow and weak, like what we have now ;-)
+)?
+
+Cheers,
+Thomas
+
+On Tue, Aug 16, 2011 at 1:04 PM, Evan Laforge <qdunkan at gmail.com> wrote:
+> I've noticed there's a convention to put modules having to deal with
+> randomness into System.Random. ?I thought System was for OS
+> interaction? ?Granted getting a random seed usually means going to the
+> OS, but isn't the rest of it, like generating random sequences,
+> distributions, selecting based on probability, shuffling, etc. all
+> non-OS related algorithms?
+>
+> I'm not sure where I would expect Random to go, perhaps Math or maybe
+> the toplevel, but under System seems, well, random...
+>
+> I notice random-fu puts it under Data, which is also not where I'd
+> look, except that you always look in Data because everything goes into
+> Data... but algorithms dealing with random numbers aren't really data
+> structures either, are they?
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

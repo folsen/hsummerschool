@@ -1,0 +1,14 @@
+From jmillikin at gmail.com  Wed Apr 20 23:16:11 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Wed, 20 Apr 2011 14:16:11 -0700 (PDT)
+Subject: [Haskell-cafe] Question about the Monad instance for Iteratee
+ (from the enumerator package)
+In-Reply-To: <BANLkTi=BaTrE8PqH0M=5=CNbwxqWRZRbeA@mail.gmail.com>
+Message-ID: <14407419.786.1303334171028.JavaMail.geo-discussion-forums@prjs22>
+
+It's forbidden for an iteratee to yield extra input that it hasn't consumed; 
+however, this is unfortunately not enforced by the type system. 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110420/e0191649/attachment.htm>
+

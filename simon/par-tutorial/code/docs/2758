@@ -1,0 +1,28 @@
+From vandijk.roel at gmail.com  Sun Feb  6 10:13:23 2011
+From: vandijk.roel at gmail.com (Roel van Dijk)
+Date: Sun, 6 Feb 2011 10:13:23 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4D6B15.2060204@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+	<4D4D6B15.2060204@btinternet.com>
+Message-ID: <AANLkTimj6PQP6o9NCcc+KXHJrc7+RwK3wQmg66KNMKur@mail.gmail.com>
+
+On 5 February 2011 16:21, Andrew Coppin <andrewcoppin at btinternet.com> wrote:
+> I didn't think Clean supported laziness at all? I thought it was a strict
+> language.
+
+"CLEAN is a practical applicable general-purpose lazy pure functional
+programming language suited for the development
+of real world applications." [1]
+
+Haskell en Clean are very much alike. You can even compile Haskell 98
+code with the latest (experimental) Clean compiler and having it
+interact with Clean code and vice-versa [2]. The main difference is
+Clean's use of uniqueness typing.
+
+
+1 - http://clean.cs.ru.nl/download/Clean20/doc/CleanLangRep.2.1.pdf
+2 - http://www.cs.ru.nl/~thomas/publications/groj10-exchanging-sources-between.pdf
+
+

@@ -1,0 +1,33 @@
+From kazu at iij.ad.jp  Fri Apr  1 07:38:14 2011
+From: kazu at iij.ad.jp (Kazu Yamamoto (=?iso-2022-jp?B?GyRCOzNLXE9CSScbKEI=?=))
+Date: Fri, 01 Apr 2011 14:38:14 +0900 (JST)
+Subject: [Haskell-cafe] A maintenance command of Haskell cabal packages
+In-Reply-To: <AANLkTi=dG8OV9XzB9KkcZOkdE-azR-b6MrnLbiGBbyEE@mail.gmail.com>
+References: <AANLkTikP-KNNvJzK0se-qtmh0-RCCJKyDh6XCgr4=Bjc@mail.gmail.com>
+	<20110401.111905.240769933.kazu@iij.ad.jp>
+	<AANLkTi=dG8OV9XzB9KkcZOkdE-azR-b6MrnLbiGBbyEE@mail.gmail.com>
+Message-ID: <20110401.143814.613498438030484319.kazu@iij.ad.jp>
+
+Hello,
+
+>>> cabal-dev is a wrapper around cabal. It creates the directory
+>>> "cabal-dev" in your current directory when you run commands.
+>>
+>> Yes, I know. But when I typed "cabal-devel install" on a package
+>> directory, nothing happened.
+> 
+> Can you give a specific example? Surely *something* happened :)
+
+I guess this happens with Haskell Platform for MacOS only. In this
+environment, .cabal/config specifies as follows:
+
+	remote-repo-cache: /Users/<user>/Library/Haskell/repo-cache
+
+But cabal-dev refers to /Users/<user>/.cabal/packages. After
+"cabal-dev update" to create it, everything becomes fine to me.
+
+Thank you.
+
+--Kazu
+
+

@@ -1,0 +1,25 @@
+From mark.lentczner at gmail.com  Fri Apr 15 01:28:33 2011
+From: mark.lentczner at gmail.com (Mark Lentczner)
+Date: Thu, 14 Apr 2011 16:28:33 -0700
+Subject: [Haskell-cafe] Experimental 64 bit installer fails
+In-Reply-To: <BANLkTimdh5h1e+tEtT7zovj5Lo07TSYQBg@mail.gmail.com>
+References: <BANLkTimdh5h1e+tEtT7zovj5Lo07TSYQBg@mail.gmail.com>
+Message-ID: <BANLkTikBsXto1Fz+nNz3TSpL4qHpaB_HZg@mail.gmail.com>
+
+Well that's no fun! The install looks like it mostly worked, execept that
+the final registration of the installed packages failed because for some
+reason the script has them out of order.
+
+You can "fix up" your install by doing this:
+
+cd /Library/Haskell/ghc-7.0.2/lib/registrations
+for c in *.conf; do echo == $c ==; ghc-pkg register --force $c; done
+
+
+I'll have to look into why that build of the package got the files out of
+order...
+ - Mark
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110414/c1e063e2/attachment.htm>
+

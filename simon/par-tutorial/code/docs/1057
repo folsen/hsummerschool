@@ -1,0 +1,26 @@
+From schlepptop at henning-thielemann.de  Thu Aug 11 19:16:46 2011
+From: schlepptop at henning-thielemann.de (Henning Thielemann)
+Date: Thu, 11 Aug 2011 19:16:46 +0200
+Subject: [Haskell-cafe] [Haskell] ANNOUNCE: GHC version 7.2.1
+In-Reply-To: <20110809200130.GA28700@matrix.chaos.earth.li>
+References: <20110809200130.GA28700@matrix.chaos.earth.li>
+Message-ID: <4E440E7E.5080908@henning-thielemann.de>
+
+On 09.08.2011 22:01, Ian Lynagh wrote:
+>
+> The GHC Team is pleased to announce a new major release of GHC, 7.2.1.
+>
+> The 7.2 branch is intended to be more of a "technology preview" than
+> normal GHC stable branches; in particular, it supports a significantly
+> improved version of DPH, as well as new features such as compiler
+> plugins and "safe Haskell". The design of these new features may evolve
+> as we get more experience with them. See the release notes for more
+> details of what's new and what's changed.
+
+These sound like a lot of exciting news. The release notes also mention 
+a VECTORISE pragma, that is not mentioned in
+    http://www.haskell.org/ghc/docs/7.2.1/html/users_guide/pragmas.html
+and not in the index. Is it about the planned GHC support for 
+SSE/AltiVec vector units or is it about DPH?
+
+

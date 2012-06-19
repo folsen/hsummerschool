@@ -1,0 +1,89 @@
+From illissius at gmail.com  Tue Feb  8 12:31:15 2011
+From: illissius at gmail.com (=?ISO-8859-1?Q?G=E1bor_Lehel?=)
+Date: Tue, 8 Feb 2011 12:31:15 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <87bp2mn64t.fsf@malde.org>
+References: <4D4B19DB.5000907@btinternet.com>
+	<AANLkTimTak3jHpg_RPattKoACvkUU31tQydCsgjjS=Oc@mail.gmail.com>
+	<4D4D6E48.3000903@btinternet.com> <4D4FC689.1080107@xyxyx.org>
+	<AANLkTinwgZZ=aTz4mAQiGU2M1j9OuPRnrS9O2Au=K+b3@mail.gmail.com>
+	<4D4FE75F.1000107@xyxyx.org>
+	<AANLkTi=5+umqSsdMudWGQgGkNWnp-rnTea+Ao=DZBgNe@mail.gmail.com>
+	<72E6D6A1-956D-425E-B933-6392C8CAA0F7@cs.otago.ac.nz>
+	<AANLkTinHKiqD+-ySu2+190JH=tLOO9LUBbndvLJWX15P@mail.gmail.com>
+	<87bp2mn64t.fsf@malde.org>
+Message-ID: <AANLkTimhBoY0Oyhb9bwNgXB0+_yxGQ5T21SCDc0UtxYM@mail.gmail.com>
+
+2011/2/8 Ketil Malde <ketil at malde.org>:
+> G?bor Lehel <illissius at gmail.com> writes:
+>
+>> Is there any sensible meaning for bangs on return types? I've been
+>> trying to think this through but not necessarily succeeding.
+>
+> Not knowing Clean in any detail, I've always just thought that a type
+> signature of, say:
+>
+> ? ? ? ? ?something :: !Foo -> Bar
+>
+> would mean the same as, in Haskell:
+>
+> ? ? ? ? ?something :: Foo -> Bar
+> ? ? ? ? ?something foo = foo `seq` ...
+>
+> In this case, there's no point to a strict return type, since it would
+> boil down to "x `seq` x", which is just ?"x".
+
+Yeah, this is what I keep arriving at as well, I'm not sure if there's
+another option I might be missing...
+
+>
+> But it seems that a lot of these discussions are about considering Foo
+> and !Foo distinct types, which would mean that you can no longer, say,
+> add a strict and a lazy integer - at least not with the current Num
+> instance. ?I find this line of thought very confusing.
+
+As I would ideally imagine it, again, strictness would be entirely
+orthogonal to the 'normal' part of the type. So you could combine Foo
+and !Foo completely freely as if the ! had never been there. !Foo
+would be a subtype of Foo, so to speak -- !Foo representing evaluated
+values, and Foo representing either evaluated or unevaluated values.
+The ! would be an instruction to the compiler/runtime, "make sure the
+Foo is evaluated by this point", and information for the programmer,
+"the Foo is certain to be evaluated by this point". Adding !s would
+only ever result in evaluation happening, and not ever a type error.
+The advantage over bang patterns would be that the time/place of
+evaluation could be controlled by the user rather than/in addition to
+the implementer of a function/type (or at least more flexibly and
+easily than it can be done now), it would more visible, obvious, and
+certain, and perhaps type inference/elaboration could even be done.
+
+But I'm minimally well-versed in compilers and type theory, so if
+someone sees something fundamentally wrong with this idea, please
+enlighten me.
+
+>
+>> This does seem a bit excessive. As a start, I don't remember anyone
+>> asking for control over (un)boxedness, so hopefully we could jettison
+>> that part of it?
+>
+> Uh, you mean like in IOUArrays, the UNPACK pragma, or
+> -funbox-strict-fields? ?Unboxing is an important optimization, but
+> perhaps the current feature set suffices.
+
+Yeah, I meant within the current context. I don't recall hearing
+complaints that control over unboxing is currently insufficient or
+that unboxing is insufficiently predictable. (But if there have been,
+feel free to fill me in...)
+
+>
+> -k
+> --
+> If I haven't seen further, it is by standing in the footprints of giants
+>
+
+
+
+-- 
+Work is punishment for failing to procrastinate effectively.
+
+

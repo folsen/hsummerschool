@@ -1,0 +1,26 @@
+From ivan.miljenovic at gmail.com  Thu Aug 25 04:06:38 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Thu, 25 Aug 2011 12:06:38 +1000
+Subject: [Haskell-cafe] do-re-mi
+In-Reply-To: <4E55AC86.9050809@vex.net>
+References: <4E55AC86.9050809@vex.net>
+Message-ID: <CA+u6gbzvMS5QxMhSf8v2G4dsJ4sviyo5Sg2M7y-BkyZ2WLWpHw@mail.gmail.com>
+
+On 25 August 2011 11:59, Albert Y. C. Lai <trebla at vex.net> wrote:
+> do, a block, a monad block
+> rec, a knot tied in the block
+> mu, a name that calls itself (mu is pronounced as me in modern Greek)
+> forM_, a long long list to run
+> SO, a state aborting threads (SO is stack overflow)
+> la, a state to follow SO
+> T's, tranformers of monads
+> that will bring us back to do
+
+_Someone_ appears to have too much spare time on their hands... :p
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

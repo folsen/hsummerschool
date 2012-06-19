@@ -1,0 +1,82 @@
+From bobzhang1988 at gmail.com  Mon Aug 22 07:49:45 2011
+From: bobzhang1988 at gmail.com (bob zhang)
+Date: Mon, 22 Aug 2011 01:49:45 -0400
+Subject: [Haskell-cafe] Need help Very strange space behavior
+Message-ID: <CANcqPu7ZP-e2epXrZreG=YxKG42S8hi0o+ncFzpiw1n3H7nd0g@mail.gmail.com>
+
+Hi all,
+     I thought that Cont Monad is just equivalent to CPS Transformation, so
+if I have
+a monadic sum, if I run in Identity Monad, it will suck due to
+stackoverflow, and if
+I run it in Cont Monad, it will okay due to tail recursion. So I write a
+simple program
+to verify my idea. But to my surprise, the result is unreasonable due to my
+limited knowledge.
+All programs are compiled "ghc --make Test.hs -o test && ./test"
+      Thank you in advance, the clearer the better!! (I am really confused)
+in the comments, suck means stackoverflow.
+
+sum0 n = if n==0  then  0  else n + sum0 (n-1)
+sum1 n = if  n==0  then return 0 else sum1 (n-1) >>= \ v ->  seq v (return
+(n+v))
+
+sum2 n k = if n == 0 then k 0 else sum2 n (\v -> k (n +
+v))
+
+sum3 n k = if n == 0 then k 0 else sum3 n (\ !v -> k (n +
+v))
+
+sum4 n k = if n == 0 then k 0 else sum4 n (\ v -> seq v ( k (n +
+v)))
+
+sum5 n = if  n==0  then return 0 else sum5 (n-1) >>= \ v ->   (return
+(n+v))
+
+-- main = print (sum0 3000000)
+--  suck  reasonable
+
+-- main = print (flip runCont id (sum1 3000000))
+-- rock 180M memory reasonable, but I am not clear why seq needed here,
+since its continuation is not applied until n goes to 0
+
+-- main = print (flip runCont id (sum5 3000000))
+-- suck -- why?
+
+-- main = print (flip runCont (const 0) (sum1 3000000))
+-- rock 130M memory   -- reasonable
+
+-- main = print (flip runCont (const 0) (sum5 3000000))
+-- rock 118M memory   -- reasonable
+
+-- main = print (sum2 3000000 (const 0))
+-- a lot of memory (more than 1G)   -- I thought sum2 is equivalent to sum5
+(when sum5 is in Cont Monad), why?
+
+-- main = print (sum3 3000000 (const 0))
+-- a lot of memory -- I thought sum3 is equivalent to sum1(Cont Monad), why?
+
+
+-- main = print (runIdentity  (sum1 3000000))
+-- suck -- exactly what I want
+
+-- main = print (sum3 3000000 id)
+-- a lot of memory -- equivalent to sum1 why?
+
+-- main = print (sum4 3000000 id) -
+- a lot of memory  -- equivalent to sum1 why?
+
+-- main = print (sum [1 .. 3000000]) -- suck -- src sum = foldl (+)
+0
+-- reasonable
+-- main = print (foldl' (+) 0 [1 .. 3000000]) -- rock 1.5M
+memory
+-- reasonable
+
+
+-- 
+Best, bob
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110822/07849b9b/attachment.htm>
+

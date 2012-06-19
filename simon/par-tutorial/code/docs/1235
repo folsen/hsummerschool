@@ -1,0 +1,57 @@
+From thomas.dubuisson at gmail.com  Fri Aug 19 22:45:07 2011
+From: thomas.dubuisson at gmail.com (Thomas DuBuisson)
+Date: Fri, 19 Aug 2011 13:45:07 -0700
+Subject: [Haskell-cafe] Question about data
+In-Reply-To: <CAGHv16uFODO0WSFP4h+m-i+XMFMiKkbCxJetVZk-QxP4fiEzqg@mail.gmail.com>
+References: <CAGHv16uFODO0WSFP4h+m-i+XMFMiKkbCxJetVZk-QxP4fiEzqg@mail.gmail.com>
+Message-ID: <CAOk36JiJasqUVFDEhVNNJ_C0Y9N_BHKKD7WwfhMLFbwr7N40Xw@mail.gmail.com>
+
+This is not a valid data declaration.  You can't have a "Float" field
+without any constructor name and have it still of type
+"MathExpression".  I suggest you do something like:
+
+data MathExpr = MathFloat Float
+    ....
+
+So you may declare pi:
+
+    let mathPi = MathFloat pi  -- note "pi" is defined in the prelude alread
+
+
+Cheers,
+Thomas
+
+On Fri, Aug 19, 2011 at 1:40 PM, Paul Reiners <paul.reiners at gmail.com> wrote:
+> I've created a simple type declaration:
+>
+> data MathExpression = Float
+> ??? | Add MathExpression MathExpression
+> ??? | Subtract MathExpression MathExpression
+> ??? | Multiply MathExpression MathExpression
+> ??? | Divide MathExpression MathExpression
+> ??? ? deriving (Show)
+>
+> Now how do I create an instance of MathExpression which is just a Float?
+>
+> This doesn't work:
+>
+> *Main> let pi = 3.14 :: MathExpression
+>
+> <interactive>:1:10:
+> ??? No instance for (Fractional MathExpression)
+> ????? arising from the literal `3.14'
+> ??? Possible fix:
+> ????? add an instance declaration for (Fractional MathExpression)
+> ??? In the expression: 3.14 :: MathExpression
+> ??? In an equation for `pi': pi = 3.14 :: MathExpression
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

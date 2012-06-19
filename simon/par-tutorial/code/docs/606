@@ -1,0 +1,38 @@
+From dave.terei at gmail.com  Fri Apr 22 10:10:30 2011
+From: dave.terei at gmail.com (David Terei)
+Date: Fri, 22 Apr 2011 01:10:30 -0700
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <4DB093A6.8000303@btinternet.com>
+References: <4DB093A6.8000303@btinternet.com>
+Message-ID: <BANLkTimX0eX78AAL5kmrUULt8TPoqduP8Q@mail.gmail.com>
+
+Good chance you've already read this but if not here is a good post by
+ Linus about his take on the problems with darcs:
+
+http://markmail.org/message/vk3gf7ap5auxcxnb
+
+ I personally think he is right on the money here. The other problem
+ with Darcs is performance. While it has improved a lot its still not
+ good enough. When GHC was using darcs you couldn't use the annotate
+ command because it took far too long to run. If you can't use certain
+ features of your vcs because of performance its a big fail. GHC isn't
+ even really that large a code base, imagine trying to use darcs for
+ say the Linux kernel. I also don't think darcs handles branches and
+ merging well enough.
+
+ Cheers,
+David
+
+On 21 April 2011 13:29, Andrew Coppin <andrewcoppin at btinternet.com> wrote:
+> I'm sure this must be a VFAQ, but... There seems to be universal agreement
+> that Darcs is a nice idea, but is unsuitable for "real" projects. Even GHC
+> keeps talking about getting rid of Darcs. Can anybody tell me what the
+> "problems" with Darcs actually are?
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

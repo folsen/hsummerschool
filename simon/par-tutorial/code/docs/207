@@ -1,0 +1,23 @@
+From simon.hengel at wiktory.org  Thu Apr  7 10:43:44 2011
+From: simon.hengel at wiktory.org (Simon Hengel)
+Date: Thu, 7 Apr 2011 10:43:44 +0200
+Subject: [Haskell-cafe] ANNOUNCE: DocTest-0.2.0
+In-Reply-To: <BANLkTi=5rhVDfLY+anNaF_50Q8C+omcUzg@mail.gmail.com>
+References: <20110406164647.GA7363@x200>
+	<BANLkTi=mTPfLkU-++DY5kPKcgb_83Vf2HA@mail.gmail.com>
+	<20110406205305.GA31747@x200>
+	<BANLkTi=5rhVDfLY+anNaF_50Q8C+omcUzg@mail.gmail.com>
+Message-ID: <20110407084344.GA2273@x200>
+
+> I like the idea of a getDocTests function. In theory, it could take a cabal
+> file as an argument, and use the Cabal library to get a list of all modules to
+> be checked. It would also be convenient if it automatically passed in GHC
+> options correlating to each LANGUAGE pragma found on a module.
+
+If you open up a ticket, I'll give it a try when I have a less tight
+schedule.
+
+Cheers,
+Simon
+
+

@@ -1,0 +1,31 @@
+From fischer at nii.ac.jp  Fri Feb 11 16:48:35 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Sat, 12 Feb 2011 00:48:35 +0900
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+Message-ID: <AANLkTikPCQfUwZ3y11vO2kSFrXjffbvo+OefTWwxZ+ZX@mail.gmail.com>
+
+>
+> I've come across this a few times - "In Haskell, once can prove the
+> correctness of the code" - Is this true?
+>
+
+One way to prove the correctness of a program is to "calculate" it from its
+specification. If the specification is also a Haskell program, equational
+reasoning can be used to transform a (often inefficient) specification into
+an equivalent (but usually faster) implementation. Richard Bird describes
+many examples of this approach, one in his functional pearl on a program to
+solve Sudoku [1]. Jeremy Gibbons gives an introduction to calculating
+functional programs in his lecture notes  of the Summer School on Algebraic
+and Coalgebraic Methods in the Mathematics of Program Construction [2].
+
+Sebastian
+
+[1]: http://www.cs.tufts.edu/~nr/comp150fp/archive/richard-bird/sudoku.pdf
+[2]:
+http://www.comlab.ox.ac.uk/jeremy.gibbons/publications/acmmpc-calcfp.pdf
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110212/65fc90a5/attachment.htm>
+

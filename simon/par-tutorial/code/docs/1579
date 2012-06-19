@@ -1,0 +1,22 @@
+From ivan.miljenovic at gmail.com  Thu Dec  1 15:19:55 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Fri, 2 Dec 2011 01:19:55 +1100
+Subject: [Haskell-cafe] Program used for debugging
+In-Reply-To: <CACqaG6zY-i7kG-OyYiXH5U8N8X7zgKZ9yr-x7cfALin3SUXoTg@mail.gmail.com>
+References: <CACqaG6zY-i7kG-OyYiXH5U8N8X7zgKZ9yr-x7cfALin3SUXoTg@mail.gmail.com>
+Message-ID: <CA+u6gbws9TcP2oeOohueEZhLZJopFwAXQX_tbFOxc+K5S4Ez4Q@mail.gmail.com>
+
+On 2 December 2011 01:10, Yves Par?s <limestrael at gmail.com> wrote:
+> Hey,
+>
+> What do you mostly use for debugging?
+> Simple calls to Debug.Trace.trace? Hpc? Hood?
+
+trace and ghci.
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

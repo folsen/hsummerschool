@@ -1,0 +1,79 @@
+From jerzy.karczmarczuk at unicaen.fr  Thu Dec 29 11:05:02 2011
+From: jerzy.karczmarczuk at unicaen.fr (Jerzy Karczmarczuk)
+Date: Thu, 29 Dec 2011 11:05:02 +0100
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <jdh9h6$gba$1@dough.gmane.org>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <jdh9h6$gba$1@dough.gmane.org>
+Message-ID: <4EFC3B4E.9020304@unicaen.fr>
+
+Sorry, a long and pseudo-philosophical treatise. Trash it before reading.
+
+Heinrich Apfelmus:
+> You could say that side effects have been moved from functions to some 
+> other type (namely IO) in Haskell. 
+I have no reason to be categorical, but I believe that calling the 
+interaction of a Haskell programme with the World - a "side effect" is 
+sinful, and it is a source of semantical trouble.
+
+People do it, SPJ (cited by S. Horne) did it as well, and this is too bad.
+People, when you eat a sandwich: are you doing "side effects"??  If you 
+break a tooth on it, this IS a side effect, but neither the eating nor 
+digesting it, seems to be one.
+
+This term should be used in a way compatible with its original meaning, 
+that something happens implicitly, "behind the curtain", specified most 
+often in an informal way (not always deserving to be called 
+"operational"). If you call all the assignments "side effects", why not 
+call -  let x = whatever in Something - also a "local side-effect"?
+Oh, that you can often transform let in the application of lambda, thus 
+purely functional?
+
+Doesn't matter, Steve Horne will explain you that (sorry for the irony): 
+"let is a compile-time pure construct ; at execution this is impure, 
+because x got a value".
+
+S.H. admits that he reasons within his model, and has problems with 
+others. Everybody has such problems, but I see here something the (true) 
+Frenchies call "un dialogue de sourds". For me a Haskell programme is 
+ABSOLUTELY pure, including the IO. The issue is that `bind` within the 
+IO monad has an implicit parameter, the World. In fact, a stream of 
+Worlds, every putWhatever, getLine, etc. passes to a new instance.
+
+We do not control this World, we call it "imperative" (whatever this 
+means, concerning eating a sandwich, or exploding an impure neutron 
+bomb), so we abuse the term "side effect" as hell!
+The "Haskell sector" of the global world, the programme itself is just a 
+function. Pure as the robe of an angel. Simply, you are not allowed by 
+the Holy Scripts to look under this robe.
+
+==
+
+The rest is a (pure of course) d?lire.
+Well, you might not believe me, but philosophically you don't need to 
+imagine the World as imperative. Personally I am a believer in the 
+Quantum Religion. If you accept all them Holy Dogmas of Unitarity, of 
+Linearity, etc., if you believe in the True Quantum Nature of the real 
+world, - then it becomes ... functional. Pure.
+  Without a single trace of any "side effects".
+
+The problem is that residing inside this world precludes the possibility 
+of considering *observed things* as pure, they are conceptually detached 
+from the stream of the Universe Vectors. They "change", so you say: 
+HaHa!! A particle got ASSIGNED a new position! This is an imperative 
+side-effect! -
+- while from the point of view of an external observer, a common 
+evolution operator transformed both of you, YOU and the particle into a 
+new instance of this sector.
+
+OK, I stop here, otherwise the digestion of your sandwiches may produce 
+some side effects.
+
+Jerzy Karczmarczuk
+Caen, France.
+(William the Conqueror was here. Produced one nice side-effect.)
+
+
+
+
+

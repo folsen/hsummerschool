@@ -1,0 +1,42 @@
+From jeremy at n-heptane.com  Thu Apr 28 17:52:13 2011
+From: jeremy at n-heptane.com (Jeremy Shaw)
+Date: Thu, 28 Apr 2011 10:52:13 -0500
+Subject: [Haskell-cafe] Binary and Serialize classes
+In-Reply-To: <BANLkTinQ3xKU3Fu5N74oSM36sCDuPd7=rw@mail.gmail.com>
+References: <BANLkTinQ3xKU3Fu5N74oSM36sCDuPd7=rw@mail.gmail.com>
+Message-ID: <BANLkTina2cAY8-8Efhq=yoiP2ozXnEKeDw@mail.gmail.com>
+
+Hello,
+
+You might consider using safecopy, which explicitly supports the case
+where the serialization format or the datastructure itself changes and
+the data needs to be migrated to the new format?
+
+http://acid-state.seize.it/safecopy
+
+- jeremy
+
+On Thu, Apr 28, 2011 at 10:00 AM, Evan Laforge <qdunkan at gmail.com> wrote:
+> It's been remarked to me that relying on the Binary and Serialize
+> classes is dangerous, because there's no guarantee they won't maintain
+> a consistent format. ?So if my app uses the Serialize instances that
+> come with cereal, it could suddenly fail to read old saves after an
+> upgrade to cereal.
+>
+> However, neither binary nor cereal expose the underlying serialization
+> algorithms for various types except through the instances, so I would
+> have to copy and paste the code over if I want control over it. ?If I
+> don't trust 'instance Serialize String' to not change behind my back,
+> maybe I could at least trust 'Data.Serialize.stringToUtf8' to not
+> change since if it did the name would now be wrong.
+>
+> Are these fears justified? ?I imagine if the Int instance for
+> Serialize changed there would be an uproar and it would probably have
+> to be changed back. ?I sent a bug to the maintainers of data-binary a
+> long time ago about the Double instance not serializing -0, and they
+> ignored it, probably because it would be bad to change the instance.
+> So can I use the included instances without fear of them changing
+> between releases? ?Of course I still run the risk of an instance from
+> some other package changing, but I'm less likely to be using those.
+
+

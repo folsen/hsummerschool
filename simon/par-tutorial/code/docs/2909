@@ -1,0 +1,49 @@
+From dominique.devriese at cs.kuleuven.be  Thu Feb 10 10:03:04 2011
+From: dominique.devriese at cs.kuleuven.be (Dominique Devriese)
+Date: Thu, 10 Feb 2011 10:03:04 +0100
+Subject: [Haskell-cafe] [Haskell] Problems with
+	(projects|community).haskell.org
+In-Reply-To: <20110209195743.1118db95.mle+hs@mega-nerd.com>
+References: <20110209195743.1118db95.mle+hs@mega-nerd.com>
+Message-ID: <AANLkTi=dqjHRQup_WpKW3S_FwW8BqoDdpD5z4Tn6tXLz@mail.gmail.com>
+
+Also, is there any news yet on a procedure for community members with
+accounts on projects.haskell.org to get access to them again? My ssh
+publickey login is no longer being accepted. I had an account mainly
+for hosting the darcs repo and the website for my project
+grammar-combinators. The website has been down for a couple of weeks
+now.
+
+Dominique
+
+P.S.: This is not a complaint, I'm just hoping for a status update.
+P.P.S.: Thanks to the people working on fixing this..
+
+2011/2/9 Erik de Castro Lopo <mle+hs at mega-nerd.com>:
+> Hi all,
+>
+> Still a couple of problems with these servers.
+>
+> Firstly, community.haskell.org shows the default Apache "It works"
+> page. It would be nice to have something better there.
+>
+> Secondly the mailman web interface on projects.haskell.org [0] is
+> giving a Service Temporarily Unavailable message (and has been
+> for a couple of days).
+>
+> Cheers,
+> Erik
+>
+> [0] http://projects.haskell.org/cgi-bin/mailman/admindb/haskell-llvm
+> --
+> ----------------------------------------------------------------------
+> Erik de Castro Lopo
+> http://www.mega-nerd.com/
+>
+> _______________________________________________
+> Haskell mailing list
+> Haskell at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell
+>
+
+

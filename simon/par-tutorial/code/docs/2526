@@ -1,0 +1,27 @@
+From cdsmith at gmail.com  Sat Dec 31 14:26:43 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Sat, 31 Dec 2011 06:26:43 -0700
+Subject: [Haskell-cafe] Are all monads functions?
+In-Reply-To: <CACqaG6z+TKe_FGqWD_ODMj4rP7bRTyHvCYev4d_m_BN7B0d_=A@mail.gmail.com>
+References: <CACqaG6y79_uXmOm4Snxg9H=zmLaemqQN+rG3eHHR3W0xB2bxAg@mail.gmail.com>
+	<20111231125201.GA6316@sniper>
+	<CACqaG6z+TKe_FGqWD_ODMj4rP7bRTyHvCYev4d_m_BN7B0d_=A@mail.gmail.com>
+Message-ID: <CAPq5PvKSVrtZzLnroicaebxE=f+AKpBo4jPr0uPMKTyghhhQYA@mail.gmail.com>
+
+On Dec 31, 2011 8:19 AM, "Yves Par?s" <limestrael+haskell at gmail.com> wrote:
+> -- The plain Maybe type
+> data Maybe a = Just a | Nothing
+>
+> -- The MaybeMonad
+> newtype MaybeMonad a = MM ( () -> Maybe a )
+>
+> That's what using Maybe as a monad semantically means, doesn't it?
+
+I'd have to say no.  That Maybe types are isomorphic to functions from ()
+is not related to their being monads... indeed it's true of all types.  I'm
+not sure what meaning you see in the function, but I don't see anything of
+monads in it.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111231/fac90990/attachment.htm>
+

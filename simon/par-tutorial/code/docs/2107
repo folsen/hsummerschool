@@ -1,0 +1,52 @@
+From wren at freegeek.org  Tue Dec 20 00:37:33 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Mon, 19 Dec 2011 18:37:33 -0500
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+References: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+Message-ID: <4EEFCABD.4030000@freegeek.org>
+
+On 12/14/11 10:58 PM, Gregory Crosswhite wrote:
+> Of course, this is not a simple change at all because it would have to
+> be done in such a way as to respect the ordering of actions --- that
+> is, we can't have each action executed only when the corresponding
+> element of the list demanded is forced, or else actions would
+> undesirably interleave.
+
+Therein lies the issue. To put this in a monadic context, this is the 
+same reason why we can't just say:
+
+     evalState (repeatM getNext) init
+
+e.g., to generate an infinite list of pseudorandom numbers and then 
+discard the final seed because we have all the numbers we'll ever need. 
+Hidden lurking in this expression is the fact that the state being 
+passed around eventually becomes bottom. We don't especially care, since 
+evalState is discarding the state, but the fact remains that we have to 
+compute it. Indeed, we can't even define 'repeatM' sensibly, for the 
+same reason.
+
+We can only compute a list of responses lazily if we happen to be in a 
+monad/applicative where we can guarantee that pulling all the effects up 
+to the top is equivalent to performing them lazily/interleaved. However, 
+even in the cases where that can be guaranteed, we don't have any 
+especially good mechanism for informing GHC about that fact.
+
+The reason why 'some' and 'many' can escape this ---in the case of 
+parsers at least--- is that they will run for a (deterministic) fixed 
+length of time and then return. If you're parsing any finite-length 
+text, then there's an upper bound on how many times the action can run 
+before it fails. This is the same reason why we can define 'replicateM' 
+even though we can't define 'repeatM'. The only difference is that with 
+'replicateM' the termination criterion is extrinsic to the monad (it's 
+induction on Int), whereas with 'some' and 'many' the termination 
+criterion is intrinsic to whatever the side-effects of the action are. 
+The problem is that for Maybe and lists, there is no intrinsic state 
+which would allow an action to succeed sometimes and fail other times 
+(thereby providing an intrinsic means for termination).
+
+-- 
+Live well,
+~wren
+
+

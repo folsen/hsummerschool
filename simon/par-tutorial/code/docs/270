@@ -1,0 +1,21 @@
+From patrick.browne at dit.ie  Sun Apr 10 09:46:33 2011
+From: patrick.browne at dit.ie (Patrick Browne)
+Date: Sun, 10 Apr 2011 08:46:33 +0100
+Subject: [Haskell-cafe] Deciding equality of functions.
+In-Reply-To: <4DA12282.7030707@freegeek.org>
+References: <829991302369988@web85.yandex.ru> <4DA12282.7030707@freegeek.org>
+Message-ID: <4DA16059.2080808@dit.ie>
+
+On 10/04/2011 04:22, wren ng thornton wrote:
+> The thing is that a lot of the common optimizations (e.g., TCO)
+> completely wreck the inductive structure of the function which, in turn,
+> makes it difficult to say interesting things about them.[1]
+
+Could you point me to some Haskell references concerning this point.
+Thanks,
+Pat
+
+
+This message has been scanned for content and viruses by the DIT Information Services E-Mail Scanning Service, and is believed to be clean. http://www.dit.ie
+
+

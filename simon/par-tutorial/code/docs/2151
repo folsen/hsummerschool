@@ -1,0 +1,50 @@
+From ok at cs.otago.ac.nz  Wed Dec 21 01:30:34 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Wed, 21 Dec 2011 13:30:34 +1300
+Subject: [Haskell-cafe] The Riddle of the Buddhist Monk
+In-Reply-To: <7460b8a53dc3.4ef0ab07@dit.ie>
+References: <7460b8a53dc3.4ef0ab07@dit.ie>
+Message-ID: <160418E5-29C2-4827-B7A0-5BC5CAE0E105@cs.otago.ac.nz>
+
+
+On 21/12/2011, at 4:34 AM, Patrick Browne wrote:
+
+> I have simplified the code using constructors and export.
+> I can evalute the qualified expressions but I do not get the expected results.
+> 
+> module  MONKONMOVE (module MONKONMOVE)where
+
+When I see "MONKONMOVE" I think "what's a MONKON?"
+
+Even the Java designers say "if you paste together several words all in
+capitals, put underscores between them".  So is it MONKON_MOVE,
+MONK_ONMOVE, MONK_ON_MOVE (what does that mean?) or something else?
+
+The classic puzzle has nothing to do with monks, Buddhist or otherwise.
+It goes something like this:
+	"One morning you start climbing a mountain at 8am and reach the
+	 top by 6pm.  You stay there overnight.  Next morning, you start
+	 down on the same path at 8am and reach the bottom by 6pm.
+	 Prove that there is some time of day 8am <= t <= 6pm such that
+	 you are at the same place at time t on both days."
+
+The solution as given by Lewis Carroll is
+	"Pretend there are two people doing the trip, one up and one
+	 down, on the same day.  Clearly they must meet.  QED."
+
+So what exactly is the program supposed to do?  The problem lacks
+the information from which a specific value of t can be computed;
+all that can be determined is that *some* value of t must exist.
+However, that proof depends on the *continuity* of the time->place
+mappings:
+	if f, g: [0,1] -> [0,1] are continuous functions
+	and f(0) = 0, f(1) = 1, g(0) = 1, g(1) = 0
+	then there exists t in [0,1] such that f(t) = g(t)
+and I don't see anything in the code that talks about continuity.
+It should be clear that daredevils going up and down the mountain
+on sufficiently springy pogo sticks (or electrons jumping in their
+insouciant quantum way) need *not* meet.
+
+
+
+

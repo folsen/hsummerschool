@@ -1,0 +1,27 @@
+From j.romildo at gmail.com  Sat Feb 12 16:12:22 2011
+From: j.romildo at gmail.com (=?iso-8859-1?Q?Jos=E9?= Romildo Malaquias)
+Date: Sat, 12 Feb 2011 13:12:22 -0200
+Subject: [Haskell-cafe] GHC and MinGW
+Message-ID: <20110212151222.GA2516@malaquias.DHCP-GERAL>
+
+Hello.
+
+How do I make ghc use my installation of MinGW on Windows? I have
+ghc-7.0.1 installed and the latest MinGW packages. I want ghc to
+automatically find libraries installed by the MinGW installer.
+
+Currently I am getting the error with my application:
+
+Linking Gui.exe ...
+C:\Program Files\Haskell\iconv-0.4.1.0\ghc-7.0.1/libHSiconv-0.4.1.0.a(hsiconv.o):hsiconv.c:(.text+0x8): undefined reference to `libiconv_open'
+
+where libiconv has been installed with the command
+
+mingw-get install mingw32-libiconv
+
+and the library is available at c:/devel/MinGW/lib/
+
+
+Romildo
+
+

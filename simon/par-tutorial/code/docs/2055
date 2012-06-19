@@ -1,0 +1,47 @@
+From gary.klindt at googlemail.com  Sat Dec 17 20:42:43 2011
+From: gary.klindt at googlemail.com (Gary Klindt)
+Date: Sat, 17 Dec 2011 20:42:43 +0100
+Subject: [Haskell-cafe] gtk2hs: adding widget during runtime
+Message-ID: <4EECF0B3.8040706@googlemail.com>
+
+Hello Haskellers,
+
+currently I work with the gtk2hs library to create a graphical user 
+interface. Everything works fine, but there is one problem:
+How can I insert widgets into boxes during runtime?
+
+I tried something like:
+
+main = do
+     initGUI
+     window <- windowNew
+
+     box <- vBoxNew True 0
+
+     l1 <- labelNew $ Just "label eins"
+     bc <- buttonNewWithLabel "insert!"
+     onClicked bc $ (\b -> do lh <- labelNew $ Just "neues label!"
+                              boxPackStart b lh PackNatural 0
+                              widgetQueueDraw lh
+                              widgetQueueDraw b ) box
+
+     boxPackStart box l1 PackNatural 0
+     boxPackStart box bc PackNatural 0
+
+     containerAdd window box
+
+     widgetShowAll window
+     onDestroy window mainQuit
+     mainGUI
+
+That compiles fine, but the GUI never shows a "neues label!".
+
+What I want is a widget W, which takes a list L, and produces sub 
+widgets for each element. There are also some Entry widgets and a button 
+B. By clicking on that button B, I want to add an element to the list L, 
+and add a sub widget to the widget W.
+
+Thank you for reading,
+Gary
+
+

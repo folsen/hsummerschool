@@ -1,0 +1,68 @@
+From leepike at gmail.com  Tue Feb  8 09:25:56 2011
+From: leepike at gmail.com (Lee Pike)
+Date: Tue, 8 Feb 2011 00:25:56 -0800
+Subject: [Haskell-cafe] Unrecognized function symbols in .prof
+In-Reply-To: <AANLkTik2Q8YNAzau5tv1e5M_S4ORxBK86RZ9JgYGkxuO@mail.gmail.com>
+References: <AANLkTikbpo9GbQwVpuwqgpQrjoHcqKAkE+b7X7sU2YV3@mail.gmail.com>
+	<AANLkTik2Q8YNAzau5tv1e5M_S4ORxBK86RZ9JgYGkxuO@mail.gmail.com>
+Message-ID: <AANLkTimSan7FjgTvoOJKFffMU7y8HqWVe1s5xktMLbbg@mail.gmail.com>
+
+Iavor,
+
+Thanks.
+
+> One way to test this would be to name the equality function explicitly. ?For
+> example, something like this:
+> myEquality x y = ...
+> instance Eq MyType where (==) = myEquality
+
+Good idea (but a little painful!).
+
+> Another option would be to look at the generated core by using -ddump-simpl
+> when compiling. This will generate a whole bunch of output, which you can
+> redirect to a file and the search for the mysterious symbols inside.
+
+The symbols aren't in the core of the module I'm profiling---sorry, I
+didn't mention that the symbols are from an imported library (compiled
+with -auto-all, so the library symbols are included in the .prof).
+
+Is there a convenient way to dump core when building libraries with
+cabal?  (--ghc-options=-ddump-simpl doesn't seem to do it).
+
+Anyway, I'll resort to your option #1.
+
+Thanks,
+Lee
+
+>> Hi,
+>>
+>> I am profiling a Haskell program using GHC, and after executing the
+>> program with +RTS -p, I get a .prof file that lists the cost centers
+>> of the program. ?Some of the cost centers listed are for function
+>> symbols that do not exist in the given module. ?For example, I have in
+>> my .prof file:
+>>
+>> COST CENTRE ? ? ? ? ? ? ?MODULE ? %time %alloc
+>> ==_a2MT ? ? ? ? ? ? ? ? ? ? ? ?Foo ? ? ? ? ? 19.8 ? ?0.0
+>> ==_a2R8 ? ? ? ? ? ? ? ? ? ? ? ? Foo ? ? ? ? ? 17.8 ? ?0.0
+>> ==_a2Bg ? ? ? ? ? ? ? ? ? ? ? ? Bar ? ? ? ? ? 13.7 ? ?0.0
+>> ? ? ? ? ? ? ? ? ?.... ? ? ? ? ? ? ? ? ? ? ....
+>>
+>> It appears these are generated symbols; how do I find out what those
+>> function symbols correspond to? ?(In this case, my assumption is that
+>> these symbols refer to instances of the Eq class, but I'm not sure.)
+>>
+>> [I couldn't find anything about this in the GHC online documentation
+>> or via Googling, but sorry if I missed it.]
+>>
+>> Thanks,
+>> Lee
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

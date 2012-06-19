@@ -1,0 +1,40 @@
+From trebla at vex.net  Wed Feb  2 03:25:34 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Tue, 01 Feb 2011 21:25:34 -0500
+Subject: [Haskell-cafe] timely shutdown of timer threads
+In-Reply-To: <84DE9201-9822-4A1A-A17A-682C146C771C@gmail.com>
+References: <84DE9201-9822-4A1A-A17A-682C146C771C@gmail.com>
+Message-ID: <4D48C09E.2050001@vex.net>
+
+On 11-02-01 02:58 PM, Warren Harris wrote:
+> I have an application that forks a thread to run an activity on a timer. (The activity happens to be Berkeley DB checkpointing, but that's actually beside the point here.) The problem is that when the application wants to quit, I would like my main thread to be able to tell the timer thread to shut down in a timely way. However, I don't see a primitive in haskell that allows me to both wait for a timeout, or a notification. (If I were to do this in java, I would use wait/notify.)
+
+Use an MVar for signalling; use a two-valued data type to represent 
+time-to-work or time-to-die. For extra correctness, use a second MVar to 
+be notified that the child thread is really done --- because otherwise 
+there would be the race condition of the child thread still in the 
+middle of critical I/O when the program quits.
+
+import Control.Concurrent
+import Control.Exception(finally)
+
+data DoOrDie = Do | Die
+
+main = do
+   v <- newEmptyMVar
+   finale <- newEmptyMVar
+   forkIO (timeloop v `finally` putMVar finale ())
+   putStrLn "press enter to quit"
+   getLine
+   putMVar v Die
+   takeMVar finale
+
+timeloop v = run where
+   run = do
+     forkIO (threadDelay 15000000 >> putMVar v Do)
+     m <- takeMVar v
+     case m of
+       Do -> putStrLn "checkpoint" >> run
+       Die -> putStrLn "checkmate"
+
+

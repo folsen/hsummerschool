@@ -1,0 +1,53 @@
+From aslatter at gmail.com  Thu Dec 15 08:41:58 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Thu, 15 Dec 2011 01:41:58 -0600
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <CAKjSnQG17eroGuo3w0YMaAesiMPOFuc-ykt_oYBH+BSfL1ocMg@mail.gmail.com>
+References: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+	<CAKjSnQFvJrz1iFd8XsGbK4q7ZK9F0qjXXUHdoTn1XVmeeAm+OQ@mail.gmail.com>
+	<430054FA-800C-408C-8B75-9C3422293133@gmail.com>
+	<CAKjSnQFUxUbDAen_p7DPobzusVo30_6q=x2yzQejsnWe914ZnQ@mail.gmail.com>
+	<CAKFCL4U+wDf69+D6fz-hiBRJcHCUK4tB0pJ_nuZB-z3nucwxDQ@mail.gmail.com>
+	<CAKjSnQE3umAo-aefkTqPjT5+=M9cr=s9e84yKAx-HQx5Qjo_Bg@mail.gmail.com>
+	<9ED90057-4B37-4E6E-A956-5BA2E952E4CB@gmail.com>
+	<CAKjSnQG17eroGuo3w0YMaAesiMPOFuc-ykt_oYBH+BSfL1ocMg@mail.gmail.com>
+Message-ID: <CAKjSnQEH7amRNmMtpeJ=ZYQH=XTs-sLUnSVHbuEiFt3qmg15RQ@mail.gmail.com>
+
+On Thu, Dec 15, 2011 at 1:40 AM, Antoine Latter <aslatter at gmail.com> wrote:
+> On Thu, Dec 15, 2011 at 1:23 AM, Gregory Crosswhite
+> <gcrosswhite at gmail.com> wrote:
+>>
+>> On Dec 15, 2011, at 3:36 PM, Antoine Latter wrote:
+>>
+>>> There are a lot of combinators you can build from (<|>) and empty that
+>>> go terribly wrong for Maybe and List but are still quite useful.
+>>>
+>>
+>> Yes, you *could* do that, but the whole point is that you shouldn't.
+>> ?Typeclasses generally come with informal laws that must be obeyed. ?If your
+>> instance does not obey those laws, then it should not be an instance.
+>>
+>
+
+To clarify - I dropped Greg's sentence "Incidentally, exactly what use
+cases do you have in mind?", which is most of what I was addressing in
+my previous email.
+
+> I said 'combinators', not 'instances'. A lot of popular parsers
+> combinators can be written exclusively from (<|>) and empty, but make
+> little sense for List and Maybe, and may not even function properly.
+> The 'trifecta' package includes a nice reference:
+>
+> http://hackage.haskell.org/packages/archive/trifecta/0.49.1/doc/html/Text-Trifecta-Parser-Combinators.html
+>
+> See 'skipSome' through 'chainr1' - I wouldn't be surprised if most of
+> these lead to the same infinite loop behavior for Maybe as the stock
+> 'many' and 'some' in base.
+>
+> These sorts of functions are what Alternative is for.
+>
+> Maybe I'm missing something fundamental here.
+>
+> Antoine
+
+

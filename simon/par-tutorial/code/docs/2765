@@ -1,0 +1,63 @@
+From illissius at gmail.com  Sun Feb  6 20:40:14 2011
+From: illissius at gmail.com (=?ISO-8859-1?Q?G=E1bor_Lehel?=)
+Date: Sun, 6 Feb 2011 20:40:14 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+References: <4D4B19DB.5000907@btinternet.com>
+	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+Message-ID: <AANLkTimXFD9GbFbSTAy1SeRq1GS5+099aKvx6DVQuvTJ@mail.gmail.com>
+
+On Thu, Feb 3, 2011 at 11:40 PM, Richard O'Keefe <ok at cs.otago.ac.nz> wrote:
+>
+> On 4/02/2011, at 10:10 AM, Andrew Coppin wrote:
+>>
+>> The important obsevation is this: One tiny, almost insignificant change can transform a program from taking 50 seconds and 400 MB of RAM into one that takes 0.02 seconds and 0.1 MB of RAM. And, at least in this case, the simpler version is the slow one.
+>>
+>> To say that Haskell is "slow" is both a little bit vague, and not really backed up by facts. In about 5 minutes flat, I managed to write a Haskell program that's very simple, and yet faster than a comparably simple C++ program (and C++ is supposed to be "fast"). So it's not that Haskell is "slow". It's that Haskell is *tricky*. Tiny, tiny little changes that look innocuous can have vast effects on performance. And this is a nice little example of that effect.
+>
+> This seems to me to be the heart of the message, so maybe this reply is on-topic.
+>
+> Back in the days when systems other than Wintel and maybe sort of intel Linux were
+> supported by Clean, I used to really love one of the features of the Clean compiler.
+> One simple command line switch and the compiler would list the names of all your
+> top level functions together with their types, and the types included strictness.
+> (Also uniqueness, not relevant to Haskell.)
+>
+> The GHC documentation says the information is in the interface files,
+> but they are binary now, and I can't find it there.
+>
+>> That got me thinking... What would happen if, instead of "Integer", we had two types, "evaluated Integer" and "possibly unevaluated Integer"? What if the strictness or otherwise of a data structure were exposed at the type level?
+>
+> Oh, you mean like "!Int" and "Int" in Clean? ?I used to find bang *types* rather easier to deal with
+> than I now do bang *patterns*.
+>
+>> Currently, if you want a strict list, you have to implement one yourself. But is that strict in the spine, or the elements, or what?
+>
+> Spine strict: ![t].
+> Spine and element strict: ![!t].
+
+This does seem like a very appealing idea (to me), especially if
+evaluation were to happen implicitly wherever the types require it.
+Are there any major obstacles or philosophical objections to it other
+than available time and manpower?
+
+
+>>
+>> I have no idea what the syntax for that would look like,
+>
+> Clean?
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Work is punishment for failing to procrastinate effectively.
+
+

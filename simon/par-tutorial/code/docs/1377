@@ -1,0 +1,27 @@
+From trebla at vex.net  Fri Aug 26 00:25:57 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Thu, 25 Aug 2011 18:25:57 -0400
+Subject: [Haskell-cafe] Cabal-1.10.1.0 and bytestring-0.9.2.0 hackage
+ problem.
+In-Reply-To: <20110825144258.GC2485@24f89f8c-e6a1-4e75-85ee-bb8a3743bb9f>
+References: <20110825144258.GC2485@24f89f8c-e6a1-4e75-85ee-bb8a3743bb9f>
+Message-ID: <4E56CBF5.3070205@vex.net>
+
+On 11-08-25 10:42 AM, Bertram Felgenhauer wrote:
+> (or rebuild Cabal / cabal-install starting with
+> 'cabal unpack Cabal; cabal unpack cabal-install')
+
+Replacing Cabal will break bin-package-db.
+
+Breaking bin-package-db will break ghc (the GHC API).
+
+"Break" means you likely don't run into problems right now, but several 
+weeks later, you try to "cabal install" a package that depends on some 
+of the above, and you get a nonsensical error message, and you don't 
+even suspect it all started with replacing a package several weeks ago 
+(you likely even forget that you did it).
+
+See my http://www.vex.net/~trebla/haskell/sicp.xhtml , in particular the 
+"pigeon drop con" scenerio.
+
+

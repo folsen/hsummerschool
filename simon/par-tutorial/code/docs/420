@@ -1,0 +1,96 @@
+From eduard.sergeev at gmail.com  Fri Apr 15 07:19:07 2011
+From: eduard.sergeev at gmail.com (Eduard Sergeev)
+Date: Thu, 14 Apr 2011 22:19:07 -0700 (PDT)
+Subject: [Haskell-cafe] Programming Chalenges: The 3n+1 problem
+In-Reply-To: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+References: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+Message-ID: <48afceea-fd0b-47fb-90f8-afd79d261160@v11g2000prb.googlegroups.com>
+
+Hi Dmitri,
+
+> *** Question: I wonder how to implement cache for this problem in Haskell?
+> At the moment, I am not so much interested in the speed of the code, as in
+> nice implementation.
+
+Yet another option for memoization implementation: to use "monad-memo"
+package [1] which provides memoization for monadic function (using
+Data.Map by default).
+
+To use it we need to define our recursive function in monadic form and
+add `memo` in place of its recursive call:
+
+> import Control.Applicative
+> import Control.Monad.Memo
+>
+> -- calculates the length of sequence (with memoization)
+> calcM 1 = return 1
+> calcM n = succ <$> memo calcM (if even n then n `div` 2 else n*3 + 1)
+
+Here is a helper-function to run this calculation (we don't really
+need it here since `calcM` is going to be called from other monadic
+function directly):
+
+> runCalc :: Integer -> Integer
+> runCalc = startEvalMemo . calcM
+
+NB: the inferred type for `calcM` might look a little bit.. verbose,
+but we don't really need to specify it or expose `calcM` from our
+module:
+> calcM :: (MonadMemo a1 a m, Num a, Functor m, Integral a1, Enum a) => a1 -> m a
+
+
+The implementation of the function to calculate the maximum length of
+the sequence for all numbers in a range is straightforward (and also
+monadic):
+
+> -- NB: memoization cache is shared among all 'calcM' calls (very efficient)
+> calcRangeM f t = maximum <$> forM [f..t] calcM
+
+and a similar helper run-function (is not needed for the task either):
+
+> runCalcRange :: Integer -> Integer -> Integer
+> runCalcRange f t = startEvalMemo $ calcRangeM f t
+
+
+To run `calcRangeM` for the input list of values (map the function
+over it) we can define yet another simple monadic function which calls
+`calcRangeM` directly (thus reusing/building the same memoization
+cache):
+
+> solM = mapM (uncurry calcRangeM)
+
+and a helper run-function:
+
+> runSol :: [(Integer, Integer)] -> [Integer]
+> runSol = startEvalMemo . solM
+
+
+Composing all these together results in the following test code (I
+hard-coded the input for the sake of simplicity):
+
+> import Control.Applicative
+> import Control.Monad.Memo
+>
+> calcM 1 = return 1
+> calcM n = succ <$> memo calcM (if even n then n `div` 2 else n*3 + 1)
+>
+> calcRangeM f t = maximum <$> forM [f..t] calcM
+>
+> solM = mapM (uncurry calcRangeM)
+>
+> runSol = startEvalMemo . solM
+>
+> main = print $ runSol [
+>        (1, 10),
+>        (100, 200),
+>        (201, 210),
+>        (900, 1000) ]
+
+
+As for the performance, `main = print $ runSol [(1, 1000000)]` takes
+~40 seconds with -O2 on my laptop.
+
+
+[1] http://hackage.haskell.org/package/monad-memo
+
+

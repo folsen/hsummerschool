@@ -1,0 +1,56 @@
+From vandijk.roel at gmail.com  Tue Apr  5 09:34:43 2011
+From: vandijk.roel at gmail.com (Roel van Dijk)
+Date: Tue, 5 Apr 2011 09:34:43 +0200
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <BANLkTimpxzgLy_5CEsontVuwhCPBp-uY6g@mail.gmail.com>
+References: <BANLkTikgr7xBJj-f6OLPjm+CWRjdhnPQtQ@mail.gmail.com>
+	<cf2cd99d-30fa-c4e3-8a1e-e45c7680c398@me.com>
+	<BANLkTimG0JSWFYQSFKSrU0mPEzv_q6Q2HA@mail.gmail.com>
+	<BANLkTima2QW7Q+u2n4-Ry7bNQexCzDWNiw@mail.gmail.com>
+	<BANLkTi=T_S7DED1r=o_K-4+F_M5XJPsByA@mail.gmail.com>
+	<BANLkTimpxzgLy_5CEsontVuwhCPBp-uY6g@mail.gmail.com>
+Message-ID: <BANLkTinD2JVfNUYKi4n6MHJL0wdcdCjeZg@mail.gmail.com>
+
+On 5 April 2011 07:04, Mark Lentczner <mark.lentczner at gmail.com> wrote:
+> I'm not on that mailing list, so I'll comment here:
+
+I recommend joining the prime list. It is very low traffic and the
+place where language changes should be discussed.
+
+> My only caveat is that the encoding provision should apply when Haskell
+> source is presented to the compiler as a bare stream of octets. Where
+> Haskell source is interchanged as a stream of Unicode characters, then
+> encoding is not relevant -- but may be likely governed by some outer
+> protocol - and hence may not be UTF-8 but nonetheless invisible at the
+> Haskell level.
+
+My intention is that every time you need an encoding for Haskell
+sources, it must be UTF-8. At least if you want to call it Haskell.
+This is not limited to compilers but concerns all tools that process
+Haskell sources.
+
+> Two examples where this might come into play are:
+> 1) An IDE that stores module source in some database. It would not be
+> relevant what encoding that IDE and database choose to store the source in
+> if the source is presented to the integrated compiler as Unicode characters.
+
+An IDE and database are free to store sources any way they see fit.
+But as soon as you want to exchange that source with some standards
+conforming system it must be encoded as UTF-8.
+
+> 2) If a compilation system fetches module source via HTTP (I could imagine a
+> compiler that chased down included?modules?directly off of Hackage, say),
+> then HTTP already has a mechanism (via MIME types) of transmitting the
+> encoding clearly. As such, there should be no problem if that outer protocol
+> (HTTP) transmits the source to the compiler via some other encoding. There
+> is no reason (and only potential?interoperability?restrictions) to enforce
+> that UTF-8 be the only legal encoding here.
+
+This is an interesting example. What distinguishes this scenario from
+others is that there is a clear understanding between two parties
+(client and server) how a file should be interpreted. I could word my
+proposal in such a way that it only concerns situations where such a
+prior agreement doesn't or can't exist. For example, when storing
+source on a file system.
+
+

@@ -1,0 +1,30 @@
+From ivan.miljenovic at gmail.com  Tue Feb  8 13:33:20 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Tue, 8 Feb 2011 23:33:20 +1100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTikfLUnyq8GPPhRzcYan__gb1SENN9vvRwvuVLnb@mail.gmail.com>
+References: <AANLkTinkP3V6AopOA+CrwkeQCWRMHtTzKzro3VOWxhiS@mail.gmail.com>
+	<AANLkTikgiT9ujJi5PpLxr4-E8aWyOfVRog_yaDPs2MHC@mail.gmail.com>
+	<AANLkTikfLUnyq8GPPhRzcYan__gb1SENN9vvRwvuVLnb@mail.gmail.com>
+Message-ID: <AANLkTikSRKx7w_af8etS=oVriuD2qKwP3Yjq1-cUyOaS@mail.gmail.com>
+
+On 8 February 2011 23:25, John Lato <jwlato at gmail.com> wrote:
+>> class Container c where
+>> ? ? type Elem c :: *
+>>
+>> class (Container cIn, Container cOut) => CMap cIn cOut where
+>> ? ? cmap :: (Elem cIn -> Elem cOut) -> cIn -> cOut
+>>
+>> instance (a ~ Elem (c a), b ~ Elem (c b), Functor c, Container (c a),
+>> Container (c b)) => CMap (c a) (c b) where
+>> ? ? cmap = fmap
+
+I'm not sure if that will work for types like Set, as you're not
+explicitly bringing the constraint in.
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

@@ -1,0 +1,38 @@
+From fischer at nii.ac.jp  Thu Aug 11 10:01:50 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Thu, 11 Aug 2011 17:01:50 +0900
+Subject: [Haskell-cafe] ANNOUNCE: yap-0.0 - yet another prelude
+In-Reply-To: <alpine.DEB.2.00.1108101638110.27064@anubis.informatik.uni-halle.de>
+References: <562B8200B62844479E12147F0AA7B3B30B54B9A660@NSQ161EX.enterprise.internal.city.ac.uk>
+	<alpine.DEB.2.00.1108101638110.27064@anubis.informatik.uni-halle.de>
+Message-ID: <CALoEywP7Rtv8cD=W4xaQWPuwTf_g=ErSSSdmYbTx7E3jqJ1FaA@mail.gmail.com>
+
+[switched to Cafe]
+
+On Wed, Aug 10, 2011 at 11:46 PM, Henning Thielemann
+<lemming at henning-thielemann.de> wrote:
+>
+> On Wed, 10 Aug 2011, Paterson, Ross wrote:
+>
+>> Yet another restructuring of the Prelude numeric classes on algebraic
+>> lines, proposed for a revision of the Haskell Prelude:
+>>
+>> http://hackage.haskell.org/package/yap-0.0
+>
+> A nice lightweight design, both in terms of the use of type extensions and
+> import dependencies, that should people encourage to use it, when they are
+> afraid of changing to a more radical approach like numeric-prelude. I would
+> have prefered the name AdditiveGroup to AbelianGroup, since with '+' and '-'
+> and '0' I associate more than just the laws of an Abelian group. The
+> multiplicative group of rational numbers is abelian, too.
+
+I'm curious: what laws do you have in mind for '+', '-', and '0' that
+do not hold in the multiplicative group of rational numbers with
+
+    (+) = (*); (-) = (/); 0 = 1
+
+?
+
+Sebastian
+
+

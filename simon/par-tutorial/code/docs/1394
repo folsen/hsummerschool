@@ -1,0 +1,19 @@
+From simon at joyful.com  Fri Aug 26 18:23:34 2011
+From: simon at joyful.com (Simon Michael)
+Date: Fri, 26 Aug 2011 09:23:34 -0700
+Subject: [Haskell-cafe] hledger subcommand detection, RFC
+In-Reply-To: <CA+FqJiGyE5OxrLy7vd5+DzeD6_iysi5wzxSHVuY7qa8afKB-hA@mail.gmail.com>
+References: <C25C6A8C-5F36-41FC-9AEB-E8055D00B77D@joyful.com>
+	<CA+FqJiGyE5OxrLy7vd5+DzeD6_iysi5wzxSHVuY7qa8afKB-hA@mail.gmail.com>
+Message-ID: <88F1B3EC-DCAB-47D9-9398-1B545CC7252F@joyful.com>
+
+Thanks Conrad! Those are some great links.
+
+> I wrapped up some manpage generation code in a package called
+> ui-command, which is kind of orthogonal to cmdargs (ui-command just
+> deals with subcommands). Example commands are often useful, so I added
+
+Interesting. Have you tried using both ui-command and cmdargs together ?
+
+
+

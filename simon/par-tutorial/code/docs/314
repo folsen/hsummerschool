@@ -1,0 +1,47 @@
+From sjachim at gmail.com  Mon Apr 11 18:25:22 2011
+From: sjachim at gmail.com (Szymon Jachim)
+Date: Mon, 11 Apr 2011 18:25:22 +0200
+Subject: [Haskell-cafe] Emscripten: compiling LLVM to JavaScript
+In-Reply-To: <BANLkTimU01+fzsND_pSVh-rXquHCUKMGNw@mail.gmail.com>
+References: <inutlj$jq5$1@dough.gmane.org>
+	<BANLkTimU01+fzsND_pSVh-rXquHCUKMGNw@mail.gmail.com>
+Message-ID: <BANLkTi=BzkNfc_Q3nDwW=OxxNU3edTtFaQ@mail.gmail.com>
+
+Time ago YHC compiler (not longer active) got additional backend that
+generated JS from Yhc.Core.
+It was working quite ok. You can still find demos online.
+Generating JS (high level code) from Ghc.Core feels better than from low
+level code of LLVM.
+
+Is GHC.core very different from YHC.core?
+
+Sz.
+
+On Mon, Apr 11, 2011 at 6:02 PM, Christopher Done
+<chrisdone at googlemail.com>wrote:
+
+> On 11 April 2011 14:54, S?nke Hahn <shahn at cs.tu-berlin.de> wrote:
+>>
+>> I haven't tried the tool myself, but it seems interesting to the Haskell
+>> efforts to compile to JavaScript:
+>>
+>> http://syntensity.blogspot.com/2011/04/emscripten-10.html
+>
+>
+> Good grief, that sounds incredibly awesome. GHC ? LLVM ? JS. Get all GHC's
+> goodies *and* not have to write JS for targeting browsers.
+>
+> Very interested. I will mess with it tonight.
+>
+> Cheers!
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110411/850ffc63/attachment.htm>
+

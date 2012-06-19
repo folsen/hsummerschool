@@ -1,0 +1,38 @@
+From steve at fenestra.com  Sat Aug 27 19:06:41 2011
+From: steve at fenestra.com (Steve Schafer)
+Date: Sat, 27 Aug 2011 13:06:41 -0400
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <4E58CDB5.2010900@btinternet.com>
+References: <4E568D11.30800@btinternet.com> <4E56CD99.6050703@vex.net>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+	<nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+	<4E57F43A.9030800@btinternet.com>
+	<b25g57lk7fbp5td6lp31qigptnr6rvfh67@4ax.com>
+	<4E58CDB5.2010900@btinternet.com>
+Message-ID: <5v7i57djjdfiqvu0iqcl22rjejrn2bqa8a@4ax.com>
+
+On Sat, 27 Aug 2011 11:57:57 +0100, you wrote:
+
+>I meant if you're trying to *implement* serialisation. The Bits class 
+>allows you to access bits one by one, but surely you'd want some way to 
+>know how many bits you need to keep?
+
+For fixed-size types (e.g., Int), I might use a simple byte-for-byte
+serialization. But these days, I tend to avoid binary serializations,
+and use string conversions for all types, taking advantage of whatever
+built-in conversions the language offers. There's obviously more
+overhead, but the advantages usually outweigh the disadvantages. For one
+thing, I can come back a couple of years later and still figure out what
+the data are supposed to be.
+
+>Likewise, you say the standard PRNG can be used to generate random 
+>Integers, but what if you're trying to implement a new PRNG?
+
+I'm not aware of of any PRNGs that use variable-length types (and I
+would think that such a PRNG wouldn't be very efficient), so I'm still
+not sure that I understand the question.
+
+-Steve Schafer
+
+

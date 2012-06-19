@@ -1,0 +1,26 @@
+From wren at freegeek.org  Fri Feb  4 12:46:37 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Fri, 04 Feb 2011 06:46:37 -0500
+Subject: [Haskell-cafe] Problems with iteratees
+In-Reply-To: <4D4B45FE.1020305@gmail.com>
+References: <4D49FF9B.9090009@freegeek.org> <4D4B4567.4010505@gmail.com>
+	<4D4B45FE.1020305@gmail.com>
+Message-ID: <4D4BE71D.4050801@freegeek.org>
+
+I managed to track down the problem at last. And, as might be expected 
+after staring at it for so long, it was a fairly boneheaded thing. Turns 
+out the error was from an entirely different thread which is using 
+Attoparsec and a modified version of attoparsec-iteratee. I never 
+suspected this thread because I'd previously verified the correctness of 
+the parser (which is indeed correct). The problem is a coworker changed 
+the format of the file that thread was reading, and I'd never bothered 
+to give the parser robust and helpful error messages <chagrin>
+
+Thanks all, for helping with the latent bugs in the code I posted and 
+for convincing me that I really wasn't just missing something there.
+
+-- 
+Live well,
+~wren
+
+

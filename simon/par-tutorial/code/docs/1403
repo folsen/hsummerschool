@@ -1,0 +1,33 @@
+From steve at fenestra.com  Fri Aug 26 23:51:30 2011
+From: steve at fenestra.com (Steve Schafer)
+Date: Fri, 26 Aug 2011 17:51:30 -0400
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <4E57F43A.9030800@btinternet.com>
+References: <4E568D11.30800@btinternet.com> <4E56CD99.6050703@vex.net>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+	<nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+	<4E57F43A.9030800@btinternet.com>
+Message-ID: <b25g57lk7fbp5td6lp31qigptnr6rvfh67@4ax.com>
+
+On Fri, 26 Aug 2011 20:30:02 +0100, you wrote:
+
+>You wouldn't want to know how many bits you need to store on disk to 
+>reliably recreate the value?
+
+I can't say that I have cared about that sort of thing in a very long
+time. Bits are rather cheap these days. I store data on disk, and the
+space it occupies is whatever it is; I don't worry about it.
+
+>Or how many bits of randomness you need to compute a value less than or
+>equal to this one?
+
+I'm not sure I understand this one. I generally don't need _any_
+randomness to compute a value. On the other hand, if the desire is to
+take an integer n and generate a set of pseudorandom numbers ranging
+from 0 to n-1, that's easily done using the standard random number
+methods.
+
+-Steve Schafer
+
+

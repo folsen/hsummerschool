@@ -1,0 +1,38 @@
+From donn at avvanta.com  Thu Dec 29 19:33:12 2011
+From: donn at avvanta.com (Donn Cave)
+Date: Thu, 29 Dec 2011 10:33:12 -0800 (PST)
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <C44BA253-1F64-4409-8F4F-E15C85768077@mobileink.com>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>
+	<20111229132335.GY17094@google.com> <4EFC9AAD.5040906@unicaen.fr>
+	<20111229165524.GD17094@google.com>
+	<20111229170135.GE17094@google.com>
+	<F6E014FF-2550-4986-843F-B6FA64F596B6@mobileink.com>
+	<CAKjSnQEbRO4yx8bPu5B8UsgUNVtbC7vQg+76YYn0Oe0A_H1rOQ@mail.gmail.com>
+	<C44BA253-1F64-4409-8F4F-E15C85768077@mobileink.com>
+Message-ID: <20111229183312.B797D93C49@mail.avvanta.com>
+
+Quoth Gregg Reynolds <dev at mobileink.com>,
+..
+> A minor point maybe, but germane to the original post (I hope).
+
+It isn't - I mean, I'm not really sure what your point is, but
+the example really returns the same IO value, not just one of
+the same type.
+
+Consider an example with implementation:
+
+   wint :: Int -> IO Int
+   wint a = let s = show a in do
+       putStr s
+       return (length s)
+
+Now the expression "wint 994" is a value of type IO Int, and
+any instance of that expression is the same value - an action
+is not the same as the action's result.  You can use this
+value in pure Haskell expressions with confidence.
+
+	Donn
+
+

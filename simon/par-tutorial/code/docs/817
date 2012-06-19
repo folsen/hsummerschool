@@ -1,0 +1,32 @@
+From dagitj at gmail.com  Thu Apr 28 08:17:46 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Wed, 27 Apr 2011 23:17:46 -0700
+Subject: [Haskell-cafe] HipmunkPlayground compile error
+In-Reply-To: <BANLkTi=+bey1M4KJz6YDy+xwCWhvckJUpQ@mail.gmail.com>
+References: <BANLkTikwaNs0eNkrogMadOn00qhFab=AHA@mail.gmail.com>
+	<BANLkTikjbKovV3PkRkh6+1190AoCpXeR-g@mail.gmail.com>
+	<BANLkTi=+bey1M4KJz6YDy+xwCWhvckJUpQ@mail.gmail.com>
+Message-ID: <BANLkTimgrxvsS0Hv+bYb+dArJGz+Jx+dtg@mail.gmail.com>
+
+On Tue, Apr 26, 2011 at 1:14 PM, Andrew Pennebaker <
+andrew.pennebaker at gmail.com> wrote:
+
+> Thanks for the tip. GHC 7.0.3 does seem to fix a couple bugs, and maybe
+> even run faster than GHC 7.0.2.
+>
+> But it doesn't solve the problem.
+>
+
+It's hard to help because I still don't know what problem you're having.
+ The error code from the attempted GLFW install is not included in your
+abbreviated log.  As I recommended before try this command:
+cabal install GLFW-0.4.2
+
+That will attempt only the GLFW install which will mean less output to look
+through for the error message.
+
+Jason
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110427/4b504b9f/attachment.htm>
+

@@ -1,0 +1,54 @@
+From aslatter at gmail.com  Thu Dec 15 03:36:52 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Wed, 14 Dec 2011 20:36:52 -0600
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <20111215020337.GA21854@soi.city.ac.uk>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+	<CACw0ni+Q=ixAAdWzmsbF+c1RkF74S2RV=fi_tX2B2puR0s5xvQ@mail.gmail.com>
+	<12B612A8-515C-4E86-BE7E-F2214AA5E210@deepbondi.net>
+	<CANd=OGHac+eas7SZjgruccP8n_Gh1a11bFdhUqzH-jmsZJxwFA@mail.gmail.com>
+	<CANd=OGGMg97zDT2t=4sxmtRmBKCLm=ue1NN705GRURNy+BhXhw@mail.gmail.com>
+	<20111215020337.GA21854@soi.city.ac.uk>
+Message-ID: <CAKjSnQE+QbryLsUK9MstLnxAzhgWJp3Pir9tc1UbC9wxKbZtpA@mail.gmail.com>
+
+On Wed, Dec 14, 2011 at 8:03 PM, Ross Paterson <ross at soi.city.ac.uk> wrote:
+> The current definition says that some and many should be the least
+> solutions of the equations
+>
+> ? ?some v = (:) <$> v <*> many v
+> ? ?many v = some v <|> pure []
+>
+> We could relax that to just requiring that they satisfy these equations
+> (which I think is what John wants). ?In that case there would be another
+> possible definition for Maybe:
+>
+> ? ?some Nothing = Nothing
+> ? ?some (Just x) = Just (repeat x)
+>
+> ? ?many Nothing = Just []
+> ? ?many (Just x) = Just (repeat x)
+>
+
+This seems to generalize to list:
+
+    some [] = []
+    some xs = [cycle xs]
+
+    many [] = [[]]
+    many xs = [cycle xs]
+
+Although I'm still not sure why I would be using these operations in
+maybe or list.
+
+Antoine
+
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

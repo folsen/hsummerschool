@@ -1,0 +1,63 @@
+From limestrael at gmail.com  Fri Dec 16 16:28:05 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Fri, 16 Dec 2011 16:28:05 +0100
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <CACqaG6wdMU=8+SH+n-cNmaPMHKEuv6UiWW3t6rFSYK06sw1t1Q@mail.gmail.com>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+	<20111216042614.GB15053@seas.upenn.edu>
+	<CADLz5wVmAYTjGq1+ST87=0oGmUoYdZUTCj=Xcv=u_5_8D3hWvQ@mail.gmail.com>
+	<CACqaG6wdMU=8+SH+n-cNmaPMHKEuv6UiWW3t6rFSYK06sw1t1Q@mail.gmail.com>
+Message-ID: <CACqaG6zrSvU2PJ0rso1NT8ifzAP1zh93=+skbnUNNJ0m83sm2g@mail.gmail.com>
+
+Sorry, I meant Sum and Product for the monoid equivalents of a Num instance.
+
+2011/12/16 Yves Par?s <limestrael at gmail.com>
+
+> "1) What about the First type? Do we {-# DEPRECATE #-} it?"
+>
+> Personnaly, I'm in favor of following the same logic than Int:
+> Int itself is *not *a monoid. You have to be specific: it's either Sum or
+> Mult.
+>
+> It should be the same for Maybe: we remove its instance of Monoid, and we
+> only use First and Last.
+>
+>
+> 2011/12/16 Bas van Dijk <v.dijk.bas at gmail.com>
+>
+>> On 16 December 2011 05:26, Brent Yorgey <byorgey at seas.upenn.edu> wrote:
+>> > I, for one, would be
+>> > quite in favor of changing the current Monoid (Maybe a) instance to
+>> > correspond to the failure-and-prioritized-choice semantics
+>>
+>> So lets do this. Some questions:
+>>
+>> 1) What about the First type? Do we {-# DEPRECATE #-} it?
+>>
+>> 2) What about the Last type? It could be deprecated in favor of Dual.
+>>
+>> 3) Do we need a new type (like the current Maybe) for lifting
+>> semigroups into a Monoid? IMHO we don't since the semigroup package
+>> does a better job with the Option type (like Brent mentioned).
+>>
+>> 4) How much code will break from this change?
+>>
+>> 5) Anyone up for proposing this to libraries at haskell.org?
+>>
+>> Regards,
+>>
+>> Bas
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111216/b75d8272/attachment.htm>
+

@@ -1,0 +1,22 @@
+From ckkashyap at gmail.com  Wed Feb  9 08:07:40 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Wed, 9 Feb 2011 12:37:40 +0530
+Subject: [Haskell-cafe]  Split function
+Message-ID: <AANLkTikno_NYzOG0omQFPptaBqhsGOXaxdD3AhD+GK4U@mail.gmail.com>
+
+Hi,
+
+Is this a good implementation of split function? ... I was wondering about
+the "lines" function, it basically a special case of split right?
+
+split c xs = foldr f [[]] xs
+where
+f x list@(l:ls)= if x == c then []:list else (x:l):ls
+
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110209/a93863f7/attachment.htm>
+

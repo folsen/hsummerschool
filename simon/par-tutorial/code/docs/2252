@@ -1,0 +1,40 @@
+From murray at sonology.net  Sat Dec 24 09:47:28 2011
+From: murray at sonology.net (Murray Campbell)
+Date: Sat, 24 Dec 2011 00:47:28 -0800
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+In-Reply-To: <CACqaG6yr-PVvri=+2e5rTgXiiHHOoccM2fLaq6CcBMC2Ub1p2g@mail.gmail.com>
+References: <4EF57FC9.1030505@vex.net>
+	<CACqaG6yr-PVvri=+2e5rTgXiiHHOoccM2fLaq6CcBMC2Ub1p2g@mail.gmail.com>
+Message-ID: <20111224084728.GA28337@wavelet>
+
+On Sat, Dec 24, 2011 at 08:54:43AM +0100, Yves Par?s wrote:
+>    See that's typically the speech that scares people away from Haskell...
+>    --
+>    The ?? is a lie.
+> 
+>    2011/12/24 Albert Y. C. Lai <[1]trebla at vex.net>
+> 
+>> [ snip. ]
+
+I find this sort of discussion is precisely what draws me to, and keeps me in
+pursuit of Haskell.  There are many approaches to producing code that
+are designed (to use a charitable term) to be minimally frightening at
+the expense of rigour.  The dogged and uncompromising attitude of many
+in the Haskell community is inspiring to me, knowing as I do that, while
+I don't *need* to follow the more rarified flights of mathematical fancy
+to get things done, the ecosystem in which I am choosing to work is
+being built by those who can.
+
+It's not as though the problem of writing good code has been solved.  It
+appears to be quite hard!  Isn't Haskell the place where the difficult
+and nit-picky questions ought to be raised and researched?
+
+It's too late to avoid success at all costs but please don't banish our
+precious pedantry!
+
+Scare on!
+
+Murray Campbell
+
+
+

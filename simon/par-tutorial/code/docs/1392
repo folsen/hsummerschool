@@ -1,0 +1,27 @@
+From informationen at gmx.de  Fri Aug 26 18:00:18 2011
+From: informationen at gmx.de (informationen)
+Date: Fri, 26 Aug 2011 18:00:18 +0200
+Subject: [Haskell-cafe] Ambiguous module name `System.Directory'
+Message-ID: <20110826160018.GB23687@sirch>
+
+Hi,
+
+i am using ghc version 7.0.3 and a pretty recent version of the
+haskell-platform.
+
+Whenever i use the System.Directory module, i run into this
+conflict:
+
+Ambiguous module name `System.Directory':
+         it was found in multiple packages:
+             system-fileio-0.2.1 directory-1.1.0.0
+
+How can i resolve this conflict permamently (i know about 
+:set -hide-package ... )? And shouldn't there be a rule in the
+haskell platform which forbids modules of the same name?
+
+Greetings 
+Chris
+
+
+

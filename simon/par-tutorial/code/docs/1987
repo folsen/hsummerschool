@@ -1,0 +1,61 @@
+From nominolo at googlemail.com  Thu Dec 15 18:24:14 2011
+From: nominolo at googlemail.com (Thomas Schilling)
+Date: Thu, 15 Dec 2011 17:24:14 +0000
+Subject: [Haskell-cafe] Type checker for haskell-src-exts (was:
+ Typechecking Using GHC API)
+In-Reply-To: <CACz_ru0TWtc5a5ZCtXBXJYG+ikvYWwzGp707weqigNRwS4qfRQ@mail.gmail.com>
+References: <CACz_ru0TWtc5a5ZCtXBXJYG+ikvYWwzGp707weqigNRwS4qfRQ@mail.gmail.com>
+Message-ID: <CAOJG3uD_-=9HHXLpbJzo3R4yj1vn3v03jHunq_0=P7Kga+90fw@mail.gmail.com>
+
+What exactly are the hopes for such a type checker?  I can understand
+it being interesting as a research project, but as a realistic tools
+there are two huge issues:
+
+ 1. It's going to take a LOT of time to reach feature parity with
+GHC's type checker.
+
+ 2. Assuming that can be done, how is it going to be maintained and
+kept up to date with GHC?
+
+If it is going to be used as a development tool, both of these are a
+major requirement.  I haven't looked into the issues, but I'd expect
+it would be more realistic (although definitely not trivial) to
+translate from GHC's internal AST into an annotated haskell-src-exts
+AST.
+
+On 15 December 2011 16:33, Sean Leather <leather at cs.uu.nl> wrote:
+> On Thu, Dec 15, 2011 at 11:07, Niklas Broberg?wrote:
+>>
+>> Envisioned: The function you ask for can definitely be written for
+>> haskell-src-exts, which I know you are currently using. I just need to
+>> complete my type checker for haskell-src-exts first. Which is not a small
+>> task, but one that has been started.
+>
+>
+> That's good to know! I presume it's something like Haskell98 to start with?
+> I'd be even more impressed (and possibly also concerned for your health) if
+> you were going to tackle all of the extensions!
+>
+> I've been trying to find a student to write a haskell-src-exts type checker
+> for me. It should use a particular kind of mechanism though, using
+> constraints similar to [1]. Then, I want to adapt that to do
+> transformations. What approach are you using? Maybe I can somehow steal your
+> work... ;)
+>
+> Regards,
+> Sean
+>
+> [1]?http://www.staff.science.uu.nl/~heere112/phdthesis/
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Push the envelope. Watch it bend.
+
+

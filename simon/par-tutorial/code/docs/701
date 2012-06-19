@@ -1,0 +1,23 @@
+From ozgurakgun at gmail.com  Mon Apr 25 15:20:16 2011
+From: ozgurakgun at gmail.com (Ozgur Akgun)
+Date: Mon, 25 Apr 2011 14:20:16 +0100
+Subject: [Haskell-cafe] Trouble with currying and uncurrying...
+In-Reply-To: <4DB57318.4040509@iac.es>
+References: <4DB57318.4040509@iac.es>
+Message-ID: <BANLkTimzU24M1tixVmbfbfxGSVssLx4RzQ@mail.gmail.com>
+
+On 25 April 2011 14:11, Angel de Vicente <angelv at iac.es> wrote:
+
+> curry :: ((a,b) -> c) -> (a -> b -> c)
+>
+
+is the same as:
+
+curry :: ((a,b) -> c) -> a -> b -> c
+
+HTH,
+Ozgur
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110425/e8b4ccb2/attachment.htm>
+

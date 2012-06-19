@@ -1,0 +1,36 @@
+From aslatter at gmail.com  Thu Feb 10 18:38:24 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Thu, 10 Feb 2011 11:38:24 -0600
+Subject: [Haskell-cafe] [Cabal-devel] Cabal && license combinations
+In-Reply-To: <1297353870.19300.88.camel@godel>
+References: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+	<1297178086.2402.5.camel@godel>
+	<AANLkTin-FnLkMpjvPSAOGo+7gS8UWhT2t7GdBiPn1K-u@mail.gmail.com>
+	<8739nw9v7a.fsf@malde.org> <1297353870.19300.88.camel@godel>
+Message-ID: <AANLkTikEi5k=Z=j=K+3m2+1a--qs0nP5mocjTPWduxLd@mail.gmail.com>
+
+On Thu, Feb 10, 2011 at 10:04 AM, Chris Smith <cdsmith at gmail.com> wrote:
+> On Thu, 2011-02-10 at 08:59 +0100, Ketil Malde wrote:
+>> I disagree - the linked executable must, but not the wrapper by itself.
+>> It's source code, i.e. text, thus a creative work, and therefore
+>> covered by copyright - on its own.
+>
+> You're certainly right from a legal standpoint. ?But being right doesn't
+> actually matter. ?The instant anyone actually compiles an application
+> that uses your library, however indirectly, they are bound by the terms
+> of the underlying library as well. ?So your bindings are effectively
+> covered by the underlying license anyway (unless you're choosing a
+> license for the sake of people who will never produce any usable end
+> result...)
+>
+
+The vast majority of Open Source licenses in use only restrict the
+publication of the work or derived works, not compilation.
+
+So no, the instant of compilation is not when the transitive
+dependencies kick in, it is the publication of compiled binaries,
+which in my mind is a pretty specialized case.
+
+Antoine
+
+

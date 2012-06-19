@@ -1,0 +1,80 @@
+From sh006d3592 at blueyonder.co.uk  Thu Dec 29 00:51:53 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Wed, 28 Dec 2011 23:51:53 +0000
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFB91BA.5070003@unicaen.fr>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <4EFB91BA.5070003@unicaen.fr>
+Message-ID: <4EFBAB99.4050605@blueyonder.co.uk>
+
+On 28/12/2011 22:01, Jerzy Karczmarczuk wrote:
+> Le 28/12/2011 22:45, Steve Horne a ?crit :
+>> Yes - AT COMPILE TIME by the principle of referential transparency it 
+>> always returns the same action. However, the whole point of that 
+>> action is that it might potentially be executed (with potentially 
+>> side-effecting results) at run-time. Pure at compile-time, impure at 
+>> run-time. What is only modeled at compile-time is realized at 
+>> run-time, side-effects included.
+>> (...)
+>>
+>> I hope If convinced you I'm not making one of the standard newbie 
+>> mistakes. I've done all that elsewhere before, but not today, honest.
+> Sorry, perhaps this is not a standard newbie mistake, but you - 
+> apparently - believe that an execution of an action on the "real 
+> world" is a side effect.
+>
+> I don't think it is.
+> Even if a Haskell programme fires an atomic bomb, a very impure one, 
+> /*there are no side effects within the programme itself*/.
+True. But side-effects within the program itself are not the only 
+relevant side-effects.
+
+As Simon Baron-Cohen says in "Tackling the Awkward Squad"...
+
+    Yet the ultimate purpose of running a program is invariably to cause
+    some side effect: a changed file, some new pixels on the screen, a
+    message sent, or whatever. Indeed it's a bit cheeky to call
+    input/output "awkward" at all. I/O is the raison d'^etre of every
+    program. --- a program that had no observable effect whatsoever (no
+    input, no output) would not be very useful.
+
+Of course he then says...
+
+    Well, if the side effect can't be in the functional program, it will
+    have to be outside it.
+
+Well, to me, that's a bit cheeky too - at least if taken overliterally. 
+Even if you consider a mutation of an IORef to occur outside the 
+program, it affects the later run-time behaviour of the program. The 
+same with messages sent to stdout - in this case, the user is a part of 
+the feedback loop, but the supposedly outside-the-program side-effect 
+still potentially affects the future behaviour of the program when it 
+later looks at stdin.
+
+A key point of functional programming (including its definitions of 
+side-effects and referential transparency) is about preventing bugs by 
+making code easier to reason about.
+
+Saying that the side-effects are outside the program is fine from a 
+compile-time compositing-IO-actions point of view. But as far as 
+understanding the run-time behaviour of the program is concerned, that 
+claim really doesn't change anything. The side-effects still occur, and 
+they still affect the later behaviour of the program. Declaring that 
+they're outside the program doesn't make the behaviour of that program 
+any easier to reason about, and doesn't prevent bugs.
+
+A final SBC quote, still from "Tackling the Awkward Squad"...
+
+    There is a clear distinction, enforced by the type system, between
+    actions which may have
+    side effects, and functions which may not.
+
+SBC may consider the side-effects to be outside the program, but he 
+still refers to "actions which may have side-effects". The side-effects 
+are still there, whether you consider them inside or outside the 
+program, and as a programmer you still have to reason about them.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111228/4a99ed46/attachment.htm>
+

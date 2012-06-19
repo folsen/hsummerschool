@@ -1,0 +1,31 @@
+From daniel.is.fischer at googlemail.com  Sun Aug 14 00:59:10 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sun, 14 Aug 2011 00:59:10 +0200
+Subject: [Haskell-cafe] Array and Ix for custom Graph ADT
+In-Reply-To: <BECED278-EAA6-4920-B5AB-BAE35CE47402@chariot.net.au>
+References: <FB1023D2-50B4-4E73-B0A2-0BEFFBBCD834@chariot.net.au>
+	<CAKjSnQHZ_1cX3MaspcVWaTXUh42J3G5fqqVQXoQpLrGAAZVV4w@mail.gmail.com>
+	<BECED278-EAA6-4920-B5AB-BAE35CE47402@chariot.net.au>
+Message-ID: <201108140059.10753.daniel.is.fischer@googlemail.com>
+
+On Sunday 14 August 2011, 00:41:33, Mark Spezzano wrote:
+> Hi Antoine,
+> 
+> The first Int field is a unique index, beginning at 1 and increasing by
+> 1 for each unique Node. 
+
+Then you could use that for indexing, assuming the Ord instance matches.
+
+range (MyNode x _ _ _, MyNode y _ _ _) = [x .. y]
+index (MyNode x _ _ _, MyNode y _ _ _) (MyNode z _ _ _)
+  | x <= z && z <= y = z-x
+  | otherwise = error ("Index out of range: " ++ show z)
+
+etc.
+
+> The second [Int] field is just a list of random
+> numbers associated with that node.
+> 
+> Mark
+
+

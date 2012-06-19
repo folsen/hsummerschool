@@ -1,0 +1,20 @@
+From hamish at firestream.co.uk  Tue Apr 26 02:27:20 2011
+From: hamish at firestream.co.uk (Hamish Mackenzie)
+Date: Tue, 26 Apr 2011 12:27:20 +1200
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+In-Reply-To: <201104260103.51102.daniel.is.fischer@googlemail.com>
+References: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+	<201104260103.51102.daniel.is.fischer@googlemail.com>
+Message-ID: <BANLkTi=F4zSVoqa=73C=G9P4rqSUfAs+8A@mail.gmail.com>
+
+On 26 April 2011 11:03, Daniel Fischer <daniel.is.fischer at googlemail.com> wrote:
+> Decreasing indentation via backspace goes one column per backspace, how can
+> I configure it to go to the next (previous) tab position on backspace in
+> the leading whitespace of a line?
+
+<shift><tab> works, but it is a bit dumb.
+
+Changing <backspace> is on my wish list too.  I think we should make
+it look at the text above to find the correct indentation points.
+
+

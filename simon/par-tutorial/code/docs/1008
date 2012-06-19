@@ -1,0 +1,44 @@
+From jwlato at gmail.com  Wed Aug 10 01:17:21 2011
+From: jwlato at gmail.com (John Lato)
+Date: Wed, 10 Aug 2011 00:17:21 +0100
+Subject: [Haskell-cafe] Problems building lambdabot on osx
+Message-ID: <CAJ727GiaU4iHxMci0bdQdAaZC20rONRMS9xWFRx_AmF+_YHOFw@mail.gmail.com>
+
+> From: Brandon Allbery <allbery.b at gmail.com>
+>
+> On Mon, Aug 8, 2011 at 21:38, Adam Turoff <adam.turoff at gmail.com> wrote:
+>
+>> First, there's the issue with linking against libiconv, which is solved
+>> this
+>> way:
+>>
+>> ? ? ? ?cabal install --extra-lib-dirs=/usr/lib
+>>
+>> That leaves a whole mess of link errors against libHSreadline:
+>>
+>
+> Yes, because now it's finding the system readline, which isn't actually
+> readline (Apple ships a "readline" which is actually BSD "editline", so you
+> get missing symbols for things editline doesn't support such as completion).
+> ?I think you'll need to temporarily deactivate MacPorts' iconv instead of
+> using --extra-lib-dirs.
+>
+> This can't really be fixed by either GHC or MacPorts; there doesn't seem to
+> be a good solution as yet, although the MacPorts folks may end up
+> implementing a hacky solution because Apple has introduced *another*
+> MacPorts-breaking library conflict in Lion (libnotify).
+
+Yep, this is Apple's problem and everyone else just has to put up with it.
+
+If you want to mix macports and a non-macports ghc, I think the best
+solution is to self-compile ghc against the macports libiconv.  This
+is easy, just configure ghc with
+
+./configure --with-iconv-includes=/opt/local/include
+--with-iconv-libraries=/opt/local/lib
+
+I haven't had a problem since I started building ghc this way (10.5 and 10.6).
+
+John L.
+
+

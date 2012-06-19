@@ -1,0 +1,34 @@
+From frodo at theshire.org  Wed Feb  9 21:34:57 2011
+From: frodo at theshire.org (Cristiano Paris)
+Date: Wed, 9 Feb 2011 21:34:57 +0100
+Subject: [Haskell-cafe] Synthetic values?
+In-Reply-To: <4D52E7A4.7020705@gmail.com>
+References: <AANLkTimsWsfdkPLK4yQRHt3OcBGUiN2FGAwG52DvKCpD@mail.gmail.com>
+	<4D52E7A4.7020705@gmail.com>
+Message-ID: <AANLkTimzm4TjW2zwwrs3y_c+J72XMKY0EBAiM-kkjc=X@mail.gmail.com>
+
+On Wed, Feb 9, 2011 at 20:14, Alexey Khudyakov
+<alexey.skladnoy at gmail.com> wrote:
+> ...
+>> instance ? ? ? ? ? ?PRead (WRead ::: b)
+>> instance PRead b => PRead (a ::: b)
+>
+>> instance ? ? ? ? ? ? PWrite (WWrite ::: b)
+>> instance PWrite b => PWrite (a ::: b)
+
+Brilliant! I was thinking to something like this but as a replacement
+of the accumulation mechanism in the Monad. I didn't think of it in
+the permission checking part.
+
+Thanks a lot. Now I need to consolidate better my code for
+incorporating yours and other people contributions.
+
+Bye,
+
+-- 
+Cristiano
+
+GPG Key: 4096R/C17E53C6 2010-02-22
+Fingerprint = 4575 4FB5 DC8E 7641 D3D8? 8EBE DF59 B4E9 C17E 53C6
+
+

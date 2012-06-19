@@ -1,0 +1,51 @@
+From arnaud.oqube at gmail.com  Mon Aug 29 17:43:15 2011
+From: arnaud.oqube at gmail.com (Arnaud Bailly)
+Date: Mon, 29 Aug 2011 17:43:15 +0200
+Subject: [Haskell-cafe] Dynamic loading of module
+In-Reply-To: <4E5BB004.4070607@vex.net>
+References: <CAL4zPao2eYnWWf1KL-sJ3NrVNw6Ar+eHVgnsDr7KSCikE_TZ4w@mail.gmail.com>
+	<4E5811CA.6050905@vex.net>
+	<CAL4zPaoO3=AGtJSexcSa9b108w0AB7dgm+QVQQmoytOUu-M3Fw@mail.gmail.com>
+	<4E593E91.5020209@vex.net>
+	<CAL4zPaqNfJWZzJowtFW12e_u2pmxxktbKpiSG5YDsh+=fZL43w@mail.gmail.com>
+	<4E5AF36A.5000507@vex.net>
+	<CAL4zParHP0R=-cKHfrrVbCVf0dais064aTTuENVGqjovRgTQjQ@mail.gmail.com>
+	<4E5BB004.4070607@vex.net>
+Message-ID: <CAL4zPapio-NTc78TnoNSAXCGobj4TdQ0GxLbork6-saMrnKr2Q@mail.gmail.com>
+
+No offense :-) Thanks for taking the time to investigate this stuff. It gave
+me the opportunity to get a closer look at ghc package management.
+
+Regards,
+Arnaud
+
+On Mon, Aug 29, 2011 at 5:28 PM, Albert Y. C. Lai <trebla at vex.net> wrote:
+
+> On 11-08-29 02:41 AM, Arnaud Bailly wrote:
+>
+>> ghc-pkg unregister --force --user template-haskell
+>>
+> [...]
+>
+>> ghc-pkg unregister --force --user template-haskell
+>>
+>
+> I am sorry. I apologize. It was not your fault. It was my fault.
+> "unregister --user" drops the global instance when there is no user
+> instance, which is when the 2nd time you issued the command. It is a ghc-pkg
+> bug.
+>
+> (I already knew the dual bug: "unregister --global" drops the user instance
+> when there is one. I make do with "unregister --global
+> --no-user-package-conf".)
+>
+>
+> ______________________________**_________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/**mailman/listinfo/haskell-cafe<http://www.haskell.org/mailman/listinfo/haskell-cafe>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110829/3ccc6da9/attachment.htm>
+

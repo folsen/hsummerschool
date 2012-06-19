@@ -1,0 +1,37 @@
+From gcrosswhite at gmail.com  Tue Dec 20 12:43:18 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Tue, 20 Dec 2011 21:43:18 +1000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CAF1yvAQL9t5jxXaCsDuOx7o4NgHD-O_RioRJ=Yc_RHj0_TerBg@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAF1yvAQJX+f-MigNFF=6be12Uka6y45QD6oys_NQpxgREkRbaQ@mail.gmail.com>
+	<653CD606-D8B6-4BD8-AFD4-46738AF49DB3@gmail.com>
+	<CAF1yvAS6hc=tmmW74qvNdVXngCqV0LNNOXn2TUgckWHMJFszUA@mail.gmail.com>
+	<91793F0E-1C9F-4F4C-96F8-188A37273A21@gmail.com>
+	<CAF1yvAQL9t5jxXaCsDuOx7o4NgHD-O_RioRJ=Yc_RHj0_TerBg@mail.gmail.com>
+Message-ID: <8DBF2B01-F624-4E53-926D-B96C4AD34576@gmail.com>
+
+
+On Dec 20, 2011, at 9:18 PM, Jesse Schalken wrote:
+
+> Why do you have to solve the halting problem?
+
+You have to solve the halting problem if you want to replace every place where _|_ could occur with an Error monad (or something similar), because _|_ includes occasions when functions will never terminate.
+
+> Consider integer division by 0.  [...]
+> This is all I was talking about.
+
+But imagine there was an occasion where you *knew* that the divisor was never zero --- say, because the divisor was constructed to be a natural number.  Now there is no point in running in the Error monad because there will never such a runtime error;  in fact, it is not clear what you would even *do* with a Left value anyway, short of terminating the program and printing and error, which is what would have happened anyway.  Furthermore, it is easy to imagine circumstances where you have now forced your entire program to run in the Error monad, which makes everything incredibly inconvenient with no benefit at all.
+
+This is the problem with arguments against partial functions;  they don't solve any problems at all except in the case where you have untrusted data in which case you should be using a different function or manually checking it anyway, and they add a lot of wasted overhead.
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111220/c2705d7f/attachment.htm>
+

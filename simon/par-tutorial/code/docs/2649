@@ -1,0 +1,23 @@
+From ozgurakgun at gmail.com  Thu Feb  3 20:57:24 2011
+From: ozgurakgun at gmail.com (Ozgur Akgun)
+Date: Thu, 3 Feb 2011 19:57:24 +0000
+Subject: [Haskell-cafe] Reader monad wrapping State monad
+In-Reply-To: <24103.19922.qm@web31103.mail.mud.yahoo.com>
+References: <24103.19922.qm@web31103.mail.mud.yahoo.com>
+Message-ID: <AANLkTik2AO8nL-QSH0yvs6fb3wuog_ZK1o9ggsuMht8L@mail.gmail.com>
+
+On 3 February 2011 19:18, michael rice <nowgate at yahoo.com> wrote:
+
+> but how do I get the constant a from the Reader monad?
+>
+
+http://hackage.haskell.org/packages/archive/transformers/latest/doc/html/Control-Monad-Trans-Reader.html#v:ask
+
+You also need to change the type to use ReaderT.
+
+-- 
+Ozgur Akgun
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/21faa367/attachment.htm>
+

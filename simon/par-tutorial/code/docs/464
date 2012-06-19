@@ -1,0 +1,25 @@
+From greg at gregorycollins.net  Mon Apr 18 08:46:23 2011
+From: greg at gregorycollins.net (Gregory Collins)
+Date: Mon, 18 Apr 2011 08:46:23 +0200
+Subject: [Haskell-cafe] Killing threads in foreign calls.
+In-Reply-To: <BANLkTi=Pgd_6Wp8AM6PFzPt2mTOpNfUF4A@mail.gmail.com>
+References: <BANLkTiktXLdW40vHBwhgzzZwvWWZ9WiX6w@mail.gmail.com>
+	<1303071453-sup-8381@ezyang>
+	<BANLkTi=Pgd_6Wp8AM6PFzPt2mTOpNfUF4A@mail.gmail.com>
+Message-ID: <BANLkTinkbqBd0yP2O-A0k+e05e8X2Jt5kw@mail.gmail.com>
+
+On Mon, Apr 18, 2011 at 12:48 AM, Jason Dusek <jason.dusek at gmail.com> wrote:
+> ?I gather I need to write the busy loop for polling for data in
+> ?Haskell. Although libpq has a procedure -- PGgetResult -- that
+> ?polls for data, it would not respond to killThread.
+
+Please don't use a busy loop! Instead use PQSocket() to get the
+underlying socket file descriptor, and call
+ThreadWaitRead/ThreadWaitWrite to use the system event dispatcher
+(epoll() or select()) to efficiently multiplex.
+
+G
+-- 
+Gregory Collins <greg at gregorycollins.net>
+
+

@@ -1,0 +1,21 @@
+From ckkashyap at gmail.com  Fri Aug 12 10:01:03 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Fri, 12 Aug 2011 13:31:03 +0530
+Subject: [Haskell-cafe] Building ? using kleene closure {not haskell
+	specific}
+Message-ID: <CAGdT1goYBsA=9WbXH57T9=ps9tZHX8pqWbiFRo4ZiKW-gg1=Ww@mail.gmail.com>
+
+Hello gentle Haskell folks,
+
+I happened to read "Beautiful code"'s chapter 1 today and found Brian
+Kerninghan's regex implementation. In it he only shows the * meta character.
+I can easily understand how + can be built but am having trouble with
+building ? (zero or one). I'd really appreciate it if some one could help me
+understand it.
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110812/0888cca1/attachment.htm>
+

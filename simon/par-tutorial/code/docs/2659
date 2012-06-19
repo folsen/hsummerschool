@@ -1,0 +1,37 @@
+From pumpkingod at gmail.com  Thu Feb  3 22:34:49 2011
+From: pumpkingod at gmail.com (Daniel Peebles)
+Date: Thu, 3 Feb 2011 21:34:49 +0000
+Subject: [Haskell-cafe] ($) not as transparent as it seems
+In-Reply-To: <4D4B1396.6070501@uni-bonn.de>
+References: <4D4B1396.6070501@uni-bonn.de>
+Message-ID: <AANLkTi=KcV+JKfvRvDV4=Qe0n64Crh=nSSXKry23-M8D@mail.gmail.com>
+
+This is indeed very strange. On my latest GHC 7 (built a couple of days ago)
+it does the right thing when compiled, but in GHCi it behaves as you
+describe. I have no idea, frankly.
+
+On Thu, Feb 3, 2011 at 8:44 PM, Steffen Schuldenzucker <
+sschuldenzucker at uni-bonn.de> wrote:
+
+>
+> Dear cafe,
+>
+> does anyone have an explanation for this?:
+>
+> >>> error (error "foo")
+> *** Exception: foo
+>
+> >>> error $ error "foo"
+> *** Exception: *** Exception: foo
+>
+> -- Steffen
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/3d760433/attachment.htm>
+

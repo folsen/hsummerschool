@@ -1,0 +1,32 @@
+From arnaud.oqube at gmail.com  Thu Aug 25 16:25:20 2011
+From: arnaud.oqube at gmail.com (Arnaud Bailly)
+Date: Thu, 25 Aug 2011 16:25:20 +0200
+Subject: [Haskell-cafe] Haddock chokes on function arguments
+Message-ID: <CAL4zPapf=s7un01+J2JnCaaTgm991bAHntXtRbcfzh-RuEoQOw@mail.gmail.com>
+
+Hello,
+while trying to generate Haddock documentation (Haddock version 2.9.2, (c)
+Simon Marlow 2006), it chokes on the following fragment
+
+-- |Apply a given function over all elements of a list and select one of the
+-- results.
+selector :: (Arbitrary b) =>
+            [a]      -> -- ^ Elements to select from
+            (a -> b) -> -- ^ Constructor to apply to selected element
+            Gen b
+selector list ctor = oneof (map (return . ctor) list)
+
+with the following error message:
+
+'   parse error on input `-- ^ Elements to select from
+
+I am puzzled as this is exactly how arguments are supposed to be documented,
+according to http://www.haskell.org/haddock/doc/html/ch03s02.html#id565220
+
+Any clues ?
+
+Arnaud
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110825/ac748af7/attachment.htm>
+

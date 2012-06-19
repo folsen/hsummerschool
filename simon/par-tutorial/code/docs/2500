@@ -1,0 +1,42 @@
+From sh006d3592 at blueyonder.co.uk  Fri Dec 30 20:47:27 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Fri, 30 Dec 2011 19:47:27 +0000
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <65374CE8-1ECD-4876-98B8-2E84F55B33F1@mobileink.com>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <jdh9h6$gba$1@dough.gmane.org>
+	<4EFCA66D.4060609@blueyonder.co.uk> <jdiesl$5sp$1@dough.gmane.org>
+	<4EFCCA86.4020709@blueyonder.co.uk>
+	<ADFFAE52-B3FF-4BFD-B891-78650E8DB9FD@mobileink.com>
+	<op.v7a9obs3shvy2l@artyom-nbook>
+	<65374CE8-1ECD-4876-98B8-2E84F55B33F1@mobileink.com>
+Message-ID: <4EFE154F.3050109@blueyonder.co.uk>
+
+On 30/12/2011 15:50, Gregg Reynolds wrote:
+> On Dec 30, 2011, at 10:34 AM, Artyom Kazak wrote:
+>
+>> Gregg Reynolds<dev at mobileink.com>  ?????(?) ? ????? ?????? Fri, 30 Dec 2011 17:23:20 +0200:
+>>
+>>> Regarding side-effects, they can be (informally) defined pretty simply:  any non-computational effect caused by a computation is a side-effect.
+>> I wonder: can writing to memory be called a ?computational effect?? If yes, then every computation is impure. If no, then what?s the difference between memory and hard drive?
+>>
+> Great question!  It suggests that the line between computation and its side effects is not as clear-cut as we (well, I) thought.
+It relates to that while loop thing in my last reply to you, I think - 
+the computational effect dressed up as non-computational.
+
+We can do some work in Haskell using a temporary file on disk as a 
+pragmatic solution to a space issue. We can feed that composed IO action 
+to unsafePerformIO without breaking referential transparency, at least 
+if we choose to ignore issues like running out of disk space (we ignore 
+similar memory issues all the time).
+
+And really, it's just explicit virtual memory - it's implicitly 
+happening in the background anyway.
+
+Or - it's layers of abstraction. The implementation of a function that 
+uses explicit virtual memory is impure, but the abstraction it provides 
+is pure. At least in principle (hand-waving away possible disk errors 
+etc), the abstraction doesn't leak impurity.
+
+
+

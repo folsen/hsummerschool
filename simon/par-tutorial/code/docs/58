@@ -1,0 +1,21 @@
+From jmillikin at gmail.com  Sat Apr  2 16:39:53 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Sat, 2 Apr 2011 07:39:53 -0700 (PDT)
+Subject: [Haskell-cafe] using IO monad in Iteratee
+In-Reply-To: <AANLkTim6SoSVFZ+AGH23okAZs2h1RvyGLvekxPKbtno9@mail.gmail.com>
+Message-ID: <18293945.560.1301755193211.JavaMail.geo-discussion-forums@prfc6>
+
+Use enumHandle.
+
+enumFile deals with the common case of "read from the filesystem in IO". It 
+can't deal with general MonadIO monads because there'd be no guarantee that 
+the handle would actually be closed (eg, an ErrorT IO might never run the 
+cleanup).
+
+If you need a special monad, do something like:
+
+withBinaryFile $ \h -> runMyMonad (run_ (enumHandle h $$ myIter))
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110402/b33b3e92/attachment.htm>
+

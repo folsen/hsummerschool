@@ -1,0 +1,31 @@
+From gcrosswhite at gmail.com  Thu Dec 15 04:04:43 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Thu, 15 Dec 2011 13:04:43 +1000
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CAKFCL4UUKjxW-pUtXBF6oyYW7JZpswc_JNBVTJ5+jEHsOJxAiA@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+	<CACw0ni+Q=ixAAdWzmsbF+c1RkF74S2RV=fi_tX2B2puR0s5xvQ@mail.gmail.com>
+	<1B00C2DD-781C-41BC-BE2F-DDB4C646C8DC@gmail.com>
+	<CAKFCL4UUKjxW-pUtXBF6oyYW7JZpswc_JNBVTJ5+jEHsOJxAiA@mail.gmail.com>
+Message-ID: <25DFB77C-5BBF-4C96-81BA-54CAAA88B137@gmail.com>
+
+
+On Dec 15, 2011, at 12:52 PM, Brandon Allbery wrote:
+
+> These statements are not mutually logically consistent, and leave me wondering if Applicative and/or Alternative have been fully thought out.
+
+
+Oh, that particular question is *super*-easy to answer:  based on what I've been reading, they *weren't* fully thought out.  ;-)  It would seem that they were tacked onto the base libraries because people had learned from experience (mostly while writing parser libraries, in the case of Alternative) that they were sufficiently useful in a general setting that doing this made sense at the time.  (I am exaggerating a little but that's the general idea.)
+
+Mind you, this was not meant to be a criticism at all --- design is an iterative process where at each step you make the best decision that you can based on the available information, hopefully setting yourself up so that at the next step you can make an even better decision.  :-)  What we seem to be learning now is simply that things that may have seemed obvious years ago are not as obvious now as they had seemed to be at the time.
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/34632c74/attachment.htm>
+

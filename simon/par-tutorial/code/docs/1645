@@ -1,0 +1,28 @@
+From bytbox at gmail.com  Sun Dec  4 17:47:24 2011
+From: bytbox at gmail.com (Scott Lawrence)
+Date: Sun, 04 Dec 2011 11:47:24 -0500
+Subject: [Haskell-cafe] Anonymous, Unique Types, maybe
+In-Reply-To: <CAB2TPRBfFBfcqc6zsOpnsrAPxut_pBYG36dKtKVrdcS56yw1Lw@mail.gmail.com>
+References: <4EDB0ABC.10705@gmail.com>
+	<CAB2TPRBfFBfcqc6zsOpnsrAPxut_pBYG36dKtKVrdcS56yw1Lw@mail.gmail.com>
+Message-ID: <4EDBA41C.3070702@gmail.com>
+
+On 12/04/11 02:25, Stephen Tetley wrote:
+> Umm, an obvious point is that if you really are using lists as streams
+> they should appear infinite to the processing code, so you shouldn't
+> encounter operations that fail due to incompatible lengths.
+
+Didn't explain myself quite right, I guess.
+
+The lists are infinite; however, when a function (which doesn't call 
+`filter`) produces more than one list, the two lists are related in that 
+the nth elements of each list came from the same source. Pairing every 
+nth element is meaningfull for two such lists/streams. In contrast, a 
+list coming out of `filter` isn't related to the list going in in this 
+way, and shouldn't be re-paired with that list (or a direct derivative). 
+My goal, again, is to represent that distinction in the type system.
+
+-- 
+Scott Lawrence
+
+

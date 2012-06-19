@@ -1,0 +1,111 @@
+From wren at freegeek.org  Sat Feb 12 12:47:39 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sat, 12 Feb 2011 06:47:39 -0500
+Subject: [Haskell-cafe] ANN: bytestring-trie 0.2.3
+Message-ID: <4D56735B.4010104@freegeek.org>
+
+--------------------------------------------
+-- bytestring-trie 0.2.3
+--------------------------------------------
+
+A long-awaited release for efficient finite maps from (byte)strings to 
+values. This version adds a number of new functions for taking advantage 
+of the trie structure.
+
+At the Haskell Symposium 2010, Milan Straka presented a wonderful paper 
+comparing the state of the @containers@ library pre-GHC7. In it he 
+compared the new @hashmap@ against the buggy old @bytestring-trie@ 0.1.4 
+(the major bug was fixed in 0.2.2 released 2010-06-10), and I've been 
+meaning to update the package ever since. I haven't had a chance to do 
+an extensive performance analysis yet, but it's worth clearing up some 
+misconceptions--- which is what this release is all about.
+
+If you are only interested in being able to associate strings to values, 
+then you may prefer the @hashmap@ package which is faster for those only 
+needing a map-like structure. This package is intended for those who 
+need the extra capabilities that a trie-like structure can offer (e.g., 
+structure sharing to reduce memory costs for highly redundant keys, 
+taking the submap of all keys with a given prefix, contextual mapping, 
+extracting the minimum and maximum keys, etc.)
+
+While hacking on another project I noticed that @bytestring-trie@ didn't 
+actually export many functions taking advantage of the trie structure. 
+So let's fix that!
+
+--------------------------------------------
+-- Changes (available in 0.2.2, but not announced previously)
+--------------------------------------------
+
+* Added some functions for treating tries like priority queues 
+(minAssoc, maxAssoc, updateMinViewBy, updateMaxViewBy). Currently these 
+are only exported by Data.Trie.Internal though future releases may 
+re-export them from Data.Trie too.
+
+--------------------------------------------
+-- Changes (since 0.2.2)
+--------------------------------------------
+
+* Added Data.Trie.Internal.alterBy_: A variant of 'alterBy' which also 
+allows modifying the sub-trie. This is useful for cases where you want 
+to alter a number of values which are each prefixes of one another 
+(e.g., "a", "ab", "abc",...).
+
+* Added a number of "contextual" mapping functions (contextualMap, 
+contextualMap', contextualFilterMap, contextualMapBy) which give access 
+to the sub-trie rooted at each value. Currently these are only exported 
+by Data.Trie.Internal though future releases may re-export them from 
+Data.Trie too.
+
+* Added strict variants of a number of functions in 
+Data.Trie.Convenience (fromListWith', insertWith', insertWithKey', 
+unionWith').
+
+* Added some additional functions for building tries from association 
+lists (fromListWith', fromListWithL, fromListWithL') as suggested by Ian 
+Taylor.
+
+* Converted the definitions for fmap, foldMap, traverse, and filterMap 
+to use the worker/wrapper transform. This appears to be an optimization, 
+though I don't have a decent benchmarking suite for verifying this.
+
+* Lots of tweaks and improvements to the documentation.
+
+--------------------------------------------
+-- Future work
+--------------------------------------------
+
+* I'm still not leased with the situation of having so many different 
+variants of fromList. There must be a nicer solution which generalizes 
+over all of them and doesn't have the various pessimal corner cases...
+
+* The priority queue functions still need some work to make them general 
+as well as comprehensive like the other functions in Data.Trie.Internal 
+are.
+
+* I still need to do a thorough performance analysis. The code for 
+Data.Trie was based very closely on the code for Data.IntMap. Milan 
+Straka found a number of ways to optimize the Data.IntMap code, so I 
+need to incorporate those into the Data.Trie code.
+
+--------------------------------------------
+-- Links
+--------------------------------------------
+
+Homepage:
+     http://code.haskell.org/~wren/
+
+Hackage:
+     http://hackage.haskell.org/package/bytestring-trie
+
+Darcs:
+     http://community.haskell.org/~wren/bytestring-trie/
+
+Haddock (Darcs version):
+
+http://community.haskell.org/~wren/bytestring-trie/dist/doc/html/bytestring-trie/
+
+-- 
+Live well,
+~wren
+
+

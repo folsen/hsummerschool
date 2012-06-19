@@ -1,0 +1,36 @@
+From creswick at gmail.com  Thu Apr 21 20:49:11 2011
+From: creswick at gmail.com (Rogan Creswick)
+Date: Thu, 21 Apr 2011 11:49:11 -0700
+Subject: [Haskell-cafe] impoosible dependencies
+In-Reply-To: <BANLkTime2W-r1o4+ahV-0WYLbQox6eCeLA@mail.gmail.com>
+References: <op.vt9azkjijmyckg@boqueron>
+	<BANLkTinBmPhaS+B4qHNjd8FrWSOLarAsuQ@mail.gmail.com>
+	<op.vt9e0fx1jmyckg@boqueron>
+	<BANLkTin8+Xawt60g4JKPCfsE9bF=hqPLgQ@mail.gmail.com>
+	<BANLkTinqosFOJA_uvaONPYfJDj7iF5srGQ@mail.gmail.com>
+	<op.vuank4u8it8v9f@chingo.local>
+	<BANLkTinq4DTrOmwF0Hd2P26v+m25qxg0oA@mail.gmail.com>
+	<BANLkTime2W-r1o4+ahV-0WYLbQox6eCeLA@mail.gmail.com>
+Message-ID: <BANLkTik4oebDqE6z6Hg7xVks5ttDbDN_5g@mail.gmail.com>
+
+On Thu, Apr 21, 2011 at 11:37 AM, Erik Hesselink <hesselink at gmail.com> wrote:
+> It doesn't seem to do this anymore for parsec. The preferred-versions
+> now look like this:
+>
+> base < 4
+> cabal-install < 0.10
+> network < 2.2.3 || >= 2.2.4
+>
+> Or am I looking at the wrong thing?
+
+Oh, interesting.  I think you're looking at the right thing.  I
+haven't checked it since cabal-install-0.10 came out (I have the
+hardest time finding that url...).
+
+--Rogan
+
+>
+> Erik
+>
+
+

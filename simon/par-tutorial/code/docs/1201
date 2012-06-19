@@ -1,0 +1,44 @@
+From oleg at okmij.org  Thu Aug 18 07:27:43 2011
+From: oleg at okmij.org (oleg at okmij.org)
+Date: Wed, 17 Aug 2011 22:27:43 -0700 (PDT)
+Subject: [Haskell-cafe] Existential question
+Message-ID: <20110818052743.3D7181712D@Adric.ern.nps.edu>
+
+
+> -- Is there a way to make this one work also?
+> data Kl i o = forall s. Kl (i -> s -> (s, o))
+> iso :: (i -> Kl () o) -> Kl i o
+> iso f = Kl $ \i s -> (\(Kl kl) -> kl () s) (f i)
+
+Yes, if you move the quantifier:
+
+type Kl i o = i -> Kl1 o
+data Kl1 o = forall s. Kl1 (s -> (s,o))
+iso :: (i -> Kl () o) -> Kl i o
+iso f = \i -> f i ()
+
+iso1 :: Kl i o -> (i -> Kl () o)
+iso1 f = \i -> (\() -> f i)
+
+
+I'm not sure if it helps in the long run: the original Kl and mine Kl1
+are useless. Suppose we have the value kl1 :: Kl Int Bool 
+with the original declaration of Kl:
+
+data Kl i o = forall s. Kl (i -> s -> (s, o))
+
+Now, what we can do with kl1? We can feed it an integer, say 1, and
+obtain function f of the type s -> (s,Bool) for an _unknown_ type s.
+Informally, that type is different from any concrete type. We can
+never find the Bool result produced by that function since we can
+never have any concrete value s. The only applications of f that will
+type check are
+	\s -> f s
+	f undefined
+both of which are useless to obtain f's result.
+
+
+
+
+
+

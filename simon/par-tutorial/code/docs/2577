@@ -1,0 +1,58 @@
+From duncan.coutts at googlemail.com  Wed Feb  2 02:33:22 2011
+From: duncan.coutts at googlemail.com (Duncan Coutts)
+Date: Wed, 02 Feb 2011 01:33:22 +0000
+Subject: [Haskell-cafe] Status update on {code, trac, projects, planet,
+	community}.haskell.org
+Message-ID: <1296610402.8387.1874.camel@localhost>
+
+All,
+
+As you will be aware, some of the *.haskell.org websites have been down
+recently, specifically:
+
+code.haskell.org
+trac.haskell.org
+projects.haskell.org
+planet.haskell.org
+community.haskell.org
+
+These are all hosted on the community server. The community server was
+hacked on the 26th January and we took it offline. The server was
+running an old version of debian that was no longer supported with
+security updates. (Ironically, two days previously the infrastructure
+team had been discussing the fact that nobody seemed to have any time
+available to do the planned migration to a new host). The hacker
+replaced sshd which we noticed because the ssh host signature changed
+and it started prompting for passwords (we use key-based rather than
+password based logins).
+
+MSR kindly allowed Ian to take time off from the GHC 7.0.2 release to
+work on migrating the services to the new host (that had previously been
+partially prepared). Thanks to Ian's efforts and some help from other
+members of the infrastructure team, the migration is now nearly
+complete.
+
+planet.haskell.org should now be working, along with email, project
+mailing lists and trac instances.
+
+We have not yet re-enabled user login accounts, nor re-enabled access to
+code repositories. The support ticket system is not yet enabled.
+
+We will send a further update when these are re-enabled, or procedures
+for people to re-enable them are finalised.
+
+On a more positive note, the new VM that we are using is a lot more
+powerful than the old one, in particular about 5x more memory. As many
+of you will have experienced, services on the old server tended to go
+AWOL which was primarily due to running up against memory limits,
+causing services to get killed off. In the case of the web server it was
+mainly due to having to use a very small number of concurrent
+connections, again to minimise memory use. So all in all we expect the
+new server to be a good deal more reliable.
+
+
+Duncan
+(On behalf of the Haskell infrastructure team)
+
+
+

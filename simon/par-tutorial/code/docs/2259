@@ -1,0 +1,41 @@
+From maydwell at gmail.com  Sat Dec 24 16:43:12 2011
+From: maydwell at gmail.com (Lyndon Maydwell)
+Date: Sat, 24 Dec 2011 23:43:12 +0800
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+In-Reply-To: <1324734001-sup-8861@ezyang>
+References: <4EF57FC9.1030505@vex.net> <1324734001-sup-8861@ezyang>
+Message-ID: <CAM5QZtwG0ZSFuY9SNcHV1LTp8zDzr+ay-UDVdrnJYEKuf7sd9w@mail.gmail.com>
+
+I wonder how the arrival of an anonymous anecdote on IRC was the
+smoking gun needed to justify calling out the Haskell community on its
+cognitive dissonance. Surely you would need some statistical evidence,
+a public display from a very prominent member, or some officially
+endorsed stance to convince anyone that "Most" of a community behaves
+a certain way.
+
+I understand why someone might want to call us out on a lack of
+rigour. However, I have no idea why someone would hold their tongue on
+the matter due to a lack of evidence, then commence hostilities once a
+disjointed quote off IRC appears...
+
+Albert: Was it the straw that broke the camel's back?
+
+On Sat, Dec 24, 2011 at 9:41 PM, Edward Z. Yang <ezyang at mit.edu> wrote:
+>> 1. a function f is strict if ?f ? = ?
+>> 2. ? represents any computation which does not terminate, i.e. an
+>> exception or an infinite loop
+>> 3. "strict" describes the denotational semantics
+>>
+>> People, could you please make up your mind already? It has been more
+>> than 13 years.
+>
+> I have to admit, I'm a bit confused what the complaint is.
+>
+> Edward
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

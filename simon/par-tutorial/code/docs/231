@@ -1,0 +1,59 @@
+From es at ertes.de  Fri Apr  8 00:52:46 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Fri, 8 Apr 2011 00:52:46 +0200
+Subject: [Haskell-cafe] Stateful iteratees
+References: <20110407190452.356fcca6@angst.streitmacht.eu>
+	<BANLkTikE_5XoYE7-no9aGuTXhs91xMHmGQ@mail.gmail.com>
+	<20110407193506.7711d387@angst.streitmacht.eu>
+	<BANLkTinOC_K3MgB+o3V++PSPKzWuMXxeTA@mail.gmail.com>
+Message-ID: <20110408005246.20bd5719@angst.streitmacht.eu>
+
+Gregory Collins <greg at gregorycollins.net> wrote:
+
+> On Thu, Apr 7, 2011 at 7:35 PM, Ertugrul Soeylemez <es at ertes.de> wrote:
+>
+> > > Why can't you use #1 and do this when you call "run_"?
+> >
+> > Because that runs the iteratee and leaves me with a StateT. ?Even
+> > though I use a CPS-based StateT, I doubt that it can be converted
+> > back to Iteratee easily.
+> >
+> > With the first variant, I would need a function like this:
+> >
+> > ? ?runMyApp :: Iteratee a (StateT MyConfig m) b -> Iteratee a m b
+>
+> Let me rephrase my question: why do you need a function like this?
+
+Because I have multiple, independent libraries, which use a stateful
+iteratee.  They work perfectly well, as long as you don't try to combine
+them.  I have found a solution now, which seems to solve the problems.
+I have described it in my last post.
+
+
+> Anyways, something like this is definitely doable (using enumerator
+> formulation, sorry), but your type needs to be this:
+>
+>     runStateIteratee :: Monad m => Iteratee a (StateT s m) r -> s ->
+>                         Iteratee a m (r, s)
+
+Well, yes, but that's only part of the problem.  After doing this, I
+need to put the iteratee on top of another monad transformer, while
+remembering the state to (again) change the underlying state type.  All
+in all it would become very complicated.  The solution I'm working on
+seems to solve this more nicely and keeps the iteratees clean.
+
+But it's good to know that such a transformation is possible.  It may
+help out later.  Thanks.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

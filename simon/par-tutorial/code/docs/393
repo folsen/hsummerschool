@@ -1,0 +1,43 @@
+From dokondr at gmail.com  Thu Apr 14 13:16:24 2011
+From: dokondr at gmail.com (Dmitri O.Kondratiev)
+Date: Thu, 14 Apr 2011 15:16:24 +0400
+Subject: [Haskell-cafe] Haskell on-line judge for Programming Challenges /
+	Contests ?
+In-Reply-To: <BANLkTi=aork0NzPnxAX+AEoidpxRVH31YA@mail.gmail.com>
+References: <BANLkTi=aork0NzPnxAX+AEoidpxRVH31YA@mail.gmail.com>
+Message-ID: <BANLkTi=HXy_+bFU4GFdrYT1LHGiu7UGHew@mail.gmail.com>
+
+Angel de Vicente wrote:
+
+On 14/04/11 10:29, Dmitri O.Kondratiev wrote:
+>* I am looking for a site providing on-line automatic judge for
+*>* Programming Challenges that can be coded in Haskell.
+*>* For example this site:
+*>* http://www.programming-challenges.com
+*>* provides lots of interesting programming provlems:
+*>* http://www.programming-challenges.com/pg.php?page=index
+*>
+>* Yet, unfortunately only C, C++ and Java code can be submitted, judge on
+*>* that site can't compile and run Haskell code.
+*>* Is there any similar online judge for Haskell?
+* You can try http://www.spoj.pl/
+Cheers,
+?ngel
+
+Angel, thanks!
+This site looks good. Do you know if "spoj.pl" has a search utility for
+problems?
+It would be great if they have 3n+1 problem I wrote about in a separate
+thread here.
+
+-- 
+All the best,
+Dmitri O. Kondratiev
+
+"This is what keeps me going: discovery"
+dokondr at gmail.com
+http://sites.google.com/site/dokondr/welcome
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110414/790109f0/attachment.htm>
+

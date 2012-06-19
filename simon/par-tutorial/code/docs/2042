@@ -1,0 +1,41 @@
+From strake888 at gmail.com  Sat Dec 17 03:35:24 2011
+From: strake888 at gmail.com (Matthew Farkas-Dyck)
+Date: Fri, 16 Dec 2011 21:35:24 -0500
+Subject: [Haskell-cafe] [Alternative] summary of my understanding so far
+In-Reply-To: <E6897C72-6886-4B18-9005-E6BDA3E92D76@gmail.com>
+References: <E6897C72-6886-4B18-9005-E6BDA3E92D76@gmail.com>
+Message-ID: <CAL3m8eDmauVuJAn_qac7U3Su0A7qMuvPjz0efd7s=coEd6H6rw@mail.gmail.com>
+
+On 15/12/2011, Gregory Crosswhite <gcrosswhite at gmail.com> wrote:
+> 1) Documentation really needs to be improved
+> 2) some/many cannot be physically separated from Alternative, but there
+> *might* be an advantage to creating a subclass for them anyway purely for
+> the sake of conveying more information about a type to users
+> 3) Maybe and [] are sensible instances of Alternative, even if many/some
+> often enters an infinite loop.
+> 4) It is possible to provide special instance of many/some that satisfy the
+> equations of many/some, with the slight disadvantage that these solutions
+> are no longer the "least" solutions.
+>
+> Based on all of this, at this moment in time it seems to me that the most
+> sensible way forward is to fix the documentation, tweak the definition of
+> Alternative to no longer require the least solutions of the equations, and
+> then to adopt the new instances for Maybe and [].
+>
+> Thoughts?
+
+(1) If we do (4), then the documentation ought to be adequate as-is.
+(2) In my opinion, no. If one is writing code polymorphic in
+(Alternative f => f), then one needn't worry. If one is using such
+code, then one ought to know whether some and many are sane for the
+types in question, anyhow (O_?)
+(4) This is very reasonable; not the least solutions, but hey, they
+converge (^_^)
+
+> Cheers,
+> Greg
+
+Cheers,
+Matthew Farkas-Dyck
+
+

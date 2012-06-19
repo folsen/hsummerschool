@@ -1,0 +1,35 @@
+From ozgurakgun at gmail.com  Mon Dec  5 16:05:53 2011
+From: ozgurakgun at gmail.com (Ozgur Akgun)
+Date: Mon, 5 Dec 2011 15:05:53 +0000
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAMXF=YCpAGRVX7QZDMek+7ibFgQgXDiGW=T6wq9NKM_A-N=Okg@mail.gmail.com>
+References: <CAHZd2pn--Umo43nENkrtXKLwh1TYs-SJpHNT8QGCjOfhkTCZFg@mail.gmail.com>
+	<CAMXF=YBAufCAuVWEJ1KFndFvjm0fY5zCcQRq1B=1_bgrmG1evg@mail.gmail.com>
+	<CAMXF=YB5si2DCHBjH5S94_seLhGBzQG4MPWZx_9pnohWsCMXAg@mail.gmail.com>
+	<CAHZd2pm0B6WESqF5Y9CYzt8tvhKFGa+gJtpE89HFrvsHyBBCkg@mail.gmail.com>
+	<CAMXF=YCpAGRVX7QZDMek+7ibFgQgXDiGW=T6wq9NKM_A-N=Okg@mail.gmail.com>
+Message-ID: <CALzazPBJow44Cc9XbZRkhJC9QJUZLHQOm2PEEYi2=sSdQAxpzw@mail.gmail.com>
+
+Hi.
+
+On 5 December 2011 14:53, dokondr <dokondr at gmail.com> wrote:
+>
+> Main System.Environment.Executable System.FilePath> "/abc" </> "/"
+> "/"
+>
+> Instead of getting "/abc/" I get "/". What am I doing wrong?
+
+
+It thinks the second path is an absolute path.
+
+"Combine two paths, if the second path isAbsolute, then it returns the
+second."
+
+http://hackage.haskell.org/packages/archive/filepath/latest/doc/html/System-FilePath-Posix.html#v:combine
+
+HTH,
+Ozgur
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111205/25bc4368/attachment.htm>
+

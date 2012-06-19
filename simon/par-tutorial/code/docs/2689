@@ -1,0 +1,31 @@
+From wren at freegeek.org  Fri Feb  4 03:40:03 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Thu, 03 Feb 2011 21:40:03 -0500
+Subject: [Haskell-cafe] OSX i386/x86 and x86_64 - time to switch
+ supported platforms?
+In-Reply-To: <CB1FAA21-8800-475F-966B-C808DD394960@gmail.com>
+References: <801E1648-B34B-4F93-9BAB-9A05EC77D747@gmail.com>
+	<C9311AB9-65D8-4ACE-B20B-F429039934CB@gmail.com>
+	<4D4B5308.4000009@freegeek.org>
+	<3C972E29-7228-4F5F-84A7-4FC13C938B82@cs.otago.ac.nz>
+	<B34591F6-86C2-471A-9E61-5B609FACF5F3@gmail.com>
+	<4D4B622F.8020501@freegeek.org>
+	<CB1FAA21-8800-475F-966B-C808DD394960@gmail.com>
+Message-ID: <4D4B6703.2030701@freegeek.org>
+
+On 2/3/11 9:28 PM, Max Cantor wrote:
+> Doesn't 10.5.x have the ability to generate and run 64-bit binaries?
+
+Yes, it does. But it defaults to 32-bit as I recall. Richard O'Keefe 
+suggested a general practice of targeting the architecture considered 
+default by the operating system. That's a good suggestion; I was just 
+pointing out that when new versions of OSX change the default 
+architecture, we should continue to support older versions of OSX on the 
+newly-default architecture even though that architecture isn't the 
+default one for the older version of OSX.
+
+-- 
+Live well,
+~wren
+
+

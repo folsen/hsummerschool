@@ -1,0 +1,31 @@
+From daniel.is.fischer at googlemail.com  Fri Apr  1 10:40:21 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Fri, 1 Apr 2011 10:40:21 +0200
+Subject: [Haskell-cafe] Strictness is observable
+In-Reply-To: <20110401070056.A57DF17433@Adric.ern.nps.edu>
+References: <20110401070056.A57DF17433@Adric.ern.nps.edu>
+Message-ID: <201104011040.21893.daniel.is.fischer@googlemail.com>
+
+On Friday 01 April 2011 09:00:56, oleg at okmij.org wrote:
+> Daniel Fischer wrote:
+> > If you have a strict function, you may evaluate its argument eagerly
+> > without changing the result^1, while eager evaluation of a non-strict
+> > function's argument may produce _|_ where deferred evaluation
+> > wouldn't.
+> 
+> Sadly, that is quite untrue. Strictness is observable, already in
+> Haskell98. That distressing result has nothing to do with imprecise
+> exceptions, seq, non-termination, lack of resources, or the use of
+> unsafe features. Plainly, just by changing the strictness of a
+> function one may cause the program to print different results, such as
+> "strict" or "non-strict" in the code below.
+
+John Meacham said it's not Haskell98, I can't be bothered to check the H98 
+report now, since that's a minor point anyway.
+
+So, mea culpa, I didn't consider catch at all, only thought of non-IO code 
+and considered all _|_s equal.
+I should have made these restrictions explicit, but I wasn't even 
+consciously aware of them.
+
+

@@ -1,0 +1,23 @@
+From trebla at vex.net  Fri Aug 26 23:44:47 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Fri, 26 Aug 2011 17:44:47 -0400
+Subject: [Haskell-cafe] Ambiguous module name `System.Directory'
+In-Reply-To: <20110826160018.GB23687@sirch>
+References: <20110826160018.GB23687@sirch>
+Message-ID: <4E5813CF.1020301@vex.net>
+
+On 11-08-26 12:00 PM, informationen wrote:
+> How can i resolve this conflict permamently (i know about :set
+> -hide-package ... )? And shouldn't there be a rule in the
+> haskell platform which forbids modules of the same name?
+
+Two permanent resolutions, choose one:
+
+ghc-pkg hide system-fileio
+
+ghc-pkg unregister system-fileio
+
+Haskell platform has never included system-fileio, so it contains no 
+ambiguous module name.
+
+

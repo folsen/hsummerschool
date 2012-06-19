@@ -1,0 +1,71 @@
+From jwlato at gmail.com  Thu Feb  3 14:05:56 2011
+From: jwlato at gmail.com (John Lato)
+Date: Thu, 3 Feb 2011 13:05:56 +0000
+Subject: [Haskell-cafe] Problems with iteratees
+Message-ID: <AANLkTi=g_iLjNtW7Dx3EyXr0a3X7H-C1V4TNn-FrHHWk@mail.gmail.com>
+
+>
+> From: wren ng thornton <wren at freegeek.org>
+> On 2/2/11 11:25 PM, Maciej Wos wrote:
+> > I think the problem is that the iteratee you give to I.convStream
+> > always returns Just [something] while you should return Nothing on
+> > EOF.
+>
+> That makes sense for the hanging problem (which I only noticed during
+> debugging). Though I still get the the same error message when running
+> the whole program...
+>
+
+I don't have too much to add to Maciej and Oleg's reply, except that I'd
+recommend looking at the Wave codec over the Tiff reader in those versions
+of iteratee.  I don't think that's the only problem, though, because then
+you'd be getting a "Divergent iteratee" error.
+
+The "endOfInput" error is suspicious, and I think you'll need to track it
+down to solve this problem.  It doesn't appear to be from either iteratee or
+protocol-buffers.  Could it be coming from your IO library?  I wonder if the
+enumerator is trying to force a read after EOF has been reached for some
+reason?
+
+As an experiment, you could try using a custom convStream function like
+this:
+
+convStream2 :: Monad m =>  IterateeG s el m (Maybe (s' el')) ->
+EnumeratorN s el s' el' m aconvStream2 fi iter = fi >>= check  where
+check (Just xs) = lift (runIter iter (Chunk xs)) >>= docase  check
+(Nothing) = return iter  docase (Done a _)        = return . return $
+a  docase (Cont k Nothing)  = convStream2 fi k
+
+  docase (Cont k (Just "endOfInput")) = convStream2 (return Nothing) k
+ docase (Cont _ (Just e)) = return $ throwErr e
+
+This may help determine if it's a problem with IO or with the message
+parsing.
+
+John
+
+
+> > On Thu, Feb 3, 2011 at 10:06 AM, wren ng thornton<wren at freegeek.org>
+>  wrote:
+> >> When I put this all together, the process is killed with:
+> >>
+> >>     control message: Just (Err "endOfInput")
+> >>
+> >> Data.Iteratee.Base.run is the origin of the "control message:" part of
+> the
+> >> error, but I don't know where (Err "endOfInput") is coming from since
+> >> Data.Iteratee.Base only uses (Err "EOF") or (Err "Divergent Iteratee").
+> I
+> >> believe runGetEnumeratee is where the problem is, though it could also
+> be
+> >> the use site or something in one of the libraries. Any help would be
+> >> appreciated.
+>
+> --
+> Live well,
+> ~wren
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/7367c328/attachment.htm>
+

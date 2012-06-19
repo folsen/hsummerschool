@@ -1,0 +1,49 @@
+From dagitj at gmail.com  Fri Dec 23 16:49:43 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Fri, 23 Dec 2011 07:49:43 -0800
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <CA+qNEz+jtpJN-DUXEJZDJEciHyqnr0P8o2WJKWWt1KTjB4zwxw@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+	<CAL3m8eBx2=RNZJfqBSp=Bds4GXeu8vvAfXR_CPkPGJ+HZ-1-Xg@mail.gmail.com>
+	<CA+qNEz+jtpJN-DUXEJZDJEciHyqnr0P8o2WJKWWt1KTjB4zwxw@mail.gmail.com>
+Message-ID: <CAJ-DSywBZOthoRT7-ud1Xv+s8ogUEuf_0tfWwzEzvcY3V0-M+A@mail.gmail.com>
+
+On Tue, Dec 20, 2011 at 3:10 PM, Chris Wong
+<chrisyco+haskell-cafe at gmail.com> wrote:
+> On Wed, Dec 21, 2011 at 10:53 AM, Matthew Farkas-Dyck
+> <strake888 at gmail.com> wrote:
+>> With GHC 7.0.3:
+>>
+>> $ cat test.hs
+>> class ? a where {
+>> ?test :: a;
+>> };
+>>
+>> (?) :: Eq a => a -> [a] -> Bool;
+>> x ? (y:ys) = x == y || x ? ys;
+>>
+>> main = putStrLn "Two of three ain't bad (^_~)";
+>> $ runhaskell test.hs
+>> Two of three ain't bad (^_~)
+>> $
+>
+> Why not expand it even further?
+
+My experience with Agda makes me think that extending it further can
+make it painful to program in.  Initially I thought that using unicode
+symbols would just make input a bit slower and that editor support
+could address that.  You know, like writing about math using latex.
+My actual experience with Agda was different than that.
+
+I was using Emacs and I found that I needed to make my font size very
+large to see all the detail of the unicode symbols clearly enough to
+distinguish between them fully.  The alternative was using the support
+in emacs for displaying the codepoint, as a number, for any glyph I
+wanted to distinguish.  Perhaps it's still "just an issue of editor
+support" but it left a sour taste in my mouth.
+
+Jason
+
+

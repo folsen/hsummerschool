@@ -1,0 +1,60 @@
+From agocorona at gmail.com  Sat Dec 17 14:24:27 2011
+From: agocorona at gmail.com (Alberto G. Corona )
+Date: Sat, 17 Dec 2011 14:24:27 +0100
+Subject: [Haskell-cafe] What happens if you get hit by a bus?
+In-Reply-To: <CACqaG6zzNevySP1xSG7R4t-Y904grz0tn2Ot-TxLu_fMnySBpQ@mail.gmail.com>
+References: <CAEzeKYpOsDqafSoJFQkYioSg-0LTJaFY8WCUBkH2RiXOCZypjQ@mail.gmail.com>
+	<CACqaG6zzNevySP1xSG7R4t-Y904grz0tn2Ot-TxLu_fMnySBpQ@mail.gmail.com>
+Message-ID: <CAArEJmbZJdvZVg_i+Feh1YcX5-f0vp6NQf+v+5UQGWiYY31cMQ@mail.gmail.com>
+
+Hehee
+Great.
+
+Haskell is a flexible high level language perfect for domain specific
+languages it isn't?. A well designed solution is, at the top level,
+simple and understandable even by non experts. The software transforms
+the complexities of the hardware into  something that the user can
+understand by means of interfaces, EDSLs etc. The complexity must be
+hidden in deeper layers. So if you are hit by a bus, the new
+programmer  would be confronted with a simple application layer
+(ideally simple enough to be understood by a non haskell programmer) ,
+that would permit the evolution of the software, so the new programmer
+is productive from day one, from the client point of view. More
+radical adaptations may require  deeper knowledge, but at least the
+shock would be greatly mitigated.
+
+2011/12/16 Yves Par?s <limestrael at gmail.com>:
+> Tell them that if you were instead on Rails, you'd have a huge chance of
+> being hit by a train, which is likely to deal far more damage than a bus.
+>
+>
+> 2011/12/16 Michael Litchard <michael at schmong.org>
+>>
+>> I'm learning what it means to be a professional Haskell programmer,
+>> and contemplating taking on side jobs. The path of least resistance
+>> seems to be web applications, as that is what I do at work. I've been
+>> investigating what some web developers have to say about their trade.
+>> One article addresses the question above. His answer was that he uses
+>> RoR which has a large community and he is therefore easily
+>> replaceable. My question, for freelancers in general, and web
+>> developers in particular is this: How do you address this question? ?I
+>> imagine potential clients would need to be assuaged of their fears
+>> that hiring me would lead to a lock-in situation at best, and no one
+>> to maintain a code base at worst. Lock-in won't be part of my business
+>> model, also sooner or later we part ways with the client. When the
+>> client wonders, "What happens then?", what is a good answer?
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

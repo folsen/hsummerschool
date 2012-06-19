@@ -1,0 +1,33 @@
+From jmillikin at gmail.com  Thu Aug 11 17:21:52 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Thu, 11 Aug 2011 08:21:52 -0700
+Subject: [Haskell-cafe] ANNOUNCE: Chell: A quiet test runner (low-output
+	alternative to test-framework)
+In-Reply-To: <CAKRanNDCXQ+6=0QOUEQmUDCQrLJJLov85JdW5Vjekb1qFgPO6Q@mail.gmail.com>
+References: <CAKRanNDhqzL-t1z-ykP0sHY1ktQqOLX6JwAONsCzHxRJhsNF8A@mail.gmail.com>
+	<CAL1ky9qJ2v=+QHYbLDiAfR9m4TdxBjKNa_mTLq_MDFFAVBB4Og@mail.gmail.com>
+	<CAKRanNBtoZcbW2sTRMJAF_hpNjVYQ10pxe4i-wk=z9SfCqYHzg@mail.gmail.com>
+	<CAL1ky9oEp_-hjDeEdWgd3bn-UxpHEN+AfOUGnfrO_XTyRjq+xw@mail.gmail.com>
+	<CAKRanNDCXQ+6=0QOUEQmUDCQrLJJLov85JdW5Vjekb1qFgPO6Q@mail.gmail.com>
+Message-ID: <CAL1ky9oMiN8P0gFS6sSb-gHdar=hkRbVv+v6uVatedjpFYY-kw@mail.gmail.com>
+
+On Thu, Aug 11, 2011 at 08:17, Greg Weber <greg at gregweber.info> wrote:
+> I am confused also, as to both what output you don't like that motivated
+> chell and what exactly hspec silences :) Suffice to say I am able to get a
+> small relevant error message on failure with hspec. I am adding the hspec
+> maintainer to this e-mail- he can answer any of your questions.
+
+The output I didn't like wasn't coming from HUnit, it was coming from
+the test aggregator I used (test-framework). It prints one line per
+test case run, whether it passed or failed.
+
+That means every time I ran my test suite, it would print *thousands*
+of lines to the terminal. Any failure immediately scrolled up and out
+of sight, so I'd have to either Ctrl-C and hunt it down, or wait for
+the final report when all the tests had finished running.
+
+Chell does the same thing as test-framework (aggregates tests into
+suites, runs them, reports results), but does so quietly. It only
+reports failed and aborted tests.
+
+

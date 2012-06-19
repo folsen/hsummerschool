@@ -1,0 +1,31 @@
+From byorgey at seas.upenn.edu  Fri Dec 16 05:20:20 2011
+From: byorgey at seas.upenn.edu (Brent Yorgey)
+Date: Thu, 15 Dec 2011 23:20:20 -0500
+Subject: [Haskell-cafe] [Alternative] some/many narrative
+In-Reply-To: <CACw0ni+mG32V_xOXQc0ggsDLqL9FFWEgS-dKN+PoH-yGDj8ZEA@mail.gmail.com>
+References: <C561B101-D6D2-458C-98D4-7EEFCB5E60F5@gmail.com>
+	<CA+qNEzJOdYjmjuob59jZA7Qk98VQbmr+gxcZf7bm9qOAFwn-iw@mail.gmail.com>
+	<CACw0ni+mG32V_xOXQc0ggsDLqL9FFWEgS-dKN+PoH-yGDj8ZEA@mail.gmail.com>
+Message-ID: <20111216042020.GA15053@seas.upenn.edu>
+
+On Thu, Dec 15, 2011 at 09:34:14AM -0800, Bryan O'Sullivan wrote:
+> On Wed, Dec 14, 2011 at 10:29 PM, Chris Wong <
+> chrisyco+haskell-cafe at gmail.com> wrote:
+> 
+> >    -- [Warning]: This is only defined for actions that eventually fail
+> >    -- after being performed repeatedly, such as parsing. For pure values
+> > such
+> >    -- as 'Maybe', this will cause an infinite loop.
+> >
+> 
+> If an action of type Maybe a is written to always and unconditionally
+> return Just some-value-or-other, *that's* when some or many will
+
+The way you phrased this sounds odd to me.  Every action/value of type
+Maybe a will *either* "always and unconditionally" be Nothing, OR
+always and unconditionally be Just some-value-or-other.  By
+referential transparency, those are the only options.
+
+-Brent
+
+

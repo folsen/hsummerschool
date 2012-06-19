@@ -1,0 +1,45 @@
+From alex.solla at gmail.com  Fri Feb 11 21:02:09 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Fri, 11 Feb 2011 12:02:09 -0800
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+Message-ID: <AANLkTimAbP0_f8=bvgAqQG1J3cWcGV93Hgm+UPmit4j5@mail.gmail.com>
+
+On Fri, Feb 11, 2011 at 3:06 AM, C K Kashyap <ckkashyap at gmail.com> wrote:
+
+> Hi Folks,
+>
+> I've come across this a few times - "In Haskell, once can prove the
+> correctness of the code" - Is this true?
+>
+> I know that static typing and strong typing of Haskell eliminate a whole
+> class of problems - is that related to the proving correctness?
+> Is it about Quickcheck - if so, how is it different from having test
+> sutites in projects using mainstream languages?
+>
+
+Let's interpret a type as a "partial specification" of a value.  If we can
+express this "partial specification" completely enough so that one (and only
+one, at least ignoring values like bottom) value is a member of the type,
+then any expression of that value must be formally correct.
+
+There are a couple of issues:  the type system is strong, but it still has
+limitations.  There are types we might like to express, but can't.  We might
+be able to express "supersets" of the type we really want, and the type
+inference engine will ensure that a value in the type meets at least this
+partial specification, but it cannot check to see if it is the "right" value
+in the type.  That is up to us.  Some of Haskell's properties, like
+referential transparency, equational reasoning, etc. make this easier than
+in other languages.
+
+A related difficulty is that encoding specifications is a programming task
+in itself.  Even if you correctly compile requirements, and are able to
+completely encode them in the type system, you might still introduce a logic
+mistake in this encoding.  A similar issue is that logic mistakes can creep
+into the requirements compiling phase of a project.  In either of these
+cases, your values would dutifully and correctly compute the wrong things.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110211/5c395467/attachment.htm>
+

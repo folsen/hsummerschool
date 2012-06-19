@@ -1,0 +1,83 @@
+From kolar at fit.vutbr.cz  Tue Feb  8 13:17:08 2011
+From: kolar at fit.vutbr.cz (=?ISO-8859-2?Q?Du=B9an_Kol=E1=F8?=)
+Date: Tue, 08 Feb 2011 13:17:08 +0100
+Subject: [Haskell-cafe] Building Plaftorm 2010 2 on 64bit Linux
+In-Reply-To: <4D512F7E.3010106@dfki.de>
+References: <4D511D52.90503@fit.vutbr.cz> <4D512C2F.1010305@dfki.de>
+	<4D512E17.1000404@fit.vutbr.cz> <4D512F7E.3010106@dfki.de>
+Message-ID: <4D513444.9020209@fit.vutbr.cz>
+
+Unfortunately, no help :-(
+
+String /usr/bin/gcc was found in the following files, if it is useful 
+information:
+
+/lib/ghc-6.12.3/haddock
+/lib/ghc-6.12.3/ghc
+
+/lib/ghc-6.12.3/ghc-6.12.3/Config.hi
+/lib/ghc-6.12.3/ghc-6.12.3/Config.p_hi
+/lib/ghc-6.12.3/ghc-6.12.3/Config.dyn_hi
+/lib/ghc-6.12.3/ghc-6.12.3/libHSghc-6.12.3.a
+/lib/ghc-6.12.3/ghc-6.12.3/libHSghc-6.12.3_p.a
+/lib/ghc-6.12.3/ghc-6.12.3/HSghc-6.12.3.o
+/lib/ghc-6.12.3/ghc-6.12.3/libHSghc-6.12.3-ghc6.12.3.so
+
++doc files
+
+Dusan
+
+
+On 02/08/2011 12:56 PM, Christian Maeder wrote:
+> Ok, gcc is used as linker, too. So maybe try to
+>
+>    -pgml /usr/local/bin/gcc
+>
+> add to your command line.
+>
+> C.
+>
+> Am 08.02.2011 12:50, schrieb Du?an Kol??:
+>> Not the problem, ghc script:
+>>
+>> cat /usr/local/lib/ghc-6.10.4/V12/bin/ghc
+>> #!/bin/sh
+>> exedir="/usr/local/lib/ghc-6.10.4/V12//lib/ghc-6.12.3"
+>> exeprog="ghc-stage2"
+>> executablename="$exedir/$exeprog"
+>> datadir="/usr/local/lib/ghc-6.10.4/V12/share"
+>> bindir="/usr/local/lib/ghc-6.10.4/V12/bin"
+>> topdir="/usr/local/lib/ghc-6.10.4/V12/lib/ghc-6.12.3"
+>> pgmgcc="/usr/local/bin/gcc"
+>> executablename="$exedir/ghc"
+>> exec "$executablename" -B"$topdir" -pgmc "$pgmgcc" ${1+"$@"}
+>>
+>> while:
+>>
+>> which gcc
+>> /usr/local/bin/gcc
+>>
+>>
+>> Dusan
+>>
+>>
+>> On 02/08/2011 12:42 PM, Christian Maeder wrote:
+>>> Am 08.02.2011 11:39, schrieb Du?an Kol??:
+>>>> ghc -O2 --make test.hs -o test
+>>>> [1 of 1] Compiling Main             ( test.hs, test.o )
+>>>> ghc: could not execute: /usr/bin/gcc
+>>>>
+>>>> Even if I can easily compile gcc testc.c -o testc and run testc.
+>>> Your ghc script (under /usr/local/bin or elsewhere "type -all ghc")
+>>> contains a line:
+>>>
+>>>     pgmgcc="/usr/bin/gcc"
+>>>
+>>> This line should be corrected to point to your gcc that is probably not
+>>> under /usr/bin/. Try by "which gcc" or "type -all gcc".
+>>>
+>>> (The official binaries only work for "sane systems".)
+>>>
+>>> HTH Christian
+
+

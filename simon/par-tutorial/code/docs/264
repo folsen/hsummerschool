@@ -1,0 +1,23 @@
+From ezyang at MIT.EDU  Sat Apr  9 23:24:53 2011
+From: ezyang at MIT.EDU (Edward Z. Yang)
+Date: Sat, 09 Apr 2011 17:24:53 -0400
+Subject: [Haskell-cafe] Deciding equality of functions.
+In-Reply-To: <829991302369988@web85.yandex.ru>
+References: <829991302369988@web85.yandex.ru>
+Message-ID: <1302384085-sup-6908@ezyang>
+
+Excerpts from Grigory Sarnitskiy's message of Sat Apr 09 13:26:28 -0400 2011:
+> I guess that deciding whether two functions are equal in most cases is
+> algorithmically impossible. However maybe there exists quite a large domain
+> of decidable cases? If so, how can I employ that in Haskell?
+
+In the case of functions where the domain and range are finite, function
+equality is decidable but not usually feasible.  If your function is a
+combinatorial circuit, you can apply technology like SAT solvers to
+hopefully decide equality in faster than exponential time (this is what
+Cryptol does; you may find it interesting.)
+
+Cheers,
+Edward
+
+

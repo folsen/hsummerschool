@@ -1,0 +1,21 @@
+From trebla at vex.net  Sun Aug  7 19:52:30 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Sun, 07 Aug 2011 13:52:30 -0400
+Subject: [Haskell-cafe] library-profiling default
+In-Reply-To: <CAH1Pdbm6NC+LJLmJ+zK_vKEK+kEAqSiGcAn1KrsbTfXYLdSRMQ@mail.gmail.com>
+References: <CAH1Pdbm6NC+LJLmJ+zK_vKEK+kEAqSiGcAn1KrsbTfXYLdSRMQ@mail.gmail.com>
+Message-ID: <4E3ED0DE.6010807@vex.net>
+
+On 11-08-04 03:06 AM, Tom Doris wrote:
+> Is there a good reason that the default for library-profiling in
+> .cabal/config is set to False?
+
+The combination of two defaults
+
+-- library-profiling: False
+-- documentation: False
+
+points towards optimizing for people who use applications such as xmonad 
+but otherwise would not write in Haskell.
+
+

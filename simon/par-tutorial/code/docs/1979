@@ -1,0 +1,23 @@
+From gcrosswhite at gmail.com  Thu Dec 15 14:26:32 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Thu, 15 Dec 2011 23:26:32 +1000
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <fddfbd10-32f2-4f71-eb37-903da9b05ee3@me.com>
+References: <fddfbd10-32f2-4f71-eb37-903da9b05ee3@me.com>
+Message-ID: <3246599F-0563-46EA-81F6-A982457C2AD5@gmail.com>
+
+
+On Dec 15, 2011, at 9:31 PM, malcolm.wallace wrote:
+
+> I do not regard that as a change in their semantics - it is perfectly allowed already  Indeed, the instances of some/many that I write are already lazily-unfolding, wherever possible.  It all depends simply on whether your instance of Applicative is lazy or strict.
+
+That makes sense.  So the problem is not with Alternative but with Maybe:  specifically, the problem is that there is no way to write a fully lazy instance of Applicative for Maybe since both arguments have to be reduced to WHNF before we can determine the WHNF of the result of applying (<$>), and this is why some/many cannot return lazily generated lists of results.
+
+Put another way, the problem with Maybe computations is that if there is a failure at any point in the computation than *the entire computation fails*, and this means that you can't lazily generate a list of results using some/many because you can't tell whether your computation was a success or a failure until the entire infinite computation has been run;  the only solution to this problem is, as others have suggested, to build domain-specific knowledge about Maybe into the some/many methods of Alternative instance, which I think is one of the good solutions that has been brought up in this discussion.  :-)
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/d6f3a8ff/attachment.htm>
+

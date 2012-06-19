@@ -1,0 +1,78 @@
+From fischer at nii.ac.jp  Tue Dec 27 12:11:55 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Tue, 27 Dec 2011 12:11:55 +0100
+Subject: [Haskell-cafe] Reifying case expressions [was: Re: On stream
+ processing, and a new release of timeplot coming]
+In-Reply-To: <CANVKUrVZaC6aAsAUQ1am0qmNDx=4HDTQj3baztnReQZAGq40AQ@mail.gmail.com>
+References: <CANVKUrWrvDiG7=vfDf=8Zn5_TFQtjawtYxMT6nGh7mroAJZR6w@mail.gmail.com>
+	<jd6tmi$5qd$1@dough.gmane.org>
+	<CALoEywPthWO=P-10hbo_VPQ894B5n1FN2WKJoGqFQkUGoYWsTA@mail.gmail.com>
+	<1B24EF42-8545-4CFD-8905-E95EE6D55D9B@gmail.com>
+	<CALoEywOzq7ZSMk9sfMZErtLkDvTAbeqMfQ1GohCNV+cYBONpNg@mail.gmail.com>
+	<CANVKUrVZaC6aAsAUQ1am0qmNDx=4HDTQj3baztnReQZAGq40AQ@mail.gmail.com>
+Message-ID: <CALoEywNRe319cS1L24isqfF8eJbWcuHhobn+BJWcxj=X6xsu8w@mail.gmail.com>
+
+On Tue, Dec 27, 2011 at 5:35 AM, Eugene Kirpichov <ekirpichov at gmail.com>wrote:
+
+>  I wonder if now this datatype of yours is isomorphic to StreamSummary b
+>>> r -> StreamSummary a r.
+>>>
+>> Not sure what you mean here. StreamSummary seems to be the same as
+>> ListConsumer but I don't see how functions from consumers to consumers are
+>> list transformers, i.e., functions from lists to lists.
+>>
+> Well. They are isomorphic, if list transformers are represented as
+> functions from lists. I'm assuming they could be with the other
+> representation too.
+>
+> type ListT a b = forall r . ([b] -> r) -> ([a] -> r)
+>
+
+I see! I think the type
+
+    type ContListTransformer a b = forall r . ListConsumer b r ->
+ListConsumer a r
+
+is isomorphic to `ListConsumer a [b]`. Here are the isomorphisms (I did not
+check whether they are indeed isomorphisms):
+
+    clt2lc :: ContListTransformer a b -> ListConsumer a [b]
+    clt2lc clt = clt idC
+
+    lc2clt :: ListConsumer a [b] -> ContListTransformer a b
+    lc2clt _               (Done r)       = Done r
+    lc2clt (Done [])       (Continue r _) = Done r
+    lc2clt (Done (b:bs))   (Continue _ f) = lc2clt (Done bs) (f b)
+    lc2clt (Continue bs f) c              =
+      Continue (consumeList c bs) (\a -> lc2clt (f a) c)
+
+However, `ListTransformer a b` is less expressive because of it's
+incremental nature. Every list transformer `t` satisfies the following
+property for all `xs` and `ys`:
+
+    transformList t xs `isPrefixOf` transformList t (xs++ys)
+
+List *consumers* don't need to follow this restriction. For example, the
+consumer
+
+    Continue [1] (\_ -> Done [])
+
+which represents the function
+
+    nonIncr [] = [1]
+    nonIncr _  = []
+
+is not incremental in the sense above, because
+
+    not (nonIncr [] `isPrefixOf` nonIncr ([]++[0]))
+
+I think it is the incremental nature of list transformers that allows them
+to be composed in lock-step in the Category instance. `lc2clt` above is
+sequential composition for list *consumers* but it applies the second
+consumer only after executing the first completely.
+
+Sebastian
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111227/0b1d9348/attachment.htm>
+

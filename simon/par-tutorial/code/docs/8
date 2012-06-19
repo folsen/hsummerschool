@@ -1,0 +1,48 @@
+From creswick at gmail.com  Fri Apr  1 04:31:24 2011
+From: creswick at gmail.com (Rogan Creswick)
+Date: Thu, 31 Mar 2011 19:31:24 -0700
+Subject: [Haskell-cafe] A maintenance command of Haskell cabal packages
+In-Reply-To: <20110401.111905.240769933.kazu@iij.ad.jp>
+References: <AANLkTinYm9K7WsGejSzdt8enjNtCB_3m2iwQ9Qtm_Ldq@mail.gmail.com>
+	<20110401.110734.86749460.kazu@iij.ad.jp>
+	<AANLkTikP-KNNvJzK0se-qtmh0-RCCJKyDh6XCgr4=Bjc@mail.gmail.com>
+	<20110401.111905.240769933.kazu@iij.ad.jp>
+Message-ID: <AANLkTi=dG8OV9XzB9KkcZOkdE-azR-b6MrnLbiGBbyEE@mail.gmail.com>
+
+On Thu, Mar 31, 2011 at 7:19 PM, Kazu Yamamoto <kazu at iij.ad.jp> wrote:
+>> cabal-dev is a wrapper around cabal. It creates the directory
+>> "cabal-dev" in your current directory when you run commands.
+>
+> Yes, I know. But when I typed "cabal-devel install" on a package
+> directory, nothing happened.
+
+Can you give a specific example? Surely *something* happened :)
+
+> I read its source but I could not found the code where cabal-dev
+> passes GHC_PACKAGE_PATH to ghc. I don't know how cabal-dev can
+> implement the sandbox featrue.
+
+running cabal-dev with --verbose=3 will show you all the cabal and
+ghc-pkg commands, which is probably the best way to see what's going
+on.
+
+Cabal-dev uses a custom cabal.config file that's (by default) located
+in the sandbox directory.  That file specifies a package-db to use
+(amongst a few other things), and cabal-install is invoked with that
+config.
+
+--Rogan
+
+
+
+
+>
+> --Kazu
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

@@ -1,0 +1,42 @@
+From allbery.b at gmail.com  Mon Aug 22 07:56:01 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Mon, 22 Aug 2011 01:56:01 -0400
+Subject: [Haskell-cafe] custom SQL-to-Haskell type conversion in HDBC
+In-Reply-To: <9CD9C8A5-E996-44E1-A82D-DCEB84232A3B@cs.otago.ac.nz>
+References: <20110819052316.GA27130@houseag.com>
+	<CAPeieQEGXOJgfvA+FF2yTbhPnWA9vv7Xk8EghLj-2LiYy1Edyg@mail.gmail.com>
+	<20110819140939.GA27362@houseag.com>
+	<CAPeieQGnDo5TR6F1hWPjvWWV0+nrW0=6iPm9z-xxJ2HfiOkY4g@mail.gmail.com>
+	<20110819145341.GB27362@houseag.com>
+	<CAPeieQHBYE9f+QrJodRtFscdgy5+_hzUYR5YnDWRrCJCv9kUYw@mail.gmail.com>
+	<CAKFCL4Xi9H-x4GPMjbzrRS9-tSSqdE4EsaV2_diQ=a4ObAL3bg@mail.gmail.com>
+	<CAPeieQEpqcF4FZm5L_VdYvDtCYRS=qJBbShaEq6rM_9GF5u5FA@mail.gmail.com>
+	<9CD9C8A5-E996-44E1-A82D-DCEB84232A3B@cs.otago.ac.nz>
+Message-ID: <CAKFCL4WGEpRjkhc5TOY6mB5GRAvdpewNt=rjuy=6PoxDrfaz9A@mail.gmail.com>
+
+On Sun, Aug 21, 2011 at 20:29, Richard O'Keefe <ok at cs.otago.ac.nz> wrote:
+
+> Values in data bases often represent sums of money, for which reading (1)
+> is
+> appropriate.  One tenth of $2.53 is $0.253; rounding that to $0.25 would in
+> some circumstances count as fraud.
+>
+> Of course, values in data bases often represent physical measurements, for
+> which
+> reading (2) is appropriate.  There is, however, no SQL data type that
+> expresses
+> this intent.
+>
+
+Interestingly, my original exposure to this was math for physics, which
+would imply reading (2) if I understand this correctly, yet I was taught
+(1).  (Later exposure was for business databases, so (1) was still
+appropriate.)
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110822/eb45cd2e/attachment.htm>
+

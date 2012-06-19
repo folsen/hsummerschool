@@ -1,0 +1,45 @@
+From allbery.b at gmail.com  Wed Dec 21 00:09:32 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Tue, 20 Dec 2011 18:09:32 -0500
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <CAF1yvARk_+B0GwHG4+7zY_702bY9DRdmegkCSLypc+L41Rg9EQ@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAF1yvAQJX+f-MigNFF=6be12Uka6y45QD6oys_NQpxgREkRbaQ@mail.gmail.com>
+	<653CD606-D8B6-4BD8-AFD4-46738AF49DB3@gmail.com>
+	<CAF1yvAS6hc=tmmW74qvNdVXngCqV0LNNOXn2TUgckWHMJFszUA@mail.gmail.com>
+	<91793F0E-1C9F-4F4C-96F8-188A37273A21@gmail.com>
+	<CAF1yvAQL9t5jxXaCsDuOx7o4NgHD-O_RioRJ=Yc_RHj0_TerBg@mail.gmail.com>
+	<8DBF2B01-F624-4E53-926D-B96C4AD34576@gmail.com>
+	<CAF1yvAS3YzNBSXRQh8dm3bAbfcoUK5WR7z86mweMJ7j+sWqhrQ@mail.gmail.com>
+	<7ADADC00-BF20-4D36-9ADB-7DFDFB1BBC0B@gmail.com>
+	<CAF1yvARk_+B0GwHG4+7zY_702bY9DRdmegkCSLypc+L41Rg9EQ@mail.gmail.com>
+Message-ID: <CAKFCL4Wq3yPexHMG=R5QyBKw+3WvN3zj+Sbgh7MU7sNabmtg=Q@mail.gmail.com>
+
+On Tue, Dec 20, 2011 at 17:52, Jesse Schalken <jesseschalken at gmail.com>wrote:
+
+> On Wed, Dec 21, 2011 at 1:09 AM, Gregory Crosswhite <gcrosswhite at gmail.com
+> > wrote:
+>
+>> That would certainly be a lovely idea *if* we were programming in Agda,
+>> but I was under the assumption that this conversation was about Haskell.
+>>  :-)
+>>
+>
+> I don't have experience with proof assistants, but maybe my answer to this
+> thread can be summed up as giving Haskell that kind of capability. ;)
+>
+
+You want to look at Agda:  a proof assistant language whose syntax is
+similar to Haskell, and which supports dependent types and the like.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111220/9614f85d/attachment.htm>
+

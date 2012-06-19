@@ -1,0 +1,28 @@
+From jld at kevembuangga.com  Tue Dec 13 09:27:58 2011
+From: jld at kevembuangga.com (Jean-Luc Delatre)
+Date: Tue, 13 Dec 2011 09:27:58 +0100
+Subject: [Haskell-cafe] Chuan-Kai Lin's Unimo framework
+In-Reply-To: <20111213072318.GA24620@seas.upenn.edu>
+References: <20111212151738.75605df1@grieve.streak>
+	<20111213072318.GA24620@seas.upenn.edu>
+Message-ID: <20111213092758.3bb7cd5d@grieve.streak>
+
+Le Tue, 13 Dec 2011 02:23:18 -0500,
+Brent Yorgey <byorgey at seas.upenn.edu> a ?crit :
+
+> No, but if you want to define monads operationally I would instead
+> recommend using the 'operational' package:
+> 
+>   http://hackage.haskell.org/package/operational
+> 
+> It does actually have examples.  Anyway, it seems like Unimo is not
+> even on Hackage.
+
+Thank you very much for the reference.
+Indeed it seems that Unimo has not been really developped see: 
+
+http://sneezy.cs.nott.ac.uk/fplunch/weblog/?p=89
+
+jean-luc
+
+

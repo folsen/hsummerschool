@@ -1,0 +1,31 @@
+From brandon_m_moore at yahoo.com  Mon Apr  4 16:24:13 2011
+From: brandon_m_moore at yahoo.com (Brandon Moore)
+Date: Mon, 4 Apr 2011 07:24:13 -0700 (PDT)
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <BANLkTimG9VyfjaNqN1khd89dyz8aNsV8cw@mail.gmail.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+	<BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+	<BANLkTimG9VyfjaNqN1khd89dyz8aNsV8cw@mail.gmail.com>
+Message-ID: <990986.91623.qm@web45110.mail.sp1.yahoo.com>
+
+>From: Michael Snoyman <michael at snoyman.com>
+>Sent: Mon, April 4, 2011 5:22:02 AM
+>
+>Firstly, I personally would love to insist on using UTF-8 and be done with it. I 
+>
+>see no reason to bother with other character encodings.
+
+If by "insist", you mean the standard insist that implementations support
+UTF-8 by default.
+
+The rest of the standard already just talks about sequences of unicode
+characters, so I don't see much to be gained by prohibiting other encodings.
+
+In particular, I have read that systems set up for east asian scripts
+often use UTF-16 as a default encoding.
+
+Brandon
+
+
+

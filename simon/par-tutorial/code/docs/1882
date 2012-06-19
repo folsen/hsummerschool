@@ -1,0 +1,56 @@
+From mkscrg at gmail.com  Mon Dec 12 23:42:16 2011
+From: mkscrg at gmail.com (Michael Craig)
+Date: Mon, 12 Dec 2011 17:42:16 -0500
+Subject: [Haskell-cafe] Module name space question
+In-Reply-To: <4EE66804.5090301@freegeek.org>
+References: <CAPTT2bYJLDkx__JRKehjiTfO-rcAQkQjnfwnR6z3gSAuHE-Y+w@mail.gmail.com>
+	<CAOrUaLaZaFH8hF_htPaKO1hTjRcR9wOmQ3w9yBGaOUZDqZygwg@mail.gmail.com>
+	<CACYs5AZrtu4whxerBMKe3g=_EVpN2292J6EYo-4SnuGR1JYRsQ@mail.gmail.com>
+	<4EE66804.5090301@freegeek.org>
+Message-ID: <CAHa9zAF6HgJruYb=yJHzaY8c2i_5jb4dmYcZ8QQN3iOQHxwbhg@mail.gmail.com>
+
+> There is, and it's awesome:
+>
+>    http://folk.ntnu.no/hammar/**explore-hackage/<http://folk.ntnu.no/hammar/explore-hackage/>
+>
+> Though it can be a bit slow to load, so try not to hammer the server too
+hard :)
+
+Awesome indeed! Can we convince Andreas to have it update regularly? Looks
+like the last update was in May.
+
+Mike S Craig
+
+
+On Mon, Dec 12, 2011 at 3:45 PM, wren ng thornton <wren at freegeek.org> wrote:
+
+> On 12/12/11 9:32 AM, Ryan Newton wrote:
+>
+>> I don't know why Hoogle didn't find one of the packages.  I've often
+>> wondered about this related question:
+>>
+>>    * Is there a place to browse the union of all namespaces in all hackage
+>> packages?
+>>
+>
+> There is, and it's awesome:
+>
+>    http://folk.ntnu.no/hammar/**explore-hackage/<http://folk.ntnu.no/hammar/explore-hackage/>
+>
+> Though it can be a bit slow to load, so try not to hammer the server too
+> hard :)
+>
+> --
+> Live well,
+> ~wren
+>
+>
+> ______________________________**_________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/**mailman/listinfo/haskell-cafe<http://www.haskell.org/mailman/listinfo/haskell-cafe>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111212/2a3626c6/attachment.htm>
+

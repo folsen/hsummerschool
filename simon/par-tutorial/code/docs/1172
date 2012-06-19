@@ -1,0 +1,33 @@
+From maoe at foldr.in  Wed Aug 17 05:01:46 2011
+From: maoe at foldr.in (Mitsutoshi Aoe)
+Date: Wed, 17 Aug 2011 12:01:46 +0900
+Subject: [Haskell-cafe] ANNOUNCE: TKYProf
+Message-ID: <96BB3D35-27F0-456B-B0CC-8EDE541C8347@foldr.in>
+
+Hi, forks
+
+I'm glad to announce the alpha release of TKYProf.
+
+  http://hackage.haskell.org/package/tkyprof
+  https://github.com/maoe/tkyprof
+
+TKYprof is a web-based interacitve visualizer for GHC time and allocation
+profiling reports. It helps you to find the bottlenecks in your code quickly!
+
+Here is a blog post:
+
+   http://blog.foldr.in/tkyprof-a-web-based-interactive-visualizer-fo
+
+It is still alpha and it have some bugs. I'm happy to hear your feedback.
+
+Thanks,
+
+-- 
+Mitsutoshi Aoe
+maoe at foldr.in
+
+
+
+
+
+

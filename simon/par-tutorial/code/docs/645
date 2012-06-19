@@ -1,0 +1,21 @@
+From tim at timsears.com  Sat Apr 23 03:42:50 2011
+From: tim at timsears.com (Tim Sears)
+Date: Fri, 22 Apr 2011 18:42:50 -0700 (PDT)
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+In-Reply-To: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+Message-ID: <12178760.2410.1303522970941.JavaMail.geo-discussion-forums@prjs22>
+
+Guys -- 
+I picked up leksah again after a long break (macosx install problem). I have 
+been using leksah for the past two weeks on Ubuntu. Great work! The ability 
+to browse and search libraries for type information and source is fantastic. 
+I love it!  All you need now is to let me fill out the types and then derive 
+my program for me.  :) 
+I will be happy to fill out a few bug reports. 
+Many Thanks
+Tim
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110422/4c813750/attachment.htm>
+

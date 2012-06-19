@@ -1,0 +1,34 @@
+From simon.hengel at wiktory.org  Thu Dec  1 19:02:09 2011
+From: simon.hengel at wiktory.org (Simon Hengel)
+Date: Thu, 1 Dec 2011 19:02:09 +0100
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CANd=OGGXOQYrKrnw9QpDaqgjC-JGsH7jFJB8Hx-OJjCTZP7KGQ@mail.gmail.com>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+	<CANd=OGGcwRC9FfTA8KJQyzsQBDL3YycF2MYx4hMiN7vxeBwTFg@mail.gmail.com>
+	<20111201174112.GA14096@x200>
+	<CANd=OGGXOQYrKrnw9QpDaqgjC-JGsH7jFJB8Hx-OJjCTZP7KGQ@mail.gmail.com>
+Message-ID: <20111201180209.GA15514@x200>
+
+On Thu, Dec 01, 2011 at 03:53:37PM -0200, Felipe Almeida Lessa wrote:
+> On Thu, Dec 1, 2011 at 3:41 PM, Simon Hengel <simon.hengel at wiktory.org> wrote:
+> >> > How to get this path in Haskell?
+> >>
+> >> If I understand you correctly, you want
+> >>
+> >> ? takeDirectory `fmap` getProgName
+> >
+> > I think getProgName does not give you the full path, but only the
+> > program name.
+> 
+> Neither does $0, does it?  It depends on how the program is called.
+$0 depend everything you need to find your program (say, the relative or
+absolute path used), but getProgName does not.  Here is an example:
+
+    ./foo/foo
+
+Here $0 will be "./foo/foo", but getProgName will be "foo".
+
+Cheers,
+Simon
+
+

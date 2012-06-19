@@ -1,0 +1,31 @@
+From wren at freegeek.org  Wed Apr 20 04:02:09 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Tue, 19 Apr 2011 22:02:09 -0400
+Subject: [Haskell-cafe] Unicode normalization
+Message-ID: <4DAE3EA1.2000200@freegeek.org>
+
+Hello all,
+
+I'm in need of a Unicode normalization function, Utf8 NFC for ByteString 
+in particular. From some quick Googling around it looks like the only 
+available option is to use ICU in some form. The text-icu package has a 
+nice binding to it, but unfortunately that means a lot of redundant 
+conversions (Utf8 ByteString -> Text; Text -> Utf8 ByteString) and an 
+additional rather large non-Haskell dependency[1].
+
+Is ICU really the only available implementation of normalization? The 
+TR15 doesn't really give a complete algorithm and only hints at the 
+"numerous opportunities for optimization" implicit in the complexity of 
+the spec.
+
+
+[1] Which is especially annoying on OSX since OSX does ship with libicu 
+in a public location, but it doesn't provide header files and apparently 
+it's incomplete somehow, meaning you'd have to reinstall it for text-icu 
+to use (and hilarity ensues when your copy gets out of sync with the OS's).
+
+-- 
+Live well,
+~wren
+
+

@@ -1,0 +1,81 @@
+From magnus at therning.org  Sun Dec 18 13:05:06 2011
+From: magnus at therning.org (Magnus Therning)
+Date: Sun, 18 Dec 2011 13:05:06 +0100
+Subject: [Haskell-cafe] ANNOUNCE: Anansi 0.4.2 (literate programming
+ pre-processor)
+In-Reply-To: <CAL1ky9oJY2q=GvV=UzXtnTZYeUWFbcCRv4B9a4Nafe-LRRCP=A@mail.gmail.com>
+References: <CAL1ky9qKan_3QxOv291H4q8wuCdXwbEeLv4hS5EDBssina12Ww@mail.gmail.com>
+	<CAAExw5tkEgwAkx2Ls4WUtg9h+F4tscOGftA+aY6F-hzQ0kveHw@mail.gmail.com>
+	<CAL1ky9oJY2q=GvV=UzXtnTZYeUWFbcCRv4B9a4Nafe-LRRCP=A@mail.gmail.com>
+Message-ID: <20111218120506.GD4864@ohann>
+
+On Tue, Dec 13, 2011 at 12:36:44PM -0800, John Millikin wrote:
+> On Tue, Dec 13, 2011 at 03:39, Magnus Therning <magnus at therning.org> wrote:
+>> 1. What to call files? ?I understand (C)WEB suggests using .w, and
+>> that noweb uses .nw, what should I call anansi files?
+> 
+> I usually use .anansi, but it doesn't matter. You can use whatever
+> extensions you like, or even none at all.
+
+I'll stick to .anansi as well then, it's rather descriptive :-)
+
+>> 2. Combining anansi and pandoc works quite well for HTML, but it
+>> fails miserably when trying to use the generated LaTeX:
+>>
+>> ? ?> markdown2pdf: ! LaTeX Error: Command \guillemotleft
+>>      unavailable in encoding OT1.
+>>
+>> ? ?Is there any good way to get around that?
+> 
+> The LaTeX loom is designed to output basic markup that can be turned
+> into a PDF with minimum fuss. It probably won't work as-is for more
+> advanced cases, such as when a user wants to use custom templates, or
+> has to inter-operate with pseudo-LaTeX parsers like Pandoc.
+
+I was probably unclear, I *really* would like to use the markdown loom
+and then pass the weave through pandoc to be able to create html/latex
+from the same source.  So I suspect the problem I ran into is more
+related to pandoc than anansi, but I was hoping that someone among the
+anansi users had run into and solved it already :-)
+
+> You could try copying the LaTeX loom into your own code, modifying
+> it to generate the custom output format you want, and then running
+> it as a #!runhaskell script.
+
+I might try that, but then use the markdown loom as the basis instead.
+It would be nice to have a specific pandoc loom that makes use of its
+extensions to markdown, where that makes sense.
+
+>> 3. Is there any editor support for anansi, syntax highlihgting etc?
+> 
+> Not that I know of. Note that Anansi's syntax itself is very
+> minimal, so what you need is an editor that can support formatting a
+> file using multiple syntaxes. I don't know enough about editor
+> modification to figure out which editors support such a feature, or
+> how to enable it.
+
+It's rather easy to do in vim, e.g. by setting the filetype to
+something line 'markdown.haskell'.  I haven't tried putting together
+three filetypes, but I suspect it just works :-)  If I get around to
+putting together an anansi syntax file for vim I'll make sure to share
+it.
+
+/M
+
+-- 
+Magnus Therning                      OpenPGP: 0xAB4DFBA4 
+email: magnus at therning.org   jabber: magnus at therning.org
+twitter: magthe               http://therning.org/magnus
+
+
+Perl is another example of filling a tiny, short-term need, and then
+being a real problem in the longer term.
+     -- Alan Kay
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111218/332917be/attachment.pgp>
+

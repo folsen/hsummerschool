@@ -1,0 +1,37 @@
+From ketil at malde.org  Fri Dec 16 17:08:32 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Fri, 16 Dec 2011 17:08:32 +0100
+Subject: [Haskell-cafe] What happens if you get hit by a bus?
+In-Reply-To: <CAEzeKYpOsDqafSoJFQkYioSg-0LTJaFY8WCUBkH2RiXOCZypjQ@mail.gmail.com>
+	(Michael Litchard's message of "Fri, 16 Dec 2011 07:37:37 -0800")
+References: <CAEzeKYpOsDqafSoJFQkYioSg-0LTJaFY8WCUBkH2RiXOCZypjQ@mail.gmail.com>
+Message-ID: <87y5ucijnj.fsf@malde.org>
+
+Michael Litchard <michael at schmong.org> writes:
+
+> One article addresses the question above. His answer was that he uses
+> RoR which has a large community and he is therefore easily
+> replaceable. My question, for freelancers in general, and web
+> developers in particular is this: How do you address this question?
+
+In this particular case, you could argue that more people know PHP and
+Python than Ruby, so surely one should avoid Ruby as well.
+
+Managers like to think of their company as a factory, and from this
+perspective, it makes sense to build your factory from easily obtainable
+parts.  But the factory mindset only works when you want to manufacture
+stuff, nobody who takes a minute to actually think will say that you can
+replace any programmer with any other, as long as they know the same
+programming language or framework.
+
+Anyway, here's something I found interesting in that respect:
+
+  http://www.dachisgroup.com/2011/12/cant-get-no-satisfaction-why-service-companies-cant-keep-their-promises/
+
+(This probably turned out less helpful than I intended, sorry :-)
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

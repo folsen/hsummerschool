@@ -1,0 +1,53 @@
+From smeltzek at eecs.oregonstate.edu  Tue Dec  6 03:44:57 2011
+From: smeltzek at eecs.oregonstate.edu (Karl Smeltzer)
+Date: Mon, 5 Dec 2011 18:44:57 -0800
+Subject: [Haskell-cafe] GHCi and Cairo on Windows
+In-Reply-To: <80D4C6E1-3DC6-4A1B-B7CB-EB3D1EF48695@me.com>
+References: <20111205002348.11646cdsx9ebots8@webmail.oregonstate.edu>
+	<80D4C6E1-3DC6-4A1B-B7CB-EB3D1EF48695@me.com>
+Message-ID: <CAGwi+bE40Xkb10CCVbc6UHGUAKWJQHdBxsCuOjxKS4VoepJzsA@mail.gmail.com>
+
+Thanks, but I don't believe this is my problem. The directory into which
+I've installed the GTK library is indeed on my path and is found without
+having to specify it when I compile with GHC. It's just the interpreter
+that seems to be failing.
+
+On Mon, Dec 5, 2011 at 1:32 PM, Malcolm Wallace <malcolm.wallace at me.com>wrote:
+
+> On Windows, it is necessary to add to your PATH variable the bin directory
+> where the gtk+ DLL lives.  Note, this is the C DLL, not the Haskell one
+> produced by gtk2hs.  For instance, on my machine the relevant directory is
+> C:\workspace\ext\gtk+-2.20\bin. It is quite likely different on yours.
+>
+>
+>
+> On 5/12/2011, at 8:23, smeltzek at eecs.oregonstate.edu wrote:
+>
+> > In effort to keep my work cross-platform, I am trying to get GHCi and
+> Cairo working together nicely on Windows (as a back-end to Diagrams, if it
+> matters.) When loading the library in GHCi I get the following error:
+> >
+> > Loading package cairo-0.12.2 ... linking ... ghc: unable to load package
+> `cairo-0.12.2'
+> >
+> > I am able to build, link, and execute successfully using 'ghc --make' so
+> I know the libraries are installed correctly. I'm using GHC as packaged in
+> the most recent version of the Haskell Platform and the most recent
+> all-in-one Windows bundle of GTK.
+> >
+> > I've seen quite similar errors reported months ago with no apparent
+> solution.
+> >
+> > Any help would be appreciated!
+> >
+> > --Karl
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111205/1fe8c9d4/attachment.htm>
+

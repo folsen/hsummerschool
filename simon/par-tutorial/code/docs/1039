@@ -1,0 +1,22 @@
+From cpa at crans.org  Thu Aug 11 16:45:33 2011
+From: cpa at crans.org (Charles-Pierre Astolfi)
+Date: Thu, 11 Aug 2011 15:45:33 +0100
+Subject: [Haskell-cafe] Trouble with readProcess
+Message-ID: <CAB6QvNMibG0QCKKtT0cOixDB0YqJBNsJQyGzHi0CB4u6LJrm+g@mail.gmail.com>
+
+Hi -cafe,
+
+I'm using readProcess and I don't know how to handle this issue:
+
+readProcess cmd [opt1,opt2] seems to execute the following:
+$ cmd "opt1" "opt2"
+
+That is usually fine, but I'm using an external program that doesn't
+understand the quotes, so I need to execute instead:
+$ cmd opt1 opt2
+
+How should I do that?
+--
+Cp
+
+

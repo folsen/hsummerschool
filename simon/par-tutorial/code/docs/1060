@@ -1,0 +1,93 @@
+From trystan.s at comcast.net  Thu Aug 11 21:47:07 2011
+From: trystan.s at comcast.net (trystan.s at comcast.net)
+Date: Thu, 11 Aug 2011 19:47:07 +0000 (UTC)
+Subject: [Haskell-cafe] ANNOUNCE: Chell: A quiet test runner (low-output
+ alternative to test-framework)
+In-Reply-To: <CAL1ky9oMiN8P0gFS6sSb-gHdar=hkRbVv+v6uVatedjpFYY-kw@mail.gmail.com>
+Message-ID: <1986184559.23443.1313092027693.JavaMail.root@sz0151a.emeryville.ca.mail.comcast.net>
+
+As Greg pointed out, HSpec does have an option to output just the failed tests. I looked at the example on the Chell project home page and converted the example tests into these hspec style specs:
+
+> import Test.Hspec (Specs, descriptions, describe, it)
+> import Test.Hspec.Runner (hHspecWithFormat)
+> import Test.Hspec.Formatters (failed_examples)
+> import Test.Hspec.HUnit
+> import Test.HUnit
+> import System.IO (stdout)
+> 
+> -- some functions to test
+> equal = (==)
+> greater = (>)
+> equalWithin = undefined
+> equalLines = (==)
+> 
+> specs :: IO Specs
+> specs = descriptions [
+>     describe "number comparison module" [
+>         it "can check for equality"
+>             (assertBool "1 should equal 1" $ equal 1 1),
+>         it "can compare order"
+>             (assertBool "2 should be greater than 1" $ greater 2 1),
+>         it "can compare eqauality with floating point numbers" 
+>             (assertBool "1.0001 should be close enough to 1.0" $ equalWithin 1.0001 1.0 0.01)
+>     ],
+>     describe "text comparison module" [
+>         it "can compare strings for equality"
+>             (let str1 = "foo\nbar\nbaz" :: String
+>                  str2 = "foo\nbar\nqux" :: String
+>              in assertBool "foo\\nbar\\nbaz shouldn't equal foo\\nbar\\nqux" $ equalLines str1 str2)
+>     ]]
+> 
+> main = hHspecWithFormat (failed_examples True) stdout specs
+
+And when run, got the following output in red text since it's only reporting failures:
+
+]  x can compare eqauality with floating point numbers FAILED [1]
+]  x can compare strings for equality FAILED [2]
+]
+] 1) number comparison module can compare eqauality with floating point numbers FAILED
+] Prelude.undefined
+]
+] 2) text comparison module can compare strings for equality FAILED
+] foo\nbar\nbaz shouldn't equal foo\nbar\nqux
+]
+] Finished in 0.0000 seconds
+]
+] 4 examples, 2 failures
+
+You can write provide your own formatter if that's not what you'd like to see. You also don't have to use the HUnit assertion text either; you could use the following function to make your specs even more like your Chell example, at the cost of losing the extra output description:
+
+> assert = assertBool ""
+
+Hspec uses HUnit TestCases and assertions but also supports QuickCheck properties almost exactly the same way Chell does. The hspec project homepage (https://github.com/trystan/hspec) has more examples, including the specs for hspec itself.
+
+Trystan Spangler
+
+
+
+From: "John Millikin" <jmillikin at gmail.com> 
+To: "Greg Weber" <greg at gregweber.info> 
+Cc: "trystan s" <trystan.s at comcast.net>, haskell-cafe at haskell.org 
+Sent: Thursday, August 11, 2011 8:21:52 AM 
+Subject: Re: ANNOUNCE: Chell: A quiet test runner (low-output alternative to test-framework) 
+
+On Thu, Aug 11, 2011 at 08:17, Greg Weber <greg at gregweber.info> wrote: 
+> I am confused also, as to both what output you don't like that motivated 
+> chell and what exactly hspec silences :) Suffice to say I am able to get a 
+> small relevant error message on failure with hspec. I am adding the hspec 
+> maintainer to this e-mail- he can answer any of your questions. 
+
+The output I didn't like wasn't coming from HUnit, it was coming from 
+the test aggregator I used (test-framework). It prints one line per 
+test case run, whether it passed or failed. 
+
+That means every time I ran my test suite, it would print *thousands* 
+of lines to the terminal. Any failure immediately scrolled up and out 
+of sight, so I'd have to either Ctrl-C and hunt it down, or wait for 
+the final report when all the tests had finished running. 
+
+Chell does the same thing as test-framework (aggregates tests into 
+suites, runs them, reports results), but does so quietly. It only 
+reports failed and aborted tests. 
+
+

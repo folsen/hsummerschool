@@ -1,0 +1,31 @@
+From lemming at henning-thielemann.de  Fri Apr 22 20:45:36 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Fri, 22 Apr 2011 20:45:36 +0200 (CEST)
+Subject: [Haskell-cafe] Is Hugs dead?
+In-Reply-To: <4DB1C6B9.3000108@gmail.com>
+References: <1303474568.13029.4.camel@fuzxxl> <4DB1C6B9.3000108@gmail.com>
+Message-ID: <alpine.DEB.2.00.1104222044090.28351@anubis>
+
+
+On Sat, 23 Apr 2011, Evgeny Tarasov wrote:
+
+> By the way, I'd like to use hugs extensively as sysadmin's universal 
+> scripting language.
+
+Hugs is better in this respect because it starts much faster than runghc.
+
+> I think, it could be a great killer feature. But as far as I know, it 
+> doesn't have any facilities to run external programs and process their 
+> stdout, stderr end exit code.
+>
+> Hugs is much more suitable for the task then ghc because of its 
+> compactness and portability. And some people think that haskell code is 
+> easier to maintain than shell scripts, perl or even python.
+
+For GHC-6.0 and GHC-6.2, that is before runInteractiveProcess, we had the 
+package:
+   http://hackage.haskell.org/package/shell-pipe
+
+Maybe this can be used for Hugs.
+
+

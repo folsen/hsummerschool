@@ -1,0 +1,59 @@
+From donn at avvanta.com  Mon Aug  1 08:08:16 2011
+From: donn at avvanta.com (Donn Cave)
+Date: Sun, 31 Jul 2011 23:08:16 -0700 (PDT)
+Subject: [Haskell-cafe] State of play with Haskell-Cocoa
+	(Objective-C)bindings?
+In-Reply-To: <E98DB816-440F-4C10-B560-A921200D6B08@eversosoft.com>
+References: <E98DB816-440F-4C10-B560-A921200D6B08@eversosoft.com>
+Message-ID: <20110801060816.2F66E276CBD@mail.avvanta.com>
+
+Quoth Luke Evans <luke at eversosoft.com>,
+> I'm planning to start an Objective-C/Cocoa project and would like to
+> write it in Haskell as much as possible.
+>
+> Of course, I can contrive to split the project into app logic (Haskell)
+> and UI (Objective-C) with some sort of minimal interface between them;
+> possibly just plain old C FFI.
+>
+> However, I would like an interface that's as 'automatic' as possible -
+> one that preferably means that I don't have to spend a lot of time
+> maintaining a somewhat heavy-weight special interface layer as I grow
+> my code on both sides of the divide.
+> Preferably the suture line is as far over on the Objective-C side as
+> possible, so that I can write pretty much everything in Haskell.
+>
+> Now, I see a couple of references to some options:
+> - HOC seems very close to what I'm looking for, but the project looks
+> pretty 'dormant'.
+> - I see some mention of an Objective-C FFI, but am uncertain if this
+> is in any current build of GHC.
+>
+> Are there any other options up anyone's sleeves?  Anybody working on
+> something interesting I could play with?
+
+You've probably seen this already and it didn't qualify as
+"something interesting", but http://www.haskell.org/haskellwiki/Using_Haskell_in_an_Xcode_Cocoa_project
+still works as of MacOS 10.6 and GHC 7.0.3.  No extra libraries or
+tools needed - you just wrangle your Haskell .o files and all the
+attendant Haskell libraries into the Xcode project, give Interface
+Builder Objective C stubs to work with, and call out to Haskell
+with C FFI.  I have done only one program this way, with a very simple 
+interface, not enough to have any real idea how painful it's going to be.
+(Actually it didn't work with -threaded, and because GHC doesn't do
+the linking I couldn't figure out how to exercise the new option to
+allow +RTS options, but it seems to be fine without -threaded.)
+
+> Until recently, I was concerned about being able to use GC on the
+> Objective-C side, but with Apple's new ARC memory management model,
+> that's no longer an issue. 
+> Most Haskell-ObjC bindings that already exist are surely designed
+> for Retain-Release, which I assume is not disrupted by ARC as this
+> is just RR at runtime.
+
+I don't know - I'm using standard (C) FFI out of the box, and both
+languages must support foreign C libraries that manage their own
+memory, so I perhaps erroneously have not been worrying about it.
+
+	Donn
+
+

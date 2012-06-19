@@ -1,0 +1,53 @@
+From eca7215 at cs.rit.edu  Tue Apr 12 21:18:55 2011
+From: eca7215 at cs.rit.edu (Edward Amsden)
+Date: Tue, 12 Apr 2011 15:18:55 -0400
+Subject: [Haskell-cafe] redefining a type class for one instance?
+In-Reply-To: <alpine.DEB.2.00.1104122111320.10952@anubis>
+References: <BANLkTik-m8Bkb8W4bo+COSk6OAgRWvTutw@mail.gmail.com>
+	<alpine.DEB.2.00.1104122111320.10952@anubis>
+Message-ID: <BANLkTi=xQ6UTGwWGqXh_A1=1fazd7vdQcA@mail.gmail.com>
+
+On Tue, Apr 12, 2011 at 3:13 PM, Henning Thielemann
+<lemming at henning-thielemann.de> wrote:
+>
+> On Tue, 12 Apr 2011, Edward Amsden wrote:
+>
+>> I am trying as an experiment to write something as follows:
+>>
+>> data Wrapper a b where
+>> ?Pure :: (a -> b) -> Wrapper a b
+>> ?Nullable :: (Maybe a -> b) -> Wrapper a b
+>>
+>> class Liftable a b where
+>> ?liftTo :: (b -> c) -> a b c
+>>
+>> instance Liftable Wrapper a where
+>> ?liftTo = Pure
+>
+> Would it be ok, to erm wrap 'a', say
+>
+> newtype Generic a = Generic a
+>
+> instance Liftable Wrapper (Generic a) where
+> ?liftTo = ...
+That rather defeats the purpose, as the point is to have a type level
+dispatch on whether or not we can use a certain constructor or just a
+general "all-purpose" constructor. This requires the user to decide to
+wrap 'a' in Generic and not do the same for Maybe a.
+
+>
+>
+>> instance Liftable Wrapper (Maybe a) where
+>> ?liftTo = Nullable
+>
+
+
+
+-- 
+Edward Amsden
+Student
+Computer Science
+Rochester Institute of Technology
+www.edwardamsden.com
+
+

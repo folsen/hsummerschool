@@ -1,0 +1,15 @@
+From anton.kholomiov at gmail.com  Wed Feb  9 09:21:24 2011
+From: anton.kholomiov at gmail.com (Anton Kholomiov)
+Date: Wed, 9 Feb 2011 11:21:24 +0300
+Subject: [Haskell-cafe] Split function
+In-Reply-To: <AANLkTikno_NYzOG0omQFPptaBqhsGOXaxdD3AhD+GK4U@mail.gmail.com>
+References: <AANLkTikno_NYzOG0omQFPptaBqhsGOXaxdD3AhD+GK4U@mail.gmail.com>
+Message-ID: <AANLkTi=jdvPD6QEjaskMk+3FbSgpbnRg9OtrdJ6qbH=j@mail.gmail.com>
+
+There is a 'spit' library on hackage. Maybe you are looking for this
+
+http://hackage.haskell.org/package/split
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110209/45cf7b07/attachment.htm>
+

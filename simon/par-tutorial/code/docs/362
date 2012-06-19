@@ -1,0 +1,20 @@
+From wilfried.kirschenmann at gmail.com  Wed Apr 13 10:00:27 2011
+From: wilfried.kirschenmann at gmail.com (Wilfried Kirschenmann)
+Date: Wed, 13 Apr 2011 10:00:27 +0200
+Subject: [Haskell-cafe] Using DPH
+In-Reply-To: <3C3119BE-294F-4DA0-A7DC-CFCD401830CA@ouroborus.net>
+References: <BANLkTinHgYaHEVbO0geFP7wTUKQS4TqBiQ@mail.gmail.com>
+	<C2EF4571-07CB-40B7-88DA-F99A1540EC2C@ouroborus.net>
+	<BANLkTi=P0H202p56WePu+AM4WKTO+3NzEA@mail.gmail.com>
+	<3C3119BE-294F-4DA0-A7DC-CFCD401830CA@ouroborus.net>
+Message-ID: <BANLkTi=xo2Q1zrAksaBE5s2HEmYoQQoqYg@mail.gmail.com>
+
+> Yeah, the Repa fold and sum functions just use the equivalent Data.Vector ones. They're not parallelised and I haven't looked at the generated code. I'll add a ticket to the trac to fix these, but won't have time to work on it myself ?in the near future.
+>
+Ok.
+
+Thank you for your help.
+
+I will try again with the future versions.
+
+

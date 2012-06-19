@@ -1,0 +1,41 @@
+From dons00 at gmail.com  Wed Apr  6 19:18:43 2011
+From: dons00 at gmail.com (Don Stewart)
+Date: Wed, 6 Apr 2011 10:18:43 -0700
+Subject: [Haskell-cafe] mtlx has a nice design but is slow
+In-Reply-To: <BANLkTinQJMF224HsM2reEK+iQ2TzVU4nNg@mail.gmail.com>
+References: <BANLkTinQJMF224HsM2reEK+iQ2TzVU4nNg@mail.gmail.com>
+Message-ID: <BANLkTi=fks+df_erzoOeH0XNH0WXiU-BKQ@mail.gmail.com>
+
+Is the package missing some obvious inlining in the instances?
+
+On Wed, Apr 6, 2011 at 10:13 AM, Sean Leather <leather at cs.uu.nl> wrote:
+> I just refactored my type and transform system prototype (introduced in [1]
+> but changed since then) from using mtlx [2] (type-indexed monad transformers
+> described in [3]) to mtl using RWST. mtlx allowed me to cleanly separate the
+> various monadic components in a convenient way. Unfortunately, I found it to
+> be too slow. The refactoring was an experiment to see how slow. I was rather
+> surprised:
+>
+> Running time of a compiled main with a list of tests:
+> ? mtlx (7 transformers): 2 min 52 sec
+> ? mtl (RWST): 0 min 13 sec
+>
+> It's frustrating to see such a huge performance gap for a better design.
+>
+> Regards,
+> Sean
+>
+> [1]
+> http://splonderzoek.blogspot.com/2011/03/draft-type-changing-program-improvement.html
+> [2] http://hackage.haskell.org/package/mtlx
+> [3] http://www.ittc.ku.edu/~marks/cgi-bin/pubs/monadfactory.pdf
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

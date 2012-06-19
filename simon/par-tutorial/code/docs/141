@@ -1,0 +1,20 @@
+From daniel.is.fischer at googlemail.com  Tue Apr  5 11:35:59 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Tue, 5 Apr 2011 11:35:59 +0200
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <F229D9AE-0D76-4703-B637-62DD0DA79E0C@cs.otago.ac.nz>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<201104041224.32058.daniel.is.fischer@googlemail.com>
+	<F229D9AE-0D76-4703-B637-62DD0DA79E0C@cs.otago.ac.nz>
+Message-ID: <201104051135.59586.daniel.is.fischer@googlemail.com>
+
+On Tuesday 05 April 2011 04:35:39, Richard O'Keefe wrote:
+> On 4/04/2011, at 10:24 PM, Daniel Fischer wrote:
+> > Colin spoke of *leading* characters, for .hs files, that drastically
+> > reduces the possibilities - not for .lhs, though.
+> 
+> A .hs file can, amongst other things, begin with any "small" letter.
+
+D'oh, yes, I always forget that a module declaration isn't required.
+
+

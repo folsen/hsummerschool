@@ -1,0 +1,25 @@
+From ekirpichov at gmail.com  Mon Dec 26 16:55:38 2011
+From: ekirpichov at gmail.com (Eugene Kirpichov)
+Date: Mon, 26 Dec 2011 19:55:38 +0400
+Subject: [Haskell-cafe] Convert Double to Data.Fixed
+Message-ID: <CANVKUrUzudNo9dp_H0c086Dv+oSY7fTfN=SCbz8Z=YqOmtC9eA@mail.gmail.com>
+
+Hi cafe,
+
+How do I most efficiently convert a Double to a Data.Fixed?
+
+I'm asking because I want to convert fractional seconds to the seconds
+field of Data.Time.TimeOfDay, which is Pico = Data.Fixed.Fixed E12.
+
+For now the fastest thing I came up with was fromIntegral (round
+(sec*1000000)) / fromIntegral 1000000, but this frankly sucks and is rather
+slow, there must be a better way.
+
+-- 
+Eugene Kirpichov
+Principal Engineer, Mirantis Inc. http://www.mirantis.com/
+Editor, http://fprog.ru/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111226/e099a69d/attachment.htm>
+

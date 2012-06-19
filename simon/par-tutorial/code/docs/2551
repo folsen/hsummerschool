@@ -1,0 +1,128 @@
+From daniel.is.fischer at googlemail.com  Tue Feb  1 13:38:16 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Tue, 1 Feb 2011 13:38:16 +0100
+Subject: [Haskell-cafe] Haskell function help
+In-Reply-To: <1296559086493-3365994.post@n5.nabble.com>
+References: <1296559086493-3365994.post@n5.nabble.com>
+Message-ID: <201102011338.16780.daniel.is.fischer@googlemail.com>
+
+Let me see if I understand that correctly.
+
+On Tuesday 01 February 2011 12:18:06, Houdini wrote:
+>  module Algorithm where
+>
+> import System.Random import Data.Maybe import Data.List
+>
+> type Atom = String
+> type Literal = (Bool,Atom)
+
+(True "P") correspnds to "P", (False, "P") to "not P"?
+
+> type Clause = [Literal]
+
+A Clause is the disjunction of the literals appearing in it?
+So [(True,"P"),(False,"Q")] translates to (p || not q) ?
+
+> type Formula = [Clause]
+
+A Formula is the conjunction of its Clauses?
+[[(True,"P"),(False,"Q")],[(True,"R")]] translates to
+(p || not q) && r ?
+
+> type Model = [(Atom, Bool)]
+
+> type Node = (Formula, ([Atom], Model))
+
+No idea what that would mean
+
+>
+> atomsClause :: Clause -> [Atom]
+> --This function takess a Clause and return the set of Atoms of that 
+Clause.
+> atomsClause = nub . map snd
+>
+> atoms :: Formula -> [Atom]
+> atoms = nub . map snd
+
+Doesn't type check, should be
+
+atoms = nub . map snd . concat
+
+> --This function takes a Formula returns the set of Atoms of a Formula
+>
+> isLiteral :: Literal -> Clause -> Bool
+> isLiteral = isLiteral = any . (==)
+> --This function returns True if the given Literal can be found within the 
+Clause.
+>
+> flipSymbol :: Model -> Atom -> Model
+> flipSymbol m a = map f m
+>   where
+>     f (atom, value) =
+>         if a == atom
+>              then (atom, not value) else (atom, value)
+> -- this function takes a Model and an Atom and flip the truthvalue of the 
+atom in the model
+>
+> assign :: (Atom,Bool)->Formula->Formula
+> assign = undefined--------any advice here? Thank you
+
+You have to find what should happen on
+- Literals
+- Clauses
+- Formulae
+(not necessarily in that order)
+
+If the Formula is empty, I suppose nothing should be done,
+
+assign _ [] = []
+
+if there are Clauses,
+
+assign (atom,value) (clause:rest)
+
+should do the assignment in the Clause and depending on the outcome, remove 
+the (modified) Clause and assign in the rest, or prepend the modified 
+Clause to the result of assigning in the rest,
+
+assign (atom,value) (clause:rest) =
+  case assignClause (atom,value) clause of
+    Nothing -> assign (atom,value) rest
+    Just cl -> cl : assign (atom,value) rest
+
+Now for assigning in a Clause. You get a trivially satisfied Clause, which 
+we'll indicate by a Nothing return value, or a reduced Clause (which may be 
+empty and hence unsatisfiable).
+
+assignClause :: (Atom,Bool) -> Clause -> Maybe Clause
+assignClause (atom,value) clause =
+  case partition ((== atom) . snd) clause of
+       -- the atom doesn't appear in the clause, nothing to do
+    ([],_) -> Just clause
+       -- the atom appears in the clause, we have see whether
+       -- assigning produces a True or only False
+    (ms,cs)
+       -- a True, clause is satisfied
+       | any (satisfied value) (map fst ms) -> Nothing
+       -- all occurrences lead to a False, we have to keep the other 
+Literals
+       | otherwise -> Just cs
+
+Now, what happens for Literals? We only call this for matching Atoms, so we 
+need only care for the Bools. If the Literal has the form (True,p), we get 
+value, otherwise we get (not value):
+
+satisfied :: Bool -> Bool -> Bool
+satisfied value True = value -- Literal in positive form
+staisfied value False = not value -- the Literal was negated
+
+Now we can write satisfied shorter: satisfied = (==)
+Or better, now we know what it is supposed to do, remove it altogether and 
+make the guard condition in assignClause
+
+     (ms,cs)
+       | any (== value) (map fst ms) -> Nothing
+       | otherwise -> Just cs
+
+
+

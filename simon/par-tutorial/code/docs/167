@@ -1,0 +1,82 @@
+From david.hotham at blueyonder.co.uk  Wed Apr  6 17:00:40 2011
+From: david.hotham at blueyonder.co.uk (David Hotham)
+Date: Wed, 6 Apr 2011 16:00:40 +0100
+Subject: [Haskell-cafe] 'Progress bar' enumeratee
+In-Reply-To: <20110406163105.13cbc9a3@angst.streitmacht.eu>
+References: <inhd6m$h2n$1@dough.gmane.org>
+	<20110406163105.13cbc9a3@angst.streitmacht.eu>
+Message-ID: <inhv6r$n8$1@dough.gmane.org>
+
+Thanks for the reply.
+
+I did have a version along those lines at some point, but I felt it was 
+cheating rather to print the dots not at the correct point in the stream.
+
+Perhaps I've over-complicated for the sake of the learning experience, but I 
+do like to have a version that passes on the correct number of bytes, then 
+prints the ".", and then continues.
+
+David
+
+"Ertugrul Soeylemez" <es at ertes.de> wrote in message 
+news:20110406163105.13cbc9a3 at angst.streitmacht.eu...
+> "David Hotham" <david.hotham at blueyonder.co.uk> wrote:
+>
+>> I've spent some time over the last couple of days trying to write an
+>> enumeratee that prints a "." every n bytes (with obvious intended use
+>> as a progress tracker).  Seems like it oughtn't be hard, but it has
+>> been a steep learning curve...
+>>
+>> I have come up with something that seems to do the job but I don't
+>> know that I'm completely happy with it (or even that I completely
+>> understand it, to be honest).
+>>
+>> If anyone more expert would be kind enough either to reassure me that
+>> I'm doing it right or - more likely - to offer improvements /
+>> suggestions on what obvious simplifications I have overlooked, I'd be
+>> grateful.
+>
+> I think that using lazy bytestrings does not have any advantage here,
+> since the enumerator creates the strict bytestrings at some point, then
+> your enumeratee converts them into lazy ones just for counting.  Just
+> use the straightforward approach:  Take the chunks and count the bytes
+> like here:
+>
+>    {-# LANGUAGE ScopedTypeVariables #-}
+>
+>    dotsAt :: forall b m. MonadPeelIO m =>
+>              Int -> Enumeratee ByteString ByteString m b
+>    dotsAt n =
+>        loop 0
+>
+>        where
+>        loop :: Int -> Enumeratee ByteString ByteString m b
+>        loop i' step@(Continue k) =
+>            continue go
+>
+>            where
+>            go :: Stream ByteString ->
+>                  Iteratee ByteString m (Step ByteString m b)
+>            go EOF = return step
+>            go ch@(Chunks strs) = do
+>                let (numDots, i) = divMod (i' + sum (L.map BC.length strs)) 
+> n
+>                tryIO $ BC.putStr (BC.replicate numDots '.')
+>                k ch >>== loop i
+>        loop i' step = return step
+>
+> I think, this is about the most straightforward and also the fastest
+> approach.
+>
+>
+> Greets,
+> Ertugrul
+>
+>
+> -- 
+> nightmare = unsafePerformIO (getWrongWife >>= sex)
+> http://ertes.de/ 
+
+
+
+

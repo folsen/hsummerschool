@@ -1,0 +1,61 @@
+From claus.reinke at talk21.com  Sat Feb  5 10:26:45 2011
+From: claus.reinke at talk21.com (Claus Reinke)
+Date: Sat, 5 Feb 2011 10:26:45 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTin1_ErVOfz+_dDD8X-E1N9GapYMygftUyyK=k6C@mail.gmail.com>
+References: <4D4B19DB.5000907@btinternet.com><AANLkTi=tyKC19Fvie9c8QYN-P=R3oKM_Pm6zOpcmo4Qk@mail.gmail.com><201102032334.19964.daniel.is.fischer@googlemail.com><20110204103813.6ffde171.mle+hs@mega-nerd.com>
+	<AANLkTin1_ErVOfz+_dDD8X-E1N9GapYMygftUyyK=k6C@mail.gmail.com>
+Message-ID: <BA92AD67B07E41D78498103C205824A8@VAIO>
+
+> Lately I've been trying to go the other direction: make a large
+> section of formerly strict code lazy.  
+
+There used to be a couple of tools trying to make suggestions
+when a function could be made less strict (Olaf Chitil's StrictCheck 
+and another that escapes memory at the moment). Often, it
+comes down to some form of eta-expansion - making information
+available earlier [(\x->f x) tells us we have a function without
+having to evaluate f, (\p->(fst p,snd p)) marks a pair without
+needing to evaluate p, and so on].
+
+> I fully agree that once code size gets big these problems get a lot 
+> harder.  You have to be very careful passing around state that you 
+> don't do anything that causes too much to be evaluated at the 
+> wrong time.  
+
+Generally, the trick is to develop an intuitition early, before
+growing the program in size;-) However, as long as you can
+run your big code with small data sets, you might want to try
+GHood, maintained on hackage thanks to Hugo Pacheco:
+
+    http://hackage.haskell.org/package/GHood
+    http://community.haskell.org/~claus/GHood/ (currently unavailable:-(
+
+The latter url has a few examples and a paper describing how
+GHood can be useful for observing relative strictness, ie, when
+data at one probe is forced relative to when it is forced at another.
+
+(it seems that citeseerx has a copy of the paper, at least:
+http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.132.1397 )
+
+For instance, if you put one probe on the output and one on the
+input, you can see which parts of the input are forced to produce
+which parts of the output. As I said, small data sets help, but since
+you put in probes manually and selectively, large code size should
+not interfere with observations (though it might hinder intuition:-).
+
+> But there's definitely a knack to be learned, and I think I might
+> eventually get better at it.  For example, I realized that the
+> criteria to make something non-strict wrt data dependency are the same
+> as trying to parallelize.  Sometimes it's easier to think "what do I
+> have to do to make these two processes run in parallel" and that's the
+> same thing I have to do to make them interleave with each other
+> lazily.
+
+Sometimes, I think of non-strict evaluation as "spark a thread for
+everything, then process the threads with a single processor"..
+
+Claus
+ 
+
+

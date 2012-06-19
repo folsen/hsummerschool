@@ -1,0 +1,24 @@
+From sh006d3592 at blueyonder.co.uk  Fri Dec 30 02:53:22 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Fri, 30 Dec 2011 01:53:22 +0000
+Subject: [Haskell-cafe] Level of Win32 GUI support in the Haskell platform
+Message-ID: <4EFD1992.60702@blueyonder.co.uk>
+
+I've been for functions like GetMessage, TranslateMessage and 
+DispatchMessage in the Haskell Platform Win32 library - the usual 
+message loop stuff - and not finding them. Hoogle says "no results found".
+
+Is this level of Win32 GUI coding supported? (other than by dealing with 
+the FFI myself)
+
+Alternatively, should I be doing dialog-based coding and leaving Haskell 
+to worry about message loops behind the scenes?
+
+Either way, is there an example I can use for reference? I have 
+something along the lines of Petzolds Hello World in mind as the ideal 
+(register a window class, handle the messages, paint some text), but 
+anything that shows how to get a basic Win32 GUI app running in Haskell 
+is fine.
+
+
+

@@ -1,0 +1,21 @@
+From michael at schmong.org  Fri Dec 16 16:37:37 2011
+From: michael at schmong.org (Michael Litchard)
+Date: Fri, 16 Dec 2011 07:37:37 -0800
+Subject: [Haskell-cafe] What happens if you get hit by a bus?
+Message-ID: <CAEzeKYpOsDqafSoJFQkYioSg-0LTJaFY8WCUBkH2RiXOCZypjQ@mail.gmail.com>
+
+I'm learning what it means to be a professional Haskell programmer,
+and contemplating taking on side jobs. The path of least resistance
+seems to be web applications, as that is what I do at work. I've been
+investigating what some web developers have to say about their trade.
+One article addresses the question above. His answer was that he uses
+RoR which has a large community and he is therefore easily
+replaceable. My question, for freelancers in general, and web
+developers in particular is this: How do you address this question?  I
+imagine potential clients would need to be assuaged of their fears
+that hiring me would lead to a lock-in situation at best, and no one
+to maintain a code base at worst. Lock-in won't be part of my business
+model, also sooner or later we part ways with the client. When the
+client wonders, "What happens then?", what is a good answer?
+
+

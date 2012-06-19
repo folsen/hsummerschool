@@ -1,0 +1,31 @@
+From mikolaj.konarski at gmail.com  Fri Dec 16 10:20:36 2011
+From: mikolaj.konarski at gmail.com (Mikolaj Konarski)
+Date: Fri, 16 Dec 2011 10:20:36 +0100
+Subject: [Haskell-cafe] SMP parallelism increasing GC time dramatically
+In-Reply-To: <CAJdww1=cfRuVEGtg-Qdcf2pPc0gvxGkN1GzZ8z5bQ6cbxBypZg@mail.gmail.com>
+References: <CAJdww1=DM+hvU97zdR_Jg01-Jqaw9jE9cJ8Brdc512C92p-LwQ@mail.gmail.com>
+	<CACYs5AY8KYBoCJwdjbWf4hVTVwufcUsdGAzVJR_76qo+WfmRQQ@mail.gmail.com>
+	<CAJdww1kHV9Ns5abq=At=wBhL_9CazACfRfLub-f7D7CLdE2SUg@mail.gmail.com>
+	<CAK-tuPbka4K6kdRWwK9ET+LqfSqf7h9qcmPjmq6Z9Yx2ZN9iww@mail.gmail.com>
+	<CAJdww1m2oAchxDZrwFqi6Vk6_-kuGB7nFVjcVROLqgFND5evpA@mail.gmail.com>
+	<CAJdww1=iLB+M-HiYNvU+mZr9446fw0j-KKkRETuLJhxhCzhX2g@mail.gmail.com>
+	<CAOJG3uC9zyNvhd=1rnYOi8Z1dCV2n7Z08WJAK1kQdfpZCe=hAQ@mail.gmail.com>
+	<CAJdww1=cfRuVEGtg-Qdcf2pPc0gvxGkN1GzZ8z5bQ6cbxBypZg@mail.gmail.com>
+Message-ID: <CAHFo2uqbRtxXoHkZm0mJRoCRyrNY9FvBRmf9Aw8Bhk-Q-bEOYg@mail.gmail.com>
+
+On Mon, Oct 10, 2011 at 15:55, Tom Thorne <thomas.thorne21 at gmail.com> wrote:
+> Yes I will try to run threadscope on it, I tried it before and the event log output produced about 1.8GB, and then crashed.
+
+Hi Tom,
+
+I'm one of the TS/ghc-events hackers and I'd like to learn more,
+fix it or at least put it on the TS/ghc-events issue tracker
+(http://trac.haskell.org/ThreadScope). Could you help me reproduce
+the problem? Did ThreadScope crash or RTS? Which versions?
+Was it 1.8GB of the log file or RAM? Did you succeed eventually?
+Any other TS feedback?
+
+Thank you,
+Mikolaj
+
+

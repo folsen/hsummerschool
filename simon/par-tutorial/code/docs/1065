@@ -1,0 +1,92 @@
+From oleg at okmij.org  Fri Aug 12 10:00:25 2011
+From: oleg at okmij.org (oleg at okmij.org)
+Date: Fri, 12 Aug 2011 01:00:25 -0700 (PDT)
+Subject: [Haskell-cafe] library on common sub-expression elimination?
+Message-ID: <20110812080025.3150C1712F@Adric.ern.nps.edu>
+
+
+I guess you mean the function that converts an abstract syntax tree to
+a directed acyclic graph (DAG). 
+
+Just for completeness I should mention that if the object language has
+effects including non-termination, one has to be careful eliminating
+seemingly common expressions. For example, in
+
+	\a i ->
+	  if i >= 0 then
+             a ! i
+          else if i > 0 then
+	     a ! i + a ! (i-1)
+	  else ....
+
+we see the expression (a ! i) repeated in both branches of
+the conditional. Eliminating the `duplicate' by pulling it out
+
+	\a i ->
+	  let t = a ! i in
+	  if i >= 0 then
+             t
+          else if i > 0 then
+	     t + a ! (i-1)
+	  else ....
+
+would be wrong, wouldn't it?
+
+This issue has been extensively investigated in the Fortran compiler
+community; Elliott, Finne and de Moor's ``Compiling Embedded Languages''
+(JFP 2003) talks about it at length.
+
+
+The standard technique to detect occurrences of common subexpressions
+is so-called hash-consing. There are (OCaml) libraries for it:
+
+  author	= {Jean-Christophe Filli{\^a}tre and Sylvain Conchon},
+  title		= {Type-Safe Modular Hash-Consing},
+  pages		= {12--19},
+  crossref	= "ml2006",
+  doi           = "10.1145/1159876.1159880",
+
+The upcoming distilled tutorial at DSL 2011
+  http://dsl2011.bordeaux.inria.fr/index.php?option=com_content&view=article&id=2&Itemid=2
+
+will present a Haskell library for hash-consing. The library can work
+with the standard Haskell Hash-tables or without them (using Data.Map,
+for example). The library does _not_ rely on Stable names and other
+internal GHC operations with unstable semantics. The library will find
+all common sub-expressions.
+
+
+Incidentally, despite the Lisp-sounding name, hash-consing was
+invented before Lisp. It was described, for the English audience, in
+the first volume of Comm. ACM, in 1958:
+
+@Article{	Ershov-hash-consing,
+  author	= {A. P. Ershov},
+  title		= {On programming of arithmetic operations},
+  journal	= "Communications of the {ACM}",
+  year		= 1958,
+  volume	= 1,
+  number	= 8,
+  pages		= {3--6},
+  doi           ="10.1145/368892.368907",
+  url           = "http://portal.acm.org/citation.cfm?id=368907"
+}
+
+The translation is quite accurate, as far as I could see, but misses
+the flowcharts and the diagram of the original paper. This short paper
+fully describes what we now call hash tables, hash functions, useful
+properties of hash functions, and hash-consing. The article analyzes
+the time complexity of the algorithm. Since the algorithm has two
+exits, writing programs in the continuation-passing style must have been
+familiar back then.
+
+
+The library to be presented at DSL 2011 unwittingly follows Ershov's
+algorithm closely. The library is (hopefully) better described (see
+the preface to the English translation of Ershov's paper). Nowadays,
+starting a paper with the phrase ``All unexplained terms are those
+from [1]'' (where [1] is the single reference) would not be taken
+kindly by reviewers.
+
+
+

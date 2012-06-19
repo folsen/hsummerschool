@@ -1,0 +1,68 @@
+From dagitj at gmail.com  Fri Apr 22 06:27:01 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Thu, 21 Apr 2011 21:27:01 -0700
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <22296892.1880.1303443738742.JavaMail.geo-discussion-forums@prhx20>
+References: <BANLkTingNDExfXWS43FmdyMhrKjj+1S6BQ@mail.gmail.com>
+	<22296892.1880.1303443738742.JavaMail.geo-discussion-forums@prhx20>
+Message-ID: <BANLkTi=RKS3Bnk30HMyD=LG8ZowXCy5dog@mail.gmail.com>
+
+On Thu, Apr 21, 2011 at 8:42 PM, John Millikin <jmillikin at gmail.com> wrote:
+
+> On Thursday, April 21, 2011 4:16:07 PM UTC-7, John Meacham wrote:
+>>
+>> Um, the patch theory is what makes darcs "just work". There is no need
+>> to understand it any more than you have to know VLSI design to
+>> understand how your computer works. The end result is that darcs
+>> repositories don't get corrupted and the order you integrate patches
+>> doesn't affect things meaning cherrypicking is painless.
+>
+>
+> This is how it's *supposed* to work. My chief complaints with PT are:
+>
+>    - Metadata about branches and merges gets lost. This makes later
+>    examination of the merge history impossible, or at least unfeasibly
+>    difficult.
+>
+> That's not an issue with patch theory though.  Darcs could still track that
+and I believe some people have been playing with the idea.
+
+
+>
+>    - Every commit needs --ask-deps , because the automatic dependency
+>    detector can only detect automatic changes (and not things like adding a new
+>    function in a different module)
+>
+>
+You mean it can only detect dependencies that depend on each other with
+respect to a diff of the changes.  Detecting most anything else would be
+undecidable in the general case.  As a divergent data point, I've been using
+darcs since 2003 and I have yet to use --ask-deps except to learn how it
+works.
+
+
+>    - The order patches are integrated still matters (it's impossible for
+>    it to not matter), but there's no longer any direct support for ordering
+>    them, so large merges become very manual.
+>
+>
+Can you give an example where you need to control the order of the changes
+in a merge with git/bzr/svn/etc but that it was not possible with darcs?
+ I'm trying to understand what you mean.
+
+
+>
+>    - If you ever merge in the wrong order, future merges will begin
+>    consuming more and more CPU time until the repository "dies". Undoing this
+>    requires using darcs-fastconvert and performing manual surgery on the export
+>    files.
+>
+>
+Yes, this is true.  Exponential merges still exist, although they are
+relatively rare with a darcs-2 formated repository.
+
+Jason
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110421/e817697c/attachment.htm>
+

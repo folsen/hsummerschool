@@ -1,0 +1,58 @@
+From sh006d3592 at blueyonder.co.uk  Thu Dec 29 20:16:41 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Thu, 29 Dec 2011 19:16:41 +0000
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <1325184067.16545.29.camel@godel>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <jdh9h6$gba$1@dough.gmane.org>
+	<4EFCA66D.4060609@blueyonder.co.uk>
+	<20111229180451.BFF53F3937@mail.avvanta.com>
+	<1325184067.16545.29.camel@godel>
+Message-ID: <4EFCBC99.60906@blueyonder.co.uk>
+
+On 29/12/2011 18:41, Chris Smith wrote:
+> Entering tutorial mode here...
+>
+> On Thu, 2011-12-29 at 10:04 -0800, Donn Cave wrote:
+>> We can talk endlessly about what your external/execution results
+>> might be for some IO action, but at the formulaic level of a Haskell
+>> program it's a simple function value, e.g., IO Int.
+> Not to nitpick, but I'm unsure what you might mean by "function value"
+> there.  An (IO Int) is not a function value: there is no function
+> involved at all.  I think the word function is causing some confusion,
+> so I'll avoid calling things functions when they aren't.
+Except that it *is* a function value.
+
+Basically, a data constructor is a self-referencing function. "Just 1" 
+is a function that returns "Just 1" for instance. According to WinGHCI...
+
+    Prelude> :type Just
+    Just :: a -> Maybe a
+    Prelude>
+
+The IO monad is a black box - we can't see the data constructors - but 
+in principle it's the same thing.
+
+The value extracted out of the IO action when it is executed is a 
+different thing, of course.
+> These are PURE values... they do NOT have side effects.  Perhaps they
+> "describe" side effects in a sense, but that's a matter of how you
+> interpret them; it doesn't change the fact that they play the role of
+> ordinary values in Haskell.  There are no special evaluation rules for
+> them.
+The semantics of the execution of primitive IO actions are part of the 
+Haskell language. The execution isn't pure functional. At compile-time 
+there is no means to evaluate the key functions at all - no way to 
+extract the result out of an IO action because the action cannot be 
+executed and so doesn't (yet) have a result. At run-time, that 
+restriction is removed, or the special evaluation rules are added in - 
+either claim is fine but the effect that Haskell is doing something it 
+couldn't do at compile-time.
+
+Yes, *Haskell* is doing it - it's still a part of what the Haskell 
+language defines.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111229/53250566/attachment.htm>
+

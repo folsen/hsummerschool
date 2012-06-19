@@ -1,0 +1,44 @@
+From michael at snoyman.com  Sun Apr  3 12:50:27 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Sun, 3 Apr 2011 13:50:27 +0300
+Subject: [Haskell-cafe] Can't connect to local yackage server
+In-Reply-To: <BANLkTi=K_LxbjW6u2MvQifNtswTa9-5bRQ@mail.gmail.com>
+References: <BANLkTi=K_LxbjW6u2MvQifNtswTa9-5bRQ@mail.gmail.com>
+Message-ID: <BANLkTimrwYLx21=0P6Uzsw4_MAOWvL_Qew@mail.gmail.com>
+
+On Sun, Apr 3, 2011 at 1:32 PM, Yitzchak Gale <gale at sefer.org> wrote:
+
+> On Mac OS X 10.6.7, after upgrading to yackage 0.1.0.1:
+>
+> After running yackage -l, I cannot connect to it even directly
+> from localhost. I get the message:
+>
+>  This Yackage server only talks to local clients
+>
+> On a Linux server it seems to work fine though.
+>
+> On the Mac, when I do "telnet localhost" I get:
+>
+>  Trying ::1...
+>
+> Could it be that yackage 0.1.0.1 doesn't recognize the
+> IPv6 notion of localhost?
+>
+> Thanks,
+> Yitz
+>
+
+Firstly, the checking-localhost-code in Yackage *is* broken for IPv6. I've
+just pushed some changes to Warp to make the situation a little better for
+specifying listening hosts, but that's not coming out most likely until Warp
+0.4.
+
+However, it doesn't sound like your problem is caused by the mis-behaving
+Yackage code: it *should* give you a "permission denied" error message. Does
+the connection work if you just run yackage normally, i.e. without -l?
+
+Michael
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110403/608b0cc6/attachment.htm>
+

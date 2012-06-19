@@ -1,0 +1,34 @@
+From mle+hs at mega-nerd.com  Wed Dec 21 13:55:54 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Wed, 21 Dec 2011 23:55:54 +1100
+Subject: [Haskell-cafe] "mapping" an Enumerator
+In-Reply-To: <jcsiiu$394$1@dough.gmane.org>
+References: <loom.20111221T112258-628@post.gmane.org>
+	<CAKA2JgJaWC6DeFn5x33Ux7oWOK9rwtFe0CE=z+hixZrC079PtA@mail.gmail.com>
+	<jcse6q$ao6$1@dough.gmane.org>
+	<CAKA2Jg+92Jq=Jo72n3LBoGdj_x9qb9uPC8FzQFVi+xvudByspw@mail.gmail.com>
+	<jcsiiu$394$1@dough.gmane.org>
+Message-ID: <20111221235554.076948acdc5291bc03e20b4d@mega-nerd.com>
+
+Kannan Goundan wrote:
+
+> You're right -- now that I think about it, I don't really care what the 
+> type of 'r' is.  (Boy, I could have saved several hours today if I had 
+> realized that earlier :-)
+
+I seem to be hitting exactly the same problem. I constrain my types
+too early and the compiler can't find a solutuon. If I then relax the
+cionstraints, GCH says "ok, here's something that fits",
+
+> Wonder if I can use a "forall" in the definition of MyRequestBody to fix 
+> things without introducing an externally visible type parameter...
+
+That may indeed help.
+
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

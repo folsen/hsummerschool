@@ -1,0 +1,19 @@
+From ivan.miljenovic at gmail.com  Sat Aug 13 09:45:48 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Sat, 13 Aug 2011 17:45:48 +1000
+Subject: [Haskell-cafe] type-class inference
+In-Reply-To: <4E462910.8020407@dit.ie>
+References: <4E5EBA42.5060805@dit.ie> <4E45AEA7.4010302@dit.ie>
+	<CAKFCL4Vp-hxCMT7e5dQ1rChO+xAkDp4mjw=TT-jsj4gExEkgbQ@mail.gmail.com>
+	<4E462910.8020407@dit.ie>
+Message-ID: <CA+u6gbxVVuKWfAL_DQm7qiK5ctsRPsmpGhEK+A7X6mznVREtcg@mail.gmail.com>
+
+On 13 August 2011 17:34, Patrick Browne <patrick.browne at dit.ie> wrote:
+> The :info command is a great help.
+> Why does
+> ?:info g 4
+> produce a parse error, while
+> ?:t g 4
+> does not?
+
+

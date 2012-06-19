@@ -1,0 +1,99 @@
+From michael at snoyman.com  Fri Feb  4 06:03:10 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Fri, 4 Feb 2011 07:03:10 +0200
+Subject: [Haskell-cafe] How to #include into .lhs files?
+In-Reply-To: <AANLkTin0_JZwZH74CK4Gutu6tNKX6+fsanfyXeX9=8Ph@mail.gmail.com>
+References: <AANLkTinGuuGe2ihAUZGTkLM+scGYLVp14iXBhU-toA1O@mail.gmail.com>
+	<201102031151.38212.daniel.is.fischer@googlemail.com>
+	<AANLkTin0_JZwZH74CK4Gutu6tNKX6+fsanfyXeX9=8Ph@mail.gmail.com>
+Message-ID: <AANLkTinS8UraesSUQ4yt-YMPomOQnbyevdbZZcE4d-0z@mail.gmail.com>
+
+My guess (a complete guess) is that the deliterate step is creating a
+temporary .hs file elsewhere on your filesystem, which is why the CPP
+step can't find B.hs without a fully-qualified path.
+
+Michael
+
+On Fri, Feb 4, 2011 at 6:56 AM, Conal Elliott <conal at conal.net> wrote:
+> Thanks, Daniel. I'm still stumped. When I say
+>
+> #include "B.hs"
+>
+> in a .hs file, all works fine, but when in a .lhs file I get "error: B.hs:
+> No such file or directory". The file B.hs is in the same directory as the
+> including file, which is the current directory for ghci. Same situation with
+> ghc.
+>
+> If I change "B.hs" to "./B.hs", I get the same behavior. Only if I use a
+> fully qualified path name for B.hs does it get found from the .lhs file.
+>
+> I'm using GHC 6.12.3 on Mac OS 10.6.6.
+>
+> Any ideas? (Anyone, not just Daniel.)
+>
+> Thanks,? - Conal
+>
+>
+> On Thu, Feb 3, 2011 at 2:51 AM, Daniel Fischer
+> <daniel.is.fischer at googlemail.com> wrote:
+>>
+>> On Thursday 03 February 2011 10:33:23, Conal Elliott wrote:
+>> > Does anyone have a working example of #include'ing Haskell code into a
+>> > bird-tracks-style .lhs file with GHC? Every way I try leads to parsing
+>> > errors. Is there documentation about how it's supposed to work?
+>> >
+>> > Help much appreciated. ? - Conal
+>>
+>> Stupid example:
+>>
+>> -- Main:
+>>
+>> > {-# LANGUAGE CPP #-}
+>> > module Main (main) where
+>>
+>> #include "MachDeps.h"
+>>
+>> > main :: IO ()
+>> > main = do
+>>
+>> #if WORD_SIZE_IN_BITS == 32
+>>
+>> > ? ? putStrLn "32 bits"
+>>
+>> #include "Stuff32"
+>>
+>> # else
+>>
+>> > ? ? putStrLn "64 bits"
+>>
+>> #include "Stuff64"
+>> #endif
+>>
+>> -- Stuff32:
+>>
+>> ? ? ?putStrLn "Included from Stuff32"
+>>
+>> -- Stuff64:
+>>
+>> ? ? ?putStrLn "Included from Stuff64"
+>>
+>>
+>> It's a bit tricky. Since the C preprocessor is run after the unlit, the
+>> included code should not have bird-tracks, also you have to get the
+>> indentation right. There's probably a way to run cpp before unlit, which
+>> would allow you to have bird-tracks in the #include'd code.
+>>
+>> Much easier with LaTeX-style literate code.
+>>
+>> Cheers,
+>> Daniel
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

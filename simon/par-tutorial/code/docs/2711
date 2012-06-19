@@ -1,0 +1,41 @@
+From eca7215 at cs.rit.edu  Fri Feb  4 14:45:18 2011
+From: eca7215 at cs.rit.edu (Edward Amsden)
+Date: Fri, 04 Feb 2011 08:45:18 -0500
+Subject: [Haskell-cafe] OSX i386/x86 and x86_64 - time to switch
+ supported platforms?
+In-Reply-To: <AANLkTi=5Xpe+brJOVyv=d+Ov1xdpff0a4o5cEbMJRy3Q@mail.gmail.com>
+References: <AANLkTi=5Xpe+brJOVyv=d+Ov1xdpff0a4o5cEbMJRy3Q@mail.gmail.com>
+Message-ID: <AANLkTikCZuEp_=85TJKb7XCTst45ffzXBgUSrw2y=87N@mail.gmail.com>
+
+Steve Severance <steve at medwizard.net> wrote:
+> Moving from x86 to x64 has advantages and disadvantages from my POV.
+> Advantages:
+> ?* Able to address more memory
+> ?* More registers for code generation
+> ?* Haskell dependencies wouldn't need to be built for x86 on Snow
+>    Leopard (though if we swapped to x64 on Leopard as well, the Leopard
+>    users would start having to build 64-bit libraries specially)
+
+If we keep the capability to build both, and come up with a good way
+to use the platform default, this would be the biggest advantage for
+OS X users. (Full disclosure: speaking as a Snow Leopard user). Also,
+as time goes on, we will be seeing more, not less, 64-bit OS X users
+and releases.
+
+> Disadvantages:
+> ?* Pointers become wider, and Haskell data structures mostly consist
+> of pointers. This will bloat memory use of Haskell programs.
+
+I'd be interested to see how much this happens in practice, but it
+does seem to be a big concern.
+
+> ?* Generated binaries won't work on older Macs that don't have a
+> 64-bit OS/CPU. This is important if you are distributing compiled
+> Haskell binaries, which is not something I personally do but which is
+> probably important to support
+
+The compilers/linkers for most languages supported on OS X support
+generating "universal" binaries with both 32- and 64- bit code. I
+wonder if this is something GHC could support?
+
+

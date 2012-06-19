@@ -1,0 +1,19 @@
+From stephen.tetley at gmail.com  Sat Apr 23 09:17:13 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Sat, 23 Apr 2011 08:17:13 +0100
+Subject: [Haskell-cafe] Pattern matching on lazy bytestrings: how does
+	it work?
+In-Reply-To: <BANLkTim6F1pYYd1B1ZQ5dAGpYrCtgpQZDQ@mail.gmail.com>
+References: <BANLkTim6F1pYYd1B1ZQ5dAGpYrCtgpQZDQ@mail.gmail.com>
+Message-ID: <BANLkTims_W-fOXYMkPFCSopYnphvhFiYdQ@mail.gmail.com>
+
+Surely `fromChunks` is making the both lines in the code snippet the same?
+
+Also, in your last sentence I think you've miscalculated the shape of
+the initial input.
+
+Best wishes
+
+Stephen
+
+

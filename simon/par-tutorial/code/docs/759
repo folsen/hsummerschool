@@ -1,0 +1,23 @@
+From bos at serpentine.com  Tue Apr 26 17:36:39 2011
+From: bos at serpentine.com (Bryan O'Sullivan)
+Date: Tue, 26 Apr 2011 08:36:39 -0700
+Subject: [Haskell-cafe] How to update the RNG per call (State monad)
+ when generating QuickCheck arbitraries?
+In-Reply-To: <BANLkTin-L8vXn70e=UBTtNGr5z=wHD1ZfA@mail.gmail.com>
+References: <BANLkTin-L8vXn70e=UBTtNGr5z=wHD1ZfA@mail.gmail.com>
+Message-ID: <BANLkTinDU2Bx3+uNWDpyMLe0ZesT6wY3iQ@mail.gmail.com>
+
+On Tue, Apr 26, 2011 at 3:04 AM, Daniel Kahlenberg <
+d.kahlenberg at googlemail.com> wrote:
+
+> Thought getRandom function would be the best place to inject my unGen
+> function
+> call, but cannot get it to type-check:
+>
+
+You haven't described what it is you're actually trying to do, and I'm
+afraid your code doesn't help to understand that.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110426/4f6535c8/attachment.htm>
+

@@ -1,0 +1,20 @@
+From jmillikin at gmail.com  Tue Aug 30 20:00:38 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Tue, 30 Aug 2011 11:00:38 -0700 (PDT)
+Subject: [Haskell-cafe] Ambiguous module name `System.Directory'
+In-Reply-To: <20110828065110.GC23687@sirch>
+References: <20110826160018.GB23687@sirch> <4E5813CF.1020301@vex.net>
+	<CAKA2Jg+RqJWkN3JZQNT+OCL+j-OcPcHmXXvBV66fi_Z_b4y1zA@mail.gmail.com>
+	<20110828065110.GC23687@sirch>
+Message-ID: <12039330.5.1314727238897.JavaMail.geo-discussion-forums@prhm8>
+
+Note that once you upgrade it (to >=0.4), you'll still need to remove the 
+older version to fix the error.
+
+I wish cabal-install defaulted to hiding every package it installs. The 
+current behavior of exposing every installed module is unreasonable and 
+confusing. Packages should be namespaces, not just installation aliases.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110830/58ec335c/attachment.htm>
+

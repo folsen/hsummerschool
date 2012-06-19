@@ -1,0 +1,38 @@
+From dev at mobileink.com  Thu Dec 29 14:19:17 2011
+From: dev at mobileink.com (Gregg Reynolds)
+Date: Thu, 29 Dec 2011 07:19:17 -0600
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <jdfv46$7r3$1@dough.gmane.org>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+Message-ID: <CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>
+
+On Wed, Dec 28, 2011 at 2:44 PM, Heinrich Apfelmus
+<apfelmus at quantentunnel.de> wrote:
+>
+> The beauty of the IO monad is that it doesn't change anything about purity.
+> Applying the function
+>
+> ? bar :: Int -> IO Int
+>
+> to the value 2 will always give the same result:
+>
+> ? bar 2 = bar (1+1) = bar (5-3)
+
+Strictly speaking, that doesn't sound right.  The "result" of an IO
+operation is outside of the control (and semantics) of the Haskell
+program, so Haskell has no idea what it will be.  Within the program,
+there is no result.  So Int -> IO Int is not really a function - it
+does not map a determinate input to a determinate output.  The IO
+monad just makes it look and act like a function, sort of, but what it
+really does is provide reliable ordering of non-functional operations
+- invariant order, not invariant results.
+
+To respond to original post: no language that supports IO can be
+purely functional in fact, but with clever design it can mimic a
+purely functional language.
+
+Cheers
+
+Gregg
+
+

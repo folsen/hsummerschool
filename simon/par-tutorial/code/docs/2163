@@ -1,0 +1,33 @@
+From gcrosswhite at gmail.com  Wed Dec 21 07:13:17 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Wed, 21 Dec 2011 16:13:17 +1000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <188648958.139133.1324440862719.JavaMail.webspher@njbbicssmp03>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+	<CAL3m8eBx2=RNZJfqBSp=Bds4GXeu8vvAfXR_CPkPGJ+HZ-1-Xg@mail.gmail.com>
+	<1324433118.2665.6.camel@turminder-xuss.roaming.operationaldynamics.com>
+	<188648958.139133.1324440862719.JavaMail.webspher@njbbicssmp03>
+Message-ID: <1843127D-7647-4EE1-B962-B7AA017227F0@gmail.com>
+
+
+On Dec 21, 2011, at 2:14 PM, scooter.phd at gmail.com wrote:
+
+> I'd suggest, in addition to the symbols, renaming some of the fundamental types and concepts, like Monad. I would violently agree that Monad is the correct term, but try to communicate with a commodity software developer sometime (or a government acquisition professional). RWH goes a long way to explaining the concepts, as do the countless Web pages dedicated to explaining the monad concept. 
+
+I super-agree with you on this point;  just because something is modeled by a particular mathematical structure doesn't mean that it should be named *after* that structure unless said structure is a commonly known one.  In a programming language names should be chosen to maximize clarity, and the term "Monad" conveys absolutely no sense of what it is to anyone who isn't already well-versed in category theory.
+
+I would go further and say that there is a problem in a lot of the documentation surrounding such concepts as Monads which is that they start with a mathematical definition --- i.e., a type with a return and bind method --- and then proceed from there, which obfuscates what Monads are all about.  It would be much better of a typical tutorial instead started by describing what problem exists that they solve.
+
+
+> Haskell is a great language with solid mathematical underpinnings. I'm a big fan of it. But, adoption is the key to success; need to make the ordinary easy to understand unless the community wants to be relegated to Scala status.
+
+Honest question here:  what exactly do you mean by being "relegated to Scala status"?  Scala seems pretty alive and kicking to me, with the added bonus that it runs on the JVM which gives it an advantage in many respects over Haskell.  Is there something I am mising?  :-)
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111221/9a1aaffb/attachment.htm>
+

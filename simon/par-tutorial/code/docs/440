@@ -1,0 +1,34 @@
+From andrew.pennebaker at gmail.com  Sat Apr 16 04:47:37 2011
+From: andrew.pennebaker at gmail.com (Andrew Pennebaker)
+Date: Fri, 15 Apr 2011 22:47:37 -0400
+Subject: [Haskell-cafe] 64 bit generic link warning on every compile
+Message-ID: <BANLkTimWgjoX2SponiQPZK1mbKXOkOyWtQ@mail.gmail.com>
+
+ GHC 7 compiles fine, but there's an additional warning during linking.
+
+$ system_profiler SPSoftwareDataType | grep "System Version"
+      System Version: Mac OS X 10.6.7 (10J869)
+$ ghc --version
+The Glorious Glasgow Haskell Compilation System, version 7.0.2
+$ cat hello.hs
+#!/usr/bin/env runhaskell
+
+module Main where
+
+main :: IO ()
+main = putStrLn "Hello World"
+$ ghc --make hello.hs
+[1 of 1] Compiling Main             ( hello.hs, hello.o )
+Linking hello ...
+ld: warning: -read_only_relocs cannot be used with x86_64
+$ ./hello
+Hello World
+
+Cheers,
+
+Andrew Pennebaker
+www.yellosoft.us
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110415/0de26a96/attachment.htm>
+

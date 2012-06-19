@@ -1,0 +1,25 @@
+From noteed at gmail.com  Wed Apr 27 09:17:52 2011
+From: noteed at gmail.com (Vo Minh Thu)
+Date: Wed, 27 Apr 2011 09:17:52 +0200
+Subject: [Haskell-cafe] ANNOUNCE: cereal-0.3.3.0
+In-Reply-To: <4DB701A8.4000604@galois.com>
+References: <4DB701A8.4000604@galois.com>
+Message-ID: <BANLkTikpCAhxpXkjZAVKr9KpZjOxcJWXMA@mail.gmail.com>
+
+2011/4/26 Trevor Elliott <trevor at galois.com>:
+> Hot on the heels of the last release, cereal-0.3.3.0 [1] adds support
+> for parsing and rendering lazy ByteStrings. ?Most running functions in
+> Data.Serialize.Get and Data.Serialize.Put now have lazy analogues, and
+> Data.Serialize has gained encodeLazy and decodeLazy.
+>
+> This new functionality was made possible by the incremental parsing
+> support added in cereal-0.3.1.0 by Lemmih.
+
+Hi,
+
+For lazy ByteStrings, what would be the reason to prefer cereal or binary now?
+
+Thanks,
+Thu
+
+

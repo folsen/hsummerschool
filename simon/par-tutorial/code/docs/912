@@ -1,0 +1,44 @@
+From Christian.Maeder at dfki.de  Tue Aug  2 11:37:49 2011
+From: Christian.Maeder at dfki.de (Christian Maeder)
+Date: Tue, 02 Aug 2011 11:37:49 +0200
+Subject: [Haskell-cafe] Regular Expression Parsing via derivatives
+In-Reply-To: <CACYWy82xwE0aZvGt_yuVuejyhKvafvg8Ekod0q9trJzG1ub3VQ@mail.gmail.com>
+References: <CACYWy82xwE0aZvGt_yuVuejyhKvafvg8Ekod0q9trJzG1ub3VQ@mail.gmail.com>
+Message-ID: <4E37C56D.5010000@dfki.de>
+
+Am 01.08.2011 17:51, schrieb Alex Clemmer:
+> Hi Haskell people,
+>
+> I've been snooping through various mailing lists and the current Haskell
+> implementation of regular expressions and I was wondering if there has
+> been a discussion about implementing regex parsing with derivatives. If
+> so, I haven't seen it. If not, I'd like to have a discussion about it --
+> if for no other reason than to decide whether I should implement it as a
+> library, or (to attempt to implement it) as a core feature.
+>
+> For those of you who don't know, recent work by Might and Darais
+> <http://arxiv.org/abs/1010.5023> indicates that parsing CFGs can be done
+
+The paper refers to http://hackage.haskell.org/package/derp
+
+C.
+
+> better (/i.e./, significantly faster) than more "traditional" approaches
+> <http://swtch.com/%7Ersc/regexp/regexp1.html>. Might's presenting at
+> ICFP later in September about it.
+>
+> I guess the first thing I should ask is, which mailing list is actually
+> the right place to field this inquiry. I considered dropping it in the
+> main haskell list, but wasn't sure how people would respond.
+>
+> --
+> Alex
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

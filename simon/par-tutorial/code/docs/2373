@@ -1,0 +1,41 @@
+From steve at fenestra.com  Thu Dec 29 04:41:13 2011
+From: steve at fenestra.com (Steve Schafer)
+Date: Wed, 28 Dec 2011 22:41:13 -0500
+Subject: [Haskell-cafe] Windows: openFile gives permission denied when
+	file in use
+In-Reply-To: <CA+qNEz+zbybvT=W=sVJtUKX3Ke4zxh2Tt1m8=Uy04X2ty0_Vrw@mail.gmail.com>
+References: <CAKA2JgLc1Q-Lf_yOuhQdb1JKuUkiRYuS=hQ7wQw_+jqCMQOEYQ@mail.gmail.com>
+	<CAKjSnQE+tKmD+YSviFX_z+csMyP29V1sZTEyWn3pT_g0o3ChGw@mail.gmail.com>
+	<CA+qNEz+zbybvT=W=sVJtUKX3Ke4zxh2Tt1m8=Uy04X2ty0_Vrw@mail.gmail.com>
+Message-ID: <m3onf759ph28uvf8pnart7tq48tjjojchd@4ax.com>
+
+On Thu, 29 Dec 2011 16:10:03 +1300, chrisyco at gmail.com wrote:
+
+>In fact, this is required behavior according to the Haskell Report:
+>
+>> Implementations should enforce as far as possible, at least locally
+>> to the Haskell process, multiple-reader single-writer locking on
+>> files. That is, there may either be many handles on the same file
+>> which manage input, or just one handle on the file which manages
+>> output.
+
+The second sentence somewhat contradicts the first.
+
+The first sentence says, "multiple-reader single-writer" which implies
+multiple readers AND at most one writer (i.e., at the same time). This
+is pretty typical file-locking behavior, and, from the symptoms, appears
+to be the way that Framemaker opens the file.
+
+The second sentence, on the other hand, implies that there can be
+multiple readers OR one writer, but not both (which appears to be the
+way that GHC operates).
+
+>I guess on Windows, "as far as possible" means locking it across the
+>whole system.
+
+Windows does allow finer-grained control (including byte-range locking),
+but most applications don't bother.
+
+-Steve Schafer
+
+

@@ -1,0 +1,30 @@
+From haskell.vivian.mcphail at gmail.com  Thu Feb 10 07:00:14 2011
+From: haskell.vivian.mcphail at gmail.com (Vivian McPhail)
+Date: Thu, 10 Feb 2011 19:00:14 +1300
+Subject: [Haskell-cafe] Cabal && license combinations
+Message-ID: <AANLkTinXUKihLVr7if6Og6SbFt+H1ExwCstmXJSXA3kh@mail.gmail.com>
+
+> > It seems then that a package should be the least restrictive
+> > combination of all the licenses in all the contained modules.
+>
+> Omit the words "least restrictive" and I think you are correct.
+>
+> To combine licences, just aggregate them.  There is no lattice of
+> subsumption; no "more" or "less" restrictive ordering.
+>
+
+I was thinking that the lattice was already flattened into a list of
+licences.  Currently the top-level package has a single licence field which
+is an arbitrary disjunctive choice.  Much better is a conjunctive
+aggregation which is just as or less restrictive than the arbitrary
+disjunctive choice.
+
+Cheers,
+
+Vivian
+
+P.S. OK := acknowledge [ACK]
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110210/dfa9cae4/attachment.htm>
+

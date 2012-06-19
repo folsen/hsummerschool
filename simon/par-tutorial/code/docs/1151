@@ -1,0 +1,21 @@
+From cdsmith at gmail.com  Mon Aug 15 21:48:52 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Mon, 15 Aug 2011 13:48:52 -0600
+Subject: [Haskell-cafe] GHC API gives a weird error about .hi-boot files
+In-Reply-To: <1313400841.32611.30.camel@godel>
+References: <1313400841.32611.30.camel@godel>
+Message-ID: <1313437732.32611.32.camel@godel>
+
+On Mon, 2011-08-15 at 03:34 -0600, Chris Smith wrote:
+> Can anyone tell me what I'm doing wrong with the GHC API?
+
+Answering my own question: I was passing OneShot as the mode instead of
+CompManager.  I still don't understand why, but random trial and error
+to the rescue!  That solves the problem for now... on to figure out the
+SafeHaskell extension so I can get this online on a public network.
+
+-- 
+Chris Smith
+
+
+

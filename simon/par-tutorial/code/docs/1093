@@ -1,0 +1,49 @@
+From mail at joachim-breitner.de  Sat Aug 13 12:57:47 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Sat, 13 Aug 2011 12:57:47 +0200
+Subject: [Haskell-cafe] Diffs for hackage
+In-Reply-To: <CALqQuoi88Uk7GF3QeFSxBwzYybc6w69h4sxPGmk_HjbKgyhbTg@mail.gmail.com>
+References: <CALqQuoi88Uk7GF3QeFSxBwzYybc6w69h4sxPGmk_HjbKgyhbTg@mail.gmail.com>
+Message-ID: <1313233067.4424.12.camel@kirk>
+
+Hi,
+
+Am Samstag, den 13.08.2011, 08:11 +0200 schrieb Luite Stegeman:
+
+> often when a new version of a package is available on hackage, I want
+> to see what has changed since the previous release. Unfortunately many
+> packages don't have a changelog
+
+this is something that should be changed! Reviewing code changes to see
+what has changed may be ok if you upgrade one library that you are going
+to use the library extensively. But for Distribution packagers (and
+surely other use cases), it is just too much.
+
+See http://hackage.haskell.org/trac/hackage/ticket/299 for more
+discussion, but please, avoid overengineering and rather get us
+changelogs soon.
+
+Maybe it would already help to add a "changelog-file" field to .cabal,
+just as with license-file, and reject packages on hackage that do not
+have this field and file, and later decide if we need a more
+standardized format for changelogs.
+
+Greetings,
+Joachim
+(Who is constantly annoyed and ashamed about this blemish of the Haskell
+ecosystem.)
+
+
+-- 
+Joachim "nomeata" Breitner
+  mail at joachim-breitner.de  |  nomeata at debian.org  |  GPG: 0x4743206C
+  xmpp: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110813/360e48d7/attachment.pgp>
+

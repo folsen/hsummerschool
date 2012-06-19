@@ -1,0 +1,53 @@
+<html><style type="text/css">
+span.lineno { color: white; background: #aaaaaa; border-right: solid white 12px }
+span.nottickedoff { background: yellow}
+span.istickedoff { background: white }
+span.tickonlyfalse { margin: -1px; border: 1px solid #f20913; background: #f20913 }
+span.tickonlytrue  { margin: -1px; border: 1px solid #60de51; background: #60de51 }
+span.funcount { font-size: small; color: orange; z-index: 2; position: absolute; right: 20 }
+span.decl { font-weight: bold }
+span.spaces    { background: white }
+</style>
+<pre>
+<span class="lineno">    1 </span>module Trie where
+<span class="lineno">    2 </span>
+<span class="lineno">    3 </span>import Prelude hiding (lookup)
+<span class="lineno">    4 </span>import qualified Data.Map as M
+<span class="lineno">    5 </span>
+<span class="lineno">    6 </span>data Trie k v = Node (Maybe v) (M.Map k (Trie k v))
+<span class="lineno">    7 </span>  deriving (<span class="decl"><span class="nottickedoff"><span class="decl"><span class="nottickedoff">Show</span></span></span></span>)
+<span class="lineno">    8 </span>
+<span class="lineno">    9 </span>lookup :: Ord k =&gt; [k] -&gt; Trie k v -&gt; Maybe v
+<span class="lineno">   10 </span><span class="decl"><span class="istickedoff">lookup []     (Node v _)  = v</span>
+<span class="lineno">   11 </span><span class="spaces"></span><span class="istickedoff">lookup (k:ks) (Node _ cs) = case M.lookup k cs of</span>
+<span class="lineno">   12 </span><span class="spaces">                              </span><span class="istickedoff">Nothing -&gt; Nothing</span>
+<span class="lineno">   13 </span><span class="spaces">                              </span><span class="istickedoff">Just t -&gt; lookup ks t</span></span>
+<span class="lineno">   14 </span>
+<span class="lineno">   15 </span>empty :: Trie k v
+<span class="lineno">   16 </span><span class="decl"><span class="istickedoff">empty = Node <span class="nottickedoff">Nothing</span> M.empty</span></span>
+<span class="lineno">   17 </span>
+<span class="lineno">   18 </span>insert :: Ord k =&gt; [k] -&gt; v -&gt; Trie k v -&gt; Trie k v
+<span class="lineno">   19 </span><span class="decl"><span class="istickedoff">insert []     v (Node _ m) = Node  (Just <span class="nottickedoff">v</span>) m</span>
+<span class="lineno">   20 </span><span class="spaces"></span><span class="istickedoff">insert (k:ks) v (Node v' cs) = case M.lookup k cs of</span>
+<span class="lineno">   21 </span><span class="spaces">                                </span><span class="istickedoff">Nothing -&gt; Node <span class="nottickedoff">v'</span> (M.insert k newTree cs)</span>
+<span class="lineno">   22 </span><span class="spaces">                                  </span><span class="istickedoff">where newTree = insert ks <span class="nottickedoff">v</span> empty</span>
+<span class="lineno">   23 </span><span class="spaces">                                </span><span class="istickedoff">Just t -&gt; Node <span class="nottickedoff">v'</span> (M.insert k newTree cs)</span>
+<span class="lineno">   24 </span><span class="spaces">                                  </span><span class="istickedoff">where newTree = insert ks <span class="nottickedoff">v</span> t</span></span>
+<span class="lineno">   25 </span>
+<span class="lineno">   26 </span>fromList :: Ord k =&gt; [([k], v)] -&gt; Trie k v
+<span class="lineno">   27 </span><span class="decl"><span class="istickedoff">fromList [] = empty</span>
+<span class="lineno">   28 </span><span class="spaces"></span><span class="istickedoff">fromList ((ks,v) : xs) = insert ks <span class="nottickedoff">v</span> $ fromList xs</span></span>
+<span class="lineno">   29 </span>
+<span class="lineno">   30 </span>type TrieSet k = Trie k ()
+<span class="lineno">   31 </span>
+<span class="lineno">   32 </span>fromList' :: Ord k =&gt; [[k]] -&gt; TrieSet k
+<span class="lineno">   33 </span><span class="decl"><span class="istickedoff">fromList' [] = empty</span>
+<span class="lineno">   34 </span><span class="spaces"></span><span class="istickedoff">fromList' (ks:kss) = insert ks <span class="nottickedoff">()</span> $ fromList' kss</span></span>
+<span class="lineno">   35 </span>
+<span class="lineno">   36 </span>notTrieSetMember :: Ord k =&gt; [k] -&gt; TrieSet k -&gt; Bool
+<span class="lineno">   37 </span><span class="decl"><span class="istickedoff">notTrieSetMember ks t = case lookup ks t of</span>
+<span class="lineno">   38 </span><span class="spaces">                          </span><span class="istickedoff">Nothing -&gt; True</span>
+<span class="lineno">   39 </span><span class="spaces">                          </span><span class="istickedoff">Just _ -&gt; False</span></span>
+
+</pre>
+</html>

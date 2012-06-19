@@ -1,0 +1,18 @@
+From stephen.tetley at gmail.com  Sun Dec  4 08:25:55 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Sun, 4 Dec 2011 07:25:55 +0000
+Subject: [Haskell-cafe] Anonymous, Unique Types, maybe
+In-Reply-To: <4EDB0ABC.10705@gmail.com>
+References: <4EDB0ABC.10705@gmail.com>
+Message-ID: <CAB2TPRBfFBfcqc6zsOpnsrAPxut_pBYG36dKtKVrdcS56yw1Lw@mail.gmail.com>
+
+Umm, an obvious point is that if you really are using lists as streams
+they should appear infinite to the processing code, so you shouldn't
+encounter operations that fail due to incompatible lengths.
+
+Otherwise I think there might be packages on Hackage for fixed sized
+lists, its a common example for the power of GADTs, though personally
+I've found size annotated lists unusable at the point where I need
+`filter` (which you are calling mySelect?).
+
+

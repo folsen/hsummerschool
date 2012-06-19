@@ -1,0 +1,52 @@
+From es at ertes.de  Tue Apr 26 15:55:42 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Tue, 26 Apr 2011 15:55:42 +0200
+Subject: [Haskell-cafe] There is no null; Maybe/Option types
+References: <BANLkTi=irBB_YvfEm3ms0Vxd6xDb7tcPcg@mail.gmail.com>
+	<alpine.DEB.2.00.1104222123290.28351@anubis>
+	<4DB2524C.7040207@freegeek.org>
+Message-ID: <20110426155542.2fdf479c@angst.streitmacht.eu>
+
+wren ng thornton <wren at freegeek.org> wrote:
+
+> But the greatest thing about Maybe is that you don't *have* to write
+> code in monadic style. Because Maybe makes explicit the null-pointer
+> shenanigans in other languages, you can simply unwrap the Maybe and
+> pass around the raw value instead of letting Nothing permeate your
+> whole program. Spending all your time in the Maybe monad is just as
+> bad as spending all your time in the IO monad.
+
+Unless you're saying that I'm one of the worst Haskell programmers in
+the world, you are totally wrong.  Monads are an abstraction for
+convenience and beauty in expression, not for encapsulating bad habits.
+Particularly there is nothing wrong with writing 90% of your code in
+monadic style, which is what I do, often combining three or more monads.
+
+And even if I don't use Maybe in monadic style, I often use combinators
+like 'maybe'.  Monadic style to avoid explicit wrapping, and combinators
+to avoid explicit unwrapping.
+
+What exactly is wrong with that?  Why would you /not/ use (>=>) to
+calculate the fourth root from a monadic square root function?
+
+  fourthRoot :: (Alternative f, Integral i, Monad f) => i -> f i
+  fourthRoot = mSqrt >=> mSqrt
+
+
+> Purity begets clarity!
+
+All Haskell code is pure (in the sense of referential transparency),
+including monadic code, even in the IO monad.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

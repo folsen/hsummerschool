@@ -1,0 +1,49 @@
+From allbery.b at gmail.com  Wed Feb  2 20:09:11 2011
+From: allbery.b at gmail.com (Brandon S Allbery KF8NH)
+Date: Wed, 02 Feb 2011 14:09:11 -0500
+Subject: [Haskell-cafe] Loading bitmap with xlib
+In-Reply-To: <loom.20110202T100220-201@post.gmane.org>
+References: <loom.20110129T151208-836@post.gmane.org>	<loom.20110131T133959-495@post.gmane.org>	<AANLkTi=Oq8yAhaYbNg920OTsQ-B_U92q_kAazUFRjumo@mail.gmail.com>
+	<loom.20110202T100220-201@post.gmane.org>
+Message-ID: <4D49ABD7.3070109@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 2/2/11 04:03 , Francesco Mazzoli wrote:
+> Conrad Parker <conrad <at> metadecks.org> writes:
+>> On 31 January 2011 21:40, Francesco Mazzoli <f <at> mazzo.li> wrote:
+>>> Francesco Mazzoli <f <at> mazzo.li> writes:
+>>> At the end I gave up and I wrote the function myself:
+>>> http://hpaste.org/43464/readbitmapfile
+>>
+>> cool ... the listed maintainer for the Xlib bindings is
+>> libraries <at> haskell.org. Perhaps you could prepare a patch and send it
+>> there? (does anyone know if there is an actual maintainer?)
+>>
+> I will send a patch, but I'm sure there must be a reason behind the
+> fact that those functions were not included, even if I can't see it.
+
+Pretty much what the comment says.  Graphics.X11 was never really a complete
+set of bindings, just what people needed at the time.  The "Extras" stuff in
+there was driven by xmonad development, for example (and named so because
+originally it was a separate library before it got folded in, so the module
+names were difficult to change while maintaining compatibility).  Dealing
+with structs in the FFI is painful enough that I can easily imagine someone
+saying "we don't need those, let someone else figure it out" --- which you
+have done.  Patch away.
+
+- -- 
+brandon s. allbery     [linux,solaris,freebsd,perl]      allbery at kf8nh.com
+system administrator  [openafs,heimdal,too many hats]  allbery at ece.cmu.edu
+electrical and computer engineering, carnegie mellon university      KF8NH
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk1Jq9cACgkQIn7hlCsL25XaJgCfc+CCngSmZlL9JOeZ21vZwkBO
+BHkAn128z1dH2entJKEfH6pKJ2Y7qW4w
+=LOMj
+-----END PGP SIGNATURE-----
+
+

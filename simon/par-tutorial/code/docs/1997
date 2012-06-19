@@ -1,0 +1,26 @@
+From allbery.b at gmail.com  Thu Dec 15 23:55:54 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Thu, 15 Dec 2011 17:55:54 -0500
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <1323960481.2894.10.camel@cslin101.csunix.comp.leeds.ac.uk>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+	<1323960481.2894.10.camel@cslin101.csunix.comp.leeds.ac.uk>
+Message-ID: <CAKFCL4XzJzWiJ1mdawNmTC_Vuwt13cJ=GqRO=-t=_Q=Z2==9BA@mail.gmail.com>
+
+On Thu, Dec 15, 2011 at 09:48, Peter Wortmann <scpmw at leeds.ac.uk> wrote:
+
+> path portably from C [1]. Using argv[0] just gave me the path of the GHC
+> wrapper script, for example - as it uses exec without "-a".
+>
+
+Note that "exec -a" is a bash-ism and not portable to POSIX shells (ash on
+*BSD, dash on Debian/Ubuntu, etc.) or traditional /bin/sh as still shipped
+with some commercial Unixes.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/03a2b664/attachment.htm>
+

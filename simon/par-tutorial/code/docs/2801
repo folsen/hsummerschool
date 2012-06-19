@@ -1,0 +1,80 @@
+From illissius at gmail.com  Mon Feb  7 15:47:39 2011
+From: illissius at gmail.com (=?ISO-8859-1?Q?G=E1bor_Lehel?=)
+Date: Mon, 7 Feb 2011 15:47:39 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4FE75F.1000107@xyxyx.org>
+References: <4D4B19DB.5000907@btinternet.com>
+	<AANLkTimTak3jHpg_RPattKoACvkUU31tQydCsgjjS=Oc@mail.gmail.com>
+	<4D4D6E48.3000903@btinternet.com> <4D4FC689.1080107@xyxyx.org>
+	<AANLkTinwgZZ=aTz4mAQiGU2M1j9OuPRnrS9O2Au=K+b3@mail.gmail.com>
+	<4D4FE75F.1000107@xyxyx.org>
+Message-ID: <AANLkTi=5+umqSsdMudWGQgGkNWnp-rnTea+Ao=DZBgNe@mail.gmail.com>
+
+On Mon, Feb 7, 2011 at 1:36 PM, Jimbo Massive
+<jimbo.massive-haskell at xyxyx.org> wrote:
+> On 07/02/2011 11:40, Stephen Tetley wrote:
+>
+>> Interesting point, but excepting that its adding more complexity
+>> Haskell type system, the Clean way of putting strictness information
+>> into the type system seems preferable don't you think?
+>
+> If we were starting from a clean sheet (no pun intended) then yes, I
+> would say this is unquestionably preferable.
+>
+> Given the amount of Haskell code out in the world, I'd expect people to
+> argue against it, on the basis that fiddling with the types is quite a
+> major change. (Though I would not necessarily be one of those people)
+
+I dunno. As a language extension, would - let's call it BangTypes - be
+backwards-incompatible in any way? As far as I understand it, 'banged'
+types would accept only evaluated values, whereas 'unbanged' types
+would accept either evaluated or unevaluated ones -- exactly as it is
+now. So, given that none of the types in currently-existing Haskell
+code are banged, the effect on them of enabling the extension should
+be pretty more or less nil. And I think code with banged types would
+still be completely interoperable with code without (at least if
+evaluation happened implicitly wherever required) -- passing a value
+of a banged type to a function expecting an unbanged one would have no
+special effect, while passing a value of an unbanged type to a
+function expecting a banged one would merely result in it being
+evaluated.
+
+The potentially disruptive effect I can think of is that currently
+authors of data structures have full control over their strictness
+(for good or ill), whereas with this extension their users would be
+able to instantiate them to various varieties of strictness
+themselves. I'm not sure if the implementations of the data structures
+(or other external uses thereof) tend to depend on their assumed
+strictness, and would break were it different? If that were the case
+it might indeed be problematic, forcing people to distinguish between
+'bang-safe' and 'bang-unsafe' code. But I don't know if this is the
+case (or, for that matter, whether it's even possible for it to be the
+case...).
+
+One thing I'm unclear on is what precisely the meaning of banging a
+type would be (or what the meaning is in Clean). Would !a indicate
+that values of type !a must be evaluated to WHNF, that constructors of
+!a which occur in a's definition recursively would be strict (as if
+they had been declared with a bang pattern), or both? (Or something
+else entirely?) You would need the second property to be able to
+specify a spine-strict but element-lazy list (as opposed to merely a
+non-bottom list) as ![a]; you would need the first for it to have any
+effect on non-recursive types. Or would it have the first meaning for
+type variables, and both meanings for concrete types?
+
+>
+> Regards,
+> Jimbo
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Work is punishment for failing to procrastinate effectively.
+
+

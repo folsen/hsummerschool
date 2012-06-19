@@ -1,0 +1,94 @@
+From michael at snoyman.com  Tue Aug 30 06:11:14 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Tue, 30 Aug 2011 07:11:14 +0300
+Subject: [Haskell-cafe] Decompressing and http-enumerator
+In-Reply-To: <20110830132759.331944b38a09b32f8d27d8ac@mega-nerd.com>
+References: <CAKA2Jg+u_BtN5WKrTc4T_mgmuxP5==ASbsh5rvxJaQhVK64MTg@mail.gmail.com>
+	<CAHZrzdqdDtoPa+eQS5XtyRFx-2=1WtOQf=eDERvQuzu_dsMwAw@mail.gmail.com>
+	<CAKA2JgJVLxsF3U4_zfMro=erD1tNiK88y+tVs5PkJrkPPQeMvg@mail.gmail.com>
+	<20110830132759.331944b38a09b32f8d27d8ac@mega-nerd.com>
+Message-ID: <CAKA2JgJPzdkpv12We8xMnyoJcLpqUAfzvyOMmpgQ+Yp7Um1s=A@mail.gmail.com>
+
+On Tue, Aug 30, 2011 at 6:27 AM, Erik de Castro Lopo
+<mle+hs at mega-nerd.com> wrote:
+> Michael Snoyman wrote:
+>
+>> I'm wondering what the most appropriate way to handle this is.
+>
+> Just to get my thoughts in order I'll back track a little.
+>
+> In the HTTP repsonse, we have two header fields, content-type
+> and content-encoding. For the later (which may be absent) we can
+> have encodings of gzip or chunked (possibly others).
+
+Actually, chunked would go under transfer-encoding, but I think that's
+irrelevant for the rest of this discussion.
+
+> Some examples:
+>
+> ? ?content-type ? content-encoding ? current practice
+> ? ?===================================================
+> ? ?text/html ? ? ?gzip ? ? ? ? ? ? ? gunzip it in H.E.
+> ? ?text/html ? ? ?chunked ? ? ? ? ? ?unchunk it in H.E.
+>
+> For the case where H.E might be used as part of a HTTP proxy
+> we also have a rawBody option that disables both the unchunking
+> and the gunzipping. This rawBody functionality works now; I'm
+> using it.
+>
+> We now add to the above a file type where the content-type is
+> application/x-tar and the content-encoding is gzipped but from
+> the filename part of the URL, a user may well expect that
+> we get a tar.gz file but where H.E. currently gunzips it on
+> the fly.
+>
+> So, on to your suggestion:
+>
+>> Maybe a dontDecompress record, looking like:
+>>
+>> ? ? type ContentType = ByteString
+>> ? ? dontDecompress :: ContentType -> Bool
+>>
+>> Then browser behavior would be:
+>>
+>> ? ? browserDecompress = (== "application/x-tar")
+>>
+>> and current behavior would be:
+>>
+>> ? ? defaultDecompress = const False
+>
+> I think we should invert the logic of this (to avoid
+> double negatives) so we have:
+>
+> ? ? type ContentType = ByteString
+> ? ? decompress :: ContentType -> Bool
+>
+> ? ? browserDecompress = (/== "application/x-tar")
+> ? ? defaultDecompress = const True
+
+No objections from me.
+
+> Was the idea that this decompress field then gets added to
+> the Request record?
+
+Yes.
+
+> If so, would simpleHttp be modified to be:
+>
+> ? simpleHttp :: String -> (ContentType -> Bool) -> m L.ByteString
+>
+> and exporting both browserDecompress and defaultDecompress so
+> they can be used as two sane defaults for the second parameter?
+
+I don't want to go this route actually. I think simpleHttp should have
+the exact same type signature it has route now (thus living up to the
+name "simple"). It likely makes sense to use browserDecompress as the
+default for simpleHttp, and defaultDecompress as the default for
+parseUrl. Though I don't really have a strong opinion on this either.
+In either case, I'm thinking we should rename defaultDecompress to
+alwaysDecompress (my mistake to start off with), to properly indicate
+what it does.
+
+Michael
+
+

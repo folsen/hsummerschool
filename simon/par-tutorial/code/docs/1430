@@ -1,0 +1,33 @@
+From cdsmith at gmail.com  Sun Aug 28 06:57:43 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Sat, 27 Aug 2011 22:57:43 -0600
+Subject: [Haskell-cafe] GHC API question
+Message-ID: <1314507463.5744.10.camel@godel>
+
+I'm using the GHC API in GHC 7.2, and running into some problems.  For
+background, I have working code that uses compileExpr to get a value
+from a dynamically loaded module.  However, I'd like to do some
+profiling, and it appears that compileExpr doesn't work from executables
+that are built with profiling.
+
+So instead, I tried to take a more circuitous route... I'm using
+getModuleInfo and modInfoTyThings to get a list of all the declarations
+in the module, and finding the one I want, which I call var.  This all
+works fine, and I can print the type and the name, and I know I have the
+right thing and it's got the correct type.  But then I do:
+
+    session <- getSession
+    v <- liftIO $ getHValue session var
+    return (unsafeCoerce# v)
+
+and I get a segfault when I try to access the resulting value.  Keep in
+mind that this is the same value that works fine when I access it with
+compileExpr on an expression I've constructed to retrieve it.
+
+Any ideas what's going on?  Am I missing a step?
+
+-- 
+Chris Smith
+
+
+

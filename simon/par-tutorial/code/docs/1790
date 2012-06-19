@@ -1,0 +1,48 @@
+From aslatter at gmail.com  Fri Dec  9 21:06:22 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Fri, 9 Dec 2011 14:06:22 -0600
+Subject: [Haskell-cafe] Generating Code
+In-Reply-To: <CAHTd3sihZABoWe7CoKhfFh-QHQ01PftATrTmiZymE5b-D_YS+Q@mail.gmail.com>
+References: <CAHTd3sihZABoWe7CoKhfFh-QHQ01PftATrTmiZymE5b-D_YS+Q@mail.gmail.com>
+Message-ID: <CAKjSnQExdbAmQNv_yAAY5=gPG=uL7fuU-mkDtuOvw4waKirPzg@mail.gmail.com>
+
+On Fri, Dec 9, 2011 at 1:45 PM, L Corbijn <aspergesoepje at gmail.com> wrote:
+> Hello,
+>
+> In an attempt to reduce the amount of boring repetitive work to update
+> the OpenGLRaw package I've created a generator to do it partially for
+> me. It currently uses haskell-src-exts for representing the haskell
+> source of the modules. Though haskell-src-exts does an excellent job
+> for representing haskell source, it seems to be more aimed at parsing
+> haskell source and doing something with it, rather than generating it.
+> For cpp macros, say for the use of different calling conventions used,
+> can't be used directly, nor is there a really good way to use comments
+> (at least so it seems to me).
+>
+> So I'm interested if there are other libraries that are more suitable
+> to the task of generating haskell code for library use, and thus
+> generate 'human readable' exported code (so no TH). I'm also
+> interested in how other projects generate code for their packages.
+>
+
+I've used 'haskell-src' to generate code, but thankfully I didn't need
+to include any CPP.
+
+I've wanted to experiment with using haskell-src-exts to generate code
+with Haddocks, but it looks like it will be painful, since it doesn't
+include comments in the syntax tree proper. This is appropriate for
+arbitrary comments, but Haddocks can only appear in specific locations
+(I think?).
+
+Here is a utility module I use as a wrapper around haskell-src to make
+it a bit friendlier for generating modules:
+
+http://code.haskell.org/~aslatter/code/xhb/build-utils/src/HaskellCombinators.hs
+
+Maybe you can add an 'OtherCall String' calling convention to haskell-src-exts?
+
+I'm not sure what to do about comments.
+
+Antoine
+
+

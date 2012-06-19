@@ -1,0 +1,72 @@
+From dan.doel at gmail.com  Thu Dec 22 20:07:03 2011
+From: dan.doel at gmail.com (Dan Doel)
+Date: Thu, 22 Dec 2011 14:07:03 -0500
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <jcusns$9cj$1@dough.gmane.org>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+	<BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+	<CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+	<jcusns$9cj$1@dough.gmane.org>
+Message-ID: <CAHEA9tMf+cKYMPdvv01WY6eufZfxLG_YfeDQ6ZPKDkVXCjAPDA@mail.gmail.com>
+
+On Thu, Dec 22, 2011 at 4:19 AM, Heinrich Apfelmus
+<apfelmus at quantentunnel.de> wrote:
+> Alexander Solla wrote:
+>>>
+>>> And denotational semantics is not just nice. It is useful. It's the best
+>>> way to understand why the program we just wrote doesn't terminate.
+>>
+>>
+>> Denotational semantics is unrealistic. ?It is a Platonic model of
+>> constructive computation. ?Alan Turing introduced the notion of an
+>> "oracle"
+>> to deal with what we are calling bottom. ?An oracle is a "thing" that
+>> (magically) "knows" what a bottom value denotes, without having to wait
+>> for
+>> an infinite number of steps. ?Does Haskell offer oracles? ?If not, we
+>> should abandon the use of distinct bottoms. ?The /defining/ feature of a
+>> bottom is that it doesn't have an interpretation.
+>
+>
+> Huh? I don't see the problem.
+>
+> Introducing bottom as a value is a very practical way to assign a
+> well-defined mathematical object to each expression that you can write down
+> in Haskell. See
+>
+> ?http://en.wikibooks.org/wiki/Haskell/Denotational_semantics
+>
+> It's irrelevant whether _|_ is "unrealistic", it's just a mathematical model
+> anyway, and a very useful one at that. For instance, we can use it to reason
+> about strictness, which gives us information about lazy evaluation and
+> operational semantics.
+
+As another example.... Not that long ago, Bob Harper was complaining
+on his blog about how you can't use induction to reason about Haskell
+functions. But, that's incorrect. What you can't use is induction
+based on a model where all data types are the expected inductively
+defined sets, and non-termination is modeled as an effect. This isn't
+surprising, of course, because Haskell's models (i.e. denotational
+semantics) aren't like that.
+
+But, once you know what Haskell's models are---they model types as
+domains, and data types are inductively defined _domains_, not
+sets---then you in fact get induction principles based on those models
+(see for instance, Fibrational Induction Rules for Initial Algebras).
+You need to prove two or three additional cases, but it works roughly
+the same as the plain ol' induction you seem to lose for having
+non-strict evaluation.
+
+And then you have one less excuse for not using a language with lazy
+evaluation. :)
+
+-- Dan
+
+* http://personal.cis.strath.ac.uk/~patricia/csl2010.pdf
+
+

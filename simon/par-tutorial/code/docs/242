@@ -1,0 +1,27 @@
+From daniel.is.fischer at googlemail.com  Fri Apr  8 14:54:05 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Fri, 8 Apr 2011 14:54:05 +0200
+Subject: [Haskell-cafe] fmap and LaTeX
+In-Reply-To: <BANLkTimeD=f273j=kgJ-QBSiFrb4MBMtAw@mail.gmail.com>
+References: <BANLkTikhJJEUp3DWjXGxOKSo1gWed1AM9A@mail.gmail.com>
+	<4D9EFE3E.3000109@henning-thielemann.de>
+	<BANLkTimeD=f273j=kgJ-QBSiFrb4MBMtAw@mail.gmail.com>
+Message-ID: <201104081454.06050.daniel.is.fischer@googlemail.com>
+
+On Friday 08 April 2011 14:25:41, Mitar wrote:
+> Hi!
+> 
+> Uuu, nice. Thanks Daniel and Henning.
+> 
+
+Alternatively, you can kill off the spaces '<' and '>' produce using 
+\mspace,
+
+\newcommand{\ltgt}[1]{\mathbin{<\mspace{-6mu}#1\mspace{-6mu}>}}
+\newcommand{\fmap}{\ltgt{\$}}
+
+The value used in \mspace can be adjusted to personal taste, perhaps you'd 
+also like to raise '<' and '>' for that a little, since they touch the 
+baseline normally.
+
+

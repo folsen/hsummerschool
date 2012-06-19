@@ -1,0 +1,47 @@
+From lrpalmer at gmail.com  Sat Feb  5 00:14:41 2011
+From: lrpalmer at gmail.com (Luke Palmer)
+Date: Fri, 4 Feb 2011 16:14:41 -0700
+Subject: [Haskell-cafe] community server & hasktags learned recursing
+	into directories
+In-Reply-To: <1296858891-sup-7850@localhost.localdomain>
+References: <1296858891-sup-7850@localhost.localdomain>
+Message-ID: <AANLkTinKOOh375m=5+3-5-y+kDeduMxVfEBj3nbK1sdn@mail.gmail.com>
+
+On Fri, Feb 4, 2011 at 3:35 PM, Marc Weber <marco-oweber at gmx.de> wrote:
+> hasktags learned about how to recurse into subdirectories itself.
+>
+> This is especially useful for windows because writing scripts can be
+> done but is less well known (http://stackoverflow.com/questions/4865391/answer/submit)
+>
+> Now I'd like to push the latest changes to the community server which
+> was hosting the repo in the past but my account does no longer work?
+>
+> ?Also there are some dead links now. Eg
+> ?http://www.haskell.org/haskellwiki/Haskell.org_domain
+> ?still references
+> ?http://community.haskell.org/admin/ (404)
+>
+> Do you know what happened and where I should host the repo now?
+> (uploading it to github would take seconds only)
+
+I host all my modules on github.  It is a very supportive environment
+for spontaneous collaborative development.  c.h.o is a nice place, but
+lacks in maturity in comparison.  As long as there is a complete, free
+place like github around, why not use it?
+
+Luke
+
+> Moreover I fonud that I was no longer subscribed to haskell-cafe. I
+> can't remember having unsubscribed ?
+>
+> Let's hope this mail get's through now after having resubscribed.
+>
+> Marc Weber
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

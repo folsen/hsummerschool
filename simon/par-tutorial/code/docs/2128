@@ -1,0 +1,35 @@
+From paul at cogito.org.uk  Tue Dec 20 12:39:08 2011
+From: paul at cogito.org.uk (Paul Johnson)
+Date: Tue, 20 Dec 2011 11:39:08 +0000
+Subject: [Haskell-cafe] The Riddle of the Buddhist Monk
+In-Reply-To: <7400d1f11a62.4ef06064@dit.ie>
+References: <7400d1f11a62.4ef06064@dit.ie>
+Message-ID: <4EF073DC.3000501@cogito.org.uk>
+
+On 20/12/11 10:16, Patrick Browne wrote:
+> Hi,
+> I am trying to implement a set of 4 modules that blend the action of a 
+> monk moving up a mountain on day 1 and returning down by the same path 
+> on day 2 [1][2]. The code should reflect the fact that there is some 
+> time and place which is common to the two days where the monk would 
+> *meets himself*.
+> My Haskell code is based on a Maude version[3][4]. Only 3 times and 
+> places are considered in the code; start, meet, and end called 1,2, 
+> and 3 (e.g. the start time for the upward journey is timeu1).
+> Using qualified elements, I can get the meets function to give the 
+> correct results, but I cannot get the location function to work.
+> Is it possible the get  meets to work without qualification? Any 
+> suggestions in getting  location to work?
+>
+> Regards,
+> Pat
+
+I think you need to rethink the solution: Haskell is not a logic 
+programming language.
+
+You definitely don't need the type class, and you don't need instances.
+
+Paul.
+
+
+

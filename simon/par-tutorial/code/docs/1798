@@ -1,0 +1,24 @@
+From jake.mcarthur at gmail.com  Sat Dec 10 00:30:33 2011
+From: jake.mcarthur at gmail.com (Jake McArthur)
+Date: Fri, 9 Dec 2011 18:30:33 -0500
+Subject: [Haskell-cafe] Generating Code
+In-Reply-To: <CAB2TPRA3+VKzv_5egN0_9cghj2qZP0CuJ=moUFO3=zBxFSzKkg@mail.gmail.com>
+References: <CAHTd3sihZABoWe7CoKhfFh-QHQ01PftATrTmiZymE5b-D_YS+Q@mail.gmail.com>
+	<CAPeieQEdWhripdkdVo-=2ZXbNdgOL7Xq+idrwzTOiZuL=AMtZQ@mail.gmail.com>
+	<CAHTd3sis-hH=mAuQDfOo-1FMOgOPSTs4eFE4f0wLTfx9nXcS8A@mail.gmail.com>
+	<CAB2TPRA3+VKzv_5egN0_9cghj2qZP0CuJ=moUFO3=zBxFSzKkg@mail.gmail.com>
+Message-ID: <CACN--9AhVOvu79zaCxsmFJiMZMt79JY_1xcwUXx=Bp1rnU_u3A@mail.gmail.com>
+
+On Dec 9, 2011 4:48 PM, "Stephen Tetley" <stephen.tetley at gmail.com> wrote:
+> For the specific problem of OpenGL - as the package already exists I'm
+> not sure a generative approach would actually pay its way
+
+I strongly disagree. OpenGLRaw is in pretty bad shape right now. It's not
+up to date with the OpenGL spec and is very difficult to maintain. A
+generator is exactly what is needed.
+
+- Jake
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111209/c1bf736c/attachment.htm>
+

@@ -1,0 +1,42 @@
+From dan.doel at gmail.com  Sun Dec 25 07:03:39 2011
+From: dan.doel at gmail.com (Dan Doel)
+Date: Sun, 25 Dec 2011 01:03:39 -0500
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+In-Reply-To: <CANVKUrXp2vui6+xKn52kR4Ncci=mMJ24C-UCiNgmcug2wEPDGw@mail.gmail.com>
+References: <4EF57FC9.1030505@vex.net>
+	<CAHEA9tMg1pFRqHVb+oU6i0zHwbCxDHmeBmfCvaCn_j-VB+axXQ@mail.gmail.com>
+	<CANVKUrXp2vui6+xKn52kR4Ncci=mMJ24C-UCiNgmcug2wEPDGw@mail.gmail.com>
+Message-ID: <CAHEA9tNt3Gmooy-qAqzvsRvbWmvQNqDkHYvciESUXxZ+A2k8iw@mail.gmail.com>
+
+On Sun, Dec 25, 2011 at 12:14 AM, Eugene Kirpichov <ekirpichov at gmail.com> wrote:
+> On Sat, Dec 24, 2011 at 10:49 PM, Dan Doel <dan.doel at gmail.com> wrote:
+>> I think it's good to be clear on all these specifics, and people could
+>> do with a better recognition of the difference between (non-)strict
+>> and (lazy)eager (hint: you can have an eager, non-strict language).
+>
+> Can you elaborate? That's apparently my blind spot.
+
+A while back, there was a paper on something called (I believe)
+optimistic evaluation. The strategy goes like this: when you evaluate
+'f x', first you start evaluating 'x'. If that takes too long, or you
+encounter an exception, you (re)thunk it, and continue evaluating the
+body of f lazy style, in case you don't really need x.
+
+This is arguably eager, since you reduce arguments to functions
+immediately if possible. And it has some advantages over lazy
+evaluation in common cases. For instance, it avoids foldl building up
+a huge nested thunk that would cause a stack overflow. But it isn't
+strict, because
+
+    const 5 undefined
+
+is still 5.
+
+You can also imagine sparking on every function application, so that
+arguments automatically get reduced in parallel, and as soon as
+possible. I think that's been determined to not be very effective,
+though.
+
+-- Dan
+
+

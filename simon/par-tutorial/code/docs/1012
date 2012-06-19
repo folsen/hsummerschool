@@ -1,0 +1,991 @@
+From ivan.tomac at gmail.com  Wed Aug 10 12:56:32 2011
+From: ivan.tomac at gmail.com (Ivan Tomac)
+Date: Wed, 10 Aug 2011 20:56:32 +1000
+Subject: [Haskell-cafe] Type level Roman numerals and skew binary random
+	access lists
+In-Reply-To: <CAHGAhvfAoCtRBTf6Rpm+YetMdhSoDhUDu_V7v0rTCYyU3exCSQ@mail.gmail.com>
+References: <CAHGAhvfAoCtRBTf6Rpm+YetMdhSoDhUDu_V7v0rTCYyU3exCSQ@mail.gmail.com>
+Message-ID: <CAHGAhvdZdfvwHLrceB6gDEdTYjHKgb2mbZaw-xL7+61w0bgLVw@mail.gmail.com>
+
+I've recently been playing with Sebastian Fischer's explicit sharing monad
+library (found at http://sebfisch.github.com/explicit-sharing) and after
+looking at the code noticed the implementation memoizes values into an
+IntMap
+of untyped values that are coerced into the correct type on retrieval, which
+is a sensible and practical way to implement this.
+
+Just for fun I thought I'd have a go at implementing a (very impractical)
+version without type casting but, disappointingly, I didn't quite get there.
+I ran out of steam by the time I got around to playing with parameterized
+monads by which stage the type signatures started looking a bit scary.
+That and I needed to get back to my projects.
+
+This has been sitting on my hard drive for a couple of weeks now and I've
+finally decided to clean it up and post it, maybe someone else will find it
+amusing.
+
+The post is about HList inspired type level implementation of Okasaki's
+skew binary random access lists indexed by Roman numerals, using ideas from
+Ralf Hinze's paper "Functional Pearl: Typed Quote/Antiquote - Or:
+Compile-time
+Parsing" and some fun tricks from the MLton wiki:
+
+http://www.cs.ox.ac.uk/ralf.hinze/publications/Quote.pdf
+http://mlton.org/Fold
+http://mlton.org/Fold01N
+http://mlton.org/VariableArityPolymorphism
+
+With that out of the way, we start of by declaring all the different
+extensions we'll need.
+
+> {-# LANGUAGE FlexibleInstances      #-}
+> {-# LANGUAGE FunctionalDependencies #-}
+> {-# LANGUAGE MultiParamTypeClasses  #-}
+> {-# LANGUAGE ScopedTypeVariables    #-}
+> {-# LANGUAGE TypeFamilies           #-}
+> {-# LANGUAGE TypeSynonymInstances   #-}
+
+These two are ugly. We need undecidable instances for bunch of things and
+overlapping instances for the type equality trick borrowed from the HList
+paper:
+
+http://homepages.cwi.nl/~ralf/HList/paper.pdf
+
+> {-# LANGUAGE OverlappingInstances   #-}
+> {-# LANGUAGE UndecidableInstances   #-}
+
+For GHC 7 we also need to increase the context stack.
+
+> {-# OPTIONS_GHC -fcontext-stack=100 #-}
+
+Define Boolean values at the type level.
+
+> data T = T
+> data F = F
+
+And now Peano numbers. We don't actually use the constructors for
+anything but if we omitted them we'd have to use another extension,
+EmptyDataDecls.
+
+> data Z   = Z
+> data S n = S n
+
+Here we create some types for heterogeneous lists and trees. Note that Pair
+has an extra type parameter. We provide two different versions of the cons
+operation. One requires that extra parameter but does not require
+undecidable
+instances. Unfortunately we still need undecidable instances later
+on for indexing.
+
+> data Pair i x y = Pair x y   deriving Show
+> data Nil        = Nil        deriving Show
+> data Tree l x r = Node l x r deriving Show
+> data Leaf   x   = Leaf   x   deriving Show
+>
+> type Pair' x y = Pair () x y
+>
+> nil :: Nil
+> nil = Nil
+
+Equality, less than, addition, subtraction and multiplication by 2 type
+functions for Peano numbers.
+
+> type family Equals m n
+>
+> type instance Equals  Z     Z    = T
+> type instance Equals  Z    (S n) = F
+> type instance Equals (S n)  Z    = F
+> type instance Equals (S m) (S n) = Equals m n
+>
+> type family LessThan m n
+>
+> type instance LessThan    Z     Z  = F
+> type instance LessThan    Z  (S n) = T
+> type instance LessThan (S n)    Z  = F
+> type instance LessThan (S m) (S n) = LessThan m n
+>
+> type family Add m n
+>
+> type instance Add    Z     n  = n
+> type instance Add    n     Z  = n
+> type instance Add (S m) (S n) = S (S (Add m n))
+>
+> type family Sub m n
+>
+> type instance Sub    n     Z  = n
+> type instance Sub (S m) (S n) = Sub m n
+>
+> type family Mul2 n
+>
+> type instance Mul2  Z    = Z
+> type instance Mul2 (S n) = S (S (Mul2 n))
+
+And finally tree depth and weight/size.
+
+> type family Depth t
+>
+> type instance Depth (Leaf   x  ) = S  Z
+> type instance Depth (Tree l x r) = S (Depth l)
+>
+> type family Weight t
+>
+> type instance Weight (Leaf   x  ) = S Z
+> type instance Weight (Tree l x r) = S (Mul2 (Weight l))
+
+For reference, here is normal implementation of random access lists
+
+    newtype List a = List { unList :: [(Int, Tree a)] } deriving Show
+
+    data Tree a = Leaf a
+                | Node (Tree a) a (Tree a) deriving Show
+
+    cons :: a -> List a -> List a
+    cons x (List wts) = List $ case wts of
+        (v, l) : (w, r) : wts' | v == w -> (1 + w + w, Node l x r) : wts'
+        _                               -> (1        , Leaf   x  ) : wts
+
+List here is a list of pairs of balanced binary trees and their weights.
+The cons function has exactly two cases. The second case is trivial, we are
+mostly interested in the first case. If the weights of the two trees at the
+front of the list are the same, we combine them into a new tree with the
+newly
+inserted element at the top.
+
+Now we are ready to implement cons. This first version is simpler but
+requires
+undecidable instances.
+
+> class Cons' x y z | x y -> z where cons' :: x -> y -> z
+
+Here we cover the cases of inserting an element into an empty list, and
+inserting an element into a list with a single element. These cover two out
+of
+four different possibilities when inserting a new element.
+
+> instance Cons' x Nil (Pair' (Leaf x) Nil) where cons' = Pair . Leaf
+>
+> instance Cons' x (Pair' y Nil) (Pair' (Leaf x) (Pair' y Nil)) where
+>     cons' = Pair . Leaf
+
+The remaining two cases occur when we have at least two elements in the
+list.
+This is where we need to compare weights of trees. First observation is that
+we don't need weight of a tree, depth is sufficient.
+
+Now we have a problem. We'd like to be able to write something like
+
+    instance (Depth l ~ u, Depth r ~ v, Equals u v ~ T) =>
+             Cons' x (Pair' l (Pair' r y)) (Pair' (Tree l x r) y) where ...
+
+    instance (Depth l ~ u, Depth r ~ v, Equals u v ~ F) =>
+             Cons' x y (Pair' (Leaf x) y) where ...
+
+but we get a functional dependency conflict in the second instance as the
+type
+variable y might stand for Pair' l (Pair' r y) and the functional dependency
+already says the result should be Pair' (Tree l x r) y, not
+Pair' (Leaf x) (Pair' l (Pair' r y))
+
+We need to merge these two instances into one and then branch on the result
+of
+the comparison of tree depths.
+
+To do this, we introduce another type class to do the branching.
+
+> class ConsIf c x y z | c x y -> z where consIf :: c -> x -> y -> z
+
+And merge the instances.
+
+> instance ( Depth l ~ u
+>          , Depth r ~ v
+>          , Equals u v ~ c
+>          , ConsIf c x (Pair' l (Pair' r y)) z ) =>
+>
+>          Cons' x (Pair' l (Pair' r y)) z where
+>
+>     cons' = consIf (undefined :: c)
+>
+> instance ConsIf F x y (Pair' (Leaf x) y) where consIf _ = Pair . Leaf
+>
+> instance (Depth l ~ u, Depth r ~ u) =>
+>
+>          ConsIf T x (Pair' l (Pair' r y)) (Pair' (Tree l x r) y) where
+>
+>     consIf _ x (Pair l (Pair r y)) = Pair (Node l x r) y
+
+We can now test our cons function.
+
+> t0' = cons' 'a'
+>     $ cons' (33       :: Int)
+>     $ cons' (4.4      :: Float)
+>     $ cons' (88       :: Integer)
+>     $ cons' ([1 .. 8] :: [Int])
+>     $ cons' "moose"
+>     $ cons' ((6, 3)   :: (Int, Int))
+>     $ nil
+
+And ghci tells us the type is
+
+*Main> :t t0'
+t0'
+  :: Pair'
+       (Tree
+          (Tree (Leaf Float) Int (Leaf Integer))
+          Char
+          (Tree (Leaf [Char]) [Int] (Leaf (Int, Int))))
+       Nil
+
+Now we get to the second version that doesn't need the undecidable instances
+extension. In this one we go a step back and attempt to keep track of depth
+information in the type of the list. When we again end up at the point where
+we need to compare if two trees at the front of the list are of the same
+depth, we run into a problem.
+
+    instance Cons x (Pair i l (Pair i r y))
+                    (Pair (S i) (Tree l x r) y) where ...
+
+    instance Cons x (Pair i y (Pair j z w))
+                    (Pair (S Z) x (Pair i y (Pair j z w))) where ...
+
+This clearly won't work as we again get a functional dependency conflict.
+The j
+type variable could be the same as i in which case we have two different
+rules
+for what the result of consing x with (Pair i l (Pair i r y)) should be.
+As we don't want to use undecidable instances, we are stuck. Unless we can
+find a way to disambiguate the two instances.
+
+Instead of keeping track of depth information, we could try to track how
+many
+elements we need to complete a new tree. That way instead of counting up, we
+are counting down towards zero and it becomes easy to differentiate the two
+instances as only the one where the depths of the two trees are equal will
+contain a Z.
+
+Keeping track of how many elements are missing turns out to be a problem,
+at least as long as we don't want to use undecidable instances. Fortunately
+we can replace the number of elements missing with the number of levels the
+tree at the front needs before its depth matches the tree that follows.
+
+> class Cons x y z | x y -> z where cons :: x -> y -> z
+
+Inserting an element into an empty list involves adding the element to the
+front and setting its the depth counter to 1.
+
+> instance Cons x Nil (Pair (S Z) (Leaf x) Nil) where cons = Pair . Leaf
+
+If we are inserting an element into a list that already has a single tree,
+we again add the new element to the front, set its counter to 1 and we
+decrement the counter of the tree that now follows the newly inserted
+element.
+
+> instance Cons x (Pair (S i) y Nil) (Pair (S Z) (Leaf x) (Pair i y Nil))
+where
+>     cons x (Pair y z) = Pair (Leaf x) (Pair y z)
+
+Here we have the case where the list already contains at least two trees but
+their depths are not equal. Like with the previous instance we insert the
+new
+element to the front and decrement the counter of the tree that now follows
+it.
+
+> instance Cons x (Pair (S i) y (Pair (S j) z w))
+>                 (Pair (S Z) (Leaf x) (Pair i y (Pair (S j) z w))) where
+>
+>     cons x (Pair y z) = Pair (Leaf x) (Pair y z)
+
+That means we are left with one more case to handle. The case when the
+depths
+of the two trees are the same, or rather when the counter reaches 0.
+As we merge the two trees and create a new tree, we must also decrement the
+counter of the tree that follows. What this means is that we really need two
+instances. One where there are only two trees of the same depth in the list,
+and one where those two trees are followed by at least one more tree.
+
+> instance (Depth l ~ i, Depth r ~ i) =>
+>          Cons x (Pair i l (Pair Z r Nil)) (Pair (S i) (Tree l x r) Nil)
+where
+>
+>     cons x (Pair l (Pair r y)) = Pair (Node l x r) y
+
+As we merge the trees into a new tree, we reset and increment the depth
+counter. Note that we are using the first tree's counter. Reason for that is
+that the counter must represent the tree's depth as the tree at the front
+was
+either just inserted and so its counter is 1, or it was created when two
+smaller trees merged and its counter was set to its depth.
+Finally we must also decrement the counter of the tree that follows.
+
+> instance (Depth l ~ i, Depth r ~ i) =>
+>          Cons x (Pair i l (Pair Z r (Pair (S j) y z)))
+>                 (Pair (S i) (Tree l x r) (Pair j y z)) where
+>
+>     cons x (Pair l (Pair r (Pair y z))) = Pair (Node l x r) (Pair y z)
+
+Now we can test the new cons function.
+
+> t0 = cons 'a'
+>    $ cons (33       :: Int)
+>    $ cons (4.4      :: Float)
+>    $ cons (88       :: Integer)
+>    $ cons ([1 .. 8] :: [Int])
+>    $ cons "moose"
+>    $ cons ((6, 3)   :: (Int, Int))
+>    $ nil
+
+The type is slightly more verbose.
+
+*Main> :t t0
+t0
+  :: Pair
+       (S (S (S Z)))
+       (Tree
+          (Tree (Leaf Float) Int (Leaf Integer))
+          Char
+          (Tree (Leaf [Char]) [Int] (Leaf (Int, Int))))
+       Nil
+
+Here we introduce our wrapper for Roman numerals though we won't get to
+play with those just yet.
+
+> newtype R n = R { unR :: Int } deriving Show
+
+We want to get indexing and updates out of the way first. The reference
+implementation for the indexing function is a bit more complex than the cons
+function. Each of the cases we need to handle has been marked with a comment
+so we can see which instance matches which part of the code.
+
+    index :: List a -> Int -> Maybe a
+    index (List ((w, t) : wts)) i
+      | i < w     = index' w i t                    -- 1
+      | otherwise = index (List wts) (i - w)        -- 2
+        where
+        index' 1 0 (Leaf   x  ) = Just x            -- 3
+        index' _ _ (Leaf   _  ) = Nothing
+        index' w i (Node l x r)
+          | i == 0    = Just x                      -- 4
+          | i <= w'   = index' w' (i - 1     ) l    -- 5
+          | otherwise = index' w' (i - 1 - w') r    -- 6
+            where
+            w' = w `div` 2
+
+    index _ _ = Nothing
+
+We don't need to do anything when the index is out of range - the type
+system
+takes care of that for us.
+
+> class Index     i x y |   i y -> x where index   ::      y -> R i -> x
+> class IndexIf c i x y | c i y -> x where indexIf :: c -> y -> R i -> x
+
+First we handle the easy cases.
+
+> instance Index Z x (Leaf   x  ) where index (Leaf   x  ) _ = x      -- 3
+> instance Index Z x (Tree l x r) where index (Node _ x _) _ = x      -- 4
+
+Cases 5 and 6 require the use of a second type class so we can branch on the
+result of the comparison i <= w, though we rewrite it to w < i' + 1 to make
+use of the LessThan type family and to differentiate instance 6 from
+instance 4.
+
+Instead of halving the weight of the tree we are currently working on, we
+get the weight of one of its children.
+
+> instance ( Weight l ~ w
+>          , LessThan w (S i) ~ c
+>          , IndexIf c i x (Tree l y r) ) => Index (S i) x (Tree l y r)
+where
+>
+>     index t _ = indexIf (undefined :: c) t (undefined :: R i)       -- 5,
+6
+>
+> instance Index i x l => IndexIf F i x (Tree l y r) where
+>     indexIf _ (Node l _ _) = index l                                -- 5
+>
+> instance ( Weight r ~ w
+>          , Sub i w ~ j
+>          , Index j x r ) => IndexIf T i x (Tree l y r) where
+>
+>     indexIf _ (Node _ _ r) _ = index r (undefined :: R j)           -- 6
+
+Cases 1 and 2 are handled in a similar way.
+
+> instance ( Weight t ~ w
+>          , LessThan i w ~ c
+>          , IndexIf c i x (Pair j t y) ) => Index i x (Pair j t y) where
+>
+>     index = indexIf (undefined :: c)                                -- 1,
+2
+>
+> instance Index i x t => IndexIf T i x (Pair j t y) where
+>     indexIf _ (Pair t _) = index t                                  -- 1
+>
+> instance ( Weight t ~ w
+>          , Sub i w ~ j
+>          , Index j x y ) => IndexIf F i x (Pair k t y) where
+>
+>     indexIf _ (Pair _ y) _ = index y (undefined :: R j)             -- 2
+
+Update is similar.
+
+    update :: Int -> a -> List a -> List a
+    update i x (List ((w, t) : wts)) = List $
+        if i < w then (w, update' w i t) : wts                      -- 1
+                 else (w, t) : unList (update (i - w) x (List wts)) -- 2
+        where
+        update' 1 0 (Leaf _     ) = Leaf x                          -- 3
+        update' _ _ (Leaf _     ) = error "update"
+        update' w i (Node l x' r)
+          | i == 0    = Node l  x  r                                -- 4
+          | i <= w'   = Node l' x' r                                -- 5
+          | otherwise = Node l  x' r'                               -- 6
+            where
+            w' = w `div` 2
+            l' = update' w' (i - 1     ) l
+            r' = update' w' (i - 1 - w') r
+
+    update _ _ _ = error "update"
+
+> class Index i x z => Update i x y z | i x y -> z where
+>     update :: y -> R i -> x -> z
+>
+> class UpdateIf c i x y z | c i x y -> z where
+>     updateIf :: c -> y -> R i -> x -> z
+>
+> instance Update Z x (Leaf y) (Leaf x) where
+>     update _ _ x = Leaf x                                           -- 3
+>
+> instance Update Z x (Tree l y r) (Tree l x r) where
+>     update (Node l _ r) _ x = Node l x r                            -- 4
+>
+> instance ( Weight l ~ w
+>          , LessThan w (S i) ~ c
+>          , Index (S i) x t
+>          , UpdateIf c i x (Tree l y r) t) =>
+>
+>          Update (S i) x (Tree l y r) t where
+>
+>     update t _ = updateIf (undefined :: c) t (undefined :: R i)     -- 5,
+6
+>
+> instance Update i x l l' => UpdateIf F i x (Tree l y r) (Tree l' y r)
+where
+>     updateIf _ (Node l y r) i x = Node (update l i x) y r           -- 5
+>
+> instance ( Weight r ~ w
+>          , Sub i w ~ j
+>          , Update j x r r' ) =>
+>
+>          UpdateIf T i x (Tree l y r) (Tree l y r') where
+>
+>     updateIf _ (Node l y r) _ x =                                   -- 6
+>         Node l y (update r (undefined :: R j) x)
+>
+> instance ( Weight t ~ w
+>          , LessThan i w ~ c
+>          , Index i x p
+>          , UpdateIf c i x (Pair j t y) p ) => Update i x (Pair j t y) p
+where
+>
+>     update = updateIf (undefined :: c)                              -- 1,
+2
+>
+> instance Update i x t t' => UpdateIf T i x (Pair j t y) (Pair j t' y)
+where
+>     updateIf _ (Pair t y) i x = Pair (update t i x) y               -- 1
+>
+> instance ( Weight t ~ w
+>          , Sub i w ~ j
+>          , Update j x y z ) => UpdateIf F i x (Pair k t y) (Pair k t z)
+where
+>
+>     updateIf _ (Pair t y) _ x =                                     -- 2
+>         Pair t (update y (undefined :: R j) x)
+
+Maybe we could combine Update and Index type classes into a single class?
+But
+we won't attempt that here.
+
+Now that we have indexing and updates, we need values we can use to index
+the
+list. Typing Z, S Z, S (S Z) and so on is too tedious and not very readable.
+We could use templates to predefine a whole bunch of type level numbers.
+That's kind of ugly though. And we can do it without using any extensions,
+in
+plain Haskell 98.
+
+We start off by making I a type synonym for S. Then we define types II to X,
+XX to C in steps of 10, CC to M in steps of 100 and finally we define MM and
+MMM. I don't know how Roman numerals are supposed to work above 3999 so
+that's
+the largest number we will be able to encode. Probably for the best as the
+type system doesn't seem too happy about having to deal with types of this
+sort.
+
+> type I    n = S       n
+>
+> type II   n = I (I    n)
+> type III  n = I (II   n)
+> type IV   n = I (III  n)
+> type V    n = I (IV   n)
+> type VI   n = I (V    n)
+> type VII  n = I (VI   n)
+> type VIII n = I (VII  n)
+> type IX   n = I (VIII n)
+> type X    n = I (IX   n)
+>
+> type XX   n = X (X    n)
+> type XXX  n = X (XX   n)
+> type XL   n = X (XXX  n)
+> type L    n = X (XL   n)
+> type LX   n = X (L    n)
+> type LXX  n = X (LX   n)
+> type LXXX n = X (LXX  n)
+> type XC   n = X (LXXX n)
+> type C    n = X (XC   n)
+>
+> type CC   n = C (C    n)
+> type CCC  n = C (CC   n)
+> type CD   n = C (CCC  n)
+> type D    n = C (CD   n)
+> type DC   n = C (D    n)
+> type DCC  n = C (DC   n)
+> type DCCC n = C (DCC  n)
+> type CM   n = C (DCCC n)
+> type M    n = C (CM   n)
+>
+> type MM   n = M (M    n)
+> type MMM  n = M (MM   n)
+
+Now for the fun part. We'd like to be able to construct only valid Roman
+numerals and that the type signatures match the values. We start of by
+defining the return and lift functions as described in Ralf Hinze's paper.
+We don't go all the way to creating a monad as these two functions are the
+only thing we need.
+
+> ret  a f = f a
+> lift   f = ret . f
+
+Now before we continue, we need a way to ensure that only valid numbers are
+constructed. We can group numbers in the range I to X into one group, let's
+call it ones, X to C into group tens, C to M into group hundreds and M, MM
+and
+MMM are in group thousands. A valid number can have at most 1 digit from
+each
+group. Digits also have to be ordered from largest to smallest, left to
+right.
+
+To do that, we could try and reuse the LessThen type family from before and
+add
+constraints so that a digit from the tens group can only be appended to a
+number less than ten. And a digit from the hundreds group can only be
+applied
+to a number less than a hundred. This approach works but it makes the GHC's
+type system choke and evaluating types of expressions takes minutes.
+
+We could also create a class for each of the groups and a set of combinators
+that can only be applied to a group of a lower rank. This works better.
+
+But we can go a step further than that - we don't actually need any type
+classes. All we need is one more phantom type for the rank of the number.
+So we introduce a second type that resembles R, only has one extra type
+variable.
+
+> newtype R' n s = R' { unR' :: Int } deriving Show
+
+Here we make use of ret and lift to create polyvariadic functions for
+constructing Roman numerals. rn starts the construction and nr finalizes it.
+
+> rn :: ((R' n s -> R n) -> r) -> r
+> rn f = ret (R . unR') f
+>
+> nr :: (R' Z (IV Z) -> r) -> r
+> nr f = f (R' 0)
+
+Trying them in ghci we get
+
+*Main> rn nr
+R {unR = 0}
+*Main> :t rn nr
+rn nr :: R Z
+
+We have a zero. Notice in the type signature for nr, rank of zero is 4.
+
+Now we need to generate the digits. We can use a single function to generate
+all of them.
+
+> mkR n = lift (\f -> f . R' . (+ n) . unR')
+
+And we encode the constraints in the type. Digits from the ones group can
+only
+be applied to a number of rank 4. There is only one number of rank 4 and
+that
+is zero.
+Applying a digit from the ones group to a zero gives us a number of rank 3.
+Digits from the tens group can be applied to numbers of ranks 3 or 4 and
+return a number of rank 2. And so on.
+
+> type RF n m s t k r = (R' n s -> k) -> ((R' m t -> k) -> r) -> r
+>
+> i    :: RF (I    n) n (III Z) (IV  s) k r
+> ii   :: RF (II   n) n (III Z) (IV  s) k r
+> iii  :: RF (III  n) n (III Z) (IV  s) k r
+> iv   :: RF (IV   n) n (III Z) (IV  s) k r
+> v    :: RF (V    n) n (III Z) (IV  s) k r
+> vi   :: RF (VI   n) n (III Z) (IV  s) k r
+> vii  :: RF (VII  n) n (III Z) (IV  s) k r
+> viii :: RF (VIII n) n (III Z) (IV  s) k r
+> ix   :: RF (IX   n) n (III Z) (IV  s) k r
+>
+> x    :: RF (X    n) n (II  Z) (III s) k r
+> xx   :: RF (XX   n) n (II  Z) (III s) k r
+> xxx  :: RF (XXX  n) n (II  Z) (III s) k r
+> xl   :: RF (XL   n) n (II  Z) (III s) k r
+> l    :: RF (L    n) n (II  Z) (III s) k r
+> lx   :: RF (LX   n) n (II  Z) (III s) k r
+> lxx  :: RF (LXX  n) n (II  Z) (III s) k r
+> lxxx :: RF (LXXX n) n (II  Z) (III s) k r
+> xc   :: RF (XC   n) n (II  Z) (III s) k r
+>
+> c    :: RF (C    n) n (I   Z) (II  s) k r
+> cc   :: RF (CC   n) n (I   Z) (II  s) k r
+> ccc  :: RF (CCC  n) n (I   Z) (II  s) k r
+> cd   :: RF (CD   n) n (I   Z) (II  s) k r
+> d    :: RF (D    n) n (I   Z) (II  s) k r
+> dc   :: RF (DC   n) n (I   Z) (II  s) k r
+> dcc  :: RF (DCC  n) n (I   Z) (II  s) k r
+> dccc :: RF (DCCC n) n (I   Z) (II  s) k r
+> cm   :: RF (CM   n) n (I   Z) (II  s) k r
+>
+> m    :: RF (M    n) n      Z  (I   s) k r
+> mm   :: RF (MM   n) n      Z  (I   s) k r
+> mmm  :: RF (MMM  n) n      Z  (I   s) k r
+>
+> i    = mkR    1
+> ii   = mkR    2
+> iii  = mkR    3
+> iv   = mkR    4
+> v    = mkR    5
+> vi   = mkR    6
+> vii  = mkR    7
+> viii = mkR    8
+> ix   = mkR    9
+>
+> x    = mkR   10
+> xx   = mkR   20
+> xxx  = mkR   30
+> xl   = mkR   40
+> l    = mkR   50
+> lx   = mkR   60
+> lxx  = mkR   70
+> lxxx = mkR   80
+> xc   = mkR   90
+>
+> c    = mkR  100
+> cc   = mkR  200
+> ccc  = mkR  300
+> cd   = mkR  400
+> d    = mkR  500
+> dc   = mkR  600
+> dcc  = mkR  700
+> dccc = mkR  800
+> cm   = mkR  900
+>
+> m    = mkR 1000
+> mm   = mkR 2000
+> mmm  = mkR 3000
+
+We can now try to construct a number such as 2011.
+
+> r2011 = rn mm x i nr
+
+*Main> r2011
+R {unR = 2011}
+*Main> :t r2011
+r2011 :: R (MM (X (I Z)))
+
+The type reflects the value we entered.
+
+Attempting to construct an invalid number gives us an error
+
+*Main> rn v vi nr
+
+<interactive>:1:0:
+    Couldn't match expected type `Z' against inferred type `S s'
+    Probable cause: `rn' is applied to too many arguments
+    In the expression: rn v vi nr
+    In the definition of `it': it = rn v vi nr
+
+I'll finish off this post with a generic map function. Here we use the type
+equality trick from the HList paper.
+
+> class GMap     t p q |   t p -> q where gmap   ::      t -> p -> q
+> class GMapIf c t p q | c t p -> q where gmapIf :: c -> t -> p -> q
+>
+> instance GMap (a -> b) Nil Nil where gmap _ = id
+>
+> instance ( TypeEq a x c
+>          , GMapIf c (a -> b) (Leaf x) (Leaf y) ) =>
+>
+>          GMap (a -> b) (Leaf x) (Leaf y) where gmap = gmapIf (undefined ::
+c)
+>
+> instance ( TypeEq a x c
+>          , GMapIf c (a -> b) (Tree l x r) (Tree l' y r') ) =>
+>
+>          GMap (a -> b) (Tree l x r) (Tree l' y r') where
+>
+>     gmap = gmapIf (undefined :: c)
+>
+> instance ( GMap (a -> b) x y
+>          , GMap (a -> b) p q ) =>
+>
+>          GMap (a -> b) (Pair i x p) (Pair i y q) where
+>
+>     gmap f (Pair x p) = Pair (gmap f x) (gmap f p)
+>
+> instance GMapIf F (a -> b) (Leaf x) (Leaf x) where gmapIf _ _ = id
+>
+> instance GMapIf T (a -> b) (Leaf a) (Leaf b) where
+>     gmapIf _ f (Leaf a) = Leaf (f a)
+>
+> instance ( GMap (a -> b) l l'
+>          , GMap (a -> b) r r' ) =>
+>
+>          GMapIf F (a -> b) (Tree l x r) (Tree l' x r') where
+>
+>     gmapIf _ f (Node l x r) = Node (gmap f l) x (gmap f r)
+>
+> instance ( GMap (a -> b) l l'
+>          , GMap (a -> b) r r' ) =>
+>
+>          GMapIf T (a -> b) (Tree l a r) (Tree l' b r') where
+>
+>     gmapIf _ f (Node l a r) = Node (gmap f l) (f a) (gmap f r)
+>
+> type family Cast     a
+> type family Cast'  t a
+> type family Cast'' t a
+>
+> type instance Cast      a = Cast'  () a
+> type instance Cast'  t  a = Cast'' t  a
+> type instance Cast'' () a = a
+>
+> class TypeEq x y c | x y -> c
+>
+> instance Cast c ~ F => TypeEq x y c
+>
+> instance                 TypeEq Char  Char  T
+> instance                 TypeEq Int   Int   T
+> instance                 TypeEq Float Float T
+> instance TypeEq a a T => TypeEq [a]   [a]   T
+
+And a few tests to see if it all works.
+
+> t1 = gmap (length   :: String -> Int) t0
+> t2 = gmap (length   :: [Int]  -> Int) t1
+> t3 = gmap ((+ 1000) :: Int    -> Int) t2
+>
+> t4 = cons (t0 `index` rn iv nr) t3
+>
+> t5 = update t4 (rn iv nr) "asdf"
+>
+> t1' = gmap (length   :: String -> Int) t0'
+> t2' = gmap (length   :: [Int]  -> Int) t1'
+> t3' = gmap ((+ 1000) :: Int    -> Int) t2'
+>
+> t4' = cons' (t0' `index` rn iv nr) t3'
+>
+> t5' = update t4' (rn iv nr) "asdf"
+
+As a bonus the implementation of type-level Roman numerals in Standard ML.
+SML/NJ has a fit trying to load the code. It seems to cope with it if
+constructors for values above 100 are commented out. And it gives really
+nice
+type signatures. MLton has no problems compiling the code, but fully expands
+all type signatures.
+
+(*****************************************************************************)
+
+signature ROMAN = sig
+
+    type z
+
+    type 'n i
+
+    type 'n ii   = 'n i i
+    type 'n iii  = 'n i ii
+    type 'n iv   = 'n i iii
+    type 'n v    = 'n i iv
+    type 'n vi   = 'n i v
+    type 'n vii  = 'n i vi
+    type 'n viii = 'n i vii
+    type 'n ix   = 'n i viii
+    type 'n x    = 'n i ix
+
+    type 'n xx   = 'n x x
+    type 'n xxx  = 'n x xx
+    type 'n xl   = 'n x xxx
+    type 'n l    = 'n x xl
+    type 'n lx   = 'n x l
+    type 'n lxx  = 'n x lx
+    type 'n lxxx = 'n x lxx
+    type 'n xc   = 'n x lxxx
+    type 'n c    = 'n x xc
+
+    type 'n cc   = 'n c c
+    type 'n ccc  = 'n c cc
+    type 'n cd   = 'n c ccc
+    type 'n d    = 'n c cd
+    type 'n dc   = 'n c d
+    type 'n dcc  = 'n c dc
+    type 'n dccc = 'n c dcc
+    type 'n cm   = 'n c dccc
+    type 'n m    = 'n c cm
+
+    type 'n mm   = 'n m m
+    type 'n mmm  = 'n m mm
+
+    type  'n      r
+    type ('n, 's) r'
+
+    val toInt : 'n r -> int
+
+    val <|  : ((('n, 's) r' -> 'n r) -> 'r) -> 'r
+    val  |> : ((z, z iv) r' -> 'r) -> 'r
+
+    type ('n, 'm, 's, 't, 'k, 'r) rf =
+        (('n, 's) r' -> 'k) -> ((('m, 't) r' -> 'k) -> 'r) -> 'r
+
+    val i    : ('n i   , 'n, z iii, 's iv , 'k, 'r) rf
+    val ii   : ('n ii  , 'n, z iii, 's iv , 'k, 'r) rf
+    val iii  : ('n iii , 'n, z iii, 's iv , 'k, 'r) rf
+    val iv   : ('n iv  , 'n, z iii, 's iv , 'k, 'r) rf
+    val v    : ('n v   , 'n, z iii, 's iv , 'k, 'r) rf
+    val vi   : ('n vi  , 'n, z iii, 's iv , 'k, 'r) rf
+    val vii  : ('n vii , 'n, z iii, 's iv , 'k, 'r) rf
+    val viii : ('n viii, 'n, z iii, 's iv , 'k, 'r) rf
+    val ix   : ('n ix  , 'n, z iii, 's iv , 'k, 'r) rf
+
+    val x    : ('n x   , 'n, z ii , 's iii, 'k, 'r) rf
+    val xx   : ('n xx  , 'n, z ii , 's iii, 'k, 'r) rf
+    val xxx  : ('n xxx , 'n, z ii , 's iii, 'k, 'r) rf
+    val xl   : ('n xl  , 'n, z ii , 's iii, 'k, 'r) rf
+    val l    : ('n l   , 'n, z ii , 's iii, 'k, 'r) rf
+    val lx   : ('n lx  , 'n, z ii , 's iii, 'k, 'r) rf
+    val lxx  : ('n lxx , 'n, z ii , 's iii, 'k, 'r) rf
+    val lxxx : ('n lxxx, 'n, z ii , 's iii, 'k, 'r) rf
+    val xc   : ('n xc  , 'n, z ii , 's iii, 'k, 'r) rf
+
+    val c    : ('n c   , 'n, z i  , 's ii , 'k, 'r) rf
+    val cc   : ('n cc  , 'n, z i  , 's ii , 'k, 'r) rf
+    val ccc  : ('n ccc , 'n, z i  , 's ii , 'k, 'r) rf
+    val cd   : ('n cd  , 'n, z i  , 's ii , 'k, 'r) rf
+    val d    : ('n d   , 'n, z i  , 's ii , 'k, 'r) rf
+    val dc   : ('n dc  , 'n, z i  , 's ii , 'k, 'r) rf
+    val dcc  : ('n dcc , 'n, z i  , 's ii , 'k, 'r) rf
+    val dccc : ('n dccc, 'n, z i  , 's ii , 'k, 'r) rf
+    val cm   : ('n cm  , 'n, z i  , 's ii , 'k, 'r) rf
+
+    val m    : ('n m   , 'n, z    , 's i  , 'k, 'r) rf
+    val mm   : ('n mm  , 'n, z    , 's i  , 'k, 'r) rf
+    val mmm  : ('n mmm , 'n, z    , 's i  , 'k, 'r) rf
+end
+
+structure Roman :> ROMAN = struct
+
+    datatype    z = Z
+    datatype 'n i = I of 'n
+
+    type 'n ii   = 'n i i
+    type 'n iii  = 'n i ii
+    type 'n iv   = 'n i iii
+    type 'n v    = 'n i iv
+    type 'n vi   = 'n i v
+    type 'n vii  = 'n i vi
+    type 'n viii = 'n i vii
+    type 'n ix   = 'n i viii
+    type 'n x    = 'n i ix
+
+    type 'n xx   = 'n x x
+    type 'n xxx  = 'n x xx
+    type 'n xl   = 'n x xxx
+    type 'n l    = 'n x xl
+    type 'n lx   = 'n x l
+    type 'n lxx  = 'n x lx
+    type 'n lxxx = 'n x lxx
+    type 'n xc   = 'n x lxxx
+    type 'n c    = 'n x xc
+
+    type 'n cc   = 'n c c
+    type 'n ccc  = 'n c cc
+    type 'n cd   = 'n c ccc
+    type 'n d    = 'n c cd
+    type 'n dc   = 'n c d
+    type 'n dcc  = 'n c dc
+    type 'n dccc = 'n c dcc
+    type 'n cm   = 'n c dccc
+    type 'n m    = 'n c cm
+
+    type 'n mm   = 'n m m
+    type 'n mmm  = 'n m mm
+
+    type 'n r = int
+
+    datatype ('n, 's) r' = R of int
+
+    type ('n, 'm, 's, 't, 'k, 'r) rf =
+        (('n, 's) r' -> 'k) -> ((('m, 't) r' -> 'k) -> 'r) -> 'r
+
+    fun toInt n = n
+
+    local
+        fun unR (R n) = n
+
+        fun ret  a f = f a
+        fun lift   f = ret o f
+
+        fun mkR n k = lift (fn g => g o R o (fn x => x + n) o unR) k
+    in
+        fun <|  f = ret unR f
+        fun  |> f = f (R 0)
+
+        fun i    k = mkR    1 k
+        fun ii   k = mkR    2 k
+        fun iii  k = mkR    3 k
+        fun iv   k = mkR    4 k
+        fun v    k = mkR    5 k
+        fun vi   k = mkR    6 k
+        fun vii  k = mkR    7 k
+        fun viii k = mkR    8 k
+        fun ix   k = mkR    9 k
+
+        fun x    k = mkR   10 k
+        fun xx   k = mkR   20 k
+        fun xxx  k = mkR   30 k
+        fun xl   k = mkR   40 k
+        fun l    k = mkR   50 k
+        fun lx   k = mkR   60 k
+        fun lxx  k = mkR   70 k
+        fun lxxx k = mkR   80 k
+        fun xc   k = mkR   90 k
+
+        fun c    k = mkR  100 k
+        fun cc   k = mkR  200 k
+        fun ccc  k = mkR  300 k
+        fun cd   k = mkR  400 k
+        fun d    k = mkR  500 k
+        fun dc   k = mkR  600 k
+        fun dcc  k = mkR  700 k
+        fun dccc k = mkR  800 k
+        fun cm   k = mkR  900 k
+
+        fun m    k = mkR 1000 k
+        fun mm   k = mkR 2000 k
+        fun mmm  k = mkR 3000 k
+    end
+end
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110810/368c8ab4/attachment-0001.htm>
+

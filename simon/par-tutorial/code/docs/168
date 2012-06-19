@@ -1,0 +1,57 @@
+From es at ertes.de  Wed Apr  6 18:29:31 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Wed, 6 Apr 2011 18:29:31 +0200
+Subject: [Haskell-cafe] 'Progress bar' enumeratee
+References: <inhd6m$h2n$1@dough.gmane.org>
+	<20110406163105.13cbc9a3@angst.streitmacht.eu>
+	<inhv6r$n8$1@dough.gmane.org>
+Message-ID: <20110406182931.0238561f@angst.streitmacht.eu>
+
+"David Hotham" <david.hotham at blueyonder.co.uk> wrote:
+
+> I did have a version along those lines at some point, but I felt it
+> was cheating rather to print the dots not at the correct point in the
+> stream.
+>
+> Perhaps I've over-complicated for the sake of the learning experience,
+> but I do like to have a version that passes on the correct number of
+> bytes, then prints the ".", and then continues.
+
+Well, then just do the printing after calling the continuation:
+
+    dotsAt :: forall b m. MonadPeelIO m => Int ->
+              Enumeratee ByteString ByteString m b
+    dotsAt n =
+        loop 0
+
+        where
+        loop :: Int -> Enumeratee ByteString ByteString m b
+        loop i' step@(Continue k) =
+            continue go
+
+            where
+            go :: Stream ByteString ->
+                  Iteratee ByteString m (Step ByteString m b)
+            go EOF = return step
+            go ch@(Chunks strs) = do
+                let (numDots, i) = divMod (i' + sum (L.map BC.length strs)) n
+                    printDots = tryIO $ BC.putStr (BC.replicate numDots '.') >>
+                                        hFlush stdout
+                k ch >>== (\step -> printDots >> loop i step)
+        loop i' step = return step
+
+By the way, after trying out the code, I found that you should use
+hFlush after printing.  Otherwise you may see the dots delayed.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

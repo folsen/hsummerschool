@@ -1,0 +1,79 @@
+From felipe.lessa at gmail.com  Thu Apr 28 19:37:41 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Thu, 28 Apr 2011 14:37:41 -0300
+Subject: [Haskell-cafe] Iteratee: manyToOne
+In-Reply-To: <BANLkTiktsAiQQ2c56KK7vxdR3WcuKxRvow@mail.gmail.com>
+References: <BANLkTinwOoNcVGx1awFANAywZUyxnUpWPg@mail.gmail.com>
+	<BANLkTi=tGAyb8JgxiHuEkQ9SnCoSdSqFTw@mail.gmail.com>
+	<BANLkTiktsAiQQ2c56KK7vxdR3WcuKxRvow@mail.gmail.com>
+Message-ID: <BANLkTimZHLG8mc3rDEMsyk=p087ZJRpLEA@mail.gmail.com>
+
+On Thu, Apr 28, 2011 at 1:10 PM, Felipe Almeida Lessa
+<felipe.lessa at gmail.com> wrote:
+> On Thu, Apr 28, 2011 at 12:09 PM, Felipe Almeida Lessa
+> <felipe.lessa at gmail.com> wrote:
+>> I foresee one problem: what is the leftover of 'manyToOne xs' if each
+>> x in xs needs different lengths of input?
+>>
+>> One possible untested-but-compiling solution:
+> [snip]
+>
+> Like I said, that manyToOne implementation isn't very predictable
+> about leftovers. ?But I guess that if all your iteratees consume the
+> same input OR if you don't care about leftovers, then it should be
+> okay.
+
+Sorry for replying to myself again. =)
+
+I think you can actually give predictable semantics to manyToOne:
+namely, the leftovers from the last iteratee are returned.  This new
+implementation should be better:
+
+import Data.Monoid (mappend)
+import qualified Data.Enumerator as E
+
+manyToOne :: Monad m => [E.Iteratee a m b] -> E.Iteratee a m [b]
+manyToOne is = E.Iteratee $ mapM E.runIteratee is >>=
+                            E.runIteratee . go
+    where
+      go [step]              = fmap (:[]) (E.returnI step)
+      go (E.Yield b _  : xs) = fmap (b:)  (go xs)
+      go (E.Error exc  : _)  = E.returnI (E.Error exc)
+      go (E.Continue f : xs) = E.continue $ go' (E.Continue f : xs)
+      go []                  = return []
+
+      go' xs stream = manyToOne $ feed xs
+        where
+          feed [E.Yield b s]       = [E.yield b (s `mappend` stream)]
+          feed (E.Continue f : ys) = f stream       : feed ys
+          feed (step         : ys) = E.returnI step : feed ys
+          feed []                  = []
+
+With the same test as before:
+
+*Main> E.run $ E.enumList 1 [5 :: Int, 6, 7] E.$$ manyToOne [return 1,
+maybe 2 id `fmap` E.head, return 3, maybe 4 id `fmap` (E.head >>
+E.head)] >>= \xs -> (,) xs `fmap` E.head
+Right ([1,5,3,6],Just 7)
+*Main> E.run $ E.enumList 10 [5 :: Int, 6, 7] E.$$ manyToOne [return
+1, maybe 2 id `fmap` E.head, return 3, maybe 4 id `fmap` (E.head >>
+E.head)] >>= \xs -> (,) xs `fmap` E.head
+Right ([1,5,3,6],Just 7)
+
+When the last iteratee doesn't consume anything:
+
+*Main> E.run $ E.enumList 1 [5 :: Int, 6, 7] E.$$ manyToOne [return 1,
+maybe 2 id `fmap` E.head, return 3, maybe 4 id `fmap` (E.head >>
+E.head), return 10] >>= \xs -> (,) xs `fmap` E.head
+Right ([1,5,3,6,10],Just 5)
+*Main> E.run $ E.enumList 10 [5 :: Int, 6, 7] E.$$ manyToOne [return
+1, maybe 2 id `fmap` E.head, return 3, maybe 4 id `fmap` (E.head >>
+E.head), return 10] >>= \xs -> (,) xs `fmap` E.head
+Right ([1,5,3,6,10],Just 5)
+
+HTH,
+
+-- 
+Felipe.
+
+

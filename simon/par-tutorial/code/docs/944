@@ -1,0 +1,14 @@
+From nowgate at yahoo.com  Sun Aug  7 01:57:59 2011
+From: nowgate at yahoo.com (michael rice)
+Date: Sat, 6 Aug 2011 16:57:59 -0700 (PDT)
+Subject: [Haskell-cafe] Prelude> read "1234" :: String -> "*** Exception:
+	Prelude.read: no parse
+Message-ID: <1312675079.94971.YahooMailClassic@web31105.mail.mud.yahoo.com>
+
+Prelude> read "1234" :: Int1234Prelude> read "1234" :: String"*** Exception: Prelude.read: no parse
+Why?
+Michael
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110806/48a17b90/attachment.htm>
+

@@ -1,0 +1,17 @@
+From andrewcoppin at btinternet.com  Thu Apr 14 19:57:35 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Thu, 14 Apr 2011 18:57:35 +0100
+Subject: [Haskell-cafe] Questioning seq
+Message-ID: <4DA7358F.1080501@btinternet.com>
+
+A couple of questions:
+
+1. Why is the existence of polymorphic seq bad?
+
+2. Why would the existence of polymorphic rnf be worse?
+
+3. How is pseq different from seq?
+
+That is all...
+
+

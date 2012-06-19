@@ -1,0 +1,25 @@
+From oleg at okmij.org  Wed Feb  2 10:21:28 2011
+From: oleg at okmij.org (oleg at okmij.org)
+Date: Wed,  2 Feb 2011 01:21:28 -0800 (PST)
+Subject: [Haskell-cafe] Instancing "Typeable" for monad transformers?
+Message-ID: <20110202092128.BDE3117123@Adric.ern.nps.edu>
+
+
+One can do something a bit shorter
+
+> instance (Typeable a, Typeable1 m) => Typeable1 (Iteratee a m) where
+>   typeOf1 i = mkTyConApp (mkTyCon "Data.Enumerator.Iteratee") 
+> 	            [typeOf a, typeOf1 m]
+>    where
+>    (a,m) = peel i
+>    peel :: Iteratee a m w -> (a, m ())
+>    peel = undefined
+
+
+still a bother to write every time one needs it, but tolerable. Only
+the signature of 'peel' matters.
+
+
+
+
+

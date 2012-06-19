@@ -1,0 +1,65 @@
+From nowgate at yahoo.com  Thu Feb  3 22:39:38 2011
+From: nowgate at yahoo.com (michael rice)
+Date: Thu, 3 Feb 2011 13:39:38 -0800 (PST)
+Subject: [Haskell-cafe] Reader monad wrapping State monad
+In-Reply-To: <201102032215.22368.daniel.is.fischer@googlemail.com>
+Message-ID: <604858.3525.qm@web31103.mail.mud.yahoo.com>
+
+And swap the arguments.
+
+
+
+Thanks for going the extra mile.
+
+
+
+Michael
+
+
+--- On Thu, 2/3/11, Daniel Fischer <daniel.is.fischer at googlemail.com> wrote:
+
+From: Daniel Fischer <daniel.is.fischer at googlemail.com>
+Subject: Re: [Haskell-cafe] Reader monad wrapping State monad
+To: "michael rice" <nowgate at yahoo.com>
+Cc: haskell-cafe at haskell.org
+Date: Thursday, February 3, 2011, 4:15 PM
+
+On Thursday 03 February 2011 21:40:13, michael rice wrote:
+> Hi Daniel,
+>
+> Ok, but what I was looking for was ReaderT on top, State on the bottom.
+
+No problem, just change the definition of the Heron type synonym and swap 
+the applcations of runReader[T] and evalState[T] in mySqrt, the monadic 
+sqrtH can remain unchanged :)
+
+> This is very confusing material, with no apparent conceptual commonality
+> (ad hoc comes to mind) among the many examples I've looked at. Sometimes
+> lift is used, other times a lift helper function, and in this case no
+> use of lift at all.
+
+That's because only methods of the MonadState and the MonadReader class are 
+used and instances of MonadState are propagated/lifted through ReaderT, 
+instance of MonadReader are propagated/lifted through StateT.
+
+(
+instance MonadReader r m => MonadReader r (StateT s m) where
+? ? ask = lift ask
+? ? local = ...
+instance MonadState s m => MonadState (ReaderT r m) where
+? ? get = lift get
+? ? put = ...
+)
+
+If you use a function on the inner monad which is not propagated to the 
+entire transformer stack via class instances, you have to use lift (if you 
+have a MonadTrans instance) or something similar.
+
+
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/7f6e5e2c/attachment.htm>
+

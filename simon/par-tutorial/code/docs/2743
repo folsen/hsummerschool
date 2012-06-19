@@ -1,0 +1,22 @@
+From andrewcoppin at btinternet.com  Sat Feb  5 16:21:57 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Sat, 05 Feb 2011 15:21:57 +0000
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+References: <4D4B19DB.5000907@btinternet.com>
+	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+Message-ID: <4D4D6B15.2060204@btinternet.com>
+
+>> That got me thinking... What would happen if, instead of "Integer", we had two types, "evaluated Integer" and "possibly unevaluated Integer"? What if the strictness or otherwise of a data structure were exposed at the type level?
+>
+> Oh, you mean like "!Int" and "Int" in Clean?  I used to find bang *types* rather easier to deal with
+> than I now do bang *patterns*.
+>
+>> I have no idea what the syntax for that would look like,
+>
+> Clean?
+
+I didn't think Clean supported laziness at all? I thought it was a 
+strict language.
+
+

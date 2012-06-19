@@ -1,0 +1,32 @@
+From michael at orlitzky.com  Mon Dec 26 20:19:48 2011
+From: michael at orlitzky.com (Michael Orlitzky)
+Date: Mon, 26 Dec 2011 14:19:48 -0500
+Subject: [Haskell-cafe] Non-exhaustive pattern match warning (incorrect?)
+In-Reply-To: <CAKjSnQGDkoHbMz0e1-CVTVu-4Lc0ZDy5ZD2Pw-086cciDunFRg@mail.gmail.com>
+References: <4EF8BB12.3010603@orlitzky.com>
+	<CAKjSnQGDkoHbMz0e1-CVTVu-4Lc0ZDy5ZD2Pw-086cciDunFRg@mail.gmail.com>
+Message-ID: <4EF8C8D4.3090904@orlitzky.com>
+
+On 12/26/11 13:42, Antoine Latter wrote:
+>>
+>> Am I overlooking something, or did I already match Octet.None?
+>>
+> 
+> What is your definition of the 'Octet' type?
+> 
+
+-- An Octet consists of eight bits. For our purposes, the most
+-- significant bit will come "first." That is, b1 is in the 2^7
+-- place while b8 is in the 2^0 place.
+data Octet = None | Octet { b1 :: Bit,
+                            b2 :: Bit,
+                            b3 :: Bit,
+                            b4 :: Bit,
+                            b5 :: Bit,
+                            b6 :: Bit,
+                            b7 :: Bit,
+                            b8 :: Bit }
+           deriving (Eq)
+
+
+

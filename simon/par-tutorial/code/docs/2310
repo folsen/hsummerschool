@@ -1,0 +1,146 @@
+From alex.solla at gmail.com  Tue Dec 27 04:30:20 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Mon, 26 Dec 2011 19:30:20 -0800
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <AA821438-98DA-4B64-BCF7-938353F306FA@yandex.ru>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+	<BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+	<CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+	<654DA160-C961-44AA-B420-0DEE81A5CB0B@yandex.ru>
+	<CAO0Ooq1MNJC=pHsgtZYM+56zuBQr23Vb9-ygbRgc8NqbwuJ+aQ@mail.gmail.com>
+	<AA821438-98DA-4B64-BCF7-938353F306FA@yandex.ru>
+Message-ID: <CAO0Ooq0oFMs0BBDtsy99Er_7DhkvLYdFgKytMzLpxFQaq-ZOJQ@mail.gmail.com>
+
+2011/12/24 MigMit <miguelimo38 at yandex.ru>
+
+>
+>
+> ?????????? ? iPad
+>
+> 24.12.2011, ? 18:50, Alexander Solla <alex.solla at gmail.com> ???????(?):
+>
+> In the same way, denotational semantics adds features which do not apply
+> to a theory of finite computation.
+>
+>
+> And why exactly should we limit ourselves to some theory you happen to
+> like?
+>
+
+Because the question was about MY IDEAL.
+
+I have spoken at length why my ideal is preferable to the current state of
+affairs.  You still continue to misunderstand my point, and respond with
+red herrings.
+
+
+>> > The /defining/ feature of a bottom is that it doesn't have an
+>> interpretation.
+>>
+>
+>> What do you mean by "interpretation"?
+>>
+>
+> You know, the basic notion of a function which maps syntax to concrete
+> values.
+>
+> http://en.wikipedia.org/wiki/Model_theory
+>
+>
+> But (_|_) IS a concrete value.
+>
+
+Um, perhaps in denotational semantics.  But even in that case, it is not a
+HASKELL value.
+
+You seem to be mixing up syntax and semantics.
+
+
+
+>
+> But they ARE very similar to other values. They can be members of
+>> otherwise meaningful structures, and you can do calculations with these
+>> structures. "fst (1, _|_)" is a good and meaningful calculation.
+>
+>
+> Mere syntax.
+>
+>
+> So what?
+>
+
+So we give meaning to syntax through our semantics.  That is what this
+whole conversation is all about.  I am proposing we give Haskell bottoms
+semantics that bring it in line with the bottoms from various theories
+including lattice theory, the theory of sets, the theory of logic, as
+opposed to using denotational semantics' bottom semantic, which is
+unrealistic for a variety of reasons.  Haskell bottoms can't be compared,
+due to Rice's theorem.  Haskell bottoms cannot be given an interpretation
+as a Haskell value.
+
+What happens to referential transparency when distinct things are all
+defined by the same equation?
+
+... = let x = x in x
+
+undefined, seq, unsafeCoerce, and many other "primitives" are defined using
+that equation.  (See GHC.Prim)  The Haskell definition for these distinct
+things /does nothing/.  It loops.  The semantics we get for them (an error
+message if we use undefined, a causal side-effect if we use seq, type
+coercion if we use unsafeCoerce) is done /magically/ by the compiler.  As
+far as Haskell, as a language, is concerned, all of these are bottom, and
+they are all /equal/, because of referential transparency/substitutionality.
+
+Oops.
+
+So Haskell, as a logic, is telling us that all of these "distinct" bottoms
+are not so distinct.  And that any interpretation function providing
+semantics should map them all to the same value in the model.
+
+>  Every other Haskell value /does/ have an interpretation.
+>>
+>> So, (_|_) is bad, but (1, _|_) is good?
+>
+>
+> I did not introduce "good" and "bad" into this discussion.  I have merely
+> said (in more words) that I want my hypothetical perfect language to prefer
+> OPERATIONAL (model) SEMANTICS for a typed PARACONSISTENT LOGIC over the
+> DENOTATIONAL SEMANTICS which the official documentation sometimes dips into.
+>
+>
+> Well, that's a different story.
+>
+
+No, it's the same story that I've been telling.
+
+
+> But it seems to me that the term "Haskell-like" won't apply to that kind
+> of language. Also, it seems to me (though I don't have any kind of proof)
+> that denotational semantics is something that is much simpler.
+>
+
+Haskell is already a paraconsistent logic.  How is giving Haskell
+operational and interpretive semantics not "Haskell-like"?  Its
+denotational semantics is a platonic completion of the logical semantics.
+
+
+
+>
+> It is clear that denotational semantics is a Platonic model of
+> constructive computation.
+>
+>
+> Could you please stop offending abstract notions?
+>
+
+What?  Platonic does not mean "bad".  But it does mean that the theory is
+"too big" to be appropriate in this case.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111226/0e0c9c24/attachment.htm>
+

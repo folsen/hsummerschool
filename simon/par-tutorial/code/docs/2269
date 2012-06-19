@@ -1,0 +1,47 @@
+From dan.doel at gmail.com  Sat Dec 24 19:49:29 2011
+From: dan.doel at gmail.com (Dan Doel)
+Date: Sat, 24 Dec 2011 13:49:29 -0500
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+In-Reply-To: <4EF57FC9.1030505@vex.net>
+References: <4EF57FC9.1030505@vex.net>
+Message-ID: <CAHEA9tMg1pFRqHVb+oU6i0zHwbCxDHmeBmfCvaCn_j-VB+axXQ@mail.gmail.com>
+
+On Sat, Dec 24, 2011 at 2:31 AM, Albert Y. C. Lai <trebla at vex.net> wrote:
+> 1. a function f is strict if ?f ? = ?
+> 2. ? represents any computation which does not terminate, i.e. an exception
+> or an infinite loop
+> 3. "strict" describes the denotational semantics
+
+All three of these statements are true. The only potentially
+controversial one is 2, but any term that the operational semantics
+would identify as simple non-termination (which is invariably what
+they're talking about when they say 2; not some partially defined
+term) will be given denotation ?.
+
+> B. Actually there are more, but apparently two is already enough to cause
+> all kinds of incoherent statements. If I draw your attention to algebraic
+> semantics, will you start saying "it is too lazy, need to make it more
+> idempotent"?
+
+Yes, there are more than two. And they don't exist in completely
+separate vacuums from one another. Denotational and operational
+properties are sometimes (often?) correlated. And algebraic semantics
+is often the sweet spot for reasoning about the structure of the
+operational or denotational semantics of your code, without bringing
+in all the irrelevant details from the latter two. I can make a
+denotational semantics for System F where each term is denoted by its
+normal form (an operational concept).
+
+I think it's good to be clear on all these specifics, and people could
+do with a better recognition of the difference between (non-)strict
+and (lazy)eager (hint: you can have an eager, non-strict language).
+But it isn't necessarily a problem that people speak in terms of more
+than one at once. The different kinds of semantics aren't in conflict
+with one another.
+
+The main problem would be that such casual mixing prevents newcomers
+from learning the distinctions by osmosis.
+
+-- Dan
+
+

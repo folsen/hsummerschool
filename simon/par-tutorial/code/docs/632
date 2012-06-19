@@ -1,0 +1,36 @@
+From dons00 at gmail.com  Fri Apr 22 20:05:23 2011
+From: dons00 at gmail.com (Don Stewart)
+Date: Fri, 22 Apr 2011 11:05:23 -0700
+Subject: [Haskell-cafe] fishing for ST mutable Vector examples
+In-Reply-To: <liliz22nuw.fsf@inside.sv3.smugmug.net>
+References: <liliz22nuw.fsf@inside.sv3.smugmug.net>
+Message-ID: <BANLkTimyMTuP0S_-=E0u1yFTzEc0M+LSmw@mail.gmail.com>
+
+In my tutorial on using vectors,
+
+http://www.haskell.org/haskellwiki/Numeric_Haskell:_A_Vector_Tutorial
+
+There's some examples:
+
+http://www.haskell.org/haskellwiki/Numeric_Haskell:_A_Vector_Tutorial#Impure_Arrays
+
+that work in IO, and should work equally well in ST (as vectors are
+parameterized by either primitive monad).
+
+On Fri, Apr 22, 2011 at 10:32 AM, brad clawsie <clawsie at fastmail.fm> wrote:
+> hi all
+>
+> i was wondering if anyone could post some minimal examples on using
+> mutable Vectors in the ST monad. i've been digging around in the usual
+> places but haven't been able to find anything to get me over the hump
+>
+> thanks in advance
+> brad
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

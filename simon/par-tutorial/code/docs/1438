@@ -1,0 +1,36 @@
+From nominolo at googlemail.com  Sun Aug 28 18:47:50 2011
+From: nominolo at googlemail.com (Thomas Schilling)
+Date: Sun, 28 Aug 2011 17:47:50 +0100
+Subject: [Haskell-cafe] GHC API question
+In-Reply-To: <1314545902.5744.14.camel@godel>
+References: <1314507463.5744.10.camel@godel> <1314545902.5744.14.camel@godel>
+Message-ID: <CAOJG3uBDc+QhdaqS2RvDEeNd3uJx7R=H5fk6DB_PD_C16e+edw@mail.gmail.com>
+
+I don't think you can link GHCi with binaries compiled in profiling
+mode.  You'll have to build an executable.
+
+On 28 August 2011 16:38, Chris Smith <cdsmith at gmail.com> wrote:
+> Okay, I should have waited until morning to post this... so actually,
+> things still work fine when I build without profiling. ?However, when I
+> build with profiling, I get the segfault. ?I'm guessing either I need to
+> set different dynamic flags with the profiling build to match the
+> options of the compiler that built the executable... or perhaps it's
+> still impossible to do what I'm looking for with profiling enabled.
+> Does anyone know which is the case?
+>
+> --
+> Chris
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Push the envelope. Watch it bend.
+
+

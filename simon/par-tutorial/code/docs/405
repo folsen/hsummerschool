@@ -1,0 +1,42 @@
+From eric at well-typed.com  Thu Apr 14 17:59:26 2011
+From: eric at well-typed.com (Eric Y. Kow)
+Date: Thu, 14 Apr 2011 16:59:26 +0100
+Subject: [Haskell-cafe] parallel-haskell mailing list
+Message-ID: <20110414155925.GB7267@dewdrop.local>
+
+Hi everybody,
+
+I thought I should point out that there is a mailing list dedicated to
+parallelism and concurrency in Haskell.  The group exists to bring
+together the various groups in the Haskell community that are working on
+parallelism. It is intended to provide some visibility into the various
+efforts and to encourage collaboration.  So if you want to know what's
+going on in the parallel Haskell world, this is the place to hang out.
+
+You can join the list by sending an email to
+
+   parallel-haskell+subscribe at googlegroups.com
+
+You can also visit the group on the web at
+
+   http://groups.google.com/group/parallel-haskell
+
+Or for those of you who prefer GMane
+
+   http://dir.gmane.org/gmane.comp.lang.haskell.parallel
+
+Enjoy!
+
+Eric
+
+-- 
+Got news for the Parallel Haskell Digest?
+Send a mail to eric at well-typed.com!
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110414/30eef050/attachment.pgp>
+

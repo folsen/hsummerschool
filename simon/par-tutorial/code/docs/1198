@@ -1,0 +1,34 @@
+From tom at zwizwa.be  Thu Aug 18 01:49:03 2011
+From: tom at zwizwa.be (Tom Schouten)
+Date: Thu, 18 Aug 2011 01:49:03 +0200
+Subject: [Haskell-cafe] Existential question
+Message-ID: <4E4C536F.2040800@zwizwa.be>
+
+{-# LANGUAGE ExistentialQuantification #-}
+
+-- Dear Cafe, this one works.
+data Kl' s i o = Kl' (i -> s -> (s, o))
+iso' :: (i -> Kl' s () o) -> Kl' s i o
+iso' f = Kl' $ \i s -> (\(Kl' kl') -> kl' () s) (f i)
+
+-- Is there a way to make this one work also?
+data Kl i o = forall s. Kl (i -> s -> (s, o))
+iso :: (i -> Kl () o) -> Kl i o
+iso f = Kl $ \i s -> (\(Kl kl) -> kl () s) (f i)
+
+{-
+     Couldn't match type `s0' with `s'
+       because type variable `s' would escape its scope
+     This (rigid, skolem) type variable is bound by
+       a pattern with constructor
+         Kl :: forall i o s. (i -> s -> (s, o)) -> Kl i o,
+       in a lambda abstraction
+     The following variables have types that mention s0
+       s :: s0 (bound at /home/tom/meta/haskell/iso.hs:11:17)
+     In the pattern: Kl kl
+     In the expression: \ (Kl kl) -> kl () s
+     In the expression: (\ (Kl kl) -> kl () s) (f i)
+-}
+
+
+

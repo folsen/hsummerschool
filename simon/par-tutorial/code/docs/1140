@@ -1,0 +1,53 @@
+From alexander.dunlap at gmail.com  Mon Aug 15 08:25:59 2011
+From: alexander.dunlap at gmail.com (Alexander Dunlap)
+Date: Sun, 14 Aug 2011 23:25:59 -0700
+Subject: [Haskell-cafe] ANNOUNCE: taffybar: an alternative status bar
+	for xmonad
+In-Reply-To: <20110814215138.GI30981@cs.wisc.edu>
+References: <20110813155648.GE13469@cs.wisc.edu>
+	<CAKdSjNGhUvvr9T6b7vgrAe90hDJwp8up7Ap=GV5rD0wix=7V=w@mail.gmail.com>
+	<20110814215138.GI30981@cs.wisc.edu>
+Message-ID: <CAKdSjNE+bnhb7kZigLdyzT3gWiF-Ekkte=DnXKvJS0d4xo8Fyw@mail.gmail.com>
+
+On 14 August 2011 14:51, Tristan Ravitch <travitch at cs.wisc.edu> wrote:
+> On Sun, Aug 14, 2011 at 02:45:24PM -0700, Alexander Dunlap wrote:
+>
+>> I apologize if I'm missing something obvious here, but when I try to
+>> run taffybar I get
+>>
+>> Launching custom binary /home/alex/.cache/taffybar/taffybar-linux-i386
+>>
+>> taffybar-linux-i386: ConnectionError "connectSession:
+>> DBUS_SESSION_BUS_ADDRESS is missing or invalid."
+>>
+>> Is there some D-BUS configuration that needs to happen before the
+>> package is usable?
+>
+> Sorry, I assumed you would have dbus running already. ?If you add a
+> line like:
+>
+> ?eval `dbus-launch --auto-syntax`
+>
+> early in your ~/.xsession (if logging in via some graphical login
+> manager) or ~/.xinitrc (if starting X via startx). ?That should work
+> for any normal -sh-style or -csh-style shell.
+>
+> That command starts DBus and sets the DBUS_SESSION* environment
+> variables, and both xmonad and taffybar need to have the same settings
+> for that variable, so make sure you execute that command before
+> starting either of them.
+>
+> I'll add some notes in the documentation about this.
+>
+
+Thanks, that worked! Also, is there a way to change the default color
+of text printed by the bar? (I've added span tags with colors to the
+different text widget formats, but it would be nice to be able to set
+a default - it shows up as a nearly-impossible-to-read dark grey for
+me.)
+
+Thanks a lot for the great program!
+
+Alexander
+
+

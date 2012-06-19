@@ -1,0 +1,48 @@
+From fischer at nii.ac.jp  Mon Aug 15 05:01:42 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Mon, 15 Aug 2011 12:01:42 +0900
+Subject: [Haskell-cafe] strictness properties of monoidal folds
+In-Reply-To: <4E39C75A.9080104@gmail.com>
+References: <CALoEywNW_WZuu+xnQsenNyo_cDnyiZF9Dcpn5CcO73YaZDbgYQ@mail.gmail.com>
+	<4E39C75A.9080104@gmail.com>
+Message-ID: <CALoEywNNa+1CLuSJP8cYuOenjvJRcAZKjdX_Gcvg5Of1fa-Rzw@mail.gmail.com>
+
+Hello Alexey,
+
+sorry for my slow response.
+
+On Thu, Aug 4, 2011 at 7:10 AM, Alexey Khudyakov
+<alexey.skladnoy at gmail.com>wrote:
+
+> On 02.08.2011 08:16, Sebastian Fischer wrote:
+>
+>> Data.Foldable also provides the monoidal fold function foldMap. It is
+>> left unspecified whether the elements are accumulated leftwards,
+>> rightwards or in some other way, which is possible because the combining
+>> function is required to be associative. Does this additional freedom for
+>> implementors go so far as to allow for strict accumulation?
+>>
+>>  Left and right folds behave identically for finite structures but they
+> are different for infinite ones.
+
+
+I agree that for types like normal lists that allow infinite structure it
+makes sense to have different folds like foldr and foldl that are explicit
+about the nesting of the combining function.
+
+I don't think that there are laws for foldMap that require it to work for
+infinite lists. One could even argue that the monoid laws imply that the
+results for folding leftwards and rightwards should be equal, that is
+undefined..
+
+For types that only allow finite sequences (like Data.Sequence or
+Data.Vector) this is not an issue. But you convinced me that a strict and
+lazy foldMap can be distinguished even for list types that have a strict
+append function by using a lazy mappend function for accumulation.
+
+Best regards,
+Sebastian
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110815/77da090d/attachment.htm>
+

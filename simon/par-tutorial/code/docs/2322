@@ -1,0 +1,56 @@
+From v.dijk.bas at gmail.com  Tue Dec 27 17:47:26 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Tue, 27 Dec 2011 17:47:26 +0100
+Subject: [Haskell-cafe] GHC 7.4: Expected behavior or bug?
+In-Reply-To: <CAKA2JgKbsGFCSrQczzpZwwcxONW_8bNasifvEGp-qy_udJijbg@mail.gmail.com>
+References: <CAKA2JgKbsGFCSrQczzpZwwcxONW_8bNasifvEGp-qy_udJijbg@mail.gmail.com>
+Message-ID: <CADLz5wVhqNAnA08d1rNDXVZUe9zDacSnbkoL1tkBHJM6EO4Muw@mail.gmail.com>
+
+On 27 December 2011 17:38, Michael Snoyman <michael at snoyman.com> wrote:
+> Thanks to Mark Wright for pointing this out[1].
+>
+> We have the equivalent of the following code in persistent:
+>
+> {-# LANGUAGE MultiParamTypeClasses #-}
+> data Key backend entity = Key
+>
+> class Monad (b m) => Foo b m where
+> ? ?func :: b m (Key b m)
+>
+> This code works fine with GHC 7.0, but I get the following message from GHC 7.4:
+>
+> ? ?Expecting two more arguments to `b'
+> ? ?In the type `b m (Key b m)'
+> ? ?In the class declaration for `Foo'
+>
+> Is this expected behavior, or a bug? If the former, what would be a
+> possible workaround?
+>
+> Thanks,
+> Michael
+>
+> [1] https://github.com/yesodweb/persistent/issues/31
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+I fixed a similar breakage in the hmatrix library:
+
+https://github.com/AlbertoRuiz/hmatrix/commit/a4f38eb196209436f72b938f6355f6e28474bef3
+
+I don't know if it's a bug in GHC, but the workaround is to add an
+explicit kind signature:
+
+{-# LANGUAGE KindSignatures, MultiParamTypeClasses #-}
+data Key (backend :: * -> * -> *) entity = Key
+
+class Monad (b m) => Foo b m where
+   func :: b m (Key b m)
+
+Cheers,
+
+Bas
+
+

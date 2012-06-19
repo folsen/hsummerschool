@@ -1,0 +1,35 @@
+From guitarmatt007 at hotmail.com  Tue Feb  1 02:54:56 2011
+From: guitarmatt007 at hotmail.com (MattMan)
+Date: Mon, 31 Jan 2011 17:54:56 -0800 (PST)
+Subject: [Haskell-cafe] Inheritance and Wrappers
+In-Reply-To: <alpine.DEB.2.00.1101312133540.22855@anubis>
+References: <1296503882287-3365126.post@n5.nabble.com>
+	<alpine.DEB.2.00.1101312133540.22855@anubis>
+Message-ID: <1296525296556-3365555.post@n5.nabble.com>
+
+
+<\quote>
+Henning Thielemann wrote:
+> 
+> If all methods of AbGroup can be defined for all Num types - why do you 
+> want an AbGroup at all? You could simply write functions with Num 
+> constraint.
+> 
+> 
+
+Well, I'd rather not have to implement (*), abs, etc on every abelian group.
+
+
+
+You may be also interested in existing approaches to algebra in Haskell:
+   http://www.haskell.org/haskellwiki/Mathematical_prelude_discussion
+
+
+
+Yes, in fact I am!  Thanks for the suggestion; it seems "numeric-prelude"
+does [most of] the things I want.  Thanks all.
+-- 
+View this message in context: http://haskell.1045720.n5.nabble.com/Inheritance-and-Wrappers-tp3365126p3365555.html
+Sent from the Haskell - Haskell-Cafe mailing list archive at Nabble.com.
+
+

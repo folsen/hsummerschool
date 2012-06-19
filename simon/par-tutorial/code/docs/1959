@@ -1,0 +1,52 @@
+From aslatter at gmail.com  Thu Dec 15 05:13:23 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Wed, 14 Dec 2011 22:13:23 -0600
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+References: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+Message-ID: <CAKjSnQFvJrz1iFd8XsGbK4q7ZK9F0qjXXUHdoTn1XVmeeAm+OQ@mail.gmail.com>
+
+On Wed, Dec 14, 2011 at 9:58 PM, Gregory Crosswhite
+<gcrosswhite at gmail.com> wrote:
+> Hey everyone,
+>
+> This is even more out there than my previous posts, but the following just
+> occurred to me: ?is it absolutely necessary that some/many have produced the
+> entire list of results before returning? ?Couldn't we change their semantics
+> so that the list of results is computed and/or extracted lazily? ?For
+> example, if this were the case, then we would have that (some (Just 1))
+> returns an infinite list rather than running in an infinite loop (even
+> without defining a special case "some" implementation), which is exactly
+> what my intuition would expect.
+>
+
+Isn't this what Ross previously suggested? I think his suggested
+instance methods for Maybe return the elements of the lists
+incrementally.
+
+> Of course, this is not a simple change at all because it would have to be
+> done in such a way as to respect the ordering of actions --- that is, we
+> can't have each action executed only when the corresponding element of the
+> list demanded is forced, or else actions would undesirably interleave. ?For
+> example, in a parser when we use "many v" we expect everything matching v to
+> be consumed by the time "many v" returns, but if instead "many v" only
+> consumed as much of the input as we demanded from its result list then we
+> might see a chunk of input matching v in another part of our parser despite
+> having assumed we'd gotten rid of it, which would cause our parser to be
+> broken.
+>
+> Nonetheless, if there were some way that we could use magic fairy dust to
+> have the results returned by some and many be lazily generated lists, then
+> this might solve many of the problems that come up with them performing
+> infinite loops in cases where it seems like they shouldn't. ?:-)
+>
+> Cheers,
+> Greg
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

@@ -1,0 +1,151 @@
+From crusso at microsoft.com  Tue Aug  9 17:15:06 2011
+From: crusso at microsoft.com (Claudio Russo)
+Date: Tue, 9 Aug 2011 15:15:06 +0000
+Subject: [Haskell-cafe] Second CFP: PADL'12 - Practical Aspects of
+ Declarative Languages 2012
+Message-ID: <88D1F4047EA9A2468BCC6B743186880F6404A2DA@DB3EX14MBXC311.europe.corp.microsoft.com>
+
+                 [Apologies if you receive multiple copies.]
+
+                          Call for Papers
+                          ===============
+
+                  14th International Symposium on 
+      Practical Aspects of Declarative Languages (PADL 2012)
+
+            http://research.microsoft.com/~crusso/padl12
+
+         Philadelphia, Pennsylvania, USA, January 23-24, 2012
+                    Co-located with ACM POPL'12
+       
+      Abstract/Paper submission deadline: September 10th/17th, 2011
+
+                      Conference Description
+                      ======================
+
+   Declarative languages build on sound theoretical bases to provide
+attractive frameworks for application development. These languages
+have been successfully applied to many different real-world
+situations, ranging from data base management to active networks to
+software engineering to decision support systems.
+
+   New developments in theory and implementation have opened up new
+application areas. At the same time, applications of declarative
+languages to novel problems raise numerous interesting research
+issues. Well-known questions include designing for scalability,
+language extensions for application deployment, and programming
+environments. Thus, applications drive the progress in the theory and
+implementation of declarative systems, and benefit from this progress
+as well.
+
+   PADL is a forum for researchers and practitioners to present
+original work emphasizing novel applications and implementation
+techniques for all forms of declarative concepts, including,
+functional, logic, constraints, etc. Topics of interest include, but
+are not limited to:
+
+   * Innovative applications of declarative languages
+   * Declarative domain-specific languages and applications
+   * Practical applications of theoretical results
+   * New language developments and their impact on applications
+   * Declarative languages and Software Engineering
+   * Evaluation of implementation techniques on practical applications
+   * Practical experiences and industrial applications
+   * Novel uses of declarative languages in the classroom
+   * Practical extensions such as constraint-based, probabilistic, and 
+     reactive languages.
+
+   PADL'12 welcomes new ideas and approaches pertaining to
+applications and implementation of declarative languages. In this
+occasion PADL is co-located, as traditionally, with ACM POPL, which
+will be held immediately following PADL, January 25-27. The symposium
+will be held in Philadelphia, Pennsylvania, USA.
+
+
+
+              Important Dates and Submission Guidelines
+              =========================================
+
+              Abstract Submission:    September 10, 2011
+              Paper Submission:       September 17, 2011
+              Notification:             October 22, 2011
+              Camera-ready:             November 5, 2011
+              Symposium:             January 23-24, 2012
+
+   Authors should submit an electronic copy of the full paper in PDF
+using the Springer LNCS format. The submission will be done through
+EasyChair conference system. If electronic submission is impossible,
+please contact the program chairs for information on how to submit
+hard copies. All submissions must be original work written in
+English. Submissions must be unpublished and not submitted for
+publication elsewhere. Work that already appeared in unpublished or
+informally published workshops proceedings may be submitted. PADL'12
+will accept both technical and application papers:
+
+   * Technical papers must describe original, previously unpublished
+     research results. Technical papers must not exceed 15 pages in
+     Springer LNCS format.
+   * Application papers are a mechanism to present important practical
+     applications of declarative languages that occur in industry or
+     in areas of research other than Computer Science. Application
+     papers will be published in the Springer-Verlag conference
+     proceedings, and will be presented in a separate session.
+     Application papers are expected to describe complex and/or
+     real-world applications that rely on an innovative use of
+     declarative languages. Application descriptions, engineering
+     solutions and real-world experiences (both positive and negative)
+     are solicited. The limit for application papers is 6 pages in
+     Springer LNCS format.
+
+
+                         Program Committee
+                         =================
+
+    Marcello Balduccini, Intelligent Systems Department, Kodak Research Labs 
+    Edwin Brady, University of St Andrews, Scotland 
+    Henning Christiansen, Roskilde University, Denmark 
+    Agostino Dovier, University of Udine, Italy 
+    Matthew Flatt, University of Utah, USA 
+    Gopal Gupta, University of Texas at Dallas, USA 
+    John Hughes, Chalmers University of Technology, Sweden; Quviq AB 
+    Gabriele Keller, University of New South Wales, Australia 
+    Lunjin Lu, Oakland University, USA 
+    Marc Pouzet, ?cole normale sup?rieure, France 
+    Ricardo Rocha, University of Porto, Portugal 
+    Andreas Rossberg, Google Germany GmbH, Germany 
+    Claudio Russo, Microsoft Research Cambridge, UK (co-chair) 
+    Kostis Sagonas, Uppsala Univeristy, Sweden 
+    Satnam Singh, Microsoft Research Cambridge, UK 
+    Zoltan Somogyi, University of Melbourne, Australia 
+    Eijiro Sumii, Tohoku University, Japan 
+    Terrance Swift, Universidade Nova de Lisboa, Portugal; Johns Hopkins University, USA 
+    Andrew Tolmach, Portland State University, USA 
+    Jan Wielemaker, University of Amsterdam, The Netherlands 
+    Roland Yap, National University of Singapore, Republic of Singapore 
+    Kwangkeun Yi, Seoul National University, Korea 
+    Neng-Fa Zhou, Brooklyn College, City University of New York, USA (co-chair) 
+
+                              Contacts
+                              ========
+
+   For additional information about papers and submissions, please
+contact the Program Chairs:
+
+    Claudio Russo
+    Microsoft Research Cambridge,UK 
+    Email: crusso <AT> microsoft <DOT> com
+    
+    Neng-Fa Zhou
+    Brooklyn College, The City University of New York, USA
+    Email: zhou <AT> sci <DOT> brooklyn <DOT> cuny <DOT> edu 
+
+
+                      With the Cooperation of
+                      =======================
+              
+               The Association for Logic Programming (ALP)
+                            ACM SIGPLAN
+                   Microsoft Research, Cambridge 
+                ===================================
+
+

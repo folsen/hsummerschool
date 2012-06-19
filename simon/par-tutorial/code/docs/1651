@@ -1,0 +1,15 @@
+From bytbox at gmail.com  Sun Dec  4 19:39:39 2011
+From: bytbox at gmail.com (Scott Lawrence)
+Date: Sun, 04 Dec 2011 13:39:39 -0500
+Subject: [Haskell-cafe] Anonymous, Unique Types, maybe
+In-Reply-To: <4EDBB528.7010200@uni-bonn.de>
+References: <4EDB0ABC.10705@gmail.com> <4EDBB528.7010200@uni-bonn.de>
+Message-ID: <4EDBBE6B.1020305@gmail.com>
+
+Thanks all; I haven't quite gotten it to work, but I imagine I'll be 
+able to now (after reading up on ExistentialQuantification).
+
+-- 
+Scott Lawrence
+
+

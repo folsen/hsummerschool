@@ -1,0 +1,28 @@
+From pocmatos at gmail.com  Fri Apr 15 17:41:33 2011
+From: pocmatos at gmail.com (Paulo J. Matos)
+Date: Fri, 15 Apr 2011 16:41:33 +0100
+Subject: [Haskell-cafe] Cairo and Haskell
+In-Reply-To: <20110415151308.GA4896@X52D.localdomain>
+References: <io9imb$1n8$1@dough.gmane.org>	<BANLkTikYTHOmmYOcxmxVk+YMRn2NE=D0Pw@mail.gmail.com>	<BANLkTinWEM-xvjUO_TS2uOoMtv-xsqf3OQ@mail.gmail.com>
+	<20110415151308.GA4896@X52D.localdomain>
+Message-ID: <io9ovd$9n9$3@dough.gmane.org>
+
+On 15/04/11 16:13, John Obbele wrote:
+>
+> bash $ mkdir /tmp/uncabal&&  cd /tmp/uncabal
+> bash $ cabal unpack cairo
+> bash $ cd /tmp/uncabal/cairo-*/demo
+> bash $ runghc StarAndRing.hs
+>
+> The gtk2hs bindings are generaly pretty dumb and just mimic the
+> original C behaviour. So the best source of documentation is
+> the original cairo website:
+>      http://cairographics.org/documentation/
+
+Awesome, just tried it and it worked! Will start off based on that! :)
+
+--
+PMatos
+
+
+

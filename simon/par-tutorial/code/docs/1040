@@ -1,0 +1,34 @@
+From jmillikin at gmail.com  Thu Aug 11 16:49:49 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Thu, 11 Aug 2011 07:49:49 -0700
+Subject: [Haskell-cafe] ANNOUNCE: Chell: A quiet test runner (low-output
+ alternative to test-framework)
+In-Reply-To: <CAGXzfB4wE7nOpoD6S29jC-_ku5j9EUYEbUp1Xn47P9a_8uX_Kw@mail.gmail.com>
+References: <CAL1ky9q1t3KnboogKho2ZvsFF1BYF0RhzNZPu66p=ZTngcoB1A@mail.gmail.com>
+	<CAGXzfB4wE7nOpoD6S29jC-_ku5j9EUYEbUp1Xn47P9a_8uX_Kw@mail.gmail.com>
+Message-ID: <CAL1ky9ohBGn_=sX8xCVO4Pg+zk52L18XN3UznA5Xuhia2XmdaQ@mail.gmail.com>
+
+I tried, actually, but couldn't figure out how to separate running the
+test from printing its output. All the attempted patches turned into
+huge refactoring marathons.
+
+When given the choice between sending a huge "replace all your code
+with my code" patch, and just releasing a separate package, I prefer
+to do the second. There's usually a reason a library behaves as it
+does, and this way both behaviors are available to users (even if I
+find one frustrating).
+
+On Wed, Aug 10, 2011 at 23:51, Max Bolingbroke
+<batterseapower at hotmail.com> wrote:
+> On 11 August 2011 05:17, John Millikin <jmillikin at gmail.com> wrote:
+>> This is just a quick package I whipped up out of frustration with
+>> test-framework scrolling an error message out of sight, for the
+>> millionth time.
+>
+> Patches to make test-framework less noisy (either by default or with a
+> flag) will be gratefully accepted, if anyone wants to give it a go :-)
+>
+> Max
+>
+
+

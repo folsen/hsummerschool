@@ -1,0 +1,108 @@
+From patrick.browne at dit.ie  Thu Feb  3 11:09:58 2011
+From: patrick.browne at dit.ie (Patrick Browne)
+Date: Thu, 03 Feb 2011 10:09:58 +0000
+Subject: [Haskell-cafe] problem with instance method
+Message-ID: <4D4A7EF6.3020408@dit.ie>
+
+Hi,
+I am studying type classes using examples from the literature [1].
+The attached code is a formalization of basic object oriented ideas. The
+particular approach seems to be built on the concepts of: thing, object,
+and identifier.
+I have no intension to implement anything or significantly change the
+code below. Rather, I am trying to understand the code as it stands.
+I include a number of test runs which seem OK, but I cannot get the
+*obj* function to work.
+
+obj :: t -> i -> o t i
+obj t i = Obj t i
+
+Any hints would be appreciated.
+
+Thanks,
+Pat
+
+[1]
+ftp://ftp.geoinfo.tuwien.ac.at/frank/frank97executableAxiomaticSpecification.pdf
+
+
+
+-- A property of a thing
+data Color = Blue | Green | Red | White deriving Show
+
+-- A thing
+class Cars c where
+ car :: Color -> c
+ getColor :: c -> Color
+ putColor :: Color -> c -> c
+ paint :: Color -> c -> c
+ paint color car = putColor color car
+
+data Car = Car Color deriving Show
+
+
+instance Cars Car where
+ car c = Car c
+ putColor color (Car c) = Car color
+ getColor (Car c) = c
+
+
+-- Identifiers for objects
+class (Integral i) => IDs i where
+ startId :: i
+ newId :: i -> i
+ newId i = succ i
+ sameId, notSameId :: i -> i -> Bool
+ sameId i j = i == j
+ notSameId i j = not (sameId i j)
+
+instance IDs Integer where
+ startId = 1
+
+-- Objects consist of Things, with Identifiers
+class (IDs i,  Show i) => Objects o t i where
+ obj :: t -> i -> o t i
+ getId :: o t i -> i
+ getThing :: o t i -> t
+ doThing :: (t -> t) -> o t i -> o t i
+ doThing f o = obj (f (getThing o)) (getId o)
+ same :: o t i -> o t i -> Bool
+ same i j = sameId (getId i) (getId j)
+ isId :: i -> o t i -> Bool
+ isId i o = sameId i (getId o)
+
+
+
+
+-- A general type of Obj
+data Object t i = Obj t i deriving  Show
+
+
+-- A particular Car Obj, which an instance of Objects class (in Haskell
+terms, not OO terms)
+instance Objects Object Car Integer where
+ obj t i = Obj t i
+ getId (Obj t i) = i
+ getThing (Obj t i) = t
+
+-- Create some actual Objects
+x = (Obj (Car Blue) (startId::Integer))
+y = (Obj (Car Green) (newId startId::Integer))
+
+
+
+-- Some tests on car thing, seem OK
+--   getColor (Car Blue)
+--   putColor Green (Car Blue)
+--   getColor (putColor Green (Car Blue))
+-- Some tests on objects, seem OK
+--  same x y
+-- Obj (Car Blue) (newId startId::Integer)
+-- Obj (Car Blue) (startId::Integer)
+-- getThing (Obj (Car Blue) (startId::Integer))
+-- getId (Obj (Car Blue) (startId::Integer))
+-- isId 2 (Obj (Car Blue) (startId::Integer))
+
+This message has been scanned for content and viruses by the DIT Information Services E-Mail Scanning Service, and is believed to be clean. http://www.dit.ie
+
+

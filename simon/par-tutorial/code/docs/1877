@@ -1,0 +1,45 @@
+From trupill at gmail.com  Mon Dec 12 22:30:54 2011
+From: trupill at gmail.com (Alejandro Serrano Mena)
+Date: Mon, 12 Dec 2011 22:30:54 +0100
+Subject: [Haskell-cafe] Module name space question
+In-Reply-To: <4EE66804.5090301@freegeek.org>
+References: <CAPTT2bYJLDkx__JRKehjiTfO-rcAQkQjnfwnR6z3gSAuHE-Y+w@mail.gmail.com>
+	<CAOrUaLaZaFH8hF_htPaKO1hTjRcR9wOmQ3w9yBGaOUZDqZygwg@mail.gmail.com>
+	<CACYs5AZrtu4whxerBMKe3g=_EVpN2292J6EYo-4SnuGR1JYRsQ@mail.gmail.com>
+	<4EE66804.5090301@freegeek.org>
+Message-ID: <CAHnFXOv4g2y-1W7G5r+6sOEPc0ykUHicqawQSc9=RU0eiQ6vgw@mail.gmail.com>
+
+You can try the Haskell Browser in the Eclipse plug-in.
+
+2011/12/12 wren ng thornton <wren at freegeek.org>
+
+> On 12/12/11 9:32 AM, Ryan Newton wrote:
+>
+>> I don't know why Hoogle didn't find one of the packages.  I've often
+>> wondered about this related question:
+>>
+>>    * Is there a place to browse the union of all namespaces in all hackage
+>> packages?
+>>
+>
+> There is, and it's awesome:
+>
+>    http://folk.ntnu.no/hammar/**explore-hackage/<http://folk.ntnu.no/hammar/explore-hackage/>
+>
+> Though it can be a bit slow to load, so try not to hammer the server too
+> hard :)
+>
+> --
+> Live well,
+> ~wren
+>
+>
+> ______________________________**_________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/**mailman/listinfo/haskell-cafe<http://www.haskell.org/mailman/listinfo/haskell-cafe>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111212/1ccbdf68/attachment.htm>
+

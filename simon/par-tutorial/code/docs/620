@@ -1,0 +1,33 @@
+From daniel.is.fischer at googlemail.com  Fri Apr 22 14:19:53 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Fri, 22 Apr 2011 14:19:53 +0200
+Subject: [Haskell-cafe] How to use cabal's data-files feature and run
+	in-place?
+In-Reply-To: <20110422115736.GA333@weatherwax.local>
+References: <20110422014600.GB1167@weatherwax.local>
+	<BANLkTikJL-D1ga-0kAHdgSGPEaP8od5_hA@mail.gmail.com>
+	<20110422115736.GA333@weatherwax.local>
+Message-ID: <201104221419.54330.daniel.is.fischer@googlemail.com>
+
+On Friday 22 April 2011 13:57:36, Richard Cobbe wrote:
+> On Thu, Apr 21, 2011 at 11:27:10PM -0500, Antoine Latter wrote:
+> > 1. A side note - using the 'cabal' command line tool is easier for
+> > many tasks than 'runhaskell Setup'. In particular, it does a user
+> > install by default.
+> 
+> Interesting -- didn't know that was possible.  I didn't see that in the
+> Cabal manual; section 4 gives instructions entirely in terms of
+> 'runhaskell Setup'.  Am I overlooking something?
+> 
+
+On the one hand, the Cabal user's guide is a little out of date.
+More importantly, there's a difference between the Cabal library and the 
+'cabal' executable (which you get from the cabal-install package).
+The Cabal user's guide can't assume that you have the cabal executable, but 
+it can assume you have runhaskell (since without a Haskell implementation, 
+installing Haskell libraries is doomed to fail anyway).
+However, if the user's guide gets updated, the cabal way will probably (and 
+definitely should) be added.
+
+
+

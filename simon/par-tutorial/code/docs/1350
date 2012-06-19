@@ -1,0 +1,38 @@
+From benl at ouroborus.net  Thu Aug 25 03:44:54 2011
+From: benl at ouroborus.net (Ben Lippmeier)
+Date: Thu, 25 Aug 2011 11:44:54 +1000
+Subject: [Haskell-cafe] (Repa) hFlush: illegal operation
+In-Reply-To: <4E5569FD.9040209@orlitzky.com>
+References: <4E5569FD.9040209@orlitzky.com>
+Message-ID: <6DE6CD9C-2293-48BF-BA4F-0C75639C3015@ouroborus.net>
+
+
+On 25/08/2011, at 7:15 , Michael Orlitzky wrote:
+
+> I'm using Repa to process a ton of MRI data. The basic process is,
+> 
+>  * Read in the data
+>  * Create a big 'ol data structure (grid) from it
+>  * Compute the output in parallel using 'traverse'
+>  * Write the output to file
+> 
+> However, during the last step, I'm getting,
+> 
+>  $ ./bin/spline3 +RTS -N4
+>  spline3: output.txt: hFlush: illegal operation (handle is closed)
+
+
+>> read_values_1d :: FilePath -> IO Values1D
+>> read_values_1d path = readVectorFromTextFile path
+
+The implementation of the text IO functions is fairly naive, just using Haskell Strings etc under the covers. It may have problems with massive files. 
+
+Can you send me some gzipped data of the same size/form as what you're using, or tell me where to download it? Even if your real source data is several GB in size, if you make a test file with mostly zeros it should gzip down to nothing.
+
+Also, what is the native form of the data you are using? If it's in some standard binary form it may just be easier to write a native Repa loader for it.
+
+Cheers,
+Ben.
+
+
+

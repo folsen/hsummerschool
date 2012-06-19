@@ -1,0 +1,50 @@
+From saihemanth at gmail.com  Fri Aug 12 11:09:26 2011
+From: saihemanth at gmail.com (Sai Hemanth K)
+Date: Fri, 12 Aug 2011 14:39:26 +0530
+Subject: [Haskell-cafe] Building ? using kleene closure {not haskell
+	specific}
+In-Reply-To: <CAGdT1goYBsA=9WbXH57T9=ps9tZHX8pqWbiFRo4ZiKW-gg1=Ww@mail.gmail.com>
+References: <CAGdT1goYBsA=9WbXH57T9=ps9tZHX8pqWbiFRo4ZiKW-gg1=Ww@mail.gmail.com>
+Message-ID: <CANOK7kvJsUEoNXm8vA7Vz=sDuPGJVqi0Wj=ndovRUvbh5bTg9w@mail.gmail.com>
+
+Hi,
+
+Perhaps I did not understand the question properly, but it looks very
+straight forward :
+
+oneOrNone x = fmap Just  x <|>  pure Nothing
+it will have a type of oneOrNone :: (Alternative f) => f a -> f (Maybe a)
+In fact, there is a function called "optional" in Control.Applicative[1]
+which does exactly that.
+Is this what you are looking for?
+
+thanks,
+Hemanth K
+
+[1]
+http://haskell.org/ghc/docs/6.12.2/html/libraries/base-4.2.0.1/Control-Applicative.html
+
+
+On Fri, Aug 12, 2011 at 1:31 PM, C K Kashyap <ckkashyap at gmail.com> wrote:
+
+> Hello gentle Haskell folks,
+>
+> I happened to read "Beautiful code"'s chapter 1 today and found Brian
+> Kerninghan's regex implementation. In it he only shows the * meta character.
+> I can easily understand how + can be built but am having trouble with
+> building ? (zero or one). I'd really appreciate it if some one could help me
+> understand it.
+>
+> Regards,
+> Kashyap
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110812/0f0c5271/attachment.htm>
+

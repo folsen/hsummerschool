@@ -1,0 +1,26 @@
+From ozgurakgun at gmail.com  Wed Dec 14 16:45:36 2011
+From: ozgurakgun at gmail.com (Ozgur Akgun)
+Date: Wed, 14 Dec 2011 15:45:36 +0000
+Subject: [Haskell-cafe] DB vs read/show for persisting large data
+In-Reply-To: <CACqaG6ykkOKyyQZx=_UJwL=Fw1nZp5x9sTjsAVvEXSZHG0AgTw@mail.gmail.com>
+References: <CAGdT1gqohuKtQPQdH2FS==HTqCtDVYvjKibD_wZ1vtF7Vxr_wA@mail.gmail.com>
+	<CACqaG6z+KRiCknrBjfXYEyJ77cTbxgEz9ZYiCZ5qwu2DH-YqNg@mail.gmail.com>
+	<CACqaG6ykkOKyyQZx=_UJwL=Fw1nZp5x9sTjsAVvEXSZHG0AgTw@mail.gmail.com>
+Message-ID: <CALzazPA_PcbeqYCRoNKpT-j=5UW77AXPfJgFEtA_eaRoqqL6uQ@mail.gmail.com>
+
+On 14 December 2011 15:02, Yves Par?s <limestrael at gmail.com> wrote:
+
+> The 'derive' package? The problem is that it has a lot of dependencies you
+> maybe don't need if you jut want serialization, plus it relies on TH so it
+> grows both compilation time and executable size.
+>
+
+Well you can use the stand alone executable to generate the code for
+instances and only ship that with your package. No added dependencies at
+all.
+
+Ozgur
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111214/84533fb5/attachment.htm>
+

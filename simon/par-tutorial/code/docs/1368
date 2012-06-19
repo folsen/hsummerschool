@@ -1,0 +1,28 @@
+From byorgey at seas.upenn.edu  Thu Aug 25 18:17:55 2011
+From: byorgey at seas.upenn.edu (Brent Yorgey)
+Date: Thu, 25 Aug 2011 12:17:55 -0400
+Subject: [Haskell-cafe] haskell-src-exts should depend on happy
+In-Reply-To: <CALzazPCqXV=poAzXbc7eNhSj4yugq6yR7Pigk+_eONKi_35xRw@mail.gmail.com>
+References: <CALzazPCqXV=poAzXbc7eNhSj4yugq6yR7Pigk+_eONKi_35xRw@mail.gmail.com>
+Message-ID: <20110825161754.GA19810@seas.upenn.edu>
+
+On Thu, Aug 25, 2011 at 04:47:30PM +0100, Ozgur Akgun wrote:
+> Hi,
+> 
+> cabal installing haskell-src-exts fails, because of an unlisted dependency
+> to the happy executable.
+
+It does list a dependency on happy:
+
+    Build-Tools:          happy >= 1.17
+
+If I understand correctly, the problem is that cabal does not track
+packages which only install executables.  So all it can do is give an
+error if a 'happy' executable is not found; there is no way to have it
+automatically install happy if it is not.  This is a well-known
+limitation of cabal-install rather than a problem with the
+haskell-src-exts package in particular.
+
+-Brent
+
+

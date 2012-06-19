@@ -1,0 +1,15 @@
+From v.dijk.bas at gmail.com  Tue Aug 16 17:09:47 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Tue, 16 Aug 2011 17:09:47 +0200
+Subject: [Haskell-cafe] Getting segmentation fault when profiling,
+	despite `-K100M'.
+In-Reply-To: <1313503012.9770.9.camel@dbanas-eeepc>
+References: <1313503012.9770.9.camel@dbanas-eeepc>
+Message-ID: <CADLz5wXyO_HBOuFKi+WymWff6k+uZt3-hbXP2MetqhhjB3SqCA@mail.gmail.com>
+
+On 16 August 2011 15:56, David Banas <dbanas at banasfamily.net> wrote:
+> Any thoughts?
+
+Just a hunch, did you specify the correct calling convention for amiInit?
+
+

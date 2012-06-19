@@ -1,0 +1,24 @@
+From aloscha_den_store at hotmail.com  Thu Dec  8 05:24:22 2011
+From: aloscha_den_store at hotmail.com (Alexej Segeda)
+Date: Thu, 8 Dec 2011 05:24:22 +0100
+Subject: [Haskell-cafe] Why doesn't this work? (palindrome :: IO)
+Message-ID: <BAY154-W299CF92BF320D6FE352A08A4B80@phx.gbl>
+
+
+Hi!
+
+A couple of months ago, I wrote an exam in an introductory Haskell course and failed, all because of an assignment that I was convinced would work, but for some reason, it didn't. The assignment was to write a function that would take a line, then determine whether it's a palindrome or not. My code follows:
+
+palindrome :: IO ()
+palindrome = do putStr "Type in a word"
+                s <- getLine
+                case s of
+                   (s == reverse s)    -> putStrLn (s ++ " is a palindrome")
+                   otherwise           -> putStrLn (s ++ " is not a palindrome")
+
+The interesting thing is, that if I change the "case ... of" statement to an "if ... then ... else" statement, this magically starts to work. Since I no longer am enrolled (I have to take the course next year), I can't ask a teacher, but my curiosity still bugs me. Why doesn't this work? And why does it work with a "if ... then ...else" statement?
+ 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/9d4a6c5a/attachment.htm>
+

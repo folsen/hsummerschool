@@ -1,0 +1,48 @@
+From michael at snoyman.com  Mon Aug 29 15:37:31 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Mon, 29 Aug 2011 16:37:31 +0300
+Subject: [Haskell-cafe] Decompressing and http-enumerator
+In-Reply-To: <CAHZrzdqdDtoPa+eQS5XtyRFx-2=1WtOQf=eDERvQuzu_dsMwAw@mail.gmail.com>
+References: <CAKA2Jg+u_BtN5WKrTc4T_mgmuxP5==ASbsh5rvxJaQhVK64MTg@mail.gmail.com>
+	<CAHZrzdqdDtoPa+eQS5XtyRFx-2=1WtOQf=eDERvQuzu_dsMwAw@mail.gmail.com>
+Message-ID: <CAKA2JgJVLxsF3U4_zfMro=erD1tNiK88y+tVs5PkJrkPPQeMvg@mail.gmail.com>
+
+On Mon, Aug 29, 2011 at 2:21 PM, Gregory Collins
+<greg at gregorycollins.net> wrote:
+> On Mon, Aug 29, 2011 at 10:08 AM, Michael Snoyman <michael at snoyman.com> wrote:
+>> Hi all,
+>>
+>> Erik just opened an issue on Github[1] that affected me very recently
+>> as well when writing some automated Hackage checking code[2]. The
+>> issue is that http-enumerator sees the content-encoding header and
+>> decompresses the tarball, returning an uncompressed tarfile. I can
+>> avoid this with rawBody = False, but that's not a real solution, since
+>> that also disables chunked response handling.
+>
+> A web server should not be setting "Content-encoding: gzip" on a
+> .tar.gz file. I agree that http-enumerator is correctly following the
+> spec by decompressing.
+>
+> If you decide to implement a workaround for this, the only reasonable
+> thing I can think of is adding a "ignoreContentEncoding" knob the user
+> can twiddle to violate spec.
+
+I'm wondering what the most appropriate way to handle this is. Maybe a
+dontDecompress record, looking like:
+
+    type ContentType = ByteString
+    dontDecompress :: ContentType -> Bool
+
+Then browser behavior would be:
+
+    browserDecompress = (== "application/x-tar")
+
+and current behavior would be:
+
+    defaultDecompress = const False
+
+I don't have any strong opinions here...
+
+Michael
+
+

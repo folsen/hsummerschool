@@ -1,0 +1,50 @@
+From rrnewton at gmail.com  Tue Feb  1 06:33:18 2011
+From: rrnewton at gmail.com (Ryan Newton)
+Date: Tue, 1 Feb 2011 00:33:18 -0500
+Subject: [Haskell-cafe] "Cabal ignores ld-options?" - 2011 remix
+In-Reply-To: <1296491060.8387.1448.camel@localhost>
+References: <AANLkTinDaXBdMdZe3y_cqWMLFyNN+Suw_eFFt5E7EjLq@mail.gmail.com>
+	<AANLkTik1TGZkXxdie-6N8xKp79gGEROUjigNXfsQ_5CR@mail.gmail.com>
+	<1296408153.8387.1371.camel@localhost>
+	<AANLkTik54DUE--ewU=qPJph915hhE5W-S-BHkkej8LGt@mail.gmail.com>
+	<AANLkTik+r7PVgyPvfSUy88vUS4kWU21txXncuFz1bgx1@mail.gmail.com>
+	<1296474201.8387.1404.camel@localhost>
+	<AANLkTin4+rJPaFg=RXLQsRnsaw7Y398sYzrkq4qdGVY+@mail.gmail.com>
+	<1296491060.8387.1448.camel@localhost>
+Message-ID: <AANLkTinizJa0RdN0+=hY2HaT0QZyW5uHHKNy0jRk7eds@mail.gmail.com>
+
+Oops, I guess I misinterpreted "package description".  It did sound a little
+dangerous ;-).
+
+What you suggested also worked.  I'm in good shape now.
+
+Thanks again,
+   -Ryan
+
+On Mon, Jan 31, 2011 at 11:24 AM, Duncan Coutts <
+duncan.coutts at googlemail.com> wrote:
+
+> On Mon, 2011-01-31 at 09:52 -0500, Ryan Newton wrote:
+> > Victory!  Thanks!
+> >
+> > Well.. mostly victory ;-).  I've got it in a state where the .cabal
+> > file rewriting works if "cabal configure" is called separately from
+> > "cabal build/install" so that the latter reads the modified
+> > configuration file.
+>
+> Yikes! Don't actually modify the .cabal file on disk. I meant just
+> modify the data structure that gets passed around.
+>
+> > As for portability...  I'm afraid I don't personally do any
+> > development on Windows.  Presumably the goal is for hackage packages
+> > to work without requiring Cygwin/make/etc?
+>
+> Right.
+>
+> Duncan
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110201/8dec58f1/attachment.htm>
+

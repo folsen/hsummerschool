@@ -1,0 +1,59 @@
+From hajhouse at hajhouse.org  Fri Aug 19 16:09:39 2011
+From: hajhouse at hajhouse.org (Henry House)
+Date: Fri, 19 Aug 2011 07:09:39 -0700
+Subject: [Haskell-cafe] custom SQL-to-Haskell type conversion in HDBC
+In-Reply-To: <CAPeieQEGXOJgfvA+FF2yTbhPnWA9vv7Xk8EghLj-2LiYy1Edyg@mail.gmail.com>
+References: <20110819052316.GA27130@houseag.com>
+	<CAPeieQEGXOJgfvA+FF2yTbhPnWA9vv7Xk8EghLj-2LiYy1Edyg@mail.gmail.com>
+Message-ID: <20110819140939.GA27362@houseag.com>
+
+On Friday, 19 August 2011, Erik Hesselink wrote:
+> Do you really need the precision info about the column, or do you just
+> need the values at the right precision? Because you get the last thing
+> already:
+> 
+> Prelude Database.HDBC.PostgreSQL Database.HDBC Data.Ratio
+> Control.Monad> (fromSql . head . head) `liftM` (quickQuery db "select
+> 1.231 ::numeric(5,0);" []) :: IO Rational
+> 1 % 1
+> Prelude Database.HDBC.PostgreSQL Database.HDBC Data.Ratio
+> Control.Monad> (fromSql . head . head) `liftM` (quickQuery db "select
+> 1.231 ::numeric(5,4);" []) :: IO Rational
+> 1231 % 1000
+
+I'm not sure I understand the distinction --- to my way of thinking,
+getting the value at the right precision means getting the correct
+number of significant decimal digits, which both your example and mine
+fail to provide.
+
+Prelude Database.HDBC.PostgreSQL Database.HDBC Data.Ratio Control.Monad>
+(fromSql . head . head) `liftM`
+   (quickQuery db "select 1.231 ::numeric(10,4);" []) :: IO Rational
+-- gives 1231 % 1000 == 1.231 in decimal notation
+Prelude Database.HDBC.PostgreSQL Database.HDBC Data.Ratio Control.Monad>
+(fromSql . head . head) `liftM`
+   (quickQuery db "select 1.231 ::numeric(10,8);" []) :: IO Rational
+-- still gives 1231 % 1000 but should be 1.21310000 in decimal notation
+-- or 1231000 % 1000000 in rational notation
+
+> If you need the precision information, perhaps 'describeResult' will
+> give you what you need. I've never used it, but it looks like it
+> might.
+
+Thanks for the suggestion. That will work, but ideally i'd like to have
+the normal usage of quickQuery, etc return correct data. Unless I am
+missing something here, the method of getting precision information
+using describeResult would be to fetch the result set, then find any
+columns having a numeric(x,y) SQL type and transform them. Even just
+getting the raw string response from the RDBMS would be better than that
+since the raw response is actually already a correctly formatted string
+representation of the data so I could use it for output without any
+further transformation.
+
+Is there a way to get raw response data from the RDBMS through HDBC?
+
+-- 
+Henry House
++1 530 848-1238
+
+

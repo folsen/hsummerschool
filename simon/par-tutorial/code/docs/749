@@ -1,0 +1,27 @@
+From malcolm.wallace at me.com  Tue Apr 26 15:41:48 2011
+From: malcolm.wallace at me.com (Malcolm Wallace)
+Date: Tue, 26 Apr 2011 14:41:48 +0100
+Subject: [Haskell-cafe] converting prefixes of CString <-> String
+In-Reply-To: <BANLkTin6QjQK_LxTax_-X3p7gH8CF4-b2w@mail.gmail.com>
+References: <BANLkTimZA8GuTN2oSWd-juDkbzu8vG_=Rg@mail.gmail.com>
+	<8D8D3C31-262C-440E-8D17-7FF1709FB63D@me.com>
+	<BANLkTin6QjQK_LxTax_-X3p7gH8CF4-b2w@mail.gmail.com>
+Message-ID: <F72C3834-7BEE-4013-8210-6D0048E1A22D@me.com>
+
+
+On 26 Apr 2011, at 13:31, Eric Stansifer wrote:
+
+>>> Let 'c2h' convert CStrings to Haskell Strings, and 'h2c' convert
+>>> Haskell Strings to CStrings.  (If I understand correctly, c2h . h2c
+>>> === id, but h2c . c2h is not the identity on all inputs;
+>> 
+>> That is correct.  CStrings are 8-bits, and Haskell Strings are 32-bits.  Converting from Haskell to C loses information, unless you use a multi-byte encoding on the C side (for instance, UTF8).
+> 
+> So actually I am incorrect, and h2c . c2h is the identity but c2h . h2c is not?
+
+Ah, my bad.  In reading the composition from right to left, I inadvertently read h2c and c2h from right to left as well!  So, starting from C, converting to Haskell, and back to C is the identity, yes.  Starting from Haskell, no.
+
+Regards,
+    Malcolm
+
+

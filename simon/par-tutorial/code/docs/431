@@ -1,0 +1,36 @@
+From john.obbele at gmail.com  Fri Apr 15 17:13:08 2011
+From: john.obbele at gmail.com (John Obbele)
+Date: Fri, 15 Apr 2011 17:13:08 +0200
+Subject: [Haskell-cafe] Cairo and Haskell
+In-Reply-To: <BANLkTinWEM-xvjUO_TS2uOoMtv-xsqf3OQ@mail.gmail.com>
+References: <io9imb$1n8$1@dough.gmane.org>
+	<BANLkTikYTHOmmYOcxmxVk+YMRn2NE=D0Pw@mail.gmail.com>
+	<BANLkTinWEM-xvjUO_TS2uOoMtv-xsqf3OQ@mail.gmail.com>
+Message-ID: <20110415151308.GA4896@X52D.localdomain>
+
+On Fri, Apr 15, 2011 at 08:19:02AM -0600, Chris Smith wrote:
+> On Apr 15, 2011 8:17 AM, "Chris Smith" <cdsmith at gmail.com> wrote:
+> > Haskell has Cairo bindings as part of gtk2hs. The package on Hackage is
+> > called 'cairo'. You can certainly preview on the screen, but I'm less sure
+> > about exporting to PDF, since the bindings were intended for GUI
+> > programming. At least PNG output is possible, though; PDF may be, as well.
+>
+> To answer my own email, yes, PDF support is there.
+
+You can also take a look at the demo programs in the cairo
+package:
+
+bash $ mkdir /tmp/uncabal && cd /tmp/uncabal
+bash $ cabal unpack cairo
+bash $ cd /tmp/uncabal/cairo-*/demo
+bash $ runghc StarAndRing.hs
+
+The gtk2hs bindings are generaly pretty dumb and just mimic the
+original C behaviour. So the best source of documentation is
+the original cairo website:
+    http://cairographics.org/documentation/
+
+regards,
+/john
+
+

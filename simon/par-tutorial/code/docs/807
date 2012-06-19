@@ -1,0 +1,35 @@
+From stephen.tetley at gmail.com  Wed Apr 27 23:18:47 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Wed, 27 Apr 2011 22:18:47 +0100
+Subject: [Haskell-cafe] Parsing binary 'hierachical' objects for lazy
+	developers
+In-Reply-To: <BANLkTik1xiMgO0XbO0dpkPwkiMg5Dgx2ig@mail.gmail.com>
+References: <20110427181603.GA16627@X52D.localdomain>
+	<BANLkTik1xiMgO0XbO0dpkPwkiMg5Dgx2ig@mail.gmail.com>
+Message-ID: <BANLkTi=QT6Q5A2eFX2xgXQj2HWGTNRnf2A@mail.gmail.com>
+
+On 27 April 2011 21:28, Alexander Solla <alex.solla at gmail.com> wrote:
+>
+
+> On Wed, Apr 27, 2011 at 11:16 AM, John Obbele <john.obbele at gmail.com> wrote:
+>>
+>> Second issue, I would like to find a way to dispatch parsers. I'm
+>> not very good at expressing my problem in english, so I will use
+>> another code example:
+>
+> This sounds very hard in the general case. ?Others have shown you how to
+> dispatch on two types. ?But there is no general data type which combines all
+> (or even arbitrarily many) types. ?Somehow, "Read" is able to do this, but I
+> don't know what kind of magic it uses.
+>
+
+Read always "demands its type" so it doesn't use any magic - if the
+input string doesn't conform it will throw an error.
+
+Any sensible binary format will have a scheme such as tag byte
+prefixes to control choice in parsing (binary parsing generally avoids
+all backtracking). If your binary data doesn't have a proper scheme it
+will be hard to parse for any language (or cast-to in the case of C),
+so the most sensible answer is to revise the format.
+
+

@@ -1,0 +1,27 @@
+From kizzx2+haskell at gmail.com  Sun Aug  7 07:15:40 2011
+From: kizzx2+haskell at gmail.com (Chris Yuen)
+Date: Sun, 7 Aug 2011 13:15:40 +0800
+Subject: [Haskell-cafe] Analyzing slow performance of a Haskell program
+Message-ID: <CAKaDkC7-vQo_AXRRX6-+P+PKV87b54D21k6bSnub=JYvH_mnRQ@mail.gmail.com>
+
+Hello Cafe,
+
+I was trying to solve ITA Software's "Word Nubmers" puzzle (
+http://www.itasoftware.com/careers/puzzle_archive.html) using a brute force
+approach.
+
+Here's a my version of a quick recap of the problem:
+
+> A wordNumber is defined as
+>
+> wordNumber 1 = "one"
+> wordNumber 2 = "onetwo"
+> wordNumber 3 = "onethree"
+> wordNumber 15 =
+"onetwothreefourfivesixseveneightnineteneleventwelvethirteenfourteenfifteen"
+> ...
+>
+> Problem: Find the 51-billion-th letter of (wordNumber Infinity); assume
+that letter is found at 'wordNumber x', also find 'sum [1..x]'
+
+

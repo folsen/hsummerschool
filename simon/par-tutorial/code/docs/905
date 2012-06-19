@@ -1,0 +1,61 @@
+From marlowsd at gmail.com  Mon Aug  1 12:05:43 2011
+From: marlowsd at gmail.com (Simon Marlow)
+Date: Mon, 01 Aug 2011 11:05:43 +0100
+Subject: [Haskell-cafe] Unbelievable parallel speedup
+In-Reply-To: <BANLkTinrWgM7D9dOt=rOdsHAqLN0W04KdQ@mail.gmail.com>
+References: <BANLkTinrWgM7D9dOt=rOdsHAqLN0W04KdQ@mail.gmail.com>
+Message-ID: <4E367A77.90409@gmail.com>
+
+On 03/06/2011 13:10, John D. Ramsdell wrote:
+> I've enjoyed reading Simon Marlow's new tutorial on parallel and
+> concurrent programming, and learned some surprisingly basic tricks.  I
+> didn't know about the '-s' runtime option for printing statistics.  I
+> decided to compute speedups for a program I wrote just as Simon did,
+> after running the program on an unloaded machine with four processors.
+>   When I did, I found the speedup on two processors was 2.4, on three
+> it was 3.2, and on four it was 4.4!  Am I living in a dream world?
+>
+> I ran the test nine more times, and here is a table of the speedups.
+>
+> 2.35975	3.42595	4.39351
+> 1.57458	2.18623	2.94045
+> 1.83232	2.77858	3.41629
+> 1.58011	2.37084	2.94913
+> 2.36678	3.63694	4.42066
+> 1.58199	2.29053	2.95165
+> 1.57656	2.34844	2.94683
+> 1.58143	2.3242	2.95098
+> 2.36703	3.36802	4.41918
+> 1.58341	2.30123	2.93933
+>
+> That last line looks pretty reasonable to me, and is what I expected.
+> Let's look at a table of the elapse times.
+>
+> 415.67	176.15	121.33	94.61
+> 277.52	176.25	126.94	94.38
+> 321.37	175.39	115.66	94.07
+> 277.72	175.76	117.14	94.17
+> 415.63	175.61	114.28	94.02
+> 277.75	175.57	121.26	94.10
+> 277.68	176.13	118.24	94.23
+> 277.51	175.48	119.40	94.04
+> 415.58	175.57	123.39	94.04
+> 277.62	175.33	120.64	94.45
+>
+> Notice that the elapse times for two and four processors is pretty
+> consistent, and the one for three processors is a little inconsistent,
+> but the times for the single processor case are all over the map.  Can
+> anyone explain all this variance?
+
+This looks like automatic CPU speed throttling to me.  The OS is 
+decreasing the CPU clock speed automatically to save power.  Normally it 
+happens in steps (0.75x, 0.5x max clock).  This would also explain why 
+when using more cores the results are more stable: the OS has determined 
+that there is lots of work to do, and has stopped throttling the CPU. 
+If you can it off, do so.
+
+Cheers,
+	Simon
+
+
+

@@ -1,0 +1,42 @@
+From spam at scientician.net  Fri Dec 30 12:04:01 2011
+From: spam at scientician.net (Bardur Arantsson)
+Date: Fri, 30 Dec 2011 12:04:01 +0100
+Subject: [Haskell-cafe] On the purity of Haskell /Random generators
+In-Reply-To: <4EFCCFFD.9080908@unicaen.fr>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org> <4EFCC3CE.7050006@blueyonder.co.uk>
+	<451591325188516@web70.yandex.ru> <4EFCCFFD.9080908@unicaen.fr>
+Message-ID: <jdk5r8$koe$1@dough.gmane.org>
+
+On 12/29/2011 09:39 PM, Jerzy Karczmarczuk wrote:
+>
+> "Truly random" numbers are very rarely used, forget about them.
+
+Well, obviously, but why should we forget about them? The usual 
+approach(*) is to gather entropy from a truly(**) random source
+and use that to seed (and perhaps periodically re-seed) a PRNG.
+
+(*) At least as far as I understand it.
+(**) At least one believed to be truly random.
+
+My point was simply to make clear the distinction between RNG vs. PRNG.
+
+> "Standard" r. generators (pseudo-random) in Haskell are monadic, because
+> the relevant algorithms are stateful.
+> Congruential, Fibonacci, Mersenne Twister, whatever, is a function, more
+> or less:
+> (newValue,newSeed) = rgen seed
+>
+> The monadic approach serves mainly to hide the seed.
+> Some people prefer to use random streams, no monads, so the question of
+> Steve Horne is not universal.
+
+Random streams are not referentially transparent, though, AFAICT...?
+
+Either way this thread has gone on long enough, let's not prolong it 
+needlessly with this side discussion.
+
+
+

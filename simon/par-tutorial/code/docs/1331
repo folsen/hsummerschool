@@ -1,0 +1,55 @@
+From jhenahan at uvm.edu  Wed Aug 24 18:12:34 2011
+From: jhenahan at uvm.edu (Jack Henahan)
+Date: Wed, 24 Aug 2011 12:12:34 -0400
+Subject: [Haskell-cafe] why the name lambda calculus?
+In-Reply-To: <1314192011.2000.48.camel@dpm-laptop>
+References: <CAGdT1gpjdu9+F6QOP0ULtrCS9JKyRT89ZorDf-2tOsavR1poOg@mail.gmail.com>
+	<BFBE5DB6-D4E9-4543-9F57-4576A6B7A3E6@uvm.edu>
+	<CAKWTe25=3Srd3TW_-+K=h+hvUcG9vWx23H7fAwAESHSKrDj2jg@mail.gmail.com>
+	<B8329527-9046-4E47-8B8F-E76C17C9961C@ezrakilty.net>
+	<alpine.LSU.2.00.1108241358550.30178@hermes-2.csi.cam.ac.uk>
+	<1314192011.2000.48.camel@dpm-laptop>
+Message-ID: <88898E00-4C81-4DDE-8B99-4575FAB0C9F5@uvm.edu>
+
+It's always been my understanding that calculi were systems that defined particular symbols and the legal methods of their manipulation in the context of a particular calculus. The point, generally (har har), seems to be abstraction. The lambda calculus describes computation without actually implementing it, the predicate/propositional calculi describe logic without necessarily containing any explicit logical statements.
+
+Algebras, on the other hand, are structures whose properties are defined by a (usually) small number of properties and axioms. A Boolean algebra is a 6-tuple (A, ?, ?, ?, ?, ?) such that for all a, b, c in A, associativity, commutativity, absorption, distributivity, and complement axioms all hold. An algebra over a field describes a vector space with a bilinear vector product. The other axioms that must hold depend on the particular vector space, though.
+
+Jack Henahan
+jhenahan at uvm.edu
+==
+Computer science is no more about computers than astronomy is about telescopes.
+-- Edsger Dijkstra
+==
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: 398E692F.gpg
+Type: application/x-apple-msg-attachment
+Size: 17822 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110824/4961d212/attachment-0001.bin>
+-------------- next part --------------
+
+On Aug 24, 2011, at 9:20 AM, Dominic Mulligan wrote:
+
+> On Wed, 2011-08-24 at 14:01 +0100, Tony Finch wrote:
+>> Ezra Cooper <ezra at ezrakilty.net> wrote:
+>>> 
+>>> I believe this to be a general trait of things described as
+>>> "calculi"--that they have some form of name-binders, but I have never
+>>> seen that observation written down.
+>> 
+>> Combinator calculi are a counter-example.
+> 
+> As is the propositional calculus.  I seem to remember Joe Wells once
+> asking Wilfrid Hodges what he thought the definition of a calculus was.
+> He didn't provide a convincing definition.
+> 
+> 
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

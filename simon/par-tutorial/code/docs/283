@@ -1,0 +1,51 @@
+From trebla at vex.net  Mon Apr 11 02:55:53 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Sun, 10 Apr 2011 20:55:53 -0400
+Subject: [Haskell-cafe] Parsing HTML tables with HXT
+In-Reply-To: <BANLkTimi4H8j6AmFsbwmHJ1MUHKDd8do9A@mail.gmail.com>
+References: <BANLkTimi4H8j6AmFsbwmHJ1MUHKDd8do9A@mail.gmail.com>
+Message-ID: <4DA25199.6070008@vex.net>
+
+On 11-04-08 06:29 AM, Dmitry Simonchik wrote:
+> Can someone please help me with getting the value of the table cell with
+> HXT in the following html:
+>
+> <table class="tblc">
+> <tr>
+> <td class="tdc">x</td>
+> <td>y</td>
+> </tr>
+> <tr>
+> <td class="tdc">a</td>
+> <td>b</td>
+> </tr>
+> </table>
+>
+> I need the value of the second cell in a row that has first cell with
+> some predefined value (in the example above it can be x or a) I need the
+> arrow of the type (IOSArrow XmlTree String) How to write it?
+
+import Text.XML.HXT.Core
+
+main = do
+   rs <- runX (readDocument [] "example.xml" >>> example "x")
+   mapM_ putStrLn rs
+
+-- example "blah" reports those 2nd columns such that
+-- their 1st columns equal "blah"
+example :: String -> IOSArrow XmlTree String
+example s = deep (is "table" />
+                   is "tr" >>>
+                   listA (getChildren >>> is "td" /> getText) >>>
+                   arrL get2nd
+                  )
+   where get2nd (one:two:_) | one==s = [two]
+         get2nd _ = []
+
+is x = isElem >>> hasName x
+
+The important part is using listA at the right point to extract the list 
+of cells (belonging to the same row) so that with a list in your hand 
+you can test the 1st item and find the 2nd item.
+
+

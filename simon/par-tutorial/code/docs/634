@@ -1,0 +1,41 @@
+From etarasov.ekb at gmail.com  Fri Apr 22 20:19:37 2011
+From: etarasov.ekb at gmail.com (Evgeny Tarasov)
+Date: Sat, 23 Apr 2011 00:19:37 +0600
+Subject: [Haskell-cafe] Is Hugs dead?
+In-Reply-To: <1303474568.13029.4.camel@fuzxxl>
+References: <1303474568.13029.4.camel@fuzxxl>
+Message-ID: <4DB1C6B9.3000108@gmail.com>
+
+By the way, I'd like to use hugs extensively as sysadmin's universal 
+scripting language. I think, it could be a great killer feature. But as 
+far as I know, it doesn't have any facilities to run external programs 
+and process their stdout, stderr end exit code.
+
+Hugs is much more suitable for the task then ghc because of its 
+compactness and portability. And some people think that haskell code is 
+easier to maintain than shell scripts, perl or even python.
+
+--
+Best regards
+Evgeny Tarasov
+
+22.04.2011 18:16, Robert Clausecker ?????:
+> Some weeks ago, I mirrored the hugs repo to github.
+> (https://github.com/fuzxxl/Hugs) This was, when I found out, that the
+> last commit was about 2 years ago. Also, since some of the dependencies
+> moved, I was unable to build hugs.
+>
+> Now my question is: Is Hugs dead? What's the status of development of
+> hugs?
+>
+> Yours, Robert Clausecker
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+

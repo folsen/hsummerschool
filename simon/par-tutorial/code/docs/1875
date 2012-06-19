@@ -1,0 +1,51 @@
+From strake888 at gmail.com  Mon Dec 12 21:52:39 2011
+From: strake888 at gmail.com (Matthew Farkas-Dyck)
+Date: Mon, 12 Dec 2011 15:52:39 -0500
+Subject: [Haskell-cafe] Cabal: Disjunctive Build-Depends
+In-Reply-To: <CANd=OGHTp6ZjW+jfsJpOqopqYEL4OJhEY1OEVd1EU_-zdMj0tg@mail.gmail.com>
+References: <CAL3m8eDWP+EOp49wEi1MnvRzyRd-wrv2qRo8iwBfoqhrs75VAw@mail.gmail.com>
+	<CANd=OGHTp6ZjW+jfsJpOqopqYEL4OJhEY1OEVd1EU_-zdMj0tg@mail.gmail.com>
+Message-ID: <CAL3m8eAbp6f7+fQxCBKgmDvuA3BQ7G5OQAK2rpCWzdH+DNhujQ@mail.gmail.com>
+
+Grand. Thanks!
+
+
+On 12/12/2011, Felipe Almeida Lessa <felipe.lessa at gmail.com> wrote:
+> On Mon, Dec 12, 2011 at 6:25 PM, Matthew Farkas-Dyck
+> <strake888 at gmail.com> wrote:
+>> I have written some code that can be compiled with either of two
+>> libraries, with no modification. How can I tell Cabal?
+>>
+>> I tried "||" but it failed to parse.
+>>
+>> I could find which package is available in the build script, and then
+>> call defaultMainNoRead with the appropriate GenericPackageDescription,
+>> but I'm not sure how to find this system-agnostically.
+>
+> You just need to use flags.  Something like
+>
+> Flag usethis
+>   Description:  Use this instead of that
+>   Default:  False
+>
+> Library
+>   Build-depends: ...everything else...
+>   if flag(usethis)
+>     Build-depends: this == 0.1.*
+>   else
+>     Build-depends: that == 4.0.*
+>
+> You don't need to care about usethis.  If 'that' is not installed but
+> 'this' is, Cabal will automatically turn 'usethis' flag on.
+>
+> Cheers,
+>
+> --
+> Felipe.
+>
+
+
+-- 
+Matthew Farkas-Dyck
+
+

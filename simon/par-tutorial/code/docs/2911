@@ -1,0 +1,45 @@
+From duncan.coutts at googlemail.com  Thu Feb 10 11:59:53 2011
+From: duncan.coutts at googlemail.com (Duncan Coutts)
+Date: Thu, 10 Feb 2011 10:59:53 +0000
+Subject: [Haskell-cafe] Cabal && license combinations
+In-Reply-To: <AANLkTimbYes6c3D2PS2mygkWK=bRjacPee2obUnAszww@mail.gmail.com>
+References: <AANLkTimbYes6c3D2PS2mygkWK=bRjacPee2obUnAszww@mail.gmail.com>
+Message-ID: <1297335593.29009.452.camel@localhost>
+
+On Wed, 2011-02-09 at 03:47 +1300, Vivian McPhail wrote:
+
+> > license: Foo, Bar
+> >
+> 
+> Could this be computed automatically from the source files by Cabal?
+
+I would not want to rely on that.
+
+
+> Looking specifically at hmatrix, there are three kinds of modules
+> 
+>    i) bindings to GSL            GPL
+>    ii) bindings to LAPACK     BSD
+>    iii) pure Haskell                hmatrix author's choice
+> 
+> 1) Am I correct in thinking that even the bindings modules (the
+> Haskell parts, not the C files) can be under any licence, FOO, chosen
+> by the author, but the binary _linked_ to, say, GSL has to comply with
+> FOO and GPL?
+
+Yes. Code you write can be under any license you like. When someone uses
+the combination then they have to comply with all the licenses (so
+implicitly there's the constraint that the license you pick must be
+compatible with the license of the other parts).
+
+> 2) If someone uses hmatrix but no GSL functions (hence there are no
+> GSL functions in the linked binary) can they get away with not
+> complying with the GSL requirement?
+
+Not sure. In practice I don't think you can achieve that with our
+toolchain.
+
+Duncan
+
+
+

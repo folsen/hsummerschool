@@ -1,0 +1,30 @@
+From andrewcoppin at btinternet.com  Fri Aug 12 19:22:58 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Fri, 12 Aug 2011 18:22:58 +0100
+Subject: [Haskell-cafe] Potential problem with AC-Vector-Fancy package
+In-Reply-To: <4E441524.8070902@btinternet.com>
+References: <CALaNiFmSjO5yZqe0vOaiXWX4Rc-AaQvYxE7QBZQcbvRXYcGw3g@mail.gmail.com>
+	<4E441524.8070902@btinternet.com>
+Message-ID: <4E456172.7070007@btinternet.com>
+
+>> I think I have found a problem with the union function:
+>> If you look here: http://hpaste.org/49889
+>> You will see that line 4 gives a different result to lines 6, 8, 10;
+>> this shouldn't be the case because union is commutative.
+>
+> AC-Vector-Fancy is merely a "fancy" facard over AC-Vector. So the bug is
+> actually with AC-Vector.
+>
+> Looking at my source code, the true bug is in Data.BoundingBox.Range
+> [which provides the engine that all the other bounding box types use).
+> The actual bug turns out to by face-slappingly stupid: it's a typo in
+> one of the variable names.
+>
+> I'll go get that fixed... and then maybe write some QuickCheck properties.
+
+I just updated AC-Vector 2.3.2, which fixes the bug. Sorry about that... 
+Let me know if you find any other stupid mistakes. (Or even clever ones, 
+but I rather doubt that!)
+
+
+

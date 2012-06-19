@@ -1,0 +1,42 @@
+From duncan.coutts at googlemail.com  Thu Feb  3 12:45:07 2011
+From: duncan.coutts at googlemail.com (Duncan Coutts)
+Date: Thu, 03 Feb 2011 11:45:07 +0000
+Subject: [Haskell-cafe] Status update on {code, trac, projects, planet,
+ community}.haskell.org
+In-Reply-To: <20110203083738.GA10988@flit>
+References: <1296610402.8387.1874.camel@localhost>
+	<20110203083738.GA10988@flit>
+Message-ID: <1296733507.8387.3401.camel@localhost>
+
+On Thu, 2011-02-03 at 10:37 +0200, Roman Cheplyaka wrote:
+> * Duncan Coutts <duncan.coutts at googlemail.com> [2011-02-02 01:33:22+0000]
+> > These are all hosted on the community server. The community server was
+> > hacked on the 26th January and we took it offline. The server was
+> > running an old version of debian that was no longer supported with
+> > security updates. (Ironically, two days previously the infrastructure
+> > team had been discussing the fact that nobody seemed to have any time
+> > available to do the planned migration to a new host). The hacker
+> > replaced sshd which we noticed because the ssh host signature changed
+> > and it started prompting for passwords (we use key-based rather than
+> > password based logins).
+> 
+> Might be related:
+> http://sourceforge.net/blog/sourceforge-attack-full-report/
+
+Yes, it's quite possible.
+
+One difference to note is that we use ssh key based logins, not
+passwords. We suspect this saved us from the worst case scenarios.
+
+Nevertheless, while we don't have to reset passwords, we are concerned
+about the potential that the attacker replaced or added to users
+~/.ssh/authorized_keys lists, which is why we have not yet re-enabled
+user accounts.
+
+We will try and provide as full a picture as we can when we're satisfied
+we've got as much info and confidence as we're likely to get.
+
+Duncan
+
+
+

@@ -1,0 +1,33 @@
+From kazu at iij.ad.jp  Fri Apr  8 04:19:41 2011
+From: kazu at iij.ad.jp (Kazu Yamamoto (=?iso-2022-jp?B?GyRCOzNLXE9CSScbKEI=?=))
+Date: Fri, 08 Apr 2011 11:19:41 +0900 (JST)
+Subject: [Haskell-cafe] cab 0.1.2
+Message-ID: <20110408.111941.138805822.kazu@iij.ad.jp>
+
+Hello cafe,
+
+Let me announce "cab version 0.1.2". This version integrates
+"cabal-dev" as well as "cabal/ghc-pkg". So, you can use a sandbox for
+your development.
+
+	http://www.mew.org/~kazu/proj/cab/en/
+
+Here is the short explanation from the page above:
+
+----
+"cab" is a MacPorts-like maintenance command of Haskell cabal
+packages. Some parts of this program are a wrapper to "ghc-pkg",
+"cabal", and "cabal-dev".
+
+If you are always confused due to inconsistency of "ghc-pkg" and
+"cabal", or if you want a way to check all outdated packages, or if
+you want a way to remove outdated packages recursively, this command
+helps you.
+
+"cab" is designed to maintain user packages only assuming that users
+use a Haskell Platform and don't want to touch the global packages.
+----
+
+--Kazu
+
+

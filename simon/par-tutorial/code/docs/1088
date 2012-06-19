@@ -1,0 +1,72 @@
+From patrick.browne at dit.ie  Sat Aug 13 09:34:40 2011
+From: patrick.browne at dit.ie (Patrick Browne)
+Date: Sat, 13 Aug 2011 08:34:40 +0100
+Subject: [Haskell-cafe] type-class inference
+In-Reply-To: <CAKFCL4Vp-hxCMT7e5dQ1rChO+xAkDp4mjw=TT-jsj4gExEkgbQ@mail.gmail.com>
+References: <4E5EBA42.5060805@dit.ie> <4E45AEA7.4010302@dit.ie>
+	<CAKFCL4Vp-hxCMT7e5dQ1rChO+xAkDp4mjw=TT-jsj4gExEkgbQ@mail.gmail.com>
+Message-ID: <4E462910.8020407@dit.ie>
+
+The :info command is a great help.
+Why does
+  :info g 4
+produce a parse error, while
+  :t g 4
+does not?
+
+Thanks for all your help,
+Pat
+
+
+On 13/08/2011 00:08, Brandon Allbery wrote:
+> Typeclasses are not independent of types, and are not inferred
+> separately from types.  If you want to know what typeclasses a type is a
+> member of, use :info.
+
+
+On 12/08/2011 23:52, Patrick Browne wrote:
+>> Hi,
+>> Why does the Haskell :type command only sometimes print the type-class?
+>> Should I expect type-class inference as well as type inference?
+>> Maybe the type-class is inferred where possible, but not always printed?
+>> 
+>> Thanks,
+>> Pat
+>> 
+>> 
+>> -- Code
+>> k x = x + 3
+>> 
+>> data T = T
+>> class A a where
+>>   g::a -> a
+>>   g a = a
+>> instance A T where
+>> instance A Integer where
+>> 
+>> -- The results from the above code.
+>> -- First in the case of a function. Inferred the Num class
+>> *Main> :t k
+>> k :: forall a. (Num a) => a -> a
+>> *Main> :t k 3
+>> k 3 :: forall t. (Num t) => t
+>> -- Did not print type class
+>> *Main> :t k (3::Integer)
+>> k (3::Integer) :: Integer
+>> 
+>> -- Second in the case of a method of a type class.
+>> -- Inferred Num
+>> *Main> :t  g 3
+>> g 3 :: forall t. (A t, Num t) => t
+>> -- Did not print class A.
+>> *Main> :t g T
+>> g T :: T
+>> -- Did not print any class.
+>> *Main> :t g (3::Integer)
+>> g (3::Integer) :: Integer
+>> 
+
+
+This message has been scanned for content and viruses by the DIT Information Services E-Mail Scanning Service, and is believed to be clean. http://www.dit.ie
+
+

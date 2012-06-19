@@ -1,0 +1,55 @@
+From arseniy.alekseyev at gmail.com  Sat Dec  3 18:23:45 2011
+From: arseniy.alekseyev at gmail.com (Arseniy Alekseyev)
+Date: Sat, 3 Dec 2011 17:23:45 +0000
+Subject: [Haskell-cafe] ismzero operator possible without equal
+	constraint
+In-Reply-To: <CAGAUyt=YX3hkczvoKyFws4zCuFO00aoC8MsqFv0Bx6F7mJiEdQ@mail.gmail.com>
+References: <CAGAUyt=YX3hkczvoKyFws4zCuFO00aoC8MsqFv0Bx6F7mJiEdQ@mail.gmail.com>
+Message-ID: <CAEnSgTkXdT9KPU_mZJZd46WCj=E9QfhOpCv+ciaVcRUk9Kh-QQ@mail.gmail.com>
+
+Of course it is not possible! Take a simple composition of reader and
+Maybe functors for an example:
+
+miszero :: (b -> Maybe a) -> Bool
+
+I'm pretty sure (b -> Maybe a) for a is a MonadPlus, but you can't
+implement miszero for it.
+
+Arseniy.
+
+On 3 December 2011 16:55, edgar klerks <edgar.klerks at gmail.com> wrote:
+> Hi list,
+>
+> I am using MonadSplit
+> (from?http://www.haskell.org/haskellwiki/New_monads/MonadSplit?)??for a
+> project and now I want to make a library out of it. This seems to be
+> straightforward, but I got stuck when I tried to move miszero out of the
+> class:
+>
+> miszero :: m a -> Bool
+>
+> It tests if the provided monad instance is empty. My naive attempt was:
+>
+> miszero :: (Eq (m a), MonadPlus m) => m a -> Bool
+> miszero = ?( == mzero )
+>
+> This works, but not correctly. It adds an Eq constraint that is unneeded. I
+> would prefer to have something like:
+>
+> miszero :: MonadPlus m => m a -> Bool
+>
+>
+> Because I am not comparing the contents of the monad. I don't even touch it.
+> ?Is this possible to write?
+>
+> with kind regards,
+>
+> Edgar
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

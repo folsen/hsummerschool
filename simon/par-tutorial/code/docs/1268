@@ -1,0 +1,49 @@
+From kc1956 at gmail.com  Mon Aug 22 15:38:38 2011
+From: kc1956 at gmail.com (KC)
+Date: Mon, 22 Aug 2011 06:38:38 -0700
+Subject: [Haskell-cafe] why the name lambda calculus?
+In-Reply-To: <CAGdT1gpjdu9+F6QOP0ULtrCS9JKyRT89ZorDf-2tOsavR1poOg@mail.gmail.com>
+References: <CAGdT1gpjdu9+F6QOP0ULtrCS9JKyRT89ZorDf-2tOsavR1poOg@mail.gmail.com>
+Message-ID: <CAMLKXynoAh2603dv=BvPm__s2jfHe=HomnJBKqHdaNUQ2hx=cA@mail.gmail.com>
+
+Definition of "calculus"
+
+a : a method of computation or calculation in a special notation (as
+of logic or symbolic logic)
+
+b : the mathematical methods comprising differential and integral
+calculus ?often used with the
+
+So a "calculus" means more than differentiation and integration it can
+also mean a system of symbols that can be "mechanistically" modified;
+algorithmically modified if you prefer.
+
+
+Lambda abstraction was probably chosen in case someone found better
+abstractions; e.g. epsilon, delta, gamma, beta, alpha, ... :)
+
+Or Joel Spolsky's "leaky abstractions". :D
+
+
+On Sun, Aug 21, 2011 at 9:37 AM, C K Kashyap <ckkashyap at gmail.com> wrote:
+> Hi,
+> Can someone please tell me what is the root of the name lambda calculus? Is
+> it just because of the symbol lambda that is used?
+> Why not alpha or beta calculus?
+> Regards,
+> Kashyap
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+
+
+-- 
+--
+Regards,
+KC
+
+

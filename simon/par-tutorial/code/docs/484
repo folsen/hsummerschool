@@ -1,0 +1,47 @@
+From felipe.lessa at gmail.com  Tue Apr 19 15:02:44 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Tue, 19 Apr 2011 10:02:44 -0300
+Subject: [Haskell-cafe] Question about the Monad instance for Iteratee
+ (from the enumerator package)
+In-Reply-To: <201104191427.47873.anotheraddress@gmx.de>
+References: <201104191427.47873.anotheraddress@gmx.de>
+Message-ID: <BANLkTi=BaTrE8PqH0M=5=CNbwxqWRZRbeA@mail.gmail.com>
+
+2011/4/19 Daniel Sch?ssler <anotheraddress at gmx.de>:
+> Hello,
+>
+> for reference, said instance is:
+>
+>> instance Monad m => Monad (Iteratee a m) where
+>> ? ? ? return x = yield x (Chunks [])
+>>
+>> ? ? ? m0 >>= f = ($ m0) $ fix $
+>> ? ? ? ? ? ? ? \bind m -> Iteratee $ runIteratee m >>= \r1 ->
+>> ? ? ? ? ? ? ? ? ? ? ? case r1 of
+>> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? Continue k -> return (Continue (bind . k))
+>> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? Error err -> return (Error err)
+>> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? Yield x (Chunks []) -> runIteratee (f x)
+>> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? Yield x extra -> runIteratee (f x) >>= \r2 ->
+>> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? case r2 of
+>> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? Continue k -> runIteratee (k extra)
+>> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? Error err -> return (Error err)
+>> ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? Yield x' _ -> return (Yield x' extra)
+>
+> The thing I don't understand yet is the last line: Why is it OK to discard the
+> leftover input from the (f x) Iteratee and yield just the leftover input from
+> the first one (m0)?
+
+On that stage no input was given to (f x), we just runned it without
+anything and it already yielded something.  So whatever it yielded
+must be without leftovers.
+
+Now, that's what I get from reading the code.  I don't remember if it
+is explicitly allowed or forbidden for an iteratee to generate
+leftovers out of nowhere.  My guess is that it doesn't make much sense
+to allow it.
+
+Cheers,
+
+-- 
+Felipe.
+

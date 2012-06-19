@@ -1,0 +1,29 @@
+From benl at ouroborus.net  Tue Dec 20 10:46:38 2011
+From: benl at ouroborus.net (Ben Lippmeier)
+Date: Tue, 20 Dec 2011 20:46:38 +1100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <20111220070644.GA32105@sniper>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+Message-ID: <7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+
+
+On 20/12/2011, at 6:06 PM, Roman Cheplyaka wrote:
+
+> * Alexander Solla <alex.solla at gmail.com> [2011-12-19 19:10:32-0800]
+>> * Documentation that discourages thinking about bottom as a 'value'.  It's
+>> not a value, and that is what defines it.
+> 
+> In denotational semantics, every well-formed term in the language must
+> have a value. So, what is a value of "fix id"?
+
+There isn't one!
+
+Bottoms will be the null pointers of the 2010's, you watch.
+ 
+Ben.
+
+
+

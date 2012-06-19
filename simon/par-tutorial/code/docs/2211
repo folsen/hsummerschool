@@ -1,0 +1,43 @@
+From ivanperezdominguez at gmail.com  Wed Dec 21 20:05:26 2011
+From: ivanperezdominguez at gmail.com (Ivan Perez)
+Date: Wed, 21 Dec 2011 20:05:26 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <CAKicEsNmJDy=Z5=5otZc6UUUwEN6=SoCCaQUQUjhfkpnsm7q2A@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CACZKWELLqTw3dzzuN412MGF9EBX-_S5kvoXjuyEoNKTjh-_9Dg@mail.gmail.com>
+	<CAKicEsNmJDy=Z5=5otZc6UUUwEN6=SoCCaQUQUjhfkpnsm7q2A@mail.gmail.com>
+Message-ID: <CACZKWEK3uNB18WG9RDgb3J5rFugBb7oWebGYaqOXTHdAuAmySg@mail.gmail.com>
+
+>> - Function overloading without classes. If it's not done, there must
+>> be a good reason for it
+>> (many good reasons, probably), but I really miss it.
+>
+> That does not play well with type inference.
+
+I understand that. But it may be ok in many simple situations,
+which is actually where I tend to "need" it. For instance,
+the following wouldn't pose a problem, would it?
+
+f  :: Int -> Int -> Int
+f = (+)
+f :: String -> String -> String
+f = (++)
+
+(Not that I would use it for exactly that code, but anyway).
+I know that one can write that with classes and instances, but I just
+want to save myself the extra-coding when possible. In complex
+situations (where it doesn't play well with type inference), that's
+when I'd rather create classes and instances. Not for the type-checker,
+but for myself.
+
+> Also, see type-directed name resolution (TDNR)
+Thanks for that pointer. I found that proposal a few months ago, but had
+completely forgotten about it.
+
+I don't really like the proposed syntax; it's very OO-like.
+I agree with gabrielrf, who said "[...] I wonder if adding an obj.method
+style will be a hinderance to beginners, as it obscures what type
+inference can do."
+
+

@@ -1,0 +1,19 @@
+From chrisdone at googlemail.com  Tue Aug 30 08:58:58 2011
+From: chrisdone at googlemail.com (Christopher Done)
+Date: Tue, 30 Aug 2011 08:58:58 +0200
+Subject: [Haskell-cafe] GHCI Feature Request: Last Successful
+ Compilation State Saved
+In-Reply-To: <4E5C6B26.3010201@vex.net>
+References: <CAJrReygxTo_DVA6B4bNozP0WR+_X7ZqQs=ERdHhuXKJNc-3+0A@mail.gmail.com>
+	<4E5C6B26.3010201@vex.net>
+Message-ID: <CAAJHNPDP9uUWWqw1b=Y=ue5qbGOhG4Z2-RM7g37OaJ4+QBNE7A@mail.gmail.com>
+
+On 30 August 2011 06:46, Albert Y. C. Lai <trebla at vex.net> wrote:
+> In #haskell, we came up with the idea of running two instances of ghci. Try
+> loading in one instance first; if good, commit to the other instance too; if
+> bad, you still have the other instance in a functional state. Presumably,
+> this should be automated by some middleware.
+
+See my post from two days ago.
+
+

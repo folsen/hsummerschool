@@ -1,0 +1,46 @@
+From iustin at google.com  Thu Dec 29 14:23:35 2011
+From: iustin at google.com (Iustin Pop)
+Date: Thu, 29 Dec 2011 14:23:35 +0100
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>
+Message-ID: <20111229132335.GY17094@google.com>
+
+On Thu, Dec 29, 2011 at 07:19:17AM -0600, Gregg Reynolds wrote:
+> On Wed, Dec 28, 2011 at 2:44 PM, Heinrich Apfelmus
+> <apfelmus at quantentunnel.de> wrote:
+> >
+> > The beauty of the IO monad is that it doesn't change anything about purity.
+> > Applying the function
+> >
+> > ? bar :: Int -> IO Int
+> >
+> > to the value 2 will always give the same result:
+> >
+> > ? bar 2 = bar (1+1) = bar (5-3)
+> 
+> Strictly speaking, that doesn't sound right.  The "result" of an IO
+> operation is outside of the control (and semantics) of the Haskell
+> program, so Haskell has no idea what it will be.  Within the program,
+> there is no result.  So Int -> IO Int is not really a function - it
+> does not map a determinate input to a determinate output.  The IO
+> monad just makes it look and act like a function, sort of, but what it
+> really does is provide reliable ordering of non-functional operations
+> - invariant order, not invariant results.
+
+Not only strictly speaking. In practice too:
+
+bar _ = do
+   s <- readFile "/tmp/x.txt"
+   return (read s)
+
+Once you're in a monad that has 'state', the return value doesn't
+strictly depend anymore on the function arguments.
+
+At least that's my understanding.
+
+regards,
+iustin
+
+

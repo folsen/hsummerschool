@@ -1,0 +1,99 @@
+From sh006d3592 at blueyonder.co.uk  Fri Dec 30 20:32:48 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Fri, 30 Dec 2011 19:32:48 +0000
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <ADFFAE52-B3FF-4BFD-B891-78650E8DB9FD@mobileink.com>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<4EFB8DFE.1060805@blueyonder.co.uk>
+	<jdh9h6$gba$1@dough.gmane.org> <4EFCA66D.4060609@blueyonder.co.uk>
+	<jdiesl$5sp$1@dough.gmane.org> <4EFCCA86.4020709@blueyonder.co.uk>
+	<ADFFAE52-B3FF-4BFD-B891-78650E8DB9FD@mobileink.com>
+Message-ID: <4EFE11E0.8030508@blueyonder.co.uk>
+
+On 30/12/2011 15:23, Gregg Reynolds wrote:
+> Now one way of understanding all this is to say that it implicates the static/dynamic (compile-time/run-time) distinction: you don't know what e.g. IO values are until runtime, so this distinction is critical to distinguishing between pure and impure.  I gather this is your view.
+Yes.
+> I think that is reasonable, but with the caveat that it must be at the right level of abstraction.  I don't think ASTs etc. enter into it - those are implementation techniques, and the only generalization we can apply to compilers is that they do implement the language definition, not how they do it (not all C compilers use ASTs).
+I would argue that AST is more an analogy than an implementation - I 
+don't really care if a person dry-runs the code by reading and rewriting 
+fragments of the source code in notepad - there is still something that 
+represents an unevaluated function but which is itself being treated as 
+a value - the fallback result in this model.
+
+A possible way to implement a Haskell program would be...
+
+ 1. Apply rewrite rules to evaluate everything possible without
+    executing primitive IO actions.
+ 2. Wait until you need to run the program.
+ 3. Continue applying rewrite rules to evaluate everything possible, but
+    this time executing primitive IO actions (and substituting run-time
+    inputs into the model) as and when necessary so that the rewriting
+    can eliminate them.
+
+The model correctly describes how the program should behave. It requires 
+no metaphors, only a very careful person to do the re-writing and 
+(unavoidably) to execute the primitive IO actions.
+>    The right level of abstraction (IMHO) is the distinction between atemporality and temporality.  The functional stuff is atemporal, which means among other things that evaluation is unordered (evaluation being a temporal process).  Adding IO etc. capabilities to the purely functional fragment of a language infects it with temporality.  But we can model temporality using order, so we can dispense with the notion of run-time and say that IO etc. stuff adds an ordered fragment to the unordered fragment.  One goal of the language is then to enforce a strict correspondence between the order of events outside the program (e.g. keystrokes) and "events" inside the program (getchar).
+Nice way to put it.
+> The beauty of the monad solution is not that it magically transforms non-functional stuff like IO into functional stuff, but that it exploits type discipline to make such operations *mimic* purely functional stuff in a sense - but only at the level of typing.  Impure operations then have purely functional type discipline while remaining essentially non-functional.  So I think of Haskell as a quasi-pure or hybrid language.  C on the other hand is totally impure (except for predefined constants like '1').  For totally pure languages you have to look elsewhere, e.g. logics - there are no pure programming languages.
+Well - on C is impure, it depends how you look at that. If it's valid to 
+say that your home-grown "while" loop is a function that accepts two 
+actions as parameters, well, C has an equivalent function built into the 
+compiler. Again you can separate the pure from the impure, and the 
+impurity is only realized when the program is executed. The 
+correspondence between orderings arises in different ways, but even C 
+only demands that results are "as if" the standards-defined evaluation 
+order were followed - partial-evaluation and other optimisations during 
+compilation are done in whatever order the C compiler finds convenient, 
+exploiting associativity and commutativity where those are guaranteed etc.
+
+It doesn't make Haskell and C the same thing, of course.
+> It's fairly easy to grasp the point by going back to Turing's original insight.  The cornerstone of his ideas was not the machine but the human calculator working with pencil and paper, finite memory, etc.  So to see the diff all you have to do is think about what a human does with a problem (program) written on paper.  Give the human calculator a computable task - add 2+2 - and you can be confident you will receive a definite answer in a finite amount of time.  Lard this with a non-computable step - add 2 + 2 + getInt - and all bets are off.
+Precisely my point with my bind example - in the expression 
+"getAnIntFromTheUser >>= \i -> return (i+1)" you cannot know the value 
+of i at compile-time, or within the realm of the atemporal. But even if 
+at one level you consider that expression still to be evaluated within 
+the atemporal realm, it is still evaluated also (in 
+translated/rewritten/whatever form) in the temporal realm - at run-time. 
+If the user happens to enter the value 1, at some point, the expression 
+i+1 is conceptually rewritten to 1+1 and then to 2.
+
+Arguably everything that can be evaluated at compile-time - everything 
+in the atemporal realm - is just optimisation. That's a narrow view, and 
+not one that I (now) agree with. The distinction is useful for 
+understanding the program - probably even more so calling it temporal 
+vs. atemporal because that removes the issue of how much partial 
+evaluation will the compiler choose to do, or for that matter am I 
+running an interpreter.
+
+> Regarding side-effects, they can be (informally) defined pretty simply:  any non-computational effect caused by a computation is a side-effect.
+Well, pedanting, there are computation effects that we pretend are 
+non-computational. The trivial case is using return. Another case might 
+be an overliteral translation of...
+
+int i = 0; int j = 0;
+while (i < 10)  {  j += i; i++; }
+
+If you literally translate this to Haskell using a hand-rolled 
+while-loop, that condition is sensitive to effects of the loop body. The 
+variable i must be implemented as an IORef. You have a computational 
+effect treated as a non-computational effect. You can feed the composed 
+IO action to unsafePerformIO to do all this in a non-IO context, and you 
+won't violate referential transparency - but it's ugly and klunky, and 
+something that should be in the atemporal realm has been artificially 
+moved into the temporal realm.
+
+Practically, that's a good reason to use recursion or a fold or whatever 
+instead of a hand-rolled while loop. In this case, idiomatic Haskell 
+would be sum [0..9] - a clear win for Haskell, I think. Different 
+languages have different idioms - no biggie.
+
+I'm just saying that a non-trivial computational effect may be dressed 
+up as a non-computational effect, and most functional programmers in my 
+experience would call each mutation of i a side-effect - or else would 
+refuse to call the corresponding C mutations side-effects.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111230/e69f323d/attachment-0001.htm>
+

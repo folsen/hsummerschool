@@ -1,0 +1,31 @@
+From nicolas at incubaid.com  Wed Dec 21 23:24:19 2011
+From: nicolas at incubaid.com (Nicolas Trangez)
+Date: Wed, 21 Dec 2011 23:24:19 +0100
+Subject: [Haskell-cafe] State Machine Composition
+In-Reply-To: <CAP6oseSLBuHBobxGH291dR=hFFjkGVG8XMTSzFaLoVG3GumVOQ@mail.gmail.com>
+References: <CAP6oseSLBuHBobxGH291dR=hFFjkGVG8XMTSzFaLoVG3GumVOQ@mail.gmail.com>
+Message-ID: <1324506259.24927.7.camel@tau.nicolast.be>
+
+On Wed, 2011-12-21 at 18:34 +0000, Daniel Waterworth wrote:
+> I made this simple state machine combinator library today. I think it
+> works as a simple example of a good use for GADTs.
+> 
+> https://gist.github.com/1507107
+
+Any way to do something along the lines of
+
+type StateChange a = SC a a
+
+handleChange :: Monad m => StateChange ConnectionState -> m ()
+handleChange (SC Closed Opening) = return ()
+handleChange (SC Opening Closed) = return ()
+handleChange (SC Closed Open) = return ()
+
+where the last line would yield a type checking error at compile time,
+and the compiler can warn about handleChange not being exhaustive (for
+the valid state change steps)?
+
+Nicolas
+
+
+

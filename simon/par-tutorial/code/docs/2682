@@ -1,0 +1,28 @@
+From wren at freegeek.org  Fri Feb  4 02:14:48 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Thu, 03 Feb 2011 20:14:48 -0500
+Subject: [Haskell-cafe] OSX i386/x86 and x86_64 - time to switch
+ supported platforms?
+In-Reply-To: <C9311AB9-65D8-4ACE-B20B-F429039934CB@gmail.com>
+References: <801E1648-B34B-4F93-9BAB-9A05EC77D747@gmail.com>
+	<C9311AB9-65D8-4ACE-B20B-F429039934CB@gmail.com>
+Message-ID: <4D4B5308.4000009@freegeek.org>
+
+On 2/3/11 10:48 AM, Max Cantor wrote:
+> Does it make sense to relegate OSX x86_64 to community status
+> while the 32-bit version is considered a supported platform?
+
+I'm not sure I can make sense of what you mean here. Given the preamble, 
+I'd guess you're asking whether we should make x86_64 the targeted 
+architecture for OSX support, and reclassify 32-bit OSX to unsupported 
+or "hopefully it still works" status. (But in that case, it's the 32-bit 
+which would be "relegated" to unsupported status while x86_64 is 
+"considered a supported platform"...)
+
+Can you clarify the question?
+
+-- 
+Live well,
+~wren
+
+

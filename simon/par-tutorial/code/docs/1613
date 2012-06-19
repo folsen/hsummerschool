@@ -1,0 +1,34 @@
+From rustom.mody at parsci.com  Fri Dec  2 14:59:10 2011
+From: rustom.mody at parsci.com (Rustom Mody)
+Date: Fri, 2 Dec 2011 19:29:10 +0530
+Subject: [Haskell-cafe] Program used for debugging
+In-Reply-To: <CACqaG6zY-i7kG-OyYiXH5U8N8X7zgKZ9yr-x7cfALin3SUXoTg@mail.gmail.com>
+References: <CACqaG6zY-i7kG-OyYiXH5U8N8X7zgKZ9yr-x7cfALin3SUXoTg@mail.gmail.com>
+Message-ID: <CAG3g5n=p0_tqkF_J_jLcAoBSd_x2Y0bPtmjZzdpRoMNVOLLsNQ@mail.gmail.com>
+
+On Thu, Dec 1, 2011 at 7:40 PM, Yves Par?s <limestrael at gmail.com> wrote:
+
+> Hey,
+>
+> What do you mostly use for debugging?
+> Simple calls to Debug.Trace.trace? Hpc? Hood?
+>
+
+I also wonder about 'type-debugging'
+
+Using ghci:
+For a top level expression:
+ - if it is not compiling I can put in (or remove) a type decl and see how
+things change.
+ - if it is compiling I can of course ":t it"
+
+But for internal expressions it can be quite hairy to figure out why what
+haskell thinks is the type of something and what I think dont match.
+
+So is there something like type-intellisense for haskell where if one
+hovers the mouse (maybe over a selection) haskell tells what type it finds
+there?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111202/0e8bc94f/attachment.htm>
+

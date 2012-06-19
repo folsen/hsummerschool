@@ -1,0 +1,18 @@
+From daniel.is.fischer at googlemail.com  Wed Apr 20 01:45:01 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Wed, 20 Apr 2011 01:45:01 +0200
+Subject: [Haskell-cafe] errors while installing yesod 0.8
+In-Reply-To: <BANLkTimKscipBEAgO0XqAeU8gbE1FenPyg@mail.gmail.com>
+References: <BANLkTinnbgfJFA8pFptB9QwOSr3soP4DaQ@mail.gmail.com>
+	<BANLkTi=k0qBmgfW+i3fZO5tvBMjU6nEPYg@mail.gmail.com>
+	<BANLkTimKscipBEAgO0XqAeU8gbE1FenPyg@mail.gmail.com>
+Message-ID: <201104200145.02246.daniel.is.fischer@googlemail.com>
+
+On Wednesday 20 April 2011 01:22:20, Michael Litchard wrote:
+> So what else can I try?
+
+$ cabal install -v3 monad-control
+
+That should give some hints at which point exactly things fail.
+
+

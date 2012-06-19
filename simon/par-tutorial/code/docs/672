@@ -1,0 +1,21 @@
+From vandijk.roel at gmail.com  Sun Apr 24 10:05:50 2011
+From: vandijk.roel at gmail.com (Roel van Dijk)
+Date: Sun, 24 Apr 2011 10:05:50 +0200
+Subject: [Haskell-cafe] Storing failing testcases for QuickCheck
+In-Reply-To: <4DB3658D.1030706@freegeek.org>
+References: <iouf55$7cp$1@dough.gmane.org> <4DB3658D.1030706@freegeek.org>
+Message-ID: <BANLkTi=L=QnrT_HSwJCaj7tpXVdA_vZdRw@mail.gmail.com>
+
+On 24 April 2011 01:49, wren ng thornton <wren at freegeek.org> wrote:
+> I would *love* there to be a tool which (a) automatically saves failing
+> QuickCheck values to disk, and (b) automates using HUnit to load those in
+> and test them. I'm not so sure that QuickCheck should be doing the second
+> step of that since that'd really mess with the QuickCheck infrastructure;
+> once you have the code for reading from disk, it'd be trivial to just use
+> HUnit.
+
+Maybe this is a job for test-framework? I think the API's of
+QuickCheck and HUnit expose enough information for this to be
+possible.
+
+

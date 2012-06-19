@@ -1,0 +1,37 @@
+From uzytkownik2 at gmail.com  Tue Aug 30 07:40:23 2011
+From: uzytkownik2 at gmail.com (Maciej Marcin Piechotka)
+Date: Tue, 30 Aug 2011 06:40:23 +0100
+Subject: [Haskell-cafe] Pointed, but not Applicative
+In-Reply-To: <CA+XKtKhTb_Pk6wSP4zNo-MxWkcxiNU7KFNcnSZ3C-Tv7QkgBSQ@mail.gmail.com>
+References: <j3d40s$nb1$1@dough.gmane.org>
+	<CALoEywNocmymRvbdW6Tv5-JvKeMBQ=gY=p6Za+pZxU+0K-m+dg@mail.gmail.com>
+	<1314588296.2724.10.camel@picard>
+	<CA+XKtKhTb_Pk6wSP4zNo-MxWkcxiNU7KFNcnSZ3C-Tv7QkgBSQ@mail.gmail.com>
+Message-ID: <1314682825.1821.3.camel@picard>
+
+On Mon, 2011-08-29 at 20:24 -0700, Ryan Ingram wrote:
+> 
+> 
+> On Sun, Aug 28, 2011 at 8:24 PM, Maciej Marcin Piechotka
+> <uzytkownik2 at gmail.com> wrote:
+>         f `fmap` FList g = _|_
+>         f `fmap` FList g = map id
+>         f `fmap` FList g = map _|_
+>         (+ variation of _|_*)
+> 
+> f `fmap` FList g = \bs -> map f (g []) ++ bs
+> 
+
+You mean 
+
+f `fmap` FList g = FList $ \bs -> map f (g []) ++ bs
+
+> 
+> 
+
+Seems to confirm to second law as well.
+
+Regards
+
+
+

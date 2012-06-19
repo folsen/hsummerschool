@@ -1,0 +1,33 @@
+From ryani.spam at gmail.com  Tue Aug 30 23:13:52 2011
+From: ryani.spam at gmail.com (Ryan Ingram)
+Date: Tue, 30 Aug 2011 14:13:52 -0700
+Subject: [Haskell-cafe] Pointed, but not Applicative
+In-Reply-To: <CAD6SzRKaYbAV3p6rqyOzn-HFw7Eqz+YM9zPL8X=Ot7z18mxafg@mail.gmail.com>
+References: <j3d40s$nb1$1@dough.gmane.org>
+	<CALoEywNocmymRvbdW6Tv5-JvKeMBQ=gY=p6Za+pZxU+0K-m+dg@mail.gmail.com>
+	<1314588296.2724.10.camel@picard>
+	<CA+XKtKhTb_Pk6wSP4zNo-MxWkcxiNU7KFNcnSZ3C-Tv7QkgBSQ@mail.gmail.com>
+	<CAD6SzRKaYbAV3p6rqyOzn-HFw7Eqz+YM9zPL8X=Ot7z18mxafg@mail.gmail.com>
+Message-ID: <CA+XKtKjJgu+X_ZYj9yqjwEX9ZbA1jj-rnyqRPRb91sFFM4Q9zA@mail.gmail.com>
+
+On Tue, Aug 30, 2011 at 9:42 AM, Conal Elliott <conal at conal.net> wrote:
+> I suspect this definition is what Sebastian meant by "converting back and
+forth to ordinary lists".
+
+Yep, I know; and technically it violates 'fmap id' == 'id'
+
+for example,
+fmap id (FList $ \xs -> xs ++ xs) = FList $ \xs -> xs
+
+If you add this FList law, though, you're OK:
+
+runFList fl as = runFList fl [] ++ as
+
+But, yes, this definition of fmap converts back to an ordinary list
+representation.
+
+  -- ryan
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110830/8109b710/attachment.htm>
+

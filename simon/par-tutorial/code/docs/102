@@ -1,0 +1,23 @@
+From daniel.is.fischer at googlemail.com  Mon Apr  4 12:24:31 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Mon, 4 Apr 2011 12:24:31 +0200
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+	<BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+Message-ID: <201104041224.32058.daniel.is.fischer@googlemail.com>
+
+On Monday 04 April 2011 11:50:03, Roel van Dijk wrote:
+> > and there aren't very many possibilities for the
+> > leading characters of a Haskell source file, are there?
+> 
+> Since a Haskell program is a sequence of Unicode code points the
+> programmer can choose from up to 1,112,064 characters. Many of these
+> can legitimately be part of the interface of a module, as function
+> names, operators or names of types.
+
+Colin spoke of *leading* characters, for .hs files, that drastically 
+reduces the possibilities - not for .lhs, though.
+
+

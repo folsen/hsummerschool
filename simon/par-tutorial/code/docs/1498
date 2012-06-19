@@ -1,0 +1,24 @@
+From trebla at vex.net  Mon Aug 29 17:28:04 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Mon, 29 Aug 2011 11:28:04 -0400
+Subject: [Haskell-cafe] Dynamic loading of module
+In-Reply-To: <CAL4zParHP0R=-cKHfrrVbCVf0dais064aTTuENVGqjovRgTQjQ@mail.gmail.com>
+References: <CAL4zPao2eYnWWf1KL-sJ3NrVNw6Ar+eHVgnsDr7KSCikE_TZ4w@mail.gmail.com>	<4E5811CA.6050905@vex.net>	<CAL4zPaoO3=AGtJSexcSa9b108w0AB7dgm+QVQQmoytOUu-M3Fw@mail.gmail.com>	<4E593E91.5020209@vex.net>	<CAL4zPaqNfJWZzJowtFW12e_u2pmxxktbKpiSG5YDsh+=fZL43w@mail.gmail.com>	<4E5AF36A.5000507@vex.net>
+	<CAL4zParHP0R=-cKHfrrVbCVf0dais064aTTuENVGqjovRgTQjQ@mail.gmail.com>
+Message-ID: <4E5BB004.4070607@vex.net>
+
+On 11-08-29 02:41 AM, Arnaud Bailly wrote:
+> ghc-pkg unregister --force --user template-haskell
+[...]
+> ghc-pkg unregister --force --user template-haskell
+
+I am sorry. I apologize. It was not your fault. It was my fault. 
+"unregister --user" drops the global instance when there is no user 
+instance, which is when the 2nd time you issued the command. It is a 
+ghc-pkg bug.
+
+(I already knew the dual bug: "unregister --global" drops the user 
+instance when there is one. I make do with "unregister --global 
+--no-user-package-conf".)
+
+

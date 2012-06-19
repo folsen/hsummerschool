@@ -1,0 +1,27 @@
+From agocorona at gmail.com  Mon Apr 18 11:53:46 2011
+From: agocorona at gmail.com (Alberto G. Corona )
+Date: Mon, 18 Apr 2011 11:53:46 +0200
+Subject: [Haskell-cafe] deriving instances in GHC 7.*
+Message-ID: <BANLkTi=drBU+H5ZG_qJb6wJ85MRWmvODug@mail.gmail.com>
+
+By my little experience with GHC 7.*  it seems that this version is
+more "deterministic" when deriving instances. For example
+if there is a general instance declaration such is:
+
+instance C1 x=> C2 x where ....
+
+then   the absence of the C1 instance becomes an error. C1 instance
+becomes a prerequisite for any C2 instance, where in previous
+versions, that was just a overlapping instance in collision with  any
+other less general instance of the C2 class, so it could be overcomed
+with the "OverlappingInstances" flag.
+
+Given that is not possible to hide instances,  this is annoying. I?m
+not saying that this is wrong or even If this is so, because this
+could be a misinterpretation on my side based on the tests I have
+done. Where can I read about the rationale of this change?. General
+Instance derivations rules, as any rule system seem to me naturally
+flexible and with different degrees of generalization rather tan
+rigid.
+
+

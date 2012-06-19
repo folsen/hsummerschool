@@ -1,0 +1,31 @@
+From qubital at gmail.com  Sun Aug 28 15:37:49 2011
+From: qubital at gmail.com (anonymous)
+Date: Sun, 28 Aug 2011 08:37:49 -0500
+Subject: [Haskell-cafe] Trouble with Haddock
+Message-ID: <CA+MSfs+UnoFU-Ej6np3yKkKz82gyHN5T=KD7j7rrx7Q0pgp_Gw@mail.gmail.com>
+
+First time using haddock.
+I'm unable to include code examples in the module header.
+Haddock fails with this error:
+haddock module header parse failed: Cannot parse header
+documentation paragraphs
+
+It's about 12 lines of code, which doesn't seem like much compared to other
+packages.
+
+e.g.
+-- | describing module
+--
+-- > code
+-- > ...
+-- > code
+module Foo
+   ( ....
+
+
+I tried @...@ code blocks, but that didn't work either.
+If I shorten the code to 3 lines or so, it will work.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110828/60582551/attachment.htm>
+

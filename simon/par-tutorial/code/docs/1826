@@ -1,0 +1,85 @@
+From ierton at gmail.com  Sun Dec 11 14:09:44 2011
+From: ierton at gmail.com (Sergey Mironov)
+Date: Sun, 11 Dec 2011 17:09:44 +0400
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+In-Reply-To: <87k464b870.fsf@gnu.org>
+References: <87k464b870.fsf@gnu.org>
+Message-ID: <CAD+npnq+CWoy1hvKqiddTiYmj01kAx2qmgqYJr6Q2yMgkQK6QA@mail.gmail.com>
+
+2011/12/10 Jose A. Ortega Ruiz <jao at gnu.org>
+
+>
+> I'm happy to announce the release of xmobar 0.14.
+>
+> Xmobar is a text-based, minimalistic status bar for linuxy systems,
+> written in Haskell.  See http://projects.haskell.org/xmobar for
+> details.
+>
+> Many, many thanks to the many, many contributors, and apologies for
+> taking so long to put their code and fixes under a new release.
+>
+> In this episode:
+>
+> _New features_
+>
+>  - New brightness monitor, courtesy of Martin Perner.
+>  - New DateZone plugin, for configurable timezone and localized
+>    datetimes, also by Martin.
+>  - New keyboard layout monitor (Kbd).  Yes, by Martin.
+>  - Rewrite of the event handling ([issue 53], [issue 57]), you
+>    guessed it.
+>  - Cpu monitor now also reports `iowait` field ([issue 55]).
+>  - Battery monitor: the full charge file is now settable in the
+>    monitor arguments (olpc systems use `charge_full_design`; see
+>    [issue 62]).
+>
+> _Bug fixes_
+>
+>  - [issue 45]: Fix for crashes with AC status changes in battery monitor.
+>  - [issue 48]: The <quality> field of Wireless behaves like a percentage.
+>  - [issue 50]/[issue 61]: `MPD` monitor now works with libmpd 0.6.
+>  - [issue 60]: Fixes for crashes on power resume for battery monitor.
+>  - Template sections without fields are now correctly displayed.
+>  - Catch errors when reading battery status (Ben Boeckel).
+>  - Compilation issues with ghc 7.x (Sergei Trofimovich).
+>  - Fixes for CoreTemp monitor in new kernels (Norbert Zeh).
+>  - Fix for pulseaudio problems in volume monitor (Martin Perner).
+>  - Fix for parsing errors when a `Run` entry ended in an array
+>    (Martin).
+>  - Fixed compilation in OpenBSD (Ivo van der Sangen).
+>
+> [issue 45]: http://code.google.com/p/xmobar/issues/detail?id=45
+> [issue 48]: http://code.google.com/p/xmobar/issues/detail?id=48
+> [issue 50]: http://code.google.com/p/xmobar/issues/detail?id=50
+> [issue 53]: http://code.google.com/p/xmobar/issues/detail?id=53
+> [issue 55]: http://code.google.com/p/xmobar/issues/detail?id=55
+> [issue 57]: http://code.google.com/p/xmobar/issues/detail?id=57
+> [issue 60]: http://code.google.com/p/xmobar/issues/detail?id=60
+> [issue 61]: http://code.google.com/p/xmobar/issues/detail?id=61
+> [issue 62]: http://code.google.com/p/xmobar/issues/detail?id=62
+>
+> Cheers,
+> jao
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+Hi. I am Awesome WM user thinking about swithcing to the xmonad. Could I
+take an opportunity and ask about mouse support in xmonad/xmobar ?
+Actually, I assume that xmobar does nothing with mouse, but what is a
+common way of showing something like main menu to the user? Is there an
+option of switching windows with mouse by pressing on some window's icon,
+just like common DE does?
+
+--
+Thanks,
+Sergey.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111211/b3196c46/attachment.htm>
+

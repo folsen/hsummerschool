@@ -1,0 +1,89 @@
+From miguelimo38 at yandex.ru  Wed Aug 24 10:08:01 2011
+From: miguelimo38 at yandex.ru (MigMit)
+Date: Wed, 24 Aug 2011 12:08:01 +0400
+Subject: [Haskell-cafe] Existential question
+In-Reply-To: <20110824074334.9706E17121@Adric.ern.nps.edu>
+References: <20110824074334.9706E17121@Adric.ern.nps.edu>
+Message-ID: <FE620BFD-772D-4FDA-BAC2-D2A3243D9E2A@yandex.ru>
+
+Ehm... what? How can you do such a replacement without losing, for example, functions like this:
+
+f (KI s h) i = snd $ h i $ fst $ h i s
+
+?????????? ? iPad
+
+24.08.2011, ? 11:43, oleg at okmij.org ???????(?):
+
+> 
+>> I had simplified the type to make the plumbing simpler.  My intention 
+>> was to include an initial value to use the function as a sequence 
+>> transformer / generator:
+>> 
+>> data Kl i o = forall s. Kl s (i ->  s ->  (s, o))
+> 
+> That change makes a world of difference! For example, the above type
+> (Kl i) is clearly a monad
+> 
+>> instance Monad (Kl i) where
+>>    return x = Kl () (\_ s -> (s,x))
+>>    (Kl s m) >>= f = Kl s (\i s -> case f (snd (m i s)) of
+>>                           Kl s' m' -> (s,snd (m' i s')))
+> 
+> 
+> It is the Reader monad. Different Kl values have their own, private s.
+> The quantification ensures that each encapsulated 's' applies only to
+> its generator. Therefore, we can just as well apply that 's' right at
+> the very beginning. Therefore,
+> 
+>> data Kl i o = forall s. Kl s (i ->  s ->  (s, o))
+> 
+> is essentially
+> 
+>> data Kl' i o = Kl' (i -> o)
+> 
+> which is certainly and Arrow and a Monad. We do not need existential
+> at all. The web page
+>    http://okmij.org/ftp/Computation/Existentials.html
+> describes other eliminations of Existentials.
+> 
+> 
+>> Does the "growing type" s1 -> s2 -> (s1,s2) in the bind-like method 
+>> below support some other abstraction that is monad-like?
+>> 
+>> data Kl1' s o = Kl1' (s -> (s,o))
+>> 
+>> bind' :: (Kl1' s1 i) -> (i -> Kl1' s2 o) -> (Kl1' (s1,s2) o)
+>> 
+>> bind' mi f = Kl1' mo where
+>>   mo (s1,s2) = ((s1',s2'),o) where
+>>     (Kl1' u1) = mi
+>>     (s1', i)  = u1 s1
+>>     (Kl1' u2) = f i
+>>     (s2', o)  = u2 s2
+> 
+> Not all things are monads; for example, restricted and parameterized
+> monads are not monads (but do look like them, enough for the
+> do-notation). Your Kl1' does look like another generalization of
+> monads. I must say that it seems to me more fitting for a parametrized
+> applicative:
+> 
+>> class Appish i where
+>>    purish :: a -> i s a
+>>    appish :: i s1 (a ->b) -> i s2 a -> i (s1,s2) b
+>> 
+>> data KL s a = KL (s -> (s,a))
+>> 
+>> instance Appish KL where
+>>    purish x = KL (\s -> (s,x))
+>>    appish (KL f1) (KL f2) = KL $ \(s1,s2) ->
+>>      let (s1', ab) = f1 s1
+>>          (s2', a)  = f2 s2
+>>      in ((s1',s2'), ab a)
+> 
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

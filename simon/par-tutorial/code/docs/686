@@ -1,0 +1,47 @@
+From dagitj at gmail.com  Sun Apr 24 19:33:46 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Sun, 24 Apr 2011 10:33:46 -0700
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <4DB3E7E8.8000907@btinternet.com>
+References: <4DB093A6.8000303@btinternet.com> <4DB3E7E8.8000907@btinternet.com>
+Message-ID: <BANLkTi=S70WstLi83umF=v=LBVu1A7pbTQ@mail.gmail.com>
+
+On Sun, Apr 24, 2011 at 2:05 AM, Andrew Coppin
+<andrewcoppin at btinternet.com>wrote:
+
+> I've discovered something interesting.
+>
+> Darcs stores history as a partially-ordered set of changes. This is a
+> beautiful and elegant idea. In theory, this lets me apply any combination of
+> changes, possibly generating file "versions" which have never actually
+> existed before. (E.g., the new type checker from GHC 7.0 embedded in the GHC
+> 6.6 codebase - not that I imagine it would compile, but in principle I can
+> do it.)
+>
+> So I was a little surprised to discover that... Darcs doesn't actually
+> support doing this. Darcs is only really interested in the result of
+> applying *all* changes in a repo. If you want to apply some subset of
+> changes, you need to make a seperate repo containing only the changes you
+> want applied.
+>
+> It seems daft to me that you would design a sophisticated system for
+> splitting history into independent chunks, and then not let me manipulate
+> them independently.
+>
+
+This is because of a deliberate choice that was made by David Roundy.  In
+darcs, you never have multiple branches within a single darcs repository
+directory tree.  To get the effect you want, you simply create two
+repositories.  One having only the patches for ghc 6.6 and one having the
+patches of ghc 7.0 and then you pull just the patches you want from 7.0 into
+6.6.  There are options to 'darcs get' that help you select the right set of
+patches to help you create the two repositories.
+
+If you're interested in the details of how to do it, I would suggest asking
+on the darcs-users mailing list.
+
+Jason
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110424/135d924f/attachment.htm>
+

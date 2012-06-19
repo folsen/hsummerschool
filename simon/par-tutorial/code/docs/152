@@ -1,0 +1,17 @@
+From mokus at deepbondi.net  Tue Apr  5 18:00:50 2011
+From: mokus at deepbondi.net (James Cook)
+Date: Tue, 5 Apr 2011 12:00:50 -0400
+Subject: [Haskell-cafe] Using _ on the RHS of an equation?
+In-Reply-To: <8294B695F1501F49AE7B527CBB3C5B852157090BDE@ex3.ad.dcs.gla.ac.uk>
+References: <8294B695F1501F49AE7B527CBB3C5B852157090BDE@ex3.ad.dcs.gla.ac.uk>
+Message-ID: <3578A9AB-46B7-47D5-9BC8-850C4E2EFA84@deepbondi.net>
+
+It's quite hacky, but this can be done with CPP and quasiquoting  
+(incidentally, it would be _REALLY_ nice if 'undefined' and 'error'  
+had similar source-location-dependent error messages by default):
+
+https://github.com/mokus0/junkbox/commit/bad59f486c3457f1d880a1cfa5b1baa33aff4ade
+
+-- James
+
+

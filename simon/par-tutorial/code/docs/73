@@ -1,0 +1,23 @@
+From noor2004 at yahoo.com  Sun Apr  3 16:31:10 2011
+From: noor2004 at yahoo.com (Anwar Bari)
+Date: Sun, 3 Apr 2011 07:31:10 -0700 (PDT)
+Subject: [Haskell-cafe] error to Fail Conversion
+Message-ID: <64103.5893.qm@web33508.mail.mud.yahoo.com>
+
+HI Cafe 
+  I have problem with this function 
+value :: Theorm-> [(String,Int)] -> Tem -> Int
+value _   env (Var s)      = maybe (error "Unknown variable.") id (lookup s env)
+value mdl env (OP s _ _ l) = maybe (error "Function not defined.") id (lookup 
+(map (value mdl env) l) (S.toList $ maybe (error 
+
+"Uknown function.") id (fmap snd (multiLookup s (operations mdl)))))
+
+This function is working fine, but I want to change error function to fail 
+function to be able use it in my GUI application. 
+
+I can't change the output of value function to IO Int,any idea will help.
+Thanks
+Nour.
+
+

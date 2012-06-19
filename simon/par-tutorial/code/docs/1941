@@ -1,0 +1,35 @@
+From mokus at deepbondi.net  Wed Dec 14 19:09:40 2011
+From: mokus at deepbondi.net (James Cook)
+Date: Wed, 14 Dec 2011 13:09:40 -0500
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CACw0ni+Q=ixAAdWzmsbF+c1RkF74S2RV=fi_tX2B2puR0s5xvQ@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+	<CACw0ni+Q=ixAAdWzmsbF+c1RkF74S2RV=fi_tX2B2puR0s5xvQ@mail.gmail.com>
+Message-ID: <12B612A8-515C-4E86-BE7E-F2214AA5E210@deepbondi.net>
+
+On Dec 14, 2011, at 12:37 PM, Bryan O'Sullivan wrote:
+
+> On Tue, Dec 13, 2011 at 10:23 PM, Gregory Crosswhite <gcrosswhite at gmail.com> wrote:
+>   
+> This way users of the classes will know whether their type has well-defined instance for some and many or not.
+> 
+> But that's precisely what the Alternative class is already for! If you are writing an Alternative instance at all, then you are asserting that it must be possible and reasonable to replicate the existing behaviour of some and many.
+
+It seems reasonable to say that 'empty' and '<|>' are what Alternative is for, and 'some' and 'many' happen to be useful compositions of those for several (but not all) Alternatives - just like there are compositions of the Monad operations that don't make sense in all monads (such as "forever"), there are compositions of the Alternative operations that don't make sense for all Alternatives.  It just happens that "some" and "many" are important enough for parsing that it was felt worthwhile to put them in the class to allow optimizing them in some cases.
+
+So a case could be made that, just as "forever (Just 1)" being nonsensical doesn't invalidate "instance Monad Maybe", "some (Just 1)" being nonsensical doesn't invalidate "instance Alternative Maybe".  And on the other hand, a case could be made that the importance of "some" and "many" justifies the creation of a subclass of Alternative where they actually are mandated to be meaningful rather than just definable.
+
+> I think we should take any further discussion off-list. Your messages from last night betray a deep misunderstanding that I'm not sure everyone else needs to sit through :-)
+
+Obviously I can't speak for everyone, but I enjoy reading discussions like this (and with a threaded mail reader, they're very easy to skip when I don't feel like reading them).  What seems like misunderstanding is often actually another person's fundamental difference of perspective, and it can be valuable to anyone who has skimmed the thread this far to see what, if any, common ground can be found.
+
+-- James
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111214/1964e0ba/attachment.htm>
+

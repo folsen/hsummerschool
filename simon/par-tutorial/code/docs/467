@@ -1,0 +1,89 @@
+From mail at joachim-breitner.de  Mon Apr 18 10:01:32 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Mon, 18 Apr 2011 13:31:32 +0530
+Subject: [Haskell-cafe] Data.StateVar and packages sizes (Was: How to
+ contact OpenGL package maintainer)
+In-Reply-To: <4DABEABC.6080407@henning-thielemann.de>
+References: <AANLkTinoGT8qa10+ZO6PEG5EOeMm=r3Cf2Rpeoe7tEts@mail.gmail.com>
+	<BANLkTikBKDkFLViTqt+UoixiX9gUQi_Gqg@mail.gmail.com>
+	<1303055619.2613.27.camel@kirk>
+	<BANLkTimKH=YLSMYhHDOTSx8xiUEYAs=PrA@mail.gmail.com>
+	<1303062686.2613.34.camel@kirk>
+	<BANLkTi=EstBKYvO1xM+=r37U4XyTn9Yz0Q@mail.gmail.com>
+	<1303111814.2482.6.camel@kirk> <4DABEABC.6080407@henning-thielemann.de>
+Message-ID: <1303113692.2482.12.camel@kirk>
+
+Hi,
+
+Am Montag, den 18.04.2011, 09:39 +0200 schrieb Henning Thielemann:
+> Joachim Breitner schrieb:
+> > Am Sonntag, den 17.04.2011, 12:39 -0700 schrieb Jason Dagit:
+> > 
+> > 
+> >> In this specific case, I'll do what I can to clean things up but your
+> >> request makes me pause and think that the debian packaging for cabal
+> >> packages is not automated enough.  As haskell developers it seems a
+> >> little odd to me that we need to consider the cost of creating new
+> >> packages for the sake of debian.  I like debian, so please don't take
+> >> that the wrong way :)
+> > 
+> > the observation is correct, but unfortunately hard to change ? Debian is
+> > large, slow moving, and unlikely to change policies for a corner-case
+> > such as Haskell libraries. 
+> 
+> As a user I had the impression that the packages become more and more
+> divided into smaller packages (like TeX) and I found this useful, since
+> I only need space for the functionality that I really use.
+
+I have doubts that there is a relevant saving of space when putting this
+code in a package of its own:
+
+======snip========
+module Data.ObjectName ( ObjectName(..) ) where
+-- | An 'ObjectName' is an explicitly handled identifier for API objects, e.g. a
+-- texture object name in OpenGL or a buffer object name in OpenAL.
+class ObjectName a where
+   -- | Generate a given number of object names, which are guaranteed to be
+   -- unused. By generating the names, they become used.
+   genObjectNames :: Int -> IO [a]
+   -- | Make the given object names available again, declaring them as unused.
+   deleteObjectNames:: [a] -> IO ()
+   -- | Test if the given object name is currently in use, i.e. test if it has
+   -- been generated, but not been deleted so far.
+   isObjectName :: a -> IO Bool
+======snip========
+
+considering that there is a license file, a .cabal file, it will create
+separate haddock data with an index.html, an alphabetical index, it will
+have an entry of its own in the package file, you will have to look at
+the package name when upgrading, more dependencies that cabal-install
+needs to think about...
+
+And with TeX, at least here, all the small .sty packages are then
+distributed as one big thing called texlive (split into large sets such
+that ?humanities?, ?science?, ?publishing?), probably because it is too
+tedious to individually package and select what package I really want.
+
+If the trend to micro-package continues on Hackage, maybe that is what
+will happening: Someone will create collections of packages, similar to
+the plaform, maybe one for graphics (containing opengl, gtk2hs, etc.),
+one for audio. And then distributors would have packages corresponding
+to those bundles.
+
+Greetings,
+Joachim
+
+-- 
+Joachim Breitner
+  e-Mail: mail at joachim-breitner.de
+  Homepage: http://www.joachim-breitner.de
+  ICQ#: 74513189
+  Jabber-ID: nomeata at joachim-breitner.de
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110418/592851c5/attachment.pgp>
+

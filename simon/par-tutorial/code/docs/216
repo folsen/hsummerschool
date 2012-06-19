@@ -1,0 +1,68 @@
+From markus.l2ll at gmail.com  Thu Apr  7 16:53:02 2011
+From: markus.l2ll at gmail.com (=?ISO-8859-1?Q?Markus_L=E4ll?=)
+Date: Thu, 7 Apr 2011 17:53:02 +0300
+Subject: [Haskell-cafe] Local copy of hackageDB
+In-Reply-To: <BANLkTi=hjtDeBwOotHopY2AfOXaA+TfSOA@mail.gmail.com>
+References: <BANLkTi=dXeg+movZswKiaTavDNaJxhHOuQ@mail.gmail.com>
+	<1302171567-sup-8769@nixos>
+	<BANLkTimWixajCFjUx-33_Cq-txo7m1SPpQ@mail.gmail.com>
+	<BANLkTi=hjtDeBwOotHopY2AfOXaA+TfSOA@mail.gmail.com>
+Message-ID: <BANLkTi=iOG2SM-ZFM6H2No=ojd50m1x2nA@mail.gmail.com>
+
+This could be a nice feature and not hard to implement, maybe someone could
+take it up?
+
+2011/4/7 Jos? Pedro Magalh?es <jpm at cs.uu.nl>
+
+> Yes, I have that tarball. I just don't know how to tell cabal-install to
+> use it. Going to each package, individually unpacking and installing it is
+> what I've been doing so far, but I was hoping that could be automated.
+>
+>
+> Cheers,
+> Pedro
+>
+>
+> On Thu, Apr 7, 2011 at 14:18, Magnus Therning <magnus at therning.org> wrote:
+>
+>> On Thu, Apr 7, 2011 at 11:21, Marc Weber <marco-oweber at gmx.de> wrote:
+>> > Local copy ?
+>> > You know that hackage is hosting several thausands of source archives -
+>> > also old versions you don't want?
+>> >
+>> > Do you want to mirror everything locally?
+>> >
+>> > Fetching "latest" versions only to generate hashes takes many hours.
+>> > (Experience from hack-nix).
+>>
+>> There's a tar-ball served from
+>> http://hackage.haskell.org/packages/hackage.html
+>> (http://hackage.haskell.org/cgi-bin/hackage-scripts/archive.tar) which
+>> contains the latest version of all packages.  I think that's what the
+>> OP is using.  Downloading a 150MB tar-ball shouldn't take many hours,
+>> if you're on a decent connection.
+>>
+>> /M
+>>
+>> --
+>> Magnus Therning                      OpenPGP: 0xAB4DFBA4
+>> email: magnus at therning.org   jabber: magnus at therning.org
+>> twitter: magthe               http://therning.org/magnus
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110407/3d6683c8/attachment.htm>
+

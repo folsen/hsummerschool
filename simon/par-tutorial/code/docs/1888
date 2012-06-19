@@ -1,0 +1,22 @@
+From gcrosswhite at gmail.com  Tue Dec 13 04:56:33 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Tue, 13 Dec 2011 13:56:33 +1000
+Subject: [Haskell-cafe] Linear types using kinds?
+Message-ID: <5D2EEA29-EA4B-4E37-A763-9118B065552E@gmail.com>
+
+Hey everyone!
+
+So, I was on LtU reading about F*
+
+	http://lambda-the-ultimate.org/node/4318
+
+and an idea just occurred to me which *must* have occurred to someone smarter than me, so I would love your feedback on the following question:
+
+Could Haskell be extended to support linear/affine types (in order to have, for example, more efficient resource management) by extending the kind system to include such types?  Or, even if the answer were yes, does the use of monads and higher-order types (like those used in "runST" function for the ST monad) make linear/affine types completely redundant in Haskell.
+
+Thanks a lot!
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111213/48369606/attachment.htm>
+

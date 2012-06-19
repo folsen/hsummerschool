@@ -1,0 +1,53 @@
+From dave at zednenem.com  Wed Dec 21 22:49:27 2011
+From: dave at zednenem.com (David Menendez)
+Date: Wed, 21 Dec 2011 16:49:27 -0500
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <CADLz5wWsWghpJim+28FtPy+RSXWjXvboX_KqNLmcho3Ugjno7w@mail.gmail.com>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+	<20111216042614.GB15053@seas.upenn.edu>
+	<CADLz5wVmAYTjGq1+ST87=0oGmUoYdZUTCj=Xcv=u_5_8D3hWvQ@mail.gmail.com>
+	<CACqaG6wdMU=8+SH+n-cNmaPMHKEuv6UiWW3t6rFSYK06sw1t1Q@mail.gmail.com>
+	<CADLz5wWsWghpJim+28FtPy+RSXWjXvboX_KqNLmcho3Ugjno7w@mail.gmail.com>
+Message-ID: <CAOv7PyoxiiMKVmq+Nwbj=HHo8T1VckonnD9pJf0d7Wkep1w47Q@mail.gmail.com>
+
+On Wed, Dec 21, 2011 at 8:10 AM, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+> On 16 December 2011 16:26, Yves Par?s <limestrael at gmail.com> wrote:
+>> "1) What about the First type? Do we {-# DEPRECATE #-} it?"
+>>
+>> Personnaly, I'm in favor of following the same logic than Int:
+>> Int itself is not a monoid. You have to be specific: it's either Sum or
+>> Mult.
+>>
+>> It should be the same for Maybe: we remove its instance of Monoid, and we
+>> only use First and Last.
+>
+> The reason you need to be specific with Int is that it's not clear
+> which semantics (sum or product) you want. The semantics of Maybe are
+> clear: it's failure-and-prioritized-choice.
+>
+> Changing the order of the arguments of mappend should be the job of Dual.
+>
+> If we really want to drop the Monoid instance for Maybe and keep First
+> and Last and also want to be consistent we should also drop the Monoid
+> instances of [a], a->b, Endo a and of all the tuples.
+
+Interestingly, every one of these examples can been seen as an adaptor
+from another class.
+
+For [a], the monoid is (mzero,mplus).
+For a -> b and the tuples, the monoid is (pure mempty, liftA2 mappend).
+For Endo, the monoid is (id, (.))  (from Category)
+
+The current monoid instances for [a], a -> a, and the tuples feel like
+natural choices (in contrast to Maybe), but knowing which operations
+are used requires some understanding of the design history of the
+library. That's why I recommend only using mempty and mappend with
+polymorphic code.
+
+-- 
+Dave Menendez <dave at zednenem.com>
+<http://www.eyrie.org/~zednenem/>
+
+

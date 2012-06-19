@@ -1,0 +1,42 @@
+From caseyh at istar.ca  Tue Apr 19 18:14:19 2011
+From: caseyh at istar.ca (caseyh at istar.ca)
+Date: Tue, 19 Apr 2011 12:14:19 -0400
+Subject: [Haskell-cafe] Errata for "Pearls of Functional Algorithm Design"
+ by Richard Bird, 2010, page 25 #Haskell
+Message-ID: <20110419121419.91237ch9sw0c66zf@webmail.uniserve.com>
+
+-- Errata for "Pearls of Functional Algorithm Design" by Richard Bird,
+-- 2010, page 25 #Haskell
+
+-- I don't like this solution it suffers from "indexitis" which
+-- Bird talks about in the chapter on Sudoku.
+-- I can see why lists are liked, they avoid "indexitis" at
+-- the cost of chopping and concatenating them.
+
+-- One of the advantages of functional programming is supposed to be  
+less bookkeeping.
+
+smallest :: (Ord a) => Int -> (Array Int a, Array Int a) -> a
+smallest k (xa,ya) =
+~~~~search k (0,m+1) (0,n+1)
+~~~~~~~~where
+~~~~~~~~(0,m) = bounds xa
+~~~~~~~~(0,n) = bounds ya
+
+~~~~~~~~search k (lx,rx) (ly,ry)
+~~~~~~~~~~~~| lx == rx = ya ! (k+ly)
+~~~~~~~~~~~~| ly == ry = xa ! (k+lx)
+~~~~~~~~~~~~| otherwise = case (xa ! mx < ya ! my, k <= mx-lx+my-ly) of
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(True, True) -> search k (lx,rx) (ly,my)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(True, False) -> search (k-(mx-lx)-1)  
+(mx+1,rx) (ly,ry)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(False, True) -> search k (lx,mx) (ly,ry)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(False, False)-> search (k-(my-ly)-1)  
+(lx,rx) (my+1,ry)
+~~~~~~~~~~~~~~~~~~~~~~~~~~where
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~mx = (lx+rx) `div` 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~my = (ly+ry) `div` 2
+
+
+
+

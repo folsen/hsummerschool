@@ -1,0 +1,32 @@
+From johan.tibell at gmail.com  Tue Feb  8 08:10:07 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Tue, 8 Feb 2011 08:10:07 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTinkP3V6AopOA+CrwkeQCWRMHtTzKzro3VOWxhiS@mail.gmail.com>
+References: <AANLkTinkP3V6AopOA+CrwkeQCWRMHtTzKzro3VOWxhiS@mail.gmail.com>
+Message-ID: <AANLkTi=KF8y2hS4VxJVp2CDfHLM-f-ApOqC-ZcV6NTGi@mail.gmail.com>
+
+On Mon, Feb 7, 2011 at 11:57 PM, John Lato <jwlato at gmail.com> wrote:
+> I think the real problem we have with container classes has a lot more to do
+> with what we would use them for.? That is, Haskell already has Monoid,
+> Foldable and Traversable.? These three (especially Foldable) cover nearly
+> everything OOP programmers would expect out of generic container operations.
+
+Unfortunately using e.g. Foldable hurts performance a lot. We need to
+look into inlining and specialization and move some functions (e.g.
+foldl') into the type class if we want acceptable performance.
+
+> What's missing are classes for specific data types.? That is, a Map/Dict
+> interface, a Queue interface, and a Heap interface (probably others too, but
+> these are the first that come to mind).? But the standard Data.Map and List
+> (for a queue) seem good enough for most people, so there seems to be a lot
+> of inertia to overcome for these to be popular.
+
+I think the missing piece to make this abstraction worthwhile is a
+second Map/Dict type worth using. Then there's a point in abstracting
+over which type is actually used. In most OOP languages the two map
+types are sorted and hashed maps.
+
+Johan
+
+

@@ -1,0 +1,43 @@
+From wren at freegeek.org  Tue Dec 20 00:11:48 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Mon, 19 Dec 2011 18:11:48 -0500
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CAKFCL4UUKjxW-pUtXBF6oyYW7JZpswc_JNBVTJ5+jEHsOJxAiA@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+	<CACw0ni+Q=ixAAdWzmsbF+c1RkF74S2RV=fi_tX2B2puR0s5xvQ@mail.gmail.com>
+	<1B00C2DD-781C-41BC-BE2F-DDB4C646C8DC@gmail.com>
+	<CAKFCL4UUKjxW-pUtXBF6oyYW7JZpswc_JNBVTJ5+jEHsOJxAiA@mail.gmail.com>
+Message-ID: <4EEFC4B4.9080903@freegeek.org>
+
+On 12/14/11 9:52 PM, Brandon Allbery wrote:
+> That's kinda where I am right now; I'm being told simultaneously that (a)
+> it makes sense to have Applicative and Alternative for Maybe, and (b) it
+> doesn't make sense to have many and some for Maybe, and (c) if you have
+> Applicative and Alternative then many and some automatically follow.
+> These statements are not mutually logically consistent, and leave me
+> wondering if Applicative and/or Alternative have been fully thought out.
+
+I think we can all safely agree that the Applicative instance for Maybe 
+is both sound and sensible. Afterall, it captures exactly the same idea 
+as the monad instance: (explicitly) partial functions.
+
+The only difference is that the Applicative instance removes (in theory) 
+the ordering constraints imposed by Monad, and therefore allows a more 
+functional/applicative style of programming in lieu of the imperative 
+style a la do-notation. The loss of ordering restrictions is only in 
+theory because in order to propagate failures correctly we must use 
+call-by-value semantics--- or, rather, we must be explicit about when 
+we're not evaluating something (and so may safely discard its potential 
+for returning Nothing). So, we can get rid of all the ordering 
+differences between different call-by-value systems, but we're not 
+completely confluent.
+
+-- 
+Live well,
+~wren
+
+

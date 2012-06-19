@@ -1,0 +1,26 @@
+From noteed at gmail.com  Wed Apr 27 11:34:51 2011
+From: noteed at gmail.com (Vo Minh Thu)
+Date: Wed, 27 Apr 2011 11:34:51 +0200
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <alpine.DEB.2.00.1104271123020.5485@anubis>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+Message-ID: <BANLkTiksUamgs9ER2XoKsiE_u37dUFjpUw@mail.gmail.com>
+
+2011/4/27 Henning Thielemann <lemming at henning-thielemann.de>:
+>
+> I like to apply for the quote of the week. :-)
+>
+> ?"If Haskell is great because of its laziness,
+> ? then Python must be even greater,
+> ? since it is lazy at the type level."
+>
+> Dynamically typed languages only check types if they have to, that is if
+> expressions are actually computed. Does this prove that laziness at type
+> level as in Python is a great thing or does this prove that laziness at the
+> value level as in Haskell is a bad thing or does this prove nothing?
+>
+> Hope for controversial discussion ...
+
+I like the sloth to be eager to eat my bugs.
+
+

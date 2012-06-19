@@ -1,0 +1,33 @@
+From ivan.miljenovic at gmail.com  Thu Feb  3 11:15:42 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Thu, 3 Feb 2011 21:15:42 +1100
+Subject: [Haskell-cafe] problem with instance method
+In-Reply-To: <4D4A7EF6.3020408@dit.ie>
+References: <4D4A7EF6.3020408@dit.ie>
+Message-ID: <AANLkTimyrFJcSCEDGQSp28KvttJKGTzYpqLjPLMshT3h@mail.gmail.com>
+
+On 3 February 2011 21:09, Patrick Browne <patrick.browne at dit.ie> wrote:
+> Hi,
+> I am studying type classes using examples from the literature [1].
+> The attached code is a formalization of basic object oriented ideas. The
+> particular approach seems to be built on the concepts of: thing, object,
+> and identifier.
+> I have no intension to implement anything or significantly change the
+> code below. Rather, I am trying to understand the code as it stands.
+> I include a number of test runs which seem OK, but I cannot get the
+> *obj* function to work.
+>
+> obj :: t -> i -> o t i
+> obj t i = Obj t i
+
+The type signature says "Given any `t' and any `i', this will return
+any `o t i' (for some unspecified type `o')".  However, your actual
+implementation uses a specific data-type, namely Object for `o'.
+Change the type signature to be "obj :: t -> i -> Object t i".
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

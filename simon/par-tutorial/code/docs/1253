@@ -1,0 +1,38 @@
+From allbery.b at gmail.com  Sun Aug 21 07:40:16 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Sun, 21 Aug 2011 01:40:16 -0400
+Subject: [Haskell-cafe] Embedding Perl RegEx in Haskell
+In-Reply-To: <CAGdT1gqXgEej_Z8ELZ8SncRNJ_iOmm92MPjTRP8oC73BY1P7-g@mail.gmail.com>
+References: <CAGdT1gqMvi3ihocy6Yg4A0z0C0uu0GVzSPStNCzZLrwCAbS=Ew@mail.gmail.com>
+	<CAKFCL4VrTnhzQwbp2N3RTL=4jzQT+6cUF9a814OgeHRSAZ1Adw@mail.gmail.com>
+	<CAGdT1gqXgEej_Z8ELZ8SncRNJ_iOmm92MPjTRP8oC73BY1P7-g@mail.gmail.com>
+Message-ID: <CAKFCL4Ufy+XjuK8hZz4cA7-PymOaVxq5X3b61_R+kBeF7csjQw@mail.gmail.com>
+
+On Sun, Aug 21, 2011 at 00:45, C K Kashyap <ckkashyap at gmail.com> wrote:
+
+>
+>> Why not just go with anchorHead and anchorTail or similar?  And a capture
+>> could simply be
+>>
+>>
+> Thanks for your inputs Brandon. I've updated the code with anchors. Still
+> trying to get a hold of captures.
+>
+
+What are you finding difficult about them?  Backreferences?  Given that this
+is Haskell, I'd look for ways to "tie the knot", although in terms of
+usability it's probably best to maintain a list of captures where the knot
+is actually tied between a capture regex component and its captures list
+entry, with backreferences either also tying the knot with the captures list
+or containing an offset in that list.  Practical usage:  you need to be able
+to access the strings matched by captures from "outside", so you want an
+independent structure for those captures rather than having to gmap the
+regex tree to get the captured strings.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110821/ab6b2307/attachment.htm>
+

@@ -1,0 +1,22 @@
+From gcrosswhite at gmail.com  Mon Dec 12 06:18:55 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Mon, 12 Dec 2011 15:18:55 +1000
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+Message-ID: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+
+Hey everyone,
+
+I am sure that it is too late to do more than idly speculate about this, but could we split the some/many methods out from Alternative?  They simply don't make sense except in a subset of possible Alternatives --- in most cases they just result in an infinite loop.  That is to say, it is not just that they are extraneous functionality, but most of the time they are *impossible* functionality to even implement!  In a way, it is a lie to be including them in Alternative since people making use of the class might incorrectly (but quite reasonably!) assume that any type that is an instance of Alternative *has* a well-defined some and many method, when this is actually the exception rather than the rule.
+
+It is only recently that I have been able to grok what some and many are even about (I think), and they seem to only make sense in cases where executing the Alternative action results in a portion of some input being consumed or not consumed.  "some v" means "consume at least one v and return the list of items consumed or fail", and "many v" means "consume zero or more v and return the list of items consumed or the empty list of none are consume".  It thus makes sense for there to be some subclass of Alternative called something like "Consumptive" that contains these methods.  The majority of "Alternative" instances would no longer have these methods, and again that would actually be an improvement since in such cases some/many were unworkable and did nothing but cause infinite loops anyway.
+
+Normally it would be unthinkable to even consider such a change to the base libraries, but I suspect that there are not more than a couple of packages out there that make active use of the some/many instances of Alternative;  it is really only parser packages that need some/many, and users most likely use the versions included with the packages themselves rather than the Alternative version.  Could we verify that this is the case, and if so split them away?  I thought I heard a trick whereby people were able to grep all the source on Hackage, but I can't remember what it was.  :-)
+
+Just a thought.  :-)
+
+Thanks,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111212/ee1403f4/attachment.htm>
+

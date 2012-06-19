@@ -1,0 +1,33 @@
+From paul.r.ml at gmail.com  Mon Dec  5 00:26:28 2011
+From: paul.r.ml at gmail.com (Paul R)
+Date: Mon, 05 Dec 2011 00:26:28 +0100
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAMXF=YCD8ODsmF53id9U=h+SsnuN1T8RvcvY2htwBgRFGgW85A@mail.gmail.com>
+	(dokondr@gmail.com's message of "Thu, 1 Dec 2011 22:26:22 +0300")
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+	<CANd=OGGcwRC9FfTA8KJQyzsQBDL3YycF2MYx4hMiN7vxeBwTFg@mail.gmail.com>
+	<20111201174112.GA14096@x200>
+	<CANd=OGGXOQYrKrnw9QpDaqgjC-JGsH7jFJB8Hx-OJjCTZP7KGQ@mail.gmail.com>
+	<CAMXF=YCD8ODsmF53id9U=h+SsnuN1T8RvcvY2htwBgRFGgW85A@mail.gmail.com>
+Message-ID: <874nxf9avv.fsf@gmail.com>
+
+dokondr> On the contrary, standard shell variable $0 - contains a full
+dokondr> path to the program location in the directory structure, no
+dokondr> matter from what directory the program was called.
+
+I don't think the comparison makes sense, as shell script invocation and
+executable run are very different mechanisms. Whenever you invoke
+a shell script, what really happens is that a program in your path (sh,
+bash ...) gets started with an argument that is the path to the script
+to load (your script actually). In this situation, you understand that
+it is easy to provide the path to the script (the $0) : it is just the
+file that the interpreter is loading.
+
+I don't know if it is possible at all to get this information in the
+context of binary execution. And I'm not sure it is a good practice
+anyway :)
+
+-- 
+  Paul
+
+

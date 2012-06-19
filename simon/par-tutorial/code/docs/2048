@@ -1,0 +1,27 @@
+From gcrosswhite at gmail.com  Sat Dec 17 06:28:15 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Sat, 17 Dec 2011 15:28:15 +1000
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <3FA2983E-B747-442C-8DF0-E9C15E35553C@gmail.com>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+	<20111216042614.GB15053@seas.upenn.edu>
+	<CADLz5wVmAYTjGq1+ST87=0oGmUoYdZUTCj=Xcv=u_5_8D3hWvQ@mail.gmail.com>
+	<CACqaG6wdMU=8+SH+n-cNmaPMHKEuv6UiWW3t6rFSYK06sw1t1Q@mail.gmail.com>
+	<3FA2983E-B747-442C-8DF0-E9C15E35553C@gmail.com>
+Message-ID: <733EEDEC-E604-40E8-AC54-AFC338070660@gmail.com>
+
+
+On Dec 17, 2011, at 2:57 PM, Gregory Crosswhite wrote:
+
+> +1 for this idea, because it follows the principle of least surprise.
+
+Sorry about the double-post!  I was foolish enough not only to use unsafePerformIO to send my e-mail, but to forgot to mark the sending routine with NOINLINE pragma.  As a result, the sending action was sparked and run twice by the runtime environment.
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111217/d04ae22a/attachment.htm>
+

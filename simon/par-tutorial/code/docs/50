@@ -1,0 +1,46 @@
+From daniel.is.fischer at googlemail.com  Sat Apr  2 11:21:31 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sat, 2 Apr 2011 11:21:31 +0200
+Subject: [Haskell-cafe] Setting up cabal on EC2
+In-Reply-To: <BANLkTimY_R7GFE2dTB5qjJAeJ6w4uJMkiw@mail.gmail.com>
+References: <BANLkTimY_R7GFE2dTB5qjJAeJ6w4uJMkiw@mail.gmail.com>
+Message-ID: <201104021121.32011.daniel.is.fischer@googlemail.com>
+
+On Saturday 02 April 2011 11:10:42, Lyndon Maydwell wrote:
+> Hi all.
+> 
+> I'm having some issues setting up cabal on EC2.
+> 
+> I've installed ghc 7.0.2, however, the bootstrap.sh script for
+> 
+> cabal-install is complaining about missing dependencies:
+> > Linking Setup ...
+> > Configuring Cabal-1.8.0.2...
+
+That looks wrong. ghc-7 comes with Cabal-1.10, so you should better build 
+cabal-install with that, that would be cabal-install-0.10.
+Which cabal-install package have you?
+
+> > Setup: At least the following dependencies are missing:
+> > base >=4 && <3 && >=1 && <5, filepath >=1 && <1.2
+
+That's a weird constraint. Impossible to fulfill, >= 4 && < 3.
+
+> > Setup: At least the following dependencies are missing: base >=4 && <3
+> > && >=1 && <5, filepath >=1 && <1.2
+> 
+> ghc-pkg tells me that I have base and filepath installed:
+> > /usr/local/lib/ghc-7.0.2/package.conf.d
+> > 
+> >    base-4.3.1.0
+> > 
+> > /usr/local/lib/ghc-7.0.2/package.conf.d
+> > 
+> >    filepath-1.2.0.0
+> 
+> Could there be an environment variable I need to set somewhere?
+
+Try downloading and unpacking cabal-install-0.10.* and run the bootstrap 
+script from that. If that doesn't work, report again.
+
+

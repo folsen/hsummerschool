@@ -1,0 +1,21 @@
+From metaniklas at gmail.com  Wed Aug 17 00:02:44 2011
+From: metaniklas at gmail.com (Niklas Larsson)
+Date: Wed, 17 Aug 2011 00:02:44 +0200
+Subject: [Haskell-cafe] why is Random in System?
+In-Reply-To: <CACbaDy5AwqkGuu1xFRg0VcXUROfZn0eonubkS8cfKPHDFR9uFQ@mail.gmail.com>
+References: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+	<A320995A-2DDA-4147-B804-098623C26914@deepbondi.net>
+	<CAKFCL4UtZAKrw-KazZtmCSi6cDZmb1mtm9of4E=0Ugr_9GXXvA@mail.gmail.com>
+	<CACbaDy5AwqkGuu1xFRg0VcXUROfZn0eonubkS8cfKPHDFR9uFQ@mail.gmail.com>
+Message-ID: <CACG=oWEbBdnUGeADqKVy03a+6EFazr1jBYoMyX3jbXnAuuL_vA@mail.gmail.com>
+
+I don't like the idea of Data.Random because random numbers use
+ordinary number types, and the generator itself is not the object of
+interest, the numbers are. I'd much prefer Math.Random. As the Math
+prefix isn't used in the core libraries maybe Control.Random is the
+least unpalatable alternative.
+
+Regards,
+Niklas
+
+

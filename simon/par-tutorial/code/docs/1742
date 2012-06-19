@@ -1,0 +1,32 @@
+From allbery.b at gmail.com  Thu Dec  8 03:01:11 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Wed, 7 Dec 2011 21:01:11 -0500
+Subject: [Haskell-cafe] terminateProcess leaves zombie processes around
+In-Reply-To: <CAJ-DSyyzivrXm3PjoZw6GVML6gLSeN_pxybT6JQnKwVX2mYkpw@mail.gmail.com>
+References: <CAN2DD_Ht0gt5p6AOzXB+yMALG=iKsA=Pmq91_amn4+qH7t59SA@mail.gmail.com>
+	<CAKFCL4UMRz2ig9YA8o4FQRCgEsgOdu8RTVKUiMc0ae3egN5OyA@mail.gmail.com>
+	<CAJ-DSyyzivrXm3PjoZw6GVML6gLSeN_pxybT6JQnKwVX2mYkpw@mail.gmail.com>
+Message-ID: <CAKFCL4UQnQCDQM4-T7MjJrPdFtkG4iZQkTM5X_ywrt6mxru3Hw@mail.gmail.com>
+
+On Wed, Dec 7, 2011 at 20:35, Jason Dagit <dagitj at gmail.com> wrote:
+
+> > They *do* terminate; a zombie is a dead process waiting for its parent to
+> > reap it with waitForProcess.  There's also some POSIX stuff you can do to
+> > have them auto-reaped, but doing that correctly and portably is somewhat
+> > painful.
+>
+> You can use a double fork to make this portable and not painful.  It's
+> just that you have to fork twice, which can be expensive in some
+> cases.
+>
+
+And problematic if you're using a pipe to communicate with the child, which
+seemed quite possible.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111207/e2f12e86/attachment.htm>
+

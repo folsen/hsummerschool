@@ -1,0 +1,78 @@
+From liuxinyu95 at gmail.com  Thu Apr 21 04:43:41 2011
+From: liuxinyu95 at gmail.com (larry.liuxinyu)
+Date: Wed, 20 Apr 2011 19:43:41 -0700 (PDT)
+Subject: [Haskell-cafe] QuickCheck, (Ord a)=> [a] -> Property problem
+In-Reply-To: <87k4ep540u.fsf@eee.8325.org>
+References: <78a0d4c2-d239-490c-a490-491f0dcabfd5@f11g2000vbx.googlegroups.com>
+	<87k4ep540u.fsf@eee.8325.org>
+Message-ID: <8d6edbcb-16f1-4501-b790-f45835c1c001@d12g2000vbz.googlegroups.com>
+
+Hi,
+
+Thanks a lot.
+
+The following type protocol also works.
+prop_foo :: (Ord a)=>(Num a) => [a] -> Property
+
+Somebody told me that:
+Eduard Sergeev ? BTW, more recent QuickCheck (from Haskell Platform
+2011.2.0.X - contains QuickCheck-2.4.0.1) seems to identifies the
+problem correctly:
+
+*** Failed! Falsifiable (after 3 tests and 2 shrinks):
+[0,1]
+False
+
+--
+Larry
+
+On Apr 20, 11:36?pm, Nick Smallbone <nick.smallb... at gmail.com> wrote:
+> "larry.liuxinyu" <liuxiny... at gmail.com> writes:
+> > prop_foo :: (Ord a) => [a] -> Property
+> > prop_foo xs = not (null xs) ==> maximum xs == minimum xs
+>
+> > This is an extreme case that the property is always wrong.
+>
+> > However, QuickCheck produces:
+> > *Main> test prop_foo
+> > OK, passed 100 tests.
+>
+> > Why this happen? If I use verboseCheck, I can find the sample test
+> > data are as the following:
+> > *Main>verboseCheck prop_foo
+> > ...
+> > 97:
+> > [(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),()]
+> > 98:
+> > [(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),
+> > (),(),(),(),(),(),()]
+> > 99:
+> > [(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),
+> > (),(),()]
+> > OK, passed 100 tests.
+>
+> This is an unfortunate feature of GHCi: if the thing you want to
+> evaluate has a polymorphic type then all the type variables default to
+> (), see:
+> ?http://www.haskell.org/ghc/docs/7.0.3/html/users_guide/interactive-ev...
+> So prop_foo is only tested for lists of (). Nasty.
+>
+> The usual way to work around it is to declare all your properties
+> monomorphic, so write:
+> ? prop_foo :: [Integer] -> Property
+>
+> > This works at least, However, since 'a'<'b', they are order-able, what
+> > if I want to test prop_foo works for char?
+>
+> Testing with Integers should always[*] be enough because of
+> parametricity.
+>
+> Nick
+>
+> [*] For certain values of "always" :)
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-C... at haskell.orghttp://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

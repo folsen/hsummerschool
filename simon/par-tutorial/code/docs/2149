@@ -1,0 +1,53 @@
+From chrisyco+haskell-cafe at gmail.com  Wed Dec 21 00:10:24 2011
+From: chrisyco+haskell-cafe at gmail.com (Chris Wong)
+Date: Wed, 21 Dec 2011 12:10:24 +1300
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <CAL3m8eBx2=RNZJfqBSp=Bds4GXeu8vvAfXR_CPkPGJ+HZ-1-Xg@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+	<CAL3m8eBx2=RNZJfqBSp=Bds4GXeu8vvAfXR_CPkPGJ+HZ-1-Xg@mail.gmail.com>
+Message-ID: <CA+qNEz+jtpJN-DUXEJZDJEciHyqnr0P8o2WJKWWt1KTjB4zwxw@mail.gmail.com>
+
+On Wed, Dec 21, 2011 at 10:53 AM, Matthew Farkas-Dyck
+<strake888 at gmail.com> wrote:
+> With GHC 7.0.3:
+>
+> $ cat test.hs
+> class ? a where {
+> ?test :: a;
+> };
+>
+> (?) :: Eq a => a -> [a] -> Bool;
+> x ? (y:ys) = x == y || x ? ys;
+>
+> main = putStrLn "Two of three ain't bad (^_~)";
+> $ runhaskell test.hs
+> Two of three ain't bad (^_~)
+> $
+
+Why not expand it even further?
+
+class Monoid m where
+    (?) :: m -> m -> m
+    (?) :: m
+
+(?) :: (Foldable t, Eq a) => a -> t a -> Bool
+
+(?) :: (b -> c) -> (a -> b) -> (a -> c)
+
+(?) :: Bool -> Bool -> Bool
+
+etc.
+
+We can write a whole Haskell library full of these aliases --
+"syntactic-heroin" perhaps? ;)
+
+(http://www.haskell.org/haskellwiki/Syntactic_sugar/Cons#Syntactic_heroin)
+
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

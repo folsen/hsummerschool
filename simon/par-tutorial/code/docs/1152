@@ -1,0 +1,48 @@
+From dokondr at gmail.com  Mon Aug 15 22:56:06 2011
+From: dokondr at gmail.com (dokondr)
+Date: Tue, 16 Aug 2011 00:56:06 +0400
+Subject: [Haskell-cafe] Haskell Actors, Linda,
+	publish / subscribe models?
+In-Reply-To: <CACYs5AZzhXknAyOYec6WBwgRmQR272aT0As4GMogo2JbkLLuuQ@mail.gmail.com>
+References: <CAMXF=YBjfyjA8NqSH9HyngS_UZDr_4cYJiv_8Lh1zNfepJYs9w@mail.gmail.com>
+	<CAMXF=YCWVwkGgj9ci80hbDcYLJv-_GwgEybBdRDU7=FCTWm+vw@mail.gmail.com>
+	<CAKJoN-o=UMdqYcBrG8cQL-J5f=23Ekj4bCQcoYhp2Di4EGPt=g@mail.gmail.com>
+	<CAMXF=YAyMvO-L=JTAF6MdEfrq-_NRd-bfs5BkqjbskA9ENUDUw@mail.gmail.com>
+	<CACYs5AZzhXknAyOYec6WBwgRmQR272aT0As4GMogo2JbkLLuuQ@mail.gmail.com>
+Message-ID: <CAMXF=YB8D8KWm2jQcVkNJXZLBJv14xp9FgNmu=dxoaH7SiFuVg@mail.gmail.com>
+
+On Mon, Aug 15, 2011 at 11:41 PM, Ryan Newton <rrnewton at gmail.com> wrote:
+
+> It seems that the recent "Cloud Haskell" paper is relevant:
+>
+>
+> http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/remote.pdf
+>
+> The repo is here:
+>
+>    https://github.com/jepst/CloudHaskell
+>
+> I haven't tried it yet myself but would like to.
+>
+> Cheers,
+>   -Ryan
+>
+>
+Thanks for the really great news!
+Finally Erlang actor model of communication comes to Haskell!
+I hope that one day Haskell will also evolve to provide dynamic code update
+as Erlang does.
+It would then be the ideal PL for reliable programming  of adaptive,
+distributed real-world systems!
+
+-- 
+All the best,
+Dmitri O. Kondratiev
+
+"This is what keeps me going: discovery"
+dokondr at gmail.com
+http://sites.google.com/site/dokondr/welcome
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110816/692e9415/attachment.htm>
+

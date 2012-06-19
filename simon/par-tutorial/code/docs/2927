@@ -1,0 +1,33 @@
+From malcolm.wallace at me.com  Thu Feb 10 22:03:46 2011
+From: malcolm.wallace at me.com (Malcolm Wallace)
+Date: Thu, 10 Feb 2011 21:03:46 +0000
+Subject: [Haskell-cafe] [Cabal-devel] Cabal && license combinations
+In-Reply-To: <AANLkTikEi5k=Z=j=K+3m2+1a--qs0nP5mocjTPWduxLd@mail.gmail.com>
+References: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+	<1297178086.2402.5.camel@godel>
+	<AANLkTin-FnLkMpjvPSAOGo+7gS8UWhT2t7GdBiPn1K-u@mail.gmail.com>
+	<8739nw9v7a.fsf@malde.org> <1297353870.19300.88.camel@godel>
+	<AANLkTikEi5k=Z=j=K+3m2+1a--qs0nP5mocjTPWduxLd@mail.gmail.com>
+Message-ID: <00C0261E-1ABC-4C7C-BC21-9E982433C2B2@me.com>
+
+
+On 10 Feb 2011, at 17:38, Antoine Latter wrote:
+>
+> So no, the instant of compilation is not when the transitive
+> dependencies kick in, it is the publication of compiled binaries,
+> which in my mind is a pretty specialized case.
+
+This is possibly the most important point to emphasise, of which many  
+people seem unaware.  If you expect to receive an open source  
+application from someone else as source code, and build it yourself,  
+then almost by the definition of Open Source, you are already in  
+compliance with all licences.
+
+It is only those, comparatively few, people who build binaries and  
+give them to other people *as binaries* who even need to think about  
+licensing issues.
+
+Regards,
+     Malcolm
+
+

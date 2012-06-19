@@ -1,0 +1,49 @@
+From hesselink at gmail.com  Fri Aug 19 17:45:57 2011
+From: hesselink at gmail.com (Erik Hesselink)
+Date: Fri, 19 Aug 2011 17:45:57 +0200
+Subject: [Haskell-cafe] custom SQL-to-Haskell type conversion in HDBC
+In-Reply-To: <20110819145341.GB27362@houseag.com>
+References: <20110819052316.GA27130@houseag.com>
+	<CAPeieQEGXOJgfvA+FF2yTbhPnWA9vv7Xk8EghLj-2LiYy1Edyg@mail.gmail.com>
+	<20110819140939.GA27362@houseag.com>
+	<CAPeieQGnDo5TR6F1hWPjvWWV0+nrW0=6iPm9z-xxJ2HfiOkY4g@mail.gmail.com>
+	<20110819145341.GB27362@houseag.com>
+Message-ID: <CAPeieQHBYE9f+QrJodRtFscdgy5+_hzUYR5YnDWRrCJCv9kUYw@mail.gmail.com>
+
+On Fri, Aug 19, 2011 at 16:53, Henry House <hajhouse at hajhouse.org> wrote:
+> On Friday, 19 August 2011, Erik Hesselink wrote:
+>> Why exactly do you need the precision information?
+>
+> Empirical measurements (e.g., sizes of some fields in hectares) are
+> precise only to a certain level of measurement error. Thus, the area
+> measurements 1 ha and 1.000 ha are not equivalent or interchangeable.
+> Database engines recognize this fact by providing different data types
+> for rational numbers and fixed-precision decimal numbers.
+>
+> The bottom line for me is that the conversion of a fixed-precision
+> decimal number as a rational is both throwing away information (the
+> precision) as well as introducing bogus information (the notion that the
+> result value has greater --- i.e., infinite --- precision that was in
+> fact intended when that value was stored).
+
+Note that PostgreSQL also doesn't work with decimals as precision:
+
+postgres=# select 1::decimal(4,2) * 1::decimal(4,2);
+?column?
+----------
+   1.0000
+(1 row)
+
+That should be 1.00 instead if you want the precision correctly represented.
+
+Perhaps a solution would be to not treat the database precision as
+your primary source of information, but represent that in Haskell
+using some data type that correctly propagates precision information,
+and marshall your database data to and from that. This means some
+duplication of information (precision in both database and Haskell)
+but you do the same with NULL and Maybe, etc. I guess that's inherent
+to (the way HDBC does) database access.
+
+Erik
+
+

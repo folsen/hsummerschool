@@ -1,0 +1,26 @@
+From dagitj at gmail.com  Mon Apr  4 01:24:46 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Sun, 3 Apr 2011 16:24:46 -0700
+Subject: [Haskell-cafe] ANNOUNCE: FreeType 2 Bindings
+In-Reply-To: <BANLkTimnPNvTqDYK1OcGvFV0MwCtF0CPzg@mail.gmail.com>
+References: <BANLkTimnPNvTqDYK1OcGvFV0MwCtF0CPzg@mail.gmail.com>
+Message-ID: <BANLkTim8RNFWM+S7RaU4-y3x4bAyaYrNNg@mail.gmail.com>
+
+On Sun, Apr 3, 2011 at 4:21 PM, Jason Dagit <dagitj at gmail.com> wrote:
+
+> I'm excited to announce the immediate availability of FreeType 2 bindings
+> on hackage.  These bindings are based off the 2.4.4 release of FreeType 2
+> and use the BSD licensing option for FreeType 2.  This package should be of
+> interest to OpenGL users as it provides a way to get nice looking fonts into
+> your OpenGL programs.
+
+
+I almost forgot to mention: An import feature of my cabalization of
+freetype2 is that NO external libraries are needed.  Just install it with
+cabal or cabal-dev on linux, osx, or windows and you're ready to go.
+
+Jason
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110403/6a47d319/attachment.htm>
+

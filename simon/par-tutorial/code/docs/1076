@@ -1,0 +1,31 @@
+From cdsmith at gmail.com  Fri Aug 12 21:00:48 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Fri, 12 Aug 2011 13:00:48 -0600
+Subject: [Haskell-cafe] fyi GHC 7.2.1 release on the benchmarks game
+In-Reply-To: <CAEs96n1kyxb20pHM-bwm21seDZH+eFi8m_R3ZKZaE_sSYT9QDw@mail.gmail.com>
+References: <1313162290.59789.YahooMailClassic@web65615.mail.ac4.yahoo.com>
+	<CAEs96n1kyxb20pHM-bwm21seDZH+eFi8m_R3ZKZaE_sSYT9QDw@mail.gmail.com>
+Message-ID: <1313175648.29706.2.camel@godel>
+
+On Fri, 2011-08-12 at 11:44 -0500, austin seipp wrote:
+> > 2) I noticed `-fvia-C` has now gone away [...]
+> 
+> I can't forsee the potential performance ramifications, but frankly
+> -fvia-C has been deprecated/not-advised-for-use for quite a while now,
+> and I wonder how many of these programs just have not been
+> updated/tested with the native code generator since they were written.
+> 
+> In any case it's not an option anymore, so your only choice is to nuke
+> it from orbit (orbit being the Makefiles.)
+
+Well, the better option would be to try with the NCG, and also with LLVM
+(the -fllvm flag).  While the NCG is certainly competitive for idiomatic
+Haskell code, it's likely to be a bit behind when it comes to heavy
+C-in-Haskell code like what often gets submitted to the shootout.  LLVM
+seems likely to do better in some cases.
+
+-- 
+Chris
+
+
+

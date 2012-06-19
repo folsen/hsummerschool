@@ -1,0 +1,22 @@
+From felipe.lessa at gmail.com  Mon Apr 11 15:21:09 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Mon, 11 Apr 2011 10:21:09 -0300
+Subject: [Haskell-cafe] Foreign function performance: monadic vs pure
+In-Reply-To: <1302527654.18936.14.camel@localhost.localdomain>
+References: <loom.20110411T135905-625@post.gmane.org>
+	<1302527654.18936.14.camel@localhost.localdomain>
+Message-ID: <BANLkTi=CuDAH7G+S27mMhV9YHevfXmgDew@mail.gmail.com>
+
+On Mon, Apr 11, 2011 at 10:14 AM, Maciej Marcin Piechotka
+<uzytkownik2 at gmail.com> wrote:
+>> main = mapM (\x -> return $! c_sin_u) [1..n]
+> 0.012 s
+
+This should be
+
+  main = mapM (\x -> return $! c_sin_u x) [1..n]
+
+-- 
+Felipe.
+
+

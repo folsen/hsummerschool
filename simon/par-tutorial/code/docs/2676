@@ -1,0 +1,43 @@
+From mle+hs at mega-nerd.com  Fri Feb  4 00:38:13 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Fri, 4 Feb 2011 10:38:13 +1100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <201102032334.19964.daniel.is.fischer@googlemail.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<AANLkTi=tyKC19Fvie9c8QYN-P=R3oKM_Pm6zOpcmo4Qk@mail.gmail.com>
+	<201102032334.19964.daniel.is.fischer@googlemail.com>
+Message-ID: <20110204103813.6ffde171.mle+hs@mega-nerd.com>
+
+Daniel Fischer wrote:
+
+> On Thursday 03 February 2011 23:19:31, Johan Tibell wrote:
+> > Hi,
+> >
+> > For what it's worth I saw the problems in your counting examples right
+> > away, without reading the explanatory text below.
+> 
+> Yes, they were pretty obvious with enough experience. For beginners I 
+> expect it to be a rather insidious trap.
+> 
+> > Hopefully that means
+> > that it's possibly to learn how to spot such things without resorting
+> > to e.g. running the program or reading Core *gasp*.
+> 
+> Within limits. Detrimental laziness or strictness can be arbitrarily well 
+> hidden.
+
+I am a relative newcomer to Haskell, but I think I have a reasonable
+understanding of the executaion model. Enough to fix performance
+issues in simple code like the example given.
+
+However, one of the Haskell projects I work on is Ben Lippmeier's
+DDC compiler. Thats about 50000 lines of Haskell code and finding
+performance issues there is really difficult. 
+
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

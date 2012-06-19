@@ -1,0 +1,17 @@
+From jason.dusek at gmail.com  Wed Dec 21 07:38:33 2011
+From: jason.dusek at gmail.com (Jason Dusek)
+Date: Wed, 21 Dec 2011 06:38:33 +0000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <1324322427.2233.6.camel@fuzxxl>
+References: <1324322427.2233.6.camel@fuzxxl>
+Message-ID: <CAO3NbwM10g2Xv6xpw1oR=TrpqDyDu4-5aZh-bm3LcX1jghoeyA@mail.gmail.com>
+
+Support for long binary data sections would be nice.
+
+--
+Jason Dusek
+() ?ascii ribbon campaign - against html e-mail
+/\ ?www.asciiribbon.org ? - against proprietary attachments
+
+

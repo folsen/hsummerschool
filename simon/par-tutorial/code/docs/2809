@@ -1,0 +1,28 @@
+From andrewcoppin at btinternet.com  Mon Feb  7 22:00:16 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Mon, 07 Feb 2011 21:00:16 +0000
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <B7DEC147-6002-49F7-B756-D4CFF93D6625@cs.otago.ac.nz>
+References: <4D4B19DB.5000907@btinternet.com>	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>	<4D4D6B15.2060204@btinternet.com>
+	<AANLkTimj6PQP6o9NCcc+KXHJrc7+RwK3wQmg66KNMKur@mail.gmail.com>
+	<4D4EF972.2060309@btinternet.com>
+	<B7DEC147-6002-49F7-B756-D4CFF93D6625@cs.otago.ac.nz>
+Message-ID: <4D505D60.3090707@btinternet.com>
+
+>>> Haskell en Clean are very much alike.
+>>
+>>  From what I could determine from a basic Clean introduction, Clean is very *unlike* Haskell, having a far more verbose and low-level syntax. (E.g., the compiler can't even determine whether a binding is recursive or not for itself. You have to say that manually.)
+>
+> I have no idea what you are talking about here.
+> Clean is _very_ Haskell-like, including typeclasses.
+>
+> Here's the first few lines of code from a Clean file I wrote in 1998.
+
+I clearly have my languages mixed up.
+
+The language I'm thinking of required all variables (even top-level 
+ones) to be declared with "let" - unless the definition is recursive, in 
+which case you have to say "letrec" (i.e., the compiler it too stupid to 
+deduce this automatically). Apparently that isn't Clean...
+
+

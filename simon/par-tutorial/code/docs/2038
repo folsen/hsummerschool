@@ -1,0 +1,53 @@
+From spam at scientician.net  Fri Dec 16 23:09:59 2011
+From: spam at scientician.net (Bardur Arantsson)
+Date: Fri, 16 Dec 2011 23:09:59 +0100
+Subject: [Haskell-cafe] What happens if you get hit by a bus?
+References: <CAEzeKYpOsDqafSoJFQkYioSg-0LTJaFY8WCUBkH2RiXOCZypjQ@mail.gmail.com>
+	<jcg4q4$559$1@dough.gmane.org> <4EEBAF54.8040605@btinternet.com>
+Message-ID: <jcgfk2$dvv$1@dough.gmane.org>
+
+Andrew Coppin wrote:
+
+> On 16/12/2011 07:05 PM, Bardur Arantsson wrote:
+>> Michael Litchard wrote:
+>>
+>> [--snip--]
+>>
+>> If getting hit by a bus is a significant factor in the overall outcome of
+>> the project then I think those are pretty good odds, aren't they?
+>>
+>> (I do realize that traffic accidents are a lot more frequent than we like
+>> to think, but still...)
+> 
+> The /actual/ probability of being hit by a bus is irrelevant. The only
+> thing of concequence is the /percieved/ probability. This latter
+> quantity is not related to the former in any meaningful way. In fact,
+> due to an effect known as availability bias, the probability of any
+> potential threat varies dependi
+> ng on how long you spend thinking about it.
+
+[snip blah blah blah]
+
+- Not to be rude, but... (*)
+
+That was the point of my post.
+
+If you're actually confronted with this perception that traffic accidents 
+are relevant to project success, you're already in deep manure because 
+there's so much more than code in a project. That's what you need to 
+explain.
+
+Code is the "means" of getting us to an "end". It seems these people are 
+worring about the "means" when the big problem is actually conveying the 
+"ends".
+
+(Again, just my take on the situation, I'm not claiming canonicity or 
+anything.)
+
+-- 
+B?r?ur ?rantsson
+
+(*) I realize that this is rude. I can only apologize.
+
+
+

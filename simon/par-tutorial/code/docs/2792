@@ -1,0 +1,25 @@
+From stephen.tetley at gmail.com  Mon Feb  7 12:40:00 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Mon, 7 Feb 2011 11:40:00 +0000
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4FC689.1080107@xyxyx.org>
+References: <4D4B19DB.5000907@btinternet.com>
+	<AANLkTimTak3jHpg_RPattKoACvkUU31tQydCsgjjS=Oc@mail.gmail.com>
+	<4D4D6E48.3000903@btinternet.com> <4D4FC689.1080107@xyxyx.org>
+Message-ID: <AANLkTinwgZZ=aTz4mAQiGU2M1j9OuPRnrS9O2Au=K+b3@mail.gmail.com>
+
+On 7 February 2011 10:16, Jimbo Massive <jimbo.massive-haskell at xyxyx.org> wrote:
+
+> It's often struck me that, this information is clearly part of the
+> interface to a function, given that correct operation of calls to that
+> function may depend on it, yet we (implicitly) pretend that it's not (by
+> rarely documenting it).
+>
+> Would it not be both incredibly useful and possible to automatically
+> document information of this sort using tools like haddock?
+
+Interesting point, but excepting that its adding more complexity
+Haskell type system, the Clean way of putting strictness information
+into the type system seems preferable don't you think?
+
+

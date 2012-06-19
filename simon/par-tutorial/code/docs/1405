@@ -1,0 +1,22 @@
+From kc1956 at gmail.com  Sat Aug 27 02:55:41 2011
+From: kc1956 at gmail.com (KC)
+Date: Fri, 26 Aug 2011 17:55:41 -0700
+Subject: [Haskell-cafe] Project Euler: request for comments
+In-Reply-To: <CAPkMFPkSb+b_qfedTSMQKCTHV5GUROZSMVWt0aLNGD5g35XoGQ@mail.gmail.com>
+References: <CAPkMFPnCdD4Od5ff6AZ8pu5peR_puk2y+ygZeuPLPX_Y4tUPhw@mail.gmail.com>
+	<CAMLKXym5FPaWa38+LrrFw7oiLnZtSZq1Kn1zpBwn_udH_L-Drw@mail.gmail.com>
+	<CAPkMFPkSb+b_qfedTSMQKCTHV5GUROZSMVWt0aLNGD5g35XoGQ@mail.gmail.com>
+Message-ID: <CAMLKXym3VR1EGvXg5n0p1xuH1zbueejdkHLF_aRjkPVerLBzDQ@mail.gmail.com>
+
+Is Problem 11 the 4 consecutive #'s problem?
+
+If so what must be true for 4 #'s to have a large product?
+
+Hint: x * y * z * 2 is that going to be larger?
+
+-- 
+--
+Regards,
+KC
+
+

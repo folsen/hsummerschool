@@ -1,0 +1,30 @@
+From cdsmith at gmail.com  Wed Aug  3 21:53:41 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Wed, 3 Aug 2011 13:53:41 -0600
+Subject: [Haskell-cafe] Difference between class and instance contexts
+In-Reply-To: <7400d2001bd4.4e39b00d@dit.ie>
+References: <7400d2001bd4.4e39b00d@dit.ie>
+Message-ID: <CAPq5PvLyeK6HN8SBR6+Vwt3UdHP2Z_sygoceuyn7SPm6UrCBkg@mail.gmail.com>
+
+On Aug 3, 2011 1:33 PM, "Patrick Browne" <patrick.browne at dit.ie> wrote:
+> instance Class Integer => SubClass Integer where
+>    moo a = foo a
+
+Since you've just written the Class instance for Integer, the superclass
+context is actually irrelevant there.  You may as well just write
+
+instance SubClass Integer where
+    moo a = foo a
+
+And that goes to the point of what the difference is.  In the first case,
+you were declaring that all SubClass instances are Class instances,
+and that mo defaults to foo for ALL types.  In the latter case, you're
+defining this just for Integer.  The difference is whether that default
+exists for other tyoes, or if its specific to Integer.
+
+-- 
+Chris Smith
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110803/ba36445c/attachment.htm>
+

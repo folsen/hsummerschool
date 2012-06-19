@@ -1,0 +1,45 @@
+From noteed at gmail.com  Tue Dec 20 17:21:23 2011
+From: noteed at gmail.com (Vo Minh Thu)
+Date: Tue, 20 Dec 2011 17:21:23 +0100
+Subject: [Haskell-cafe] Mitigating state-threading through an
+	application loop
+In-Reply-To: <CADN_yYSU0xsVGdWDXr-R3Bu2PFyKjcZoD5R93JKed854UOyDPg@mail.gmail.com>
+References: <CADN_yYSU0xsVGdWDXr-R3Bu2PFyKjcZoD5R93JKed854UOyDPg@mail.gmail.com>
+Message-ID: <CAOHoMsnk7QDv0mcTBo3D2GNNhmeLKNYjS_=xXCDaagHdkPXA7g@mail.gmail.com>
+
+2011/12/20 Michael Serra <mk.serra at gmail.com>:
+> Hello Haskellers,
+> ? I'm implementing a simple tree-manipulating (for sports tournaments)
+> application prototype, with SDL for graphics and simple user interaction.
+> For reference, I've posted the code on hpaste.? My question is about code
+> organization: everything was simple and elegant until I started writing the
+> program's display/event loop.? Every function in this section has to be
+> passed the same parameters - the application window to draw on, the font to
+> display text with, the tree representing the current application state,
+> etc.? The font is an especially egregious example of the problem, because
+> it's only used by one function but to get there it must be threaded through
+> all of them (looking at the hpaste, you will see I don't want to call
+> openFont on every invocation of drawTexts; what's needed is to call it once
+> in main and have the resulting value available to drawTxt.? So my question:
+> how can I mitigate the ugliness of this state-threading?? I understand this
+> is one purpose for monads; am I supposed to implement a monad transformer
+> for this?
+>
+> I think it would be great if I could define a type AppState as a tuple of
+> the various things I need to thread, and specify some kind of automatic
+> as-pattern, so that every function taking this AppState parameter would
+> implicitly have its components bound to certain preset names.? I've never
+> seen anyone do this however.? What is the right solution?
+
+You can use the -XRecordWildcards extension[0] with a Reader or a State monad.
+
+  data AppState = AppState { appStateSomething :: String }
+
+  f AppState{..} = print appStateSomething
+
+Cheers,
+Thu
+
+[0] http://haskell.org/ghc/docs/latest/html/users_guide/syntax-extns.html#record-wildcards
+
+

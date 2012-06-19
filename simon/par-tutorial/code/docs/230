@@ -1,0 +1,13 @@
+From lemming at henning-thielemann.de  Thu Apr  7 22:18:05 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Thu, 07 Apr 2011 22:18:05 +0200 (CEST)
+Subject: [Haskell-cafe] Is there a way to find out the type inferred for
+ a local function inside another function? :)
+In-Reply-To: <BANLkTik+PnKjxL2BxeA519EKMap-dqmfMA@mail.gmail.com>
+References: <BANLkTik+PnKjxL2BxeA519EKMap-dqmfMA@mail.gmail.com>
+Message-ID: <alpine.DEB.2.00.1104072216420.25252@anubis>
+
+
+http://www.haskell.org/haskellwiki/Determining_the_type_of_an_expression
+
+

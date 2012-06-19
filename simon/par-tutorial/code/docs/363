@@ -1,0 +1,27 @@
+From greg at gregorycollins.net  Wed Apr 13 10:10:14 2011
+From: greg at gregorycollins.net (Gregory Collins)
+Date: Wed, 13 Apr 2011 10:10:14 +0200
+Subject: [Haskell-cafe] RFC: Extendable and Easy-To-Use Logger (HLogger)
+In-Reply-To: <op.vtuheazdpz0j5l@zen5.arnhem.chello.nl>
+References: <4DA48066.10805@jonkristensen.com>
+	<BANLkTi=dcW5p5WCAdFMRNb3cWwN8P4tKSA@mail.gmail.com>
+	<op.vtuheazdpz0j5l@zen5.arnhem.chello.nl>
+Message-ID: <BANLkTimLGTA-ZXj-UVySvfTDs_aMP_BGCw@mail.gmail.com>
+
+On Tue, Apr 12, 2011 at 11:45 PM, Henk-Jan van Tuyl <hjgtuyl at chello.nl> wrote:
+>
+> If you want to know what the last thing was that your application was doing,
+> before it crashed (e.g. at the customers site), you better write every
+> message immediately to disk.
+
+Yes, I suppose it would depend on your use case whether you wanted to
+optimize for throughput or for latency to secondary storage. I just
+know from experience that for high-throughput server applications,
+writing each message to disk is going to introduce unacceptable
+context-switching overhead.
+
+G
+-- 
+Gregory Collins <greg at gregorycollins.net>
+
+

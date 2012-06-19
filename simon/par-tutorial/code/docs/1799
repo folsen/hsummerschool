@@ -1,0 +1,35 @@
+From allbery.b at gmail.com  Sat Dec 10 01:32:55 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Fri, 9 Dec 2011 19:32:55 -0500
+Subject: [Haskell-cafe] Generating Code
+In-Reply-To: <CAKjSnQE2owa4YK0G0MTR0ON1CBqMiuWQntRrqmsxSL1tYjSxxg@mail.gmail.com>
+References: <CAHTd3sihZABoWe7CoKhfFh-QHQ01PftATrTmiZymE5b-D_YS+Q@mail.gmail.com>
+	<CAPeieQEdWhripdkdVo-=2ZXbNdgOL7Xq+idrwzTOiZuL=AMtZQ@mail.gmail.com>
+	<CAKjSnQE2owa4YK0G0MTR0ON1CBqMiuWQntRrqmsxSL1tYjSxxg@mail.gmail.com>
+Message-ID: <CAKFCL4VzZ8hr2+LUKnOdzPiwT7msA-KAqo4BdLwj1AoLdwEQNQ@mail.gmail.com>
+
+On Fri, Dec 9, 2011 at 17:27, Antoine Latter <aslatter at gmail.com> wrote:
+
+> On Fri, Dec 9, 2011 at 2:17 PM, Erik Hesselink <hesselink at gmail.com>
+> wrote:
+> > Since you ask how other packages solve this problem, and since most
+> > packages use template haskell, I have to ask: why can't you use
+> > template haskell for this?
+>
+> For my case, template haskell can't create modules, and template
+> haskell solves a different problem - I've not interested in creating
+> Haskell declarations from Haskell declarations - I'm interested in
+> creating Haskell modules from an external, formal,  specification. In
+> a sense I'm compiling to Haskell.
+
+
+It occurs to me that c2hs (or more appropriately the gtk2hsc2hs fork) is
+intended to solve this problem; have you looked into it?
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111209/c16bf62f/attachment.htm>
+

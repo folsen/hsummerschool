@@ -1,0 +1,138 @@
+From kolsrud at gmail.com  Tue Aug  2 20:21:29 2011
+From: kolsrud at gmail.com (=?ISO-8859-1?Q?=D8ystein_Kolsrud?=)
+Date: Tue, 2 Aug 2011 20:21:29 +0200
+Subject: [Haskell-cafe] QuickCheck Questions
+In-Reply-To: <52F4601C-C65D-40D8-9A00-E8CA02A910D6@chariot.net.au>
+References: <AC0E6FC6-7E58-4E9F-8973-3BE0760F3EF5@chariot.net.au>
+	<op.vy402awxjmyckg@boqueron>
+	<52F4601C-C65D-40D8-9A00-E8CA02A910D6@chariot.net.au>
+Message-ID: <CAH_oh=xZdEujkq4DOjxeiYG0uuv+xrLqPfTB0UaybX=D8RTQvw@mail.gmail.com>
+
+Hi! I usually use the function 'sized' for this. The function would look
+something like this:
+
+myIntGen :: Gen Int
+myIntGen = sized $ \n -> choose (0,f n)
+
+where 'f' is a function that uses the size value to generate an upper value
+for your random range. I usually use ^2 or sqrt or something like that
+depending on my needs.
+
+Hope it helps!
+
+Best regards, ?ystein
+
+On Mon, Jul 25, 2011 at 6:31 AM, Mark Spezzano <mark.spezzano at chariot.net.au
+> wrote:
+
+> Hi Kevin,
+>
+> Thanks for the response. The first part works well with minor
+> modifications.
+>
+> Part 2 is still a bit vague to me. I basically want to "clamp" the Integers
+> generated within the Queue to between 0 and some positive number. At present
+> they're giving me numbers all over the place (specifically negative number)
+>
+> Thanks
+>
+> Mark
+>
+>
+> On 25/07/2011, at 4:44 AM, Kevin Quick wrote:
+>
+> > On Sun, 24 Jul 2011 07:30:56 -0700, Mark Spezzano <
+> mark.spezzano at chariot.net.au> wrote:
+> >
+> >> Hi all,
+> >>
+> >> I would appreciate it if someone can point me in the right direction
+> with the following problem.
+> >>
+> >> I'm deliberately implementing a naive Queues packages that uses finite
+> lists as the underlying representation. I've already read through Hughes'
+> paper and the article in The Fun of Programming, but I'm still having some
+> difficulties. Specifically:
+> >>
+> >> 1. I have a newtype Queue a = Queue [a] and I want to generate Queues of
+> random Integers that are also of random size. How do I do this in
+> QuickCheck? I guess that  I need to write a generator and then make my
+> "Queue a" concrete type an instance of Arbitrary? How?
+> >
+> > Mark,
+> >
+> > One of the great things about QuickCheck is that it is automatically
+> compositional.
+> > What I mean by this is that all you need in your instance is how to form
+> a "Queue [a]" given "[a]", because there are already QuickCheck instances
+> for forming lists, and as long as a is pretty standard (Integers is fine)
+> then there's likely an Arbitrary instance for that as well.
+> >
+> > So (from my head, not actually tested in GHC):
+> >
+> > import Control.Applicative
+> > import Test.QuickCheck
+> >
+> > instance Arbitrary Queue where
+> >   arbitrary = Queue <$> arbitrary
+> >
+> > Then you can use this as:
+> >
+> > testProperty "length is something" propQInts
+> >
+> > propQInts t = length t == ....
+> >    where types = (t :: Queue Integers)
+> >
+> > The where clause is a fancy way of specifying what the type of t should
+> be without having to express the overall type of propQInts.  You could use a
+> more conventional type specification as well.
+> >
+> >>
+> >> 2. If I wanted to specify/constrain the ranges of random Integers
+> generated, how would I do this?
+> >
+> > Probably something like this:
+> >
+> > instance Arbitrary Queue where
+> >    arbitrary = do li <- listOf $ arbitrary
+> >                  lr <- liftM $ map rangelimit li
+> >                  return $ Queue lr
+> >                where rangelimit n = case (n < LOW, n > HIGH) of
+> >                                       (True,_) -> LOW
+> >                                       (_,True) -> HIGH
+> >                                       _ -> n
+> >
+> >
+> >>
+> >> 3. If I wanted to specify/constrain the Queue sizes how would I do this?
+> >
+> > Similar to #2.  Perhaps:
+> >
+> >   arbitrary = arbitrary >>= (return . Queue . take CNT . listOf)
+> >
+> >
+> > --
+> > -KQ
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >
+> >
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Mvh ?ystein Kolsrud
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110802/095fbc92/attachment.htm>
+

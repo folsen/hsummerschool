@@ -1,0 +1,37 @@
+From martindemello at gmail.com  Wed Dec 21 02:55:24 2011
+From: martindemello at gmail.com (Martin DeMello)
+Date: Tue, 20 Dec 2011 17:55:24 -0800
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <CA+qNEz+jtpJN-DUXEJZDJEciHyqnr0P8o2WJKWWt1KTjB4zwxw@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+	<CAL3m8eBx2=RNZJfqBSp=Bds4GXeu8vvAfXR_CPkPGJ+HZ-1-Xg@mail.gmail.com>
+	<CA+qNEz+jtpJN-DUXEJZDJEciHyqnr0P8o2WJKWWt1KTjB4zwxw@mail.gmail.com>
+Message-ID: <CAFrFfuHugr33bjnzrwSwHmdBT_xn9TLGFpW0Q72yiKWANM87=Q@mail.gmail.com>
+
+On Tue, Dec 20, 2011 at 3:10 PM, Chris Wong
+<chrisyco+haskell-cafe at gmail.com> wrote:
+>
+> Why not expand it even further?
+>
+> class Monoid m where
+> ? ?(?) :: m -> m -> m
+> ? ?(?) :: m
+>
+> (?) :: (Foldable t, Eq a) => a -> t a -> Bool
+>
+> (?) :: (b -> c) -> (a -> b) -> (a -> c)
+>
+> (?) :: Bool -> Bool -> Bool
+>
+> etc.
+>
+> We can write a whole Haskell library full of these aliases --
+> "syntactic-heroin" perhaps? ;)
+
+Why would you go that far and still not have ? ? (:
+
+martin
+
+

@@ -1,0 +1,25 @@
+From wheele11 at illinois.edu  Fri Apr 22 01:09:58 2011
+From: wheele11 at illinois.edu (Jeff Wheeler)
+Date: Thu, 21 Apr 2011 18:09:58 -0500
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <4DB093A6.8000303@btinternet.com>
+References: <4DB093A6.8000303@btinternet.com>
+Message-ID: <BANLkTikhhMqqgePPA78dcPT4qT4o2cp_oA@mail.gmail.com>
+
+On Thu, Apr 21, 2011 at 3:29 PM, Andrew Coppin
+<andrewcoppin at btinternet.com> wrote:
+> I'm sure this must be a VFAQ, but... There seems to be universal agreement
+> that Darcs is a nice idea, but is unsuitable for "real" projects. Even GHC
+> keeps talking about getting rid of Darcs. Can anybody tell me what the
+> "problems" with Darcs actually are?
+
+Yi, a fairly large and old repository, recently moved to (primarily)
+Git. Our motivation was not flaws in Darcs, but rather GitHub.
+
+-- 
+Jeff Wheeler
+
+Undergraduate, Electrical Engineering
+University of Illinois at Urbana-Champaign
+
+

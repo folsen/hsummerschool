@@ -1,0 +1,55 @@
+From nomeata at debian.org  Mon Apr 18 12:07:38 2011
+From: nomeata at debian.org (Joachim Breitner)
+Date: Mon, 18 Apr 2011 15:37:38 +0530
+Subject: [Haskell-cafe] How to contact OpenGL package maintainer (where
+ is Sven?)
+In-Reply-To: <BANLkTikYEEYGyXmd7c7pnxqZaS8ZmkiwKw@mail.gmail.com>
+References: <AANLkTinoGT8qa10+ZO6PEG5EOeMm=r3Cf2Rpeoe7tEts@mail.gmail.com>
+	<BANLkTikBKDkFLViTqt+UoixiX9gUQi_Gqg@mail.gmail.com>
+	<1303055619.2613.27.camel@kirk>
+	<BANLkTimKH=YLSMYhHDOTSx8xiUEYAs=PrA@mail.gmail.com>
+	<1303062686.2613.34.camel@kirk>
+	<BANLkTi=EstBKYvO1xM+=r37U4XyTn9Yz0Q@mail.gmail.com>
+	<1303111814.2482.6.camel@kirk>
+	<BANLkTikYEEYGyXmd7c7pnxqZaS8ZmkiwKw@mail.gmail.com>
+Message-ID: <1303121258.2482.38.camel@kirk>
+
+Hi,
+
+Am Montag, den 18.04.2011, 07:06 -0300 schrieb Felipe Almeida Lessa:
+> On Mon, Apr 18, 2011 at 4:30 AM, Joachim Breitner
+> <mail at joachim-breitner.de> wrote:
+> > Also, the policies that make life a bit more harder for us are also the
+> > policies that make Debian a good distribution: E.g. manually creating a
+> > copyright file describing who all has copyright on the files, and what
+> > license the files are under ? .cabal has fields for that, but
+> > unfortunately, they very often do not reflect the reality of the .hs
+> > files. Or the other one, requiring that an upload of a source package is
+> > accompanied by a manually built and signed binary package ensures that
+> > the maintainer actually checked that the package builds and hopefully
+> > has tested it.
+> 
+> Is it a good solution to have a Debian package containing many Cabal
+> packages?  For example, 'opengl-utils' with all OpenGL-related
+> packages?  Maybe this could be a good compromise.
+
+it?s something that I have in mind to resort to eventually, but our
+tools currently assume one cabal package per Debian package ? but
+nothing that cannot be fixed.
+
+Greetings,
+Joachim
+
+-- 
+Joachim "nomeata" Breitner
+Debian Developer
+  nomeata at debian.org | ICQ# 74513189 | GPG-Keyid: 4743206C
+  JID: nomeata at joachim-breitner.de | http://people.debian.org/~nomeata
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110418/a37e94d4/attachment.pgp>
+

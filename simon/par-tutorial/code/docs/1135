@@ -1,0 +1,48 @@
+From warren.henning at gmail.com  Sun Aug 14 23:20:27 2011
+From: warren.henning at gmail.com (Warren Henning)
+Date: Sun, 14 Aug 2011 14:20:27 -0700
+Subject: [Haskell-cafe] Evolving faster Haskell programs - where are the
+	files?
+In-Reply-To: <1313356406.2070.4.camel@robert-ThinkPad-R500>
+References: <1313356406.2070.4.camel@robert-ThinkPad-R500>
+Message-ID: <CADq0JEuv+M13r6fbeFrFTez38Kgfd_T_iRuxQH39Wau=J878bg@mail.gmail.com>
+
+I mentioned this to him on Twitter a while ago. Presumably it has to
+do with the fact that he's no longer at Galois.
+
+Another unfortunate fact is that ACOVEA is at this point unmaintained,
+and that is why the official homepage for it was removed. When I
+emailed the author, he said he couldn't afford to spend the time on it
+it was requiring. :(
+
+I've wondered if it would be worth it to make a pure-Haskell
+replacement specifically devoted to improving the performance of
+Haskell programs, and not only optimizing a single objective but
+presenting an efficient frontier between space usage and execution
+time or whatever other criteria it makes sense to optimize for..
+
+Warren
+
+On Sun, Aug 14, 2011 at 2:13 PM, Robert Clausecker <fuzxxl at gmail.com> wrote:
+> I just read the enlightening article by Don Stewart[1], and wanted to
+> test this method on one of my own programs, but it seems that there some
+> of the attached files are missing, namely [2], [3] and [4]. Is there
+> anybody who knows, where I can get those files? I don't really want to
+> rewrite those file by hand.
+>
+> Yours, Robert Clausecker
+>
+> [1]:
+> http://donsbot.wordpress.com/2009/03/09/evolving-faster-haskell-programs
+> [2]: http://galois.com/~dons/acovea/gcc43_core2.acovea
+> [3]: http://galois.com/~dons/acovea/ghc-basic.acovea
+> [4]: http://galois.com/~dons/acovea/ghc-6_10.acovea
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

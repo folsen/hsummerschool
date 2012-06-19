@@ -1,0 +1,46 @@
+From rob.nikander at gmail.com  Sun Apr 10 21:51:41 2011
+From: rob.nikander at gmail.com (Rob Nikander)
+Date: Sun, 10 Apr 2011 15:51:41 -0400
+Subject: [Haskell-cafe] Tuple
+In-Reply-To: <93578.14795.qm@web33505.mail.mud.yahoo.com>
+References: <93578.14795.qm@web33505.mail.mud.yahoo.com>
+Message-ID: <BANLkTik5k5Ux8vV=eSDUbY4naNDonvzMjg@mail.gmail.com>
+
+On Sun, Apr 10, 2011 at 12:49 PM, Anwar Bari <noor2004 at yahoo.com> wrote:
+> HI Cafe
+> ? ? I have to make a function to check that I have one occurrence of the last
+> element (z) of the same list [a,b] in the tuple
+>
+> ?[([a,b],z)]
+> For example
+> [([1,2],3),([1,1],5),([1,3],6).......] ?this is true because there is one single
+> z for each single list.
+>
+> while this one is false
+> [([1,2],3),([1,2],5),([1,3],6).......] because 3&5 were found for the same list
+> [1,2]
+>
+> any Idea how to code this Fn.
+> Thanks
+
+This seems to work...
+
+    import Data.List
+
+    a = [([1,2],3),([1,1],5),([1,3],6)]
+    b = [([1,2],3),([1,2],5),([1,3],6)]
+
+    test :: Ord a => [([a], a)] -> Bool
+    test = not . hasDuplicates . sort
+      where hasDuplicates [] = False
+            hasDuplicates [_] = False
+            hasDuplicates (x:xs) = fst x == fst (head xs) || hasDuplicates xs
+
+    main = do
+      print $ test a
+      print $ test b
+
+
+Rob
+
+

@@ -1,0 +1,19 @@
+From v.dijk.bas at gmail.com  Tue Dec 27 19:36:32 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Tue, 27 Dec 2011 19:36:32 +0100
+Subject: [Haskell-cafe] Haskell Platform and Windows - where's 2011.4?
+In-Reply-To: <4EFA0AC9.3080703@blueyonder.co.uk>
+References: <4EFA0AC9.3080703@blueyonder.co.uk>
+Message-ID: <CADLz5wXxOGPLCvcj4JnA1D1wm+qtJoS7bZK=PY7JLi4DBHNegg@mail.gmail.com>
+
+On 27 December 2011 19:13, Steve Horne <sh006d3592 at blueyonder.co.uk> wrote:
+> On haskell.org, the 2011.4.0.0 version is shown as the current stable
+> release - but the most recent download link is for the 2011.2.0.0 version.
+
+What download link are you referring to? I see that:
+http://hackage.haskell.org/platform/windows.html correctly points to
+the 2011.4.0.0 release.
+
+Bas
+
+

@@ -1,0 +1,29 @@
+From kolar at fit.vutbr.cz  Tue Feb  8 11:39:14 2011
+From: kolar at fit.vutbr.cz (=?ISO-8859-2?Q?Du=B9an_Kol=E1=F8?=)
+Date: Tue, 08 Feb 2011 11:39:14 +0100
+Subject: [Haskell-cafe] Building Plaftorm 2010 2 on 64bit Linux
+Message-ID: <4D511D52.90503@fit.vutbr.cz>
+
+Hello all,
+
+   I'm trying to build platform on Linux 2.6.32.22 #1 SMP Tue Sep 21 
+09:44:04 CEST 2010 x86_64 x86_64 x86_64 GNU/Linux. I've downloaded 
+binary of ghc6.12.3 for the purpose, but ghc doesn't work. ghci does 
+work, gcc does work, but for ghc I get:
+
+ghc -O2 --make test.hs -o test
+[1 of 1] Compiling Main             ( test.hs, test.o )
+ghc: could not execute: /usr/bin/gcc
+
+Even if I can easily compile gcc testc.c -o testc and run testc.
+
+Could anyone point me to a solution? Helps found by google pointed me to 
+try use option -pgmc gcc, which doesn't work. All other threads with 
+similar issue stayed unresoleved. :-(
+
+Thanks
+
+    Dusan
+
+
+

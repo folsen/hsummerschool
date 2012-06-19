@@ -1,0 +1,39 @@
+From catamorphism at gmail.com  Wed Apr 13 21:26:09 2011
+From: catamorphism at gmail.com (Tim Chevalier)
+Date: Wed, 13 Apr 2011 12:26:09 -0700
+Subject: [Haskell-cafe] IO and Cont as monads
+In-Reply-To: <COL123-W183410A2B76C9121FE8797CDAB0@phx.gbl>
+References: <COL123-W183410A2B76C9121FE8797CDAB0@phx.gbl>
+Message-ID: <BANLkTi=USNYyegHZ3i5kkfxh_Ta41xb4gA@mail.gmail.com>
+
+2011/4/12 Burak Ekici <ekcburak at hotmail.com>:
+> Dear List,
+>
+> I am quite new in Haskell's categorical manner of programming. However I
+> have enough knowledge in Category Theory.
+> I want to ask a question, maybe very well-known one by some of you, about
+> monads of Haskell.
+>
+> For the type constructors like Maybe and [], I managed to prove that
+> together with 2 natural transformations (bind + return), both of these
+> triples construct a monad. But when I try to prove that IO and Cont type
+> constructors with the same natural transformations (bind + return) are
+> monads as well, it was failed.
+>
+> Here my question is: Is there anyone who knows how to prove that IO and Cont
+> are monads with satisfing following properties:
+
+IO doesn't obey the monad laws, due to the presence of seq in Haskell.
+Sad but true...
+
+Cheers,
+Tim
+
+
+
+-- 
+Tim Chevalier * http://cs.pdx.edu/~tjc/ * Often in error, never in doubt
+"an intelligent person fights for lost causes,realizing that others
+are merely effects" -- E.E. Cummings
+
+

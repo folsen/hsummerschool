@@ -1,0 +1,58 @@
+From cdsmith at gmail.com  Thu Apr 28 16:21:03 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Thu, 28 Apr 2011 08:21:03 -0600
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <ipb02s$oap$1@dough.gmane.org>
+References: <4DB093A6.8000303@btinternet.com> <4DB3E7E8.8000907@btinternet.com>
+	<BANLkTi=S70WstLi83umF=v=LBVu1A7pbTQ@mail.gmail.com>
+	<4DB5493F.4010804@btinternet.com>
+	<D47B6B3C-B39D-475B-BCED-2E7758A5ED7A@me.com> <4DB89687.30705@earth.li>
+	<ipb02s$oap$1@dough.gmane.org>
+Message-ID: <1304000463.23817.25.camel@godel>
+
+On Thu, 2011-04-28 at 08:04 +0200, Bardur Arantsson wrote:
+> There's also the fact that using in-repo branches means that all the 
+> tooling doesn't have to rely on any (fs-specific) conventions for 
+> finding branches.
+> 
+> As someone who has admin'd a reasonably large Bazaar setup (where
+branch 
+> == directory similarly to Darcs) I can honestly say that this would be
+a 
+> HUGE boon.
+
+Just keep in mind that adding branches withing the repository is a
+massive increase in the conceptual complexity of the system, and it
+would IMO be very un-darcs-like to adopt something like that into the
+core mental model you need to use a darcs repository, only because of
+incidental conveniences (by "incidental" here, I mean that there is
+nothing wrong with the darcs model; it *is* true that branches and
+repositories are the same thing -- but it just turns out that, often,
+developers want several repositories for the same project).
+
+It seems to me the same problems could be solved without the necessary
+increase in complexity by:
+
+(a) Keeping repositories in sibling directories with names.
+
+(b) Keeping a working directory that you build in as one of these, and
+switching it to match various other named repositories as needed.  Then
+your build files are still there.
+
+Surely there are things darcs could do to make some of those bits easier
+to do remotely (ssh to a remote machine in order to darcs-get from one
+directory to a new one is a pain, for sure).  But those can be offered
+without in-repo branches, at the advantage of not really affecting
+people that don't use them.
+
+Convention, rather than baking answers into tools, is the right way to
+solve organizational problems, and that's essentially what we're talking
+about here.  And adding complexity every time someone has an awkward use
+case will lead (has led, in more systems than I can count) to an
+unusable result in the end.
+
+-- 
+Chris Smith
+
+
+

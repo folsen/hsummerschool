@@ -1,0 +1,54 @@
+From mail at joachim-breitner.de  Sat Dec  3 10:01:59 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Sat, 03 Dec 2011 10:01:59 +0100
+Subject: [Haskell-cafe] Weird interaction between literate haskell,
+ ghci and OverloadedStrings
+In-Reply-To: <20111203161824.f134a60f1a8a9ee4ece50ff4@mega-nerd.com>
+References: <20111203161824.f134a60f1a8a9ee4ece50ff4@mega-nerd.com>
+Message-ID: <1322902919.2611.1.camel@kirk>
+
+Hi,
+
+Am Samstag, den 03.12.2011, 16:18 +1100 schrieb Erik de Castro Lopo:
+> I'm working on a literate haskell document (actually TeX, but the
+> example below is just test) and I'm using ByteStrings in the code.
+> I know I can do:
+> 
+>     ghci -XOverloadedStrings file.lhs
+> 
+> or, after ghci is running I can do:
+> 
+>     Main> :set -XOverloadedStrings
+> 
+> but I'd like to embed a directive in the file so that when loaded
+> in GHCi, I will automatically get OverloadedStrings. This is mainly
+> so that it JustWorks(tm) when I pass the file on to someone else.
+> 
+> Is there a way to do this?
+> 
+> There is a short example file below. I'm using ghc-7.0.4 from Debian
+> testing.
+
+it does not seem to be related to literate haskell, if I copy the code
+from your file into a .hs without the "> ", ghci still does not activate
+the OverloadedStrings extension when loading the file.
+
+I?d consider this a bug until the developers explain why this should or
+cannot be different, and suggest you file it as such.
+
+Greetings,
+Joachim
+
+-- 
+Joachim "nomeata" Breitner
+  mail at joachim-breitner.de  |  nomeata at debian.org  |  GPG: 0x4743206C
+  xmpp: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111203/6b06c6bf/attachment.pgp>
+

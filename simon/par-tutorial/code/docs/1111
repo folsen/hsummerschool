@@ -1,0 +1,29 @@
+From travitch at cs.wisc.edu  Sun Aug 14 08:12:08 2011
+From: travitch at cs.wisc.edu (Tristan Ravitch)
+Date: Sun, 14 Aug 2011 01:12:08 -0500
+Subject: [Haskell-cafe] ANNOUNCE: taffybar: an alternative status bar
+ for xmonad
+In-Reply-To: <CAFpSbhLprzaqD4P7=svV+8PBDyFFSjAP_6QUzq+6rAqfNQ3zdg@mail.gmail.com>
+References: <20110813155648.GE13469@cs.wisc.edu>
+	<CAFpSbhLprzaqD4P7=svV+8PBDyFFSjAP_6QUzq+6rAqfNQ3zdg@mail.gmail.com>
+Message-ID: <20110814061206.GF13469@cs.wisc.edu>
+
+On Sat, Aug 13, 2011 at 09:54:13PM -0700, Joel Burget wrote:
+> This sounds really intriguing. Since I'm temporarily not using xmonad, and
+> I'm sure others would like to see as well, could we get a screenshot?
+
+Oops, how could I forget.
+
+  http://pages.cs.wisc.edu/~travitch/taffybar.jpg
+
+I have the xmonad log on the left, a CPU graph, memory graph,
+date/time, weather, and then system tray visible there.
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: Digital signature
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110814/c265614a/attachment.pgp>
+

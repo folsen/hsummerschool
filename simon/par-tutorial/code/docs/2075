@@ -1,0 +1,49 @@
+From fischer at nii.ac.jp  Mon Dec 19 00:51:44 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Mon, 19 Dec 2011 00:51:44 +0100
+Subject: [Haskell-cafe] [Alternative] summary of my understanding so far
+In-Reply-To: <E6897C72-6886-4B18-9005-E6BDA3E92D76@gmail.com>
+References: <E6897C72-6886-4B18-9005-E6BDA3E92D76@gmail.com>
+Message-ID: <CALoEywMZRy+2udYAo983MxY36sir_XCtzL_ncEUPCDay6HV61Q@mail.gmail.com>
+
+On Thu, Dec 15, 2011 at 9:13 AM, Gregory Crosswhite
+<gcrosswhite at gmail.com>wrote:
+
+> To quote Ross Paterson's proposals:
+>
+> instance Alternative [] where
+>    ...
+>    some [] = []
+>    some (x:xs) = repeat (repeat x)
+>
+>    many [] = [[]]
+>    many (x:xs) = repeat (repeat x)
+>
+
+Isn't this instance conflating the ZipList notion and the nondeterministic
+list notion?
+
+
+> ? some v = (:) <$> v <*> many v
+> ? many v = some v <|> pure []
+>
+
+Is there a motivation for writing the second law like this and not like
+
+    many v = pure [] <|> some v
+
+other than "parsers should try longest match first"? Because apart from
+that, I find the version with flipped arguments to <|> more natural (base
+case first). Incidentally, it would lead to terminating definitions of
+'some' and 'many' for lists:
+
+    ghci> take 5 . map (take 5) $ some [1,2]
+    [[1],[1,1],[1,1,1],[1,1,1,1],[1,1,1,1,1]]
+    ghci> take 5 . map (take 5) $ many [1,2]
+    [[],[1],[1,1],[1,1,1],[1,1,1,1]]
+
+Sebastian
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111219/67dcc389/attachment.htm>
+

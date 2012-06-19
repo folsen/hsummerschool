@@ -1,0 +1,39 @@
+From cdsmith at gmail.com  Thu Apr 28 17:53:21 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Thu, 28 Apr 2011 09:53:21 -0600
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <20110428172708.22b30845@angst.streitmacht.eu>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<87vcy0vxdq.fsf@malde.org> <loom.20110428T091338-92@post.gmane.org>
+	<20110428172708.22b30845@angst.streitmacht.eu>
+Message-ID: <BANLkTimqYuX6mNsqAMEHDKO9cvhvE+gkPw@mail.gmail.com>
+
+On Apr 28, 2011 9:25 AM, "Ertugrul Soeylemez" <es at ertes.de> wrote:
+>
+>
+> > Sometimes I wish for a -fphp flag that would turn some type errors
+> > into warnings. Example:
+> >
+> > v.hs:8:6:
+> >     Couldn't match expected type `[a]' against inferred type `()'
+> >     In the first argument of `a', namely `y'
+> >     In the expression: a y
+> >     In the definition of `c': c = a y
+> >
+> > GHC could substitute 'y = error "Couldn't match expected type `[a]'
+> > against inferred type `()'"' and compile anyway.
+> >
+> > Would that bring Haskell closer to Python?
+>
+> It would make people abuse that feature.  I don't want it.
+
+I do, particularly in GHCi.  I don't mind if Haskell refuses to build a
+binary, but having to comment out coded in order to load bits in GHCi is
+definitely a pain.
+
+-- 
+Chris Smith
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110428/97c81858/attachment.htm>
+

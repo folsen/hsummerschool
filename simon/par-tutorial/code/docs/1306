@@ -1,0 +1,33 @@
+From ivan.miljenovic at gmail.com  Wed Aug 24 05:37:52 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Wed, 24 Aug 2011 13:37:52 +1000
+Subject: [Haskell-cafe] a minor bug (memory leak) in ListLike package
+In-Reply-To: <CANcqPu6BSBtbQwtwgvLH01tbN3MaXe=yknBMhrACShZNjyK3DQ@mail.gmail.com>
+References: <4E544F7D.8030401@gmail.com>
+	<CA+u6gbzyx=_d6BbGtZ86GYpfDx3jg8o6zpM8Tcu3958wPpOffg@mail.gmail.com>
+	<CANcqPu6BSBtbQwtwgvLH01tbN3MaXe=yknBMhrACShZNjyK3DQ@mail.gmail.com>
+Message-ID: <CA+u6gbyhRBZ45WZ=yhPrPoWskFWcwvbeTtNXN-W34uDFmMbGOg@mail.gmail.com>
+
+On 24 August 2011 13:17, bob zhang <bobzhang1988 at gmail.com> wrote:
+> Hi,
+> ? I think 3 < genericLength [1..] should fail, that laziness is not we
+> want.
+
+It might not be what _you_ want, but it might be what others want.  If
+you're concerned with efficiency, then wouldn't you use length rather
+than genericLength?
+
+> ? I can not derive ListLike ?instance using GHC extensions, can you provide
+> a working example?
+
+I take it back, it doesn't seem to be possible due to the design of
+ListLilke.  You need to define the instance explicitly (there are only
+four functions you have to define, but for performance reasons you
+probably want to re-define all of them).
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

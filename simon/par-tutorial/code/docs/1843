@@ -1,0 +1,84 @@
+From dokondr at gmail.com  Sun Dec 11 19:47:47 2011
+From: dokondr at gmail.com (dokondr)
+Date: Sun, 11 Dec 2011 21:47:47 +0300
+Subject: [Haskell-cafe] No instance for (Read POSIXTime)
+In-Reply-To: <CAOrUaLYhC7AgFKtPBgiqANaaBJF+9k-cPBHjq97TyJy_+qqV+g@mail.gmail.com>
+References: <CAMXF=YBDfLb1shH=UqO4GjLEbK=d02rmsOock_vMhCFEXm=cOg@mail.gmail.com>
+	<CAOrUaLYhC7AgFKtPBgiqANaaBJF+9k-cPBHjq97TyJy_+qqV+g@mail.gmail.com>
+Message-ID: <CAMXF=YAfN9DzAEATV-4e92M3r3LtJMFkfRjkuz98Rp7-6H9YcQ@mail.gmail.com>
+
+Yitz, thanks for the detailed answer!
+May be I should have formulated my question differently. All I actually
+need is some way to get *seconds* since epoch from the  system, so I could
+manipulate them as integers.
+Correct me if I am wrong, but UTCTime does not help here.
+The only way I found to get seconds form epoch using existing today GHC
+libraries is that:
+
+utcStr = "Wed, 07 Dec 2011 10:10:05 +0000"
+posixSecondsIntg = read posixSecondsStr :: Integer
+posixSecondsStr =  init $ show (cvtUTCtoSec  utcStr) -- throw away 's' from
+posix seconds string, s\
+uch as "1235657s"
+
+cvtUTCtoSec utcTimeStr = utcTimeToPOSIXSeconds utcTime where
+        utcTime = fromJust $ tryParseTime utcTimeStr
+
+timeFormat1 = "%a, %d %b %Y %T %z"
+timeFormat2 = "%m/%e/%Y %l:%M:%S %p"
+
+tryParseTime :: String -> Maybe UTCTime
+tryParseTime timeStr = tryFormat (parseTime defaultTimeLocale timeFormat1
+timeStr :: Maybe UTCTime)
+   where
+     tryFormat time
+        | time == Nothing = parseTime defaultTimeLocale timeFormat2 timeStr
+:: Maybe UTCTime
+        | otherwise = time
+
+
+Not a very easy way, isn't it?
+
+On Sun, Dec 11, 2011 at 9:22 PM, Yitzchak Gale <gale at sefer.org> wrote:
+
+> dokondr wrote:
+> > When I try to read POSIXTime...
+> > No instance for (Read POSIXTime)...
+> > What should I do to provide Read instance for POSIXTime?
+>
+> Short answer: if you are thinking about this as a moment
+> in time that could be parsed from the usual kind of
+> string representation for that, you probably want to
+> use UTCTime in your data type, not POSIXTime.
+>
+> If you really, really want to represent it internally
+> as POSIXTime, then you should read those strings
+> as UTCTime and then convert them to POSIXTime
+> to store in your data type. I.e., in that case don't
+> make your data type an instance of Read.
+>
+> POSIXTime is just a type alias for NominalDiffTime,
+> i.e., a quantity of time between two moments.
+>
+> This is what the Show instance looks like:
+>
+> Prelude Data.Time> realToFrac 1000000 :: NominalDiffTime
+> 1000000s
+>
+> By convention, the Read instance would expect a
+> string in that format. Generally people aren't interested
+> in that, so there is no Read instance.
+> Even if you did want to parse that, you would just
+> parse it as a number and then use realToFrac, as I
+> did above.
+>
+> The rule of thumb is: always represent moments in
+> time as a UTCTime.
+>
+> Regards,
+> Yitz
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111211/7a9abd81/attachment.htm>
+

@@ -1,0 +1,49 @@
+From jmillikin at gmail.com  Sun Dec 11 04:22:04 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Sat, 10 Dec 2011 19:22:04 -0800
+Subject: [Haskell-cafe] ANNOUNCE: Anansi 0.4.2 (literate programming
+	pre-processor)
+Message-ID: <CAL1ky9qKan_3QxOv291H4q8wuCdXwbEeLv4hS5EDBssina12Ww@mail.gmail.com>
+
+Anansi is a preprocessor for literate programs, in the model of NoWeb
+or nuweb. Literate programming allows both computer code and
+documentation to be generated from a single unified source.
+
+Home page: https://john-millikin.com/software/anansi/
+Hackage: http://hackage.haskell.org/package/anansi-0.4.2
+
+-----
+
+This release has a couple cool new features, suggested by Dirk Laurie.
+
+Markdown loom
+===============
+
+Markdown, a lightweight markup language similar to ReStructuredText,
+is used often on web forums. Use [[ :loom anansi.markdown ]] in your
+documents to enable.
+
+User-defined line pragmas
+========================
+
+Users can now add, modify, and disable line pragmas in tangled output
+based on file extension. This makes it much easier to combine code and
+data in a single source file. By default, line pragmas are enabled for
+the C, C++, C#, Haskell, Perl, and Go languages.
+
+Customizing the pragma format is easy. Use the ${line}, ${path}, and
+${quoted-path} substitutions in an :option. This example code will
+insert comments into tangled Python code:
+
+-------------------------------------------
+:# Insert comments into any tangled output file with a name ending in ".py"
+:option anansi.line-pragma-py=# Generated from ${path} line ${line}
+-------------------------------------------
+
+To disable line pragmas for a particular file type, just set its
+pragma format to an empty string:
+-------------------------------------------
+:option anansi.line-pragma-pl=
+-------------------------------------------
+
+

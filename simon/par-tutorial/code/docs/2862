@@ -1,0 +1,21 @@
+From cdsmith at gmail.com  Tue Feb  8 16:14:46 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Tue, 08 Feb 2011 08:14:46 -0700
+Subject: [Haskell-cafe] Cabal && license combinations
+In-Reply-To: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+References: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+Message-ID: <1297178086.2402.5.camel@godel>
+
+It feels to me like a quite reasonable simplification that if someone
+wants to offer different bits of code, with the intent that the license
+terms of the eventual executable may be different depending on which
+bits you use, then they ought to do so in different packages.  It's
+simple enough to do, and removes the need to do per-module license
+considerations.
+
+-- 
+Chris Smith
+
+
+
+

@@ -1,0 +1,62 @@
+From jwlato at gmail.com  Thu Aug 25 02:25:04 2011
+From: jwlato at gmail.com (John Lato)
+Date: Thu, 25 Aug 2011 01:25:04 +0100
+Subject: [Haskell-cafe] a minor bug (memory leak) in ListLike package
+In-Reply-To: <4E547B77.2060000@gmail.com>
+References: <4E544F7D.8030401@gmail.com>
+	<CA+u6gbzyx=_d6BbGtZ86GYpfDx3jg8o6zpM8Tcu3958wPpOffg@mail.gmail.com>
+	<CANcqPu6BSBtbQwtwgvLH01tbN3MaXe=yknBMhrACShZNjyK3DQ@mail.gmail.com>
+	<CA+u6gbyhRBZ45WZ=yhPrPoWskFWcwvbeTtNXN-W34uDFmMbGOg@mail.gmail.com>
+	<4E547B77.2060000@gmail.com>
+Message-ID: <CAJ727Ggn=CRVrn8B-6d1_CfP1sVv7+=3LnWyHt7q3ojFeo2Z9w@mail.gmail.com>
+
+Thanks for reporting this.  I understand the problem, however I don't
+want to bloat the interface even more with a bunch of strict versions
+of functions.  Even so, the current implementation is definitely the
+worst possible option as it has the slow performance of building
+thunks without the actual benefits of laziness.
+
+`Data.List` currently uses a fully lazy implementation, with RULEs to
+specialize to a strict variant for Int and Integer accumulators.  The
+same solution should work for ListLike, with the following additions:
+
+1.  `length` be made fully strict in the accumulator
+2.  `genericLength'` (strict variant) be exposed via the interface
+
+Currently I know of no way to automatically derive listlike-instances,
+however the `listlike-instances` package has instances for a few other
+useful types (vectors and Text mainly).  Adding instances is
+definitely a pain, so I may well try to create a Derive extension for
+the next time I want to do so.
+
+Cheers,
+John
+
+On Wed, Aug 24, 2011 at 5:17 AM, bob zhang <bobzhang1988 at gmail.com> wrote:
+> ? 11-8-23 ??11:37, Ivan Lazar Miljenovic ??:
+>>
+>> It might not be what_you_  want, but it might be what others want.  If
+>> you're concerned with efficiency, then wouldn't you use length rather
+>> than genericLength?
+>>
+> length is identical to genericLength in ListLike except type signature.
+> but still,
+> import Data.Number
+> import Data.List
+> import qualified Data.ListLike as L
+> (3 :: Natural) < genericLength [1..] (work)
+> (3 :: Natural) < L.genericLength [1..] (non-terminating)
+>
+> If you want laziness, L.genericLength should be defined like this
+> L.genericLength [] = 0
+> L.genericLength (_:l) = 1 + L.genericLength l
+> the genericLength used in ListLike package used tail recursion while
+> non-strict.
+> and also, a strict length is still needed (currently, length is identical to
+> genericLength)
+>
+> Thank you
+> bob
+>
+
+

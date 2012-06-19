@@ -1,0 +1,62 @@
+From wren at freegeek.org  Sat Aug 13 04:59:58 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Fri, 12 Aug 2011 22:59:58 -0400
+Subject: [Haskell-cafe] library on common sub-expression elimination?
+In-Reply-To: <CADDxdqMUC2xrLO3z0YyfSWfRpy3Gb-3bvsAR9VaHU=GP0DLKTA@mail.gmail.com>
+References: <20110812080025.3150C1712F@Adric.ern.nps.edu>
+	<CADDxdqMUC2xrLO3z0YyfSWfRpy3Gb-3bvsAR9VaHU=GP0DLKTA@mail.gmail.com>
+Message-ID: <4E45E8AE.10409@freegeek.org>
+
+On 8/12/11 12:52 PM, Anton Kholomiov wrote:
+> Just to make it explicit, is it
+>
+>       \a i ->
+>           let t = a ! i in
+>           if i>= 0 then
+>              t
+>           else if i>  0 then
+>              t + a ! (i-1)
+>           else ....
+>
+> bad idea, because of last else-case? Can it be mended with
+> one another pass  for if-expressions?
+
+Lifting the computation out of the guards preserves the semantics of the 
+original program only if:
+
+     (a) you can guarantee that it has no observable effects
+         (i) this clearly precludes nontermination
+         (ii) this also precludes it taking any non-zero measurable 
+length of time to compute (or memory, or any other observable resource)
+
+or
+
+     (b) you can guarantee that the computation is executed in every 
+possible execution path from the point to which the computation is 
+lifted (including all exceptional paths); moreover, you can guarantee 
+that all observable effects generated prior to the original sites of the 
+computation are identical along all paths.
+
+
+The reason for including (a)(ii) is that, if the computation takes a 
+non-zero measurable length of time, then we can detect a difference 
+between the original and the modified program whenever the computation 
+does not adhere to condition (b). This is notable for performance 
+reasons, but, more importantly, it's critical for the semantics of 
+security. The relative time taken by different branches of a computation 
+is an observable effect which could allow the informational content of 
+"secret" variables[1] to leak out and be discovered.
+
+It is only valid to ignore (a)(ii) when the semantics you're preserving 
+explicitly exclude concerns with program execution time, memory, 
+security, etc., by assuming/pretending that these things aren't observable.
+
+
+[1] In this case, information about the value of i, and possibly 
+additional things in the trailing else case.
+
+-- 
+Live well,
+~wren
+
+

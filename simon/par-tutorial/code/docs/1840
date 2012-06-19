@@ -1,0 +1,46 @@
+From gale at sefer.org  Sun Dec 11 19:22:55 2011
+From: gale at sefer.org (Yitzchak Gale)
+Date: Sun, 11 Dec 2011 20:22:55 +0200
+Subject: [Haskell-cafe] No instance for (Read POSIXTime)
+In-Reply-To: <CAMXF=YBDfLb1shH=UqO4GjLEbK=d02rmsOock_vMhCFEXm=cOg@mail.gmail.com>
+References: <CAMXF=YBDfLb1shH=UqO4GjLEbK=d02rmsOock_vMhCFEXm=cOg@mail.gmail.com>
+Message-ID: <CAOrUaLYhC7AgFKtPBgiqANaaBJF+9k-cPBHjq97TyJy_+qqV+g@mail.gmail.com>
+
+dokondr wrote:
+> When I try to read POSIXTime...
+> No instance for (Read POSIXTime)...
+> What should I do to provide Read instance for POSIXTime?
+
+Short answer: if you are thinking about this as a moment
+in time that could be parsed from the usual kind of
+string representation for that, you probably want to
+use UTCTime in your data type, not POSIXTime.
+
+If you really, really want to represent it internally
+as POSIXTime, then you should read those strings
+as UTCTime and then convert them to POSIXTime
+to store in your data type. I.e., in that case don't
+make your data type an instance of Read.
+
+POSIXTime is just a type alias for NominalDiffTime,
+i.e., a quantity of time between two moments.
+
+This is what the Show instance looks like:
+
+Prelude Data.Time> realToFrac 1000000 :: NominalDiffTime
+1000000s
+
+By convention, the Read instance would expect a
+string in that format. Generally people aren't interested
+in that, so there is no Read instance.
+Even if you did want to parse that, you would just
+parse it as a number and then use realToFrac, as I
+did above.
+
+The rule of thumb is: always represent moments in
+time as a UTCTime.
+
+Regards,
+Yitz
+
+

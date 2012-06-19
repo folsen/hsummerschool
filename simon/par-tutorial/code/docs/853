@@ -1,0 +1,18 @@
+From magicloud.magiclouds at gmail.com  Fri Apr 29 03:49:11 2011
+From: magicloud.magiclouds at gmail.com (Magicloud Magiclouds)
+Date: Fri, 29 Apr 2011 09:49:11 +0800
+Subject: [Haskell-cafe] How to make ghc 7 with llvm?
+Message-ID: <BANLkTim17m2=ymk-f-ZcKQKbwF_Z5z=4Xg@mail.gmail.com>
+
+Hi,
+  As I recalled, ghc started to support llvm from version 7.
+  But there is a problem: there is no option to make ghc with llvm. So
+Library within ghc source will be in gcc's binary format. Then when I
+install other packages, they may complain that the binary format is
+not llvm, so they install some libraries again.
+  Any way I could make ghc 7 with llvm?
+-- 
+???????
+???????
+
+

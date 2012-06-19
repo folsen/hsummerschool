@@ -1,0 +1,32 @@
+From ezyang at MIT.EDU  Sun Apr 10 23:38:12 2011
+From: ezyang at MIT.EDU (Edward Z. Yang)
+Date: Sun, 10 Apr 2011 17:38:12 -0400
+Subject: [Haskell-cafe] Current heap size and other runtime statistics
+	-- API for accessing in GHC?
+In-Reply-To: <BANLkTinypS_hu1AKACiJD=WfagJmM32o2w@mail.gmail.com>
+References: <BANLkTinypS_hu1AKACiJD=WfagJmM32o2w@mail.gmail.com>
+Message-ID: <1302471431-sup-9820@ezyang>
+
+Simon Marlow and I had this conversation not too long ago, and the answer
+is no. However, this is definitely something that would be useful for
+a lot of people (GHC developers included!)
+
+Cheers,
+Edward
+
+Excerpts from Ryan Newton's message of Sun Apr 10 17:30:50 -0400 2011:
+> Hi cafe,
+> 
+> The rtsopts (-s etc) can provide some nice debugging information regarding
+> memory management.  And System.Mem.performGC can initiate garbage
+> collection.  But are there APIs for querying the current state of the heap?
+>  I've googled and come up dry.
+> 
+> In this case I'm running benchmarks and for the sake of fair comparison I
+> want to make sure that everything from a previous run is cleaned up before
+> the next run.
+> 
+> Thanks,
+>   -Ryan
+
+

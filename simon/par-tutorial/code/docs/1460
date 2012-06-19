@@ -1,0 +1,37 @@
+From allbery.b at gmail.com  Mon Aug 29 04:38:36 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Sun, 28 Aug 2011 22:38:36 -0400
+Subject: [Haskell-cafe] Dynamic loading of module
+In-Reply-To: <4E5AF5DD.9050800@vex.net>
+References: <CAL4zPao2eYnWWf1KL-sJ3NrVNw6Ar+eHVgnsDr7KSCikE_TZ4w@mail.gmail.com>
+	<4E5811CA.6050905@vex.net>
+	<CAL4zPaoO3=AGtJSexcSa9b108w0AB7dgm+QVQQmoytOUu-M3Fw@mail.gmail.com>
+	<4E593E91.5020209@vex.net>
+	<CAL4zPaqNfJWZzJowtFW12e_u2pmxxktbKpiSG5YDsh+=fZL43w@mail.gmail.com>
+	<CAKFCL4WPnbkXF9Ao3qPCyL_sih-Wywjse=2+ZbtOEds7J7A3MA@mail.gmail.com>
+	<4E5AF5DD.9050800@vex.net>
+Message-ID: <CAKFCL4Wj2O1k2cod9=vO5fZhDi2kOU6vOLbcYmqP316MdcBGDQ@mail.gmail.com>
+
+On Sun, Aug 28, 2011 at 22:13, Albert Y. C. Lai <trebla at vex.net> wrote:
+
+> On 11-08-28 04:53 PM, Brandon Allbery wrote:
+>
+>> That'd be expected; you shouldn't simply obliterate package.conf.d, you
+>> need to keep ghc's boot libraries (which include itself as a library).
+>>  If the boot libraries are somehow hosed, you need to reinstall the
+>> compiler to get them back.
+>>
+>
+> Different package.conf.d
+>
+
+Except that, as you discovered later, the user was obviously talking about
+having obliterated the system one.  :(
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110828/9cd0c41e/attachment.htm>
+

@@ -1,0 +1,34 @@
+From anotheraddress at gmx.de  Tue Apr 19 14:27:47 2011
+From: anotheraddress at gmx.de (Daniel =?utf-8?q?Sch=C3=BCssler?=)
+Date: Tue, 19 Apr 2011 14:27:47 +0200
+Subject: [Haskell-cafe] Question about the Monad instance for Iteratee (from
+	the enumerator package)
+Message-ID: <201104191427.47873.anotheraddress@gmx.de>
+
+Hello,
+
+for reference, said instance is:
+
+> instance Monad m => Monad (Iteratee a m) where
+> 	return x = yield x (Chunks [])
+> 
+> 	m0 >>= f = ($ m0) $ fix $
+> 		\bind m -> Iteratee $ runIteratee m >>= \r1 ->
+> 			case r1 of
+> 				Continue k -> return (Continue (bind . k))
+> 				Error err -> return (Error err)
+> 				Yield x (Chunks []) -> runIteratee (f x)
+> 				Yield x extra -> runIteratee (f x) >>= \r2 ->
+> 					case r2 of
+> 						Continue k -> runIteratee (k extra)
+> 						Error err -> return (Error err)
+> 						Yield x' _ -> return (Yield x' extra)
+
+The thing I don't understand yet is the last line: Why is it OK to discard the 
+leftover input from the (f x) Iteratee and yield just the leftover input from 
+the first one (m0)?
+
+Cheers,
+Daniel
+
+

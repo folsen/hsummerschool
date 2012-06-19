@@ -1,0 +1,45 @@
+From dagitj at gmail.com  Fri Aug 26 06:45:52 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Thu, 25 Aug 2011 21:45:52 -0700
+Subject: [Haskell-cafe] ping haskell.org timeout
+In-Reply-To: <87zkiw248m.fsf@malde.org>
+References: <CAFLa5WPXwUP=tGWc1ubAAa3NUhWvAYx-bhFNKydFFS1tpMO+UQ@mail.gmail.com>
+	<CAJ-DSyzj92O-h=ApUKceUcQM4JOHKyJZQXwHQy8WunKjOsuynQ@mail.gmail.com>
+	<87zkiw248m.fsf@malde.org>
+Message-ID: <CAJ-DSyz3K6fTmr-ut_D61LWX6v5z5Grrz=_5-G+eeBLtQGyYEQ@mail.gmail.com>
+
+On Thu, Aug 25, 2011 at 9:20 PM, Ketil Malde <ketil at malde.org> wrote:
+> Jason Dagit <dagitj at gmail.com> writes:
+>
+>> On Thu, Aug 25, 2011 at 2:39 PM, Greg Fitzgerald <garious at gmail.com> wrote:
+>>> "cabal update" hangs. ?"ping haskell.org" times out. ?But haskell.org and
+>>> hackage webpages are loading just fine. ?What's going on?
+>
+>> Lots of servers turn off ICMP packet responses these days
+>
+> Because users don't really need error messages, that's privileged
+> information for system administrators.
+
+I think the reason it gets disabled is typically well intentioned.
+Besides, if someone is trying to debug http protocol issues using
+ICMP, they're taking an awfully indirect route.
+
+> Looks like haskell.org isn't one of them.
+
+Good to know.
+
+> It takes a while to complete with no visual feedback. ?Perhaps the
+> network is just slow? ?Or perhaps the web pages are cached somewhere
+> along the way?
+
+All of those are plausible, but I heard one of the servers needed some
+help restarting.  I don't know enough about the network topology and
+setup (or what was wrong with the server) to understand why would
+cause the behavior Greg was seeing.  I do know that several other
+people were able to run 'cabal update' during that time.
+
+The whole thing seems a bit odd to me, but should be behind us for now.
+
+Jason
+
+

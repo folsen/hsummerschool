@@ -1,0 +1,39 @@
+From magnus at therning.org  Sat Feb 12 07:47:41 2011
+From: magnus at therning.org (Magnus Therning)
+Date: Sat, 12 Feb 2011 06:47:41 +0000
+Subject: [Haskell-cafe] Compiling network-bytestring with ghc7+hp2011
+In-Reply-To: <AANLkTikkwTwF-h+QMQyiUUvJZf-_T1L_ysM9QViu3_aq@mail.gmail.com>
+References: <20110211073418.GA8491@ohann>
+	<AANLkTikkwTwF-h+QMQyiUUvJZf-_T1L_ysM9QViu3_aq@mail.gmail.com>
+Message-ID: <20110212064741.GA18714@ohann>
+
+On Fri, Feb 11, 2011 at 04:48:28PM -0800, Johan Tibell wrote:
+> Hi Magnus,
+> 
+> network-2.3 supersedes network-bytestring as the modules provided by
+> the latter were merged into network. network-2.3 and later cannot be
+> used together with network-bytestring, in one package, as both
+> expose the same modules. Libraries that use network-bytestring
+> should eventually migrate to network-2.3.
+
+Excellent, I wasn't aware of this.
+
+I suggest that the Hackage entry for network-bytestring is modified to
+let users know this.  I noticed that monads-fd has been marked as
+obsolete on Hackage, with a pointer to mtl, maybe it's possible to do
+something similar with network-bytestring?
+
+/M
+
+-- 
+Magnus Therning                      OpenPGP: 0xAB4DFBA4 
+email: magnus at therning.org   jabber: magnus at therning.org
+twitter: magthe               http://therning.org/magnus
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110212/136b9f96/attachment.pgp>
+

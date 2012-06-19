@@ -1,0 +1,26 @@
+From allbery.b at gmail.com  Wed Aug 17 09:35:35 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Wed, 17 Aug 2011 03:35:35 -0400
+Subject: [Haskell-cafe] ANNOUNCE: TKYProf
+In-Reply-To: <CALoEywOuRx5kX4PxFehspuP2kVZ9b-g6Vi1u2UYM1F10Wc4=NQ@mail.gmail.com>
+References: <96BB3D35-27F0-456B-B0CC-8EDE541C8347@foldr.in>
+	<CALoEywOuRx5kX4PxFehspuP2kVZ9b-g6Vi1u2UYM1F10Wc4=NQ@mail.gmail.com>
+Message-ID: <CAKFCL4UunewKt8rXxvXw-mvaW_NHH=+5Gb0x88YRMY3TCZ0pBQ@mail.gmail.com>
+
+On Wed, Aug 17, 2011 at 00:31, Sebastian Fischer <fischer at nii.ac.jp> wrote:
+
+> Additionally, I linked /usr/lib/libstdc++.so.6 to /usr/lib/libstdc++.so
+>> before I could successfully install tkyprof. Not sure about the
+>> consequences..
+>
+>
+This means you didn't install your distribution's libstdc++-dev (or whatever
+it is called in yours package.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110817/0411c13b/attachment.htm>
+

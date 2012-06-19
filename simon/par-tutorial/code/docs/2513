@@ -1,0 +1,65 @@
+From spam at scientician.net  Fri Dec 30 23:20:26 2011
+From: spam at scientician.net (Bardur Arantsson)
+Date: Fri, 30 Dec 2011 23:20:26 +0100
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFE28CA.5080400@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk>
+	<jdh9h6$gba$1@dough.gmane.org> <4EFC3B4E.9020304@unicaen.fr>
+	<4EFCAC61.6000201@blueyonder.co.uk>
+	<1325192463.16545.42.camel@godel>
+	<4EFCE482.8010104@blueyonder.co.uk> <jdk4sc$f0v$1@dough.gmane.org>
+	<4EFE28CA.5080400@blueyonder.co.uk>
+Message-ID: <jdldfj$j81$1@dough.gmane.org>
+
+On 12/30/2011 10:10 PM, Steve Horne wrote:
+> On 30/12/2011 10:47, Bardur Arantsson wrote:
+>> On 12/29/2011 11:06 PM, Steve Horne wrote:
+> Calling it a straw man won't convince anyone who has the scars from
+> being attacked by those "straw men".
+>
+> I've been in those arguments, being told that C has side-effects
+> therefore all C programs are full of bugs, whereas Haskell can't have
+> similar bugs because it doesn't have side-effects.
+[--snip--]
+
+Please stop or quote someone.
+
+>
+> I'm really not interested in whose-side-are-you-on arguments. Trying to
+> keep the two definitions separate is relevant, and that was my
+> motivation for saying this - it's a fact that if you mix your
+> definitions up enough you can "prove" anything.
+>
+
+Yes, and if you throw up enough verbiage or move goalposts enough you 
+(impersonal) can tire anyone. That doesn't prove anything.
+
+> I like C++. I recognise the flaws in C++, as every everyday-user of the
+> language must. Pretending they don't exist doesn't solve the issues -
+> it's for OTT advocates, not developers. I don't insist that every
+> virtuous-sounding term must apply to C++. I don't pretend every C++
+> advocate is an angel.
+
+I dislike C++. There's one reason for that: "Undefined behavior". 
+Haskell still has some of that, but as long as you steer clear of 
+unsafePerformIO, you're mostly good.
+
+> I like Haskell. I can't claim to be an everyday user, but I'm learning
+> more and using it more all the time. I'm still uncertain whether some
+> flaws I see are real - some that I used to see weren't - but I'll
+> address that over time by thinking and debating. I won't pretend every
+> Haskell advocate is an angel.
+
+I really don't care if you like or dislike Haskell, nor does anyone else 
+AFAICT. Thinking is good. Debating is also fine as long as you're 
+prepared to listen what people are saying.
+
+[--snip--]
+
+Conal Elliot was right -- at least about the debate part :)
+
+That really *is* my last post on this thread.
+
+
+

@@ -1,0 +1,83 @@
+From michael at schmong.org  Mon Apr 25 23:44:49 2011
+From: michael at schmong.org (Michael Litchard)
+Date: Mon, 25 Apr 2011 14:44:49 -0700
+Subject: [Haskell-cafe] errors while installing yesod 0.8
+In-Reply-To: <BANLkTin_fgR0+jhhKNEkqwG0D34ABt=d1g@mail.gmail.com>
+References: <BANLkTinnbgfJFA8pFptB9QwOSr3soP4DaQ@mail.gmail.com>
+	<BANLkTi=k0qBmgfW+i3fZO5tvBMjU6nEPYg@mail.gmail.com>
+	<BANLkTimKscipBEAgO0XqAeU8gbE1FenPyg@mail.gmail.com>
+	<201104200145.02246.daniel.is.fischer@googlemail.com>
+	<BANLkTin43RU_5mXfaGDqzQW54KSmgRUq_Q@mail.gmail.com>
+	<BANLkTin_fgR0+jhhKNEkqwG0D34ABt=d1g@mail.gmail.com>
+Message-ID: <BANLkTinysuJ+B9duFm3zWygQUjB=jRV_+g@mail.gmail.com>
+
+So it appears this is a bug with JSONb-1.0.2. There's a new version
+out. IS the answer to use that, or to patch this version?
+
+On Mon, Apr 25, 2011 at 1:48 PM, Michael Litchard <michael at schmong.org> wrote:
+> Following the install trail I run into this problem
+>
+> mlitchard at apotheosis:~$ cab install JSONb-1.0.2
+> Resolving dependencies...
+> Configuring JSONb-1.0.2...
+> Preprocessing library JSONb-1.0.2...
+> Preprocessing executables for JSONb-1.0.2...
+> Building JSONb-1.0.2...
+> [1 of 7] Compiling Text.JSON.Escape ( Text/JSON/Escape.hs,
+> dist/build/Text/JSON/Escape.o )
+> [2 of 7] Compiling Text.JSONb.Simple ( Text/JSONb/Simple.hs,
+> dist/build/Text/JSONb/Simple.o )
+> [3 of 7] Compiling Text.JSONb.Decode ( Text/JSONb/Decode.hs,
+> dist/build/Text/JSONb/Decode.o )
+>
+> Text/JSONb/Decode.hs:56:33:
+> ? ?Ambiguous occurrence `number'
+> ? ?It could refer to either `Text.JSONb.Decode.number', defined at
+> Text/JSONb/Decode.hs:118:0
+> ? ? ? ? ? ? ? ? ? ? ? ? ?or `Attoparsec.number', imported from
+> Data.Attoparsec.Char8 at Text/JSONb/Decode.hs:25:0-52
+> cabal: Error: some packages failed to install:
+> JSONb-1.0.2 failed during the building phase. The exception was:
+> ExitFailure 1
+>
+>
+> How do I clear up this ambiguity?
+>
+> On Mon, Apr 25, 2011 at 1:24 PM, Michael Litchard <michael at schmong.org> wrote:
+>> I started mindlessly pasting in the output, and the following lept out at me:
+>>
+>> ,
+>>
+>>
+>>
+>> package authenticate-0.8.2.2-cc3ed2c523ecbf1ad123c3468785149e is
+>> unusable due to missing or recursive dependencies:
+>> ?http-enumerator-0.3.1-719bcd77e1dcb62efc9cf9b4f0b72271
+>> package http-enumerator-0.3.1-719bcd77e1dcb62efc9cf9b4f0b72271 is
+>> unusable due to missing or recursive dependencies:
+>> ?attoparsec-enumerator-0.2.0.3-4978ab2dc4d87b7b724534bbfdcb07f1
+>> package json-enumerator-0.0.1-7d4b724ae8c9b5ffa92da26856c4e1f1 is
+>> unusable due to missing or recursive dependencies:
+>> ?blaze-builder-enumerator-0.2.0.1-23e6e1f270358d3329f627e3a5ce8838
+>> package wai-extra-0.3.2-f8378ad4a5cc6f375d96b718876384fa is unusable
+>> due to missing or recursive dependencies:
+>>
+>> There's more of the same I'm leaving out.
+>>
+>> I'm going to see if I can go somewhere with these error messages. If I
+>> totally hose things, I'll let you guys know.
+>>
+>>
+>> On Tue, Apr 19, 2011 at 4:45 PM, Daniel Fischer
+>> <daniel.is.fischer at googlemail.com> wrote:
+>>> On Wednesday 20 April 2011 01:22:20, Michael Litchard wrote:
+>>>> So what else can I try?
+>>>
+>>> $ cabal install -v3 monad-control
+>>>
+>>> That should give some hints at which point exactly things fail.
+>>>
+>>
+>
+
+

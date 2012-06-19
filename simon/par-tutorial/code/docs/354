@@ -1,0 +1,32 @@
+From benl at ouroborus.net  Wed Apr 13 05:10:24 2011
+From: benl at ouroborus.net (Ben Lippmeier)
+Date: Wed, 13 Apr 2011 13:10:24 +1000
+Subject: [Haskell-cafe] Using DPH
+In-Reply-To: <BANLkTi=P0H202p56WePu+AM4WKTO+3NzEA@mail.gmail.com>
+References: <BANLkTinHgYaHEVbO0geFP7wTUKQS4TqBiQ@mail.gmail.com>
+	<C2EF4571-07CB-40B7-88DA-F99A1540EC2C@ouroborus.net>
+	<BANLkTi=P0H202p56WePu+AM4WKTO+3NzEA@mail.gmail.com>
+Message-ID: <3C3119BE-294F-4DA0-A7DC-CFCD401830CA@ouroborus.net>
+
+
+On 12/04/2011, at 11:50 PM, Wilfried Kirschenmann wrote:
+
+> surprisingly, when removing the R.force from the code you attached,
+> performances are better (speed-up=2). I suppose but I am not sure that
+> this allow for loop fusions beetween the R.map ant the R.sum.
+> 
+> I use ghc 7.0.3, Repa 2.0.0.3 and LLVM 2.9.
+> 
+> By the end, the performances with this new version (0.48s) is 15x
+> better than my original version (6.9s)
+> However, the equivalent sequential C code is still 15x better (0.034s).
+> 
+> This may indeed be explained by the fact that all computations are
+> performed inside the R.sum.
+
+Yeah, the Repa fold and sum functions just use the equivalent Data.Vector ones. They're not parallelised and I haven't looked at the generated code. I'll add a ticket to the trac to fix these, but won't have time to work on it myself  in the near future.
+
+Ben.
+
+
+

@@ -1,0 +1,35 @@
+From lemming at henning-thielemann.de  Fri Apr 22 22:11:48 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Fri, 22 Apr 2011 22:11:48 +0200 (CEST)
+Subject: [Haskell-cafe] There is no null; Maybe/Option types
+In-Reply-To: <1303501989.3911.4.camel@localhost.localdomain>
+References: <BANLkTi=irBB_YvfEm3ms0Vxd6xDb7tcPcg@mail.gmail.com>
+	<alpine.DEB.2.00.1104222123290.28351@anubis>
+	<1303501989.3911.4.camel@localhost.localdomain>
+Message-ID: <alpine.DEB.2.00.1104222211170.28351@anubis>
+
+
+On Fri, 22 Apr 2011, Maciej Marcin Piechotka wrote:
+
+> On Fri, 2011-04-22 at 21:26 +0200, Henning Thielemann wrote:
+>>
+>> In idiomatic Haskell you would write
+>>
+>> case userList of
+>>     Nothing -> Nothing
+>>     Just plainUserList =
+>>        let user = findUser "bob" plainUserList
+>>        ...
+>>
+>> since (userList /= Nothing) requires an Eq instance without need and it
+>> requires fromJust. Or was there an educational purpose to write it with
+>> (/= Nothing) ?
+>
+> Using 'more advanced haskell'
+>
+> email = getEmail =<< findUser "bob" =<< userList
+
+This is what Christopher Done wrote some lines below the code, that I 
+quoted.
+
+

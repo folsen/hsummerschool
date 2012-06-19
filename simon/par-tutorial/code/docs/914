@@ -1,0 +1,36 @@
+From nick at well-typed.com  Tue Aug  2 15:15:05 2011
+From: nick at well-typed.com (Nicolas Wu)
+Date: Tue, 2 Aug 2011 14:15:05 +0100
+Subject: [Haskell-cafe] difference between class context and deriving
+In-Reply-To: <4E37F44A.9070506@dit.ie>
+References: <4E37F44A.9070506@dit.ie>
+Message-ID: <CAFBp9R=2B4tcmq=KUJpooKzxjiHk-5eDeh0WRb36WeFwwroOqQ@mail.gmail.com>
+
+Hi Patrick,
+
+On 2 August 2011 13:57, Patrick Browne <patrick.browne at dit.ie> wrote:
+> What is the difference between using a class context and deriving in
+> data type declaration?
+
+A class context simply says something about the types involved in the
+construction. In your example,
+
+> data Eq a => Set1 a = NilSet1 | ConsSet1 a (Set1 a)
+
+the type `a` must have an instance of `Eq`. This does not imply that
+`Set1` itself has an instance of `Eq`.
+
+On the other hand, the `deriving` keyword tells the compiler that
+you'd like it to try and derive a default instance for a class. In
+your example, this results in an instance of `Eq Set2`.
+
+Hopefully that should explain why you had:
+
+> (NilSet1) == (NilSet1) -- no instance, error
+> (NilSet2) == (NilSet2) -- True
+
+All the best,
+
+Nick
+
+

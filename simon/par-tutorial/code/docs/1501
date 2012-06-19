@@ -1,0 +1,71 @@
+From gwern0 at gmail.com  Mon Aug 29 17:47:55 2011
+From: gwern0 at gmail.com (Gwern Branwen)
+Date: Mon, 29 Aug 2011 11:47:55 -0400
+Subject: [Haskell-cafe] Truly Really Off-topic: (Was: Mathematics)
+In-Reply-To: <4E5BAE09.1000405@unicaen.fr>
+References: <4E5B4F1F.2090600@btinternet.com>
+	<013AD1D0-E315-4F47-A37B-B6F8787D7BD5@uvm.edu>
+	<4E5BAE09.1000405@unicaen.fr>
+Message-ID: <CAMwO0gyj6VVdBXF=A_sRbxcLW_T4m+uTdvGfj87eoRMXuHD2cA@mail.gmail.com>
+
+On Mon, Aug 29, 2011 at 11:19 AM, Jerzy Karczmarczuk
+<jerzy.karczmarczuk at unicaen.fr> wrote:
+> It is unsourced, repeated without discernment, and Dijkstra cannot confirm
+> (or deny) it any more. Somehow I cannot believe he said that...
+> Dijkstra began to study physics, and a physicist would be reluctant to make
+> such puns. Why?
+
+Some googling takes me to the full quote:
+
+> "Computer science is no more about computers than astronomy is about telescopes, biology is about microscopes, or chemistry is about beakers and test tubes. Science is not about tools. It is about how we use them, and what we find out when we do."
+
+Which is referenced to, inside _Invitation to Computer Science_ (G.
+Michael Schneider, Judith L. Gersting, Keith Miller;
+http://books.google.com/books?id=gQK0pJONyhgC ), to "Fellows, M.R.,
+and Parberry, I. "Getting Children Excited About Computer Science",
+_Computing Research News_, vol. 5, no. 1 (January 1993)".
+
+Curiously, the preface to the quote is:
+
+> This distinction between computers and computer science is beautifully expressed by computer scientists Michael R. Fellows and Ian Parberry in an article in the journal _Computing Research News_:
+
+*No* mention of Dijkstra. Searching that full book, the only Dijkstra
+mentions are unconnected to the quote.
+
+Chasing links, I head to
+http://archive.cra.org/CRN/issues/by_title_by_issue.html and download
+January 1993: http://archive.cra.org/CRN/issues/9301.pdf
+
+On page 7, I find it. The article title is different: "SIGACT trying
+to get children excited about CS". The money line is highlighted. The
+relevant paragraph and surrounding paragraphs:
+
+> Is it any wonder then that computer science is represented in many schools by either computer games or some antiquated approach to programming, which at worst concentrates on a litany of syntax and at best emphasizes expediency over effectiveness and efficiency? But computer science is not about computers?it is about computation.
+>
+> What would we like our children- the general public of the future?to learn about computer science in schools? We need to do away with the myth that computer science is about computers. Computer science is no more about computers than astronomy is about telescopes, biology is about microscopes or chemistry is about beakers and test tubes. Science is not about tools, it is about how we use them and what we find out when we do.
+>
+> It may come as a surprise to some that computer science is full of activities that children still find exciting even without the use of computers. Take theoretical computer science, for example, which may seem an unlikely candidate. If computer science is underrepresented in schools, then theoretical computer science is doubly so.
+
+This is the precise quote, with no quotation marks or references or
+allusions of any kind; this seems to be the original, where the exact
+quote comes from. There are no mentions whatsoever of Dijkstra in the
+January PDF.
+
+On Mon, Aug 29, 2011 at 11:25 AM, Christopher Done
+<chrisdone at googlemail.com> wrote:
+> Wherever its origin, it is featured in SICP which was out in 1984:
+> http://www.youtube.com/watch?v=zQLUPjefuWA It's a sound analogy.
+
+Abelson doesn't cite Dijkstra in the first minute where he makes the
+comparisons, either, unless I missed it.
+
+As well, in no Google hit did I find any specific citation to
+Dijkstra. Hence, I conclude that because it is insightful and sounds
+like Dijkstra (eg. his submarine quote), it has become apocryphally
+associated with him but is *not* actually a Dijkstra quote.
+
+-- 
+gwern
+http://www.gwern.net
+
+

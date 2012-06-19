@@ -1,0 +1,65 @@
+From chak at cse.unsw.edu.au  Mon Aug  1 04:22:28 2011
+From: chak at cse.unsw.edu.au (Manuel M T Chakravarty)
+Date: Mon, 1 Aug 2011 12:22:28 +1000
+Subject: [Haskell-cafe] XCode Dependency for HP on Mac
+In-Reply-To: <CAAOoiFbwhBo7Yjrvy4XhdgtfSu=7NgE0hXxA4GLJu_eaw8QCmw@mail.gmail.com>
+References: <CAO9Q0tWUGq_cXYLcWwpWqGPhG6L6Bzpe58whuAyvToW8biKyrw@mail.gmail.com>
+	<CACz_ru2WXfc62oQJp9EXCvB04=UgoPWa=p4+q43LddmUi8+H=w@mail.gmail.com>
+	<C2D2F5BF-A0B6-4C97-9FCB-596463124F90@uvm.edu>
+	<1311789803.25339.124.camel@godel>
+	<CAO9Q0tV11Aw47Lk8xQvOx+VKVZHKA-rR4EgKx3-54R_um0MzyA@mail.gmail.com>
+	<CAF==i18FYnQ6tGKT44TVb-ThCn0Pi713fDMxErqyFjvq3J5g-w@mail.gmail.com>
+	<CAAOoiFbwhBo7Yjrvy4XhdgtfSu=7NgE0hXxA4GLJu_eaw8QCmw@mail.gmail.com>
+Message-ID: <405D2A0E-7472-4ADE-8154-726C6B042F49@cse.unsw.edu.au>
+
+In addition to the excellent reasons that Mark outlined, there is another important reason to *not* include gcc and friends in the HP.  Every software developer (as opposed to friend of a friend who just wanted to try to learn programming with Haskell on a road trip) will already have Xcode installed on their Mac.
+
+Having two versions of gcc, make, lots of other tools, library headers, library objects, etc is going to lead to subtle bugs and headaches; at the latest, when you compile your first multi-language project.  (This is where this is not comparable to the situation on Windows with mingw.  A software developer on Windows, will have Visual Studio installed, but usually not some flavour of the GNU tools.)
+
+Manuel
+
+PS: I am sure there is demand for a self-contained, lightweight beginners/teaching Haskell environment, but let's not confuse that with the main distribution.
+
+
+Mark Lentczner:
+> Hiho - I'm the maintainer of the Mac installer for HP. I thought I'd
+> chime in a bit:
+> 
+> On Mac OS X, "developer tools" is essentially synonymous with "Xcode".
+> That is, to get the set of standard utilities needed for development
+> on compiled executables (notably the "binutils"), you install Xcode.
+> True, it also includes the IDE called Xcode, but the vast bulk of that
+> installation are things like headers, link libraries, command line
+> tools, and other utilities for development of compiled executables in
+> general.
+> 
+> As several have pointed out, you can download Xcode for free. If you
+> have Lion, you can get Xcode 4 for free from the Mac Store. Xcode 3
+> for 10.6 and 10.5. Traditionally, Apple has included Xcode on one of
+> the CD-ROMs that came with a new computer, and/or as an installer
+> already present on the hard disk. (I haven't bought a new Air...
+> yet... but perhaps someone can check to see if the Xcode installer is
+> one the SSD volume already?)
+> 
+> It is conceivably possible to build and distribute some of those
+> tools, but not the whole bundle. But the difficulty of getting such a
+> build just right, and all the pieces in the right place, seems absurd
+> to attempt to recreate when Apple has done it, and gives it away for
+> free. Apple's versions of bintools also includes many extensions extra
+> options for the OS X environment (like supporting multi-arch binaries)
+> Finally, there is also licensing questions regarding the parts
+> supplied by the OS vendor (headers, stub libs, debug libs, etc....)
+> 
+> Given the above, perhaps it is a little more clear why we choose to
+> not include the system development tools in the Haskell Platform
+> installer.
+> 
+> - Mark
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+

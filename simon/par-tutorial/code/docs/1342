@@ -1,0 +1,24 @@
+From abm221617 at gmail.com  Wed Aug 24 23:03:15 2011
+From: abm221617 at gmail.com (Armando Blancas)
+Date: Wed, 24 Aug 2011 14:03:15 -0700
+Subject: [Haskell-cafe] Using -> as both type and value constructor
+In-Reply-To: <201108242040.55398.daniel.is.fischer@googlemail.com>
+References: <CAHjViWKoML3hkn+hbOXMY5CZJVHcQ_ho9027J0hM3Pkohk48DQ@mail.gmail.com>
+	<201108242040.55398.daniel.is.fischer@googlemail.com>
+Message-ID: <CAHjViW+Pk_kuzTY8nCVkf3hOPKPWU1+OLgzyspDouG5yFUPCkQ@mail.gmail.com>
+
+>
+> > I didn't see that claim in the linked slides, and it's not Haskell '98
+> (nor
+> > Haskell 2010).
+
+
+I didn't realize it linked to the slides; I thought that pointed to the
+article. I just found another version of the paper, A Simple Implementation
+Technique for Priority Search Queues, by Hinze, which shows the binding type
+as a pair, with access functions for k and p. I'll continue to work my way
+through the material there. Thanks for you response.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110824/3fd9026e/attachment.htm>
+

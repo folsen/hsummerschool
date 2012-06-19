@@ -1,0 +1,54 @@
+From rob.nikander at gmail.com  Sun Apr 10 21:58:46 2011
+From: rob.nikander at gmail.com (Rob Nikander)
+Date: Sun, 10 Apr 2011 15:58:46 -0400
+Subject: [Haskell-cafe] haskell-src-meta installation failed
+In-Reply-To: <6906BC0DD6C16B44A738B0F6E05CF9472297D6@CH1PRD0102MB100.prod.exchangelabs.com>
+References: <6906BC0DD6C16B44A738B0F6E05CF9472297D6@CH1PRD0102MB100.prod.exchangelabs.com>
+Message-ID: <BANLkTik=c=MJMkwHku7rEY8SofcAwvgWoQ@mail.gmail.com>
+
+I don't know what would cause this, but it's saying that a file in
+your installed haskell-src-exts package is corrupt, so maybe try
+reinstalling that package.
+
+Rob
+
+2011/4/10 Qiuchi Jian <qiuchi at student.chalmers.se>:
+> Hi guys,
+>
+> I tried to install haskell-src-meta and got the error below.? I checked all
+> dependencies which are listed on the hackage page, they are all installed
+> with the right version.? Can anyone tell me what is the problem? Thanks a
+> lot.
+>
+> jqc at ubuntu:~$ cabal install haskell-src-meta
+> Resolving dependencies...
+> Configuring haskell-src-meta-0.3...
+> Preprocessing library haskell-src-meta-0.3...
+> Building haskell-src-meta-0.3...
+> [1 of 7] Compiling Language.Haskell.Meta.Syntax.Translate (
+> src/Language/Haskell/Meta/Syntax/Translate.hs,
+> dist/build/Language/Haskell/Meta/Syntax/Translate.o )
+>
+> src/Language/Haskell/Meta/Syntax/Translate.hs:19:0:
+>
+> Bad interface file:
+> /home/jqc/.cabal/lib/haskell-src-exts-1.9.6/ghc-6.12.3/Language/Haskell/Exts/Syntax.hi
+>     Data.Binary.getWord8: end of file
+>
+> cabal: Error: some packages failed to install:
+> haskell-src-meta-0.3 failed during the building phase. The exception was:
+> ExitFailure 1
+>
+> Regards,
+>
+> Jian
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

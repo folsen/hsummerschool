@@ -1,0 +1,63 @@
+From olshanskydr at gmail.com  Sun Apr  3 07:08:57 2011
+From: olshanskydr at gmail.com (Dmitry Olshansky)
+Date: Sun, 3 Apr 2011 09:08:57 +0400
+Subject: [Haskell-cafe] using IO monad in Iteratee
+In-Reply-To: <20110403030659.3272d8a1@angst.streitmacht.eu>
+References: <AANLkTim6SoSVFZ+AGH23okAZs2h1RvyGLvekxPKbtno9@mail.gmail.com>
+	<BANLkTikYdKE=UnZ54803rdw70NAKqr5xrQ@mail.gmail.com>
+	<20110403030659.3272d8a1@angst.streitmacht.eu>
+Message-ID: <BANLkTinFbZDfQxU1dODhHw9B8YwuBXNHRA@mail.gmail.com>
+
+Ertugrul,
+
+thanks for information. I've found several decisions for my real problem
+(using enumHandle and some more special decision).
+But I'll be have in mind about monad-control.
+
+
+
+2011/4/3 Ertugrul Soeylemez <es at ertes.de>
+
+> Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+>
+> > On 1 April 2011 21:59, Dmitry Olshansky <olshanskydr at gmail.com> wrote:
+> > > Is it possible to change enumFile to using MonadIO class?
+> >
+> > No because it uses the control operation Control.Exception.finally ::
+> > IO a -> IO b -> IO a internally. You can't lift control operations
+> > with liftIO :: MonadIO m => IO a -> m a.
+> >
+> > However if you are able to define a MonadTransControl and
+> > MonadControlIO instance (from the monad-control package[1]) for
+> > Iteratee and use Control.Exception.Control.finally instead of the
+> > regular finally, you can use your MyMonad with the modified enumFile.
+>
+> I don't think that's possible, because Iteratee is based on CPS.  I
+> think, so far nobody has come up with an instance definition for
+> monad-peel or monad-control for CPS-based monads like ContT or Iteratee.
+>
+> However, it is easy to write an own handle enumerator, which uses
+> monad-peel or monad-control exception handling to convert errors to
+> iteratee exceptions.  On the other hand, as has been noted, there is
+> enumHandle, which does that by itself.
+>
+>
+> Greets,
+> Ertugrul
+>
+>
+> --
+> nightmare = unsafePerformIO (getWrongWife >>= sex)
+> http://ertes.de/
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110403/2b4ca5c2/attachment.htm>
+

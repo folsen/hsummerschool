@@ -1,0 +1,33 @@
+From trebla at vex.net  Sun Dec  4 19:40:54 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Sun, 04 Dec 2011 13:40:54 -0500
+Subject: [Haskell-cafe] writeFile: commitBuffer: invalid argument
+ (Illegal byte sequence)
+In-Reply-To: <CAMXF=YDO52dMscP8VTCJ3h6ZmLzS4JtC0jxymf2423zX+ZPBfw@mail.gmail.com>
+References: <CAMXF=YDO52dMscP8VTCJ3h6ZmLzS4JtC0jxymf2423zX+ZPBfw@mail.gmail.com>
+Message-ID: <4EDBBEB6.3050201@vex.net>
+
+On 11-12-04 07:08 AM, dokondr wrote:
+> In  GHC 7.0.3 / Mac OS X when trying to:
+>
+> writeFile "someFile" "(Hoping You Have A iPhone When I Do This) Lol
+> Sleep Is When You Close These ---&gt; \55357\56384"
+>
+> I get:
+> commitBuffer: invalid argument (Illegal byte sequence)
+>
+> The string I am trying to write can also be seen here:
+> http://twitter.com/#!/search/Hoping%20You%20Have%20A%20iPhone%20When%20I%20Do%20This%20lang%3Aen
+> <http://twitter.com/#%21/search/Hoping%20You%20Have%20A%20iPhone%20When%20I%20Do%20This%20lang%3Aen>
+
+\55357 and \56384 would be surrogates D83D and DC40 for use in UTF-16 
+only. Haskell's Char is not a UTF-16 code unit (unlike early versions of 
+Java and probably current ones). GHC is correct in rejecting them.
+
+Haskell's Char is a Unicode character directly. If you want the 
+character U+1F440 "EYES", write \128064 directly (or \x1f440, or \x1F440).
+
+Use http://www.unicode.org/charts/ to find out what you are getting 
+into. You can enter a hexadecimal number or choose a category.
+
+

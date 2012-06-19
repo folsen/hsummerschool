@@ -1,0 +1,59 @@
+From cdsmith at gmail.com  Mon Aug 15 11:34:01 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Mon, 15 Aug 2011 03:34:01 -0600
+Subject: [Haskell-cafe] GHC API gives a weird error about .hi-boot files
+Message-ID: <1313400841.32611.30.camel@godel>
+
+Can anyone tell me what I'm doing wrong with the GHC API?  I'm getting
+the following error message from the GHC API:
+
+    Can't find interface-file declaration for variable Main.picture
+      Probable cause: bug in .hi-boot file, or inconsistent .hi file
+      Use -ddump-if-trace to get an idea of which file caused the error
+
+The source code I'm loading doesn't seem to matter at all, except that
+it defines a top-level variable called 'picture'.  Of course, if I
+change the module name then I get a different module name in the error,
+but that's about it.
+
+The code I'm using to load the file is as follows:
+
+getPicture src = do
+    fn <- chooseFileName ".hs"
+    B.writeFile fn src
+    codeErrors <- newIORef []
+    GHC.defaultErrorHandler (addErrorTo codeErrors)
+        $ GHC.runGhc (Just GHC.libdir)
+        $ GHC.handleSourceError (handle codeErrors) $ do
+            dflags <- GHC.getSessionDynFlags
+            GHC.setSessionDynFlags $ dflags {
+                GHC.ghcMode = GHC.OneShot,
+                GHC.ghcLink = GHC.LinkInMemory,
+                GHC.hscTarget = GHC.HscInterpreted,
+                GHC.log_action = addErrorTo codeErrors
+                }
+            target <- GHC.guessTarget fn Nothing
+            GHC.setTargets [target]
+            r <- fmap GHC.succeeded (GHC.load GHC.LoadAllTargets)
+            case r of
+                True -> do
+                    mods <- GHC.getModuleGraph
+                    GHC.setContext
+                        [ GHC.ms_mod (head mods) ]
+                        [ GHC.simpleImportDecl
+                            (GHC.mkModuleName "Graphics.Gloss") ]
+                    v <- GHC.compileExpr "picture :: Picture"
+                    return (Right (unsafeCoerce# v :: Picture))
+                False -> return (Left codeErrors)
+
+I can't see anything I'm doing obviously wrong here, but I'm not at all
+familiar with GHC's build process, so I'm hoping someone can pipe up and
+point out the obvious stuff I've missed.
+
+Any ideas?
+
+-- 
+Chris Smith
+
+
+

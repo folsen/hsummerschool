@@ -1,0 +1,40 @@
+From jmaessen at alum.mit.edu  Fri Apr  1 16:50:49 2011
+From: jmaessen at alum.mit.edu (Jan-Willem Maessen)
+Date: Fri, 1 Apr 2011 10:50:49 -0400
+Subject: [Haskell-cafe] Class constraints for associated type synonyms
+In-Reply-To: <59543203684B2244980D7E4057D5FBC11F2F71C8@DB3EX14MBXC310.europe.corp.microsoft.com>
+References: <AANLkTinYC18ifpc75_J1vY0NbkB6oE+QHwQ=3DkvEPUJ@mail.gmail.com>
+	<59543203684B2244980D7E4057D5FBC11F2F71C8@DB3EX14MBXC310.europe.corp.microsoft.com>
+Message-ID: <AANLkTikbMTCJ8p=HYfqyF6rPXCPb8BeJLr3SoiVy2=c9@mail.gmail.com>
+
+On Thu, Mar 24, 2011 at 11:36 AM, Simon Peyton-Jones
+<simonpj at microsoft.com> wrote:
+> | class Monoid (GeneratorOf a) => Generable a where
+> | ? type GeneratorOf a :: * -> *
+> | ? construct :: GeneratorOf a -> a
+> |
+> | Now, it seems I need FlexibleInstances to do this when I'm using an
+> | associated type synonym, but I don't need the flexibility when using a
+> | multiparameter type class.
+>
+>
+> Suppose you have these wierd instances:
+> ? ? ? ?type instance GeneratorOf (Tree a) = Tree (Tree a)
+> ? ? ? ?instance Generable a => Monoid (Tree a)
+> ? ? ? ?instance Generable (Tree a)
+>
+> Now, in the last of these we need to cough up an instance of Generable (Tree a)'s superclasses. ?Ah, that's Monoid (GeneratorOf (Tree a))
+> Ah, that's Monoid (Tree (Tree a))
+> We have an instance of Monoid, but it needs, well Generable (Tree a), which is where we started.
+>
+> If I'd nested things a bit more deeply you can see I'd get into an infinite regress. ? So you have to take responsibility that instance solving will terminate, hence FlexibleInstances.
+>
+> As you say, the same thing can happen with fundeps. The fact that the thing is allowed is probably a bug in the Fundep stuff.
+
+Thanks, it's good to know that I was, in fact, being naughty in both
+instances (and not merely being constrained from doing Good Things by
+the typing rules for associated types).  Back to the drawing board.
+
+-Jan
+
+

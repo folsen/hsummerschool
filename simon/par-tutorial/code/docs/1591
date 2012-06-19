@@ -1,0 +1,33 @@
+From felipe.lessa at gmail.com  Thu Dec  1 18:53:37 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Thu, 1 Dec 2011 15:53:37 -0200
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <20111201174112.GA14096@x200>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+	<CANd=OGGcwRC9FfTA8KJQyzsQBDL3YycF2MYx4hMiN7vxeBwTFg@mail.gmail.com>
+	<20111201174112.GA14096@x200>
+Message-ID: <CANd=OGGXOQYrKrnw9QpDaqgjC-JGsH7jFJB8Hx-OJjCTZP7KGQ@mail.gmail.com>
+
+On Thu, Dec 1, 2011 at 3:41 PM, Simon Hengel <simon.hengel at wiktory.org> wrote:
+>> > How to get this path in Haskell?
+>>
+>> If I understand you correctly, you want
+>>
+>> ? takeDirectory `fmap` getProgName
+>
+> I think getProgName does not give you the full path, but only the
+> program name.
+
+Neither does $0, does it?  It depends on how the program is called.
+
+You can always use System.Directory.getCurrentDirectory with
+System.FilePath.{isRelative,replaceDirectory} if you somehow need the
+full path.  Note, however, that not even this is generally guaranteed
+to be correct.
+
+Cheers,
+
+-- 
+Felipe.
+
+

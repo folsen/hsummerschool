@@ -1,0 +1,37 @@
+From jao at gnu.org  Sun Dec 11 14:56:18 2011
+From: jao at gnu.org (Jose A. Ortega Ruiz)
+Date: Sun, 11 Dec 2011 14:56:18 +0100
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+References: <87k464b870.fsf@gnu.org> <87d3bw102d.fsf@write-only.cryp.to>
+	<CAKFCL4VhQe89QZmTM6Wxm+7KR6KOT7+qQe-xYCNBt8i3fR+zjg@mail.gmail.com>
+	<87fwgrblkq.fsf@gnu.org> <20111211111845.GA12470@sniper>
+Message-ID: <87pqfv9pq5.fsf@gnu.org>
+
+On Sun, Dec 11 2011, Roman Cheplyaka wrote:
+
+[...]
+
+> To avoid problems like this, please specify version constraints in the
+> .cabal file. See [1] for the details.
+
+I'm actually preparing a new release with stricter version constraints
+(the new .cabal is
+https://github.com/jaor/xmobar/blob/master/xmobar.cabal, in case anyone
+has the time to check whether i'm doing something dumb).  
+
+It's clear to me what contraints to use for packages not included in
+ghc, but there're some of them that come with the compiler (unix, time
+and filepath in my case): what's the best practice regarding those
+packages?  I've left they're version unspecified, intending to mean
+"whatever version comes with your ghc".
+
+Is that a good practice?
+
+TIA,
+jao
+-- 
+Ignorance more frequently begets confidence than does knowledge
+  - Charles Darwin
+
+
+

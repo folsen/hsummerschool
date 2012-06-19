@@ -1,0 +1,44 @@
+From pjscott at iastate.edu  Sun Feb  6 03:12:40 2011
+From: pjscott at iastate.edu (Peter Scott)
+Date: Sat, 5 Feb 2011 20:12:40 -0600
+Subject: [Haskell-cafe] Storing passwords securely
+Message-ID: <AANLkTik_07tk=YgMiJyrUWyKj19gAadiA5Mp+wXTM_Zv@mail.gmail.com>
+
+The usual advice on how to store passwords securely is "use bcrypt", but
+since there seem to be no Haskell bindings for bcrypt, the other good option
+is to iterate a salted hash function at least 1000 times. In order for
+people to get this right, there should be a library with a really simple API
+that makes it Just Work. I think I have such an API, but I'd like to hear if
+anybody else has suggestions before I go releasing it onto Hackage. The code
+is here:
+
+https://github.com/PeterScott/pwstore
+
+The part of the API that people have to care about is two functions.
+makePassword creates a hashed, salted password that you can store in a
+database. verifyPassword takes this hashed, salted password and a user's
+password input, and tells you if it matches. Like this:
+
+    >>> makePassword (B.pack "hunter2") 12
+
+ "sha256|12|lMzlNz0XK9eiPIYPY96QCQ==|1ZJ/R3qLEF0oCBVNtvNKLwZLpXPM7bLEy/Nc6QBxWro="
+
+    >>> verifyPassword (B.pack "wrong guess") passwordHash
+    False
+    >>> verifyPassword (B.pack "hunter2") passwordHash
+    True
+
+There's also a function for increasing the number of hash iterations on
+stored password hashes, to compensate for Moore's law.
+
+Does this sound reasonable? Also, I have a pure-Haskell version and a
+version which depends on some C code, for speed (about 25x difference). Does
+anybody care about the pure Haskell version, or should I just drop it and
+require the faster C/Haskell mixed version?
+
+Thanks,
+-Peter
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110205/85be614c/attachment.htm>
+

@@ -1,0 +1,78 @@
+From ok at cs.otago.ac.nz  Thu Dec 15 05:34:25 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Thu, 15 Dec 2011 17:34:25 +1300
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <F12E6066-CF9B-4DAF-9A17-A468A79394B6@deepbondi.net>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+	<F12E6066-CF9B-4DAF-9A17-A468A79394B6@deepbondi.net>
+Message-ID: <E54DC127-6B24-40CC-A3B4-4686E6A40CAE@cs.otago.ac.nz>
+
+Suppose you have a typeclass C with operations x y z w
+and you decide that there's a real difference, that more
+things can support x y than can support z w.
+
+If you then split
+	C' x y
+	  C z w
+
+then all existing *uses* of C are happy.
+But all the existing *instances* of C have to be split
+into an instance for C' and an instance of C.
+
+Alternative is of course the example we're discussing,
+but this is a problem that's going to keep on coming up.
+
+Suggestion 1:
+    If someone writes an instance declaration that says
+    some type T is an instance of some class C, and there
+    is a parent class C' for which the compiler can't find
+    a declaration that T belongs to C', BUT all the operations
+    needed for membership in C' are actually in the instance
+    declaration for C,
+
+    why can't the compiler automatically construct an instance
+    declaration that T is an instance of C' and move the
+    necessary definitions there?
+
+    so instance (context) => C T
+          where x =
+                y =
+                z =
+                w =
+    => instance (context) => C' T
+         where x =
+               y =
+       instance (context) => C T
+         where z =
+               w =
+
+    I dare say there are all sorts of things that could go wrong
+    with this, but I am too dumb to see what they are.  I hasten
+    to add that I have no idea whether this could be extended to
+    multiparameter type classes or not.
+
+    Something like this would make the refactoring of C into C'+C
+    pretty much painless; the compiler could warn about unfactored
+    instance declarations so you could migrate gradually to the new
+    structure, but it wouldn't break working code.
+
+Suggestion 2:
+    Make it explicit.  Have
+	instance (context) => C T
+	  deriving C' T              -- new feature
+	  where x =
+		y =
+		z =
+		w =
+    do the refactoring.  This requires a one-line explicit change
+    for each existing instance declaration, so there's *some* pain,
+    but it's *less* pain than a complete manual refactoring, which
+    you might need to do repeatedly while working out a design.
+
+
+
+

@@ -1,0 +1,47 @@
+From feeder.of.the.bears at gmail.com  Wed Aug 31 18:50:56 2011
+From: feeder.of.the.bears at gmail.com (David Pollak)
+Date: Wed, 31 Aug 2011 09:50:56 -0700
+Subject: [Haskell-cafe] iOS and Haskell
+In-Reply-To: <CA+0XtC_yRoFpheQ-gHMVKxSx_hnCiGff7fRUObmBPyP0QZnOpw@mail.gmail.com>
+References: <CA+0XtC_yRoFpheQ-gHMVKxSx_hnCiGff7fRUObmBPyP0QZnOpw@mail.gmail.com>
+Message-ID: <CAH6e9Lj=aGAj9EQ8wtNZaLUdmXVyvaok4NSDY8n_Hf5ZWLQPww@mail.gmail.com>
+
+Here's a repository that demonstrates Lisp written in Haskell running on the
+iPad via Haskell-iPhone (see http://www.haskell.org/mailman/listinfo/iphone
+):
+
+https://github.com/dpp/LispHaskellIPad
+
+The library is mature and the author is tremendously responsive on the
+Haskell-iPhone list.
+
+
+On Tue, Aug 30, 2011 at 9:32 PM, Vasili I. Galchin <vigalchin at gmail.com>wrote:
+
+> Hello,
+>
+>
+>       I know nothing about the architecture of iOS running on an iPad.
+> However, I have a friend who just bought the newer iPad. It seems that
+> either C++ or Objective C is available on iPad for development(actually the
+> icon says C++). What are the prospects of getting Haskell ported to iOS?
+>
+> Vasili
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+
+-- 
+Lift, the simply functional web framework http://liftweb.net
+Simply Lift http://simply.liftweb.net
+Follow me: http://twitter.com/dpp
+Blog: http://goodstuff.im
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110831/d86354d8/attachment.htm>
+

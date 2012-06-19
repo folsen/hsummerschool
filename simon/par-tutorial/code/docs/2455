@@ -1,0 +1,35 @@
+From sh006d3592 at blueyonder.co.uk  Fri Dec 30 05:14:26 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Fri, 30 Dec 2011 04:14:26 +0000
+Subject: [Haskell-cafe] Level of Win32 GUI support in the Haskell
+	platform
+In-Reply-To: <CA+qNEz+_a9c86Y_WuEy5fuHUUJqe4kdc5wczEVGE__V=6r4zoQ@mail.gmail.com>
+References: <4EFD1992.60702@blueyonder.co.uk>
+	<CA+qNEz+_a9c86Y_WuEy5fuHUUJqe4kdc5wczEVGE__V=6r4zoQ@mail.gmail.com>
+Message-ID: <4EFD3AA2.2080303@blueyonder.co.uk>
+
+On 30/12/2011 03:43, Chris Wong wrote:
+> On Fri, Dec 30, 2011 at 2:53 PM, Steve Horne
+> <sh006d3592 at blueyonder.co.uk>  wrote:
+>> I've been for functions like GetMessage, TranslateMessage and
+>> DispatchMessage in the Haskell Platform Win32 library - the usual message
+>> loop stuff - and not finding them. Hoogle says "no results found".
+>>
+>> Is this level of Win32 GUI coding supported? (other than by dealing with the
+>> FFI myself)
+> I'd recommend using Gtk2hs (http://haskell.org/gtk2hs). It's well
+> supported and your program will work on Mac&  Linux&  BSD to boot.
+>
+> Trying to grapple with Win32 APIs isn't exactly my idea of fun. :)
+
+I had dismissed GTK  - I assumed getting it set up in Windows would be a 
+bit painful, and figured I'd stick with whats in the Haskell Platform 
+for the moment. I'm already familiar (though very rusty) with Win32 from 
+C - it seemed like an easy if limited option.
+
+But I'll take a look at gtk2hs anyway.
+
+Thanks.
+
+
+

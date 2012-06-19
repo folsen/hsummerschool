@@ -1,0 +1,126 @@
+From kizzx2+haskell at gmail.com  Mon Aug  8 18:24:45 2011
+From: kizzx2+haskell at gmail.com (Chris Yuen)
+Date: Tue, 9 Aug 2011 00:24:45 +0800
+Subject: [Haskell-cafe] Analyzing slow performance of a Haskell program
+In-Reply-To: <CANVKUrXxHLgmGcYwk+hJHyME22TUDVoZ2n4K0T7afqH1LHZqpg@mail.gmail.com>
+References: <CAKaDkC7-vQo_AXRRX6-+P+PKV87b54D21k6bSnub=JYvH_mnRQ@mail.gmail.com>
+	<CAGXzfB60BDXV6vOJfk6YVBG7xjyhhmTDn=+ax6mjLBx5kY6B=A@mail.gmail.com>
+	<201108071120.18563.daniel.is.fischer@googlemail.com>
+	<CAKaDkC40kbdfEinqsUuoaexpD4JCmfX-wTvt5MZt9NPdU--ELA@mail.gmail.com>
+	<CANVKUrXxHLgmGcYwk+hJHyME22TUDVoZ2n4K0T7afqH1LHZqpg@mail.gmail.com>
+Message-ID: <CAKaDkC4Ab3yoG0UoaN9C4CM+1-goZ_yswqOLcBz7ejE6LfLg8w@mail.gmail.com>
+
+Where is the `unsafeAt` function? I can't seem to find it (
+http://haskell.org/hoogle/?hoogle=unsafeat).
+
+For reference I have asked the same question on StackOverflow. One person
+suggested that the reason might be that Int64 on Windows is broken (
+http://stackoverflow.com/questions/6970904/analyzing-slow-performance-of-a-haskell-program/6976448#6976448
+).
+
+I tried the same test on Arch Linux x64 (GHC 7.0.3) but it still can't
+complete in 3 minutes, where as a new C++ version I wrote completes in 45
+seconds (because I didn't want to use Mono for benchmarks. For reference
+here is the C++ implementation http://ideone.com/vZGhh (Again, ironically
+shorter than Haskell and actually looks quite clean))
+
+The profile under x64 Linux is similar to the one posted before -- most
+allocations and time spent in wordLength'.
+
+It seems mysterious that such an innocent program is so obscure to write
+"correctly" in Haskell :P
+
+Chris
+
+On Mon, Aug 8, 2011 at 1:40 AM, Eugene Kirpichov <ekirpichov at gmail.com>wrote:
+
+> What about using unsafe array indexing operations? (i.e. array `unsafeAt`
+> index)
+>
+> 2011/8/7 Chris Yuen <kizzx2+haskell at gmail.com>:
+> > Here is an updated version using Data.Array.Unboxed
+> http://ideone.com/YXuVL
+> > And the profile http://hpaste.org/49940
+> >
+> > Still taking 5+ minutes...
+> >
+> > Chris
+> >
+> > On Sun, Aug 7, 2011 at 5:20 PM, Daniel Fischer
+> > <daniel.is.fischer at googlemail.com> wrote:
+> >>
+> >> On Sunday 07 August 2011, 10:52:20, Max Bolingbroke wrote:
+> >> > In short I don't see how to get further without changing the algorithm
+> >> > or doing some hacks like manual unrolling. Maybe someone else has some
+> >> > ideas?
+> >>
+> >> Well, the C# implementation uses arrays for lookup while the Haskell
+> >> version uses list lookups
+> >>
+> >>                      in (tens !! fromIntegral t) ++ wordify x
+> >>
+> >> and case'd functions
+> >>
+> >> lenTens 0 = 0
+> >> lenTens 1 = 3
+> >> lenTens 2 = 6
+> >> lenTens 3 = 6
+> >> lenTens 4 = 5
+> >> lenTens 5 = 5
+> >> lenTens 6 = 5
+> >> lenTens 7 = 7
+> >> lenTens 8 = 6
+> >> lenTens 9 = 6
+> >>
+> >> wordify is only called once at the end, so that should not have a
+> >> measurable impact, but the lenXXXs might.
+> >> I'm not sure what
+> >>
+> >> CaseLen.$wlenTens :: GHC.Prim.Int# -> GHC.Prim.Int#
+> >> [GblId,
+> >>  Arity=1,
+> >>  Str=DmdType L,
+> >>  Unf=Unf{Src=<vanilla>, TopLvl=True, Arity=1, Value=True,
+> >>         ConLike=True, Cheap=True, Expandable=True,
+> >>         Guidance=IF_ARGS [12] 11 0}]
+> >> CaseLen.$wlenTens =
+> >>  \ (ww_shY :: GHC.Prim.Int#) ->
+> >>    case ww_shY of _ {
+> >>      __DEFAULT ->
+> >>        CaseLen.lenTens1
+> >>        `cast` (CoUnsafe GHC.Types.Int GHC.Prim.Int#
+> >>                :: GHC.Types.Int ~ GHC.Prim.Int#);
+> >>      0 -> 0;
+> >>      1 -> 3;
+> >>      2 -> 6;
+> >>      3 -> 6;
+> >>      4 -> 5;
+> >>      5 -> 5;
+> >>      6 -> 5;
+> >>      7 -> 7;
+> >>      8 -> 6;
+> >>      9 -> 6
+> >>    }
+> >>
+> >> means at a lower level, but it's certainly worth trying out whether an
+> >> unboxed array lookup is faster.
+> >
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >
+> >
+>
+>
+>
+> --
+> Eugene Kirpichov
+> Principal Engineer, Mirantis Inc. http://www.mirantis.com/
+> Editor, http://fprog.ru/
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110809/eca94ffc/attachment.htm>
+

@@ -1,0 +1,14 @@
+From andrewcoppin at btinternet.com  Sat Feb 12 11:30:26 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Sat, 12 Feb 2011 10:30:26 +0000
+Subject: [Haskell-cafe] Sub-optimal
+Message-ID: <4D566142.5060103@btinternet.com>
+
+I have a small program that fills a file with random numbers. If I 
+compile it without optimisation, it runs in constant space. And yet, if 
+I supply -O2 (or even just -O1), for large output files the program 
+gobbles large amounts of RAM.
+
+Is this a known bug? (GHC 6.10.x)
+
+

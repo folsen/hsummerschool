@@ -1,0 +1,23 @@
+From sh006d3592 at blueyonder.co.uk  Fri Dec 30 05:31:35 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Fri, 30 Dec 2011 04:31:35 +0000
+Subject: [Haskell-cafe] Level of Win32 GUI support in the Haskell
+	platform
+In-Reply-To: <1325218065.16545.175.camel@godel>
+References: <4EFD1992.60702@blueyonder.co.uk>
+	<1325218065.16545.175.camel@godel>
+Message-ID: <4EFD3EA7.9010804@blueyonder.co.uk>
+
+On 30/12/2011 04:07, Chris Smith wrote:
+> On Fri, 2011-12-30 at 01:53 +0000, Steve Horne wrote:
+>> I've been for functions like GetMessage, TranslateMessage and
+>> DispatchMessage in the Haskell Platform Win32 library - the usual
+>> message loop stuff - and not finding them. Hoogle says "no results found".
+> I see them in the Win32 package.
+>
+> http://hackage.haskell.org/packages/archive/Win32/2.2.1.0/doc/html/Graphics-Win32-Window.html#v:getMessage
+Ah - I didn't look in Graphics.Win32.Window because those functions 
+don't relate to Windows. Clearly I gave up my search too easily - thanks.
+
+
+

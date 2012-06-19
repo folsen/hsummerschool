@@ -1,0 +1,61 @@
+From dan.doel at gmail.com  Wed Dec  7 17:19:09 2011
+From: dan.doel at gmail.com (Dan Doel)
+Date: Wed, 7 Dec 2011 11:19:09 -0500
+Subject: [Haskell-cafe] More liberal than liberal type synonyms
+In-Reply-To: <CAN0wsw=4tK-BLDms1j3_iPz-igVOX=+=SUenh7Le=MGH=dULtw@mail.gmail.com>
+References: <CAHEA9tPH_uO0UjQ7yUe8j5fGC=NsqVAsodfVJS+x1e7LOhGxrw@mail.gmail.com>
+	<CAN0wsw=4tK-BLDms1j3_iPz-igVOX=+=SUenh7Le=MGH=dULtw@mail.gmail.com>
+Message-ID: <CAHEA9tM-BcaeFA097P87R14Kc1eixzot6_fFrbmh2Cn9Aq3QRw@mail.gmail.com>
+
+On Wed, Dec 7, 2011 at 5:48 AM, Dmitry Kulagin <dmitry.kulagin at gmail.com> wrote:
+> I am still pretty new in Haskell, but this problem annoys me already.
+>
+> If I define certain monad as a type synonym:
+>
+> ? ?type StateA a = StateT SomeState SomeMonad a
+>
+> Then I can't declare new monad based on the synonym:
+>
+> ? ?type StateB a = StateT SomeOtherState StateA a
+>
+> The only way I know to overcome is to declare StateA without `a':
+>
+> ? ?type StateA = StateT SomeState SomeMonad
+>
+> But it is not always possible with existing code base.
+
+I'm afraid my proposal doesn't make this work. You could perhaps
+define StateB, but when you expand in a type you get:
+
+    StateB a = StateT SomeOtherState StateA a
+
+which has a partially applied StateA, and is rejected. The only way to
+make this work is to eta reduce StateA manually, or make GHC recognize
+when a synonym can be eta reduced in this way (which might be both
+possible and useful as a separate proposal).
+
+My extension fell within the liberal type synonym space, which says
+that if you have:
+
+    F G
+
+where F and G are both synonyms, and G is partially applied, then it
+is okay as long as expansion of F (and any subsequent expansions)
+cause G to become fully applied. My extension of this is just to allow
+partial application inside aliases as long as it meets these same
+criteria.
+
+The reason to disallow partially applied type aliases is that they
+make inference pretty much impossible, unless you only infer them in
+very limited circumstances perhaps. And if you can't get inference of
+them, you probably need to start having explicit annotations to tell
+the type checker what you want to happen, which has some of its own
+complications with the way quantifiers work in GHC and such. It'd
+cascade into some thorny issues.
+
+Hopefully that covers all the other subsequent stuff folks have been
+talking about.
+
+-- Dan
+
+

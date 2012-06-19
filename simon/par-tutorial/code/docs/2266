@@ -1,0 +1,88 @@
+From ekirpichov at gmail.com  Sat Dec 24 17:06:21 2011
+From: ekirpichov at gmail.com (Eugene Kirpichov)
+Date: Sat, 24 Dec 2011 20:06:21 +0400
+Subject: [Haskell-cafe] Parallel Karatsuba - A Weird speed up value
+	greater than 4 on an Intel Quadcore CPU!
+In-Reply-To: <COL123-W62ACAC5AE3EE28D55DA62ECDA80@phx.gbl>
+References: <COL123-W64F9A9597A07A9A1AF6FAECDA80@phx.gbl>
+	<6142B585-9879-425E-B3B6-58CA0B1256E4@gmail.com>
+	<COL123-W62ACAC5AE3EE28D55DA62ECDA80@phx.gbl>
+Message-ID: <2052646A-E83A-4C09-91AE-A90E01777833@gmail.com>
+
+If the cache was infinitely faster, then doubling it would give an infinite speedup for an algorithm whose working set was exactly one core's cache size.
+
+
+
+24.12.2011, ? 19:58, Burak Ekici <ekcburak at hotmail.com> ???????(?):
+
+> 
+> First of all, thanks a lot for your quick answer!
+> However, the question is what are the approximate limits 
+> of this super-linear speedup? I mean, is it acceptable, if
+> parallelization happens even 100 time faster?
+> 
+> How can I calculate the limits of this speedup via the 
+> cache size of my processor?
+> 
+> Cheers,
+> Burak.
+> 
+> CC: haskell-cafe at haskell.org
+> From: ekirpichov at gmail.com
+> Subject: Re: [Haskell-cafe] Parallel Karatsuba - A Weird speed up value greater than 4 on an Intel Quadcore CPU!
+> Date: Sat, 24 Dec 2011 19:53:26 +0400
+> To: ekcburak at hotmail.com
+> 
+> Superlinear speedup can occur due to the increased cache size.
+> 
+> 
+> 
+> 24.12.2011, ? 19:49, Burak Ekici <ekcburak at hotmail.com> ???????(?):
+> 
+> Dear List,
+> 
+> I am trying to parallelize Karatsuba multiplication with Haskell's
+> second generation strategies. Although, I am running the code on an
+> Intel quad-core  CPU, I abnormally have a speedup much greater 
+> than 4, around 10, which means a weird parallelization or something 
+> occurs.
+> 
+> I would be appreciated, if anyone make some comments on the issue 
+> explaining the possible reasons why this weird incident occurs?
+> 
+> Here is the basic parallel portion of the code:
+> 
+> karatsuba :: Int -> [Bool] -> [Bool] -> [Bool]
+> karatsuba _ [] _ = []
+> karatsuba _ _ [] = []
+> karatsuba currentDepth xs ys 
+>  | (l < 32 || currentDepth >= limit) = mul xs ys
+>  | otherwise = (x `add` (replicate l False ++ (z `add` (replicate l False ++ y)))) `Main.using` strategy  
+>   where 
+>    l = (min (length xs) (length ys)) `div` 2
+>    (xs0, xs1) = splitAt l xs
+>    (ys0, ys1) = splitAt l ys
+>    x  = (normalize (karatsuba (currentDepth+1) xs0 ys0))
+>    y  = (normalize (karatsuba (currentDepth+1) xs1 ys1)) 
+>    z  = ((karatsuba (currentDepth+1) (add xs0 xs1) (add ys0 ys1)) `sub` (normalize (karatsuba (currentDepth+1) xs0 ys0)) `sub` (normalize (karatsuba (currentDepth+1) xs1 ys1)))
+>    strategy res = do (Main.rpar) (x)
+>                      (Main.rpar) (y)
+>                      (Main.rpar) (z)
+>                      Main.rdeepseq res
+> 
+> Many thanks in advance and kind regards.
+> 
+> Saluti,
+> Burak.
+> 
+> 
+> 
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111224/69cf0288/attachment.htm>
+

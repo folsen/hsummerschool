@@ -1,0 +1,84 @@
+From cdsmith at gmail.com  Thu Dec 29 19:41:07 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Thu, 29 Dec 2011 11:41:07 -0700
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <20111229180451.BFF53F3937@mail.avvanta.com>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org> <4EFB8DFE.1060805@blueyonder.co.uk>
+	<jdh9h6$gba$1@dough.gmane.org> <4EFCA66D.4060609@blueyonder.co.uk>
+	<20111229180451.BFF53F3937@mail.avvanta.com>
+Message-ID: <1325184067.16545.29.camel@godel>
+
+Entering tutorial mode here...
+
+On Thu, 2011-12-29 at 10:04 -0800, Donn Cave wrote:
+> We can talk endlessly about what your external/execution results 
+> might be for some IO action, but at the formulaic level of a Haskell
+> program it's a simple function value, e.g., IO Int.
+
+Not to nitpick, but I'm unsure what you might mean by "function value"
+there.  An (IO Int) is not a function value: there is no function
+involved at all.  I think the word function is causing some confusion,
+so I'll avoid calling things functions when they aren't.
+
+In answer to the original question, the mental shift that several people
+are getting at here is this: a value of the type (IO Int) is itself a
+meaningful thing to get your hands on and manipulate.  IO isn't just
+some annotation you have to throw in to delineate where your non-pure
+stuff is or something like that; it's a type constructor, and IO types
+have values, which are just as real and meaningful as any other value in
+the system.  For example,
+
+Type: Int
+Typical Values: 5, or 6, or -11
+
+Type: IO Int
+Typical Values: (choosing a random number from 1 to 10 with the default
+random number generator), or (doing nothing and always returning 5), or
+(writing "hello" to temp.txt in the current working directory and
+returning the number of bytes written)
+
+These are PURE values... they do NOT have side effects.  Perhaps they
+"describe" side effects in a sense, but that's a matter of how you
+interpret them; it doesn't change the fact that they play the role of
+ordinary values in Haskell.  There are no special evaluation rules for
+them.
+
+Just like with any other type, you might then consider what operations
+you might want on values of IO types.  For example, the operations you
+might want on Int are addition, multiplication, etc.  It turns out that
+there is one major operation you tend to want on IO types: combine two
+of them by doing them in turn, where what you do second might depend on
+the result of what you do first.  So we provide that operation on values
+of IO types... it's just an ordinary function, which happens to go by
+the name (>>=).  That's completely analogous to, say, (+) for Int...
+it's just a pure function that takes two parameters, and produces a
+result.  Just like (+), if you apply (>>=) to the same two parameters,
+you'll always get the same value (of an IO type) as a result.
+
+Now, of course, behind the scenes we're using these things to describe
+effectful actions... which is fine!  In fact, our entire goal in writing
+any computer program in any language is *precisely* to describe an
+effectful action, namely what we'd like to see happen when our program
+is run.  There's nothing wrong with that... when Haskell is described as
+pure, what is meant by that is that is lets us get our hands on these
+things directly, manipulate them by using functions to construct more
+such things, in exactly the same way we'd do with numbers and
+arithmetic.  This is a manifestly different choice from other languages
+where those basic manipulations even on the simple types are pushed into
+the more nebulous realm of effectful actions instead.
+
+If you wanted to make a more compelling argument that Haskell is not
+"pure", you should look at termination and exceptions from pure code.
+This is a far more difficult kind of impurity to explain away: we do it,
+by introducing a special families of values (one per type) called
+"bottom" or _|_, but then we also have to introduce some special-purpose
+rules about functions that operate on that value... an arguably clearer
+way to understand non-termination is as a side-effect that Haskell does
+NOT isolate in the type system.  But that's for another time.
+
+-- 
+Chris Smith
+
+
+

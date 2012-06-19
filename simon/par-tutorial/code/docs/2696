@@ -1,0 +1,33 @@
+From markl at glyphic.com  Fri Feb  4 07:29:38 2011
+From: markl at glyphic.com (Mark Lentczner)
+Date: Thu, 3 Feb 2011 22:29:38 -0800
+Subject: [Haskell-cafe] OSX i386/x86 and x86_64 - time to switch
+	supported platforms?
+In-Reply-To: <B34591F6-86C2-471A-9E61-5B609FACF5F3@gmail.com>
+References: <801E1648-B34B-4F93-9BAB-9A05EC77D747@gmail.com>
+	<C9311AB9-65D8-4ACE-B20B-F429039934CB@gmail.com>
+	<4D4B5308.4000009@freegeek.org>
+	<3C972E29-7228-4F5F-84A7-4FC13C938B82@cs.otago.ac.nz>
+	<B34591F6-86C2-471A-9E61-5B609FACF5F3@gmail.com>
+Message-ID: <99FDB0B1-0F54-4CFA-82CD-EFDDE35BCBCF@glyphic.com>
+
+
+On Feb 3, 2011, at 5:55 PM, Max Cantor wrote:
+> Yes.  I'm saying that I believe that OSX x86_64 should be the officially supported platform instead of 32-bit x86 with all the associated guarantees and assurances.   I wanted to see how people felt about that.
+
+I don't think this is such a good idea.
+
+There are plenty of Macs in the field that can only execute 32bit code. (I'm typing on one right now!) Anyone wanting to produce binaries that they can distribute or deploy will need an environment that produces either 32bit only binaries, or multi-arch 32bit/64bit binaries.
+
+My understanding is that GHC is quite a long way, if ever, from producing multi-arch binaries from a single compiler. To produce multi-arch binaries you'd need to install two copies of the GHC (one 32bit, one 64bit), build your code twice, once with each, and stitch the results together with lipo.
+
+Hence, for the Haskell developer needing to deploy code, the path of least resistance is going to be simply compiling and distributing 32bit for awhile.
+
+Because of this, the 32bit version should be officially supported just as much as the 64bit for at least the next few years.
+
+My plan for the upcoming Haskell Platform is to build and distribute two installers: one 32bit and 64bit. Most developers should take the 64bit one if their machine supports it. Developers with older machines, and those building binary distributions will need to take the 32bit.
+
+	- Mark
+
+
+

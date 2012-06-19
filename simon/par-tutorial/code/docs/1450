@@ -1,0 +1,105 @@
+From kc1956 at gmail.com  Mon Aug 29 00:56:52 2011
+From: kc1956 at gmail.com (KC)
+Date: Sun, 28 Aug 2011 15:56:52 -0700
+Subject: [Haskell-cafe] Project Euler: request for comments
+In-Reply-To: <CAMLKXy=+ssLowPaqjvotTnYvQaTR0WxAJzFVai377R4sGuQRZQ@mail.gmail.com>
+References: <CAPkMFPnCdD4Od5ff6AZ8pu5peR_puk2y+ygZeuPLPX_Y4tUPhw@mail.gmail.com>
+	<CAMLKXym5FPaWa38+LrrFw7oiLnZtSZq1Kn1zpBwn_udH_L-Drw@mail.gmail.com>
+	<CAPkMFPkSb+b_qfedTSMQKCTHV5GUROZSMVWt0aLNGD5g35XoGQ@mail.gmail.com>
+	<CAMLKXym3VR1EGvXg5n0p1xuH1zbueejdkHLF_aRjkPVerLBzDQ@mail.gmail.com>
+	<CAPkMFPnJ54YhqjGwWURhzX1O_zMsZXDpzwvsU_Npi61O1T_BOQ@mail.gmail.com>
+	<CAMLKXynw0-criA1sCq3CxsdEPpj9SFh+gNpbyEa_eB1C=mzxXQ@mail.gmail.com>
+	<CAPkMFPmB6oHgknOy0vhOCJ50RmdKWP78F7DsmOGquLSvubJT0w@mail.gmail.com>
+	<CAPkMFPmZPxWsCG2Bm6g-4JZf+hoyZnvmf_NTAmQORjc21Gf+=A@mail.gmail.com>
+	<CAMLKXy=+ssLowPaqjvotTnYvQaTR0WxAJzFVai377R4sGuQRZQ@mail.gmail.com>
+Message-ID: <CAMLKXyn4Sw=Z5QYB7fWzRavRJRv03rpyrQxEOYJZUgPaz3YBdw@mail.gmail.com>
+
+I just noticed that the 20x20 grid has some "00" entries; thus, time
+could be saved by not touching any of the grid entries 3 cells away.
+Same for the "01" entries.
+
+The challenge, of course, is in finding these entries in the first place. :)
+
+
+On Sun, Aug 28, 2011 at 1:58 PM, KC <kc1956 at gmail.com> wrote:
+> Try something like the following:
+>
+> -- Project Euler 11
+>
+> -- In the 20?20 grid below, four numbers along a diagonal line have
+> been marked in red.
+>
+> -- <snip>
+>
+> -- The product of these numbers is 26 ? 63 ? 78 ? 14 = 1788696.
+>
+> -- What is the greatest product of four adjacent numbers in any
+> direction (up, down, left, right, or diagonally) in the 20?20 grid?
+>
+>
+> import Data.List
+>
+> -- Doing the one dimensional case.
+> f011 :: [Int] -> Int
+> f011 (t:u:v:xs) = f011helper t u v xs
+>
+> f011helper :: Int -> Int -> Int -> [Int] -> Int
+> f011helper t u v (w:ws)
+> ? | ws == [] ?= t*u*v*w
+> ? | otherwise = yada nada mada
+>
+> -- What are yada nada mada?
+>
+> -- The 20x20 grid case will become:
+> f0112D :: [[Int]] -> Int
+> -- where [[Int]] is a list of lists of rows, columns, major diagonals,
+> & minor diagonals.
+>
+>
+>
+> On Sun, Aug 28, 2011 at 5:10 AM, Oscar Picasso <oscarpicasso at gmail.com> wrote:
+>> No. The answer I posted is not good.
+>> It worked, by chance, on a couple of small examples I tried but it
+>> could end up comparing sequence of 4 numbers that where not initially
+>> adjacent.
+>>
+>> On Sun, Aug 28, 2011 at 12:32 AM, Oscar Picasso <oscarpicasso at gmail.com> wrote:
+>>> Maybe this?
+>>>
+>>> f x@(a:b:c:d:[]) = x
+>>> f (a:b:c:d:e:ys) ?= if e >= a
+>>> ? ? ? ? ? ? ? ? ? then f (b:c:d:e:ys)
+>>> ? ? ? ? ? ? ? ? ? else f (a:b:c:d:ys)
+>>>
+>>> On Sat, Aug 27, 2011 at 8:26 PM, KC <kc1956 at gmail.com> wrote:
+>>>> Think of the simplest version of the problem that isn't totally trivial.
+>>>>
+>>>> e.g. A one dimensional list of numbers.
+>>>>
+>>>> What would you do?
+>>>>
+>>>> Note: you only want to touch each element once.
+>>>>
+>>>> The 2 dimensional case could be handled by putting into lists: rows,
+>>>> columns, major diagonals, and minor diagonals.
+>>>>
+>>>> This isn't the fastest way of doing the problem but it has the
+>>>> advantage of avoiding "indexitis".
+>>>>
+>>>>
+>
+>
+> --
+> --
+> Regards,
+> KC
+>
+
+
+
+-- 
+--
+Regards,
+KC
+
+

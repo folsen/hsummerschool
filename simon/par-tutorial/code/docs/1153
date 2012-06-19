@@ -1,0 +1,67 @@
+From tom at zwizwa.be  Tue Aug 16 01:37:46 2011
+From: tom at zwizwa.be (Tom Schouten)
+Date: Tue, 16 Aug 2011 01:37:46 +0200
+Subject: [Haskell-cafe] Hiding "growing" state using existentials.
+Message-ID: <4E49ADCA.9010304@zwizwa.be>
+
+Dear Cafe,
+
+I'm building an abstraction for representing sequences as difference
+equations, storing initial values and update equation.
+
+I have something that resembles a Monad, but has an extra state
+parameter s that "grows" on _join or _bind, so I can't simply create
+an instance Monad (Sig s).
+
+ > {-# LANGUAGE ExistentialQuantification #-}
+
+ > data Sig s a = Sig s (s -> (a, s))
+
+ > _join :: (Sig s1 (Sig s2 a)) -> Sig (s1,s2) a
+ > _join (Sig i1 u1) = Sig (i1, i2) u12 where
+ >   ((Sig i2 _), _) = u1 i1
+ >   u12 (s1, s2) = (a, (s1', s2')) where
+ >     ((Sig _ u2), s1') = u1 s1
+ >     (a, s2')          = u2 s2
+
+ > _fmap :: (a -> b) -> Sig s a -> Sig s b
+ > _fmap f (Sig s0 u) = Sig s0 u' where
+ >   u' s = (f a, s') where
+ >     (a, s') = u s
+
+ > _return x = Sig () $ \() -> (x, ())
+
+ > _bind :: (Sig s1 a) -> (a -> Sig s2 b) -> (Sig (s1,s2) b)
+ > m `_bind` g = _join ((_fmap g) m)
+
+
+I try to hide the state parameter using existential quantification.
+
+ > data Signal a = forall s. Signal (Sig s a)
+
+This approach works for defining Functor and Applicative instances,
+but I can't seem to find a way to obtain an unwrapped version of f
+that can be passed to _bind to implement the Monad instance's (>>=).
+The following returns:
+
+     Couldn't match type `t' with `Sig s1 b'
+       `t' is a rigid type variable bound by
+           the inferred type of f' :: a -> t
+           at /home/tom/meta/ssm/SigHC.lhs:52:7
+     In the expression: mb
+     In a case alternative: Signal mb -> mb
+     In the expression: case (f a) of { Signal mb -> mb }
+
+ > instance Monad Signal where
+ >   return = Signal . _return
+ >   (>>=) (Signal ma) f = Signal $ ma `_bind` f' where
+ >     f' a = case (f a) of
+ >       Signal mb -> mb
+
+Any tips on how to work around this?
+
+Cheers,
+Tom
+
+
+

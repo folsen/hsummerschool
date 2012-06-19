@@ -1,0 +1,233 @@
+From dstcruz at gmail.com  Thu Dec  1 04:16:27 2011
+From: dstcruz at gmail.com (Daniel Santa Cruz)
+Date: Wed, 30 Nov 2011 22:16:27 -0500
+Subject: [Haskell-cafe] Haskell Weekly News: Issue 209
+Message-ID: <CA+V-9CzGVV_3em7DsT1tRJSdUS2enu=t3tgwB8sd-C0ZC4nY8w@mail.gmail.com>
+
+Welcome to issue 209 of the HWN, a newsletter covering developments in
+the Haskell community. This release covers two weeks, from November 13
+to 26, 2011.
+
+You can find the HTML version at:
+http://contemplatecode.blogspot.com/2011/11/haskell-weekly-news-issue-209.html
+
+Announcements
+
+   By now I'm sure you've heard about Da the lamb.
+   [1] http://goo.gl/WF2o7
+
+   Sean Leather annouced that the next Dutch functinal programming day
+   will take place on January 6, 2012, at the university campus "De
+   Uithof" of Utrecht University.
+   [2] http://goo.gl/IfVK8
+
+   Ganesh Sittampalam announced that the haskell.org committee for
+   2011-12 has been formed.
+   [3] http://goo.gl/YFFsa
+
+New and Updated Projects
+
+   * Gtk2Hs (Axel Simon; 0.12.2) Adjustments to Gtk2Hs to work with
+     GHC 7.x.x. Also, looking for a part-time maintainer.
+     [4] http://goo.gl/52M56
+
+   * iteratee-compress (Maciej Marcin Piechotka; 0.3.0.0) Provides
+     compressing and decompressing enumerators.
+     [5] http://goo.gl/tRAkg
+
+   * Netwire (Ertugrul Soeylemez; 2.0.0) Complete rewrite.
+     [6] http://goo.gl/HMCG8
+
+   * SBV (Levent Erkok; 0.9.22)
+     [7] http://goo.gl/pSXGb
+
+   * graphviz (Ivan Lazar Miljenovic; 2999.12.0.4).
+     [8] http://goo.gl/JNVSV
+
+   * SmallCHeck (Roman Cheplyaka; 0.5)
+     [9] http://goo.gl/8njoh
+
+   * OpenCL (Luis Cabellos; 1.0.2.2) Better error handling.
+     [10] http://goo.gl/fphJN
+
+   * clientsession (Michael Snoyman; 0.7.3.4) Major performance
+     enhancement.
+     [11] http://goo.gl/hCqrf
+
+Quotes of the Week
+
+   * dmwit: Let's not make things better, I haven't put enough lipstick
+     on the worse version yet.
+
+   * mike-burns: Oh good, a semantic argument. Goodnight.
+
+   * companion_cube: why bother with complicated abstractions like
+     monads, when you can enjoy the taste of the sun on your skin?
+
+   * applicative: clearly the trouble with haskell is plain: no inbuild
+     syntactic support for quaternions. Wonder if *fortress* has it.
+
+   * elliott: "with a lot of unicode" is like agda's @faq. "yes, agda
+     can do that with a lot of unicode!"
+
+   * [shachaf] mauke: EBCDIC?
+     [mauke] shachaf: ah, the data encryption
+             	      standard invented by IBM?
+
+   * Tiwazz: It's called "Berp" because that's the sound Haskell makes
+     after it devours a live Python.
+
+Top Reddit Stories
+
+   * Typeclassopedia moved to the Haskell wiki
+     Domain: byorgey.wordpress.com, Score: 72, Comments: 8
+     On Reddit: [12] http://goo.gl/pbHqr
+     Original: [13] http://goo.gl/tWM0P
+
+   * New project to support SIMD vector instructions in GHC
+     (x86 SSE & AVX, ARM's NEON etc)
+     Domain: hackage.haskell.org, Score: 62, Comments: 18
+     On Reddit: [14] http://goo.gl/JRj3o
+     Original: [15] http://goo.gl/OcFCG
+
+   * GHC 7.4 branched, what's in for Christmas?
+     Domain: haskell.org, Score: 54, Comments: 16
+     On Reddit: [16] http://goo.gl/ZUN1e
+     Original: [17] http://goo.gl/qWIhq
+
+   * How to read Haskell like Python
+     Domain: blog.ezyang.com, Score: 52, Comments: 7
+     On Reddit: [18] http://goo.gl/3cVXY
+     Original: [19] http://goo.gl/nNhDI
+
+   * xmonad-0.10 released!
+     Domain: hackage.haskell.org, Score: 51, Comments: 15
+     On Reddit: [20] http://goo.gl/U5rry
+     Original: [21] http://goo.gl/SIFuB
+
+   * Roy - language with Hindley-Milner type system and monads that
+compiles to javascript
+     Domain: roy.brianmckenna.org, Score: 43, Comments: 9
+     On Reddit: [22] http://goo.gl/RLK8S
+     Original: [23] http://goo.gl/dzx8N
+
+   * The Universe of Discourse : Triples and Closure and Monads
+     Domain: blog.plover.com, Score: 42, Comments: 13
+     On Reddit: [24] http://goo.gl/7EDJX
+     Original: [25] http://goo.gl/iPLnN
+
+   * ANN: happstack-lite. A simpler, friendlier version of the
+     Happstack Haskell Web Framework. What do you think?
+     Domain: happstack.blogspot.com, Score: 35, Comments: 12
+     On Reddit: [26] http://goo.gl/Ii6Ch
+     Original: [27] http://goo.gl/5wSZJ
+
+   * HN/SPL - a better way to do your boring C++ job (written in Haskell)
+     Domain: code.google.com, Score: 35, Comments: 16
+     On Reddit: [28] http://goo.gl/VxqIN
+     Original: [29] http://goo.gl/9aAeZ
+
+   * Fast lookup tables in haskell
+     Domain: tab.snarc.org, Score: 34, Comments: 10
+     On Reddit: [30] http://goo.gl/mzgyw
+     Original: [31] http://goo.gl/4VnrX
+
+   * What Yesod Got Right
+     Domain: yesodweb.com, Score: 34, Comments: 12
+     On Reddit: [32] http://goo.gl/eZhhK
+     Original: [33] http://goo.gl/Li4mY
+
+Top StackOverflow Questions
+
+   * What is a monad in FP, in categorical terms?
+     votes: 30, answers: 7
+     Read on SO: [34] http://goo.gl/sC7PD
+
+   * Haskell vs JVM performance [closed]
+     votes: 24, answers: 6
+     Read on SO: [35] http://goo.gl/olA8g
+
+   * Are there any Haskell techniques for mixed
+     (part structure, part unmodified text)
+     parsing & rewriting?
+     votes: 24, answers: 1
+     Read on SO: [36] http://goo.gl/jRydd
+
+   * STArray documentation for newbies and State/ST related questions
+     votes: 17, answers: 1
+     Read on SO: [37] http://goo.gl/nw8eH
+
+   * Should I avoid using Monad fail?
+     votes: 15, answers: 3
+     Read on SO: [38] http://goo.gl/ruh7s
+
+   * Effects of monomorphism restriction on type class constraints
+     votes: 15, answers: 2
+     Read on SO: [39] http://goo.gl/QRbTh
+
+   * Folding, function composition, monads, and laziness, oh my?
+     votes: 14, answers: 2
+     Read on SO: [40] http://goo.gl/gped5
+
+   * Type error when ascribing a valid forall type to a let-bound variable
+     votes: 13, answers: 2
+     Read on SO: [41] http://goo.gl/oyx0a
+
+   * How do I organize my pure functions with my monadic actions idiomatically
+     votes: 13, answers: 3
+     Read on SO: [42] http://goo.gl/6tByj
+
+   * Is foldl ever preferable to its strict cousin, foldl'?
+     votes: 13, answers: 2
+     Read on SO: [43] http://goo.gl/jFIe4
+
+Until next time,
+   Daniel Santa Cruz
+
+References
+
+   1. http://comments.gmane.org/gmane.comp.lang.haskell.cafe/93887
+   2. http://comments.gmane.org/gmane.comp.lang.haskell.general/19025
+   3. http://comments.gmane.org/gmane.comp.lang.haskell.general/19031
+   4. http://comments.gmane.org/gmane.comp.lang.haskell.general/19019
+   5. http://comments.gmane.org/gmane.comp.lang.haskell.libraries/16591
+   6. http://comments.gmane.org/gmane.comp.lang.haskell.cafe/93860
+   7. http://comments.gmane.org/gmane.comp.lang.haskell.cafe/93866
+   8. http://comments.gmane.org/gmane.comp.lang.haskell.cafe/93956
+   9. http://comments.gmane.org/gmane.comp.lang.haskell.cafe/94014
+  10. http://comments.gmane.org/gmane.comp.lang.haskell.cafe/94103
+  11. http://comments.gmane.org/gmane.comp.lang.haskell.yesod/941
+  12. http://byorgey.wordpress.com/2011/11/26/typeclassopedia-v2-moving-my-efforts-to-the-haskell-wiki/
+  13. http://www.reddit.com/r/haskell/comments/mq2nr/typeclassopedia_moved_to_the_haskell_wiki/
+  14. http://hackage.haskell.org/trac/ghc/wiki/SIMD
+  15. http://www.reddit.com/r/haskell/comments/mbpoi/new_project_to_support_simd_vector_instructions/
+  16. http://www.haskell.org/pipermail/cvs-ghc/2011-November/068352.html
+  17. http://www.reddit.com/r/haskell/comments/mm68o/ghc_74_branched_whats_in_for_christmas/
+  18. http://blog.ezyang.com/2011/11/how-to-read-haskell/
+  19. http://www.reddit.com/r/haskell/comments/mc2mw/how_to_read_haskell_like_python/
+  20. http://hackage.haskell.org/package/xmonad-0.10
+  21. http://www.reddit.com/r/haskell/comments/mhzu8/xmonad010_released/
+  22. http://roy.brianmckenna.org/
+  23. http://www.reddit.com/r/haskell/comments/mp245/roy_language_with_hindleymilner_type_system_and/
+  24. http://blog.plover.com/math/monad-closure.html
+  25. http://www.reddit.com/r/haskell/comments/mfsfz/the_universe_of_discourse_triples_and_closure_and/
+  26. http://happstack.blogspot.com/2011/11/ann-happstack-lite-friendly.html
+  27. http://www.reddit.com/r/haskell/comments/mcjoz/ann_happstacklite_a_simpler_friendlier_version_of/
+  28. http://code.google.com/p/inv/
+  29. http://www.reddit.com/r/haskell/comments/mldzq/hnspl_a_better_way_to_do_your_boring_c_job/
+  30. http://tab.snarc.org/posts/haskell/2011-11-15-lookup-tables.html
+  31. http://www.reddit.com/r/haskell/comments/mh1ox/fast_lookup_tables_in_haskell/
+  32. http://www.yesodweb.com/blog/2011/11/got-right
+  33. http://www.reddit.com/r/haskell/comments/mi4r7/what_yesod_got_right/
+  34. http://stackoverflow.com/questions/8221395/what-is-a-monad-in-fp-in-categorical-terms
+  35. http://stackoverflow.com/questions/8185282/haskell-vs-jvm-performance
+  36. http://stackoverflow.com/questions/8198808/are-there-any-haskell-techniques-for-mixed-part-structure-part-unmodified-text
+  37. http://stackoverflow.com/questions/8197032/starray-documentation-for-newbies-and-state-st-related-questions
+  38. http://stackoverflow.com/questions/8163852/should-i-avoid-using-monad-fail
+  39. http://stackoverflow.com/questions/8270548/effects-of-monomorphism-restriction-on-type-class-constraints
+  40. http://stackoverflow.com/questions/8249958/folding-function-composition-monads-and-laziness-oh-my
+  41. http://stackoverflow.com/questions/8190431/type-error-when-ascribing-a-valid-forall-type-to-a-let-bound-variable
+  42. http://stackoverflow.com/questions/8234162/how-do-i-organize-my-pure-functions-with-my-monadic-actions-idiomatically
+  43. http://stackoverflow.com/questions/8235797/is-foldl-ever-preferable-to-its-strict-cousin-foldl
+
+

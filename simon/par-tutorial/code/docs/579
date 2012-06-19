@@ -1,0 +1,32 @@
+From jmillikin at gmail.com  Fri Apr 22 00:16:18 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Thu, 21 Apr 2011 15:16:18 -0700 (PDT)
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <4DB093A6.8000303@btinternet.com>
+Message-ID: <2413044.1630.1303424178223.JavaMail.geo-discussion-forums@prcm34>
+
+My chief complaint is that it's built on "patch theory", which is 
+ill-defined and doesn't seem particularly useful. The Bazaar/Git/Mercurial 
+DAG model is much easier to understand and work with.
+
+Possibly as a consequence of its shaky foundation, Darcs is much slower than 
+the competition -- this becomes noticeable for even very small repositories, 
+when doing a lot of branching and merging.
+
+I think it's been kept alive in the Haskell community out of pure "eat our 
+dogfood" instinct; IMO if having a VCS written in Haskell is important, it 
+would be better to just write a new implementation of an existing tool. Of 
+course, nobody cares that much about what language their VCS is written in, 
+generally.
+
+Beyond that, the feeling I get of the three major DVCS alternatives is:
+
+git: Used by Linux kernel hackers, and Rails plugin developers who think 
+they're more important than Linux kernel hackers
+
+hg/bzr: Used by people who don't like git's UI, and flipped heads/tails when 
+picking a DVCS (hg and bzr are basically equivalent)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110421/4e2b9b90/attachment.htm>
+

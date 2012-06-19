@@ -1,0 +1,43 @@
+From miguelimo38 at yandex.ru  Fri Apr 22 23:05:00 2011
+From: miguelimo38 at yandex.ru (Miguel Mitrofanov)
+Date: Sat, 23 Apr 2011 01:05:00 +0400
+Subject: [Haskell-cafe] naming convention for maybes?
+In-Reply-To: <BANLkTi=ftrj1T4RHbHg0ETJRZMNbLH-uRQ@mail.gmail.com>
+References: <BANLkTi=ftrj1T4RHbHg0ETJRZMNbLH-uRQ@mail.gmail.com>
+Message-ID: <29CDDE72-E7F0-4A1F-93E8-E1CD122575D6@yandex.ru>
+
+Well, Maybe IS a monad, so I just use "m" prefix.
+
+?????????? ? iPhone
+
+Apr 22, 2011, ? 21:14, Evan Laforge <qdunkan at gmail.com> ???????(?):
+
+> Here's a simple issue that's been with me for a while.  As do many
+> people, I use plural variable names for lists, so if a Block as called
+> 'block' then [Block] is 'blocks'.
+> 
+> The other pattern that comes up a lot is 'Maybe Block'.  When I have
+> to name it, I call it 'maybe_block', e.g.
+> 
+> maybe_block <- lookup something
+> case maybe_block of
+>  Just block -> ...
+> 
+> However, this maybe_ prefix is rather long and unwieldy.  I have
+> considered things like 'm' or 'mb' but they don't suggest Maybe to me.
+> An 'm' prefix or suffix is already implying 'monad'.  If '?' were
+> allowed in identifiers I could use it as a suffix.  I could just
+> append 'q' and get used to it... lispers did it with 'p' after all.  I
+> suppose 'mby' could be ok, but for some reason it just looks ugly to
+> me.  'opt' looks ok, I suppose, but 'optional' doesn't cover the full
+> range of Maybe's usage (i.e. it's strange to call a failed lookup
+> result "optional").  Does anyone else have a nice convention for this?
+> Hopefully something short but intuitive and nicely reading like the
+> plural convention?
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

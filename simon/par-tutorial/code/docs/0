@@ -1,0 +1,50 @@
+From ryani.spam at gmail.com  Fri Apr  1 00:28:39 2011
+From: ryani.spam at gmail.com (Ryan Ingram)
+Date: Thu, 31 Mar 2011 15:28:39 -0700
+Subject: [Haskell-cafe] how to optmize this code?
+In-Reply-To: <201103311629.56221.daniel.is.fischer@googlemail.com>
+References: <AANLkTi=dv3Of9GA5jmAzo09HG7J1jZxobRerr+v9QRZ_@mail.gmail.com>
+	<201103311218.47509.daniel.is.fischer@googlemail.com>
+	<AANLkTim=DUoE2-X9naEKvREaXs6w8cbsTrdv+3uRFNve@mail.gmail.com>
+	<201103311629.56221.daniel.is.fischer@googlemail.com>
+Message-ID: <AANLkTikmU7=7fPJoCbrFr1xzQ=1yhrpaHF2m+E8aurVy@mail.gmail.com>
+
+On Thu, Mar 31, 2011 at 7:29 AM, Daniel Fischer <
+daniel.is.fischer at googlemail.com> wrote:
+
+> Err, terminology problem here.
+> Strictly speaking, a function is strict iff
+>
+> f _|_ = _|_
+>
+> while we are talking here about evaluation strategies, so we should better
+> have spoken of eager vs. deferred evaluation.
+> A non-strict function has different semantics from a strict one by
+> definition.
+>
+> If you have a strict function, you may evaluate its argument eagerly
+> without changing the result?, while eager evaluation of a non-strict
+> function's argument may produce _|_ where deferred evaluation wouldn't.
+>
+
+This is almost but not entirely true.  Consider
+
+f x = error "f is not implemented"
+
+Clearly, f _|_ = _|_, so f is strict.
+
+f (error "bang!")
+
+might, depending on how strictness analysis proceeds, generate an "f is not
+implemented" error or a "bang!" error.  But that's only observable at the IO
+level, and the optimization is considered important enough, that potentially
+generating a different exception is allowed.
+
+I think this paper covers some of the details:
+http://research.microsoft.com/en-us/um/people/simonpj/papers/imprecise-exn.htm
+
+  -- ryan
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110331/ef592cca/attachment-0001.htm>
+

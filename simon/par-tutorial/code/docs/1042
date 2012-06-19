@@ -1,0 +1,22 @@
+From artyom.kazak at gmail.com  Thu Aug 11 17:01:28 2011
+From: artyom.kazak at gmail.com (Artyom Kazak)
+Date: Thu, 11 Aug 2011 18:01:28 +0300
+Subject: [Haskell-cafe] Additional functions of GMP
+In-Reply-To: <201108111438.32473.daniel.is.fischer@googlemail.com>
+References: <op.vz1s8vk7shvy2l@artyom-nbook>
+	<201108111438.32473.daniel.is.fischer@googlemail.com>
+Message-ID: <op.vz11cqwashvy2l@artyom-nbook>
+
+> I'm writing a package (arithmoi) that will include reasonably fast
+> implementations of those, but I never find the time to finish it :(
+
+Package is great, but sometimes it is useful to have such functions out of  
+box (for example, when solving SPOJ problems).
+
+> No, you can't, unfortunately (not easily, anyway).
+
+I have found a manual on including additional primops in GHC (exactly this  
+situation), but this requires modifying GHC's sources, which also does not  
+allow using them with SPOJ.
+
+

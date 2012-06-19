@@ -1,0 +1,35 @@
+From globules at gmail.com  Sun Apr 24 05:21:59 2011
+From: globules at gmail.com (Globules)
+Date: Sun, 24 Apr 2011 03:21:59 +0000 (UTC)
+Subject: [Haskell-cafe] fishing for ST mutable Vector examples
+References: <liliz22nuw.fsf@inside.sv3.smugmug.net>
+Message-ID: <loom.20110424T050958-280@post.gmane.org>
+
+brad clawsie <clawsie <at> fastmail.fm> writes:
+
+> 
+> hi all
+> 
+> i was wondering if anyone could post some minimal examples on using
+> mutable Vectors in the ST monad. i've been digging around in the usual
+> places but haven't been able to find anything to get me over the hump
+> 
+> thanks in advance
+> brad
+> 
+
+I was just looking into the same thing.  This link at Rosetta Code has
+a list shuffling function, which is my first experiment with mutable
+Vectors:
+
+    http://rosettacode.org/wiki/Balanced_brackets#Haskell
+
+The list is converted to a mutable Vector, the mapM_ performs a series
+of element swaps, then the result is frozen and converted back to a
+list.
+
+- Globules
+
+
+
+

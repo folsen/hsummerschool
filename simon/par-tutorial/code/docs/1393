@@ -1,0 +1,34 @@
+From chrisdone at googlemail.com  Fri Aug 26 18:06:08 2011
+From: chrisdone at googlemail.com (Christopher Done)
+Date: Fri, 26 Aug 2011 18:06:08 +0200
+Subject: [Haskell-cafe] Ambiguous module name `System.Directory'
+In-Reply-To: <20110826160018.GB23687@sirch>
+References: <20110826160018.GB23687@sirch>
+Message-ID: <CAAJHNPAqDA+DQ5w4DjLa7kku4nb+dnHh-C5AMPKBn2hxHruBfQ@mail.gmail.com>
+
+On 26 August 2011 18:00, informationen <informationen at gmx.de> wrote:
+> Hi,
+>
+> i am using ghc version 7.0.3 and a pretty recent version of the
+> haskell-platform.
+>
+> Whenever i use the System.Directory module, i run into this
+> conflict:
+>
+> Ambiguous module name `System.Directory':
+> ? ? ? ?it was found in multiple packages:
+> ? ? ? ? ? ?system-fileio-0.2.1 directory-1.1.0.0
+>
+> How can i resolve this conflict permamently (i know about :set -hide-package
+> ... )? And shouldn't there be a rule in the
+> haskell platform which forbids modules of the same name?
+
+1) Use PackageImports:
+http://www.haskell.org/ghc/docs/7.0.3/html/users_guide/syntax-extns.html#package-imports
+
+import "network" Network.Socket
+
+2) Use cabal-dev ghci which will only have packages available that you
+specify in your .cabal file.
+
+

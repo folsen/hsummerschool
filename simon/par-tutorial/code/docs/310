@@ -1,0 +1,26 @@
+From chrisdone at googlemail.com  Mon Apr 11 18:02:58 2011
+From: chrisdone at googlemail.com (Christopher Done)
+Date: Mon, 11 Apr 2011 18:02:58 +0200
+Subject: [Haskell-cafe] Emscripten: compiling LLVM to JavaScript
+In-Reply-To: <inutlj$jq5$1@dough.gmane.org>
+References: <inutlj$jq5$1@dough.gmane.org>
+Message-ID: <BANLkTimU01+fzsND_pSVh-rXquHCUKMGNw@mail.gmail.com>
+
+On 11 April 2011 14:54, S?nke Hahn <shahn at cs.tu-berlin.de> wrote:
+>
+> I haven't tried the tool myself, but it seems interesting to the Haskell
+> efforts to compile to JavaScript:
+>
+> http://syntensity.blogspot.com/2011/04/emscripten-10.html
+
+
+Good grief, that sounds incredibly awesome. GHC ? LLVM ? JS. Get all GHC's
+goodies *and* not have to write JS for targeting browsers.
+
+Very interested. I will mess with it tonight.
+
+Cheers!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110411/2e27c1ef/attachment.htm>
+

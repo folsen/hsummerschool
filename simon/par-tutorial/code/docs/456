@@ -1,0 +1,46 @@
+From jason.dusek at gmail.com  Sun Apr 17 21:31:11 2011
+From: jason.dusek at gmail.com (Jason Dusek)
+Date: Sun, 17 Apr 2011 19:31:11 +0000
+Subject: [Haskell-cafe] Killing threads in foreign calls.
+Message-ID: <BANLkTiktXLdW40vHBwhgzzZwvWWZ9WiX6w@mail.gmail.com>
+
+  I am building an application that uses Postgres for storage.
+  If a query runs too long, I would like to kill the querying
+  thread, releasing its lock on the connection; if the
+  connection is a in a bad state -- for example, busy -- I would
+  like to clean up the connection.
+
+  Unfortunately, killing calls in to libpq seems not to work. I
+  have put a minimal example on hpaste:
+
+    http://hpaste.org/45774/minimal_pg_contention_example
+
+  If you install libpq with Cabal, you can run it. In the
+  example, the main thread spawns a worker thread that queries
+  Postgres, running "SELECT pg_sleep(10);"; the main thread
+  waits half a second and then tries to kill the worker.
+  Unfortunately, the worker always manages to get as far as
+  printing "complete".
+
+  In the code, I call `Database.PQ.exec':
+
+    http://hackage.haskell.org/packages/archive/libpq/0.4.1/doc/html/src/Database-PQ.html#exec
+
+  This in turn calls a `safe' binding, `c_PQexec', to `PQexec'
+  in the C library:
+
+    http://hackage.haskell.org/packages/archive/libpq/0.4.1/doc/html/src/Database-PQ.html#line-2222
+
+  There are async interfaces, too; they do not seem to be any
+  more killable then the sync ones.
+
+  Maybe the problem is that you can't kill a thread while it's
+  in a foreign call? I do not see any documentation to this
+  effect; but I may have missed it.
+
+--
+Jason Dusek
+() ?ascii ribbon campaign - against html e-mail
+/\ ?www.asciiribbon.org ? - against proprietary attachments
+
+

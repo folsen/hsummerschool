@@ -1,0 +1,174 @@
+From cmsdew at gmail.com  Thu Apr 14 14:00:45 2011
+From: cmsdew at gmail.com (Chris Dew)
+Date: Thu, 14 Apr 2011 13:00:45 +0100
+Subject: [Haskell-cafe] Type Classes in Haskell - how can I make GHC make a
+ choice of types, when the type chosen doesn't matter?
+Message-ID: <BANLkTinPdtvLyNLGA3M7hx8ngUEOec+How@mail.gmail.com>
+
+This is a question about the use of type classes in Haskell.
+
+I get an error (below) when trying to compile the code (below and at
+https://github.com/chrisdew/haskell-sandbox/blob/master/not_working_but_clean.hs
+).
+
+As someone just learning Haskell, I have tried following GHC's advice,
+but I think the cause is different.
+
+I believe the problem is that either of the types 'IO String' or plain
+'String' could be the type of 'lhello ->> lbracket', but GHC doesn't
+know which.
+
+The problem is that it doesn't matter, either type would work fine.
+
+I have posted a working version of the code at
+https://github.com/chrisdew/haskell-sandbox/blob/master/working_but_ugly.hs
+.  This replaces one of the ->> operators with a new (non type class)
+operator '->>>' which forces 'lhello ->> lbracket' to be of type 'IO
+String'.
+
+* Is my analysis correct?  Or is there something else going on here?
+
+* Is there any way of informing GHC what the type of 'lhello ->>
+lbracket' doen't matter and that is should just chose either of the
+two possibilities.  Or perhaps theres a LANGUAGE option which will let
+me specify that 'lastest declared matching instance of the class wins'
+if anything is undecided.
+
+Thanks,
+
+Chris.
+
+
+Error:
+chris at chris-linux-desktop:~/nonworkspace/haskell-sandbox$ ghc
+not_working_but_clean.hs
+
+not_working_but_clean.hs:40:16:
+    No instance for (Stream (IO String) (IO String) (IO String) d)
+      arising from a use of `->>' at not_working_but_clean.hs:40:16-34
+    Possible fix:
+      add an instance declaration for
+      (Stream (IO String) (IO String) (IO String) d)
+    In the first argument of `(->>)', namely `lhello ->> lbracket'
+    In the second argument of `($)', namely
+        `lhello ->> lbracket ->> putStrLn'
+    In a stmt of a 'do' expression:
+          forkIO $ lhello ->> lbracket ->> putStrLn
+
+not_working_but_clean.hs:40:16:
+    No instance for (Stream d String (IO ()) (IO ()))
+      arising from a use of `->>' at not_working_but_clean.hs:40:16-47
+    Possible fix:
+      add an instance declaration for (Stream d String (IO ()) (IO ()))
+    In the second argument of `($)', namely
+        `lhello ->> lbracket ->> putStrLn'
+    In a stmt of a 'do' expression:
+          forkIO $ lhello ->> lbracket ->> putStrLn
+    In the expression:
+        do { forkIO $ (bracket $ hello) ->> putStrLn;
+             forkIO $ lhello ->> lbracket ->> putStrLn;
+             forkIO $ bracket hello ->> putStrLn;
+             forkIO $ lbracket lhello ->> putStrLn;
+           .... }
+
+
+
+not_working_but_clean.hs:
+{-# LANGUAGE MultiParamTypeClasses, FlexibleInstances,
+TypeSynonymInstances, OverlappingInstances #-}
+{-# OPTIONS_GHC #-}
+
+module Main (
+main
+)
+where
+
+import Control.Concurrent (forkIO, MVar, newEmptyMVar, putMVar,
+takeMVar, ThreadId, threadDelay)
+import Control.Monad (forever, liftM)
+
+class Stream a b c d where
+    (->>) :: a -> (b -> c) -> d
+
+instance Stream (IO d) d (IO c) (IO c) where
+    f ->> g = f >>= g
+
+instance Stream d d (IO c) (IO c) where
+    f ->> g = g f
+
+instance Stream d d c c where
+    x ->> y = y $ x
+
+-- This simply wraps a string in brackets.
+bracket :: String -> String
+bracket x = "(" ++ x ++ ")"
+
+lbracket :: IO String -> IO String
+lbracket x = liftM bracket x
+
+hello :: String
+hello = "Hello World!"
+
+lhello :: IO String
+lhello = do return hello
+
+main :: IO ()
+main = do
+       forkIO $ (bracket $ hello) ->> putStrLn
+       forkIO $ lhello ->> lbracket ->> putStrLn
+       forkIO $ bracket hello ->> putStrLn
+       forkIO $ lbracket lhello ->> putStrLn
+       threadDelay 10000000 -- Sleep for at least 10 seconds before exiting.
+
+
+
+working_but_ugly.hs:
+{-# LANGUAGE MultiParamTypeClasses, FlexibleInstances,
+TypeSynonymInstances, OverlappingInstances #-}
+{-# OPTIONS_GHC #-}
+
+module Main (
+main
+)
+where
+
+import Control.Concurrent (forkIO, MVar, newEmptyMVar, putMVar,
+takeMVar, ThreadId, threadDelay)
+import Control.Monad (forever, liftM)
+
+class Stream a b c d where
+    (->>) :: a -> (b -> c) -> d
+
+instance Stream (IO d) d (IO c) (IO c) where
+    f ->> g = f >>= g
+
+instance Stream d d (IO c) (IO c) where
+    f ->> g = g f
+
+instance Stream d d c c where
+    x ->> y = y $ x
+
+x ->>> y = y $ x
+
+-- This simply wraps a string in brackets.
+bracket :: String -> String
+bracket x = "(" ++ x ++ ")"
+
+lbracket :: IO String -> IO String
+lbracket x = liftM bracket x
+
+hello :: String
+hello = "Hello World!"
+
+lhello :: IO String
+lhello = do return hello
+
+main :: IO ()
+main = do
+       forkIO $ (bracket $ hello) ->> putStrLn
+       forkIO $ lhello ->>> lbracket ->> putStrLn
+       forkIO $ bracket hello ->> putStrLn
+       forkIO $ lbracket lhello ->> putStrLn
+       threadDelay 10000000 -- Sleep for at least 10 seconds before exiting.
+
+

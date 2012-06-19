@@ -1,0 +1,209 @@
+From martindemello at gmail.com  Tue Dec 27 23:06:54 2011
+From: martindemello at gmail.com (Martin DeMello)
+Date: Tue, 27 Dec 2011 14:06:54 -0800
+Subject: [Haskell-cafe] How hard is it to start a web startup using
+	Haskell?
+In-Reply-To: <CAFj8LZdj42PEN6Kbnkro5=zdGAL6VaNCOwXfYmYrVEy-BOHOxg@mail.gmail.com>
+References: <loom.20111218T175134-76@post.gmane.org>
+	<CAKA2JgJEUfh0jyS5Dy3w5f6QS-wg-kGEmfyH8eDxjncYMf9Nuw@mail.gmail.com>
+	<CACZKWEKH+4KHRhmAs6CV-YN9s14JpBt=Ss8Qr=xQUBT9Qwhu+Q@mail.gmail.com>
+	<CAH6e9LhQNM-nMXOYYFjz69TMgaDKHW5BJEOYHuV4gOJAntr32A@mail.gmail.com>
+	<CACqaG6zvBD2dYOCxq21d4=Ku65vx=MEO8vRbGO5fu-9greS5Mw@mail.gmail.com>
+	<CAH6e9Lg_-b6aFQQXQkU=Nm0BJHbM9xy_2Pd5wAr65yAaTHkafg@mail.gmail.com>
+	<CAFj8LZdj42PEN6Kbnkro5=zdGAL6VaNCOwXfYmYrVEy-BOHOxg@mail.gmail.com>
+Message-ID: <CAFrFfuHAVKUh1ebpm_auygoTUv0YkzUbp9xAcCJ58GOdLMe1hg@mail.gmail.com>
+
+A good compromise might be opa (not used it myself, but I've been
+reading up on it as a possible candidate for any personal web projects
+I might want to do). It is not haskell, but it is ML-derived, and
+specifically for webapps. It has some example apps available, though
+nothing near the volume of apps rails or django would have.
+
+martin
+
+On Mon, Dec 26, 2011 at 6:17 PM, Haisheng Wu <freizl at gmail.com> wrote:
+>
+> Turns out that those guys doing?start-up?with Haskell are already expert at
+> Haskell.
+> Hence choosing Haskell is more?straightforward.
+>
+> I'm thinking of using Haskell since it looks cool and beautiful.
+> However I have little?experience?and will move slowly at certain begging
+> period.
+> This sounds not good to a startup company.
+>
+> Comparing with Django in Python, Rails in Ruby, yesod and snap looks not
+> that mature.
+> Also, for instance, I'd like to build up a CRM application company, I
+> could?leverage?some open source projects in other languages. ?In Haskell, we
+> need to build from?scratch?basically.
+>
+> Appreciate?your suggestions/comments.
+>
+> -Simon
+>
+>
+>
+> On Wed, Dec 21, 2011 at 2:30 AM, David Pollak
+> <feeder.of.the.bears at gmail.com> wrote:
+>>
+>>
+>>
+>> On Mon, Dec 19, 2011 at 2:36 PM, Yves Par?s <limestrael at gmail.com> wrote:
+>>>
+>>> > Haskell is a mature platform that provides lots of goodies that I might
+>>> > otherwise have to write (like the goodies I wrote in Lift including an
+>>> > Actors library)
+>>>
+>>> I don't get it: Actors are at the core of Scala concurrency model,
+>>
+>>
+>> Actors as implemented in the Scala distribution were (and probably still
+>> are) horrid. ?They have poor performance, memory retention issues, and an
+>> overall poor design. ?When Lift relied on Scala's Actors, a Lift-comet site
+>> needed to be restarted every few weeks because of pent-up memory issues. ?On
+>> the other hand, with Lift Actors, http://demo.liftweb.net has been running
+>> since July 7th.
+>>
+>>>
+>>> and are expanded for distributed programming through Akka for instance.
+>>
+>>
+>> Actually, no. ?Scala's Actors are not expanded by Akka (although Akka
+>> Actors may replace the existing Actor implementation in the Scala library).
+>> ?Akka is yet another replacement for Scala's Actor library and Akka's
+>> distributed capabilities are weak and brittle. ?Also, Lift's Actor library
+>> and Martin Odersky's flames about it paved the way for Akka because I took
+>> the heat that might have driven Jonas out of the Scala community when Akka
+>> was a small project.
+>>
+>>>
+>>> To me it'd be the other way around: you'd have to develop Actors in
+>>> Haskell, don't you?
+>>
+>>
+>> I've come to understand that Actors are a weak concurrency/distribution
+>> paradigm. ?Anything that has a type signature Any => Unit is not composable
+>> and will lead to the same kinds of issues that we're looking for the
+>> compiler in Haskell to help us with (put another way, if you like Smalltalk
+>> and Ruby, then Actors seem pretty cool.)
+>>
+>> On the other hand, many of Haskell's libraries (STM, Iteratees, etc.) have
+>> a much more composable set of concurrency primitives.
+>>
+>>>
+>>> Or maybe you don't mean the same thing by 'Actor'?
+>>>
+>>>
+>>> 2011/12/19 David Pollak <feeder.of.the.bears at gmail.com>
+>>>>
+>>>> On Mon, Dec 19, 2011 at 2:04 AM, Ivan Perez
+>>>> <ivanperezdominguez at gmail.com> wrote:
+>>>>>
+>>>>> I'm actually trying to make a list of companies and people using
+>>>>> Haskell
+>>>>> for for-profit real world software development.
+>>>>>
+>>>>> I'd like to know the names of those startups, if possible.
+>>>>
+>>>>
+>>>> I am building http://visi.pro on Haskell. ?I am doing it for a number of
+>>>> reasons:
+>>>>
+>>>> Haskell is a mature platform that provides lots of goodies that I might
+>>>> otherwise have to write (like the goodies I wrote in Lift including an
+>>>> Actors library)
+>>>> Haskell allows a lot of nice "things" that make building a language and
+>>>> associated tools easier (like laziness)
+>>>> Haskell is a filter for team members. Just like Foursquare uses Scala as
+>>>> a filter for candidates in recruiting, I'm using Haskell as a filter... if
+>>>> you have some good Haskell open source code, it's a way to indicate to me
+>>>> that you're a strong developer.
+>>>>
+>>>>
+>>>>>
+>>>>>
+>>>>> -- Ivan
+>>>>>
+>>>>> On 18 December 2011 18:42, Michael Snoyman <michael at snoyman.com> wrote:
+>>>>> > On Sun, Dec 18, 2011 at 6:57 PM, Gracjan Polak
+>>>>> > <gracjanpolak at gmail.com> wrote:
+>>>>> >>
+>>>>> >> Hi all,
+>>>>> >>
+>>>>> >> The question 'How hard is it to start a technical startup with
+>>>>> >> Haskell?'
+>>>>> >> happened a couple of times on this list. Sometimes it was in the
+>>>>> >> form 'How hard
+>>>>> >> is to find Haskell programmers?' or 'Are there any Haskell jobs?'.
+>>>>> >>
+>>>>> >> I'd like to provide one data point as an answer:
+>>>>> >>
+>>>>> >>
+>>>>> >> http://www.reddit.com/r/haskell/comments/ngbbp/haskell_only_esigning_startup_closes_second_angel/
+>>>>> >>
+>>>>> >> Full disclosure: I'm one of two that founded this startup.
+>>>>> >>
+>>>>> >> How are others doing businesses using Haskell doing these days?
+>>>>> >
+>>>>> > I don't run a startup myself, but I know of at least three startups
+>>>>> > using Haskell for web development (through Yesod), and my company is
+>>>>> > basing its new web products on Yesod as well. I think there are
+>>>>> > plenty
+>>>>> > of highly qualified Haskell programmers out there, especially if
+>>>>> > you're willing to let someone work remotely.
+>>>>> >
+>>>>> > Michael
+>>>>> >
+>>>>> > _______________________________________________
+>>>>> > Haskell-Cafe mailing list
+>>>>> > Haskell-Cafe at haskell.org
+>>>>> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>>>>
+>>>>> _______________________________________________
+>>>>> Haskell-Cafe mailing list
+>>>>> Haskell-Cafe at haskell.org
+>>>>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>>>
+>>>>
+>>>>
+>>>>
+>>>> --
+>>>> Visi.Pro, Cloud Computing for the Rest of Us http://visi.pro
+>>>> Lift, the simply functional web framework http://liftweb.net
+>>>> Follow me: http://twitter.com/dpp
+>>>> Blog: http://goodstuff.im
+>>>>
+>>>>
+>>>>
+>>>> _______________________________________________
+>>>> Haskell-Cafe mailing list
+>>>> Haskell-Cafe at haskell.org
+>>>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>>>
+>>>
+>>
+>>
+>>
+>> --
+>> Visi.Pro, Cloud Computing for the Rest of Us http://visi.pro
+>> Lift, the simply functional web framework http://liftweb.net
+>> Follow me: http://twitter.com/dpp
+>> Blog: http://goodstuff.im
+>>
+>>
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

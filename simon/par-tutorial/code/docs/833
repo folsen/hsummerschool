@@ -1,0 +1,54 @@
+From es at ertes.de  Thu Apr 28 17:27:08 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Thu, 28 Apr 2011 17:27:08 +0200
+Subject: [Haskell-cafe] Python is lazier than Haskell
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<87vcy0vxdq.fsf@malde.org> <loom.20110428T091338-92@post.gmane.org>
+Message-ID: <20110428172708.22b30845@angst.streitmacht.eu>
+
+Gracjan Polak <gracjanpolak at gmail.com> wrote:
+
+> Ketil Malde <ketil <at> malde.org> writes:
+>
+> > In Haskell, I often need to add stubs of "undefined" in order to do
+> > this.  I don't mind, since it is often very useful to say
+> > *something* about the particular piece - e.g. I add the type
+> > signature, establishing the shape of the missing piece without
+> > bothering with the actual implementation just yet.
+>
+> Seconded.
+
+I don't see any problem with this.  Although I usually have a bottom-up
+approach, so I don't do this too often, it doesn't hurt, when I have to.
+
+
+> Sometimes I wish for a -fphp flag that would turn some type errors
+> into warnings. Example:
+>
+> v.hs:8:6:
+>     Couldn't match expected type `[a]' against inferred type `()'
+>     In the first argument of `a', namely `y'
+>     In the expression: a y
+>     In the definition of `c': c = a y
+>
+> GHC could substitute 'y = error "Couldn't match expected type `[a]'
+> against inferred type `()'"' and compile anyway.
+>
+> Would that bring Haskell closer to Python?
+
+It would make people abuse that feature.  I don't want it.  Haskell is
+so difficult to abuse compared to other languages, and I'd like to keep
+it that way.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

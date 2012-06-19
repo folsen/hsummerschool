@@ -1,0 +1,34 @@
+From tab at snarc.org  Mon Aug 15 08:55:44 2011
+From: tab at snarc.org (Vincent Hanquez)
+Date: Mon, 15 Aug 2011 08:55:44 +0200
+Subject: [Haskell-cafe] ANNOUNCE: taffybar: an alternative status bar
+ for xmonad
+In-Reply-To: <20110813155648.GE13469@cs.wisc.edu>
+References: <20110813155648.GE13469@cs.wisc.edu>
+Message-ID: <20110815065544.GA18554@snarc.org>
+
+On Sat, Aug 13, 2011 at 10:56:49AM -0500, Tristan Ravitch wrote:
+> I've wanted a slightly fancier status bar than xmobar for a while, so
+> I finally made one.  It uses gtk2hs and dbus extensively, so if you
+> hate either of those things it probably isn't for you.  Being written
+> in gtk, though, it can have more graphical widgets.
+> 
+>   http://hackage.haskell.org/package/taffybar
+
+Hi Tristan,
+
+Thanks for this new status bar, this is exactly what i've been looking for
+xmonad !
+
+A word of warning though, it seems to wakeup a bit too much (and do too much work
+at wakeup) with the example configuration and make a laptop great for winter
+as a hand warmer :-)
+
+I ended up with just the clock widget (setup to update every minute instead of
+every second), the system tray, and the logwidget, and the wakeup rate is
+completely acceptable, and the cpu time stays low.
+
+-- 
+Vincent
+
+

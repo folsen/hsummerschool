@@ -1,0 +1,157 @@
+From bogus@does.not.exist.com  Fri Aug 26 17:16:24 2011
+From: bogus@does.not.exist.com ()
+Date: Fri, 26 Aug 2011 15:16:24 -0000
+Subject: No subject
+Message-ID: <mailman.1.1314581246.22581.haskell-cafe@haskell.org>
+
+but instead maybe "!".
+
+The OS QNX is a hard real-time OS that uses a message passing IPC. I have
+worked QNX and have written a device driver for QNX.
+This job posting maybe very unfair argument against C++/OOPs as maybe the
+thought is that C++ adds to much "non-determinism" to a hard real-time
+problem. In the real-time extension to the POSIX API is a function "mlock"
+which locks a process into memory(no swapping) which seriously helps to cut
+down on non-determinism. Here Haskell would be worse with its garbage
+collector with its attending non-determinism. No "OS function calls" seems
+way over the top.
+
+
+Sorry for my meandering thinking ....
+
+
+Regards,
+
+Vasili
+
+--0016e6d78589b5b60904ab9acbb1
+Content-Type: text/html; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
+
+Hello,<br><br>=A0=A0=A0=A0=A0 I received two job postings ... my comments f=
+ollows the postings:<br><br>-----------------------------------------------=
+---------------------------------------------------------------------------=
+---------------------------------------------------------------------------=
+-----------------------------------------<br>
+<p class=3D"MsoNormal"><b><u><span style=3D"color: black;">#1 Software Deve=
+loper</span></u></b></p><p class=3D"MsoNormal"><b><u><span style=3D"color: =
+black;"><span style=3D"text-decoration: none;">=A0</span></span></u></b></p=
+><p class=3D"MsoNormal">
+<span style=3D"color: black;">Location: Austin, TX</span></p><p class=3D"Ms=
+oNormal"><span style=3D"color: black;">Duration: 6 months</span></p><p clas=
+s=3D"MsoNormal">Rate : $60/hr -$70/hr on w2</p><p class=3D"MsoNormal">=A0</=
+p><p class=3D"MsoNormal">
+<b>Required:</b> </p><p class=3D"MsoNormal"><b>-
+ Straight C experience - Generally need a pure C programmer to ideally=20
+create 1 C file that can be compiled in Win32/Win64/Dos/Shell/Linux</b></p>=
+<p style=3D"margin-left: 0.75in;"><span style=3D"font-size: 11pt;"><span>a.=
+<span style=3D"font: 7pt &quot;Times New Roman&quot;;">=A0=A0=A0=A0=A0=A0 <=
+/span></span></span><span style=3D"font-size: 11pt;">Prefer C, not C++, but=
+ if only C++ still consider it.</span></p>
+<p style=3D"margin-left: 0.75in;"><span style=3D"font-size: 11pt;"><span>b.=
+<span style=3D"font: 7pt &quot;Times New Roman&quot;;">=A0=A0=A0=A0=A0 </sp=
+an></span></span><span style=3D"font-size: 11pt;">Past contractors tried to=
+ do too large of things like templates, huge class structures, etc. so we p=
+refer C over C++</span></p>
+<p style=3D"margin-left: 0.75in;"><span style=3D"font-size: 11pt;"><span>c.=
+<span style=3D"font: 7pt &quot;Times New Roman&quot;;">=A0=A0=A0=A0=A0=A0 <=
+/span></span></span><span style=3D"font-size: 11pt;">Upper level Windows pr=
+ogramming such as .NET detracts because client wants them to think about al=
+l targets, not just Windows </span></p>
+<p class=3D"MsoNormal"><b>- Linux experience =96 Generally need to get a Wi=
+ndows GUI application to be re-compiled and run in Linux</b></p><p class=3D=
+"MsoNormal" style=3D"margin-left: 0.5in;">a. Hard to find, so first do a ke=
+y word search of Linux <br>
+b. Programming applications background is a big plus <br>c. Looking for GUI=
+ experience so they can scope how the Win32 app looks then implement the sa=
+me experience in Linux <br>d. Client is lacking in Linux background, so nee=
+d someone that needs minimal help with Linux.</p>
+<p class=3D"MsoNormal">=A0</p><p class=3D"MsoNormal"><b>Desired:</b> </p><p=
+ class=3D"MsoNormal">- Application development =96 Have several Win32 appli=
+cations that need to be compiled as Win64 then tested</p><p class=3D"MsoNor=
+mal" style=3D"margin-left: 0.5in;">
+a. Experience in testing and familiar with looking for corner case scenario=
+s</p><p class=3D"MsoNormal">- Low level hardware/software interaction knowl=
+edge</p><p class=3D"MsoNormal" style=3D"margin-left: 0.5in;">a. Apps requir=
+e running a SMI to initiate contact, need candidate to understand differenc=
+e between virtual and flat addressing<span></span></p>
+<span style=3D"font-size: 10pt;">=A0</span><br>----------------------------=
+---------------------------------------------------------------------------=
+---------------------------------------------------------------------------=
+------------------------------------------------------------------<br>
+<div id=3D"job_header">
+<b class=3D"jobtitle"><font size=3D"+1">#2 SMTP EMAIL SERVER - C</font></b>
+
+
+    <br>
+
+    <span class=3D"company">Elance</span> -
+
+
+    <span class=3D"location">United States</span>
+
+   =20
+       =20
+            <br><a class=3D"view_job_link" href=3D"http://www.indeed.com/rc=
+/clk?jk=3D6f0fdd27079eb247&amp;from=3Dvj&amp;grandfrom=3Dja&amp;tk=3D1687hj=
+c6n069g1ia" target=3D"_blank">See original job posting at Elance =BB</a>
+       =20
+       =20
+   =20
+
+    </div>
+
+          =20
+   =20
+
+
+
+   =20
+
+
+
+
+
+<span class=3D"summary">Developer to provide ANSI C software to send=20
+(receive not required) email using an SMTP Server. This software must=20
+support: ? AUTH_LOGIN (base 64 encoding) ? NTLM ?
+<br><br>
+NTLM2 ? CRAM MD5 This software is targeted to run on an embedded=20
+microcontroller but can be developed in Linux or Windows. The following=20
+requirements MUST be met: ? No C++, No C++ Classes...etc ?
+<br><br>
+No .NET ? No DLLs ? No Libraries ? No OS dependencies (Windows/QNX/MQX or a=
+ny other OS) ?
+<br><br>
+No OS Function Calls ? 100% ANSI C Source is required. Desired Skills: C
+
+    </span><br><br><br>----------------------------------------------------=
+---------------------------------------------------------------------------=
+---------------------------------------------------------------------------=
+------------------------------------<br>
+<br>Both seem to want to have nothing with C++ (dare I say OOPS?). I work i=
+n mainstream industry. Have others on the mail list seen such job postings =
+recently?<br>=A0Is there now a trend against C++ due to somewhat loose type=
+ checking and very statefullness? (Unlike Haskell which splits pure and mon=
+ads very clearly vis strong types).<br>
+<br><br>#1<br>To C++ templates are much more bulky(and ugly) compared Haske=
+ll&#39;s polymorphic types. However, it caused me to think where we Haskell=
+ programmers can do &quot;too large of things&quot;. ??? Perhaps an unfair =
+question given that I have no access to the current C++ code.<br>
+<br><br><br><br>#2<br>From the context of #2, I can tell the author didn&#3=
+9;t mean all of the &quot;?&quot;&#39;s but instead maybe &quot;!&quot;.<br=
+><br>The OS QNX is a hard real-time OS that uses a message passing IPC. I h=
+ave worked QNX and have written a device driver for QNX. <br>
+This job posting maybe very unfair argument against C++/OOPs as maybe the t=
+hought is that C++ adds to much &quot;non-determinism&quot; to a hard real-=
+time problem. In the real-time extension to the POSIX API is a function &qu=
+ot;mlock&quot; which locks a process into memory(no swapping) which serious=
+ly helps to cut down on non-determinism. Here Haskell would be worse with i=
+ts garbage collector with its attending non-determinism. No &quot;OS functi=
+on calls&quot; seems way over the top.<br>
+<br><br>Sorry for my meandering thinking ....<br><br><br>Regards,<br><br>Va=
+sili<br>
+
+--0016e6d78589b5b60904ab9acbb1--
+
+

@@ -1,0 +1,42 @@
+From catamorphism at gmail.com  Sat Feb 12 17:41:24 2011
+From: catamorphism at gmail.com (Tim Chevalier)
+Date: Sat, 12 Feb 2011 08:41:24 -0800
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <AANLkTi=sA-Mkfgd1e0kbij8P=w+e3DyTgqs5SYXsyXQ2@mail.gmail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+	<AANLkTinRwfq-hikWx=U-1hZvvyEwG=U4oL_ZypiayRye@mail.gmail.com>
+	<AANLkTi=sA-Mkfgd1e0kbij8P=w+e3DyTgqs5SYXsyXQ2@mail.gmail.com>
+Message-ID: <AANLkTinqXo59gMxXSs5Rbjm9r8JjbEpv8FoToHa2-hXx@mail.gmail.com>
+
+On Sat, Feb 12, 2011 at 6:08 AM, C K Kashyap <ckkashyap at gmail.com> wrote:
+> Anyway, how can one go about explaining to an imperative programmer with no
+> FP exposure - what aspect of Haskell makes it easy to refactor?
+
+I think you just said it: typechecking, typechecking, typechecking. In
+Haskell, you can change one line of code and be confident that the
+compiler will force you to change every other line of code that's
+rendered nonsensical by your change. You just can't do that in C. It
+really liberates your mind and makes you less committed to your own
+design mistakes, since refactoring doesn't come with gut-wrenching
+worry that you'll introduce a silent error as a result.
+
+That said, I find that explaining Haskell's or ML's type system to
+someone used to a language with a much weaker type system is
+difficult. Many such people believe that type errors are trivial
+errors by definition and the compiler doesn't give them any help
+finding significant errors, which is true for the languages they've
+used (they may even believe that typecheckers get in their way by
+forcing them to correct errors). What's important is not just that
+Haskell has static typing, but that algebraic data types are a rich
+enough language to let you express your intent in data and not just in
+code. That helps you help the compiler help you.
+
+Cheers,
+Tim
+
+-- 
+Tim Chevalier * http://cs.pdx.edu/~tjc/ * Often in error, never in doubt
+"an intelligent person fights for lost causes,realizing that others
+are merely effects" -- E.E. Cummings
+
+

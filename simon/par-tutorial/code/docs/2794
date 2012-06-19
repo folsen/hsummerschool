@@ -1,0 +1,43 @@
+From ross at soi.city.ac.uk  Mon Feb  7 13:07:24 2011
+From: ross at soi.city.ac.uk (Ross Paterson)
+Date: Mon, 7 Feb 2011 12:07:24 +0000
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTiki+eeMtdfhh0VeGFO7eqi8WmcpB41_8p4GCkWZ@mail.gmail.com>
+References: <AANLkTiki+eeMtdfhh0VeGFO7eqi8WmcpB41_8p4GCkWZ@mail.gmail.com>
+Message-ID: <20110207120724.GA7681@soi.city.ac.uk>
+
+On Mon, Feb 07, 2011 at 11:05:53AM +0000, John Lato wrote:
+>     From: Ivan Lazar Miljenovic <ivan.miljenovic at gmail.com>
+> 
+>     On 7 February 2011 12:30, wren ng thornton <wren at freegeek.org> wrote:
+>     > On 2/6/11 4:53 PM, Ivan Lazar Miljenovic wrote:
+>     >>
+>     >> On 7 February 2011 08:12, Alexey Khudyakov<alexey.skladnoy at gmail.com>
+>     >> ?wrote:
+>     >>>
+>     >>> Also there is a container-classes package which provide set of type
+>     class
+>     >>> for containers.
+>     >>>
+>     >>> [1] http://hackage.haskell.org/package/container-classes
+>     >>
+>     >> Don't use that package: it's broken. ?I did start on a re-write that
+>     >> works (and there are similar libraries around that I believe do work),
+>     >> but gave up because it was a) too fiddly, and b) I decided that the
+>     >> use case I had for them wasn't worth it (as it would just make that
+>     >> library more complicated and difficult to use, possibly also less
+>     >> efficient). ?If anyone wants it I can certainly send them what I've
+>     >> got though.
+>     >
+>     > Any chance you could push a 0.0.0.1 version which tells people this, so
+>     that
+>     > they know to avoid it?
+> 
+>     Didn't think about that; I'll try to do so tonight.
+> 
+> Perhaps a better approach would be to ask the hackage maintainer (Ross
+> Patterson, if I'm not mistaken) to deprecate container-classes.
+
+Done.
+
+

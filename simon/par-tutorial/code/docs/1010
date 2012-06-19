@@ -1,0 +1,40 @@
+From dmbarbour at gmail.com  Wed Aug 10 02:48:13 2011
+From: dmbarbour at gmail.com (David Barbour)
+Date: Tue, 9 Aug 2011 17:48:13 -0700
+Subject: [Haskell-cafe] Error in the asynchronous exception operational
+	semantics
+In-Reply-To: <1312922260-sup-2735@ezyang>
+References: <1312922260-sup-2735@ezyang>
+Message-ID: <CAAOQMStVveW5VJGc3+=9WOh1Z_W0vifx_R3+Pqj2g-OLe2hr2Q@mail.gmail.com>
+
+All you need to know about asynchronous exceptions is: *don't use
+them!* They're
+too difficult to reason about, in terms of failure modes and such. Use TVars
+or MVars instead.
+
+
+On Tue, Aug 9, 2011 at 1:40 PM, Edward Z. Yang <ezyang at mit.edu> wrote:
+
+> Hello all,
+>
+> I was recently reading "Asynchronous Exceptions as an Effect" by Harrison,
+> Allwein, Gill and Procter, and noticed at the end that they found an error
+> in the operational semantics described in "Asynchronous Exceptions in
+> Haskell"
+> by the Simons and Andrew Moran.  Does anyone know what this error was, and
+> whether or not it was corrected in the December 12, 2006 version of the
+> paper
+> floating around on the net?
+>
+> Thanks,
+> Edward
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110809/80a93f6c/attachment.htm>
+

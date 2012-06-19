@@ -1,0 +1,33 @@
+From wren at freegeek.org  Sun Dec  4 07:32:23 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sun, 04 Dec 2011 01:32:23 -0500
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAMXF=YCD8ODsmF53id9U=h+SsnuN1T8RvcvY2htwBgRFGgW85A@mail.gmail.com>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+	<CANd=OGGcwRC9FfTA8KJQyzsQBDL3YycF2MYx4hMiN7vxeBwTFg@mail.gmail.com>
+	<20111201174112.GA14096@x200>
+	<CANd=OGGXOQYrKrnw9QpDaqgjC-JGsH7jFJB8Hx-OJjCTZP7KGQ@mail.gmail.com>
+	<CAMXF=YCD8ODsmF53id9U=h+SsnuN1T8RvcvY2htwBgRFGgW85A@mail.gmail.com>
+Message-ID: <4EDB13F7.3020308@freegeek.org>
+
+On 12/1/11 2:26 PM, dokondr wrote:
+> How to find this path using GHC libraries?
+
+There was a discussion about this recently over on libraries@, IIRC. The 
+short answer is that, at present, there is no function to give you $0. 
+We'd like to add such a function, but it's not been done yet.
+
+Part of the problem is that, as Alexey says, the first element of argv 
+is just whatever is passed to exec, which is not guaranteed to be a 
+complete path, a canonical path, or any other specific thing we'd 
+desire. It's not at all straightforward to determine the actual location 
+of the executable, especially not in a platform-independent manner. 
+argv[0] can't be trusted, scanning through $PATH isn't guaranteed to 
+find it (and even if you find something of the right name, it's not 
+guaranteed to be the correct executable), etc etc.
+
+-- 
+Live well,
+~wren
+
+

@@ -1,0 +1,59 @@
+From Tillmann.Vogt at rwth-aachen.de  Sun Aug  7 12:16:53 2011
+From: Tillmann.Vogt at rwth-aachen.de (Tillmann Vogt)
+Date: Sun, 07 Aug 2011 12:16:53 +0200
+Subject: [Haskell-cafe] Rotating calipers
+In-Reply-To: <3d638c95-cbd5-4c7e-99e0-f2a8a523ea87@u6g2000prc.googlegroups.com>
+References: <2a65257e-8039-48ce-85af-39d5a2b2494c@u28g2000prm.googlegroups.com>
+	<4E3D7AC0.9040205@rwth-aachen.de>
+	<3d638c95-cbd5-4c7e-99e0-f2a8a523ea87@u6g2000prc.googlegroups.com>
+Message-ID: <4E3E6615.4070401@rwth-aachen.de>
+
+Am 06.08.2011 22:23, schrieb mukesh tiwari:
+>> There are several algorithms mentioned on that page. Do you need the
+>> diameter, width, or something else?
+> Oh , I did not realize that .Actually first i implemented diameter
+> algorithm [ http://hpaste.org/49925 ] and tested it on couple of test
+> cases . Its working fine then i tried  to implement " The minimum area
+> enclosing rectangle for a convex polygon"  using four calipers but i
+> don't know whats wrong code.
+>> Do you have some example data and what wrong result you  get?
+> For any test input [ which i tried ] it outputs 4 . If its implemented
+> correctly then it will accepted here with slight modification [
+> http://www.spoj.pl/problems/WLOO0707 ] since it asks for square area.
+> Couple of test cases which i tried .
+>
+> ghci>final [ P 1 1 , P 2 2 , P 0 100 , P 0 1 ]
+> Loading package array-0.3.0.0 ... linking ... done.
+> Loading package bytestring-0.9.1.5 ... linking ... done.
+> 4.0
+>
+> ghci>final [ P 0 0 ,P 5 1 , P 9 2 , P 12 3 , P 14 4 , P 15 5 , P 16
+> 7 , P 17 10 , P 18 14 , P 19 19 ]
+> 3.9999999999999982
+>
+> ghci>final [ P 2 ( -3 ) , P (-1 ) 2 , P 0 5 , P (-5) (-1) , P (-4)
+> ( 2 ) , P 4 0 , P 1 3 , P 4 3 , P (-3) (-4) , P 0 (-2)]
+> 4.0
+>
+> Thank you
+> Mukesh Tiwari
+
+I found the error!
+
+In
+ >    width = distVec cpa' cpb'
+ >    length = distVec cqa' cqb'
+the length of the direction vectors is used to compute the area and the 
+area is then always 4.
+
+Replace it with
+ >    width = distVec (V x1 y1) (V x3 y3)
+ >    length = distVec (V x5 y5) (V x7 y7)
+
+and it seems to work:
+
+ghci> final [ P 1 1 , P 2 2 , P 0 100 , P 0 1 ]
+           221.3707297724792
+
+
+

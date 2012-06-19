@@ -1,0 +1,31 @@
+From serguei.son at gmail.com  Mon Apr 11 15:55:04 2011
+From: serguei.son at gmail.com (Serguei Son)
+Date: Mon, 11 Apr 2011 13:55:04 +0000 (UTC)
+Subject: [Haskell-cafe] Foreign function performance: monadic vs pure
+References: <loom.20110411T135905-625@post.gmane.org>
+	<1302527654.18936.14.camel@localhost.localdomain>
+	<BANLkTi=CuDAH7G+S27mMhV9YHevfXmgDew@mail.gmail.com>
+Message-ID: <loom.20110411T155115-463@post.gmane.org>
+
+Felipe Almeida Lessa <felipe.lessa <at> gmail.com> writes:
+
+> 
+> On Mon, Apr 11, 2011 at 10:14 AM, Maciej Marcin Piechotka
+> <uzytkownik2 <at> gmail.com> wrote:
+> >> main = mapM (\x -> return $! c_sin_u) [1..n]
+> > 0.012 s
+> 
+> This should be
+> 
+>   main = mapM (\x -> return $! c_sin_u x) [1..n]
+> 
+
+So if I must use a safe function returning IO a,
+there is no way to improve its performance? To give you
+a benchmark, calling gsl_ran_ugaussian a million times
+in pure C takes only a second or two on my system.
+
+
+
+
+

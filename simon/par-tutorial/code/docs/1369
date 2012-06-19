@@ -1,0 +1,35 @@
+From eric.kow at gmail.com  Thu Aug 25 19:02:22 2011
+From: eric.kow at gmail.com (Eric Y. Kow)
+Date: Thu, 25 Aug 2011 18:02:22 +0100
+Subject: [Haskell-cafe] Cabal-1.10.1.0 and bytestring-0.9.2.0 hackage
+ problem.
+In-Reply-To: <20110825144258.GC2485@24f89f8c-e6a1-4e75-85ee-bb8a3743bb9f>
+References: <20110825144258.GC2485@24f89f8c-e6a1-4e75-85ee-bb8a3743bb9f>
+Message-ID: <20110825170221.GA73192@dewdrop.local>
+
+Thanks!  I was scratching my head at this
+
+On Thu, Aug 25, 2011 at 16:42:58 +0200, Bertram Felgenhauer wrote:
+> 1. http://hackage.haskell.org/package/bytestring is now broken.
+> 2. The downloadeble package index (00-index.tar) still contains
+>    the bytestring-0.9.2.0 cabal file, so the problem persists.
+> 
+> As a workaround, one can remove the cabal file from the downloaded
+> index manually,
+> 
+> tar -f ~/.cabal/packages/hackage.haskell.org/00-index.tar --delete bytestring/0.9.2.0
+
+gnutar for the apparently 50% of Haskellers (*) that use Macs
+
+* or at least those that attend UK hackathons
+
+-- 
+Eric Kow <http://erickow.com>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110825/7ffdb75f/attachment.pgp>
+

@@ -1,0 +1,80 @@
+From mle+hs at mega-nerd.com  Tue Aug 30 05:27:59 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Tue, 30 Aug 2011 13:27:59 +1000
+Subject: [Haskell-cafe] Decompressing and http-enumerator
+In-Reply-To: <CAKA2JgJVLxsF3U4_zfMro=erD1tNiK88y+tVs5PkJrkPPQeMvg@mail.gmail.com>
+References: <CAKA2Jg+u_BtN5WKrTc4T_mgmuxP5==ASbsh5rvxJaQhVK64MTg@mail.gmail.com>
+	<CAHZrzdqdDtoPa+eQS5XtyRFx-2=1WtOQf=eDERvQuzu_dsMwAw@mail.gmail.com>
+	<CAKA2JgJVLxsF3U4_zfMro=erD1tNiK88y+tVs5PkJrkPPQeMvg@mail.gmail.com>
+Message-ID: <20110830132759.331944b38a09b32f8d27d8ac@mega-nerd.com>
+
+Michael Snoyman wrote:
+
+> I'm wondering what the most appropriate way to handle this is.
+
+Just to get my thoughts in order I'll back track a little.
+
+In the HTTP repsonse, we have two header fields, content-type
+and content-encoding. For the later (which may be absent) we can
+have encodings of gzip or chunked (possibly others).
+
+Some examples:
+
+    content-type   content-encoding   current practice
+    ===================================================
+    text/html      gzip               gunzip it in H.E.
+    text/html      chunked            unchunk it in H.E.
+
+For the case where H.E might be used as part of a HTTP proxy
+we also have a rawBody option that disables both the unchunking
+and the gunzipping. This rawBody functionality works now; I'm
+using it.
+
+We now add to the above a file type where the content-type is
+application/x-tar and the content-encoding is gzipped but from
+the filename part of the URL, a user may well expect that
+we get a tar.gz file but where H.E. currently gunzips it on
+the fly.
+
+So, on to your suggestion:
+
+> Maybe a dontDecompress record, looking like:
+> 
+>     type ContentType = ByteString
+>     dontDecompress :: ContentType -> Bool
+>
+> Then browser behavior would be:
+> 
+>     browserDecompress = (== "application/x-tar")
+> 
+> and current behavior would be:
+> 
+>     defaultDecompress = const False
+
+I think we should invert the logic of this (to avoid
+double negatives) so we have:
+
+     type ContentType = ByteString
+     decompress :: ContentType -> Bool
+
+     browserDecompress = (/== "application/x-tar")
+     defaultDecompress = const True
+
+Was the idea that this decompress field then gets added to
+the Request record?
+
+If so, would simpleHttp be modified to be:
+
+   simpleHttp :: String -> (ContentType -> Bool) -> m L.ByteString
+
+and exporting both browserDecompress and defaultDecompress so
+they can be used as two sane defaults for the second parameter?
+
+Cheers,
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

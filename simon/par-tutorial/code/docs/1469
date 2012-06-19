@@ -1,0 +1,25 @@
+From fischer at nii.ac.jp  Mon Aug 29 06:47:22 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Mon, 29 Aug 2011 13:47:22 +0900
+Subject: [Haskell-cafe] Pointed, but not Applicative
+In-Reply-To: <1314588296.2724.10.camel@picard>
+References: <j3d40s$nb1$1@dough.gmane.org>
+	<CALoEywNocmymRvbdW6Tv5-JvKeMBQ=gY=p6Za+pZxU+0K-m+dg@mail.gmail.com>
+	<1314588296.2724.10.camel@picard>
+Message-ID: <CALoEywNd7pocbykOG9+fgGs0_5jkANi6gH-nohE_Hw6yqtMb+g@mail.gmail.com>
+
+On Mon, Aug 29, 2011 at 12:24 PM, Maciej Marcin Piechotka
+<uzytkownik2 at gmail.com> wrote:
+
+> instance Functor FList where
+> ? ?f `fmap` FList g = ...?
+
+Yes, Functor is also one of the classes that can only be implemented
+by converting to ordinary lists (I think).
+
+So FList could only be made an instance of Pointed without (certain)
+superclass constraints.
+
+Sebastian
+
+

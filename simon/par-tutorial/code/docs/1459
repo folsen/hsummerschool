@@ -1,0 +1,65 @@
+From vigalchin at gmail.com  Mon Aug 29 04:33:20 2011
+From: vigalchin at gmail.com (Vasili I. Galchin)
+Date: Sun, 28 Aug 2011 21:33:20 -0500
+Subject: [Haskell-cafe] only anecdotal .... not a proof of a trend ...
+In-Reply-To: <CAKFCL4VGQ12RgGAqTzO6-XuL-iXCoqs+qP8dHazDxmDMt5eyDg@mail.gmail.com>
+References: <CA+0XtC-o7jbZXzrEK+3Rwrx_cfTXLOMZe8yVWn2QciaS4d+H0A@mail.gmail.com>
+	<CAKFCL4VGQ12RgGAqTzO6-XuL-iXCoqs+qP8dHazDxmDMt5eyDg@mail.gmail.com>
+Message-ID: <CA+0XtC8vLjS6j+aOSpwx=75zGvstF0-mg1c88w9WLN5j1cfrBg@mail.gmail.com>
+
+Hi Brandon,
+
+     1) The reason I said "over the top" is that QNX is highly optimized to
+bound kernel pathways. I was able to read kernel code. I have also worked on
+LynxOS and pSOS. Not dissing you [?]
+
+     2) What is the Haskell package that you are alluding to. I would like
+to know plus probably others on this list.
+
+Kind regards,
+
+Vasili
+
+
+
+On Sun, Aug 28, 2011 at 9:27 PM, Brandon Allbery <allbery.b at gmail.com>wrote:
+
+> On Sun, Aug 28, 2011 at 21:27, Vasili I. Galchin <vigalchin at gmail.com>wrote:
+>
+>> From the context of #2, I can tell the author didn't mean all of the "?"'s
+>> but instead maybe "!".
+>>
+>
+> More likely ? or ? and they got remapped to ?s by incorrect encodings.
+>
+>
+>> The OS QNX is a hard real-time OS that uses a message passing IPC. I have
+>> worked QNX and have written a device driver for QNX.
+>> (...)
+>
+> attending non-determinism. No "OS function calls" seems way over the top.
+>>
+>
+> It's not over the top; it's traditional embedded device programming, where
+> there isn't an OS available, just a simple BIOS (and I don't mean the MS-DOS
+> one).  I suppose kids these days expect even embedded environments to be
+> fairly high end CPUs with full memory management and full OSes... nope.
+>  There's even still ladder logic out there ? and at least one recent Haskell
+> package aimed at programming for it.
+>
+> --
+> brandon s allbery                                      allbery.b at gmail.com
+> wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110828/e329ee83/attachment.htm>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: image/gif
+Size: 96 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110828/e329ee83/attachment.gif>
+

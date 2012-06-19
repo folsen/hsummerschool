@@ -1,0 +1,13 @@
+From jld at kevembuangga.com  Mon Dec 12 15:17:38 2011
+From: jld at kevembuangga.com (Jean-Luc Delatre)
+Date: Mon, 12 Dec 2011 15:17:38 +0100
+Subject: [Haskell-cafe] Chuan-Kai Lin's Unimo framework
+Message-ID: <20111212151738.75605df1@grieve.streak>
+
+Does anybody has an hands on experience of using Chuan-Kai Lin's Unimo framework?
+https://sites.google.com/site/chklin/research
+It looks interesting but it seems it amounts to add an extra layer of interpretation (the monads encoding as a data type) and the paper lacks examples of actual uses of the framework.
+
+jld
+
+

@@ -1,0 +1,27 @@
+From allbery.b at gmail.com  Thu Dec  1 06:04:06 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Thu, 1 Dec 2011 00:04:06 -0500
+Subject: [Haskell-cafe] Using Data,TypeLevel.Num
+In-Reply-To: <B26461F6-5C11-4EFC-935C-7755BB0D3533@cs.otago.ac.nz>
+References: <B26461F6-5C11-4EFC-935C-7755BB0D3533@cs.otago.ac.nz>
+Message-ID: <CAKFCL4Xv+1vNbMW+yGGbc7g+FX9MZikrsC=YMSX5VNcgq6R+ew@mail.gmail.com>
+
+On Wed, Nov 30, 2011 at 23:55, Richard O'Keefe <ok at cs.otago.ac.nz> wrote:
+
+> The "value-level reflection functions" in Data.TypeLevel.Num.Ops all seem
+> to be
+> 'undefined'.
+>
+
+Those are operations on type level representations, but expressed at the
+value level; that is, in some sense the opposite of what you're looking
+for.  Looks like what you really want is Data.TypeLevel.Num.Sets.toNum (or
+toInt in the same module).
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111201/dcfac099/attachment.htm>
+

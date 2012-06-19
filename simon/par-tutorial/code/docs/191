@@ -1,0 +1,80 @@
+From dstcruz at gmail.com  Thu Apr  7 03:12:30 2011
+From: dstcruz at gmail.com (Daniel Santa Cruz)
+Date: Wed, 6 Apr 2011 21:12:30 -0400
+Subject: [Haskell-cafe] Haskell Weekly News: Issue 176
+Message-ID: <BANLkTikYMyW2V7JSQCa5qo196XjfDgouZg@mail.gmail.com>
+
+   Welcome to issue 176 of the HWN, a newsletter covering developments in
+   the [1]Haskell community. This release covers the week of March 27 to
+   April 02, 2011.
+
+   You can find the HTML version at: http://bit.ly/fEdQka
+
+Announcements
+
+   Wren Ng Thornton [2]announced the release of version 0.3.4 of
+   unix-bytestring.
+
+   Ian Lynagh and the GHC team [3]announced version 7.0.3 of GHC,
+   containing a handful of bugfixes.
+
+   Jose A. Ortega Ruiz [4]annouced the release of version 0.13 of xmobar.
+   Might want to check it out specially if you are using xmonad!
+
+   Jason Dagit [5]annouced release 0.2.0 of the nehe-tuts package,
+   tutorials for using OpenGL.
+
+   David Sorokin [6]annouced the release of his new library aivika: a
+   multi-paradigm simulation library.
+
+   Tom Hawkins [7]annouced version 0.3.1 of ImProve: an imperative DSL for
+   hard realtime embedded applications.
+
+   Eric Y. Kow [8]introduced the first issue of Parallel Haskell Digest,
+   "a newsletter aiming to show off all the work that's going on using
+   parallelism and concurrency in the Haskell community." Here is to
+   hoping we get more of these!
+
+   George Giorgidze [9]announced version 0.5.5 of DSH (Database Supported
+   Haskell).
+
+   Jasper Van der Jeugt [10]annouced the 7th Ghent Functional Programming
+   Group meeting on Tuesday, April 26, in celebration of the group's first
+   year of existance. The meetup will be at the Technicum building of
+   Ghent University at 19:30.
+
+Quotes of the Week
+
+     * lispy: [in response to "C++ is a huge language, the type system is
+       complex"] real and imaginary components :) the imaginary bits are
+       the type safety
+
+     * gwern: amazing `catch` (how sweet the type), that saved an
+       exception like me! I once was thrown, but now am caught; was
+       impure, but now pure be
+
+     * hpc: appEndo sounds like a harry potter spell
+
+     * monochrom: yeah, get out of Turing tarpit, provable termination,
+       only to get into Godel tarpit
+
+     * xplat: to me, the great thing about pointfree programming is you
+       don't have to let variable names get in the way of your logic. and
+       the great thing about pointful programming is you don't have to let
+       '(flip .) . (.) . (flip flip . join)' get in the way of your logic.
+       it's nice to have multiple tools in your toolbox
+
+     * lispy: I've never looked at the gtk2hs source. I'm not sure I can
+       muster the intestinal fortitude
+
+     * kmc: time to play "transfinite ordinal or asian emoticon"
+
+     * killing-joke: rip oop. "Object-oriented programming is eliminated
+       entirely from the introductory curriculum, because it is both
+       anti-modular and anti-parallel by its very nature, and hence
+       unsuitable for a modern CS curriculum."
+
+Top Reddit Stories
+
+     * Promo code to get Learn You a Haskell 40% off + e- book for free +
+       swag

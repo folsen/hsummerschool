@@ -1,0 +1,65 @@
+From andrewcoppin at btinternet.com  Wed Dec 21 11:19:59 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Wed, 21 Dec 2011 10:19:59 +0000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <1324322427.2233.6.camel@fuzxxl>
+References: <1324322427.2233.6.camel@fuzxxl>
+Message-ID: <4EF1B2CF.7050003@btinternet.com>
+
+On 19/12/2011 07:20 PM, Robert Clausecker wrote:
+> Image you would create your own language with a paradigm similar to
+> Haskell or have to chance to change Haskell without the need to keep any
+> compatibility. What stuff would you add to your language, what stuff
+> would you remove and what problems would you solve completely different?
+
+1. Remove special treatment for lists.
+
+That is, remove the standard list type from the Prelude and make it into 
+just another container library. The type is trivially definable; it 
+doesn't need to be hard-wired into the language. I would name it "List" 
+rather than "[]" too, and give its constructors sensible names rather 
+than ":" and "[]".
+
+I would also make the current literal list syntax overloaded, so it can 
+be used to construct any type of container. (Much the way numeric 
+literals are overloaded.)
+
+2. Add special treatment for arrays.
+
+That is, have strict, unboxed arrays hard-wired into the language. For 
+every user type, not just ones which are members of a special type. 
+Fully parametric. You know, like how they are in almost every other 
+programming language known to Man, except Haskell. Also, the base array 
+library would have zero-based integer indicies, and if you want 
+arbitrary index values, that would be a library on top. Also, primitives 
+for fast copying of array chunks.
+
+3. Fix the Typeclassopedia.
+
+By which I mean things like removing "fail" from Monad, making 
+Applicative a superclass of Monad, etc. You know, the usual stuff 
+everybody complains about for being horribly broken.
+
+4. Do something sane with the numerical classes.
+
+Unfortunately, this one is a Hard Problem. I doubt you can "solve" this 
+without rampant language changes. But it should be possible to /improve/ 
+on what exists currently.
+
+5. Miscelaneous consistency changes.
+
+Haskell has a number of minor glitches which are irritating though not 
+catastrophic. Things like type signatures being allowed in expressions 
+but not patterns. Value constructors can be operators, but type 
+constructors cannot. Negation is the only unary operator. And so forth. 
+Nothing radical here.
+
+6. Experimental stuff.
+
+I have a number of other, more radical ideas, but I probably wouldn't 
+put those in, because the resulting language would be so drastically 
+different that it wouldn't be "Haskell" any more. (That said, most of 
+the stuff above would pretty much be hard breaking changes...)
+
+

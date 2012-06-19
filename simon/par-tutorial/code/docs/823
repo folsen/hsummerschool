@@ -1,0 +1,64 @@
+From daniel.is.fischer at googlemail.com  Thu Apr 28 12:21:38 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Thu, 28 Apr 2011 12:21:38 +0200
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+In-Reply-To: <1303974242010-4345891.post@n5.nabble.com>
+References: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+	<201104280200.50065.daniel.is.fischer@googlemail.com>
+	<1303974242010-4345891.post@n5.nabble.com>
+Message-ID: <201104281221.38407.daniel.is.fischer@googlemail.com>
+
+On Thursday 28 April 2011 09:04:02, jutaro wrote:
+> Hi Daniel,
+> 
+> that seemed to be a real odyssey.
+
+Still a lot short of ten years ;)
+
+> I will try to install the statistics
+> package when I find time. Guess it is this one on hackage:
+> http://hackage.haskell.org/package/statistics.
+
+Yes, version 0.8.0.5. I don't expect the version to matter much, but it 
+could make a difference.
+
+> Just some remarks:
+> In case of problems with metadata it is helpful to stop the GUI and call
+> leksah-server from the command line. (leksah-server -s collects metainfo
+> for new packages).
+
+I ran
+$ leksah-server -e DEBUG -s
+to locate the problem, that reported that it couldn't retrieve metadata, 
+then "inGhcIO called with []", Start: ("ghc", ["--print-libdir"]), success 
+report (forgot how that was worded), End: ("ghc", ["--print-libdir"]).
+
+After that, no more, so I added some more debugM calls to the server code. 
+Printing the package description,
+
+    liftIO $ debugM "leksah-server" $ "Description: " ++ show pd
+    deepseq pd (return pd)
+
+hung at Statistics.Function.partialSort, getting as far as
+
+   dscMbTypeStr'  = Just "
+
+> What happens then is that leksah-server calls GHC-API and Haddock as a
+> library, which itself uses GHC-API.
+> So its a bit like running Haddock on a package, which usually may fail,
+> but it is uncommon to have this kind of problems. (It happened one time
+> before with a type level library, which defined all integers between 1
+> and several thousands...).
+> 
+> J?rgen
+> 
+> PS: The server at leksah.org has reached its limit yesterday, the
+> Windows installer alone was downloaded about 2000 times!
+
+Awesome.
+
+> But it should work now.
+
+Yup, can reach it again.
+
+

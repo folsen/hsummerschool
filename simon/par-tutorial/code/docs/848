@@ -1,0 +1,37 @@
+From ws506 at doc.ic.ac.uk  Thu Apr 28 23:07:12 2011
+From: ws506 at doc.ic.ac.uk (Will Sonnex)
+Date: Thu, 28 Apr 2011 22:07:12 +0100
+Subject: [Haskell-cafe] [Haskell] ANNOUNCE: zeno-0.2
+In-Reply-To: <BANLkTi=K+A6R=26TTfvFFvZaro6KzthK9g@mail.gmail.com>
+References: <BANLkTimZEy_MSPCfcnm6RC0nKW5N1LJc7w@mail.gmail.com>
+	<BANLkTimBtvQWx5TN9ra0smGnf6SkSfL6gA@mail.gmail.com>
+	<BANLkTi=K+A6R=26TTfvFFvZaro6KzthK9g@mail.gmail.com>
+Message-ID: <BANLkTinP4ZCb0_+8GZF4XCQfKkF_XjJnhw@mail.gmail.com>
+
+Hey Benedict,
+
+Thanks for the response, think I'll do that over the weekend then. I
+should have mentioned also the best place for a more technical
+description in our latest paper at http://pubs.doc.ic.ac.uk/zeno.
+
+
+Cheers,
+
+Will
+
+
+On 28 April 2011 21:56, Benedict Eastaugh <ionfish at gmail.com> wrote:
+> Hi Will,
+>
+> I attended your presentation on Zeno at AngloHaskell last year and was
+> really intrigued; it's great to see you've got a release up on
+> Hackage, and I look forward to trying it out. Are you planning on
+> making your source code repository publicly available on GitHub or
+> somewhere similar? If nothing else it would be interesting to follow
+> further developments between releases.
+>
+> All the best,
+> Benedict.
+>
+
+

@@ -1,0 +1,23 @@
+From benl at ouroborus.net  Fri Apr 29 06:38:35 2011
+From: benl at ouroborus.net (Ben Lippmeier)
+Date: Fri, 29 Apr 2011 14:38:35 +1000
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <alpine.DEB.2.00.1104271123020.5485@anubis>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+Message-ID: <003E6991-CB70-447D-8955-A69E3B1DD5E5@ouroborus.net>
+
+
+On 27/04/2011, at 7:30 PM, Henning Thielemann wrote:
+
+>  "If Haskell is great because of its laziness,
+>   then Python must be even greater,
+>   since it is lazy at the type level."
+
+Laziness at the value level causes space leaks, and laziness at the type level causes mind leaks. Neither are much fun.
+
+When people start wanting laziness at the kind level we'll have to quarantine them before the virus spreads...
+
+Ben.
+
+
+

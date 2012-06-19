@@ -1,0 +1,52 @@
+From chrisyco+haskell-cafe at gmail.com  Fri Dec 30 05:20:18 2011
+From: chrisyco+haskell-cafe at gmail.com (Chris Wong)
+Date: Fri, 30 Dec 2011 17:20:18 +1300
+Subject: [Haskell-cafe] Text.Regex.Base throws exceptions with
+	makeRegexOptsM
+In-Reply-To: <201112300124.02713.daniel.is.fischer@googlemail.com>
+References: <20111229225246.GB13805@barry.normanonet.net>
+	<201112300124.02713.daniel.is.fischer@googlemail.com>
+Message-ID: <CA+qNEzJjoRvLVpVba586EQeVLpCUTDPmVo-OApfVfcEdahf1aw@mail.gmail.com>
+
+On Fri, Dec 30, 2011 at 1:24 PM, Daniel Fischer
+<daniel.is.fischer at googlemail.com> wrote:
+> On Thursday 29 December 2011, 23:52:46, Omari Norman wrote:
+>> [...]
+>
+> 'fail' doesn't properly belong in the Monad class, it was added for the
+> purpose of dealing with pattern-match failures, but most monads can't do
+> anything better than abort with an error in such cases.
+> 'fail' is widely considered a wart.
+
+I thought I'd add my own reason why I don't like fail.
+
+Take these two functions, for example:
+
+test :: Maybe Int
+test = do
+    (Right v) <- Just (Left 1)
+    return v
+
+test' :: Maybe Int
+test' = do
+    let (Right v) = Left 1
+    return v
+
+The first returns Nothing. The second crashes with a pattern match failure.
+
+Why should a pattern failure cause a crash everywhere *except* a do
+binding? It makes no sense. It violates the principle of least
+surprise by behaving differently to every other occurrence of pattern
+matching in the whole language.
+
+As for custom failures, I'd recommend either Michael Snoyman's Failure
+class or MonadPlus, which were both designed for this sort of thing.
+But I'd stay away from using fail, since as Omari Norman said, it's a
+wart.
+
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

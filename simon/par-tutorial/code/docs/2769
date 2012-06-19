@@ -1,0 +1,26 @@
+From stephen.tetley at gmail.com  Sun Feb  6 21:24:44 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Sun, 6 Feb 2011 20:24:44 +0000
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4EF972.2060309@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+	<4D4D6B15.2060204@btinternet.com>
+	<AANLkTimj6PQP6o9NCcc+KXHJrc7+RwK3wQmg66KNMKur@mail.gmail.com>
+	<4D4EF972.2060309@btinternet.com>
+Message-ID: <AANLkTi=jrf8_FHX7+hjFkzuHoXtU92ZwnB3qvSGvXt3Y@mail.gmail.com>
+
+On 6 February 2011 19:41, Andrew Coppin <andrewcoppin at btinternet.com> wrote:
+. (E.g., the
+> compiler can't even determine whether a binding is recursive or not for
+> itself. You have to say that manually.) It seems a very unecessarily
+> complicated and messy language - which makes the name rather ironic.
+
+
+Erm - nope. Sure you haven't mixed OCaml and Clean to get OCClaeman?
+
+Clean is a very clean language. The only thing I got tripped up on
+were uniqueness and strict annotations (thanks to Richard O'Keefe
+above in the thread, for useful clarification).
+
+

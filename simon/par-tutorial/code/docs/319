@@ -1,0 +1,21 @@
+From leon.p.smith at gmail.com  Tue Apr 12 02:31:54 2011
+From: leon.p.smith at gmail.com (Leon Smith)
+Date: Mon, 11 Apr 2011 20:31:54 -0400
+Subject: [Haskell-cafe] Higher-kinded Quantification
+Message-ID: <BANLkTi=EA+347QXDEBu4ST_qMMgJe2AK1g@mail.gmail.com>
+
+I have a type constructor (Iterator i o m a) of kind (* -> * -> (* ->
+*) -> *),  which is a monad transformer,  and I'd like to use the type
+system to express the fact that some computations must be "pure",  by
+writing the impredicative type (Iterator i o (forall m. m) a).
+However I've run into a bit of difficulty expressing this,  due to the
+kind of m.   I've attached a minimal-ish example.   Is there a way to
+express this in GHC?
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: impredicative.hs
+Type: text/x-haskell
+Size: 1580 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110411/7997cb53/attachment.hs>
+

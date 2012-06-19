@@ -1,0 +1,26 @@
+From eca7215 at cs.rit.edu  Tue Apr 26 02:28:07 2011
+From: eca7215 at cs.rit.edu (Edward Amsden)
+Date: Mon, 25 Apr 2011 20:28:07 -0400
+Subject: [Haskell-cafe] Inputs to classic FRP:
+	unsafeInterleaveIO/unsafePerformIO
+Message-ID: <BANLkTi=XMKwyeK8VK5kyYJRuP1JS4RZS4g@mail.gmail.com>
+
+As far as I can tell, with classic FRP implementations (those which
+use behaviors as a first-class abstraction), the only way to create a
+behavior or
+event based on some external input (for instance keypresses or
+microphone input) is to do something with unsafePerformIO or
+unsafeInterleaveIO. A behavior is a value, which when evaluated at a
+specific time would have to either block its evaluation until input
+could be read, or check the input at that particular time.
+
+Is there any other way of implementing external behaviors besides that?
+
+-- 
+Edward Amsden
+Student
+Computer Science
+Rochester Institute of Technology
+www.edwardamsden.com
+
+

@@ -1,0 +1,64 @@
+From v.dijk.bas at gmail.com  Wed Apr 20 17:22:09 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Wed, 20 Apr 2011 17:22:09 +0200
+Subject: [Haskell-cafe] Need comments on a libusb asynchronous
+	select/poll loop
+In-Reply-To: <BANLkTi=ZY1rBuK5+c1xK-k+swTwSqgnfnw@mail.gmail.com>
+References: <20110419130604.GA26986@X52D.localdomain>
+	<BANLkTikQk4cg0poLVscuj2WW+ORNNNwm2g@mail.gmail.com>
+	<BANLkTi=ZY1rBuK5+c1xK-k+swTwSqgnfnw@mail.gmail.com>
+Message-ID: <BANLkTinxh+4LutE3OA2hC0_0m0-Nogv8SA@mail.gmail.com>
+
+On 20 April 2011 17:04, Johan Tibell <johan.tibell at gmail.com> wrote:
+> On Tue, Apr 19, 2011 at 10:36 PM, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+>> On 19 April 2011 15:06, John Obbele <john.obbele at gmail.com> wrote:
+>> ? ? ? ?-- Step 3 is the most important step. Submitting the transfer:
+>> ? ? ? ?handleUSBException $ c'libusb_submit_transfer transPtr
+>>
+>> ? ? ? ?-- TODO: Now we need to do the complicated stuff described in:
+>> ? ? ? ?-- http://libusb.sourceforge.net/api-1.0/group__poll.html
+>> ? ? ? ?--
+>> ? ? ? ?-- First we need the function:
+>> ? ? ? ?-- getPollFds ? Ctx ? IO [C'libusb_pollfd]
+>> ? ? ? ?--
+>> ? ? ? ?-- A C'libusb_pollfd:
+>> ? ? ? ?-- http://libusb.sourceforge.net/api-1.0/structlibusb__pollfd.html
+>> ? ? ? ?-- is a structure containing a file descriptor which should be
+>> ? ? ? ?-- polled by the GHC event manager and an abstract integer
+>> ? ? ? ?-- describing the event flags to be polled.
+>> ? ? ? ?--
+>> ? ? ? ?-- The idea is to call getPollFds and register the returned
+>> ? ? ? ?-- file descriptors and associated events with the GHC event
+>> ? ? ? ?-- manager using registerFd:
+>> ? ? ? ?-- http://hackage.haskell.org/packages/archive/base/4.3.1.0/doc/html/System-Event.html#v:registerFd
+>> ? ? ? ?--
+>> ? ? ? ?-- As the callback we use libusb_handle_events_timeout.
+>> ? ? ? ?--
+>> ? ? ? ?-- But here we run into a problem: We need to turn our
+>> ? ? ? ?-- concrete event integer into a value of the _abstract_ type
+>> ? ? ? ?-- Event. But the only way to create Events is by evtRead or
+>> ? ? ? ?-- evtWrite!
+>> ? ? ? ?--
+>> ? ? ? ?-- I would really like a solution for this.
+>> ? ? ? ?-- Bryan, Johan any ideas?
+>
+> Could you do something like:
+>
+> toEvent :: Int -> Event
+> toEvent flag
+> ? ?| flag `xor` (#const POLLIN) = evtRead
+>
+> etc?
+
+Yes I think I can. I currently copied the code from GHC.Event.Poll:
+https://github.com/basvandijk/usb/blob/async/Poll.hsc
+
+> Not that evtRead and evtWrite maps to different things on different platforms.
+
+Do you mean "Not" or "Note"?
+
+Thanks,
+
+Bas
+
+

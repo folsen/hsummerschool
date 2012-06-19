@@ -1,0 +1,32 @@
+From ketil at malde.org  Thu Feb  3 09:28:03 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Thu, 03 Feb 2011 09:28:03 +0100
+Subject: [Haskell-cafe] Another Question
+In-Reply-To: <759031.74723.qm@web120215.mail.ne1.yahoo.com> (Navin Rustagi's
+	message of "Wed, 2 Feb 2011 23:18:38 -0800 (PST)")
+References: <759031.74723.qm@web120215.mail.ne1.yahoo.com>
+Message-ID: <87bp2tzfn0.fsf@malde.org>
+
+Navin Rustagi <navin_kunta at yahoo.com> writes:
+
+> It gives the error ERROR - Control stack overflow. I assume it is
+> because of the lazy evaluation. 
+
+Yes, you're just building a tower of additions, and when evaluating
+this, you blow up the stack.  You need to make sure to evaluate the
+tuple element each time, so instead of 
+
+>    case ys of  'A'  -> (elf, els+1,elr,ell,elx) 
+
+write:
+
+>    case ys of  'A'  -> els `seq` (elf, els+1,elr,ell,elx)
+
+(Strictly speaking this will only evaluate the previous value, but your
+ tower of additions will now have maximum one floor)
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

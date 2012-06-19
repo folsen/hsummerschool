@@ -1,0 +1,28 @@
+From felipe.lessa at gmail.com  Sun Aug 28 16:48:39 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Sun, 28 Aug 2011 11:48:39 -0300
+Subject: [Haskell-cafe] Pointed, but not Applicative
+In-Reply-To: <4E5A1B5A.5060204@gmail.com>
+References: <j3d40s$nb1$1@dough.gmane.org>
+	<4E5A1B5A.5060204@gmail.com>
+Message-ID: <CANd=OGGWDb-+VN9He8PsnfTp1jBQ-o93RCdY_TsZJc3q=5=D4w@mail.gmail.com>
+
+On Sun, Aug 28, 2011 at 7:41 AM, Tony Morris <tonymorris at gmail.com> wrote:
+> Pointed f => Pointed (StateT s f)
+>
+> but not
+>
+> Applicative f => Applicative (StateT s f)
+
+But we do have
+
+    (Functor m, Monad m) => Applicative (StateT s m)
+
+so I'm not sure if this is a valid example.
+
+Cheers,
+
+-- 
+Felipe.
+
+

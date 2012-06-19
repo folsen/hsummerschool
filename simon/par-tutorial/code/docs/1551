@@ -1,0 +1,32 @@
+From lists.haskell at dbp.mm.st  Wed Aug 31 04:55:57 2011
+From: lists.haskell at dbp.mm.st (Daniel Patterson)
+Date: Tue, 30 Aug 2011 22:55:57 -0400
+Subject: [Haskell-cafe] GHCI Feature Request: Last Successful
+	Compilation State Saved
+In-Reply-To: <CAAJHNPCqfR7v1BMx__bvCWLaAz26NVomj3vKoS8+LufMAHNLCg@mail.gmail.com>
+References: <CAJrReygxTo_DVA6B4bNozP0WR+_X7ZqQs=ERdHhuXKJNc-3+0A@mail.gmail.com>
+	<CAM_wFVtTiY=gz7aA==5DZ5YEXxZeabECMhrO3FHKw7wmOdacuA@mail.gmail.com>
+	<201108272331.01371.daniel.is.fischer@googlemail.com>
+	<6D6D37B1-79CF-4709-8C86-CFFC8B602360@dbp.mm.st>
+	<CAJrReyhTdrtzSGmPWgXWG9yHGzcKiHL=EnCGuBD3GwAtqHqEWA@mail.gmail.com>
+	<CAAJHNPBWLOcT-uP18DTfp6+c+3pAfpxYN16HiqVN=7MSCn+ENg@mail.gmail.com>
+	<945EF39F-3E20-4FE2-A6D3-DD688DF8FBF5@dbp.mm.st>
+	<CAAJHNPCqfR7v1BMx__bvCWLaAz26NVomj3vKoS8+LufMAHNLCg@mail.gmail.com>
+Message-ID: <30CD1A1C-7DBE-4305-AF97-1C3F1BA5E318@dbp.mm.st>
+
+
+On Aug 30, 2011, at 1:15 PM, Christopher Done wrote:
+> 1) You put all your source files on the server, too and then run the
+> GHCi process under tramp and access the files via tramp.
+> 
+> 2) Sounds like you'd prefer to keep your files local, which, I suppose
+> means you want to send code to the server when you trigger a compile?
+> 
+> Could be done, could be done. I'll ponder it.
+
+Actually, 1. is what happens, which seems like the easier thing. The folder does exist locally (ie, on the host), but it is shared with the virtualmachine, so it can be edited in either place. The sharing is either done through a a special mechanism provided by the virtualmachine (ie, in virtualbox, "shared folders"), or with plain old NFS (the latter is faster, for unknown reasons).
+
+My normal workflow is to have an editor open that edits the files on the "host". Then with a ssh connection to the "client" (the virtualmachine), I build and/or run ghci through that. I'm not sure if this is how other people do work with virtualmachines, but I would imagine it was relatively common. 
+
+I'd be pretty excited about that working. As an added benefit, the same strategy could be used to jump into a project on an actually remote host. 
+

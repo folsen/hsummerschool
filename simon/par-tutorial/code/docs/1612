@@ -1,0 +1,73 @@
+From nswamy at microsoft.com  Fri Dec  2 05:43:04 2011
+From: nswamy at microsoft.com (Nikhil Swamy)
+Date: Fri, 2 Dec 2011 04:43:04 +0000
+Subject: [Haskell-cafe] PLPV 2012: Call for participation
+Message-ID: <55B8BB41BB08654590C07B5D630FD93A0B674A15@TK5EX14MBXC287.redmond.corp.microsoft.com>
+
+Call for Participation
+======================
+
+                              PLPV 2012
+                     The Sixth ACM SIGPLAN Workshop 
+            Programming Languages meets Program Verification 
+
+24th January, 2012
+Philadelphia, USA
+(Affiliated with POPL 2012)
+http://research.microsoft.com/en-us/um/people/nswamy/plpv12
+         
+You are cordially invited to PLPV 2012.  
+
+The goal of PLPV is to foster and stimulate research at the intersection of programming languages and program verification, by bringing together experts from diverse areas like types, contracts, interactive theorem proving, model checking and program analysis. Work in this area typically attempts to reduce the burden of program verification by taking advantage of particular semantic or structural properties of the programming language. Examples include dependently typed programming languages, which leverage a language's type system to specify and check richer than usual specifications or extended static checking systems which incorporate contracts with either static or dynamic contract checking.
+
+Registration
+============
+To register for PLPV 2012, please follow the instructions at:
+
+ https://regmaster3.com/2012conf/POPL12/register.php
+
+The early registration deadline is December 24, 2011. 
+
+Hotel Information
+=================
+
+PLPV will be co-located with POPL at the Sheraton Society Hill Hotel in Philadelphia.  Please visit POPL's web site to make reservations at the special conference rate.
+
+Program
+=======
+
+Session 1: 9:00am-10:00am
+        LTL types FRP: Linear-time Temporal Logic Propositions as Types,
+        Proofs as Functional Reactive Programs
+        Alan Jeffrey 
+
+        A Hoare Calculus for the Verification of Synchronous Languages
+        Manuel Gesell and Klaus Schneider 
+
+Session 2: 10:30am-12:00pm
+        Invited talk: Could We Verify an Information-flow Computer?
+        Benjamin C. Pierce 
+        University of Pennsylvania 
+
+Lunch: 12:00pm-2:00pm (not provided)
+
+Session 3: 2:00pm-3:30pm
+        Reflexive Toolbox for Regular Expression Matching
+        Vladimir Komendantsky 
+
+        Formal Network Packet Processing with Minimal Fuss: Invertible Syntax Descriptions at Work
+        Reynald Affeldt, David Nowak and Yutaka Oiwa 
+
+        The VerCors project - setting up basecamp
+        Afshin Amighi, Stefan Blom, Marieke Huisman and Marina Zaharieva-Stojanovski
+ 
+Session 4: 4:00pm-5:00pm
+        Dependent Interoperability
+        Peter-Michael Osera, Vilhelm Sjoberg and Steve Zdancewic. 
+
+        Equational Reasoning about Programs with General Recursion and Call-by-value Semantics
+        Garrin Kimmell, Aaron Stump, Harley Eades, Peng Fu, Tim Sheard, Stephanie Weirich, 
+        Chris Casinghino, Vilhelm Sjoberg, Nathan Collins and Ki Yung Ahn
+
+
+

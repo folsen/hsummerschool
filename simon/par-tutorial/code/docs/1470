@@ -1,0 +1,30 @@
+From conrad at metadecks.org  Mon Aug 29 08:24:55 2011
+From: conrad at metadecks.org (Conrad Parker)
+Date: Mon, 29 Aug 2011 14:24:55 +0800
+Subject: [Haskell-cafe] hledger subcommand detection, RFC
+In-Reply-To: <88F1B3EC-DCAB-47D9-9398-1B545CC7252F@joyful.com>
+References: <C25C6A8C-5F36-41FC-9AEB-E8055D00B77D@joyful.com>
+	<CA+FqJiGyE5OxrLy7vd5+DzeD6_iysi5wzxSHVuY7qa8afKB-hA@mail.gmail.com>
+	<88F1B3EC-DCAB-47D9-9398-1B545CC7252F@joyful.com>
+Message-ID: <CA+FqJiGB-K9W9aFW3hrChc0wNZUH6=27PzxpmFD9_doHinAnXg@mail.gmail.com>
+
+On 27 August 2011 00:23, Simon Michael <simon at joyful.com> wrote:
+> Thanks Conrad! Those are some great links.
+>
+>> I wrapped up some manpage generation code in a package called
+>> ui-command, which is kind of orthogonal to cmdargs (ui-command just
+>> deals with subcommands). Example commands are often useful, so I added
+>
+> Interesting. Have you tried using both ui-command and cmdargs together ?
+
+No, I've generally just used ui-command to select (and document)
+subcommands, and GetOpt to handle arguments. I think cmdargs added
+support for selecting subcommands recently.
+
+In any case, you are selecting subcommands by searching the
+filesystem. Perhaps it would be a good idea to split out the
+documentation part of ui-command ...
+
+Conrad.
+
+

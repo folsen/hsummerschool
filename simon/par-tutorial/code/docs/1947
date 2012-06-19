@@ -1,0 +1,42 @@
+From felipe.lessa at gmail.com  Thu Dec 15 02:06:06 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Wed, 14 Dec 2011 23:06:06 -0200
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CANd=OGHac+eas7SZjgruccP8n_Gh1a11bFdhUqzH-jmsZJxwFA@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+	<CACw0ni+Q=ixAAdWzmsbF+c1RkF74S2RV=fi_tX2B2puR0s5xvQ@mail.gmail.com>
+	<12B612A8-515C-4E86-BE7E-F2214AA5E210@deepbondi.net>
+	<CANd=OGHac+eas7SZjgruccP8n_Gh1a11bFdhUqzH-jmsZJxwFA@mail.gmail.com>
+Message-ID: <CANd=OGGMg97zDT2t=4sxmtRmBKCLm=ue1NN705GRURNy+BhXhw@mail.gmail.com>
+
+Ok, sorry for the spam, accidentaly hit the send button =/.
+
+On Wed, Dec 14, 2011 at 11:03 PM, Felipe Almeida Lessa
+<felipe.lessa at gmail.com> wrote:
+> On Wed, Dec 14, 2011 at 4:09 PM, James Cook <mokus at deepbondi.net> wrote:
+>> So a case could be made that, just as "forever (Just 1)" being nonsensical
+>> doesn't invalidate "instance Monad Maybe", "some (Just 1)" being nonsensical
+>> doesn't invalidate "instance Alternative Maybe". ?And on the other hand, a
+>> case could be made that the importance of "some" and "many" justifies the
+>> creation of a subclass of Alternative where they actually are mandated to be
+>> meaningful rather than just definable.
+
+Being in the same typeclass means that you can define
+
+ ?instance Alternative Maybe where
+    ...
+    some Nothing = Nothing
+    some (Just _) = error "Alternative.some: used with Just (loops forever)"
+    many Nothing = Nothing
+    many (Just _) = error "Alternative.many: used with Just (loops forever)"
+
+Cheers,
+
+-- 
+Felipe.
+
+

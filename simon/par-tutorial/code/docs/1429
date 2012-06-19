@@ -1,0 +1,60 @@
+From kc1956 at gmail.com  Sun Aug 28 02:26:30 2011
+From: kc1956 at gmail.com (KC)
+Date: Sat, 27 Aug 2011 17:26:30 -0700
+Subject: [Haskell-cafe] Project Euler: request for comments
+In-Reply-To: <CAPkMFPnJ54YhqjGwWURhzX1O_zMsZXDpzwvsU_Npi61O1T_BOQ@mail.gmail.com>
+References: <CAPkMFPnCdD4Od5ff6AZ8pu5peR_puk2y+ygZeuPLPX_Y4tUPhw@mail.gmail.com>
+	<CAMLKXym5FPaWa38+LrrFw7oiLnZtSZq1Kn1zpBwn_udH_L-Drw@mail.gmail.com>
+	<CAPkMFPkSb+b_qfedTSMQKCTHV5GUROZSMVWt0aLNGD5g35XoGQ@mail.gmail.com>
+	<CAMLKXym3VR1EGvXg5n0p1xuH1zbueejdkHLF_aRjkPVerLBzDQ@mail.gmail.com>
+	<CAPkMFPnJ54YhqjGwWURhzX1O_zMsZXDpzwvsU_Npi61O1T_BOQ@mail.gmail.com>
+Message-ID: <CAMLKXynw0-criA1sCq3CxsdEPpj9SFh+gNpbyEa_eB1C=mzxXQ@mail.gmail.com>
+
+Think of the simplest version of the problem that isn't totally trivial.
+
+e.g. A one dimensional list of numbers.
+
+What would you do?
+
+Note: you only want to touch each element once.
+
+The 2 dimensional case could be handled by putting into lists: rows,
+columns, major diagonals, and minor diagonals.
+
+This isn't the fastest way of doing the problem but it has the
+advantage of avoiding "indexitis".
+
+
+On Fri, Aug 26, 2011 at 6:15 PM, Oscar Picasso <oscarpicasso at gmail.com> wrote:
+> Like:
+> 20*19*21*18
+> is bigger than
+> 100*100*3*2
+> ?
+>
+> If so I need to think about how to formalize it.
+>
+> Thanks for the hint.
+>
+> On Fri, Aug 26, 2011 at 8:55 PM, KC <kc1956 at gmail.com> wrote:
+>> Is Problem 11 the 4 consecutive #'s problem?
+>>
+>> If so what must be true for 4 #'s to have a large product?
+>>
+>> Hint: x * y * z * 2 is that going to be larger?
+>>
+>> --
+>> --
+>> Regards,
+>> KC
+>>
+>
+
+
+
+-- 
+--
+Regards,
+KC
+
+

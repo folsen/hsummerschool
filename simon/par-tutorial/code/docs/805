@@ -1,0 +1,74 @@
+From alex.solla at gmail.com  Wed Apr 27 22:14:08 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Wed, 27 Apr 2011 13:14:08 -0700
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <4DB81521.50800@unicaen.fr>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<34E1B523-F2C9-4875-98D2-728D5178DC89@gmail.com>
+	<4DB80841.8040304@gmail.com> <4DB81521.50800@unicaen.fr>
+Message-ID: <BANLkTikupnpPXpHKs0-29kycVf9784waXw@mail.gmail.com>
+
+On Wed, Apr 27, 2011 at 6:07 AM, Jerzy Karczmarczuk <
+jerzy.karczmarczuk at unicaen.fr> wrote:
+
+>
+>  Thomas Davie wrote:
+>>
+>>> This completely misses what laziness gives Haskell ? it gives a way of
+>>> completing a smaller number of computations than it otherwise would have to
+>>> at run time. (...)
+>>>
+>> Tony Morris continues the ping-pong:
+>
+>  This is not what laziness gives us. Rather, it gives us terminating
+>> programs that would otherwise not terminate.
+>>
+> Next, please...
+>
+> You know, this suggests that you should read the parable of Blind Men and
+> the Elephant.
+>
+> Alright, my turn. I never wanted to write non-terminating programs (what
+> for?),
+
+
+Daemons/servers/console interfaces/streaming clients?
+
+In any case, this question is opposite to the one you "should" be asking.
+ Laziness makes "infinite" programs finite.  We can express infinite data
+structures and compute them lazily, as necessary for the completion of the
+"greater" program.  This would not be possible using simple expressive
+forms, in other languages.
+
+
+> and all my programs executed exactly those instructions they should have
+> executed, not more or less.
+
+
+I would rather write equations describing what things "are" than
+instructions on how to compute them.  In the end, these are the same, and
+yet we can still use referential transparency and the other functional
+concepts to their fullest.
+
+
+> I see ONE usage of laziness: the possibility to write co-recursive
+> equations, which become algorithms
+
+
+What about "infinite" lists?  There is no need for mutually recursive
+functions to see the usefulness of a list which never ends, and is computed
+to the length that your algorithm /acutally/ requires.
+
+For example, the function "intIndex" (using tuple-types for convenience):
+
+intIndex :: [a] -> I.IntMap a
+intIndex list = I.fromAscList $ zip (,) [0..] list
+
+Laziness allows simpler expression, and is not necessary for mutual
+recursion.  For example, we can implement mutual recursion in C with goto,
+and that language model uses "imperative evaluation" -- evaluation of
+instructions in the order they are given.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110427/45daf9d7/attachment.htm>
+

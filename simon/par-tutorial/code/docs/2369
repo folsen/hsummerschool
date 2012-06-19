@@ -1,0 +1,59 @@
+From aslatter at gmail.com  Thu Dec 29 02:45:12 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Wed, 28 Dec 2011 19:45:12 -0600
+Subject: [Haskell-cafe] Windows: openFile gives permission denied when
+ file in use
+In-Reply-To: <CAKA2JgLc1Q-Lf_yOuhQdb1JKuUkiRYuS=hQ7wQw_+jqCMQOEYQ@mail.gmail.com>
+References: <CAKA2JgLc1Q-Lf_yOuhQdb1JKuUkiRYuS=hQ7wQw_+jqCMQOEYQ@mail.gmail.com>
+Message-ID: <CAKjSnQE+tKmD+YSviFX_z+csMyP29V1sZTEyWn3pT_g0o3ChGw@mail.gmail.com>
+
+On Wed, Dec 28, 2011 at 3:52 PM, Michael Snoyman <michael at snoyman.com> wrote:
+> Hi all,
+>
+> I just received a bug report from a client that, when an input file is
+> open in FrameMaker, my program gives a "permission denied error". This
+> bug is reproducible with a simple Haskell program:
+>
+> import System.IO
+>
+> main = do
+> ? ?putStrLn "here1"
+> ? ?h <- openFile "filename.txt" ReadMode
+> ? ?putStrLn "here2"
+>
+> I tried writing a simple C program using fopen, and it ran just fine.
+> Does anyone have experience with this issue, and know of a workaround?
+>
+
+When GHC opens files for reading, it asks windows to disallow write
+access to the file. I'm guessing that Framemaker has the file open for
+writing, so GHC can't get that permission.
+
+I imagine that the Haskell runtime does this to make lazy-io less crazy.
+
+Here's the call GHC makes:
+https://github.com/ghc/packages-base/blob/0e1a02b96cfd03b8488e3ff4ce232466d6d5ca77/include/HsBase.h#L580
+
+To open a file for reading in your C demo in a similar way you could
+do something like:
+
+fd = _sopen("file_name", _O_RDONLY | _O_NOINHERIT,_SH_DENYWR, 0);
+
+Here "_SH_DENYWR" is telling windows to deny others from writing to this file.
+
+Here's the msdn link for _sopen and _wsopen:
+http://msdn.microsoft.com/en-us/library/w7sa2b22%28VS.80%29.aspx
+
+I haven't tested any of that, but that should help you in reproducing
+how GHC opens files for read on windows.
+
+You should be able to use System.Win32.File.createFile with a share
+mode of (fILE_SHARE_READ .|. fILE_SHARE_WRITE) and then wrangling a
+Haskell Handle out of that, but I haven't tried it.
+
+Or you could modify the call to _wsopen and FFI call that - it takes
+fewer parameters and might be less confusing.
+
+Antoine
+
+

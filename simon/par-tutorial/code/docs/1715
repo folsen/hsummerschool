@@ -1,0 +1,40 @@
+From qdunkan at gmail.com  Tue Dec  6 20:59:57 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Tue, 6 Dec 2011 11:59:57 -0800
+Subject: [Haskell-cafe] Haddock and the qualified imports
+In-Reply-To: <CAN8ZjBFYbFp+CpCqg4=iX8L_7UitDCbhK9a57PVAP2qBBS3xPw@mail.gmail.com>
+References: <CACqaG6xYok7wr0OBKJa+=ScWYHfY=vefB1z2=Uzyx78EDN+fJg@mail.gmail.com>
+	<CAN8ZjBFBJFziUf2k6qjZqzQ4MxQGLp1gyW_cebh7fEV+wvZN=A@mail.gmail.com>
+	<CAN8ZjBGoMyawh-atpCA5jjhv5frPv9jB1+P7_XEZjCakm7-uXg@mail.gmail.com>
+	<CACbaDy7btfnFx2BU+uV7AZOvN4FKg0ucZUZ+GvThZ77pakZ0GQ@mail.gmail.com>
+	<CAN8ZjBFYbFp+CpCqg4=iX8L_7UitDCbhK9a57PVAP2qBBS3xPw@mail.gmail.com>
+Message-ID: <CACbaDy7UVOCaBoA7FaiYWha=ULeCpvmdD1O9RBJeXOg8u__UgA@mail.gmail.com>
+
+On Tue, Dec 6, 2011 at 11:51 AM, David Waern <david.waern at gmail.com> wrote:
+> 2011/12/6 Evan Laforge <qdunkan at gmail.com>:
+>> I've also often wished that unimported but fully qualified modules
+>> like 'Data.List.partition' would link even if Data.List is not
+>> imported. ?I suppose similarly to the way that ""s "blind link"
+>> without having to know about the module in question.
+>
+> That's just been fixed - it's just been a long standing bug.
+
+Whoohoo, good to hear!  I've always written those links in my docs,
+under the hope that they would some day start working :)
+
+>> And speaking of ""s, I've always wondered why double quotes were
+>> needed for module names, and why single quotes around capitalized
+>> words isn't sufficient.
+>
+> That would refer to a type or data constructor!
+
+Well, it could look at the filesystem and tell them apart, right?  I
+suppose you're right, it's ambiguous if there's both Data.hs:data List
+= ... and Data/List.hs.
+
+I guess what really trips me up is that ""s "blink link" feature means
+it will try to turn all sorts of improbably things into module links.
+It might be enough to check for Camel.Dots.Words to reduce the amount
+of manual " quoting you have to do.
+
+

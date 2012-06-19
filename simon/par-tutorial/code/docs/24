@@ -1,0 +1,37 @@
+From gershomb at gmail.com  Fri Apr  1 14:55:22 2011
+From: gershomb at gmail.com (Gershom Bazerman)
+Date: Fri, 1 Apr 2011 08:55:22 -0400
+Subject: [Haskell-cafe] SoC project: advice requested
+In-Reply-To: <AANLkTi=SacKCY_KdVQ66zqL44cPXLBVZePrUmXeBoWVU@mail.gmail.com>
+References: <AANLkTi=SacKCY_KdVQ66zqL44cPXLBVZePrUmXeBoWVU@mail.gmail.com>
+Message-ID: <865A1660-D1CF-4615-9CE2-854867D106CD@gmail.com>
+
+On Apr 1, 2011, at 7:52 AM, G?bor Lehel wrote:
+
+> 
+> The two projects I've been able to think of which seem like they
+> *might* be appropriate are: integrating the standard 'deriving'
+> mechanism with Template Haskell to support deriving custom classes;
+> and adding native FFI support for passing C structs / tuples
+> (arbitrary products?) of FFI-able types by value, as discussed in [1].
+> Would either of these be not-too-big / would anyone be willing to
+> mentor them? Alternately, I'd be very happy to receive suggestions
+> about other GHC-related work which would be considered appropriate.
+> (Or, heck, any other compiler.)
+
+The former project is now outdated, I suspect. My understanding is that work has already been underway to implement Generic Deriving [1] in GHC. Even prior to then, the template haskell approach was supported by the derive [2] tool.
+
+On the latter count, there's plenty of work to be done for c2hs, that seems very related to the work you've done on the C++-to-Haskell generator. C2hs is already in wide use across the Haskell community, and improvements to it would benefit a wide swath of developers, either directly or indirectly. I've been told that the c2hs project is quite open to a SoC student. I'm ccing Duncan and Manuel, because they're much more able to speak to the "big picture" than I am. As I recall, one task I heard described is an overhaul of marshalling -- although, again, Duncan and Manuel could explain what that actually entails.  Along with that, I'd very much like to see extensible declaration of default marshalling, and extension of default marshalling support to get and set hooks as well. Another task is to implement "enum define" hooks as described in the paper. I'm sure there's plenty else too.
+
+And while I'm at it, I should mention another SoC project that I think would be quite important -- improvements/rewrites to the HDBC database backends. [3]
+
+Cheers,
+Gershom
+
+[1] http://www.dreixel.net/research/pdf/gdmh_nocolor.pdf
+[2] http://hackage.haskell.org/package/derive
+[3] http://hackage.haskell.org/trac/summer-of-code/ticket/1598
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110401/54e80e7b/attachment.htm>
+

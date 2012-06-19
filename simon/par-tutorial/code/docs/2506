@@ -1,0 +1,55 @@
+From 2haskell at pkturner.org  Fri Dec 30 21:38:55 2011
+From: 2haskell at pkturner.org (Scott Turner)
+Date: Fri, 30 Dec 2011 15:38:55 -0500
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFE11E0.8030508@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<4EFB8DFE.1060805@blueyonder.co.uk>
+	<jdh9h6$gba$1@dough.gmane.org> <4EFCA66D.4060609@blueyonder.co.uk>
+	<jdiesl$5sp$1@dough.gmane.org> <4EFCCA86.4020709@blueyonder.co.uk>
+	<ADFFAE52-B3FF-4BFD-B891-78650E8DB9FD@mobileink.com>
+	<4EFE11E0.8030508@blueyonder.co.uk>
+Message-ID: <4EFE215F.1020800@pkturner.org>
+
+On 2011-12-30 14:32, Steve Horne wrote:
+> A possible way to implement a Haskell program would be...
+> 
+>  1. Apply rewrite rules to evaluate everything possible without
+>     executing primitive IO actions.
+>  2. Wait until you need to run the program.
+>  3. Continue applying rewrite rules to evaluate everything possible, but
+>     this time executing primitive IO actions (and substituting run-time
+>     inputs into the model) as and when necessary so that the rewriting
+>     can eliminate them.
+
+This is inadequate, because it is does not specify when the program's
+various IO actions are executed, or even which of them are executed. Try
+    print "first" `seq` print "second"
+or
+    let x = print "x" in print "value"
+Also, "evaluate everything possible" is strangely hard to match up with
+the concepts involved in Haskell's non-strict evaluation.
+
+An accurate description of how an IO expression is executed would be:
+
+Evaluate the expression. There are three possible results.
+1. If it is a 'return' operation, the result is the operand.
+2. If it is a bind (>>=) operation,
+   a. Execute the left operand, obtaining a result expression.
+   b. The right operand is a function. Apply it to the returned
+      expression, obtaining an IO expression.
+   c. Execute the IO expression.
+3. If it is a primitive, execute it, obtaining an expression.
+
+A Haskell program is an IO expression, and is executed as above. Notice
+that when a program is executed, its IO actions are not performed as a
+result of being evaluated. Rather, they are evaluated (down to values)
+in order to be performed. Every evaluation in the above procedure is
+pure, with no IO effects.
+
+The concept of AST is no more helpful in explaining IO than it is in
+explaining
+    foldr (*) 1 [1..5]
+IMO it's no help at all.
+
+

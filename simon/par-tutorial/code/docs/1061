@@ -1,0 +1,30 @@
+From batterseapower at hotmail.com  Thu Aug 11 22:09:30 2011
+From: batterseapower at hotmail.com (Max Bolingbroke)
+Date: Thu, 11 Aug 2011 21:09:30 +0100
+Subject: [Haskell-cafe] ANNOUNCE: Chell: A quiet test runner (low-output
+ alternative to test-framework)
+In-Reply-To: <CAL1ky9ohBGn_=sX8xCVO4Pg+zk52L18XN3UznA5Xuhia2XmdaQ@mail.gmail.com>
+References: <CAL1ky9q1t3KnboogKho2ZvsFF1BYF0RhzNZPu66p=ZTngcoB1A@mail.gmail.com>
+	<CAGXzfB4wE7nOpoD6S29jC-_ku5j9EUYEbUp1Xn47P9a_8uX_Kw@mail.gmail.com>
+	<CAL1ky9ohBGn_=sX8xCVO4Pg+zk52L18XN3UznA5Xuhia2XmdaQ@mail.gmail.com>
+Message-ID: <CAGXzfB4gM3Gg=VnN7ur3vOfM_4ghpf9ukhZJuzydTAvQzonCrw@mail.gmail.com>
+
+On 11 August 2011 15:49, John Millikin <jmillikin at gmail.com> wrote:
+> I tried, actually, but couldn't figure out how to separate running the
+> test from printing its output. All the attempted patches turned into
+> huge refactoring marathons.
+
+Just FYI test-framework already has exactly this split between running
+tests and printing their results. If you had wanted to change this you
+could have modified showImprovingTestResult in
+https://github.com/batterseapower/test-framework/blob/master/core/Test/Framework/Runners/Console/Run.hs.
+
+However, as someone else has already pointed out, the --hide-successes
+flag does what you want, and you can even make it the default for your
+particular testsuite by making your "main" be (do { args <- getArgs;
+defaultMainWithArgs tests (["--hide-successes"] ++ args) })
+
+Cheers,
+Max
+
+

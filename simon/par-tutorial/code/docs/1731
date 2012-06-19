@@ -1,0 +1,70 @@
+From nhn at Cs.Nott.AC.UK  Wed Dec  7 16:21:24 2011
+From: nhn at Cs.Nott.AC.UK (Henrik Nilsson)
+Date: Wed, 07 Dec 2011 15:21:24 +0000
+Subject: [Haskell-cafe] How did iteratees get their names?
+In-Reply-To: <20111207154812.36c674b5@angst.streitmacht.eu>
+References: <CACruqwTG3fOEbwiTMohwTG8Mt-9HR=r+gHKu5BVLg0MT_JnTrQ@mail.gmail.com>
+	<20111207154812.36c674b5@angst.streitmacht.eu>
+Message-ID: <4EDF8474.1040502@cs.nott.ac.uk>
+
+Hi,
+
+Ertugrul wrote:
+
+ > Just like chatter and chattee, employer and employee, there is an
+ > iterator (usually as part of an enumerator/ee) and an iteratee.
+
+Thanks for the attempt to explain. But I, at least, remain mystified,
+and I agree with Douglas that the terminology is confusing.
+
+Usually, the relationship between word-pairs such as the ones above is
+pretty obvious, typically implying some kind of subordinate
+relationship. For example:
+
+   * employer: the one employing
+     employee: the one employed
+
+   * tutor: the one teaching, instructing, providing care
+     tutee: the one receiving instruction, care
+
+   * caller: that which is calling
+     callee: that which is being called
+
+And so on.
+
+The above would suggest that "iterator" would be something that
+iterates over something, and that "iteratee" would be (an element
+of) that being iterated over.
+
+However, no such simple relationship seems to emerge from the
+provided explanation.
+
+I also had a look at John Millikin's page on Understanding Iteratees,
+which is very good:
+
+    https://john-millikin.com/articles/understanding-iteratees/
+
+But, the intuition that comes across there is:
+
+   * iteratee: a stream (of sorts) consumer
+
+   * enumerator: a stream (of sorts) producer
+
+   * enumeratee: a stream (of sorts) transformer
+
+And "iterator" isn't mentioned at all.
+
+I might be missing something, but the terminology is hardly crystal
+clear. Which is a pity!
+
+Best,
+
+/Henrik
+
+-- 
+Henrik Nilsson
+School of Computer Science
+The University of Nottingham
+nhn at cs.nott.ac.uk
+
+

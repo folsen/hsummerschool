@@ -1,0 +1,18 @@
+From stephen.tetley at gmail.com  Fri Dec  9 22:47:05 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Fri, 9 Dec 2011 21:47:05 +0000
+Subject: [Haskell-cafe] Generating Code
+In-Reply-To: <CAHTd3sis-hH=mAuQDfOo-1FMOgOPSTs4eFE4f0wLTfx9nXcS8A@mail.gmail.com>
+References: <CAHTd3sihZABoWe7CoKhfFh-QHQ01PftATrTmiZymE5b-D_YS+Q@mail.gmail.com>
+	<CAPeieQEdWhripdkdVo-=2ZXbNdgOL7Xq+idrwzTOiZuL=AMtZQ@mail.gmail.com>
+	<CAHTd3sis-hH=mAuQDfOo-1FMOgOPSTs4eFE4f0wLTfx9nXcS8A@mail.gmail.com>
+Message-ID: <CAB2TPRA3+VKzv_5egN0_9cghj2qZP0CuJ=moUFO3=zBxFSzKkg@mail.gmail.com>
+
+Geoffrey Mainland did significant work generating C with his GHC quasi
+quote extension. I'm not sure the status or availability of the code
+but there was a good Haskell Workshop paper describing it.
+
+For the specific problem of OpenGL - as the package already exists I'm
+not sure a generative approach would actually pay its way
+
+

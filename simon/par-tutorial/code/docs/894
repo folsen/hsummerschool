@@ -1,0 +1,47 @@
+From fraimike at gmail.com  Sat Apr 30 20:50:17 2011
+From: fraimike at gmail.com (mike frai)
+Date: Sat, 30 Apr 2011 11:50:17 -0700
+Subject: [Haskell-cafe] GHC optimizer consuming memory
+In-Reply-To: <BANLkTik9W9crNT_MBTLM0aSK=xUzDjZGpg@mail.gmail.com>
+References: <BANLkTik9W9crNT_MBTLM0aSK=xUzDjZGpg@mail.gmail.com>
+Message-ID: <BANLkTi=-mFbehCgix0kVXms+J17=tjKBZg@mail.gmail.com>
+
+Hi,
+
+While using Michael Snoyman's persistent package, I discovered that a
+certain bit of code generated from it made the GHC optimizer consume a
+ridiculous amount of memory (ie. only when using the "-O" flag). I
+know very little about the GHC compiler and Michael Snoyman
+recommended I post my findings here to see what others thought.
+
+I've done what I can to extract the code generated from the persistent
+package and simplify/strip it down to the bare minimum of what's
+needed to cause this issue. You can find it in the attachment
+FromTest.hs. From my testing, removing five fields from Rec and the
+equivalent from the fromValue function - the memory consumption drops
+dramatically and I am able to compile.
+
+For your convenience, I've also attached FromTest.out, which is the
+output I get when compiling FromTest.hs using "ghc -O -v3". This is
+just the output up to the point it starts consuming a lot of memory.
+I've never seen anything after this point because my system slows down
+to a crawl (due to swapping) and I end up killing the process.
+
+Please let me know what you guys think or if you need any more
+information about this. Thanks,
+- Mike
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: FromTest.hs
+Type: text/x-haskell
+Size: 2546 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110430/88b11e0f/attachment.hs>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: FromTest.out
+Type: application/octet-stream
+Size: 1962 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110430/88b11e0f/attachment.obj>
+

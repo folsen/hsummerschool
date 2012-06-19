@@ -1,0 +1,47 @@
+From andrewcoppin at btinternet.com  Mon Aug 29 10:32:29 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Mon, 29 Aug 2011 09:32:29 +0100
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <CAKFCL4XkkudmL7r0r9VpzVDfyAn=GXBVF2oSTQUeGEWGeUOa4Q@mail.gmail.com>
+References: <4E568D11.30800@btinternet.com> <4E56CD99.6050703@vex.net>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+	<nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+	<4E57F43A.9030800@btinternet.com>
+	<b25g57lk7fbp5td6lp31qigptnr6rvfh67@4ax.com>
+	<4E58CDB5.2010900@btinternet.com>
+	<CAKFCL4VsuQrdmfM5EfBK_DBokMTC7SVP=u_UTJZV+17vABOvCg@mail.gmail.com>
+	<4E5B427D.3040605@btinternet.com>
+	<CAKFCL4XkkudmL7r0r9VpzVDfyAn=GXBVF2oSTQUeGEWGeUOa4Q@mail.gmail.com>
+Message-ID: <4E5B4E9D.9090000@btinternet.com>
+
+On 29/08/2011 09:00 AM, Brandon Allbery wrote:
+> On Mon, Aug 29, 2011 at 03:40, Andrew Coppin
+> <andrewcoppin at btinternet.com <mailto:andrewcoppin at btinternet.com>> wrote:
+>
+>             I meant if you're trying to *implement* serialisation. The Bits
+>             class allows you to access bits one by one, but surely you'd
+>         want
+>             some way to know how many bits you need to keep?
+>
+>         I think that falls into the realm of protocol design; if you're
+>         doing it
+>         in your program at runtime, you're probably doing it wrong.
+>           (The fixed
+>         size version makes sense for marshaling; it's *dynamic* sizes
+>         that need
+>         to be thought out beforehand.)
+>
+>
+>     If you're doing, say, cryptography, then thousand-bit random
+>     integers that need to be serialised are fairly common...
+>
+>
+> Sure, and there are encodings that let you do this without needing
+> bitSize (BER).  You need a word count, but that's usually part of the
+> structure holding the integer.
+
+OK. But since there's no way of getting a byte count for an Integer 
+either...
+
+

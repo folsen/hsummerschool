@@ -1,0 +1,83 @@
+From sedrikov at gmail.com  Wed Dec 28 12:36:31 2011
+From: sedrikov at gmail.com (AUGER =?UTF-8?B?Q8OpZHJpYw==?=)
+Date: Wed, 28 Dec 2011 12:36:31 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+Message-ID: <4efaff07.85d5e00a.60c4.2055@mx.google.com>
+
+Le Mon, 26 Dec 2011 19:30:20 -0800,
+Alexander Solla <alex.solla at gmail.com> a ?crit :
+
+> So we give meaning to syntax through our semantics.  That is what this
+> whole conversation is all about.  I am proposing we give Haskell
+> bottoms semantics that bring it in line with the bottoms from various
+> theories including lattice theory, the theory of sets, the theory of
+> logic, as opposed to using denotational semantics' bottom semantic,
+> which is unrealistic for a variety of reasons.  Haskell bottoms can't
+> be compared, due to Rice's theorem.  Haskell bottoms cannot be given
+> an interpretation as a Haskell value.  
+
+There is no problem with Rice Theorem, you can perfectly "compare"
+bottoms between them, all you cannot do is to make this "compare"
+function both "correct" and "complete" in Haskell.
+
+By correct, I mean "(?==?)?False", and by complete, I mean "(?==?)??".
+But incompleteness is very common in Haskell, and correctness is the
+only "real worry" when computing (comparing two non terminating
+values, and expecting the comparison to terminate is a mistake from
+the programmer).
+
+On purely theoretical side (so not in Haskell), there is no problem
+either. For instance, the "halting-problem" can be turned into a
+mathematical function ? (ie., ? ? ?(TM?{true,false}) satisfying the
+criteria of functionnal total relation); the only thing is that this
+set is not "computable".
+
+> as opposed to using denotational semantics' bottom semantic,
+> which is unrealistic for a variety of reasons.  
+
+Indeed, it is realistic, since in real world, things are not always
+expected to terminate, so we have to take this into account into the
+semantics. Don't forget that semantics is something "upper" Haskell
+evaluation, it is in the purely mathematical world and can rely on non
+computable things as far as they are consistent with the theory.
+
+That is you cannot define a complete and correct function in pure
+Haskell which takes a String which can be interpreted as a Haskell
+function, and return a String which can be interpreted as the semantics
+of the Haskell function.
+
+(Of course the following function would be correct:
+ semantics :: String -> String
+ semantics s = semantics s
+
+ and this one would be complete
+ semantics :: String -> String
+ semantics s = []
+
+ and there is many possible functions which are complete and correct
+ for many inputs and many possible functions which are correct and
+ terminate for many inputs)
+
+> Haskell bottoms cannot be given an interpretation as a Haskell
+> value.  
+
+As a lot of others said, Haskell bottoms ARE values, so they have an
+interpretation as a Haskell value (itself).
+
+If a whole community doesn't agree with you, either you are right and
+know it and should probably run away from this community or publish a
+well argumented book (you won't solve in 2 lines, what the community
+believes in for years) either the other case (you are right but not
+sure, or simply you are wrong) and in this case don't try to impose
+your point of view, rather ask questions on the points you don't
+understand.
+For me your actual behaviour can be considered as trolling.
+
+Note that I don't say the semantics you have in mind is "wrong", I only
+say that the semantics of ? as described in the community's paper is
+not "wrong"; but two different "formal" semantics can exist which give
+the same "observationnal" semantics.
+
+
+

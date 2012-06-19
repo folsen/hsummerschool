@@ -1,0 +1,12 @@
+From john at repetae.net  Fri Apr  1 09:34:00 2011
+From: john at repetae.net (John Meacham)
+Date: Fri, 1 Apr 2011 00:34:00 -0700
+Subject: [Haskell-cafe] Strictness is observable
+Message-ID: <AANLkTi=a0RvhrLrHMQSCByC8PiM-oKFzqRVQP6wWzewt@mail.gmail.com>
+
+Error is not catchable in haskell 98. Only things thrown by raiseIO are.
+On Apr 1, 2011 12:02 AM, <oleg at okmij.org> wrote:
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110401/11791098/attachment.htm>
+

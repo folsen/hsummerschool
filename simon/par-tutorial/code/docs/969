@@ -1,0 +1,33 @@
+From kc1956 at gmail.com  Mon Aug  8 16:31:32 2011
+From: kc1956 at gmail.com (KC)
+Date: Mon, 8 Aug 2011 07:31:32 -0700
+Subject: [Haskell-cafe] [Haskell-beginners] Conciseness question
+In-Reply-To: <20110808131044.61547a19@arcor.com>
+References: <20110807132548.4eaa8832@arcor.com>
+	<20110807152113.1e01b1cb@angst.streitmacht.eu>
+	<20110807170740.46696b3f@arcor.com>
+	<524E5BF3-FBFE-4031-8229-AAF3D8CE182D@vidplace.com>
+	<20110807183607.51159f5c@arcor.com>
+	<20110807185537.6c44c1f1@angst.streitmacht.eu>
+	<20110807215558.3c9fe7d2@arcor.com>
+	<20110808094811.67f566f4@angst.streitmacht.eu>
+	<20110808131044.61547a19@arcor.com>
+Message-ID: <CAMLKXy=KsWEYt3ESP0XZNoRw4Mg8MEpM4fptvuG7+CwU17=40w@mail.gmail.com>
+
+Sorry, I haven't read all the replies so I don't know if you have
+completely described the problem you're trying to solve; however, it
+might be better for people in future to say they want O(1) for
+insertions, O(lg n) for searching, etc.
+
+If they don't want to completely describe what their problem is.
+
+
+
+
+
+-- 
+--
+Regards,
+KC
+
+

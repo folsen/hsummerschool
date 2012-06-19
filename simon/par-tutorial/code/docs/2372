@@ -1,0 +1,30 @@
+From chrisyco+haskell-cafe at gmail.com  Thu Dec 29 04:10:03 2011
+From: chrisyco+haskell-cafe at gmail.com (Chris Wong)
+Date: Thu, 29 Dec 2011 16:10:03 +1300
+Subject: [Haskell-cafe] Windows: openFile gives permission denied when
+ file in use
+In-Reply-To: <CAKjSnQE+tKmD+YSviFX_z+csMyP29V1sZTEyWn3pT_g0o3ChGw@mail.gmail.com>
+References: <CAKA2JgLc1Q-Lf_yOuhQdb1JKuUkiRYuS=hQ7wQw_+jqCMQOEYQ@mail.gmail.com>
+	<CAKjSnQE+tKmD+YSviFX_z+csMyP29V1sZTEyWn3pT_g0o3ChGw@mail.gmail.com>
+Message-ID: <CA+qNEz+zbybvT=W=sVJtUKX3Ke4zxh2Tt1m8=Uy04X2ty0_Vrw@mail.gmail.com>
+
+On Thu, Dec 29, 2011 at 2:45 PM, Antoine Latter <aslatter at gmail.com> wrote:
+> [...]
+>
+> When GHC opens files for reading, it asks windows to disallow write
+> access to the file. I'm guessing that Framemaker has the file open for
+> writing, so GHC can't get that permission.
+
+In fact, this is required behavior according to the Haskell Report:
+
+> Implementations should enforce as far as possible, at least locally to the Haskell process, multiple-reader single-writer locking on files. That is, there may either be many handles on the same file which manage input, or just one handle on the file which manages output.
+
+I guess on Windows, "as far as possible" means locking it across the
+whole system.
+
+(See http://www.haskell.org/onlinereport/haskell2010/haskellch41.html#x49-32800041.3.4
+for the gory details)
+
+-- Chris
+
+

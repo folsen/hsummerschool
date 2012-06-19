@@ -1,0 +1,722 @@
+From eric at well-typed.com  Sat Dec 24 21:40:22 2011
+From: eric at well-typed.com (Eric Kow)
+Date: Sat, 24 Dec 2011 20:40:22 +0000
+Subject: [Haskell-cafe] Parallel Haskell Digest 7
+Message-ID: <74AF985F-9E5E-4BCC-9CDA-26870D02C91C@well-typed.com>
+
+Parallel Haskell Digest 7
+=========================
+2011-12-24
+
+Hello Haskellers!
+
+GHC 7.4 is coming!  There is loads to look forward to, but sometimes,
+it's the little things that count.  For example, do you hate the fact
+that you can't just flip on an `+RTS -N` without having to first
+recompile your program, this time remembering to throw an `-rtsopts` on
+it?  Duncan Coutts has relaxed the requirement so that commonly used RTS
+options can be used without it.  This flag was originally implemented to
+counter security problems for CGI or setuid programs; however, it was
+also a hassle for regular users because it got in the way of common
+options like `-eventlog`, `-N`, or `-prof`.  The GHC 7.4 RTS will make a
+better tradeoff between security and convenience, allowing a common set of
+benign flags without needing `-rtsopts`.
+
+That's the sort of thing that the Parallel GHC Project is about.  We
+want to push parallel Haskell out into the real world, first by helping
+real users (our ~~guinea pigs~~ industrial partners) to apply it to their
+work, second by making it easier to use (tools, libraries), and finally
+communicating more about it (this digest).
+
+In this month's digest, we'll be catching up on news from the community.
+After the holidays, we'll be back with some new words of the month
+exploring a bit of concurrent Haskell.  In the meantime, happy hacking
+and Merry Christmas!
+
+News
+----------------------------------------------------------------------
+[Job Opportunity at Parallel Scientific][ph-job]
+
+Peter Braam wants you, parallel Haskeller!
+
+> Parallel Scientific, LLC is a Boulder, CO based early stage, but funded
+> startup company working in the area of scalable parallelization for
+> scientific and large data computing.  We are implementing radically new
+> software tools for the creation and optimization of parallel programs
+> benefiting applications and leveraging modern systems architecture. We
+> build on our mathematical knowledge, cutting edge programming languages and
+> our understanding of systems software and hardware.  We are currently
+> working with the Haskell development team and major HPC laboratories world
+> wide on libraries and compiler extensions for parallel programming.
+
+Note the mandatory Haskell experience and the desirability of ?in depth
+knowledge of core Haskell libraries for parallel programming (NDP, REPA
+etc)?.
+
+Parallel GHC Project Update
+----------------------------------------------------------------------
+The Parallel GHC Project is an MSR-funded project, run by Well-Typed,
+with the aim of demonstrating that parallel Haskell can be employed
+successfully in real world projects.
+
+Our most recent work has been in polishing the upcoming ThreadScope
+release that we previewed this September at the Haskell Implementor's
+Workshop.  This new release comes with goodies for users of Strategies
+or the basic `par/pseq` parallelism: spark creation/conversion graphs,
+visualisations showing your spark pools filling and emptying, and
+histograms displaying the distribution of spark sizes.  All this with
+the aim of helping you gain deeper insight, not just what your program
+is doing but *why*.
+
+We've also done backend work to make ThreadScope even more useful
+further down the road.  First, we have improved the ghc-events package
+by encoding the meanings of events in state machines. This makes it
+possible to validate eventlogs, and doubles as an always up-to-date
+source of code as documentation.  Second, we have extended the GHC RTS
+to emit the startup wall-clock time and Haskell threads labels to the
+eventlog. The wall-clock time event allows us to synchronise logs for
+simultaneous processes, brining us a step closer to using ThreadScope on
+distributed programs. Named Haskell thread make it easier to distinguish
+threads from each other.
+
+Finally, we have been exploring the use of Cloud Haskell for high
+performance computing on clusters. To do this we would need to abstract
+Cloud Haskell over different transport mechanisms, that is to develop a
+robust Cloud Haskell implementation sitting on top of a swappable
+transport layer. We have posted an [initial design][mc3] for this layer
+on the parallel-haskell list.  We have taken the substantial feedback
+into consideration and will be sending a revised design and recording it
+in a page on the GHC wiki.  Meanwhile, we are working to further
+validate our design on simple models of both the transport layer and a
+cloud Haskell layer on top.  Longer term, we aim to implement some
+transports, an IP transport in particular and perhaps a single-node
+multi-process transport using forks and pipes.
+
+Tutorials and Papers
+----------------------------------------------------------------------
+*    [Tutorial: Deterministic Parallel Programming in Haskell][hal6] (7 Oct)
+
+     Well-Typed's Andres L?h presented a parallel programming tutorial
+     at the recent Haskell in Leipzig meeting. The tutorial comes with
+     slides, exercises, sample code.  It paints a picture of the
+     parallel Haskell landscape, and then focuses on one of the many
+     possible approaches (namely, strategies).  One nice feature of the
+     tutorial is an emphasis on practicalities, for example, on using
+     ThreadScope to figure out where performance goes wrong in a program.
+     So if you're looking for a way to get started using on parallelism
+     to speed up your Haskell code, give Andres' tutorial a try!
+
+*    [Parallel Genome Assembly with Software Transactional Memory][stm-ketil] (27 Oct)
+
+     Ketil Malde wrote up some of his experiences using STM to
+     parallelise an inherently complicated program best solved with
+     multiple interacting threads.  His article demonstrates that a
+     program using STM is able to successfully parallelize the genome
+     scaffolding process with a near linear speedup.  Ketil would be
+     interested in any feedback the community may have.
+
+Blogs and Packages
+----------------------------------------------------------------------
+
+### Actors, actors everywhere
+
+*    [remote: Cloud Haskell is here!][b1] (27 Oct)
+
+     You may have been hearing a lot about Cloud Haskell lately, the new
+     Erlang-ish distributed programming library for Haskell.  Now's your
+     chance to see what all the fuss is about!  Jeff Epstein has uploaded
+     the remote package to Hackage, so take it for a spin by doing
+
+         cabal update
+         cabal install remote
+
+     Library documentation is on the Hackage page, and more details are
+     available in the paper [Towards Haskell in the Cloud][ch-paper]
+
+*    [Distributed storage in Haskell][b2] (30 Oct)
+
+     So what are people doing with Cloud Haskell?  Julian Porter for one
+     has been working on a distributed monadic MapReduce implementation.
+     Along the way he's produced a general proof of concept for
+     distributed storage.  Have a look at Julian's page for a short
+     paper and GitHub page.
+
+*    [simple-actors 0.1.0 released][b3] (11 Oct)
+
+     Brandon Simmons accounced simple-actors, an EDSL-style library for
+     writing more structured concurrent programs, based on the Actor
+     Model. It was designed for local concurrency, as an alternative to
+     ad-hoc use of Chans, but could be extended to a distributed system
+     by defining appropriate [SplitChan][SplitChan] instances for some
+     network "channel".
+
+*    [Haskell Actors][b4] (28 Oct)
+
+     Martin Sulzmann wishes he'd named his [actor package][mh-actor]
+     ?multi-headed-actor?.  With the recent interest in actor style
+     concurrency in Haskell, there may be some confusion about the
+     various packages that are out there.  The point in Martin's library
+     is being to pattern match over multiple events in the message
+     queue, which makes it easier elegantly express ideas like a
+     marketplace actor which matchmakes buyer/seller messages.  While
+     Martin's library is built on concurrent channels, it could be
+     adapted to use distributed channels provided by haskell-mpi or
+     Cloud Haskell.  See the paper for more information [Actors with
+     Multi-Headed Message Receive Patterns][mh-actor-pdf].
+
+### More concurrency 
+
+*    [stm-stats: Retry statistics for STM transaction][b5] (9 Oct)
+
+     Joachim Breitner blogged about the stm-stats package, which
+     provides wrappers around `atomically` to track how often a
+     transaction was initiated and how often it was retried. The
+     stm-stats library is used interally by Factis research, but
+     recently released to the wider Haskell community.  In fact,
+     Factis have recently hired Joachim to help them contribute
+     back to the Free Software community where possible.  So,
+     thanks, Factis and congratulations, Joachim!
+
+*    [How to deal with concurrent external events?][b6] (11 Oct)
+
+     Apfelmus has been scratching his head over a design problem for
+     event-based frameworks such as GUI libraries: how do you deal with
+     events that occur while you are currently handling another event?
+     Apfelmus gave a simple wxHaskell demonstrator illustrating the
+     problem, (A) reacting to an event while handling another one may
+     expose internal invariants but (B) reacting to an event after
+     finishing another one may render it ?impossible?, i.e.  it should
+     not have happened in the first place.  Any thoughts on the dilema?
+     
+*    [Concurrency And Foreign Functions In The Glasgow Haskell Compiler][b7] (24 Oct)
+
+     Leon P. Smith posted an overview of the interaction between Haskell
+     concurrency and FFI calls in GHC.  Leon's post walks us through
+     some the basic concepts: capabilities, Haskell threads, OS threads,
+     and bound threads. This could be good place to start before
+     delving into papers or library documentation.
+
+*    [iteratee-stm][b8] (4 Nov)
+
+     John Lato announced the new iteratee-stm library recently
+     uploaded to Hackage.  Iteratee-stm provides an iteratee interface
+     that uses bounded TChans for communication. This makes it simple to
+     run IO in a separate thread from processing.
+
+### Parallelism
+
+*    [Automatic deparallelization][b9] (17 Nov)
+
+     Ken Takusagawa explored a different perspective on parallelism.
+     Instead of adding parallelism to programs, what if we started
+     with too much parallelism and stripped it away to fit reality?
+
+     > Consider always writing code in a style using egregious fine
+     > grained parallelism: assume lots of cores with no communication
+     > latency and no overhead.
+     >
+     > It is the compiler's job to deparallelize (unparallelize,
+     > serialize) the program to run on the actual number of cores
+     > available, taking into account communication latency and the
+     > overhead of parallelization
+
+     Oh, and [qkhsskbg] ([Document Refinding Key][doc-refind])
+
+*    [Introducing Speculation][b10] (22 Jul 2010)
+
+     Recently, I got a chance to catch up with Edward Kmett, getting my
+     mind twisted into delightful funny shapes in the process. Edward
+     mentioned his speculation library, yet more parallelism in Haskell!
+     The library is based on the paper [Safe Programmable Speculative
+     Parallelism][sps-par] by Prakash Prabhu et al.  It provides a way
+     to parallelise inherently sequential algorithms (eg. lexing,
+     Huffman decoding) by guessing the value of intermediate results.
+     You start working in parallel to build work off the guess, only
+     discarding it if the guess turns out to be wrong later on.  Check
+     out Edward's blog and slides for more details.
+
+*    [Quasicrystals as sums of waves in the plane][b11] (24 Oct)
+
+     Keegan McAllister posted an somewhat hypnotic animation of
+     quasicrystals.  His post comes with complete source code for
+     his program using the Repa parallel arrays library.  Repa was
+     useful to Keegan because it provides
+
+     * Immutable arrays, supporting clean, expressive code
+     * A fast implementation, including automatic parallelization
+     * Easy output to image files, via repa-devil
+
+*    [Simple library for CAS posted][b12] (7 Dec)
+
+     Ryan Newton released IORefCAS, which provides a drop-in replacement
+     for atomicModifyIORef that takes advantage of the new `casMutVar#`
+     primop from GHC 7.2.  Ryan says that ?[b]ecause it's an easy change
+     it might be worth trying that for hot IOrefs in your parallel app.?
+
+*    [OpenCL 10.2.2][b13] (23 Nov)
+
+     Luis Cabellos has updated the Haskell OpenCL package with better
+     documentation and improved error handling using Control.Exception
+     instead of Either error.
+
+Mailing list discussions
+---------------------------------------------------------------------
+
+### Help wanted
+
+*    [Alternative STM implementation][mh1] (10 Dec)
+
+     Daniel Waterworth shared his [alternative STM
+     implementation][stm-danielw], written as a learning exercise.
+     Could anybody provide Daniel with some criticism and pointers
+     to STM benchmarks for comparison?  His replacement should drop
+     right in if you only use TVars.
+
+*    [Parallel Matrix Multiplication][mh2] (10 Dec)
+
+     Mukesh Tiwari is trying to teach himself parallel Haskell
+     (welcome!).  He's gone through Real World Haskell and the
+     [tutorial][afp08] by Simon Peyton-Jones and Satnam Singh, but
+     now trying to implement a parallel matrix multiplication function,
+     he finds himself with no sparks converted. Can anybody give Mukesh
+     a hand?
+
+     Mukesh also asked about resources for Parallel Haskell, which
+     would be where I come in.  Mukesh, have a look at the parallel
+     Haskell portal: <http://www.haskell.org/haskellwiki/Parallel>
+
+### Cloud Haskell
+
+*    [Cloud Haskell now on Hackage][mc1] (27 Oct)
+
+     Jeff Epstein's announcement that he had uploaded ?remote? to
+     Hackage was greeted with joy and a somewhat lengthy discussion on
+     package/module naming.  It looks like the modules will be moved
+     from 'Remote' to 'Control.Distributed.Actor' or
+     'Control.Distributed.Process' to match the approach used for the
+     concurrency packages. The final package name seems to be
+     [distributed-process][ch-dp].
+     
+     ![Anyone got a paintbrush?](bikeshed.jpg)
+
+*    [Haskell Cloud and Closures][mc2] (1 Oct)
+
+     Fred Smith gave Cloud Haskell a try, using it to remotely compute
+     the plus function.  Now he wants to be able to send a function to a
+     remote host, no matter if the function is locally declared or at
+     the top level. Erik de Castro Lopo replied that this was a known
+     limitation with the only known workaround being to move the
+     required function to the top-level. Chris Smith pointed out that
+     while the current restrictions may be too tight, there is good
+     reason to have them.  As for alternatives approaches to serialising
+     functions, David Barbour suggested maybe looking at the [tangible
+     values][tv] work by Conal Elliot.
+
+*    [Feedback on Cloud Haskell transport layer interface][mc3] (2 Nov)
+     
+     As I mentioned in the Parallel GHC Project update, we've been
+     looking quite a bit into Cloud Haskell lately.  Duncan Coutts
+     posted a request for feedback on the design for a Cloud Haskell
+     transport layer interface.  We're hoping one day to make use of
+     Cloud Haskell on for high performance computing on clusters.  To do
+     this, we hope to develop a robust Cloud Haskell implementation
+     sitting on top of a swappable transport layer, for example, an IP
+     transport, or a single-node multi-process transport using forks and
+     pipes.
+
+     One issues that emerged from the discussion is how to deal with
+     potentially a plethora of paramaters (eg. buffered vs eager?
+     ordered? reliable?) associated with connection/endpoint creation. 
+     It doesn't help that each connection type may have its own set of
+     parameters.  Is it enough to be able to set and forget them during
+     transport session initialisation, or is it essential for Cloud
+     Haskell be able to set these parameters differently for different
+     connections in the same session?
+
+*    [Parallel Haskell in industry][mc4] (7 Nov)
+
+     S?bastien Lannez also got a chance to try out Cloud Haskell.  The
+     remote package uploaded by Jeff seems to work well and ? dabblers
+     take note ? the examples shipped with the code are very easy to
+     adapt.  Before digging deeper, S?bastien wanted to know more about
+
+     1. performance limitations
+     2. communication requirements/overheads
+     3. stability
+     4. already developed applications
+
+     Jeff cautioned that while he thinks Cloud Haskell could be a good
+     platform to develop distributed applications, it's still very much
+     research software and a work in progress.  Don't stake your company
+     on Cloud Haskell just yet.
+     
+     That said, Duncan Coutts added, we are pretty happy with the design
+     and optimistic about developing a robust implementation, because we
+     can build it as an ordinary Haskell library without requiring
+     tricky extensions to the runtime system. As for S?bastien's fourth
+     question, a couple of Parallel GHC Project partners are rather keen
+     on Cloud Haskell. We are working on the implementation and will
+     hopefully have more to report on performance, overheads and other
+     issues we encounter.
+     
+### Multicore performance
+     
+*    [SMP parallelism increasing GC time dramatically][mm1] (5 Oct)
+
+     It takes a village to tune a program. Tom Thorne has a program
+     with a function does some fairly intensive calculations on with
+     hmatrix.  When Tom tries to get some simple parallelism on his 12
+     core machine, replacing a `map` with a `parMap rdeepseq`, he finds
+     GC time going through the roof, from 1s (1.7%) to 248s (40.5%). Is
+     the big scary number just an artefact of how GC time is reported,
+     or is something really wrong?
+
+     ThreadScope is a good first response here and Tom was duly nagged
+     by the community. Tom promises to give it a go, although the last
+     time he tried, the event log output produced about 1.8GB, and then
+     crashed. The ThreadScope team would love to get hold of any hints
+     about reproducing the crash
+     
+     Ryan Newton observed that GC aside, the program does not appear to
+     be scaling; the mutator time itself isn't going down with
+     parallelism. Tom improved the parallelism a bit, breaking the work
+     into chunks and spreading it around more evenly, and provided he
+     disables the parallel GC, it turns much faster and outperforms the
+     sequential version. Having loads of RAM to play and code that
+     doesn't use much memory, Tom then tried telling the RTS to perform
+     GC less often.  This worked. Increasing the minimum allocation
+     area size from its default 512K with `+RTS -A32M` allows Tom to get
+     performance with the parallel GC comparable to that without.
+     Hooray! But there's still this little problem? now Tom's program
+     intermittently segfaults. Getting a bug report out of this may take
+     a while though as Tom attempts to boil it down.
+
+     Meanwhile, Oliver Batchelor offered his experience that enabling
+     more threads than he has cores makes his program get drastically
+     slower. Alexander Kjeldaas and Austin Seipp commented that this is
+     due to GC needing to co-ordinate with blocked threads, and that the
+     problem of oversaturating is well known. There's also the "dreaded
+     last core slowdown" bug which once affected Linux users but seems
+     to have gone away in recent Linux/GHC.
+
+*    [AMD Bulldozer modules and Haskell parallelism][mm2] (13 Oct)
+
+     Herbert Valerio Riedel has been eyeing the AMD FX-8120 [Bulldozer
+     processor][bulldozer]. Bulldozer cores are not
+     independent from each other, but grouped into pairs. So Herbert
+     wanted to know how this might affect Haskell parallelism; would
+     8 cores *really* mean 8 or just 4 with slightly better SMT
+     capability?  Simon Marlow does not know (benchmarks).  Duncan
+     Coutts believes that it should be all fine as the pairing is not
+     at all like hyperthreading.
+
+*    [Estimating contention on an IORef hammered with atomicModifyIORef][mm3] (27 Oct)
+
+     Ryan Newton starts us off with a hypothetical scaling bottleneck:
+     all threads frequently accessing a single IORef using
+     `atomicModifyIORef` (Data.IORef).  This is commonly understood to
+     be likely a bad idea, but how do we go about measuring just *how*
+     bad it is?  This sort of design appears in monad-par, as pointed
+     out by Johan Tibbell, in the GHC IO manager, so it would be good to
+     know how much it really hurts.  (See also Ryan's [IORefCAS][b12]
+     package which seems to be partly a result of this discussion)
+     
+     One approach is to use GHC events to count operations on particular
+     IORefs, then put that through a model that reports whether if the
+     IORef is being used acceptably, or is "hot".  Duncan Coutts
+     suggests a simple way to get partway there: stick something like a
+     `traceEvent "IORef #3"` on each use of `atomicModifyIORef` and do
+     something like a `ghc-events show | grep IORef` to at least get an
+     idea which `IORefs` are hotter than others and some orders of
+     magnitude.  We'll hear back from Ryan when he's had a chance to try
+     it.
+
+     Meanwhile, Duncan's suggestion made Ryan curious about the
+     overheads from the `traceEvent`s.  He attached a microbenchmark
+     showing some strange behaviour on one of his machines. Check the
+     thread out for a little magic from Simon Marlow and perhaps some
+     clues for your own benchmarking.
+
+     Also for the interested, it's worth mentioning that GHC 7.4 will be
+     sporting a new and improved `traceEvent`, this time exported
+     through `Debug.Trace` and offering versions for use in pure code
+     and IO both.
+
+*    [Way to expose BLACKHOLES through an API?][mm4] (7 Nov)
+     
+     A BLACKHOLE in GHC acts as a placeholder for a thunk that is
+     currently being evaluated. When the thunk is forced, GHC replaces
+     it with a BLACKHOLE object, which it later replaces when it has the
+     evaluation result. In a parallel/concurrent setting, it may happen
+     that two threads are trying to evaluate the same thunk at the same
+     time. In that case, the first thread creates the blackhole, which
+     the second thread notices and blocks on until the evaluation result
+     is available.
+     
+     Ryan Newton observes that this blocking is implicit, whereas
+     ?[w]hen implementing certain concurrent systems-level software in
+     Haskell it is good to be aware of all potentially blocking
+     operations?.  He proposes a mechanism to expose blackholes, for
+     example with a `evaluateNonblocking :: a -> IO (Maybe a)` that
+     returns `Nothing` if the value is blackholed.  Simon Marlow points
+     out that this may be slightly problematic as thunks depend on each
+     other and ?you might be a long way into evaluating the argument and
+     have accumulated a deep stack before you encounter the BLACKHOLE?
+     See the discussion for a counter-proposal.
+
+### Data structures and concurrency
+
+*    [Efficient mutable arrays in STM][md1] (25 Oct)
+     
+     Ben Franksen has large arrays (millions of elements) with mostly
+     small elements (Int or Double) and largely chunk-wise access
+     patterns.  The current implementation of
+     `Control.Concurrent.STM.TArray` as `Array ix (TVar e)` is not
+     nearly efficient enough for his use case.  A more efficient
+     implementation would be most welcome, but for now Ben is eyeing
+     `Data.Vector.Unboxed` from the vector package instead. The idea is
+     to use `unsafeIOToSTM` to provide shared transactional access to
+     his arrays. Ben thinks he can live with the consequences: IO code
+     being rerun, aborting, and inconsistent views.
+     
+     But does the STM transaction actually "see" that he changed part of
+     the underlying array so that the transaction is retried? If not,
+     how does he go about manually implementing this behaviour? Antoine
+     Latter reports that no `unsafeIOToSTM` is not transactional - IO
+     actions will be performed immediately and are not rolled back, and
+     are then re-performed on retry.  David Barbour and Ketil Malde
+     suggested possible implementations, either keeping an extra `TVar
+     Int` for every chunk in the array, or (B) cleaner and safer: create
+     a ?chunked? `TArray` that works with fixed-width immutable chunks
+     in a spine.
+
+     Another issue that came up is that transactions scale quadratically
+     with the number of TVars touched.  Bryan O'Sullivan and Ryan Ingram
+     explained that this is due to choice of data structure (a list)
+     for the STM transaction log, and should be easy to fix.
+
+*    [High performance threadsafe mutable data structures in Haskell?][md2] (27 Oct)
+
+     Ryan Newton wanted to know if anybody else was working on
+     threadsafe mutable data structures in Haskell. He and the monad-par
+     team were planning to replace their work stealing deques with
+     something more efficient. If anybody else is working in the same
+     general area, teaming up would be great!
+    
+     Ryan will be exploring both a pure Haskell approach and one based
+     on wrapping foreign data structures with the FFI.  Ultimately, Ryan
+     is aiming for an "abstract-deque" parameterizable interface that
+     abstracts over many variants (bounded/unbounded, concurrent/
+     non-concurrent, single/1.5/double-ended, etc).  His
+     current prototype makes use of phantom types and the type families
+     extension to handle all this abstraction, with the intended end
+     result being that someone can create a new queue by setting all the
+     switches on the type (eg. `q :: Deque NT T SingleEnd SingleEnd
+     Bound Safe Int <- newQ`), but this brings up a set of Haskell
+     language and type system questions. More details in the thread!
+
+*    [Persistent Concurrent Data Structures][md3] (1 Nov)
+
+     Like Ryan, Dmitri Kondratiev is interested in concurrent
+     mutable data structures, but this time with persistence to boot.
+     His goal is to program at a higher level of abstraction,
+     avoiding the detail bloat that would result from directly using
+     some data storage API (eg. SimpleDB).  Dmitri's idea: a module tree
+     of data structures mirroring Data.List, Data.Map, etc but with
+     concurrency and persistence.  One would be able to configure
+     through the type interfaces:
+     
+     1. media to persist data (file? DBMS?)
+     2. caching policy
+     3. concurrency configuration (optimistic/pessimistic locking?).
+     
+     Dmitri's post prompted some suggestions for packages to look into:
+
+     * [safecopy][safecopy]: addresses both the issues of serializing
+       the data and migrating it when the datastructure changes
+     * [acid-state][acid-state]: builds on top of safecopy to add a
+       notion of transactions to any Haskell data structure
+     * [TCache][TCache]: a transactional cache with configurable
+       persistence
+     * Haskell web server frameworks (eg. Yesod, Happstack [acid-state
+       was formerly happstack-state]), as some come with persistence
+       support
+
+     Jeremy Shaw and David Barbour had reservations about what Dmitri
+     had in mind when he said "concurrent".  How would he deal with
+     transaction boundaries, and would a concurrently modified Data.List
+     variant still be a list?  Evan Laforge also expressed skepticism
+     about the viability of abstracting over data stores with
+     potentially very different needs.
+
+### Threads, blocking
+
+*    [Waiting on input with `hWaitForInput' or `threadWaitRead'][mt1] (17 Oct)
+
+     Jason Dusek would like to use evented I/O for a proxying
+     application, in particular, to fork a thread for each new
+     connection and then to wait for data on either socket in this
+     thread, writing to one or the other socket as needed. He's found
+     two functions which could help, `System.IO.hWaitForInput` and
+     `Control.Concurrent.threadWaitRead` but each comes with some
+     difficulties. Is there something like `select()` that works with
+     handles rather than file descriptors?
+
+     Ertugrul Soeylemez suggested an alternative approach, just
+     plain Concurrent Haskell because ?[a] hundred Haskell threads
+     reading from Handles are translated to one or more OS threads using
+     whatever polling mechanism (select(), poll(), epoll) your operating
+     system supports?.  He pasted a small [echo server][ertu-echo]
+     to demonstrate the idea.  It wasn't entirely clear for Jason
+     how to apply this to a proxy server.  Jason has a `lazyBridge ::
+     Handle -> Handle -> IO ()` which writes everything it reads from
+     one handle into the other and vice-versa, but it blocks and does
+     not allow packets to go back and forth.  Gregory Collins sketched
+     out a possible solution: how about `forkIO`ing two threads (one for
+     the read end, one for the write end), with a loop over lazy I/O?
+     [This works][jd-bridge], but is still somewhat surprising.
+
+*    [System calls and Haskell threads][mt2] (3 Nov)
+
+     Andreas Voellmy noticed this in Kazu Yamamoto's [Monad
+     Reader][mr-kazu] article on a high performance web server.
+
+     > When a user thread issues a system call, a context switch occurs.
+     > This means that all Haskell user threads stop, and instead the
+     > kernel is given the CPU time.
+
+     Can that be right?  Andreas thought, and Johan Tibell confirms,
+     that when a Haskell thread is blocking a particular OS threads,
+     other Haskell threads can continue run concurrently on other OS
+     threads on other CPUs (see [Extending the Haskell
+     Foreign Function Interface with Concurrency][conc-ffi]).
+     
+     Further clarification comes from David Barbour, who points out why
+     Kazu's original statement was correct in the context of the
+     article.  While Mighttpd uses Haskell threads for concurrency; it
+     does not go the traditional route of using the RTS `-Nx` argument
+     to generate OS threads.  Instead it gets its parallelism from
+     a "prefork" model that creates separate processes to balance user
+     invocations (each process may itself be running multiple Haskell
+     threads).  This unusual approach is chosen to avoid issues with
+     garbage collection.
+
+*    [Where threadSleep is defined?][mt3] (6 Dec)
+
+     Dmitri Kondratiev was looking for a function to make the current
+     process (executing thread) go to sleep for a given time.  Felipe
+     Almeida Lessa pointed to the `threadDelay` function in
+     Control.Concurrent.
+
+Stack Overflow and Reddit
+----------------------------------------------------------------------
+* [Space analysis for parfib in monad-par example][s1]
+* [Using the Par monad with STM and Deterministic IO][s2]
+* [Haskell: thread blocked indefinitely in an STM transaction][s3]
+* [How to install haskell Parallel on mac?][s4]
+* [Mutable, (possibly parallel) Haskell code and performance tuning][s5]
+* [Why does my concurrent Haskell program terminate prematurely?][s6]
+* [Parallel Matrix Multiplication][s7]
+
+* [Yo /r/haskell, I heard you like monads... : haskell][r1]
+* [GHC commit: Allow the number of capabilities to be increased at runtime : haskell][r2]
+* [Haswell processor (hardware transactional memory) : haskell][r3]
+
+
+Help and Feedback
+----------------------------------------------------------------------
+If you'd like to make an announcement in the next Haskell Parallel
+Digest, then get in touch with me, Eric Kow, at
+<parallel at well-typed.com>. Please feel free to leave any comments and
+feedback!
+
+[Bikeshed image][bikeshed] by banlon1964 available under a CC-NC-ND-2.0 license.
+
+[acid-state]: http://hackage.haskell.org/package/acid-state
+[afp08]: http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/AFP08-notes.pdf
+[bh-intro]: http://mainisusuallyafunction.blogspot.com/2011/10/thunks-and-lazy-blackholes-introduction.html
+[bikeshed]: http://www.flickr.com/photos/banlon1964/6337069654/
+[bulldozer]: http://en.wikipedia.org/wiki/Bulldozer_%28processor%29
+[ch-dp]: https://github.com/haskell-distributed/distributed-process
+[ch-paper]: http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/remote.pdf
+[conc-ffi]: http://community.haskell.org/~simonmar/papers/conc-ffi.pdf
+[doc-refind]: http://kenta.blogspot.com/2004/07/document-refindingkey.html
+[ertu-echo]: http://hpaste.org/52742
+[ghc-gc-tune]: http://hackage.haskell.org/package/ghc-gc-tune
+[hal6]: http://www.well-typed.com/Hal6/
+[heist-tut]: http://www.nadineloveshenry.com/haskell/heistTutorial.html
+[jd-bridge]: http://hpaste.org/52814
+[mh-actor-pdf]: http://ww2.cs.mu.oz.au/~sulzmann/publications/multi-headed-actors.pdf
+[mh-actor]: http://hackage.haskell.org/package/actor
+[mr-kazu]: http://themonadreader.files.wordpress.com/2011/10/issue19.pdf
+[ph-job]: http://www.haskell.org/pipermail/haskell-cafe/2011-November/097008.html
+[safecopy]: http://hackage.haskell.org/package/safecopy
+[SplitChan]: http://hackage.haskell.org/package/chan-split
+[sps-par]: http://research.microsoft.com/apps/pubs/default.aspx?id=118795
+[stm-danielw]: https://gist.github.com/1454995
+[stm-ketil]: http://malde.org/~ketil/papers/stmcluster.pdf
+[TCache]: http://hackage.haskell.org/package/TCache
+[tv]: http://www.haskell.org/haskellwiki/TV
+[wool]: http://www.sics.se/~kff/wool/
+
+[b1]: http://hackage.haskell.org/package/remote
+[b2]: http://jpembeddedsolutions.wordpress.com/2011/10/30/distributed-storage-in-haskell/
+[b3]: http://www.haskell.org/pipermail/haskell-cafe/2011-October/095970.html
+[b4]: http://sulzmann.blogspot.com/2011/10/haskell-actors.html
+[b5]: http://factisresearch.blogspot.com/2011/10/stm-stats-retry-statistics-for-stm.html
+[b6]: http://apfelmus.nfshost.com/blog/2011/10/11-frp-concurrent-events.html
+[b7]: http://blog.melding-monads.com/2011/10/24/concurrency-and-foreign-functions-in-the-glasgow-haskell-compiler/
+[b8]: https://plus.google.com/115372308262579808851/posts/PKrA4817zJB
+[b9]: http://kenta.blogspot.com/2011/11/qkhsskbg-automatic-deparallelization.html
+[b10]: http://comonad.com/reader/2010/introducing-speculation/
+[b11]: http://mainisusuallyafunction.blogspot.com/2011/10/quasicrystals-as-sums-of-waves-in-plane.html
+[b12]: https://groups.google.com/d/msg/parallel-haskell/ETUJFOjuspU/NVPKnNdL2gcJ
+[b13]: http://www.haskell.org/pipermail/haskell-cafe/2011-November/097058.html
+
+[mh1]: http://www.haskell.org/pipermail/haskell-cafe/2011-December/097428.html
+[mh2]: http://www.haskell.org/pipermail/haskell-cafe/2011-December/097434.html
+
+[mc1]: https://groups.google.com/forum/#!msg/parallel-haskell/8YelldrF0QI/TZaoFGjwZfUJ
+[mc2]: http://www.haskell.org/pipermail/haskell-cafe/2011-October/095731.html
+[mc3]: https://groups.google.com/d/msg/parallel-haskell/wUmoSxdAmhE/2fX7OmYtzlwJ
+[mc4]: https://groups.google.com/d/msg/parallel-haskell/UnClyLc8GXI/DZpIIof3bhcJ
+
+[mm1]: http://www.haskell.org/pipermail/haskell-cafe/2011-October/095845.html
+[mm2]: https://groups.google.com/d/msg/parallel-haskell/pLxsTRJijJg/SKCne1L2tSkJ
+[mm3]: https://groups.google.com/d/msg/parallel-haskell/UcWJFW-eUsI/nexQ1_6A5BcJ
+[mm4]: https://groups.google.com/d/msg/parallel-haskell/b8Yo8HNRnks/noNMm-RLvgEJ
+
+[md1]: http://www.haskell.org/pipermail/haskell-cafe/2011-October/096343.html
+[md2]: https://groups.google.com/forum/#!topic/parallel-haskell/9NqyXYo1VRg
+[md3]: http://www.haskell.org/pipermail/haskell-cafe/2011-November/096533.html
+
+[mt1]: http://www.haskell.org/pipermail/haskell-cafe/2011-October/096104.html
+[mt2]: http://www.haskell.org/pipermail/haskell-cafe/2011-November/096597.html
+[mt3]: http://www.haskell.org/pipermail/haskell-cafe/2011-December/097329.html
+
+[m3]: http://www.haskell.org/pipermail/haskell-cafe/2011-October/095970.html
+[m5]: http://www.haskell.org/pipermail/haskell-cafe/2011-October/096199.html
+[m8]: http://www.haskell.org/pipermail/haskell-cafe/2011-October/096392.html
+
+[s1]: http://stackoverflow.com/questions/7704580/space-analysis-for-parfib-in-monad-par-example
+[s2]: http://stackoverflow.com/questions/7769996/using-the-par-monad-with-stm-and-deterministic-io
+[s3]: http://stackoverflow.com/questions/7862372/haskell-thread-blocked-indefinitely-in-an-stm-transaction
+[s4]: http://stackoverflow.com/questions/8056880/how-to-install-haskell-parallel-on-mac
+[s5]: http://stackoverflow.com/questions/8155929/mutable-possibly-parallel-haskell-code-and-performance-tuning
+[s6]: http://stackoverflow.com/questions/8272241/why-does-my-concurrent-haskell-program-terminate-prematurely
+[s7]: http://stackoverflow.com/questions/8480087/parallel-matrix-multiplication
+
+[r1]: http://www.reddit.com/r/haskell/comments/ldu36/yo_rhaskell_i_heard_you_like_monads/
+[r2]: http://www.reddit.com/r/haskell/comments/n2mws/ghc_commit_allow_the_number_of_capabilities_to_be/
+[r3]: http://www.reddit.com/r/haskell/comments/n7iv1/haswell_processor_hardware_transactional_memory/
+-- 
+Eric Kow <http://erickow.com>
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 163 bytes
+Desc: Message signed with OpenPGP using GPGMail
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111224/c76091b5/attachment.pgp>
+

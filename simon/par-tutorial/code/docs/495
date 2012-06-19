@@ -1,0 +1,23 @@
+From vs at foldr.org  Tue Apr 19 19:07:25 2011
+From: vs at foldr.org (Volker Stolz)
+Date: Tue, 19 Apr 2011 19:07:25 +0200
+Subject: [Haskell-cafe] Stack overflow in simple code with getStdRandom /
+	randomR (GHC)
+Message-ID: <64F46328-A550-4FCE-A197-4C508BAFE96F@foldr.org>
+
+The following three-liner creates a stack overflow (on my machine, MacOS), and I'm a bit puzzled as to why:
+
+> import System.Random
+> 
+> main = do
+>  mapM (const (getStdRandom (randomR (0, 50000::Int)))) [0..10000000]
+
+botanix:~ stolz$ ./a.out 
+Stack space overflow: current size 8388608 bytes.
+Use `+RTS -Ksize -RTS' to increase it.
+
+Yes, the list is quite long, but somehow I'd expected mapM to chug slowly along...printing "Hello World" doesn't create a stack overflow either, after all. My Haskell-foo has become a bit rusty, but I was wondering where I am missing a point or two here (and I couldn't find the correct profiler incantation that would give me more than a big black blob for the main-CAF). GHC is 6.12.3 on MacOS.
+
+Cheers,
+  Volker
+

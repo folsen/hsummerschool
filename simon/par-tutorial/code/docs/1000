@@ -1,0 +1,90 @@
+From johan.tibell at gmail.com  Tue Aug  9 19:44:23 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Tue, 9 Aug 2011 13:44:23 -0400
+Subject: [Haskell-cafe] Analyzing slow performance of a Haskell program
+In-Reply-To: <CAKaDkC6ZVxsqLFKMCTa+hB-UZM7JBNoB+SiU+M9qCeQaEeCs1w@mail.gmail.com>
+References: <CAKaDkC7-vQo_AXRRX6-+P+PKV87b54D21k6bSnub=JYvH_mnRQ@mail.gmail.com>
+	<CAGXzfB60BDXV6vOJfk6YVBG7xjyhhmTDn=+ax6mjLBx5kY6B=A@mail.gmail.com>
+	<201108071120.18563.daniel.is.fischer@googlemail.com>
+	<CAKaDkC40kbdfEinqsUuoaexpD4JCmfX-wTvt5MZt9NPdU--ELA@mail.gmail.com>
+	<CANVKUrXxHLgmGcYwk+hJHyME22TUDVoZ2n4K0T7afqH1LHZqpg@mail.gmail.com>
+	<CAKaDkC4Ab3yoG0UoaN9C4CM+1-goZ_yswqOLcBz7ejE6LfLg8w@mail.gmail.com>
+	<CACw0niLT_DORERkF0PqQMephH1-h7pYS1ajT-Vsk3S6v9tOHMw@mail.gmail.com>
+	<CABjzJLA5HCOziGokibZuWWdf3jNXB5rad+=67tB-E_cYF+MN0Q@mail.gmail.com>
+	<CAKaDkC6ZVxsqLFKMCTa+hB-UZM7JBNoB+SiU+M9qCeQaEeCs1w@mail.gmail.com>
+Message-ID: <CAK-tuPb8YzFf7FwWQr9kU1g8v2=t6nYCA7oGuP-KdZh2Qs1yew@mail.gmail.com>
+
+Hi Chris,
+
+On Tue, Aug 9, 2011 at 12:47 PM, Chris Yuen <kizzx2+haskell at gmail.com> wrote:
+> 1. Why are bangs needed on the length arrays?
+>
+> If I remove them from below, performance drops 10%. I thought `unsafeIndex`
+> is straight in both arguments, no?
+>
+> wordLength i = go i
+> ? where
+> ??? go n
+> ????? | n < 10 = lengthOnes !! n
+> ????? | n < 20 = lengthTeens !! (n-10)
+> ????? | n < 100 = (lengthTens !! (n // 10)) + (lengthOnes !! (n % 10))
+> ????? | n < 1000 = (lengthOnes !! (n // 100)) + 7 + go (n % 100)
+> ????? | n < 1000000 = go (n // 1000) + 8 + go (n % 1000)
+> ????? | otherwise = go (n // 1000000) + 7 + go (n % 1000000)
+> ??? !lengthOnes = lengthVec ones
+> ??? !lengthTens = lengthVec tens
+> ??? !lengthTeens = lengthVec teens
+
+(It's "strict", not "straight".)
+
+The different lengths are not used in all branches and since Haskell
+is a lazy (or to be pendantic: non-strict) language we cannot compute
+them before knowing which branch will be evaluated. For example, given
+that we have
+
+    ones = ...
+    tens = error "Boom!"
+
+    test = wordLength 0
+
+evaluating 'test' should not cause an exception to be raised as the
+first (n < 10) branch is taken, but it would if lengthOnes was strict.
+
+Delaying the evaluation has some costs, namely allocating a thunk for
+e.g. `lengthVec ones` and later evaluate that thunk. By making the
+lengths strict we can evaluate them earlier and avoid some allocation
+and forcing of thunks.
+
+> 2. Why the single element worker wrapper pattern (`go` functions) increases
+> performance?
+>
+> If we change wordLength to
+>
+> wordLength n
+> ? | n < 10 = lengthOnes !! n
+> ? | n < 20 = lengthTeens !! (n-10)
+> ? | n < 100 = (lengthTens !! (n // 10)) + (lengthOnes !! (n % 10))
+> ? | n < 1000 = (lengthOnes !! (n // 100)) + 7 + wordLength (n % 100)
+> ? | n < 1000000 = wordLength (n // 1000) + 8 + wordLength (n % 1000)
+> ? | otherwise = wordLength (n // 1000000) + 7 + wordLength (n % 1000000)
+> ? where
+> ??? !lengthOnes = lengthVec ones
+> ??? !lengthTens = lengthVec tens
+> ??? !lengthTeens = lengthVec teens
+>
+> The performance drops by another 10%. This really surprised me. `go i`
+> seemed obvious to me and I don't understand how it could make any
+> difference. The full source code is available to GHC so it shouldn't be
+> related to call-by-pointer problem? If this is the case, shouldn't we always
+> wrap a "go" function for **any** recursive functions?
+
+Making wordLength non-recursive lets GHC inline it, which can
+sometimes help performance (e.g. if the inlining enables more
+optimizations). Inlining does increase code size (and sometimes
+allocation if a closure has to be allocated to capture free
+variables), so it's not always a good idea.
+
+Cheers,
+Johan
+
+

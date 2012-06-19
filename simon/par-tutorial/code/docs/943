@@ -1,0 +1,85 @@
+From mukeshtiwari.iiitm at gmail.com  Sat Aug  6 22:23:29 2011
+From: mukeshtiwari.iiitm at gmail.com (mukesh tiwari)
+Date: Sat, 6 Aug 2011 13:23:29 -0700 (PDT)
+Subject: [Haskell-cafe] Rotating calipers
+In-Reply-To: <4E3D7AC0.9040205@rwth-aachen.de>
+References: <2a65257e-8039-48ce-85af-39d5a2b2494c@u28g2000prm.googlegroups.com>
+	<4E3D7AC0.9040205@rwth-aachen.de>
+Message-ID: <3d638c95-cbd5-4c7e-99e0-f2a8a523ea87@u6g2000prc.googlegroups.com>
+
+>There are several algorithms mentioned on that page. Do you need the
+> diameter, width, or something else?
+
+Oh , I did not realize that .Actually first i implemented diameter
+algorithm [ http://hpaste.org/49925 ] and tested it on couple of test
+cases . Its working fine then i tried  to implement " The minimum area
+enclosing rectangle for a convex polygon"  using four calipers but i
+don't know whats wrong code.
+> Do you have some example data and what wrong result you  get?
+For any test input [ which i tried ] it outputs 4 . If its implemented
+correctly then it will accepted here with slight modification [
+http://www.spoj.pl/problems/WLOO0707 ] since it asks for square area.
+Couple of test cases which i tried .
+
+ghci>final [ P 1 1 , P 2 2 , P 0 100 , P 0 1 ]
+Loading package array-0.3.0.0 ... linking ... done.
+Loading package bytestring-0.9.1.5 ... linking ... done.
+4.0
+
+ghci>final [ P 0 0 ,P 5 1 , P 9 2 , P 12 3 , P 14 4 , P 15 5 , P 16
+7 , P 17 10 , P 18 14 , P 19 19 ]
+3.9999999999999982
+
+ghci>final [ P 2 ( -3 ) , P (-1 ) 2 , P 0 5 , P (-5) (-1) , P (-4)
+( 2 ) , P 4 0 , P 1 3 , P 4 3 , P (-3) (-4) , P 0 (-2)]
+4.0
+
+Thank you
+Mukesh Tiwari
+
+On Aug 6, 10:32?pm, Tillmann Vogt <Tillmann.V... at rwth-aachen.de>
+wrote:
+> Am 06.08.2011 13:12, schrieb mukesh tiwari:> Hello all ,
+> Hi
+> > ? I am trying to understand rotating calipers [
+> >http://en.wikipedia.org/wiki/Rotating_calipers] but i am not sure if
+> > understood this algorithm correctly . I tried to use the almost same
+> > algorithm given on wiki but with four calipers to solve the problem
+> > [http://cgm.cs.mcgill.ca/~orm/rotcal.html].
+>
+> There are several algorithms mentioned on that page. Do you need the
+> diameter, width, or something else?
+>
+> > ? My approach is find
+> > xminP, xmaxP, yminP ymaxP and their corresponding calipers will be ( 0
+> > * i - j ) , ( o * i + j ) , ( i + 0 * j ) and ( -i + 0 * j ). I
+> > implemented the algorithm in Haskell but its not working . I am not
+> > sure if i have followed the wiki algorithm correctly and could some
+> > one please tell me what is wrong with implementation. It would be
+> > great if some one can explain this algorithm in ? pseudo ?code which
+> > explains the rotating caliper and their implementation details . In
+> > case of indentation , see here [http://hpaste.org/49907] .
+> > Thank you
+> > Mukesh Tiwari
+>
+> I tried your code on one of my libraries. The convex hull function seems
+> to works correctly (I could send you a screenshot). I hope this narrows
+> the search down. Do you have some example data and what wrong result you
+> get?
+>
+> In one of my libraries
+> (http://hackage.haskell.org/packages/archive/collada-types/0.3/doc/htm...)
+> there is a function:
+>
+> streamAnimation :: [(Float,Float,Float)] -> [SceneNode] -> [Animation]
+>
+> that can visualize a stream of points by an animation. I use this
+> sometimes for debugging.
+>
+> -Tillmann
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-C... at haskell.orghttp://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

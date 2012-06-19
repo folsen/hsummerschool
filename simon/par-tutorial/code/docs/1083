@@ -1,0 +1,49 @@
+From allbery.b at gmail.com  Sat Aug 13 01:29:37 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Fri, 12 Aug 2011 19:29:37 -0400
+Subject: [Haskell-cafe] type-class inference
+In-Reply-To: <CAKFCL4Vp-hxCMT7e5dQ1rChO+xAkDp4mjw=TT-jsj4gExEkgbQ@mail.gmail.com>
+References: <4E5EBA42.5060805@dit.ie> <4E45AEA7.4010302@dit.ie>
+	<CAKFCL4Vp-hxCMT7e5dQ1rChO+xAkDp4mjw=TT-jsj4gExEkgbQ@mail.gmail.com>
+Message-ID: <CAKFCL4VjgNACS2FzYQKXuKs+Bga_QrVKm7Ji+SHQ0Xkk2DTp5w@mail.gmail.com>
+
+On Fri, Aug 12, 2011 at 19:08, Brandon Allbery <allbery.b at gmail.com> wrote:
+
+> On Fri, Aug 12, 2011 at 18:52, Patrick Browne <patrick.browne at dit.ie>wrote:
+>
+>> Why does the Haskell :type command only sometimes print the type-class?
+>>
+>
+> Haskell infers the most specific type applicable.  If the most specific it
+> can get is a typeclass, that's what it produces; if it can infer an explicit
+> type, it will.
+>
+
+By the way, a possible source of confusion here is the combination of the
+monomorphism restriction and defaulting, especially GHCi's extended
+defaulting.  The monomorphism restriction says that if you don't provide a
+way to *easily* infer a type for a binding (in practice this means there are
+no parameters), Haskell insists that the binding is not polymorphic unless
+you explicitly provide a type signature. Defaulting is how it accomplishes
+this:  there is a list of default types that can be applied when a concrete
+type is required and none is available, and the first one that typechecks is
+used.  The Haskell standard specifies Double and Integer as default types;
+GHCI's extended defaulting (or GHC in general with -XExtendedDefaultRules)
+adds () aka "unit".  So, for example, something that you might expect to be
+(Num a => a) may end up being Integer due to the monomorphism restriction
+requiring a concrete type and defaulting supplying one.
+
+(There's a widely expressed sentiment that the monomorphism restriction
+should go away because the confusion it engenders is worse than the problems
+it solves; on the other hand, GHC recently added a new application of it
+(monomorphic pattern bindings).  In any case, if you want to play around
+with types in GHCi, you may want to ":set -XNoMonomorphismRestriction
+-XNoMonoPatBinds" so you can see how types actually behave in the wild.)
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110812/2e79f62a/attachment.htm>
+

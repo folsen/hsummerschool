@@ -1,0 +1,78 @@
+From anotheraddress at gmx.de  Fri Aug  5 22:48:05 2011
+From: anotheraddress at gmx.de (Daniel =?iso-8859-1?q?Sch=FCssler?=)
+Date: Fri, 5 Aug 2011 22:48:05 +0200
+Subject: [Haskell-cafe] Deriving instances with GADTs
+Message-ID: <201108052248.05867.anotheraddress@gmx.de>
+
+Hi,
+
+you can declare an instance 
+
+instance Show (OrderType s o) where ...
+
+this makes sense since it means "for every type s and o, OrderType s o is 
+showable", which is vacuously true if (s,o) isn't in {Buy,Sell} x {Market, 
+Limit} (because in that case, there /is/ no non-bottom value of type 
+'OrderType s o').
+
+Obviously, this will make the newtype's 'deriving' clause work.
+
+Furthermore, you can use {-# LANGUAGE StandaloneDeriving #-} and write
+
+deriving instance Show (OrderType s o)
+
+(Standalone deriving works differently from a 'deriving' clause; the former 
+generates the code regardless of how weird the type is and lets the 
+typechecker decide. For your GADT, this succeeds).
+
+Cheers,
+Daniel Sch?ssler
+
+On 2011-August-04 Thursday 08:57:46 Tim Cowlishaw wrote:
+> Hi all,
+> 
+> I've been writing a DSL to describe securities orders, and after a lot
+> of help from the kind folk of this list and #haskell have come up with
+> the following implementation, using generalised algebraic data types:
+> 
+> https://gist.github.com/1124621
+> 
+> Elsewhere in my application, I make use of the order type defined
+> therein in the following newtype declaration:
+> 
+>  newtype OrderListLevel s = OrderListLevel {orders :: [Order s Limit]}
+> deriving (Eq, Show)
+> 
+> However, the 'deriving' clause here fails:
+> 
+> src/Simulation/OrderList.hs:9:82:
+>     No instance for (Eq (Order s Limit))
+>       arising from the 'deriving' clause of a data type declaration
+>                    at src/Simulation/OrderList.hs:9:82-83
+> 
+> src/Simulation/OrderList.hs:9:86:
+>     No instance for (Show (Order s Limit))
+>       arising from the 'deriving' clause of a data type declaration
+>                    at src/Simulation/OrderList.hs:9:86-89
+> 
+> 
+> 
+> I don't fully understand this - the error is correct that there is no
+> instance of either Eq or Show for (Order s Limit), however, instances
+> are defined for Order Buy Limit and Order Sell Limit, and since these
+> are the only possible types that a value can be constructed with (the
+> type constructor is 'closed' over these types in some sense I guess),
+> it seems to me that this should provide enough information to derive
+> the Eq and Show instances. Am I making unreasonable expectations of
+> ghci's instance-deriving mechanism here, or missing something obvious?
+> 
+> Many thanks in advance,
+> 
+> Tim
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

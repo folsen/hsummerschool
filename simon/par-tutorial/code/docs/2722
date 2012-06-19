@@ -1,0 +1,36 @@
+From ivan.miljenovic at gmail.com  Fri Feb  4 23:58:53 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Sat, 5 Feb 2011 09:58:53 +1100
+Subject: [Haskell-cafe] community server & hasktags learned recursing
+	into directories
+In-Reply-To: <1296858891-sup-7850@localhost.localdomain>
+References: <1296858891-sup-7850@localhost.localdomain>
+Message-ID: <AANLkTin9qasWQ5FUkau1_i6AQ1_kwxK+LhguVntbB_d3@mail.gmail.com>
+
+On 5 February 2011 09:35, Marc Weber <marco-oweber at gmx.de> wrote:
+> Now I'd like to push the latest changes to the community server which
+> was hosting the repo in the past but my account does no longer work?
+
+http://www.haskell.org/pipermail/haskell-cafe/2011-February/088829.html
+
+Short version: community.haskell.org was hacked.  Admins quickly
+shifted it to a new server ahead of schedule (since if they were going
+to do a fix/update they might as well do it on a new machine).  Some
+stuff is up, but the various logins, etc. aren't for security reasons,
+etc.
+
+> Moreover I fonud that I was no longer subscribed to haskell-cafe. I
+> can't remember having unsubscribed ?
+
+No idea about that one.
+
+> Let's hope this mail get's through now after having resubscribed.
+
+I'm sorry, but it didn't :p
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

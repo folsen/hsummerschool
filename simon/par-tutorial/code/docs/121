@@ -1,0 +1,57 @@
+From daniel.is.fischer at googlemail.com  Mon Apr  4 16:52:56 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Mon, 4 Apr 2011 16:52:56 +0200
+Subject: [Haskell-cafe] broken on build encoding
+In-Reply-To: <BANLkTinxDmbWVd8eQSMKNrQHgS7j5+2gMA@mail.gmail.com>
+References: <BANLkTinxDmbWVd8eQSMKNrQHgS7j5+2gMA@mail.gmail.com>
+Message-ID: <201104041652.56745.daniel.is.fischer@googlemail.com>
+
+On Monday 04 April 2011 16:19:46, Gang Yu wrote:
+> Hi, cafe,
+> 
+>    I always get the following build failure when I try to install
+> encoding:
+> 
+>  Configuring encoding-0.6.4...
+> Warning: This package indirectly depends on multiple versions of the
+> same package. This is highly likely to cause a compile failure.
+> package haskell98-1.0.1.1 requires random-1.0.0.2
+> package HaXml-1.20.2 requires random-1.0.0.2
+> package random-1.0.0.2 requires time-1.1.4
+> package random-1.0.0.2 requires time-1.2.0.4
+
+That looks as though you have two random-1.0.0.2 packages (and two time 
+packages), probably one in the global package-db and one in the user-db.
+haskell98 depends on the one in the global db and probably HaXml depends on 
+the one in the user-db.
+
+For some package you installed (or did you perchance run cabal upgrade?), 
+cabal seems to have reinstalled random and time (possibly more), that's not 
+good.
+
+Ask ghc-pkg about broken packages,
+$ ghc-pkg check
+
+You might need to remove packages from the user-db
+
+> [ 6 of 65] Compiling Data.Encoding.ByteSource (
+> Data/Encoding/ByteSource.hs, dist/build/Data/Encoding/ByteSource.o )
+> 
+> Data/Encoding/ByteSource.hs:151:17:
+>     Not in scope: data constructor `State'
+
+You have mtl-2.*, but encoding would need mtl-1.* it seems, but it hasn't 
+put an upper bound on that dependency. Notify author/maintainer.
+
+> 
+> I manually installed a ghc-6.12.3, a ubuntu ghc-6.12.1, all the same?
+> 
+> anybody can provide helps? thanks
+
+To circumvent the build failure, have an mtl-1.*, but no mtl-2.* available, 
+then it should build (or you could edit the source to replace all 
+occurrences of the data constructor State with the function state to make 
+it build with mtl-2.*).
+
+
+

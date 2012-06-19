@@ -1,0 +1,74 @@
+From fryguybob at gmail.com  Thu Feb  3 15:56:28 2011
+From: fryguybob at gmail.com (Ryan Yates)
+Date: Thu, 3 Feb 2011 09:56:28 -0500
+Subject: [Haskell-cafe] Review request for "platform independent
+ interactive graphics" with VNC
+In-Reply-To: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>
+References: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>
+Message-ID: <AANLkTimbkBWCgfTMST7k70VVnG=QdeUPt63Rp=gucRkU@mail.gmail.com>
+
+Hi Kashyap,
+
+What a fun project!  I was able to build and run on Windows (GHC 6.12.3 and
+TightVNC 1.4.4) with a few minor changes:
+
+Remove from Chitra\Canvas.hs
+
+import Network.Server
+import Network.Socket
+
+I think these are artifacts from a previous version and are not used.  For
+whatever reason getAddrInfo with the parameters given in RFB\Server.hs
+ returns some IPv6 address on my system.  Changing the second parameter from
+Nothing to (Just "127.0.0.1") made things work for me.
+
+Attached is the Cabal file I used to build (it wasn't clear what license
+things are under so those fields are commented out).
+
+Ryan Yates
+
+
+On Thu, Feb 3, 2011 at 6:15 AM, C K Kashyap <ckkashyap at gmail.com> wrote:
+
+> Hi,
+> I've been working on a Haskell based platform independent graphics
+> rendering
+> using VNC. I'd like it very much if you could take a look at it and give me
+> feedback. Using it is straight forward -
+>
+> git clone git at github.com:ckkashyap/Chitra.git
+> cd Chitra
+> make
+> ./Main 100 100 5900
+>
+> Main starts off a vncserver listening on port 5900. A standard vncviewer
+> can be
+> used to connect to 'localhost' and you can see a 100 x 100 screen. Clicking
+> on
+> the screen will set the pixel on the click location.
+>
+> What I eventually want to do is somehow integrate this piece with GHCI in
+> such
+> a manner that one can use GHCI to draw things on the VNC buffer.
+>
+> Regards,
+> Kashyap
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/6989769f/attachment.htm>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Chitra.cabal
+Type: application/octet-stream
+Size: 1008 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/6989769f/attachment.obj>
+

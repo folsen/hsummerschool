@@ -1,0 +1,44 @@
+From bos at serpentine.com  Thu Dec  8 18:03:46 2011
+From: bos at serpentine.com (Bryan O'Sullivan)
+Date: Thu, 8 Dec 2011 09:03:46 -0800
+Subject: [Haskell-cafe] Recommended class instances for container type
+In-Reply-To: <CAPTT2bbaiCeJWsYPJfufKaRmOBAA7gcsEtbMYzXcZJX5xFvnUw@mail.gmail.com>
+References: <CAPTT2bbaiCeJWsYPJfufKaRmOBAA7gcsEtbMYzXcZJX5xFvnUw@mail.gmail.com>
+Message-ID: <CACw0niLbg6bMWQkEiU9a6yxU11pczyaFX0vKar8LAmi5R+ZCjw@mail.gmail.com>
+
+On Thu, Dec 8, 2011 at 8:12 AM, Christoph Breitkopf <
+chbreitkopf at googlemail.com> wrote:
+
+>
+> I'm in the process of implementing a container data type, and wonder what
+> class instances are generally considered necessary. E.g. is it ok to start
+> out with a Show that's adequate for debugging, or is it a 'must' to include
+> instances of everything possible (Eq, Ord if possible, Read, Show, Functor,
+> ...).
+>
+
+If you're only beginning or partway through the implementation, my advice
+would be to simply not worry about instances at all just yet, until you've
+got things in reasonable shape. When the time comes, implement the
+instances you think appropriate in order of importance, relevance, and
+difficulty.
+
+Of course if you're new to the community, it won't be too obvious what's
+important or relevant (difficulty should be obvious enough). Basically, aim
+at the standard classes first, based on how often you'd expect to use them
+yourself.
+
+And what about the more experimental things? Say, DeepSeq, Typeable, Data?
+>
+
+None of those are experimental. They're all frequently used in production
+code. DeepSeq is far more important than the other two, though. For
+Typeable and Data, you could copy the approach taken by Data.Map and be
+fine.
+
+At some point, if you want your container class to be useful to others,
+you'll want to implement Foldable and Traversable.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/2e1d731e/attachment.htm>
+

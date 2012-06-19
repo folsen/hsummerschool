@@ -1,0 +1,56 @@
+From wren at freegeek.org  Mon Apr 25 01:06:39 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sun, 24 Apr 2011 19:06:39 -0400
+Subject: [Haskell-cafe] A parallelization problem
+Message-ID: <4DB4ACFF.9000302@freegeek.org>
+
+Hello all,
+
+I have some loopy code I'd like to make parallel, but I'm not sure the 
+best way to go about it. Everywhere else in this program I'm using STM, 
+but that seems pretty heavy-handed for this task, and it looks like the 
+perfect place for `par` and friends.
+
+So the 10,000ft view of the code is something like:
+
+     foldl' step (0,state0) xs
+
+     step (n,stateN) x = (n+1, k stateN)
+         where
+         k = case lookup n stateN of
+             Nothing        -> error "oh noes"
+             Just substateN -> insert (n+1) $
+                 foldl' maybeInsert empty (views substateN x)
+
+         maybeInsert state (k,v)
+             | p (k,v)   = state
+             | otherwise = insert k v state
+
+That is, for each x that comes in we add a bunch of things to a map 
+datastructure. The thing that makes the inner loop parallelizable is 
+that we happen to know that none of the new keys will (a) conflict with 
+old keys (as indicated by the fact that we're nesting maps), (b) 
+conflict with the other new keys, nor (c) depend on the other new 
+key/value pairs. Thus, we know that we can reassociate the order of 
+insertions without changing the semantics.
+
+So the question is, how do I do it? One issue not apparent in this 
+high-level look at the code is that I'm actually using ST for doing the 
+inner loop efficiently, which is why I'm not just using fromList.
+
+So far I'm using an IntMap for storing the state. The STM approach would 
+be to store the IntMap in a TMVar and fire off threads to compute and 
+insert each one of the views. But even as lightweight as Haskell's 
+threads are, I worry that the overhead would swamp the benefits.
+
+(Of course, it may be viable to push the ST down far enough to use 
+(fromList . catMaybes). Then we could just construct the list and call 
+par on all the elements. That wouldn't do much to parallelize the 
+insertions themselves, but that shouldn't matter too much I hope. 
+Perhaps I've just answered my own question; any other ideas?)
+
+-- 
+Live well,
+~wren
+
+

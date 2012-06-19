@@ -1,0 +1,72 @@
+From kizzx2+haskell at gmail.com  Wed Aug 10 01:05:19 2011
+From: kizzx2+haskell at gmail.com (Chris Yuen)
+Date: Wed, 10 Aug 2011 07:05:19 +0800
+Subject: [Haskell-cafe] Analyzing slow performance of a Haskell program
+In-Reply-To: <CACw0niLc-CmMeP0KEksjWGTtkQBOTNqKiytMOy=4ni2Hg+5AbQ@mail.gmail.com>
+References: <CAKaDkC7-vQo_AXRRX6-+P+PKV87b54D21k6bSnub=JYvH_mnRQ@mail.gmail.com>
+	<CAGXzfB60BDXV6vOJfk6YVBG7xjyhhmTDn=+ax6mjLBx5kY6B=A@mail.gmail.com>
+	<201108071120.18563.daniel.is.fischer@googlemail.com>
+	<CAKaDkC40kbdfEinqsUuoaexpD4JCmfX-wTvt5MZt9NPdU--ELA@mail.gmail.com>
+	<CANVKUrXxHLgmGcYwk+hJHyME22TUDVoZ2n4K0T7afqH1LHZqpg@mail.gmail.com>
+	<CAKaDkC4Ab3yoG0UoaN9C4CM+1-goZ_yswqOLcBz7ejE6LfLg8w@mail.gmail.com>
+	<CACw0niLT_DORERkF0PqQMephH1-h7pYS1ajT-Vsk3S6v9tOHMw@mail.gmail.com>
+	<CABjzJLA5HCOziGokibZuWWdf3jNXB5rad+=67tB-E_cYF+MN0Q@mail.gmail.com>
+	<CAKaDkC6ZVxsqLFKMCTa+hB-UZM7JBNoB+SiU+M9qCeQaEeCs1w@mail.gmail.com>
+	<CACw0niLc-CmMeP0KEksjWGTtkQBOTNqKiytMOy=4ni2Hg+5AbQ@mail.gmail.com>
+Message-ID: <CAKaDkC4oMHCKXBvZhBW4PpTVZKJixCxATQnBVbVSRpAMqRK7xg@mail.gmail.com>
+
+>
+> It's cheaper again to use quotInt# and remInt# as I did in my code.
+>
+
+Just want to point out that this is actually surprisingly less of an impact
+than I thought. As I did the step-by-step break down (you can see my blog
+post), this one (changing `quotRem` to `quotInt#` and `remInt#`) yielded
+almost negligible differences. Every other change had more impact than this,
+including turning the `Data.Array.Unboxed` into "lookup functions" (like
+`lenOnes 0 = 0; lenOnes 1 = 3; lenOnes 2 = 3; ...`)
+
+Chris
+
+On Wed, Aug 10, 2011 at 2:16 AM, Bryan O'Sullivan <bos at serpentine.com>wrote:
+
+> On Tue, Aug 9, 2011 at 9:47 AM, Chris Yuen <kizzx2+haskell at gmail.com>wrote:
+>
+>>
+>> - I was using GHC 32-bit. Int is 32-bit there, so I needed Int64. It turns
+>> out 64-bit operations in 32-bit programs are just darn slow. Maybe it's a
+>> Windows problem.
+>
+>
+> No, GHC calls out to C for 64-bit integer ops on all 32-bit platforms.
+>
+>
+>> On Linux 64 bit GHC Int is 64 bit so everything just works. Changing Int64
+>> to Int liberates me from many `fromIntegral` which saved 20%
+>>
+>
+> Actually, fromIntegral is usually a no-op, so chances are you're seeing the
+> effect of something else.
+>
+>
+>> - Changing `divMod` to `quotRem` saved another 20%
+>>
+>
+> It's cheaper again to use quotInt# and remInt# as I did in my code.
+>
+>
+>> 1. Why are bangs needed on the length arrays?
+>
+>
+> GHC has to deconstruct the Vector in order to get at the real underlying
+> array, so that unsafeIndex can perform the actual index into the real
+> underlying array.
+>
+> Without bang patterns, the code performs at least one deconstruction on
+> every iteration through the loop. Each deconstruction has a cost. With the
+> bang patterns, they're all hoisted out and performed just once.
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110810/daea7bde/attachment.htm>
+

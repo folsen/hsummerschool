@@ -1,0 +1,27 @@
+From ckkashyap at gmail.com  Tue Feb  8 09:49:38 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Tue, 8 Feb 2011 14:19:38 +0530
+Subject: [Haskell-cafe]  Help needed for converting IOArray to ByteString
+Message-ID: <AANLkTimFRPKHbpL36uwim2GtTdknVY6pdK2-dJn7FwGU@mail.gmail.com>
+
+Hi,
+I need to convert IOArray to bytestring as shown below -
+
+import Data.Array.IO
+import Data.Binary.Put
+import qualified Data.ByteString.Lazy as BS
+import Data.Word
+
+main = do
+arr <- newArray (0,9) 0 :: IO (IOArray Int Int)
+let bs=toByteString arr
+return ()
+
+How can I implement the 'toByteString' function?
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110208/d81ae9dd/attachment.htm>
+

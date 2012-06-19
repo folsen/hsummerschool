@@ -1,0 +1,26 @@
+From kolsrud at gmail.com  Wed Apr 27 00:31:32 2011
+From: kolsrud at gmail.com (=?ISO-8859-1?Q?=D8ystein_Kolsrud?=)
+Date: Wed, 27 Apr 2011 00:31:32 +0200
+Subject: [Haskell-cafe] Creating polygons in qtHaskell
+Message-ID: <BANLkTinACwWEjwhuCyWZ6b5Hc26dSknuyw@mail.gmail.com>
+
+Hi! I'm using qtHaskell and I'm trying to create a
+QGraphicsPolygonItem object. From what I see I need to create a
+QPolygonF item that I can supply to the constructor, but to populate
+the QPolygonF I need to use methods of the QVector class that
+QPolygonF inherits and I can't figure out how to do that. It seems
+that QVector is not part of the qtHaskell library. What I would like
+to do is something like this (where mypoints is a list of QPointF):
+
+makePolygon = do
+  polygon <- qPolygonF ()
+  mapM (pushBack polygon) mypoints
+  qGraphicsPolygonItem_nf polygon
+
+However, pushBack doesn't seem to be available. Does anyone know a way
+to do this?
+
+-- 
+Mvh ?ystein Kolsrud
+
+

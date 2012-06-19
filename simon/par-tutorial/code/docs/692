@@ -1,0 +1,23 @@
+From felipe.lessa at gmail.com  Mon Apr 25 00:46:35 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Sun, 24 Apr 2011 19:46:35 -0300
+Subject: [Haskell-cafe] generics and sql
+In-Reply-To: <19892.19368.552678.735324@myth.localdomain>
+References: <19892.12751.507521.701489@myth.localdomain>
+	<1303655313-sup-8301@ezyang>
+	<19892.16921.384581.22002@myth.localdomain>
+	<1303659091-sup-6152@ezyang>
+	<19892.19368.552678.735324@myth.localdomain>
+Message-ID: <BANLkTinjz-+Zh69RsQ0hZKNvSab0Pc-3vQ@mail.gmail.com>
+
+Not that it solves your problem, but you may want to take a look at
+persistent [1].
+
+Cheers,
+
+[1] http://hackage.haskell.org/package/persistent
+
+-- 
+Felipe.
+
+

@@ -1,0 +1,19 @@
+From lemming at henning-thielemann.de  Sun Apr 24 11:58:28 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Sun, 24 Apr 2011 11:58:28 +0200 (CEST)
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <4DB3E7E8.8000907@btinternet.com>
+References: <4DB093A6.8000303@btinternet.com> <4DB3E7E8.8000907@btinternet.com>
+Message-ID: <alpine.DEB.2.00.1104241157510.3624@anubis>
+
+
+On Sun, 24 Apr 2011, Andrew Coppin wrote:
+
+> (If you think about it, the difference between, say, GHC 7.0 and GHC 6.6 is 
+> which set of changes are applied. Yet because Darcs doesn't support looking 
+> at it like this, you must have a completely seperate repo for each one...)
+
+But darcs shares the patch files between repositories on the same file 
+system using hard links.
+
+

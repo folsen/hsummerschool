@@ -1,0 +1,103 @@
+From edgar.klerks at gmail.com  Sun Dec  4 08:56:51 2011
+From: edgar.klerks at gmail.com (edgar klerks)
+Date: Sun, 4 Dec 2011 08:56:51 +0100
+Subject: [Haskell-cafe] ismzero operator possible without equal
+	constraint
+In-Reply-To: <CAOv7PyqhteCft3jiVWStKZM0v7561F+G6hLj_PhRxUZOp+fFwg@mail.gmail.com>
+References: <CAGAUyt=YX3hkczvoKyFws4zCuFO00aoC8MsqFv0Bx6F7mJiEdQ@mail.gmail.com>
+	<CAKjSnQGfZ+M9EuhBynauAi-nMSHTz2wdLLXZjnAeNW4RbKq=bg@mail.gmail.com>
+	<CAOv7PyqhteCft3jiVWStKZM0v7561F+G6hLj_PhRxUZOp+fFwg@mail.gmail.com>
+Message-ID: <CAGAUytnVCWJFwgTW84tUBo8Tr9k6rmucsOcQeLG6zqaAtCbeAg@mail.gmail.com>
+
+No not for lists, but it is not a bad direction. If I modify it a bit, I
+can get an ifmzero function:
+
+ifmzero :: (MonadSplit m) => m a -> m b -> m b -> m b
+ifmzero p b f = join $ mhead $ (liftM (const f) p) `mplus` (return b)
+
+mhead :: (MonadSplit m) => m a -> m a
+mhead = liftM fst . msplit
+
+Which I think works for all MonadSplit monads. I have some loose rationing,
+I can show, but am a bit affraid to share :)
+
+I have made a small example with a foldl function.
+
+Thanks for your example.
+
+Greets,
+
+Edgar
+
+> module Control.Monad.MonadSplit where
+> import Control.Monad
+> import Control.Applicative
+> import qualified Data.Sequence as S
+> import Test.QuickCheck
+
+> class MonadPlus m => MonadSplit m where
+>       msplit  :: m a -> m (a, m a)
+
+
+> instance MonadSplit [] where
+>       msplit []     = mzero
+>       msplit (x:xs) = return (x,xs)
+
+> instance MonadSplit Maybe where
+>       msplit Nothing   = mzero
+>       msplit (Just x)  = return (x, Nothing)
+
+> ifmzero p b f = join $ mhead $ (liftM (const f) p) `mplus` (return b)
+
+> mhead :: (MonadSplit m) => m a -> m a
+> mhead = liftM fst . msplit
+
+> foldMSl :: (MonadSplit m) => (b -> a -> m b) -> b -> m a -> m b
+> foldMSl m i n = ifmzero n (return i) $ do
+>    (x, xs) <- msplit n
+>    i' <- m i x
+>    foldMSl m i' xs
+
+> prop_foldMSl_ref = property $ test_foldMSl_ref
+>    where test_foldMSl_ref :: Int -> [Int] -> Bool
+>          test_foldMSl_ref x y = (foldMSl (\x y -> return $ x - y) x y) ==
+(return (foldl (\x y -> x - y) x y))
+>
+
+
+On Sat, Dec 3, 2011 at 11:39 PM, David Menendez <dave at zednenem.com> wrote:
+
+> On Sat, Dec 3, 2011 at 3:55 PM, Antoine Latter <aslatter at gmail.com> wrote:
+> > On Sat, Dec 3, 2011 at 10:55 AM, edgar klerks <edgar.klerks at gmail.com>
+> wrote:
+> >> Hi list,
+> >>
+> >> I am using MonadSplit
+> >> (from http://www.haskell.org/haskellwiki/New_monads/MonadSplit )  for a
+> >> project and now I want to make a library out of it. This seems to be
+> >> straightforward, but I got stuck when I tried to move miszero out of the
+> >> class:
+> >>
+> >> miszero :: m a -> Bool
+> >>
+> >> It tests if the provided monad instance is empty. My naive attempt was:
+> >>
+> >
+> > You can write:
+> >
+> > miszero :: MonadPlus m => m a -> m Bool
+> > miszero m = (m >> return False) <|> return True
+> >
+> > but that will invoke any monadic effects as well as determining the
+> > nature of the value, which may not be what you want.
+>
+> It's almost certainly not what you want for the list monad.
+>
+> --
+> Dave Menendez <dave at zednenem.com>
+> <http://www.eyrie.org/~zednenem/>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111204/1801315c/attachment.htm>
+

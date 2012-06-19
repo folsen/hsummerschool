@@ -1,0 +1,25 @@
+From michael at schmong.org  Tue Apr 26 02:18:00 2011
+From: michael at schmong.org (Michael Litchard)
+Date: Mon, 25 Apr 2011 17:18:00 -0700
+Subject: [Haskell-cafe] errors while installing yesod 0.8
+In-Reply-To: <BANLkTinwW=bzHJNAoXjRyRCwo98dkg0kVg@mail.gmail.com>
+References: <BANLkTinnbgfJFA8pFptB9QwOSr3soP4DaQ@mail.gmail.com>
+	<BANLkTi=k0qBmgfW+i3fZO5tvBMjU6nEPYg@mail.gmail.com>
+	<BANLkTimKscipBEAgO0XqAeU8gbE1FenPyg@mail.gmail.com>
+	<201104200145.02246.daniel.is.fischer@googlemail.com>
+	<BANLkTin43RU_5mXfaGDqzQW54KSmgRUq_Q@mail.gmail.com>
+	<BANLkTin_fgR0+jhhKNEkqwG0D34ABt=d1g@mail.gmail.com>
+	<BANLkTinysuJ+B9duFm3zWygQUjB=jRV_+g@mail.gmail.com>
+	<BANLkTikv86DaDqrNVrTUTZ6-Pif1MSCeqA@mail.gmail.com>
+	<BANLkTikf1F24oi5hU1FefYfFZGnN0ARdYg@mail.gmail.com>
+	<BANLkTinwW=bzHJNAoXjRyRCwo98dkg0kVg@mail.gmail.com>
+Message-ID: <BANLkTi=T+kbrju8g_pq5ewTMRODU12hFYA@mail.gmail.com>
+
+In case this ever gets googled ...
+
+I'm pretty sure this problem had to do with my environment. I removed
+$HOME/.cabal and $HOME/.ghc, and upgraded to the latest stable haskell
+platform. yesod 0.8 has installed fine. I'm not sure what the exact
+problem was however.
+
+

@@ -1,0 +1,68 @@
+From twanvl at gmail.com  Fri Apr  8 14:55:19 2011
+From: twanvl at gmail.com (Twan van Laarhoven)
+Date: Fri, 08 Apr 2011 14:55:19 +0200
+Subject: [Haskell-cafe] Testing Implementation vs Model - Records or
+ Type Classes?
+In-Reply-To: <inmm1b$ld4$1@dough.gmane.org>
+References: <inmm1b$ld4$1@dough.gmane.org>
+Message-ID: <4D9F05B7.8090105@gmail.com>
+
+On 08/04/11 11:54, Heinrich Apfelmus wrote:
+> Hello,
+>
+> I'm writing a small Haskell library for functional reactive programming.
+> The core of the library consists of two data types and several
+> primitives. However, I have programmed this core *twice*: once as a
+> *model* that displays the intended semantics, and once as the actual
+> *implementation* to be used in production code.
+>
+> ...
+> Haskell Caf?, what are your suggestions and ideas?
+>
+> ...
+> For reference, here the full signature of the core combinators:
+>
+> data Event a
+> data Behavior a
+>
+> instance Functor Behavior
+> instance Applicative Behavior
+> instance Functor Event
+> instance Monoid (Event a)
+>
+> filter :: (a -> Bool) -> Event a -> Event a
+> apply :: Behavior (a -> b) -> Event a -> Event b
+> accumB :: a -> Event (a -> a) -> Behavior a
+
+You don't need MPTCs to generalize the filter function:
+
+     -- this class is useful beyond this FRP library,
+     --  you might already be able to find it on hackage somewhere
+     class Functor f => Filterable f where
+         filter :: (a -> Bool) -> f a -> f a
+         -- filter p . fmap f == fmap f . filter (p . f)
+         -- filter (const True) == id
+         -- filter p . filter q == filter (\x -> p x && q x)
+
+The apply and accumB functions are harder. Is the Behavior 
+implementation for the model really different from the one of the 
+implementation, which seems to be {initial::a, changes::Event a}? If 
+not, you could just generalize that type by making the event type a 
+parameter
+
+     data GenBehavior e a = GB a (E a)
+
+If this is not the case, then instead of MPTCs you could also try type 
+families,
+
+     class ... => FRP event where
+         data Behavior event
+         apply :: Behavior event (a -> b) -> event a -> event b
+         accumB :: a -> event (a -> a) -> Behavior event a
+
+I don't know whether this is any better than the MPTC approach, though.
+
+
+Twan
+
+

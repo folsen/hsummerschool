@@ -1,0 +1,31 @@
+From mikhail.vorozhtsov at gmail.com  Thu Dec  1 10:46:17 2011
+From: mikhail.vorozhtsov at gmail.com (Mikhail Vorozhtsov)
+Date: Thu, 01 Dec 2011 16:46:17 +0700
+Subject: [Haskell-cafe] ANNOUNCE: data-timeout - 64-bit timeouts of
+	nanosecond precision
+Message-ID: <4ED74CE9.40105@gmail.com>
+
+Hi.
+
+I grew up tired of counting milliseconds, so I wrote a small library[1] 
+that allows me to specify time units for timeouts and convert between 
+them. The library also provides wrapped versions of 'timeout' and 
+'threadDelay' functions:
+
+ > threadDelay $ 1 # Minute + 30 # Second
+
+Nanosecond precision seems to be enough for RTS and POSIX calls and it 
+also provides a good range for 64-bit representation:
+
+ > maxBound :: Timeout
+30500 w 3 d 23 h 34 m 33 s 709 ms 551 us 615 ns
+
+One thing that might disappoint some people is that I chose unsigned 
+underlying type (Word64), which means that "infinite" timeouts cannot be 
+represented. I think "negative" timeouts essentially are performance 
+warts (a way of packing `Maybe Word63` into Word64) that muddle equality 
+and I recommend using `Maybe Timeout` whenever timeout is optional.
+
+[1] http://hackage.haskell.org/package/data-timeout
+
+

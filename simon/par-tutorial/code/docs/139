@@ -1,0 +1,91 @@
+From svante.signell at telia.com  Tue Apr  5 09:43:40 2011
+From: svante.signell at telia.com (Svante Signell)
+Date: Tue, 05 Apr 2011 09:43:40 +0200
+Subject: [Haskell-cafe] Problems porting ghc6-6.10.1 to GNU/Hurd using 6.8.2
+Message-ID: <1301989420.5567.18.camel@hp.my.own.domain>
+
+Hi,
+
+I'm currently trying to upgrade Debian GNU/Hurd ghc6.8.2 to 6.10.1 (and
+further from there, due to requirements of ghc and haddock versions),
+and get stuck on configuring the random-1.0.0.1 library in stage1. I
+have tried versions of ghc6 are 6.10.1+dfsg1-1 to 6.10.1+dfsg1-5 (the
+latest not requiring ghc6.10 due to haddock 2.4.2). The commands are
+shown below: (added the -verbose=3 parameter)
+
+cd ghc6-6.10.1+dfsg1/libraries
+
+(sorry for the missing \ due to cut-and-paste to the mailer)
+
+( cd random && /home/srs/DEBs/ghc/ghc6-6.10.1+dfsg1/libraries/cabal-bin
+--verbose=3 /usr/bin/ghc6 /home/srs/DEBs/ghc/ghc6-6.10.1
++dfsg1/libraries/bootstrapping.conf configure --verbose=3
+--prefix=/NONEXISTENT --bindir=/NONEXISTENT --libdir=/NONEXISTENT
+--libexecdir=/NONEXISTENT --datadir=/NONEXISTENT --docdir=/NONEXISTENT
+--haddockdir=/NONEXISTENT --htmldir=/NONEXISTENT
+--with-compiler=/home/srs/DEBs/ghc/ghc6-6.10.1
++dfsg1/ghc/stage1-inplace/ghc
+--with-hc-pkg=/home/srs/DEBs/ghc/ghc6-6.10.1
++dfsg1/utils/ghc-pkg/install-inplace/bin/ghc-pkg   --libsubdir='$pkgid'
+--with-gcc=gcc --with-ld=/usr/bin/ld  --with-hscolour=/usr/bin/HsColour
+--with-alex=/usr/bin/alex --with-happy=/usr/bin/happy
+--configure-option='--build'  --configure-option='i486-gnu'
+--configure-option='--prefix=/usr'
+--configure-option='--with-ghc=/usr/bin/ghc6'
+--configure-option='build_alias=i486-gnu'  --configure-option='CFLAGS=-g
+-O2'  --configure-option='LDFLAGS='  --configure-option='CPPFLAGS='
+--configure-option=--with-cc=gcc
+--with-hsc2hs=/home/srs/DEBs/ghc/ghc6-6.10.1
++dfsg1/utils/hsc2hs/install-inplace/bin/hsc2hs
+--haddock-options="--use-contents=../index.html
+--use-index=../doc-index.html"  --enable-library-profiling
+--enable-split-objs ) && touch
+stamp/configure.library.build-profiling-splitting.random || touch
+random/unbuildable
+
+Output:
+=======
+Creating dist (and its parents)
+("/home/srs/DEBs/ghc/ghc6-6.10.1\
++dfsg1/ghc/stage1-inplace/ghc",["--numeric-version"])
+/home/srs/DEBs/ghc/ghc6-6.10.1+dfsg1/ghc/stage1-inplace/ghc is version
+6.10.1
+("/home/srs/DEBs/ghc/ghc6-6.10.1\
++dfsg1/utils/ghc-pkg/install-inplace/bin/ghc-pkg",["--version"])
+/home/srs/DEBs/ghc/ghc6-6.10.1\
++dfsg1/utils/ghc-pkg/install-inplace/bin/ghc-pkg
+is version 6.10.1
+("/home/srs/DEBs/ghc/ghc6-6.10.1\
++dfsg1/ghc/stage1-inplace/ghc",["--supported-languages"])
+Reading installed packages...
+("/home/srs/DEBs/ghc/ghc6-6.10.1\
++dfsg1/utils/ghc-pkg/install-inplace/bin/ghc-pkg",["dump","--global"])
+
+Hangs here!
+
+Running manually works OK!!
+/home/srs/DEBs/ghc/ghc6-6.10.1\
++dfsg1/utils/ghc-pkg/install-inplace/bin/ghc-pkg "dump" "--global"
+
+Gives a lot of output here...
+
+Below is the ghc-pkg script:
+
+cat /home/srs/DEBs/ghc/ghc6-6.10.1\
++dfsg1/utils/ghc-pkg/install-inplace/bin/ghc-pkg
+PKGCONF=/home/srs/DEBs/ghc/ghc6-6.10.1\
++dfsg1/inplace-datadir/./package.conf
+exec /home/srs/DEBs/ghc/ghc6-6.10.1\
++dfsg1/utils/ghc-pkg/install-inplace/libexec/ghc-pkg --global-conf\
+$PKGCONF ${1+"$@"}
+
+I've tried changing the shell from dash to bash but no changes. I also
+tried to escape some of the variables in the gkc-pkg shell script but
+without any luck.
+
+Anybody can help me here??
+
+
+
+
+

@@ -1,0 +1,93 @@
+From ccshan at post.harvard.edu  Sat Aug 13 17:00:36 2011
+From: ccshan at post.harvard.edu (Chung-chieh Shan)
+Date: Sat, 13 Aug 2011 11:00:36 -0400
+Subject: [Haskell-cafe] ML Workshop: register early by August 15
+Message-ID: <20110813150036.GD16191@mantle.bostoncoop.net>
+
+ACM SIGPLAN Workshop on ML
+Sunday, 18 September 2011, Tokyo, Japan (co-located with ICFP)
+http://conway.rutgers.edu/ml2011/
+
+CALL FOR PARTICIPATION
+			* Early Registration deadline is August 15! *
+
+The ML family of programming languages includes dialects known as
+Standard ML, Objective Caml, and F#.  These languages have inspired
+a large amount of computer-science research, both practical and
+theoretical.  This workshop aims to provide a forum for discussion and
+research on ML and related technology (higher-order, typed, or strict
+languages).
+
+The format of ML 2011 will continue the return in 2010 to a more
+informal model: a workshop with presentations selected from submitted
+abstracts.  Presenters will be invited to submit working notes, source
+code, and extended papers for distribution to the attendees, but the
+workshop will not publish proceedings, so any contributions may be
+submitted for publication elsewhere.  We hope that this format will
+encourage the presentation of exciting (if unpolished) research and
+deliver a lively workshop atmosphere.
+
+INVITED SPEAKERS
+
+    Naoki Kobayashi (Tohoku University)
+
+    Atsushi Ohori (Tohoku University)
+
+ACCEPTED TALKS
+
+    Efficiently scrapping boilerplate code in OCaml
+    Dmitri Boulytchev, Sergey Mechtaev
+
+    Implementing implicit self-adjusting computation (short talk)
+    Yan Chen, Joshua Dunfield, Matthew A. Hammer, Umut A. Acar
+
+    Lightweight typed customizable unmarshaling
+    Pascal Cuoq, Damien Doligez, Julien Signoles
+
+    Adding GADTs to OCaml: the direct approach
+    Jacques Garrigue, Jacques Le Normand
+
+    A demo of Coco: a compiler of monadic coercions in ML (short talk)
+    Nataliya Guts, Michael Hicks, Nikhil Swamy, Daan Leijen
+
+    Verifying liveness properties of ML programs
+    M. M. Lester, R. P. Neatherway, C.-H. L. Ong, S. J. Ramsay
+
+    MixML remixed
+    Andreas Rossberg, Derek Dreyer
+
+    Report on OCaml type debugger
+    Kanae Tsushima, Kenichi Asai
+
+    Camomile: a Unicode library for OCaml (short talk)
+    Yoriyuki Yamagata
+
+PROGRAM COMMITTEE
+
+    Amal Ahmed (Indiana University)
+    Andrew Tolmach (Portland State University)
+    Anil Madhavapeddy (University of Cambridge)
+    Chung-chieh Shan (chair)
+    Joshua Dunfield (Max Planck Institute for Software Systems)
+    Julia Lawall (University of Copenhagen)
+    Keisuke Nakano (University of Electro-Communications)
+    Martin Elsman (SimCorp)
+    Walid Taha (Halmstad University)
+
+STEERING COMMITTEE
+
+    Eijiro Sumii (chair) (Tohoku University)
+    Andreas Rossberg (Google)
+    Jacques Garrigue (Nagoya University)
+    Matthew Fluet (Rochester Institute of Technology)
+    Robert Harper (Carnegie Mellon University)
+    Yaron Minsky (Jane Street)
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 190 bytes
+Desc: Digital signature
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110813/17b741bd/attachment.pgp>
+

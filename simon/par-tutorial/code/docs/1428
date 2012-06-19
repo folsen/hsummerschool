@@ -1,0 +1,50 @@
+From aditya.siram at gmail.com  Sun Aug 28 01:30:26 2011
+From: aditya.siram at gmail.com (aditya siram)
+Date: Sat, 27 Aug 2011 18:30:26 -0500
+Subject: [Haskell-cafe] GHCI Feature Request: Last Successful
+ Compilation State Saved
+In-Reply-To: <6D6D37B1-79CF-4709-8C86-CFFC8B602360@dbp.mm.st>
+References: <CAJrReygxTo_DVA6B4bNozP0WR+_X7ZqQs=ERdHhuXKJNc-3+0A@mail.gmail.com>
+	<CAM_wFVtTiY=gz7aA==5DZ5YEXxZeabECMhrO3FHKw7wmOdacuA@mail.gmail.com>
+	<201108272331.01371.daniel.is.fischer@googlemail.com>
+	<6D6D37B1-79CF-4709-8C86-CFFC8B602360@dbp.mm.st>
+Message-ID: <CAJrReyhTdrtzSGmPWgXWG9yHGzcKiHL=EnCGuBD3GwAtqHqEWA@mail.gmail.com>
+
+http://www.youtube.com/watch?v=Y_exermAXkU&t=0m6s
+
+-deech
+
+On Sat, Aug 27, 2011 at 4:56 PM, Daniel Patterson
+<lists.haskell at dbp.mm.st>wrote:
+
+> That doesn't look very promising :(
+>
+> On Aug 27, 2011, at 5:31 PM, Daniel Fischer wrote:
+>
+> > On Saturday 27 August 2011, 23:10:17, David Virebayre wrote:
+> >> 2011/8/27 aditya siram <aditya.siram at gmail.com>:
+> >>> Hi all,
+> >>> I would like for the GHCI interpreter to save its environment before
+> >>> reloading a file and allowed the user to revert back to that state if
+> >>> the compilation was unsuccessful.
+> >>
+> >> That would be awesome. I would like this too.
+> >
+> > http://hackage.haskell.org/trac/ghc/ticket/1896
+> >
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110827/ff160d02/attachment.htm>
+

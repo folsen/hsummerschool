@@ -1,0 +1,19 @@
+From qdunkan at gmail.com  Wed Dec 14 21:48:58 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Wed, 14 Dec 2011 12:48:58 -0800
+Subject: [Haskell-cafe] indentation blues
+In-Reply-To: <CAFrFfuGkeHEMfsitZoyaGWz=RZvuaUc8KKGK57dFdJL-kj_43w@mail.gmail.com>
+References: <CAFrFfuGkeHEMfsitZoyaGWz=RZvuaUc8KKGK57dFdJL-kj_43w@mail.gmail.com>
+Message-ID: <CACbaDy7y068Y6ogUznYxyZeOMRsotLF_HuV6+RT31M+oBF=MCA@mail.gmail.com>
+
+On Mon, Dec 12, 2011 at 4:50 PM, Martin DeMello <martindemello at gmail.com> wrote:
+> The vim autoindent for haskell is really bad :( Is there a better
+> indent.hs file floating around somewhere? Alternatively, is the emacs
+> haskell mode better enough that it's worth my time learning my way
+> around emacs and evil?
+
+I don't know what kind of indentation you're doing, but another
+solution is to use a simple indentation style, and indent manually.
+As a bonus, foldmethod=indent then works for folding.
+
+

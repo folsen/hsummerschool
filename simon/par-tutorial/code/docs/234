@@ -1,0 +1,84 @@
+From apfelmus at quantentunnel.de  Fri Apr  8 11:54:51 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Fri, 08 Apr 2011 11:54:51 +0200
+Subject: [Haskell-cafe] Testing Implementation vs Model - Records or Type
+	Classes?
+Message-ID: <inmm1b$ld4$1@dough.gmane.org>
+
+Hello,
+
+I'm writing a small Haskell library for functional reactive programming. 
+The core of the library consists of two data types and several 
+primitives. However, I have programmed this core *twice*: once as a 
+*model* that displays the intended semantics, and once as the actual 
+*implementation* to be used in production code.
+
+Of course, I would like to use QuickCheck to test that the 
+implementation gives the same results as the model. My problem is: how 
+to organize this with the minimum amount of boilerplate?
+
+It appears that I can use *multiparameter type classes* to solve this, 
+but I'm not sure I'm happy with this, in particular because it makes the 
+generated Haddock less readable (see 3) below). On the other hand, I 
+could also use *record wildcards* to conveniently reify a module into a 
+record data structure. But that will give me problems with combinators 
+that are derived from the core combinators (see 2) below).
+
+Haskell Caf?, what are your suggestions and ideas?
+
+
+In particular, I wish to:
+
+1) Write examples to be QuickChecked only once.
+I imagine that my main function for testing looks like this
+
+     test_equal example =
+       forAll $ \input -> example model input
+                       == example implementation input
+
+where  example  an expression involving the combinators from my library. 
+The point is that I don't want to write  example  twice, once for each 
+version.
+
+2) Use derived combinators.
+For reference, here the full signature of the core combinators:
+
+    data Event a
+    data Behavior a
+
+    instance Functor Behavior
+    instance Applicative Behavior
+    instance Functor Event
+    instance Monoid  (Event a)
+
+    filter :: (a -> Bool) -> Event a -> Event a
+    apply  :: Behavior (a -> b) -> Event a -> Event b
+    accumB :: a -> Event (a -> a) -> Behavior a
+
+When writing tests, I also want to use common derived combinators, like, say
+
+    filterJust :: Event (Maybe a) -> Event a
+    filterJust = fmap fromJust . filter isJust
+
+without implementing them twice.
+
+3) Obtain readable Haddock.
+I like the simplicity and readability of an ordinary module signature. 
+In contrast, libraries with many type class scare me. Or is there a way 
+to make this less scary?
+
+I'm not sure about the last one:
+4) Make both model and implementation available to the user,
+so that he can QuickCheck his own programs as well. Since the 
+implementation makes heavy use of IO, it is a bit harder to test 
+automatically, so the model might be useful to have.
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

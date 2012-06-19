@@ -1,0 +1,38 @@
+From felipe.lessa at gmail.com  Fri Apr 22 12:25:10 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Fri, 22 Apr 2011 07:25:10 -0300
+Subject: [Haskell-cafe] Question about the Monad instance for Iteratee
+ (from the enumerator package)
+In-Reply-To: <1303462490.3329.22.camel@localhost.localdomain>
+References: <201104191427.47873.anotheraddress@gmx.de>
+	<BANLkTi=BaTrE8PqH0M=5=CNbwxqWRZRbeA@mail.gmail.com>
+	<1303462490.3329.22.camel@localhost.localdomain>
+Message-ID: <BANLkTimZuecS06_Kf6C_0LrxKaADmzPwgQ@mail.gmail.com>
+
+On Fri, Apr 22, 2011 at 5:54 AM, Maciej Marcin Piechotka
+<uzytkownik2 at gmail.com> wrote:
+> For the record: such code is therefore illegal
+>
+> abab :: Iteratee Char Identity ()
+> abab = continue parseA
+> ? ? ? where parseA (Chunks ('a':'b':xs)) = parseA (Chunks xs)
+> ? ? ? ? ? ? parseA (Chunks ('a':[])) = continue parseB
+> ? ? ? ? ? ? parseA (Chunks xs@(_:_)) = yield () xs
+> ? ? ? ? ? ? parseA (Chunks []) = continue parseA
+> ? ? ? ? ? ? parseA EOF = yield () EOF
+> ? ? ? ? ? ? parseB (Chunks ('b':xs)) = parseA (Chunks xs)
+> ? ? ? ? ? ? parseB (Chunks xs@(_:_)) = yield () (a:xs)
+> ? ? ? ? ? ? parseB (Chunks []) = continue parseB
+> ? ? ? ? ? ? parseB EOF = yield () ['a']
+
+Is it really illegal?  I guess you're pointing out a problem with the
+last line, because it's EOF and we yield something.  But that
+something was given to us in some "continue" step.  IMHO, that's
+perfectly fine.  The same thing goes for the other yield in parseB.
+
+Cheers,
+
+-- 
+Felipe.
+
+

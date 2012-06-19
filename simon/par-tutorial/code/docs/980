@@ -1,0 +1,53 @@
+From paul.reiners at gmail.com  Tue Aug  9 03:06:03 2011
+From: paul.reiners at gmail.com (Paul Reiners)
+Date: Mon, 8 Aug 2011 20:06:03 -0500
+Subject: [Haskell-cafe] Couldn't match expected type `Integer' against
+	inferred type `Int'
+In-Reply-To: <CA+u6gbycNufaMqz1-noeNwiXD64LE3hqVXDhJEcOQR7UJiijrw@mail.gmail.com>
+References: <FCDFD17E-2B06-43C2-9419-EACAF7F16B9F@gmail.com>
+	<CA+u6gbycNufaMqz1-noeNwiXD64LE3hqVXDhJEcOQR7UJiijrw@mail.gmail.com>
+Message-ID: <83C78424-EB0E-46D6-9627-85F4DB14A295@gmail.com>
+
+
+On Aug 8, 2011, at 7:59 PM, Ivan Lazar Miljenovic wrote:
+
+> On 9 August 2011 10:49, Paul Reiners <paul.reiners at gmail.com> wrote:
+>> Why am I getting this error:
+>> 
+>>     Couldn't match expected type `Integer' against inferred type `Int'
+>>     In the expression: foldl step 0 xs
+>>     In the definition of `asInt_foldAux':
+>>         asInt_foldAux xs
+>>                         = foldl step 0 xs
+>>                         where
+>>                             step acc '.' = error "cannot handle decimal
+>> numbers"
+>>                             step acc x = acc * 10 + digitToInt x
+>> 
+>> for this code?
+>> 
+>> import Data.Char (digitToInt)
+>> asInt_fold :: String -> Integer
+>> asInt_fold ('-':xs) = -(asInt_foldAux xs)
+>> asInt_fold xs       = asInt_foldAux xs
+>> asInt_foldAux :: String -> Integer
+>> asInt_foldAux xs = foldl step 0 xs
+>>            where step acc '.' = error "cannot handle decimal numbers"
+>>                  step acc x = acc * 10 + digitToInt x
+> 
+> digitToInt returns an Int; as such the result of asInt_foldAux is an
+> Int, but you've specified in its type signature that it should be
+> returning an Integer.
+
+So is there something like digitToInteger?  Or can I somehow cast the Int to an Integer?
+
+> 
+>> Note that I'm using Int, rather than Integer, to avoid silent overflow
+>> errors.
+> 
+> Should that be the other way round?
+
+Yes, it should be the other way round.
+
+
+

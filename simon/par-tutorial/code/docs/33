@@ -1,0 +1,26 @@
+From bluescreen303 at gmail.com  Fri Apr  1 19:46:46 2011
+From: bluescreen303 at gmail.com (Mathijs Kwik)
+Date: Fri, 1 Apr 2011 19:46:46 +0200
+Subject: [Haskell-cafe] ArrowLoop and streamprocessors
+In-Reply-To: <AANLkTinXRyf3qX_o=-uZr9yV_sVq4Ob-RzpVS2ecWhAg@mail.gmail.com>
+References: <AANLkTikxquh-8tpOtnOdQygjQVvaV21qBeucNPUaMk+V@mail.gmail.com>
+	<928741C4-271A-4C84-864F-AD6DE65F1855@alum.mit.edu>
+	<AANLkTinXRyf3qX_o=-uZr9yV_sVq4Ob-RzpVS2ecWhAg@mail.gmail.com>
+Message-ID: <AANLkTimM+AfA5+wh9tOnyYDVxFQ3zuUjP+aPQB1NcNxO@mail.gmail.com>
+
+Thank you all,
+
+As you all pointed out, arrows are just not up to this without resorting to
+tricks such as timestamping.
+I'm gonna have a look at the Peakachu library now (
+http://hackage.haskell.org/packages/archive/peakachu/0.3.0/doc/html/FRP-Peakachu-Program.html
+)
+(thanks Gergely!), it looks like a nice API and seems to match some ideas I
+had in mind.
+
+Have a nice weekend!
+Mathijs
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110401/66e82935/attachment.htm>
+

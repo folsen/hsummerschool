@@ -1,0 +1,24 @@
+From jetkoten at gmail.com  Tue Feb  1 23:54:50 2011
+From: jetkoten at gmail.com (JETkoten)
+Date: Tue, 01 Feb 2011 17:54:50 -0500
+Subject: [Haskell-cafe] Automatically move cursor focus in split window
+ in haskell-mode in emacs on load (C-c C-l) command?
+In-Reply-To: <4D460C1F.3070509@gmail.com>
+References: <4D45922A.5000501@gmail.com>	<AANLkTinkoM=ZDtDksUfs=CtjTHiHwy_X8EyRDJSWOk88@mail.gmail.com>	<4D459C4F.8000709@gmail.com>
+	<4D460C1F.3070509@gmail.com>
+Message-ID: <4D488F3A.3000101@gmail.com>
+
+
+
+On 1/30/11 8:10 PM, Brandon S Allbery KF8NH wrote:
+> Aside from the comments, which go to end of line but got broken in 
+> this case,
+> no; all that matters is the parens.  I suspect it may depend strongly on
+> what version of emacs you're running though.
+Thanks for your comments. After reading them I had subscribed to the 
+emacs mailing list for my platform/version, but it seems to be really 
+low traffic.
+
+Thank goodness this list came through for me.
+
+

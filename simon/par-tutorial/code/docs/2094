@@ -1,0 +1,79 @@
+From rune at bak.dk  Mon Dec 19 17:14:45 2011
+From: rune at bak.dk (Rune Harder Bak)
+Date: Tue, 20 Dec 2011 01:14:45 +0900
+Subject: [Haskell-cafe] Idiomatic Aeson
+Message-ID: <CAOGW7Kxu2A2bmq2dJ6boU-GU2x6RvX59AtoXN9J0DED_HMk3=g@mail.gmail.com>
+
+Hi
+
+I'm trying to parse a nested structure using Aeson (from Facebook)
+
+It looks something like this:
+
+{ "education": [
+        {
+            "school": {
+                "name": "A"
+            },
+        },
+        {
+            "concentration": [
+                {
+                    "name": "B"
+                }
+        }
+]}
+
+And besides this there is a lot of fields I don't need. (And a lot of
+other fields I do need)
+
+What is the idiomatic aeson way of doing this?
+
+I'm using Aeson because it's fast, and it seams to have all the
+relevant combinators, just can't get them to play nicely together.
+I was thinking something like
+getInfo (Object m) = (,) <$> m .: "school" .: "name" <*> mapM (.:
+"name")  (m .: "concentracion")
+but of cause the types don't add up.
+
+the verbose style like
+getInfo (Object m) = do
+ school <- m .: "school"
+ schoolName <- case school of
+  Object m' -> m' .: "name"
+  l -> typeMismatch "schoolName" l
+ concentration <- m .: "concentration"
+ concentrationName <- case concentration of
+  Array l -> forM (V.toList l) $ \m' ->
+    case m' of
+      Object m' -> m' .: "name"
+      l -> typeMismatch "concentrationName" l
+      )
+   o -> typeMismatch "parseList" o
+return (schoolName,concentrationName)
+quickly explodes.
+
+So I wrote my own functions of the following sort
+
+parseName name _ (Object m) = m .: name
+parseName _ err l = typeMismatch err l
+parseList p (Array l) = mapM p $ V.toList l
+parseList _ o = typeMismatch "parseList" o
+
+so I can do something like
+getInfo (Object m) = (,)
+     <$> parseName "school "school" m >>= parseName "name" "schoolName"
+     <*> parseName "concentration" "concentration" m >>= parseList
+(parseName "name" "concentrationName")
+
+And then variants for for .:?, but then it gets messy with >>= and maybe.
+Getting rid of the m in the above I moved to arrows, and.. it seems
+I'm not understanding the standard combinators.
+
+So.. what is the idiomatic way of doing this in Aeson?
+
+It shouldn't be necessary to move to template-haskell/generics to do this!
+
+Thanks!
+
+

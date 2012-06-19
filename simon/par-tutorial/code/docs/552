@@ -1,0 +1,27 @@
+From aslatter at gmail.com  Wed Apr 20 20:32:06 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Wed, 20 Apr 2011 13:32:06 -0500
+Subject: [Haskell-cafe] Hackage haddock not running?
+In-Reply-To: <1303320363.2836.1.camel@godel>
+References: <1303320363.2836.1.camel@godel>
+Message-ID: <BANLkTik_6YKPptkaNuGJhszM74ZOB8m+bQ@mail.gmail.com>
+
+Maybe the cabal-devel list is also a good one to include on this?
+Either way I've added them to the CC list.
+
+On Wed, Apr 20, 2011 at 12:26 PM, Chris Smith <cdsmith at gmail.com> wrote:
+> I've noticed a lot of packages recently missing documentation links on
+> Hackage. ?It looks like the job to build these hasn't been running since
+> perhaps about Saturday. ?Are appropriate people aware of this?
+>
+> --
+> Chris Smith
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

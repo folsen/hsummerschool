@@ -1,0 +1,74 @@
+From dokondr at gmail.com  Thu Dec  8 15:30:57 2011
+From: dokondr at gmail.com (dokondr)
+Date: Thu, 8 Dec 2011 17:30:57 +0300
+Subject: [Haskell-cafe] Converting string to System.Time.ClockTime
+In-Reply-To: <CAPeieQFKXCVqRDEWui7LH89-1aNWm0jKjF5m6DCp2b63Ax2zFw@mail.gmail.com>
+References: <CAMXF=YB3WXB=O=g58=tEdprQvrO1peHvm0ntZRvbwvDTSjB9Hg@mail.gmail.com>
+	<CAPeieQFKXCVqRDEWui7LH89-1aNWm0jKjF5m6DCp2b63Ax2zFw@mail.gmail.com>
+Message-ID: <CAMXF=YDUDcVCx4izBg-Uczd_k=+Q2SaXJrNSegNxJ6pVVt9Cqg@mail.gmail.com>
+
+I need to parse time strings like "Wed, 07 Dec 2011 10:09:21 +0000" to a
+type that:
+1) implements Eq, Ord
+2) is numerical, so I could subtract one value from another to find the
+difference or interval length
+
+To answer 1) requirement I wrote the following snippet. Yet I could not
+subtract  UTCTime values. How can I convert them to milliseconds?
+
+import Data.Time.Format
+import Data.Time.Clock
+import Locale
+import Data.Maybe
+
+s1 = "Wed, 07 Dec 2011 10:09:21 +0000"
+s2 = "Wed, 07 Dec 2011 10:11:00 +0000"
+t1 = fromJust $ tryParseTime s1
+t2 = fromJust $ tryParseTime s2
+
+t = compare t1 t2
+
+tryParseTime :: String -> Maybe UTCTime
+tryParseTime timeStr = tryFormat (parseTime defaultTimeLocale timeFormat1
+timeStr :: Maybe UTCTime)
+   where
+     tryFormat time
+        | time == Nothing = parseTime defaultTimeLocale timeFormat2 timeStr
+:: Maybe UTCTime
+        | otherwise = time
+
+     timeFormat1 = "%a, %d %b %Y %T %z"
+     timeFormat2 = "%m/%e/%Y %l:%M:%S %p"
+
+
+
+On Thu, Dec 8, 2011 at 6:12 PM, Erik Hesselink <hesselink at gmail.com> wrote:
+
+> I'm not sure if you really need ClockTime (from old-time), but if you
+> don't, the types from the 'time' package are all parseable with
+> `parseTime` [1].
+>
+> Erik
+>
+[1]
+> http://hackage.haskell.org/packages/archive/time/latest/doc/html/Data-Time-Format.html#v:parseTime
+>
+> On Thu, Dec 8, 2011 at 14:16, dokondr <dokondr at gmail.com> wrote:
+> > Hi,
+> > What would be the simplest way to convert strings like "Wed, 07 Dec 2011
+> > 10:09:21 +0000" to System.Time.ClockTime ?
+> >
+> > Thanks!
+> >
+> >
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/96d1c97d/attachment.htm>
+

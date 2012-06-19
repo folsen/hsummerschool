@@ -1,0 +1,43 @@
+From dev at mobileink.com  Thu Dec 29 17:55:28 2011
+From: dev at mobileink.com (Gregg Reynolds)
+Date: Thu, 29 Dec 2011 10:55:28 -0600
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <20111229151652.1261E93C2E@mail.avvanta.com>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>
+	<20111229151652.1261E93C2E@mail.avvanta.com>
+Message-ID: <6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+
+
+On Dec 29, 2011, at 9:16 AM, Donn Cave wrote:
+
+> Quoth Gregg Reynolds <dev at mobileink.com>,
+>> On Wed, Dec 28, 2011 at 2:44 PM, Heinrich Apfelmus
+>> <apfelmus at quantentunnel.de> wrote:
+>>> 
+>>> The beauty of the IO monad is that it doesn't change anything about purity.
+>>> Applying the function
+>>> 
+>>>  bar :: Int -> IO Int
+>>> 
+>>> to the value 2 will always give the same result:
+>>> 
+>>>  bar 2 = bar (1+1) = bar (5-3)
+>> 
+>> Strictly speaking, that doesn't sound right.
+> 
+> Look again at the sentence you trimmed off the end:
+> 
+>>> Of course, the point is that this result is an *IO action* of
+>>> type IO Int, it's not the Int you would get "when executing this
+>>> action".
+> 
+> I believe that more or less points to the key to this discussion.
+> If it didn't make sense to you, or didn't seem relevant to the
+> question of pure functions, then it would be worth while to think
+> more about it.
+
+Ok, let's parse it out.  "?it's not the int you would get 'when executing this action".  Close, but no cooky: it's not any kind of int at all (try doing arithmetic with it).  "IO Int" is a piece of rhetoric for the mental convenience of the user; Haskell does not and cannot know what the result of an IO action is, because it's outside the scope of the language (and computation).  (The "Int" part of "IO Int" refers to the input, not the output; it's just a sort of type annotation.)  It's not even a computation, unless you want to take a broad view and include oracles, interaction, etc. in your definition of computation.
+
+-Gregg
+

@@ -1,0 +1,25 @@
+From schlepptop at henning-thielemann.de  Mon Aug  8 10:56:00 2011
+From: schlepptop at henning-thielemann.de (Henning Thielemann)
+Date: Mon, 08 Aug 2011 10:56:00 +0200
+Subject: [Haskell-cafe] For class Monoid;
+ better names than mempty & mappend might have been: mid (mident) &
+ mbinop
+In-Reply-To: <CAKjSnQGmkvp9SKXbhhyMKyur9x9F860JNsQM3H_8O7f5mmC+Uw@mail.gmail.com>
+References: <CAMLKXykX-mZmpS1Qx74Pew9uSeGHyDOw+EjeZiZMUTvsn2qPXA@mail.gmail.com>
+	<CAKjSnQGmkvp9SKXbhhyMKyur9x9F860JNsQM3H_8O7f5mmC+Uw@mail.gmail.com>
+Message-ID: <4E3FA4A0.1020100@henning-thielemann.de>
+
+On 24.07.2011 22:20, Antoine Latter wrote:
+> On Sat, Jul 23, 2011 at 1:41 PM, KC<kc1956 at gmail.com>  wrote:
+>> It would be easier for beginners to "grok".
+>>
+>
+> I think that assumes that all beginners have a strong foundation in
+> algebra. Although it does have the advantage that the names are as
+> abstract as the class.
+
+As pointed out earlier in this list, the name of the class and the 
+methods are inconsistent. Monoid refers to a general algebraic 
+structure, whereas mempty and mappend refer to certain instances like lists.
+
+

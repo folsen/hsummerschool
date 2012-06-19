@@ -1,0 +1,49 @@
+From daniel.is.fischer at googlemail.com  Fri Apr  1 11:20:11 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Fri, 1 Apr 2011 11:20:11 +0200
+Subject: [Haskell-cafe] Strictness is observable
+In-Reply-To: <AANLkTikVY+KiFWM6OaeVbiXgbiztZpVoLh4zVSkdaa+5@mail.gmail.com>
+References: <20110401070056.A57DF17433@Adric.ern.nps.edu>
+	<AANLkTikVY+KiFWM6OaeVbiXgbiztZpVoLh4zVSkdaa+5@mail.gmail.com>
+Message-ID: <201104011120.11383.daniel.is.fischer@googlemail.com>
+
+On Friday 01 April 2011 10:49:53, Yves Par?s wrote:
+> Then if you turn :
+> 
+> fs True = True
+> fs x = True
+> 
+> to:
+> 
+> fs x = case x of
+>     True -> True
+>     x' -> True
+> 
+> Is it still strict, or does 'fs' wrap the case test and defer
+> evaluation?
+
+It's still strict, to produce a result, fs has to pattern-match its 
+argument, pattern matching is strict.
+
+The report says:
+"Patterns appear in lambda abstractions, function definitions, pattern 
+bindings, list comprehensions, do expressions, and case expressions. 
+However, the first five of these ultimately translate into case 
+expressions, so defining the semantics of pattern matching for case 
+expressions is sufficient. "
+
+So I think the report mandates that both forms are equivalent.
+
+You get exactly the same code as for 
+
+gs :: Bool -> Bool
+gs x = x `seq` True
+
+or
+
+hs :: Bool -> Bool
+hs x = if x then True else True
+
+with GHC (with or without optimisations) btw.
+
+

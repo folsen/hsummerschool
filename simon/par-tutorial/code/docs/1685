@@ -1,0 +1,65 @@
+From axman6 at gmail.com  Tue Dec  6 05:27:22 2011
+From: axman6 at gmail.com (Axman)
+Date: Tue, 6 Dec 2011 15:27:22 +1100
+Subject: [Haskell-cafe] List x ByteString x Lazy Bytestring
+In-Reply-To: <CACqaG6x2XUzNK348fTo3GLB+D=ZuaQM9RrhakwYegPnzUQAvDA@mail.gmail.com>
+References: <1323090896.3764.140661007583849@webmail.messagingengine.com>
+	<20111205134940.GA21037@x200>
+	<CACqaG6ypYKCRgJEY7hKnS_nGHLrB7fDdxY5OG4oRUV7KhNTY8A@mail.gmail.com>
+	<CAK-tuPZf5CQ41z8O9c-rW4QfyEms_oKKr5xWfUQcj=xWySHO9A@mail.gmail.com>
+	<CACqaG6x2XUzNK348fTo3GLB+D=ZuaQM9RrhakwYegPnzUQAvDA@mail.gmail.com>
+Message-ID: <CAHcAHA1BaUfnVrupie1JeqWa8CnHuPEz-AdWKgB9fBvzd9vvaQ@mail.gmail.com>
+
+I wonder what profiling tells you, you should identify where your
+performance problems actually are before trying to optimise.
+
+Some things that might help are using something like Blaze-Builder[1] to
+construct your bytestrings for output. I'm hoping that they're sufficiently
+lazy that you can lazily read in the input, and write output as you've made
+it available. if you use the blaze-builder-enumerator package, you should
+be able to get exactly what you want (but probably requires some minor
+knowledge of iteratees).
+
+Anyway, without seeing your code, we can't easily tell you what's wrong.
+
+Cheers,
+Alex
+
+[1] http://hackage.haskell.org/package/blaze-builder
+[2] http://hackage.haskell.org/package/blaze-builder-enumerator
+
+On 6 December 2011 02:11, Yves Par?s <limestrael at gmail.com> wrote:
+
+> Oh, sorry, my bad.
+> I misunderstood the dependency.
+>
+>
+> 2011/12/5 Johan Tibell <johan.tibell at gmail.com>
+>
+>> On Mon, Dec 5, 2011 at 6:09 AM, Yves Par?s <limestrael at gmail.com> wrote:
+>>
+>>> However the performance issues seem odd: text is based on bytestring.
+>>
+>>
+>> This is not the case. Text is based on ByteArray#, GHC internal type for
+>> blocks of bytes. The text package depends on the bytestring package because
+>> it allows you to encode/decode Text<->ByteString.
+>>
+>> -- Johan
+>>
+>>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+
+-- 
+-- Alex Mason
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111206/71c86210/attachment.htm>
+

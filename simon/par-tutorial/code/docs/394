@@ -1,0 +1,66 @@
+From steven.keuchel at gmail.com  Thu Apr 14 13:17:30 2011
+From: steven.keuchel at gmail.com (Steven Keuchel)
+Date: Thu, 14 Apr 2011 13:17:30 +0200
+Subject: [Haskell-cafe] Programming Chalenges: The 3n+1 problem
+In-Reply-To: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+References: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+Message-ID: <BANLkTikjUG3MSn5USTehQosJYJDKGWUPDw@mail.gmail.com>
+
+Hi Dmitri,
+
+As a reference you might want to take a look at the Project Euler
+problem #14 and the corresponding dubious entry in the HaskellWiki:
+http://www.haskell.org/haskellwiki/Euler_problems/11_to_20#Problem_14
+.
+
+> *** Question: I wonder how to implement cache for this problem in Haskell?
+> At the moment, I am not so much interested in the speed of the code, as in
+> nice implementation.
+
+a while ago I wondered about the same question: memoization and more
+specifically tabulation (DP) in Haskell. After some time I came up
+with code which does it IMO in a fairly nice way using an array of
+lazy computations which gives you top-down DP for free at the expense
+of performance. Another way is to use lazily built tries ala MemoTrie:
+http://www.haskell.org/haskellwiki/MemoTrie .
+
+Specific implementation:
+
+> import Data.Array
+> import Data.MemoTrie
+
+I write the collatz function using open recursion in order to separate
+the recursive function from the memo scheme.
+
+> type Gen a = a -> a
+> type Fix a = Gen a -> a
+>
+> collatzGen :: Gen (Integer -> Integer)
+> collatzGen c 1             = 1
+> collatzGen c n | even n    = 1 + c (div n 2)
+>                | otherwise = 1 + c (3*n + 1)
+
+We can use plain old Data.Function.fix to get the usual stupid
+recursive function or use our custom fixpoint combinators. |fixtab|
+for example uses an array to cache the result in the given range. When
+the argument is outside of the range the normal recursive scheme is
+applied.
+
+> fixtab :: Ix i => (i, i) -> Fix (i -> r)
+> fixtab b f = f'
+>   where a    = listArray b [ f f' i | i <- range b ]
+>         f' i = if inRange b i then a!i else f f' i
+
+Another option is to use the MemoTrie package where we can write a
+fixpoint combinator like this:
+> fixmemo :: HasTrie i => Fix (i -> r)
+> fixmemo f = let m = memo (f m); in m
+
+And of course the final collatz function:
+> collatz :: Integer -> Integer
+> collatz = fixtab (1,1000000) collatzGen
+
+Cheers,
+Steven
+
+

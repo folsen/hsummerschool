@@ -1,0 +1,36 @@
+From jmillikin at gmail.com  Fri Apr 22 05:42:18 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Thu, 21 Apr 2011 20:42:18 -0700 (PDT)
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <BANLkTingNDExfXWS43FmdyMhrKjj+1S6BQ@mail.gmail.com>
+Message-ID: <22296892.1880.1303443738742.JavaMail.geo-discussion-forums@prhx20>
+
+On Thursday, April 21, 2011 4:16:07 PM UTC-7, John Meacham wrote:
+>
+> Um, the patch theory is what makes darcs "just work". There is no need
+> to understand it any more than you have to know VLSI design to
+> understand how your computer works. The end result is that darcs
+> repositories don't get corrupted and the order you integrate patches
+> doesn't affect things meaning cherrypicking is painless.
+
+
+This is how it's *supposed* to work. My chief complaints with PT are:
+
+   - Metadata about branches and merges gets lost. This makes later 
+   examination of the merge history impossible, or at least unfeasibly 
+   difficult.
+   - Every commit needs --ask-deps , because the automatic dependency 
+   detector can only detect automatic changes (and not things like adding a new 
+   function in a different module)
+   - The order patches are integrated still matters (it's impossible for it 
+   to not matter), but there's no longer any direct support for ordering them, 
+   so large merges become very manual.
+   - If you ever merge in the wrong order, future merges will begin 
+   consuming more and more CPU time until the repository "dies". Undoing this 
+   requires using darcs-fastconvert and performing manual surgery on the export 
+   files.
+   
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110421/d11131ec/attachment.htm>
+

@@ -1,0 +1,87 @@
+From ozgurakgun at gmail.com  Sat Feb  5 17:13:00 2011
+From: ozgurakgun at gmail.com (Ozgur Akgun)
+Date: Sat, 5 Feb 2011 16:13:00 +0000
+Subject: [Haskell-cafe] combined parsing & pretty-printing
+In-Reply-To: <4D4069E8.1060307@informatik.uni-marburg.de>
+References: <AANLkTi=ik=Ft2pfwBxhG0BaHvskBT-gf7K1ZX+2UAH_T@mail.gmail.com>
+	<20110126164223.GA11657@seas.upenn.edu>
+	<4D4069E8.1060307@informatik.uni-marburg.de>
+Message-ID: <AANLkTikxkcbystegS86=xqiyUZJp_-=8cOnQa-wPm=Ga@mail.gmail.com>
+
+Tillmann,
+
+I've been looking into you packages, very neat ideas and a nice
+implementation really.
+
+I've already implemented a toy example and it worked great. Now I am trying
+to use your library in a more serious piece of code, and I've realised that
+defineIsomorphisms doesn't support record constructors. To be precise, you
+handle the case for NormalC in the code, however you do not handle RecC. I
+don't think this will be a difficult thing to add. Is there any reason for
+you not to support RecC?
+
+Best,
+
+2011/1/26 Tillmann Rendel <rendel at informatik.uni-marburg.de>
+
+> Hi Ozgur,
+>
+> Ozgur Akgun wrote:
+>
+>> I can write (separately) a parser and a pretty-printer [...]
+>>
+>> Is there any work to combine the two?
+>>
+>
+> Brent Yorgey wrote:
+>
+>> Maybe take a look at "Invertible Syntax Descriptions: Unifying Parsing
+>> and Pretty Printing" by Tillmann Rendel and Klaus Ostermann from last
+>> year's Haskell Symposium:
+>>
+>>   http://www.informatik.uni-marburg.de/~rendel/unparse/
+>>
+>> It's a beautiful paper, and perhaps the code will work for you
+>> (although it's too bad it's not on Hackage).
+>>
+>
+> Indeed, I started this project for exactly the reason Ozgur describes: I
+> needed to duplicate a lot of information between parsers and pretty printers
+> and was annoyed about it. With invertible syntax descriptions, I now write a
+> single program, which looks like a combinator parser (think "Parsec"), but
+> can work as a pretty printer, too.
+>
+> I just uploaded the code from the paper (and some additional combinators)
+> to Hackage:
+>
+>  http://hackage.haskell.org/package/partial-isomorphisms
+>  http://hackage.haskell.org/package/invertible-syntax
+>
+> I use this code for the implementation of some very small languages (think
+> "lambda calculus"). This works fine.
+>
+> I haven't really tried it for larger languages, but we have two students
+> here in Marburg implementing a parser for Java using the library, so we are
+> going to have experience with larger languages in a few weeks (months?).
+>
+> If you give it a try, I would be happy to receive success stories, bug
+> reports, patches, feature requests etc. I want to keep working on this, and
+> I am open for suggestions.
+>
+>  Tillmann
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Ozgur Akgun
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110205/ba4d3956/attachment.htm>
+

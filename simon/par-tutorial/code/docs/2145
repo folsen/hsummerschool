@@ -1,0 +1,48 @@
+From strake888 at gmail.com  Tue Dec 20 22:53:11 2011
+From: strake888 at gmail.com (Matthew Farkas-Dyck)
+Date: Tue, 20 Dec 2011 16:53:11 -0500
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+Message-ID: <CAL3m8eBx2=RNZJfqBSp=Bds4GXeu8vvAfXR_CPkPGJ+HZ-1-Xg@mail.gmail.com>
+
+With GHC 7.0.3:
+
+$ cat test.hs
+class ? a where {
+  test :: a;
+};
+
+(?) :: Eq a => a -> [a] -> Bool;
+x ? (y:ys) = x == y || x ? ys;
+
+main = putStrLn "Two of three ain't bad (^_~)";
+$ runhaskell test.hs
+Two of three ain't bad (^_~)
+$
+
+On 20/12/2011, David Fox <ddssff at gmail.com> wrote:
+> On Mon, Dec 19, 2011 at 11:20 AM, Robert Clausecker <fuzxxl at gmail.com>wrote:
+>
+>> Image you would create your own language with a paradigm similar to
+>> Haskell or have to chance to change Haskell without the need to keep any
+>> compatibility. What stuff would you add to your language, what stuff
+>> would you remove and what problems would you solve completely different?
+>>
+>> Thanks in advance for all answers, yours
+>>
+>
+> One thing that concerns me is the use of capital letters to distinguish
+> type and class names and constructors from values.  If I was doing it over
+> I would use a typographical distinction like italics for types, bold for
+> classes.  That way we could have a constructor named ?, a function named ?,
+> a class named ?.
+>
+
+
+Cheers,
+Matthew Farkas-Dyck
+
+

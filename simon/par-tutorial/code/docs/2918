@@ -1,0 +1,36 @@
+From duncan.coutts at googlemail.com  Thu Feb 10 16:22:41 2011
+From: duncan.coutts at googlemail.com (Duncan Coutts)
+Date: Thu, 10 Feb 2011 15:22:41 +0000
+Subject: [Haskell-cafe] [Cabal-devel] Cabal && license combinations
+In-Reply-To: <4D53CFB2.9000006@k-hornz.de>
+References: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+	<1297178086.2402.5.camel@godel>
+	<AANLkTin-FnLkMpjvPSAOGo+7gS8UWhT2t7GdBiPn1K-u@mail.gmail.com>
+	<1297336324.29009.464.camel@localhost>  <4D53CFB2.9000006@k-hornz.de>
+Message-ID: <1297351361.29009.469.camel@localhost>
+
+On Thu, 2011-02-10 at 12:44 +0100, Stefan Kersten wrote:
+> On 10.02.11 12:12, Duncan Coutts wrote:
+> > We are already working on a feature that will show the full set of
+> > licenses that the end user must comply with (a patch has been submitted
+> > and it's been through one round of review so far). In your example that
+> > would mean you expect the set to be {BSD} but the tool will show you
+> > that it is in fact {BSD, GPL}. You can then use that as your warning
+> > that the set of licenses is not what you expected.
+> 
+> that would be quite useful for those who want to distribute executables!
+> 
+> may i also suggest the following feature: collect all the copyright notices and
+> license files from each dependency (many licenses require those to be displayed
+> and distributed along with the executable) and optionally bundle them with the
+> applicaton's data-files? i briefly looked into this, but couldn't find a way to
+> retrieve the installed License-File from ~/.cabal using Cabal. doing this by
+> hand turns out to be quite tedious when there are many dependencies ...
+
+Right, that feature was also in the patch. From experience I know that
+this would indeed be very useful (I've also had to do it manually).
+
+Duncan
+
+
+

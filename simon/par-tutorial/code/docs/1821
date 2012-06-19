@@ -1,0 +1,50 @@
+From aslatter at gmail.com  Sun Dec 11 07:36:52 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Sun, 11 Dec 2011 00:36:52 -0600
+Subject: [Haskell-cafe] HaXml 1.13 -> 1.22 upgrade
+In-Reply-To: <4EE448DF.9030400@orlitzky.com>
+References: <4EE448DF.9030400@orlitzky.com>
+Message-ID: <CAKjSnQE23zX7_jn8GnoA3tVABYYAM22CZ-Jqab8+YX3CK5K-fg@mail.gmail.com>
+
+On Sun, Dec 11, 2011 at 12:08 AM, Michael Orlitzky <michael at orlitzky.com> wrote:
+> I'm trying to migrate one my programs from the old HaXml API to the new.
+> Please, someone save me.
+>
+> I'm currently stuck with this, which works in 1.13. All of the filters work
+> on Content, so I make some from the root element with the "root_elem = CElem
+> root" line.
+>
+> ?-- |Takes an XML String as an argument, and returns the
+> ?-- status that was parsed from it. Should only be used
+> ?-- on XML string where a <status> is a top-level element.
+> ?parse_status :: String -> [Status]
+> ?parse_status xml_data =
+> ? ?catMaybes maybe_status
+> ? ?where
+> ? ? ?(Document _ _ root _) = xmlParse xml_file_name xml_data
+> ? ? ?root_elem = CElem root
+> ? ? ?status_element = (single_status root_elem)
+> ? ? ?maybe_status = map status_from_content status_element
+>
+> In the new API, xmlParse returns the root element with type (Element i)
+> rather than just Element. And the Content constructor I have to use is
+> (CElem (Element i) i), but I have no way to pass the correct 'i' to it.
+>
+
+It looks like the function 'xmlParse' returns a value of type
+'Document Posn', according to the API docs. I'm guessing the 'Posn'
+value is used to annotate the position in the source document a
+particular piece of XML came from, so you can report errors better.
+
+Since the pretty-printing functions ignore it, you can replace it with
+whatever you want, even with a value of a different type if you have a
+need to annotate the tree.
+
+> I just want to parse a few elements from an XML file.
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

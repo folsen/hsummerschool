@@ -1,0 +1,40 @@
+From nccb2 at kent.ac.uk  Thu Apr 14 14:50:29 2011
+From: nccb2 at kent.ac.uk (Neil Brown)
+Date: Thu, 14 Apr 2011 13:50:29 +0100
+Subject: [Haskell-cafe] Type Classes in Haskell - how can I make GHC
+ make a choice of types, when the type chosen doesn't matter?
+In-Reply-To: <BANLkTinPdtvLyNLGA3M7hx8ngUEOec+How@mail.gmail.com>
+References: <BANLkTinPdtvLyNLGA3M7hx8ngUEOec+How@mail.gmail.com>
+Message-ID: <4DA6ED95.1040700@kent.ac.uk>
+
+On 14/04/11 13:00, Chris Dew wrote:
+> class Stream a b c d where
+>      (->>) :: a ->  (b ->  c) ->  d
+>
+> instance Stream (IO d) d (IO c) (IO c) where
+>      f ->>  g = f>>= g
+>
+> instance Stream d d (IO c) (IO c) where
+>      f ->>  g = g f
+>
+> instance Stream d d c c where
+>      x ->>  y = y $ x
+>
+
+I notice that in all your instances, the last two types are the same.  
+So do you need the final type parameter?  Could you not make it:
+
+class Stream a b c where
+   (->>) :: a -> (b -> c) -> c
+
+I quickly tried this, and it fixes the errors you were getting.  If that 
+doesn't hold for all instances you have in mind, then you may want to 
+use functional dependencies or type families to specify a relationship 
+between the types.
+
+Thanks,
+
+Neil.
+
+
+

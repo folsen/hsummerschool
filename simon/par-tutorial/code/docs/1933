@@ -1,0 +1,27 @@
+From limestrael at gmail.com  Wed Dec 14 16:02:10 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Wed, 14 Dec 2011 16:02:10 +0100
+Subject: [Haskell-cafe] DB vs read/show for persisting large data
+In-Reply-To: <CACqaG6z+KRiCknrBjfXYEyJ77cTbxgEz9ZYiCZ5qwu2DH-YqNg@mail.gmail.com>
+References: <CAGdT1gqohuKtQPQdH2FS==HTqCtDVYvjKibD_wZ1vtF7Vxr_wA@mail.gmail.com>
+	<CACqaG6z+KRiCknrBjfXYEyJ77cTbxgEz9ZYiCZ5qwu2DH-YqNg@mail.gmail.com>
+Message-ID: <CACqaG6ykkOKyyQZx=_UJwL=Fw1nZp5x9sTjsAVvEXSZHG0AgTw@mail.gmail.com>
+
+2011/12/14 Yves Par?s <limestrael at gmail.com>
+>
+> For brutal binary serialization, you may like binary or cereal (I don't
+> know the dis/advantages of both, except that the last time I checked,
+> cereal only handled strict bytestrings).
+>
+
+BTW, if we can cope with strict bytestrings (if we don't have a too big
+input), would you recommend binary or cereal?
+
+What would you use to auto-derive the Binary/Serialize classes?
+The 'derive' package? The problem is that it has a lot of dependencies you
+maybe don't need if you jut want serialization, plus it relies on TH so it
+grows both compilation time and executable size.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111214/c0346a7d/attachment.htm>
+

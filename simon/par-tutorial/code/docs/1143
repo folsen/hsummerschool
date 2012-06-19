@@ -1,0 +1,74 @@
+From hreinhardt at gmail.com  Mon Aug 15 10:36:12 2011
+From: hreinhardt at gmail.com (Holger Reinhardt)
+Date: Mon, 15 Aug 2011 10:36:12 +0200
+Subject: [Haskell-cafe] Haskell Actors, Linda,
+	publish / subscribe models?
+In-Reply-To: <CAMXF=YCWVwkGgj9ci80hbDcYLJv-_GwgEybBdRDU7=FCTWm+vw@mail.gmail.com>
+References: <CAMXF=YBjfyjA8NqSH9HyngS_UZDr_4cYJiv_8Lh1zNfepJYs9w@mail.gmail.com>
+	<CAMXF=YCWVwkGgj9ci80hbDcYLJv-_GwgEybBdRDU7=FCTWm+vw@mail.gmail.com>
+Message-ID: <CAKJoN-o=UMdqYcBrG8cQL-J5f=23Ekj4bCQcoYhp2Di4EGPt=g@mail.gmail.com>
+
+Hi,
+
+the actor package seems unmaintained and probably doesn't fit your needs. If
+you want to implement some kind of publish/subscribe system over the
+network, I'd suggest you take a look at ZeroMQ[1] and AMQP[2].
+AMQP is probably easier to get started with, but it requires you to set up a
+dedicated broker, which (if you have very high throughput) might become a
+bottleneck. ZeroMQ, on the other hand, allows for a more decentralized
+architecture.
+
+Regards,
+Holger
+
+[1] http://hackage.haskell.org/package/zeromq-haskell
+[2] http://hackage.haskell.org/package/amqp
+
+2011/8/14 dokondr <dokondr at gmail.com>
+
+> On Sat, Aug 13, 2011 at 3:54 PM, dokondr <dokondr at gmail.com> wrote:
+>
+>> Hi,
+>> I am trying to figure out what Haskell libraries can be used to build
+>> publish / subscribe communication between threads running both in the same
+>> and different address spaces on the net.
+>> For my needs any of these models will work:
+>> - Actors [ http://en.wikipedia.org/wiki/Actor_model ]
+>> - Linda tuple space [
+>> http://en.wikipedia.org/wiki/Linda_%28coordination_language%29 ]
+>> - Publish / subscribe [
+>> http://en.wikipedia.org/wiki/Java_Message_Service#Publish.2Fsubscribe_model]
+>>
+>> I need to build a framework to coordinate task producers / consumers
+>> distributed in the same and different address spaces. I need to scale a data
+>> processing application somewhat Hadoop-like way yet in more flexible manner,
+>> without Hadoop-specific distributed FS constraints.
+>>
+>> Looking through Applications and libraries/Concurrency and parallelism:
+>>
+>> http://www.haskell.org/haskellwiki/Applications_and_libraries/Concurrency_and_parallelism
+>>
+>> I found Haskell actor package [
+>> http://hackage.haskell.org/cgi-bin/hackage-scripts/package/actor ] that
+>> fails to build with ghc 7.0.
+>>
+>> Please advise on latest working libraries.
+>>
+>> Thanks!
+>>
+>>
+>
+>  Have anybody used Haskell actor package [
+> http://hackage.haskell.org/cgi-bin/hackage-scripts/package/actor ]?
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110815/aa3480a5/attachment.htm>
+

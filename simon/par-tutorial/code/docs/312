@@ -1,0 +1,75 @@
+From as at hacks.yi.org  Mon Apr 11 18:22:56 2011
+From: as at hacks.yi.org (austin seipp)
+Date: Mon, 11 Apr 2011 11:22:56 -0500
+Subject: [Haskell-cafe] Emscripten: compiling LLVM to JavaScript
+In-Reply-To: <inutlj$jq5$1@dough.gmane.org>
+References: <inutlj$jq5$1@dough.gmane.org>
+Message-ID: <BANLkTiksH=SZiKepoWcL-dqFzJ7b9rRT1g@mail.gmail.com>
+
+I do wonder how Emscripten handles the GHC calling convention that is
+part of LLVM. In particular, global register declarations in the RTS
+scare me from a side line view, and LLVM's calling convention support
+is what makes the combination work at all in a registered environment.
+It's currently not even possible to compile code using global register
+variables to LLVM bitcode - it requires support everywhere from the
+frontend all the way to code generation. This is why LLVM uses a
+custom calling convention for GHC. The custom CC is also needed to
+make sure things like GC etc can work accurately - GC roots for
+example are always in predictable physical registers or somesuch.
+
+The RTS will probably need to be heavily modified or flat-out
+re-implemented in JS for this to work, I'd think (similar to ghcjs.)
+It's possible to get GHC to generate code that does not use global
+register variables (normally used when compiling via C, use ack and
+search for 'NO_REGS' in the source. It's primarily for unregisterized
+builds.) The result is fairly POSIX-compliant code that could be
+compiled with, say, clang to produce bitcode.
+
+However, forcing NO_REGS across GHC will mean that certain STG
+'registers' are instead mapped to stack locations, not real physical
+registers. So it changes the calling convention. The LLVM calling
+convention is currently only built to handle a registerized GHC from
+what I've seen, and upon entry to STG-land, it's going to expect that
+certain STG registers are pinned to physical machine registers.
+Result: disasterous CC mismatch.
+
+Of course, perhaps re-implementing the RTS in JS isn't a terrible,
+terrible idea. You could for example, swap out GHC's lightweight
+threading to use webworkers or somesuch. This would probably be a hell
+of a lot more difficult if you were compiling the real C RTS code into
+JS indirectly via LLVM.
+
+I don't know if Emscripten is the way to go for compiling Haskell to
+JS, but it does open up more possibilities. It's going to be a lot of
+work no matter how you approach it though - perhaps we need some
+interested team of people willing to do the research.
+
+(NB: I could be wrong on the LLVM note; David T. or one of the Simons
+would probably know more and be more qualified to answer.)
+
+On Mon, Apr 11, 2011 at 7:54 AM, S?nke Hahn <shahn at cs.tu-berlin.de> wrote:
+> Hi all!
+>
+> I haven't tried the tool myself, but it seems interesting to the Haskell
+> efforts to compile to JavaScript:
+>
+> http://syntensity.blogspot.com/2011/04/emscripten-10.html
+>
+> Cheers,
+> S?nke
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Regards,
+Austin
+
+

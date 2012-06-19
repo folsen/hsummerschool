@@ -1,0 +1,54 @@
+From artyom.kazak at gmail.com  Fri Dec 30 22:48:33 2011
+From: artyom.kazak at gmail.com (Artyom Kazak)
+Date: Fri, 30 Dec 2011 23:48:33 +0200
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <1325276916.16545.222.camel@godel>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <jdh9h6$gba$1@dough.gmane.org>
+	<4EFCA66D.4060609@blueyonder.co.uk> <jdiesl$5sp$1@dough.gmane.org>
+	<4EFCCA86.4020709@blueyonder.co.uk> <jdjtv1$6r0$1@dough.gmane.org>
+	<CAD6SzRLxjE7Xgi6dXMknwt0oFRN_m3Z868jAKnsayR=w1=Se6w@mail.gmail.com>
+	<FD41967A-36F7-4203-87E3-D4392146C53D@mobileink.com>
+	<CABHqrUm6W8Gw66E7S8RVQe3os5TqDQiPCn-vtuxw4aPOf2R2rA@mail.gmail.com>
+	<8F4B5EDB-3653-44F1-86A9-5AEC32EFD475@mobileink.com>
+	<CABHqrUmvkEJD5dX2TUvj3_HF0sD+BpbPu2Mn4to7=oqXcxAkdQ@mail.gmail.com>
+	<FE478236-BE49-4C1C-941A-B51AB1CDD043@mobileink.com>
+	<CAD6SzRLeZ-r0Ebzz5pSeSWVtw=5RPc7aCYyQB_DxfqC+NhXA4w@mail.gmail.com>
+	<EC631798-2BB6-4D56-9FC6-526B794B4EAE@mobileink.com>
+	<1325275461.16545.215.camel@godel> <op.v7bmpqekshvy2l@artyom-nbook>
+	<1325276916.16545.222.camel@godel>
+Message-ID: <op.v7bn67h1shvy2l@artyom-nbook>
+
+Chris Smith <cdsmith at gmail.com> ?????(?) ? ????? ?????? Fri, 30 Dec 2011  
+22:28:36 +0200:
+
+I really think that the notion of ?purity? appeared to convince C  
+programmers. It would be silly to try to explain that ?Int -> IO Int?  
+isn't really a function from Int to Int, monads, blah blah blah. So, we're  
+saying: ?here is a function which accepts Int and (sic!) returns Int, but  
+it can also do IO, which is kinda unsafe. So we are marking it with ?IO?  
+letters, see? This means that this function is ?impure?. And to prevent  
+mixing pure things with impure things, compiler demands you to mark with  
+IO every ?function? which ?uses? IO?.
+
+Functions don't use IO. Funtions return IO <something>. And functions  
+returning IO are impure. That's all.
+
+> This is a valid concern... assigning a meaning to values of IO types
+> necessarily involves some very unsatisfying hand-waving about
+> indeterminacy, since for example IO actions can distinguish between
+> bottoms that are considered equivalent in the denotational semantics of
+> pure values (you can catch a use of 'error', but you can't catch
+> non-termination).  Nevertheless, I'm satisfied that to the extent that
+> any such meaning can be assigned, f will be a valid function on
+> non-bottom values.  Not perfect, but close.
+
+Agree. The fact that IO actions can distinguish between bottoms,  
+self-modify code, terminate non-terminable computations by rebooting the  
+system, send killbots to the programmer's house and so on are extremely  
+unsatisfying. That's IO for you.
+
+The dirty impure bottom comparison which uses IO, though, is available  
+only to already impure functions.
+
+

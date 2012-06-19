@@ -1,0 +1,64 @@
+From gracjanpolak at gmail.com  Wed Dec 28 10:33:45 2011
+From: gracjanpolak at gmail.com (Gracjan Polak)
+Date: Wed, 28 Dec 2011 09:33:45 +0000 (UTC)
+Subject: [Haskell-cafe]
+	=?utf-8?q?How_hard_is_it_to_start_a_web_startup_us?=
+	=?utf-8?q?ing=09Haskell=3F?=
+References: <loom.20111218T175134-76@post.gmane.org>
+	<CAKA2JgJEUfh0jyS5Dy3w5f6QS-wg-kGEmfyH8eDxjncYMf9Nuw@mail.gmail.com>
+	<CACZKWEKH+4KHRhmAs6CV-YN9s14JpBt=Ss8Qr=xQUBT9Qwhu+Q@mail.gmail.com>
+	<CAH6e9LhQNM-nMXOYYFjz69TMgaDKHW5BJEOYHuV4gOJAntr32A@mail.gmail.com>
+	<CACqaG6zvBD2dYOCxq21d4=Ku65vx=MEO8vRbGO5fu-9greS5Mw@mail.gmail.com>
+	<CAH6e9Lg_-b6aFQQXQkU=Nm0BJHbM9xy_2Pd5wAr65yAaTHkafg@mail.gmail.com>
+	<CAFj8LZdj42PEN6Kbnkro5=zdGAL6VaNCOwXfYmYrVEy-BOHOxg@mail.gmail.com>
+Message-ID: <loom.20111228T102225-87@post.gmane.org>
+
+Haisheng Wu <freizl <at> gmail.com> writes:
+
+> 
+> 
+> Turns out that those guys doing?start-up?with Haskell are already expert
+> at Haskell. Hence choosing Haskell is more?straightforward.
+
+We hope to become experts while doing Haskell.
+
+> I'm thinking of using Haskell since it looks cool and beautiful.
+
+Sense of internal taste is very important in engineering. And this is true
+whatever language you choose.
+
+> However I have little?experience?and will move slowly at certain
+> begging period. This sounds not good to a startup company.
+> 
+> Comparing with Django in Python, Rails in Ruby, yesod and snap looks
+> not that mature.
+
+Add whole Hackage to the list an suddenly Haskell looks on par with most of
+other things out there. 
+
+> 
+> Also, for instance, I'd like to build up a CRM application company, I
+could?leverage?some open source projects in other languages. ?In Haskell, we
+need to build from?scratch?basically.
+
+And that may be of course downside. If you happen do to what most other people
+are doing out there, then using premade components is good option.
+
+> Appreciate?your suggestions/comments.
+
+There was a reason 37signals decided to go with unknown little language and
+create Rails from scratch. There was a reason Paul G. started viaweb in Lisp.
+There was a reason that Apple things are programmed in Objective C instead of
+plain C or plain Smalltalk. There was a reason that made Larry create perl
+instead of sticking to awk+sed.
+
+Of course you are to decide how much of these reasons apply to your situation.
+
+Good luck anyway!
+
+-- 
+Gracjan
+
+
+
+

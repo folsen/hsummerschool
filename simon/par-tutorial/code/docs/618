@@ -1,0 +1,19 @@
+From fuzxxl at gmail.com  Fri Apr 22 14:16:08 2011
+From: fuzxxl at gmail.com (Robert Clausecker)
+Date: Fri, 22 Apr 2011 14:16:08 +0200
+Subject: [Haskell-cafe] Is Hugs dead?
+Message-ID: <1303474568.13029.4.camel@fuzxxl>
+
+Some weeks ago, I mirrored the hugs repo to github.
+(https://github.com/fuzxxl/Hugs) This was, when I found out, that the
+last commit was about 2 years ago. Also, since some of the dependencies
+moved, I was unable to build hugs.
+
+Now my question is: Is Hugs dead? What's the status of development of
+hugs?
+
+Yours, Robert Clausecker
+
+
+
+

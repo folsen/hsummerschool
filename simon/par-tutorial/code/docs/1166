@@ -1,0 +1,22 @@
+From qdunkan at gmail.com  Tue Aug 16 22:04:48 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Tue, 16 Aug 2011 13:04:48 -0700
+Subject: [Haskell-cafe] why is Random in System?
+Message-ID: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+
+I've noticed there's a convention to put modules having to deal with
+randomness into System.Random.  I thought System was for OS
+interaction?  Granted getting a random seed usually means going to the
+OS, but isn't the rest of it, like generating random sequences,
+distributions, selecting based on probability, shuffling, etc. all
+non-OS related algorithms?
+
+I'm not sure where I would expect Random to go, perhaps Math or maybe
+the toplevel, but under System seems, well, random...
+
+I notice random-fu puts it under Data, which is also not where I'd
+look, except that you always look in Data because everything goes into
+Data... but algorithms dealing with random numbers aren't really data
+structures either, are they?
+
+

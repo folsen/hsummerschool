@@ -1,0 +1,38 @@
+From mle+hs at mega-nerd.com  Sun Apr 17 12:29:26 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Sun, 17 Apr 2011 20:29:26 +1000
+Subject: [Haskell-cafe] http://trac.haskell.org/ not redering correctly
+Message-ID: <20110417202926.0058e617.mle+hs@mega-nerd.com>
+
+Hi all,
+
+Trac pages aren't rendering correctly. It seems the HTTP server
+can't find the CSS files. See below.
+
+Cheers,
+Erik
+
+
+erikd > wget --proxy=off http://trac.haskell.org/trac/chrome/common/css/ticket.css -O /dev/null
+--2011-04-17 20:11:53--  http://trac.haskell.org/trac/chrome/common/css/ticket.css
+Resolving trac.haskell.org... 178.63.91.44, 2a01:4f8:121:6::1:10
+Connecting to trac.haskell.org|178.63.91.44|:80... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2011-04-17 20:11:56 ERROR 404: Not Found.
+
+erikd > wget --proxy=off http://trac.haskell.org/trac/chrome/common/css/trac.css -O /dev/null
+--2011-04-17 20:28:36--  http://trac.haskell.org/trac/chrome/common/css/trac.css
+Resolving trac.haskell.org... 178.63.91.44, 2a01:4f8:121:6::1:10
+Connecting to trac.haskell.org|178.63.91.44|:80... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2011-04-17 20:28:40 ERROR 404: Not Found.
+
+
+
+
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

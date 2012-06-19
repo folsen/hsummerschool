@@ -1,0 +1,41 @@
+From michael at snoyman.com  Mon Apr 11 18:22:48 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Mon, 11 Apr 2011 19:22:48 +0300
+Subject: [Haskell-cafe] Emscripten: compiling LLVM to JavaScript
+In-Reply-To: <inutlj$jq5$1@dough.gmane.org>
+References: <inutlj$jq5$1@dough.gmane.org>
+Message-ID: <BANLkTiknwf87H0781fEYmhuGXAyfuPOJ1A@mail.gmail.com>
+
+On Mon, Apr 11, 2011 at 3:54 PM, S?nke Hahn <shahn at cs.tu-berlin.de> wrote:
+
+> Hi all!
+>
+> I haven't tried the tool myself, but it seems interesting to the Haskell
+> efforts to compile to JavaScript:
+>
+> http://syntensity.blogspot.com/2011/04/emscripten-10.html
+>
+>
+I saw this same article this morning. I personally am not so interested in
+compiling Haskell to run as Javascript, though it definitely sounds like a
+nice idea. I was wondering if we can somehow build Haskell/LLVM bytecode
+bundles, similar to how Java code gets distributed as JARs. Imagine being
+able to do any/all of these:
+
+* Build a bundle from any package on Hackage.
+* Have a utility that can convert this to Javascript via emscripten
+* Create a Haskell runtime for different OSes that can run these bundles,
+and comes complete with GTK/Qt and a few other basic libraries.
+* Convert a bundle into something that can run natively on the JVM or CLR.
+* Create a "Haskell Web Start" where Haskell bundles can be run with a
+single click from the browser.
+
+This is far from my area of expertise, but I know that I could put such a
+system to good use. A lot of this stuff (running on JVM/CLR for instance)
+already has a good head start from efforts in the LLVM world.
+
+Michael
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110411/b128989b/attachment.htm>
+

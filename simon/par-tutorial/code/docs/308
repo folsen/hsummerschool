@@ -1,0 +1,80 @@
+From d.kahlenberg at googlemail.com  Mon Apr 11 16:30:53 2011
+From: d.kahlenberg at googlemail.com (Daniel Kahlenberg)
+Date: Mon, 11 Apr 2011 16:30:53 +0200
+Subject: [Haskell-cafe] already installed packages alerted as not being
+	installed
+In-Reply-To: <20110411.182600.94852454.kazu@iij.ad.jp>
+References: <BANLkTi=xDJO68sNZR5vi=NofwD3p0aZ3TA@mail.gmail.com>
+	<20110411.173233.34530666.kazu@iij.ad.jp>
+	<BANLkTikQPD5GojX8vZ_f9iQkgvrmydkO8Q@mail.gmail.com>
+	<20110411.182600.94852454.kazu@iij.ad.jp>
+Message-ID: <BANLkTimLLXqEtwCvesnDTAFZBzXkOv1gaw@mail.gmail.com>
+
+Ingenious,
+
+finally it is possible at least with the help of those two tools
+cabal-dev and cab to build the threadscope executable on Windows
+linked against gtk+-bundle_2.22.1-20101227_win32 version, thanks again
+to their developers.
+
+[Note to myself]
+How I did,
+
+1) as described in
+http://hackage.haskell.org/trac/gtk2hs/ticket/1203#comment:2 edited
+each Gtk2HsSetup.hs file
+2) In a mingw+msys shell (tar is needed, how to install -> I strongly
+recommend using mingw-get-inst:
+http://sourceforge.net/projects/mingw/files/Automated%20MinGW%20Installer/mingw-get-inst/
+to mention at a first place, you can easily add things then with the
+bundled mingw-get command) did
+
+   pushd /h/.homedir
+
+   cabal-dev add-source /h/.homedir/gtk2hs-buildtools-0.12.0/
+/h/.homedir/glib-0.12.0/ /h/.homedir/cairo-0.12.0/
+/h/.homedir/gio-0.12.0/ /h/.homedir/glade-0.12.0/
+/h/.homedir/pango-0.12.0/ /h/.homedir/gtk-0.12.0/
+
+   cab install threadscope --sandbox=/h/.homedir/cabal-dev
+
+To be honest the last command I even run at the Windows cmd.exe prompt.
+
+This all means h:/.homedir/cabal-dev contains the formerly broken
+dependencies sources patched by my edits in the .cabal files. It is
+used (--sandbox parameter) as a first repository for building
+threadscope later on, the other dependencies are loaded remotely by
+demand.
+
+The reason for breaking with cabal I could see as mentioned above by Kazu, with:
+
+   cab install threadscope -n
+
+threadscope needed different versions than the dependencies
+pre-installed with my former gtk2hs installation trial had.
+
+Cheers
+Daniel
+
+2011/4/11 Kazu Yamamoto <kazu at iij.ad.jp>:
+> Hello,
+>
+>> thanks I wanted to mention that the "unknown symbol" error is very
+>> likely not related to the cab tool as the same error appears, when
+>> using the cabal - tool. I guess we can ignore it even in the context
+>> of my main question, sorry for being to verbose. What I found more
+>> interesting is, that cab doesn't try to re-install an installed
+>> package - already in the database too, as ghc-pkg output pretends -
+>> which is expected behaviour. The cabal system frontend obviously does
+>> trying to reinstall the package though. This seems like different
+>> model of reality...
+>
+> This is not true.
+>
+> cab install re-installs some packages if necessary, unfortunately.
+> That's why I recommend to use "cab install -n".
+>
+> --Kazu
+>
+
+

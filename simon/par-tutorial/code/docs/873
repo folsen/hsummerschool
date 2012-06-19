@@ -1,0 +1,48 @@
+From es at ertes.de  Fri Apr 29 12:10:17 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Fri, 29 Apr 2011 12:10:17 +0200
+Subject: [Haskell-cafe] Python is lazier than Haskell
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<87vcy0vxdq.fsf@malde.org> <loom.20110428T091338-92@post.gmane.org>
+	<20110428172708.22b30845@angst.streitmacht.eu>
+	<BANLkTimqYuX6mNsqAMEHDKO9cvhvE+gkPw@mail.gmail.com>
+Message-ID: <20110429121017.1c01bc8d@angst.streitmacht.eu>
+
+Chris Smith <cdsmith at gmail.com> wrote:
+
+> > > Sometimes I wish for a -fphp flag that would turn some type errors
+> > > into warnings. Example:
+> > >
+> > > v.hs:8:6:
+> > >     Couldn't match expected type `[a]' against inferred type `()'
+> > >     In the first argument of `a', namely `y'
+> > >     In the expression: a y
+> > >     In the definition of `c': c = a y
+> > >
+> > > GHC could substitute 'y = error "Couldn't match expected type
+> > > `[a]' against inferred type `()'"' and compile anyway.
+> > >
+> > > Would that bring Haskell closer to Python?
+> >
+> > It would make people abuse that feature.  I don't want it.
+>
+> I do, particularly in GHCi.  I don't mind if Haskell refuses to build
+> a binary, but having to comment out coded in order to load bits in
+> GHCi is definitely a pain.
+
+I wonder why I don't have to do that.  You may be thinking in a
+different language.  With the semantics of Haskell also comes a certain
+programming style, I think.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

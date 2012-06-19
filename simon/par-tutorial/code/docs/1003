@@ -1,0 +1,20 @@
+From ezyang at MIT.EDU  Tue Aug  9 22:40:06 2011
+From: ezyang at MIT.EDU (Edward Z. Yang)
+Date: Tue, 09 Aug 2011 16:40:06 -0400
+Subject: [Haskell-cafe] Error in the asynchronous exception operational
+	semantics
+Message-ID: <1312922260-sup-2735@ezyang>
+
+Hello all,
+
+I was recently reading "Asynchronous Exceptions as an Effect" by Harrison,
+Allwein, Gill and Procter, and noticed at the end that they found an error
+in the operational semantics described in "Asynchronous Exceptions in Haskell"
+by the Simons and Andrew Moran.  Does anyone know what this error was, and
+whether or not it was corrected in the December 12, 2006 version of the paper
+floating around on the net?
+
+Thanks,
+Edward
+
+

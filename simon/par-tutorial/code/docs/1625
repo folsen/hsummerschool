@@ -1,0 +1,32 @@
+From mle+hs at mega-nerd.com  Sat Dec  3 11:19:31 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Sat, 3 Dec 2011 21:19:31 +1100
+Subject: [Haskell-cafe] Weird interaction between literate haskell,
+ ghci and OverloadedStrings
+In-Reply-To: <1322902919.2611.1.camel@kirk>
+References: <20111203161824.f134a60f1a8a9ee4ece50ff4@mega-nerd.com>
+	<1322902919.2611.1.camel@kirk>
+Message-ID: <20111203211931.6e9baf3a5eb56f9bdee9c9aa@mega-nerd.com>
+
+Joachim Breitner wrote:
+
+> it does not seem to be related to literate haskell, if I copy the code
+> from your file into a .hs without the "> ", ghci still does not activate
+> the OverloadedStrings extension when loading the file.
+
+I hadn't noticed that.
+ 
+> I?d consider this a bug until the developers explain why this should or
+> cannot be different, and suggest you file it as such.
+
+I agree. I've lodged a bug report here:
+
+    http://hackage.haskell.org/trac/ghc/ticket/5673
+
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

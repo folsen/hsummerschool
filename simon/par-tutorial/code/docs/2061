@@ -1,0 +1,56 @@
+From nomeata at debian.org  Sat Dec 17 22:47:46 2011
+From: nomeata at debian.org (Joachim Breitner)
+Date: Sat, 17 Dec 2011 22:47:46 +0100
+Subject: [Haskell-cafe] Announce: The Haskell Platform 2011.4
+In-Reply-To: <CAFd+Dr3kaJorXBEqcSFfjES0JtOJ5eEOeZ3-bJSAAwj-1LFpdw@mail.gmail.com>
+References: <CAFd+Dr3kaJorXBEqcSFfjES0JtOJ5eEOeZ3-bJSAAwj-1LFpdw@mail.gmail.com>
+Message-ID: <1324158466.3684.21.camel@kirk>
+
+Hi,
+
+Am Samstag, den 17.12.2011, 16:04 -0500 schrieb Don Stewart:
+> We're pleased to announce the release of the Haskell Platform: a
+> single, standard Haskell distribution for everyone.
+> 
+> Download the Haskell Platform 2011.4.0.0:
+
+we are pleased to announce the release of the Haskell Platform on
+Debian: Version 2011.4.0.0 has just been uploaded to the unstable suite.
+In a few hours you will see it also on 
+http://packages.debian.org/sid/haskell-platform
+
+(Ok, this is a bit of cheating; we have packaged the required libraries
+already a few weeks back, based on the unreleased platform cabal file at
+http://code.haskell.org/haskell-platform/haskell-platform.cabal, and now
+just bumped the version number of the meta package.)
+
+If everything goes well the updated packages will be available in Debian
+testing (?wheezy?) in two or three days.
+
+Note that Debian slightly deviates from the version constraints as
+specified in the official platform package, due to non-platform
+libraries and programs requiring newer versions. At the moment, this is:
+        alex    version 3.0.1      instead of 2.3.5
+        cgi     version 3001.1.8.2 instead of 2001.1.7.4
+        network version 2.3.0.6    instead of 2.3.0.5
+
+You can always check the various platform package versions available in
+Debian stable (?squeeze?), testing (?wheezy?) and unstable (?sid?) on
+http://people.debian.org/~nomeata/platform.html
+
+On behalf of the Debian Haskell Group,
+Joachim Breitner
+
+-- 
+Joachim "nomeata" Breitner
+Debian Developer
+  nomeata at debian.org | ICQ# 74513189 | GPG-Keyid: 4743206C
+  JID: nomeata at joachim-breitner.de | http://people.debian.org/~nomeata
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111217/18a473c3/attachment.pgp>
+

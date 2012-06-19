@@ -1,0 +1,25 @@
+ From a pure functional point of view, that should return the same 
+action every time. Well, the partially evaluated getAnIntFromTheUser has 
+the same structure each time - but the actual Int packaged inside the 
+action isn't decided until runtime, when the action is executed. At 
+compile-time, that action can only be partially evaluated - the final 
+value OF THE ACTION depends on what Int the user chooses to give because 
+that Int is a part of the action value.
+
+For your specific challenge, place that as a left-hand argument in a bind...
+
+f :: Int -> IO Int
+f = getAnIntFromTheUser >>= \i -> return (i+1)
+
+Well, the value of i isn't decidable until runtime. The value of i+1 is 
+not decidable until runtime. The value of return (i+1) is not decidable 
+until runtime and so on. It can only be partially evaluated at 
+compile-time, but when it is fully evaluated, you get a different IO 
+action returned by f depending on what Int you got from the user.
+
+And so we get right back to the 
+referential-transparency-by-referencing-the-world-as-an-argument thing, 
+I guess.
+
+
+

@@ -1,0 +1,30 @@
+From shakthimaan at gmail.com  Tue Dec  6 10:02:22 2011
+From: shakthimaan at gmail.com (Shakthi Kannan)
+Date: Tue, 6 Dec 2011 14:32:22 +0530
+Subject: [Haskell-cafe] Complete package description list
+In-Reply-To: <562B8200B62844479E12147F0AA7B3B30B5D216788@NSQ161EX.enterprise.internal.city.ac.uk>
+References: <CABG-yt094g5_Q4ZQh9+B9drQi4os+Wqm7O1t2TMkYyXDbTwvMQ@mail.gmail.com>
+	<562B8200B62844479E12147F0AA7B3B30B5D216788@NSQ161EX.enterprise.internal.city.ac.uk>
+Message-ID: <CABG-yt1gAjaCYi2DHwixbAVG7swsX2c6Q5wp08yP5mrtDgnFcA@mail.gmail.com>
+
+Hi,
+
+--- On Tue, Dec 6, 2011 at 2:15 PM, Paterson, Ross
+<R.Paterson at city.ac.uk> wrote:
+| It is updated each time a new package is uploaded, and contains the
+| .cabal files for all available packages.
+\--
+
+So, how would I know if there is a new package in it, other than
+having to compare it to the previous snapshot? Does the filename
+(00-index.tar.gz) change?
+
+Thanks for your reply,
+
+SK
+
+-- 
+Shakthi Kannan
+http://www.shakthimaan.com
+
+

@@ -1,0 +1,39 @@
+From daniel.is.fischer at googlemail.com  Tue Feb  1 13:59:22 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Tue, 1 Feb 2011 13:59:22 +0100
+Subject: [Haskell-cafe] Inheritance and Wrappers
+In-Reply-To: <AANLkTikKFYxQJQOwv5nvPgafaCMK0R7nLhze4mhScBY1@mail.gmail.com>
+References: <AANLkTi=3pSG0U+3H+0GU7E3h+0z9nMgbq1YgmKyJauQ5@mail.gmail.com>
+	<AANLkTi=5Nk1dLZZVfCmfnHE3pZBaMMmUy1S6jdtSfVvP@mail.gmail.com>
+	<AANLkTikKFYxQJQOwv5nvPgafaCMK0R7nLhze4mhScBY1@mail.gmail.com>
+Message-ID: <201102011359.22479.daniel.is.fischer@googlemail.com>
+
+On Tuesday 01 February 2011 13:45:34, Ozgur Akgun wrote:
+> I want to be able to write the following instance to accomplish that:
+>
+> instance Data t => Term t where
+> ? ? termTag = show . toConstr
+>
+> And if the user wants to write a more specific instance, they should be
+> welcome to do so:
+>
+> instance Term UserDT where
+> ? ? termTag (...) = ...
+>
+> I am not very much interested in the technical details about how things
+> currently are, I am more interested in a discussion about why (if?) this
+> would be considered a *design flaw*?
+
+I think the strongest reason to consider it a design flaw is the current 
+implementation, that instance selection doesn't take contexts into account.
+Things being as they are, an
+
+instance A a => B a where ...
+
+just isn't very useful. If instance selection took contexts into account, 
+such an instance might be useful, but it would still prevent users from 
+declaring instances for both classes (without an extension which would have 
+much the same problems as OverlappingInstances).
+
+
+

@@ -1,0 +1,41 @@
+From aslatter at gmail.com  Sat Aug 13 18:43:54 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Sat, 13 Aug 2011 11:43:54 -0500
+Subject: [Haskell-cafe] Array and Ix for custom Graph ADT
+In-Reply-To: <FB1023D2-50B4-4E73-B0A2-0BEFFBBCD834@chariot.net.au>
+References: <FB1023D2-50B4-4E73-B0A2-0BEFFBBCD834@chariot.net.au>
+Message-ID: <CAKjSnQHZ_1cX3MaspcVWaTXUh42J3G5fqqVQXoQpLrGAAZVV4w@mail.gmail.com>
+
+On Sat, Aug 13, 2011 at 4:37 AM, Mark Spezzano
+<mark.spezzano at chariot.net.au> wrote:
+> Hi,
+>
+> I'm creating a Graph data structure, and I want to use the array list approach, implemented as an Array.
+>
+> I need my Nodes to be instances of Ix for this to work and my Node type is roughly as follows:
+>
+> data Node = MyNode Int [Int] Type1 Type2
+>
+> (Type1 and Type2 are nullary algebraic datatypes--enumerations in other words)
+>
+> How can I "index" the Array with an instance of a Node. I think I need to make Node an instance of Ix somehow??
+>
+
+What do the 'Int' and '[Int]' fields represent in your Node type?
+
+Antoine
+
+> Is this a sensible approach? Sample code of the instance declaration for Ix would be helpful.
+>
+>
+> Thanks
+>
+> Mark Spezzano
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

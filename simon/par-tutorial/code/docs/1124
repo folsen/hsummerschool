@@ -1,0 +1,48 @@
+From ezyang at MIT.EDU  Sun Aug 14 20:27:54 2011
+From: ezyang at MIT.EDU (Edward Z. Yang)
+Date: Sun, 14 Aug 2011 14:27:54 -0400
+Subject: [Haskell-cafe] how to read CPU time vs wall time report from
+	GHC?
+In-Reply-To: <20110814182502.GA13795@teal.hq.k1024.org>
+References: <4E480FD8.7070301@uu.nl> <20110814182502.GA13795@teal.hq.k1024.org>
+Message-ID: <1313346466-sup-534@ezyang>
+
+Ah, good catch. :-)
+
+Edward
+
+Excerpts from Iustin Pop's message of Sun Aug 14 14:25:02 -0400 2011:
+> On Sun, Aug 14, 2011 at 08:11:36PM +0200, Wishnu Prasetya wrote:
+> > Hi guys,
+> > 
+> > I'm new in parallel programming with Haskell. I made a simple test
+> > program using that par combinator etc, and was a bit unhappy that it
+> > turns out to be  slower than its sequential version. But firstly, I
+> > dont fully understand how to read the runtime report produced by GHC
+> > with -s option:
+> > 
+> >   SPARKS: 5 (5 converted, 0 pruned)
+> > 
+> >   INIT  time    0.02s  (  0.01s elapsed)
+> >   MUT   time    3.46s  (  0.89s elapsed)
+> >   GC    time    5.49s  (  1.46s elapsed)
+> >   EXIT  time    0.00s  (  0.00s elapsed)
+> >   Total time    8.97s  (  2.36s elapsed)
+> > 
+> > As I understand it from the documentation, the left time-column is
+> > the CPU time, whereas the right one is elapses wall time. But how
+> > come that the wall time is less than the CPU time? Isn't wall time =
+> > user's perspective of time; so that is CPU time + IO + etc?
+> 
+> Yes, but if you have multiple CPUs, then CPU time "accumulates" faster
+> than wall-clock time.
+> 
+> Based on the above example, I guess you have or you run the program on 4
+> cores (2.36 * 4 = 9.44, which means you got a very nice ~95%
+> efficiency).
+> 
+> regards,
+> iustin
+> 
+
+

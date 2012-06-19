@@ -1,0 +1,22 @@
+From greg at gregweber.info  Thu Aug 11 16:18:03 2011
+From: greg at gregweber.info (Greg Weber)
+Date: Thu, 11 Aug 2011 07:18:03 -0700
+Subject: [Haskell-cafe] ANNOUNCE: Chell: A quiet test runner (low-output
+	alternative to test-framework)
+Message-ID: <CAKRanNDhqzL-t1z-ykP0sHY1ktQqOLX6JwAONsCzHxRJhsNF8A@mail.gmail.com>
+
+Hi John,
+
+I am wondering if you have seen the hspec package? [1] It seems to solve all
+the problems you are with chell, including that it silences Hunit output. We
+are using it for all the Yesod tests now.
+
+Thanks,
+Greg Weber
+
+[1]:
+http://hackage.haskell.org/packages/archive/hspec/0.6.1/doc/html/Test-Hspec.html
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110811/341f3184/attachment.htm>
+

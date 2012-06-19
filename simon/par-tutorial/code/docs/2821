@@ -1,0 +1,47 @@
+From allbery.b at gmail.com  Tue Feb  8 01:08:44 2011
+From: allbery.b at gmail.com (Brandon S Allbery KF8NH)
+Date: Mon, 07 Feb 2011 19:08:44 -0500
+Subject: [Haskell-cafe] coding style vs. foreign interfaces
+In-Reply-To: <20110207173605.A93E3276C4F@mail.avvanta.com>
+References: <20110207031018.F30AA276C45@mail.avvanta.com>	<AANLkTin0RLYYepedjidow5LHv5hdky7HDD0cDtwxEXKa@mail.gmail.com>
+	<20110207173605.A93E3276C4F@mail.avvanta.com>
+Message-ID: <4D50898C.7060302@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 2/7/11 12:36 , Donn Cave wrote:
+> I don't know the OpenGL example, but I gather you're talking about
+> an API that's different in a practical way, not just a thin layer
+> with the names spelled differently.  In that case, assuming that
+> it really is more Haskell-functional-etc, vive la difference!  No
+> one would argue with this, I think.
+
+Usually the low level one is merely a thin layer, whereas the high level one
+is more than just Haskell conventions but a proper Haskell-style API, using
+e.g. monads instead of opaque state blobs.
+
+> helpfully reveals the actual POSIX 1003.1 function names, but
+> try for example to figure out what has become of the the fairly
+> commonly used "ICANON" flag, without looking at the source.
+> If you're hoping that in the course of time a significantly
+> functionally designed API will come along for any of these things,
+> note that names it might have used are already taken.
+
++1.  The stuff that's a thin wrapper, such as System.Posix.*, should keep
+names as close to the API it's mirroring as possible; if you want to rename
+them, do it in the context of an actual Haskell API.
+
+- -- 
+brandon s. allbery     [linux,solaris,freebsd,perl]    allbery.b at gmail.com
+system administrator  [openafs,heimdal,too many hats]                kf8nh
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk1QiYsACgkQIn7hlCsL25UZ4gCgrS2vGDNqk0QPyPB9+ZVCCYHi
+oBsAnA5XJyHSozeEny+xlnNcL+K5ZfAy
+=AfVP
+-----END PGP SIGNATURE-----
+
+

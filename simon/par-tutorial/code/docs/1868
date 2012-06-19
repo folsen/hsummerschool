@@ -1,0 +1,29 @@
+From chowells79 at gmail.com  Mon Dec 12 18:42:40 2011
+From: chowells79 at gmail.com (Carl Howells)
+Date: Mon, 12 Dec 2011 09:42:40 -0800
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+Message-ID: <CAECnf4ApS=L-YmMLUTCpB7b+kqv3Dps15irucqrngybxau_iAQ@mail.gmail.com>
+
+> Don't be silly. The purpose of some and many is to be used with combinators
+> that are expected to fail sometimes. If you use them with combinators that
+> always succeed, of course you're going to get an infinite loop. Would you
+> propose to ban recursive functions because they might not terminate?
+>
+> Apparently the confusion here lies with the fact that the documentation for
+> some and many are too terse for their behaviour to be easily understood.
+> That's a whole different category of problem than "ban them!".
+
+Well, as I read it, the whole point of this thread was "They don't
+make sense for many instances of Alternative.  They should be moved to
+a different class."  It sounded like you were arguing that any
+instance of Alternative where they don't make sense shouldn't be an
+instance of Alternative, instead.
+
+Carl
+
+

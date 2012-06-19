@@ -1,0 +1,59 @@
+From carsten at codimi.de  Tue Feb  1 20:26:16 2011
+From: carsten at codimi.de (Carsten Schultz)
+Date: Tue, 01 Feb 2011 20:26:16 +0100
+Subject: [Haskell-cafe] Haskell function help
+In-Reply-To: <1296565545358-3366154.post@n5.nabble.com>
+References: <1296559086493-3365994.post@n5.nabble.com>	<201102011338.16780.daniel.is.fischer@googlemail.com>	<1296564962294-3366134.post@n5.nabble.com>	<1296565104932-3366135.post@n5.nabble.com>
+	<1296565545358-3366154.post@n5.nabble.com>
+Message-ID: <ii9mop$2gt$1@dough.gmane.org>
+
+Am 01.02.11 14:05, schrieb Houdini:
+> 
+> that is really.....complicated...hmm
+
+Maybe you find
+
+
+assign :: (Atom,Bool)->Formula->Formula
+
+assign _ [] = []
+assign (a,b) (c:cs)
+       | (b,a) `elem` c = cs'
+       | otherwise = filter ((/= a).snd) c : cs'
+       where cs' = assign (a,b) cs
+
+
+easier to read.  With
+
+
+example :: Formula
+example = [[p,q,r],[n p,q,n r],[p,n q]]
+    where p = l "P"
+          q = l "Q"
+          r = l "R"
+          l a = (True, a)
+          n (b,a) = (not b, a)
+
+
+we get
+
+*Algorithm> example
+[[(True,"P"),(True,"Q"),(True,"R")],[(False,"P"),(True,"Q"),(False,"R")],[(True,"P"),(False,"Q")]]
+*Algorithm> assign ("P", True) example
+[[(True,"Q"),(False,"R")]]
+*Algorithm> assign ("P", False) example
+[[(True,"Q"),(True,"R")],[(False,"Q")]]
+
+But note that we also get
+
+*Algorithm> assign ("P", False)
+[[(True,"P"),(True,"Q"),(True,"R")],[(False,"P"),(True,"Q"),(False,"R")],[(True,"P")]]
+[[(True,"Q"),(True,"R")],[]]
+
+So this is not reduced to [[]].
+
+hth C.
+
+
+
+

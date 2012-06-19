@@ -1,0 +1,30 @@
+From limestrael at gmail.com  Sat Apr  2 13:16:23 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Sat, 2 Apr 2011 13:16:23 +0200
+Subject: [Haskell-cafe] Multi agent system
+Message-ID: <BANLkTik4mp16fYnsM4yU=12xVPGZeMqoWw@mail.gmail.com>
+
+Hello,
+
+For the purpose of a simple game, I'm looking for a simple way to get agents
+communicating with each other, with agents possibly running on different
+threads:
+
+Basically, an agent is Agent :: * -> *, since it is parameterized with the
+type of messages it can receive, and can make two basic operations:
+fetch, which gives it the messages in its mailbox
+and send, which sends a message a to an Agent a
+
+Given that haskell threads are lightweight, is it reasonable to lauch a
+thread per agent and then implement fetch and send through Chans?
+It will be simple to implement and to use, but if I have, say, two hundreds
+of really dumb (sorry, *reactive *^^) agents, like ants, I will have to
+launch as many threads.
+
+I could use a neater abstraction than IO to model agents (FRP is perfect for
+that), but I would loose the benefits of concurrent programming (or I won't
+be able to keep things simple).
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110402/2355d052/attachment.htm>
+

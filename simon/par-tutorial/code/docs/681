@@ -1,0 +1,66 @@
+From nadine.and.henry at pobox.com  Sun Apr 24 16:21:03 2011
+From: nadine.and.henry at pobox.com (nadine.and.henry at pobox.com)
+Date: Sun, 24 Apr 2011 09:21:03 -0500
+Subject: [Haskell-cafe] generics and sql
+Message-ID: <19892.12751.507521.701489@myth.localdomain>
+
+Dear Group,
+
+Greetings.  I have a feeling that what I am trying to do is easy, I
+just don't know how to say it in Haskell.  Let's start with:
+
+> {-# LANGUAGE 
+>    DeriveDataTypeable,  GeneralizedNewtypeDeriving  #-}
+> 
+> import Database.HDBC
+> import Data.Typeable (Typeable)
+> import Data.Data 
+> data C = C { str :: String, dbl:: Double }
+>   deriving (Eq, Ord, Typeable, Data)
+> 
+> a :: C
+> a = C "twelve" 12.0
+> 
+
+Now I load this up in ghci and I can do the following:
+
+ toSql . str $ a  -- result: SqlString "twelve"
+ toSql . dbl $ a  -- result: SqlDouble 12.0
+
+but what I would really like to do is something like:
+
+gmapQ toSql $ a
+
+which results in:
+<interactive>:1:7:
+    Could not deduce (Convertible d SqlValue)
+      arising from a use of `toSql'
+    from the context (Data d)
+      bound by a type expected by the context: Data d => d -> SqlValue
+      at <interactive>:1:1-11
+    Possible fix:
+      add (Convertible d SqlValue) to the context of
+        a type expected by the context: Data d => d -> SqlValue
+      or add an instance declaration for (Convertible d SqlValue)
+    In the first argument of `gmapQ', namely `toSql'
+    In the expression: gmapQ toSql
+
+In other words, I'm looking for a function with a signature:
+
+(Whatever Instances I neeed here) => a -> [SqlValue]
+
+I have tried various incantations of type signatures, but thus far I
+can't get it right.  Can someone point me in the right direction?  Thanks.
+
+Henry Laxen
+
+-- 
+Nadine & Henry Laxen    Belle, Venus, Aphrodite
+10580 N. McCarran Blvd. Adonis, Miss Parker & Jarod
+Suite 115-396           Via Alta # 6
+Reno, Nevada            Chapala, Jalisco, Mexico 
+89503-1896              CP 45900
+         The rest is silence.  (Hamlet)
+
+
+

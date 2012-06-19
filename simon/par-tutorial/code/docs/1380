@@ -1,0 +1,92 @@
+From conrad at metadecks.org  Fri Aug 26 02:52:29 2011
+From: conrad at metadecks.org (Conrad Parker)
+Date: Fri, 26 Aug 2011 08:52:29 +0800
+Subject: [Haskell-cafe] hledger subcommand detection, RFC
+In-Reply-To: <C25C6A8C-5F36-41FC-9AEB-E8055D00B77D@joyful.com>
+References: <C25C6A8C-5F36-41FC-9AEB-E8055D00B77D@joyful.com>
+Message-ID: <CA+FqJiGyE5OxrLy7vd5+DzeD6_iysi5wzxSHVuY7qa8afKB-hA@mail.gmail.com>
+
+Hi Simon,
+
+good stuff! this is the same approach that eg. git uses, it seems to
+be quite flexible.
+
+I did a similar thing for a C project called oggz a while back:
+
+http://lists.xiph.org/pipermail/ogg-dev/2008-August/001110.html
+
+some other useful things you could add:
+
+  * a "help" subcommand built-in to the hledger wrapper, which
+basically translates eg "hledger help report" into "man
+hledger-report" or "hledger-report --help" (depending on availability,
+platform etc.)
+
+  * an option to all commands that lists out all its available
+options, to aid with shell completion. See the link I posted above
+about the oggz tools for an example usage and a link to a bash
+completion file.
+
+I wrapped up some manpage generation code in a package called
+ui-command, which is kind of orthogonal to cmdargs (ui-command just
+deals with subcommands). Example commands are often useful, so I added
+those, with validity checking, to hogg (a Haskell version of oggz).
+Some related posts:
+
+http://blog.kfish.org/2008/03/release-hogg-040.html
+http://blog.kfish.org/2008/12/release-hogg-041.html
+
+cheers,
+
+Conrad.
+
+On 26 August 2011 08:22, Simon Michael <simon at joyful.com> wrote:
+> When I split up the hledger package, I always intended to make the hledger
+> program act as a single front end for hledger-* executables. I finally got
+> around to trying that, just pushed to darcs [1]. So hledger now searches
+> your PATH at startup and offer any hledger-* executables as subcommands.?To
+> make this fully modular, so that options can be reused and third-party
+> add-ons don't need to be baked in to hledger in any way, there has also been
+> a rather extensive options overhaul, using cmdargs.?Below?is an
+> example?[2]?of the new help output with all hledger-* packages plus a local
+> hledger-report.hs script installed.
+> I'm not sure if this is fully safe, cross-platform, robust, quick enough to
+> be unnoticeable, etc. I have about 20 dirs and 4k files in my PATH. I
+> haven't noticed a slowdown on macbook or vps, but have not measured. More
+> testing of this on diverse platforms and machines, or code review, would be
+> very welcome.
+> -Simon
+> [1]?http://joyful.com/darcsden/simon/hledger/browse/hledger/Hledger/Cli/Options.hs#L-330
+> [2]
+> $ hledger
+> hledger [COMMAND] ... [OPTIONS]
+> ? run the specified hledger command. hledger COMMAND --help for more detail.
+> ? In general, COMMAND should precede OPTIONS.
+> Misc commands:
+> ? add ? ? ? prompt for new transactions and append them to the journal
+> ? convert ? show the specified CSV file as hledger journal entries
+> ? test ? ? ?run self-tests, or just the ones matching REGEXPS
+> Report commands:
+> ? accounts ?(or balance) show matched accounts and their balances
+> ? entries ? (or print) show matched journal entries
+> ? postings ?(or register) show matched postings and running total
+> ? activity ?show a barchart of transactions per interval
+> ? stats ? ? show quick statistics for a journal (or part of it)
+> Add-on commands found:
+> ? chart ? ? [-- OPTIONS] ? run the hledger-chart program
+> ? interest ?[-- OPTIONS] ? run the hledger-interest program
+> ? report ? ?[-- OPTIONS] ? run the hledger-report program
+> ? vty ? ? ? [-- OPTIONS] ? run the hledger-vty program
+> ? web ? ? ? [-- OPTIONS] ? run the hledger-web program
+> ? -? --help ? ? Display help message
+> ? ? ?--debug ? ?Show extra debug output
+> ? -V --version ?Print version information
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

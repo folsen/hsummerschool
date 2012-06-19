@@ -1,0 +1,1075 @@
+\Section{conc-distrib}{Distributed concurrency}
+
+Up until now, we have been considering programs that run on a single
+machine, while possibly making use of multiple processors to exploit
+parallelism.  There is a far more plentiful source of parallelism
+available though: running a program on multiple \emph{machines}
+simultaneously.  We call this \emph{distributed} programming, and
+Haskell provides a framework called @remote@\footnote{Also known as
+  ``Cloud Haskell''} that supports it.
+
+Aside from the obvious advantages of multi-machine parallelism, there
+are other reasons to want to write distributed programs. For example:
+
+\begin{itemize}
+\item A distributed server can make more efficient use of network
+  resources by moving the servers closer to the clients.  We shall see
+  an example of this in \secref{conc-distrib-chat}.
+
+\item A distributed program can exploit a heterogenous environment,
+  where certain resources are only available to certain machines.  An
+  example of this might be a cluster of machines with local disks,
+  where a large data structure is spread across the disks and we wish
+  to run our computation on the machine that is has the appropriate
+  part of the data structure on its local disk.
+\end{itemize}
+
+So what should distributed programming look like from the programmer's
+perspective?  Should it look like Concurrent Haskell, with @forkIO@,
+@MVar@ and @STM@?  In fact there are some good reasons to treat
+distributed computation very differently from computation on a
+shared-memory multicore:
+
+\begin{itemize}
+\item There is a realistic possibility of partial hardware failure:
+  that is, some of the machines involved in a computation go down
+  while others continue to run.  Indeed, given a large enough cluster
+  of machines, having nodes go down becomes the norm.  It would be
+  unacceptable to simply abort the entire program in this case.
+  Recovery is likely to be application-specific, so it makes sense to
+  make failure visible to the programmer and let them handle it in an
+  appropriate way for their application.
+
+\item Communication time becomes non-trivial.  In the shared-memory
+  setting it is convenient and practical to allow unrestricted
+  sharing, since for example passing a pointer to a large data
+  structure from one thread to another really does have no cost
+  (beyond the costs imposed by the hardware and the runtime memory
+  manager, but again it is convenient and practical to ignore these).
+  In a distributed setting however, communication can be costly, and
+  sharing a data structures between threads is something that the
+  programmer will want to have explicit control over.
+
+\item In a distributed setting it becomes impractical to provide any
+  global consistency guarantees of the kind that, for example, STM
+  provides in the shared-memory setting.
+\end{itemize}
+
+For these reasons the conclusion we came to is that the model for
+distributed programming should be based on explicit \emph{message
+  passing}\footnote{also known as the \emph{actor model}}, and not the @MVar@ and @STM@ models that we provide for
+shared-memory concurrency.  Think of it as having @TChan@ be the basic
+primitive available for communication.  It is possible to build
+higher-level abstractions on top of the explicit message-passing
+layer, and we shall consider how to do this later.
+
+\Subsection{remote-framework}{The \texttt{remote} framework}
+
+There is no special runtime support for distribution in Haskell: it is
+all implemented as a library using the existing concurrency
+primitives and the @network@ library.  The examples in this chapter
+are based around the @remote-0.1.1@ package which is available on
+Hackage, and you will also need the @derive@ package for automatically
+deriving @Binary@ instances.
+
+At the time of writing, the @remote@ framework is somewhat new and a
+little rough around the edges, but it is already quite fully-featured
+and we expect it to mature in due course.
+
+It is reasonable to wonder whether we even need a framework to do
+distributed message-passing.  After all, can't we just use the
+@network@ package directly and program our own message-passing?
+Certainly you could do this, but the @remote@ package provides a lot
+of functionality that makes it much easier to build a distributed
+application.  Think of it this way: we want to write a \emph{single
+  program that happens to run on multiple machines}, rather than a
+collection of programs running on different machines that talk to each
+other.  For example, with the @remote@ framework we can call a
+function @spawn@ that spawns a process (like a thread) on a different
+machine, and exchange messages with the remote process directly in the
+form of Haskell datatypes.  Even though we are writing a single
+program to execute on multiple machines, there is no need for all the
+machines to be identical: indeed it is often the case that we want to
+exploit some non-uniformity, for example to perform a database query
+on a machine that is closer to the database itself.
+
+The @remote@ frameork provides a whole suite of infrastructure that
+supports the distributed application domain.  Some of the important
+facilities it provides are:
+
+\begin{itemize}
+\item remote spawning of processes,
+\item serialisation of Haskell data for message-passing,
+\item process linking (receiving notification when another process dies),
+\item receiving messages on multiple channels,
+\item a distinguished per-process channel for receiving
+  dynamically-typed messages,
+\item automatic peer discovery.
+\end{itemize}
+
+Furthermore, the @remote@ API is designed to be independent of the
+actual transport layer being used to communicate between nodes.  In
+fact only TCP/IP is implemented currently, but in the future we expect
+the @remote@ layer to have separate back-ends for Infiniband and other
+high-speed transports, while the external API would remain identical
+(modulo some way to select which back-end to use).
+
+\Subsection{distrib-conc-or-par}{Distributed concurrency or parallelism?}
+
+We have included distribution in the concurrency part of this book,
+for the simple reason that the explicit message-passing API we shall
+be describing is concurrent and nondeterministic.  And yet, the main
+reason to want to use distribution is to exploit the
+\emph{parallelism} in running on multiple machines simultaneously, so
+it is a little unfortunate that we have to resort to a
+nondeterministic programming model to achieve that.  We consider how
+it might be possible to build deterministic parallelism on top of
+the distributed message-passing API in \secref{conc-distrib-det}.
+
+\Subsection{conc-distrib-ping}{A first example: pings}
+
+To get acquainted with the basics of distributed programming, we will
+start with a simple example: a ping/pong message exchange.  To start
+with there will be a single master process, and it will create a child
+process.  The master process will send a ``ping'' message to the
+child, which will respond with a ``pong'' message, and the program
+will then exit.
+
+The ping example will illustrate the basic pattern for setting up a
+program to use the @remote@ framework, and introduce the APIs for
+creating processes and simple message passing.  The first version of
+the program will run on a single \emph{node} (machine), so that we can
+get familiar with the basics of the interface before moving on to
+working with multiple nodes.
+
+For reference, the subset of the @Remote@ API that we will be using is
+shown in \figref{basic-remote}.
+
+\begin{figure}
+\begin{haskell}
+data ProcessM  -- instance Monad, MonadIO
+
+data NodeId    -- instance Eq, Ord, Typeable, Binary
+data ProcessId -- instance Eq, Ord, Typeable, Binary
+
+getSelfPid  :: ProcessM ProcessId
+getSelfNode :: ProcessM NodeId
+
+spawn  :: NodeId -> Closure (ProcessM ()) -> ProcessM ProcessId
+
+send   :: Serializable a => ProcessId -> a -> ProcessM ()
+expect :: Serializable a => ProcessM a
+
+terminate :: ProcessM a
+
+say :: String -> ProcessM ()
+
+remoteInit :: Maybe FilePath
+           -> [RemoteCallMetaData]
+           -> (String -> ProcessM ())
+           -> IO ()
+\end{haskell}
+\label{fig:basic-remote}
+\caption{Basic \texttt{Remote} API}
+\end{figure}
+
+\Subsubsection{distrib-ping-processes}{Processes and the
+  \texttt{ProcessM} monad}
+
+First a bit of terminology: a distributed program consists of a set of
+\emph{processes} that may communicate with each other by sending and
+receiving messages.  A process is like a thread: processes run
+concurrently with each other, just like threads, and every process has
+a @ProcessId@ which is distinct from other processes.  There are a
+couple of important differences between threads and processes,
+however:
+
+\begin{itemize}
+\item A process can be created on a remote node, whereas threads are
+  always created on the local node (we won't be using this facility
+  until the next section, though).
+
+\item Processes run in the @ProcessM@ monad, rather than the @IO@
+  monad. @ProcessM@ is an instance of @MonadIO@, so you can perform
+  @IO@ operations in @ProcessM@ by wrapping them in @liftIO@.  All of
+  the message-passing operations are in @ProcessM@, so only processes,
+  not threads, can engage in message-passing.
+\end{itemize}
+
+\Subsubsection{distrib-ping-messages}{Defining a message type}
+
+We start by defining the type of messages that our processes will send
+and receive\footnote{the full code is in @remote-ping/ping.hs@}:
+
+% <<../code/remote-ping/ping.hs:Message
+\begin{haskell}
+data Message = Ping ProcessId
+             | Pong ProcessId
+  deriving Typeable
+
+$( derive makeBinary ''Message )
+\end{haskell}
+% >>
+
+The @Ping@ message contains the @ProcessId@ of the process that sent
+it, so that the target of the message knows where to send the response
+(@ProcessId@ is the obvious analogue of @ThreadId@ for processes).
+The @Pong@ response also includes the @ProcessId@ of the responder, so
+that the master process can tell which process a particular response
+comes from.
+
+Messages must be instances of two type classes: @Typeable@
+and @Binary@.  This is just a requirement of the framework, which uses
+the @Binary@ class to implement the serialisation of Haskell data
+types into bits and bytes, and deserialisation back into Haskell data
+again.  The @Typeable@ constraint is required because messages can be
+sent to dyanmically-typed channels (more about this later).
+
+For @Typeable@ we can derive the instance directly (line 3), but there
+is no built-in support for deriving @Binary@.  Fortunately the
+@derive@ package provides automatic deriving of @Binary@ instances
+using Template Haskell, and on line 5 we see a Template Haskell splice
+to achieve exactly that (don't forget to @import Data.DeriveTH@ first,
+though).
+
+@Typeable@ and @Binary@ are normally packaged up together and referred
+to as @Serializable@, using the following class provided by @Remote@:
+
+\begin{haskell}
+class (Binary a, Typeable a) => Serializable a
+instance (Binary a, Typeable a) => Serializable a
+\end{haskell}
+
+There's nothing magic about @Serializable@; just think of
+@Serializable a@ as shorthand for @(Binary a, Typeable a)@.  You'll
+see @Serializable@ used a lot in the @Remote@ APIs.
+
+\Subsubsection{distrib-ping-server}{The ping server process}
+
+Next, we'll write the code for a ``ping server'' process.  The ping
+server must (a) wait for a @Ping@ message, and (b) respond with a
+@Pong@ message.
+
+% <<../code/remote-ping/ping.hs:pingServer
+\begin{haskell}
+pingServer :: ProcessM ()
+pingServer = do
+  Ping from <- expect
+  mypid <- getSelfPid
+  send from (Pong mypid)
+\end{haskell}
+% >>
+
+First of all, notice that we are in the @ProcessM@ monad.  As we
+mentioned earlier, virtually all of the @Remote@ API is in this monad,
+and only code running in the @ProcessM@ monad can communicate with
+other processes and spawn new processes.  There has to be a way to get
+into @ProcessM@ in the first place; we'll see how that happens
+shortly, but for now let's assume we're already in @ProcessM@ and we
+need to program the ping server.
+
+On line 3, we receive the next message using @expect@:
+
+\begin{haskell}
+expect :: Serializable a => ProcessM a
+\end{haskell}
+
+The @expect@ function receives a message sent directly to this
+process.  Each process has a channel associated with it, and the
+channel can receive messages of any type.  The @expect@ call receives
+only a particular type of messages though, and the type of messages it
+receives is determined by the context.  This is rather like Haskell's
+@read@ function that parses a string into a particular type: if the
+type cannot be determined from the context, you may need to give an
+explicit type signature.  In this case, the type of messages to
+receive is determined by the pattern match on the result, which here
+matches directly on the @Ping@ constructor and thus forces @expect@ to
+receive messages of the type @Message@ that we defined above.
+
+What happens if the channel contains messages of other types?  They
+are simply ignored and left in the channel for the time being.  The
+@expect@ function does not necessarily return the message at the front
+of the queue, because it might have the wrong type.  In fact, @expect@
+might have to search through the queue of messages for the current
+process to find one of the right type.  If there are no messages of
+the right type, @expect@ will block until one arrives.  Therefore it
+should be used with care: the other messages in the queue are ignored
+while @expect@ is waiting for the right kind of message to arrive,
+which could lead to a deadlock.  We'll see later how to wait for
+several different types of message at the same time.
+
+Now, we are going to invoke @pingServer@ in a separate process.
+Although in this example we will be creating the new process on the
+local node, in general we might be creating the new process on another
+node. Functions that will be executed remotely in this way need to be
+declared explicitly.\footnote{We expect that in the future GHC will
+  provide syntactic sugar to make remote code execution easier.}  The
+following declaration invokes a bit of Template Haskell magic that
+creates the necessary infrastructure to allow @pingServer@ to be
+executed remotely:
+
+% <<../code/remote-ping/ping.hs:remotable
+\begin{haskell}
+$( remotable ['pingServer] )
+\end{haskell}
+% >>
+
+\Subsubsection{distrib-ping-master}{The master process}
+
+Next, we will write the code for the master process, which you can see
+below.  As you might expect, this is an operation of type @ProcessM ()@:
+
+% <<../code/remote-ping/ping.hs:master
+\begin{numhaskell}
+master :: ProcessM ()
+master = do
+  node <- getSelfNode
+
+  say $ printf "spawning on %s" (show node)
+  pid <- spawn node pingServer__closure
+
+  mypid <- getSelfPid
+  say $ printf "pinging %s" (show pid)
+  send pid (Ping mypid)
+
+  Pong _ <- expect
+  say "pong."
+  terminate
+\end{numhaskell}
+% >>
+
+\begin{itemize}
+\item Line 3 calls @getSelfNode@, which returns the @NodeId@ of the
+  current node.  A @NodeId@ is needed when creating a new process.
+
+\item Line 5 prints a debugging message using @say@; this is a useful
+  way to debug your program.
+
+\item Lint 6 calls @spawn@ to create the child process:
+
+\begin{haskell}
+spawn :: NodeId -> Closure (ProcessM ()) -> ProcessM ProcessId
+\end{haskell}
+
+  \noindent @spawn@ creates a new process on the given @NodeId@ (which
+  here is the current node).  The new process runs the computation
+  supplied as the second argument to @spawn@, which is a value of type
+  @Closure (ProcessM ())@.  Ultimately we want to spawn a computation
+  of type @ProcessM ()@, but such values cannot be \emph{serialised},
+  that is turned into raw data and squirted over the network, because
+  in practice a value of type @ProcessM ()@ could refer to an
+  arbitrary amount of local data, including things that cannot be sent
+  to other nodes (such as @TVar@).  Hence the type @Closure@ is used
+  to represent serialisable values of type @ProcessM ()@.  How do we
+  get one of these?  Remember above where we used the Template Haskell
+  function @remotable@ to declare that @pingServer@ could be executed
+  remotely?  This generated a value called @pingServer__closure@ with
+  type @Closure (ProcessM ())@, that we can pass as the second
+  argument to @spawn@.
+
+  The @spawn@ operation returns the @ProcessId@ of the new process,
+  which we bind to @pid@.
+
+\item Line 8 calls @getSelfPid@ to return the @ProcessId@ of the
+  current process.  We need this to send in the @Ping@ message.
+
+\item Lines 11 sends the @Ping@ message to the child processe, using
+  the function @send@:
+
+\begin{haskell}
+send :: (Serializable a) => ProcessId -> a -> ProcessM ()
+\end{haskell}
+
+\item Line 13 calls @expect@ to receive the @Pong@ message from the
+  child process.
+
+\item Finally (lines 14-15), we print a diagnostic message and
+  terminate the process by calling @terminate@.  In this case simply
+  returning from @master@ would terminate the process, but sometimes
+  we need to end the process in a context where it is not practical to
+  arrange the top-level function to return, and in those cases
+  @terminate@ is useful.  Moreover it is good practice to indicate the
+  end of the process explicitly.
+\end{itemize}
+
+\Subsubsection{distrib-ping-main}{The \texttt{main} function}
+
+All that remains to complete the program is to define our @main@
+function, and here it is:
+
+% <<../code/remote-ping/ping.hs:main
+\begin{haskell}
+main = remoteInit (Just "config") [Main.__remoteCallMetaData] $
+         \_ -> master
+\end{haskell}
+% >>
+% $
+
+The @main@ function calls @remoteInit@ to initialise the @remote@
+framework and start the node.  The first argument to @remoteInit@ is
+the name of a configuration file to read, which we have called
+@"config"@.  The file should contain the following:
+
+\begin{verbatim}
+cfgRole MASTER
+cfgHostName localhost
+cfgKnownHosts localhost
+\end{verbatim}
+
+Don't worry about what this means yet, it isn't important for this
+single-node example.
+
+The second argument to @remoteInit@ is the metadata used to execute
+remote calls; in this case we pass @Main.__remoteCallMetaData@ which
+is generated by the Template Haskell call to @remotable@ we showed
+earlier.
+
+The final argument is a function of type @String -> ProcessM ()@.
+Here we use the function @\_ -> master@ which ignores the @String@
+argument and calls @master@ (the @String@ argument is used in a
+multi-node setting, we'll explain it in the next example).
+
+So essentially the @main@ function initialises the @remote@ framework
+and starts a single process which invokes @master@.
+
+\paragraph{Running the program.}  First make sure that
+the current directory contains the file @"config"@ mentioned above,
+and then run the program.  You should see output like this:
+
+\begin{verbatim}
+$ ./ping
+2012-05-09 16:08:38.848328 BST 0 pid://localhost:42337/8/
+     SAY spawning on nid://localhost:42337/
+2012-05-09 16:08:38.849693 BST 0 pid://localhost:42337/8/
+     SAY pinging pid://localhost:42337/9/
+2012-05-09 16:08:38.850066 BST 0 pid://localhost:42337/8/
+     SAY pong.
+\end{verbatim}
+
+\paragraph{Summing up.} In this section we built the simplest
+distributed program possible: it spawns a single child process and
+performs a simple ping-pong message exchange.  The key things to take
+away are:
+
+\begin{itemize}
+\item To create a process, we call @spawn@, passing a @NodeId@ and a
+  @Closure (ProcessM ())@.  The former we got from @getSelfNode@
+  (there are other ways, which we will encounter shortly), and the
+  latter is generated by a call to the Template Haskell function
+  @remotable@.
+
+\item Processes run in the @ProcessM@ monad, which is a layer over
+  the @IO@ moand.
+
+\item Messages can be sent to a process using @send@, and received by
+  calling @expect@.  Messages are ordinary Haskell data, the only
+  requirement is that the type of the message is an instance of the
+  @Binary@ and @Typeable@ classes.
+\end{itemize}
+
+There is a certain amount of boilerplate associated with distributed
+programming: deriving @Binary@ instances, declaring remotable
+functions with @remotable@, starting up the framework with
+@remoteInit@ and so on.  Remember that the @remote@ framework is
+currently implemented as a library entirely in Haskell. There is no
+support for distributed programming built into the language or GHC
+itself, and this accounts for some of the boilerplate.  Over time some
+of the details will probably change and distributed programming will
+likely become a smoother experience.
+
+\Subsection{ping-multi-node}{Multi-node ping}
+
+The previous example showed how to create a process and exchange some
+simple messages.  Now we will extend the program to be truly
+distributed: rather than spawning a process on the local node, we will
+run the program on several nodes, create a process on each one, and
+perform the ping-pong protocol with all nodes simultaneously.
+
+The @Message@ type and @pingServer@ remain exactly as before, the only
+changes will be to the @master@ and @main@ functions.  The new
+@master@ function is shown in \figref{ping-multi}.  It looks like
+there is a lot of code here, but it's really quite straightforward:
+
+\begin{figure}
+% <<../code/remote-ping/ping-multi.hs:master
+\begin{numhaskell}
+master :: ProcessM ()
+master = do
+  peers <- getPeers
+
+  let workers = findPeerByRole peers "WORKER"
+
+  ps <- forM workers $ \nid -> do
+          say $ printf "spawning on %s" (show nid)
+          spawn nid pingServer__closure
+
+  mypid <- getSelfPid
+
+  forM_ ps $ \pid -> do
+    say $ printf "pinging %s" (show pid)
+    send pid (Ping mypid)
+
+  waitForPongs ps
+
+  say "All pongs successfully received"
+  terminate
+
+waitForPongs :: [ProcessId] -> ProcessM ()
+waitForPongs [] = return ()
+waitForPongs ps = do
+  m <- expect
+  case m of
+    Pong p -> waitForPongs (filter (/= p) ps)
+    _  -> say "MASTER received ping" >> terminate
+\end{numhaskell}
+% >>
+\label{fig:ping-multi}
+\end{figure}
+
+\begin{itemize}
+\item Line 3 calls @getPeers@, which returns a list of @NodeId@
+  representing each of the nodes (other than the master node) involved
+  in the computation.  The framework automatically discovers nearby
+  peers, and we'll see shortly how to start up the program on multiple
+  nodes.
+
+\item Line 5 filters the list of peers to find those that are
+  designated as @"WORKER"@ nodes.  Each node has a designated
+  \emph{role}, and here we are using exactly two roles: @"MASTER"@ and
+  @"WORKER"@.  Our program will have a single node with the role
+  @"MASTER"@, and all the other nodes will be assigned the role
+  @"WORKER"@.  We'll see shortly how we assign roles to nodes.
+
+\item Lines 7-9 spawn a new process on each of the worker nodes, and
+  binds the resulting list of @ProcessId@s to @ps@.
+
+\item Lines 13-15 send the @Ping@ message to each of the new
+  processes.
+
+\item Line 17 calls @waitForPongs@ (defined on lines 22-28) to receive
+  all the pong messages.  It is a simple algorithm that removes each
+  @ProcessId@ from the list as its pong message is received, and
+  returns when the list is empty.
+
+\item When @waitForPongs@ returns, we emit a diagnostic and
+  @terminate@ as before.
+\end{itemize}
+
+The @main@ function is a little different:
+
+% <<../code/remote-ping/ping-multi.hs:main
+\begin{numhaskell}
+main = remoteInit (Just "config") [Main.__remoteCallMetaData] initialProcess
+
+initialProcess :: String -> ProcessM ()
+initialProcess "WORKER" = receiveWait []
+initialProcess "MASTER" = master
+\end{numhaskell}
+% >>
+
+Remember that the third argument to @remoteInit@ is a function that
+takes a @String@ as an argument?  Well, the @String@ represents the
+role of the current node, and the function can pattern-match on the
+@String@ to decide how to behave, basd on the role.  In this case, if
+the role is @"MASTER"@ we call the @master@ function, and if it is
+@"WORKER"@ then we want to wait for the master node to get things
+going.  Here we're calling @receiveWait []@, which is an idiom for
+blocking indefinitely.
+
+You might be wondering how the role is chosen for a given node.
+Recall that there is a configuration file called @config@ that is read
+when the program starts, containing this:
+
+\begin{verbatim}
+cfgRole MASTER
+cfgHostName localhost
+cfgKnownHosts localhost
+\end{verbatim}
+
+The first line tells the @remote@ framework what role to use for the
+current node.  This means that when we start multiple nodes, each one
+needs its own configuration file with the appropriate setting for
+@cfgRole@.  Alternatively the role can be specified by the
+command-line flag @-cfgRole=WORKER@, which overrides the corresponding
+@config@ file setting.  This may be a more convenient way to set the
+role, especially when starting multiple nodes on the same machine.
+
+\Subsubsection{running-ping-multi}{Running with multiple nodes on one machine}
+
+First I'll illustrate starting multiple nodes on the same machine, and
+then progress on to multiple machines.
+
+Let's start by creating two @WORKER@ nodes:
+
+\begin{verbatim}
+$ ./ping-multi -cfgRole=WORKER &
+[3] 58837
+$ ./ping-multi -cfgRole=WORKER &
+[4] 58847
+\end{verbatim}
+
+I used @&@ to create these as background processes in the shell.  If
+you're on Windows, just open a few Command Prompt windows and run the
+program in each one.
+
+Having started the workers, we now start the @MASTER@ node:
+
+\begin{verbatim}
+$ ./ping-multi
+2012-05-09 16:39:47.522472 BST 0 pid://localhost:39618/8/
+     SAY spawning on nid://localhost:34957/
+2012-05-09 16:39:47.524933 BST 0 pid://localhost:39618/8/
+     SAY spawning on nid://localhost:50781/
+2012-05-09 16:39:47.527318 BST 0 pid://localhost:39618/8/
+     SAY pinging pid://localhost:34957/9/
+2012-05-09 16:39:47.528245 BST 0 pid://localhost:39618/8/
+     SAY pinging pid://localhost:50781/9/
+2012-05-09 16:39:47.530207 BST 0 pid://localhost:39618/8/
+     SAY All pongs successfully received
+\end{verbatim}
+
+The first thing to note is that the master node automatically found
+the two worker nodes.  The @remote@ framework includes some \emph{peer
+  discovery} mechanisms that are designed to automatically locate and
+connect to other instances running on the same machine or other
+machines on the local network.  We will see later how to control this
+to avoid accidentally connecting with nodes belonging to other
+programs.
+
+
+\Subsubsection{running-ping-multi-machines}{Running on multiple machines}
+
+
+\Subsection{distrib-typed-channels}{Typed Channels}
+
+\ToDo{}
+
+\begin{figure}
+\begin{haskell}
+data SendPort a     -- instance of Typeable, Binary
+data ReceivePort a
+
+newChannel       :: Serializable a
+                 => ProcessM (SendPort a, ReceivePort a)
+
+sendChannel      :: Serializable a
+                 => SendPort a -> a -> ProcessM ()
+
+receiveChannel   :: Serializable a
+                 => ReceivePort a -> ProcessM a
+
+mergePortsBiased :: Serializable a
+                 => [ReceivePort a] -> ProcessM (ReceivePort a)
+\end{haskell}
+\label{fig:remote-typed-channels}
+\caption{Typed Channels}
+\end{figure}
+
+% typed channels imply a different kind of interaction.
+%   - client creates a new channel for an interaction
+%   - client sends the channel to the server
+%   - server responds on that channel
+%
+% in general, the server might make its own channel and send that to
+% the client, and the subsequent interaction would happen over these
+% two channels.
+%
+
+% The advantage of this is that the response arrives on a particular
+% channel, which might be more convenient.  The channel serves as a
+% link between the original request and the response; we know that it
+% is a response to *this* particular request, because it arrived on
+% the right channel.
+
+For example:
+
+% <<../code/remote-ping/ping-tc.hs:Message
+\begin{haskell}
+data Message = Ping (SendPort ProcessId)
+  deriving Typeable
+
+$( derive makeBinary ''Message )
+\end{haskell}
+% >>
+
+Note that we don't need a @Pong@ message any more.  Instead the @Ping@
+message will contain a @SendPort@ on which to send the reply, and the
+reply is just the @ProcessId@ of the sender.  In fact in this example
+we don't really need to send any content back at all---just sending
+@()@ would be enough---but for the purposes of illustration we will
+send back the @ProcessId@.
+
+% <<../code/remote-ping/ping-tc.hs:pingServer
+\begin{haskell}
+pingServer :: ProcessM ()
+pingServer = do
+  Ping chan <- expect
+  mypid <- getSelfPid
+  sendChannel chan mypid
+\end{haskell}
+% >>
+
+% <<../code/remote-ping/ping-tc.hs:master
+\begin{haskell}
+master :: ProcessM ()
+master = do
+  peers <- getPeers
+
+  let workers = findPeerByRole peers "WORKER"
+
+  ps <- forM workers $ \nid -> do
+          say $ printf "spawning on %s" (show nid)
+          spawn nid pingServer__closure
+
+  mypid <- getSelfPid
+
+  ports <- forM ps $ \pid -> do
+    say $ printf "pinging %s" (show pid)
+    (sendport,recvport) <- newChannel
+    send pid (Ping sendport)
+    return recvport
+
+  forM_ ports $ \port -> do
+     p <- receiveChannel port
+     return ()
+
+  say "All pongs successfully received"
+  terminate
+\end{haskell}
+% >>
+
+Note that we can just wait for a response on each channel one after
+another, and when we have received a response on each channel we know
+that each of the @pingServer@ instances has responded once.  This code
+is simpler than the previous example with the @waitForPongs@ function.
+
+On the other hand, if we wanted to use a typed channel to send the
+@Ping@ messages, things get more complicated.  We want to do something
+like this (considering just a single worker for simplicity):
+
+\begin{haskell}
+  do
+    (s1,r1) <- newChannel
+    spawn nid (pingServer__closure r1)
+
+    (s2,r2) <- newChannel
+    sendChannel s1 (Ping s2)
+
+    receiveChannel r2
+\end{haskell}
+
+\noindent This seems quite natural: we create a channel on which to
+send the @Ping@ message, and give the receive end of the channel to
+the @pingServer@ process when we spawn it.\footnote{we haven't
+  discussed passing arguments to closures yet, but in fact there is no
+  problem with arguments: it is part of the magic that @remotable@
+  handles for us.}  But there's a big problem here: @ReceivePorts@ are not
+@Serializable@, which prevents us passing a @ReceivePort@ to the
+spawned process.  GHC will reject the program with a type error.
+
+Why are @ReceivePorts@ not @Serializable@?  If you think about it a
+bit, this makes a lot of sense.  If a process were allowed to send a
+@ReceivePort@ somewhere else, then the implementation would have to
+deal with two things: routing messages to the correct destination when
+a @ReceivePort@ has been forwarded (possibly multiple times), and
+routing messages to \emph{multiple} destinations, because sending a
+@ReceivePort@ would create a new copy.  This would introduce a vast
+amount of complexity in the implementation, and it is not at all clear
+that it is a good feature to allow.  So the @remote@ framework
+explicitly disallows it, which fortunately can be done using Haskell's
+type system.
+
+This does mean that we have to jump through an extra hoop to fix the
+code above though.  Instead of passing the @ReceivePort@ to the
+spawned process, the spawned process must create the channel and send
+us back the @SendPort@.  Which means we need \emph{another} channel so
+that the spawned process can send us back its @SendPort@.
+
+\begin{haskell}
+  do
+    (s,r) <- newChannel  -- throw-away channel
+    spawn nid (pingServer__closure s)
+    ping <- receiveChannel r
+
+    (sendpong,recvpong) <- newChannel
+    sendChannel ping (Ping sendpong)
+
+    receiveChannel recvpong
+\end{haskell}
+
+Since this extra handshake is a bit of a hassle, you might well prefer
+to send messages directly to the spawned process using @send@ rather
+than using typed channels, which is exactly what the example code at the
+beginning of this section did.
+
+% ToDo: we want
+%   spawnWithChannel :: Serializable a
+%                    => NodeId -> Closure (ReceivePort a -> ProcessM ())
+%                    -> ProcessM (ProcessId, SendPort a)
+
+\Subsubsection{distrib-typed-channels-merging}{Merging channels}
+
+In the example above we waited for a response from each child process
+in turn, whereas the old @waitForPongs@ version processed the messages
+in the order they arrive.  In this case it isn't a problem, but
+suppose some of these messages required a response.  Then we might
+have introduced some extra latency: if a process towards the end of
+the list @ps@ replies early, then it won't get a response until the
+master process has dealt with the messages from the other processes
+earlier in the list, some of which might take a while to reply.
+
+\ToDo{complete, showing how to merge channels}
+
+\Subsection{distrib-failure}{Handling failure}
+
+One of the important features of the @remote@ framework is that it
+provides facilities for handling failure, and recovering from it.
+
+Here is a basic example showing how the failure of one process can be
+caught and acted upon by another process.  In our ping example, recall
+that the @Message@ type has two constructors:
+
+\begin{haskell}
+data Message = Ping ProcessId
+             | Pong ProcessId
+\end{haskell}
+
+\noindent and the code for @pingServer@ matches explicitly on the
+@Ping@ constructor:
+
+% <<../code/remote-ping/ping-fail.hs:pingServer
+\begin{haskell}
+pingServer :: ProcessM ()
+pingServer = do
+  Ping from <- expect
+  mypid <- getSelfPid
+  send from (Pong mypid)
+\end{haskell}
+% >>
+
+\noindent What will happen if the message is a @Pong@, rather than a
+@Ping@?  Both messages have the type @Message@, so @expect@ cannot
+distinguish: if the context requires a message of type @Message@, then
+either a @Ping@ or a @Pong@ will do.  Clearly in the case of a @Pong@
+the pattern match will fail, and as usual in Haskell this causes an
+exception to be thrown.  Since there are no exception handlers, the
+exception will result in the termination of the @pingServer@ process.
+
+We can catch this failure using @withMonitor@:
+
+\begin{haskell}
+withMonitor :: ProcessId -> ProcessM a -> ProcessM a
+\end{haskell}
+
+\noindent @withMonitor@ takes a @ProcessId@ to monitor and an action
+to perform.  During the action, any failure of the specified process
+will result in a special message of type @ProcessMonitorException@
+being sent to the current process.
+
+To wait for either the @ProcessMonitorException@ message or a @Pong@,
+we need to know how to wait for different types of message at the same
+time.  The basic pattern for this is as follows:
+
+\begin{haskell}
+  receiveWait
+    [ match $ \p -> do ...
+    , match $ \q -> do ...
+    ]
+\end{haskell}
+
+\noindent where @p@ and @q@ are patterns that match different types of
+message.  The types of these functions are show in
+\figref{remote-receive-multi}.  The function @receiveWait@ waits
+until any of the @match@ functions applies to a message in the queue,
+and then executes the associated action.
+
+\begin{figure}
+\begin{haskell}
+receiveWait :: [MatchM q ()] -> ProcessM q
+
+match   :: Serializable a
+        => (a -> ProcessM q) -> MatchM q ()
+
+matchIf :: Serializable a
+        => (a -> Bool) -> (a -> ProcessM q) -> MatchM q ()
+\end{haskell}
+\label{fig:remote-receive-multi}
+\caption{Receiving multiple types of message}
+\end{figure}
+
+Here is how we monitor the @pingServer@ process, and then wait for
+either a @Pong@ message or a @ProcessMonitorException@:\footnote{the full code is in @remote-ping/ping-fail.hs@}
+
+% <<../code/remote-ping/ping-fail.hs:withMonitor
+\begin{haskell}
+  withMonitor pid $ do
+    send pid (Pong mypid)
+    receiveWait
+      [ match $ \(Pong _) -> do
+         say "pong."
+         terminate
+      , match $ \(ProcessMonitorException pid reason) -> do
+         say (printf "process %s died: %s" (show pid) (show reason))
+         terminate
+      ]
+\end{haskell}
+% >>
+
+\noindent Note that we deliberately send the child a @Pong@ message to
+cause it to fail.  Running the program results in this:
+
+\begin{verbatim}
+2012-05-10 15:38:14.063126 BST 0 pid://localhost:33924/8/
+     SAY spawning on nid://localhost:33924/
+2012-05-10 15:38:14.064075 BST 0 pid://localhost:33924/8/
+     SAY pinging pid://localhost:33924/9/
+2012-05-10 15:38:14.064661 BST 2 pid://localhost:33924/9/
+     SYS Process got unhandled exception Pattern match failure in do expression at ping-fail.hs:22:3-11
+2012-05-10 15:38:14.06498 BST  0 pid://localhost:33924/8/
+     SAY process pid://localhost:33924/9/ died: SrException "Pattern match failure in do expression at ping-fail.hs:22:3-11"
+\end{verbatim}
+
+\noindent there was a @SYS@ diagnostic to inform us that the process
+died unexpectedly with an exception, and then we see the message from
+the master process indicating that it received the notification of the
+failed process.
+
+\begin{figure}
+\begin{haskell}
+data ProcessMonitorException
+ = ProcessMonitorException ProcessId SignalReason
+
+data SignalReason
+  = SrNormal           -- the process terminated normally
+
+  | SrException String -- the process terminated with an
+                       -- uncaught exception, which is given
+                       -- as a string
+
+  | SrNoPing           -- the process is not responding to
+                       -- pings
+
+  | SrInvalid          -- the process was not running at the
+                       -- time of the attempt to establish
+                       -- monitoring
+
+withMonitor    :: ProcessId -> ProcessM a -> ProcessM a
+
+monitorProcess :: ProcessId -> ProcessId -> MonitorAction
+               -> ProcessM ()
+
+data MonitorAction
+  = MaMonitor   -- receive ProcessMonitorException
+                -- on termination, as a message
+
+  | MaLink      -- receive ProcessMonitorException
+                -- on termination, as an async exception
+
+  | MaLinkError -- receive ProcessMonitorException
+                -- on failure only, as an async exception
+
+linkProcess :: ProcessId -> ProcessM ()
+\end{haskell}
+\label{fig:remote-monitor}
+\caption{Monitoring and linking processes}
+\end{figure}
+
+Typically when a process dies unexpectedly we want to arrange to
+restart it in a known good state.  This is part of the ``let it
+crash'' philosophy mentioned earlier on; the idea that instead of
+fine-grained exception handlers to cope with particular kinds of
+failure, we should handle failures by letting the entire process
+crash, but monitor the process and recover from the crash by
+restarting the process.
+
+It is worth asking whether having a single @Message@ data type for our
+messages was a good idea in the first place.  Perhaps we should have
+made separate types, as in
+
+\begin{haskell}
+newtype Pong = Pong ProcessId
+newtype Ping = Ping ProcessId
+\end{haskell}
+
+The choice comes down to whether we are using typed channels or not.
+With typed channels we could use only a single message type, whereas
+using the per-process dynamically typed channel with @send@ and
+@expect@ or @receiveWait@ we could use multiple message types.  Having
+one type for each message would avoid the possibility of pattern-match
+failure when matching on a message, but unless we also have a
+catch-all case to match unrecognised messages, the other messages
+could be left in the queue for ever, which could amount to an
+undetected error or deadlock.  So there might well be cases where we
+\emph{want} to match both messages, because one is definitely an
+error, and so using a single message type would help ensure that we
+always match on all the possible messages.
+
+Which choice is more appropriate depends on the particular
+circumstances in your application.
+
+\Subsection{distrib-why-explicit-serialisation}{Why explicit serialisation?}
+
+\Subsection{distrib-peer-discovery}{Controlling peer discovery}
+
+\Subsection{distrib-mixing-processes-threads}{Mixing processes and threads}
+
+We saw earlier that distributed programs consist of a collection of
+communicating processes, and that processes are different from threads
+in that they may communciate with other (possibly remote) processes.
+Still, there is nothing to stop a distributed program from also
+creating local threads and using all the concurrency interfaces that
+we have seen so far.
+
+Some languages, such as Erlang, take the view that since explicit
+message-passing is the right model for programming distributed
+applications, we should use \emph{only} that model, and then our
+programs will run unchanged on both a shared-memory or a distributed
+platform.  There is undeniable benefit in that approach, and indeed it
+is entirely possible to write your concurrent Haskell programs using
+only processes and not threads.  However, there are a number of
+attractive advantages to be had when running in a shared-memory
+environment (such as @STM@), so we see it as important to have both
+models available.
+
+In the next section we will extend the chat-server example from
+\secref{chat} to use distribution, but leaving most of its existing
+multithreaded architecture in place.  The result will be a program
+using a mixture of threads and processes in quite a natural way.
+
+\Subsection{distrib-state}{State in a distributed program}
+
+% Some comments about state: state is typically stored in an
+% individual process, which provides operations on the state via
+% protocols.  Operations are atomic, because the process is
+% single-threaded (or maybe it is multi-threaded internally).
+% Transactions on multiple states are not easily implementable.
+
+% When there is state, think about how the state is restored if the
+% process crashes.
+
+\Subsection{conc-distrib-chat}{A distributed chat server}
+
+\paragraph{Consistency}
+
+% $ ((echo "a"; sleep 0.5) | nc localhost 44445) & ((echo "a"; sleep 0.5) | nc localhost 44444)
+% [1] 33488
+% What is your name?
+% *** a has connected
+% What is your name?
+% *** a has connected
+% You have been kicked: by SYSTEM
+% You have been kicked: by SYSTEM
+
+\paragraph{Adding failsafety}
+
+%  - chatServer: respawn socketListener if it dies
+%  - chatServer: respawn proxy if it dies
+%  - chatServer: shut down socketListener/proxy if chatServer dies
+%  - master process: respawn chatServers if they die
+
+% Maybe: make a ``crashme'' client that randomly does all kinds of
+% stuff, run a few of these concurrently.  Check coverage with hpc.
+
+\Subsection{conc-distrib-det}{Distributed deterministic parallelism}
+
+\Subsection{conc-distrib-par}{Distributed parallel computation}

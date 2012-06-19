@@ -1,0 +1,38 @@
+From dokondr at gmail.com  Thu Dec  1 22:22:03 2011
+From: dokondr at gmail.com (dokondr)
+Date: Fri, 2 Dec 2011 00:22:03 +0300
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAMXF=YBAufCAuVWEJ1KFndFvjm0fY5zCcQRq1B=1_bgrmG1evg@mail.gmail.com>
+References: <CAHZd2pn--Umo43nENkrtXKLwh1TYs-SJpHNT8QGCjOfhkTCZFg@mail.gmail.com>
+	<CAMXF=YBAufCAuVWEJ1KFndFvjm0fY5zCcQRq1B=1_bgrmG1evg@mail.gmail.com>
+Message-ID: <CAMXF=YD-B-NGK93ZDxfN2_Sg9W1_hwrnV7_+6sVRRzDb7q7NEQ@mail.gmail.com>
+
+Balazs,  thanks!
+It's great that these packages exist!
+
+
+On Thu, Dec 1, 2011 at 11:17 PM, Balazs Komuves <bkomuves at gmail.com> wrote:
+
+>
+> Hello,
+>
+> I'm not subscribed to haskell cafe, but I browse the archives sometimes.
+>
+> As Simon Hengel wrote there, there are two packages on Hackage
+> trying to solve this exact problem (since GHC and the standard library
+> does not provide the necessary information):
+>
+> http://hackage.haskell.org/package/executable-path
+> http://hackage.haskell.org/package/FindBin
+>
+> (Hackage is down at the moment, so I'm not completely sure about the
+> second link).
+> I'm the author of the first one.
+>
+> Balazs
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111202/b45ca4e6/attachment-0001.htm>
+

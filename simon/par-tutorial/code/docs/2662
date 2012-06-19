@@ -1,0 +1,34 @@
+From catamorphism at gmail.com  Thu Feb  3 22:54:51 2011
+From: catamorphism at gmail.com (Tim Chevalier)
+Date: Thu, 3 Feb 2011 13:54:51 -0800
+Subject: [Haskell-cafe] ($) not as transparent as it seems
+In-Reply-To: <4D4B1396.6070501@uni-bonn.de>
+References: <4D4B1396.6070501@uni-bonn.de>
+Message-ID: <AANLkTikZUOoLE6oyhdEaEOHtLc_=+AxDV=oBF217Yk5j@mail.gmail.com>
+
+On Thu, Feb 3, 2011 at 12:44 PM, Steffen Schuldenzucker
+<sschuldenzucker at uni-bonn.de> wrote:
+>
+> Dear cafe,
+>
+> does anyone have an explanation for this?:
+>
+>>>> error (error "foo")
+> *** Exception: foo
+>
+>>>> error $ error "foo"
+> *** Exception: *** Exception: foo
+>
+
+Have you read the intermediate Core (using -ddump-simpl) for each variation?
+
+Cheers,
+Tim
+
+
+-- 
+Tim Chevalier * http://cs.pdx.edu/~tjc/ * Often in error, never in doubt
+"an intelligent person fights for lost causes,realizing that others
+are merely effects" -- E.E. Cummings
+
+

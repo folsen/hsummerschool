@@ -1,0 +1,71 @@
+From lazycat.manatee at gmail.com  Tue Apr 26 15:56:41 2011
+From: lazycat.manatee at gmail.com (Andy Stewart)
+Date: Tue, 26 Apr 2011 21:56:41 +0800
+Subject: [Haskell-cafe] plugins and cabal build
+In-Reply-To: <BANLkTikxdX-kR4cOwUo9vqjVTJGxoFQBUg@mail.gmail.com> (Ivan Lazar
+	Miljenovic's message of "Tue, 26 Apr 2011 12:13:05 +0000")
+References: <BANLkTimugDfWXFb0-HepHGqGOyspQAztLg@mail.gmail.com>
+	<BANLkTikxdX-kR4cOwUo9vqjVTJGxoFQBUg@mail.gmail.com>
+Message-ID: <87aafdxgiu.fsf@gmail.com>
+
+Ivan Lazar Miljenovic <ivan.miljenovic at gmail.com> writes:
+
+> On 26 April 2011 04:57, Michael Snoyman <michael at snoyman.com> wrote:
+>> Hi all,
+>>
+>> I'm experimenting with using the plugins package for yesod devel
+>> server. The basic approach is to use cabal for building the object
+>> files, and then load them with plugins. I can get everything to work
+>> when I compile with "ghc --make", but I believe name mangling is
+>> getting in the way with the "cabal build" route. Can someone give some
+>> guidance on how to properly mangle the function names so that plugins
+>> can load them?
+>
+> I'm not sure if he reads this list, but Andy Stewart might know (and
+> I've CC'd him to this).
+Hi Ivan, sorry for late, too busy on Linux job.
+
+Yes, i have got hot-swap code work for Manatee
+(http://hackage.haskell.org/package/manatee)
+
+I used to use plugins, but i found it's buggy.
+So i use GHC-API wrote my own code at:
+https://patch-tag.com/r/AndyStewart/manatee-core/snapshot/current/content/pretty/Manatee/Core/Dynload.hs
+
+Michael, from your need, you just need read function `dynload`, other
+functions is write for Manatee framework.
+
+Let me explain function `dynload`:
+
+    dynload :: (String, String, [(String, HValue -> IO ())]) -> IO ()
+    dynload (filepath, moduleName, loadList) = ...
+
+First argument is FilePath that contain module.
+Second argument is moduleName you need scan.
+Third argument is tuple list that contain symbol you need load and
+callback function for symbol's HValue.
+
+Once function `dynload` find symbol in target module, it will use below code
+dynamic load new value:
+
+    (do
+        hValue <- compileExpr (moduleName ++ "." ++ symbolName)
+        liftIO $ loadFun hValue)
+
+function `compileExpr` will get the HValue of symbol, then use loadFun
+update HVaule in running program.
+
+The key is `HValue -> IO ()`, you need build TVar/IORef in your
+running program, once you got new HValue, you should write
+writeTVar/writeIORef in function `HValue -> IO ()` to update the value of
+TVar/IORef, then you can dynamic loading new value and don't need
+reboot.
+
+I have draw some picture to explain above framework:
+http://www.flickr.com/photos/48809572 at N02/5304662424/in/photostream/lightbox/
+
+Michael, hope above will help you, good luck! :)
+
+  -- Andy
+
+

@@ -1,0 +1,42 @@
+From conal at conal.net  Wed Feb  9 01:55:30 2011
+From: conal at conal.net (Conal Elliott)
+Date: Tue, 8 Feb 2011 16:55:30 -0800
+Subject: [Haskell-cafe] semantics
+In-Reply-To: <4D515B8E.4050609@dit.ie>
+References: <4D515B8E.4050609@dit.ie>
+Message-ID: <AANLkTin45BHo6A4tskvoD-5A2RncRNU_fpnTM2pBKz7E@mail.gmail.com>
+
+On Tue, Feb 8, 2011 at 7:04 AM, Patrick Browne <patrick.browne at dit.ie>wrote:
+
+> Consider the following definitions:
+> 1. Denotational semantics can be considered as relation between syntax
+> and mathematical objects (the meaning of the syntax).
+> 2. Operational semantics can be considered as set of rules for
+> performing computation.
+>
+> Question 1
+> Applying these definitions in a Haskell context can I say that the
+> lambda calculus provides both the operational and denotational
+> semantics for Haskell programs at value level for definition and
+> evaluations.
+>
+> Question 2
+> Does it make sense to use these definitions at type level? If so, what
+> exactly do they represent?
+>
+> Thanks,
+> Pat
+>
+
+Here's my personal denotational answer to question 2: I think of a type as
+denoting a collection of (mathematical) values. If an expression e has type
+T, then the meaning (value) of e is a member of the collection denoted by T.
+This simple principle, which is fundamental to how I think of functional
+programming, has consequences in library design, which I've discussed at
+http://conal.net/blog/posts/notions-of-purity-in-haskell/ .
+
+Regards, - Conal
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110208/245a9653/attachment.htm>
+

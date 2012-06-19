@@ -1,0 +1,57 @@
+From angelv at iac.es  Mon Apr 25 16:07:13 2011
+From: angelv at iac.es (Angel de Vicente)
+Date: Mon, 25 Apr 2011 15:07:13 +0100
+Subject: [Haskell-cafe] Trouble with currying and uncurrying...
+In-Reply-To: <BANLkTimpvBGo-XzUPHHg6hO9jFd=1otTyQ@mail.gmail.com>
+References: <4DB57318.4040509@iac.es>
+	<BANLkTimpvBGo-XzUPHHg6hO9jFd=1otTyQ@mail.gmail.com>
+Message-ID: <4DB58011.80602@iac.es>
+
+Hi,
+
+On 25/04/11 14:21, Stephen Tetley wrote:
+> On 25 April 2011 14:11, Angel de Vicente<angelv at iac.es>  wrote:
+>
+>> curry :: ((a,b) ->  c) ->  (a ->  b ->  c)
+>> curry g x y = g (x,y)
+>
+> Is expressing curry this way more illuminating?
+>
+> curry :: ((a,b) ->  c) ->  (a ->  b ->  c)
+> curry g = \x y ->  g (x,y)
+>
+> That is, curry is a function taking one argument that produces a
+> result function taking two arguments.
+>
+> In Haskell - the type signature:
+>
+>> curry :: ((a,b) ->  c) ->  (a ->  b ->  c)
+>
+> ... can mean either form.
+>
+> Though this is a "quirk" of Haskell, in the language Clean, for
+> example, the parens in the type signature "mean what they" say so only
+> only my second definition is allowed, the first version won't compile.
+
+This was my first encounter with this syntax, but it was a bit confusing.
+curry :: ((a,b) -> c) -> a -> b -> c
+
+is much clearer to me, and once partial application is understood it is 
+no problem to see what curry f  or curry f x y mean. But to me (at this 
+point in my Haskell trip) it would make more sense that once you put 
+the parentheses as in the original definition, no partial application is 
+allowed and so the lambda notation is required.
+
+Thanks a lot,
+?ngel de Vicente
+-- 
+http://www.iac.es/galeria/angelv/
+
+High Performance Computing Support PostDoc
+Instituto de Astrof?sica de Canarias
+---------------------------------------------------------------------------------------------
+ADVERTENCIA: Sobre la privacidad y cumplimiento de la Ley de Protecci?n de Datos, acceda a http://www.iac.es/disclaimer.php
+WARNING: For more information on privacy and fulfilment of the Law concerning the Protection of Data, consult http://www.iac.es/disclaimer.php?lang=en
+
+
+

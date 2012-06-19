@@ -1,0 +1,37 @@
+From qdunkan at gmail.com  Wed Dec 14 21:58:19 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Wed, 14 Dec 2011 12:58:19 -0800
+Subject: [Haskell-cafe] indentation blues
+In-Reply-To: <CAJ+TeocYJPrPSTEujPFsfNR0=jCFZieqjPwh8KRgShzoK97w3Q@mail.gmail.com>
+References: <CAFrFfuGkeHEMfsitZoyaGWz=RZvuaUc8KKGK57dFdJL-kj_43w@mail.gmail.com>
+	<0d62b1a11095f003e5019c4740a5fcfd@haxaire.org>
+	<CAJ+TeocYJPrPSTEujPFsfNR0=jCFZieqjPwh8KRgShzoK97w3Q@mail.gmail.com>
+Message-ID: <CACbaDy699DUq_763j+Q0fcRboTRu_Ngu62YkbKW_Guv5Pv8NVg@mail.gmail.com>
+
+On Wed, Dec 14, 2011 at 5:56 AM, Rustom Mody <rustompmody at gmail.com> wrote:
+> Is the haskell-mode that comes out of the box with emacs (v 23.3) the one
+> you folk use or do you use something more specific/uptodate?? How to find
+> out? [There should be a haskell-mode-version...]
+>
+> To the folks from the (hesitating) vi-camp: Whatever you use, please take
+> time to familiarize yourself with ghci.? Its my finding that the majority of
+> vi aficionados imagine that programming is invariably tied to
+> - having a main
+> - built with make
+> - run from a shell
+> - back to vi
+
+This is not how I work.  I have source open in one window, and switch
+between files with keybindings for tags, search in same directory,
+search in recent buffers, switch between test and non-test module,
+etc. (and to the guy who likes how files open != buffers shown, yes
+vim does this too).  ghci is open in the other window.  :L loads the
+currently edited module into ghci.  Then I edit and :r to typecheck or
+test a function by hand.  Or I switch to the test module and run the
+test interactively until it passes.  I have a number of other
+shortcuts to insert a type signature, automatically add and remove
+'import' lines, exchange argument order, etc., but these few simple
+things already work pretty well.  It also helps to have a tiling
+window manager and switch focus with the keyboard.
+
+

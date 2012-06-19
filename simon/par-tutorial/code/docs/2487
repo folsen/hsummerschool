@@ -1,0 +1,47 @@
+From dev at mobileink.com  Fri Dec 30 18:45:34 2011
+From: dev at mobileink.com (Gregg Reynolds)
+Date: Fri, 30 Dec 2011 11:45:34 -0600
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <1325265063.16545.189.camel@godel>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <jdh9h6$gba$1@dough.gmane.org>
+	<4EFCA66D.4060609@blueyonder.co.uk> <jdiesl$5sp$1@dough.gmane.org>
+	<4EFCCA86.4020709@blueyonder.co.uk> <jdjtv1$6r0$1@dough.gmane.org>
+	<CAD6SzRLxjE7Xgi6dXMknwt0oFRN_m3Z868jAKnsayR=w1=Se6w@mail.gmail.com>
+	<FD41967A-36F7-4203-87E3-D4392146C53D@mobileink.com>
+	<1325265063.16545.189.camel@godel>
+Message-ID: <77280C1B-8551-4E61-9862-35AD54D603D7@mobileink.com>
+
+
+On Dec 30, 2011, at 11:11 AM, Chris Smith wrote:
+
+> 
+>> time t:  f 42   (computational process implementing func application
+>> begins?)
+>> t+1:   <keystroke> = 1
+>> t+2:  43   (? and ends)
+>> 
+>> 
+>> time t+3:  f 42
+>> t+4:  <keystroke> = 2
+>> t+5:  44
+>> 
+>> 
+>> Conclusion:  f 42 != f 42
+> 
+> That conclusion would only follow if the same IO action always produced
+> the same result when performed twice in a row.  That's obviously untrue,
+> so the conclusion doesn't follow.  What you've done is entirely
+> consistent with the fact that f 42 = f 42... it just demonstrates that
+> whatever f 42 is, it doesn't always produce the same result when you o
+> it twice.
+> 
+> What Conal is getting at is that we don't have a formal model of what an
+> IO action means.
+
+Right, and my little counter-example is intended to support that.
+
+>  Nevertheless, we know because f is a function
+
+We do?
+

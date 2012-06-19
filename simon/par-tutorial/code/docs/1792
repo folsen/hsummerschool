@@ -1,0 +1,38 @@
+From dhelta.diaz at gmail.com  Fri Dec  9 21:34:52 2011
+From: dhelta.diaz at gmail.com (=?UTF-8?Q?Daniel_D=C3=ADaz_Casanueva?=)
+Date: Fri, 9 Dec 2011 21:34:52 +0100
+Subject: [Haskell-cafe] ANNOUNCE: HaTeX 3.1.0 (and HaTeX-meta 1.1.0)
+Message-ID: <CAJFXAQiYF01vTQgGUyP+FM4ZMUieedDEYUqPeMb6MLsDO5mf-A@mail.gmail.com>
+
+Hello Cafe!
+
+Today I released to Hackage a new version of the HaTeX package (
+http://hackage.haskell.org/package/HaTeX-3.1.0 ).
+
+If you don't know HaTeX, it is a combinator library of the LaTeX syntax.
+Visit the homepage for more information: http://dhelta.net/hprojects/HaTeX
+
+Highlights:
+
++ Added warnings (See Text.LaTeX.Base.Warnings). Still very experimental.
+
++ Added an "Examples" directory, with a simple example inside to get
+started.
+
++ Num instance for LaTeX and LaTeXT.
+
++ New package implemented "AMSThm" (See Text.LaTeX.Packages.AMSThm).
+
+See the ReleaseNotes in the source tarball for more details in release
+changes.
+
+With it, I released an update of HaTeX-meta (version 1.1.0), which produces
+part of the HaTeX code. An important change here is the addition of the
+HATEX pragma (explained in
+http://deltadiaz.blogspot.com/2011/11/hatex-pragma.html ).
+
+If you need something more, feel free to contact me or send me a patch.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111209/0ce04438/attachment.htm>
+

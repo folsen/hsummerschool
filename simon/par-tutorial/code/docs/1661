@@ -1,0 +1,58 @@
+From dokondr at gmail.com  Mon Dec  5 13:44:39 2011
+From: dokondr at gmail.com (dokondr)
+Date: Mon, 5 Dec 2011 15:44:39 +0300
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAMXF=YBAufCAuVWEJ1KFndFvjm0fY5zCcQRq1B=1_bgrmG1evg@mail.gmail.com>
+References: <CAHZd2pn--Umo43nENkrtXKLwh1TYs-SJpHNT8QGCjOfhkTCZFg@mail.gmail.com>
+	<CAMXF=YBAufCAuVWEJ1KFndFvjm0fY5zCcQRq1B=1_bgrmG1evg@mail.gmail.com>
+Message-ID: <CAMXF=YB5si2DCHBjH5S94_seLhGBzQG4MPWZx_9pnohWsCMXAg@mail.gmail.com>
+
+This is how I finally solved this problem for POSIX complaint system:
+
+--
+-- TestRun
+--
+module Main where
+import System.Cmd (rawSystem)
+import System.Directory (getCurrentDirectory)
+import System.Environment.Executable (ScriptPath(..), getScriptPath)
+import System.FilePath.Posix (splitFileName)
+
+main = do
+
+  path <- getMyPath
+  putStrLn $ "myPath = " ++ path
+  let cmdLine = path ++ "args.sh"
+  rawSystem cmdLine  ["iphone", "test-twitts.txt"]
+
+{--
+data ScriptPath Source
+
+Constructors:
+Executable FilePath    it was (probably) a proper compiled executable
+RunGHC FilePath        it was a script run by runghc/runhaskell
+Interactive                     we are in GHCi
+--}
+
+getMyPath = do
+  curDir <- getCurrentDirectory -- from System.Directory
+  scriptPath  <- getScriptPath -- from System.Environment.Executable
+  let path = getMyPath' scriptPath curDir
+  return path
+
+getMyPath' (Executable path) _ = fst (splitFileName path)
+getMyPath' (RunGHC path) _  = fst (splitFileName path)
+getMyPath' Interactive curDir = curDir++"/"
+
+
+-- 
+All the best,
+Dmitri O. Kondratiev
+
+"This is what keeps me going: discovery"
+dokondr at gmail.com
+http://sites.google.com/site/dokondr/welcome
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111205/e38bc117/attachment.htm>
+

@@ -1,0 +1,28 @@
+From florbitous at gmail.com  Sun Feb  6 09:46:35 2011
+From: florbitous at gmail.com (Bernie Pope)
+Date: Sun, 6 Feb 2011 19:46:35 +1100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4D6F8A.40504@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<AANLkTi=tyKC19Fvie9c8QYN-P=R3oKM_Pm6zOpcmo4Qk@mail.gmail.com>
+	<201102032334.19964.daniel.is.fischer@googlemail.com>
+	<20110204103813.6ffde171.mle+hs@mega-nerd.com>
+	<AANLkTinzw=jmdocvNM2RkRJotypEjHToduB72EOxeHsO@mail.gmail.com>
+	<4D4D6F8A.40504@btinternet.com>
+Message-ID: <AANLkTim1f7YFjRpivWLDw2ZdXX8r6HcLCb8B0BQCehxN@mail.gmail.com>
+
+On 6 February 2011 02:40, Andrew Coppin <andrewcoppin at btinternet.com> wrote:
+
+> Then again, if you could actually single-step through a Haskell program's
+> execution, most strictness issues would become quite shallow.
+
+You can single-step through a Haskell program's execution with the
+GHCi debugger. It can provide considerable insight into evaluation
+order.
+
+A proper stack tracer would make it even more useful.
+
+Cheers,
+Bernie.
+
+

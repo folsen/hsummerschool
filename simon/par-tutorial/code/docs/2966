@@ -1,0 +1,19 @@
+From mihai.maruseac at gmail.com  Sat Feb 12 16:04:19 2011
+From: mihai.maruseac at gmail.com (Mihai Maruseac)
+Date: Sat, 12 Feb 2011 17:04:19 +0200
+Subject: [Haskell-cafe] Beginner: (Another) Binary Search Tree Question
+In-Reply-To: <1297522349134-3382773.post@n5.nabble.com>
+References: <1297522349134-3382773.post@n5.nabble.com>
+Message-ID: <AANLkTikxuFEzwkHHzZ71jh5eaT-LA7nhuwyjMajpnQMd@mail.gmail.com>
+
+> ? ? ? ? ?| v<= a = Node a ( insert v b ) c
+
+
+Hi,
+
+The quoted line is the problem, you wanted to say Node (insert v b) a c.
+
+-- 
+MM
+
+

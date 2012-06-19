@@ -1,0 +1,39 @@
+From dons00 at gmail.com  Sat Dec 17 22:04:53 2011
+From: dons00 at gmail.com (Don Stewart)
+Date: Sat, 17 Dec 2011 16:04:53 -0500
+Subject: [Haskell-cafe] Announce: The Haskell Platform 2011.4
+Message-ID: <CAFd+Dr3kaJorXBEqcSFfjES0JtOJ5eEOeZ3-bJSAAwj-1LFpdw@mail.gmail.com>
+
+We're pleased to announce the release of the Haskell Platform: a
+single, standard Haskell distribution for everyone.
+
+Download the Haskell Platform 2011.4.0.0:
+
+    http://haskell.org/platform/
+
+The specification, along with installers (including Windows, Apple and
+Unix installers for a full Haskell environment) are available.
+
+The Haskell Platform is a single, standard Haskell distribution for
+every system, in the form of a blessed library and tool suite for
+Haskell distilled from the thousands of libraries on Hackage, along with
+installers for a wide variety of systems. It saves developers work
+picking and choosing the best Haskell libraries and tools to use for a
+task.
+
+When you install the Haskell Platform, you get the latest stable
+compiler, an expanded set of core libraries, additional development
+tools, and cabal-install ? so you can download anything else you need
+from Hackage.
+
+What you get is specified here:
+
+    http://hackage.haskell.org/platform/contents.html
+
+Thanks!
+
+-- The Platform Infrastructure Team
+
+P.S. Special thanks to Mark Lentczner for his excellent work on this release.
+
+

@@ -1,0 +1,59 @@
+From ankarakulov at gmail.com  Sun Apr 17 18:42:15 2011
+From: ankarakulov at gmail.com (Alexey Karakulov)
+Date: Sun, 17 Apr 2011 19:42:15 +0300
+Subject: [Haskell-cafe] Template Haskell question
+Message-ID: <BANLkTikW9CrcuZ8kBQKCsRcLM=V47wywrA@mail.gmail.com>
+
+I'm interested if it's possible to use functions from some module without
+explicitly importing it. In ghci it's done on the fly, like this:
+
+Prelude> Data.Map.empty
+Loading package array-0.3.0.2 ... linking ... done.
+Loading package containers-0.4.0.0 ... linking ... done.
+fromList []
+
+But without gchi it seems impossible.
+
+I have the file Test.hs:
+
+> {-# LANGUAGE TemplateHaskell #-}
+> module Test where
+> import Language.Haskell.TH
+>
+> x :: ExpQ
+> x = global $ mkName "Data.Map.empty"
+
+When I load it in ghci, all works:
+
+$ ghci -XTemplateHaskell Test.hs
+*Test> $x
+Loading package pretty-1.0.1.2 ... linking ... done.
+Loading package array-0.3.0.2 ... linking ... done.
+Loading package containers-0.4.0.0 ... linking ... done.
+Loading package template-haskell ... linking ... done.
+fromList []
+
+But when I try to use it from other module, it fails. File Main.hs:
+
+> {-# LANGUAGE TemplateHaskell #-}
+> module Main where
+> import Test
+>
+> main = do
+>   print $x
+
+$ runhaskell Main.hs
+
+Main.hs:5:9:
+    Not in scope: `Data.Map.empty'
+    In the result of the splice:
+      $x
+    To see what the splice expanded to, use -ddump-splices
+    In the first argument of `print', namely `$x'
+    In the expression: print ($x)
+
+--
+All the best,
+Alexey
+
+

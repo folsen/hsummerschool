@@ -1,0 +1,32 @@
+From hesselink at gmail.com  Thu Dec  8 15:12:08 2011
+From: hesselink at gmail.com (Erik Hesselink)
+Date: Thu, 8 Dec 2011 15:12:08 +0100
+Subject: [Haskell-cafe] Converting string to System.Time.ClockTime
+In-Reply-To: <CAMXF=YB3WXB=O=g58=tEdprQvrO1peHvm0ntZRvbwvDTSjB9Hg@mail.gmail.com>
+References: <CAMXF=YB3WXB=O=g58=tEdprQvrO1peHvm0ntZRvbwvDTSjB9Hg@mail.gmail.com>
+Message-ID: <CAPeieQFKXCVqRDEWui7LH89-1aNWm0jKjF5m6DCp2b63Ax2zFw@mail.gmail.com>
+
+I'm not sure if you really need ClockTime (from old-time), but if you
+don't, the types from the 'time' package are all parseable with
+`parseTime` [1].
+
+Erik
+
+[1] http://hackage.haskell.org/packages/archive/time/latest/doc/html/Data-Time-Format.html#v:parseTime
+
+On Thu, Dec 8, 2011 at 14:16, dokondr <dokondr at gmail.com> wrote:
+> Hi,
+> What would be the simplest way to convert strings like "Wed, 07 Dec 2011
+> 10:09:21 +0000" to System.Time.ClockTime ?
+>
+> Thanks!
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

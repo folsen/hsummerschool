@@ -1,0 +1,38 @@
+\part{Concurrent Haskell}
+\label{sec:concurrent}
+
+Concurrent Haskell \cite{jones96concurrent} is an extension to Haskell
+2010 \cite{haskell2010} adding support for explicitly threaded
+concurrent programming.  The basic interface remains largely unchanged
+in its current implementation, although a number of embellishments have
+since been added, which we will cover in later sections:
+
+\begin{itemize}
+\item Asynchronous exceptions \cite{spj:asynch-exceptions} were added
+  as a means for asynchronous cancellation of threads,
+\item Software Transactional Memory was added \cite{stm}, allowing
+  safe composition of concurrent abstractions, and making it possible
+  to safely build larger concurrent systems.
+\item The behaviour of Concurrent Haskell in the presence of calls to
+  and from foreign languages was specified \cite{conc-ffi}
+\end{itemize}
+
+\input{conc-fork}
+\input{conc-mvar}
+\input{conc-asyncex}
+\input{conc-stm}
+\input{conc-higher}
+
+\Section{conc-data}{Shared concurrent data structures}
+
+\ToDo{Discuss the trade-offs between IORef, MVar and STM.}
+
+\input{conc-server}
+\input{conc-ffi}
+
+\Section{conc-par}{Using concurrency to exploit parallelism}
+
+\ToDo{perhaps an example that involves non-determinism and therefore
+  can't use the deterministic parallel programming models.}
+
+\input{conc-distrib}

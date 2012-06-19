@@ -1,0 +1,80 @@
+From daniel.is.fischer at googlemail.com  Tue Apr  5 11:10:18 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Tue, 5 Apr 2011 11:10:18 +0200
+Subject: [Haskell-cafe] broken on build encoding
+In-Reply-To: <BANLkTikOHvvT2sjXHvV6tY06C6VO4n2eXA@mail.gmail.com>
+References: <BANLkTinxDmbWVd8eQSMKNrQHgS7j5+2gMA@mail.gmail.com>
+	<201104041652.56745.daniel.is.fischer@googlemail.com>
+	<BANLkTikOHvvT2sjXHvV6tY06C6VO4n2eXA@mail.gmail.com>
+Message-ID: <201104051110.18480.daniel.is.fischer@googlemail.com>
+
+On Tuesday 05 April 2011 03:07:31, Gang Yu wrote:
+> Hi Daniel,
+> 
+> > To circumvent the build failure, have an mtl-1.*, but no mtl-2.*
+> > available, then it should build (or you could edit the source to
+> > replace all occurrences of the data constructor State with the
+> > function state to make it build with mtl-2.*).
+> > 
+>   It does not work, I cleaned up my ghc and unregistered the
+>   mtl-2.0.1.0,
+> 
+> then reinstall encoding, it gets the following failure:
+> 
+> [ 6 of 65] Compiling Data.Encoding.ByteSource (
+> Data/Encoding/ByteSource.hs, dist/build/Data/Encoding/ByteSource.o )
+> 
+> Data/Encoding/ByteSource.hs:131:9:
+>     No instance for (Monad (Either DecodingException))
+<snip>
+> cabal: Error: some packages failed to install:
+> encoding-0.6.4 failed during the building phase. The exception was:
+> ExitFailure 1
+
+That seems to be related to a change in Monad instances, formerly, there 
+was an
+
+instance (Error e) => Monad (Either e) where ...
+
+defined in Control.Monad.Error, now there's an
+
+instance Monad (Either e) where ...
+
+defined in Control.Monad.Instances. So in Data.Encoding.ByteSource, there's 
+an
+
+instance Monad (Either DecodingException) where ...
+
+but that wouldn't work with the new instance, so it's conditionally 
+included per
+
+
+#ifndef MIN_VERSION_mtl(2,0,0,0)
+instance Monad (Either DecodingException) where
+...
+#endif
+
+Apparently that doesn't work as expected, probably should be
+
+#if !MIN_VERSION_mtl(2,0,0)
+
+Short of changing the code, try installing encoding-0.6.3; that built with 
+ghc-6.12 on hackage, so it should work for you.
+
+> gang at gang-laptop:~$ ghc-pkg list
+> /var/lib/ghc-6.12.1/package.conf.d
+
+>    directory-1.0.1.0
+
+> /home/gang/.ghc/i386-linux-6.12.1/package.conf.d
+
+>    directory-1.1.0.0
+
+Unrelated, but that looks like trouble waiting for an opportunity to bite 
+you.
+
+> 
+> Thanks
+> Gang
+
+

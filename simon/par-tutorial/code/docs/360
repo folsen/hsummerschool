@@ -1,0 +1,31 @@
+From batterseapower at hotmail.com  Wed Apr 13 09:27:15 2011
+From: batterseapower at hotmail.com (Max Bolingbroke)
+Date: Wed, 13 Apr 2011 08:27:15 +0100
+Subject: [Haskell-cafe] Debugging with gdb?
+In-Reply-To: <1302677977.7958.22.camel@hp.my.own.domain>
+References: <1302677977.7958.22.camel@hp.my.own.domain>
+Message-ID: <BANLkTin4kk5T3_9zgen3NB-Wgp2zHCUAnA@mail.gmail.com>
+
+On 13 April 2011 07:59, Svante Signell <svante.signell at telia.com> wrote:
+> As I don't know anything about Haskell, can I make a stupid question: Is
+> there any method to create debug symbols for a Haskell program, and is
+> it possible to debug with gdb?
+
+You cannot create debug symbols. Things that are possible:
+
+ 1. You may use the -debug flag to GHC to link with the debug RTS,
+which has full debugging information for GDB. Note that this only lets
+you debug the *RTS*, not any of the code you wrote
+
+ 2. Use GDB to debug your Haskell code without giving it any symbols
+or understanding of the Haskell calling conventions. This is very
+difficult. Information on this is on the GHC wiki:
+http://hackage.haskell.org/trac/ghc/wiki/Debugging/CompiledCode?redirectedfrom=DebuggingGhcCrashes
+
+ 3. Use the GHCi debugger, which does actually work surprisingly well:
+http://www.haskell.org/ghc/docs/7.0.3/html/users_guide/ghci-debugger.html
+
+Cheers,
+Max
+
+

@@ -1,0 +1,35 @@
+From lemming at henning-thielemann.de  Sun Feb 13 11:21:42 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Sun, 13 Feb 2011 11:21:42 +0100 (CET)
+Subject: [Haskell-cafe] Why is there no "splitSeperator" function in
+ Data.List
+In-Reply-To: <20110213095016.GA6508@teal.hq.k1024.org>
+References: <1297526447.2361.4.camel@robert-desktop>
+	<AANLkTim+z3eNe_s4xR4YBz95o6ArXGWzA-VUMsW7ExqS@mail.gmail.com>
+	<20110213095016.GA6508@teal.hq.k1024.org>
+Message-ID: <alpine.DEB.2.00.1102131115150.5284@anubis>
+
+
+On Sun, 13 Feb 2011, Iustin Pop wrote:
+
+> On Sat, Feb 12, 2011 at 11:21:37AM -0500, Gwern Branwen wrote:
+>> 
+>> See http://hackage.haskell.org/package/split
+>> 
+>> The reason it's not in Data.List is because there are a bazillion
+>> different splits one might want (when I was pondering the issue before
+>> Brent released it, I had collected something like 8 different proposed
+>> splits), so no agreement could ever be reached.
+>
+> It is curious though that the Python community managed to agree on a
+> single implementation and include that in the standard library? So it is
+> possible :)
+
+It was not the implementation, that was discussed in length, but it was 
+the question, what 'split' shall actually do.
+
+If you are satisfied with a simple Haskell 98 implementation of a 'split' 
+operation you might like 'chop' in
+   http://hackage.haskell.org/packages/archive/utility-ht/0.0.5.1/doc/html/Data-List-HT.html
+
+

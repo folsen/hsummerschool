@@ -1,0 +1,32 @@
+From apfelmus at quantentunnel.de  Fri Apr  1 17:34:20 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Fri, 01 Apr 2011 17:34:20 +0200
+Subject: [Haskell-cafe] Computational Physics in Haskell
+In-Reply-To: <SNT131-w5904FBE42719BF9A5D53AAB0BC0@phx.gbl>
+References: <SNT131-w5904FBE42719BF9A5D53AAB0BC0@phx.gbl>
+Message-ID: <in4r9t$85i$1@dough.gmane.org>
+
+Azeem -ul-Hasan wrote:
+> I started learning Haskell a little while ago. Although I am a novice
+> I am still in love with it. I am physics major and primarily
+> interested in Theoretical Physics and would like to use Haskell in
+> this area. So, I just know to what has been done in this area, are
+> there any libraries for simulating physical process in Haskell etc.
+
+There are a few packages that cover most of the physicist's generic needs:
+
+   dimensional - statically checked units
+   http://hackage.haskell.org/package/dimensional
+
+   hmatrix - very pleasant to use LAPACK bindings
+   http://hackage.haskell.org/package/hmatrix
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

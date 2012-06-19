@@ -1,0 +1,77 @@
+From brandon_m_moore at yahoo.com  Sun Apr  3 23:39:10 2011
+From: brandon_m_moore at yahoo.com (Brandon Moore)
+Date: Sun, 3 Apr 2011 14:39:10 -0700 (PDT)
+Subject: [Haskell-cafe] Haskell programs as specifications
+In-Reply-To: <4D987E66.1070902@dit.ie>
+References: <4D987E66.1070902@dit.ie>
+Message-ID: <524255.76577.qm@web45104.mail.sp1.yahoo.com>
+
+> From: Patrick Browne <patrick.browne at dit.ie>
+
+> Sent: Sun, April 3, 2011 9:04:22 AM
+> 
+...
+> 2)My second question  is more theoretical. It is stated by the author
+> that type checking and  excitability provide verification.
+
+I don't know what "excitability" has to do with verification.
+
+Type checking in Haskell provides some degree of verification.
+Besides the basic guarantees that the function will actually return
+a value of the type the signature claims, more complicated types
+(often involving parametric polymorphism) can be used to
+enforce some higher level properties.
+
+Also, because Haskell is a pure language, which means all the
+arguments and results are explicit. In a language like Java, methods
+might also change variables elsewhere. This does not show up in
+the type, so just checking the types tells you less about whether
+a Java function might be correct.
+
+> In this case
+> verification probably means  checking that an instance is consistent with
+> its type class. Does  verification using these techniques in Haskell have
+> any firmer logical  foundation than say doing the verification in Java?
+
+Yes. The type system in Java lacks parametric polymorphism, for one.
+
+The Haskell type system can often provide some guarnatees about
+correct operation of a function, especially through "free theorems"
+
+http://www-ps.iai.uni-bonn.de/cgi-bin/free-theorems-webui.cgi
+
+There are stronger type systems in languages/proof assistants
+such as Coq or Agda, which really do let you prove anything you like
+about functions.
+
+> I am aware that Haskell  uses inference for type checking, but is the net
+> result superior to compilers  that do not use inference?
+
+It's the design of the type system which produces good results.
+It would still tell you just as much about your program if there was
+no type inference, but it would be annoying to have to write out
+so many types. Even languages like C or Java do some type
+inference so you don't have to write down the type of every
+subterm of an expression - it's
+
+int x = f(12 * y + z);
+
+not
+
+int x = (int)f((int)((int)((int)12*(int)y)+(int)z);
+
+> Also, is Haskell execution based purely on  logic?
+
+I'm not entirely sure what this means either. Evaluation expressions is pure and 
+functional
+and can be done by rewriting or graph reduction. There are also things like 
+threads
+and IO which are more imperative.
+
+Evaluation is certainly not based on logic in the same sense as Prolog - there's
+no unification or backtracing.
+
+Brandon
+
+
+

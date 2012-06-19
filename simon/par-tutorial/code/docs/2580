@@ -1,0 +1,42 @@
+From mail at joachim-breitner.de  Wed Feb  2 06:13:59 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Wed, 02 Feb 2011 10:43:59 +0530
+Subject: [Haskell-cafe] Haskell Platform 2011.x - planned release date?
+In-Reply-To: <20110201162851.GD5770@whirlpool.galois.com>
+References: <7DFC5A8A-2745-4F3C-B349-FE46E8FBB29D@gmail.com>
+	<20110201162851.GD5770@whirlpool.galois.com>
+Message-ID: <1296623639.2475.35.camel@kirk>
+
+Hi,
+
+Am Dienstag, den 01.02.2011, 08:28 -0800 schrieb Don Stewart:
+> Due to lack of time, I've been unavailable. I expect the release to come
+> out around Feb 11, during the BayHac hackathon.
+
+are the versions in the new platform already mostly fixed? I?d like to
+add them to the tracker at
+http://people.debian.org/~nomeata/platform.html but the repo
+http://code.haskell.org/haskell-platform/ seems to be empty (maybe due
+to the recent break-in?).
+
+This is assuming that
+http://code.haskell.org/haskell-platform/haskell-platform.cabal is still
+the right place to look at the state of the to-be-released platform
+cabal file.
+
+Greetings,
+Joachim
+
+-- 
+Joachim "nomeata" Breitner
+  mail: mail at joachim-breitner.de | ICQ# 74513189 | GPG-Key: 4743206C
+  JID: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+  Debian Developer: nomeata at debian.org
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110202/d16d1d3e/attachment.pgp>
+

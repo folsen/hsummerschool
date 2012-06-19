@@ -1,0 +1,64 @@
+From conal at conal.net  Fri Dec 30 17:33:11 2011
+From: conal at conal.net (Conal Elliott)
+Date: Fri, 30 Dec 2011 08:33:11 -0800
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <CAD6SzRJ+BuHVbm=tN9Njk+vkGU0VGo0qZU9yiMM5EpqB6+6Dig@mail.gmail.com>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<CAA+2x_VzE3zHgL89K8V+EQoPLMS89XtsTpU+Kn_aK6F1WKmObg@mail.gmail.com>
+	<4EFD08E1.3080304@blueyonder.co.uk>
+	<CAD6SzRLDAf3XBcwNkA6bGFq5o9xeZ6k2W9MDTCs0Rr6bUtfiaw@mail.gmail.com>
+	<jdju3n$6r0$2@dough.gmane.org>
+	<CAD6SzRJ+BuHVbm=tN9Njk+vkGU0VGo0qZU9yiMM5EpqB6+6Dig@mail.gmail.com>
+Message-ID: <CAD6SzRLfNSNugxXtYatg38mdn5iGft2ZfMDy6dq35cfTT5HtEw@mail.gmail.com>
+
+On Fri, Dec 30, 2011 at 8:12 AM, Conal Elliott <conal at conal.net> wrote:
+
+> On Fri, Dec 30, 2011 at 12:52 AM, Heinrich Apfelmus <
+> apfelmus at quantentunnel.de> wrote:
+>
+>> Conal Elliott wrote:
+>>
+>>> I wrote that post to point out the fuzziness that fuels many
+>>> discussion threads like this one. See also http://conal.net/blog/posts/*
+>>> *notions-of-purity-in-haskell/<http://conal.net/blog/posts/notions-of-purity-in-haskell/>and the
+>>> comments.
+>>>
+>>> I almost never find value in discussion about whether language X is
+>>> "functional", "pure", or even "referentially transparent", mainly
+>>> because those terms are used so imprecisely. In the notions-of-purity
+>>> post, I suggest another framing, as whether or not a language and/or
+>>> collection of data types is/are "denotative", to use Peter Landin's
+>>> recommended replacement for "functional", "declarative", etc. I
+>>> included some quotes and a link in that post. so people can track
+>>> down what "denotative" means. In my understanding, Haskell-with-IO is
+>>> not denotative, simply because we do not have a
+>>> (precise/mathematical) model for IO. And this lack is by design, as
+>>> explained in the "toxic avenger" remarks in a comment on that post.
+>>>
+>>> I often hear explanations of what IO means (world-passing etc), but I
+>>> don't hear any consistent with Haskell's actual IO, which includes
+>>> nondeterministic concurrency. Perhaps the difficulties could be
+>>> addressed, but I doubt it, and I haven't seen claims pursued far
+>>> enough to find out.
+>>>
+>>
+>> Personally, the operational semantics given in SPJ's "Tackling the
+>> Awkward Squad" always struck me as an accurate model of how GHC performs IO.
+>
+>
+> It might be accurate, but it's not denotational.  - Conal
+>
+
+Moreover, afaict, the "Awkward Squad" operational semantics tackles only a
+tiny fraction of the IO type.
+
+One of the strengths of Haskell IO is that it can be extended easily via
+the FFI. And I guess that strength is also a theoretical weakness in the
+sense that only a tiny fraction of the IO interface has even an operational
+semantics.
+
+  - Conal
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111230/dc86ad55/attachment.htm>
+

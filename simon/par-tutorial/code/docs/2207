@@ -1,0 +1,77 @@
+From mail at joachim-breitner.de  Wed Dec 21 19:23:19 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Wed, 21 Dec 2011 18:23:19 +0000
+Subject: [Haskell-cafe] guided seq (Was: Interruptible threads with IO
+ loops)
+In-Reply-To: <4EF21F9D.8090101@freegeek.org>
+References: <CAH-sQ5jrocgiuXiOmDaoaajkn7HRF5XWaXJK9kA2sE_cj4P0cQ@mail.gmail.com>
+	<D90F9E28-E21D-4630-8BA2-D3F04E491F3D@gmail.com>
+	<1324459870.3833.9.camel@kirk> <4EF21F9D.8090101@freegeek.org>
+Message-ID: <1324491799.2468.16.camel@kirk>
+
+Dear Wren,
+
+Am Mittwoch, den 21.12.2011, 13:04 -0500 schrieb wren ng thornton:
+> On 12/21/11 4:31 AM, Joachim Breitner wrote:
+> > This would be particularly handy when with, for example
+> >          snd tuple `evaluateUntilItDoesNotNeed` tuple
+> > where the tuple is unevaluated in the right component (and where we
+> > don?t want to force this just now), but retains something large in the
+> > left component (that we want to become GCable).
+> 
+> Can't you already do that with:
+> 
+>      let (_,x) = tuple in ...x...
+> 
+> or
+> 
+>      case tuple of (_,x) -> ...x...
+> 
+> ?
+> 
+> The tuple will be evaluated far enough that we can access its second 
+> component, and then we're free to discard the tuple itself provided it's 
+> not referenced elsewhere. The above would only be strict in x if the use 
+> sites are strict.
+> 
+> Or do you mean that you want something with the semantics of the above, 
+> but with a syntactic form that enables us to abstract out the ellipses?
+
+Your first example would not work, because the tuple is only evaluated
+when x is evaluated, which might be later than the point where I want
+the left component of the tuple to be GCed:
+
+Prelude Debug.Trace> let (_,x) = trace "some tuple" (error "a", error "b") in const () x
+()
+
+The second case works in this particular instance:
+
+Prelude Debug.Trace> case  trace "some tuple" (error "a", error "b") of (_,x) -> const () x
+some tuple
+()
+
+
+But assume the function is not snd but rather a library provided
+function that you have no control over and that you know returns one
+component of the tuple, but you don?t know which (depending on other
+parameters, perhaps). The advantage of a `evaluateUntilItDoesNotNeed`
+would be that it can be combined with code that was written without
+having such considerations in mind.
+
+Greetings,
+Joachim
+        
+
+-- 
+Joachim "nomeata" Breitner
+  mail at joachim-breitner.de  |  nomeata at debian.org  |  GPG: 0x4743206C
+  xmpp: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111221/8a3ec8a9/attachment.pgp>
+

@@ -1,0 +1,33 @@
+From daniel.is.fischer at googlemail.com  Tue Apr 26 16:34:42 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Tue, 26 Apr 2011 16:34:42 +0200
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <20110426140455.GA2543@elliptictech.com>
+References: <4DB093A6.8000303@btinternet.com>
+	<201104261551.51295.daniel.is.fischer@googlemail.com>
+	<20110426140455.GA2543@elliptictech.com>
+Message-ID: <201104261634.43200.daniel.is.fischer@googlemail.com>
+
+On Tuesday 26 April 2011 16:04:55, Nick Bowler wrote:
+> On 2011-04-26 15:51 +0200, Daniel Fischer wrote:
+> > On Tuesday 26 April 2011 15:35:42, Ivan Lazar Miljenovic wrote:
+> > > How do you "see" how git branches are related to each other?
+> > 
+> > To some extent, you can see such a relation in gitk. For mercurial, hg
+> > glog also shows a bit. I suppose there's also something to visualise
+> > branches in bazaar, but I've never used that, so I don't know.
+> > 
+> > So, with gitk/glog, you can see that foo branched off bar after commit
+> > 0de8793fa1bc..., then checkout/update to that commit [or bar's head],
+> > checkout/update to foo's head/tip and compare.
+> 
+> No need to do a checkout; gitk can visualize any or all branches of the
+> repository simultaneously.
+
+Yes, at least if you're only interested in the genealogy.
+When I think about how branches are related, I think of contents at least 
+as much as of genealogy. Can gitk show the code next to each other?
+I wouldn't be surprised, but I haven't yet found a way to do it (but I've 
+only taken a couple of short looks, so that doesn't say much).
+
+

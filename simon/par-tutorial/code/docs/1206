@@ -1,0 +1,25 @@
+From creswick at gmail.com  Thu Aug 18 14:24:57 2011
+From: creswick at gmail.com (Rogan Creswick)
+Date: Thu, 18 Aug 2011 05:24:57 -0700
+Subject: [Haskell-cafe] conditionally exposing modules in cabal
+In-Reply-To: <CAKjSnQGSg4bAJv70WFV3o0XpMsBUSh3i6KhqcnsbY9yt18ioaw@mail.gmail.com>
+References: <CAHjep=wxNRG1Qxhdo3N+hsfcfHFSacMmob2EnVUdHmxsAfNeKQ@mail.gmail.com>
+	<CAKjSnQGSg4bAJv70WFV3o0XpMsBUSh3i6KhqcnsbY9yt18ioaw@mail.gmail.com>
+Message-ID: <CAHjep=xOMaWiB6G86=QBt2sHLESJP8yOXWhLPS41Ad1iAZLJzg@mail.gmail.com>
+
+On Thu, Aug 18, 2011 at 4:41 AM, Antoine Latter <aslatter at gmail.com> wrote:
+> One problem to consider - a downstream user of the new features won't
+> know that they need to pass special flags to your module, and may not
+> even know that they are using your module if the dependency is a few
+> steps removed.
+
+The situation is more that I have a number of independent changes that
+I'd like to experiment with locally, without ever releasing them
+individually -- if/when they're released, they would build without the
+need to set the flag.  The net effect is very similar to maintaining
+multiple branches of the primary project, but with more separation
+between the stable project and the experimental code.
+
+--Rogan
+
+

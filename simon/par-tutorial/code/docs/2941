@@ -1,0 +1,41 @@
+From daniel.is.fischer at googlemail.com  Fri Feb 11 13:48:27 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Fri, 11 Feb 2011 13:48:27 +0100
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+Message-ID: <201102111348.48362.daniel.is.fischer@googlemail.com>
+
+On Friday 11 February 2011 12:06:58, C K Kashyap wrote:
+> Hi Folks,
+>
+> I've come across this a few times - "In Haskell, once can prove the
+> correctness of the code" - Is this true?
+
+One can also prove the correctness of the code in other languages.
+What makes these proofs much easier in Haskell than in many other languages 
+is purity and immutability. Also the use of higher order combinators (you 
+need prove foldr, map, ... correct only once, not everytime you use them).
+Thus, proving correctness of the code is feasible for more complicated 
+programmes in Haskell than in many other languages.
+Nevertheless, for sufficiently complicated programmes, proving correctness 
+is unfeasible in Haskell too.
+
+>
+> I know that static typing and strong typing of Haskell eliminate a whole
+> class of problems - is that related to the proving correctness?
+
+Yes, strong static typing (and the free theorems mentioned by Steffen) give 
+you a stronger foundation upon which to build the proof.
+
+> Is it about Quickcheck - if so, how is it different from having test
+> sutites in projects using mainstream languages?
+
+Testing can only prove code incorrect, it can never prove code correct 
+(except for extremely simple cases where testing all possible inputs can be 
+done; but guaranteeing that QuickCheck generates all possible inputs is 
+generally harder than a proof without testing in those cases).
+
+
+
+

@@ -1,0 +1,61 @@
+From v.dijk.bas at gmail.com  Sun Dec 18 22:52:25 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Sun, 18 Dec 2011 22:52:25 +0100
+Subject: [Haskell-cafe] Adding state to a library
+In-Reply-To: <CAMtV1SGKo9vNvBnkQ=riq3BHwON71VU+QZXcQnL9-=zr5xoSAA@mail.gmail.com>
+References: <CAMtV1SEMsWhBd57t8EjZ=0Q3BA=87E=H_krzPEfyDdvnd5KPUA@mail.gmail.com>
+	<CAMtV1SGKo9vNvBnkQ=riq3BHwON71VU+QZXcQnL9-=zr5xoSAA@mail.gmail.com>
+Message-ID: <CADLz5wWxOK+VJ4wV=kVTgtA2VWO8+ZayW9GoYcxE3FBDcqjwdQ@mail.gmail.com>
+
+On 18 December 2011 22:26, Kevin Jardine <kevinjardine at gmail.com> wrote:
+> I have a library of functions that all take a config parameter (and usually
+> others) and return results in the IO monad.
+>
+> It is sometimes useful to drop the config parameter by using a state-like
+> monad..
+
+If you're not modifying the configuration, a reader monad transformer
+is probably enough:
+
+http://hackage.haskell.org/packages/archive/transformers/0.2.2.0/doc/html/Control-Monad-Trans-Reader.html#t:ReaderT
+
+You probably want to define your own monad transformer for your library:
+
+newtype MyMonad m a = M {unM :: ReaderT Config m a}
+  deriving (Functor, Applicative, Monad, MonadTrans, MonadIO)
+
+getConfig :: MyMonad m Config
+getConfig = M ask
+
+> I have found that I can wrap all my functions like so:
+>
+> withLibrary cfg f = f cfg
+
+This can now be defined as:
+
+withLibrary :: Config -> MyMonad m a -> m a
+withLibrary cfg m = runReaderT (unM m) cfg
+
+> stateF a b c d =
+> ?? getConfig >>= \cfg -> liftIO $ withLibrary cfg
+> ?? libraryF a b c d
+>
+> notice that I need stateF and libraryF lines, each with n parameters.
+>
+> Upgrading my library like this is rather tedious.
+>
+> I would prefer to just write something like
+>
+> stateF = upgrade libraryF
+>
+> but I can find no way to define the function upgrade in Haskell.
+>
+> This must be a fairly common problem. Is there a simple solution?
+
+What do you mean by "upgrading"?
+
+Cheers,
+
+Bas
+
+

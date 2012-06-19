@@ -1,0 +1,56 @@
+From dave at zednenem.com  Tue Dec 20 04:20:32 2011
+From: dave at zednenem.com (David Menendez)
+Date: Mon, 19 Dec 2011 22:20:32 -0500
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <4EEFCABD.4030000@freegeek.org>
+References: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+	<4EEFCABD.4030000@freegeek.org>
+Message-ID: <CAOv7PypxmgqZByCHFYGYsn=5Nx0AKMLQsmQ-e=j5-8p7M70Hbg@mail.gmail.com>
+
+On Mon, Dec 19, 2011 at 6:37 PM, wren ng thornton <wren at freegeek.org> wrote:
+> On 12/14/11 10:58 PM, Gregory Crosswhite wrote:
+>>
+>> Of course, this is not a simple change at all because it would have to
+>> be done in such a way as to respect the ordering of actions --- that
+>> is, we can't have each action executed only when the corresponding
+>> element of the list demanded is forced, or else actions would
+>> undesirably interleave.
+>
+>
+> Therein lies the issue. To put this in a monadic context, this is the same
+> reason why we can't just say:
+>
+> ? ?evalState (repeatM getNext) init
+>
+> e.g., to generate an infinite list of pseudorandom numbers and then discard
+> the final seed because we have all the numbers we'll ever need.
+
+Sure you can. Just make sure you're using a non-strict state monad.
+
+import Control.Monad.Identity
+import Control.Monad.State.Lazy
+import System.Random
+
+repeatM :: Monad m => m a -> m [a]
+repeatM = sequence . repeat
+
+nextM :: RandomGen g => StateT g Identity Int
+nextM = StateT $ Identity . next
+
+*Main> g <- getStdGen
+*Main> let ints = runIdentity $ evalStateT (repeatM nextM) g
+*Main> :t ints
+ints :: [Int]
+*Main> take 5 ints
+[1259974427,117524251,96384700,1814821362,997859942]
+*Main> take 10 ints
+[1259974427,117524251,96384700,1814821362,997859942,2058526379,835643552,1075525457,727974455,388071455]
+*Main> ints !! 100
+271901956
+
+
+-- 
+Dave Menendez <dave at zednenem.com>
+<http://www.eyrie.org/~zednenem/>
+
+

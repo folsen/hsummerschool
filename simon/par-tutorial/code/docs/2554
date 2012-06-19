@@ -1,0 +1,15 @@
+From daniel.is.fischer at googlemail.com  Tue Feb  1 13:47:51 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Tue, 1 Feb 2011 13:47:51 +0100
+Subject: [Haskell-cafe] Haskell function help
+Message-ID: <201102011347.51996.daniel.is.fischer@googlemail.com>
+
+Just a few further remarks,
+- partition requires the import of Data.List
+- with an import of Data.Maybe, assign can be much shorter stated as
+
+assign (atom,value) formula =
+    catMaybes (map (assignClause (atom,value)) formula)
+
+
+

@@ -1,0 +1,60 @@
+From acowley at seas.upenn.edu  Fri Feb  4 16:33:41 2011
+From: acowley at seas.upenn.edu (Anthony Cowley)
+Date: Fri, 4 Feb 2011 10:33:41 -0500
+Subject: [Haskell-cafe] Extending GHCi
+In-Reply-To: <AANLkTimY=7amY-NdvjivHS1RbjCVtL0UyjP=owmcRsNw@mail.gmail.com>
+References: <AANLkTintbzM_qEmFH=ijc5NudTTuk=eHqLYX1SAcXZ__@mail.gmail.com>
+	<4D4BEE24.1020000@uni-bonn.de>
+	<AANLkTimY=7amY-NdvjivHS1RbjCVtL0UyjP=owmcRsNw@mail.gmail.com>
+Message-ID: <AANLkTimg6gewbZpTDvfmUAL-7u0-SKcB5NNi0o6-x-JH@mail.gmail.com>
+
+On Fri, Feb 4, 2011 at 9:41 AM, C K Kashyap <ckkashyap at gmail.com> wrote:
+> Thanks Steffen,
+>
+>>
+>> Prelude> :l MyModule.hs
+>> *MyModule> conn <- waitForAndAcceptConnection
+>> *MyModule> someData <- getSomeData conn
+>> *MyModule> sendSomeAnswer conn $ processSomeData someData
+>> ...
+>>
+>
+> So this cycle of getting data from the connection and writing answer on the
+> connection should happen concurrently with the ghci interaction ... so lets
+> say that when the "thread" is forked that listens on socket behaves like an
+> echo server ... as in, it reads data from the client till "\n" and echoes it
+> back ... All this would happen without the intervention of the user using
+> GHCI ... However, using GHCI, the user should be able to modify the code
+> such that the server returns "hello" prepended to the input. ..
+>> startMyServer -- at this point the the echo server gets spawned
+>> ? ? ? ? ? ? ? ? ? ? ? -- echo server continues to run
+>> someFunction "hello" --- now onwards ?hello gets prepended
+>> ? ? ? ? ? ? ? ? ? ? ? --- echo server continues to run returning "hello"
+>> prepended
+>> someFunction "world" --- now onwards "helloworld" get
+> I hope this is possible without having to modify ghci itself.
+
+Something like this, perhaps. Sorry that it is a bit hard to read.
+
+Anthony
+
+
+$ ghci
+GHCi, version 6.12.3: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Loading package ffi-1.0 ... linking ... done.
+Prelude> :m +Data.IORef Control.Concurrent Control.Monad
+Prelude Data.IORef Control.Concurrent Control.Monad> msg <- newIORef "Hello"
+Prelude Data.IORef Control.Concurrent Control.Monad> let echo =
+forever $ readIORef msg >>= putStrLn >> threadDelay 3000000
+Prelude Data.IORef Control.Concurrent Control.Monad> t <- forkIO echo
+Hello
+Prelude Data.IORef Control.Concurrent Control.Monad> Hello
+Hello
+writeIORefHello msg "World"
+Prelude Data.IORef Control.Concurrent Control.Monad> World
+World
+
+

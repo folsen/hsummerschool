@@ -1,0 +1,55 @@
+From ckkashyap at gmail.com  Thu Feb  3 18:05:48 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Thu, 3 Feb 2011 22:35:48 +0530
+Subject: [Haskell-cafe] Review request for "platform independent
+ interactive graphics" with VNC
+In-Reply-To: <4D4ADBD9.5050504@dfki.de>
+References: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>
+	<4D4ACEC4.3050608@dfki.de>
+	<AANLkTik3OuqBfZ2GVS7J-OJr4XHhXb6RQC=ieUK7aiQP@mail.gmail.com>
+	<4D4ADBD9.5050504@dfki.de>
+Message-ID: <AANLkTimecmbjBJm+_b8Mtx43HDcZpmxQdTrrROpGz5oF@mail.gmail.com>
+
+>
+>
+> Thanks, I cannot get it to run with my vncviewer (TightVNC Viewer
+> version 1.3.9)
+>
+> How should I call vncviewer and your Main binary?
+>
+
+./Main 200 200 5900
+
+after this, the program should start listening to port 5900
+
+You can check if things are fine by telneting to localhost:5900, you should
+see this -
+
+ck at ck-desktop:~/lab/Chitra$ telnet localhost 5900
+Trying ::1...
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+RFB 003.003
+
+After this, you can use vncviewer to connect to localhost (5900 is the
+default port for vnc)
+
+
+>
+> P.S. after getArgs in Main.hs use
+>  case args of
+>    [x, y, p] -> ...
+>    _ -> putStrLn "usage: Main xres yres port"
+>
+>  instead of "!!"
+>
+
+Thanks Christian ... I've incorporated this.
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/ce14cb96/attachment.htm>
+

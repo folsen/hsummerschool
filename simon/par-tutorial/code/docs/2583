@@ -1,0 +1,61 @@
+From ekmett at gmail.com  Wed Feb  2 08:52:52 2011
+From: ekmett at gmail.com (Edward Kmett)
+Date: Wed, 2 Feb 2011 02:52:52 -0500
+Subject: [Haskell-cafe] Instancing "Typeable" for monad transformers?
+In-Reply-To: <AANLkTimSRmKMaYe05YtKAyEQCsZ6Wb=RZOqCxZYmQ3AU@mail.gmail.com>
+References: <AANLkTimSRmKMaYe05YtKAyEQCsZ6Wb=RZOqCxZYmQ3AU@mail.gmail.com>
+Message-ID: <AANLkTim6fOsTLnSe+RcvSTPCuMARTCiToMUD81kqMezW@mail.gmail.com>
+
+I would happily supply a patch to add the Typeable (and the few Data
+instances that can be made) to transformers. I had to make similar ones in
+my comonad-transformers package anyways.
+
+-Edward Kmett
+
+On Wed, Feb 2, 2011 at 1:02 AM, John Millikin <jmillikin at gmail.com> wrote:
+
+> Is there any reasonable way to do this if I want to cast a monadic
+> value? For example:
+>
+> > castState :: (Typeable a, Typeable s, Typeable1 m, Typeable b) => a ->
+> Maybe (StateT s m b)
+> > castState = Data.Typeable.cast
+>
+> None of the common monad transformers declare instances of Typeable,
+> so I don't know if the concept itself even works.
+>
+> The use case here is one of my library users wants to return an
+> Iteratee from code running in "hint", which requires any extracted
+> values be typeable. My first attempt at an extension-free instance is
+> something like this:
+>
+> > import Data.Enumerator
+> > import Data.Typeable
+> >
+> > instance (Typeable a, Typeable1 m) => Typeable1 (Iteratee a m) where
+> >       typeOf1 i = rep where
+> >               typed :: (a -> b) -> b -> a -> a
+> >               typed _ _ a = a
+> >
+> >               ia :: a -> Iteratee a m b
+> >               ia = undefined
+> >
+> >               im :: m c -> Iteratee a m b
+> >               im = undefined
+> >
+> >               rep = mkTyConApp (mkTyCon "Data.Enumerator.Iteratee") [tyA,
+> tyM]
+> >               tyA = typeOf (typed ia i undefined)
+> >               tyM = typeOf1 (typed im i undefined)
+>
+> which, besides being ugly, I have no idea if it's correct.
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110202/6415f5b1/attachment.htm>
+

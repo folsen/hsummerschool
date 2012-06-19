@@ -1,0 +1,56 @@
+From as at hacks.yi.org  Tue Dec 27 23:22:41 2011
+From: as at hacks.yi.org (austin seipp)
+Date: Tue, 27 Dec 2011 16:22:41 -0600
+Subject: [Haskell-cafe] GHC 7.4 and binutils-gold
+In-Reply-To: <CAKA2JgJ-igsuMAqPV6Y7Y1S8hmP8RjtjiOrxKczF1_+8iJt=Fg@mail.gmail.com>
+References: <CAKA2JgJ-igsuMAqPV6Y7Y1S8hmP8RjtjiOrxKczF1_+8iJt=Fg@mail.gmail.com>
+Message-ID: <CAEs96n1ebcp+QYDZwY8VxNxB9jnEpKFCQFShrjOf8MOsP9fG3A@mail.gmail.com>
+
+I encountered this problem approximately a month ago building HEAD and
+reported it to Ian:
+
+http://www.haskell.org/pipermail/cvs-ghc/2011-November/068562.html
+
+His fix worked - but I was doing a build from source. The problem now
+is that this is a -build-time- option, not a runtime option, but
+you're using pre-built binaries: ones that were built on Linux systems
+using GNU ld, not gold. So removing gold is basically your only hope
+for the 7.4.1 RC.
+
+Alternatively, you could probably tell GHC which ld to use by aliasing
+GHC to something like 'ghc -pgml ld.ld' - Oneiric installs gold under
+'ld.gold' and moves GNU ld to 'ld.ld' so you still have both
+installed. It just updates the ld symlink to point to the gold binary
+by default.
+
+So if 7.4.1 final wants to support gold, this logic needs to be moved
+to runtime somehow.
+
+This should probably be discussed on cvs-ghc or glasgow-haskell-users
+with Ian et al.
+
+On Tue, Dec 27, 2011 at 4:00 PM, Michael Snoyman <michael at snoyman.com> wrote:
+> Hi all,
+>
+> One other little GHC 7.4 note. When I first tried building code with
+> it, I got the following error message:
+>
+> /usr/bin/ld: --hash-size=31: unknown option
+>
+> Once I uninstalled binutils-gold, everything went just fine. Has
+> anyone else experienced this? I'm running Ubuntu Oneiric.
+>
+> Michael
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+
+-- 
+Regards,
+Austin
+
+

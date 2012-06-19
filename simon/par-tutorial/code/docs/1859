@@ -1,0 +1,48 @@
+From jwlato at gmail.com  Mon Dec 12 12:45:01 2011
+From: jwlato at gmail.com (John Lato)
+Date: Mon, 12 Dec 2011 11:45:01 +0000
+Subject: [Haskell-cafe] Module name space question
+Message-ID: <CAJ727GhDRhpEdS-6Bu7HuGRxZLgtOaOd6Z+Ck7ACRhhsHPaikg@mail.gmail.com>
+
+> From: Christoph Breitkopf <chbreitkopf at googlemail.com>
+>
+> Hi,
+>
+> I recently asked about what interfaces to implement for a new data type.
+> Following the rule that the last 10% of work take the second 90% of time,
+> some other questions have come up.
+>
+> If anyone wants to look at the code in question:
+> http://www.chr-breitkopf.de/comp/IntervalMap
+>
+> Some time ago, I was looking for a data structure to search in sets of
+> possibly
+> overlapping intervals, and found only Data.SegmentTree, which did not fit
+> my needs
+> (nice term for "I did not understand the type signatures").
+
+I can't answer any of your specific questions, although I've published
+a related structure in the splaytree package
+(http://hackage.haskell.org/package/splaytree).  The interface is
+minimal, although it suits my needs and I'd be happy to extend it if
+someone else found it worthwhile.
+
+The difference between my data structure (which I've called a
+RangeSet) and a standard IntervalSet is that overlapping ranges are
+combined, and if part of a range is deleted, the affected range is
+modified and possibly split e.g.
+
+> let set1 = singleton $ range 0 5
+>      set2 = insert (range 2 5) set1
+
+after this, set2 has one node representing the range 0-7.
+
+Staying on topic, my package puts everything under
+`Data.SplayTree.xxx`, which is different from the fingertree package
+organization.  AFAICT the selection of one convention over the other
+is fairly arbitrary, although more packages seem to use the "one
+second-level hierarchy" structure (e.g. bytestring, text, containers).
+
+John L.
+
+

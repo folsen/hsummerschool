@@ -1,0 +1,40 @@
+From ezyang at MIT.EDU  Sun Apr 24 23:53:28 2011
+From: ezyang at MIT.EDU (Edward Z. Yang)
+Date: Sun, 24 Apr 2011 17:53:28 -0400
+Subject: [Haskell-cafe] More ideas for controlled mutation
+In-Reply-To: <87wrijz5rw.fsf@malde.org>
+References: <1303646089-sup-2399@ezyang> <87wrijz5rw.fsf@malde.org>
+Message-ID: <1303681621-sup-8273@ezyang>
+
+Yep.  It harkens to my days of forcing impure, non-thread-safe
+C libraries into nice, pure, Haskell FFI bindings.  I suppose what
+I'd like to do here is work in the unsafe IO much more closely
+with GHC's existing facilities, so that we spend as much time
+as possible /not/ in unsafePerformIO.  A kind of hybrid approach,
+if you will.
+
+P.S. Don Stewart points out that Edward Kmett has can access
+GHC's pointer tags http://hackage.haskell.org/package/tag-bits,
+thus allowing us to approximate evaluated/not evaluated.  Maybe
+I'll hack up a prototype next time round.
+
+Excerpts from Ketil Malde's message of Sun Apr 24 17:41:23 -0400 2011:
+> "Edward Z. Yang" <ezyang at MIT.EDU> writes:
+> 
+> > I've been toying around with some ideas where we do alternative
+> > forms of controlled mutation.  One such idea has to do with memoization.
+>   [..]
+> > Hash tables take advantage of this fact by simply chaining together values
+> > in a linked list if they land in the same bucket.  [...]
+> > An obvious way to do this is to use unsafePerformIO to
+> > read out an IORef stating the value currently being looked up, and
+> > have the thunk evaluate to the pair of that key and the result.  There
+> > are some synchronization concerns, of course:
+> 
+> Seen this?
+> 
+> http://augustss.blogspot.com/2011/04/ugly-memoization-heres-problem-that-i.html
+> 
+> -k
+
+

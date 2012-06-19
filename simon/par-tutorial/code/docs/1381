@@ -1,0 +1,45 @@
+From pumpkingod at gmail.com  Fri Aug 26 03:40:28 2011
+From: pumpkingod at gmail.com (Daniel Peebles)
+Date: Thu, 25 Aug 2011 21:40:28 -0400
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <4E56CD99.6050703@vex.net>
+References: <4E568D11.30800@btinternet.com>
+	<4E56CD99.6050703@vex.net>
+Message-ID: <CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+
+And as Daniel mentioned earlier, it's not at all obvious what we mean by
+"bits used" when it comes to negative numbers. GMP pretends that any
+negative number has infinite bits in the two's-complement representation.
+Should we count the highest _unset_ bit when the number is negative?
+
+Or to put it another way, what invariants should the proposed bit-counting
+function satisfy?
+
+On Thu, Aug 25, 2011 at 6:32 PM, Albert Y. C. Lai <trebla at vex.net> wrote:
+
+> On 11-08-25 01:57 PM, Andrew Coppin wrote:
+>
+>> Does anybody else think it would be *far* more useful if bitSize applied
+>> to an Integer would tell you how many bits that particular Integer is
+>> using? Especially given that it can vary?
+>>
+>
+> It is useful to know the number of bits used in a value.
+>
+> It is useful to know the maximum number of bits storable in a type.
+>
+> It is useless to conflate the two into one single method.
+>
+> The name "bitSize" is already taken. Come up with another name, and I will
+> agree with you.
+>
+>
+> ______________________________**_________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/**mailman/listinfo/haskell-cafe<http://www.haskell.org/mailman/listinfo/haskell-cafe>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110825/b3a00f88/attachment.htm>
+

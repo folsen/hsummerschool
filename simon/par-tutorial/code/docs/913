@@ -1,0 +1,38 @@
+From patrick.browne at dit.ie  Tue Aug  2 14:57:46 2011
+From: patrick.browne at dit.ie (Patrick Browne)
+Date: Tue, 02 Aug 2011 13:57:46 +0100
+Subject: [Haskell-cafe] difference between  class context and deriving
+Message-ID: <4E37F44A.9070506@dit.ie>
+
+What is the difference between using a class context and deriving in
+data type declaration?
+Are there certain situations in which one or the other is preferred?
+
+data Eq a => Set1 a = NilSet1 | ConsSet1 a (Set1 a)
+data         Set2 a = NilSet2 | ConsSet2 a (Set2 a) deriving Eq
+
+(NilSet1) == (NilSet1) -- no instance, error
+(NilSet2) == (NilSet2) -- True
+
+-- seems OK
+type Type1 = Set1 Integer
+type Type2 = Set2 Integer
+
+-- seems OK
+data Data1 = Set1 | Set2
+
+-- Seems to have same type
+:t ConsSet2 1 NilSet2
+ConsSet2 1 NilSet2 :: forall t. (Num t) => Set2 t
+:t ConsSet1 1 NilSet1
+ConsSet1 1 NilSet1 :: forall t. (Num t) => Set1 t
+
+
+
+
+-- Pat
+
+
+This message has been scanned for content and viruses by the DIT Information Services E-Mail Scanning Service, and is believed to be clean. http://www.dit.ie
+
+

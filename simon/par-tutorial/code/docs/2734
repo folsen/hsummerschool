@@ -1,0 +1,26 @@
+From wren at freegeek.org  Sat Feb  5 10:36:56 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sat, 05 Feb 2011 04:36:56 -0500
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <BA92AD67B07E41D78498103C205824A8@VAIO>
+References: <4D4B19DB.5000907@btinternet.com><AANLkTi=tyKC19Fvie9c8QYN-P=R3oKM_Pm6zOpcmo4Qk@mail.gmail.com><201102032334.19964.daniel.is.fischer@googlemail.com><20110204103813.6ffde171.mle+hs@mega-nerd.com>	<AANLkTin1_ErVOfz+_dDD8X-E1N9GapYMygftUyyK=k6C@mail.gmail.com>
+	<BA92AD67B07E41D78498103C205824A8@VAIO>
+Message-ID: <4D4D1A38.8040804@freegeek.org>
+
+On 2/5/11 4:26 AM, Claus Reinke wrote:
+>> Lately I've been trying to go the other direction: make a large
+>> section of formerly strict code lazy.
+>
+> There used to be a couple of tools trying to make suggestions
+> when a function could be made less strict (Olaf Chitil's StrictCheck and
+> another that escapes memory at the moment).
+
+Perhaps you're thinking of the chasing bottoms[1] library?
+
+[1] http://hackage.haskell.org/package/ChasingBottoms
+
+-- 
+Live well,
+~wren
+
+

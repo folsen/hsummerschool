@@ -1,0 +1,28 @@
+From trebla at vex.net  Mon Aug 29 04:13:49 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Sun, 28 Aug 2011 22:13:49 -0400
+Subject: [Haskell-cafe] Dynamic loading of module
+In-Reply-To: <CAKFCL4WPnbkXF9Ao3qPCyL_sih-Wywjse=2+ZbtOEds7J7A3MA@mail.gmail.com>
+References: <CAL4zPao2eYnWWf1KL-sJ3NrVNw6Ar+eHVgnsDr7KSCikE_TZ4w@mail.gmail.com>	<4E5811CA.6050905@vex.net>	<CAL4zPaoO3=AGtJSexcSa9b108w0AB7dgm+QVQQmoytOUu-M3Fw@mail.gmail.com>	<4E593E91.5020209@vex.net>	<CAL4zPaqNfJWZzJowtFW12e_u2pmxxktbKpiSG5YDsh+=fZL43w@mail.gmail.com>
+	<CAKFCL4WPnbkXF9Ao3qPCyL_sih-Wywjse=2+ZbtOEds7J7A3MA@mail.gmail.com>
+Message-ID: <4E5AF5DD.9050800@vex.net>
+
+On 11-08-28 04:53 PM, Brandon Allbery wrote:
+> That'd be expected; you shouldn't simply obliterate package.conf.d, you
+> need to keep ghc's boot libraries (which include itself as a library).
+>   If the boot libraries are somehow hosed, you need to reinstall the
+> compiler to get them back.
+
+Different package.conf.d
+
+I suggested obliterating C:\Documents and Settings\abailly\Application 
+Data\ghc\i386-mingw32-7.0.3\package.conf.d (on linux it would be called 
+~/.ghc/i386-linux-7.0.3/package.conf.d). That would just drop user 
+packages and not touch boot packages (global packages for that matter).
+
+You can also see that under the listing of D:/Program Files/Haskell 
+Platform/2011.2.0.1\lib\package.conf.d the majority of packages are 
+still there, not obliterated. (For example base, bin-package-db are 
+still there.)
+
+

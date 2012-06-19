@@ -1,0 +1,33 @@
+From serguei.son at gmail.com  Mon Apr 11 16:18:35 2011
+From: serguei.son at gmail.com (Serguei Son)
+Date: Mon, 11 Apr 2011 14:18:35 +0000 (UTC)
+Subject: [Haskell-cafe] Foreign function performance: monadic vs pure
+References: <loom.20110411T135905-625@post.gmane.org>
+	<1302527654.18936.14.camel@localhost.localdomain>
+	<BANLkTi=CuDAH7G+S27mMhV9YHevfXmgDew@mail.gmail.com>
+	<loom.20110411T155115-463@post.gmane.org>
+	<loom.20110411T155944-565@post.gmane.org>
+Message-ID: <loom.20110411T161529-933@post.gmane.org>
+
+Serguei Son <serguei.son <at> gmail.com> writes:
+
+
+> Also, please note that I can force the evaluation 
+> of c_sin, e.g. 
+> 
+> mapM (return . c_sin) [1..n] >>= (print $ foldl' (+) 0)
+> 
+> And it will still execute reasonably fast.
+> 
+
+Pls disregard the my previous post. I actually meant
+let lst = map c_sin [1..n]
+print $ foldl' (+) 0 lst
+
+This executes in 0.2 s for n = 10^7. c_sin is safe, as well
+as c_sin_m. The only difference is CDouble -> CDouble vs
+CDouble -> IO CDouble.
+
+
+
+

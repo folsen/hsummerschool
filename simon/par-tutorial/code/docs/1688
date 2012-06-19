@@ -1,0 +1,19 @@
+From R.Paterson at city.ac.uk  Tue Dec  6 09:45:43 2011
+From: R.Paterson at city.ac.uk (Paterson, Ross)
+Date: Tue, 6 Dec 2011 08:45:43 +0000
+Subject: [Haskell-cafe] Complete package description list
+In-Reply-To: <CABG-yt094g5_Q4ZQh9+B9drQi4os+Wqm7O1t2TMkYyXDbTwvMQ@mail.gmail.com>
+References: <CABG-yt094g5_Q4ZQh9+B9drQi4os+Wqm7O1t2TMkYyXDbTwvMQ@mail.gmail.com>
+Message-ID: <562B8200B62844479E12147F0AA7B3B30B5D216788@NSQ161EX.enterprise.internal.city.ac.uk>
+
+Shakthi Kannan writes:
+> How often does the 00-index.tar.gz file from:
+>
+>   http://hackage.haskell.org/packages/archive/00-index.tar.gz
+>
+> get updated?
+
+It is updated each time a new package is uploaded, and contains the
+.cabal files for all available packages.
+
+

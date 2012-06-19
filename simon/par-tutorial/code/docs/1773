@@ -1,0 +1,39 @@
+From allbery.b at gmail.com  Fri Dec  9 02:50:23 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Thu, 8 Dec 2011 20:50:23 -0500
+Subject: [Haskell-cafe] Why doesn't this work? (palindrome :: IO)
+In-Reply-To: <CAO9Q0tW78wLVRnsz4JofQps5UqbAa6k-zb72hCfJV3DZ1J=UFQ@mail.gmail.com>
+References: <BAY154-W299CF92BF320D6FE352A08A4B80@phx.gbl>
+	<CAKFCL4URW+=cq7MzWkj=-jJ-eO4_wdHDtAjiDTA=a2-+HX07Jw@mail.gmail.com>
+	<CAO9Q0tW78wLVRnsz4JofQps5UqbAa6k-zb72hCfJV3DZ1J=UFQ@mail.gmail.com>
+Message-ID: <CAKFCL4XiSN55t5abyHghGD2sCSkEvywSBui0Pn3XLyaRO4-zvg@mail.gmail.com>
+
+On Thu, Dec 8, 2011 at 15:52, Tom Murphy <amindfv at gmail.com> wrote:
+
+> On Wed, Dec 7, 2011 at 11:46 PM, Brandon Allbery <allbery.b at gmail.com>wrote:
+>
+>> > case () of
+>> >   () | s == reverse s -> putStrLn "palindrome"
+>> >   _                   -> putStrLn "nope"
+>>
+>
+>
+> This is kind of a hack of case, though. I think what the OP was looking
+> for is
+>
+ isPalindrome word
+
+>   | (word == reverse word) = putStrLn (word ++ " is a palindrome")
+>   | otherwise              = putStrLn (word ++ " is not a palindrome")
+>
+
+Erm?  It's as much of a hack of case as yours is, since the above is
+actually using case.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/9a326807/attachment.htm>
+

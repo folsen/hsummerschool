@@ -1,0 +1,28 @@
+From doaitse at swierstra.net  Mon Apr 18 15:58:47 2011
+From: doaitse at swierstra.net (S. Doaitse Swierstra)
+Date: Mon, 18 Apr 2011 15:58:47 +0200
+Subject: [Haskell-cafe] Summer school on Applied Functional Programming at
+	Utrecht University; deadline for registration May 15
+Message-ID: <7A683F76-3B58-40D8-9669-B42C74F89B1D@swierstra.net>
+
+Again we will teach an "Applied Functional Programming Summer in Haskell" school this year at Utrecht University. In the previous two occasions students were all very happy with the school and we plan to repeat this success this year.
+
+The intended audience are prospective master students who have been in contact with Functional Programming, e.g. by taking a general course on programming languages, and want to learn more about Haskell and its typical programming patterns. In the previous two years we have taught an introductory part (advanced bachelor level), an advanced part (beginning master level) and a shared part for both groups. Topics covered are, besides some examples of domain specific languages, also monads, monad transformers, arrows, parser combinators and self-analysing programs, underlying principles, type inferencing, etc. Half of the course time is spent on a larger programming exercise; you can also come with a problem of your own if you want, and get help from the Utrecht University Software Technology group in finding the proper Haskell idioms, tools and libraries, for solving it.
+
+Important links: 
+  -- our own page where we supply information based on questions asked http://www.cs.uu.nl/wiki/bin/view/USCS2011/WebHome
+  -- the poster you can print and hang somewhere (why not your office door): http://www.cs.uu.nl/wiki/pub/USCS2011/WebHome/USCSpos11.pdf 
+  -- the official summerschool site where you can register: http://www.utrechtsummerschool.nl/index.php?type=courses&code=H9
+
+Furthermore we ask for your cooperation to bring this announcement under the attention of potential participants.
+
+ Best,
+ Doaitse Swierstra
+
+PS: apologies if you get this mail more than once
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110418/5297d92c/attachment.htm>
+

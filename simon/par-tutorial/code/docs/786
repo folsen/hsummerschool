@@ -1,0 +1,38 @@
+From emax at chalmers.se  Wed Apr 27 11:33:16 2011
+From: emax at chalmers.se (Emil Axelsson)
+Date: Wed, 27 Apr 2011 11:33:16 +0200
+Subject: [Haskell-cafe] ANNOUNCE: New version Feldspar
+Message-ID: <4DB7E2DC.80303@chalmers.se>
+
+On behalf of the Feldspar team, I'm happy to announce version 0.4.0.2 of 
+feldspar-language and feldspar-compiler:
+
+   http://hackage.haskell.org/package/feldspar-language
+   http://hackage.haskell.org/package/feldspar-compiler
+
+Feldspar is an embedded domain-specific language for generating code for 
+embedded applications, in particular for digital signal processing. For 
+more information, see our web pages:
+
+   http://feldspar.inf.elte.hu/feldspar/
+   http://feldspar.inf.elte.hu/
+
+A brief list of changes since the last version:
+
+   * Support for GHC 7.
+   * Including a fresh tutorial for new users.
+   * Improved C code generation (efficiency and readability).
+     - Efficient vector append.
+     - More unified representation of arrays in the C code.
+     - Etc.
+   * A new sequential construct for unfolding vectors using an 
+accumulating parameter.
+   * Support for structs.
+   * New optimization: common sub-expression elimination.
+   * Lots of restructuring under the hood.
+   * Bugfixes.
+
+/ Emil
+
+
+

@@ -1,0 +1,44 @@
+From baumgartner.tim at googlemail.com  Wed Dec 28 10:42:51 2011
+From: baumgartner.tim at googlemail.com (Tim Baumgartner)
+Date: Wed, 28 Dec 2011 10:42:51 +0100
+Subject: [Haskell-cafe] MIDI-controlled application
+In-Reply-To: <CAO9Q0tWJTRdrwY_26mqU_-yv+S9LFUc1ePzntNy-ELfk9SqN3A@mail.gmail.com>
+References: <CAE0Z8DEZwSXUn65q6nEhnHccZuQojg1softo3esh=Hc06yuY=g@mail.gmail.com>
+	<CAO9Q0tWJTRdrwY_26mqU_-yv+S9LFUc1ePzntNy-ELfk9SqN3A@mail.gmail.com>
+Message-ID: <CAE0Z8DHWSRBAM84v9uDa3Lk_+uqMkzkxx-8QLdYeU14m2KfoDA@mail.gmail.com>
+
+Hi Tom!
+
+[...]
+> >
+> >
+> > Currently I'm using a monad that combines Parsec (with MIDI event
+> stream) and a Writer (that writes commands that should result in IO). It's
+> done in a way that during running the monad, many parses can be done and
+> failing parses roll back the parser state so that a new parse can be tried.
+> >
+>
+>
+> Care to share your code?
+>
+
+Yes, great! Have you worked with MIDI in Haskell? Perhaps
+parsing/recognizing it? I think it will take a few more days (hopefully not
+weeks) until I know what will be the foundation for my app. But then I will
+create a project online and send you a message.
+In case anybody has time to look at it, I just pasted my aforementioned
+monad on hpaste. I thought about it some more and came to the conclusion
+that for user-defined "triggers" (aka parsers), this approach is probably
+sub optimal...
+After Heinrich's suggestion, I worked through the slot machine example from
+reactive-banana. It's a great introduction to FRP for me. The declarative
+style is very appealing. I will try how it fits with my ideas.
+
+Some of my code (thaugh probably obsolete): http://hpaste.org/55795
+
+Regards
+Tim
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111228/4e5dcaca/attachment.htm>
+

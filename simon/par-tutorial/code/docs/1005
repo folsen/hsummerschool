@@ -1,0 +1,21 @@
+From cmalune at gmail.com  Tue Aug  9 23:46:04 2011
+From: cmalune at gmail.com (Edward Tate)
+Date: Tue, 9 Aug 2011 22:46:04 +0100
+Subject: [Haskell-cafe] Snap Riak Extension v0.1
+Message-ID: <CAJezgr0=4Vj=cDaz5n84XUSvMiyMVAsJR=FhhO6fGsdWsQdhzw@mail.gmail.com>
+
+Hi,
+
+I released this library a while ago but didn't tell anyone, thought I would
+let people know.
+
+Would be cool to get feedback, suggestions etc.
+
+https://github.com/et4te/snap-extension-riak/
+
+PS: There are no recent commits since I'm going to be overhauling the
+architecture once Snap 6 comes out with 'Snaplets'.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110809/1cba23af/attachment.htm>
+

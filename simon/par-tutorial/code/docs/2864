@@ -1,0 +1,54 @@
+From ckkashyap at gmail.com  Tue Feb  8 16:16:23 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Tue, 8 Feb 2011 20:46:23 +0530
+Subject: [Haskell-cafe] forkIO on GHCI does not seem to spawn the thread
+ in the background on some OSs
+In-Reply-To: <711625.47203.qm@web45115.mail.sp1.yahoo.com>
+References: <AANLkTinUd-EV-b6QUuUKmRwMj8qtUrf2=KeakGaEM0Jw@mail.gmail.com>
+	<AANLkTimZkt2pNzw=yPpPYnPAsssUVxVY7iXKsfA1zp4i@mail.gmail.com>
+	<711625.47203.qm@web45115.mail.sp1.yahoo.com>
+Message-ID: <AANLkTikgmPX85NyQ5=2wkQSU8MTGZcgtA8WYiEyx_462@mail.gmail.com>
+
+>
+>
+> I can't reproduce this. What are you using as the action?
+>
+> I've tried bottoms, and tight loops whose Core contains no allocations, and
+> not
+> managed to lock up the prompt, or seen ghci using more threads than I have
+> cores.
+>
+> One thing that may give the appearance of locking up the prompt is if
+> the thread starts reading from the terminal and your commands no longer
+> make it
+> to the interpreter.
+>
+> > It is  not always a thread.  ForkIO creates a spark and then the
+> > scheduler  decides when sparks should be scheduled to threads.  Thus
+> > you get a  guarantee of concurrent but not parallel execution.
+>
+> That is not correct - it is "par" that creates sparks may be discarded.
+>
+> forkIO always creates new threads, though it is of course up to the
+> scheduler
+> when the threads are executed, and how many cores are used.
+>
+> > Are you running with  threads enabled?
+>
+> That is, was your ghci compiled with -threaded? This mostly
+> depends on the version. what version of ghc are you running, and how did
+> you
+> install it?
+>
+>
+>
+>
+> Sorry ... extremely sorry ... my bad ... for some reason, I was omitting
+the call to forkIO :( when I was trying on other platforms.
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110208/fe0d8b9a/attachment.htm>
+

@@ -1,0 +1,35 @@
+From chrisdone at googlemail.com  Sat Aug 13 10:18:42 2011
+From: chrisdone at googlemail.com (Christopher Done)
+Date: Sat, 13 Aug 2011 10:18:42 +0200
+Subject: [Haskell-cafe] Diffs for hackage
+In-Reply-To: <CALqQuoi88Uk7GF3QeFSxBwzYybc6w69h4sxPGmk_HjbKgyhbTg@mail.gmail.com>
+References: <CALqQuoi88Uk7GF3QeFSxBwzYybc6w69h4sxPGmk_HjbKgyhbTg@mail.gmail.com>
+Message-ID: <CAAJHNPCuwepw4bMnfseVjvvOx-=eM=jgP4OmDsauaRbt287q-w@mail.gmail.com>
+
+Wow, really nice stuff. Great work! I'll find this very useful.
+
+On 13 August 2011 08:11, Luite Stegeman <stegeman at gmail.com> wrote:
+> hi all,
+> often when a new version of a package is available on hackage, I want to see
+> what has changed since the previous release. Unfortunately many packages
+> don't have a changelog or a public source code repository. That's why I have
+> made a simple website with git repositories that contain all versions of all
+> hackage packages:
+>
+> http://hdiff.luite.com/
+> The home page contains a bookmarklet that takes you directly from the index
+> page of a package version (for
+> example?http://hackage.haskell.org/package/parsec-3.1.0?)?to the commit
+> diff, showing the difference with the previous version
+> (?http://hdiff.luite.com/cgit/parsec/commit?id=3.1.0?)
+> I hope some people will find this useful,
+> luite
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

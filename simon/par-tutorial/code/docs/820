@@ -1,0 +1,38 @@
+From gracjanpolak at gmail.com  Thu Apr 28 09:19:09 2011
+From: gracjanpolak at gmail.com (Gracjan Polak)
+Date: Thu, 28 Apr 2011 07:19:09 +0000 (UTC)
+Subject: [Haskell-cafe] Python is lazier than Haskell
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<87vcy0vxdq.fsf@malde.org>
+Message-ID: <loom.20110428T091338-92@post.gmane.org>
+
+Ketil Malde <ketil <at> malde.org> writes:
+> 
+> In Haskell, I often need to add stubs of "undefined" in order to do
+> this.  I don't mind, since it is often very useful to say *something*
+> about the particular piece - e.g. I add the type signature, establishing
+> the shape of the missing piece without bothering with the actual
+> implementation just yet.
+
+Seconded.
+
+Sometimes I wish for a -fphp flag that would turn some type errors into
+warnings. Example: 
+
+v.hs:8:6:
+    Couldn't match expected type `[a]' against inferred type `()'
+    In the first argument of `a', namely `y'
+    In the expression: a y
+    In the definition of `c': c = a y
+
+GHC could substitute 'y = error "Couldn't match expected type `[a]' against
+inferred type `()'"' and compile anyway.
+
+Would that bring Haskell closer to Python?
+
+-- 
+Gracjan
+
+
+
+

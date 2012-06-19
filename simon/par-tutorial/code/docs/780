@@ -1,0 +1,44 @@
+From peteg42 at gmail.com  Wed Apr 27 02:14:38 2011
+From: peteg42 at gmail.com (Peter Gammie)
+Date: Wed, 27 Apr 2011 10:14:38 +1000
+Subject: [Haskell-cafe] How to keep cabal and ghci package versions in
+	sync?
+In-Reply-To: <BANLkTimBXna=jO7RvAHe=BiVuDE9Pb4zMg@mail.gmail.com>
+References: <loom.20110424T200650-84@post.gmane.org>
+	<4DB560FA.6030105@henning-thielemann.de>
+	<loom.20110426T110933-984@post.gmane.org>
+	<BANLkTimBXna=jO7RvAHe=BiVuDE9Pb4zMg@mail.gmail.com>
+Message-ID: <D37E1D4E-2303-474A-BC5D-8529009D147A@gmail.com>
+
+On 27/04/2011, at 3:04 AM, Rogan Creswick wrote:
+
+> At the moment, cabal-dev ghci just uses the -package-conf and
+> -no-user-package-conf flags to restrict ghci to the sandboxed and
+> global package dbs.
+> 
+> It's difficult to do more without parsing the content of the project's
+> cabal file, and that parser isn't exposed through a library api (it's
+> in cabal-install), which makes it a little difficult to use.
+
+Can't you use cabal as a library to do this?
+
+I had a crack at figuring out a ghci command line in TBC (testing by convention):
+
+https://github.com/peteg/TBC
+
+while waiting for this cabal feature to be implemented:
+
+http://hackage.haskell.org/trac/hackage/ticket/382
+
+Apparently there's a GSoC project that will nail this.
+
+You can fire up TBC with the verbose flag and it will give you a very long ghc invocation line that is strongly similar to what cabal uses to compile your project. It doubtlessly is incomplete, and probably bit rotten. I will try to make it work with the latest Haskell Platform release in the coming weeks.
+
+I welcome patches, but you're better off fixing cabal itself.
+
+cheers
+peter
+
+-- 
+http://peteg.org/
+

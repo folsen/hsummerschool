@@ -1,0 +1,41 @@
+From dagitj at gmail.com  Fri Apr  1 04:12:20 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Thu, 31 Mar 2011 19:12:20 -0700
+Subject: [Haskell-cafe] A maintenance command of Haskell cabal packages
+In-Reply-To: <20110401.110734.86749460.kazu@iij.ad.jp>
+References: <20110401.104845.79254511.kazu@iij.ad.jp>
+	<AANLkTinYm9K7WsGejSzdt8enjNtCB_3m2iwQ9Qtm_Ldq@mail.gmail.com>
+	<20110401.110734.86749460.kazu@iij.ad.jp>
+Message-ID: <AANLkTikP-KNNvJzK0se-qtmh0-RCCJKyDh6XCgr4=Bjc@mail.gmail.com>
+
+On Thu, Mar 31, 2011 at 7:07 PM, Kazu Yamamoto <kazu at iij.ad.jp> wrote:
+
+> > whoah, it has uninstall!!! awesome!
+>
+> It just unregisters libraries not delete them actually. But I guess it
+> is enough for you.
+>
+> The "cabal-delete" command does delete libraries and I'm planning to
+> integrate "cab" and "cabal-delete". But the author of "cabal-delete"
+> is now suffering from the Tsunami in Japan. I'm just waiting for
+> his recovery.
+>
+> I want to integrate "cab" and "cabal-dev" also. But I cannot
+> understand how to use "cabal-dev" at this momemnt...
+>
+
+Have you read this?
+http://www.reddit.com/r/haskell/related/f3ykj/psa_use_cabaldev_to_solve_dependency_problems/
+
+
+cabal-dev is a wrapper around cabal.  It creates the directory "cabal-dev"
+in your current directory when you run commands.
+
+If you understand how to use 'cabal' then 'cabal-dev' should be pretty easy
+to figure out.  Do you have any specific questions?
+
+Jason
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110331/c07e3434/attachment.htm>
+

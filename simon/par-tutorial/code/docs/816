@@ -1,0 +1,50 @@
+From spam at scientician.net  Thu Apr 28 08:04:54 2011
+From: spam at scientician.net (Bardur Arantsson)
+Date: Thu, 28 Apr 2011 08:04:54 +0200
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <4DB89687.30705@earth.li>
+References: <4DB093A6.8000303@btinternet.com>	<4DB3E7E8.8000907@btinternet.com>	<BANLkTi=S70WstLi83umF=v=LBVu1A7pbTQ@mail.gmail.com>	<4DB5493F.4010804@btinternet.com>	<D47B6B3C-B39D-475B-BCED-2E7758A5ED7A@me.com>
+	<4DB89687.30705@earth.li>
+Message-ID: <ipb02s$oap$1@dough.gmane.org>
+
+On 04/28/2011 12:19 AM, Ganesh Sittampalam wrote:
+> On 26/04/2011 12:17, Malcolm Wallace wrote:
+>>
+>> On 25 Apr 2011, at 11:13, Andrew Coppin wrote:
+>>
+>>> On 24/04/2011 06:33 PM, Jason Dagit wrote:
+>>>>
+>>>> This is because of a deliberate choice that was made by David Roundy.
+>>>> In darcs, you never have multiple branches within a single darcs
+>>>> repository directory tree.
+>>>
+>>> Yes, this seems clear. I'm just wondering whether or not it's the best design choice.
+>>
+>> It seems to me to be a considerable insight.  Branches and repositories are the same thing.  There is no need for two separate concepts.  The main reason other VCSes have two concepts is because one of them is often more efficiently implemented (internally) than the other.  But that's silly - how much better to abstract over the mental clutter, and let the implementation decide how its internals look!
+>>
+>> So in darcs, two repositories on the same machine share the same files (like a branch), but if they are on different machines, they have separate copies of the files.  The difference is a detail that you really don't need to know or care about.
+>>
+>>> It does mean that you duplicate information. You have [nearly] the same set of patches stored twice,
+>>
+>> No, if on the same machine, the patches only appear once, it is just the index that duplicates some information (I think).  In fact just as if it were a branch in another VCS.
+>
+> Unfortunately, I don't think this is quite true, because being able to
+> switch between multiple branches in the same working directory means you
+> can reuse build products when switching branches. Depending on how
+> radical the branch shift is, this can be a substantial win, and it's the
+> main reason that darcs might in future implement in-repo branching of
+> some form.
+>
+
+There's also the fact that using in-repo branches means that all the 
+tooling doesn't have to rely on any (fs-specific) conventions for 
+finding branches.
+
+As someone who has admin'd a reasonably large Bazaar setup (where branch 
+== directory similarly to Darcs) I can honestly say that this would be a 
+HUGE boon.
+
+Cheers,
+
+
+

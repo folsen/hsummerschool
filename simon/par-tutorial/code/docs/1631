@@ -1,0 +1,80 @@
+From edgar.klerks at gmail.com  Sat Dec  3 18:28:44 2011
+From: edgar.klerks at gmail.com (edgar klerks)
+Date: Sat, 3 Dec 2011 18:28:44 +0100
+Subject: [Haskell-cafe] ismzero operator possible without equal
+	constraint
+In-Reply-To: <CAEnSgTkXdT9KPU_mZJZd46WCj=E9QfhOpCv+ciaVcRUk9Kh-QQ@mail.gmail.com>
+References: <CAGAUyt=YX3hkczvoKyFws4zCuFO00aoC8MsqFv0Bx6F7mJiEdQ@mail.gmail.com>
+	<CAEnSgTkXdT9KPU_mZJZd46WCj=E9QfhOpCv+ciaVcRUk9Kh-QQ@mail.gmail.com>
+Message-ID: <CAGAUyt=EYGEL-spev8Mf-rBKW7FFvxcaK58HLa3f85X1+BM1mQ@mail.gmail.com>
+
+Hi Arseniy,
+
+Yes, I see it now. :) . I had some feeling there should be some structural
+equality:
+
+Just _ == Just _ = True
+Nothing == Nothing = True
+_ == _ = False
+
+But this doesn't work for functions.
+
+Thanks for your answer!
+
+Greets,
+
+Edgar
+On Sat, Dec 3, 2011 at 6:23 PM, Arseniy Alekseyev <
+arseniy.alekseyev at gmail.com> wrote:
+
+> Of course it is not possible! Take a simple composition of reader and
+> Maybe functors for an example:
+>
+> miszero :: (b -> Maybe a) -> Bool
+>
+> I'm pretty sure (b -> Maybe a) for a is a MonadPlus, but you can't
+> implement miszero for it.
+>
+> Arseniy.
+>
+> On 3 December 2011 16:55, edgar klerks <edgar.klerks at gmail.com> wrote:
+> > Hi list,
+> >
+> > I am using MonadSplit
+> > (from http://www.haskell.org/haskellwiki/New_monads/MonadSplit )  for a
+> > project and now I want to make a library out of it. This seems to be
+> > straightforward, but I got stuck when I tried to move miszero out of the
+> > class:
+> >
+> > miszero :: m a -> Bool
+> >
+> > It tests if the provided monad instance is empty. My naive attempt was:
+> >
+> > miszero :: (Eq (m a), MonadPlus m) => m a -> Bool
+> > miszero =  ( == mzero )
+> >
+> > This works, but not correctly. It adds an Eq constraint that is
+> unneeded. I
+> > would prefer to have something like:
+> >
+> > miszero :: MonadPlus m => m a -> Bool
+> >
+> >
+> > Because I am not comparing the contents of the monad. I don't even touch
+> it.
+> >  Is this possible to write?
+> >
+> > with kind regards,
+> >
+> > Edgar
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111203/16bf13cd/attachment.htm>
+

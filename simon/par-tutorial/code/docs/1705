@@ -1,0 +1,15 @@
+From dokondr at gmail.com  Tue Dec  6 17:41:58 2011
+From: dokondr at gmail.com (dokondr)
+Date: Tue, 6 Dec 2011 19:41:58 +0300
+Subject: [Haskell-cafe] Where threadSleep is defined?
+Message-ID: <CAMXF=YDMgcP-Up=ywvLX1y+3vhiseefLSxbDz5Ee4zGUwf5RKQ@mail.gmail.com>
+
+Hi,
+I need to make the current process (executing thread) go to sleep for a
+given amount of time.  Can't find where threadSleep is defined.
+
+Thanks!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111206/f8dff437/attachment.htm>
+

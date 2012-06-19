@@ -1,0 +1,52 @@
+From warrensomebody at gmail.com  Wed Feb  2 22:42:07 2011
+From: warrensomebody at gmail.com (Warren Harris)
+Date: Wed, 2 Feb 2011 13:42:07 -0800
+Subject: [Haskell-cafe] timely shutdown of timer threads
+In-Reply-To: <4D48C09E.2050001@vex.net>
+References: <84DE9201-9822-4A1A-A17A-682C146C771C@gmail.com>
+	<4D48C09E.2050001@vex.net>
+Message-ID: <11F6D72C-5841-4FFF-B3B6-7B5C1DDC5C5E@gmail.com>
+
+Interesting. I hadn't thought of this solution. You're forking the timer to yet a third thread so that if it continues waiting beyond the checkpoint thread shutdown it doesn't really matter. I guess that works as long as the main thread doesn't wait for all other threads to terminate before terminating the app.
+
+It still seems to me that haskell is lacking when it comes to operations that can wait for multiple conditions.
+
+Warren
+
+
+On Feb 1, 2011, at 6:25 PM, Albert Y. C. Lai wrote:
+
+> On 11-02-01 02:58 PM, Warren Harris wrote:
+>> I have an application that forks a thread to run an activity on a timer. (The activity happens to be Berkeley DB checkpointing, but that's actually beside the point here.) The problem is that when the application wants to quit, I would like my main thread to be able to tell the timer thread to shut down in a timely way. However, I don't see a primitive in haskell that allows me to both wait for a timeout, or a notification. (If I were to do this in java, I would use wait/notify.)
+> 
+> Use an MVar for signalling; use a two-valued data type to represent time-to-work or time-to-die. For extra correctness, use a second MVar to be notified that the child thread is really done --- because otherwise there would be the race condition of the child thread still in the middle of critical I/O when the program quits.
+> 
+> import Control.Concurrent
+> import Control.Exception(finally)
+> 
+> data DoOrDie = Do | Die
+> 
+> main = do
+>  v <- newEmptyMVar
+>  finale <- newEmptyMVar
+>  forkIO (timeloop v `finally` putMVar finale ())
+>  putStrLn "press enter to quit"
+>  getLine
+>  putMVar v Die
+>  takeMVar finale
+> 
+> timeloop v = run where
+>  run = do
+>    forkIO (threadDelay 15000000 >> putMVar v Do)
+>    m <- takeMVar v
+>    case m of
+>      Do -> putStrLn "checkpoint" >> run
+>      Die -> putStrLn "checkmate"
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+

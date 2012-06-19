@@ -1,0 +1,28 @@
+From andrewcoppin at btinternet.com  Sat Feb  5 16:36:37 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Sat, 05 Feb 2011 15:36:37 +0000
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <201102032334.19964.daniel.is.fischer@googlemail.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<AANLkTi=tyKC19Fvie9c8QYN-P=R3oKM_Pm6zOpcmo4Qk@mail.gmail.com>
+	<201102032334.19964.daniel.is.fischer@googlemail.com>
+Message-ID: <4D4D6E85.9080303@btinternet.com>
+
+>> For what it's worth I saw the problems in your counting examples right
+>> away, without reading the explanatory text below.
+>
+> Yes, they were pretty obvious with enough experience. For beginners I
+> expect it to be a rather insidious trap.
+
+Beginners or anybody coding Haskell while not completely awake. ;-)
+
+>> Hopefully that means
+>> that it's possibly to learn how to spot such things without resorting
+>> to e.g. running the program or reading Core *gasp*.
+>
+> Within limits. Detrimental laziness or strictness can be arbitrarily well
+> hidden.
+
+I agree. Unfortunately... :-/
+
+

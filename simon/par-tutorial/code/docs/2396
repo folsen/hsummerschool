@@ -1,0 +1,30 @@
+From aslatter at gmail.com  Thu Dec 29 18:29:51 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Thu, 29 Dec 2011 11:29:51 -0600
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <F6E014FF-2550-4986-843F-B6FA64F596B6@mobileink.com>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>
+	<20111229132335.GY17094@google.com> <4EFC9AAD.5040906@unicaen.fr>
+	<20111229165524.GD17094@google.com> <20111229170135.GE17094@google.com>
+	<F6E014FF-2550-4986-843F-B6FA64F596B6@mobileink.com>
+Message-ID: <CAKjSnQEbRO4yx8bPu5B8UsgUNVtbC7vQg+76YYn0Oe0A_H1rOQ@mail.gmail.com>
+
+On Thu, Dec 29, 2011 at 11:14 AM, Gregg Reynolds <dev at mobileink.com> wrote:
+>
+> On Dec 29, 2011, at 11:01 AM, Iustin Pop wrote:
+>
+>> And to clarify better my original email: yes, (bar x) always gives you
+>> back the same IO action;
+>
+> More precisely: the same *type*.
+>
+
+I'm confused - what do you mean by "type"? I don't think that Iustin's
+statement needs any sort of qualifier - (bar x) always returns the
+same IO action when called with the same value for x, no matter how
+many times you call it.
+
+Antoine
+
+

@@ -1,0 +1,88 @@
+From axman6 at gmail.com  Sun Apr 17 09:57:08 2011
+From: axman6 at gmail.com (Alex Mason)
+Date: Sun, 17 Apr 2011 17:57:08 +1000
+Subject: [Haskell-cafe] Announcing AusHac 2011 - The second annual
+	Australian Haskell Hackathon (July 8-10)
+Message-ID: <3D36BC9B-EC7D-42C3-ADEB-02209972B5B7@gmail.com>
+
+Attention all Australasian Haskellers!
+
+After last year?s fantastic turnout for the first Australian Haskell Hackathon
+- AusHac 2010 - we?ve decided to organise another. As it?s rather boring to
+have a Hackathon with only two people, we encourage and welcome anyone
+interested in Haskell in Australia, New Zealand and surrounding areas (or
+further afield if you want!) to come and join us. Last year we had more than
+25 Haskellers come from Brisbane, Canberra, Melbourne, Sydney and even two
+from as far away as New Zealand.
+
+AusHac 2011 will be held from Friday July 8th until Sunday July 10th, again at
+UNSW?s Computer Science building in Sydney. There?s no need to come for the
+entire weekend, just for whenever you?re able to.
+
+Last year, people worked on several projects including:
+
+    ? Accelerate: a high performance library for array computations using
+      various backends (CUDA, LLVM, etc.) being written at UNSW.
+      
+    ? Leksah: the Haskell IDE written in Haskell
+    
+    ? DDC: the compiler for the Haskell-like language Disciple, which has
+      strict evaluation by default, region, effect and closure typing and
+      other interesting language features.
+      
+    ? Hubris: the Haskell/Ruby bridge for calling Haskell from Ruby and
+      vice-versa.
+      
+    ? haskell-mpi: bindings to MPI, the message passing interface used
+      frequently on high performance super-computers to allow programs to run
+      on many nodes in parallel with easy communication.
+      
+    ? There was even some work on LLVM to produce HTML output showing register
+      allocations (as an aid to those writing new code generators etc.), which
+      has now been included upstream. This work did not use Haskell, but it
+      did happen at AusHac 2010.
+      
+    ? And much more!
+
+
+This is a great chance to collaborate with others and get feedback on your
+work, while having heaps of fun and meeting other Haskellers, to verify they
+do actually exist! And don?t worry if you can?t think of a project to work on;
+just come along and pitch in with whatever strikes your fancy!
+
+
+If you?re interested in coming and have a project you?d like to work on, check
+out the wikipage http://www.haskell.org/haskellwiki/AusHac2011 where you can
+add your project ideas, or just take a look and see what others will be
+working on that you can help out with.
+
+
+People of all skill levels are welcome, from complete beginners to Oleg-level
+sage masters. We?re more than happy to help you learn Haskell if you?re just
+starting out or help you solve that little niggly bit in your code.
+
+
+If you?re interested in coming along, fill out our registration form
+http://axman6.wufoo.com/forms/aushac-2011-sign-up/. Registration is required
+so we know numbers and for you to get access to the university Wifi. Even if
+you?re not sure, fill it in to express your interest, obligation free. We?d
+rather know we have room for too many people than not enough.
+
+
+So come along! And if for some reason you don?t enjoy yourself, registration
+comes with a money-back guarantee!
+
+Hope to see you there,
+
+-- Alex Mason and Ivan Miljenovic, AusHac organisers
+
+
+P.S: If you have received this email directly, it is because you have shown
+     previous interest in AusHac by signing up via the previous signup. If you
+     do not wish to receive any more email regarding AusHac, please email me
+     (axman6 at gmail.com) and I'll be sure to take you off the list of
+     interested people.
+
+
+
+

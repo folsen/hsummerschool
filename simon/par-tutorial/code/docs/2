@@ -1,0 +1,16 @@
+From a UNIX point of view, one peculiarity of the Mac OS X native file
+system is that while case preserving for creation, it is case
+insensitive for lookup.  On my Mac laptop, where everything is native,
+this actually works very pleasantly, although it does mean that
+"fn1 and fn2 are equivalent for lookup, whatever the state of the
+file system" and "fn1 and fn2 are equivalent for creation, whatever
+the state of the file system" are different propositions.  On my Mac
+desktop, where _some_ directories are native and _some_ are NFS, it
+can get confusing.
+
+If memory serves me, Mac OS Classic recorded the script of each file
+name, so in a multidirectory path foo:bar:ugh:zoo each component might
+be byte encoded in a different script...
+
+
+

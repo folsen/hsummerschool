@@ -1,0 +1,109 @@
+From aslatter at gmail.com  Tue Apr 19 15:52:44 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Tue, 19 Apr 2011 08:52:44 -0500
+Subject: [Haskell-cafe] Need comments on a libusb asynchronous
+	select/poll loop
+In-Reply-To: <20110419130604.GA26986@X52D.localdomain>
+References: <20110419130604.GA26986@X52D.localdomain>
+Message-ID: <BANLkTim866Givw+zukTNXtoDnQBSAMUxeg@mail.gmail.com>
+
+On Tue, Apr 19, 2011 at 8:06 AM, John Obbele <john.obbele at gmail.com> wrote:
+> I was reading the recent thread about select/poll, events
+> handling and why forkIO is the only thing you should need (sorry
+> if this is a horrible summary ;) and I'm realizing I could use
+> some advice concerning my last project.
+>
+> I'm trying to implement an asynchronous interface to libusb, re-using
+> the raw bindings-usb (by Maur?cio C. Antunes) and partially copying what
+> can be found in the (great but synchronous-only) usb package (from Bas
+> van Dijk).
+>
+> The issues are:
+>
+> 1) I don't know how to expose the asynchronous API to Haskell. (How would
+> you 'functionalize' it ?)
+>
+> 2) I am messing with lots of FFI calls around epoll and libusb and would
+> appreciate if someone could sanitize my approach.
+>
+> A pre-alpha-use-at-your-own-risk code preview is available there[1].
+>
+> [1]: https://patch-tag.com/r/obbele/usb-asynchronous/home
+>
+> So far, my answer to both issues was:
+>
+> Issue 1)
+> Create an 'AsyncManager' data type to use in code like the following:
+>
+>>readAsyncIO = do $
+>> ? ? ? dev ? ? ?<- getDeviceByVIDPID
+>> ? ? ? amanager <- newAsyncManager dev iface
+>> ? ? ? -- AsyncManager set a background thread to poll libusb for new events.
+>>
+>> ? ? ? sendURB amanager dummyURB -- non-blocking call
+>> ? ? ? urb <- getURB amanager -- blocking
+>> ? ? ? putStr . pprintURB $ urb
+>>
+>> ? ? ? closeAsyncManager amanager
+>>
+>> ?where iface = 0
+>> ? ? ? ? ? ? ? dummyURB = newControlTransfer ?
+>
+> Any opinions on this model ?
+> (N.B.: to keep things simple, I do not yet plan to add a 'cancel'
+> feature to this binding).
+>
+>
+> Issue 2)
+> What libusb asynchronous API requires is the following:
+>
+> 1. initialize resources, get device handles, etc.
+>
+> 2. get a set of file descriptors and select/poll them for read or write
+> ? access.
+>
+> 3. register USB transfers
+>
+> 4. when the transfers are completed, libusb will signal it on one of the
+> ? file descriptors. (but we don't know which one)
+>
+> 5. when your select/poll awakes from one event (it doesn't matter which
+> ? one), you call libusb_handle_events which will flush every pending
+> ? transfer by calling its associated callback function.
+>
+> ? This results in the C runtime calling back an Haskell function (thus
+> ? the RTS will spawn an OS thread to handle it -- which doesn't bug
+> ? anymore since GHC 7.0.2.x :)
+>
+> 6. GOTO 3 or 4
+>
+> Complete libusb idiosyncrasies are explained in [2] and [3]:
+> [2]: http://libusb.sourceforge.net/api-1.0/group__asyncio.html
+> [3]: http://libusb.sourceforge.net/api-1.0/mtasync.html
+>
+> So far, I didn't find a 'blessed' FFI interface to select/poll the set
+> of file descriptors and I'm currently using Toralf Wittner's Epoll
+> package. (which is very fine albeit a linux-only hack).
+>
+> I am wondering if anyone know a magic wand (or abstraction model) to
+> ease my headaches in Haskell.
+>
+> Something that could be more cross-platform ?
+> Something that could be well-integrated with the (GHC) FFI ?
+> Something that could be ... simple ?
+>
+
+Maybe I'm misunderstanding something, but why why I want to use epoll
+directly instead of just using forkIO plus threadWaitRead and
+threadWaitWrite?
+
+http://hackage.haskell.org/packages/archive/base/latest/doc/html/Control-Concurrent.html#v:threadWaitRead
+
+As a developer, the concurrency model offered by the
+Control.Concurrency module has always been friendly to me.
+
+Maybe there was something in the other thread I missed.
+
+Antoine
+
+

@@ -1,0 +1,37 @@
+From eca7215 at cs.rit.edu  Tue Apr 12 21:04:05 2011
+From: eca7215 at cs.rit.edu (Edward Amsden)
+Date: Tue, 12 Apr 2011 15:04:05 -0400
+Subject: [Haskell-cafe] redefining a type class for one instance?
+Message-ID: <BANLkTik-m8Bkb8W4bo+COSk6OAgRWvTutw@mail.gmail.com>
+
+I am trying as an experiment to write something as follows:
+
+data Wrapper a b where
+  Pure :: (a -> b) -> Wrapper a b
+  Nullable :: (Maybe a -> b) -> Wrapper a b
+
+class Liftable a b where
+  liftTo :: (b -> c) -> a b c
+
+instance Liftable Wrapper a where
+  liftTo = Pure
+
+instance Liftable Wrapper (Maybe a) where
+  liftTo = Nullable
+
+Obviously this code (with suitable extensions enabled) complains of
+overlapping type instances, but is there a way to accomplish
+redefining a class instance for one particular group of types while
+having it defined for all others? (Maybe a vs. a in this instance)
+
+
+
+
+-- 
+Edward Amsden
+Student
+Computer Science
+Rochester Institute of Technology
+www.edwardamsden.com
+
+

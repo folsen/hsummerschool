@@ -1,0 +1,94 @@
+From kolar at fit.vutbr.cz  Tue Feb  8 13:33:40 2011
+From: kolar at fit.vutbr.cz (=?ISO-8859-2?Q?Du=B9an_Kol=E1=F8?=)
+Date: Tue, 08 Feb 2011 13:33:40 +0100
+Subject: [Haskell-cafe] Building Plaftorm 2010 2 on 64bit Linux
+In-Reply-To: <4D5136B5.6040608@dfki.de>
+References: <4D511D52.90503@fit.vutbr.cz> <4D51316A.5070201@dfki.de>
+	<4D513575.6000803@fit.vutbr.cz> <4D5136B5.6040608@dfki.de>
+Message-ID: <4D513824.4050606@fit.vutbr.cz>
+
+Well, it helped, but not getting output anyway:
+
+/tmp/ghc32376_0/ghc32376_0.s: Assembler messages:
+
+/tmp/ghc32376_0/ghc32376_0.s:35:0:
+      Error: bad register name `%rbp)'
+
+/tmp/ghc32376_0/ghc32376_0.s:36:0:  Error: bad register name `%r15'
+
+/tmp/ghc32376_0/ghc32376_0.s:38:0:  Error: bad register name `%r12'
+
+/tmp/ghc32376_0/ghc32376_0.s:39:0:
+      Error: bad register name `%r13)'
+
+/tmp/ghc32376_0/ghc32376_0.s:41:0:
+      Error: bad register name `%r12)'
+
+/tmp/ghc32376_0/ghc32376_0.s:42:0:  Error: bad register name `%rbx'
+
+
+... and many other similar lines
+
+
+Is my installation of gcc broken? :-O
+
+
+Dusan
+
+
+On 02/08/2011 01:27 PM, Christian Maeder wrote:
+> This looks like gcc is used as assembler.
+>
+> Try to add:
+>
+>    -pgma /usr/local/bin/gcc
+>
+> C.
+>
+>
+> Am 08.02.2011 13:22, schrieb Du?an Kol??:
+>> This is the end of the log:
+>>
+>> *** Assembler:
+>> /usr/bin/gcc -I. -c /tmp/ghc29474_0/ghc29474_0.s -o test.o
+>> *** Deleting temp files:
+>> Deleting: /tmp/ghc29474_0/ghc29474_0.s
+>> *** Deleting temp dirs:
+>> Deleting: /tmp/ghc29474_0
+>> ghc: could not execute: /usr/bin/gcc
+>>
+>> Otherwise gcc not mentioned, no error mentioned.
+>>
+>> Dusan
+>>
+>>
+>> On 02/08/2011 01:04 PM, Christian Maeder wrote:
+>>> Does adding "-v" reveal when /usr/bin/gcc is used?
+>>>
+>>>     ghc -v -O2 --make test.hs -o test
+>>>
+>>> C.
+>>>
+>>> Am 08.02.2011 11:39, schrieb Du?an Kol??:
+>>>> Hello all,
+>>>>
+>>>>     I'm trying to build platform on Linux 2.6.32.22 #1 SMP Tue Sep 21
+>>>> 09:44:04 CEST 2010 x86_64 x86_64 x86_64 GNU/Linux. I've downloaded
+>>>> binary of ghc6.12.3 for the purpose, but ghc doesn't work. ghci does
+>>>> work, gcc does work, but for ghc I get:
+>>>>
+>>>> ghc -O2 --make test.hs -o test
+>>>> [1 of 1] Compiling Main             ( test.hs, test.o )
+>>>> ghc: could not execute: /usr/bin/gcc
+>>>>
+>>>> Even if I can easily compile gcc testc.c -o testc and run testc.
+>>>>
+>>>> Could anyone point me to a solution? Helps found by google pointed me to
+>>>> try use option -pgmc gcc, which doesn't work. All other threads with
+>>>> similar issue stayed unresoleved. :-(
+>>>>
+>>>> Thanks
+>>>>
+>>>>      Dusan
+
+

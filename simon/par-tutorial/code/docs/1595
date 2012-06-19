@@ -1,0 +1,27 @@
+From michael at schmong.org  Thu Dec  1 20:36:39 2011
+From: michael at schmong.org (Michael Litchard)
+Date: Thu, 1 Dec 2011 11:36:39 -0800
+Subject: [Haskell-cafe] Hackage down!
+In-Reply-To: <00C900DF-592C-48CF-9AD5-60B07F395250@me.com>
+References: <CA+L91bOB+qMoSExJ_MOyV=eMp5yez1C5mtX43CCTb_W7wfCF9g@mail.gmail.com>
+	<CAPTT2bZ71zrja5LCEYeqSqmmRZ-eWc4FFaCqEJCaWQ5dVmeq1w@mail.gmail.com>
+	<00C900DF-592C-48CF-9AD5-60B07F395250@me.com>
+Message-ID: <CAEzeKYqmnxL830zNhYKrC8owyQO3o4VPK9szdRC7fBavxsAjrg@mail.gmail.com>
+
+Does anyone know of a hackage mirror? It now occurs to me I should
+have a local mirror, it's that essential.
+
+On Thu, Dec 1, 2011 at 9:24 AM, Malcolm Wallace <malcolm.wallace at me.com> wrote:
+> And, amusingly, ?http://downforeveryoneorjustme.com/ is also down, having exceeded its Google App Engine quota.
+>
+> [ But the similarly named .org site still works, and confirms that hackage is down. ]
+>
+> Regards,
+> ? ?Malcolm
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

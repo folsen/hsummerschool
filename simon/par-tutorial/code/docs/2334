@@ -1,0 +1,23 @@
+From sh006d3592 at blueyonder.co.uk  Tue Dec 27 20:04:35 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Tue, 27 Dec 2011 19:04:35 +0000
+Subject: [Haskell-cafe] Haskell Platform and Windows - where's 2011.4?
+In-Reply-To: <4EFA150F.6040802@blueyonder.co.uk>
+References: <4EFA0AC9.3080703@blueyonder.co.uk>
+	<CADLz5wXxOGPLCvcj4JnA1D1wm+qtJoS7bZK=PY7JLi4DBHNegg@mail.gmail.com>
+	<4EFA150F.6040802@blueyonder.co.uk>
+Message-ID: <4EFA16C3.7050005@blueyonder.co.uk>
+
+On 27/12/2011 18:57, Steve Horne wrote:
+> OK - I really should have tried that before. But... why would an old 
+> page hang around in my Firefox cache so long and not get updated? I've 
+> not had this on any other sites.
+I still should be doing more checking before posting.
+
+A look in the source for the page doesn't show any odd metadata or 
+anything. Whatever the issue is, it's my end.
+
+Sorry everyone.
+
+
+

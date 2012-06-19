@@ -1,0 +1,26 @@
+From aslatter at gmail.com  Tue Feb  1 01:34:38 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Mon, 31 Jan 2011 18:34:38 -0600
+Subject: [Haskell-cafe] Packages all screwed up
+In-Reply-To: <AANLkTimOAkVnV=V+Om6_EMFKsGStNuTFxAN+VDvAvUYR@mail.gmail.com>
+References: <AANLkTimOAkVnV=V+Om6_EMFKsGStNuTFxAN+VDvAvUYR@mail.gmail.com>
+Message-ID: <AANLkTikT0Vib4q2P5Ui3iJWnhtF4RcEnuqjsBn2hLVuF@mail.gmail.com>
+
+On Mon, Jan 31, 2011 at 4:59 PM, Arnaud Bailly <arnaud.oqube at gmail.com> wrote:
+> Hello,
+> I recently tried to upgrade some package (eg. yesod) and it seems
+> that, in the process, I screwed up my Haskell packages setup.
+> When I am trying to do a simple:
+>> ghc --make Crete1941
+
+What command(s) did you issue to "upgrade some packages?"
+Were you trying to do a user or global install?
+
+When ghc loads packages, I've had cases where packages in the user db
+would shadow packages in the global db, causing *other* packages in
+the global db to report as "broken".
+
+Thanks,
+Antoine
+
+

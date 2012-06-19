@@ -1,0 +1,44 @@
+From nomeata at debian.org  Sat Apr 23 11:48:04 2011
+From: nomeata at debian.org (Joachim Breitner)
+Date: Sat, 23 Apr 2011 15:18:04 +0530
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+In-Reply-To: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+References: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+Message-ID: <1303552084.2479.23.camel@kirk>
+
+Hi Hamish,
+
+Am Freitag, den 22.04.2011, 22:40 +1200 schrieb Hamish Mackenzie:
+> Yesterday we uploaded our official 0.10.0 release (0.10.0.4) to Hackage
+> and we have Windows and OS X installers at http://leksah.org/download.html
+
+I am checking what is to be done to get this new release into Debian,
+and I notice quite a few changes to the dependencies, including some
+duplication of existing libraries (haddock-leksah, haddock-process).
+
+That is something we would definitely like to avoid in Debian. Can you
+tell us why exactly you need different packages, e.g. a link to the bug
+report where you ask for inclusion of your changes? Ideally, we would in
+Debian incorporate your changes in the Debian package of process or
+haddock, but of course only if they are reviewed by upstream and will
+eventually be merged.
+
+Also, is there a chance that the features of binary-shared will be
+merged into binary eventually?
+
+Thanks,
+Joachim
+
+-- 
+Joachim "nomeata" Breitner
+Debian Developer
+  nomeata at debian.org | ICQ# 74513189 | GPG-Keyid: 4743206C
+  JID: nomeata at joachim-breitner.de | http://people.debian.org/~nomeata
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110423/6acb070b/attachment.pgp>
+

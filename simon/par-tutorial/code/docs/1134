@@ -1,0 +1,23 @@
+From fuzxxl at gmail.com  Sun Aug 14 23:13:26 2011
+From: fuzxxl at gmail.com (Robert Clausecker)
+Date: Sun, 14 Aug 2011 23:13:26 +0200
+Subject: [Haskell-cafe] Evolving faster Haskell programs - where are the
+	files?
+Message-ID: <1313356406.2070.4.camel@robert-ThinkPad-R500>
+
+I just read the enlightening article by Don Stewart[1], and wanted to
+test this method on one of my own programs, but it seems that there some
+of the attached files are missing, namely [2], [3] and [4]. Is there
+anybody who knows, where I can get those files? I don't really want to
+rewrite those file by hand.
+
+Yours, Robert Clausecker
+
+[1]:
+http://donsbot.wordpress.com/2009/03/09/evolving-faster-haskell-programs
+[2]: http://galois.com/~dons/acovea/gcc43_core2.acovea
+[3]: http://galois.com/~dons/acovea/ghc-basic.acovea
+[4]: http://galois.com/~dons/acovea/ghc-6_10.acovea
+
+
+

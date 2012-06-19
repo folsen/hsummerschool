@@ -1,0 +1,52 @@
+From tonymorris at gmail.com  Sun Aug 28 12:41:30 2011
+From: tonymorris at gmail.com (Tony Morris)
+Date: Sun, 28 Aug 2011 20:41:30 +1000
+Subject: [Haskell-cafe] Pointed, but not Applicative
+In-Reply-To: <j3d40s$nb1$1@dough.gmane.org>
+References: <j3d40s$nb1$1@dough.gmane.org>
+Message-ID: <4E5A1B5A.5060204@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 28/08/11 01:41, S?nke Hahn wrote:
+> Hi!
+> 
+> I was reading through the Typeclassopedia ([1]) and I was wondering which 
+> type could be an instance of Pointed, but not of Applicative. But I can't 
+> think of one. Any ideas?
+> 
+> S?nke
+> 
+> [1] http://www.haskell.org/haskellwiki/Typeclassopedia
+> 
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+Pointed f => Pointed (StateT s f)
+
+but not
+
+Applicative f => Applicative (StateT s f)
+
+- -- 
+Tony Morris
+http://tmorris.net/
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iQEcBAEBAgAGBQJOWhtaAAoJEPxHMY3rBz0Pa3oIAMrqoyv4DW39VjIXwzV3/4Ir
+W5s0+fdoPj7h1j6eyCB81VcDHNtGQmWhZ3+g2AhHo1jLAzmH8G5ACdD1c1FeF2dn
+a0iO7uvH5sM0xovpsqUwZC8BkomdeAnRuYF5Ohzar5M/Ip2BD0k7QpIWJt3RdLZm
+uCpwDnsQ2foHJCJYlGmmGkpzDAnkwePOfER93KrKXmzHqQxhS0oACQy6LKfXODTM
++d2VVzzb4tWuzijXE4NflpdtW/4jSs3gVFmkZ7BmXSg8XxZO3naO/y4gtrU4YVjw
+7TKo4IOIygQVMsFbdV2WZHprMHU/VaM6MTByiNECyB0q/yhJhsXtGsd9eeR2jng=
+=X4nM
+-----END PGP SIGNATURE-----
+
+

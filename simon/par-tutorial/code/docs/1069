@@ -1,0 +1,32 @@
+From igouy2 at yahoo.com  Fri Aug 12 17:18:10 2011
+From: igouy2 at yahoo.com (Isaac Gouy)
+Date: Fri, 12 Aug 2011 08:18:10 -0700 (PDT)
+Subject: [Haskell-cafe] fyi GHC 7.2.1 release on the benchmarks game
+Message-ID: <1313162290.59789.YahooMailClassic@web65615.mail.ac4.yahoo.com>
+
+1) Some of the GHC programs contributed to the benchmarks game have problems with recent GHC releases
+
+- meteor-contest #5 - Ambiguous occurrence `permutations'
+
+http://shootout.alioth.debian.org/u64q/program.php?test=meteor&lang=ghc&id=5#log
+
+
+- regex-dna #2 - Precedence parsing error
+
+http://shootout.alioth.debian.org/u64q/program.php?test=regexdna&lang=ghc&id=2#log
+
+
+- reverse-complement #2 - parse error on input `->'
+
+http://shootout.alioth.debian.org/u64q/program.php?test=revcomp&lang=ghc&id=2#log
+
+
+- reverse-complement #3 - Could not find module `Monad'
+
+http://shootout.alioth.debian.org/u64q/program.php?test=revcomp&lang=ghc&id=3#log
+
+
+2) I noticed `-fvia-C` has now gone away and there were half-a-dozen programs that had been written to use `-fvia-C` so how might that effect performance of those programs?
+
+
+

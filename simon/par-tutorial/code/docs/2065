@@ -1,0 +1,23 @@
+From c.lopez at kmels.net  Sun Dec 18 18:41:25 2011
+From: c.lopez at kmels.net (=?ISO-8859-1?Q?Carlos_L=F3pez_Camey?=)
+Date: Sun, 18 Dec 2011 11:41:25 -0600
+Subject: [Haskell-cafe] How hard is it to start a web startup using
+	Haskell?
+In-Reply-To: <loom.20111218T175134-76@post.gmane.org>
+References: <loom.20111218T175134-76@post.gmane.org>
+Message-ID: <CAMSgvCJ_GR4DMaMmYJLF=XBt=n+w2_YQrS8D+HwcyWE5uxewDg@mail.gmail.com>
+
+> The question 'How hard is it to start a technical startup with Haskell?'
+> happened a couple of times on this list. Sometimes it was in the form 'How hard
+> is to find Haskell programmers?' or 'Are there any Haskell jobs?'.
+>
+> I'd like to provide one data point as an answer:
+>
+> http://www.reddit.com/r/haskell/comments/ngbbp/haskell_only_esigning_startup_closes_second_angel/
+>
+
+Hi Gracjan, here is Bryan O' Sullivan's "Running a Startup on Haskell"
+in case you haven't seen it:
+http://www.infoq.com/presentations/Running-a-Startup-on-Haskell
+
+

@@ -1,0 +1,22 @@
+From sergueyz at gmail.com  Sun Dec 11 19:53:56 2011
+From: sergueyz at gmail.com (Serguey Zefirov)
+Date: Sun, 11 Dec 2011 22:53:56 +0400
+Subject: [Haskell-cafe] Hardware description in Haskell.
+In-Reply-To: <CANd=OGE_2di3S5XmBg-atCS3_Y1Ff4NC5ftb=wMnKFKJORmQpA@mail.gmail.com>
+References: <CABFQQ=C0ybeTt8mSi_d43FGHL+hCA6=_SwBLVD4AwLN9SCYoJw@mail.gmail.com>
+	<CANd=OGE_2di3S5XmBg-atCS3_Y1Ff4NC5ftb=wMnKFKJORmQpA@mail.gmail.com>
+Message-ID: <CABFQQ=Ad=pGLEcQz1uy2m_8JyuwjETqFD+GhSD2e=vgCQOA3sA@mail.gmail.com>
+
+2011/12/11 Felipe Almeida Lessa <felipe.lessa at gmail.com>:
+> On Sun, Dec 11, 2011 at 10:52 AM, Serguey Zefirov <sergueyz at gmail.com> wrote:
+>> scrutiny and critique by Haskell users who is into hardware
+>> description.
+> A two years-old project is more than ready to be on Hackage. ?It will
+> sure make it easier to use by prospective users.
+
+This is two-years-long project, not two-years-old. It is only days
+old, it became useful this day, actually.
+
+I have two points in my TODO list. When I finish them I'll do a package.
+
+

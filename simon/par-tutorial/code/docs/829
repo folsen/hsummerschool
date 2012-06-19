@@ -1,0 +1,57 @@
+From felipe.lessa at gmail.com  Thu Apr 28 17:09:43 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Thu, 28 Apr 2011 12:09:43 -0300
+Subject: [Haskell-cafe] Iteratee: manyToOne
+In-Reply-To: <BANLkTinwOoNcVGx1awFANAywZUyxnUpWPg@mail.gmail.com>
+References: <BANLkTinwOoNcVGx1awFANAywZUyxnUpWPg@mail.gmail.com>
+Message-ID: <BANLkTi=tGAyb8JgxiHuEkQ9SnCoSdSqFTw@mail.gmail.com>
+
+On Thu, Apr 28, 2011 at 11:39 AM, Dmitry Olshansky
+<olshanskydr at gmail.com> wrote:
+> Hello,
+>
+> does somewhere?exist function with type like this -?manyToOne :: [Iteratee a
+> m b] -> Iteratee a m [b] ?
+>
+> I.e. I need to process one input through many Iteratees indepentently in
+> constant space and collect results.
+>
+> It is similar by type with sequenceM but as far as I understand sequenceM
+> won't use the same input for all Iteratees.
+
+I foresee one problem: what is the leftover of 'manyToOne xs' if each
+x in xs needs different lengths of input?
+
+One possible untested-but-compiling solution:
+
+import Control.Monad (liftM)
+import qualified Data.Enumerator as E
+
+manyToOne :: Monad m => [E.Iteratee a m b] -> E.Iteratee a m [b]
+manyToOne [] = return []
+manyToOne xs = E.Iteratee $ mapM E.runIteratee xs >>= go
+    where
+      go (E.Yield b s  : xs) = liftM (put b s) (go xs)
+      go (E.Error exc  : _)  = return $ E.Error exc
+      go (E.Continue f : xs) = return $ E.Continue $ go' (E.Continue f : xs)
+      go []                  = return $ E.Yield [] (error "manyToOne:
+never here")
+
+      go' xs stream = manyToOne $ map apply xs
+        where
+          apply (E.Continue f) = f stream
+          apply step           = E.returnI step
+
+      put b s (E.Yield bs _) = E.Yield (b : bs) s
+      put b s (E.Error exc)  = E.Error exc
+      put b s (E.Continue f) = E.Continue (liftM (b:) . f)
+      -- When 'go xs' is a E.Continue, then we just put 'b' on
+      -- the list and let the next round of iteratees decide
+      -- what the leftover will be.
+
+HTH,
+
+-- 
+Felipe.
+
+

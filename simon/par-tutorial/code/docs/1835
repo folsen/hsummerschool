@@ -1,0 +1,46 @@
+From allbery.b at gmail.com  Sun Dec 11 17:10:13 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Sun, 11 Dec 2011 11:10:13 -0500
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+In-Reply-To: <CAKjSnQEW6=iXAvRNPyGRHppv50papjAwvnp0DoeaBn-TEVf2VQ@mail.gmail.com>
+References: <87k464b870.fsf@gnu.org> <87d3bw102d.fsf@write-only.cryp.to>
+	<CAKFCL4VhQe89QZmTM6Wxm+7KR6KOT7+qQe-xYCNBt8i3fR+zjg@mail.gmail.com>
+	<CAKjSnQEW6=iXAvRNPyGRHppv50papjAwvnp0DoeaBn-TEVf2VQ@mail.gmail.com>
+Message-ID: <CAKFCL4X-Hd1RGd5+Wk949Cz2EZZM9tzCDGm6ptYDJT09nF=NLg@mail.gmail.com>
+
+On Sun, Dec 11, 2011 at 10:44, Antoine Latter <aslatter at gmail.com> wrote:
+
+> On Sat, Dec 10, 2011 at 5:31 PM, Brandon Allbery <allbery.b at gmail.com>
+> wrote:
+> > On Sat, Dec 10, 2011 at 18:25, Peter Simons <simons at cryp.to> wrote:
+> >>    src/Parsers.hs:163:52:
+> >>        Couldn't match expected type `Char' against inferred type
+> `[Char]'
+> >
+> > xmobar currently requires parsec 3.x; the above is the symptom of
+> building
+> > it against 2.x.
+>
+> It's not clear to me from reading the sources and type signatures of
+> 'notFollowedBy' why this is different in parsec 2 vs. parsec 3.
+>
+
+It's not necessarily going to be visible in individual combinators, as I
+understand it; the issue is that Parsec2 can really only handle fundamental
+types such as Char, whereas Parsec3 can handle more complex types.  xmobar
+appears to be making use of this so its higher level parsing is at the
+string instead of the character level, factoring out lower level issues to
+a lower parsing "layer".
+
+It's not going to be something easily retrofitted into Parsec2, in any
+case; Parsec3 needed a fair amount of work to do it to begin with, and even
+more to make it do so efficiently, which is why Parsec2 remained the
+default in the 6.12/6.14 days.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111211/59dad597/attachment.htm>
+

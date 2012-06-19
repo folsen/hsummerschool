@@ -1,0 +1,135 @@
+From ryani.spam at gmail.com  Sat Feb 12 01:46:33 2011
+From: ryani.spam at gmail.com (Ryan Ingram)
+Date: Fri, 11 Feb 2011 16:46:33 -0800
+Subject: [Haskell-cafe] coding a queue with reactive
+In-Reply-To: <000e0cd2df9478ef99049be01d08@google.com>
+References: <000e0cd2df9478ef99049be01d08@google.com>
+Message-ID: <AANLkTikz68zXOv4jffxnRrjaD2Mgd2SdjgPjjRnWRqTk@mail.gmail.com>
+
+Hi Sam.  I don't know much about the performance problems you are
+seeing, but I think your solution is more cleanly implemented just
+under the event level with futures.
+
+I think the reactive function you want has a type like this:
+
+stateMachine :: s -> (a -> s -> s) -> (s -> Future (b, s)) -> Event a -> Event b
+
+I don't think that function currently exists in Reactive, but the semantics are:
+
+stateMachine initialState updateState runner input
+  | runner initialState -> (b, nextState) happens before the first
+event in input => output the b, then stateMachine nextState
+updateState runner input
+  | input -> (Stepper a input') happens first => let nextState =
+updateState a nextState, then stateMachine nextState updateState
+runner input'
+
+Here's my thoughts on an implementation:
+
+stateMachineF s0 upd run (Event inp) = do
+    x <- mappend (Left <$> run s0) (Right <$> inp)
+    case x of
+        Left (b,sNext) -> return (Stepper b (stateMachineF sNext upd run inp))
+        Right (Stepper a inpNext) -> stateMachineF (upd a s0) upd run inpNext
+
+stateMachine s0 upd run inp = Event $ stateMachineF s0 upd run inp
+
+Then we can do something like
+
+queue delay = stateMachine Nothing upd run . withTimeE where
+    run Nothing = mempty
+    run (Just (t, a, q)) = future t (a, sNext) where
+        sNext = fmap (\(a', q') -> (t + delay, a', q')) (viewQ q)
+    upd (time, x) Nothing = Just (time + delay, x, emptyQ)
+    upd (time, x) (Just (t, a, q)) = Just (t, a, pushQ x q)
+
+given these queue functions:
+
+emptyQ :: Queue a
+viewQ :: Queue a -> Maybe (a, Queue a)
+pushQ :: a -> Queue a -> Queue a
+
+which can be pretty easily implemented on the standard functional
+queue structure
+
+data Queue a = Q [a] [a]
+emptyQ = Q [] []
+pushQ a (Q fs bs) = Q fs (a:bs)
+viewQ (Q [] []) = Nothing
+viewQ (Q (a:fs) bs) = Just (a, Q fs bs)
+viewQ (Q [] bs) = viewQ (Q (reverse bs) [])
+
+
+On Wed, Feb 9, 2011 at 1:26 PM,  <sam.roberts.1983 at gmail.com> wrote:
+> Hi all,
+>
+> I hope someone is interested in helping me out with the reactive library.
+> I am trying to implement a function "queue" in reactive:
+>
+> queue :: Double -> Event a -> Event a
+>
+> This is a simple queue: events from the event stream coming into the queue,
+> queue up waiting to be processed one by one. Processing an event takes a
+> constant amount of time for every event. The output of the queue function
+> is the stream of processed events.
+>
+> My current (deficient) implementation of the queue function is:
+>
+> queue dt eventsIn =
+> do
+> (a,exitT) <- withExitTime eventsIn
+> _ <- atTime exitT
+> return a
+> where
+> withExitTime = scanlE calcExitTime (undefined, -1/0) . withTimeE
+> calcExitTime (_,prevExitT) (a,inT) = (a, (max inT prevExitT) + dt)
+>
+> I am having three problems.
+>
+> 1 - I find my implementation of the queue is less clear then an imperative
+> description of a queue.
+>
+> 2 - I rely on being able to calculate the exit time of an event when it
+> first arrives at the queue, whereas an imperative queue would simply store
+> the event in queue and only need to calculate the output time once the event
+> was popped off the queue. If I want to do something similar with my
+> function,
+> I think I need to make some sort of recursive definition of a queue which
+> responds to it's own exit events. I've tried to code this up, but have not
+> managed to wrap my brain around the concept.
+>
+> 3 - The code performs horribly! I am guessing that this is because I have
+> not
+> told reactive that the exit events preserve the ordering of the input
+> events,
+> but I'm not sure how to encode that relationship in reactive.
+>
+> (It's worth noting here that I actually have a fourth problem too: I get
+> linker errors while trying to compile a profiling version of the program ...
+> but that's a separate topic.)
+>
+> It's also worth noting, from a performance point of view, that a much
+> simpler
+> "delay" function with similar use of the bind function performs badly as
+> well:
+>
+> delay :: Double -> Event a -> Event a
+> delay dt es = do (e,t) <- withTimeE es
+> _ <- atTime (t+dt)
+> return e
+>
+> I'd appreciate any light that anyone could shed on any of these problems.
+> If there's a better way of structuring my queue function, or if there's a
+> better way of changing event times in reactive, I am open to all
+> suggestions.
+>
+> Many thanks,
+> Sam
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

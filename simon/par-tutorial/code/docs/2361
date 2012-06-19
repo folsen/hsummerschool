@@ -1,0 +1,27 @@
+From michael at snoyman.com  Wed Dec 28 22:52:41 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 28 Dec 2011 23:52:41 +0200
+Subject: [Haskell-cafe] Windows: openFile gives permission denied when file
+	in use
+Message-ID: <CAKA2JgLc1Q-Lf_yOuhQdb1JKuUkiRYuS=hQ7wQw_+jqCMQOEYQ@mail.gmail.com>
+
+Hi all,
+
+I just received a bug report from a client that, when an input file is
+open in FrameMaker, my program gives a "permission denied error". This
+bug is reproducible with a simple Haskell program:
+
+import System.IO
+
+main = do
+    putStrLn "here1"
+    h <- openFile "filename.txt" ReadMode
+    putStrLn "here2"
+
+I tried writing a simple C program using fopen, and it ran just fine.
+Does anyone have experience with this issue, and know of a workaround?
+
+Thanks,
+Michael
+
+

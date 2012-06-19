@@ -1,0 +1,51 @@
+From mail at joachim-breitner.de  Thu Dec  1 11:38:39 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Thu, 01 Dec 2011 11:38:39 +0100
+Subject: [Haskell-cafe] List fusion of nested lists
+In-Reply-To: <1322735299.2990.26.camel@kirk>
+References: <1322735299.2990.26.camel@kirk>
+Message-ID: <1322735919.2990.30.camel@kirk>
+
+Hi,
+
+Am Donnerstag, den 01.12.2011, 11:28 +0100 schrieb Joachim Breitner:
+> Now I?d like to implement streaks in terms of build and foldr such that
+> it is subject to list fusion.
+
+one half of the task is quite doable:
+
+        streaks' :: [Integer] -> [[Integer]]
+        streaks' xs = foldr streaksF [] xs
+        
+        streaksF :: Integer -> [[Integer]] -> [[Integer]]
+        streaksF i [] = [[i]]
+        streaksF i ([x]:ys) = [i,x]:ys
+        streaksF i ((x1:x2:xs):ys) = if i `compare` x1 == x1 `compare`
+        x2
+                                     then (i:x1:x2:xs):ys
+                                     else [i]:(x1:x2:xs):ys
+
+so I can make streaks a somewhat well-behaving consumer. The task to
+create the lists using build remains.
+
+(The function only works correctly on lists where no two adjacent
+elements are the same, and it behaves differently than the code in the
+first mail on [2,1,2]; it builds [[2],[1,2]] instead of [[2,1],2]. That
+is ok for my purposes.)
+
+Greetings,
+Joachim
+
+-- 
+Joachim "nomeata" Breitner
+  mail at joachim-breitner.de  |  nomeata at debian.org  |  GPG: 0x4743206C
+  xmpp: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111201/b5712245/attachment.pgp>
+

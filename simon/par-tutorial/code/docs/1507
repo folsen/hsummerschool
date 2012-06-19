@@ -1,0 +1,50 @@
+From greg at gregorycollins.net  Mon Aug 29 18:32:35 2011
+From: greg at gregorycollins.net (Gregory Collins)
+Date: Mon, 29 Aug 2011 18:32:35 +0200
+Subject: [Haskell-cafe] Decompressing and http-enumerator
+In-Reply-To: <1314628133.4827.61.camel@duo>
+References: <CAKA2Jg+u_BtN5WKrTc4T_mgmuxP5==ASbsh5rvxJaQhVK64MTg@mail.gmail.com>
+	<CAHZrzdqdDtoPa+eQS5XtyRFx-2=1WtOQf=eDERvQuzu_dsMwAw@mail.gmail.com>
+	<1314628133.4827.61.camel@duo>
+Message-ID: <CAHZrzdqfcxaRoTTQmU9Y54C7j6NOk2sDmw5S-EByg-gxwe0uPg@mail.gmail.com>
+
+On Mon, Aug 29, 2011 at 4:28 PM, Herbert Valerio Riedel <hvr at gnu.org> wrote:
+> On Mon, 2011-08-29 at 13:21 +0200, Gregory Collins wrote:
+>> A web server should not be setting "Content-encoding: gzip" on a
+>> .tar.gz file.
+>
+> Why not? From RFC2616 compliant servers I'd expect a .tar.gz file to
+> have the Content-* headers provide meta-information about the
+> content[1], e.g.
+>
+> ?Content-Type: application/x-tar
+> ?Content-Encoding: gzip
+> ?Transfer-Encoding: chunked
+
+The way I would interpret this is: this MIME body is a TAR file which
+has been gzip-encoded for the purpose of efficiency in transmission.
+When I ask the library for the body contents as an octet stream, I
+would expect to get the TAR file contents, uncompressed. This is how
+it works when you send text/html with "Content-Encoding: gzip", I
+don't understand why it should be different with a .tar.gz file.
+
+If you wanted the MIME body to be passed through unmolested (i.e. you
+expect the octet stream to actually be in gzip-compressed TAR format),
+I would expect that you set "Content-Type: application/x-tgz" without
+a Content-Encoding. But that's just my interpretation both of standard
+practice and of the spec.
+
+
+> If I want to detach the gzip encoding from the "content" (or "entity"),
+> I'd move it to the Transfer-Encoding header[2], e.g.:
+>
+> ?Content-Type: application/x-tar
+> ?Transfer-Encoding: gzip, chunked
+
+As Michael mentioned, that isn't how those headers are interpreted.
+
+G
+-- 
+Gregory Collins <greg at gregorycollins.net>
+
+

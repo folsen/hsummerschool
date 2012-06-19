@@ -1,0 +1,29 @@
+From andrewcoppin at btinternet.com  Tue Apr 12 20:28:30 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Tue, 12 Apr 2011 19:28:30 +0100
+Subject: [Haskell-cafe] Current heap size and other runtime statistics
+ -- API for accessing in GHC?
+In-Reply-To: <BANLkTim5t2wAuew1pcqVe_VvOvmEyoQkgw@mail.gmail.com>
+References: <BANLkTinypS_hu1AKACiJD=WfagJmM32o2w@mail.gmail.com>
+	<BANLkTim5t2wAuew1pcqVe_VvOvmEyoQkgw@mail.gmail.com>
+Message-ID: <4DA499CE.2010101@btinternet.com>
+
+On 11/04/2011 12:52 AM, Don Stewart wrote:
+> I'd like a proper FFI binding for getting at Stats.c dynamically. So I
+> can write programs that determine their own stats about the GC and so
+> on.
+
+I have often wished that there was a much bigger API for interacting 
+with the RTS. Currently, you can query how many capabilities there are, 
+and you can request a (magor?) GC cycle. And that's *it*.
+
+One can imagine a far richer API, with the ability to do things like set 
+and query RTS flags, query the GHC version number and RTS "way", ask how 
+much RAM is allocated to what, request a minor or magor GC, try to 
+release RAM to the OS, pre-allocate RAM from the OS because you're about 
+to use it, find out how many threads are running or how many sparks are 
+queued, and so on.
+
+Of course, I doubt anyone is going to implement it anytime soon...
+
+

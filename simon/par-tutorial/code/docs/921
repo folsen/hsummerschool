@@ -1,0 +1,52 @@
+From valheru at chariot.net.au  Wed Aug  3 01:36:46 2011
+From: valheru at chariot.net.au (Mark Spezzano)
+Date: Wed, 3 Aug 2011 09:06:46 +0930
+Subject: [Haskell-cafe] Fractional Part
+In-Reply-To: <6753AB4C-1B54-402F-9384-5723C11FECBC@gmail.com>
+References: <6753AB4C-1B54-402F-9384-5723C11FECBC@gmail.com>
+Message-ID: <7A8FD5FE-2D70-4CAA-A829-8399C20EF3BC@chariot.net.au>
+
+Hi Ata,
+
+You could write the following
+
+decimalPart :: Float -> Integer
+decimalPart f = read (tail (tail (show (f)))) :: Integer
+
+This basically says "convert f into a String using the show function, and then get the tail of that String twice to get rid of  the leading zero and the decimal point then read the result back as an Integer".
+
+To use this function you would type at the prompt:
+
+decimalPart 0.123
+
+which gives
+
+123
+
+This is probably not a very elegant solution, but it will work.
+
+
+Cheers,
+
+Mark
+
+
+On 03/08/2011, at 8:36 AM, Ata Jafari wrote:
+
+> Hi everyone,
+> I'm totally new to Haskell and functional programming. I try to solve some problems from Proejct Euler with Haskell so that I can improve myself in functional programming.
+> In the first step I want to write a little code that can give me only the decimal part of a float. For instance:
+> if the number is (0.123) I want to obtain only the (123) part to do some processes on that. (I mean the result of this code must be an integer.)
+> I don't expect any complete code, any suggestion and help will be appreciated.
+> Thanks
+> Ata
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+> 
+> 
+
+
+

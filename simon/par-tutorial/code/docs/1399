@@ -1,0 +1,67 @@
+From daniel.is.fischer at googlemail.com  Fri Aug 26 22:08:25 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Fri, 26 Aug 2011 22:08:25 +0200
+Subject: [Haskell-cafe] RFC: decodeFloat
+Message-ID: <201108262208.25207.daniel.is.fischer@googlemail.com>
+
+Occasionally, the behaviour of decodeFloat and its consequences causes 
+concern and/or bug reports (e.g. 
+http://hackage.haskell.org/trac/ghc/ticket/3898).
+
+The main problem is the treatment of NaNs and infinities (that it doesn't 
+distinguish between 0.0 and -0.0 is a minor thing), which are converted as 
+if they were ordinary finite values.
+
+Thus, for example, decodeFloat (1/0 :: Double) = (2^52,972) and 
+consequently
+
+floor (1/0 :: Double) = 2^1024 (corresponding for round, truncate, ceiling, 
+properFraction),
+significand (1/0 :: Double) = 0.5,
+Prelude> uncurry encodeFloat (decodeFloat (1/0 :: Float)) :: Double
+3.402823669209385e38
+
+and similar meaningless/nonsensical results for NaNs.
+
+At its type, decodeFloat :: RealFloat a => a -> (Integer, Int), I see only 
+two reasonable options,
+
+1. leave the behaviour as it is, just warn about the exceptional cases in 
+the documentation,
+
+2. let decodeFloat raise an error when its argument is a NaN or infinite.
+
+Both options have disadvantages, 1. makes it easy to get meaningless 
+results when there's a non-finite value around, 2. incurs a nontrivial 
+performance penalty.
+
+Paying that performance penalty when dealing only with known-to-be-good 
+values is undesirable, but so are meaningless results.
+
+
+A third option would be providing both behaviours by adding a function.
+That could take several forms,
+
+a) leave decodeFloat as is and add safeDecodeFloat outside the RealFloat 
+class, that would check the value first and then either raise an error on 
+NaN/Infinity or return a Maybe (Integer, Int),
+
+b) add a function to the RealFloat class, either leave decodeFloat as is 
+and add safeDecodeFloat with the behaviour as in a) or change decodeFloat 
+according to 2. and add unsafeDecodeFloat with the current behaviour.
+
+The drawback of a) is that safeDecodeFloat would have to perform two 
+checks, while with IEEE Doubles/Floats, the result could be determined by 
+one check (which would also be simpler than each of isNaN and isInfinite).
+Also, which module should export it?
+
+The drawback of b) is adding a function to RealFloat, as if that wasn't big 
+enough already. Since both behaviours allow a default definition in terms 
+of the other, only code that by chance uses the new name would break.
+
+What would be the community's preferred way to handle this issue?
+
+Cheers,
+Daniel
+
+

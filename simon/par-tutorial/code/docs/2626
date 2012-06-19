@@ -1,0 +1,54 @@
+From gtener at gmail.com  Thu Feb  3 12:23:43 2011
+From: gtener at gmail.com (=?UTF-8?Q?Krzysztof_Skrz=C4=99tnicki?=)
+Date: Thu, 3 Feb 2011 12:23:43 +0100
+Subject: [Haskell-cafe] Review request for "platform independent
+ interactive graphics" with VNC
+In-Reply-To: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>
+References: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>
+Message-ID: <AANLkTimz-hwp0Ufd1WV0OsKd9xiB+Mk_PprEMUbs-dQj@mail.gmail.com>
+
+One thing to notice:
+$ cabal install network-server
+
+is needed.
+
+Best regards,
+Krzysztof Skrz?tnicki
+
+On Thu, Feb 3, 2011 at 12:15, C K Kashyap <ckkashyap at gmail.com> wrote:
+
+> Hi,
+> I've been working on a Haskell based platform independent graphics
+> rendering
+> using VNC. I'd like it very much if you could take a look at it and give me
+> feedback. Using it is straight forward -
+>
+> git clone git at github.com:ckkashyap/Chitra.git
+> cd Chitra
+> make
+> ./Main 100 100 5900
+>
+> Main starts off a vncserver listening on port 5900. A standard vncviewer
+> can be
+> used to connect to 'localhost' and you can see a 100 x 100 screen. Clicking
+> on
+> the screen will set the pixel on the click location.
+>
+> What I eventually want to do is somehow integrate this piece with GHCI in
+> such
+> a manner that one can use GHCI to draw things on the VNC buffer.
+>
+> Regards,
+> Kashyap
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/efa47ec3/attachment.htm>
+

@@ -1,0 +1,46 @@
+From wren at freegeek.org  Mon Dec 12 04:07:38 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sun, 11 Dec 2011 22:07:38 -0500
+Subject: [Haskell-cafe] Recommended class instances for container type
+In-Reply-To: <CAPTT2bbaiCeJWsYPJfufKaRmOBAA7gcsEtbMYzXcZJX5xFvnUw@mail.gmail.com>
+References: <CAPTT2bbaiCeJWsYPJfufKaRmOBAA7gcsEtbMYzXcZJX5xFvnUw@mail.gmail.com>
+Message-ID: <4EE56FFA.3080501@freegeek.org>
+
+On 12/8/11 11:12 AM, Christoph Breitkopf wrote:
+> Hello,
+>
+> I'm in the process of implementing a container data type, and wonder what
+> class instances are generally considered necessary. E.g. is it ok to start
+> out with a Show that's adequate for debugging, or is it a 'must' to include
+> instances of everything possible (Eq, Ord if possible, Read, Show, Functor,
+> ...).
+>
+> And what about the more experimental things? Say, DeepSeq, Typeable, Data?
+> I'd like to keep this simple at start, and I've admittedly not followed
+> recent developments in Haskell-land (recent meaning the last 10 years or
+> so. I _do_ know about hierachical modules ;-) ).
+
+I don't use Typeable or Data, but there are a lot of folks who do, and 
+they seem pretty well entrenched in GHC-standard Haskell. Not sure about 
+non-GHC compiler support.
+
+For a container datatype, I'd consider Foldable and Traversable to be 
+essential (provided that they're actually implementable). These classes 
+are widely used and so they offer a nice standard set of names for 
+common operations. But more than just having a common set of names, 
+implementing these classes ensures a minimum level of completeness for 
+your API--- and that's the essential part.
+
+Functor, Applicative, and Monad are also good to offer whenever 
+possible. Functor is required/implied by Foldable and Traversable. 
+Applicative and Monad just give a nice clean interface--- though you 
+should beware of whether there are multiple law-abiding implementations 
+for these two classes. If there are, then you'll have to worry about 
+which one you offer by default (if any) as well as how people can access 
+the other ones.
+
+-- 
+Live well,
+~wren
+
+

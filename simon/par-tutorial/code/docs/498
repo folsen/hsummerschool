@@ -1,0 +1,29 @@
+From lemming at henning-thielemann.de  Tue Apr 19 19:21:14 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Tue, 19 Apr 2011 19:21:14 +0200 (CEST)
+Subject: [Haskell-cafe] Stack overflow in simple code with getStdRandom
+	/	randomR (GHC)
+In-Reply-To: <64F46328-A550-4FCE-A197-4C508BAFE96F@foldr.org>
+References: <64F46328-A550-4FCE-A197-4C508BAFE96F@foldr.org>
+Message-ID: <alpine.DEB.2.00.1104191916520.13388@anubis>
+
+
+On Tue, 19 Apr 2011, Volker Stolz wrote:
+
+> The following three-liner creates a stack overflow (on my machine, MacOS), and I'm a bit puzzled as to why:
+>
+>> import System.Random
+>>
+>> main = do
+>>  mapM (const (getStdRandom (randomR (0, 50000::Int)))) [0..10000000]
+>
+> botanix:~ stolz$ ./a.out
+> Stack space overflow: current size 8388608 bytes.
+> Use `+RTS -Ksize -RTS' to increase it.
+
+Shall it print something? I think mapM_ would be better here. If you 
+compile with 'ghc -Wall' then GHC will also warn you, that you ignored the 
+result of mapM. I think, HLint would also warn you.
+
+
+

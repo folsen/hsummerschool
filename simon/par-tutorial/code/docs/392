@@ -1,0 +1,22 @@
+From felipe.lessa at gmail.com  Thu Apr 14 13:11:19 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Thu, 14 Apr 2011 08:11:19 -0300
+Subject: [Haskell-cafe] Programming Chalenges: The 3n+1 problem
+In-Reply-To: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+References: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+Message-ID: <BANLkTikS0N0Lf502mo2HsYQBmj1BNzzmSQ@mail.gmail.com>
+
+This is very similar to the Problem 14 on Project Euler [1].  Should
+you really want a nice solution in Haskell, and noting that this is a
+big spoiler, there are some on the wiki [2].  But I highly recommend
+you to try coding your own solutions before looking at the site =).
+
+Cheers!
+
+[1] http://projecteuler.net/index.php?section=problems&id=14
+[2] http://www.haskell.org/haskellwiki/Euler_problems/11_to_20#Problem_14
+
+-- 
+Felipe.
+
+

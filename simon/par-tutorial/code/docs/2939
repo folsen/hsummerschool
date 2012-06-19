@@ -1,0 +1,69 @@
+From markus.l2ll at gmail.com  Fri Feb 11 12:53:45 2011
+From: markus.l2ll at gmail.com (=?ISO-8859-1?Q?Markus_L=E4ll?=)
+Date: Fri, 11 Feb 2011 13:53:45 +0200
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <AANLkTi=2Z_vzNt6YN81=J8TeSCnz1c4_EEi1HKrAXbLL@mail.gmail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+	<AANLkTi=2Z_vzNt6YN81=J8TeSCnz1c4_EEi1HKrAXbLL@mail.gmail.com>
+Message-ID: <AANLkTi=bVM6AFMi5EvW6_oduNFGAuj3nXQ4Gdzf3c+M-@mail.gmail.com>
+
+I think one thing it means, is that, with the typesystem, you just can't do
+random things where-ever you want. Like, in the pure world if you want to
+transform values from one type to another, you always need to have
+implementations of functions available to do that. (You can't just take a
+pure value, get its mem location and interpret it as something else, without
+being explicid about it.) So when lining up your code (composing functions),
+you can be sure, that at least as far as types are concerned, everything is
+correct -- that such a program, that you wrote, can actually exist == that
+all the apropriate functions exist.
+
+And it is correct only that far -- the value-level coding is still up to
+you, so no mind-reading...
+
+
+--
+Markus L?ll
+
+On Fri, Feb 11, 2011 at 1:16 PM, Ivan Lazar Miljenovic <
+ivan.miljenovic at gmail.com> wrote:
+
+> On 11 February 2011 22:06, C K Kashyap <ckkashyap at gmail.com> wrote:
+> > Hi Folks,
+> > I've come across this a few times - "In Haskell, once can prove the
+> > correctness of the code" - Is this true?
+>
+> I'm not quite sure where you got that...
+>
+> But since Haskell is pure, we can also do equational reasoning, etc.
+> to help prove correctness.  Admittedly, I don't know how many people
+> actually do so...
+>
+> > I know that static typing and strong typing of Haskell eliminate a whole
+> > class of problems - is that related to the proving correctness?
+> > Is it about Quickcheck - if so, how is it different from having test
+> sutites
+> > in projects using mainstream languages?
+>
+> QuickCheck doesn't prove correctness: I had a bug that survived
+> several releases tested regularly during development with a QC-based
+> testsuite before it arose (as it required a specific condition to be
+> satisfied for the bug to happen).  As far as I know, a testsuite - no
+> matter what language or what tools/methodologies are used - for a
+> non-trivial piece of work just provides reasonable degree of assurance
+> of correctness; after all, there could be a bug/problem you hadn't
+> thought of!
+>
+> --
+> Ivan Lazar Miljenovic
+> Ivan.Miljenovic at gmail.com
+> IvanMiljenovic.wordpress.com
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110211/c8b722ca/attachment.htm>
+

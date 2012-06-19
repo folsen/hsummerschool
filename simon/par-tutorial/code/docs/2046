@@ -1,0 +1,33 @@
+From gcrosswhite at gmail.com  Sat Dec 17 05:57:55 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Sat, 17 Dec 2011 14:57:55 +1000
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <CACqaG6wdMU=8+SH+n-cNmaPMHKEuv6UiWW3t6rFSYK06sw1t1Q@mail.gmail.com>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+	<20111216042614.GB15053@seas.upenn.edu>
+	<CADLz5wVmAYTjGq1+ST87=0oGmUoYdZUTCj=Xcv=u_5_8D3hWvQ@mail.gmail.com>
+	<CACqaG6wdMU=8+SH+n-cNmaPMHKEuv6UiWW3t6rFSYK06sw1t1Q@mail.gmail.com>
+Message-ID: <3FA2983E-B747-442C-8DF0-E9C15E35553C@gmail.com>
+
+
+On Dec 17, 2011, at 1:26 AM, Yves Par?s wrote:
+
+> "1) What about the First type? Do we {-# DEPRECATE #-} it?"
+> 
+> Personnaly, I'm in favor of following the same logic than Int:
+> Int itself is not a monoid. You have to be specific: it's either Sum or Mult.
+> 
+> It should be the same for Maybe: we remove its instance of Monoid, and we only use First and Last.
+
+
++1 for this idea, because it follows the principle of least surprise.
+
+Cheers,
+Greg
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111217/d2cbd43a/attachment.htm>
+

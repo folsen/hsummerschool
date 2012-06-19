@@ -1,0 +1,34 @@
+From johan.tibell at gmail.com  Wed Apr 20 18:34:45 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Wed, 20 Apr 2011 18:34:45 +0200
+Subject: [Haskell-cafe] Need comments on a libusb asynchronous
+	select/poll loop
+In-Reply-To: <BANLkTinMfjrWLEfie-_xQ_rbmxxxUTJw+g@mail.gmail.com>
+References: <20110419130604.GA26986@X52D.localdomain>
+	<BANLkTikQk4cg0poLVscuj2WW+ORNNNwm2g@mail.gmail.com>
+	<BANLkTi=ZY1rBuK5+c1xK-k+swTwSqgnfnw@mail.gmail.com>
+	<BANLkTinxh+4LutE3OA2hC0_0m0-Nogv8SA@mail.gmail.com>
+	<BANLkTi=5rFFjMzOisGE2hf8oTMhVxXt6YQ@mail.gmail.com>
+	<BANLkTinMfjrWLEfie-_xQ_rbmxxxUTJw+g@mail.gmail.com>
+Message-ID: <BANLkTimB13gfEGgJoGZZan4kYepVMtHmAA@mail.gmail.com>
+
+On Wed, Apr 20, 2011 at 6:11 PM, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+> I still need to add appropriate conditions for checking whether the
+> program is using the threaded RTS. What is the recommended approach
+> for this?
+>
+> I see GHC.Conc.IO uses a dynamic check:
+>
+> foreign import ccall unsafe "rtsSupportsBoundThreads" threaded :: Bool
+>
+> Is this also available to me as a library author?
+
+I think there's a ticket for adding something along the lines of
+
+    getSystemEventManager :: IO (Maybe EventManager)
+
+If that returns Just em, you're in the threaded RTS and have an EventManager.
+
+Johan
+
+

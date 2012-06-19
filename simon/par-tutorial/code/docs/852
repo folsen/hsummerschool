@@ -1,0 +1,51 @@
+From mle+hs at mega-nerd.com  Fri Apr 29 01:49:23 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Fri, 29 Apr 2011 09:49:23 +1000
+Subject: [Haskell-cafe] Wai and http-enumerator not as lazy as I'd like
+In-Reply-To: <BANLkTikENiNJh1h_4cG0SLZBzx+OPs9YCA@mail.gmail.com>
+References: <20110426222746.57ea8526.mle+hs@mega-nerd.com>
+	<BANLkTikENiNJh1h_4cG0SLZBzx+OPs9YCA@mail.gmail.com>
+Message-ID: <20110429094923.4659644e.mle+hs@mega-nerd.com>
+
+Antoine Latter wrote:
+
+> None of the "lbs" functions in http-enumerator can operate in constant
+> space - they are all built on top of the utility function "lbsIter"
+> which provides a warning:
+> 
+> > Convert the HTTP response into a Response value.
+> >
+> > Even though a Response contains a lazy bytestring, this function does not utilize lazy
+> > I/O, and therefore the entire response body will live in memory. If you want constant >
+> > memory usage, you'll need to write your own iteratee and use http or httpRedirect
+> > directly.
+
+Thanks Antoine. I know I read the documention a number of times
+but still managed to fall into that trap. I think it was because
+I tired using httpDirect, couldn't figure it out and then fell
+back to using the non-lazy lbs version.
+
+Basically I need a serveRequest function with a signature:
+
+ ? ?import qualified Network.HTTP.Enumerator ? ? as HE
+ ? ?import qualified Network.Wai ? ? ? ? ? ? ? ? as Wai
+
+     serveRequest :: (MonadControlIO m, Failure HE.HttpException m) =>
+ ? ?            ? ? ? ? HE.Request m -> m Wai.Response
+
+that calls httpRedirect to do a lazy download of the specified data and
+returns it as a Wai.Response using the ResponseEnumerator constructor.
+
+Unfortunately, I've tried a bunch if stuff and nothing I've come up with
+even comes close t type checking.
+
+Has anyone done anything like this and care to shed some light?
+
+Cheers,
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

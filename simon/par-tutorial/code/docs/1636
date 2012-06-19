@@ -1,0 +1,33 @@
+From wren at freegeek.org  Sun Dec  4 07:23:57 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sun, 04 Dec 2011 01:23:57 -0500
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+Message-ID: <4EDB11FD.5030404@freegeek.org>
+
+On 12/1/11 11:12 AM, dokondr wrote:
+> Hi,
+> When my program starts it needs to know a complete path to the directory
+> from which it was invoked.
+> In terms of standard shell (sh) I need the Haskell function that will do
+> equivalent to:
+>
+> #!/bin/sh
+> path=$(dirname $0)
+
+That's not the path to the directory from which the script is invoked 
+(aka, $PWD or, more accurately, the results of `pwd`). That's the path 
+to the directory containing the script.
+
+The current working directory (the dir from which the program is 
+invoked, provided the program haven't moved since invocation) can be 
+gotten by System.Directory.getCurrentDirectory in the directory package.
+
+Getting the path to the location of the executable is trickier business.
+
+-- 
+Live well,
+~wren
+
+

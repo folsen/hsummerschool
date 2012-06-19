@@ -1,0 +1,44 @@
+From aslatter at gmail.com  Thu Aug 18 01:09:31 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Wed, 17 Aug 2011 18:09:31 -0500
+Subject: [Haskell-cafe] writing a good Setup.hs is *hard* (was: broken
+ on install encoding 0.6.6)
+In-Reply-To: <CAHjep=zq26dxU0E8NwMkgvbn9rPPRo_1=7kjJC161PSw6ZC17A@mail.gmail.com>
+References: <CAHjep=zq26dxU0E8NwMkgvbn9rPPRo_1=7kjJC161PSw6ZC17A@mail.gmail.com>
+Message-ID: <CAKjSnQF3h_q=oEDise85e=CeQnUYXmiLfBRs0NpABm=OHZCbTg@mail.gmail.com>
+
+On Wed, Aug 17, 2011 at 9:11 AM, Rogan Creswick <creswick at gmail.com> wrote:
+> On Wed, Aug 17, 2011 at 6:29 AM, Gang <yugang.bj at gmail.com> wrote:
+>>
+>> sorry to bother
+>>
+>
+> Not in the least!
+>
+> I was trying to figure out what problem you were encountering, and I
+> learned a lot. ?I never did recreate your problem, but in the process
+> I ran into a whole host of other annoyances and strange situations
+> relating to slightly broken cabal files and cabal build intricacies
+> that confound our existing tools.
+
+I think the only way to do this sort of thing today is to take the
+complexity in the Setup.hs and put it in its own executable. Then you
+can package up the executable with Cabal and specify proper
+dependencies, and then in the original package require the new
+executable as a build tool.
+
+(You might be able to perform a magic trick to get the build-tool
+treated as a proper dependency that Cabal will install for you, but
+that is only implied by
+http://hackage.haskell.org/trac/hackage/ticket/227 ).
+
+I swear this discussion has come up before, but I can't find anything
+in the mail-list archives for cabal-dev, or on Trac.
+
+The downside, of course, is that you have to be able to thread your
+install logic through a command-line tool, which may not work well in
+this case.
+
+Antoine
+
+

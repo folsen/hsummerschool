@@ -1,0 +1,35 @@
+From mle+hs at mega-nerd.com  Fri Apr 22 00:56:38 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Fri, 22 Apr 2011 08:56:38 +1000
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <4DB093A6.8000303@btinternet.com>
+References: <4DB093A6.8000303@btinternet.com>
+Message-ID: <20110422085638.932f3ce5.mle+hs@mega-nerd.com>
+
+Andrew Coppin wrote:
+
+> I'm sure this must be a VFAQ, but... There seems to be universal 
+> agreement that Darcs is a nice idea, but is unsuitable for "real" 
+> projects.
+
+I not sure what constitues a "real" project, but I have found
+Darcs to be more than satisfactory for Ben Lippmeier's DDC
+compiler project. Thats 50k lines of Haskell code with a commit
+history of 2500+ commits.
+
+I also do use other VCSs, in order of frequency Bzr, SVN, Git Darcs
+and Hg. However, my order of preference is Bzr, Darcs, Hg, Git and
+then SVN.
+
+The only reason I slight prefer Bzr over Darcs is that Bzr has a 
+slightly easier and more intuitive (at least for me) user interface.
+However, I do find Bzr (written in Python) slightly fragile in that
+I ocassionally get a huge Python backtrace when something blows up
+
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

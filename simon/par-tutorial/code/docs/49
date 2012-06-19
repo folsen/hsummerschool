@@ -1,0 +1,30 @@
+From maydwell at gmail.com  Sat Apr  2 11:10:42 2011
+From: maydwell at gmail.com (Lyndon Maydwell)
+Date: Sat, 2 Apr 2011 17:10:42 +0800
+Subject: [Haskell-cafe] Setting up cabal on EC2
+Message-ID: <BANLkTimY_R7GFE2dTB5qjJAeJ6w4uJMkiw@mail.gmail.com>
+
+Hi all.
+
+I'm having some issues setting up cabal on EC2.
+
+I've installed ghc 7.0.2, however, the bootstrap.sh script for
+cabal-install is complaining about missing dependencies:
+
+> Linking Setup ...
+> Configuring Cabal-1.8.0.2...
+> Setup: At least the following dependencies are missing:
+> base >=4 && <3 && >=1 && <5, filepath >=1 && <1.2
+> Setup: At least the following dependencies are missing: base >=4 && <3 && >=1 && <5, filepath >=1 && <1.2
+
+ghc-pkg tells me that I have base and filepath installed:
+
+> /usr/local/lib/ghc-7.0.2/package.conf.d
+>    base-4.3.1.0
+
+> /usr/local/lib/ghc-7.0.2/package.conf.d
+>    filepath-1.2.0.0
+
+Could there be an environment variable I need to set somewhere?
+
+

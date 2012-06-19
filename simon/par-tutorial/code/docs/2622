@@ -1,0 +1,39 @@
+From ozgurakgun at gmail.com  Thu Feb  3 11:19:37 2011
+From: ozgurakgun at gmail.com (Ozgur Akgun)
+Date: Thu, 3 Feb 2011 10:19:37 +0000
+Subject: [Haskell-cafe] Inheritance and Wrappers
+In-Reply-To: <842201.36239.qm@web45108.mail.sp1.yahoo.com>
+References: <AANLkTi=3pSG0U+3H+0GU7E3h+0z9nMgbq1YgmKyJauQ5@mail.gmail.com>
+	<AANLkTimK9ttKW8wv5CK+u4y-DLnBrfNFOg5UvjtnAFBc@mail.gmail.com>
+	<AANLkTi=5Nk1dLZZVfCmfnHE3pZBaMMmUy1S6jdtSfVvP@mail.gmail.com>
+	<AANLkTikKFYxQJQOwv5nvPgafaCMK0R7nLhze4mhScBY1@mail.gmail.com>
+	<842201.36239.qm@web45108.mail.sp1.yahoo.com>
+Message-ID: <AANLkTin4iz_SmMO_-DRTsyN_feUovFEKA7U_WeK5j_9L@mail.gmail.com>
+
+On 3 February 2011 02:35, Brandon Moore <brandon_m_moore at yahoo.com> wrote:
+
+> Here's one thing to consider:
+>
+> Can you write a function
+>
+> f :: (Data a) => a -> String
+> f x = termTag x
+>
+> It would seem the Data a => Term a instance justifies
+> this function, and it will always use the default instance.
+>
+> Now, what happens if "f" is applied to a value of some type
+> T which is an instance of Data, but has a custom Term instance?
+>
+
+Great point, thanks!
+
+I guess somehow you shouldn't be allowed to write that function "f". I need
+to think about this one.
+
+-- 
+Ozgur
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/e7ff955e/attachment.htm>
+

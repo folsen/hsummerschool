@@ -1,0 +1,60 @@
+From michael at snoyman.com  Tue Dec  6 04:50:48 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Tue, 6 Dec 2011 05:50:48 +0200
+Subject: [Haskell-cafe] ANNOUNCE: monad-control-0.3
+In-Reply-To: <20111206030316.GA25805@gnu.kitenet.net>
+References: <CADLz5wW4oZbBtKMb7UQ8qQdn3UayBSQ-TL66VLG3hGXCUk_npg@mail.gmail.com>
+	<CADLz5wVs3AGCagikDMJVKVm-RJjgMhCbs7LJtxGPqi_rLbjRqQ@mail.gmail.com>
+	<20111206030316.GA25805@gnu.kitenet.net>
+Message-ID: <CAKA2JgL0Mq5OKKMh_jYM+8SvHgHTUQfFgPr2PXTG-Nu162zQ9Q@mail.gmail.com>
+
+On Tue, Dec 6, 2011 at 5:03 AM, Joey Hess <joey at kitenet.net> wrote:
+> I'm trying to convert from 0.2 to 0.3, but in way over my head.
+>
+> {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+> newtype Annex a = Annex { runAnnex :: StateT AnnexState IO a }
+> ? ? ? ?deriving (
+> ? ? ? ? ? ? ? ?Monad,
+> ? ? ? ? ? ? ? ?MonadIO,
+> ? ? ? ? ? ? ? ?-- MonadControlIO
+> ? ? ? ? ? ? ? ?MonadBaseControl IO
+> ? ? ? ?)
+>
+> I added that after seeing this when I changed some code to use
+> the new liftBaseOp instead of liftIOOp. (They're equivilant, right?)
+>
+> ? ?No instance for (MonadBaseControl IO Annex)
+> ? ? ? ? arising from a use of `liftBaseOp'
+>
+> But with ghc 7.0.4, the derivation fails:
+>
+> Annex.hs:45:17:
+> ? ?Can't make a derived instance of `MonadBaseControl IO Annex'
+> ? ? ?(even with cunning newtype deriving):
+> ? ? ?the class has associated types
+> ? ?In the newtype declaration for `Annex'
+>
+> The only way I can find to make my code compile is to lose the newtype.
+> But of course that makes for some ugly type messages.
+>
+> --
+> see shy jo
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+Hi Joey,
+
+I just spent a fair amount of time yesterday upgrading packages to
+monad-control 0.3. What I had to do was add in the MonadTransControl
+and MonadBaseControl instances manually. It's actually not too
+difficult; just copy out the instance for StateT and make a few
+changes. Be warned that Bas used some tricky CPP stuff, however, which
+you'll have to unwind ;).
+
+Michael
+
+

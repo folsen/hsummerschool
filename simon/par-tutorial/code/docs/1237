@@ -1,0 +1,19 @@
+From stephen.tetley at gmail.com  Fri Aug 19 23:34:01 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Fri, 19 Aug 2011 22:34:01 +0100
+Subject: [Haskell-cafe] Question about data
+In-Reply-To: <CAGHv16uFODO0WSFP4h+m-i+XMFMiKkbCxJetVZk-QxP4fiEzqg@mail.gmail.com>
+References: <CAGHv16uFODO0WSFP4h+m-i+XMFMiKkbCxJetVZk-QxP4fiEzqg@mail.gmail.com>
+Message-ID: <CAB2TPRA7NX75NOf_99oTet7kN=V=vrSpZNFV+j_9aRNdSoZ0uw@mail.gmail.com>
+
+Others have pointed out your first bug.
+
+To get floating-point numeric literals you will need to define
+instances of Num and then Fractional for your symbolic type.
+
+On 19 August 2011 21:40, Paul Reiners <paul.reiners at gmail.com> wrote:
+
+> *Main> let pi = 3.14 :: MathExpression
+>
+
+

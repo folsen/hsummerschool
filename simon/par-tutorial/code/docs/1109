@@ -1,0 +1,48 @@
+From mark.spezzano at chariot.net.au  Sun Aug 14 02:18:25 2011
+From: mark.spezzano at chariot.net.au (Mark Spezzano)
+Date: Sun, 14 Aug 2011 09:48:25 +0930
+Subject: [Haskell-cafe] Array and Ix for custom Graph ADT
+In-Reply-To: <201108140059.10753.daniel.is.fischer@googlemail.com>
+References: <FB1023D2-50B4-4E73-B0A2-0BEFFBBCD834@chariot.net.au>
+	<CAKjSnQHZ_1cX3MaspcVWaTXUh42J3G5fqqVQXoQpLrGAAZVV4w@mail.gmail.com>
+	<BECED278-EAA6-4920-B5AB-BAE35CE47402@chariot.net.au>
+	<201108140059.10753.daniel.is.fischer@googlemail.com>
+Message-ID: <37502424-9F88-4505-8D01-D74FCE880EF7@chariot.net.au>
+
+Solved it with your help :)
+
+Thanks for your assistance!
+
+Mark Spezzano
+
+On 14/08/2011, at 8:29 AM, Daniel Fischer wrote:
+
+> On Sunday 14 August 2011, 00:41:33, Mark Spezzano wrote:
+>> Hi Antoine,
+>> 
+>> The first Int field is a unique index, beginning at 1 and increasing by
+>> 1 for each unique Node. 
+> 
+> Then you could use that for indexing, assuming the Ord instance matches.
+> 
+> range (MyNode x _ _ _, MyNode y _ _ _) = [x .. y]
+> index (MyNode x _ _ _, MyNode y _ _ _) (MyNode z _ _ _)
+>  | x <= z && z <= y = z-x
+>  | otherwise = error ("Index out of range: " ++ show z)
+> 
+> etc.
+> 
+>> The second [Int] field is just a list of random
+>> numbers associated with that node.
+>> 
+>> Mark
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+> 
+> 
+
+
+

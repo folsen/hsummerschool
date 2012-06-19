@@ -1,0 +1,47 @@
+From uzytkownik2 at gmail.com  Mon Aug 29 12:32:51 2011
+From: uzytkownik2 at gmail.com (Maciej Marcin Piechotka)
+Date: Mon, 29 Aug 2011 11:32:51 +0100
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <4E57F43A.9030800@btinternet.com>
+References: <4E568D11.30800@btinternet.com> <4E56CD99.6050703@vex.net>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+	<nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+	<4E57F43A.9030800@btinternet.com>
+Message-ID: <1314613976.1873.5.camel@picard>
+
+On Fri, 2011-08-26 at 20:30 +0100, Andrew Coppin wrote:
+> On 26/08/2011 07:36 PM, Steve Schafer wrote:
+> > On Fri, 26 Aug 2011 18:24:37 +0100, you wrote:
+> >
+> >> I would usually want #3 or #4.
+> >
+> > Out of curiosity, what for? While I do occasionally need to get a
+> > "logarithmic size estimate" of a number (which is basically what #3 and
+> > #4 are), the specific requirements in each case tend to vary, enough so
+> > that it's unlikely that a single function (other than simply taking the
+> > logarithm) can handle the majority of applications.
+> 
+> You wouldn't want to know how many bits you need to store on disk to 
+> reliably recreate the value? Or how many bits of randomness you need to 
+> compute a value less than or equal to this one?
+> 
+> I suppose I could use a binary logarithm. I'm just concerned that it 
+> would be rather slow. After all, I'm not interested in the exact 
+> logarithm (which is fractional), just the number of bits (which is a 
+> small integer)...
+
+According to random side (http://gruntthepeon.free.fr/ssemath/) not so
+new computers can compute 15.5 milions of serial logarithms per second
+(62 millions in total). I'd say that overhead of Integer might be much
+bigger then cost of logarithm.
+
+Best regards
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110829/a15c98b8/attachment.pgp>
+

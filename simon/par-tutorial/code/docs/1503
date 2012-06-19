@@ -1,0 +1,54 @@
+From roly.perera at dynamicaspects.org  Mon Aug 29 18:12:37 2011
+From: roly.perera at dynamicaspects.org (Roly Perera)
+Date: Mon, 29 Aug 2011 18:12:37 +0200
+Subject: [Haskell-cafe] Text.Parsec.Prim
+In-Reply-To: <mailman.1602.1314634120.22584.haskell-cafe@haskell.org>
+References: <mailman.1602.1314634120.22584.haskell-cafe@haskell.org>
+Message-ID: <CAEgBARUKmEuWeWUn+injh19VFRMn2toxko3mK46xw=NOFrgQzg@mail.gmail.com>
+
+Hi,
+
+I seem to have some trouble accessing this module. I would like to use
+the type synonym ParsecT directly.
+
+I'm running GHC 6.12.1. According to Hoogle, the type I want is part
+of parsec-3.1.1, in module Text.Parsec.Prim. But if try to import
+Text.Parsec.Prim, GHC complains
+
+Could not find module `Text.Parsec.Prim':
+
+Can anyone help me with this? In the 2+ years I've been using parsec
+I've never managed to use ParsecT directly, but now it would be very
+useful.
+
+thanks,
+Roly
+
+In verbose mode, GHC reports:
+
+Glasgow Haskell Compiler, Version 6.12.1, for Haskell 98, stage 2
+booted by GHC version 6.12.1
+Using binary package database: /usr/lib/ghc-6.12.1/package.conf.d/package.cache
+Using binary package database:
+/home/rolyp/.ghc/x86_64-linux-6.12.1/package.conf.d/package.cache
+hiding package Cabal-1.8.0.2 to avoid conflict with later version Cabal-1.10.2.0
+hiding package QuickCheck-1.2.0.0 to avoid conflict with later version
+QuickCheck-2.1.0.2
+hiding package base-3.0.3.2 to avoid conflict with later version base-4.2.0.0
+wired-in package ghc-prim mapped to
+ghc-prim-0.2.0.0-9d35c97e886f807a1e6d024aaa91dcec
+wired-in package integer-gmp mapped to
+integer-gmp-0.2.0.0-9a51ffb34a83618a1a3d4e472b9977a0
+wired-in package base mapped to base-4.2.0.0-2cc27b7e43511c4ca001642a7f77a8f6
+wired-in package rts mapped to builtin_rts
+wired-in package haskell98 mapped to
+haskell98-1.0.1.1-0fdaf3b26bc38c43ce8371edf538dbf6
+wired-in package template-haskell mapped to
+template-haskell-2.4.0.0-bbc7c61990d2fe9d20be2deb924f833c
+wired-in package dph-seq mapped to
+dph-seq-0.4.0-52cfd6db5fc09a2abf793cd6a856a392
+wired-in package dph-par mapped to
+dph-par-0.4.0-b4f339fed900d7bc4b3db61526caf863
+Hsc static flags: -static
+
+

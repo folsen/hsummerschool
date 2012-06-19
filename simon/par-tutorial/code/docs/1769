@@ -1,0 +1,30 @@
+From johan.tibell at gmail.com  Thu Dec  8 20:41:16 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Thu, 8 Dec 2011 11:41:16 -0800
+Subject: [Haskell-cafe] Recommended class instances for container type
+In-Reply-To: <CAPTT2bbaiCeJWsYPJfufKaRmOBAA7gcsEtbMYzXcZJX5xFvnUw@mail.gmail.com>
+References: <CAPTT2bbaiCeJWsYPJfufKaRmOBAA7gcsEtbMYzXcZJX5xFvnUw@mail.gmail.com>
+Message-ID: <CAK-tuPZNHemOeAkAkU=psEh9EpHGEd25HcH3PwMVJeFt7HoYow@mail.gmail.com>
+
+On Thu, Dec 8, 2011 at 8:12 AM, Christoph Breitkopf <
+chbreitkopf at googlemail.com> wrote:
+
+> Hello,
+>
+> I'm in the process of implementing a container data type, and wonder what
+> class instances are generally considered necessary. E.g. is it ok to start
+> out with a Show that's adequate for debugging, or is it a 'must' to include
+> instances of everything possible (Eq, Ord if possible, Read, Show, Functor,
+> ...).
+>
+
+Start out with Show and spend your time making sure that you're container
+type performs well (unless you're doing this as an exercise of course). A
+featureful API for something that's as slow as linked lists isn't very
+useful. ;)
+
+-- Johan
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/738ff795/attachment.htm>
+

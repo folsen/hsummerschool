@@ -1,0 +1,25 @@
+From aslatter at gmail.com  Mon Apr 18 02:48:03 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Sun, 17 Apr 2011 19:48:03 -0500
+Subject: [Haskell-cafe] Oddness with binary-0.5.0.2 user install
+Message-ID: <BANLkTikR1W-36xrOzkB6sNQnN-of19e=Sw@mail.gmail.com>
+
+Hello folks,
+
+The docs for binary-0.5.0.2 on Hackage claim that their is a Binary
+instance for lazy ByteStrings, but there does not seem to be such an
+instance in my local install of binary-0.5.0.2.
+
+In addition, the docs on Hackage claim that there is an Applicative
+instance for the 'Get' type, which my install is also lacking.
+
+I've verified this in ghci and by looking at my own locally generated haddocks.
+
+The module structure for the 'binary' package is pretty
+straightforward - so I don't think I'm missing any imports in ghci.
+
+Has anyone seen this before?
+
+Antoine
+
+

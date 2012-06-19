@@ -1,0 +1,82 @@
+From ryani.spam at gmail.com  Fri Aug 19 08:50:22 2011
+From: ryani.spam at gmail.com (Ryan Ingram)
+Date: Thu, 18 Aug 2011 23:50:22 -0700
+Subject: [Haskell-cafe] Existential question
+In-Reply-To: <4E4C536F.2040800@zwizwa.be>
+References: <4E4C536F.2040800@zwizwa.be>
+Message-ID: <CA+XKtKjN9w83x6mbcM++MZC11jk=YcUanvNuJtAwdWv7VQO+=w@mail.gmail.com>
+
+On Wed, Aug 17, 2011 at 4:49 PM, Tom Schouten <tom at zwizwa.be> wrote:
+
+> {-# LANGUAGE ExistentialQuantification #-}
+>
+> -- Dear Cafe, this one works.
+> data Kl' s i o = Kl' (i -> s -> (s, o))
+> iso' :: (i -> Kl' s () o) -> Kl' s i o
+> iso' f = Kl' $ \i s -> (\(Kl' kl') -> kl' () s) (f i)
+>
+> -- Is there a way to make this one work also?
+> data Kl i o = forall s. Kl (i -> s -> (s, o))
+> iso :: (i -> Kl () o) -> Kl i o
+> iso f = Kl $ \i s -> (\(Kl kl) -> kl () s) (f i)
+>
+
+Not without moving the quantifier, as Oleg says.  Here is why:
+
+Existential types are equivalent to packing up a type with the constructor;
+imagine KI as
+
+data KI i o = KI @s (i -> s -> (s,o))   -- not legal haskell
+
+where @s represents "hold a type s which can be used in the other elements
+of the structure".  An example element of this type:
+
+  KI @[Int] (\i s -> (i:s, sum s)) :: KI Int Int
+
+Trying to implement iso as you suggest, we end up with
+
+iso f = KI ?? (\i s -> case f i of ...)
+
+What do we put in the ??.  In fact, it's not possible to find a solution;
+consider this:
+
+ki1 :: KI () Int
+ki1 = KI @Int (\() s -> (s+1, s))
+
+ki2 :: KI () Int
+ki2 = KI @() (\() () -> ((), 0))
+
+f :: Bool -> KI () Int
+f x = if x then ki1 else ki2
+
+iso f = KI ?? ??
+
+The problem is that we have multiple possible internal state types!
+
+  -- ryan
+
+
+> {-
+>    Couldn't match type `s0' with `s'
+>      because type variable `s' would escape its scope
+>    This (rigid, skolem) type variable is bound by
+>      a pattern with constructor
+>        Kl :: forall i o s. (i -> s -> (s, o)) -> Kl i o,
+>      in a lambda abstraction
+>    The following variables have types that mention s0
+>      s :: s0 (bound at /home/tom/meta/haskell/iso.hs:**11:17)
+>    In the pattern: Kl kl
+>    In the expression: \ (Kl kl) -> kl () s
+>    In the expression: (\ (Kl kl) -> kl () s) (f i)
+> -}
+>
+>
+> ______________________________**_________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/**mailman/listinfo/haskell-cafe<http://www.haskell.org/mailman/listinfo/haskell-cafe>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110818/eb6b1b3f/attachment.htm>
+

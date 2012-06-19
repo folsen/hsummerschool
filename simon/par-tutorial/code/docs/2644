@@ -1,0 +1,14 @@
+From mxcantor at gmail.com  Thu Feb  3 19:43:11 2011
+From: mxcantor at gmail.com (Max Cantor)
+Date: Fri, 4 Feb 2011 02:43:11 +0800
+Subject: [Haskell-cafe] hsmagick on OSX 10.6
+Message-ID: <354CC396-9411-440F-8972-3C4A7F56156D@gmail.com>
+
+Just out of curiosity, has anyone gotten this to work?  I'm getting bus errors whenever I call readImage.  
+
+If anyone out there has gotten it working and would tell me which versions they're using of the relevant bits, that would be very much appreciated.  Also, I'll post all my debug info if there's someone who's gotten this to work.
+
+
+thanks,
+mc
+

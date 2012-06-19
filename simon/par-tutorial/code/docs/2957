@@ -1,0 +1,34 @@
+From apfelmus at quantentunnel.de  Sat Feb 12 10:01:49 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Sat, 12 Feb 2011 10:01:49 +0100
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <AANLkTi=2Z_vzNt6YN81=J8TeSCnz1c4_EEi1HKrAXbLL@mail.gmail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+	<AANLkTi=2Z_vzNt6YN81=J8TeSCnz1c4_EEi1HKrAXbLL@mail.gmail.com>
+Message-ID: <ij5i9u$po7$1@dough.gmane.org>
+
+Ivan Lazar Miljenovic wrote:
+> C K Kashyap wrote:
+>
+>> I've come across this a few times - "In Haskell, once can prove the
+>> correctness of the code" - Is this true?
+> 
+> I'm not quite sure where you got that...
+> 
+> But since Haskell is pure, we can also do equational reasoning, etc.
+> to help prove correctness.  Admittedly, I don't know how many people
+> actually do so...
+
+I did, I did!
+
+http://projects.haskell.org/operational/Documentation.html#proof-of-the-monad-laws-sketch
+
+
+Regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

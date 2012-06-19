@@ -1,0 +1,64 @@
+From yugang.bj at gmail.com  Wed Aug 17 15:29:03 2011
+From: yugang.bj at gmail.com (Gang)
+Date: Wed, 17 Aug 2011 21:29:03 +0800
+Subject: [Haskell-cafe] broken on install encoding 0.6.6
+In-Reply-To: <CAMFLX-Lfc7Q9hSyOodHXA7jRHUbni3ObUDaiBBEWaU3p81nZ=w@mail.gmail.com>
+References: <CAMFLX-Lfc7Q9hSyOodHXA7jRHUbni3ObUDaiBBEWaU3p81nZ=w@mail.gmail.com>
+Message-ID: <4E4BC21F.5060705@gmail.com>
+
+Solved.
+
+Under my ghc6.12.3 environment, I manually downloaded and installed the 
+encoding-0.6.3 package together with mtl-1.1.0.2, and pin HaXml to 1.19 ,
+
+Modify the dependence rules of
+mtl to mtl <2
+HaXml>=1.19 to HaXml=1.19
+Then
+
+runhaskell Setup configure --flags=splitBase --flags=newGHC --user --ghc
+runhaskell Setup build
+runhaskell Setup install
+
+works,
+
+sorry to bother
+
+Regards
+Gang
+On 08/17/2011 04:59 PM, Gang Yu wrote:
+> hi, cafe:
+>
+>     I go through to the encoding package installation problem again.
+>
+>  cabal install encoding
+> Resolving dependencies...
+> /tmp/encoding-0.6.68093/encoding-0.6.6/dist/setup/setup: 4: Syntax 
+> error: ";" unexpected
+>
+> when I have a check on the this issue, I get:
+>
+> file 
+> ~/.cabal/packages/hackage.haskell.org/encoding/0.6.6/encoding-0.6.6/dist/setup/setup 
+> <http://hackage.haskell.org/encoding/0.6.6/encoding-0.6.6/dist/setup/setup>
+> /home/gang/.cabal/packages/hackage.haskell.org/encoding/0.6.6/encoding-0.6.6/dist/setup/setup 
+> <http://hackage.haskell.org/encoding/0.6.6/encoding-0.6.6/dist/setup/setup>: 
+> ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically 
+> linked (uses shared libs), for GNU/Linux 2.6.27, not stripped
+>
+> My machine is:
+>
+> gang at gang-laptop:~$ uname -a
+> Linux gang-laptop 2.6.38-8-generic #42-Ubuntu SMP Mon Apr 11 03:31:50 
+> UTC 2011 i686 i686 i386 GNU/Linux
+>
+> is this related? How can I manually install the package from scratch? 
+> Any helps or directs will be appreciated
+>
+> Thanks
+> Gang
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110817/30e131e4/attachment.htm>
+

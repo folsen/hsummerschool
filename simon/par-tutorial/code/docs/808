@@ -1,0 +1,45 @@
+From jerzy.karczmarczuk at unicaen.fr  Wed Apr 27 23:33:25 2011
+From: jerzy.karczmarczuk at unicaen.fr (Jerzy Karczmarczuk)
+Date: Wed, 27 Apr 2011 23:33:25 +0200
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <BANLkTikupnpPXpHKs0-29kycVf9784waXw@mail.gmail.com>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>	<34E1B523-F2C9-4875-98D2-728D5178DC89@gmail.com>	<4DB80841.8040304@gmail.com>	<4DB81521.50800@unicaen.fr>
+	<BANLkTikupnpPXpHKs0-29kycVf9784waXw@mail.gmail.com>
+Message-ID: <4DB88BA5.9090805@unicaen.fr>
+
+Alexander Solla comments my comment :
+>
+>
+>     Alright, my turn. I never wanted to write non-terminating programs
+>     (what for?),
+>
+>
+> Daemons/servers/console interfaces/streaming clients?
+Come on, not THIS kind of non-termination. This has little to do with 
+strictness/laziness, I think. Endless loops can be coded in various ways...
+>
+>     I see ONE usage of laziness: the possibility to write co-recursive
+>     equations, which become algorithms
+>
+>
+> What about "infinite" lists?  There is no need for mutually recursive 
+> functions to see the usefulness of a list which never ends, and is 
+> computed to the length that your algorithm /acutally/ requires.
+>
+This is almost EXACTLY what I meant. When I say "co-recursive", I do not 
+mean "mutually recursive". Rather the extrapolating recursion, not 
+necessarily "terminating" (lacking the base clause) but finitely 
+progressing, such as the standard definition of the stream of integers, 
+used to scare the beginners...
+
+ints = 1 : zipWith (+)  (fix (1:)) ints
+   where  fix f = f (fix f)
+
+Thanks.
+
+Jerzy Karczmarczuk
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110427/f89bec1f/attachment.htm>
+

@@ -1,0 +1,33 @@
+From haberg-1 at telia.com  Tue Dec 20 23:17:32 2011
+From: haberg-1 at telia.com (Hans Aberg)
+Date: Tue, 20 Dec 2011 23:17:32 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CA+qNEzLdy128SaENYYwRL1XhZXttwQJzRqcTTbh17gF1J_zoeQ@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+	<CA+qNEzLdy128SaENYYwRL1XhZXttwQJzRqcTTbh17gF1J_zoeQ@mail.gmail.com>
+Message-ID: <B31F669A-0009-4EF0-B1DE-297A3E6F91D2@telia.com>
+
+On 20 Dec 2011, at 22:51, Chris Wong wrote:
+
+>> One thing that concerns me is the use of capital letters to distinguish type
+>> and class names and constructors from values.  If I was doing it over I
+>> would use a typographical distinction like italics for types, bold for
+>> classes.  That way we could have a constructor named ?, a function named ?,
+>> a class named ?.
+> 
+> It's Algol all over again! Will we have to typeset our keywords in bold too?
+
+There are in fact Unicode symbols for that, see
+  http://unicode.org/charts/PDF/U1D400.pdf
+The monospace characters U+1D670-1D6A3 might be used for keywords. Font:
+  http://www.stixfonts.org/
+
+Not hard to add.
+
+Hans
+
+
+
+

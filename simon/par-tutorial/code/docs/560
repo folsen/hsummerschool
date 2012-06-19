@@ -1,0 +1,30 @@
+From creswick at gmail.com  Thu Apr 21 00:18:21 2011
+From: creswick at gmail.com (Rogan Creswick)
+Date: Wed, 20 Apr 2011 15:18:21 -0700
+Subject: [Haskell-cafe] impoosible dependencies
+In-Reply-To: <op.vt9azkjijmyckg@boqueron>
+References: <op.vt9azkjijmyckg@boqueron>
+Message-ID: <BANLkTinBmPhaS+B4qHNjd8FrWSOLarAsuQ@mail.gmail.com>
+
+On Wed, Apr 20, 2011 at 2:51 PM, Kevin Quick <quick at sparq.org> wrote:
+> $ cabal update
+> $ cabal install hakyll
+> Resolving dependencies...
+> cabal: dependencies conflict: ghc-6.12.3 requires unix ==2.4.0.2 however
+> unix-2.4.0.2 was excluded because ghc-6.12.3 requires unix ==2.4.1.0
+> $
+>
+> Any advice (other than upgrading to 7.0.3, which is not an option at the
+> moment)?
+
+You can run the build with verbose output (--verbose=3) and get more
+details about why the impossible dependencies were required, or you
+can build your application (whatever relies on hakyll) with cabal-dev
+-- I've been able to build hakyll that way on my machine with
+ghc-6.12.3, so I suspect there is some unexpected dependency in your
+local package db that is causing cabal to make a series of undesirable
+version selections.
+
+--Rogan
+
+

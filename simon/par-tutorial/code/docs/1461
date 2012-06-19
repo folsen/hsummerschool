@@ -1,0 +1,48 @@
+From trebla at vex.net  Mon Aug 29 04:49:30 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Sun, 28 Aug 2011 22:49:30 -0400
+Subject: [Haskell-cafe] Dynamic loading of module
+In-Reply-To: <CAKFCL4Wj2O1k2cod9=vO5fZhDi2kOU6vOLbcYmqP316MdcBGDQ@mail.gmail.com>
+References: <CAL4zPao2eYnWWf1KL-sJ3NrVNw6Ar+eHVgnsDr7KSCikE_TZ4w@mail.gmail.com>	<4E5811CA.6050905@vex.net>	<CAL4zPaoO3=AGtJSexcSa9b108w0AB7dgm+QVQQmoytOUu-M3Fw@mail.gmail.com>	<4E593E91.5020209@vex.net>	<CAL4zPaqNfJWZzJowtFW12e_u2pmxxktbKpiSG5YDsh+=fZL43w@mail.gmail.com>	<CAKFCL4WPnbkXF9Ao3qPCyL_sih-Wywjse=2+ZbtOEds7J7A3MA@mail.gmail.com>	<4E5AF5DD.9050800@vex.net>
+	<CAKFCL4Wj2O1k2cod9=vO5fZhDi2kOU6vOLbcYmqP316MdcBGDQ@mail.gmail.com>
+Message-ID: <4E5AFE3A.2070707@vex.net>
+
+On 11-08-28 10:38 PM, Brandon Allbery wrote:
+> On Sun, Aug 28, 2011 at 22:13, Albert Y. C. Lai <trebla at vex.net
+> <mailto:trebla at vex.net>> wrote:
+>
+>     On 11-08-28 04:53 PM, Brandon Allbery wrote:
+>
+>         That'd be expected; you shouldn't simply obliterate
+>         package.conf.d, you
+>         need to keep ghc's boot libraries (which include itself as a
+>         library).
+>           If the boot libraries are somehow hosed, you need to reinstall the
+>         compiler to get them back.
+>
+>
+>     Different package.conf.d
+>
+>
+> Except that, as you discovered later, the user was obviously talking
+> about having obliterated the system one.  :(
+
+Explain to me why the following survives obliteration:
+
+D:/Program Files/Haskell Platform/2011.2.0.1\lib\package.conf.d:
+[...]
+     base-4.3.1.0 (base-4.3.1.0-f520cd232cc386346843c4a12b63f44b)
+     bin-package-db-0.0.0.0 
+(bin-package-db-0.0.0.0-97d865e5935b41538bcb29fc1040ae7d)
+[...]
+     ffi-1.0 (builtin_ffi)
+     (ghc-binary-0.5.0.2 
+(ghc-binary-0.5.0.2-aba2b5dca5546ea1a972188de48f87b5))
+     ghc-prim-0.2.0.0 (ghc-prim-0.2.0.0-e1f7c380581d61d42b0360d440cc35ed)
+[...]
+     integer-gmp-0.2.0.3 
+(integer-gmp-0.2.0.3-91607778cf3ae8f3948a50062b4f8479)
+     rts-1.0 (builtin_rts)
+[...]
+
+

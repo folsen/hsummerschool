@@ -1,0 +1,43 @@
+From jao at gnu.org  Sun Dec 11 12:30:02 2011
+From: jao at gnu.org (Jose A. Ortega Ruiz)
+Date: Sun, 11 Dec 2011 12:30:02 +0100
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+In-Reply-To: <20111211111845.GA12470@sniper> (Roman Cheplyaka's message of
+	"Sun, 11 Dec 2011 13:18:45 +0200")
+References: <87k464b870.fsf@gnu.org> <87d3bw102d.fsf@write-only.cryp.to>
+	<CAKFCL4VhQe89QZmTM6Wxm+7KR6KOT7+qQe-xYCNBt8i3fR+zjg@mail.gmail.com>
+	<87fwgrblkq.fsf@gnu.org> <20111211111845.GA12470@sniper>
+Message-ID: <87borfbb2d.fsf@gnu.org>
+
+On Sun, Dec 11 2011, Roman Cheplyaka wrote:
+
+> * Jose A. Ortega Ruiz <jao at gnu.org> [2011-12-11 08:43:01+0100]
+>> On Sun, Dec 11 2011, Brandon Allbery wrote:
+>> 
+>> [...]
+>> 
+>> > xmobar currently requires parsec 3.x; the above is the symptom of
+>> > building it against 2.x.
+>> 
+>> Aha, thanks for pointing this out, guys.
+>> 
+>> Peter, would using parsec 3.x be an acceptable solution to you?
+>
+> To avoid problems like this, please specify version constraints in the
+> .cabal file. See [1] for the details.
+
+Thanks for your suggestion.  Yes, that's what i was thinking of doing;
+but i wanted to know before that if there might be reasons for people
+not being able or not wanting to use parsec 3 (in which case i might try
+to rewrite the parsing code using parsec 2-compatible calls, assuming
+there's a compatibility layer in parsec 3).
+
+
+Cheers,
+jao
+-- 
+One reason that life is complex is that it has a real part and an
+imaginary part.
+ -Andrew Koenig
+
+

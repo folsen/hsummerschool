@@ -1,0 +1,67 @@
+From sschuldenzucker at uni-bonn.de  Mon Apr 11 07:36:21 2011
+From: sschuldenzucker at uni-bonn.de (Steffen Schuldenzucker)
+Date: Mon, 11 Apr 2011 07:36:21 +0200
+Subject: [Haskell-cafe] Generating random graph
+In-Reply-To: <BANLkTikuGdF_zEOSZ23S=W8QgmmAtWzJeA@mail.gmail.com>
+References: <BANLkTikuGdF_zEOSZ23S=W8QgmmAtWzJeA@mail.gmail.com>
+Message-ID: <4DA29355.2080309@uni-bonn.de>
+
+
+Hello.
+
+I don't know if that is the reason for the strange behaviour, but
+
+On 04/11/2011 03:03 AM, Mitar wrote:
+> I have made this function to generate a random graph for
+> Data.Graph.Inductive library:
+>
+> generateGraph :: Int ->  IO (Gr String Double)
+> generateGraph graphSize = do
+>    when (graphSize<  1) $ throwIO $ AssertionFailed $ "Graph size out
+> of bounds " ++ show graphSize
+>    let ns = map (\n ->  (n, show n)) [1..graphSize]
+>    es<- fmap concat $ forM [1..graphSize] $ \node ->  do
+>      nedges<- randomRIO (0, graphSize)
+>      others<- fmap (filter (node /=) . nub) $ forM [1..nedges] $ \_ ->
+> randomRIO (1, graphSize)
+>      gen<- getStdGen
+>      let weights = randomRs (1, 10) gen
+
+^ this use of randomRs looks wrong.
+
+>      return $ zip3 (repeat node) others weights
+>    return $ mkGraph ns es
+
+http://hackage.haskell.org/packages/archive/random/latest/doc/html/System-Random.html
+
+tells me:
+
+   randomRs :: RandomGen g => (a, a) -> g -> [a]
+
+   Plural variant of randomR, producing an infinite list of random
+   values instead of returning a new generator.
+
+So when using randomRs, the state of the global random number generator 
+is not updated, but it is used again in the next iteration of the 
+toplevel forM [1..graphSize] loop. Try:
+
+ > weights <- replicateM (length others) $ randomRIO (1, 10)
+
+instead.
+
+-- Steffen
+
+>
+> But I noticed that graph has sometimes same weights on different
+> edges. This is very unlikely to happen so probably I have some error
+> using random generators. Could somebody tell me where?
+>
+>
+> Mitar
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

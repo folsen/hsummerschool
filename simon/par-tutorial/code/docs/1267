@@ -1,0 +1,37 @@
+From ivan.miljenovic at gmail.com  Mon Aug 22 11:57:10 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Mon, 22 Aug 2011 19:57:10 +1000
+Subject: [Haskell-cafe] QuasiQuotation with existing parsers
+Message-ID: <CA+u6gbxKUWrmQPW27ue_ktpD+QqDv0XVNs3E5Y1iMg1jDD4crA@mail.gmail.com>
+
+For graphviz [1], I'm thinking of adding in some quasi-quoting support
+for things like record labels [2], to make them easier to use and less
+verbose to define (i.e. by using actual Dot syntax [3] for them).  If
+I wanted anti-quotation support in those though, what would be the
+preferable/recommended option?
+
+* Extend the current data types to also have the anti-quotation types
+(but don't export those constructors), adapt the parser accordingly
+and use that (though for quasi-quotation I'd need to convert the input
+String into a Text value, as that's what the existing parsers use).
+However, this means there's a chance that the anti-quotation types
+will leak through (and possibly cause problems when parsing real Dot
+code when the anti-quotation notation is found).  This second
+complication could be relaxed with a Bool flag to the parser
+indicating whether or not anti-quotation should be supported, but it
+still feels a bit awkward to me.
+
+* Define new data types with anti-quotation support with new parsers
+for them, and after anti-quotation is evaluated convert them to the
+real data types.  Requires duplicate work, etc.
+
+[1]: http://projects.haskell.org/graphviz/
+[2]: http://hackage.haskell.org/packages/archive/graphviz/2999.12.0.3/doc/html/Data-GraphViz-Attributes-Complete.html#g:6
+[3]: http://www.graphviz.org/doc/info/shapes.html#record
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

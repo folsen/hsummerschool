@@ -1,0 +1,28 @@
+From stephen.tetley at gmail.com  Fri Apr 22 18:46:06 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Fri, 22 Apr 2011 17:46:06 +0100
+Subject: [Haskell-cafe] Global memoization in Haskell
+In-Reply-To: <BANLkTinA-5vTDx7FFhzRvoAJp9_RaJcCSw@mail.gmail.com>
+References: <BANLkTinjxvEKkudVqoeJ7qZwEnvfOow9WQ@mail.gmail.com>
+	<BANLkTin6V_yw7SfrWX_=p9mMbavHO+Oy0Q@mail.gmail.com>
+	<BANLkTinuTOU8ogHaApFW=TQHzMAMmzDbeg@mail.gmail.com>
+	<BANLkTikmCW0cLofhzUw+-6GKsuUBdJdr+w@mail.gmail.com>
+	<BANLkTinHE-G=Yq2ibS6BYy3wcf-HWO3Spg@mail.gmail.com>
+	<BANLkTinA-5vTDx7FFhzRvoAJp9_RaJcCSw@mail.gmail.com>
+Message-ID: <BANLkTin4KpROFQUE_=NoD4Ec2FjdNoYWFA@mail.gmail.com>
+
+Hi Albert
+
+You could try benchmarking with DeltaML instead - DeltaML is the only
+language I can think of where memoization is (nearly) pervasive,
+though you need still need to mark memo functions with a keyword as
+far as I'm aware. This would be a lot easier than modifying GHC:
+
+http://www.mpi-sws.org/~umut/projects/delta-ml/
+
+
+Best wishes
+
+Stepehn
+
+

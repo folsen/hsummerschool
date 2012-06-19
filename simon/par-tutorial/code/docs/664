@@ -1,0 +1,23 @@
+From shahn at cs.tu-berlin.de  Sat Apr 23 14:02:55 2011
+From: shahn at cs.tu-berlin.de (=?UTF-8?B?U8O2bmtl?= Hahn)
+Date: Sat, 23 Apr 2011 14:02:55 +0200
+Subject: [Haskell-cafe] Storing failing testcases for QuickCheck
+Message-ID: <iouf55$7cp$1@dough.gmane.org>
+
+Hi!
+
+I would like to have a library that would allow to use QuickCheck in the 
+normal manner, but it would save test data for failing properties on the 
+filesystem (maybe using the shiny new acid-state?). On consecutive test 
+runs, the saved test data would be used first (before generating new 
+arbitrary test data). I think, this would come in quite handy when doing 
+test driven development.
+
+Any comments on this? Does something like this already exist?
+
+Cheers,
+S?nke
+
+
+
+

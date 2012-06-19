@@ -1,0 +1,37 @@
+From arnaud.oqube at gmail.com  Thu Aug 25 16:59:09 2011
+From: arnaud.oqube at gmail.com (Arnaud Bailly)
+Date: Thu, 25 Aug 2011 16:59:09 +0200
+Subject: [Haskell-cafe] Haddock chokes on function arguments
+In-Reply-To: <CALzazPDXfNVENn42KibfRrax7syHRBj5EmQsUxwmVgVewa2c4g@mail.gmail.com>
+References: <CAL4zPapf=s7un01+J2JnCaaTgm991bAHntXtRbcfzh-RuEoQOw@mail.gmail.com>
+	<CABw4ky5kkWamsTDcg3JDmdsqBjkJz-2paU9Rka5X8JRBjqSKGA@mail.gmail.com>
+	<CAL4zPapSBYuKfzaRUWa-jWHirGRyz8JiV6b3z0i=ZaqHrcm=BQ@mail.gmail.com>
+	<CALzazPDXfNVENn42KibfRrax7syHRBj5EmQsUxwmVgVewa2c4g@mail.gmail.com>
+Message-ID: <CAL4zPaq6ZcNO5j3ZwAhGSPe62es9GkCnJt2-dgoO074x=t9wBg@mail.gmail.com>
+
+OK. Time to go to bed...
+
+Apologies for the noise.
+
+Arnaud
+
+On Thu, Aug 25, 2011 at 4:50 PM, Ozgur Akgun <ozgurakgun at gmail.com> wrote:
+
+> Hi Arnaud,
+>
+>
+> On 25 August 2011 15:44, Arnaud Bailly <arnaud.oqube at gmail.com> wrote:
+>
+>> But then, why is it documented the other way ?
+>
+>
+> It isn't, as far as I can see. Are we both looking at the same place,
+> namely section 3.2.3?
+>
+> --
+> Ozgur Akgun
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110825/e65a765e/attachment.htm>
+

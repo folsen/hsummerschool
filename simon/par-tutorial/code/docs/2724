@@ -1,0 +1,47 @@
+From andersk at MIT.EDU  Sat Feb  5 00:29:17 2011
+From: andersk at MIT.EDU (Anders Kaseorg)
+Date: Fri, 4 Feb 2011 18:29:17 -0500 (EST)
+Subject: [Haskell-cafe] MonadPeelIO instance for monad transformers on
+	top of "forall"
+In-Reply-To: <AANLkTikwE10qMs+n6b-dMMcHXkNCVtaAQR4E7TxQVmCx@mail.gmail.com>
+References: <AANLkTimhhfkBJ3iS6xjgoAnV0dQ5GfG+otb9BDOHp3So@mail.gmail.com>
+	<alpine.DEB.2.02.1102041630280.12561@dr-wily.mit.edu>
+	<AANLkTikwE10qMs+n6b-dMMcHXkNCVtaAQR4E7TxQVmCx@mail.gmail.com>
+Message-ID: <alpine.DEB.2.02.1102041820130.12561@dr-wily.mit.edu>
+
+On Fri, 4 Feb 2011, Max Bolingbroke wrote:
+> On 4 February 2011 21:41, Anders Kaseorg <andersk at mit.edu> wrote:
+> > On Fri, 4 Feb 2011, Max Bolingbroke wrote:
+> >> data M a = M { unM :: forall m. MonadPeelIO m => Reader.ReaderT () m a }
+> >
+> > Maybe this won?t help in your actual code, but isn?t M isomorphic to IO
+> > (via unM :: M a -> IO a, M . liftIO :: IO a -> M a)?
+> 
+> Well, yes :-). My real code actually has a non-trivial ReaderT
+> transformer and a StateT transformer it reaches "m". I had hoped that
+> by restricting to ReaderT () the problem would be simpler and hence
+> clearer.
+
+Oh sorry, I further simplified your problem by stripping off the ReaderT 
+() and forgot to undo that before sending my reply.  Pretend that I sent 
+the following instead:  :-)
+
+Maybe this won?t help in your actual code, but isn?t M isomorphic to 
+ReaderT () IO (via unM :: M a -> ReaderT () IO a, M . mapReaderT liftIO :: 
+IO a -> M a)?
+
+instance MonadPeelIO M where
+  peelIO = M (mapReaderT liftIO (liftM (\k (M mx) -> liftM (\my -> (M (mapReaderT liftIO my))) (k mx)) peelIO))
+
+> Is this definition trying to exploit the isomorphism, or do you think 
+> that this is a solution to the general class of problems I'm having 
+> trouble with?
+
+It does exploit the isomorphism.  I?m not sure whether the isomorphism 
+will generalize to your case; I assume there?s probably some reason you 
+have a polymorphic type instead of replacing it with an equivalent 
+nonpolymorphic type?
+
+Anders
+
+

@@ -1,0 +1,81 @@
+From greg at gregorycollins.net  Sun Apr 24 13:05:15 2011
+From: greg at gregorycollins.net (Gregory Collins)
+Date: Sun, 24 Apr 2011 13:05:15 +0200
+Subject: [Haskell-cafe] fishing for ST mutable Vector examples
+In-Reply-To: <loom.20110424T050958-280@post.gmane.org>
+References: <liliz22nuw.fsf@inside.sv3.smugmug.net>
+	<loom.20110424T050958-280@post.gmane.org>
+Message-ID: <BANLkTikg7WMpVoXobiHL+vBVoeDPUNuPPg@mail.gmail.com>
+
+I also recently implemented a Fisher-Yates shuffle in mutable vectors.
+I probably should have used Gen (from mwc-random) in ST, but I already
+had a GenIO hanging around for other reasons.
+
+------------------------------------------------------------------------------
+import           Control.Monad.ST                     (unsafeIOToST)
+import           Data.Vector                          (Vector)
+import qualified Data.Vector                          as V
+import qualified Data.Vector.Mutable                  as MV
+import           System.Random.MWC
+
+shuffle :: GenIO -> Vector k -> Vector k
+shuffle rng v = if V.null v then v else V.modify go v
+  where
+    !n = V.length v
+
+    go mv = f (n-1)
+      where
+        -- note: inclusive
+        pickOne b = unsafeIOToST $ uniformR (0,b) rng
+
+        swap = MV.unsafeSwap mv
+
+        f 0  = return ()
+        f !k = do
+            idx <- pickOne k
+            swap k idx
+            f (k-1)
+------------------------------------------------------------------------------
+
+G.
+
+On Sun, Apr 24, 2011 at 5:21 AM, Globules <globules at gmail.com> wrote:
+> brad clawsie <clawsie <at> fastmail.fm> writes:
+>
+>>
+>> hi all
+>>
+>> i was wondering if anyone could post some minimal examples on using
+>> mutable Vectors in the ST monad. i've been digging around in the usual
+>> places but haven't been able to find anything to get me over the hump
+>>
+>> thanks in advance
+>> brad
+>>
+>
+> I was just looking into the same thing. ?This link at Rosetta Code has
+> a list shuffling function, which is my first experiment with mutable
+> Vectors:
+>
+> ? ?http://rosettacode.org/wiki/Balanced_brackets#Haskell
+>
+> The list is converted to a mutable Vector, the mapM_ performs a series
+> of element swaps, then the result is frozen and converted back to a
+> list.
+>
+> - Globules
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Gregory Collins <greg at gregorycollins.net>
+
+

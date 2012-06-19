@@ -1,0 +1,325 @@
+From andrew.pennebaker at gmail.com  Fri Apr 15 01:01:35 2011
+From: andrew.pennebaker at gmail.com (Andrew Pennebaker)
+Date: Thu, 14 Apr 2011 19:01:35 -0400
+Subject: [Haskell-cafe] Experimental 64 bit installer fails
+Message-ID: <BANLkTimdh5h1e+tEtT7zovj5Lo07TSYQBg@mail.gmail.com>
+
+I downloaded the experimental 64 bit installer for from Haskell
+Platform<http://hackage.haskell.org/platform/mac.html>.
+It fails with the message "The installation failed."
+
+In case Haskell Platform i386 was interfering, I uninstalled it. But the 64
+bit installer still yields "The installation failed."
+
+Specs
+
+   - Haskell Platform 2011.2.0.0-x86_64 installer
+   - Haskell Platform 2011.2.0.0-i386 present
+   - Mac OS X 10.6.7
+   - MacBook Pro 5,1
+
+/var/log/install.log
+
+Apr 14 17:58:38 wonko Installer[18657]: Haskell Platform  Installation Log
+Apr 14 17:58:38 wonko Installer[18657]: Opened from:
+/Users/andrew/Downloads/Haskell Platform 2011.2.0.0-x86_64.pkg
+Apr 14 17:58:46 wonko runner[18669]: Administrator authorization granted.
+Apr 14 17:58:46 wonko Installer[18657]:
+================================================================================
+Apr 14 17:58:46 wonko Installer[18657]: User picked Standard Install
+Apr 14 17:58:46 wonko Installer[18657]: Choices selected for installation:
+Apr 14 17:58:46 wonko Installer[18657]: Upgrade: "Haskell Platform"
+Apr 14 17:58:46 wonko Installer[18657]: Upgrade: "Glasgow Haskell Compiler"
+Apr 14 17:58:46 wonko Installer[18657]: Haskell Platform
+2011.2.0.0-x86_64.pkg#ghc.pkg : org.haskell.HaskellPlatform.GHC.pkg : 1
+Apr 14 17:58:46 wonko Installer[18657]: Upgrade: "Haskell Platform
+Libraries"
+Apr 14 17:58:46 wonko Installer[18657]: Haskell Platform
+2011.2.0.0-x86_64.pkg#haskell.pkg :
+org.haskell.HaskellPlatform.Libraries.pkg : 1
+Apr 14 17:58:46 wonko Installer[18657]: Haskell Platform
+2011.2.0.0-x86_64.pkg#haskellPlatformPostflight.pkg :
+org.haskell.haskellPlatform.postflight.pkg : 1.0
+Apr 14 17:58:46 wonko Installer[18657]:
+================================================================================
+Apr 14 17:58:46 wonko Installer[18657]: It took 0.00 seconds to summarize
+the package selections.
+Apr 14 17:58:46 wonko Installer[18657]: -[IFDInstallController(Private)
+_buildInstallPlan]: location = file://localhost
+Apr 14 17:58:46 wonko Installer[18657]: -[IFDInstallController(Private)
+_buildInstallPlan]:
+file://localhost/Users/andrew/Downloads/Haskell%20Platform%202011.2.0.0-x86_64.pkg#ghc.pkg
+Apr 14 17:58:46 wonko Installer[18657]: -[IFDInstallController(Private)
+_buildInstallPlan]:
+file://localhost/Users/andrew/Downloads/Haskell%20Platform%202011.2.0.0-x86_64.pkg#haskell.pkg
+Apr 14 17:58:46 wonko Installer[18657]: -[IFDInstallController(Private)
+_buildInstallPlan]:
+file://localhost/Users/andrew/Downloads/Haskell%20Platform%202011.2.0.0-x86_64.pkg#haskellPlatformPostflight.pkg
+Apr 14 17:58:46 wonko Installer[18657]: Will use PK session
+Apr 14 17:58:46 wonko Installer[18657]: Starting installation:
+Apr 14 17:58:46 wonko Installer[18657]: Configuring volume "Wonko"
+Apr 14 17:58:46 wonko Installer[18657]: Preparing disk for local booted
+install.
+Apr 14 17:58:46 wonko Installer[18657]: Free space on "Wonko": 52.51 GB
+(52508946432 bytes).
+Apr 14 17:58:46 wonko Installer[18657]: Create temporary directory
+"/var/folders/N-/N-IxaaKuFae5ik1WKxV6wE+++TI/-Tmp-//Install.18657bWOdda"
+Apr 14 17:58:46 wonko Installer[18657]: IFPKInstallElement (3 packages)
+Apr 14 17:58:46 wonko installd[18673]: PackageKit: ----- Begin install -----
+Apr 14 17:58:46 wonko installd[18673]: PackageKit: request=PKInstallRequest
+<3 packages, destination=/>
+Apr 14 17:58:46 wonko installd[18673]: PackageKit: packages=(\n
+ "PKLeopardPackage
+<file://localhost/Users/andrew/Downloads/Haskell%20Platform%202011.2.0.0-x86_64.pkg#ghc.pkg>",\n
+   "PKLeopardPackage
+<file://localhost/Users/andrew/Downloads/Haskell%20Platform%202011.2.0.0-x86_64.pkg#haskell.pkg>",\n
+   "PKLeopardPackage
+<file://localhost/Users/andrew/Downloads/Haskell%20Platform%202011.2.0.0-x86_64.pkg#haskellPlatformPostflight.pkg>"\n)
+Apr 14 17:58:47 wonko installd[18673]: PackageKit: Extracting
+file://localhost/Users/andrew/Downloads/Haskell%20Platform%202011.2.0.0-x86_64.pkg#ghc.pkg
+(destination=/var/folders/zz/zzzivhrRnAmviuee+++++++++++/Cleanup At
+Startup/PKInstallSandbox-tmp/Root/Library/Frameworks, uid=0)
+Apr 14 17:59:06 wonko installd[18673]: PackageKit: Extracting
+file://localhost/Users/andrew/Downloads/Haskell%20Platform%202011.2.0.0-x86_64.pkg#haskell.pkg
+(destination=/var/folders/zz/zzzivhrRnAmviuee+++++++++++/Cleanup At
+Startup/PKInstallSandbox-tmp/Root/Library, uid=0)
+Apr 14 17:59:12 wonko installd[18673]: PackageKit: Extracting
+file://localhost/Users/andrew/Downloads/Haskell%20Platform%202011.2.0.0-x86_64.pkg#haskellPlatformPostflight.pkg
+(destination=/var/folders/zz/zzzivhrRnAmviuee+++++++++++/Cleanup At
+Startup/PKInstallSandbox-tmp/Root, uid=0)
+Apr 14 17:59:14 wonko installd[18673]: PackageKit: Shoving
+/var/folders/zz/zzzivhrRnAmviuee+++++++++++/Cleanup At
+Startup/PKInstallSandbox-tmp/Root (1 items) to /
+Apr 14 17:59:16 wonko installd[18673]: PackageKit: Executing script
+"./postinstall" in
+/private/tmp/PKInstallSandbox.e59JtF/Scripts/org.haskell.HaskellPlatform.GHC.pkg.k6SuIR
+Apr 14 17:59:16 wonko installd[18673]: PackageKit: Executing script
+"./postinstall" in
+/private/tmp/PKInstallSandbox.e59JtF/Scripts/org.haskell.HaskellPlatform.Libraries.pkg.dWwJo8
+Apr 14 17:59:17 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/GLUT-2.1.2.1.conf" ...
+done.
+Apr 14 17:59:17 wonko installd[18673]: ./postinstall: GLUT-2.1.2.1:
+dependency "OpenGL-2.2.3.0-f260c686098842b872fcd761a1de8b56" doesn't exist
+(ignoring)
+Apr 14 17:59:17 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/HTTP-4000.1.1.conf" ...
+done.
+Apr 14 17:59:17 wonko installd[18673]: ./postinstall: HTTP-4000.1.1:
+dependency "mtl-2.0.1.0-5b7a9cce5565d8cc8721ba4f95becf1b" doesn't exist
+(ignoring)
+Apr 14 17:59:17 wonko installd[18673]: ./postinstall: HTTP-4000.1.1:
+dependency "network-2.3.0.2-980e23d4d2855583b05d6ed337c0eaed" doesn't exist
+(ignoring)
+Apr 14 17:59:17 wonko installd[18673]: ./postinstall: HTTP-4000.1.1:
+dependency "parsec-3.1.1-d6e895e0dfa7aa6990c069c9c9c706bb" doesn't exist
+(ignoring)
+Apr 14 17:59:17 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/HUnit-1.2.2.3.conf" ...
+done.
+Apr 14 17:59:17 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/OpenGL-2.2.3.0.conf" ...
+done.
+Apr 14 17:59:17 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/QuickCheck-2.4.0.1.conf"
+... done.
+Apr 14 17:59:17 wonko installd[18673]: ./postinstall: QuickCheck-2.4.0.1:
+dependency "mtl-2.0.1.0-5b7a9cce5565d8cc8721ba4f95becf1b" doesn't exist
+(ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/cgi-3001.1.7.4.conf" ...
+done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: cgi-3001.1.7.4:
+dependency "mtl-2.0.1.0-5b7a9cce5565d8cc8721ba4f95becf1b" doesn't exist
+(ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: cgi-3001.1.7.4:
+dependency "network-2.3.0.2-980e23d4d2855583b05d6ed337c0eaed" doesn't exist
+(ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: cgi-3001.1.7.4:
+dependency "parsec-3.1.1-d6e895e0dfa7aa6990c069c9c9c706bb" doesn't exist
+(ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: cgi-3001.1.7.4:
+dependency "xhtml-3000.2.0.1-fa3c2d95250480afb9bfb787b25e7398" doesn't exist
+(ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/deepseq-1.1.0.2.conf" ...
+done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/fgl-5.4.2.3.conf" ...
+done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: fgl-5.4.2.3:
+dependency "mtl-2.0.1.0-5b7a9cce5565d8cc8721ba4f95becf1b" doesn't exist
+(ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from
+"/Library/Haskell/ghc-7.0.2/lib/registrations/haskell-platform-2011.2.0.0.conf"
+... done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"haskell-src-1.0.1.4-1aa2c7df30199d039aa020a6edd80791" doesn't exist
+(ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"html-1.0.1.2-0cdd616c514cf10f5323f121a96991b6" doesn't exist (ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"mtl-2.0.1.0-5b7a9cce5565d8cc8721ba4f95becf1b" doesn't exist (ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"network-2.3.0.2-980e23d4d2855583b05d6ed337c0eaed" doesn't exist (ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"parallel-3.1.0.1-cecd6f84e9c097c6abc356ad52b80887" doesn't exist (ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"parsec-3.1.1-d6e895e0dfa7aa6990c069c9c9c706bb" doesn't exist (ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"regex-base-0.93.2-ea22834f5565d6f16b2cec3e7a63917a" doesn't exist
+(ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"regex-compat-0.93.1-bfb1854d3b8f7b71bdd9d0efc565110d" doesn't exist
+(ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"regex-posix-0.94.4-d6abc61e1702c884e7bba4f3e318dda9" doesn't exist
+(ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"stm-2.2.0.1-88d46817e31bfcb31467cd8ca2c7850b" doesn't exist (ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"syb-0.3-00d8c06f799942b01364e795b2a54d70" doesn't exist (ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"text-0.11.0.5-efa21e4f4b045cc91adb4295f85c7319" doesn't exist (ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"transformers-0.2.2.0-4bbbfde1fb5c4eb17cdb1963dda698f3" doesn't exist
+(ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"xhtml-3000.2.0.1-fa3c2d95250480afb9bfb787b25e7398" doesn't exist (ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall:
+haskell-platform-2011.2.0.0: dependency
+"zlib-0.5.3.1-7e19941cbd00147a79723e25160ffc8b" doesn't exist (ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/haskell-src-1.0.1.4.conf"
+... done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: haskell-src-1.0.1.4:
+dependency "syb-0.3-00d8c06f799942b01364e795b2a54d70" doesn't exist
+(ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/html-1.0.1.2.conf" ...
+done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/mtl-2.0.1.0.conf" ...
+done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: mtl-2.0.1.0:
+dependency "transformers-0.2.2.0-4bbbfde1fb5c4eb17cdb1963dda698f3" doesn't
+exist (ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/network-2.3.0.2.conf" ...
+done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: network-2.3.0.2:
+dependency "parsec-3.1.1-d6e895e0dfa7aa6990c069c9c9c706bb" doesn't exist
+(ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/parallel-3.1.0.1.conf"
+... done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/parsec-3.1.1.conf" ...
+done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/regex-base-0.93.2.conf"
+... done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/regex-compat-0.93.1.conf"
+... done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: regex-compat-0.93.1:
+dependency "regex-posix-0.94.4-d6abc61e1702c884e7bba4f3e318dda9" doesn't
+exist (ignoring)
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/regex-posix-0.94.4.conf"
+... done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/stm-2.2.0.1.conf" ...
+done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/syb-0.3.conf" ... done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/text-0.11.0.5.conf" ...
+done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from
+"/Library/Haskell/ghc-7.0.2/lib/registrations/transformers-0.2.2.0.conf" ...
+done.
+Apr 14 17:59:18 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/xhtml-3000.2.0.1.conf"
+... done.
+Apr 14 17:59:19 wonko installd[18673]: ./postinstall: Reading package info
+from "/Library/Haskell/ghc-7.0.2/lib/registrations/zlib-0.5.3.1.conf" ...
+done.
+Apr 14 17:59:19 wonko installd[18673]: ./postinstall: ln:
+/Library/Haskell/ghc-7.0.2/doc/ghc-doc: File exists
+Apr 14 17:59:19 wonko installd[18673]: ./postinstall: ln:
+/Library/Haskell/ghc-7.0.2/doc/ghc-api: File exists
+Apr 14 17:59:19 wonko installd[18673]: PackageKit: Install Failed: PKG:
+post-install scripts for "org.haskell.HaskellPlatform.Libraries.pkg"\nError
+Domain=PKInstallErrorDomain Code=112 UserInfo=0x102f52820 "An error occurred
+while running scripts from the package ?Haskell Platform
+2011.2.0.0-x86_64.pkg?." {\n    NSFilePath = "./postinstall";\n
+ NSLocalizedDescription = "An error occurred while running scripts from the
+package \U201cHaskell Platform 2011.2.0.0-x86_64.pkg\U201d.";\n    NSURL =
+"#haskell.pkg --
+file://localhost/Users/andrew/Downloads/Haskell%20Platform%202011.2.0.0-x86_64.pkg";\n
+   PKInstallPackageIdentifier =
+"org.haskell.HaskellPlatform.Libraries.pkg";\n}
+Apr 14 17:59:19 wonko Installer[18657]: install:didFailWithError:Error
+Domain=PKInstallErrorDomain Code=112 UserInfo=0x1002af810 "An error occurred
+while running scripts from the package ?Haskell Platform
+2011.2.0.0-x86_64.pkg?."
+Apr 14 17:59:19 wonko Installer[18657]: Install failed: The Installer
+encountered an error that caused the installation to fail. Contact the
+software manufacturer for assistance.
+Apr 14 17:59:19 wonko Installer[18657]: IFDInstallController 23DC40 state =
+7
+Apr 14 17:59:19 wonko Installer[18657]: Displaying 'Install Failed' UI.
+Apr 14 17:59:19 wonko Installer[18657]: 'Install Failed' UI displayed
+message:'The Installer encountered an error that caused the installation to
+fail. Contact the software manufacturer for assistance.'.
+Apr 14 18:02:50 wonko Installer[24606]: @(#)PROGRAM:Install
+ PROJECT:Install-595.1
+Apr 14 18:02:50 wonko Installer[24606]: @(#)PROGRAM:Installer
+ PROJECT:Installer-430.1
+Apr 14 18:02:50 wonko Installer[24606]: Hardware: MacBookPro5,5 @ 2.53 GHz
+(x 2), 4096 MB RAM
+Apr 14 18:02:50 wonko Installer[24606]: Running OS Build: Mac OS X 10.6.7
+(10J869)
+Apr 14 18:02:50 wonko Installer[24606]: Env:
+PATH=/usr/bin:/bin:/usr/sbin:/sbin
+Apr 14 18:02:50 wonko Installer[24606]: Env:
+TMPDIR=/var/folders/N-/N-IxaaKuFae5ik1WKxV6wE+++TI/-Tmp-/
+Apr 14 18:02:50 wonko Installer[24606]: Env: SHELL=/bin/bash
+Apr 14 18:02:50 wonko Installer[24606]: Env: HOME=/Users/andrew
+Apr 14 18:02:50 wonko Installer[24606]: Env: USER=andrew
+Apr 14 18:02:50 wonko Installer[24606]: Env: LOGNAME=andrew
+Apr 14 18:02:50 wonko Installer[24606]: Env:
+DISPLAY=/tmp/launch-IvsorY/org.x:0
+Apr 14 18:02:50 wonko Installer[24606]: Env:
+SSH_AUTH_SOCK=/tmp/launch-kqVUwk/Listeners
+Apr 14 18:02:50 wonko Installer[24606]: Env:
+Apple_PubSub_Socket_Render=/tmp/launch-dpKpq2/Render
+Apr 14 18:02:50 wonko Installer[24606]: Env: COMMAND_MODE=unix2003
+Apr 14 18:02:50 wonko Installer[24606]: Env:
+__CF_USER_TEXT_ENCODING=0x1F5:0:0
+
+Cheers,
+
+Andrew Pennebaker
+www.yellosoft.us
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110414/bf7acc95/attachment.htm>
+

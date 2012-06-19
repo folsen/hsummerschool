@@ -1,0 +1,31 @@
+From dima at simonchik.net  Fri Apr  8 12:29:17 2011
+From: dima at simonchik.net (Dmitry Simonchik)
+Date: Fri, 8 Apr 2011 14:29:17 +0400
+Subject: [Haskell-cafe] Parsing HTML tables with HXT
+Message-ID: <BANLkTimi4H8j6AmFsbwmHJ1MUHKDd8do9A@mail.gmail.com>
+
+Dear Cafe,
+
+Can someone please help me with getting the value of the table cell with HXT
+in the following html:
+
+<table class="tblc">
+<tr>
+  <td class="tdc">x</td>
+  <td>y</td>
+</tr>
+<tr>
+  <td class="tdc">a</td>
+  <td>b</td>
+</tr>
+</table>
+
+I need the value of the second cell in a row that has first cell with some
+predefined value (in the example above it can be x or a) I need the arrow of
+the type (IOSArrow XmlTree String) How to write it?
+
+Thanks
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110408/de713fd2/attachment.htm>
+

@@ -1,0 +1,52 @@
+From ivan.miljenovic at gmail.com  Sat Dec 31 01:35:38 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Sat, 31 Dec 2011 11:35:38 +1100
+Subject: [Haskell-cafe] Copy .cabal folder to diff machine/user
+In-Reply-To: <eeadce25-d89a-4192-a6d8-bca1ff7965da@f33g2000yqh.googlegroups.com>
+References: <d292bd49-5ede-41d8-8c4e-a7751582a3e3@24g2000yqi.googlegroups.com>
+	<CA+u6gbyk9AoJV1igjfcKDzvkvEjT_bqu1ons=J+FfQi9L6=WOg@mail.gmail.com>
+	<eeadce25-d89a-4192-a6d8-bca1ff7965da@f33g2000yqh.googlegroups.com>
+Message-ID: <CA+u6gbxwXHSQuPPxwhKTcMpR16pHitpWd0p4kD_0W1W98RVB_w@mail.gmail.com>
+
+On 31 December 2011 11:27, Vagif Verdi <vagif.verdi at gmail.com> wrote:
+> The problem is, i tried and it does not work. Cabal has absolute paths
+> hardcoded in many places.
+> So just copying folders does not work unless you copy it under the
+> same home folder.
+
+sed the ~/.ghc/*/package.conf.d/* files, then run ghc-pkg recache
+
+>
+> On Dec 30, 4:16?pm, Ivan Lazar Miljenovic <ivan.miljeno... at gmail.com>
+> wrote:
+>> On 31 December 2011 10:49, Vagif Verdi <vagif.ve... at gmail.com> wrote:
+>>
+>> > Is it possible to copy .cabal and .ghc folders to different machine/
+>> > user and develop same project over there ?
+>>
+>> If you have the same version of GHC and necessary C libraries on all
+>> machines, and they're all using the same architecture (e.g. all
+>> x86_64) then it might be possible.
+>>
+>> --
+>> Ivan Lazar Miljenovic
+>> Ivan.Miljeno... at gmail.com
+>> IvanMiljenovic.wordpress.com
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-C... at haskell.orghttp://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

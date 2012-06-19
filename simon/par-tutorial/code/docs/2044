@@ -1,0 +1,32 @@
+From gcrosswhite at gmail.com  Sat Dec 17 05:50:36 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Sat, 17 Dec 2011 14:50:36 +1000
+Subject: [Haskell-cafe] [Alternative] summary of my understanding so far
+In-Reply-To: <CAL3m8eDmauVuJAn_qac7U3Su0A7qMuvPjz0efd7s=coEd6H6rw@mail.gmail.com>
+References: <E6897C72-6886-4B18-9005-E6BDA3E92D76@gmail.com>
+	<CAL3m8eDmauVuJAn_qac7U3Su0A7qMuvPjz0efd7s=coEd6H6rw@mail.gmail.com>
+Message-ID: <10A83B32-3913-46C8-BD2E-3147C4E295F4@gmail.com>
+
+
+On Dec 17, 2011, at 12:35 PM, Matthew Farkas-Dyck wrote:
+
+> (1) If we do (4), then the documentation ought to be adequate as-is.
+
+I see your point that if we do (4) then some and many are no longer problematic for Maybe and [], and thus we don't need warnings for those types.  However, nonetheless we will *still* need *big warnings* *for the sake of others who write Alternative instances* for new types to make sure that these instances do not fall into the same trap as Maybe and [].  That is, we want to let future authors of instances know about the conditions under which they will need to write their own versions of some and maybe in order to make sure that these methods have sensible behavior.
+
+In addition to this, we also really need some additional documentation explaining what the point of some and many are, since few people have any clue about them.  :-)
+
+Finally, if we adopt (4) then we will need to change the documentation to remove "least" from "least solutions of the equations" since the phrase will no longer be correct.  Better still, we could replace the phrase entirely with something like "least *converging* solutions of the equations". (*)
+
+Cheers,
+Greg
+
+(*) P.S:
+
+Dear people who are better at this kind of technical language than I:
+
+I am fully aware of the fact that the phrase "least converging solutions of the equations [...]" is sloppy wording at best and absolutely wrong at worst, but hopefully you should at least understand what I am *trying* to get at.  Thus, I would welcome either your feedback on what it is that I am supposed to be thinking and saying, or an explanation about why the idea I am trying to conceive and convey is so intrinsically poorly formed that I am best off just giving up on it.  ;-)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111217/ffcde732/attachment.htm>
+

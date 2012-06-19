@@ -1,0 +1,47 @@
+From scooter.phd at gmail.com  Wed Dec 21 05:14:35 2011
+From: scooter.phd at gmail.com (scooter.phd at gmail.com)
+Date: Tue, 20 Dec 2011 20:14:35 -0800
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <1324433118.2665.6.camel@turminder-xuss.roaming.operationaldynamics.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+	<CAL3m8eBx2=RNZJfqBSp=Bds4GXeu8vvAfXR_CPkPGJ+HZ-1-Xg@mail.gmail.com>
+	<1324433118.2665.6.camel@turminder-xuss.roaming.operationaldynamics.com>
+Message-ID: <188648958.139133.1324440862719.JavaMail.webspher@njbbicssmp03>
+
+I'd suggest, in addition to the symbols, renaming some of the fundamental types and concepts, like Monad. I would violently agree that Monad is the correct term, but try to communicate with a commodity software developer sometime (or a government acquisition professional). RWH goes a long way to explaining the concepts, as do the countless Web pages dedicated to explaining the monad concept. 
+
+Better examples for SYB and arrows would also help. 
+
+Haskell is a great language with solid mathematical underpinnings. I'm a big fan of it. But, adoption is the key to success; need to make the ordinary easy to understand unless the community wants to be relegated to Scala status.
+
+-----Original message-----
+From: Andrew Cowie <andrew at operationaldynamics.com>
+To: haskell-cafe at haskell.org
+Sent: Tue, Dec 20, 2011 18:05:18 PST
+Subject: Re: [Haskell-cafe] If you'd design a Haskell-like language, what would you do different?
+
+On Tue, 2011-12-20 at 16:53 -0500, Matthew Farkas-Dyck wrote:
+> Two of three ain't bad (^_~)
+
+Now we just need ? to replace \, ? to replace ->, and ? to replace /=
+(which still looks like division assignment no matter how hard I squint
+my eyes. 25 years of C and C derived languages is hard to forget).
+
+Hey, forget replacing, wouldn't it be wonderful if the compiler would
+just accept them as synonyms?
+
+AfC
+Sydney
+
+
+
+_______________________________________________
+Haskell-Cafe mailing list
+Haskell-Cafe at haskell.org
+http://www.haskell.org/mailman/listinfo/haskell-cafe
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111220/2ea92ae4/attachment.htm>
+

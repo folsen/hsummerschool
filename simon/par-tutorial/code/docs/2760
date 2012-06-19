@@ -1,0 +1,58 @@
+From ivan.miljenovic at gmail.com  Sun Feb  6 12:53:04 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Sun, 6 Feb 2011 22:53:04 +1100
+Subject: [Haskell-cafe] community server & hasktags learned recursing
+	into directories
+In-Reply-To: <AANLkTimL4MMdqyVj4kM36KaZJz2=po7WxdeAdkQ1_L_V@mail.gmail.com>
+References: <1296858891-sup-7850@localhost.localdomain>
+	<AANLkTinKOOh375m=5+3-5-y+kDeduMxVfEBj3nbK1sdn@mail.gmail.com>
+	<AANLkTimdfjFB5gS2YPmCC7oCkqHxjrMeN_EJgJoTT1t4@mail.gmail.com>
+	<AANLkTimL4MMdqyVj4kM36KaZJz2=po7WxdeAdkQ1_L_V@mail.gmail.com>
+Message-ID: <AANLkTi=AJBG_p+sU2G90ekupt3xxKvtnN6nSfdPGHtcB@mail.gmail.com>
+
+On 6 February 2011 22:43, Mark Wotton <mwotton at gmail.com> wrote:
+> On Sat, Feb 5, 2011 at 6:43 AM, Ivan Lazar Miljenovic
+> <ivan.miljenovic at gmail.com> wrote:
+>> On 5 February 2011 10:14, Luke Palmer <lrpalmer at gmail.com> wrote:
+>>> I host all my modules on github. ?It is a very supportive environment
+>>> for spontaneous collaborative development. ?c.h.o is a nice place, but
+>>> lacks in maturity in comparison. ?As long as there is a complete, free
+>>> place like github around, why not use it?
+>>
+>> 1) Github uses git, not darcs.
+>
+> Git is good enough for serious use.
+
+As, I believe, is darcs.
+
+>> 2) I know who runs/controls c.h.o, but not github (so if something
+>> goes wrong...)
+>
+> If something goes wrong, the maintainer of c.h.o can commiserate with
+> you about it being down.
+> I suspect he/she doesn't have a large team of dedicated sysadmins to
+> put it right, or a set of redundant servers.
+
+There's also the data ownership issue, in that I'm more likely to
+trust others in the Haskell community than I am from people that make
+money from the website I'm using.
+
+>> 3) Maturity? I can put darcs repos there, how mature does it need to be?
+>
+> integrated pull requests, commenting systems, notifications of
+> updates, issue trackers...
+>
+> if you particularly want to use something else for each of these,
+> that's fine, but it's nice to have a reasonable default.
+
+*shrug* I don't see the advantage, but admittedly I don't have use for
+any of these.  I more use c.h.o as a place to have a place to store
+the code for others to look at if they need so, and so I can work both
+at uni and at home on the same codebase.
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

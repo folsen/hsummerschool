@@ -1,0 +1,17 @@
+From greg at gregweber.info  Tue Dec  6 11:52:28 2011
+From: greg at gregweber.info (Greg Weber)
+Date: Tue, 6 Dec 2011 07:52:28 -0300
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+Message-ID: <CAKRanNAOuiRXENBGid2HhPu4Pp_ydO0hOi9_L43105aLjod-eA@mail.gmail.com>
+
+In addition to argv[0]
+http://hackage.haskell.org/packages/archive/system-argv0/0.1/doc/html/System-Argv0.html
+
+There is also this package:
+http://hackage.haskell.org/packages/archive/FindBin/0.0.5/doc/html/System-Environment-FindBin.html
+
+System-Argv0 has special cases for windows- FindBin may not work there.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111206/882d6007/attachment.htm>
+

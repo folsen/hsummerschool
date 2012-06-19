@@ -1,0 +1,27 @@
+From jason.dusek at gmail.com  Fri Apr 29 07:22:47 2011
+From: jason.dusek at gmail.com (Jason Dusek)
+Date: Fri, 29 Apr 2011 05:22:47 +0000
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <loom.20110428T091338-92@post.gmane.org>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<87vcy0vxdq.fsf@malde.org> <loom.20110428T091338-92@post.gmane.org>
+Message-ID: <BANLkTikowgaK6JYsaSug8284z=T83pK6dw@mail.gmail.com>
+
+On Thu, Apr 28, 2011 at 07:19, Gracjan Polak <gracjanpolak at gmail.com> wrote:
+> Sometimes I wish for a -fphp flag that would turn some type
+> errors into warnings.
+> [...]
+> GHC could substitute 'y = error "Couldn't match expected type
+> `[a]' against inferred type `()'"' and compile anyway.
+
+  PHP doesn't really do dynamic type errors, though. To be more
+  like PHP, the -fphp flag should surely coerce y to a list,
+  using read and show if possible and otherwise using
+  unsafeCoerce.
+
+--
+Jason Dusek
+() ?ascii ribbon campaign - against html e-mail
+/\ ?www.asciiribbon.org ? - against proprietary attachments
+
+

@@ -1,0 +1,40 @@
+From ok at cs.otago.ac.nz  Mon Aug 22 02:38:36 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Mon, 22 Aug 2011 12:38:36 +1200
+Subject: [Haskell-cafe] custom SQL-to-Haskell type conversion in HDBC
+In-Reply-To: <20110820150102.GC14268@houseag.com>
+References: <20110819052316.GA27130@houseag.com>
+	<CAPeieQEGXOJgfvA+FF2yTbhPnWA9vv7Xk8EghLj-2LiYy1Edyg@mail.gmail.com>
+	<20110819140939.GA27362@houseag.com>
+	<CAKFCL4XDXNGJOWfjNNk3OSFkaojm1A2idcQOPgkCqpA2b9JQ6A@mail.gmail.com>
+	<20110820150102.GC14268@houseag.com>
+Message-ID: <B27248CB-8C65-4A97-81C2-E3D12E6D72A4@cs.otago.ac.nz>
+
+
+On 21/08/2011, at 3:01 AM, Henry House wrote:
+> No, I want a data type in Haskell that mirrors the data type in the
+> RDBMS, not conversion of RDBMS fixed-precision data into something else
+> (Rational). If the data in the RDBMS represented a rational number of
+> arbitrary precision, then they would have been stored in the RDBMS as a
+> rational data type (assuming that the database was designed sensibly, of
+> course).
+
+How?  There is no rational data type in standard SQL.
+"Arbitrary precision" really does not fit the classic SQL model of
+fixed size columns very well.
+
+> The limitations of the SQL backend are deliberately chosen (no
+> one is forced to use fixed-precision numeric data types in PostgreSQL;
+> arbitrary-precision numeric is available as well as a true rational with
+> a contrib module).
+
+Can you talk to the designer of the data base in question?
+Do you know whether they were interested in exploiting features of
+PostgreSQL or whether they were interested in portability?
+Are you certain that 2.00 will always be reported as "2.00" and
+never as "2.0"?
+
+
+
+
+

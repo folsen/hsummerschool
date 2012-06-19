@@ -1,0 +1,56 @@
+From es at ertes.de  Thu Dec 22 14:00:45 2011
+From: es at ertes.de (Ertugrul =?UTF-8?B?U8O2eWxlbWV6?=)
+Date: Thu, 22 Dec 2011 14:00:45 +0100
+Subject: [Haskell-cafe] State Machine Composition
+References: <CAP6oseSLBuHBobxGH291dR=hFFjkGVG8XMTSzFaLoVG3GumVOQ@mail.gmail.com>
+Message-ID: <20111222140045.115705ea@angst.streitmacht.eu>
+
+Daniel Waterworth <da.waterworth at gmail.com> wrote:
+
+> I made this simple state machine combinator library today. I think it
+> works as a simple example of a good use for GADTs.
+>
+> https://gist.github.com/1507107
+
+Aren't your examples all special cases of the generic automaton arrow?
+There are two ways to represent it, both with their advantages and
+disadvantages:
+
+    newtype Auto a b = Auto (a -> (b, Auto a b))
+
+    countFrom :: Int -> Auto a Int
+    countFrom n = Auto (\_ -> (n, countFrom (succ n)))
+
+or:
+
+    data Auto a b = forall s. Auto s ((a, s) -> (b, s))
+
+    countFrom :: Int -> Auto a Int
+    countFrom n0 = Auto n0 (\(_, s) -> (s, succ s))
+
+These state machines have local state and can be composed using
+applicative and arrow interfaces:
+
+    liftA2 (+) (countFrom 3) (countFrom 5)
+
+    proc x -> do
+        n1 <- countFrom 10 -< ()
+        n2 <- someOtherMachine -< x
+        anotherMachine -< n1 + n2
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111222/18e2fbfb/attachment.pgp>
+

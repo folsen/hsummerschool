@@ -1,0 +1,25 @@
+From syntaxglitch at gmail.com  Fri Apr 29 08:23:45 2011
+From: syntaxglitch at gmail.com (Casey McCann)
+Date: Fri, 29 Apr 2011 02:23:45 -0400
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <BANLkTinxzwvC-UwCFTcFG=zQaixQM8NLqA@mail.gmail.com>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<003E6991-CB70-447D-8955-A69E3B1DD5E5@ouroborus.net>
+	<BANLkTinxzwvC-UwCFTcFG=zQaixQM8NLqA@mail.gmail.com>
+Message-ID: <BANLkTim4h4_=2YHCcNUQe00EQrk_-n+0Pw@mail.gmail.com>
+
+On Fri, Apr 29, 2011 at 12:42 AM, Gregg Reynolds <dev at mobileink.com> wrote:
+> On Thu, Apr 28, 2011 at 11:38 PM, Ben Lippmeier <benl at ouroborus.net> wrote:
+>> Laziness at the value level causes space leaks, and laziness at the type
+>> level causes mind leaks. Neither are much fun.
+>>
+> If the designers could find a way to support laziness at the programmer
+> level I for one would be very grateful.
+
+I believe I saw a specification for such a language once.
+Unfortunately it was also lazy at the ontological level, and since
+nothing logically required the spec to exist it actually didn't.
+
+- C.
+
+

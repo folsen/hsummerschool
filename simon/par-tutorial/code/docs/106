@@ -1,0 +1,47 @@
+From v.dijk.bas at gmail.com  Mon Apr  4 13:54:39 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Mon, 4 Apr 2011 13:54:39 +0200
+Subject: [Haskell-cafe] Fast conversion between Vector Double and Vector
+	CDouble
+Message-ID: <BANLkTime8Omz8PAPtu_HVAQfhafR+=bsCg@mail.gmail.com>
+
+Hello,
+
+I just rewrote my levmar library[1] to use Vectors (from the vector
+package[2]) instead of lists. I was expecting to see a significant
+performance improvement. Unfortunately I only saw a 10% improvement.
+However, I noticed I had a lot of conversions from Vector Double to
+Vector CDouble and visa versa in my code:
+
+import Data.Vector.Storable ( Vector )
+
+mapRealToFrac ? (Storable ?, Storable ?, Real ?, Fractional ?)
+              ? Vector ? ? Vector ?
+mapRealToFrac = VS.map realToFrac
+
+When I replace this with:
+
+mapRealToFrac = unsafeCoerce
+
+My application computes the same result but does it 28 times faster!
+
+My question are:
+
+1) Is this always safe? In other words: are the runtime
+representations of Double and CDouble always equivalent or do they
+vary between platforms?
+
+2) Can the same improvement be accomplished using RULE pragma's?
+
+3) Are there disadvantages of using CDouble instead of Double in the
+levmar API? For some reason it feels wrong to use CDouble in the API
+but I don't have a good argument against it yet.
+
+Thanks,
+
+Bas
+
+[1] http://hackage.haskell.org/package/levmar
+[2] http://hackage.haskell.org/package/vector
+
+

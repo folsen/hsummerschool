@@ -1,0 +1,42 @@
+From sh006d3592 at blueyonder.co.uk  Tue Dec 27 19:13:29 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Tue, 27 Dec 2011 18:13:29 +0000
+Subject: [Haskell-cafe] Haskell Platform and Windows - where's 2011.4?
+Message-ID: <4EFA0AC9.3080703@blueyonder.co.uk>
+
+
+On haskell.org, the 2011.4.0.0 version is shown as the current stable 
+release - but the most recent download link is for the 2011.2.0.0 version.
+
+This is bugging me a little because the documentation in the 2011.2 
+Haskell Platform download for Windows is broken - there's at least one 
+bug report about this already. There's online documentation, but it's 
+(1) online, where I need something I can read on an old no-internet 
+laptop, and (2) I assume for the most recent version, and therefore it 
+potentially misleading.
+
+I already fixed the "online" side - sorry, I know slurping a whole site 
+is evil but I had little choice. The fact that the docs relate to a 
+version of the platform that I can't access remains. I just have to hope 
+that the changes are few and won't affect me.
+
+Extra annoying - there's no mention of why 2011.4 is missing from the 
+Windows download page - no "temporarily delayed" or "skipped due to an 
+awkward technical issue" or "not enough Windows developers 
+volunteering". For all I know, it could just be an oversight updating 
+haskell.org itself, but I think that's unlikely.
+
+So... what's the situation with the Haskell Platform on Windows? - both 
+WRT my specific bit of whinging and whining, and in general?
+
+Is Windows a low priority niche from the Haskell POV? If I intend to 
+take Haskell more seriously, do I need to make Linux or some other *nix 
+my primary OS?
+
+Please say no - I've been an on-and-off Linux user for around 10 years, 
+with the most recent 2 years on ending around May this year. For all the 
+pros, the cons of endless graphics card driver issues, awkward 
+configuration hassles and so on have defeated me yet again.
+
+
+

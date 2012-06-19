@@ -1,0 +1,51 @@
+From wren at freegeek.org  Wed Dec 21 18:49:07 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Wed, 21 Dec 2011 12:49:07 -0500
+Subject: [Haskell-cafe] Mitigating state-threading through an
+ application loop
+In-Reply-To: <CADN_yYSU0xsVGdWDXr-R3Bu2PFyKjcZoD5R93JKed854UOyDPg@mail.gmail.com>
+References: <CADN_yYSU0xsVGdWDXr-R3Bu2PFyKjcZoD5R93JKed854UOyDPg@mail.gmail.com>
+Message-ID: <4EF21C13.3090008@freegeek.org>
+
+On 12/20/11 11:08 AM, Michael Serra wrote:
+> Hello Haskellers,
+>    I'm implementing a simple tree-manipulating (for sports tournaments)
+> application prototype, with SDL for graphics and simple user interaction.
+> For reference, I've posted the code on hpaste.<http://hpaste.org/55506>
+> My question is about code organization: everything was simple and elegant
+> until I started writing the program's display/event loop.  Every function
+> in this section has to be passed the same parameters - the application
+> window to draw on, the font to display text with, the tree representing the
+> current application state, etc.  The font is an especially egregious
+> example of the problem, because it's only used by one function but to get
+> there it must be threaded through all of them (looking at the hpaste, you
+> will see I don't want to call openFont on every invocation of drawTexts;
+> what's needed is to call it once in main and have the resulting value
+> available to drawTxt.  So my question: how can I mitigate the ugliness of
+> this state-threading?  I understand this is one purpose for monads; am I
+> supposed to implement a monad transformer for this?
+
+I haven't looked at your specific example (for which I think the 
+previous emails provide the answer you're seeking), but here's a general 
+technique which I often use to help clarify things...
+
+Oftentimes I find that the kinds of state needed for various functions 
+are disjoint (or nearly so), and so packaging it all up in a State monad 
+just doesn't feel right. But remember that functions are data too! In 
+your main/driver function, grab all the kinds of state and pass them in 
+to the various functions which need them. Now, instead of passing the 
+arguments around in your State, just pass a record containing all the 
+partially applied functions.
+
+This works best when you know the basic API you want (it's specified by 
+the record's type), but there are a bunch of different ways to get 
+there. It's especially helpful when you have both pure and 
+side-effecting ways to get there, or when the side-effects are 
+concentrated in getting the parameters rather than in using them (e.g., 
+dealing with commandline arguments).
+
+-- 
+Live well,
+~wren
+
+

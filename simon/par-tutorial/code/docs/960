@@ -1,0 +1,55 @@
+From thomas.dubuisson at gmail.com  Sun Aug  7 20:49:47 2011
+From: thomas.dubuisson at gmail.com (Thomas DuBuisson)
+Date: Sun, 7 Aug 2011 11:49:47 -0700
+Subject: [Haskell-cafe] Simple Parsec example
+In-Reply-To: <1312742655.47629.YahooMailClassic@web31107.mail.mud.yahoo.com>
+References: <1312742655.47629.YahooMailClassic@web31107.mail.mud.yahoo.com>
+Message-ID: <CAOk36Ji0P6WxuebQHP+3pS6g1BkL920+tVdSdY8qHr67=d6mpQ@mail.gmail.com>
+
+I suggest you install hoogle or use the web interface as it can easily
+answer such questions for you:
+
+http://www.haskell.org/hoogle/?hoogle=commaSep
+http://www.haskell.org/hoogle/?hoogle=integer+%2bparsec
+
+Cheers,
+Thomas
+
+On Sun, Aug 7, 2011 at 11:44 AM, michael rice <nowgate at yahoo.com> wrote:
+
+> What other imports must I add to get this to run. I can't seem to get it
+> right.
+>
+> Michael
+>
+> =========
+>
+> import Text.ParserCombinators.Parsec.Prim
+>
+> main = case (parse numbers "" "11, 2, 43") of
+>          Left err  -> print err
+>          Right xs  -> print (sum xs)
+>
+> numbers = commaSep integer
+>
+> ==============
+>
+> [michael at sabal ~]$ ghc --make parsetest.hs
+> [1 of 1] Compiling Main             ( parsetest.hs, parsetest.o )
+>
+> parsetest.hs:7:11: Not in scope: `commaSep'
+>
+> parsetest.hs:7:20: Not in scope: `integer'
+> [michael at sabal ~]$
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110807/2f661345/attachment.htm>
+

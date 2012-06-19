@@ -1,0 +1,14 @@
+From limestrael at gmail.com  Thu Dec  1 15:10:39 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Thu, 1 Dec 2011 15:10:39 +0100
+Subject: [Haskell-cafe] Program used for debugging
+Message-ID: <CACqaG6zY-i7kG-OyYiXH5U8N8X7zgKZ9yr-x7cfALin3SUXoTg@mail.gmail.com>
+
+Hey,
+
+What do you mostly use for debugging?
+Simple calls to Debug.Trace.trace? Hpc? Hood?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111201/fffefc89/attachment.htm>
+

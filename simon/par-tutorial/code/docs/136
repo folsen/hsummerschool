@@ -1,0 +1,47 @@
+From mark.lentczner at gmail.com  Tue Apr  5 07:04:10 2011
+From: mark.lentczner at gmail.com (Mark Lentczner)
+Date: Mon, 4 Apr 2011 22:04:10 -0700
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <BANLkTi=T_S7DED1r=o_K-4+F_M5XJPsByA@mail.gmail.com>
+References: <BANLkTikgr7xBJj-f6OLPjm+CWRjdhnPQtQ@mail.gmail.com>
+	<cf2cd99d-30fa-c4e3-8a1e-e45c7680c398@me.com>
+	<BANLkTimG0JSWFYQSFKSrU0mPEzv_q6Q2HA@mail.gmail.com>
+	<BANLkTima2QW7Q+u2n4-Ry7bNQexCzDWNiw@mail.gmail.com>
+	<BANLkTi=T_S7DED1r=o_K-4+F_M5XJPsByA@mail.gmail.com>
+Message-ID: <BANLkTimpxzgLy_5CEsontVuwhCPBp-uY6g@mail.gmail.com>
+
+On Mon, Apr 4, 2011 at 3:52 PM, Roel van Dijk <vandijk.roel at gmail.com>wrote:
+
+> I made an official proposal on the haskell-prime list:
+>
+> http://www.haskell.org/pipermail/haskell-prime/2011-April/003368.html
+>
+> Let's have further discussion there.
+
+
+I'm not on that mailing list, so I'll comment here:
+
+My only caveat is that the encoding provision should apply when Haskell
+source is presented to the compiler as a bare stream of octets. Where
+Haskell source is interchanged as a stream of Unicode characters, then
+encoding is not relevant -- but may be likely governed by some outer
+protocol - and hence may not be UTF-8 but nonetheless invisible at the
+Haskell level.
+
+Two examples where this might come into play are:
+
+1) An IDE that stores module source in some database. It would not be
+relevant what encoding that IDE and database choose to store the source in
+if the source is presented to the integrated compiler as Unicode characters.
+
+2) If a compilation system fetches module source via HTTP (I could imagine a
+compiler that chased down included modules directly off of Hackage, say),
+then HTTP already has a mechanism (via MIME types) of transmitting the
+encoding clearly. As such, there should be no problem if that outer protocol
+(HTTP) transmits the source to the compiler via some other encoding. There
+is no reason (and only potential interoperability restrictions) to enforce
+that UTF-8 be the only legal encoding here.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110404/7db14e1a/attachment.htm>
+

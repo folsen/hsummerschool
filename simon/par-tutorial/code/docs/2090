@@ -1,0 +1,48 @@
+From ivanperezdominguez at gmail.com  Mon Dec 19 11:04:16 2011
+From: ivanperezdominguez at gmail.com (Ivan Perez)
+Date: Mon, 19 Dec 2011 11:04:16 +0100
+Subject: [Haskell-cafe] How hard is it to start a web startup using
+	Haskell?
+In-Reply-To: <CAKA2JgJEUfh0jyS5Dy3w5f6QS-wg-kGEmfyH8eDxjncYMf9Nuw@mail.gmail.com>
+References: <loom.20111218T175134-76@post.gmane.org>
+	<CAKA2JgJEUfh0jyS5Dy3w5f6QS-wg-kGEmfyH8eDxjncYMf9Nuw@mail.gmail.com>
+Message-ID: <CACZKWEKH+4KHRhmAs6CV-YN9s14JpBt=Ss8Qr=xQUBT9Qwhu+Q@mail.gmail.com>
+
+I'm actually trying to make a list of companies and people using Haskell
+for for-profit real world software development.
+
+I'd like to know the names of those startups, if possible.
+
+-- Ivan
+
+On 18 December 2011 18:42, Michael Snoyman <michael at snoyman.com> wrote:
+> On Sun, Dec 18, 2011 at 6:57 PM, Gracjan Polak <gracjanpolak at gmail.com> wrote:
+>>
+>> Hi all,
+>>
+>> The question 'How hard is it to start a technical startup with Haskell?'
+>> happened a couple of times on this list. Sometimes it was in the form 'How hard
+>> is to find Haskell programmers?' or 'Are there any Haskell jobs?'.
+>>
+>> I'd like to provide one data point as an answer:
+>>
+>> http://www.reddit.com/r/haskell/comments/ngbbp/haskell_only_esigning_startup_closes_second_angel/
+>>
+>> Full disclosure: I'm one of two that founded this startup.
+>>
+>> How are others doing businesses using Haskell doing these days?
+>
+> I don't run a startup myself, but I know of at least three startups
+> using Haskell for web development (through Yesod), and my company is
+> basing its new web products on Yesod as well. I think there are plenty
+> of highly qualified Haskell programmers out there, especially if
+> you're willing to let someone work remotely.
+>
+> Michael
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

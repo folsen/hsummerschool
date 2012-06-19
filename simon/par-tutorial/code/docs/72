@@ -1,0 +1,38 @@
+From patrick.browne at dit.ie  Sun Apr  3 16:04:22 2011
+From: patrick.browne at dit.ie (Patrick Browne)
+Date: Sun, 03 Apr 2011 15:04:22 +0100
+Subject: [Haskell-cafe] Haskell programs as specifications
+Message-ID: <4D987E66.1070902@dit.ie>
+
+Hi,
+Attached are two programs that represent one-way and two-way traffic on
+a road. I can get the programs to produce reasonable results that match
+our intuitive ideas of roads.
+However, I have 2 question about the programs:
+
+1)I cannot get the result suggested by the author that t1 should give
+true in prog1 and false in prog2.
+
+
+2)My second question is more theoretical. It is stated by the author
+that type checking and excitability provide verification. In this case
+verification probably means checking that an instance is consistent with
+its type class. Does verification using these techniques in Haskell have
+any firmer logical foundation than say doing the verification in Java? I
+am aware that Haskell uses inference for type checking, but is the net
+result superior to compilers that do not use inference? Also, is Haskell
+execution based purely on logic?
+
+Regards,
+Pat
+
+This message has been scanned for content and viruses by the DIT Information Services E-Mail Scanning Service, and is believed to be clean. http://www.dit.ie
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: prog2.hs
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110403/01cc5a0c/attachment.txt>
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: prog1.hs
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110403/01cc5a0c/attachment.asc>
+

@@ -1,0 +1,139 @@
+From vincent at xenbox.fr  Sat Aug 20 18:51:47 2011
+From: vincent at xenbox.fr (Vincent Gerard)
+Date: Sat, 20 Aug 2011 11:51:47 -0500
+Subject: [Haskell-cafe] Segfault in the libc malloc using FFI (occurs only
+	in x86_64)
+Message-ID: <20110820115147.7c456a60@ocelotl.lan>
+
+Hi cafe,
+
+I have been struggling with this issue for the past days. I have
+investigated at the Haskell, C and even at assembly level...
+Perhaps I'm missing something big ??
+
+I hope someone familiar with FFI could help me on this Segfault.
+
+My env is: Linux Debian 3.0.0-1, SMP, GHC 7.0.4, x86_64, eglibc 2.13-10
+(This issues occurs as well on others people with /= env, but only with
+x86_64 arch)
+
+The bug is in the hsmagick library (FFI bindings to
+GraphicsMagick), for which I am the maintainer.
+
+--
+So here is a reproducer (Works fine in 32 bit, segfault in 64).
+
+You should have hsmagick + GraphicsMagick dev libs installed. 
+
+  import Graphics.Transform.Magick.Images
+
+  main =  do 
+    initializeMagick
+    c <- readImage "image.jpg"
+    putStrLn "End"
+--
+Executing this program, compiled with standard options, a Segfault
+occurs at runtime.
+
+If I compile this small program with -threaded option an assertion error
+is thrown at runtime:
+
+  main: malloc.c:3096: sYSMALLOc: Assertion `(old_top == (((mbinptr)
+ (((char *) &((av)->bins[((1) - 1) * 2])) - __builtin_offsetof (struct
+ malloc_chunk, fd)))) && old_size == 0) || ((unsigned long) (old_size)
+ >= (unsigned long)((((__builtin_offsetof (struct malloc_chunk,
+ >fd_nextsize))+((2 * (sizeof(size_t))) - 1)) & ~((2 * (sizeof(size_t)))
+ >- 1))) && ((old_top)->size & 0x1) && ((unsigned long)old_end &
+ >pagemask) == 0)' failed.
+
+This assertion error is cryptic for me... but it maybe could help
+someone here.
+
+However, having a C experience, investigating a Segfault is in
+my habits, so let's install debugs symbols on everything and dig with
+gdb.
+
+Here is the backtrace:
+
+  Program received signal SIGSEGV, Segmentation fault.
+  0x00007ffff510292c in malloc_consolidate (av=0x7ffff540fe60) at
+  malloc.c:5161 (this is inside the eglibc source)
+  5161		    unlink(p, bck, fwd);
+(gdb) bt
+  #0  0x00007ffff510292c in malloc_consolidate (av=0x7ffff540fe60) at
+  malloc.c:5161 
+  #1  0x00007ffff5104d64 in _int_malloc (av=0x7ffff540fe60,bytes=8520)
+  at malloc.c:4373 
+  #2  0x00007ffff5107420 in __libc_malloc (bytes=8520) at malloc.c:3660
+  #3  0x00007ffff67bf311 in CloneImageInfo (image_info=0x0) at
+  magick/image.c:1012 
+  #4  0x0000000000439dfa in
+  hsmagickzm0zi5_GraphicsziTransformziMagickziFFIHelpers_mkNewImageInfo1_info
+  ()
+
+Yay, the Segfault is deep in the libc after a regular malloc (8520bytes)
+(I dug into the GraphicsMagick source starting from magick/image.c:1012)
+
+And this libc call is called by a call to CloneImageInfo(NULL) from
+Haskell, which is correct as it is graphicsMagick way to
+allocate an empty ImageInfo data structure.
+(http://www.graphicsmagick.org/api/image.html#cloneimageinfo)
+
+I tried in a C program to execute (after initializing ImageMagick)
+image_info=CloneImageInfo((ImageInfo *) NULL); 
+And of course .... no Segfault...
+
+Let's look at the FFI call... 
+
+This FFI call is the done by the mkNewImageInfo as shown in the trace.
+
+The Haskell FFI layer here has done the right job, calling
+the C function with the right args (NULL)
+
+Here is all the code related to mkNewImageInfo (the last Haskell part we
+see in the backtrace)
+
+---
+  mkNewImageInfo :: IO (ForeignPtr HImageInfo)
+  mkNewImageInfo = mkFinalizedImageInfo =<< mkNewImageInfo_
+
+  mkFinalizedImageInfo :: Ptr HImageInfo -> IO (ForeignPtr HImageInfo)
+  mkFinalizedImageInfo = newForeignPtr imageInfoFinalizer
+
+  mkNewImageInfo_ :: IO (Ptr HImageInfo)
+  mkNewImageInfo_ = clone_image_info nullPtr -- CALL before the Segfault
+
+  destroyImageInfo :: Ptr HImageInfo -> IO ()
+  destroyImageInfo = destroy_image_info
+
+  foreign import ccall "static magick/api.h &DestroyImageInfo"
+    imageInfoFinalizer :: FunPtr (Ptr HImageInfo -> IO ())
+
+  foreign import ccall "static magick/api.h CloneImageInfo"
+    clone_image_info :: Ptr HImageInfo -> IO (Ptr HImageInfo)
+--
+
+To me, this code is right (and works perfectly in 32 bit).
+Furthermore, as the call is made with a nullPtr arg, no data structure
+is used ...
+I tried this code without using ForeignPtr Finalizers (hsmagick <= 0.4)
+and the Segfault occurs as well ...
+
+I even had a look at the generated assembly, which also looks right...
+
+It seems there is a real segmentation error, or an illegal access to a
+memory page... But I could not find the root cause of this error.
+
+And an additionnal piece to the puzzle, when running the program inside
+valgrind, there is no Segfault and the program works as expected.
+
+
+So if anyone have an idea on how only on 64bits arch an Haskell FFI
+call could led to a Segfault in the libc malloc, it would make my day,
+perhaps my week :)
+
+Thanks !
+
+Vincent Gerard
+
+

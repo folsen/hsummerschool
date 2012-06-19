@@ -1,0 +1,29 @@
+From byorgey at seas.upenn.edu  Wed Dec 14 18:00:26 2011
+From: byorgey at seas.upenn.edu (Brent Yorgey)
+Date: Wed, 14 Dec 2011 12:00:26 -0500
+Subject: [Haskell-cafe] ANNOUNCE: hxournal-0.5.0.0 - A pen notetaking
+ program written in haskell
+In-Reply-To: <CACZKWEKfvH+MsPr+XaPeyinZxkp9PB4CdYJKd53JV--3W6TZYg@mail.gmail.com>
+References: <CAPNnnrV329dsY_cB=K7q1-REUE5os7+u+psqN=rWeq9Crz6JEQ@mail.gmail.com>
+	<CACZKWEL6=_f+HTckrrgqCZj-EWKHJpw3TSEaBvXOBhZFOeFAOg@mail.gmail.com>
+	<CAPNnnrXoaY36PRRvM3_EtoX+HFLkyRy_F-jtr11qZtW-4izVGQ@mail.gmail.com>
+	<CAKFCL4XQceD_Y0Cv4oViYrfCwLRcbeG9EQOjOMScCfDZ=iWq4g@mail.gmail.com>
+	<CACZKWE+UZdbnc5RjfUrpLs-YDoWPomBbqceUHThkniJR4cwTqw@mail.gmail.com>
+	<CACZKWEKOV-c+1=EpNbU6aycuyQVWUUx6yFYJBxp9M16bMfV-=g@mail.gmail.com>
+	<CAPNnnrXB6bL_sShjLJZ7MUS3hSsw4ZCCaxnpKmyPWTqPWvJpMA@mail.gmail.com>
+	<CAPNnnrVSVQyTpY6jwX8_oz+f_SD0TTGfKSgBP1ok7-AD3spc=w@mail.gmail.com>
+	<CAO9Q0tUenrDdjR5p3N11N0-V=KcYiMRFTVo6N0hHnygPMbATGw@mail.gmail.com>
+	<CACZKWEKfvH+MsPr+XaPeyinZxkp9PB4CdYJKd53JV--3W6TZYg@mail.gmail.com>
+Message-ID: <20111214170026.GA6692@seas.upenn.edu>
+
+On Wed, Dec 14, 2011 at 04:53:38PM +0100, Ivan Perez wrote:
+> I think not. The version in hackage is still hxournal-0.5.0.0. Unless,
+> of course,
+> you can update a package that's already been submitted without increasing the
+> version number. Is that possible? (I actually don't know)
+
+Thankfully, it is not.
+
+-Brent
+
+

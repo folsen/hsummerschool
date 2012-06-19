@@ -1,0 +1,28 @@
+From felipe.lessa at gmail.com  Sat Apr  2 14:14:36 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Sat, 2 Apr 2011 12:14:36 +0000
+Subject: [Haskell-cafe] Multi agent system
+In-Reply-To: <BANLkTik4mp16fYnsM4yU=12xVPGZeMqoWw@mail.gmail.com>
+References: <BANLkTik4mp16fYnsM4yU=12xVPGZeMqoWw@mail.gmail.com>
+Message-ID: <BANLkTinFYo6Yb3J_QwWxXtNWPS3O1+8TBQ@mail.gmail.com>
+
+On Sat, Apr 2, 2011 at 11:16 AM, Yves Par?s <limestrael at gmail.com> wrote:
+> Given that haskell threads are lightweight, is it reasonable to lauch a
+> thread per agent and then implement fetch and send through Chans?
+> It will be simple to implement and to use, but if I have, say, two hundreds
+> of really dumb (sorry, reactive ^^) agents, like ants, I will have to launch
+> as many threads.
+
+I don't see any problems with this approach if you have only hundreds
+of agents, especially because GHC 7 is a lot faster when using many
+threads.  However, if you want hundreds of thousands of agents, maybe
+this won't work, but I don't really know what kinds of limits GHC has
+8-).  That said, it may be difficult to do better than GHC's scheduler
+;-).
+
+Cheers! =)
+
+-- 
+Felipe.
+
+

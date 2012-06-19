@@ -1,0 +1,18 @@
+From shahn at cs.tu-berlin.de  Sat Aug 27 17:41:04 2011
+From: shahn at cs.tu-berlin.de (=?UTF-8?B?U8O2bmtl?= Hahn)
+Date: Sat, 27 Aug 2011 17:41:04 +0200
+Subject: [Haskell-cafe] Pointed, but not Applicative
+Message-ID: <j3d40s$nb1$1@dough.gmane.org>
+
+Hi!
+
+I was reading through the Typeclassopedia ([1]) and I was wondering which 
+type could be an instance of Pointed, but not of Applicative. But I can't 
+think of one. Any ideas?
+
+S?nke
+
+[1] http://www.haskell.org/haskellwiki/Typeclassopedia
+
+
+

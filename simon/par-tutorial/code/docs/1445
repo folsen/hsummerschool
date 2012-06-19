@@ -1,0 +1,42 @@
+From allbery.b at gmail.com  Sun Aug 28 22:53:05 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Sun, 28 Aug 2011 16:53:05 -0400
+Subject: [Haskell-cafe] Dynamic loading of module
+In-Reply-To: <CAL4zPaqNfJWZzJowtFW12e_u2pmxxktbKpiSG5YDsh+=fZL43w@mail.gmail.com>
+References: <CAL4zPao2eYnWWf1KL-sJ3NrVNw6Ar+eHVgnsDr7KSCikE_TZ4w@mail.gmail.com>
+	<4E5811CA.6050905@vex.net>
+	<CAL4zPaoO3=AGtJSexcSa9b108w0AB7dgm+QVQQmoytOUu-M3Fw@mail.gmail.com>
+	<4E593E91.5020209@vex.net>
+	<CAL4zPaqNfJWZzJowtFW12e_u2pmxxktbKpiSG5YDsh+=fZL43w@mail.gmail.com>
+Message-ID: <CAKFCL4WPnbkXF9Ao3qPCyL_sih-Wywjse=2+ZbtOEds7J7A3MA@mail.gmail.com>
+
+On Sun, Aug 28, 2011 at 16:40, Arnaud Bailly <arnaud.oqube at gmail.com> wrote:
+
+> Thanks for taking the time to help me fix this package stuff. So I wiped
+> out my package.conf.d/ and tried to reinstall my stuff. Installing
+> template-haskell 2.5.0.0 is ok (2.6 is not, fails to compile on ghc 7.0.3)
+> but then:
+>
+> D:\projets\>ghc --make -package ghc main
+>
+> <command line>: cannot satisfy -package ghc
+>     (use -v for more information)
+>
+
+That'd be expected; you shouldn't simply obliterate package.conf.d, you need
+to keep ghc's boot libraries (which include itself as a library).  If the
+boot libraries are somehow hosed, you need to reinstall the compiler to get
+them back.
+
+Although, I think you were headed there anyway:  template-haskell is a boot
+library, since it's very tightly bound to the exact compiler version, so
+it's almost always wrong to install it in any way other than as part of
+installing GHC itself.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110828/06c64f4d/attachment.htm>
+

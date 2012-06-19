@@ -1,0 +1,38 @@
+From andrewcoppin at btinternet.com  Sat Feb  5 17:13:01 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Sat, 05 Feb 2011 16:13:01 +0000
+Subject: [Haskell-cafe] Concurrency best practices?
+In-Reply-To: <AANLkTim5x9V+2zAukpwADGeD-6qh6HJF72TbaQcJKbkp@mail.gmail.com>
+References: <4D4D1C63.2000906@freegeek.org>
+	<AANLkTim5x9V+2zAukpwADGeD-6qh6HJF72TbaQcJKbkp@mail.gmail.com>
+Message-ID: <4D4D770D.8030503@btinternet.com>
+
+On 05/02/2011 12:56 PM, Jesper Louis Andersen wrote:
+> On Sat, Feb 5, 2011 at 10:46, wren ng thornton<wren at freegeek.org>  wrote:
+>
+>> Sometimes I need those threads to do some IO like printing logging info.
+>
+> Logging is easy, especially if you don't mind a performance hit.
+> Create an STM.TChan and throw each log message on it. Have a separate
+> forkIO'ed process that reads off log messages and prints them.
+
+This is the solution I immediately thought of too. Much cleaner 
+abstraction than grubbing around in low-level I/O implementations and such.
+
+> The price however, is that you may be running into a bottleneck upon
+> entering messages on the TChan because sadly I can't remember if it is
+> asynchronous or synchronous when you add messages to it.
+
+Presumably messages added to the channel appear immediately after the 
+transaction commits. The problem is, I think GHC's STM implementation 
+might mean that if two transactions both try to log a message, they both 
+get rolled back...
+
+> It won't work for general IO either (Though perhaps it is a Writer monad).
+
+There is of course a *reason* why you can't do general I/O inside a 
+transaction: The transaction may have seen inconsistent state, and it 
+may be re-executed arbitrary times. Think about that before you try to 
+shove real I/O into a transaction abstraction...
+
+

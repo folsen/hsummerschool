@@ -1,0 +1,47 @@
+From frodo at theshire.org  Fri Feb 11 20:20:52 2011
+From: frodo at theshire.org (Cristiano Paris)
+Date: Fri, 11 Feb 2011 20:20:52 +0100
+Subject: [Haskell-cafe] Is Show special? Of course not but...
+In-Reply-To: <201102112000.12131.daniel.is.fischer@googlemail.com>
+References: <AANLkTikfYO9WjuHe0QiygJsGFYZq5nswK6barGgpci5f@mail.gmail.com>
+	<201102112000.12131.daniel.is.fischer@googlemail.com>
+Message-ID: <AANLkTinMq30qykq+T_VZ_7gpqybAzPvdU1VXeKKz=pOT@mail.gmail.com>
+
+On Fri, Feb 11, 2011 at 20:00, Daniel Fischer
+<daniel.is.fischer at googlemail.com> wrote:
+> ...
+> It's because there's no way to determine the type variable a (in either
+> wrong or right).
+
+That's what I thought when I wrote the code at first but then I was
+surprised to see it working with the Show type-class.
+
+> In such cases, under some circumstances, the type variable gets defaulted
+> (the ambiguous contexts all must have the form (C a), at least one numeric
+> class [Num, Integral, Fractional, ...] is involved, all involved classes
+> come from the Prelude or the standard libraries) as specified in the report
+> (section 4.3, iirc).
+
+I'm reading it right now.
+
+> ...
+> These conditions are not met by your 'right' function, but ghci uses
+> extended default rules, a type variable a with a Show constraint [and no
+> other] gets defaulted to (). But ghci has no rule how to default your Dumb
+> class, so it reports the ambiguous type variable there.
+> [Without extended defaulting rules, ambiguous type variable errors would be
+> too frequent at the ghci prompt.]
+
+God! It seems like I'm reading the small-character lines of a contract :)
+
+Seriously, now it makes sense...
+
+Thank you.
+
+-- 
+Cristiano
+
+GPG Key: 4096R/C17E53C6 2010-02-22
+Fingerprint = 4575 4FB5 DC8E 7641 D3D8? 8EBE DF59 B4E9 C17E 53C6
+
+

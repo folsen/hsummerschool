@@ -1,0 +1,33 @@
+From gcrosswhite at gmail.com  Wed Dec 14 10:21:25 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Wed, 14 Dec 2011 19:21:25 +1000
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CA+u6gbzmc6hk-Cr-pkNOok0SzOBm+sOK+kycSkxfRJRUCW4FoA@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<CAECnf4ApS=L-YmMLUTCpB7b+kqv3Dps15irucqrngybxau_iAQ@mail.gmail.com>
+	<CACw0niKAp9HWV3qxBm6bN5Z2Z9yUVeTw9H9S9DERH9ofrWaXKQ@mail.gmail.com>
+	<84E2499A-1794-4A54-9CA8-446FA3571E13@gmail.com>
+	<CA+u6gbzmc6hk-Cr-pkNOok0SzOBm+sOK+kycSkxfRJRUCW4FoA@mail.gmail.com>
+Message-ID: <397029A6-EB85-4714-A93C-9489BB466875@gmail.com>
+
+
+On Dec 14, 2011, at 4:40 PM, Ivan Lazar Miljenovic wrote:
+
+> [...] Apart from some
+> basic combinators in Control.Monad or the definitions of monad
+> transformers, how much of what you write in do-blocks is applicable to
+> some generic Monad instance as opposed to a specific Monad?
+
+Well, if my *only* constraint on a type is that it be an instance of Monad, then *all* of the code written in do-blocks will be applicable to a generic Monad instance.  That's the whole point.  :-)
+
+Furthermore, you make it sound like this generic case scenario is incredibly rare, but in fact it is very common:  it occurs whenever someone writes a monadic transformer, which happens all the time.  Imagine what writing monadic transformers would be like if you couldn't always trust that, say, (>>=) was a well-defined operation?
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111214/7a824672/attachment.htm>
+

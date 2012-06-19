@@ -1,0 +1,28 @@
+From fuzxxl at gmail.com  Sat Feb 12 17:00:47 2011
+From: fuzxxl at gmail.com (Robert Clausecker)
+Date: Sat, 12 Feb 2011 17:00:47 +0100
+Subject: [Haskell-cafe] Why is there no "splitSeperator" function in
+	Data.List
+Message-ID: <1297526447.2361.4.camel@robert-desktop>
+
+Is there any reason, that one can't find a function that splits a list
+at a seperator in the standard library? I imagined something like this:
+
+
+    splitSeperator :: Eq a => a -> [a] -> [[a]]
+
+    splitSeperator ',' "foo,bar,baz"
+      --> ["foo","bar","baz"]
+
+Or something similar? This is needed so often, even if I can implement
+it in one line, is there any reason why it's not in the libs?
+
+Yours, Robert Clausecker
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 490 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110212/d72a5611/attachment.pgp>
+

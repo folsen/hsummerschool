@@ -1,0 +1,52 @@
+From uzytkownik2 at gmail.com  Fri Dec 23 01:06:30 2011
+From: uzytkownik2 at gmail.com (Maciej Marcin Piechotka)
+Date: Fri, 23 Dec 2011 01:06:30 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <04595744-37C5-40A3-B1EA-DE9E9DA1AA08@yandex.ru>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+	<BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+	<CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+	<jcvqjs$sb2$1@dough.gmane.org>
+	<3AEE194F-22A4-4E69-9EF3-A9AAB05689CB@strictlypositive.org>
+	<04595744-37C5-40A3-B1EA-DE9E9DA1AA08@yandex.ru>
+Message-ID: <1324598790.27155.13.camel@localhost.localdomain>
+
+On Fri, 2011-12-23 at 01:29 +0400, MigMit wrote:
+> ?????????? ? iPad
+> 
+> 22.12.2011, ? 23:56, Conor McBride <conor at strictlypositive.org>
+> ???????(?):
+> 
+> > I'd be glad if "pure" meant "total", but
+> > partiality were an effect supported by the run-time system. Then we
+> > could choose to restrict ourselves, but we wouldn't be restricted by
+> the
+> > language.
+> 
+> I second that. Having a special "partiality" monad would be nice.
+> However, I'm not certain as to how it would interact with recursion ?
+> if f is a total function, fix f could be (and almost certainly would
+> be) a possibly undiefined value. So, fix should have type "(a -> a) ->
+> Partial a"; that's OK, but implicit uses of fix (I mean let
+> statements) would be quite different. 
+
+IIRC in ML-derived languages there is difference between let and let
+rec. All implicit fix can be changed into explicit so I imagine that:
+
+let rec f x = x -- a -> Partial a
+let g x = x -- a -> a
+
+Regards
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111223/5d527a75/attachment.pgp>
+

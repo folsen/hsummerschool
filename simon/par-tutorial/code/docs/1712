@@ -1,0 +1,71 @@
+From iridcode at gmail.com  Tue Dec  6 20:12:09 2011
+From: iridcode at gmail.com (Simon Meier)
+Date: Tue, 6 Dec 2011 20:12:09 +0100
+Subject: [Haskell-cafe] List x ByteString x Lazy Bytestring
+In-Reply-To: <1323178407.13144.140661008102421@webmail.messagingengine.com>
+References: <1323090896.3764.140661007583849@webmail.messagingengine.com>
+	<201112051605.21133.daniel.is.fischer@googlemail.com>
+	<1323178407.13144.140661008102421@webmail.messagingengine.com>
+Message-ID: <CAFbzPDd1eixBtb8oKkD=_PZ-i2JZainbOUsn6PhrtKThOTUWQw@mail.gmail.com>
+
+Hi John,
+
+>> > I've used Haskell and GHC to solve particular real life application. 4
+>> > ? tools were developed and their function is almost the same - they
+>> > ? modify textual input according to patterns found in the text. Thus, it
+>>
+>> Hmm, modification can be a problem for ByteStrings, since it entails
+>> copying. That could be worse for strict BytStrings than lazy, if in the
+>> lazy ByteString you can reuse many chunks.
+>
+> I understand now, that is probably the point.
+>
+>
+>>
+>> Two main possibilities:
+>> 1. your algorithm isn't suited for ByteStrings
+>> 2. you're doing it wrong
+>>
+>> The above indicates 1., but without a more detailed description and/or
+>> code, it's impossible to tell.
+>
+>
+> Yes, it seems that the (1) is the point, because I split and re-build
+> the bytestream many times during processing.
+
+For splitting it might be interesting to have a look at 'attoparsec'
+(http://hackage.haskell.org/package/attoparsec), which are parser
+combinators specialized to bytestring's. If the splitting still leaves
+large enough chunks of the original input intact (large enough being
+around > 128 bytes), then you might be able to achieve a benefit.
+
+To use strict and lazy bytestrings efficiently, it helps a lot to know
+their internal representation (a slice of a char[] array and lists of
+slices of char[] arrays) and to think about what the different
+operations cost on this datastructure. (The source code of the library
+is actually not that hard to understand.) An obviously very expensive
+operation is concatenation (guaranteed copying for strict bytestrings
+at least a list traversal for lazy bytestrings). The blaze-builder
+library provides a type that supports O(1) concatenation of sequences
+of bytes and an efficient conversion to a lazy bytestring that has a
+large average chunk size. Large chunks are important to amortize the
+work spent on the boundary with the speedup gained due to the compact
+and cache efficient representation.
+
+If you keep using lists, but need a lot of concatenation using
+difference lists (http://hackage.haskell.org/package/dlist) also
+allows a O(1) concatenation. Note that the "cost" of having this O(1)
+concatenation is that the resulting list cannot be inspected, as long
+as it is in a form that supports O(1) concatenation. The same holds
+for the lazy bytestring builder provided by blaze-builder.
+
+Note that I'd be very curious, if you could achieve any further
+performance improvement using blaze-builder...which is no surprise, as
+I'm its author :-) Note also that the API has been cleaned up and will
+be published with the next release of the bytestring library. So just
+ignore the whole 'write' stuff. I should have separated it.
+
+good luck and best regards,
+Simon
+
+

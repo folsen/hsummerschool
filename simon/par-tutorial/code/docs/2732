@@ -1,0 +1,26 @@
+From batterseapower at hotmail.com  Sat Feb  5 09:15:56 2011
+From: batterseapower at hotmail.com (Max Bolingbroke)
+Date: Sat, 5 Feb 2011 08:15:56 +0000
+Subject: [Haskell-cafe] MonadPeelIO instance for monad transformers on
+	top of "forall"
+In-Reply-To: <alpine.DEB.2.02.1102042256060.12561@dr-wily.mit.edu>
+References: <AANLkTimhhfkBJ3iS6xjgoAnV0dQ5GfG+otb9BDOHp3So@mail.gmail.com>
+	<alpine.DEB.2.02.1102041630280.12561@dr-wily.mit.edu>
+	<AANLkTikwE10qMs+n6b-dMMcHXkNCVtaAQR4E7TxQVmCx@mail.gmail.com>
+	<alpine.DEB.2.02.1102041820130.12561@dr-wily.mit.edu>
+	<alpine.DEB.2.02.1102042256060.12561@dr-wily.mit.edu>
+Message-ID: <AANLkTi=P6r-v7eL2KtDVaEBM52VsYC9GRTQO3QMxArMn@mail.gmail.com>
+
+On 5 February 2011 04:19, Anders Kaseorg <andersk at mit.edu> wrote:
+> Just to demonstrate that I didn?t use the triviality of ReaderT (), here?s
+> a less trivial example with ReaderT and StateT:
+
+This is superb, thank you! I would never have come up with that :-)
+
+It still seems to fail somehow on my real example, but I'm confident I
+can get it working now.
+
+Many thanks!
+Max
+
+

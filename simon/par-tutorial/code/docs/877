@@ -1,0 +1,42 @@
+From andrewcoppin at btinternet.com  Fri Apr 29 17:03:51 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Fri, 29 Apr 2011 16:03:51 +0100
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <1304000463.23817.25.camel@godel>
+References: <4DB093A6.8000303@btinternet.com>
+	<4DB3E7E8.8000907@btinternet.com>	<BANLkTi=S70WstLi83umF=v=LBVu1A7pbTQ@mail.gmail.com>	<4DB5493F.4010804@btinternet.com>	<D47B6B3C-B39D-475B-BCED-2E7758A5ED7A@me.com>
+	<4DB89687.30705@earth.li>	<ipb02s$oap$1@dough.gmane.org>
+	<1304000463.23817.25.camel@godel>
+Message-ID: <4DBAD357.6040905@btinternet.com>
+
+On 28/04/2011 03:21 PM, Chris Smith wrote:
+> On Thu, 2011-04-28 at 08:04 +0200, Bardur Arantsson wrote:
+>> There's also the fact that using in-repo branches means that all the
+>> tooling doesn't have to rely on any (fs-specific) conventions for
+>> finding branches.
+>>
+>> As someone who has admin'd a reasonably large Bazaar setup (where
+> branch
+>> == directory similarly to Darcs) I can honestly say that this would be
+> a
+>> HUGE boon.
+>
+> Just keep in mind that adding branches withing the repository is a
+> massive increase in the conceptual complexity of the system, and it
+> would IMO be very un-darcs-like to adopt something like that into the
+> core mental model you need to use a darcs repository, only because of
+> incidental conveniences
+
+> Convention, rather than baking answers into tools, is the right way to
+> solve organizational problems, and that's essentially what we're talking
+> about here.  And adding complexity every time someone has an awkward use
+> case will lead (has led, in more systems than I can count) to an
+> unusable result in the end.
+
+It seems half the people here think that having multiple branches per 
+repo is a fantastic idea, while the other half think it's a stupid idea.
+
+Perhaps there is room for more than one revision control system based on 
+change-sets in this world?
+
+

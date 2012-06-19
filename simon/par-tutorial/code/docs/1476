@@ -1,0 +1,32 @@
+From michael at snoyman.com  Mon Aug 29 10:08:39 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Mon, 29 Aug 2011 11:08:39 +0300
+Subject: [Haskell-cafe] Decompressing and http-enumerator
+Message-ID: <CAKA2Jg+u_BtN5WKrTc4T_mgmuxP5==ASbsh5rvxJaQhVK64MTg@mail.gmail.com>
+
+Hi all,
+
+Erik just opened an issue on Github[1] that affected me very recently
+as well when writing some automated Hackage checking code[2]. The
+issue is that http-enumerator sees the content-encoding header and
+decompresses the tarball, returning an uncompressed tarfile. I can
+avoid this with rawBody = False, but that's not a real solution, since
+that also disables chunked response handling.
+
+So one possible solution is to just add an option to never decompress
+response bodies, but that's a bit of a hack. The real question is:
+what's the correct way to handle these tarballs? Web browsers seem to
+know not to decompress them, but AFAICT http-enumerator is correctly
+following the spec by decompressing. Another possibility is to
+determine whether or not to decompress based on the content type,
+using either a white or black list (e.g., never compress TAR files,
+always decompress HTML files, etc).
+
+I'm open to suggestions here.
+
+Michael
+
+[1] https://github.com/snoyberg/http-enumerator/issues/30
+[2] https://github.com/yesodweb/maintenance/blob/master/release/sdist-check.hs
+
+

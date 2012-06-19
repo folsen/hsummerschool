@@ -1,0 +1,79 @@
+From chowells79 at gmail.com  Thu Dec 15 18:59:01 2011
+From: chowells79 at gmail.com (Carl Howells)
+Date: Thu, 15 Dec 2011 09:59:01 -0800
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <CACqaG6xYuFShwXymrU=2pxzzxUsHXe++UtQGVCbT4NwmF-OQ5A@mail.gmail.com>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<5E7ED349-3B28-4BE6-8B47-FBA763712A9E@gmail.com>
+	<CACqaG6xYuFShwXymrU=2pxzzxUsHXe++UtQGVCbT4NwmF-OQ5A@mail.gmail.com>
+Message-ID: <CAECnf4CqkFWf02RaKAD_VaVCS+w3LdBHJ6pYBa=Zd3oqHOAajg@mail.gmail.com>
+
+Monoid and Alternative are not the same.  There is a very important
+difference between them:
+
+class Alternative f where
+    (<|>) :: f a -> f a -> f a
+    ...
+
+class Monoid a where
+    mappend :: a -> a -> a
+    ...
+
+The equivalent to Alternative is MonadPlus, not Monoid.  The kinds
+matter.  In Alternative, you are guaranteed that the type that f is
+applied to cannot affect the semantics of (<|>).  As has been already
+demonstrated aptly, the type a in the instance Monoid a => Monoid
+(Maybe a) matters quite a lot.
+
+Carl
+
+On Thu, Dec 15, 2011 at 8:04 AM, Yves Par?s <limestrael at gmail.com> wrote:
+> So why don't we use First and Last with the Alternative interface too?
+>
+> It's indeed weird the Maybe doesn't react the same way with Alternative and
+> Monoid.
+>
+>
+> 2011/12/15 Anthony Cowley <acowley at gmail.com>
+>>
+>> On Dec 15, 2011, at 10:19 AM, Brent Yorgey wrote:
+>>
+>> > On Thu, Dec 15, 2011 at 06:49:13PM +1000, Gregory Crosswhite wrote:
+>> >>
+>> >> So at the end of the day... what is the point of even making Maybe and
+>> >> [] instances of Alternative?
+>> >
+>> > The Alternative and Monoid instances for [] are equivalent. ?However,
+>> > the Alternative and Monoid instances for Maybe are not. To wit:
+>> >
+>> >> (Just (Sum ?4)) <|> (Just (Sum 3))
+>> > ?Just (Sum {getSum = 4})
+>> >
+>> >> (Just (Sum 4)) `mappend` (Just (Sum 3))
+>> > ?Just (Sum {getSum = 7})
+>>
+>> We already have,
+>>
+>> > First (Just (Sum 4)) `mappend` First (Just (Sum 3))
+>> First {getFirst = Just (Sum {getSum = 4})}
+>>
+>> So the overlap of apparent Alternative and Monoid functionality remains.
+>> This just represents an opportunity for the caller to select the monoid they
+>> want.
+>>
+>> Anthony
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

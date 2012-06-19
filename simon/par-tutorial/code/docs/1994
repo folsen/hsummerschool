@@ -1,0 +1,30 @@
+From josef.svenningsson at gmail.com  Thu Dec 15 21:17:55 2011
+From: josef.svenningsson at gmail.com (Josef Svenningsson)
+Date: Thu, 15 Dec 2011 21:17:55 +0100
+Subject: [Haskell-cafe] smt solver bindings
+In-Reply-To: <C0207498A084F14E85CA5D588539FA0F0B81CE80@DB3EX14MBXC311.europe.corp.microsoft.com>
+References: <C0207498A084F14E85CA5D588539FA0F0B81CE80@DB3EX14MBXC311.europe.corp.microsoft.com>
+Message-ID: <CAGF=PZLUAOz1kqOL0oFSaFy3t_HAGSjSuYVsVDQrx1vaYWh5ow@mail.gmail.com>
+
+On Thu, Dec 15, 2011 at 7:04 PM, Dimitrios Vytiniotis <
+dimitris at microsoft.com> wrote:
+
+>
+> I've a quick question:
+>
+> Are there Haskell wrappers for the Z3 C API around?
+>
+> I believe sbv recently got support for Z3 but I don't know if it uses the
+C API. Neither have I tried the Z3 backend, I only played with the Yices
+backend. If you contact Levent Erk?k, the author of sbv, he should be able
+to give you more information.
+
+ https://github.com/LeventErkok/sbv
+
+Thanks,
+
+Josef
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/04910bed/attachment.htm>
+

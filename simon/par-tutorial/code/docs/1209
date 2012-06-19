@@ -1,0 +1,53 @@
+From ckkashyap at gmail.com  Thu Aug 18 20:01:46 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Thu, 18 Aug 2011 23:31:46 +0530
+Subject: [Haskell-cafe] Embedding Perl RegEx in Haskell
+Message-ID: <CAGdT1gqMvi3ihocy6Yg4A0z0C0uu0GVzSPStNCzZLrwCAbS=Ew@mail.gmail.com>
+
+Dear Haskell folks,
+
+I was attempting to do an EDSL that would allow me to describe regular
+expressions in Hakell and generate Perl as target -
+
+https://github.com/ckkashyap/LearningPrograms/blob/master/Haskell/edsl/regex.hs
+
+$ ghci regex.hs
+GHCi, version 7.0.3: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Loading package ffi-1.0 ... linking ... done.
+[1 of 1] Compiling Main             ( regex.hs, interpreted )
+Ok, modules loaded: Main.
+*Main> let hello = stringToRegularExpression "hello"
+*Main> let world = stringToRegularExpression "world"
+*Main> :t hello
+hello :: RegularExpression
+*Main> :t world
+world :: RegularExpression
+*Main> let re = listToSequence [ hello, oneOrMore world, hello ]
+*Main> re
+hello(world)+hello
+*Main> :t re
+re :: RegularExpression
+
+I am looking for suggestions on how I could encode the anchors - ^ and $ and
+also how I could refer to captures. My goal is to be able to extend the idea
+to create an EDSL that could be used to build Perl tasks - such as filters,
+report generators etc
+
+Arguably this could be seen as a pointless exercise because I could chose to
+do the scripting in Haskell itself but I have a practical problem that I
+have to deal with clusters that have a little dated version of Linux where I
+could not really build the Haskell and where Haskell generated executables
+don't seem to run. When I started out with this idea, I was thinking of
+embedding Perl in Haskell but later I thought that perhaps that will sort of
+beat the point of "DS" bit in EDSL. So, I have started on this idea of
+trying to encode very precise "tasks".
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110818/86952d9e/attachment.htm>
+

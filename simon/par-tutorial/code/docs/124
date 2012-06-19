@@ -1,0 +1,71 @@
+From nbowler at elliptictech.com  Mon Apr  4 17:19:56 2011
+From: nbowler at elliptictech.com (Nick Bowler)
+Date: Mon, 4 Apr 2011 11:19:56 -0400
+Subject: [Haskell-cafe] Fast conversion between Vector Double and Vector
+ CDouble
+In-Reply-To: <BANLkTime8Omz8PAPtu_HVAQfhafR+=bsCg@mail.gmail.com>
+References: <BANLkTime8Omz8PAPtu_HVAQfhafR+=bsCg@mail.gmail.com>
+Message-ID: <20110404151956.GA6362@elliptictech.com>
+
+On 2011-04-04 13:54 +0200, Bas van Dijk wrote:
+> However, I noticed I had a lot of conversions from Vector Double to
+> Vector CDouble and visa versa in my code:
+> 
+> import Data.Vector.Storable ( Vector )
+> 
+> mapRealToFrac ? (Storable ?, Storable ?, Real ?, Fractional ?)
+>               ? Vector ? ? Vector ?
+> mapRealToFrac = VS.map realToFrac
+> 
+> When I replace this with:
+> 
+> mapRealToFrac = unsafeCoerce
+> 
+> My application computes the same result but does it 28 times faster!
+
+Note that even if Double and CDouble have identical representations,
+unsafeCoerce does not perform the same conversion as realToFrac -- the
+latter does conversion to/from Rational and thus munges all values not
+representable therein.  This also happens to be why it is slooooooooow.
+Some real examples, in GHCi:
+
+  > realToFrac (0/0 :: Double) :: CDouble
+  -Infinity
+ 
+  > unsafeCoerce (0/0 :: Double) :: CDouble
+  NaN
+ 
+  > realToFrac (-0 :: Double) :: CDouble
+  0.0
+ 
+  > unsafeCoerce (-0 :: Double) :: CDouble
+  -0.0
+
+Using realToFrac to convert between different floating types is even
+more fun:
+
+  > realToFrac (1/0 :: Float) :: Double
+  3.402823669209385e38
+
+Nice!
+
+> My question are:
+> 
+> 1) Is this always safe? In other words: are the runtime
+> representations of Double and CDouble always equivalent or do they
+> vary between platforms?
+
+Probably not, but realToFrac isn't really "safe", either (as above).
+
+> 2) Can the same improvement be accomplished using RULE pragma's?
+
+No, because the two methods do not compute the same function.
+However, there are (or were) broken RULE pragmas in GHC which
+do this sort of transformation.  Such RULEs make realToFrac
+really fun because your program's correctness will depend on
+whether or not GHC decides to inline things.
+
+-- 
+Nick Bowler, Elliptic Technologies (http://www.elliptictech.com/)
+
+

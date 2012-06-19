@@ -1,0 +1,95 @@
+From leon.p.smith at gmail.com  Tue Apr 12 17:27:31 2011
+From: leon.p.smith at gmail.com (Leon Smith)
+Date: Tue, 12 Apr 2011 11:27:31 -0400
+Subject: [Haskell-cafe] Higher-kinded Quantification
+In-Reply-To: <201104120537.51306.dan.doel@gmail.com>
+References: <BANLkTi=EA+347QXDEBu4ST_qMMgJe2AK1g@mail.gmail.com>
+	<201104120537.51306.dan.doel@gmail.com>
+Message-ID: <BANLkTim8wmfsxPgddncT_7JzDVSzgPtpbg@mail.gmail.com>
+
+I think impredicative polymorphism is actually needed here;  if I write
+
+> {-# LANGUAGE ScopedTypeVariables #-}
+> {-# LANGUAGE RankNTypes #-}
+
+> feedPure :: forall i o a. [i] -> (forall m. Iterator i o m a) -> (forall m. Iterator i o m a)
+> feedPure = loop
+>   where
+>     loop :: [i] -> (forall m. Iterator i o m a) -> (forall m. Iterator i o m a)
+>     loop []     iter = iter
+>     loop (i:is) (NeedInput k)    = loop is (k i)
+
+Then I get a type error:
+
+Iterator.hs:185:36:
+    Couldn't match type `m0' with `m1'
+      because type variable `m1' would escape its scope
+    This (rigid, skolem) type variable is bound by
+      a type expected by the context: Iterator i o m1 a
+    The following variables have types that mention m0
+      k :: i -> Iterator i o m0 a (bound at Iterator.hs:185:28)
+
+Which I think I vaguely understand,  as the type of NeedInput is (i ->
+Iterator i o m a) -> Iterator i o m a,  meaning the type of m is
+equal.   So it seems the polymorphism must be carried on m.
+
+But what I find rather befuddling is the kind error:
+
+> feedPure' :: [i] -> Iterator i o (forall (m :: * -> *) . m) a -> Iterator i o (forall (m :: * -> *) . m) a
+> feedPure' = undefined
+
+Iterator.hs:193:58:
+    `m' is not applied to enough type arguments
+    Expected kind `*', but `m' has kind `* -> *'
+    In the type signature for `feedPure'':
+      feedPure' :: [i]
+                   -> Iterator i o (forall m :: (* -> *). m) a
+                      -> Iterator i o (forall m :: (* -> *). m) a
+
+Is impredicative polymorphism restricted to the kind *?
+
+Best,
+Leon
+
+
+
+
+Then I get a tp
+
+
+
+On Tue, Apr 12, 2011 at 5:37 AM, Dan Doel <dan.doel at gmail.com> wrote:
+> On Monday 11 April 2011 8:31:54 PM Leon Smith wrote:
+>> I have a type constructor (Iterator i o m a) of kind (* -> * -> (* ->
+>> *) -> *), ?which is a monad transformer, ?and I'd like to use the type
+>> system to express the fact that some computations must be "pure", ?by
+>> writing the impredicative type (Iterator i o (forall m. m) a).
+>> However I've run into a bit of difficulty expressing this, ?due to the
+>> kind of m. ? I've attached a minimal-ish example. ? Is there a way to
+>> express this in GHC?
+>
+> I think the simplest way is 'Iterator i o Id a'. Then there's a function:
+>
+> ?embed :: Iterator i o Id a -> Iterator i o m a
+>
+> with the obvious implementation. This means your NeedAction case is no longer
+> undefined, too. You can either peel off NeedActions (since they're just
+> delays) or leave them in place.
+>
+> However, another option is probably:
+>
+> ? ?[i] -> (forall m. Iterator i o m a) -> (forall m. Iterator i o m a)
+>
+> which will still have the 'this is impossible' case. You know that the
+> incoming iterator can't take advantage of what m is, though, so it will be
+> impossible.
+>
+> -- Dan
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

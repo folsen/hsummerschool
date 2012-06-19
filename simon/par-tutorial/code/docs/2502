@@ -1,0 +1,29 @@
+From artyom.kazak at gmail.com  Fri Dec 30 21:58:30 2011
+From: artyom.kazak at gmail.com (Artyom Kazak)
+Date: Fri, 30 Dec 2011 22:58:30 +0200
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <20111230183646.77233F3944@mail.avvanta.com>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <jdh9h6$gba$1@dough.gmane.org>
+	<4EFC3B4E.9020304@unicaen.fr> <4EFCAC61.6000201@blueyonder.co.uk>
+	<jdk4g7$ckl$1@dough.gmane.org> <4EFDFA69.3000502@blueyonder.co.uk>
+	<20111230183646.77233F3944@mail.avvanta.com>
+Message-ID: <op.v7blvsedshvy2l@artyom-nbook>
+
+Donn Cave <donn at avvanta.com> ?????(?) ? ????? ?????? Fri, 30 Dec 2011  
+20:36:46 +0200:
+
+> That's why we use terms in a sense that apply meaningfully to computer
+> programming languages in general and Haskell in particular.  To do
+> otherwise - for example to insist on a definition of "pure" that could
+> not even in principle apply to any useful programming language, or a
+> definition of "side effect" that would have to apply every time a
+> program does anything - seems to me like an inane waste of time, to
+> put it mildly.
+
+When one questions accepted definitions or beliefs, it is the sign of
+their vagueness. To be honest, the definitions of ?side effect? and
+?purity? are vague indeed. I hope that eventually (probably in this
+very discussion) they will be refined.
+
+

@@ -1,0 +1,32 @@
+From christiaan.baaij at gmail.com  Tue Aug 30 09:14:17 2011
+From: christiaan.baaij at gmail.com (Christiaan Baaij)
+Date: Tue, 30 Aug 2011 09:14:17 +0200
+Subject: [Haskell-cafe] GHC API question
+In-Reply-To: <CAOJG3uDOYsiuHhU_8UvtVY0fcQWTPsFdpf+OnQLkwJ_sTa7ppQ@mail.gmail.com>
+References: <1314507463.5744.10.camel@godel> <1314545902.5744.14.camel@godel>
+	<CAOJG3uBDc+QhdaqS2RvDEeNd3uJx7R=H5fk6DB_PD_C16e+edw@mail.gmail.com>
+	<1314550678.5744.22.camel@godel>
+	<CAOJG3uDOYsiuHhU_8UvtVY0fcQWTPsFdpf+OnQLkwJ_sTa7ppQ@mail.gmail.com>
+Message-ID: <F649A5DF-947F-44A6-BC63-C3ABC93E0F68@gmail.com>
+
+Hi,
+
+> This is what I've was referring to in my previous mail. Even though
+> you're compiling to machine code, you are using the in-memory linker
+> (i.e., the GHCi linker).  It seems like that this is a fundamental
+> limitation of the internal linker. You may be using it in a way that
+> doesn't trigger the sanity check and end up causing a panic.
+
+I had similar problems when trying to profile an executable that was 
+using certain parts of the GHC API [1]. If you are using parts of
+the GHC API that are related to the GHCi profiling API bug [2],
+then you will get errors/segfaults. AFAIK, a better error message
+was never implemented for GHC API users, only for building GHCi in
+profiling mode.
+
+-- Christiaan Baaij
+
+[1] http://hackage.haskell.org/trac/ghc/ticket/3285
+[2] http://hackage.haskell.org/trac/ghc/ticket/2197
+
+

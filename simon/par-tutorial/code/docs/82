@@ -1,0 +1,53 @@
+From ryani.spam at gmail.com  Sun Apr  3 22:14:28 2011
+From: ryani.spam at gmail.com (Ryan Ingram)
+Date: Sun, 3 Apr 2011 13:14:28 -0700
+Subject: [Haskell-cafe] fundeps => type family
+In-Reply-To: <BANLkTikku7ZaKtOJZHh6Fkn+Y=0jTn8aDw@mail.gmail.com>
+References: <BANLkTikku7ZaKtOJZHh6Fkn+Y=0jTn8aDw@mail.gmail.com>
+Message-ID: <AANLkTinf80YG9B+cOxF21GYbRhvB9PtPQ5mH0q=1RSQM@mail.gmail.com>
+
+On Sun, Apr 3, 2011 at 1:00 PM, Tad Doxsee <tad.doxsee at gmail.com> wrote:
+
+>   "Equality constraints ... enable a simple translation of programs
+>    using functional dependencies into programs using family
+>    synonyms instead.
+>
+> So I tried:
+>
+> class (T s ~ a) => ShapeC a s where
+>  type T s :: *
+>  draw :: s -> String
+>  copyTo :: s -> T s -> T s -> s
+>
+> but got a compile error:
+>
+>  Alas, GHC 7.0 still cannot handle equality superclasses: T s ~ a
+>
+> So my question is, how does one convert the above code to use type
+> families instead of functional dependencies?  Is one technique
+> preferable over another?
+>
+
+Sadly the documentation assumes the feature that you show is missing.  That
+said, you don't need that feature for the simple FD you have.
+
+Just do
+
+class ShapeC s where
+   type T s :: *
+   draw :: s -> String
+   copyTo :: s -> T s -> T s -> s
+
+
+This code should work:
+
+data ShapeD a = forall s. (ShapeC s, a ~ T s) => MkShapeD s
+
+instance ShapeC (ShapeD a) where
+    type T (ShapeD a) = a
+    draw (MkShapeD s) = draw s
+    copyTo (MkShapeD s) x y = MkShapeD (copyTo s x y)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110403/8c26e66a/attachment.htm>
+

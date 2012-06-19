@@ -1,0 +1,47 @@
+From aslatter at gmail.com  Tue Apr 12 23:08:01 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Tue, 12 Apr 2011 16:08:01 -0500
+Subject: [Haskell-cafe] syntactic sugar for heterogeneous lists
+In-Reply-To: <BANLkTin9Uj95e-vagiLCeZovp6gbvqfQtw@mail.gmail.com>
+References: <BANLkTin9Uj95e-vagiLCeZovp6gbvqfQtw@mail.gmail.com>
+Message-ID: <BANLkTintGTYGPECbsSG4RzO_QNzdzcb6SQ@mail.gmail.com>
+
+On Tue, Apr 12, 2011 at 12:57 PM, Alberto G. Corona <agocorona at gmail.com> wrote:
+> Hi Cafe:
+> http://hackage.haskell.org/trac/ghc/ticket/1245
+>
+> I also want some kind of syntactic sugar for H. Lists.
+> The absence of syntactic sugar makes heterogeneous list to look scary.
+> People in haskell is accostumed to syntactic sugaring, so people think of
+> not sugared expressions as second class.
+> I? don't know the details, but it seems that tuples are in the language to
+> cover the heterogeneous flexibility thing that homogeneous lists may not
+> provide, but they introduce its own inflexibilities; These repeating
+> instances for two, three, four and so on tuples makes them artificial and
+> repetitive. In its comparison, a complex but unique H. List instance look
+> elegant. specially if it is sugarized.
+> An alternative to sugarize H.Lists preserving tuples could be to use {} to
+> sugarize H. lists as
+> ?? {x,y,z}
+> and desugarize it into:
+> x :*: y :*: z :*: {}
+> Just like [] means empty list, {} would mean HNil, the empty heterogeneous
+> list.
+>
+> But this alternative , if implemented, would soon render tuples ?obsolete.
+> These (,,) (,,,) constructors may create marginally faster and compact
+> structures, but they are much less manageable.
+>
+
+You could use quasi-quotes as an way to do this while you explore
+building it in to a compiler:
+
+> [hlist|5, "hello", True]
+
+You should be able to steal most of the implementation from
+haskell-src-exts-qq. It would work for expressions and patterns. You
+could even make a type quasi-quoter if you get ambitious.
+
+Antoine
+
+

@@ -1,0 +1,21 @@
+From ok at cs.otago.ac.nz  Tue Apr  5 04:35:39 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Tue, 5 Apr 2011 14:35:39 +1200
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <201104041224.32058.daniel.is.fischer@googlemail.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+	<BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+	<201104041224.32058.daniel.is.fischer@googlemail.com>
+Message-ID: <F229D9AE-0D76-4703-B637-62DD0DA79E0C@cs.otago.ac.nz>
+
+
+On 4/04/2011, at 10:24 PM, Daniel Fischer wrote:
+> Colin spoke of *leading* characters, for .hs files, that drastically 
+> reduces the possibilities - not for .lhs, though.
+
+A .hs file can, amongst other things, begin with any "small" letter.
+
+
+
+

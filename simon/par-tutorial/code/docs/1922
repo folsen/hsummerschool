@@ -1,0 +1,47 @@
+From ivan.miljenovic at gmail.com  Wed Dec 14 12:28:35 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Wed, 14 Dec 2011 22:28:35 +1100
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <397029A6-EB85-4714-A93C-9489BB466875@gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<CAECnf4ApS=L-YmMLUTCpB7b+kqv3Dps15irucqrngybxau_iAQ@mail.gmail.com>
+	<CACw0niKAp9HWV3qxBm6bN5Z2Z9yUVeTw9H9S9DERH9ofrWaXKQ@mail.gmail.com>
+	<84E2499A-1794-4A54-9CA8-446FA3571E13@gmail.com>
+	<CA+u6gbzmc6hk-Cr-pkNOok0SzOBm+sOK+kycSkxfRJRUCW4FoA@mail.gmail.com>
+	<397029A6-EB85-4714-A93C-9489BB466875@gmail.com>
+Message-ID: <CA+u6gbz5XOtq+Yo0iCPszC5gc1hf33O5xqNdpy-2aTjBQEOs6Q@mail.gmail.com>
+
+On 14 December 2011 20:21, Gregory Crosswhite <gcrosswhite at gmail.com> wrote:
+>
+> On Dec 14, 2011, at 4:40 PM, Ivan Lazar Miljenovic wrote:
+>
+> [...] Apart from some
+>
+> basic combinators in Control.Monad or the definitions of monad
+> transformers, how much of what you write in do-blocks is applicable to
+> some generic Monad instance as opposed to a specific Monad?
+>
+>
+> Well, if my *only* constraint on a type is that it be an instance of Monad,
+> then *all* of the code written in do-blocks will be applicable to a generic
+> Monad instance. ?That's the whole point. ?:-)
+>
+> Furthermore, you make it sound like this generic case scenario is incredibly
+> rare, but in fact it is very common: ?it occurs whenever someone writes a
+> monadic transformer, which happens all the time. ?Imagine what writing
+> monadic transformers would be like if you couldn't always trust that, say,
+> (>>=) was a well-defined operation?
+
+What I was trying to reference was times when I use the list monad as
+a pseudo-prolog, or the Maybe monad as a "stop when failed" case,
+etc.: trying to use one for the other doesn't always work.
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

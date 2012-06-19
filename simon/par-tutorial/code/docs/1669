@@ -1,0 +1,75 @@
+From daniel.is.fischer at googlemail.com  Mon Dec  5 16:05:21 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Mon, 5 Dec 2011 16:05:21 +0100
+Subject: [Haskell-cafe] List x ByteString x Lazy Bytestring
+In-Reply-To: <1323090896.3764.140661007583849@webmail.messagingengine.com>
+References: <1323090896.3764.140661007583849@webmail.messagingengine.com>
+Message-ID: <201112051605.21133.daniel.is.fischer@googlemail.com>
+
+On Monday 05 December 2011, 14:14:56, John Sneer wrote:
+> I've used Haskell and GHC to solve particular real life application. 4
+>   tools were developed and their function is almost the same - they
+>   modify textual input according to patterns found in the text. Thus, it
+
+Hmm, modification can be a problem for ByteStrings, since it entails 
+copying. That could be worse for strict BytStrings than lazy, if in the 
+lazy ByteString you can reuse many chunks.
+
+>   is something like a compiler, the result is also a text and it is not
+>   parsed to tokens as patterns appear on a different level.
+> 
+>   The tools differ in tasks and number of modifications performed,
+>   otherwise, in principal, they are very much similar.
+> 
+>   I used lists (Prelude, Data.List) to develop the tools. After
+>   successfully completing the development, I've started to optimize the
+>   code to make the tools faster. After modification of some algorithms
+>   (which dropped the processing time notably), I started to change data
+>   structures. I swapped lists with lazy bytestrings. Nevertheless, what
+>   an unpleasant surprise, the processing speed dropped down,
+>   significantly / more then 30% time needed). 
+
+Two main possibilities:
+1. your algorithm isn't suited for ByteStrings
+2. you're doing it wrong
+
+The above indicates 1., but without a more detailed description and/or 
+code, it's impossible to tell.
+
+> 
+>   So my questions follow:
+> - What kind of application is lazy bytestring suitable for?
+
+Anything that involves examining large sequences of bytes (or ASCII 
+[latin1/other single-byte encoding] text) basically sequentially (it's not 
+good if you have to jump forwards and backwards a lot and far).
+Also some types of modification of such data.
+
+> - Would it be worth using strict bytestring even if input files may be
+> large? (They would fit in memory, but may consume whole)
+
+Probably not, see above. But see above.
+
+> - If bytestring is not suitable for text manipulation, is there
+> something faster than lists?
+
+text has already been mentioned, but again, there are types of manipulation 
+it's not well-suited for and where a linked list may be superior.
+
+> - It would be nice to have native sort for lazy bytestring - would it be
+> slower than  pack $ Data.List.sort $ unpack ?
+
+The natural sort for ByteStrings would be a counting sort,
+O(alphabet size + length), so for long ByteStrings, it should be 
+significantly faster than pack . sort . unpack, but for short ones, it 
+would be significantly slower.
+
+> - If bytestring is suitable for text manipulation could we have some
+> hGetTextualContents which translates Windows EOL (CR+LF) to LF?
+
+Doing such a transformation would be kind of against the purpose of 
+ByteStrings, I think.  Isn't the point of ByteStrings to get the raw bytes 
+as efficiently as possible?
+
+
+

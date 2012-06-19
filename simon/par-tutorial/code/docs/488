@@ -1,0 +1,137 @@
+From gtener at gmail.com  Tue Apr 19 16:20:01 2011
+From: gtener at gmail.com (=?UTF-8?Q?Krzysztof_Skrz=C4=99tnicki?=)
+Date: Tue, 19 Apr 2011 16:20:01 +0200
+Subject: [Haskell-cafe] RFC: Possible improvements to System.Random and
+	Control.Monad.Random API
+Message-ID: <BANLkTimcF5YuCq9tffqkq0z2DuCjPzw=cA@mail.gmail.com>
+
+Today I answered a question on stackoverflow.com about behaviour of random
+data generation
+[1]<http://stackoverflow.com/questions/5714873/weird-performance-with-evalrandio/5715742#5715742>.
+The code in question was as follows:
+
+import Control.Monad.Random
+
+
+inf :: (RandomGen g, Random a) => Rand g [a]
+inf = sequence $ repeat $ getRandom
+
+many :: (RandomGen g, Random a) => Int -> Rand g [a]
+many n = sequence $ replicate n $ getRandom
+
+main = do
+  m <- evalRandIO $ many 1000000 :: IO [Bool]
+  i <- evalRandIO $ inf :: IO [Bool]
+  putStrLn $ show $ take 5 m
+  putStrLn $ show $ take 5 i
+
+
+It triggered stack overflow if the stack wasn't set high enough. This was
+because to calculate i one has to first calculate the seed that results from
+evaluating many 1000000 :: IO [Bool].
+
+Even worse, if we swap the order of execution like this:
+
+main = do
+
+  i <- evalRandIO $ inf :: IO [Bool]  m <- evalRandIO $ many 1000000
+:: IO [Bool]  putStrLn $ show $ take 5 m
+  putStrLn $ show $ take 5 i
+
+ We will get space leak and our code will never finish nor provide single
+bit of output.
+
+One possible solution is to make cell holding std gen strict. This would
+make behaviour more clear to the unsuspecting user. I think it might have
+other uses, but unfortunately this would also break some code.
+
+So I think another solution might be applicable here. In my response I
+provided solution based on the fact that StdGen is splittable. The essence
+of the solution is to have each call to evalRandIO run on different seed.
+
+main = do
+
+  newGen' <- newStdGen
+
+  m <- evalRandIO $ many 1000000 :: IO [Bool]
+
+  setStdGen newGen'
+  i <- evalRandIO $ inf :: IO [Bool]
+
+  putStrLn $ show $ take 5 m
+
+  putStrLn $ show $ take 5 i
+
+This code works as expected, i.e. very runs fast.
+
+It dawns on me that this solution might be useful as a general pattern.
+There are several ways to do that. One might define additional functions for
+random values generation. For example for Control.Monad.Random:
+
+randomSplitIO :: (Random a) => IO a
+
+randomSplitIO = do
+
+   newGen <- newStdGen
+
+   val <- randomIO
+
+   setStdGen newGen
+   return val
+
+
+But this is slightly unfortunate, as it grows the API considerably. I
+estimate that overall 5-10 new functions will be needed (both internal and
+external, that is).
+
+The best idea I have now is to add this function to System.Random:
+
+withSplitGen :: IO a -> IO a
+
+withSplitGen act = do
+
+   newGen <- newStdGen
+
+   val <- act
+
+   setStdGen newGen
+   return val
+
+
+Additional function will be needed for Control.Monad.Random, but I don't
+know how to write it. getSplit
+[2]<http://hackage.haskell.org/packages/archive/MonadRandom/0.1.6/doc/html/Control-Monad-Random-Class.html#v:getSplit>will
+likely be involved in such function.
+
+The original program becomes this, and works as expected.
+
+main = do
+
+  i <- withSplitGen $ evalRandIO $ inf :: IO [Bool]
+
+  m <- withSplitGen $ evalRandIO $ many 1000000 :: IO [Bool]
+
+  putStrLn $ show $ take 5 i
+
+  putStrLn $ show $ take 5 m
+
+
+As a bonus this function could draw attention to the problem that otherwise
+might be overlooked. People would get better understanding of how StdGen
+works just by reading documentation of this function.
+
+Please comment on this idea. Perhaps there are some problems I didn't
+anticipate or some naming could be improved.
+
+
+Best regards,
+Krzysztof Skrz?tnicki
+
+[1]
+http://stackoverflow.com/questions/5714873/weird-performance-with-evalrandio/5715742#5715742
+[2]
+http://hackage.haskell.org/packages/archive/MonadRandom/0.1.6/doc/html/Control-Monad-Random-Class.html#v:getSplit
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110419/c45bcbef/attachment-0001.htm>
+

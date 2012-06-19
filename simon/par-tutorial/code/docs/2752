@@ -1,0 +1,61 @@
+From ozgurakgun at gmail.com  Sat Feb  5 21:05:22 2011
+From: ozgurakgun at gmail.com (Ozgur Akgun)
+Date: Sat, 5 Feb 2011 20:05:22 +0000
+Subject: [Haskell-cafe] combined parsing & pretty-printing
+In-Reply-To: <4D4DA3BC.3000505@rendel.net>
+References: <AANLkTi=ik=Ft2pfwBxhG0BaHvskBT-gf7K1ZX+2UAH_T@mail.gmail.com>
+	<20110126164223.GA11657@seas.upenn.edu>
+	<4D4069E8.1060307@informatik.uni-marburg.de>
+	<AANLkTikxkcbystegS86=xqiyUZJp_-=8cOnQa-wPm=Ga@mail.gmail.com>
+	<4D4DA3BC.3000505@rendel.net>
+Message-ID: <AANLkTikSoj6KeR7WhKcmcR4TXNCwFJjpgu-AdtW0dgWP@mail.gmail.com>
+
+Great! That was pretty fast :)
+
+Are you going to update invertible-syntax to use partial-isomorphisms-0.2?
+
+2011/2/5 Tillmann Rendel <tillmann at rendel.net>
+
+> Hi Ozgur,
+>
+> Ozgur Akgun wrote:
+>
+>> I've already implemented a toy example and it worked great. Now I am
+>> trying
+>> to use your library in a more serious piece of code, and I've realised
+>> that
+>> defineIsomorphisms doesn't support record constructors. To be precise, you
+>> handle the case for NormalC in the code, however you do not handle RecC. I
+>> don't think this will be a difficult thing to add. Is there any reason for
+>> you not to support RecC?
+>>
+>
+> No reason at all. I just generalized the Template Haskell macros. They now
+> support:
+>
+>  * newtypes
+>  * infix constructors
+>  * record constructors
+>
+> Infix constructors are only support by constructorIso, though, not by
+> defineIsomorphisms, because I can't think of a good automatic naming scheme.
+> Suggestions welcome.
+>
+> The code is on hackage.
+>
+> There are still some constructors which are not supported: constructors of
+> GADTs as well as data or newtype instances, and constructors with
+> existentials. I would need to think about typing issues before supporting
+> these.
+>
+>  Tillmann
+>
+
+
+
+-- 
+Ozgur Akgun
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110205/3289f82e/attachment.htm>
+

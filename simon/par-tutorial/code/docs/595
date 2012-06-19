@@ -1,0 +1,36 @@
+From leimy2k at gmail.com  Fri Apr 22 04:59:03 2011
+From: leimy2k at gmail.com (David Leimbach)
+Date: Thu, 21 Apr 2011 19:59:03 -0700
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <ioqpd7$qjo$1@dough.gmane.org>
+References: <4DB093A6.8000303@btinternet.com>
+	<2413044.1630.1303424178223.JavaMail.geo-discussion-forums@prcm34>
+	<BANLkTingNDExfXWS43FmdyMhrKjj+1S6BQ@mail.gmail.com>
+	<ioqpd7$qjo$1@dough.gmane.org>
+Message-ID: <C39F1ED1-DCA8-48C9-9952-F722B3DA413F@gmail.com>
+
+Codehole doesn't sound like a good name.  Don't lose stuff in codehole!
+
+Sent from my iPhone
+
+On Apr 21, 2011, at 7:33 PM, Simon Michael <simon at joyful.com> wrote:
+
+> +1 to what you said.
+> 
+> On 4/21/11 4:16 PM, John Meacham wrote:
+>> Incidentally, I wrote a github like site based around darcs a few
+>> years ago at codehole.org. It is just used internally by me for
+>> certain projects. but if people were interested, I could resume work
+>> on it and make it public.
+> 
+> John, please do - darcs folks are longing for a really good hub. You're probably aware of patch-tag and darcsden - perhaps you can exceed or reuse those ? Both are good but have maintainers now focussed elsewhere. Running a robust scalable public darcs hub is difficult. I think darcs developers are keen to help anyone working on that. FYI codehole seems access-restricted.
+> 
+> -Simon
+> 
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

@@ -1,0 +1,44 @@
+From stephen.tetley at gmail.com  Tue Dec 27 15:09:09 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Tue, 27 Dec 2011 14:09:09 +0000
+Subject: [Haskell-cafe] MIDI-controlled application
+In-Reply-To: <CAE0Z8DEZwSXUn65q6nEhnHccZuQojg1softo3esh=Hc06yuY=g@mail.gmail.com>
+References: <CAE0Z8DEZwSXUn65q6nEhnHccZuQojg1softo3esh=Hc06yuY=g@mail.gmail.com>
+Message-ID: <CAB2TPRBRpLECKtXB28MVjiRaz42+dP-TA930nQYkrf9vyqEDRA@mail.gmail.com>
+
+Hi Tim
+
+Events in FRP / Yampa are typically key presses / mouse movement, so a
+MIDI controller generating Note-on / Note-off events would be a direct
+analogue to key presses.
+
+More problematic is that FRP models hybrid (continuous and discrete)
+systems. For me at least, MIDI seems essentially discrete - a stream
+of control events. In MIDI files control events are twinned with a
+time stamp so they can be played. Presumably events are instantaneous
+in real-time interactive MIDI - not something I've looked at.
+
+Working with an FRP system like Yampa might add a lot of complexity,
+which admittedly you should be able to ignore - but initially it might
+be difficult to identify what parts are needed for a "mostly" discrete
+system like MIDI. (If you are time-stamping MIDI events yourself you
+will presumably need to sample a running clock which seems like a
+continuous behaviour...)
+
+Unfortunately I can't think of any systems in Haskell that are "more
+discrete than continuous" so you might have to choose a FRP system
+anyway.
+
+
+Incidentally, I've been working on a MIDI "animation language" for the
+last couple of days based on the animation language in Paul Hudak's
+book. I've wanted continuous behaviours to model modulating volumes
+(crescendos, decrescendos) and panning, but I've found the work tough
+going for modelling the note lists where I want the system discrete in
+both input (specification) and output.
+
+Best wishes
+
+Stephen
+
+

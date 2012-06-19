@@ -1,0 +1,29 @@
+From gracjanpolak at gmail.com  Sun Apr 24 20:13:36 2011
+From: gracjanpolak at gmail.com (Gracjan Polak)
+Date: Sun, 24 Apr 2011 18:13:36 +0000 (UTC)
+Subject: [Haskell-cafe] How to keep cabal and ghci package versions in sync?
+Message-ID: <loom.20110424T200650-84@post.gmane.org>
+
+
+Hi all,
+
+I have a project with a .cabal file listing package dependencies using
+the usual version constraints ==X.Y.* <Z.W or >=K.J syntax.
+Standard route cabal configure; cabal build works correctly as it is able
+to select working set of package versions.
+
+I have also a .ghci file. When I run GHCi it uses all latest installed packages
+in the system. This prevents the project from loading.
+
+I tried to use 'cabal-dev ghci', but this still selects latest global packages.
+
+So, how to I load up ghci with the same package versions as selected by cabal?
+
+Thanks!
+
+-- 
+Gracjan
+
+
+
+

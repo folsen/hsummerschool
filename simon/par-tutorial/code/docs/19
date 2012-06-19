@@ -1,0 +1,23 @@
+From john at repetae.net  Fri Apr  1 11:47:06 2011
+From: john at repetae.net (John Meacham)
+Date: Fri, 1 Apr 2011 02:47:06 -0700
+Subject: [Haskell-cafe] Strictness is observable
+In-Reply-To: <20110401092324.93FB2172BC@Adric.ern.nps.edu>
+References: <20110401092324.93FB2172BC@Adric.ern.nps.edu>
+Message-ID: <AANLkTi=a1WD3L80c54Yjy+16GWWk+xV=8cDPc-f+nVgy@mail.gmail.com>
+
+On Fri, Apr 1, 2011 at 2:23 AM,  <oleg at okmij.org> wrote:
+>
+> John Meacham wrote:
+>> Error is not catchable in haskell 98. Only things thrown by raiseIO are.
+>
+> I see; so GHC, absent any LANGUAGE pragma, should have arranged for
+> `error' to generate a non-catchable exception.
+
+Actually, it was because you imported Control.Exception. the catch/handle in
+Control.Exception has different behavior than the catch in Prelude. one catches
+imprecise exceptions, the other doesn't.
+
+        John
+
+

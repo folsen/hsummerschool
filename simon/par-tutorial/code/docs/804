@@ -1,0 +1,32 @@
+From stephen.tetley at gmail.com  Wed Apr 27 21:52:22 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Wed, 27 Apr 2011 20:52:22 +0100
+Subject: [Haskell-cafe] Parsing binary 'hierachical' objects for lazy
+	developers
+In-Reply-To: <20110427181603.GA16627@X52D.localdomain>
+References: <20110427181603.GA16627@X52D.localdomain>
+Message-ID: <BANLkTinSRCigfwde_OUpdkb5Sepb=TQ+Cg@mail.gmail.com>
+
+John Meacham's DrIFT tool used to get extended faster than GHC for
+things that "should" be automatic. I'm not sure of its current status,
+though:
+
+
+http://repetae.net/computer/haskell/DrIFT/
+
+
+For your second problem, something like this:
+
+getAB :: Get (Either A B)
+getAB = do
+  len <- getWord16be
+  tag <- getWord16be
+  if tag == 0x00 then do { a <- getA len; return (Left a) }
+	         else do { a <- getB len; return (Right b) }
+
+-- length already consumed so sent as an argument...
+
+getA :: Word16 -> Get A
+getB :: Word16 -> Get B
+
+

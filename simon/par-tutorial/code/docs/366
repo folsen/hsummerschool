@@ -1,0 +1,20 @@
+From luke.randall at gmail.com  Wed Apr 13 13:34:43 2011
+From: luke.randall at gmail.com (Luke Randall)
+Date: Wed, 13 Apr 2011 13:34:43 +0200
+Subject: [Haskell-cafe] Syntastic support for cabal
+Message-ID: <42090BD8CB3B40659D2E629F0EAC82C4@gmail.com>
+
+Hi all
+
+I'm using Haskell mode for Vim, as well as syntastic. I've found syntastic particularly useful as I'm quite new to Haskell and sometimes get the types of my functions wrong.
+
+When working on Cabal packages however, syntastic marks import statements which import modules local to the cabal package as being incorrect because the module cannot be found. Has anyone solved this, or do you have pointers on how I can?
+
+Thanks
+-- 
+Luke Randall
+Sent with Sparrow
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110413/97e504f0/attachment.htm>
+

@@ -1,0 +1,28 @@
+From batterseapower at hotmail.com  Fri Aug 26 16:41:18 2011
+From: batterseapower at hotmail.com (Max Bolingbroke)
+Date: Fri, 26 Aug 2011 15:41:18 +0100
+Subject: [Haskell-cafe] Make shared library - questions
+In-Reply-To: <CAHbuS7++=cJvNq4x8PtzVsyXtOp0tL-A7HgkMW7uB6Wu4R763A@mail.gmail.com>
+References: <CAHbuS7++=cJvNq4x8PtzVsyXtOp0tL-A7HgkMW7uB6Wu4R763A@mail.gmail.com>
+Message-ID: <CAGXzfB7eS4pv0M=_BVO-nHMQRFX-cwXHcg8ctBQWdpNJst7w2w@mail.gmail.com>
+
+On 26 August 2011 13:52, Sergiy Nazarenko <nazarenko.sergiy at gmail.com> wrote:
+> /usr/local/lib/ghc-6.12.3/base-4.2.0.2/libHSbase-4.2.0.2.a(Conc__270.o):
+> relocation R_X86_64_32 against
+> `base_GHCziConc_ensureIOManagerIsRunning1_closure' can not be used when
+> making a shared object; recompile with -fPIC
+
+So it looks like you will have to recompile the base libraries with
+-fPIC (or try this on Windows, where PIC is unnecessary).
+
+The way I would do this personally is to recompile all of GHC, and in
+mk/build.mk set the GhcLibHcOpts to -fPIC. There may be a way to just
+recompile the base library (and dependents) using Cabal, but I'm less
+sure about that path.
+
+Note that using -fPIC will probably impose a performance penalty on
+the library code.
+
+Max
+
+

@@ -1,0 +1,51 @@
+From michael at snoyman.com  Thu Apr  7 09:59:00 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Thu, 7 Apr 2011 10:59:00 +0300
+Subject: [Haskell-cafe] ANNOUNCE: DocTest-0.2.0
+In-Reply-To: <20110406205305.GA31747@x200>
+References: <20110406164647.GA7363@x200>
+	<BANLkTi=mTPfLkU-++DY5kPKcgb_83Vf2HA@mail.gmail.com>
+	<20110406205305.GA31747@x200>
+Message-ID: <BANLkTi=5rhVDfLY+anNaF_50Q8C+omcUzg@mail.gmail.com>
+
+On Wed, Apr 6, 2011 at 11:53 PM, Simon Hengel <simon.hengel at wiktory.org>wrote:
+
+> Hello Michael,
+>
+> > I would like to integrate DocTest into my normal test suite procedures.
+> Do you
+> > have a recommended approach for this? I think I have projects using all
+> of
+> > test-framework[1], HTF[2] and hspect[3], so I'm not picky here.
+>
+> Currently you are pretty much on your own here.  A shell script that
+> runs both, doctest and unit test, is what I currently use.
+>
+> In principle it should be possible to provide an API function that maps
+> a list of flags and source files to tests, like:
+>
+>    getDocTests :: [Flag] -> [FilePath] -> IO [Test]
+>
+> But with this you still have to figure out the flags and source files.
+>
+> A different approach would be to provide Cabal with a `doctest' target
+> (similar to the `haddock' target), that runs the DocTests.  Cabal
+> already knows the necessary information to do so.
+>
+> Sadly, I have no time to work on any of these for at least a month.
+> Nevertheless, I'd be interested what you think about it.
+>
+> Cheers,
+> Simon
+>
+
+I like the idea of a getDocTests function. In theory, it could take a cabal
+file as an argument, and use the Cabal library to get a list of all modules
+to be checked. It would also be convenient if it automatically passed in GHC
+options correlating to each LANGUAGE pragma found on a module.
+
+Michael
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110407/f4197af3/attachment.htm>
+

@@ -1,0 +1,57 @@
+From benl at ouroborus.net  Tue Apr 12 14:07:52 2011
+From: benl at ouroborus.net (Ben Lippmeier)
+Date: Tue, 12 Apr 2011 22:07:52 +1000
+Subject: [Haskell-cafe] Using DPH
+In-Reply-To: <BANLkTinHgYaHEVbO0geFP7wTUKQS4TqBiQ@mail.gmail.com>
+References: <BANLkTinHgYaHEVbO0geFP7wTUKQS4TqBiQ@mail.gmail.com>
+Message-ID: <C2EF4571-07CB-40B7-88DA-F99A1540EC2C@ouroborus.net>
+
+
+On 12/04/2011, at 7:32 PM, Wilfried Kirschenmann wrote:
+
+> Hi,
+> 
+> In order to do a performance comparison beetween different approaches for our application, I make different implementation of a simple example (computing the norm of a vector expression.
+> I rely on Repa to do this. 
+> However, when I tried to build the parallel version (-threaded -fvectorise -rtsopts), I got an error specifying that dph-par was not available. Indeed, It wasn't.
+
+Repa and DPH are different projects. The compilation mechanism and approach to parallelism is quite different between them. You only need -fvectorise to turn on the vectoriser for DPH code. You don't need (or want) -fvectorise for Repa programs. DPH is also still at the "research prototype" stage, and not yet at a point where you'd try to use it for anything real.
+
+With your example code, you also need to use R.force at appropriate points, and add matches against @(Array _ [Region RangeAll (GenManifest _)]). The reasons for both of these are explained in [1]. Hopefully the second will be fixed by a subsequent GHC release. You must also add {-# INLINE fun #-} pragmas to polymorphic functions or you will pay the price of dictionary passing for the type class overloading.
+
+
+With the attached code:
+
+desire:tmp benl$ ghc --version
+The Glorious Glasgow Haskell Compilation System, version 7.0.3
+
+desire:tmp benl$ ghc-pkg list |grep repa
+    repa-2.0.0.2
+    repa-algorithms-2.0.0.2
+    repa-bytestring-2.0.0.2
+    repa-io-2.0.0.2
+
+desire:tmp benl$ ghc -rtsopts -threaded -O3 -fllvm -optlo-O3 -fno-liberate-case --make haskell.hs -XBangPatterns -fforce-recomp
+
+desire:tmp benl$ /usr/bin/time ./haskell
+[3.3645823e12]
+725188000000
+        6.62 real         6.39 user         0.22 sys
+
+
+This runs but doesn't scale with an increasing number of threads. I haven't looked at why. If all the work is in R.sum then that might be the problem -- I haven't put much time into optimising reductions, just maps and filters.
+
+Cheers,
+Ben.
+
+[1] http://www.cse.unsw.edu.au/~benl/papers/stencil/stencil-icfp2011-sub.pdf
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: haskell.hs
+Type: application/octet-stream
+Size: 2091 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110412/e6bdf813/attachment.obj>
+

@@ -1,0 +1,31 @@
+From nipkow at in.tum.de  Thu Aug 18 14:29:26 2011
+From: nipkow at in.tum.de (Tobias Nipkow)
+Date: Thu, 18 Aug 2011 14:29:26 +0200
+Subject: [Haskell-cafe] Gaussian elimination
+Message-ID: <4E4D05A6.3000101@in.tum.de>
+
+Hi, I came up with the following extremely compact version of Gaussian
+elimination for matrices represented as functions. I searched the web
+but found nothing resembling it, probably because of its inefficiency.
+Has anybody seen something like it before?
+
+Thanks
+Tobias
+
+gauss :: Int -> (Int -> Int -> Rational) -> Maybe (Int -> Int -> Rational)
+gauss 0 a = Just a
+gauss (n+1) a =
+  case dropWhile (\i -> a i n == 0) [0..n] of
+    [] -> Nothing
+    (k:_) ->
+      let ak' j = a k j / a k n
+          a' i = if i == k then ak' else (\j -> a i j - a i n * ak' j)
+      in gauss n (swap k n a')
+
+swap :: Int -> Int -> (Int -> a) -> (Int -> a)
+swap k n f = g
+  where g x | x == k = f n
+            | x == n = f k
+            | otherwise = f x
+
+

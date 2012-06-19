@@ -1,0 +1,21 @@
+From tonymorris at gmail.com  Wed Apr 27 14:12:49 2011
+From: tonymorris at gmail.com (Tony Morris)
+Date: Wed, 27 Apr 2011 22:12:49 +1000
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <34E1B523-F2C9-4875-98D2-728D5178DC89@gmail.com>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<34E1B523-F2C9-4875-98D2-728D5178DC89@gmail.com>
+Message-ID: <4DB80841.8040304@gmail.com>
+
+On 27/04/11 20:02, Thomas Davie wrote:
+> This completely misses what laziness gives Haskell ? it gives a way of completing a smaller number of computations than it otherwise would have to at run time.  The hope being that this speeds up the calculation of the result after the overhead of laziness is taken into account.
+This is not what laziness gives us. Rather, it gives us terminating
+programs that would otherwise not terminate.
+
+-- 
+Tony Morris
+http://tmorris.net/
+
+
+
+

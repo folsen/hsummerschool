@@ -1,0 +1,31 @@
+From jwlato at gmail.com  Tue Apr 26 16:19:25 2011
+From: jwlato at gmail.com (John Lato)
+Date: Tue, 26 Apr 2011 15:19:25 +0100
+Subject: [Haskell-cafe] Question about the Monad instance for Iteratee
+ (from the enumerator package)
+Message-ID: <BANLkTim9=_0Znfrq-VHAWjiFqT8YnL8n0w@mail.gmail.com>
+
+Joining slightly late...
+
+
+> From: John Millikin <jmillikin at gmail.com>
+>
+> John Lato's "iteratee" package is based on IterateeMCPS.hs[1]. I used
+> IterateeM.hs for "enumerator", because when I benchmarked them the non-CPS
+> version was something like 10% faster on most operations.
+>
+
+Based on tests I did before iteratee-0.4, the fastest implementation was
+Oleg's alternate design which is in the comments of IterateeM.hs.  I don't
+think any current packages use that however, with good reason.
+
+I'd be interested to see the results of a shootout between iteratee and
+enumerator.  I would expect them to be basically equivalent most of the
+time, with maybe two or three operations with a small (but consistent)
+difference one way or the other.
+
+John L.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110426/0cb1660b/attachment.htm>
+

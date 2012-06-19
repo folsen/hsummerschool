@@ -1,0 +1,57 @@
+From mauricio.antunes at gmail.com  Mon Apr  4 21:07:04 2011
+From: mauricio.antunes at gmail.com (mauricio.antunes at gmail.com)
+Date: Mon, 4 Apr 2011 19:07:04 +0000 (UTC)
+Subject: [Haskell-cafe] HDF5 binding (was: why is ghci trying to load
+	hsc file ??)
+References: <20110226171334.5490d00e@windy.deldotd.com>
+	<871v2px23g.fsf@tac.ki.iif.hu>
+	<206B7FA3-5D14-4BC1-A740-4A84A7D16100@deepbondi.net>
+	<inbb8j$dnf$1@dough.gmane.org>
+	<5AA2A7E8-E86C-4634-92E4-17E8F87D7A25@deepbondi.net>
+Message-ID: <ind4so$t8a$1@dough.gmane.org>
+
+>> Bindings to the full hdf5 were supposed to be in the example set for
+>> bindings-DSL. It doesn't use pkg-config, though, and hdf5 developers
+>> didn't like the idea of adding support. [...]
+
+> That seems strange to me - pkg-config is such a useful system, and  
+> "support" for it is incredibly easy to add and practically zero- 
+> maintenance. [...]
+
+I have to start asking for forgiveness. In fact, PETSc
+(http://www.mcs.anl.gov/petsc) developers refused pkg-config, not HDF5. I
+investigated several libraries for numerical and massive data processing,
+and most didn't had pkg-config support.  I started asking about it at
+pkg-scicomp-devel debian list, and then Tollef (maintainer of pkg-config):
+
+http://lists.alioth.debian.org/pipermail/pkg-scicomp-devel/2009-September/004507.html
+
+http://thread.gmane.org/gmane.comp.package-management.pkg-config/345
+
+After learning from them that pkg-config files belong to upstream
+packages, not distribution packages, I asked PETSc guys. Unfortunately,
+their petsc-maint mainling list doesn't seem to have an external
+archive. But Matthew Knepley, from PETSc, said that "we do not use that
+system. It's unreliable, and in my opinion, one of the worst designs
+possible." They (Matthew and Satish Balay) suggested that we "use the
+makefile targets which give the include and library information."
+
+I'm not sure how practical that is with cabal, but I gave up before
+trying harder and decided to focus on packages with pkg-config already
+available. I think 'hmatrix' package on hackage uses a script to check
+for dependencies, but I didn't read enough to check how portable that
+method can be.
+
+> Currently I've got a "template" hdf5.pc file in the source tree which  
+> can be customized and dropped into the appropriate directory.  It's a  
+> lot less manual than it ought to be, but it's at least a lot less ugly  
+> than hard-coding my development machine's include and lib paths.   
+
+Maybe it's worth contacting HDF5 guys about that.
+
+Best,
+Maur?cio
+
+
+
+

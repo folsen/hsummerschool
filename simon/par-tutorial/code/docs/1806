@@ -1,0 +1,26 @@
+From mainland at apeiron.net  Sat Dec 10 14:01:35 2011
+From: mainland at apeiron.net (Geoffrey Mainland)
+Date: Sat, 10 Dec 2011 13:01:35 +0000
+Subject: [Haskell-cafe] Generating Code
+In-Reply-To: <CAB2TPRA3+VKzv_5egN0_9cghj2qZP0CuJ=moUFO3=zBxFSzKkg@mail.gmail.com>
+References: <CAHTd3sihZABoWe7CoKhfFh-QHQ01PftATrTmiZymE5b-D_YS+Q@mail.gmail.com>
+	<CAPeieQEdWhripdkdVo-=2ZXbNdgOL7Xq+idrwzTOiZuL=AMtZQ@mail.gmail.com>
+	<CAHTd3sis-hH=mAuQDfOo-1FMOgOPSTs4eFE4f0wLTfx9nXcS8A@mail.gmail.com>
+	<CAB2TPRA3+VKzv_5egN0_9cghj2qZP0CuJ=moUFO3=zBxFSzKkg@mail.gmail.com>
+Message-ID: <jbvl7f$7v3$2@dough.gmane.org>
+
+On 12/09/2011 21:47, Stephen Tetley wrote:
+> Geoffrey Mainland did significant work generating C with his GHC quasi
+> quote extension. I'm not sure the status or availability of the code
+> but there was a good Haskell Workshop paper describing it.
+
+In case anybody is interested, language-c-quote on hackage is the
+current version of the C quasiquoting library from the workshop paper.
+
+Geoff
+
+> For the specific problem of OpenGL - as the package already exists I'm
+> not sure a generative approach would actually pay its way
+
+
+

@@ -1,0 +1,48 @@
+From es at ertes.de  Wed Aug 17 10:46:07 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Wed, 17 Aug 2011 10:46:07 +0200
+Subject: [Haskell-cafe] why is Random in System?
+References: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+	<A320995A-2DDA-4147-B804-098623C26914@deepbondi.net>
+	<CAKFCL4UtZAKrw-KazZtmCSi6cDZmb1mtm9of4E=0Ugr_9GXXvA@mail.gmail.com>
+Message-ID: <20110817104607.43c9ae37@angst.streitmacht.eu>
+
+Brandon Allbery <allbery.b at gmail.com> wrote:
+
+> > > I've noticed there's a convention to put modules having to deal
+> > > with randomness into System.Random.  I thought System was for OS
+> > > interaction?  Granted getting a random seed usually means going to
+> > > the OS, but isn't the rest of it, like generating random
+> > > sequences, distributions, selecting based on probability,
+> > > shuffling, etc. all non-OS related algorithms?
+> >
+> > System definitely does seem like an odd choice.  In most cases the
+> > only interaction any PRNG, even when accessed via the FFI, has with
+> > the "system" is - as you say - to get an initial seed value for a
+> > global instance.
+>
+> I'd be tempted to guess that the whole reason it's under System is the
+> IO component.
+
+That's not really valid, is it?  After all the new 'time' package is
+also stationed under the Data tree, and it has a similarly large IO
+component.  I have to say, it seems very intuitive to me to look for it
+under Data, even though I'm not sure why.  Probably I'm just used to it.
+Time has a strong connection to the operating system and the hardware,
+so it could just as well go into the System tree.  For
+(non-cryptographic) randomness however we are dealing with numerical
+data, for which the connection to the system is mere convenience, so I
+wouldn't mind finding it under Data at all.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

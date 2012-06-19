@@ -1,0 +1,33 @@
+From allbery.b at gmail.com  Fri Feb  4 01:16:39 2011
+From: allbery.b at gmail.com (Brandon S Allbery KF8NH)
+Date: Thu, 03 Feb 2011 19:16:39 -0500
+Subject: [Haskell-cafe] Problems with iteratees
+In-Reply-To: <4D49FF9B.9090009@freegeek.org>
+References: <4D49FF9B.9090009@freegeek.org>
+Message-ID: <4D4B4567.4010505@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 2/2/11 20:06 , wren ng thornton wrote:
+> When I put this all together, the process is killed with:
+>     control message: Just (Err "endOfInput")
+
+POSIX FIFOs and GHC's nonblocking file descriptors implementation don't play
+well together; you should launch the writer end first and let it block
+waiting for the reader, or you should switch to opening the FIFO r/w and add
+a control message for end-of-stream (the usual way to work with FIFOs).
+
+- -- 
+brandon s. allbery     [linux,solaris,freebsd,perl]    allbery.b at gmail.com
+system administrator  [openafs,heimdal,too many hats]                kf8nh
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk1LRWYACgkQIn7hlCsL25UhiwCePaEpZM0wlKRabmOT0SV7UKbP
+Bc8AnRs+QTl59Cn9JRWUfNE1MBGv0X1S
+=Fvqe
+-----END PGP SIGNATURE-----
+
+

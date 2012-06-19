@@ -1,0 +1,172 @@
+From andressocrates90 at yahoo.com  Thu Feb  3 10:21:03 2011
+From: andressocrates90 at yahoo.com (Houdini)
+Date: Thu, 3 Feb 2011 01:21:03 -0800 (PST)
+Subject: [Haskell-cafe] Haskell procedure
+Message-ID: <1296724863106-3369005.post@n5.nabble.com>
+
+
+One :Thank you Carsten Schultz,Daniel Fischer,Mihai and all the other for
+your help.
+Two:After my last post I wrote some function that should help me in the
+future,but I need some help with the followint as I'm tired and have to fit
+in a schedule.I know it is long so I'll try and explain it as short and
+consice as I can.
+The DPLL procedure has two main stages: a simplification stage and a search
+stage. In the simplification
+stage, functions are applied to the formula to assign truth values to
+certain propositional variables. The
+simplifications are made because if there is a satisfying assignment for the
+simplified formula then it is also
+a satisfying assignment for the original formula. This reduces the need for
+search which can take a long
+time. The search stage is performed when no more simplifications can be
+made. In this stage a literal is
+chosen and is assigned true or false leading to two new branches in the
+search space.
+I wrote some function wich should be helpfull,but I have to fit in a
+schedule and I'm getting tired I need some additional help if possible.
+
+    module Algorithm where
+
+    import System.Random
+    import Data.Maybe
+    import Data.List
+
+    type Atom = String
+    type Literal = (Bool,Atom)
+    type Clause = [Literal]
+    type Formula = [Clause]
+    type Model = [(Atom, Bool)]
+    type Node = (Formula, ([Atom], Model))
+
+    -- This function  takess a Clause and return the set of Atoms of that
+Clause.
+    atomsClause :: Clause -> [Atom]
+   
+
+    -- This function  takes a Formula returns the set of Atoms of a Formula
+    atoms :: Formula -> [Atom]
+   
+
+    -- This function returns True if the given Literal can be found within
+    -- the Clause.
+    isLiteral :: Literal -> Clause -> Bool
+   
+
+    -- this function takes a Model and an Atom and flip the truthvalue of
+    -- the atom in the model
+    flipSymbol :: Model -> Atom -> Model -- is this ok?
+ 
+    Additional functions that I wrote:
+    remove :: (Eq a) )a ->[a] ->[a]
+    -This function removes an item from a list.
+     
+     neg :: Literal->Literal
+    -This function flips a literal (ie. from P to :P and from :P to P).
+    falseClause :: Model -> Clause -> Bool
+    -This function takes a Model and a Clause and returns True
+    if the clause is unsatisfied by the model or False otherwise.
+    falseClauses :: Formula -> Model -> [Clause]
+    -This function takes a Formula and a Model and returns the list of
+clauses of the  formula that are not satisfied.
+     assignModel :: Model -> Formula -> Formula
+     -This function applies the assign function for all the assignments of a
+given model.
+     checkFormula :: Formula -> Maybe Bool This function checks whether a
+formula can be  decided to be satisfiable or unsatisfiable based on the
+effects of the assign function.
+     satisfies :: Model -> Formula -. Bool This function checks whether a
+model satisfies a formula. This is done with the combination of the
+assignModel and checkFormula functions.
+
+
+--Where do I need help:
+           
+           removeTautologies :: Formula->Formula
+This function should output a simplified formula if tautologies
+can be found in one or more clauses in the input
+Notes: If in a clause, a literal and its negation are found, it means that
+the clause will be true, regardless of the value
+finally assigned to that propositional variable. Consider the following
+example:
+(A v B v -A) ^ (B v C v A)
+The first clause contains the literals A and -A. This means that the clause
+will always be true, in which case
+it can be simplify the whole set to simply (B v C v A) (the second clause
+alone)
+
+         pureLiteralDeletion :: Formula->Formula
+This function is suppose to implement a simplification step that assumes as
+true any atom in a formula that appears exclusively in a positive or
+negative form (not both). Consider the formula:
+(P v Q v R) ^ (P v Q v -R) ^ (-Q v R)
+Note that in this formula P is present but -P is not. Using Pure Literal
+Deletion  it can be assumed that the value of P will be True thus
+simplifying the formula to (-Q v R). If the literal were false then the
+literal would simply be deleted from the clauses it appears in. In that case
+any satisfying model for the resulting formula would also be a satisfying
+model for the formula when we assume that the literal is true. Hence this
+simplification is sound in that if there is a solution to the simplified
+formula then there is a solution to the original formula.
+   
+      propagateUnits :: Formula->Formula
+If a clause in a propositional formula contains only one literal, then that
+literal must be true (so that the particular clause can be satisfied). When
+this happens,we can remove the unit clauses (the ones that contain only one
+literal), all the clauses where the literal appears and also, from the
+remaining clauses, we can delete the negation of the literal (because if P
+is true, -P will be false).For example, in the formula (P v Q v R) ^ (-P v Q
+v -R) ^ (P) we have one unit clause (the third clause(P) ). Because this one
+has to be true for the whole formula to be true we assign True to P and try
+to find
+a satisfying assignment for the remaining formula. Finally because -P cannot
+be true (given the assigned value of P) then the second clause is reduced by
+eliminating the symbol -P . This simplification results in the revised
+formula (Q v -R).
+The resulting simplification can create other unit clauses. For example in
+the formula (-P v Q) ^ (P) is simplified to (Q) when the unit clause (P) is
+propagated. This makes (Q) a unit clause which can now also be simplified to
+give a satisfying assignment to the formula. The function should apply unit
+propagation until it can no longer make any further simplifications.
+Note that if both P and -P are unit clauses then the formula is
+unsatisfiable. In this case the function should return a formula with an
+empty clause in it to indicate that the formula could not be satisfied.
+
+        update :: Node -> [Node]
+The update function should take in a Node and return a list of the Nodes
+that result from assigning True to an unassigned atom in one case and False
+in the other (ie. a case
+split). So the list returned should have two nodes as elements. One node
+should contain the formula with an atom assigned True and the model updated
+with this assignment, and the other should contain the formula with the atom
+assigned False and the model updated to show this. The lists of unassigned
+atoms of each node should also be updated accordingly. This function should
+use your implemented assign function to make the assignments. It should also
+use the chooseAtom function provided to select the literal to assign.
+
+    search :: (Node -> [Node]) -> [Node] -> Int -> (Bool, Int)
+The search function should perform a backtracking search. The function takes
+the update function as input and uses it to generate nodes in the search
+space. The search function also takes in a list which has one element, the
+initial node consisting of the formula along with an initial model. It
+should generate nodes using the update function and check nodes using the
+given check function. If a node is unsatisfiable then it should
+abandon that branch of the search. If a node is satisfiable then a
+satisfying assignment has been found and so it should return True. If a node
+is neither satisfiable or unsatisfiable then it should generate new nodes
+from this node. If all possible branches of the search space have been
+tried, i.e. the list of nodes to try has become the empty list, then it
+should return False since all possible assignments have been tried. The
+search function also has an Int argument which should be an integer that
+tracks how many
+calls to the update function have been made. The search function should
+return a pair consisting of the truth value of the formula and the number of
+calls to update made.
+
+Thank you(because ,I'm anticipating your help),and until I get a reply I
+will continue to try an squize my exhausted brain.
+-- 
+View this message in context: http://haskell.1045720.n5.nabble.com/Haskell-procedure-tp3369005p3369005.html
+Sent from the Haskell - Haskell-Cafe mailing list archive at Nabble.com.
+
+

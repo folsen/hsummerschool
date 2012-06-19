@@ -1,0 +1,68 @@
+From aslatter at gmail.com  Wed Apr 20 20:35:49 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Wed, 20 Apr 2011 13:35:49 -0500
+Subject: [Haskell-cafe] Data.Binary.IncrementalGet remake
+In-Reply-To: <BANLkTimwtaSOPxDw8EyKqSe-P=hx4DdNwg@mail.gmail.com>
+References: <BANLkTimwtaSOPxDw8EyKqSe-P=hx4DdNwg@mail.gmail.com>
+Message-ID: <BANLkTikvq23sJUnz=-psmuPD6qCtLRmi4g@mail.gmail.com>
+
+On Wed, Apr 20, 2011 at 1:03 PM, Sergey Mironov <ierton at gmail.com> wrote:
+> Hello cafe.
+>
+> Haskell wiki told me about continuation-based parser
+> Data.Binary.IncrementalGet [1] from binary-strict package. I found the
+> idea very useful and tried to use it. Original library by Lennart
+> Kolmodin raises some questions. The lib's main data structures are:
+>
+
+Lennart Kolmodin has a branch of Binary with incremental get which
+supports lookAhead:
+
+https://github.com/kolmodin/binary/tree/cps
+
+I don't have performance measurements, but if you look-ahead too far
+it obviously isn't good for memory consumption.
+
+Antoine
+
+> data IResult a = IFailed S String
+> ? ? ? ? ? ? ? | IFinished S a
+> ? ? ? ? ? ? ? | IPartial (B.ByteString -> IResult a)
+>
+> newtype Get r a = Get { unGet :: S -> (a -> S -> IResult r) -> IResult r }
+>
+> instance Monad (Get r) where
+> ?return a = Get (\s -> \k -> k a s)
+> ?m >>= k = Get (\s -> \cont -> unGet m s (\a -> \s' -> unGet (k a) s' cont))
+> ?fail err = Get (\s -> const $ IFailed s err)
+>
+> Here, "S" is parser's state. It works well, but currently doesn't
+> support lookAhead. I tried to add such function and gave up to do it
+> having current implementation, but write simpler one instead. Please
+> see IncrementalGet2.hs (link [2] below). Remake is briefly tested, has
+> no ghc-specific optimizations, but allows user to peek data from
+> stream.
+>
+> What bothering me is the fact that I could actually miss idea (or part
+> of idea) of the original. If it is so, please let me know :) For
+> example, what is the point of using separate result type r in original
+> Get r a?
+>
+> [1] - Original IncrementalGet lib.
+> ? ?http://www.haskell.org/haskellwiki/DealingWithBinaryData#Incremental_parsing
+> [2] - Main file of remake
+> ? ?https://github.com/ierton/binary-incremental-get2/blob/a9f9afaa0cbc0435a8acea338a31aafaef53fb6e/src/Data/Binary/IncrementalGet2.hs
+> [3] - whole github project
+> ? ?https://github.com/ierton/binary-incremental-get2
+> --
+> Sergey
+>
+> sorry for weak English
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

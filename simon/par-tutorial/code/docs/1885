@@ -1,0 +1,35 @@
+From ben.kolera at gmail.com  Tue Dec 13 02:01:10 2011
+From: ben.kolera at gmail.com (Ben Kolera)
+Date: Tue, 13 Dec 2011 11:01:10 +1000
+Subject: [Haskell-cafe]  indentation blues
+In-Reply-To: <CAPmqrp8FGSjXaGj5edp4-v6V--eUF1w9R_+sPqE1tKs7hL_jRA@mail.gmail.com>
+References: <CAFrFfuGkeHEMfsitZoyaGWz=RZvuaUc8KKGK57dFdJL-kj_43w@mail.gmail.com>
+	<CAPmqrp8FGSjXaGj5edp4-v6V--eUF1w9R_+sPqE1tKs7hL_jRA@mail.gmail.com>
+Message-ID: <CAPmqrp8E6TVDp7ZuJXszWHe90Xgewwa0RE2-BRf=q-n+BEHEww@mail.gmail.com>
+
+I am fairly new to haskell, but I really like the emacs haskell mode.
+It is a bit strict but it generally does what I want it to.
+Unfortunately I can't really compare to the haskell vim mode since I
+only did Scala and Perl back when I was a heavy vim user.
+
+The one useful thing that I can add is that there are some really good
+packages out there for modal vi keybindings in emacs. If you truly
+like the vim keybindings better then you can still use them in emacs.
+
+I hope that helps a little bit.
+
+On Tue, Dec 13, 2011 at 10:50 AM, Martin DeMello
+<martindemello at gmail.com> wrote:
+> The vim autoindent for haskell is really bad :( Is there a better
+> indent.hs file floating around somewhere? Alternatively, is the emacs
+> haskell mode better enough that it's worth my time learning my way
+> around emacs and evil?
+>
+> martin
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

@@ -1,0 +1,74 @@
+From sam.roberts.1983 at gmail.com  Wed Feb  9 22:26:16 2011
+From: sam.roberts.1983 at gmail.com (sam.roberts.1983 at gmail.com)
+Date: Wed, 09 Feb 2011 21:26:16 +0000
+Subject: [Haskell-cafe] coding a queue with reactive
+Message-ID: <000e0cd2df9478ef99049be01d08@google.com>
+
+Hi all,
+
+I hope someone is interested in helping me out with the reactive library.
+I am trying to implement a function "queue" in reactive:
+
+queue :: Double -> Event a -> Event a
+
+This is a simple queue: events from the event stream coming into the queue,
+queue up waiting to be processed one by one. Processing an event takes a
+constant amount of time for every event. The output of the queue function
+is the stream of processed events.
+
+My current (deficient) implementation of the queue function is:
+
+queue dt eventsIn =
+do
+(a,exitT) <- withExitTime eventsIn
+_ <- atTime exitT
+return a
+where
+withExitTime = scanlE calcExitTime (undefined, -1/0) . withTimeE
+calcExitTime (_,prevExitT) (a,inT) = (a, (max inT prevExitT) + dt)
+
+I am having three problems.
+
+1 - I find my implementation of the queue is less clear then an imperative
+description of a queue.
+
+2 - I rely on being able to calculate the exit time of an event when it
+first arrives at the queue, whereas an imperative queue would simply store
+the event in queue and only need to calculate the output time once the event
+was popped off the queue. If I want to do something similar with my  
+function,
+I think I need to make some sort of recursive definition of a queue which
+responds to it's own exit events. I've tried to code this up, but have not
+managed to wrap my brain around the concept.
+
+3 - The code performs horribly! I am guessing that this is because I have  
+not
+told reactive that the exit events preserve the ordering of the input  
+events,
+but I'm not sure how to encode that relationship in reactive.
+
+(It's worth noting here that I actually have a fourth problem too: I get
+linker errors while trying to compile a profiling version of the program ...
+but that's a separate topic.)
+
+It's also worth noting, from a performance point of view, that a much  
+simpler
+"delay" function with similar use of the bind function performs badly as  
+well:
+
+delay :: Double -> Event a -> Event a
+delay dt es = do (e,t) <- withTimeE es
+_ <- atTime (t+dt)
+return e
+
+I'd appreciate any light that anyone could shed on any of these problems.
+If there's a better way of structuring my queue function, or if there's a
+better way of changing event times in reactive, I am open to all  
+suggestions.
+
+Many thanks,
+Sam
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110209/d2632281/attachment.htm>
+

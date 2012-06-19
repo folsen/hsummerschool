@@ -1,0 +1,41 @@
+From gcrosswhite at gmail.com  Mon Dec 19 04:51:50 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Mon, 19 Dec 2011 13:51:50 +1000
+Subject: [Haskell-cafe] [Alternative] summary of my understanding so far
+In-Reply-To: <CAO0Ooq1NjpJJXATKtpkO71=2JbQ+B3ypJxg1i79=dTxL4Fp93Q@mail.gmail.com>
+References: <E6897C72-6886-4B18-9005-E6BDA3E92D76@gmail.com>
+	<CAL3m8eDmauVuJAn_qac7U3Su0A7qMuvPjz0efd7s=coEd6H6rw@mail.gmail.com>
+	<14CB30D2-F2CF-41DF-BBFA-FF9A3923AF67@cs.otago.ac.nz>
+	<CAKFCL4X=ZhpiyMaCci6J5UAa-i-TFy_Tc+LbE37BDPHkepB0Cw@mail.gmail.com>
+	<02D04C33-5E50-4804-89C5-D15F0C2D4AA0@gmail.com>
+	<CAO0Ooq1NjpJJXATKtpkO71=2JbQ+B3ypJxg1i79=dTxL4Fp93Q@mail.gmail.com>
+Message-ID: <E0284320-D506-4DDA-90FC-DA3BAFDEE42C@gmail.com>
+
+
+On Dec 19, 2011, at 1:03 PM, Alexander Solla wrote:
+
+> The "incidental" comment is significantly more clear than an English description.
+
+That is only true for someone who has already seen a sentence like that one before and so can immediately pick up what it is getting at.  :-)  In particular, if one has never heard of a semigroup then the sentence is not very helpful.
+
+> I would rather see commutative diagrams (or what amounts to the same, usage examples) that describe the behavior than a "plain English" description.
+
+I find it amusing that anyone would consider commutative diagram to be the same thing as usage examples for anyone other than a mathematician.  :-)  Nonetheless, I see your point that examples may be clearer than English, so how about:
+
+================================================================
+
+	This instance satisfies the property that, for all x any y:
+		(1) Nothing `mappend` Nothing = Nothing
+		(2) Just x `mappend` Nothing = Just x
+		(3) Nothing `mappend` Just y = Just y
+		(4) Just x `mappend` Just y = Just (x `mappend` y)
+
+	(Warning: Note that rule (4) for this instance is different from the case of the MonadPlus/Alternative instances where the Just y value is discarded so that Just x `mplus` Just y = Just x <|> Just y = Just x.)
+
+	Formally, this instance performs the standard procedure of turning an arbitrary semigroup into a monoid by simply adding a new element to the semigroup to serve as the identity element, where in this case the identity element is the Nothing value of Maybe;  unfortunately, since the base libraries do not come with a Semigroup typeclass, this process is expressed in code as lifting from the Monoid typeclass.
+
+================================================================
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111219/278e4660/attachment.htm>
+

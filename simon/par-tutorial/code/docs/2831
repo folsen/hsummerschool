@@ -1,0 +1,37 @@
+From duncan.coutts at googlemail.com  Tue Feb  8 10:05:38 2011
+From: duncan.coutts at googlemail.com (Duncan Coutts)
+Date: Tue, 08 Feb 2011 09:05:38 +0000
+Subject: [Haskell-cafe] Cabal && license combinations
+In-Reply-To: <DB2F8BA0-6AAE-4699-83F1-BCF070E76889@me.com>
+References: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+	<DB2F8BA0-6AAE-4699-83F1-BCF070E76889@me.com>
+Message-ID: <1297155938.26187.750.camel@localhost>
+
+On Mon, 2011-02-07 at 14:42 +0000, Malcolm Wallace wrote:
+> > It seems then that a package should be the least restrictive  
+> > combination of all the licenses in all the contained modules.
+> 
+> Omit the words "least restrictive" and I think you are correct.
+> 
+> To combine licences, just aggregate them.  There is no lattice of  
+> subsumption; no "more" or "less" restrictive ordering.  It's simple:  
+> you must obey all of them.  Some aggregations introduce a  
+> contradiction of terms, so you cannot legally aggregate those modules  
+> without breaking some term.  But if the terms of the aggregated  
+> licences are compatible rather than contradictory, then all is good.
+
+Right, so the effect of per-file/mixed licenses could be achieved by
+letting packages specify a list of licenses:
+
+license: Foo, Bar
+
+Meaning you may copy/distribute provided you comply with all these
+licenses.
+
+Note that this does not cover dual licensing, e.g. Foo or Bar at
+distributor's choice.
+
+Duncan
+
+
+

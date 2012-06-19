@@ -1,0 +1,19 @@
+From lemming at henning-thielemann.de  Sun Apr 24 14:37:53 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Sun, 24 Apr 2011 14:37:53 +0200 (CEST)
+Subject: [Haskell-cafe] More ideas for controlled mutation
+In-Reply-To: <1303646089-sup-2399@ezyang>
+References: <1303646089-sup-2399@ezyang>
+Message-ID: <alpine.DEB.2.00.1104241436090.3624@anubis>
+
+
+On Sun, 24 Apr 2011, Edward Z. Yang wrote:
+
+> Laziness can be viewed as a form of controlled mutation, where
+> we overwrite a thunk with its actual value, thus only running
+> the code once and reaping great time benefits.
+
+Reminds me on a discussion about 'blue printing' in the past:
+   http://www.haskell.org/haskellwiki/Blueprint
+
+

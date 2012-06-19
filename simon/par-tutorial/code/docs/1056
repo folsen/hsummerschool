@@ -1,0 +1,25 @@
+From jmillikin at gmail.com  Thu Aug 11 18:41:11 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Thu, 11 Aug 2011 09:41:11 -0700
+Subject: [Haskell-cafe] ANNOUNCE: Chell: A quiet test runner (low-output
+ alternative to test-framework)
+In-Reply-To: <CAD84eiFHAxx2dAojwX334d4VLFppTUpNPKWG4Ph+_n1RK9es-g@mail.gmail.com>
+References: <CAKRanNDhqzL-t1z-ykP0sHY1ktQqOLX6JwAONsCzHxRJhsNF8A@mail.gmail.com>
+	<CAL1ky9qJ2v=+QHYbLDiAfR9m4TdxBjKNa_mTLq_MDFFAVBB4Og@mail.gmail.com>
+	<CAKRanNBtoZcbW2sTRMJAF_hpNjVYQ10pxe4i-wk=z9SfCqYHzg@mail.gmail.com>
+	<CAL1ky9oEp_-hjDeEdWgd3bn-UxpHEN+AfOUGnfrO_XTyRjq+xw@mail.gmail.com>
+	<CAKRanNDCXQ+6=0QOUEQmUDCQrLJJLov85JdW5Vjekb1qFgPO6Q@mail.gmail.com>
+	<CAL1ky9oMiN8P0gFS6sSb-gHdar=hkRbVv+v6uVatedjpFYY-kw@mail.gmail.com>
+	<CAD84eiFHAxx2dAojwX334d4VLFppTUpNPKWG4Ph+_n1RK9es-g@mail.gmail.com>
+Message-ID: <CAL1ky9q7kct4ExHDWYB3m5=BjDjyaNn6Scn9H8Ma4cddnS-TCg@mail.gmail.com>
+
+Possible -- I ran into dependency conflicts between
+t-f/t-f-q/quickcheck when trying to migrate to test-framework 0.4, so
+I clamped all my test subprojects to 0.3.
+
+On Thu, Aug 11, 2011 at 09:09, Nathan Howell <nathan.d.howell at gmail.com> wrote:
+> Is this different than the "--hide-successes" flag for test-framework? Looks
+> like it was added a few months
+> back:?https://github.com/batterseapower/test-framework/commit/afd7eeced9a4777293af1e17eadab4bf485fd98f
+
+

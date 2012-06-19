@@ -1,0 +1,33 @@
+From allbery.b at gmail.com  Mon Dec 12 06:31:28 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Mon, 12 Dec 2011 00:31:28 -0500
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+Message-ID: <CAKFCL4Uf4G2pBq1qugmnW26reR=+mHZrb8Y9M621KwjSjJ2j7w@mail.gmail.com>
+
+On Mon, Dec 12, 2011 at 00:18, Gregory Crosswhite <gcrosswhite at gmail.com>wrote:
+
+> It is only recently that I have been able to grok what some and many are
+> even about (I think), and they seem to only make sense in cases where
+> executing the Alternative action results in a portion of some input being
+> consumed or not consumed.  "some v" means "consume at least one v and
+> return the list of items consumed or fail", and "many v" means "consume
+> zero or more v and return the list of items consumed or the empty list of
+> none are consume".  It thus makes sense for there to be some subclass of
+> Alternative called something like "Consumptive" that contains these methods.
+
+
+"Parsive"?
+
+I think the only reason they're in there is that Applicative and
+Alternative "came about" via experimentation with parsing (Applicative
+started its pre-ghc life as a parser combinator library).
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111212/605e0b23/attachment.htm>
+

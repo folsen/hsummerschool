@@ -1,0 +1,48 @@
+From es at ertes.de  Wed Apr  6 22:14:47 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Wed, 6 Apr 2011 22:14:47 +0200
+Subject: [Haskell-cafe] 'Progress bar' enumeratee
+References: <inhd6m$h2n$1@dough.gmane.org>
+	<20110406163105.13cbc9a3@angst.streitmacht.eu>
+	<inhv6r$n8$1@dough.gmane.org>
+	<20110406182931.0238561f@angst.streitmacht.eu>
+	<inieg7$38g$1@dough.gmane.org>
+Message-ID: <20110406221447.5004b742@angst.streitmacht.eu>
+
+"David Hotham" <david.hotham at blueyonder.co.uk> wrote:
+
+> The desired behaviour (certainly my desired behaviour, but I think
+> also the most useful behaviour generally) is that the enumeratee
+> passes n bytes to its iteratee, prints a dot, and repeats.
+>
+> Given that, printing the dots all in one bunch after passing bytes to
+> the iteratee isn't any improvement over printing the dots all in one
+> bunch before passing them to the iteratee.
+>
+> I think that mostly I want it the way that I want it because that's
+> the bit that I struggled most over and I'm now reluctant to give it
+> up!  However this might actually make a useful difference to behaviour
+> in the case of an iteratee that did very expensive processing, or that
+> itself performed IO.  In such cases, my behaviour could be expected to
+> give a more accurate indication of how far through processing we'd
+> actually got.
+
+If you're talking about my code, you must have misunderstood something.
+It does not print the dots all in one bunch, but prints them as input is
+requested from the enumerator.  The last version I posted prints the
+dots after the iteratee has consumed the input.  That difference is
+noticable, when your iteratee does complex computations before it goes
+back to the Continue state.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

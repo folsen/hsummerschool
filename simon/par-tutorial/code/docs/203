@@ -1,0 +1,65 @@
+From simonpj at microsoft.com  Thu Apr  7 08:59:16 2011
+From: simonpj at microsoft.com (Simon Peyton-Jones)
+Date: Thu, 7 Apr 2011 06:59:16 +0000
+Subject: [Haskell-cafe] mtlx has a nice design but is slow
+In-Reply-To: <BANLkTi=fks+df_erzoOeH0XNH0WXiU-BKQ@mail.gmail.com>
+References: <BANLkTinQJMF224HsM2reEK+iQ2TzVU4nNg@mail.gmail.com>
+	<BANLkTi=fks+df_erzoOeH0XNH0WXiU-BKQ@mail.gmail.com>
+Message-ID: <59543203684B2244980D7E4057D5FBC11F318D80@DB3EX14MBXC306.europe.corp.microsoft.com>
+
+GHC's goal is to be good enough at inlining and optimisation that you shouldn't take a performance hit for adding layers of abstraction.  Sometimes it needs help (eg inlining pragmas).  So as Don implies, it might be worth digging a bit to see where the performance hit comes from.
+
+Simon
+
+| -----Original Message-----
+| From: haskell-cafe-bounces at haskell.org [mailto:haskell-cafe-
+| bounces at haskell.org] On Behalf Of Don Stewart
+| Sent: 06 April 2011 18:19
+| To: Sean Leather
+| Cc: Haskell Caf? List
+| Subject: Re: [Haskell-cafe] mtlx has a nice design but is slow
+| 
+| Is the package missing some obvious inlining in the instances?
+| 
+| On Wed, Apr 6, 2011 at 10:13 AM, Sean Leather <leather at cs.uu.nl> wrote:
+| > I just refactored my type and transform system prototype (introduced in [1]
+| > but changed since then) from using mtlx [2] (type-indexed monad
+| transformers
+| > described in [3]) to mtl using RWST. mtlx allowed me to cleanly separate
+| the
+| > various monadic components in a convenient way. Unfortunately, I found it
+| to
+| > be too slow. The refactoring was an experiment to see how slow. I was
+| rather
+| > surprised:
+| >
+| > Running time of a compiled main with a list of tests:
+| > ? mtlx (7 transformers): 2 min 52 sec
+| > ? mtl (RWST): 0 min 13 sec
+| >
+| > It's frustrating to see such a huge performance gap for a better design.
+| >
+| > Regards,
+| > Sean
+| >
+| > [1]
+| > http://splonderzoek.blogspot.com/2011/03/draft-type-changing-program-
+| improvement.html
+| > [2] http://hackage.haskell.org/package/mtlx
+| > [3] http://www.ittc.ku.edu/~marks/cgi-bin/pubs/monadfactory.pdf
+| >
+| >
+| > _______________________________________________
+| > Haskell-Cafe mailing list
+| > Haskell-Cafe at haskell.org
+| > http://www.haskell.org/mailman/listinfo/haskell-cafe
+| >
+| >
+| 
+| _______________________________________________
+| Haskell-Cafe mailing list
+| Haskell-Cafe at haskell.org
+| http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+

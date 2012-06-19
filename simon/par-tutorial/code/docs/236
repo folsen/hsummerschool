@@ -1,0 +1,37 @@
+From andrew.pennebaker at gmail.com  Fri Apr  8 12:32:22 2011
+From: andrew.pennebaker at gmail.com (Andrew Pennebaker)
+Date: Fri, 8 Apr 2011 06:32:22 -0400
+Subject: [Haskell-cafe] FFI for a beginner
+Message-ID: <BANLkTi=5O6CLOsL27_-Cv5bkoKuruYtZUQ@mail.gmail.com>
+
+ncurses is proving too difficult to setup, so I'm working on a new library
+called charm. The C code works by itself, but I can't compile a Haskell
+wrapper for it. While the tutorials at
+HaskellWiki<http://www.haskell.org/haskellwiki/FFI_complete_examples>are
+helpful, they're outdated. Argh! The
+docs<http://www.haskell.org/ghc/docs/latest/html/users_guide/ffi-ghc.html#glasgow-foreign-headers>say
+that -#include pragmas no longer work, but fail to explain how to load
+code without them. Suffice to say I have no recourse but trial and error.
+
+GitHub: charm <https://github.com/mcandre/charm> and
+hscharm<https://github.com/mcandre/hscharm>
+
+<https://github.com/mcandre/charm>$ make
+cp /usr/include/charm.c .
+ghc --make -fforce-recomp -o hellocharm hellocharm.hs charm.hs charm.c
+-I/usr/include -dylib-install-name /usr/lib/libcharm.dynlib
+[1 of 2] Compiling Charm            ( charm.hs, charm.o )
+[2 of 2] Compiling Main             ( hellocharm.hs, hellocharm.o )
+Linking hellocharm ...
+ld: duplicate symbol _Charm_getWidth_info in charm.o and charm.o
+collect2: ld returned 1 exit status
+make: *** [hellocharm] Error 1
+
+Cheers,
+
+Andrew Pennebaker
+www.yellosoft.us
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110408/d203067a/attachment.htm>
+

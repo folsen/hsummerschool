@@ -1,0 +1,35 @@
+From wren at freegeek.org  Thu Feb  3 09:01:54 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Thu, 03 Feb 2011 03:01:54 -0500
+Subject: [Haskell-cafe] Problems with iteratees
+In-Reply-To: <AANLkTi=iDwEzK1BGHwTf9SEcpHi=0VHhJ8A2mEXc7_xJ@mail.gmail.com>
+References: <4D49FF9B.9090009@freegeek.org>
+	<AANLkTi=iDwEzK1BGHwTf9SEcpHi=0VHhJ8A2mEXc7_xJ@mail.gmail.com>
+Message-ID: <4D4A60F2.3000103@freegeek.org>
+
+On 2/2/11 11:25 PM, Maciej Wos wrote:
+> I think the problem is that the iteratee you give to I.convStream
+> always returns Just [something] while you should return Nothing on
+> EOF.
+
+That makes sense for the hanging problem (which I only noticed during 
+debugging). Though I still get the the same error message when running 
+the whole program...
+
+> On Thu, Feb 3, 2011 at 10:06 AM, wren ng thornton<wren at freegeek.org>  wrote:
+>> When I put this all together, the process is killed with:
+>>
+>>     control message: Just (Err "endOfInput")
+>>
+>> Data.Iteratee.Base.run is the origin of the "control message:" part of the
+>> error, but I don't know where (Err "endOfInput") is coming from since
+>> Data.Iteratee.Base only uses (Err "EOF") or (Err "Divergent Iteratee"). I
+>> believe runGetEnumeratee is where the problem is, though it could also be
+>> the use site or something in one of the libraries. Any help would be
+>> appreciated.
+
+-- 
+Live well,
+~wren
+
+

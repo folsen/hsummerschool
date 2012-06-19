@@ -1,0 +1,43 @@
+From wren at freegeek.org  Sun Apr 24 01:49:33 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sat, 23 Apr 2011 19:49:33 -0400
+Subject: [Haskell-cafe] Storing failing testcases for QuickCheck
+In-Reply-To: <iouf55$7cp$1@dough.gmane.org>
+References: <iouf55$7cp$1@dough.gmane.org>
+Message-ID: <4DB3658D.1030706@freegeek.org>
+
+On 4/23/11 8:02 AM, S?nke Hahn wrote:
+> Hi!
+>
+> I would like to have a library that would allow to use QuickCheck in the
+> normal manner, but it would save test data for failing properties on the
+> filesystem (maybe using the shiny new acid-state?). On consecutive test
+> runs, the saved test data would be used first (before generating new
+> arbitrary test data). I think, this would come in quite handy when doing
+> test driven development.
+>
+> Any comments on this? Does something like this already exist?
+
+The closest I can think of is using HUnit on the same property functions 
+you use in QuickCheck. I do this often for regression testing and to 
+ensure that corner cases are covered[1]. Unfortunately this still 
+requires a bit of hand-holding to keep your regression suite up to date.
+
+I would *love* there to be a tool which (a) automatically saves failing 
+QuickCheck values to disk, and (b) automates using HUnit to load those 
+in and test them. I'm not so sure that QuickCheck should be doing the 
+second step of that since that'd really mess with the QuickCheck 
+infrastructure; once you have the code for reading from disk, it'd be 
+trivial to just use HUnit.
+
+
+[1] I also do some overloading of (==>) and similar, so that I can use 
+the same properties in both QuickCheck and lazy SmallCheck. 
+Unfortunately, I've yet to come up with a good way to ensure that 
+QuickCheck doesn't explore territory already covered by SmallCheck.
+
+-- 
+Live well,
+~wren
+
+

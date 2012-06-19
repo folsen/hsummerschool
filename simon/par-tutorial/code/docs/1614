@@ -1,0 +1,50 @@
+From limestrael at gmail.com  Fri Dec  2 16:28:17 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Fri, 2 Dec 2011 16:28:17 +0100
+Subject: [Haskell-cafe] Program used for debugging
+In-Reply-To: <CAG3g5n=p0_tqkF_J_jLcAoBSd_x2Y0bPtmjZzdpRoMNVOLLsNQ@mail.gmail.com>
+References: <CACqaG6zY-i7kG-OyYiXH5U8N8X7zgKZ9yr-x7cfALin3SUXoTg@mail.gmail.com>
+	<CAG3g5n=p0_tqkF_J_jLcAoBSd_x2Y0bPtmjZzdpRoMNVOLLsNQ@mail.gmail.com>
+Message-ID: <CACqaG6xz2opf2L3AqjBZyZy1mz1bc_xdbyd50k3QnYHOJ10UAg@mail.gmail.com>
+
+> But for internal expressions it can be quite hairy to figure out why what
+haskell thinks is the type of something and what I think dont match.
+
+^^ Just give the internal expression a type you know to be wrong, then GHC
+will display the infered type and say it doesn't match the one you wrote.
+
+2011/12/2 Rustom Mody <rustom.mody at parsci.com>
+
+> On Thu, Dec 1, 2011 at 7:40 PM, Yves Par?s <limestrael at gmail.com> wrote:
+>
+>> Hey,
+>>
+>> What do you mostly use for debugging?
+>> Simple calls to Debug.Trace.trace? Hpc? Hood?
+>>
+>
+> I also wonder about 'type-debugging'
+>
+> Using ghci:
+> For a top level expression:
+>  - if it is not compiling I can put in (or remove) a type decl and see how
+> things change.
+>  - if it is compiling I can of course ":t it"
+>
+> But for internal expressions it can be quite hairy to figure out why what
+> haskell thinks is the type of something and what I think dont match.
+>
+> So is there something like type-intellisense for haskell where if one
+> hovers the mouse (maybe over a selection) haskell tells what type it finds
+> there?
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111202/1c375bbb/attachment.htm>
+

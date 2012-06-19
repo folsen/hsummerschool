@@ -1,0 +1,14 @@
+From vagif.verdi at gmail.com  Sat Dec 31 00:49:44 2011
+From: vagif.verdi at gmail.com (Vagif Verdi)
+Date: Fri, 30 Dec 2011 15:49:44 -0800 (PST)
+Subject: [Haskell-cafe] Copy .cabal folder to diff machine/user
+Message-ID: <d292bd49-5ede-41d8-8c4e-a7751582a3e3@24g2000yqi.googlegroups.com>
+
+Is it possible to copy .cabal and .ghc folders to different machine/
+user and develop same project over there ?
+
+Or is the only way to allow a team of developers to work on the same
+project is to force each one of them to install all necessary packages
+on their machines.
+
+

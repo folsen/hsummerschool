@@ -1,0 +1,89 @@
+From ryani.spam at gmail.com  Tue Aug 30 07:32:46 2011
+From: ryani.spam at gmail.com (Ryan Ingram)
+Date: Mon, 29 Aug 2011 22:32:46 -0700
+Subject: [Haskell-cafe] Unexpected Typeable behaviour; Prelude.undefined
+In-Reply-To: <F340DD96-6FE4-4EC8-A1DF-1912C611F792@st-andrews.ac.uk>
+References: <79B22C4D-B42B-463E-9689-479D878E6DB7@st-andrews.ac.uk>
+	<CAKFCL4XGT69tz5jBbKf1pTr831uwt3t1Sd+k-VU4XBP19wQF_g@mail.gmail.com>
+	<F340DD96-6FE4-4EC8-A1DF-1912C611F792@st-andrews.ac.uk>
+Message-ID: <CA+XKtKgaRSSgzqNcEzgK6h_t97vtjSTr6BUjynP0DtLEuNQcuQ@mail.gmail.com>
+
+The problem with hiding the context in the constructor is that there's no
+guarantee that the context actually exists in the first place; for example,
+given this type
+
+data IsInt a where
+    Proof :: IsInt Int
+
+this is a legal program:
+
+foo :: IsInt Bool
+foo = undefined
+
+That said, you are still just fine to hide the context in the constructor at
+the call site:
+
+data MyGADT m where
+    MonadAction :: (Typeable1 m, Monad m) -> m () -> MyGADT m
+
+instance (Typeable1 m, Monad m) => Typeable (MyGADT m) where
+    typeof t = ...
+
+getTypeRep :: MyGADT m -> TypeRep
+getTypeRep x@(MonadAction _) = typeof (undefined `asTypeOf` x)
+
+Here we unpack the context from x and use it to construct the 'typeof'
+function for MyGADT m.
+
+  -- ryan
+
+On Mon, Aug 29, 2011 at 2:06 AM, Philip Holzenspies
+<pkfh at st-andrews.ac.uk>wrote:
+
+>  Dear Brandon, Ozgur, et al,
+>
+>  Thanks very much for you explanation. This seems to be a perfectly
+> reasonable explanation; the wrapper-types I used probably explicitly invoke
+> typeOf with undefined. The problem here, however, is that in my actual
+> program, I don't use ADTs, but I use GADTs, so as to carry the context
+> (Monad, Typeable1) with the constructor. To get to this context, I must
+> pattern-match with the constructor. It seems hiding contexts (which I really
+> like about GADTs) isn't "available" consistently. Oh well ;)
+>
+>  Regards,
+> Philip
+>
+>
+>  On 29 Aug 2011, at 01:20, Brandon Allbery wrote:
+>
+>  On Sun, Aug 28, 2011 at 18:44, Philip Holzenspies <pkfh at st-andrews.ac.uk>wrote:
+>
+>> instance (Typeable1 m, Monad m) => Typeable (MyADT m) where
+>>        typeOf t@(MyADT _)
+>>
+>
+>  typeOf is usually invoked with an undefined parameter; it should use
+> types, never values.  Here you've defined it to deconstruct what it's
+> passed, which means that anything that uses it in the usual way (`typeOf
+> (undefined :: someType)') will immediately throw undefined.
+>
+>  You don't need a deconstructor there; you (correctly) throw away the
+> value, and it doesn't provide any type information not already available
+> from the instance declaration.  `typeOf t' should be good enough.
+>
+>  --
+> brandon s allbery                                      allbery.b at gmail.com
+> wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110829/e9df7864/attachment.htm>
+

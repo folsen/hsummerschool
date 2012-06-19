@@ -1,0 +1,42 @@
+From jmillikin at gmail.com  Tue Dec 13 21:36:44 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Tue, 13 Dec 2011 12:36:44 -0800
+Subject: [Haskell-cafe] ANNOUNCE: Anansi 0.4.2 (literate programming
+	pre-processor)
+In-Reply-To: <CAAExw5tkEgwAkx2Ls4WUtg9h+F4tscOGftA+aY6F-hzQ0kveHw@mail.gmail.com>
+References: <CAL1ky9qKan_3QxOv291H4q8wuCdXwbEeLv4hS5EDBssina12Ww@mail.gmail.com>
+	<CAAExw5tkEgwAkx2Ls4WUtg9h+F4tscOGftA+aY6F-hzQ0kveHw@mail.gmail.com>
+Message-ID: <CAL1ky9oJY2q=GvV=UzXtnTZYeUWFbcCRv4B9a4Nafe-LRRCP=A@mail.gmail.com>
+
+On Tue, Dec 13, 2011 at 03:39, Magnus Therning <magnus at therning.org> wrote:
+> 1. What to call files? ?I understand (C)WEB suggests using .w, and
+> that noweb uses .nw, what should I call anansi files?
+
+I usually use .anansi, but it doesn't matter. You can use whatever
+extensions you like, or even none at all.
+
+> 2. Combining anansi and pandoc works quite well for HTML, but it fails
+> miserably when trying to use the generated LaTeX:
+>
+> ? ?> markdown2pdf: ! LaTeX Error: Command \guillemotleft unavailable
+> in encoding OT1.
+>
+> ? ?Is there any good way to get around that?
+
+The LaTeX loom is designed to output basic markup that can be turned
+into a PDF with minimum fuss. It probably won't work as-is for more
+advanced cases, such as when a user wants to use custom templates, or
+has to inter-operate with pseudo-LaTeX parsers like Pandoc.
+
+You could try copying the LaTeX loom into your own code, modifying it
+to generate the custom output format you want, and then running it as
+a #!runhaskell script.
+
+> 3. Is there any editor support for anansi, syntax highlihgting etc?
+
+Not that I know of. Note that Anansi's syntax itself is very minimal,
+so what you need is an editor that can support formatting a file using
+multiple syntaxes. I don't know enough about editor modification to
+figure out which editors support such a feature, or how to enable it.
+
+

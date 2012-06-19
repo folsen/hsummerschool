@@ -1,0 +1,21 @@
+From cdsmith at gmail.com  Sun Aug 28 17:38:22 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Sun, 28 Aug 2011 09:38:22 -0600
+Subject: [Haskell-cafe] GHC API question
+In-Reply-To: <1314507463.5744.10.camel@godel>
+References: <1314507463.5744.10.camel@godel>
+Message-ID: <1314545902.5744.14.camel@godel>
+
+Okay, I should have waited until morning to post this... so actually,
+things still work fine when I build without profiling.  However, when I
+build with profiling, I get the segfault.  I'm guessing either I need to
+set different dynamic flags with the profiling build to match the
+options of the compiler that built the executable... or perhaps it's
+still impossible to do what I'm looking for with profiling enabled.
+Does anyone know which is the case?
+
+-- 
+Chris
+
+
+

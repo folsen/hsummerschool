@@ -1,0 +1,31 @@
+From stephen.tetley at gmail.com  Tue Aug 16 09:23:25 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Tue, 16 Aug 2011 08:23:25 +0100
+Subject: [Haskell-cafe] Hiding "growing" state using existentials.
+In-Reply-To: <4E49ADCA.9010304@zwizwa.be>
+References: <4E49ADCA.9010304@zwizwa.be>
+Message-ID: <CAB2TPRB_muU=eCduED-3qBn=ScEn1GL5sSaAv_FMgE9B_A2sAw@mail.gmail.com>
+
+You can't define (>>=) if your state type changes:
+
+(>>=) :: m a -> (a -> m b) -> m c
+
+Whereas, your bind is effectively three different parametric types:
+
+_bind :: m1 a -> (a -> m2 b) -> m3 b
+
+You can use parametric monads to represent state changing within a
+monad. Oleg Kiselyov has tutorials on their use on his website (search
+for the Monadish class). The SHE experimental extension of Haskell
+also has parametric monads built in.
+
+bindish :: m s1 a -> (a -> m s2 b) -> m s2 b
+
+I don't think parametric monads will solve your problem though, as you
+want a product of the states as the result of bind. Are you really
+sure you want this behavior?, I'd imagine it breaks the monad laws
+anyway.
+
+http://okmij.org/ftp/Computation/monads.html
+
+

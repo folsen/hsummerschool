@@ -1,0 +1,28 @@
+From hjgtuyl at chello.nl  Mon Aug  1 00:26:54 2011
+From: hjgtuyl at chello.nl (Henk-Jan van Tuyl)
+Date: Mon, 01 Aug 2011 00:26:54 +0200
+Subject: [Haskell-cafe] A language that runs on the JVM or .NET has the
+ advantage of Oracle & Microsoft making those layers more parallelizable.
+In-Reply-To: <CAMLKXynsdeGg1eLoNGihp-Md8ACPKdZpa=VNMZMr+Z8ZMvtBLA@mail.gmail.com>
+References: <CAMLKXynsdeGg1eLoNGihp-Md8ACPKdZpa=VNMZMr+Z8ZMvtBLA@mail.gmail.com>
+Message-ID: <op.vzh8m4f3pz0j5l@zen5.arnhem.chello.nl>
+
+On Sun, 31 Jul 2011 00:07:23 +0200, KC <kc1956 at gmail.com> wrote:
+
+> Are there plans a foot (or under fingers) to make a version of Haskell
+> that runs on the JVM?
+>
+
+UCH has an almost fully functional backend for JVM, see:
+   http://www.cs.uu.nl/wiki/bin/view/Ehc/UhcUserDocumentation#5_7_2_jazy_Core_based_Java_no_wh
+
+Regards,
+Henk-Jan van Tuyl
+
+
+-- 
+http://Van.Tuyl.eu/
+http://members.chello.nl/hjgtuyl/tourdemonad.html
+--
+
+

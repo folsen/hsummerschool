@@ -1,0 +1,30 @@
+From schlepptop at henning-thielemann.de  Thu Aug 11 18:14:54 2011
+From: schlepptop at henning-thielemann.de (Henning Thielemann)
+Date: Thu, 11 Aug 2011 18:14:54 +0200
+Subject: [Haskell-cafe] How to use cabal macros in .hsc files
+In-Reply-To: <CADLz5wXV1WA-_EaQuD71SjG44ikrZ+6i0jR-vkMfL0PV5ZA8Lw@mail.gmail.com>
+References: <CADLz5wXV1WA-_EaQuD71SjG44ikrZ+6i0jR-vkMfL0PV5ZA8Lw@mail.gmail.com>
+Message-ID: <4E43FFFE.5090903@henning-thielemann.de>
+
+On 08.08.2011 12:08, Bas van Dijk wrote:
+> Hello,
+>
+> Currently it's not possible to use cabal macros like
+> MIN_VERSION_base(x,y,z) in .hsc files:
+>
+> http://hackage.haskell.org/trac/hackage/ticket/870
+>
+> Is there a workaround to get the same effect?
+
+Writing a plain Haskell module that contains the code that depends on 
+the particular base-version?
+
+Usually I try to stay away from this preprocessor hackery, and this case 
+seems to support my attempts. What I do is to add Hs-Source-Dirs 
+depending on some Cabal flag, and connect it with a field like 
+Build-Depends: base==3.*.
+
+http://www.haskell.org/haskellwiki/Cabal/Developer-FAQ#Adapt_to_different_systems_without_CPP
+
+
+

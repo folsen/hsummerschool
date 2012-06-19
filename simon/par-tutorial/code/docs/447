@@ -1,0 +1,79 @@
+From patil.nikhil at gmail.com  Sat Apr 16 17:22:48 2011
+From: patil.nikhil at gmail.com (Nikhil A. Patil)
+Date: Sat, 16 Apr 2011 10:22:48 -0500
+Subject: [Haskell-cafe] "import" functionality in DSLs
+In-Reply-To: <BANLkTi=ObTp+_VtiZ1rTBuov-33qYXUDUA@mail.gmail.com>
+References: <20110416132930.GA20119@ece.utexas.edu>
+	<BANLkTi=ObTp+_VtiZ1rTBuov-33qYXUDUA@mail.gmail.com>
+Message-ID: <20110416152248.GA21073@ece.utexas.edu>
+
+On Sat, Apr 16, 2011 at 08:55 CDT, Felipe Almeida Lessa wrote:
+> On Sat, Apr 16, 2011 at 10:29 AM, Nikhil A. Patil
+> <patil.nikhil at gmail.com> wrote:
+> >> doit :: DSL Term
+> >> doit = do (+) <- (+)
+> >> ? ? ? ? ? n0 ?<- n0
+> >> ? ? ? ? ? k ? <- k
+> >> ? ? ? ? ? -- begin beautiful DSL code
+> >> ? ? ? ? ? let x = k + n0
+> >> ? ? ? ? ? return $ x + x
+> 
+> I guess the core problem is that on each time you say '(+) <- (+)',
+> you may actually get something different depending on what
+> 'define_function' does.  You say yourself that these functions change
+> a hidden state.  So, without any internal changes, I doubt you could
+> do something better.
+
+Thanks very much for your response! You are right, I haven't defined the
+semantics of this operation in my post. For the example in my post, the
+define_* functions are idempotent on the hidden state, when used with
+the same arguments (i.e. the multiple calls are redundant). I explicitly
+handle this in the implementation of the DSL monad: basically, there is
+a Set that tracks what functions have been previously defined, and when
+a conflicting re-definition is found, I throw a run-time error.
+
+But: how can I get rid of the boilerplate code, and give the user the
+appearance that she is "import"-ing identifier bindings from another
+file?
+
+nikhil
+
+> 
+> One possible solution may be to have a special case for your Prelude
+> functions and constants that never change.  That is, if currently you
+> have
+> 
+>   data Term = Term Key ...
+>   type Key = Integer
+> 
+> and you store other informations about each term on your hidden state,
+> then you may use
+> 
+>   data Term = Term Key ...
+>   data Key = Prelude Integer | User Integer
+> 
+> Your define_* functions always return User keys, however now you can
+> have unsafe versions of them that take a key as argument.  Then your
+> Prelude would be
+> 
+> > module DSLPrelude where
+> >
+> > (+) :: Term -> Term -> Term
+> > n0  :: Term
+> > k   :: Term
+> > (+) = unsafe_define_function t1 "+" 2
+> > n0  = unsafe_define_constant t2 "0"
+> > k   = unsafe_define_constant t3 "k"
+> >
+> > t1, t2, t3 :: Key
+> > (t1:t2:t3:_) = map Prelude [1..]
+> 
+> Of course, this is a lot of handwaving, but you haven't provided any
+> details about your internal implementation.
+> 
+> HTH,
+> 
+> -- 
+> Felipe.
+
+

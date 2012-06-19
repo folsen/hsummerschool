@@ -1,0 +1,57 @@
+From dan.doel at gmail.com  Tue Apr 12 21:35:18 2011
+From: dan.doel at gmail.com (Dan Doel)
+Date: Tue, 12 Apr 2011 15:35:18 -0400
+Subject: [Haskell-cafe] Higher-kinded Quantification
+In-Reply-To: <BANLkTim8wmfsxPgddncT_7JzDVSzgPtpbg@mail.gmail.com>
+References: <BANLkTi=EA+347QXDEBu4ST_qMMgJe2AK1g@mail.gmail.com>
+	<201104120537.51306.dan.doel@gmail.com>
+	<BANLkTim8wmfsxPgddncT_7JzDVSzgPtpbg@mail.gmail.com>
+Message-ID: <201104121535.18383.dan.doel@gmail.com>
+
+On Tuesday 12 April 2011 11:27:31 AM Leon Smith wrote:
+> I think impredicative polymorphism is actually needed here;  if I write
+> ...
+> Then I get a type error
+> ...
+
+I'm not going to worry about the type error, because that wasn't what I had in 
+mind for the types. The type for loop I had in mind was:
+
+  [i] -> Iterator i o m a -> Iterator i o m a
+
+Then, feedPure cracks open the first (forall m. ...), instantiates it to the m 
+for the result, and runs loop on it. If we had explicit type application, it'd 
+look like:
+
+  feedPure l it = /\m -> loop l (it at m)
+
+but as it is it's just:
+
+  feedPure l it = loop l it
+
+Which cannot be eta reduced.
+
+> But what I find rather befuddling is the kind error:
+> > feedPure' :: [i] -> Iterator i o (forall (m :: * -> *) . m) a -> Iterator
+> > i o (forall (m :: * -> *) . m) a feedPure' = undefined
+> 
+> Iterator.hs:193:58:
+>     `m' is not applied to enough type arguments
+>     Expected kind `*', but `m' has kind `* -> *'
+>     In the type signature for `feedPure'':
+>       feedPure' :: [i]
+>                    -> Iterator i o (forall m :: (* -> *). m) a
+>                       -> Iterator i o (forall m :: (* -> *). m) a
+> 
+> Is impredicative polymorphism restricted to the kind *?
+
+The problem is that (forall (m :: * -> *). m) is not a valid type, and forall 
+is not a valid way to construct things with kind * -> *. You have:
+
+  m :: * -> * |- T[m] :: * ==> |- (forall (m :: * -> *). T[m]) :: *
+
+but that is the only way forall works.
+
+-- Dan
+
+

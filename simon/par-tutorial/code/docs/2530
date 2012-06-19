@@ -1,0 +1,33 @@
+From sh006d3592 at blueyonder.co.uk  Sat Dec 31 20:26:57 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Sat, 31 Dec 2011 19:26:57 +0000
+Subject: [Haskell-cafe] Are all monads functions?
+In-Reply-To: <CACqaG6z+TKe_FGqWD_ODMj4rP7bRTyHvCYev4d_m_BN7B0d_=A@mail.gmail.com>
+References: <CACqaG6y79_uXmOm4Snxg9H=zmLaemqQN+rG3eHHR3W0xB2bxAg@mail.gmail.com>
+	<20111231125201.GA6316@sniper>
+	<CACqaG6z+TKe_FGqWD_ODMj4rP7bRTyHvCYev4d_m_BN7B0d_=A@mail.gmail.com>
+Message-ID: <4EFF6201.1030006@blueyonder.co.uk>
+
+On 31/12/2011 13:18, Yves Par?s wrote:
+> But still, I maintain my previous view. I could clarify that by saying 
+> that (e.g. for Maybe) we could separate it in two types, Maybe itself 
+> and its monad:
+>
+> -- The plain Maybe type
+> data Maybe a = Just a | Nothing
+>
+> -- The MaybeMonad
+> newtype MaybeMonad a = MM ( () -> Maybe a )
+>
+You've just reminded me of a painful time - lot's a scratching my head 
+and saying "but these parser functions are monadic - the tutorial 
+clearly says they're monadic - why does my every attempt at making the 
+type an instance of Monad fail?"
+
+Answer - I only had the equivalent of the Maybe type, and I was trying 
+to force it where the MaybeMonad should go.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111231/9cad3825/attachment.htm>
+

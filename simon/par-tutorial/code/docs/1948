@@ -1,0 +1,36 @@
+From gcrosswhite at gmail.com  Thu Dec 15 03:01:41 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Thu, 15 Dec 2011 12:01:41 +1000
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CACw0ni+Q=ixAAdWzmsbF+c1RkF74S2RV=fi_tX2B2puR0s5xvQ@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+	<CACw0ni+Q=ixAAdWzmsbF+c1RkF74S2RV=fi_tX2B2puR0s5xvQ@mail.gmail.com>
+Message-ID: <1B00C2DD-781C-41BC-BE2F-DDB4C646C8DC@gmail.com>
+
+
+On Dec 15, 2011, at 3:37 AM, Bryan O'Sullivan wrote:
+
+> But that's precisely what the Alternative class is already for! If you are writing an Alternative instance at all, then you are asserting that it must be possible and reasonable to replicate the existing behaviour of some and many.
+
+So... in other words, the Maybe and [] instances are wrong, and in an idea world would be removed?  As I thought I stated before, I would be perfectly okay with that.
+
+> The fact that those functions are currently methods of the class is completely irrelevant, and perhaps this is a source of your confusion. They can be - and used to be - implemented as normal functions with Alternative class constraints, then at some point someone moved them into the class itself, solely to allow implementors to write faster versions.
+
+Hmm, that's a fair point that I hadn't considered, namely that some and many can always be defined in terms of the other methods so moving them out of the typeclass doesn't make them inaccessible.  Thus, splitting them off into a subclass if Alternative would in some sense just be a formality;  nonetheless, I think that it would be a useful formality because it would make explicit when these two methods are actually useful.  Those who have more efficient versions for some/many can write them manually, and those who don't could just add a line "instance Parsive T" (or whatever) and be done with it.
+
+> I think we should take any further discussion off-list. Your messages from last night betray a deep misunderstanding that I'm not sure everyone else needs to sit through :-)
+
+I know that you meant no offense, but your remark was essentially just a nicer version of "Clearly you simply don't know what you are talking about, so shut up and go away so that those of us who *do* know what we are talking about can be left alone," which comes across as really condescending and offensive.
+
+Also, frankly, I haven't seen much of a sign that the community itself has some kind of deep understanding of some/many that I lack.  People have been giving me different answers to my question, many of which are not consistent with each other, and some of which seem not to be consistent with themselves.  Regarding what to do about Alternative, I have been getting a whole range of answers, including:  do nothing but add more documentation, split some/many off from Alternative into a separate subclass, remove instances from Alternative got Maybe and [], etc.  So it's not as if there is this obvious and complete picture of what Alternative is or should be about that is available to nearly everyone here but me, an part of the reasons why I have been pushing so hard here is to see if we can work towards a consensus of some kind on this issue.
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/26deab01/attachment.htm>
+

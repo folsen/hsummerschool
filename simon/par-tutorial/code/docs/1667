@@ -1,0 +1,24 @@
+From johan.tibell at gmail.com  Mon Dec  5 15:47:35 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Mon, 5 Dec 2011 06:47:35 -0800
+Subject: [Haskell-cafe] List x ByteString x Lazy Bytestring
+In-Reply-To: <CACqaG6ypYKCRgJEY7hKnS_nGHLrB7fDdxY5OG4oRUV7KhNTY8A@mail.gmail.com>
+References: <1323090896.3764.140661007583849@webmail.messagingengine.com>
+	<20111205134940.GA21037@x200>
+	<CACqaG6ypYKCRgJEY7hKnS_nGHLrB7fDdxY5OG4oRUV7KhNTY8A@mail.gmail.com>
+Message-ID: <CAK-tuPZf5CQ41z8O9c-rW4QfyEms_oKKr5xWfUQcj=xWySHO9A@mail.gmail.com>
+
+On Mon, Dec 5, 2011 at 6:09 AM, Yves Par?s <limestrael at gmail.com> wrote:
+
+> However the performance issues seem odd: text is based on bytestring.
+
+
+This is not the case. Text is based on ByteArray#, GHC internal type for
+blocks of bytes. The text package depends on the bytestring package because
+it allows you to encode/decode Text<->ByteString.
+
+-- Johan
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111205/ad1d3619/attachment.htm>
+

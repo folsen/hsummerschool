@@ -1,0 +1,34 @@
+From sugarbzzzz at gmail.com  Wed Feb  2 20:31:28 2011
+From: sugarbzzzz at gmail.com (Sugar Bzzz)
+Date: Wed, 2 Feb 2011 13:31:28 -0600
+Subject: [Haskell-cafe] SYB: extending a generic reader with a type class
+Message-ID: <AANLkTinu1ZoUObvBVBXeK6sTt8yh3tSTkTsqoHpDvt4x@mail.gmail.com>
+
+Dear -cafe,
+
+Is it possible to extend a generic reader (extR / ext1R from syb) with a
+type class?
+
+
+For example, let
+
+foo :: (Integral a) => SomeMonad a
+
+I could write:
+
+reader = ... `extR` (foo :: SomeMonad Int) `extR` (foo :: SomeMonad Integer)
+
+However, that is tedious.  Could I do something like
+
+reader = ... `extR` foo
+
+and have it apply to all instances of Integral?
+
+
+I hope I am being clear.
+
+Thank you.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110202/7f2bd4c5/attachment.htm>
+

@@ -1,0 +1,38 @@
+From ketil at malde.org  Wed Apr 27 11:47:45 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Wed, 27 Apr 2011 11:47:45 +0200
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <alpine.DEB.2.00.1104271123020.5485@anubis> (Henning Thielemann's
+	message of "Wed, 27 Apr 2011 11:30:37 +0200 (CEST)")
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+Message-ID: <87vcy0vxdq.fsf@malde.org>
+
+Henning Thielemann <lemming at henning-thielemann.de> writes:
+
+> I like to apply for the quote of the week. :-)
+>
+>   "If Haskell is great because of its laziness,
+>    then Python must be even greater,
+>    since it is lazy at the type level."
+
+Well, this is indeed (an elegant reformulation of) a common objection,
+namely that Python programmers often want to run code that is *wrong*,
+in ways that a statically typed languge would prohibit.  The idea being
+that during development, you can test a partial program without worrying
+about the missing pieces from - or pieces that don't quite fit - the
+puzzle.
+
+In Haskell, I often need to add stubs of "undefined" in order to do
+this.  I don't mind, since it is often very useful to say *something*
+about the particular piece - e.g. I add the type signature, establishing
+the shape of the missing piece without bothering with the actual
+implementation just yet.
+
+That "Haskell is great because of its laziness" is arguable, see Robert
+Harper's blog for all the arguing. (http://existentialtype.wordpress.com/)
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

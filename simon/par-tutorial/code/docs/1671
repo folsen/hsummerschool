@@ -1,0 +1,28 @@
+From daniel.is.fischer at googlemail.com  Mon Dec  5 16:08:17 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Mon, 5 Dec 2011 16:08:17 +0100
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAMXF=YCpAGRVX7QZDMek+7ibFgQgXDiGW=T6wq9NKM_A-N=Okg@mail.gmail.com>
+References: <CAHZd2pn--Umo43nENkrtXKLwh1TYs-SJpHNT8QGCjOfhkTCZFg@mail.gmail.com>
+	<CAHZd2pm0B6WESqF5Y9CYzt8tvhKFGa+gJtpE89HFrvsHyBBCkg@mail.gmail.com>
+	<CAMXF=YCpAGRVX7QZDMek+7ibFgQgXDiGW=T6wq9NKM_A-N=Okg@mail.gmail.com>
+Message-ID: <201112051608.17424.daniel.is.fischer@googlemail.com>
+
+On Monday 05 December 2011, 15:53:35, dokondr wrote:
+> Balazs, thanks for your comments!
+> The first comment works just fine.
+> With </> operator I get this:
+> 
+> Main System.Environment.Executable System.FilePath> "/abc" </> "/"
+> "/"
+> 
+> Instead of getting "/abc/" I get "/". What am I doing wrong?
+
+The second path is absolute.
+
+</> is an alias for combine, the docs for that say:
+
+"Combine two paths, if the second path isAbsolute, then it returns the 
+second."
+
+

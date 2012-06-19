@@ -1,0 +1,54 @@
+From alex.solla at gmail.com  Tue Aug 23 22:55:15 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Tue, 23 Aug 2011 13:55:15 -0700
+Subject: [Haskell-cafe] why the name lambda calculus?
+In-Reply-To: <B8329527-9046-4E47-8B8F-E76C17C9961C@ezrakilty.net>
+References: <CAGdT1gpjdu9+F6QOP0ULtrCS9JKyRT89ZorDf-2tOsavR1poOg@mail.gmail.com>
+	<BFBE5DB6-D4E9-4543-9F57-4576A6B7A3E6@uvm.edu>
+	<CAKWTe25=3Srd3TW_-+K=h+hvUcG9vWx23H7fAwAESHSKrDj2jg@mail.gmail.com>
+	<B8329527-9046-4E47-8B8F-E76C17C9961C@ezrakilty.net>
+Message-ID: <CAO0Ooq0finGitVn519usz9jgDUJ8HrHwSsZUSnvOEivDWS4a6w@mail.gmail.com>
+
+On Tue, Aug 23, 2011 at 10:58 AM, Ezra Cooper <ezra at ezrakilty.net> wrote:
+
+> An algebra is a specific kind of structure which is itself formalized
+> mathematically. I've never seen a formalization of the notion of "a
+> calculus" and I believe it to be a looser term, as KC defined it.
+>
+> Specifically, an algebra consists of a set (or several "sorts" of sets) and
+> operations that reduce pairs of elements from that set (or the pairs can be
+> triples, etc.) back into the set. Usually that set corresponds to the
+> "semantics" of the algebra, and syntactic equations like xy = yx exist in a
+> different realm from the operations and their actions.
+>
+> Lambda calculus differs from an algebra by having a construct (lambda
+> abstraction) that only makes sense if you know the syntactic structure of
+> the term it applies to. That is, it has a binding construct. You could
+> define lambda calculus as an algebra by taking the underlying set to be the
+> syntax of the calculus itself, but that would require infinitely many
+> operations (a lambda-binder for each variable) and equations, so perhaps
+> that would be awkward.
+>
+> Pi calculus, like lambda calculus, has binders, while "process algebras"
+> are usually defined via operations on processes. I believe this to be a
+> general trait of things described as "calculi"--that they have some form of
+> name-binders, but I have never seen that observation written down.
+>
+> I'm sure that an algebraist could give a more definite answer about this.
+>
+
+Aside from "the calculus", a calculus is just a language with syntactic
+rules of inference/deduction.  Indeed, "the calculus" was a calculus in this
+sense way back when, before Riemann formalized the subject with deltas and
+epsilons (that is, arguments about sequences and limits).  I am referring to
+the syntactic rules for manipulating derivatives and integrals which Liebniz
+invented, such as "formal cancellation of derivatives":  dy/dx * dz/dy =
+dz/dx
+
+An algebra is a model for a language that quantifies over objects and
+function symbols on objects.  For example, the "symmetric group S4" is an
+algebra that models the symmetric group axioms.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110823/c067eed7/attachment.htm>
+

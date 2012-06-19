@@ -1,0 +1,13 @@
+From jmillikin at gmail.com  Mon Apr 18 23:41:33 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Mon, 18 Apr 2011 14:41:33 -0700 (PDT)
+Subject: [Haskell-cafe] HXT and xhtml page encoded in cp1251
+In-Reply-To: <4DACA7D5.1040206@gmail.com>
+Message-ID: <10769234.2604.1303162893064.JavaMail.geo-discussion-forums@prog33>
+
+Since the document claims it is HTML, you should be parsing it with an HTML 
+parser. Try hxt-tagsoup -- specifically, the "parseHtmlTagSoup" arrow.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110418/be6ffeb1/attachment.htm>
+

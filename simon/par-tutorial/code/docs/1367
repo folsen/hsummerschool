@@ -1,0 +1,21 @@
+From ozgurakgun at gmail.com  Thu Aug 25 17:47:30 2011
+From: ozgurakgun at gmail.com (Ozgur Akgun)
+Date: Thu, 25 Aug 2011 16:47:30 +0100
+Subject: [Haskell-cafe] haskell-src-exts should depend on happy
+Message-ID: <CALzazPCqXV=poAzXbc7eNhSj4yugq6yR7Pigk+_eONKi_35xRw@mail.gmail.com>
+
+Hi,
+
+cabal installing haskell-src-exts fails, because of an unlisted dependency
+to the happy executable.
+
+The following succeeds:
+
+cabal install happy; cabal install haskell-src-exts
+
+Thanks,
+Ozgur
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110825/bbd177cf/attachment.htm>
+

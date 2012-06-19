@@ -1,0 +1,20 @@
+From james.w.keats at gmail.com  Wed Apr 13 18:56:59 2011
+From: james.w.keats at gmail.com (James Keats)
+Date: Wed, 13 Apr 2011 17:56:59 +0100
+Subject: [Haskell-cafe] Service Component Architecture and Distributed
+	Haskell
+Message-ID: <BANLkTinM3BKy7sb4WVR4fCO+dcRaSYtsqw@mail.gmail.com>
+
+Hi all. There's recently been some talk about distributed haskell, but what
+I wish to see is interest from an experienced member of the Haskell
+community in implementing Haskell components with SCA/Tuscany. Please see
+this and consider it, it'd be great to be able to use Haskell in the same
+project with Java/Scala.
+
+Thanks.
+
+Link: http://www.haskell.org/pipermail/haskell/2010-April/022004.html
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110413/bb077654/attachment.htm>
+

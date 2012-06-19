@@ -1,0 +1,40 @@
+From ross at soi.city.ac.uk  Thu Dec 15 04:03:17 2011
+From: ross at soi.city.ac.uk (Ross Paterson)
+Date: Thu, 15 Dec 2011 03:03:17 +0000
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CAKjSnQE+QbryLsUK9MstLnxAzhgWJp3Pir9tc1UbC9wxKbZtpA@mail.gmail.com>
+References: <CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+	<CACw0ni+Q=ixAAdWzmsbF+c1RkF74S2RV=fi_tX2B2puR0s5xvQ@mail.gmail.com>
+	<12B612A8-515C-4E86-BE7E-F2214AA5E210@deepbondi.net>
+	<CANd=OGHac+eas7SZjgruccP8n_Gh1a11bFdhUqzH-jmsZJxwFA@mail.gmail.com>
+	<CANd=OGGMg97zDT2t=4sxmtRmBKCLm=ue1NN705GRURNy+BhXhw@mail.gmail.com>
+	<20111215020337.GA21854@soi.city.ac.uk>
+	<CAKjSnQE+QbryLsUK9MstLnxAzhgWJp3Pir9tc1UbC9wxKbZtpA@mail.gmail.com>
+Message-ID: <20111215030317.GA22857@soi.city.ac.uk>
+
+On Thu, Dec 15, 2011 at 02:36:52AM +0000, Antoine Latter wrote:
+> This seems to generalize to list:
+> 
+>     some [] = []
+>     some xs = [cycle xs]
+> 
+>     many [] = [[]]
+>     many xs = [cycle xs]
+
+More like
+
+    some [] = []
+    some (x:xs) = repeat (repeat x)
+
+    many [] = [[]]
+    many (x:xs) = repeat (repeat x)
+
+> Although I'm still not sure why I would be using these operations in
+> maybe or list.
+
+That's true.
+
+

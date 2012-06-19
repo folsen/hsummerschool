@@ -1,0 +1,93 @@
+From hreinhardt at gmail.com  Wed Feb  9 16:59:42 2011
+From: hreinhardt at gmail.com (Holger Reinhardt)
+Date: Wed, 9 Feb 2011 16:59:42 +0100
+Subject: [Haskell-cafe] Possible bug in Control.Concurrent
+In-Reply-To: <AANLkTikWsDP+Jo5i9fqs7dLqLOewZATs0bzBw_pYftzJ@mail.gmail.com>
+References: <AANLkTikWsDP+Jo5i9fqs7dLqLOewZATs0bzBw_pYftzJ@mail.gmail.com>
+Message-ID: <AANLkTik9rOAVRPs_M-xfstZmc=Kre_MZ4rnRuHnmQHEj@mail.gmail.com>
+
+You've been bitten by the following bug:
+http://hackage.haskell.org/trac/ghc/ticket/4154
+
+In short, isEmptyChan will block because of the concurrent call to readChan.
+The "solution" is to not use isEmptyChan or switch to STM.
+
+
+2011/2/9 Krzysztof Skrz?tnicki <gtener at gmail.com>
+
+> Hello Cafe,
+>
+> Here is a simple program that yields strange results:
+>
+> module Main where
+>
+> import Control.Concurrent
+> import Control.Concurrent.Chan
+> import Control.Monad
+>
+> main = do
+>  c <- newChan
+>  writeChan c 1
+>  forkIO $ forever $ do
+>    i <- readChan c
+>    print ("forkio",i)
+> isEmptyChan c >>= print
+>
+> First of all, if we try to run it via runhaskell, it will hang:
+>
+> runhaskell deadlock.hs
+> ("forkio",1)
+> -- no more output --
+>
+>
+> Compiled version OTOH behaves differently dependent on compilation flags.
+> Without -threaded:
+> ./deadlock
+> ("forkio",1)
+> False
+>
+> With -threaded:
+> ./deadlock
+> False
+>
+> Now, this is strange thing: we put single element into the channel. We take
+> it out. And then we see the channel isn't really empty. Perhaps there is a
+> race condition here? So we put an delay, so that we will be sure the check
+> for empty channel occurs 1 second later than the channel is emptied.
+>
+> import Control.Concurrent
+> import Control.Concurrent.Chan
+> import Control.Monad
+>
+> main = do
+>  c <- newChan
+>  writeChan c 1
+>  forkIO $ forever $ do
+>    i <- readChan c
+>    print ("forkio",i)
+>   threadDelay 1000000
+>  isEmptyChan c >>= print
+>
+> This program will misbehave. Invariably of -threaded flag it will go like
+> this:
+>
+> ./deadlock
+> ("forkio",1)
+> deadlock: thread blocked indefinitely in an MVar operation
+>
+> I have no idea what is the problem here. Perhaps I'm not using the library
+> in the right way. Does anyone has any idea what's going on here?
+>
+> Best regards,
+> Krzysztof Skrz?tnicki
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110209/b3ba3d41/attachment.htm>
+

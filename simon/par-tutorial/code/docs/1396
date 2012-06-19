@@ -1,0 +1,83 @@
+From daniel.is.fischer at googlemail.com  Fri Aug 26 20:02:59 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Fri, 26 Aug 2011 20:02:59 +0200
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <4E57D6D5.8030407@btinternet.com>
+References: <4E568D11.30800@btinternet.com>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+Message-ID: <201108262002.59552.daniel.is.fischer@googlemail.com>
+
+On Friday 26 August 2011, 19:24:37, Andrew Coppin wrote:
+> On 26/08/2011 02:40 AM, Daniel Peebles wrote:
+> > And as Daniel mentioned earlier, it's not at all obvious what we mean
+> > by "bits used" when it comes to negative numbers.
+> 
+> I guess part of the problem is that the documentation asserts that
+> bitSize will never depend on its argument. (So would will write things
+> like "bitSize undefined :: ThreadID" or similar.)
+
+I don't think that's a problem, it's natural for what bitSize does. And it 
+would be bad if bitSize did something different for Integer than for Int, 
+Word, ...
+
+> 
+> I can think of several possible results one might want from a bit size
+> query:
+
+Yup, though for some there are better names than bitSize would be.
+
+> 
+> 1. The number of bits of precision which will be kept for values of this
+> type. (For Word16, this is 16. For Integer, this is [almost] infinity.)
+
+Not "almost infinity", what your RAM or Int allow, whichever cops out 
+first, or "enough, unless you [try to] do really extreme stuff".
+
+> 
+> 2. The amount of RAM that this value is using up. (But that would surely
+> be measured in bytes, not bits. And processor registors make the picture
+> more complicated.)
+> 
+> 3. The bit count to the most significant bit, ignoring sign.
+> 
+> 4. The bit count to the sign bit.
+> 
+> Currently, bitSize implements #1. I'm not especially interested in #2. I
+> would usually want #3 or #4.
+
+I'd usually be more interested in #2 than in #4.
+
+> 
+> Consider the case of 123 (decimal). The 2s complement representation of
+> +123 is
+> 
+> ...0000000000000001111011
+> 
+> The 2s complement representation of -123 is
+> 
+> ...1111111111111110000101
+> 
+> For query #3, I would expect both +123 and -123 to yield 7.
+
+One could make a case for the answer 3 for -123, I wouldn't know what to 
+expect without it being stated in the docs.
+
+> For query
+> #4, I would expect both to yield 8. (Since if you truncate both of those
+> strings to 8 bits, then the positive value starts with 0, and the
+> negative one start with 1.)
+
+#4 would then generally be #3 + 1 for signed types, I think, so not very 
+interesting, but for unsigned types?
+
+> 
+> Then of course, there's the difference between "count of the bits" and
+> "bit index", which one might expect to be zero-based. (So that the Nth
+> bit represents 2^N.)
+
+Yes, but that shouldn't be a problem with good names.
+
+So, which of them are useful and important enough to propose for inclusion?
+
+

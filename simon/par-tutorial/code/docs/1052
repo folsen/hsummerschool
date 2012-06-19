@@ -1,0 +1,38 @@
+From donn at avvanta.com  Thu Aug 11 17:57:12 2011
+From: donn at avvanta.com (Donn Cave)
+Date: Thu, 11 Aug 2011 08:57:12 -0700 (PDT)
+Subject: [Haskell-cafe] Trouble with readProcess
+In-Reply-To: <CAB6QvNNdKDWAX96LKDukDMgqFiPTkJ2icqEdWmv9a4C610ONaA@mail.gmail.com>
+References: <CAB6QvNMibG0QCKKtT0cOixDB0YqJBNsJQyGzHi0CB4u6LJrm+g@mail.gmail.com>
+	<20110811150527.5B9F6276C45@mail.avvanta.com>
+	<CAB6QvNNdKDWAX96LKDukDMgqFiPTkJ2icqEdWmv9a4C610ONaA@mail.gmail.com>
+Message-ID: <20110811155712.8125093C2E@mail.avvanta.com>
+
+Quoth Charles-Pierre Astolfi <cpa at crans.org>,
+
+> I've found my mistake: I was calling readProcess cmd ["-p -t"] instead
+> of readProcess cmd ["-p","-t"]
+
+That would do it.
+
+> Not sure what are the semantics of quotation in this case, though. And
+> I'm pretty sure my analysis is wrong because of that :)
+
+The principle isn't complicated. In UNIX, anyway, quotes are for the shell -
+   $ cmd a b
+
+is a string interpreted by the shell as a UNIX command (path, [args]).
+If an argument contains white space or something it needs to be quoted,
+and the shell supports all kinds of ways to do that.  Of course it uses
+the quotes, the executed command doesn't see them.
+
+But when a Haskell process function's command takes a list of args, 
+we infer that there isn't any shell interpretation, so no quotes.
+If you want a shell command, for example because you want a pipeline
+or something, then you may invoke the shell yourself, like
+
+ readProcess "/bin/sh" ["-c", "cmd -p -t"]
+
+	Donn
+
+

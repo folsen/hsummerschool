@@ -1,0 +1,23 @@
+From malcolm.wallace at me.com  Thu Dec 15 12:31:57 2011
+From: malcolm.wallace at me.com (malcolm.wallace)
+Date: Thu, 15 Dec 2011 11:31:57 +0000 (GMT)
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+Message-ID: <fddfbd10-32f2-4f71-eb37-903da9b05ee3@me.com>
+
+On 15 Dec, 2011,at 03:58 AM, Gregory Crosswhite <gcrosswhite at gmail.com> wrote:
+
+> This is even more out there than my previous posts, but the following just occurred to me:  is it absolutely necessary that some/many have produced the entire list of results before returning?
+ 
+No, it is not absolutely necessary.
+> Couldn't we change their semantics so that the list of results is computed and/or extracted lazily?
+ 
+I do not regard that as a change in their semantics - it is perfectly allowed already.  Indeed, the instances of some/many that I write are already lazily-unfolding, wherever possible.  It all depends simply on whether your instance of Applicative is lazy or strict.
+
+?
+Regards,
+    Malcolm
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/962c15a7/attachment.htm>
+

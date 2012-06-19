@@ -1,0 +1,67 @@
+From aslatter at gmail.com  Tue Apr 26 14:39:18 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Tue, 26 Apr 2011 07:39:18 -0500
+Subject: [Haskell-cafe] Wai and http-enumerator not as lazy as I'd like
+In-Reply-To: <20110426222746.57ea8526.mle+hs@mega-nerd.com>
+References: <20110426222746.57ea8526.mle+hs@mega-nerd.com>
+Message-ID: <BANLkTikENiNJh1h_4cG0SLZBzx+OPs9YCA@mail.gmail.com>
+
+On Tue, Apr 26, 2011 at 7:27 AM, Erik de Castro Lopo
+<mle+hs at mega-nerd.com> wrote:
+> Hi all,
+>
+> I'm using Wai and http-enumerator to build a http proxy. The core of
+> the code looks like this:
+>
+> ? ?import qualified Network.HTTP.Enumerator ? ? as HE
+> ? ?import qualified Network.Wai ? ? ? ? ? ? ? ? as Wai
+>
+> ? ?serveRequest :: forall (m :: * -> *).
+> ? ? ? ? ? ? (MonadControlIO m, Failure HE.HttpException m) =>
+> ? ? ? ? ? ? HE.Request m -> m Wai.Response
+> ? ?serveRequest request
+> ? ? = do ? HE.Response sc rh bs <- HE.withManager $ HE.httpLbsRedirect request
+> ? ? ? ? ? ?return $ Wai.responseLBS (mkStatus sc) rh bs
+>
+> This works but does not run in constant space as I would have hoped.
+> The thing is, HE.httpLbsRedirect returns a lazy ByteString and
+> Wai.responseLBS writes a lazy ByteString, so why isn't the whole thing
+> lazy?
+>
+
+None of the "lbs" functions in http-enumerator can operate in constant
+space - they are all built on top of the utility function "lbsIter"
+which provides a warning:
+
+> Convert the HTTP response into a Response value.
+>
+> Even though a Response contains a lazy bytestring, this function does not utilize lazy
+> I/O, and therefore the entire response body will live in memory. If you want constant >
+> memory usage, you'll need to write your own iteratee and use http or httpRedirect
+> directly.
+
+See:
+
+http://hackage.haskell.org/packages/archive/http-enumerator/0.6.0.2/doc/html/Network-HTTP-Enumerator.html#g:4
+
+It might be good to have this warning on the functions that use
+"lbsIter", or have them use ByteStrings instead of Lazy ByteStrings.
+
+Antoine
+
+> I'd appreciate any clues.
+>
+> Cheers,
+> Erik
+> --
+> ----------------------------------------------------------------------
+> Erik de Castro Lopo
+> http://www.mega-nerd.com/
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

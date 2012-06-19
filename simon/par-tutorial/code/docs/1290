@@ -1,0 +1,72 @@
+From ezra at ezrakilty.net  Tue Aug 23 19:58:23 2011
+From: ezra at ezrakilty.net (Ezra Cooper)
+Date: Tue, 23 Aug 2011 13:58:23 -0400
+Subject: [Haskell-cafe] why the name lambda calculus?
+In-Reply-To: <CAKWTe25=3Srd3TW_-+K=h+hvUcG9vWx23H7fAwAESHSKrDj2jg@mail.gmail.com>
+References: <CAGdT1gpjdu9+F6QOP0ULtrCS9JKyRT89ZorDf-2tOsavR1poOg@mail.gmail.com>
+	<BFBE5DB6-D4E9-4543-9F57-4576A6B7A3E6@uvm.edu>
+	<CAKWTe25=3Srd3TW_-+K=h+hvUcG9vWx23H7fAwAESHSKrDj2jg@mail.gmail.com>
+Message-ID: <B8329527-9046-4E47-8B8F-E76C17C9961C@ezrakilty.net>
+
+An algebra is a specific kind of structure which is itself formalized mathematically. I've never seen a formalization of the notion of "a calculus" and I believe it to be a looser term, as KC defined it.
+
+Specifically, an algebra consists of a set (or several "sorts" of sets) and operations that reduce pairs of elements from that set (or the pairs can be triples, etc.) back into the set. Usually that set corresponds to the "semantics" of the algebra, and syntactic equations like xy = yx exist in a different realm from the operations and their actions. 
+
+Lambda calculus differs from an algebra by having a construct (lambda abstraction) that only makes sense if you know the syntactic structure of the term it applies to. That is, it has a binding construct. You could define lambda calculus as an algebra by taking the underlying set to be the syntax of the calculus itself, but that would require infinitely many operations (a lambda-binder for each variable) and equations, so perhaps that would be awkward.
+
+Pi calculus, like lambda calculus, has binders, while "process algebras" are usually defined via operations on processes. I believe this to be a general trait of things described as "calculi"--that they have some form of name-binders, but I have never seen that observation written down.
+
+I'm sure that an algebraist could give a more definite answer about this.
+
+Ezra
+
+On Aug 23, 2011, at 12:19 PM, Rajesh S R <srrajesh1989 at gmail.com> wrote:
+
+> Slight digression. Why not Lambda "Algebra"?
+> In particular, what is the criteria for a system to be calculus and how's it different from algebra?
+> 
+> On Mon, Aug 22, 2011 at 12:41 AM, Jack Henahan <jhenahan at uvm.edu> wrote:
+> The short answer is "because Church said so". But yes, it is basically because ? is the abstraction operator in the calculus.
+> 
+> Why not alpha or beta calculus? What would we call alpha and beta conversion, then? :D
+> 
+> On Aug 21, 2011, at 12:37 PM, C K Kashyap wrote:
+> 
+> > Hi,
+> > Can someone please tell me what is the root of the name lambda calculus? Is it just because of the symbol lambda that is used?
+> > Why not alpha or beta calculus?
+> > Regards,
+> > Kashyap
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> 
+> Jack Henahan
+> jhenahan at uvm.edu
+> ==
+> Computer science is no more about computers than astronomy is about telescopes.
+> -- Edsger Dijkstra
+> ==
+> 
+> 
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+> 
+> 
+> 
+> 
+> -- 
+> Rajesh S R
+> http://rajeshsr.co.cc/blogs/
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110823/ce939e02/attachment.htm>
+

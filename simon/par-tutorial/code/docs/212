@@ -1,0 +1,20 @@
+From marco-oweber at gmx.de  Thu Apr  7 12:21:17 2011
+From: marco-oweber at gmx.de (Marc Weber)
+Date: Thu, 07 Apr 2011 12:21:17 +0200
+Subject: [Haskell-cafe] Local copy of hackageDB
+In-Reply-To: <BANLkTi=dXeg+movZswKiaTavDNaJxhHOuQ@mail.gmail.com>
+References: <BANLkTi=dXeg+movZswKiaTavDNaJxhHOuQ@mail.gmail.com>
+Message-ID: <1302171567-sup-8769@nixos>
+
+Local copy ?
+You know that hackage is hosting several thausands of source archives -
+also old versions you don't want?
+
+Do you want to mirror everything locally?
+
+Fetching "latest" versions only to generate hashes takes many hours.
+(Experience from hack-nix).
+
+Marc Weber
+
+

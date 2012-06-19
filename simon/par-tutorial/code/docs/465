@@ -1,0 +1,65 @@
+From mail at joachim-breitner.de  Mon Apr 18 09:30:14 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Mon, 18 Apr 2011 13:00:14 +0530
+Subject: [Haskell-cafe] How to contact OpenGL package maintainer (where
+	is Sven?)
+In-Reply-To: <BANLkTi=EstBKYvO1xM+=r37U4XyTn9Yz0Q@mail.gmail.com>
+References: <AANLkTinoGT8qa10+ZO6PEG5EOeMm=r3Cf2Rpeoe7tEts@mail.gmail.com>
+	<BANLkTikBKDkFLViTqt+UoixiX9gUQi_Gqg@mail.gmail.com>
+	<1303055619.2613.27.camel@kirk>
+	<BANLkTimKH=YLSMYhHDOTSx8xiUEYAs=PrA@mail.gmail.com>
+	<1303062686.2613.34.camel@kirk>
+	<BANLkTi=EstBKYvO1xM+=r37U4XyTn9Yz0Q@mail.gmail.com>
+Message-ID: <1303111814.2482.6.camel@kirk>
+
+[Moving to haskell-cafe, not really library specific any more]
+
+Hi,
+
+Am Sonntag, den 17.04.2011, 12:39 -0700 schrieb Jason Dagit:
+
+
+> In this specific case, I'll do what I can to clean things up but your
+> request makes me pause and think that the debian packaging for cabal
+> packages is not automated enough.  As haskell developers it seems a
+> little odd to me that we need to consider the cost of creating new
+> packages for the sake of debian.  I like debian, so please don't take
+> that the wrong way :)
+
+the observation is correct, but unfortunately hard to change ? Debian is
+large, slow moving, and unlikely to change policies for a corner-case
+such as Haskell libraries. 
+
+Also, the policies that make life a bit more harder for us are also the
+policies that make Debian a good distribution: E.g. manually creating a
+copyright file describing who all has copyright on the files, and what
+license the files are under ? .cabal has fields for that, but
+unfortunately, they very often do not reflect the reality of the .hs
+files. Or the other one, requiring that an upload of a source package is
+accompanied by a manually built and signed binary package ensures that
+the maintainer actually checked that the package builds and hopefully
+has tested it.
+
+If you think more about it, the lack of some of the policies on Hackage,
+e.g. nobody checking that licenses and copyright are correctly specified
+and actually compatible with dependencies, make Hackage a dangerous
+source for serious users. I am not saying that this should change, but
+the cheapness of Hackage uploads has its downsides.
+
+Greetings,
+Joachim
+
+-- 
+Joachim Breitner
+  e-Mail: mail at joachim-breitner.de
+  Homepage: http://www.joachim-breitner.de
+  ICQ#: 74513189
+  Jabber-ID: nomeata at joachim-breitner.de
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110418/7bb2954b/attachment.pgp>
+

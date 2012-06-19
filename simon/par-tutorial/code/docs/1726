@@ -1,0 +1,167 @@
+From dmitry.kulagin at gmail.com  Wed Dec  7 13:07:22 2011
+From: dmitry.kulagin at gmail.com (Dmitry Kulagin)
+Date: Wed, 7 Dec 2011 16:07:22 +0400
+Subject: [Haskell-cafe] More liberal than liberal type synonyms
+In-Reply-To: <CACqaG6zfA9nBb8NX+Fhpp+Lg+zxckz04-Qty=Q5Nh3rzkBjxSA@mail.gmail.com>
+References: <CAHEA9tPH_uO0UjQ7yUe8j5fGC=NsqVAsodfVJS+x1e7LOhGxrw@mail.gmail.com>
+	<CAN0wsw=4tK-BLDms1j3_iPz-igVOX=+=SUenh7Le=MGH=dULtw@mail.gmail.com>
+	<CAH_oh=wSOk3mJjtmV3VtWfu5JdvXWUQwtpGzeo23iTgAr=mxDQ@mail.gmail.com>
+	<CACqaG6ykwGvGMFnwY43TYt6-HYm6cJ2sVPLff+BrO10XAhS1nQ@mail.gmail.com>
+	<CAN0wswkbFNi=O1a+35iYHKyVNPOSu8hpGcVE16sOBsq1ODrJcQ@mail.gmail.com>
+	<CACqaG6zfA9nBb8NX+Fhpp+Lg+zxckz04-Qty=Q5Nh3rzkBjxSA@mail.gmail.com>
+Message-ID: <CAN0wswnKWLw37iFMahWX32znb7cdMGFop3K3tVXs8bjPVT86Mg@mail.gmail.com>
+
+> For short, type synonyms work for mere aliases, but not for full-fledged> type-level non-inductive functions.> And sometimes we intuitively want to use them as such.
+Thank you, Yves! It is now more clear for me.
+
+Still, it seems that ability to use partially applied type synonyms would be
+very natural (and useful) extension to the language. It would allow to avoid
+boilerplate code associated with creating "really new" types instead of just
+using synonims for existing ones.
+
+On Wed, Dec 7, 2011 at 3:51 PM, Yves Par?s <limestrael at gmail.com> wrote:
+> Ah, maybe Dan could tell us if it works only with GHC 7.
+>
+> Dmitry, I had your problem many times. The last time was when I saw you
+> could define the ContT monad in terms of Cont (the opposite is done in the
+> mtl).
+> It leads to a simpler code, but you are stucked when trying to define ContT
+> as an instance of MonadTrans:
+>
+> data Cont r a = ...
+> -- [instances of Monad Cont, blah blah blah]
+>
+> type ContT r m a = Cont r (m a)
+>
+> instance MonadTrans (ContT r) where? -- This doesn't compile, even if it is
+> logical
+> ? lift = ...
+>
+> For short, type synonyms work for mere aliases, but not for full-fledged
+> type-level non-inductive functions.
+> And sometimes we intuitively want to use them as such.
+>
+>
+> 2011/12/7 Dmitry Kulagin <dmitry.kulagin at gmail.com>
+>>
+>> > Dmitry, does your code work with LiberalTypeSynonyms extention
+>> > activated?
+>> No, the same error:
+>> Type synonym `StateA' should have 1 argument, but has been given 0
+>>
+>> But I have GHC 6.12.3
+>>
+>> Dmitry
+>> 2011/12/7 Yves Par?s <limestrael at gmail.com>:
+>> > This is impossible:
+>> > in the definition of 'StateT s m a', m must be a monad and then have the
+>> > *
+>> > -> * kind.
+>> > So you cannot pass (StateA a), because it has simply the * kind.
+>> >
+>> > Dmitry, does your code work with LiberalTypeSynonyms extention
+>> > activated?
+>> >
+>> >
+>> > 2011/12/7 ?ystein Kolsrud <kolsrud at gmail.com>
+>> >>
+>> >> You should be able to write something like this:
+>> >>
+>> >> type StateB a b = StateT SomeOtherState (StateA a) b
+>> >>
+>> >> Best regards, ?ystein Kolsrud
+>> >>
+>> >>
+>> >> On Wed, Dec 7, 2011 at 11:48 AM, Dmitry Kulagin
+>> >> <dmitry.kulagin at gmail.com>
+>> >> wrote:
+>> >>>
+>> >>> Hi Dan,
+>> >>>
+>> >>> I am still pretty new in Haskell, but this problem annoys me already.
+>> >>>
+>> >>> If I define certain monad as a type synonym:
+>> >>>
+>> >>> ? ?type StateA a = StateT SomeState SomeMonad a
+>> >>>
+>> >>> Then I can't declare new monad based on the synonym:
+>> >>>
+>> >>> ? ?type StateB a = StateT SomeOtherState StateA a
+>> >>>
+>> >>> The only way I know to overcome is to declare StateA without `a':
+>> >>>
+>> >>> ? ?type StateA = StateT SomeState SomeMonad
+>> >>>
+>> >>> But it is not always possible with existing code base.
+>> >>>
+>> >>> I am sorry, if this is offtopic, but it seemed to me that the problem
+>> >>> is realted to partially applied type synomyms you described.
+>> >>>
+>> >>> Thanks!
+>> >>> Dmitry
+>> >>>
+>> >>> On Tue, Dec 6, 2011 at 10:59 PM, Dan Doel <dan.doel at gmail.com> wrote:
+>> >>> > Greetings,
+>> >>> >
+>> >>> > In the process of working on a Haskell-alike language recently, Ed
+>> >>> > Kmett and I realized that we had (without really thinking about it)
+>> >>> > implemented type synonyms that are a bit more liberal than GHC's.
+>> >>> > With
+>> >>> > LiberalTypeSynonyms enabled, GHC allows:
+>> >>> >
+>> >>> > ? ?type Foo a b = b -> a
+>> >>> > ? ?type Bar f = f String Int
+>> >>> >
+>> >>> > ? ?baz :: Bar Foo
+>> >>> > ? ?baz = show
+>> >>> >
+>> >>> > because Bar expands to saturate Foo. However, we had also
+>> >>> > implemented
+>> >>> > the following, which fails in GHC:
+>> >>> >
+>> >>> > ? ?type Foo a b = b -> a
+>> >>> > ? ?type Bar f = f (Foo Int) (Foo Int)
+>> >>> > ? ?type Baz f g = f Int -> g Int
+>> >>> >
+>> >>> > ? ?quux :: Bar Baz
+>> >>> > ? ?quux = id
+>> >>> >
+>> >>> > That is: type synonyms are allowed to be partially applied within
+>> >>> > other type synonyms, as long as similar transitive saturation
+>> >>> > guarantees are met during their use.
+>> >>> >
+>> >>> > I don't know how useful it is, but I was curious if anyone can see
+>> >>> > anything wrong with allowing this (it seems okay to me after a
+>> >>> > little
+>> >>> > thought), and thought I'd float the idea out to the GHC developers,
+>> >>> > in
+>> >>> > case they're interested in picking it up.
+>> >>> >
+>> >>> > -- Dan
+>> >>> >
+>> >>> > _______________________________________________
+>> >>> > Haskell-Cafe mailing list
+>> >>> > Haskell-Cafe at haskell.org
+>> >>> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+>> >>>
+>> >>> _______________________________________________
+>> >>> Haskell-Cafe mailing list
+>> >>> Haskell-Cafe at haskell.org
+>> >>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>> >>
+>> >>
+>> >>
+>> >>
+>> >> --
+>> >> Mvh ?ystein Kolsrud
+>> >>
+>> >> _______________________________________________
+>> >> Haskell-Cafe mailing list
+>> >> Haskell-Cafe at haskell.org
+>> >> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>> >>
+>> >
+>
+>
+
+

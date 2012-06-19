@@ -1,0 +1,113 @@
+From ivanperezdominguez at gmail.com  Fri Dec 16 17:37:50 2011
+From: ivanperezdominguez at gmail.com (Ivan Perez)
+Date: Fri, 16 Dec 2011 17:37:50 +0100
+Subject: [Haskell-cafe] What happens if you get hit by a bus?
+In-Reply-To: <87y5ucijnj.fsf@malde.org>
+References: <CAEzeKYpOsDqafSoJFQkYioSg-0LTJaFY8WCUBkH2RiXOCZypjQ@mail.gmail.com>
+	<87y5ucijnj.fsf@malde.org>
+Message-ID: <CACZKWEJMdbbySALfemF9y30GMoHY6KnT1w9xaW4i-AJjdDeshg@mail.gmail.com>
+
+Just like Michael, I've been learning what it means to be a professional
+Haskell programmer for a few months.
+
+I think the case of Ruby on Rails and Haskell are very, very, very different.
+
+Ruby on Rails has been around for many years. There are books, tutorials,
+examples, websites, etc. Still, there are not as many developers that use
+Rails than those that use PHP, or Java, or .NET, or Python (for web
+development). But there are many.
+
+This is definitely not the case with Haskell. If you go around the internet,
+it's not just that you can't find Haskell programmers with the necessary skills.
+You also cannot find people demanding these jobs, servers that support
+Haskell for web, or success stories to convince others and yourself that this
+is the right platform for this job.
+
+After several months, I just found the first client for which I'll
+create a website
+using Yesod.
+
+Being a professional Haskell developer requires many skills that have nothing
+to do with Haskell. Unless you are born with the talent of having the tax rules
+embedded in your head, you'll have to learn them. Maybe the hard way. That is
+true for lots of tasks related to social skills, design, management,
+negotiation.
+such as "how do I know what the client really wants without wasting
+hundreds of hours", "how the heck do I show my client what I have in mind"
+or "should this button go on the right or on the left and why should I care".
+
+Learning them takes time, and most of us don't learn them unless we actually
+need to. It's not that there aren't any people capable of creating
+websites using Haskell, or Haskell programmers who could learn to do it.
+
+It's just that not many people know enough, as of this day, to deliver
+a professional
+product with the results that clients expect.
+
+In my experience, the following help:
+
+ - Have a good portfolio, a list of websites you've created in Haskell
+that shows they
+have nothing to fear. If you can't find clients, create websites for
+free. Sparked.com
+may help. You'll know the list is good when there are great jobs that
+you choose not
+to include in it.
+
+ - Ask your previous clients and those you created websites for to
+leave feedback,
+acknowledge your work publicly or recommend you on linkedin.
+
+- Make a list of your competitors names and addresses (and put my name
+on top of the list ;)
+Haskellers.org may help. So can linkedin, guru.com, peopleperhour,
+etc. If they ask, tell them
+that there are tens of programmers with the necessary experience to go
+on if they are not
+satisfied with your work. If you want, we can created a group in a
+social network just
+for this, with the requirement that you must have created an actual
+product to be in the group.
+
+The amount of packages in hackage means Nothing to me. It means
+nothing to my clients.
+
+Good luck.
+
+Cheers,
+Ivan
+
+On 16 December 2011 17:08, Ketil Malde <ketil at malde.org> wrote:
+> Michael Litchard <michael at schmong.org> writes:
+>
+>> One article addresses the question above. His answer was that he uses
+>> RoR which has a large community and he is therefore easily
+>> replaceable. My question, for freelancers in general, and web
+>> developers in particular is this: How do you address this question?
+>
+> In this particular case, you could argue that more people know PHP and
+> Python than Ruby, so surely one should avoid Ruby as well.
+>
+> Managers like to think of their company as a factory, and from this
+> perspective, it makes sense to build your factory from easily obtainable
+> parts. ?But the factory mindset only works when you want to manufacture
+> stuff, nobody who takes a minute to actually think will say that you can
+> replace any programmer with any other, as long as they know the same
+> programming language or framework.
+>
+> Anyway, here's something I found interesting in that respect:
+>
+> ?http://www.dachisgroup.com/2011/12/cant-get-no-satisfaction-why-service-companies-cant-keep-their-promises/
+>
+> (This probably turned out less helpful than I intended, sorry :-)
+>
+> -k
+> --
+> If I haven't seen further, it is by standing in the footprints of giants
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

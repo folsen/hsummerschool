@@ -1,0 +1,52 @@
+From andrewcoppin at btinternet.com  Tue Aug 23 22:26:32 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Tue, 23 Aug 2011 21:26:32 +0100
+Subject: [Haskell-cafe] Performance of concurrent array access
+In-Reply-To: <CADdwyZ=MTFYz8NZt_KxpH1VfvbkFfpnhRHamvJar_gS-fe-awg@mail.gmail.com>
+References: <CADdwyZ=MTFYz8NZt_KxpH1VfvbkFfpnhRHamvJar_gS-fe-awg@mail.gmail.com>
+Message-ID: <4E540CF8.20605@btinternet.com>
+
+On 23/08/2011 09:04 PM, Andreas Voellmy wrote:
+
+> I compiled this with "ghc --make -rtsopts -threaded  -fforce-recomp -O2
+> DirectTableTest.hs".
+> Running "time ./DirectTableTest 1 +RTS -N1" takes about 1.4 seconds and
+> running "time ./DirectTableTest 2 +RTS -N2" take about 2.0 seconds!
+
+> I found that changing the array type used in the implementation of
+> DirectAddressTable from IOArray to IOUArray fixes this problem. With
+> this change, the running time of "time ./DirectTableTest 1 +RTS -N1" is
+> takes about 1.4 seconds whereas the running "time ./DirectTableTest 2
+> +RTS -N2" is about 1.0 seconds. Increasing to 4 cores gives a run time
+> of 0.55 seconds.
+
+> Finally, I tried one more variation. Instead of having the threads work
+> on the same shared array, I had each thread work on its own array. This
+> scales nicely (as you would expect), more or less like the second
+> program, with either IOArray or IOUArray implementing the
+> DirectAddressTable data structure.
+>
+> I understand why IOUArray might perform better than IOArray, but I don't
+> know why it scales better to multiple threads and cores. Does anyone
+> know why this might be happening or what I can do to find out what is
+> going on?
+
+I haven't deeply studied your code. However, I'm going to take a guess 
+this has to do with strictness.
+
+By using an IOArray, you're probably filling each cell with a reference 
+to "drop 7 cyclicChars" or similar, which then only gets evaluated (in 
+one thread) when you call "print".
+
+By using an IOUArray, you're definitely forcing each character to be 
+computed right away, by the thread doing the writing.
+
+That's /probably/ what the difference is. As a guess. (Not sure how you 
+can easily prove/disprove the theory though.)
+
+You don't say which GHC version, but AFAIK recent releases of GHC have a 
+seperate heap per thread (or was it per capability?), which probably 
+makes a difference if you start giving each thread its own array. That 
+and just plain ordinary cache coherance issues...
+
+

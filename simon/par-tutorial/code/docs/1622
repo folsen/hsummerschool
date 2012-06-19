@@ -1,0 +1,30 @@
+From mle+hs at mega-nerd.com  Sat Dec  3 08:03:58 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Sat, 3 Dec 2011 18:03:58 +1100
+Subject: [Haskell-cafe] Weird interaction between literate haskell,
+ ghci and OverloadedStrings
+In-Reply-To: <CA+u6gbzs=1Zt60mixWnKhgc19-ObxB1k_gUgZxcixvX05-Bgdw@mail.gmail.com>
+References: <20111203161824.f134a60f1a8a9ee4ece50ff4@mega-nerd.com>
+	<CA+u6gbzs=1Zt60mixWnKhgc19-ObxB1k_gUgZxcixvX05-Bgdw@mail.gmail.com>
+Message-ID: <20111203180358.cad749ee642e1af480aa1945@mega-nerd.com>
+
+Ivan Lazar Miljenovic wrote:
+
+> Add ":set -XOverloadedStrings" to a (possibly local) .ghci file?  It
+> doesn't contain it within the same document, but then if it's a local
+> one you could also add ":load file.lhs" in there so that you just have
+> to type ghci.
+
+Unfortunately, thats no better than telling people do:
+
+ ? ?ghci -XOverloadedStrings file.lhs
+
+Probably worse actually.
+
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

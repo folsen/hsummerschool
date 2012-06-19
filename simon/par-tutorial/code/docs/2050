@@ -1,0 +1,34 @@
+From conor at strictlypositive.org  Sat Dec 17 11:32:21 2011
+From: conor at strictlypositive.org (Conor McBride)
+Date: Sat, 17 Dec 2011 10:32:21 +0000
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <CAL3m8eALLyBZ69+uWFMTaiYCkqSNZ+p+2QgT0-YFece-Gxz48w@mail.gmail.com>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+	<CAL3m8eALLyBZ69+uWFMTaiYCkqSNZ+p+2QgT0-YFece-Gxz48w@mail.gmail.com>
+Message-ID: <73C09B8B-8299-4772-AC49-0E57BE6C59CB@strictlypositive.org>
+
+
+On 17 Dec 2011, at 02:51, Matthew Farkas-Dyck wrote:
+
+>>
+>
+> By my reason, the instance (Monoid a => Monoid (Maybe a)) is
+> appropriate, since we have another class for inner-type-agnostic
+> choice -- Alternative!
+
+So your argument is to create incoherence because we can. I'm not
+convinced.
+
+> (and MonadPlus, but that's essentially the
+> same, and would be if (Functor m => Applicative m => Monad m), as it
+> ought).
+
+and as it already is in Strathclyde...
+
+Cheers
+
+Conor
+
+

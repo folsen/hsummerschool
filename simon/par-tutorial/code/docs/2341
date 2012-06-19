@@ -1,0 +1,35 @@
+From amindfv at gmail.com  Wed Dec 28 03:05:47 2011
+From: amindfv at gmail.com (Tom Murphy)
+Date: Tue, 27 Dec 2011 21:05:47 -0500
+Subject: [Haskell-cafe] MIDI-controlled application
+In-Reply-To: <CAE0Z8DEZwSXUn65q6nEhnHccZuQojg1softo3esh=Hc06yuY=g@mail.gmail.com>
+References: <CAE0Z8DEZwSXUn65q6nEhnHccZuQojg1softo3esh=Hc06yuY=g@mail.gmail.com>
+Message-ID: <CAO9Q0tWJTRdrwY_26mqU_-yv+S9LFUc1ePzntNy-ELfk9SqN3A@mail.gmail.com>
+
+On Tue, Dec 27, 2011 at 3:54 AM, Tim Baumgartner <
+baumgartner.tim at googlemail.com> wrote:
+>
+> Hi Haskellers!
+>
+> I'm writing my first non-trivial Haskell application. I have an
+electronic drum set that generates MIDI events that I process with Haskell.
+A simple application of this kind might have fixed drums associated with
+fixed commands (I've done that).
+
+[...]
+>
+>
+> Currently I'm using a monad that combines Parsec (with MIDI event stream)
+and a Writer (that writes commands that should result in IO). It's done in
+a way that during running the monad, many parses can be done and failing
+parses roll back the parser state so that a new parse can be tried.
+>
+
+
+Care to share your code?
+
+amindfv / Tom
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111227/e74cef04/attachment.htm>
+

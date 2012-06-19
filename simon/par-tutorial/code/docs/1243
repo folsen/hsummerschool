@@ -1,0 +1,70 @@
+From hajhouse at hajhouse.org  Sat Aug 20 17:01:02 2011
+From: hajhouse at hajhouse.org (Henry House)
+Date: Sat, 20 Aug 2011 08:01:02 -0700
+Subject: [Haskell-cafe] custom SQL-to-Haskell type conversion in HDBC
+In-Reply-To: <CAKFCL4XDXNGJOWfjNNk3OSFkaojm1A2idcQOPgkCqpA2b9JQ6A@mail.gmail.com>
+References: <20110819052316.GA27130@houseag.com>
+	<CAPeieQEGXOJgfvA+FF2yTbhPnWA9vv7Xk8EghLj-2LiYy1Edyg@mail.gmail.com>
+	<20110819140939.GA27362@houseag.com>
+	<CAKFCL4XDXNGJOWfjNNk3OSFkaojm1A2idcQOPgkCqpA2b9JQ6A@mail.gmail.com>
+Message-ID: <20110820150102.GC14268@houseag.com>
+
+On Friday, 19 August 2011, Brandon Allbery wrote:
+> On Fri, Aug 19, 2011 at 10:09, Henry House <hajhouse at hajhouse.org> wrote:
+> 
+> > I'm not sure I understand the distinction --- to my way of thinking,
+> > getting the value at the right precision means getting the correct
+> > number of significant decimal digits, which both your example and mine
+> > fail to provide.
+> >
+> 
+> So you want display format data instead of something that you can do
+> computations with?  HDBC is giving you the latter; the precision is correct
+> for computation, although it could be argued that a Fixed type would be
+> better if you intend to propagate exact precision through operations.  (That
+> said, I believe Fixed obeys exact mathematical precision instead of
+> replicating your SQL backend's limitations, so you'd be unhappy again in
+> case of multiplication or division.)
+
+No, I want a data type in Haskell that mirrors the data type in the
+RDBMS, not conversion of RDBMS fixed-precision data into something else
+(Rational). If the data in the RDBMS represented a rational number of
+arbitrary precision, then they would have been stored in the RDBMS as a
+rational data type (assuming that the database was designed sensibly, of
+course). The limitations of the SQL backend are deliberately chosen (no
+one is forced to use fixed-precision numeric data types in PostgreSQL;
+arbitrary-precision numeric is available as well as a true rational with
+a contrib module). I'm well aware that management of roundoff error in
+computations is a tricky issue that needs appropriate management but
+that's not really my issue here.
+
+> I would suggest that if you want SQL formatted string output, you describe
+> that in the query instead of expecting HDBC to convert numeric data to
+> string while duplicating your SQL backend's formatting.
+
+That is a reasonable suggestion. Even better would be to read the result
+set returned by the SQL backend without any type conversion being done.
+AFAIK all result sets are returned as formatted text. The representation
+of result sets as booleans, integers, etc, is a result of conversion in
+the client.
+
+> Otherwise, perhaps you'd be better suited to a language with a looser
+> type system, so you can pretend string and numeric values are the same
+> thing and usually get something resembling the right result.
+
+I apologize, I can see that I was not clear at all in my question. This
+is quite the opposite of what I am looking for: I would like a stricter
+interpretation of data types --- that does not treat fixed-precision and
+rational as the same thing --- not a looser one.
+
+Anyway, while I appreciate the discussion about significant figures on
+computation, etc, I was asking whether anyone can point me in the right
+direction for implementing a custom SQL-to-Haskell type conversion,
+replacing the built-in behavior of HDBC (numeric fixed-precision to
+SqlRational) with a conversion that better suits my needs (e.g., as
+provided by the Decimal library). Thanks.
+
+-- 
+Henry House
+
+

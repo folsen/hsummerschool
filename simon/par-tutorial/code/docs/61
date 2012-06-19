@@ -1,0 +1,68 @@
+From lrpalmer at gmail.com  Sat Apr  2 20:11:03 2011
+From: lrpalmer at gmail.com (Luke Palmer)
+Date: Sat, 2 Apr 2011 12:11:03 -0600
+Subject: [Haskell-cafe] Asynchronous Arrows need Type Specialization -
+	Help!
+In-Reply-To: <BANLkTim2G4ZEk7iMDNPACL5=aH--BDfprQ@mail.gmail.com>
+References: <AANLkTi=p=Zi=k32sAROAiC7Ea4SRiSbzTqAp+B2YF7CS@mail.gmail.com>
+	<AANLkTi=jizU+TYLiLr7jP10bKdpdBHduDLVaa7svo0fr@mail.gmail.com>
+	<AANLkTinVhEQXVO7UP6xLEtBhM797dhcS5f477HUgV2OF@mail.gmail.com>
+	<AANLkTinst+ut2LN5vZOKEzeGbgummz3nsoZ4kCoS4+UR@mail.gmail.com>
+	<AANLkTimoOE32n5wq77BLuofk11Wo0=Cns8=oS5TxvEok@mail.gmail.com>
+	<BANLkTim6CqRWUxShdj-0UJGfWe1J9mRuUQ@mail.gmail.com>
+	<AANLkTimR1u6wF-CHp84u4qQHJhgVZazpze2D0_3J5QPV@mail.gmail.com>
+	<BANLkTim2G4ZEk7iMDNPACL5=aH--BDfprQ@mail.gmail.com>
+Message-ID: <BANLkTinS4JpwT=6usmkNv1f=2picxeD-iQ@mail.gmail.com>
+
+On Sat, Apr 2, 2011 at 10:09 AM, Paul L <ninegua at gmail.com> wrote:
+
+> Sorry, forgot to CC the list. I wonder why Gmail doesn't default to
+> reply-all.
+>
+
+If you have keyboard shortcuts on, reply to messages with the "a" key
+instead of the "r" key. I hardly ever use "r".
+
+Luke
+
+
+> On Fri, Apr 1, 2011 at 9:48 PM, David Barbour <dmbarbour at gmail.com> wrote:
+> >
+> > If we ignore the 'delay' primitive (which lifts latency into program
+> > logic), my model does meet all the arrow laws. Nonetheless, the issues
+> > of physical synchronization still apply. It's important to recognize
+> > that the Arrow Laws do not describe non-functional properties, such as
+> > time-space performance.
+>
+> Well, when you throw the time stamp into the value domain, and
+> according to your previous calculation of time stamps,  (a1 *** a2)
+> >>> first a3 will produce different result than (a1 >>> a3) *** a2.
+> This is in direct conflict to arrow laws.
+>
+> Arrows by themselves do not impose physical synchronization. They are
+> very often used to model computations about synchronous data streams,
+> but that is a very different concept.
+>
+> >> In the actual implementation of such lifting (perhaps over multiple
+> >> type classes), the calculation of the time stamp can be made precise.
+> >
+> > Indeed. And it is precisely the greater of the input timestamps. ;-)
+>
+> This is because you are using a single number as timestamp. Define
+> your timestamp type differently, you'll get a different opinion. For
+> example, you can use a pair of time stamps for pairs, and nested time
+> stamps for nested values.
+>
+> --
+> Regards,
+> Paul Liu
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110402/201f216d/attachment.htm>
+

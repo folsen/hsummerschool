@@ -1,0 +1,25 @@
+From sh006d3592 at blueyonder.co.uk  Fri Dec 30 18:52:41 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Fri, 30 Dec 2011 17:52:41 +0000
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <jdk4g7$ckl$1@dough.gmane.org>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk>
+	<jdh9h6$gba$1@dough.gmane.org> <4EFC3B4E.9020304@unicaen.fr>
+	<4EFCAC61.6000201@blueyonder.co.uk> <jdk4g7$ckl$1@dough.gmane.org>
+Message-ID: <4EFDFA69.3000502@blueyonder.co.uk>
+
+On 30/12/2011 10:41, Bardur Arantsson wrote:
+>
+> This doesn't sound right to me. To me, a "side effect" is something 
+> which happens as a (intended or unintended) consequence of something 
+> else. An effect which you want to happen (e.g. by calling a procedure, 
+> or letting the GHC runtime interpreting an IO Int) is just "an effect".
+>
+Trouble is, whether it sounds right doesn't really matter - that's just 
+an artifact of the meaning you're most familiar with. Any specialist 
+field has it's own jargon, including old words given new 
+related-but-different meanings.
+
+
+

@@ -1,0 +1,24 @@
+From v.dijk.bas at gmail.com  Tue Dec  6 10:40:35 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Tue, 6 Dec 2011 10:40:35 +0100
+Subject: [Haskell-cafe] ANNOUNCE: monad-control-0.3
+In-Reply-To: <CADLz5wX6aSLyjxpjZ_H00e4vQdf=-6gAbMsXZ_vKrROWFrMzjQ@mail.gmail.com>
+References: <CADLz5wW4oZbBtKMb7UQ8qQdn3UayBSQ-TL66VLG3hGXCUk_npg@mail.gmail.com>
+	<CADLz5wVs3AGCagikDMJVKVm-RJjgMhCbs7LJtxGPqi_rLbjRqQ@mail.gmail.com>
+	<20111206030316.GA25805@gnu.kitenet.net>
+	<CADLz5wX6aSLyjxpjZ_H00e4vQdf=-6gAbMsXZ_vKrROWFrMzjQ@mail.gmail.com>
+Message-ID: <CADLz5wVXaXLHStgJs6m+=-_QpxDo6=2ntd41wVLdSo=CbipRFA@mail.gmail.com>
+
+On 6 December 2011 09:12, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+> instance MonadBaseControl IO Annex where
+> ? ?newtype StM Annex a = StAnnex (StM (StateT AnnexState IO) a)
+> ? ?liftBaseWith f = Annex $ liftBaseWith $ \runInIO ->
+> ? ? ? ? ? ? ? ? ? ? ? f $ liftM StAnnex . runInIO . runAnnex
+
+Oops forgot the restoreM method:
+
+   restoreM = Annex . restoreM . unStAnnex
+
+unStAnnex (StAnnex st) = st
+
+

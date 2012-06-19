@@ -1,0 +1,37 @@
+From gcrosswhite at gmail.com  Wed Dec 21 07:30:50 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Wed, 21 Dec 2011 16:30:50 +1000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+Message-ID: <48743015-B3C4-4D72-85E1-948636946D87@gmail.com>
+
+
+On Dec 21, 2011, at 2:24 PM, Alexander Solla wrote:
+
+> I would rather have an incomplete semantic, and have all the incomplete parts collapsed into something we call "bottom".  We can then be smart and stay within a total fragment of the language (where bottom is guaranteed to not occur).
+
+
+But part of the whole point of including bottom in our semantics in the first place is *exactly* to *enable* us to be smart enough to know when we are staying within a total fragment of the language.  For example, including bottom in our semantics allows us to make and prove statements like
+
+	fst (42,_|_) = 42
+
+and
+
+	fst _|_ = _|_
+
+That is, as long a you know that the pair is total and that the first element is total, calling fst on it is also total regardless of whether the second value is total.
+
+Refusing to use bottom in our semantics doesn't make life better by forcing us to stay within a total fragment of the language, it actually makes life harder by removing from us a useful tool for knowing *how* to stay within a total fragment of the language.
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111221/b010186e/attachment.htm>
+

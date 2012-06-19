@@ -1,0 +1,22 @@
+From felipe.lessa at gmail.com  Wed Dec  7 16:27:05 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Wed, 7 Dec 2011 13:27:05 -0200
+Subject: [Haskell-cafe] terminateProcess leaves zombie processes around
+In-Reply-To: <CAKFCL4UMRz2ig9YA8o4FQRCgEsgOdu8RTVKUiMc0ae3egN5OyA@mail.gmail.com>
+References: <CAN2DD_Ht0gt5p6AOzXB+yMALG=iKsA=Pmq91_amn4+qH7t59SA@mail.gmail.com>
+	<CAKFCL4UMRz2ig9YA8o4FQRCgEsgOdu8RTVKUiMc0ae3egN5OyA@mail.gmail.com>
+Message-ID: <CANd=OGFTwVzfTE2LyW=oth2u1iXVf1bsPS4=RCxdTHWRf4zk0g@mail.gmail.com>
+
+On Wed, Dec 7, 2011 at 1:19 PM, Brandon Allbery <allbery.b at gmail.com> wrote:
+> They *do* terminate; a zombie is a dead process waiting for its parent to
+> reap it with waitForProcess. ?There's also some POSIX stuff you can do to
+> have them auto-reaped, but doing that correctly and portably is somewhat
+> painful.
+
+But zombie processes do consume a row in the process table, right?  If
+so, then it's bad to have them around.
+
+-- 
+Felipe.
+
+

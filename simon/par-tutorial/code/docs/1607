@@ -1,0 +1,82 @@
+From haskell-cafe at ocharles.org.uk  Fri Dec  2 01:02:48 2011
+From: haskell-cafe at ocharles.org.uk (Oliver Charles)
+Date: Fri, 02 Dec 2011 00:02:48 +0000
+Subject: [Haskell-cafe] Using QuickCheck to test against a database
+Message-ID: <87mxbbu9g7.fsf@googlemail.com>
+
+Hi!
+
+I've just spent my evening trying to use QuickCheck properties to test
+the database accessing functions in a project I'm working on at the
+moment. I've got some stuff that's working, and I wanted to see what the
+cafe thought about it, and if anyone had any suggestions or critiscm
+that can help me make it even better!
+
+I got here by trying to figure out how I want to test my application. At
+first I saw 2 options: use a test database and assume it exists, or have
+each test setup the data it needs. I like the latter more, because it
+minimises dependence on the outside world. So I got down to writing some
+HUnit tests and then had a wave of inspiration... what if I didn't even
+define the data, but let QuickCheck do that for me?
+
+Here's what I came up with - note the code here is somewhat paraphrased
+for brevity:
+
+  data DBState a = DBState { initDb :: IO ()
+                           , entity :: a
+                           }
+
+This type stores an action that initialises the database with enough
+data such that it contains whatever 'entity' is. For example,
+'DBState Person' knows how to insert a specific person into the
+database, and carries along an in-memory log.
+
+Continuing with the Person idea, I then went and made an Arbitrary
+instance for DBState Person:
+
+  instance Arbitrary (DBState Person) where
+    arbitrary = do
+      l <- Person <$> arbitrary `suchThat` (not . null)
+      return $ DBState (void $ insertPerson l) p
+      where insertPerson p =
+              doSql "INSERT INTO person (name) VALUES (?)"
+                    [ personName p l ]
+
+Then it's just a case of defining some properties:
+
+  prop_allPersons = monadicIO $ do
+    dbState <- pick arbitrary :: Gen [Person]
+    fetched <- run $ initDb `mapM` dbState >> findAllPersons
+    assert $ fetched `eqSet` (entity `map` dbState)
+    where eqSet a b = all (`elem` a) b && all (`elem` b) a
+
+Voila! For any database, 'findAllPersons' returns all
+persons. Now... onto my own critiscisms with this.
+
+Firstly, way too much boiler plate. You have to remember to apply all of
+the states of your arbitrary instances, which is a pain, and guaranteed
+to be missed. At first I thought DBState looks like it's basically a
+writer/IO monad, but then I couldn't actually figure out the monoid to
+write to. In this case it's just [Person], but in more complex property
+we might need 2 types of entities (for example, to ensure a join worked
+correctly) which makes this list heterogenous.
+
+Secondly, the initDb action is sensitive to the order actions are
+sequenced. Presumably, I want to test against a database that's as
+accurate to production as possible, which means I want foreign keys
+enabled. If things are initialized in the wrong order, it violates the
+foreign key constraint, and it's a burden if people have to determine
+the correct order. One solution here is to make use of deferrable
+constraints, but support for these is flakey at best (and it doesn't
+work for bracketting tests with BEGIN; ROLLBACK).
+
+These problems just make the properties harder, but they don't seem to
+impede the quality or usefulness of the tests. I really want to make
+this work, because the idea of it is quite beautiful to me. Though that
+might be partly because this is my first time really using QuickCheck,
+so I'm getting the "oh wow this is sweeeet" effect at the same time ;)
+
+Would love to hear peoples thoughts!
+- Ollie
+
+

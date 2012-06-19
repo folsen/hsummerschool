@@ -1,0 +1,54 @@
+From batterseapower at hotmail.com  Fri Feb  4 09:13:19 2011
+From: batterseapower at hotmail.com (Max Bolingbroke)
+Date: Fri, 4 Feb 2011 08:13:19 +0000
+Subject: [Haskell-cafe] OSX i386/x86 and x86_64 - time to switch
+	supported platforms?
+In-Reply-To: <AANLkTimQLoNa9CLAXeR-srtRSKzoN992WesRcAhSWoB5@mail.gmail.com>
+References: <801E1648-B34B-4F93-9BAB-9A05EC77D747@gmail.com>
+	<C9311AB9-65D8-4ACE-B20B-F429039934CB@gmail.com>
+	<4D4B5308.4000009@freegeek.org>
+	<3C972E29-7228-4F5F-84A7-4FC13C938B82@cs.otago.ac.nz>
+	<B34591F6-86C2-471A-9E61-5B609FACF5F3@gmail.com>
+	<4D4B622F.8020501@freegeek.org>
+	<CB1FAA21-8800-475F-966B-C808DD394960@gmail.com>
+	<AANLkTimQLoNa9CLAXeR-srtRSKzoN992WesRcAhSWoB5@mail.gmail.com>
+Message-ID: <AANLkTineXgg6cLZk8gzf3kK4sFb9SgNJPc0fNo_g9J6u@mail.gmail.com>
+
+On 4 February 2011 02:35, Steve Severance <steve at medwizard.net> wrote:
+> Wholly support moving OSX to x64. x86 should be supported only on a
+> best effort basis for legacy.
+
+Moving from x86 to x64 has advantages and disadvantages from my POV. Advantages:
+ * Able to address more memory
+ * More registers for code generation
+ * Haskell dependencies wouldn't need to be built for x86 on Snow
+Leopard (though if we swapped to x64 on Leopard as well, the Leopard
+users would start having to build 64-bit libraries specially)
+
+Disadvantages:
+ * Pointers become wider, and Haskell data structures mostly consist
+of pointers. This will bloat memory use of Haskell programs.
+ * Generated binaries won't work on older Macs that don't have a
+64-bit OS/CPU. This is important if you are distributing compiled
+Haskell binaries, which is not something I personally do but which is
+probably important to support
+
+Did I miss anything?
+
+I don't know if anyone using a 64-bits GHC on e.g. Linux has reported
+experience of whether moving to 64-bits is a net win or not from a
+performance perspective. My guess is that it is a win for certain
+classes of programs (numerically intensive, "high performance
+Haskell"), and a loss for programs making extensive use of laziness,
+boxed data structures etc.
+
+I notice that there is some work towards standardisation of a "x32"
+ABI for 64-bit applications using thin, 32 bit pointers. See
+http://robertmh.wordpress.com/2011/01/19/finally-amd32-is-taking-shape/.
+This might be an interesting thing to explore when it becomes more
+fully developed.
+
+Cheers,
+Max
+
+

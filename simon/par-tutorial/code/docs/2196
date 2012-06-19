@@ -1,0 +1,19 @@
+From v.dijk.bas at gmail.com  Wed Dec 21 14:30:39 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Wed, 21 Dec 2011 14:30:39 +0100
+Subject: [Haskell-cafe] Interruptible threads with IO loops
+In-Reply-To: <CAH-sQ5jrocgiuXiOmDaoaajkn7HRF5XWaXJK9kA2sE_cj4P0cQ@mail.gmail.com>
+References: <CAH-sQ5jrocgiuXiOmDaoaajkn7HRF5XWaXJK9kA2sE_cj4P0cQ@mail.gmail.com>
+Message-ID: <CADLz5wWMpMXcpvqtHvZfBeU6f9LhfKcyBOvD8f5r4RdSwUtnZA@mail.gmail.com>
+
+On 21 December 2011 09:52, Fedor Gogolev <knsd at knsd.net> wrote:
+> I'm trying to get some threads that I can stop and get last
+> values that was computed (and that values are IO values, in fact).
+
+I'm not sure it's what you need but you might want to look at:
+
+http://hackage.haskell.org/package/Workflow
+
+Bas
+
+

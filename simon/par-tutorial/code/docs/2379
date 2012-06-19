@@ -1,0 +1,37 @@
+From andrewcoppin at btinternet.com  Thu Dec 29 12:49:11 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Thu, 29 Dec 2011 11:49:11 +0000
+Subject: [Haskell-cafe] Windows: openFile gives permission denied when
+ file in use
+In-Reply-To: <CAKjSnQH=mNONY7mC7-nEt-R51A0PULg-GhPvWiQ59vrOxpznuw@mail.gmail.com>
+References: <CAKA2JgLc1Q-Lf_yOuhQdb1JKuUkiRYuS=hQ7wQw_+jqCMQOEYQ@mail.gmail.com>
+	<CAKjSnQH=mNONY7mC7-nEt-R51A0PULg-GhPvWiQ59vrOxpznuw@mail.gmail.com>
+Message-ID: <4EFC53B7.2010806@btinternet.com>
+
+On 29/12/2011 04:29 AM, Antoine Latter wrote:
+> On Wed, Dec 28, 2011 at 3:52 PM, Michael Snoyman<michael at snoyman.com>  wrote:
+>> Hi all,
+>>
+>> I just received a bug report from a client that, when an input file is
+>> open in FrameMaker, my program gives a "permission denied error". This
+>> bug is reproducible with a simple Haskell program:
+>>
+>
+> This bug and its discussion is similar, but not identical:
+> http://hackage.haskell.org/trac/ghc/ticket/4363
+
+This one has been rumbling on for ages. As others have said, the Report 
+demands that locking occur, which is probably a mistake. The daft thing 
+is, apparently Linux doesn't really support locking, so on that platform 
+these types of thing all work fine, and only on Windows, which does and 
+always has supported propper locking, people get these errors. And yet, 
+many people seem surprised to hear that Windows can actually turn off 
+the locking; they seem completely unaware of the extensive and highly 
+flexible locking facilities that Windows provides. Every time I hear 
+"oh, I don't think Windows can handle that", I sigh with resignation.
+
+Whatever we change the default to, it would be useful if we could expose 
+locking mechanisms in a reasonably portable way so that people who care 
+about such things can alter the default if it is not what they want.
+
+

@@ -1,0 +1,58 @@
+From albzey at googlemail.com  Fri Apr 22 14:20:04 2011
+From: albzey at googlemail.com (Albert Zeyer)
+Date: Fri, 22 Apr 2011 14:20:04 +0200
+Subject: [Haskell-cafe] Global memoization in Haskell
+In-Reply-To: <BANLkTinHE-G=Yq2ibS6BYy3wcf-HWO3Spg@mail.gmail.com>
+References: <BANLkTinjxvEKkudVqoeJ7qZwEnvfOow9WQ@mail.gmail.com>
+	<BANLkTin6V_yw7SfrWX_=p9mMbavHO+Oy0Q@mail.gmail.com>
+	<BANLkTinuTOU8ogHaApFW=TQHzMAMmzDbeg@mail.gmail.com>
+	<BANLkTikmCW0cLofhzUw+-6GKsuUBdJdr+w@mail.gmail.com>
+	<BANLkTinHE-G=Yq2ibS6BYy3wcf-HWO3Spg@mail.gmail.com>
+Message-ID: <BANLkTinA-5vTDx7FFhzRvoAJp9_RaJcCSw@mail.gmail.com>
+
+Hi,
+
+I was mostly thinking about automatic memoization, i.e. not explicit
+memoization.
+
+Also, it should only add some small constant overhead for each
+function and maybe leads to huge improvements after all. But maybe I'm
+also wrong and for an "average" function it doesn't lead to
+improvements.
+
+But the only real way to know that is to try it out.
+
+I don't really understand why it would be such a huge substantial
+undertaking. I would store the memo-ed values just in some hidden
+global variable and proxy every function through some simple
+memoizing-handler. Or is that complicated to add as an option to GHC?
+
+Regards,
+Albert
+
+
+On Fri, Apr 22, 2011 at 2:08 PM, Stephen Tetley
+<stephen.tetley at gmail.com> wrote:
+> Hi Albert
+>
+> My contention is that there are specific programs (or specific
+> functions within them) that memoization improves - hence adding
+> memoization to those programs rather than the compiler is the way to
+> go.
+>
+> Not that I've looked deeply, but I think adding memoization to GHC
+> would be a pretty substantial undertaking. In the first instance where
+> do you put the memo-ed values? - if you're doing it for all functions
+> you might have to change the RTS as well as the compiler.
+>
+> Best wishes
+>
+> Stephen
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

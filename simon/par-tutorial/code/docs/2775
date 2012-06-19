@@ -1,0 +1,23 @@
+From ok at cs.otago.ac.nz  Mon Feb  7 00:25:36 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Mon, 7 Feb 2011 12:25:36 +1300
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4D6B15.2060204@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+	<4D4D6B15.2060204@btinternet.com>
+Message-ID: <00DE9576-90F8-4069-BBCD-7D90B4811FE9@cs.otago.ac.nz>
+
+
+On 6/02/2011, at 4:21 AM, Andrew Coppin wrote:
+> I didn't think Clean supported laziness at all? I thought it was a strict language.
+
+Absolutely not.  Back in the Good Old Days the one thing that
+used to keep on tripping me up is that
+	Haskell    if e0 then e1 else e2
+ <=>	Clean	   if e0 e1 e2
+
+Now, in what kind of language can 'if' be a perfectly ordinary function?
+
+
+

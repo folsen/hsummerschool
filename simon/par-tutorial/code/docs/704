@@ -1,0 +1,42 @@
+From angelv at iac.es  Mon Apr 25 15:32:31 2011
+From: angelv at iac.es (Angel de Vicente)
+Date: Mon, 25 Apr 2011 14:32:31 +0100
+Subject: [Haskell-cafe] Trouble with currying and uncurrying...
+In-Reply-To: <BANLkTimzU24M1tixVmbfbfxGSVssLx4RzQ@mail.gmail.com>
+References: <4DB57318.4040509@iac.es>
+	<BANLkTimzU24M1tixVmbfbfxGSVssLx4RzQ@mail.gmail.com>
+Message-ID: <4DB577EF.7060209@iac.es>
+
+Hi,
+
+On 25/04/11 14:20, Ozgur Akgun wrote:
+> On 25 April 2011 14:11, Angel de Vicente <angelv at iac.es
+> <mailto:angelv at iac.es>> wrote:
+>
+>     curry :: ((a,b) -> c) -> (a -> b -> c)
+>
+>
+> is the same as:
+>
+> curry :: ((a,b) -> c) -> a -> b -> c
+
+thanks, it makes sense now. Somehow I thought that adding the 
+parenthesis in ...-> (a -> b -> c) was something special and that I 
+couldn't get rid of them (in the same sense as I cannot get rid of the 
+parenthesis in the first part and write:
+
+curry :: (a,b) -> c -> a -> b -> c
+
+Thanks,
+??ngel
+-- 
+http://www.iac.es/galeria/angelv/
+
+High Performance Computing Support PostDoc
+Instituto de Astrof??sica de Canarias
+---------------------------------------------------------------------------------------------
+ADVERTENCIA: Sobre la privacidad y cumplimiento de la Ley de Protecci?n de Datos, acceda a http://www.iac.es/disclaimer.php
+WARNING: For more information on privacy and fulfilment of the Law concerning the Protection of Data, consult http://www.iac.es/disclaimer.php?lang=en
+
+
+

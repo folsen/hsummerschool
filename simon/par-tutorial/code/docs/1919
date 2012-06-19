@@ -1,0 +1,40 @@
+From ketil at malde.org  Wed Dec 14 10:43:26 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Wed, 14 Dec 2011 10:43:26 +0100
+Subject: [Haskell-cafe] Sharing on equality
+In-Reply-To: <CACMox4N59GtgJZK1iFRCZYJZ_uO6QVTsOvk63W0UXKCwgS8b0g@mail.gmail.com>
+	(Johan Brinch's message of "Tue, 13 Dec 2011 16:52:47 +0100")
+References: <CACMox4PY4-G1VdCmrx_KEoJDnmLQVPF7707aNh0WoObypLzrog@mail.gmail.com>
+	<CACMox4N59GtgJZK1iFRCZYJZ_uO6QVTsOvk63W0UXKCwgS8b0g@mail.gmail.com>
+Message-ID: <87aa6v4hfl.fsf@malde.org>
+
+Johan Brinch <brinchj at gmail.com> writes:
+
+> Can GHC eliminate one of two equal ByteStrings, when they are compared
+> and turns out to be equal?
+
+Not in general, there is no guarantee that a is identical to b, just
+because a == b.
+
+> Say i have a map, ByteString -> Int.
+
+  Data.Map.Map ByteString Int
+
+> I now do a lookup on a ByteString and if it exists, I insert this
+> ByteString into a list.
+
+> Is it possible to avoid using more memory, than used by the keys in
+> the map + the list structure?
+
+> I guess, this could be done by having lookup return the key as well,
+> and then insert this key into the list, however, that's a bit ugly and
+> somewhat anti-intuitive.
+
+I think this /is/ intuitive.  (Or you could replace the key in the map,
+but that will still leave duplicates in the list).
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

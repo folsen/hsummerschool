@@ -1,0 +1,29 @@
+From nbowler at elliptictech.com  Tue Apr 26 16:04:55 2011
+From: nbowler at elliptictech.com (Nick Bowler)
+Date: Tue, 26 Apr 2011 10:04:55 -0400
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <201104261551.51295.daniel.is.fischer@googlemail.com>
+References: <4DB093A6.8000303@btinternet.com> <4DB6C5C0.1080503@btinternet.com>
+	<BANLkTi=j0nL49pkMXDwCcjiV0CyKpkSO1g@mail.gmail.com>
+	<201104261551.51295.daniel.is.fischer@googlemail.com>
+Message-ID: <20110426140455.GA2543@elliptictech.com>
+
+On 2011-04-26 15:51 +0200, Daniel Fischer wrote:
+> On Tuesday 26 April 2011 15:35:42, Ivan Lazar Miljenovic wrote:
+> > How do you "see" how git branches are related to each other?
+> 
+> To some extent, you can see such a relation in gitk. For mercurial, hg glog 
+> also shows a bit. I suppose there's also something to visualise branches in 
+> bazaar, but I've never used that, so I don't know.
+> 
+> So, with gitk/glog, you can see that foo branched off bar after commit 
+> 0de8793fa1bc..., then checkout/update to that commit [or bar's head], 
+> checkout/update to foo's head/tip and compare.
+
+No need to do a checkout; gitk can visualize any or all branches of the
+repository simultaneously.
+
+-- 
+Nick Bowler, Elliptic Technologies (http://www.elliptictech.com/)
+
+

@@ -1,0 +1,38 @@
+From v.dijk.bas at gmail.com  Mon Feb  7 21:23:32 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Mon, 7 Feb 2011 21:23:32 +0100
+Subject: [Haskell-cafe] [Haskell] ANN: case-insensitive-0.1
+In-Reply-To: <AANLkTimzva9vcESuChj6F24XZr=OXA+bO+Z=TZNiZdmr@mail.gmail.com>
+References: <AANLkTin_5Fy2juPCHEc9PLg8-C6Pn3iiDE+mSqHM77pE@mail.gmail.com>
+	<AANLkTimzva9vcESuChj6F24XZr=OXA+bO+Z=TZNiZdmr@mail.gmail.com>
+Message-ID: <AANLkTinqiDXP13Fppn-puLkHWOPcOjiQXwY-D+wvms4U@mail.gmail.com>
+
+On 7 February 2011 15:26, Max Rabkin <max.rabkin at gmail.com> wrote:
+> This could be a useful package but can you add a note that this does
+> not do correct Unicode-aware comparison on String (though AFAICT it is
+> correct for Text)?
+
+Good point!
+
+I just released version 0.2:
+
+http://hackage.haskell.org/package/case-insensitive-0.2
+
+Changelog:
+
+* Added note about the not fully correct case folding of types other than Text
+  Requested by Max Rabkin.
+
+* Removed FoldCase instance for [s] and added one for String
+  I think this makes more sense.
+  Bumped version from 0.1 to 0.2 because of the removed instance.
+
+* Export foldedCase :: CI s -> s.
+
+* Other little documentation fixes.
+
+Regards,
+
+Bas
+
+

@@ -1,0 +1,45 @@
+From tebrow at gmail.com  Sat Apr 23 08:52:32 2011
+From: tebrow at gmail.com (Tom Brow)
+Date: Fri, 22 Apr 2011 23:52:32 -0700
+Subject: [Haskell-cafe] Pattern matching on lazy bytestrings: how does it
+	work?
+Message-ID: <BANLkTim6F1pYYd1B1ZQ5dAGpYrCtgpQZDQ@mail.gmail.com>
+
+I noticed today that I can pattern match against lazy bytestrings when using
+the OverloadedStrings extension:
+
+import Data.ByteString.Char8 ()
+>
+> import Data.ByteString.Lazy.Char8
+>
+>
+>> f :: ByteString -> Bool
+>
+> f "abc" = True
+>
+> f _ = False
+>
+>
+>> main = do
+>
+> print $ f $ fromChunks ["abc"]
+>
+> print $ f $ fromChunks ["a","bc"]
+>
+>
+When I run the above, I get:
+
+True
+>
+> True
+>
+>
+Given that pattern matching is based on data constructors, how is it
+possible that (Chunk "abc Empty) and (Chunk "a" (Chunk "bc" Empty)) match
+the same pattern?
+
+Tom
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110422/fd10f47a/attachment.htm>
+

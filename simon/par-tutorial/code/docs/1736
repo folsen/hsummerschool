@@ -1,0 +1,94 @@
+From es at ertes.de  Wed Dec  7 16:48:00 2011
+From: es at ertes.de (Ertugrul =?UTF-8?B?U8O2eWxlbWV6?=)
+Date: Wed, 7 Dec 2011 16:48:00 +0100
+Subject: [Haskell-cafe] How did iteratees get their names?
+References: <CACruqwTG3fOEbwiTMohwTG8Mt-9HR=r+gHKu5BVLg0MT_JnTrQ@mail.gmail.com>
+	<20111207154812.36c674b5@angst.streitmacht.eu>
+	<4EDF8474.1040502@cs.nott.ac.uk>
+Message-ID: <20111207164800.73553acf@angst.streitmacht.eu>
+
+Henrik Nilsson <nhn at Cs.Nott.AC.UK> wrote:
+
+> > Just like chatter and chattee, employer and employee, there is an
+> > iterator (usually as part of an enumerator/ee) and an iteratee.
+>
+> Thanks for the attempt to explain. But I, at least, remain mystified,
+> and I agree with Douglas that the terminology is confusing.
+>
+> Usually, the relationship between word-pairs such as the ones above is
+> pretty obvious, typically implying some kind of subordinate
+> relationship. For example:
+>
+>    * employer: the one employing
+>      employee: the one employed
+>
+>    * tutor: the one teaching, instructing, providing care
+>      tutee: the one receiving instruction, care
+>
+>    * caller: that which is calling
+>      callee: that which is being called
+>
+> And so on.
+>
+> The above would suggest that "iterator" would be something that
+> iterates over something, and that "iteratee" would be (an element of)
+> that being iterated over.
+
+You are right.  In that case it really doesn't make sense.  However, one
+way to make sense of this is that the iteratee is indeed being iterated
+over.  Consider that the iteratee /contains/ the stream.  The stream
+isn't fed from outside, because the enumerator itself is an iteratee and
+that one creates the stream in the first place.
+
+
+> However, no such simple relationship seems to emerge from the
+> provided explanation.
+>
+> I also had a look at John Millikin's page on Understanding Iteratees,
+> which is very good:
+>
+>     https://john-millikin.com/articles/understanding-iteratees/
+>
+> But, the intuition that comes across there is:
+>
+>    * iteratee: a stream (of sorts) consumer
+>
+>    * enumerator: a stream (of sorts) producer
+>
+>    * enumeratee: a stream (of sorts) transformer
+>
+> And "iterator" isn't mentioned at all.
+
+That's because the iterator isn't part of the system at all.  You bring
+in the iterator from outside.  For example a loop reading chunks from a
+file is an iterator.  That iterator is used inside of an enumerator,
+which is itself an iteratee that transforms another iteratee (in that it
+handles the Continue state).
+
+
+> I might be missing something, but the terminology is hardly crystal
+> clear. Which is a pity!
+
+That's true, but on the other hand personally I wouldn't know how to
+improve it without giving a wrong intuition.
+
+Coroutines actually capture this kind of composition (where some code
+interrupts itself to hand control over to some other code) very well.
+Perhaps it would be better to use terms from that abstraction instead.
+In fact, iteratees are a special case of coroutines.
+
+
+Greets,
+Ertugrul
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111207/0d4d5946/attachment.pgp>
+

@@ -1,0 +1,48 @@
+From bobzhang1988 at gmail.com  Wed Aug 24 19:23:07 2011
+From: bobzhang1988 at gmail.com (bob zhang)
+Date: Wed, 24 Aug 2011 13:23:07 -0400
+Subject: [Haskell-cafe] How to make callCC more dynamic
+In-Reply-To: <CAJ-DSywaXiYfJX6+=84vRN6pQ-XJSQNCTxQaZUVBUy3Gz4Z8Jg@mail.gmail.com>
+References: <4E5524AB.5010108@gmail.com>
+	<CAJ-DSywaXiYfJX6+=84vRN6pQ-XJSQNCTxQaZUVBUy3Gz4Z8Jg@mail.gmail.com>
+Message-ID: <CANcqPu4k5ZZAad0hq7m=Z3dQr-=HJSDVdKSfVwdOkjVh=sRiRw@mail.gmail.com>
+
+Hi Jason, thanks for your reply.
+  I was curious that we could bring really continuations into haskell, the
+traditional callCC brings a lot of unnecessary
+type restrictions
+
+On Wed, Aug 24, 2011 at 12:45 PM, Jason Dagit <dagitj at gmail.com> wrote:
+
+> On Wed, Aug 24, 2011 at 9:19 AM, bob zhang <bobzhang1988 at gmail.com> wrote:
+> > Hi, all
+> > I thought the right type for ContT should be
+> > newtype ContT m a = ContT {runContT :: forall r. (a-> m r) -> m r}
+> > and
+> > other control operators
+> > shift :: Monad m => (forall r . (a-> ContT m r) -> ContT m r) -> ContT m
+> a
+> > reset :: Monad m => ContT m a -> ContT m a
+> > callCC :: ((a-> (forall r . ContT m r)) -> ContT m a) -> ContT m a
+> >
+> > unfortunately, I can not make callCC type check, and don't know how to
+> > do it.
+> > I managed to make shift, reset type check
+>
+> Correct me if I'm wrong, but you're wanting to implement the delimited
+> form of continuations?
+>
+> If so, you might take a look at this and the associated papers:
+> http://hackage.haskell.org/package/CC-delcont
+>
+> Jason
+>
+
+
+
+-- 
+Best, bob
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110824/b04ada0b/attachment.htm>
+

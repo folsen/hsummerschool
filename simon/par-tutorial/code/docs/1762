@@ -1,0 +1,30 @@
+From chbreitkopf at googlemail.com  Thu Dec  8 17:12:06 2011
+From: chbreitkopf at googlemail.com (Christoph Breitkopf)
+Date: Thu, 8 Dec 2011 17:12:06 +0100
+Subject: [Haskell-cafe] Recommended class instances for container type
+Message-ID: <CAPTT2bbaiCeJWsYPJfufKaRmOBAA7gcsEtbMYzXcZJX5xFvnUw@mail.gmail.com>
+
+Hello,
+
+I'm in the process of implementing a container data type, and wonder what
+class instances are generally considered necessary. E.g. is it ok to start
+out with a Show that's adequate for debugging, or is it a 'must' to include
+instances of everything possible (Eq, Ord if possible, Read, Show, Functor,
+...).
+
+And what about the more experimental things? Say, DeepSeq, Typeable, Data?
+I'd like to keep this simple at start, and I've admittedly not followed
+recent developments in Haskell-land (recent meaning the last 10 years or
+so. I _do_ know about hierachical modules ;-) ).
+
+OTOH, if not having such instances makes it impossible to do things the
+modern way, I'd probably take the time to implement (and maybe understand)
+them.
+
+Thanks,
+
+Chris
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/8584a34a/attachment.htm>
+

@@ -1,0 +1,39 @@
+From albzey at googlemail.com  Fri Apr 22 13:32:23 2011
+From: albzey at googlemail.com (Albert Zeyer)
+Date: Fri, 22 Apr 2011 13:32:23 +0200
+Subject: [Haskell-cafe] Global memoization in Haskell
+In-Reply-To: <BANLkTinuTOU8ogHaApFW=TQHzMAMmzDbeg@mail.gmail.com>
+References: <BANLkTinjxvEKkudVqoeJ7qZwEnvfOow9WQ@mail.gmail.com>
+	<BANLkTin6V_yw7SfrWX_=p9mMbavHO+Oy0Q@mail.gmail.com>
+	<BANLkTinuTOU8ogHaApFW=TQHzMAMmzDbeg@mail.gmail.com>
+Message-ID: <BANLkTikmCW0cLofhzUw+-6GKsuUBdJdr+w@mail.gmail.com>
+
+On Fri, Apr 22, 2011 at 12:55 PM, Stephen Tetley
+<stephen.tetley at gmail.com> wrote:
+> There isn't much value to automatic memoization as people have already
+> pointed out on SO - if you believe otherwise, you're probably better
+> off proving a case on paper first before attempting to implement it in
+> GHC.
+
+Hi Stephen,
+
+I think there are already many many examples where memoization does
+indeed give much better performance (very simple and common one is the
+Fibonacci sequence).
+
+So the prove was already done. I am not sure what to prove otherwise.
+Demonstrating that it does indeed perform well when you apply it
+globally to some real-world application is not really something you
+prove on a paper. You do the actual benchmarking instead. I.e., you
+implement the memoization in GHC and benchmark some programs with it.
+Implementing it shouldn't also be complicated -- I already presented a
+60 line Python implementation which is trivial to be applied globally
+and took 10 minutes to be implemented.
+
+I'm not sure though how complicated it would be to add that to GHC. I
+have no idea where to start.
+
+Regards,
+Albert
+
+

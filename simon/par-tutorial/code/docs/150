@@ -1,0 +1,43 @@
+From johan.tibell at gmail.com  Tue Apr  5 16:33:03 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Tue, 5 Apr 2011 16:33:03 +0200
+Subject: [Haskell-cafe] ANN: Google Summer of Code student application
+ period opens today
+In-Reply-To: <1302008756-sup-3765@zezinho>
+References: <AANLkTi=UBbYgQMeKsPGo2S9JxoG=1_OABB7hsZ7nmn5q@mail.gmail.com>
+	<1302008756-sup-3765@zezinho>
+Message-ID: <BANLkTinYXQJTZ4ksoFa69gyEmOpza=AF+g@mail.gmail.com>
+
+Hi Marco
+
+On Tue, Apr 5, 2011 at 3:17 PM, Marco T?lio Gontijo e Silva
+<marcot at marcot.eti.br> wrote:
+> I've writed a draft of the proposal at
+> http://www2.dcc.ufmg.br/laboratorios/llp/wiki/doku.php?id=marco_soc2011 . ?If
+> you have any comments, I'll be glad to receive them.
+
+Thanks for taking the time to put together such a well-written
+proposals. I have two comments at this point:
+
+    "If not all of the dependencies were build yet, the dependencies
+are included in the queue, and also the package or module, after
+them."
+
+Minor nit: note that several packages can share a dependency so
+naively adding a dependency to the queue could cause unnecessary
+rebuilds.
+
+    "I'll work on a released version of GHC, to avoid having to
+rebuild it whenever the git is updated, and to avoid handling with
+changed on the git tree during my development."
+
+I would strongly recommend against this as you might end up with an
+impossible merge towards the end of the project, putting the whole
+project in jeopardy. I'd suggest getting patches in early and
+frequently. By submitting patches (at least for review) early and
+often you'll benefit from feedback and buy-in from the maintainer(s)
+and make it easier for him/her/they to merge your work.
+
+Johan
+
+

@@ -1,0 +1,40 @@
+From miguelimo38 at yandex.ru  Tue Apr 12 13:55:06 2011
+From: miguelimo38 at yandex.ru (Miguel Mitrofanov)
+Date: Tue, 12 Apr 2011 15:55:06 +0400
+Subject: [Haskell-cafe] IO and Cont as monads
+In-Reply-To: <COL123-W183410A2B76C9121FE8797CDAB0@phx.gbl>
+References: <COL123-W183410A2B76C9121FE8797CDAB0@phx.gbl>
+Message-ID: <953DCFAC-210A-4014-A657-A789082D3F1E@yandex.ru>
+
+As for Cont, it can be proved easily, either by hand, or by observation that Cont is an obvious composition of two adjoint functors.
+
+As for IO, it has to be taken for granted, since IO internals are hidden from the programmer.
+
+?????????? ? iPhone
+
+Apr 12, 2011, ? 14:39, Burak Ekici <ekcburak at hotmail.com> ???????(?):
+
+> Dear List,
+> 
+> I am quite new in Haskell's categorical manner of programming. However I have enough knowledge in Category Theory.
+> I want to ask a question, maybe very well-known one by some of you, about monads of Haskell.
+> 
+> For the type constructors like Maybe and [], I managed to prove that together with 2 natural transformations (bind + return), both of these triples construct a monad. But when I try to prove that IO and Cont type constructors with the same natural transformations (bind + return) are monads as well, it was failed.
+> 
+> Here my question is: Is there anyone who knows how to prove that IO and Cont are monads with satisfing following properties:
+> 
+> join . fmap join = join . join
+> join . fmap return = join . return = id
+> return . f = fmap f . return
+> join . fmap (fmap f) = fmap f . join
+> 
+> Thanks already now,
+> Burak Ekici.
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110412/6eaa2301/attachment.htm>
+

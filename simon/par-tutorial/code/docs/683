@@ -1,0 +1,118 @@
+From nadine.and.henry at pobox.com  Sun Apr 24 17:30:33 2011
+From: nadine.and.henry at pobox.com (nadine.and.henry at pobox.com)
+Date: Sun, 24 Apr 2011 10:30:33 -0500
+Subject: [Haskell-cafe] generics and sql
+In-Reply-To: <1303655313-sup-8301@ezyang>
+References: <19892.12751.507521.701489@myth.localdomain>
+	<1303655313-sup-8301@ezyang>
+Message-ID: <19892.16921.384581.22002@myth.localdomain>
+
+Thanks for the quick reply Edward.  What I'm trying to do is be lazy.  I have
+a longish data structure, say:
+
+    data Loan = Loan {
+      loan_address :: String,
+      loan_initialAmount :: Double,
+      loan_interestRate :: Double,
+      loan_term:: Int,
+      loan_originated :: Day,
+      loan_minimumPayment :: Double,
+      loan_usualPayment :: Double,
+      loan_familiarName :: String,
+      loan_password :: String,
+      loan_lastVisit :: Day,
+      loan_nextToLastVisit :: Day,
+      loan_emailAddress :: String,
+      } deriving (Read, Show, Eq, Ord, Typeable, Data)
+ 
+where each component is an instance of (Convertible a SqlValue), and I would
+like to be able to say something like:
+
+let vals = magicalGmapIncantation toSql loan 
+liftIO $ withtransaction db $ \d -> run query vals
+
+of course I could do:
+
+let vals = [toSql (loan_address loan), toSql (loan_initialAmount loan) ...]
+
+but that feels so "dirty," when all those fields are just waiting for me
+inside that loan data type.
+
+Best wishes,
+H
+
+>>>>> "EZY" == Edward Z Yang <ezyang at MIT.EDU> writes:
+
+    EZY> Hmm, this is a bit peculiar.  The problem is you don't get control
+    EZY> over how gmapQ invokes the function toSql: it will only ever be done
+    EZY> with the type signature Data d => d -> u.  There is good reason for
+    EZY> this too: imagined you tried to run gmapQ toSql on a data-type that
+    EZY> contained a member that was not convertible to a SqlValue: then it
+    EZY> ought to fail with a type error!
+
+    EZY> You may be able to work around this with more generics madness: use
+    EZY> Typeable to check if the types of all the fields are kosher, and then
+    EZY> do an appropriate casts before invoking toSql.  But you won't get
+    EZY> particularly good static guarantees doing it this way.
+
+    EZY> So... what are you really trying to do? :-)
+
+------------------------------------------------------------------------
+
+Greetings.  I have a feeling that what I am trying to do is easy, I
+just don't know how to say it in Haskell.  Let's start with:
+
+> {-# LANGUAGE 
+>    DeriveDataTypeable,  GeneralizedNewtypeDeriving  #-}
+> 
+> import Database.HDBC
+> import Data.Typeable (Typeable)
+> import Data.Data 
+> data C = C { str :: String, dbl:: Double }
+>   deriving (Eq, Ord, Typeable, Data)
+> 
+> a :: C
+> a = C "twelve" 12.0
+> 
+
+Now I load this up in ghci and I can do the following:
+
+ toSql . str $ a  -- result: SqlString "twelve"
+ toSql . dbl $ a  -- result: SqlDouble 12.0
+
+but what I would really like to do is something like:
+
+gmapQ toSql $ a
+
+which results in:
+<interactive>:1:7:
+    Could not deduce (Convertible d SqlValue)
+      arising from a use of `toSql'
+    from the context (Data d)
+      bound by a type expected by the context: Data d => d -> SqlValue
+      at <interactive>:1:1-11
+    Possible fix:
+      add (Convertible d SqlValue) to the context of
+        a type expected by the context: Data d => d -> SqlValue
+      or add an instance declaration for (Convertible d SqlValue)
+    In the first argument of `gmapQ', namely `toSql'
+    In the expression: gmapQ toSql
+
+In other words, I'm looking for a function with a signature:
+
+(Whatever Instances I neeed here) => a -> [SqlValue]
+
+I have tried various incantations of type signatures, but thus far I
+can't get it right.  Can someone point me in the right direction?  Thanks.
+
+
+-- 
+Nadine & Henry Laxen    Belle, Venus, Aphrodite
+10580 N. McCarran Blvd. Adonis, Miss Parker & Jarod
+Suite 115-396           Via Alta # 6
+Reno, Nevada            Chapala, Jalisco, Mexico 
+89503-1896              CP 45900
+         The rest is silence.  (Hamlet)
+
+
+

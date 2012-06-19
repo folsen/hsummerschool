@@ -1,0 +1,31 @@
+From daniel.is.fischer at googlemail.com  Mon Aug 29 12:53:29 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Mon, 29 Aug 2011 12:53:29 +0200
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <1314613976.1873.5.camel@picard>
+References: <4E568D11.30800@btinternet.com> <4E57F43A.9030800@btinternet.com>
+	<1314613976.1873.5.camel@picard>
+Message-ID: <201108291253.29595.daniel.is.fischer@googlemail.com>
+
+On Monday 29 August 2011, 12:32:51, Maciej Marcin Piechotka wrote:
+> On Fri, 2011-08-26 at 20:30 +0100, Andrew Coppin wrote:
+> > I suppose I could use a binary logarithm. I'm just concerned that it
+> > would be rather slow. After all, I'm not interested in the exact
+> > logarithm (which is fractional), just the number of bits (which is a
+> > small integer)...
+> 
+> According to random side (http://gruntthepeon.free.fr/ssemath/) not so
+> new computers can compute 15.5 milions of serial logarithms per second
+> (62 millions in total). I'd say that overhead of Integer might be much
+> bigger then cost of logarithm.
+
+Well, converting the Integer to Double can easily take longer than 
+calculating the logarithm.
+
+The main problem with this approach, however, is that only smallish 
+(cryptographically speaking) Integers can be converted to Double with 
+something resembling adequate precision (above 2^1024-2^972, you'll get 
+Infinity from the conversion, log is Infinity: boom).
+
+
+

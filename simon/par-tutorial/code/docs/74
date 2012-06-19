@@ -1,0 +1,25 @@
+From daniel.is.fischer at googlemail.com  Sun Apr  3 16:39:09 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sun, 3 Apr 2011 16:39:09 +0200
+Subject: [Haskell-cafe] Haskell programs as specifications
+In-Reply-To: <4D987E66.1070902@dit.ie>
+References: <4D987E66.1070902@dit.ie>
+Message-ID: <201104031639.10251.daniel.is.fischer@googlemail.com>
+
+On Sunday 03 April 2011 16:04:22, Patrick Browne wrote:
+> Hi,
+> Attached are two programs that represent one-way and two-way traffic on
+> a road. I can get the programs to produce reasonable results that match
+> our intuitive ideas of roads.
+> However, I have 2 question about the programs:
+> 
+> 1)I cannot get the result suggested by the author that t1 should give
+> true in prog1 and false in prog2.
+
+Only took a short look, but that'd probably be because it's wrong, t1 
+should give True for both.
+You have a road r from a to b and a car c at a. Then after you move the car 
+along the road, it will be located at b, regardless of whether it's a one-
+way road or traffic may flow in both directions.
+
+

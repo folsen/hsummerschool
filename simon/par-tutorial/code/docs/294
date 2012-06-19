@@ -1,0 +1,22 @@
+From leather at cs.uu.nl  Mon Apr 11 11:40:09 2011
+From: leather at cs.uu.nl (Sean Leather)
+Date: Mon, 11 Apr 2011 11:40:09 +0200
+Subject: [Haskell-cafe] Fucntion composing
+In-Reply-To: <DF47C447-E80D-4A31-9655-7CE52D738FFE@mac.com>
+References: <DF47C447-E80D-4A31-9655-7CE52D738FFE@mac.com>
+Message-ID: <BANLkTinr37EcHd3Ve8y+=TVpoZo7ohf9+A@mail.gmail.com>
+
+> Prelude> let h x y = (g 0 (f x y))
+>
+> How to do pointfree definition of h?
+>
+
+See the thread http://thread.gmane.org/gmane.comp.lang.haskell.cafe/70488for
+related material.
+
+Regards,
+Sean
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110411/bf35ada0/attachment.htm>
+

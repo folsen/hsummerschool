@@ -1,0 +1,150 @@
+From frodo at theshire.org  Wed Feb  9 18:15:42 2011
+From: frodo at theshire.org (Cristiano Paris)
+Date: Wed, 9 Feb 2011 18:15:42 +0100
+Subject: [Haskell-cafe] Synthetic values?
+Message-ID: <AANLkTimsWsfdkPLK4yQRHt3OcBGUiN2FGAwG52DvKCpD@mail.gmail.com>
+
+Hi all,
+
+I've a type problem that I cannot solve and, before I keep banging my
+head against an unbreakable wall, I'd like to discuss it with the
+list.
+
+Consider the following code:
+
+------------
+module Main where
+
+class PRead p where {}
+class PWrite p where {}
+
+newtype Sealed p a = Sealed a
+
+instance Monad (Sealed p) where
+	return = Sealed
+	(Sealed x) >>= f = f x
+
+mustRead :: PRead p => a -> Sealed p a
+mustRead = Sealed
+
+mustWrite :: PWrite p => a -> Sealed p a
+mustWrite = Sealed
+
+readLog :: PRead p => String -> Sealed p String
+readLog = mustRead . id
+
+writeLog :: PWrite p => String -> Sealed p String
+writeLog = mustWrite . id
+
+appendLog l e = do l <- readLog l
+                   writeLog $ l ++ e
+------------
+
+The central type of this code is Sealed, which boxes a value inside a
+newtype with a phantom type which represents a "set of permissions".
+
+This set of permissions is implemented through a series of type
+classes (PRead and PWrite in this case) which are attached to the
+permission value p of the Sealed newtype.
+
+This way I can define which set of permissions I expect to be enforced
+when trying to peel off the Sealed value. The use of the Monad class
+and type classes as permissions behaves nicely when combining
+functions with different permission constraints, as it's the case of
+appendLog, whose type signature is:
+
+appendLog  :: (PRead p, PWrite p) => String -> [Char] -> Sealed p String
+
+Very nice, the permissions accumulates as constraints over the p type.
+Now for the "peel-off" part:
+
+------------
+unseal :: p -> Sealed p a -> a
+unseal _ (Sealed x) = x
+------------
+
+Basically this function requires a witness value of the type p to
+peel-off the Sealed value. Notice that:
+
+------------
+unseal undefined $ appendLog "Foo" "Bar"
+------------
+
+won't work as the undefined value is unconstrained. That's good,
+because otherwise it'd very easy to circumvent the enforcing
+mechanism. So, I defined some "roles":
+
+------------
+data User = User
+data Admin = Admin
+
+instance PRead User where {}
+
+instance PRead Admin where {}
+instance PWrite Admin where {}
+------------
+
+If I try to unseal the Sealed value passing User, it won't succeed, as
+the type checker is expecting the value of a type which is also an
+instance of the PWrite class:
+
+------------
+*Main> unseal User $ appendLog "Foo" "Bar"
+
+<interactive>:1:14:
+    No instance for (PWrite User)
+      arising from a use of `appendLog' at <interactive>:1:14-34
+------------
+
+while works perfectly if I pass Admin as a value:
+
+------------
+*Main> unseal Admin $ appendLog "Foo" "Bar"
+"FooBar"
+------------
+
+The idea is to hide the Admin and User constructor from the programmer
+and having two factory functions, checkAdmin and checkUser, which
+checks whether the current user has the named role, something like:
+
+------------
+checkAdmin :: IO Admin
+checkUser :: IO User
+------------
+
+where role checking happens in the IO Monad (or something similar),
+a-l? trusted kernel. So far so good and I'm very happy with that.
+
+Now the problem.
+
+I would like to enforce permissions not at the role level, but at the
+permissions level. Let's say that I want to leave "unseal" unchanged,
+I'd like to "construct" a p-value for unseal "combining" functions
+checking for single permissions, that is, in pseudo-code:
+
+unseal (checkPRead .*. checkPWrite) $ appendLog "Foo" "Bar"
+
+where .*. is some kind of "type aggregation" operator.
+
+Or maybe something like:
+
+(checkPRead .*. checkPWrite) $ appendLog "Foo" "Bar"
+
+So far I got only frustration. In principle it seems possible to
+achieve this result because everything is known at compile time and
+the type-checked should have all the information available to enforce
+the security constraints.
+
+Anyhow, I couldn't write any usable code.
+
+Any help would be appreciated, even pointers to papers discussing this approach.
+
+Thank you,
+
+-- 
+Cristiano
+
+GPG Key: 4096R/C17E53C6 2010-02-22
+Fingerprint = 4575 4FB5 DC8E 7641 D3D8? 8EBE DF59 B4E9 C17E 53C6
+
+

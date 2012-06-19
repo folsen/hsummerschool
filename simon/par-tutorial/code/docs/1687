@@ -1,0 +1,54 @@
+From v.dijk.bas at gmail.com  Tue Dec  6 09:12:56 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Tue, 6 Dec 2011 09:12:56 +0100
+Subject: [Haskell-cafe] ANNOUNCE: monad-control-0.3
+In-Reply-To: <20111206030316.GA25805@gnu.kitenet.net>
+References: <CADLz5wW4oZbBtKMb7UQ8qQdn3UayBSQ-TL66VLG3hGXCUk_npg@mail.gmail.com>
+	<CADLz5wVs3AGCagikDMJVKVm-RJjgMhCbs7LJtxGPqi_rLbjRqQ@mail.gmail.com>
+	<20111206030316.GA25805@gnu.kitenet.net>
+Message-ID: <CADLz5wX6aSLyjxpjZ_H00e4vQdf=-6gAbMsXZ_vKrROWFrMzjQ@mail.gmail.com>
+
+On 6 December 2011 04:03, Joey Hess <joey at kitenet.net> wrote:
+> I'm trying to convert from 0.2 to 0.3, but in way over my head.
+>
+> {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+> newtype Annex a = Annex { runAnnex :: StateT AnnexState IO a }
+> ? ? ? ?deriving (
+> ? ? ? ? ? ? ? ?Monad,
+> ? ? ? ? ? ? ? ?MonadIO,
+> ? ? ? ? ? ? ? ?-- MonadControlIO
+> ? ? ? ? ? ? ? ?MonadBaseControl IO
+> ? ? ? ?)
+
+You can use the following:
+
+{-# LANGUAGE GeneralizedNewtypeDeriving, TypeFamilies, MultiParamTypeClasses #-}
+
+import Control.Applicative
+import Control.Monad
+import Control.Monad.Base
+import Control.Monad.Trans.Class
+import Control.Monad.Trans.Control
+import Control.Monad.Trans.State
+import Control.Monad.IO.Class
+
+newtype Annex a = Annex { runAnnex :: StateT AnnexState IO a }
+       deriving (Applicative, Functor, Monad, MonadIO)
+
+data AnnexState = AnnexState
+
+instance MonadBase IO Annex where
+    liftBase = Annex . liftBase
+
+instance MonadBaseControl IO Annex where
+    newtype StM Annex a = StAnnex (StM (StateT AnnexState IO) a)
+    liftBaseWith f = Annex $ liftBaseWith $ \runInIO ->
+                       f $ liftM StAnnex . runInIO . runAnnex
+
+When I have some time I will add some better documentation to monad-control.
+
+Cheers,
+
+Bas
+
+

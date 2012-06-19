@@ -1,0 +1,57 @@
+From dons00 at gmail.com  Sat Apr 16 20:17:53 2011
+From: dons00 at gmail.com (Don Stewart)
+Date: Sat, 16 Apr 2011 11:17:53 -0700
+Subject: [Haskell-cafe] Haskell Platform 2011.2.0.1 now available
+In-Reply-To: <1302936617.2572.15.camel@kirk>
+References: <BANLkTimrpXDe6qpGeTBMCqp8bHk3QimbRw@mail.gmail.com>
+	<1302936617.2572.15.camel@kirk>
+Message-ID: <BANLkTi=nhxXdvJFoU3QRQLR=+zwFvQQpbw@mail.gmail.com>
+
+On Fri, Apr 15, 2011 at 11:50 PM, Joachim Breitner <nomeata at debian.org> wrote:
+> Hi,
+>
+> Am Freitag, den 15.04.2011, 15:44 -0700 schrieb Don Stewart:
+>> We're pleased to announce the 2011.2.0.1 release of the Haskell Platform:
+>> a single, standard Haskell distribution for everyone.
+>>
+>> Download the Haskell Platform 2011.2.0.1:
+>>
+>> ? ? http://haskell.org/platform/
+>
+> or use Debian unstable, which ships this version of the platform since
+> five days already: http://people.debian.org/~nomeata/platform.html
+
+
+Good work!
+
+Is the link to Debian on the http://haskell.org/platform homepage correct?
+
+
+> ?* We only ship it already because the file on
+> http://code.galois.com/darcs/haskell-platform/haskell-platform.cabal
+> has already changed earlier, which was linked by
+> http://hackage.haskell.org/platform/changelog.html so we thought this is
+> already official and released and we just missed the announcement.
+
+Do you watch the haskell-platform at projects.haskell.org mailing list?
+There we announced the freeze, and the initial release candidates.
+
+
+> Maybe it would be better if released versions get their own, static
+> directory again, as it was the case for
+> http://hackage.haskell.org/platform/2010.1.0.0/haskell-platform.cabal
+> and
+> http://hackage.haskell.org/platform/2010.2.0.0/haskell-platform.cabal
+
+Good idea.
+
+> and the relationship between the repositories
+> http://code.haskell.org/haskell-platform/ and
+> http://code.galois.com/darcs/haskell-platform/ should be explained on
+> http://trac.haskell.org/haskell-platform/.
+
+That's just a temporary problem, since code.haskell.org was moved.
+
+-- Don
+
+

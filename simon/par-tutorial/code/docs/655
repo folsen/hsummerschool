@@ -1,0 +1,39 @@
+From helgikrs at gmail.com  Sat Apr 23 09:41:54 2011
+From: helgikrs at gmail.com (Helgi Kristvin Sigurbjarnarson)
+Date: Sat, 23 Apr 2011 07:41:54 +0000
+Subject: [Haskell-cafe] Pattern matching on lazy bytestrings: how does
+ it work?
+In-Reply-To: <BANLkTim6F1pYYd1B1ZQ5dAGpYrCtgpQZDQ@mail.gmail.com>
+References: <BANLkTim6F1pYYd1B1ZQ5dAGpYrCtgpQZDQ@mail.gmail.com>
+Message-ID: <20110423074154.GA24939@helgi-server>
+
+On Fri, Apr 22, 2011 at 11:52:32PM -0700, Tom Brow wrote:
+> I noticed today that I can pattern match against lazy bytestrings when using
+> the OverloadedStrings extension:
+[..]
+> Given that pattern matching is based on data constructors, how is it possible
+> that (Chunk "abc Empty) and (Chunk "a" (Chunk "bc" Empty)) match the same
+> pattern?
+> 
+> Tom
+> 
+
+According to the haskell report[1] string literals use the overloaded (==)
+for pattern matching.
+
+    Matching a numeric, character, or string literal pattern k against a
+    value v succeeds if v == k, where == is overloaded based on the type of
+    the pattern. The match diverges if this test diverges.
+
+    [1]: http://www.haskell.org/onlinereport/exps.html#sect3.17.2
+
+-- 
+Helgi Kristvin Sigurbjarnarson <helgikrs (at) gmail (dot) com>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110423/e121dccd/attachment.pgp>
+

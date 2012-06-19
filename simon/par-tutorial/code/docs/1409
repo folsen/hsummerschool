@@ -1,0 +1,31 @@
+From andrewcoppin at btinternet.com  Sat Aug 27 12:57:57 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Sat, 27 Aug 2011 11:57:57 +0100
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <b25g57lk7fbp5td6lp31qigptnr6rvfh67@4ax.com>
+References: <4E568D11.30800@btinternet.com> <4E56CD99.6050703@vex.net>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+	<nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+	<4E57F43A.9030800@btinternet.com>
+	<b25g57lk7fbp5td6lp31qigptnr6rvfh67@4ax.com>
+Message-ID: <4E58CDB5.2010900@btinternet.com>
+
+On 26/08/2011 10:51 PM, Steve Schafer wrote:
+> On Fri, 26 Aug 2011 20:30:02 +0100, you wrote:
+>
+>> You wouldn't want to know how many bits you need to store on disk to
+>> reliably recreate the value?
+>
+> I can't say that I have cared about that sort of thing in a very long
+> time. Bits are rather cheap these days. I store data on disk, and the
+> space it occupies is whatever it is; I don't worry about it.
+
+I meant if you're trying to *implement* serialisation. The Bits class 
+allows you to access bits one by one, but surely you'd want some way to 
+know how many bits you need to keep?
+
+Likewise, you say the standard PRNG can be used to generate random 
+Integers, but what if you're trying to implement a new PRNG?
+
+

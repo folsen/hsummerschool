@@ -1,0 +1,29 @@
+From gary.klindt at googlemail.com  Sat Dec 17 21:12:34 2011
+From: gary.klindt at googlemail.com (Gary Klindt)
+Date: Sat, 17 Dec 2011 21:12:34 +0100
+Subject: [Haskell-cafe] gtk2hs: adding widget during runtime
+In-Reply-To: <1324152205.3684.14.camel@kirk>
+References: <4EECF0B3.8040706@googlemail.com> <1324152205.3684.14.camel@kirk>
+Message-ID: <4EECF7B2.9060108@googlemail.com>
+
+On 12/17/2011 09:03 PM, Joachim Breitner wrote:
+> Hi,
+>
+> Am Samstag, den 17.12.2011, 20:42 +0100 schrieb Gary Klindt:
+>> That compiles fine, but the GUI never shows a "neues label!".
+> blind guess: Do you need to call widgetShow on the newly created widget?
+Uuh! That seem's very elemental, and it works. Thank you.
+> Greetings,
+> Joachim
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111217/4e1ade34/attachment.htm>
+

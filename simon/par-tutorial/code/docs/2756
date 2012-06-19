@@ -1,0 +1,71 @@
+From michael at snoyman.com  Sun Feb  6 06:37:32 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Sun, 6 Feb 2011 07:37:32 +0200
+Subject: [Haskell-cafe] AES on 32-bit system
+In-Reply-To: <AANLkTi=9dX_d1g8Hzzb4zBVk9nfsfpN82kWG8h7+WNJt@mail.gmail.com>
+References: <AANLkTi=BQsuAF-Hmp94n6NqKU_P_rrv+17_rfVHVkpo7@mail.gmail.com>
+	<AANLkTik_b_hV=cAf-f_oSnzudZjcL8p-TATrvLqonocA@mail.gmail.com>
+	<AANLkTi=9dX_d1g8Hzzb4zBVk9nfsfpN82kWG8h7+WNJt@mail.gmail.com>
+Message-ID: <AANLkTi=nvoMqF66AUH4Vqo31RFeYCNMrxkksaRHJUxdr@mail.gmail.com>
+
+OK, now I'm sure I tried it before: I tried switching Haskellers over
+to AES with that code change you mention, and it results in runtime
+crashes (I assume segfaults, I didn't really look into it too much).
+So Svein, please disregard my requested code change, it's a bad idea.
+
+Michael
+
+On Fri, Feb 4, 2011 at 8:16 AM, Michael Snoyman <michael at snoyman.com> wrote:
+> Wow, I thought I'd tried that before, I guess not. Yes, that compiles,
+> and an initial test seems that it does not break at runtime either.
+> I'll email the author and see if he can make that change.
+>
+> Michael
+>
+> On Fri, Feb 4, 2011 at 8:11 AM, Daniel Peebles <pumpkingod at gmail.com> wrote:
+>> Knowing nothing about the package or its code, it looks like a typo to me.
+>> The stdint.h naming of types would have it be uint64_t, not uint_64t. Could
+>> that be it?
+>>
+>> On Fri, Feb 4, 2011 at 6:00 AM, Michael Snoyman <michael at snoyman.com> wrote:
+>>>
+>>> Hi everyone,
+>>>
+>>> Does anyone else have trouble installing the AES package on a 32-bit
+>>> system? My system at home installs it just fine, but my VPS chokes
+>>> with the following error messages (plus a bunch of warnings):
+>>>
+>>> cbits/ctr_inc.c:11:0:
+>>> ? ? error: 'uint_64t' undeclared (first use in this function)
+>>>
+>>> cbits/ctr_inc.c:11:0:
+>>> ? ? error: (Each undeclared identifier is reported only once
+>>>
+>>> cbits/ctr_inc.c:11:0: ?error: for each function it appears in.)
+>>>
+>>> cbits/ctr_inc.c:11:0:
+>>> ? ? error: 'ctr' undeclared (first use in this function)
+>>>
+>>> cbits/ctr_inc.c:11:0: ?error: expected expression before ')' token
+>>>
+>>> It's actually for this very reason that I'm still maintaining the
+>>> OpenSSL backend for http-enumerator: I think the tls package is stable
+>>> enough now to be used in production environments (kudos to Vincent by
+>>> the way). However, I can't use it in production if I can't build one
+>>> of its dependencies. This bug is also preventing me from adding some
+>>> nice features to http-enumerator, such as checking validity of SSL
+>>> certificates.
+>>>
+>>> Anyone have any thoughts?
+>>>
+>>> Michael
+>>>
+>>> _______________________________________________
+>>> Haskell-Cafe mailing list
+>>> Haskell-Cafe at haskell.org
+>>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+>>
+>
+
+

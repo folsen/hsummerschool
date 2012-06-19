@@ -1,0 +1,34 @@
+From gcrosswhite at gmail.com  Thu Dec 15 03:56:38 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Thu, 15 Dec 2011 12:56:38 +1000
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CAKjSnQE+QbryLsUK9MstLnxAzhgWJp3Pir9tc1UbC9wxKbZtpA@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+	<CACw0ni+Q=ixAAdWzmsbF+c1RkF74S2RV=fi_tX2B2puR0s5xvQ@mail.gmail.com>
+	<12B612A8-515C-4E86-BE7E-F2214AA5E210@deepbondi.net>
+	<CANd=OGHac+eas7SZjgruccP8n_Gh1a11bFdhUqzH-jmsZJxwFA@mail.gmail.com>
+	<CANd=OGGMg97zDT2t=4sxmtRmBKCLm=ue1NN705GRURNy+BhXhw@mail.gmail.com>
+	<20111215020337.GA21854@soi.city.ac.uk>
+	<CAKjSnQE+QbryLsUK9MstLnxAzhgWJp3Pir9tc1UbC9wxKbZtpA@mail.gmail.com>
+Message-ID: <C18471A7-C41A-433E-8454-ED6F24EFC969@gmail.com>
+
+
+On Dec 15, 2011, at 12:36 PM, Antoine Latter wrote:
+
+> Although I'm still not sure why I would be using these operations in
+> maybe or list.
+
+You probably wouldn't use these operations directly on Maybe or List, but the whole point is that when you are using a typeclass you have cannot assume that you know what they underlying type is.  If your algorithm needs to make use of many and some, then as long as the type is an instance of Alternative then you know that you can do this regardless of what the type actually is.  If certain types break your algorithm, then the constraint on the type being Alternative is clearly insufficient.
+
+I wish that I had a more concrete example of how this could happen in practice off the top of my head --- say, when writing something like an alternative stack transformer (analogous to a monad stack transformer).
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/a6c57350/attachment.htm>
+

@@ -1,0 +1,52 @@
+From patrickm7860 at yahoo.co.uk  Fri Feb 11 18:23:34 2011
+From: patrickm7860 at yahoo.co.uk (Patrick M)
+Date: Fri, 11 Feb 2011 17:23:34 +0000 (GMT)
+Subject: [Haskell-cafe] Haskell Help
+Message-ID: <963147.86446.qm@web24807.mail.ird.yahoo.com>
+
+I'm
+ writting a function that will remove tautologies from a fomula.The 
+basic idea is that if in a clause, a literal and its negation are found,
+ it means that the clause will be true, regardless of the value finally 
+assigned to that propositional variable.My appoach is to create a 
+function that will remove this but for a clause and map it to the 
+fomula.Of course I have to remove duplicates at the beginning.
+
+??? module Algorithm where
+
+??? import System.Random
+??? import Data.Maybe
+??? import Data.List
+
+??? type Atom = String
+??? type Literal = (Bool,Atom)
+??? type Clause = [Literal]
+??? type Formula = [Clause]
+??? type Model = [(Atom, Bool)]
+??? type Node = (Formula, ([Atom],
+ Model))
+??? removeTautologies :: Formula -> Formula
+??? removeTautologies = map tC.map head.group.sort
+????? where rt ((vx, x) : (vy, y) : clauses) | x == y = rt rest
+????????????????????????????????????????? | otherwise = (vx, x) : rt ((vy, y) : clauses)
+Now
+ I have problems? when I try to give it a formula (for example (A v B v 
+-A) ^ (B v C v A)).Considering that example the first clause contains 
+the literals A and -A. This means that the clause will always be true, 
+in which case it can be simplify the whole set to simply (B v C v A) . 
+But I get the following
+
+??? Loading package old-locale-1.0.0.2 ... linking ... done.
+??? Loading
+ package time-1.1.4 ... linking ... done.
+??? Loading package random-1.0.0.2 ... linking ... done.
+??? [[(True,"A"),(True,"B")*** Exception: Assignment.hs:(165,11)-(166,83): Non-exhaustive patterns in function rt
+
+What should I do?
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110211/93abade4/attachment.htm>
+

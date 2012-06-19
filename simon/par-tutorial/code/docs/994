@@ -1,0 +1,32 @@
+From hoerdegen at funktional.info  Tue Aug  9 17:02:20 2011
+From: hoerdegen at funktional.info (=?ISO-8859-1?Q?=22Dr=2E_Heinrich_H=F6rdegen=22?=)
+Date: Tue, 09 Aug 2011 17:02:20 +0200
+Subject: [Haskell-cafe] Question Formlets, file upload
+Message-ID: <4E414BFC.9020503@funktional.info>
+
+  Dear all,
+
+I am using the library Text.XHtml.Strict.Formlets to build a validating 
+form. I use the function "file" to get a file upload widget. The 
+encoding is set to multipart. I want to check, if the user entered 
+something or left the widget empty. However, when entering nothing, 
+instead of an empty string, I always get a string like "/tmp/12101" 
+which corresponds to an empty file.
+
+It would be nice, if I could check for the empty string to see, weather 
+the user entered something or not into the upload widget.
+
+I appreciate any hints to achive this and wish you a good day,
+Heinrich
+
+
+-- 
+--
+
+hoerdegen at funktional.info
+www.funktional.info
+
+--
+
+
+

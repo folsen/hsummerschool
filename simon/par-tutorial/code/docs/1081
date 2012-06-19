@@ -1,0 +1,33 @@
+From cdsmith at gmail.com  Sat Aug 13 00:58:08 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Fri, 12 Aug 2011 16:58:08 -0600
+Subject: [Haskell-cafe] type-class inference
+In-Reply-To: <4E45AEA7.4010302@dit.ie>
+References: <4E5EBA42.5060805@dit.ie>  <4E45AEA7.4010302@dit.ie>
+Message-ID: <1313189888.29706.27.camel@godel>
+
+On Fri, 2011-08-12 at 23:52 +0100, Patrick Browne wrote:
+> -- Second in the case of a method of a type class.
+> -- Inferred Num
+> *Main> :t  g 3
+> g 3 :: forall t. (A t, Num t) => t
+> -- Did not print class A.
+> *Main> :t g T
+> g T :: T
+> -- Did not print any class.
+
+This is because you already know that T is T.  The compiler has checked
+that T is, in fact, an instance of A, but it need not tell you so
+because it has information that's strictly more specific than that.
+
+> *Main> :t g (3::Integer)
+> g (3::Integer) :: Integer
+
+Same thing.  Integer is an instance of A, so telling you it's an Integer
+is even better (more specific).
+
+-- 
+Chris Smith
+
+
+

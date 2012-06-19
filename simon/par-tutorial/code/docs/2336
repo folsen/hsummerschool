@@ -1,0 +1,19 @@
+From michael at snoyman.com  Tue Dec 27 23:00:05 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 28 Dec 2011 00:00:05 +0200
+Subject: [Haskell-cafe] GHC 7.4 and binutils-gold
+Message-ID: <CAKA2JgJ-igsuMAqPV6Y7Y1S8hmP8RjtjiOrxKczF1_+8iJt=Fg@mail.gmail.com>
+
+Hi all,
+
+One other little GHC 7.4 note. When I first tried building code with
+it, I got the following error message:
+
+/usr/bin/ld: --hash-size=31: unknown option
+
+Once I uninstalled binutils-gold, everything went just fine. Has
+anyone else experienced this? I'm running Ubuntu Oneiric.
+
+Michael
+
+

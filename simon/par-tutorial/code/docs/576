@@ -1,0 +1,12 @@
+From andrewcoppin at btinternet.com  Thu Apr 21 22:29:26 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Thu, 21 Apr 2011 21:29:26 +0100
+Subject: [Haskell-cafe] Why not Darcs?
+Message-ID: <4DB093A6.8000303@btinternet.com>
+
+I'm sure this must be a VFAQ, but... There seems to be universal 
+agreement that Darcs is a nice idea, but is unsuitable for "real" 
+projects. Even GHC keeps talking about getting rid of Darcs. Can anybody 
+tell me what the "problems" with Darcs actually are?
+
+

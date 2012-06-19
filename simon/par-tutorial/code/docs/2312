@@ -1,0 +1,40 @@
+From baumgartner.tim at googlemail.com  Tue Dec 27 09:54:04 2011
+From: baumgartner.tim at googlemail.com (Tim Baumgartner)
+Date: Tue, 27 Dec 2011 09:54:04 +0100
+Subject: [Haskell-cafe] MIDI-controlled application
+Message-ID: <CAE0Z8DEZwSXUn65q6nEhnHccZuQojg1softo3esh=Hc06yuY=g@mail.gmail.com>
+
+Hi Haskellers!
+
+I'm writing my first non-trivial Haskell application. I have an electronic
+drum set that generates MIDI events that I process with Haskell. A simple
+application of this kind might have fixed drums associated with fixed
+commands (I've done that). The next step would be to display menus (with
+very large font...) that show commands and the associated drums. The menu
+structure should be derived from the commands active in each context. Up to
+this point, I implemented this already in Java. But now after some
+successful attempts in Haskell, I plan for more features: the user should
+ultimately be able to record his own "triggers", i.e. short drum rhythms,
+and associate them with actions. Since I'm still a beginner with only some
+basic experience in Monads, Arrows and their transformers, there is
+infinite knowledge to be gained by working on this problem (both library
+and concrete apps).
+
+Currently I'm using a monad that combines Parsec (with MIDI event stream)
+and a Writer (that writes commands that should result in IO). It's done in
+a way that during running the monad, many parses can be done and failing
+parses roll back the parser state so that a new parse can be tried.
+
+Now my questions:
+I have read about Yampa, but I have not mastered it yet. E.g. I don't
+understand switches. Could my "triggers" be realized with Yampa's events
+and switches?
+Would you recommend any other approach?
+Is there something similar somewhere?
+
+Regards
+Tim
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111227/f60bb466/attachment.htm>
+

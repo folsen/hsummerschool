@@ -1,0 +1,57 @@
+From creswick at gmail.com  Sat Apr 30 03:06:25 2011
+From: creswick at gmail.com (Rogan Creswick)
+Date: Fri, 29 Apr 2011 18:06:25 -0700
+Subject: [Haskell-cafe] versioning of Haskell packages
+In-Reply-To: <4DBB3633.2000200@gmail.com>
+References: <4DBB3633.2000200@gmail.com>
+Message-ID: <BANLkTikbWaCt2GDDR++jnC_T5E3NWQn29Q@mail.gmail.com>
+
+On Fri, Apr 29, 2011 at 3:05 PM, Daniil Elovkov
+<daniil.elovkov at gmail.com> wrote:
+> Hello list
+>
+> I have an idea on versioning of Haskell packages and a small question about
+> release model of Haskell Platform. Since the latter is shorter let's start
+> with it.
+>
+> So, what is the release model of Haskell Platform? Is it released every N
+> months and frozen at that point? Or some intermediate package/compiler
+> updates can make the new version to appear out of schedule?
+>
+> Now, about package versioning. Haskell packages are flourishing and evolving
+> at a high speed. Packages depend on other package and they evolve
+> asynchronously. In result it is easy to end up in need of multiple versions
+> of the same package in one program or maybe stumble upon other
+> conflicts/problems. I'm expressing myself a little vaguely because I don't
+> have a good example in my head right now.
+>
+> However, the idea is to maintain not just multi-digit version names that
+> don't carry any semantics except that 1.1.3 is later than 1.1.2, but also
+> somehow describe compatibility between versions.
+>
+> This way, even if the package A has jumped from 1.0 to 1.5 and the dependent
+> package B has been stagnant all this time (and B depends on A 1.0), if we
+> have information that 1.5 is compatible with 1.0, then we can safely use A
+> 1.5 while building B. Or we could use whatever version of A is found in the
+> system as long as its compatible with A 1.0 that B depends on.
+
+I think the PVP (Package Versioning Policy) covers a lot of what
+you're discussing, but I may misunderstand:
+
+http://www.haskell.org/haskellwiki/Package_versioning_policy
+
+We *do* still have some trouble maintaining / enforcing the PVP in
+general, and there are a few things that it doesn't cover (I don't
+believe exception behavior is covered, for example, although I'd argue
+that throwing more exceptions than a previous version introduces a
+substantial API change. Anyhow, that's a different rant. ;).
+
+Finer granularity would be great -- if it can be done autonomously.
+
+I think that raising awareness of the PVP and refining the tools to
+check for necessary version bumps would be a great step in the right
+direction.
+
+--Rogan
+
+

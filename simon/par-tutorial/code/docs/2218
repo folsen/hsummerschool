@@ -1,0 +1,44 @@
+From da.waterworth at gmail.com  Wed Dec 21 23:38:04 2011
+From: da.waterworth at gmail.com (Daniel Waterworth)
+Date: Wed, 21 Dec 2011 22:38:04 +0000
+Subject: [Haskell-cafe] State Machine Composition
+In-Reply-To: <1324506259.24927.7.camel@tau.nicolast.be>
+References: <CAP6oseSLBuHBobxGH291dR=hFFjkGVG8XMTSzFaLoVG3GumVOQ@mail.gmail.com>
+	<1324506259.24927.7.camel@tau.nicolast.be>
+Message-ID: <CAP6oseTyRuJVFfrGGt1-azGFE2LkaQCZR0B30rOsdus6SiveEQ@mail.gmail.com>
+
+I suspect it's possible to do something like that with multi parameter
+type classes, but I tend to find that trying to do pseudo dependently
+typed things in Haskell tends to bite me sooner or later.
+
+Daniel
+
+On 21 December 2011 22:24, Nicolas Trangez <nicolas at incubaid.com> wrote:
+> On Wed, 2011-12-21 at 18:34 +0000, Daniel Waterworth wrote:
+>> I made this simple state machine combinator library today. I think it
+>> works as a simple example of a good use for GADTs.
+>>
+>> https://gist.github.com/1507107
+>
+> Any way to do something along the lines of
+>
+> type StateChange a = SC a a
+>
+> handleChange :: Monad m => StateChange ConnectionState -> m ()
+> handleChange (SC Closed Opening) = return ()
+> handleChange (SC Opening Closed) = return ()
+> handleChange (SC Closed Open) = return ()
+>
+> where the last line would yield a type checking error at compile time,
+> and the compiler can warn about handleChange not being exhaustive (for
+> the valid state change steps)?
+>
+> Nicolas
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

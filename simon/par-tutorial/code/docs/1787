@@ -1,0 +1,18 @@
+From v.dijk.bas at gmail.com  Fri Dec  9 17:17:15 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Fri, 9 Dec 2011 17:17:15 +0100
+Subject: [Haskell-cafe] Haskell functions caller-callee details
+In-Reply-To: <CABG-yt37Ub0r_RZzb6pAu5aLM0ZJRz1E0rWktgz9QZbfgh9+oA@mail.gmail.com>
+References: <CABG-yt37Ub0r_RZzb6pAu5aLM0ZJRz1E0rWktgz9QZbfgh9+oA@mail.gmail.com>
+Message-ID: <CADLz5wU1VPWTeQfFpK44n4aDN=skduA2fxsdY0z_ZE8urCk+zA@mail.gmail.com>
+
+On 9 December 2011 16:41, Shakthi Kannan <shakthimaan at gmail.com> wrote:
+> Given a Haskell package is there a way I can get each functions'
+> caller-callee details? Are there any existing tools/libraries that can
+> help me get this data from the source?
+
+Check out SourceGraph:
+
+http://hackage.haskell.org/package/SourceGraph
+
+

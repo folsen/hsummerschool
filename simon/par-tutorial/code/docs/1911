@@ -1,0 +1,22 @@
+From gcrosswhite at gmail.com  Wed Dec 14 06:51:46 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Wed, 14 Dec 2011 15:51:46 +1000
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+Message-ID: <BD14E80B-9116-4F52-9914-E0AE7797F076@gmail.com>
+
+
+On Dec 13, 2011, at 3:06 AM, Bryan O'Sullivan wrote:
+
+> There is absolutely no implication of consuming anything in the definitions of many or some. This is how they happen to behave when used in the context of some parsing libraries, but that's all. If many or some always go into an infinite loop for some Alternative instance, then I suspect that the instance itself is either broken or shouldn't exist.
+
+Yes of course, so I suppose my point was that when I thought about them in this way their purpose made sense for the first time.  :-)
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111214/a2679b5f/attachment.htm>
+

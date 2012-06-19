@@ -1,0 +1,30 @@
+From haskell.vivian.mcphail at gmail.com  Mon Feb  7 13:44:43 2011
+From: haskell.vivian.mcphail at gmail.com (Vivian McPhail)
+Date: Tue, 8 Feb 2011 01:44:43 +1300
+Subject: [Haskell-cafe] Cabal && license combinations
+Message-ID: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+
+Dear All,
+
+There was recently a discussion on haskell-cafe (
+http://www.mail-archive.com/haskell-cafe at haskell.org/msg86472.html) about
+licenses of libraries such as hmatrix and the combination of various
+different licences.
+
+One question was about per-package versus by-file licenses:
+
+In Haskell the compilation unit is the module, and the per-file cabal header
+allows for a license field.  It seems then that a package should be the
+least restrictive combination of all the licenses in all the contained
+modules.  If this has to become a hand-coded fancy function of various GPLx,
+BSDy, OpenSource, and other licenses then so be it.  That is the legal
+reality.  And use of a BSD3 module in hmatrix that does not depend upon
+GPL'd GSL modules would be acceptable.
+
+In short, I argue for a per-file(module) license regime.
+
+Vivian
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110208/a244ef03/attachment.htm>
+

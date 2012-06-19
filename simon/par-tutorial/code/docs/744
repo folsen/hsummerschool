@@ -1,0 +1,32 @@
+From eric.stansifer+haskell at gmail.com  Tue Apr 26 14:31:11 2011
+From: eric.stansifer+haskell at gmail.com (Eric Stansifer)
+Date: Tue, 26 Apr 2011 14:31:11 +0200
+Subject: [Haskell-cafe] converting prefixes of CString <-> String
+In-Reply-To: <8D8D3C31-262C-440E-8D17-7FF1709FB63D@me.com>
+References: <BANLkTimZA8GuTN2oSWd-juDkbzu8vG_=Rg@mail.gmail.com>
+	<8D8D3C31-262C-440E-8D17-7FF1709FB63D@me.com>
+Message-ID: <BANLkTin6QjQK_LxTax_-X3p7gH8CF4-b2w@mail.gmail.com>
+
+>> Let 'c2h' convert CStrings to Haskell Strings, and 'h2c' convert
+>> Haskell Strings to CStrings. ?(If I understand correctly, c2h . h2c
+>> === id, but h2c . c2h is not the identity on all inputs;
+>
+> That is correct. ?CStrings are 8-bits, and Haskell Strings are 32-bits. ?Converting from Haskell to C loses information, unless you use a multi-byte encoding on the C side (for instance, UTF8).
+
+So actually I am incorrect, and h2c . c2h is the identity but c2h . h2c is not?
+
+> I suggest you look at the utf8-string package, for instance Codec.Binary.UTF8.String.{encode,decode}, which convert Haskell strings to/from a list of Word8, which can then be transferred via the FFI to wherever you like.
+
+This package was very helpful;  I looked at the source to see how the
+utf8 encoding was done.  It looks as if the functionality I want is
+technically feasible but not implemented yet;  it shouldn't be too
+much trouble to implement it myself, by imitating the existing
+'decode' function but changing its behavior when it runs out of input
+in the middle of a utf8-character.  Also key is the property
+s1 ++ s2 == decode (encode s1)) ++ decode (encode s2))
+holds.
+
+Thanks,
+Eric
+
+

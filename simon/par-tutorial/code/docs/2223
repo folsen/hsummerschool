@@ -1,0 +1,57 @@
+From gcrosswhite at gmail.com  Thu Dec 22 04:41:54 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Thu, 22 Dec 2011 13:41:54 +1000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CAO0Ooq0R4VHA04xjTg6+bKGiMu-S-kj=iBuRvqQU1EAeppyENw@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+	<48743015-B3C4-4D72-85E1-948636946D87@gmail.com>
+	<CAO0Ooq0R4VHA04xjTg6+bKGiMu-S-kj=iBuRvqQU1EAeppyENw@mail.gmail.com>
+Message-ID: <B2B77FC9-A674-4DA1-B455-593E0F64B612@gmail.com>
+
+
+On Dec 22, 2011, at 12:40 PM, Alexander Solla wrote:
+
+> 
+> 	fst _|_ = _|_
+> 
+> This expression is basically non-sense.
+
+This is only "nonsense" because you refuse to accept that there are valid formalisms other than your own that contain _|_ as a perfectly valid entity.  :-)
+
+
+> Should we accept straight-forwardly ill-typed expressions like:
+> 
+>     data Strict a = Strict !a
+>     fst (Strict [1..])
+> 
+> just because the argument is "strictly" a bottom? Bottom inhabits every type, but only vacuously.
+
+No, each type has its own value for _|_, and your example demonstrates why this makes more sense than making all _|_'s be equivalent.
+
+
+> Things like seq, unsafeCoerce, and the like, are defined as (functions into) bottom in GHC.Prim, and the real semantic-changing magic they perform is done behind the scenes.  It cannot be expressed as Haskell in the same Haskell context it is used.  So assuming you mean something like:
+> 
+>    fst (seq [1..] (1,2))
+> 
+> I must respond that you are using one of these magical keywords which change Haskell's semantics.  They should be avoided.
+
+So... now you want to throw out seq so that we no longer have a way to force the evaluation of values, and the motivation for this is because when we throw out _|_ then we no longer have a formal way to describe the semantics of seq?
+
+
+> Refusing to use bottom in our semantics doesn't make life better by forcing us to stay within a total fragment of the language, it actually makes life harder by removing from us a useful tool for knowing *how* to stay within a total fragment of the language.
+> 
+> I am collapsing the semantics for "distinct" bottoms into a single bottom and noting that it has no interpretation as a Haskell value.
+
+I agree that if you collapse all of the distinct bottoms then you get a mess, but since whenever we are talking about semantics in the Haskell community we give each type has its own _|_ it is an incredibly moot point;  it's like saying that the problem with cars is that if you remove all of their wheels then they have a lot of trouble getting anywhere at all.  :-)
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111222/447953a0/attachment.htm>
+

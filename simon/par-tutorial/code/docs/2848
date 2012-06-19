@@ -1,0 +1,82 @@
+From jwlato at gmail.com  Tue Feb  8 13:25:00 2011
+From: jwlato at gmail.com (John Lato)
+Date: Tue, 8 Feb 2011 12:25:00 +0000
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTikgiT9ujJi5PpLxr4-E8aWyOfVRog_yaDPs2MHC@mail.gmail.com>
+References: <AANLkTinkP3V6AopOA+CrwkeQCWRMHtTzKzro3VOWxhiS@mail.gmail.com>
+	<AANLkTikgiT9ujJi5PpLxr4-E8aWyOfVRog_yaDPs2MHC@mail.gmail.com>
+Message-ID: <AANLkTikfLUnyq8GPPhRzcYan__gb1SENN9vvRwvuVLnb@mail.gmail.com>
+
+On Mon, Feb 7, 2011 at 11:30 PM, Ivan Lazar Miljenovic <
+ivan.miljenovic at gmail.com> wrote:
+
+> On 8 February 2011 09:57, John Lato <jwlato at gmail.com> wrote:
+> > I think the real problem we have with container classes has a lot more to
+> do
+> > with what we would use them for.  That is, Haskell already has Monoid,
+> > Foldable and Traversable.  These three (especially Foldable) cover nearly
+> > everything OOP programmers would expect out of generic container
+> operations.
+>
+> That was what my rewrite was going to be using.  The problem, however,
+> is two-fold:
+>
+> * Dealing with types of kind * vs kind * -> *
+
+
+> * Dealing with types of kind * -> * that have a restriction on the
+> type parameter (e.g. Set).
+>
+> I was basing my approach on Ganesh's rmonad [1] library whilst taking
+> into account the Functor => Applicative => Monad hierarchy when
+> re-defining the classes, but the approach was very quickly becoming
+> unwieldy.
+>
+
+ I think the Functor => Applicative => Monad hierarchy should be orthogonal
+to container design.  Although many containers form useful monads, those
+monads can have very different behavior (e.g. List and Set).  Therefore very
+few (if any) algorithms can both be usefully polymorphic with respect to the
+container instance and also take advantage of the monadic structure.  For
+those algorithms this is useful, adding an extra Monad to the context is
+entirely appropriate.
+
+Probably more importantly, what users want from a container is often not
+what the monad provides.  Although the List monad is very elegant, I usually
+find the semantics of ZipList more useful.  This leads me to believe that
+getting "singleton" and "<*>" from a class other than Applicative is the
+correct approach.
+
+Functor is generally better-suited to containers, except for types of kind *
+that aren't functors.  I would suggest there's a better approach than the
+rmonad machinery, perhaps something like this:
+
+> class Container c where
+>     type Elem c :: *
+>
+> class (Container cIn, Container cOut) => CMap cIn cOut where
+>     cmap :: (Elem cIn -> Elem cOut) -> cIn -> cOut
+>
+> instance (a ~ Elem (c a), b ~ Elem (c b), Functor c, Container (c a),
+Container (c b)) => CMap (c a) (c b) where
+>     cmap = fmap
+
+Now we have the same operation which fmap provides, only we can define it
+for any container type.  Better, we have an instance which is suitable for
+all Functor instances, so we need only write instances for containers of
+kind * (e.g. ByteString).
+
+An annoyance with this approach is that the output type of cmap (c b) can't
+be determined from the input function, so it's sometimes necessary to add
+type annotations.  I think this can be solved by using bidirectional fundeps
+instead of associated types though.
+
+If you design container classes so that the element type is part of the
+class instance, restrictions aren't a problem.  It's only when you try to
+accommodate Functor etc. that workarounds such as rmonad become necessary.
+
+John
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110208/9d029d34/attachment.htm>
+

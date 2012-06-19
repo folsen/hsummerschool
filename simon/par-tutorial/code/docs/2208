@@ -1,0 +1,74 @@
+From dave at zednenem.com  Wed Dec 21 19:32:34 2011
+From: dave at zednenem.com (David Menendez)
+Date: Wed, 21 Dec 2011 13:32:34 -0500
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <4EF21971.9010104@freegeek.org>
+References: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+	<4EEFCABD.4030000@freegeek.org>
+	<CAOv7PypxmgqZByCHFYGYsn=5Nx0AKMLQsmQ-e=j5-8p7M70Hbg@mail.gmail.com>
+	<4EF21971.9010104@freegeek.org>
+Message-ID: <CAOv7Pyq1BwzaP9XmPuNBHSNaunf8jSMuFve2u75u1ADDQcadJw@mail.gmail.com>
+
+On Wed, Dec 21, 2011 at 12:37 PM, wren ng thornton <wren at freegeek.org> wrote:
+> On 12/19/11 10:20 PM, David Menendez wrote:
+>>
+>> On Mon, Dec 19, 2011 at 6:37 PM, wren ng thornton<wren at freegeek.org>
+>> ?wrote:
+>>>
+>>> On 12/14/11 10:58 PM, Gregory Crosswhite wrote:
+>>>>
+>>>>
+>>>> Of course, this is not a simple change at all because it would have to
+>>>> be done in such a way as to respect the ordering of actions --- that
+>>>> is, we can't have each action executed only when the corresponding
+>>>> element of the list demanded is forced, or else actions would
+>>>> undesirably interleave.
+>>>
+>>>
+>>> Therein lies the issue. To put this in a monadic context, this is the
+>>> same
+>>> reason why we can't just say:
+>>>
+>>> ? ?evalState (repeatM getNext) init
+>>>
+>>> e.g., to generate an infinite list of pseudorandom numbers and then
+>>> discard
+>>> the final seed because we have all the numbers we'll ever need.
+>>
+>>
+>> Sure you can. Just make sure you're using a non-strict state monad.
+>
+>
+> Fair enough. I over-simplified the example I had in mind, which cannot be
+> evaded so easily.
+>
+> Though it's worth pointing out that your solution relies on the specific
+> property I mentioned (later in the same email), namely that it is safe to
+> perform the evaluation of lazy state at any point we desire, because it will
+> not interact with other side-effects[1]. Thus, this happens to be one of the
+> monads which has the property necessary for being able to perform the
+> reordering desired by the OP. However, if we try using your 'repeatM' for
+> other monads it is unlikely to work--- and for the same reasons that 'many'
+> and 'some' are problematic for Maybe and lists.
+
+Yes, sequence . repeat is only sensible for non-strict monads, which
+are fairly uncommon. (Identity, State, Reader, Writer, infinite
+search, and various combinations thereof are the only ones I'm aware
+of.) The situation is exactly analogous to many and some, which are
+only meaningful for certain values in certain types, as well as to
+functions like fix and folder, which can diverge if given
+inappropriate arguments.
+
+If there were a lot of code that was (1) meaningfully generic over
+non-strict monads and (2) diverged for strict monads, it might make
+sense to declare a subclass and restrict those functions to non-strict
+monads. That won't stop someone from trying to call sequence on an
+infinite list, but it does express an important precondition of the
+code in the type.
+
+
+-- 
+Dave Menendez <dave at zednenem.com>
+<http://www.eyrie.org/~zednenem/>
+
+

@@ -1,0 +1,26 @@
+From vandijk.roel at gmail.com  Sat Apr  2 21:39:21 2011
+From: vandijk.roel at gmail.com (Roel van Dijk)
+Date: Sat, 2 Apr 2011 21:39:21 +0200
+Subject: [Haskell-cafe] darcs repo browser
+In-Reply-To: <AANLkTintHCYs=kK3Q3RCQsGHH4irz2DwkzGg94=f-fKB@mail.gmail.com>
+References: <AANLkTintHCYs=kK3Q3RCQsGHH4irz2DwkzGg94=f-fKB@mail.gmail.com>
+Message-ID: <AANLkTikGXpOEgTi9xMhqUCWs2kQi75MY8cDbELKNxwLx@mail.gmail.com>
+
+Nice work!
+
+The view file part seems to have problems with utf-8 encoded files:
+http://handra.rampa.sk/dawb/view?repoVURL=http%3A%2F%2Fcode.haskell.org%2Fnumerals&repoVFile=test%2FText%2FNumeral%2FLanguage%2FZH%2FTestData.hs
+
+It is unreadable even when explicitly asking my browser to decode the
+document as UTF-8. This makes me suspect the problem is in the code
+that processes files to produce the HTML.
+
+I have no solution ready for this problem. Each file could potentially
+use a different encoding.
+
+Apart from this inconvenience your tool looks very useful.
+
+Regards,
+Roel
+
+

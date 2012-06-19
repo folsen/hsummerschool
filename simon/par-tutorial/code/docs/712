@@ -1,0 +1,29 @@
+From skirmantas.kligys at gmail.com  Tue Apr 26 00:10:47 2011
+From: skirmantas.kligys at gmail.com (Skirmantas Kligys)
+Date: Mon, 25 Apr 2011 15:10:47 -0700
+Subject: [Haskell-cafe] Data.Enumerator.Text.utf8 not constant memory?
+Message-ID: <BANLkTikvOg3DwT7iuCbkJeju-DsDKyd8xg@mail.gmail.com>
+
+Hi,
+
+I am learning iteratees, and as a starter project I wanted to use expat-
+enumerator to parse a 2 gigabyte XML file.
+
+I expected to be able to do what SAX does in Java, i.e. to avoid loading the
+whole 2 gigabytes into memory.  For warm-up, I wrote an iteratee to count lines
+in the file, and it does load the whole file into memory!  After profiling, I
+see that the problem was Data.Enumerator.Text.utf8, it allocates up to 60
+megabytes when run on a 40 megabyte test file.
+
+Any suggestions how to fix Text.utf8, or what people do for parsing UTF-8
+encoded text files with iteratees?
+
+Thanks!
+
+Here is my code and profiling results:
+
+http://i.imgur.com/XEI1v.png
+http://hpaste.org/46037/counting_lines_with_iteratees
+http://hpaste.org/46038/counting_lines_with_iteratees
+
+

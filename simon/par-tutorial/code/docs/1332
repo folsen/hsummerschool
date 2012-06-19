@@ -1,0 +1,39 @@
+From bobzhang1988 at gmail.com  Wed Aug 24 18:19:55 2011
+From: bobzhang1988 at gmail.com (bob zhang)
+Date: Wed, 24 Aug 2011 12:19:55 -0400
+Subject: [Haskell-cafe] How to make callCC more dynamic
+Message-ID: <4E5524AB.5010108@gmail.com>
+
+Hi, all
+I thought the right type for ContT should be
+newtype ContT m a = ContT {runContT :: forall r. (a-> m r) -> m r}
+and
+other control operators
+shift :: Monad m => (forall r . (a-> ContT m r) -> ContT m r) -> ContT m a
+reset :: Monad m => ContT m a -> ContT m a
+callCC :: ((a-> (forall r . ContT m r)) -> ContT m a) -> ContT m a
+
+unfortunately, I can not make callCC type check, and don't know how to
+do it.
+I managed to make shift, reset type check
+
+reset :: Monad m => ContT m a -> ContT m a
+reset e = ContT $ \ k -> runContT e return >>= k
+
+shift :: Monad m => (forall r . (a-> ContT m r) -> ContT m r) -> ContT m a
+shift e = ContT $ \ (k :: a -> m r) ->
+runContT ((e $ \ v -> ContT $ \c -> k v >>= c) :: ContT m r) return
+
+but still, I cann't use shift, reset in recursive jumpings like this?
+
+newtype H r m = H (H r m -> ContT m r)
+unH (H x) = x
+test = flip runContT return $ reset $ do
+jump <- shift (\f -> f (H f))
+lift . print $ "hello"
+unH jump jump
+
+Have anyone tried this before?
+Best, bob
+
+

@@ -1,0 +1,48 @@
+From vandijk.roel at gmail.com  Mon Apr  4 12:31:52 2011
+From: vandijk.roel at gmail.com (Roel van Dijk)
+Date: Mon, 4 Apr 2011 12:31:52 +0200
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <BANLkTimG9VyfjaNqN1khd89dyz8aNsV8cw@mail.gmail.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+	<BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+	<BANLkTimG9VyfjaNqN1khd89dyz8aNsV8cw@mail.gmail.com>
+Message-ID: <BANLkTi=fK3MfxL6Qhfak1A7Eb0-JzpWBCg@mail.gmail.com>
+
+On 4 April 2011 12:22, Michael Snoyman <michael at snoyman.com> wrote:
+> Firstly, I personally would love to insist on using UTF-8 and be done with
+> it. I see no reason to bother with other character encodings.
+
+This is also my preferred choice.
+
+> There *is* an algorithm for determining the encoding of an XML file based on
+> a combination of the BOM (Byte Order Marker) and an assumption that the file
+> will start with a XML declaration (i.e., <?xml ... ?>). But this isn't
+> capable of determining every possible encoding on the planet, just
+> distinguishing amongst varieties of UTF-(8|16|32)/(big|little) endian and
+> EBCIDC. It cannot tell the difference between UTF-8, Latin-1, and
+> Windows-1255 (Hebrew), for example.
+
+I think I was confused between character encodings in general and
+Unicode encodings.
+
+> I think the implication of "Unicode encoding formats" is something in the
+> UTF family. An encoding like Latin-1 or Windows-1255 can be losslessly
+> translated into Unicode codepoints, but it's not exactly an encoding of
+> Unicode, but rather a subset of Unicode.
+
+That would validate Colin's point about there not being that many encodings.
+
+> My guess is that a large subset of Haskell modules start with one of left
+> brace (starting with comment or language pragma), m (for starting with
+> module), or some whitespace character. So it *might* be feasible to take a
+> guess at things. But as I said before: I like UTF-8. Is there anyone out
+> there who has a compelling reason for writing their Haskell source in
+> EBCDIC?
+
+I think I misinterpreted the word 'leading'. I thought Colin meant
+"most used". The set of characters with which Haskell programmes start
+is indeed small. But like you I prefer no guessing and just default to
+UTF-8.
+
+

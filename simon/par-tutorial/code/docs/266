@@ -1,0 +1,35 @@
+From catamorphism at gmail.com  Sun Apr 10 02:23:35 2011
+From: catamorphism at gmail.com (Tim Chevalier)
+Date: Sat, 9 Apr 2011 17:23:35 -0700
+Subject: [Haskell-cafe] ANNOUNCE: hplaylist-0.1
+Message-ID: <BANLkTinsLzXamSy4a-F3idREtRk+mhSMPQ@mail.gmail.com>
+
+Hello,
+
+hplaylist is a very simple command-line utility, written in Haskell,
+for automatically syncing an iTunes playlist to a
+non-Apple-manufactured MP3 player (anything that mounts as a USB drive
+should work in principle).
+
+For example, if I have an iTunes playlist called "Songs about cheese",
+hplaylist allows me to type:
+
+$ hplaylist "Songs about cheese"
+
+which automatically copies the named playlist, and all music files
+included in the playlist, to my device.
+
+Download at:
+http://hackage.haskell.org/package/hplaylist-0.1
+or
+https://github.com/catamorphism/hplaylist
+
+Cheers,
+Tim
+
+-- 
+Tim Chevalier * http://cs.pdx.edu/~tjc/ * Often in error, never in doubt
+"an intelligent person fights for lost causes,realizing that others
+are merely effects" -- E.E. Cummings
+
+

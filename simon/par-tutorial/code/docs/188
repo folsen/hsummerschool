@@ -1,0 +1,38 @@
+From muddsnyder at yahoo.com  Thu Apr  7 00:00:39 2011
+From: muddsnyder at yahoo.com (Mark Snyder)
+Date: Wed, 6 Apr 2011 15:00:39 -0700 (PDT)
+Subject: [Haskell-cafe] mtlx has a nice design but is slow
+Message-ID: <867597.43712.qm@web120504.mail.ne1.yahoo.com>
+
+I'm the author for mtlx, and admittedly I didn't do anything about efficiency when I implemented it. ?Is there any initial place I ought to look for tips on inlining? I'll start with the pragmas page (http://www.haskell.org/ghc/docs/7.0.3/html/users_guide/pragmas.html) I suppose. ?I'm happy for any suggestions--optimizing hasn't been one of my focuses, so it's time for me to learn I suppose!
+
+I did switch to newtype definitions in the most recent version (0.1.5), which probably helped a lot compared to data definitions, but there are no inline pragmas in use, so perhaps there are some good opportunities for optimization.
+
+~Mark Snyder
+
+>
+>Is the package missing some obvious inlining in the instances?
+>
+>> I just refactored my type and transform system prototype (introduced in [1]
+>> but changed since then) from using mtlx [2] (type-indexed monad transformers
+>> described in [3]) to mtl using RWST. mtlx allowed me to cleanly separate the
+>> various monadic components in a convenient way. Unfortunately, I found it to
+>> be too slow. The refactoring was an experiment to see how slow. I was rather
+>> surprised:
+>>
+>> Running time of a compiled main with a list of tests:
+>> ? mtlx (7 transformers): 2 min 52 sec
+>> ? mtl (RWST): 0 min 13 sec
+>>
+>> It's frustrating to see such a huge performance gap for a better design.
+>>
+>> Regards,
+>> Sean
+>>
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110406/2f4c9d90/attachment.htm>
+

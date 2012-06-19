@@ -1,0 +1,88 @@
+From dbanas at banasfamily.net  Fri Aug 19 15:50:31 2011
+From: dbanas at banasfamily.net (David Banas)
+Date: Fri, 19 Aug 2011 06:50:31 -0700
+Subject: [Haskell-cafe] Failed link to mixed-language shared object.
+In-Reply-To: <1313724759.23760.4.camel@dbanas-eeepc>
+References: <1313724759.23760.4.camel@dbanas-eeepc>
+Message-ID: <1313761831.24567.15.camel@dbanas-eeepc>
+
+On Thu, 2011-08-18 at 20:32 -0700, David Banas wrote:
+> Hi all,
+> 
+> Does this trigger recollection in anyone:
+> 
+> dbanas at dbanas-eeepc:~/prj/haskell/AMIParse/trunk$ make
+> ghc -dynamic -o ami_test -L. -lami ami_test.o
+> ./libami.so: undefined reference to `__stginit_haskell98_MarshalArray_'
+> ./libami.so: undefined reference to `__stginit_haskell98_MarshalError_'
+> collect2: ld returned 1 exit status
+> make: *** [ami_test] Error 1
+> dbanas at dbanas-eeepc:~/prj/haskell/AMIParse/trunk$ 
+> 
+> ?
+> Know what I need to do?
+> 
+> Thanks,
+> -db
+> 
+
+So, I was able to make my link errors go away, by adding `-shared' to my
+command line:
+
+dbanas at dbanas-eeepc:~/prj/haskell/AMIParse/trunk$ make
+ghc -no-hs-main -shared -dynamic -o ami_test -L. -lami ami_test.o
+
+However, when I try to execute the resultant program, I get a
+segmentation fault:
+
+dbanas at dbanas-eeepc:~/prj/haskell/AMIParse/trunk$ ./ami_test test.ami 
+Segmentation fault
+
+Tracing this shows that the `main' pointer of the program appears to be
+NULL:
+
+dbanas at dbanas-eeepc:~/prj/haskell/AMIParse/trunk$ gdb --args ./ami_test
+test.ami 
+GNU gdb (GDB) 7.1-ubuntu
+Copyright (C) 2010 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later
+<http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show
+copying"
+and "show warranty" for details.
+This GDB was configured as "i486-linux-gnu".
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>...
+Reading symbols
+from /home/dbanas/prj/haskell/AMIParse/trunk/ami_test...done.
+(gdb) l
+2	#include <stdlib.h>
+3	#include <string.h>
+4	//#include "HsFFI.h"
+5	#include "ami_model.h"
+6	
+7	#define DEF_AMI_FILE "test.ami"
+8	#define VEC_SIZE       8
+9	#define MAX_LINE_LEN 256
+10	
+11	int main(int argc, char *argv[]) {
+(gdb) b 11
+Breakpoint 1 at 0x87d: file ami_test.c, line 11.
+(gdb) run
+Starting program: /home/dbanas/prj/haskell/AMIParse/trunk/ami_test
+test.ami
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00000002 in ?? ()
+
+I assume that's because of the `-shared' flag.
+
+Any thoughts?
+
+Thanks,
+-db
+
+
+
+

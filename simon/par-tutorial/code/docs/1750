@@ -1,0 +1,160 @@
+From kolsrud at gmail.com  Thu Dec  8 13:48:01 2011
+From: kolsrud at gmail.com (=?ISO-8859-1?Q?=D8ystein_Kolsrud?=)
+Date: Thu, 8 Dec 2011 13:48:01 +0100
+Subject: [Haskell-cafe] Disjunctive patterns
+In-Reply-To: <4EE0AA66.1050006@chalmers.se>
+References: <CALgsdJLSZvMjei3rW_Ppx65zDanSRNPza4x1uwx4EGnEUTJJOQ@mail.gmail.com>
+	<4EE0AA66.1050006@chalmers.se>
+Message-ID: <CAH_oh=wyhMCi-rd5+9acC9DevbNTs6M806Y6Xgzr3PmGjS9QBg@mail.gmail.com>
+
+Or perhaps this?
+
+data T = Foo Int | Bar Int | Baz
+
+fooBar (Foo a) = Just a
+fooBar (Bar a) = Just a
+fooBar _       = Nothing
+
+foo :: T -> T -> Int
+foo x y = sum $ catMaybes $ map fooBar [x,y]
+
+/?ystein
+
+On Thu, Dec 8, 2011 at 1:15 PM, Emil Axelsson <emax at chalmers.se> wrote:
+
+> Instead of pattern guards you can use ViewPatterns:
+>
+>  http://hackage.haskell.org/**trac/ghc/wiki/ViewPatterns<http://hackage.haskell.org/trac/ghc/wiki/ViewPatterns>
+>
+> This reduces some of the noise.
+>
+> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**~~
+> {-# LANGUAGE ViewPatterns #-}
+>
+>
+> data T = Foo Int | Bar Int | Baz
+>
+> fooBar (Foo a) = Just a
+> fooBar (Bar a) = Just a
+> fooBar _       = Nothing
+>
+>
+> foo :: T -> T -> Int
+> foo x y = case (x,y) of
+>  (fooBar -> Just a, fooBar -> Just b) -> a + b
+>  (Bar a, Baz) -> -a
+>
+>  (Foo a, Baz) -> a
+>  _ -> 0
+> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**~~
+>
+> / Emil
+>
+>
+> 2011-12-08 11:13, Asger Feldthaus skrev:
+>
+>> Haskell doesn't seem to support disjunctive patterns, and I'm having a
+>> difficult time writing good Haskell code in situations that would
+>> otherwise call for that type of pattern.
+>>
+>> Suppose for an example I have this data type:
+>>
+>> data T = Foo Int | Bar Int | Baz
+>>
+>> In OCaml I can write something like:
+>>
+>> (* foo : T -> T -> int *)
+>> fun foo x y = match (x,y) with
+>>   | (Foo a | Bar a, Foo b | Bar b) -> a + b
+>>   | (Baz, Foo a)
+>>   | (Bar a, Baz) -> -a
+>>   | (Baz, Bar a)
+>>   | (Foo a, Baz) -> a
+>>   | _ -> 0
+>>
+>> In Haskell I can't find any equivalent to the disjunctive pattern. If
+>> expanded naively, my Haskell version would look like this:
+>>
+>> foo :: T -> T -> Int
+>> foo x y = case (x,y) of
+>>   (Foo a, Foo b) -> a + b
+>>   (Foo a, Bar b) -> a + b
+>>   (Bar a, Foo b) -> a + b
+>>   (Bar a, Bar b) -> a + b
+>>   (Baz, Foo a) -> -a
+>>   (Bar a, Baz) -> -a
+>>   (Baz, Bar a) -> a
+>>   (Foo a, Baz) -> a
+>>   _ -> 0
+>>
+>> While my example is still managable in size, this quickly goes out of
+>> hand in practice. I've tried using pattern guards but with limited
+>> success. For example:
+>>
+>> foo2 :: T -> T -> Int
+>> foo2 x y = case (x,y) of
+>>   (x,y) | Just a <- open x,
+>>           Just b <- open y ->
+>>             a+b
+>>   (Baz, Foo a) -> -a
+>>   (Bar a, Baz) -> -a
+>>   (Baz, Bar a) -> a
+>>   (Foo a, Baz) -> a
+>>   _ -> 0
+>>   where
+>>     open (Foo x) = Just x
+>>     open (Bar x) = Just x
+>>     open Baz = Nothing
+>>
+>> I admit it doesn't look that bad in my crafted example, but this
+>> approach doesn't seem to well work for me in practice. In any case, it's
+>> still far more verbose than the disjunctive pattern version.
+>>
+>> Nesting the case expressions instead of tuple-matching can reduce some
+>> code duplication, but in general it becomes really verbose, and it is
+>> easy to make mistakes when you have partially overlapped patterns in the
+>> disjunctive-pattern version. Here's the example with nested cases:
+>>
+>> foo3 :: T -> T -> Int
+>> foo3 x y = case x of
+>>   Foo a -> case y of
+>>     Foo b -> a+b
+>>     Bar b -> a+b
+>>     Baz -> a
+>>   Bar a -> case y of
+>>     Foo b -> a+b
+>>     Bar b -> a+b
+>>     Baz -> -a
+>>   Baz -> case y of
+>>     Foo b -> -b
+>>     Bar b -> b
+>>     Baz -> 0
+>>
+>> What do people do in this situation - is there a good trick I've
+>> overlooked? And is there some reason why Haskell does not support
+>> disjunctive patterns?
+>>
+>> Thanks,
+>> Asger
+>>
+>>
+>> ______________________________**_________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/**mailman/listinfo/haskell-cafe<http://www.haskell.org/mailman/listinfo/haskell-cafe>
+>>
+>
+> ______________________________**_________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/**mailman/listinfo/haskell-cafe<http://www.haskell.org/mailman/listinfo/haskell-cafe>
+>
+
+
+
+-- 
+Mvh ?ystein Kolsrud
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/2b322b37/attachment.htm>
+

@@ -1,0 +1,42 @@
+From allbery.b at gmail.com  Mon Dec 12 22:33:40 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Mon, 12 Dec 2011 16:33:40 -0500
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CACw0niKAp9HWV3qxBm6bN5Z2Z9yUVeTw9H9S9DERH9ofrWaXKQ@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<CAECnf4ApS=L-YmMLUTCpB7b+kqv3Dps15irucqrngybxau_iAQ@mail.gmail.com>
+	<CACw0niKAp9HWV3qxBm6bN5Z2Z9yUVeTw9H9S9DERH9ofrWaXKQ@mail.gmail.com>
+Message-ID: <CAKFCL4W65vpr0iH6ACeNLpNooqL4MD9OJ-GMT+EU7YFOM-sc3w@mail.gmail.com>
+
+On Mon, Dec 12, 2011 at 14:09, Bryan O'Sullivan <bos at serpentine.com> wrote:
+
+> On Mon, Dec 12, 2011 at 9:42 AM, Carl Howells <chowells79 at gmail.com>wrote:
+>
+>>
+>> Well, as I read it, the whole point of this thread was "They don't
+>> make sense for many instances of Alternative.  They should be moved to
+>> a different class."  It sounded like you were arguing that any
+>> instance of Alternative where they don't make sense shouldn't be an
+>> instance of Alternative, instead.
+>
+>
+> Correct. And your example of "some (Just 1)" inflooping was not a
+> counterargument, but rather an illustration that perhaps some people (and
+> I'm not trying to imply you here, don't worry) don't understand what some
+> and many are supposed to do.
+>
+
+Or put otherwise, they're an indication that Applicative is more general
+than many.  The point remains, many and some apply to something that has
+more constraints than Applicative.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111212/5f0b2d7b/attachment.htm>
+

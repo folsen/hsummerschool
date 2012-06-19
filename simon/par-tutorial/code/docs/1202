@@ -1,0 +1,49 @@
+From kyrab at mail.ru  Thu Aug 18 09:02:22 2011
+From: kyrab at mail.ru (kyra)
+Date: Thu, 18 Aug 2011 11:02:22 +0400
+Subject: [Haskell-cafe] FFI question - FunPtrs to top-level functions
+In-Reply-To: <CAKjSnQG7h4DtpOSFrFOhjoW+FkVFrWUh=FCmqdSWCO8iNPJfVQ@mail.gmail.com>
+References: <CAKjSnQG7h4DtpOSFrFOhjoW+FkVFrWUh=FCmqdSWCO8iNPJfVQ@mail.gmail.com>
+Message-ID: <4E4CB8FE.30109@mail.ru>
+
+On 8/18/2011 6:49 AM, Antoine Latter wrote:
+> Hi Haskell,
+>
+> I have a question about the Haskell FFI and creating FunPtrs to
+> Haskell functions.
+>
+> Does anyone have any recommendations for when I have a top-level
+> function that I would like to pass to a C function as a function
+> pointer (that is called via a foreign import)?
+>
+> I know that the FFI provides the "wrapper" foreign import I can use to
+> wrap Haskell functions, but then I would need to jump through hoops to
+> manage the liefetime of of the FunPtr wrapper. If I were closing over
+> interesting state I would want this - but the function
+> (side-effectfully) operates only on its arguments (and the Haskell
+> RTS, of course).
+>
+> Is it "okay" to place an "unsafePerformIO $ mkWrapper myFunc" as a
+> top-level declaration, or am I journeying into uncharted lands?
+>
+> Is there something clever I can do with foreign exports and foreign
+> imports, or is this just making things too complex?
+>
+> Thanks,
+> Antoine
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+You can export and reimport the same function with no "wrapper" needed. 
+For example:
+
+foreign export ccall foo :: ...
+foreign import ccall "& foo" fooptr :: FunPtr (...)
+
+Cheers,
+Kyra
+
+

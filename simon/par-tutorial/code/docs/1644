@@ -1,0 +1,37 @@
+From sschuldenzucker at uni-bonn.de  Sun Dec  4 13:14:12 2011
+From: sschuldenzucker at uni-bonn.de (Steffen Schuldenzucker)
+Date: Sun, 04 Dec 2011 13:14:12 +0100
+Subject: [Haskell-cafe] Anonymous, Unique Types, maybe
+In-Reply-To: <4EDB0ABC.10705@gmail.com>
+References: <4EDB0ABC.10705@gmail.com>
+Message-ID: <4EDB6414.7050506@uni-bonn.de>
+
+
+On 12/04/2011 06:53 AM, Scott Lawrence wrote:
+> [...]
+> Some operators might take more than one list/stream as an argument,
+> combining them in some way or another. Obviously, if the lists were
+> different lengths, the operator would fail. I don't want that to happen
+> at run time, so I want to check for it statically, presumably via the
+> type system. I could do this manually:
+>
+> type AList = [Event]
+> type BList = [Event]
+> type CList = [Event]
+>
+> myMapish :: AList -> AList
+> mySelect :: AList -> (Event -> Bool) -> BList
+> myOtherSelect :: BList -> CList
+ > [...]
+
+Just as a small side note, with the 'type' keyword, AList, BList, CList 
+will /not/ be seen as separate types (but they're all the same type, 
+namely [Event]).
+If you want separate types, you would use a newtype wrapper like
+
+newtype AList = AList [Event]
+     deriving (some instances you want to derive from [Event])
+
+-- Steffen
+
+

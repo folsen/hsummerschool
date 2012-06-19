@@ -1,0 +1,47 @@
+From simon at joyful.com  Fri Feb 11 20:39:30 2011
+From: simon at joyful.com (Simon Michael)
+Date: Fri, 11 Feb 2011 11:39:30 -0800
+Subject: [Haskell-cafe] hledger: mtl vs transformers
+In-Reply-To: <87zkq2wf8a.fsf@write-only.cryp.to>
+References: <AANLkTi=ftrP5RcuqFxkh_ogy+2dK3JiDS0-Pq2znT4=N@mail.gmail.com>
+	<2BCC8C44-A021-49FF-846D-8CECB531AB52@joyful.com>
+	<AANLkTinZp5E02a8SgVT6OuX-UnX7hiSe52u=Zr2zxy=V@mail.gmail.com>
+	<4D397475.3050902@joyful.com> <87zkqu30nd.fsf@write-only.cryp.to>
+	<ihc8p0$ra0$1@dough.gmane.org> <87zkq2wf8a.fsf@write-only.cryp.to>
+Message-ID: <5C6B3CBB-2015-4C21-800C-35A32C3FF094@joyful.com>
+
+On Feb 11, 2011, at 11:20 AM, Peter Simons wrote:
+> If hledger offers optional features by means of Cabal flags, then  
+> users
+> of the library need the ability to depend on hledger with a specific  
+> set
+> of features (flags) enabled or disabled, but unfortunately Cabal can't
+> do that.
+>
+> The new approach remedies that problem by placing optional features in
+> separate packages. That creates a different problem, however, because
+> users may now install hledger and hledger-web separately, which --  
+> as we
+> know -- may create all kinds of version conflicts that are non-trivial
+> to resolve.
+>
+> This is the problem you're now trying to solve by over-specifying the
+> dependencies of hledger. Arguably, though, Cabal should solve that
+> problem for the user, i.e. by offering to re-compile hledger to  
+> resolve
+> the conflict etc., but unfortunately Cabal can't do that either.
+
+Hi Peter.. thanks for the follow-up. In case it wasn't clear, I do  
+realise now that attempts to over-specify depedencies to avoid  
+practical cabal install issues can backfire, and a package author  
+should just accept that cabal install can't be made 100% reliable  
+installation method for non-experts (for now - I know many people are  
+thinking about this).
+
+And, I've fixed/relaxed the process dependency in hledger head, and  
+only laziness/business has prevented that from being released to  
+hackage. I'll do that asap.
+
+Cheers - Simon
+
+

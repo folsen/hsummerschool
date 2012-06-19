@@ -1,0 +1,87 @@
+From jpm at cs.uu.nl  Thu Aug  4 09:11:03 2011
+From: jpm at cs.uu.nl (=?ISO-8859-1?Q?Jos=E9_Pedro_Magalh=E3es?=)
+Date: Thu, 4 Aug 2011 09:11:03 +0200
+Subject: [Haskell-cafe] Deriving instances with GADTs
+In-Reply-To: <CAMugUeLnbiV51r1VhsoePzBxBGb_qrBj286zF1=KDkh3WA_DaQ@mail.gmail.com>
+References: <CAMugUeLnbiV51r1VhsoePzBxBGb_qrBj286zF1=KDkh3WA_DaQ@mail.gmail.com>
+Message-ID: <CA+ZFbn9820HP3G_TT=_ybQkPhk3nvAG71z7Dzskv9zi-OQO4-A@mail.gmail.com>
+
+Hi Tim,
+
+On Thu, Aug 4, 2011 at 08:57, Tim Cowlishaw <tim at timcowlishaw.co.uk> wrote:
+
+> Hi all,
+>
+> I've been writing a DSL to describe securities orders, and after a lot
+> of help from the kind folk of this list and #haskell have come up with
+> the following implementation, using generalised algebraic data types:
+>
+> https://gist.github.com/1124621
+>
+> Elsewhere in my application, I make use of the order type defined
+> therein in the following newtype declaration:
+>
+>  newtype OrderListLevel s = OrderListLevel {orders :: [Order s Limit]}
+> deriving (Eq, Show)
+>
+> However, the 'deriving' clause here fails:
+>
+> src/Simulation/OrderList.hs:9:82:
+>    No instance for (Eq (Order s Limit))
+>      arising from the 'deriving' clause of a data type declaration
+>                   at src/Simulation/OrderList.hs:9:82-83
+>
+> src/Simulation/OrderList.hs:9:86:
+>    No instance for (Show (Order s Limit))
+>      arising from the 'deriving' clause of a data type declaration
+>                   at src/Simulation/OrderList.hs:9:86-89
+>
+>
+>
+> I don't fully understand this - the error is correct that there is no
+> instance of either Eq or Show for (Order s Limit), however, instances
+> are defined for Order Buy Limit and Order Sell Limit, and since these
+> are the only possible types that a value can be constructed with (the
+> type constructor is 'closed' over these types in some sense I guess),
+> it seems to me that this should provide enough information to derive
+> the Eq and Show instances. Am I making unreasonable expectations of
+> ghci's instance-deriving mechanism here, or missing something obvious?
+>
+
+Here you seem to be using newtype deriving in particular, which behaves
+differently from standard deriving. Compiling with -ddump-deriv will show
+you the instances GHC is generating, which can help in debugging.
+
+Note however that deriving instances for GADTs is not trivial, in general.
+In particular, you should not assume that GHC knows that `s` can only be
+instantiated with `Buy` and `Sell` since (because we lack a proper kind
+system) nothing prevents you from later using, say, `Order Int Limit`
+somewhere.
+
+I describe the issue in more detail in the paper:
+
+> Jos? Pedro Magalh?es and Johan Jeuring. Generic Programming for Indexed
+> Datatypes.
+> Color pdf: http://dreixel.net/research/pdf/gpid.pdf
+> Greyscale pdf: http://dreixel.net/research/pdf/gpid_nocolor.pdf
+>
+
+
+Cheers,
+Pedro
+
+
+>
+> Many thanks in advance,
+>
+> Tim
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110804/8477c629/attachment.htm>
+

@@ -1,0 +1,13 @@
+From sargrigory at ya.ru  Tue Apr 19 20:51:31 2011
+From: sargrigory at ya.ru (Grigory Sarnitskiy)
+Date: Tue, 19 Apr 2011 22:51:31 +0400
+Subject: [Haskell-cafe] Painless parallelization.
+Message-ID: <662211303239092@web69.yandex.ru>
+
+Hello, I'm searching a way to benefit from modern hardware in my programs.
+
+I consider parallel programing to be actually easier than sequential one. Parallel computation allows to avoid sophisticated algorithms that were developed to gain performance on sequential architecture. It should also allow to stop bothering about using immutable objects --- immutable parallel arrays should be as fast as mutable ones, right? (provided there is enough cores)
+
+So what are the options to write a pure functional parallel code with the level of abstraction I used in Haskell? So far I've found Data Parallel Haskell for multicore CPU's and Data.Array.Accelerate for GPU's. It would be nice to have something at the release state, rather than some beta.
+
+

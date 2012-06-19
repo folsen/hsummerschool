@@ -1,0 +1,20 @@
+From sol at typeful.net  Mon Dec  5 14:49:40 2011
+From: sol at typeful.net (Simon Hengel)
+Date: Mon, 5 Dec 2011 14:49:40 +0100
+Subject: [Haskell-cafe] List x ByteString x Lazy Bytestring
+In-Reply-To: <1323090896.3764.140661007583849@webmail.messagingengine.com>
+References: <1323090896.3764.140661007583849@webmail.messagingengine.com>
+Message-ID: <20111205134940.GA21037@x200>
+
+Hi,
+
+> - If bytestring is not suitable for text manipulation, is there
+> something faster than lists?
+Have a look at the text package[1].                                                                                                                            
+                                                                                                                                                               
+Cheers,                                                                                                                                                        
+Simon                                                                                                                                                          
+                                                                                                                                                               
+[1] http://hackage.haskell.org/package/text   
+
+

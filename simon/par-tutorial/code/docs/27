@@ -1,0 +1,107 @@
+From illissius at gmail.com  Fri Apr  1 16:57:16 2011
+From: illissius at gmail.com (=?ISO-8859-1?Q?G=E1bor_Lehel?=)
+Date: Fri, 1 Apr 2011 16:57:16 +0200
+Subject: [Haskell-cafe] SoC project: advice requested
+In-Reply-To: <865A1660-D1CF-4615-9CE2-854867D106CD@gmail.com>
+References: <AANLkTi=SacKCY_KdVQ66zqL44cPXLBVZePrUmXeBoWVU@mail.gmail.com>
+	<865A1660-D1CF-4615-9CE2-854867D106CD@gmail.com>
+Message-ID: <AANLkTikUFrw2Vwa1W5RO03VtACoeu4Mu7C9=Hc=Z2Xgg@mail.gmail.com>
+
+2011/4/1 Gershom Bazerman <gershomb at gmail.com>:
+> On Apr 1, 2011, at 7:52 AM, G?bor Lehel wrote:
+>
+> The two projects I've been able to think of which seem like they
+> *might* be appropriate are: integrating the standard 'deriving'
+> mechanism with Template Haskell to support deriving custom classes;
+> and adding native FFI support for passing C structs / tuples
+> (arbitrary products?) of FFI-able types by value, as discussed in [1].
+> Would either of these be not-too-big / would anyone be willing to
+> mentor them? Alternately, I'd be very happy to receive suggestions
+> about other GHC-related work which would be considered appropriate.
+> (Or, heck, any other compiler.)
+>
+> The former project is now outdated, I suspect. My understanding is that work
+> has already been underway to implement Generic Deriving [1] in GHC. Even
+> prior to then, the template haskell approach was supported by the derive [2]
+> tool.
+
+As far as I can tell from skimming the paper, the Generic Deriving
+approach is more structured, disciplined, and less flexible than what
+I had in mind. Using TH to generate instances is all over the place:
+all that I have in mind is being able to take a function with a type
+along the lines of 'Name -> Q (Either String Dec)' and register it
+with GHC for a given class somehow (a pragma?), and thenceforth being
+able to list that class in a deriving clause and have the provided
+function be used to (attempt to) derive it, instead of having to do a
+top-level TH splice explicitly (which is rather ugly, to my taste). So
+just syntactic sugar, more or less, but to me it feels like important
+sugar. I can imagine this being both too small or too large for a
+summer project, depending on how GHC works. (The staging restriction
+seems like it's going to be either the fly in the ointment or the
+cherry on top: if using TH-backed deriving causes the file to be
+staged into pieces that almost entirely defeats the purpose; whereas
+if it can be made so that TH-backed deriving *doesn't* cause staging,
+unlike a vanilla top-level TH splice, that would be, well, pretty
+great.)
+
+> On the latter count, there's plenty of work to be done for c2hs, that seems
+> very related to the work you've done on the C++-to-Haskell generator.?C2hs
+> is already in wide use across the Haskell community, and improvements to it
+> would benefit a wide swath of developers, either directly or
+> indirectly.?I've been told that the c2hs project is quite open to a SoC
+> student.?I'm ccing Duncan and Manuel, because they're much more able to
+> speak to the "big picture" than I am. As I recall, one task I heard
+> described is an overhaul of marshalling -- although, again, Duncan and
+> Manuel could explain what that actually entails. ?Along with that, I'd very
+> much like to see extensible declaration of default marshalling, and
+> extension of default marshalling support to get and set hooks as well.
+> Another task is to implement "enum define" hooks as described in the paper.
+> I'm sure there's plenty else too.
+
+I'm actually not overly familiar with c2hs :) and (correct me if I'm
+wrong, but) I'm not sure C++ and c2hs are as relevant to each other as
+one might think. c2hs seems to be mainly concerned with C structs and
+marshalling thereof, along with functions involving them; in contrast,
+while C++ is (almost) a superset of C, C++ types are by convention
+nearly always opaque, so one just passes around pointers to them and
+is done with it, and the interesting parts are elsewhere. (And the two
+seem to work on a different level: c2hs seems mainly to be an aid for
+binding libraries manually, whereas the point of the generator I'm
+working on is that it would generate bindings semi-automatically; and
+once you're doing that it seems easier to just skip the intermediate
+step and generate the foreign import/exports and other code directly.)
+
+Another idea I had earlier, but discarded, was adding FFI support for
+the Itanium C++ ABI (which seems to have been adopted as more-or-less
+the standard across Unix-like systems). I discarded it because it
+seemed like you'd have to essentially implement a C++ compiler as part
+of GHC to make it work. Thinking about it more, though, I'm not sure
+if a useful subset would necessarily be unreasonable (no templates,
+for starters). One foreseeable difficulty is that while reference and
+const-reference parameters are in practice passed the same way as
+pointers, one would still need to somehow tell GHC which one it is in
+order to generate the correct mangling (or correct
+stub-C-wrapper-to-be-compiled-with-g++, if going that route). In any
+case, this very much would build on my experience with the bindings
+generator in a pretty big way, maybe even bringing it into the scope
+of a summer project (though obviously iffy). (The wildcard from my
+point of view is still GHC, about whose internals I don't know so much
+-- how easy/hard it is to muck around with the FFI implementation, for
+example.)
+
+
+> And while I'm at it, I should mention another SoC project that I think would
+> be quite important -- improvements/rewrites to the HDBC database backends.
+> [3]
+> Cheers,
+> Gershom
+> [1]?http://www.dreixel.net/research/pdf/gdmh_nocolor.pdf
+> [2]?http://hackage.haskell.org/package/derive
+> [3]?http://hackage.haskell.org/trac/summer-of-code/ticket/1598
+
+
+
+-- 
+Work is punishment for failing to procrastinate effectively.
+
+

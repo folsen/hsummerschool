@@ -1,0 +1,48 @@
+From es at ertes.de  Sun Aug  7 16:56:27 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Sun, 7 Aug 2011 16:56:27 +0200
+Subject: [Haskell-cafe] ANN: Netwire AFRP library
+Message-ID: <20110807165627.54ddd760@angst.streitmacht.eu>
+
+Hi there,
+
+after a few weeks of development time, I have released the first
+official version of my arrowized FRP library called Netwire:
+
+    http://hackage.haskell.org/package/netwire
+
+I have written it with networking applications in mind, but it is a
+general purpose library, so it can be used in all of the classic fields
+like gaming, animation, user interfaces and others.
+
+Its basic idea is the same as in Yampa, but its internal structure is
+much simpler and hence it's easier to extend.  Also like in most of my
+libraries I have specifically decided to expose the internals, so you
+can extend Netwire without having to fork.
+
+Features not found in Yampa/Animas:
+
+  * switching by ArrowChoice,
+  * suspended signal transformers,
+  * signal inhibition,
+  * combination through ArrowZero and ArrowPlus,
+  * impure signal transformers.
+
+There exists a wiki page, which should give you a quickstart:
+
+    http://haskell.org/haskellwiki/Netwire
+
+I would be grateful for any constructive feedback.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

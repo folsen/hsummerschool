@@ -1,0 +1,49 @@
+From jmg at gaillourdet.net  Tue Dec 13 10:20:33 2011
+From: jmg at gaillourdet.net (Jean-Marie Gaillourdet)
+Date: Tue, 13 Dec 2011 10:20:33 +0100
+Subject: [Haskell-cafe] indentation blues
+In-Reply-To: <0d62b1a11095f003e5019c4740a5fcfd@haxaire.org>
+References: <CAFrFfuGkeHEMfsitZoyaGWz=RZvuaUc8KKGK57dFdJL-kj_43w@mail.gmail.com>
+	<0d62b1a11095f003e5019c4740a5fcfd@haxaire.org>
+Message-ID: <CB6B6261-5249-49A2-A921-47648377B81B@gaillourdet.net>
+
+Hello,
+
+On 13.12.2011, at 08:51, Adrien Haxaire wrote:
+
+> Hello,
+> 
+> I don't know how the indent.hs file works for the vim mode, but as you are asking for another indent.hs file, here is the link to the indent.hs file in emacs haskell-mode:
+> 
+> https://github.com/jwiegley/haskell-mode/blob/8067b7547f047352c41af2374e3246b5504c7741/indent.hs
+> 
+> Maybe you can use it in the vim mode ?
+> 
+> If not, the emacs haskell mode is nice, and coming from vim you wouldn't spend much time learning emacs. there is also a vi emulator I think, though I haven't tested it.
+
+
+> 
+> On Mon, 12 Dec 2011 16:50:24 -0800, Martin DeMello wrote:
+>> The vim autoindent for haskell is really bad :( Is there a better
+>> indent.hs file floating around somewhere? Alternatively, is the emacs
+>> haskell mode better enough that it's worth my time learning my way
+>> around emacs and evil?
+
+
+Yes, the haskell-emacs is nice. It provides two separate implementations of indentation engines: haskell-indent and haskell-indentation. And you can use emacs default indentation. I use haskell-indent because it considers the right indentation candidates for my coding style [1].
+
+Regarding, your question whether this is worth switching from vim to emacs. I've been using both editors for some years and I very much doubt, that "you wouldn't spend much time learning emacs". If you are comfortable with vim, stick with it, unless you are interested in Emacs or one of its really great modes: org and auctex/reftex.
+
+Regarding, the vi emulations, I'd say they are nice should you ever be forced to use emacs for some time. But I don't recommend them, I've tried them all. They are not the real thing. Most of them are vi not vim emulators. And they always feel like second class citizens in emacs land. YMMW.
+
+[1]: But I am not able to configure it to place "where" where I like it, indented by half the normal indentation width.
+
+Cheers,
+ Jean
+
+
+
+
+
+
+

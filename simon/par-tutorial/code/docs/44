@@ -1,0 +1,28 @@
+From job.vranish at gmail.com  Sat Apr  2 02:51:52 2011
+From: job.vranish at gmail.com (Job Vranish)
+Date: Fri, 1 Apr 2011 20:51:52 -0400
+Subject: [Haskell-cafe] Missing MaybeT MonadFix instance
+Message-ID: <AANLkTin=e-FV=4qVP-ymbmKLpa0WW0s2sFCtMhRbbTPd@mail.gmail.com>
+
+Is there a particular reason that the
+transformers<http://hackage.haskell.org/packages/archive/transformers/latest/doc/html/Control-Monad-Trans-Maybe.html#v:MaybeT>version
+of the MaybeT monad does not have a MonadFix instance?
+
+It seems like the following instance would be suitable:
+
+instance (MonadFix m) => MonadFix (MaybeT m) where
+  mfix f = MaybeT $ mfix $ \a -> runMaybeT $ f $ case a of
+     Just a -> a
+     Nothing -> error "mfix MaybeT: Nothing"
+
+I don't think it's possible to hit the error case:
+In order to terminate f cannot be strict so it must return a value without
+evaluating its input. If f returns a Nothing, then you have your return
+value and you're done. If f returns a Just, then we don't hit the error
+case.
+
+- Job
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110401/5634321d/attachment.htm>
+

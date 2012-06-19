@@ -1,0 +1,76 @@
+From pkfh at st-andrews.ac.uk  Mon Aug 29 00:44:45 2011
+From: pkfh at st-andrews.ac.uk (Philip Holzenspies)
+Date: Sun, 28 Aug 2011 22:44:45 +0000
+Subject: [Haskell-cafe] Unexpected Typeable behaviour; Prelude.undefined
+Message-ID: <79B22C4D-B42B-463E-9689-479D878E6DB7@st-andrews.ac.uk>
+
+L.S.,
+
+I'm currently writing code where I want some ADTs to be parametric with a monad. There are some extra conditions that I place on my parameter, but I've boiled things down to minimal reproducibility. When I define MyADT as follows:
+
+
+import Data.Typeable
+
+data MyADT m = MyADT (m ())
+
+instance (Typeable1 m, Monad m) => Typeable (MyADT m) where
+	typeOf t@(MyADT _)
+	 = mkTyCon "MyADT"
+	  `mkTyConApp`
+	  [typeOf1 ((return :: Monad m => MyADT m -> m (MyADT m)) t)]
+
+
+it compiles fine and GHCi works as expected on a single instance of MyADT:
+
+
+*Main> typeOf (MyADT (return () :: IO ()))
+MyADT IO
+
+
+However, as soon as I place my data type in a structure of sorts, things break down:
+
+
+*Main> typeOf [(MyADT (return () :: IO ()))]
+*** Exception: Prelude.undefined
+*Main> typeOf (Just (MyADT (return () :: IO ())))
+*** Exception: Prelude.undefined
+*Main> typeOf ((return :: a -> IO a) (MyADT (return () :: IO ())))
+*** Exception: Prelude.undefined
+
+
+But if I stick a number in a similar structure, typeOf works just fine:
+
+
+*Main> typeOf ((return :: a -> IO a) 5)
+IO Integer
+
+
+I don't quite understand where  the undefined comes from. I'm certainly not using it anywhere (as shown by the minimal reproduction above). Weirder still, when I *do* introduce a nice error, that too does not come up, viz.
+
+
+import Data.Typeable
+
+data MyADT m = MyADT (m ())
+instance (Typeable1 m, Monad m) => Typeable (MyADT m) where
+	typeOf t@(MyADT _)
+	 = error "foobar"
+
+
+with GHCi-session:
+
+
+*Main> typeOf (MyADT (return () :: IO ()))
+*** Exception: foobar
+*Main> typeOf ((return :: a -> IO a) (MyADT (return () :: IO ())))
+*** Exception: Prelude.undefined
+*Main> typeOf $ Just (MyADT (return () :: IO ()))
+*** Exception: Prelude.undefined
+*Main> typeOf $ Just 42
+Maybe Integer
+
+
+FYI, I'm using GHC 7.0.3, as installed with the Haskell Platform 2011.2.0.1. Am I overlooking something? Any help would be appreciated.
+
+Regards,
+Philip
+

@@ -1,0 +1,18 @@
+From johan.tibell at gmail.com  Thu Feb  3 23:19:31 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Thu, 3 Feb 2011 23:19:31 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4B19DB.5000907@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>
+Message-ID: <AANLkTi=tyKC19Fvie9c8QYN-P=R3oKM_Pm6zOpcmo4Qk@mail.gmail.com>
+
+Hi,
+
+For what it's worth I saw the problems in your counting examples right
+away, without reading the explanatory text below. Hopefully that means
+that it's possibly to learn how to spot such things without resorting
+to e.g. running the program or reading Core *gasp*.
+
+Johan
+
+

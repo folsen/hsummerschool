@@ -1,0 +1,65 @@
+       From (dmwit.com), scored 26 with 27 comments.
+       Read on [28]reddit.
+       Read the [29]original post.
+
+Top StackOverflow Questions
+
+     * [30]Implementing lazy functional languages votes: 19, answers: 3
+
+     * [31]Is it possible to roll your own syntax sugar (like do-notation,
+       or arrow-notation) in Haskell? votes: 12, answers: 2
+
+     * [32]Are there any LL Parser Generators for Functional Languages
+       such as Haskell or Scala? votes: 11, answers: 4
+
+     * [33]Programming language for functional parallelism: F# vs Haskell
+       votes: 10, answers: 6
+
+     * [34]easy "undo" in functional data structures votes: 8, answers: 2
+
+About the Haskell Weekly News
+
+   If you have any comments/thoughts on the newsletter, don't hesitate to
+   contact me at dstcruz at gmail.com. Happy coding!
+
+   Until next time,
+   Daniel Santa Cruz
+
+References
+
+   1. http://haskell.org/
+   2. http://article.gmane.org/gmane.comp.lang.haskell.libraries/15521
+   3. http://article.gmane.org/gmane.comp.lang.haskell.general/18607
+   4. http://article.gmane.org/gmane.comp.lang.haskell.cafe/87583
+   5. http://article.gmane.org/gmane.comp.lang.haskell.cafe/87584
+   6. http://article.gmane.org/gmane.comp.lang.haskell.general/18612
+   7. http://article.gmane.org/gmane.comp.lang.haskell.cafe/87628
+   8. http://article.gmane.org/gmane.comp.lang.haskell.cafe/87709
+   9. http://article.gmane.org/gmane.comp.lang.haskell.general/18635
+  10. http://article.gmane.org/gmane.comp.lang.haskell.cafe/87752
+  11. http://www.reddit.com/r/haskell/comments/ge10y/promo_code_to_get_learn_you_a_haskell_40_off_e/
+  12. http://learnyouahaskell.com/
+  13. http://www.reddit.com/r/haskell/comments/gdudz/real_time_edge_detection_in_parallel_haskell/
+  14. http://disciple-devel.blogspot.com/2011/03/real-time-edge-detection-in-haskell.html
+  15. http://www.reddit.com/r/haskell/comments/gepfm/modern_opengl_with_haskell/
+  16. http://www.arcadianvisions.com/blog/?p=224
+  17. http://www.reddit.com/r/haskell/comments/ggu2r/ghc_migrati%C3%B6n_t%C3%B6_git_c%C3%B6mpl%C3%A9t%C3%A9/
+  18. http://www.haskell.org/pipermail/cvs-ghc/2011-April/060798.html
+  19. http://www.reddit.com/r/haskell/comments/ggwv3/haskell_is_21_years_old_today/
+  20. http://twitter.com/donsbot/status/54026417721188352
+  21. http://www.reddit.com/r/haskell/comments/gf3sb/reimplementing_xmonads_core_in_coq_wouter/
+  22. http://www.cs.ru.nl/~wouters/Talks/BrouwerExtraction.pdf
+  23. http://www.reddit.com/r/haskell/comments/gcmsz/ghc_703_released/
+  24. http://www.haskell.org/pipermail/haskell/2011-March/022673.html
+  25. http://www.reddit.com/r/haskell/comments/gd46d/reactivebanana_and_the_essence_of_frp_i/
+  26. http://apfelmus.nfshost.com/blog/2011/03/28-essence-frp.html
+  27. http://www.reddit.com/r/haskell/comments/gcsi1/new_release_of_opengl_nehe_tutorials_in_haskell/
+  28. http://www.reddit.com/r/haskell/comments/gfz5k/do_you_read_academic_papers_on_a_kindle/
+  29. http://dmwit.com/pdfsplit
+  30. http://stackoverflow.com/questions/5451645/implementing-lazy-functional-languages
+  31. http://stackoverflow.com/questions/5450003/is-it-possible-to-roll-your-own-syntax-sugar-like-do-notation-or-arrow-notation
+  32. http://stackoverflow.com/questions/5507665/are-there-any-ll-parser-generators-for-functional-languages-such-as-haskell-or-sc
+  33. http://stackoverflow.com/questions/5492930/programming-language-for-functional-parallelism-f-vs-haskell
+  34. http://stackoverflow.com/questions/5447054/easy-undo-in-functional-data-structures
+
+

@@ -1,0 +1,32 @@
+From jgoerzen at complete.org  Wed Aug 10 21:14:04 2011
+From: jgoerzen at complete.org (John Goerzen)
+Date: Wed, 10 Aug 2011 14:14:04 -0500
+Subject: [Haskell-cafe] New releases and BSD3 license
+Message-ID: <4E42D87C.9040602@complete.org>
+
+Hello,
+
+I would like to announce new versions of the following:
+
+hslogger
+convertible
+HDBC
+HDBC-odbc
+HDBC-postgresql
+HDBC-sqlite3
+
+By popular, insistent, persistent, and patient request <grin>, all have 
+been relicensed under the 3-clause BSD license.  I am also working to 
+make that happen with MissingH, but have to receive permission from a 
+few third parties first.
+
+Additionally, this will be my last upload of the HDBC* packages. 
+Nicolas Wu has kindly agreed to step in as HDBC maintainer.  Nicolas has 
+recently contributed a lot of good things towards HDBC and has more time 
+to maintain it than I do.
+
+Thanks,
+
+-- John Goerzen
+
+

@@ -1,0 +1,89 @@
+From aslatter at gmail.com  Sat Feb 12 18:08:14 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Sat, 12 Feb 2011 11:08:14 -0600
+Subject: [Haskell-cafe] Using MonadFix to tie the knot with STM
+In-Reply-To: <60855813-F183-409C-A272-42EBDCBF9BAA@fvisser.nl>
+References: <60855813-F183-409C-A272-42EBDCBF9BAA@fvisser.nl>
+Message-ID: <AANLkTim81LdbQDYpNj2NK+aYRb7XrEQ9OhvDn7S+5624@mail.gmail.com>
+
+On Sat, Feb 12, 2011 at 8:47 AM, Sebastiaan Visser <haskell at fvisser.nl> wrote:
+> Hi all,
+>
+> During a little experiment I discovered there is no MonadFix instance available for the STM monad. Is this absence the consequence of some deep restriction of how STM works or 'just accidental'? Is there some way I could derive this instance?
+
+If you port `fixST` to the STM monad, it seems to work fine at first glance:
+
+http://hpaste.org/43915/fixstm
+
+But I would want someone else's opinion on it to make sure I'm not
+doing something like introducing lazy STM values that violate
+atomicity, or something. The strict `case` on the return value makes
+me feel pretty good about it.
+
+Antoine
+
+>
+> For those who are interested and may know other ways to solve my problem, I'm trying to tie the knot in a graph by using transactional variables as the edges between nodes. I'm trying to do this in a rather generic way:
+>
+>> {-# LANGUAGE DeriveFunctor, DeriveFoldable, DeriveTraversable, StandaloneDeriving, DoRec #-}
+>> module Graph where
+>>
+>> import Control.Applicative
+>> import Control.Concurrent.STM
+>> import Control.Monad.Fix
+>> import Data.Maybe
+>> import Data.Foldable
+>> import Data.Traversable
+>> import Prelude hiding (mapM)
+>> import qualified Data.Map as M
+>>
+>> instance MonadFix STM where
+>> ? mfix = error "I need this instance!" ? ? ?-- What to do?
+>>
+>> -- A single node is a graph, has a list of both incoming and outgoing edges.
+>>
+>> data Node edge = Node
+>> ? { nodeId ? :: NodeId
+>> ? , payload ?:: String
+>> ? , incoming :: [edge]
+>> ? , ougoing ?:: [edge]
+>> ? } deriving (Functor, Foldable, Traversable)
+>>
+>> type NodeId = String
+>>
+>> -- A graph with an index on the nodes by NodeId, parametrized with the type we
+>> -- want to used as the edge pointer.
+>>
+>> type Graph edge = M.Map NodeId (Node edge)
+>>
+>> -- Type level fixed point combinator with a TVar annotation.
+>>
+>> newtype TFix f = TIn { tout :: TVar (f (TFix f)) }
+>>
+>> -- Take a graph that uses NodeIds as edges and recursively transform it into a
+>> -- graph with TVars to the neighbouring nodes in the edges.
+>>
+>> tieTheKnot :: Graph NodeId -> STM (Graph (TFix Node))
+>> tieTheKnot untied =
+>> ? do rec tied <- (mapM . mapM) (\nodeid -> TIn <$> newTVar (tryLookup nodeid tied)) untied
+>> ? ? ?return tied
+>>
+>> -- Helper function to lookup a pre-tied node from a graph, throws an error when
+>> -- the edge could not be resolved. This should, of course, not happen!
+>>
+>> tryLookup :: NodeId -> Graph (TFix Node) -> Node (TFix Node)
+>> tryLookup i = fromJust (error msg) . M.lookup i
+>> ? where msg = "tieTheKnot: Lookup error, input is an incomplete graph."
+>
+> Thanks in advance,
+>
+> --
+> Sebastiaan Visser
+> http://www.silkapp.com
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

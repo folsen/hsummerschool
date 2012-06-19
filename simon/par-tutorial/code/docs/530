@@ -1,0 +1,156 @@
+From michael at snoyman.com  Wed Apr 20 06:38:49 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 20 Apr 2011 07:38:49 +0300
+Subject: [Haskell-cafe] errors while installing yesod 0.8
+In-Reply-To: <BANLkTikgO5jRYUDQab7gZkTj7=Zeb8Vxyg@mail.gmail.com>
+References: <BANLkTinnbgfJFA8pFptB9QwOSr3soP4DaQ@mail.gmail.com>
+	<BANLkTi=tznqXgekcbqgU30s9bUT4CbrKBQ@mail.gmail.com>
+	<BANLkTimaTu9+5rbvUnMsY733WnXA4iB1ZA@mail.gmail.com>
+	<BANLkTi=k0qBmgfW+i3fZO5tvBMjU6nEPYg@mail.gmail.com>
+	<BANLkTimKscipBEAgO0XqAeU8gbE1FenPyg@mail.gmail.com>
+	<BANLkTikgO5jRYUDQab7gZkTj7=Zeb8Vxyg@mail.gmail.com>
+Message-ID: <BANLkTimMsX2C=fw6+cVTBm9kJhWJtFj61A@mail.gmail.com>
+
+I was also able to install monad-control, both with GHC 7 and 6.12.3. A more
+detailed error log will definitely be helpful here.
+
+Michael
+
+On Wed, Apr 20, 2011 at 2:58 AM, Rogan Creswick <creswick at gmail.com> wrote:
+
+> On Tue, Apr 19, 2011 at 4:22 PM, Michael Litchard <michael at schmong.org>
+> wrote:
+> > yesod-static-0.1.0 depends on monad-control-0.2.0.1 which failed to
+> install.
+> >
+> >
+> > This is what happened after I did cabal update, then cabal-dev install
+> > yesod. This is the original error I received.
+>
+> Just for a point of reference - I just tried this and
+> monad-control-0.2.0.1 build just fine. (The build failed overall
+> because I didn't have the correct unix-compat c library deps
+> installed.)
+>
+> I poked into the monad-control build system, and the only thing that
+> strikes me as at all unusual is that it uses unicode symbols for ::
+> and -> in Setup.hs.
+>
+> --Rogan
+>
+> > So what else can I try?
+> >
+> > On Tue, Apr 19, 2011 at 3:30 PM, Rogan Creswick <creswick at gmail.com>
+> wrote:
+> >> On Tue, Apr 19, 2011 at 3:10 PM, Michael Litchard <michael at schmong.org>
+> wrote:
+> >>> New information, may be helpful.
+> >>>
+> >>> I manually installed hamlet 0.8 with cabal-dev, and it seemed to
+> >>> install. Here is the message
+> >>>
+> >>>
+> >>> Registering hamlet-0.8.0...
+> >>> Installing library in
+> >>> /home/mlitchard/hamlet-0.8.0/cabal-dev//lib/hamlet-0.8.0/ghc-6.12.3
+> >>> Registering hamlet-0.8.0...
+> >>
+> >> It looks like you manually downloaded the hamlet-0.8.0.tar.gz,
+> >> unpacked it, and ran cabal-dev install from inside there -- is that
+> >> right? (There's nothing wrong with doing it that way, but it doesn't
+> >> quite do what you expected, based on the rest of your email.  Also, if
+> >> my assumption is wrong, then the rest of my advice may not help.)
+> >>
+> >> First, it's important to know that cabal-dev sandboxes everything it
+> >> can.  If you want to install hamlet into your .cabal directory, then
+> >> you need to use cabal, not cabal-dev.  Cabal-dev is meant to keep
+> >> everything for a given project separate from everything else -- in
+> >> this way you can have multiple projects that depend on conflicting
+> >> libraries building at the same time, and it also means that
+> >> coincidental changes to your user package database won't cause
+> >> spurious *successes* when you build something, which is a surprisingly
+> >> common problem.  Unfortunately this means that the first time you
+> >> build a project with cabal-dev, it tends to take a long time (it has
+> >> to build everything it depends on).
+> >>
+> >> Now, there are (at least) two important take-away points /
+> >> implications of using cabal-dev:
+> >>
+> >>  (1) cabal-dev won't install a library into a standard location.
+> >> That's by design, so you don't usually want to cabal-dev install
+> >> dependencies manually.
+> >>  (2) cabal-dev uses the local hackage cache to select packages in the
+> >> same way cabal does (cabal-dev actually just uses cabal to do this).
+> >>
+> >>> mlitchard at apotheosis:~/yesod-0.8.0$ cabal-dev install
+> >>> Resolving dependencies...
+> >>> cabal: cannot configure yesod-0.8.0. It requires hamlet ==0.8.*
+> >>> There is no available version of hamlet that satisfies ==0.8.*
+> >>
+> >> I think you just need to run 'cabal update' so cabal-dev can see the
+> >> latest version of hamlet, after which you can cabal-dev install yesod.
+> >>
+> >> There are a couple other things to try if that doesn't work for some
+> reason.
+> >>
+> >> --Rogan
+> >>
+> >>
+> >>>
+> >>> I noticed it did not install in the $HOME/.cabal/ path. How do make
+> >>> sure it does that?
+> >>> I think if I can get it to install in the right place this will work
+> out.
+> >>>
+> >>> On Tue, Apr 19, 2011 at 2:52 PM, Rogan Creswick <creswick at gmail.com>
+> wrote:
+> >>>> On Tue, Apr 19, 2011 at 2:18 PM, Michael Litchard <
+> michael at schmong.org> wrote:
+> >>>>> mlitchard at apotheosis:~/monad-control$ cabal install
+> >>>>> Resolving dependencies...
+> >>>>> Configuring monad-control-0.2.0.1...
+> >>>>> cabal: Error: some packages failed to install:
+> >>>>> monad-control-0.2.0.1 failed during the configure step. The exception
+> was:
+> >>>>> ExitFailure 11
+> >>>>>
+> >>>>>
+> >>>>> note: I've been trying to use the cab command to manage my packages,
+> I
+> >>>>> get the same error as above when I use cab instead of cabal.I mention
+> >>>>> this just in case there is some unforseen problem having to do with
+> >>>>> cab/cabal interaction.
+> >>>>>
+> >>>>> Has anyone experienced this problem, or know what I can do to get
+> more
+> >>>>> useful error messages that might reveal the cause of the breakage?
+> >>>>
+> >>>> You might learn more by issuing the configure / build steps manually
+> >>>> (I think `cabal configure` will produce an error).  Upping the
+> >>>> verbosity will also help:
+> >>>>
+> >>>> # get pages and pages of details:
+> >>>> $ cabal install --verbose=3
+> >>>>
+> >>>> I would first suggest trying cabal-dev, though (cab can delegate to
+> >>>> cabal-dev now too, but I haven't played with it yet).
+> >>>>
+> >>>> $ cabal-dev install yesod-0.8
+> >>>>
+> >>>> will either work or fail in a way that we can more easily reproduce.
+> >>>>
+> >>>> --Rogan
+> >>>>
+> >>>
+> >>
+> >
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110420/f7eafd0f/attachment.htm>
+

@@ -1,0 +1,63 @@
+From limestrael at gmail.com  Wed Dec 14 14:49:50 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Wed, 14 Dec 2011 14:49:50 +0100
+Subject: [Haskell-cafe] DB vs read/show for persisting large data
+In-Reply-To: <CACqaG6z+KRiCknrBjfXYEyJ77cTbxgEz9ZYiCZ5qwu2DH-YqNg@mail.gmail.com>
+References: <CAGdT1gqohuKtQPQdH2FS==HTqCtDVYvjKibD_wZ1vtF7Vxr_wA@mail.gmail.com>
+	<CACqaG6z+KRiCknrBjfXYEyJ77cTbxgEz9ZYiCZ5qwu2DH-YqNg@mail.gmail.com>
+Message-ID: <CACqaG6wiQ-quBmQThrLqDWR8XnbLe1ALqZv2Yo3-f6EOShgnMw@mail.gmail.com>
+
+I got mixed up with something else : forget about enumerator-based version
+of aeson, it does not exist.
+
+2011/12/14 Yves Par?s <limestrael at gmail.com>
+
+> If what bothers you is writing SQL code (and I could easily understand),
+> you may wanna check persistent. It uses Template Haskell to generate for
+> you the necessary marshalling and tables definition, so you just handle
+> haskell datatypes.
+> (^^ Michael just outposted [1] me).
+>
+> For json serialization, aeson (normal or enumerator-based flavour) might
+> be nice.
+>
+> For brutal binary serialization, you may like binary or cereal (I don't
+> know the dis/advantages of both, except that the last time I checked,
+> cereal only handled strict bytestrings).
+>
+> For XML I don't know, since use it the least I can.
+>
+>
+> [1] I don't know if there is such a word. Sorry, I'm french.
+>
+>  2011/12/14 C K Kashyap <ckkashyap at gmail.com>
+>
+>> Hi,
+>>
+>> It has been on my todo list for some time now. I'd like to write a GTD
+>> tool that has dependency tracking support. Haskell seems like a good choice
+>> for this. I was wondering if there has been any past attempts with this?
+>>
+>> One thing that has been bothering me has been this - the persistence of
+>> data. Should I use sqlite(or someother DB) or should I use Haskell's
+>> read/show functions to read from and write to a file? I am slightly not
+>> inclined towards NOT using DB because I want to implement all the business
+>> logic in Haskell. I want to avoid having to generate SQL.
+>>
+>> It'll be great if I could get some feedback on the "read/show" approach -
+>> is this even a viable option?
+>>
+>> Regards,
+>> Kashyap
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+>>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111214/0b80fab7/attachment.htm>
+

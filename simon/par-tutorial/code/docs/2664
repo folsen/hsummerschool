@@ -1,0 +1,87 @@
+From dons at galois.com  Thu Feb  3 22:58:50 2011
+From: dons at galois.com (Don Stewart)
+Date: Thu, 3 Feb 2011 13:58:50 -0800
+Subject: [Haskell-cafe] ($) not as transparent as it seems
+In-Reply-To: <AANLkTikZUOoLE6oyhdEaEOHtLc_=+AxDV=oBF217Yk5j@mail.gmail.com>
+References: <4D4B1396.6070501@uni-bonn.de>
+	<AANLkTikZUOoLE6oyhdEaEOHtLc_=+AxDV=oBF217Yk5j@mail.gmail.com>
+Message-ID: <20110203215850.GI6054@whirlpool.galois.com>
+
+catamorphism:
+> On Thu, Feb 3, 2011 at 12:44 PM, Steffen Schuldenzucker
+> <sschuldenzucker at uni-bonn.de> wrote:
+> >
+> > Dear cafe,
+> >
+> > does anyone have an explanation for this?:
+> >
+> >>>> error (error "foo")
+> > *** Exception: foo
+> >
+> >>>> error $ error "foo"
+> > *** Exception: *** Exception: foo
+> >
+> 
+> Have you read the intermediate Core (using -ddump-simpl) for each variation?
+> 
+
+A.
+GHC.Base.bindIO
+  @ GHC.Prim.Any
+  @ [()]
+  ((GHC.Err.error @ [GHC.Types.Char] (GHC.Base.unpackCString# "foo"))
+   `cast` (CoUnsafe [GHC.Types.Char] (GHC.Types.IO GHC.Prim.Any)
+           :: [GHC.Types.Char] ~ GHC.Types.IO GHC.Prim.Any))
+  ((\ (it_ade :: GHC.Prim.Any)
+      (eta_B1 :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+      ((GHC.Base.returnIO
+          @ [()]
+          (GHC.Types.:
+             @ ()
+             (it_ade `cast` (CoUnsafe GHC.Prim.Any () :: GHC.Prim.Any ~ ()))
+             (GHC.Types.[] @ ())))
+       `cast` (GHC.Types.NTCo:IO [()]
+               :: GHC.Types.IO [()]
+                    ~
+                  (GHC.Prim.State# GHC.Prim.RealWorld
+                   -> (# GHC.Prim.State# GHC.Prim.RealWorld, [()] #))))
+        eta_B1)
+   `cast` (GHC.Prim.Any -> sym (GHC.Types.NTCo:IO [()])
+           :: (GHC.Prim.Any
+               -> GHC.Prim.State# GHC.Prim.RealWorld
+               -> (# GHC.Prim.State# GHC.Prim.RealWorld, [()] #))
+                ~
+              (GHC.Prim.Any -> GHC.Types.IO [()])))
+
+B.
+GHC.Base.bindIO
+  @ GHC.Prim.Any
+  @ [()]
+  (GHC.Base.$
+     @ [GHC.Types.Char]
+     @ (GHC.Types.IO GHC.Prim.Any)
+     (GHC.Err.error @ (GHC.Types.IO GHC.Prim.Any))
+     (GHC.Err.error @ [GHC.Types.Char] (GHC.Base.unpackCString# "foo")))
+  ((\ (it_aib :: GHC.Prim.Any)
+      (eta_B1 :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+      ((GHC.Base.returnIO
+          @ [()]
+          (GHC.Types.:
+             @ ()
+             (it_aib `cast` (CoUnsafe GHC.Prim.Any () :: GHC.Prim.Any ~ ()))
+             (GHC.Types.[] @ ())))
+       `cast` (GHC.Types.NTCo:IO [()]
+               :: GHC.Types.IO [()]
+                    ~
+                  (GHC.Prim.State# GHC.Prim.RealWorld
+                   -> (# GHC.Prim.State# GHC.Prim.RealWorld, [()] #))))
+        eta_B1)
+   `cast` (GHC.Prim.Any -> sym (GHC.Types.NTCo:IO [()])
+           :: (GHC.Prim.Any
+               -> GHC.Prim.State# GHC.Prim.RealWorld
+               -> (# GHC.Prim.State# GHC.Prim.RealWorld, [()] #))
+                ~
+              (GHC.Prim.Any -> GHC.Types.IO [()])))
+
+
+

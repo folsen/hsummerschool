@@ -1,0 +1,26 @@
+From trebla at vex.net  Tue Aug 30 06:46:30 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Tue, 30 Aug 2011 00:46:30 -0400
+Subject: [Haskell-cafe] GHCI Feature Request: Last Successful
+ Compilation State Saved
+In-Reply-To: <CAJrReygxTo_DVA6B4bNozP0WR+_X7ZqQs=ERdHhuXKJNc-3+0A@mail.gmail.com>
+References: <CAJrReygxTo_DVA6B4bNozP0WR+_X7ZqQs=ERdHhuXKJNc-3+0A@mail.gmail.com>
+Message-ID: <4E5C6B26.3010201@vex.net>
+
+On 11-08-27 04:59 PM, aditya siram wrote:
+> Many times I've changed files, loaded them, hit a compilation error and
+> needed, for example, the inferred type signature of some function. Even
+> though that function hasn't been changed I have to either fix my code,
+> undo a bunch of changes or comment out the last change I made and reload
+> in order to do a ":type" on the function. This really breaks the flow of
+> development.
+
+In #haskell, we came up with the idea of running two instances of ghci. 
+Try loading in one instance first; if good, commit to the other instance 
+too; if bad, you still have the other instance in a functional state. 
+Presumably, this should be automated by some middleware.
+
+(We were discussing the prospect of auto-reload, i.e., automatically 
+poll source file timestamps and reload.)
+
+

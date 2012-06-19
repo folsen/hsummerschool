@@ -1,0 +1,172 @@
+From trebla at vex.net  Mon Aug 29 04:03:22 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Sun, 28 Aug 2011 22:03:22 -0400
+Subject: [Haskell-cafe] Dynamic loading of module
+In-Reply-To: <CAL4zPaqNfJWZzJowtFW12e_u2pmxxktbKpiSG5YDsh+=fZL43w@mail.gmail.com>
+References: <CAL4zPao2eYnWWf1KL-sJ3NrVNw6Ar+eHVgnsDr7KSCikE_TZ4w@mail.gmail.com>	<4E5811CA.6050905@vex.net>	<CAL4zPaoO3=AGtJSexcSa9b108w0AB7dgm+QVQQmoytOUu-M3Fw@mail.gmail.com>	<4E593E91.5020209@vex.net>
+	<CAL4zPaqNfJWZzJowtFW12e_u2pmxxktbKpiSG5YDsh+=fZL43w@mail.gmail.com>
+Message-ID: <4E5AF36A.5000507@vex.net>
+
+On 11-08-28 04:40 PM, Arnaud Bailly wrote:
+> Hello Albert,
+> Thanks for taking the time to help me fix this package stuff. So I wiped
+> out my package.conf.d/ and tried to reinstall my stuff. Installing
+> template-haskell 2.5.0.0 is ok (2.6 is not, fails to compile on ghc
+> 7.0.3) but then:
+>
+> D:\projets\>ghc --make -package ghc main
+> <command line>: cannot satisfy -package ghc
+>      (use -v for more information)
+>
+> I suspect I really *do* have to reinstall haskell-platform. Here is the
+> output of ghc-pkg list -v:
+>
+> using cache: C:\Documents and Settings\abailly\Application
+> Data\ghc\i386-mingw32-7.0.3\package.conf.d\package.cache
+> using cache: D:/Program Files/Haskell
+> Platform/2011.2.0.1\lib\package.conf.d\package.cache
+> D:/Program Files/Haskell Platform/2011.2.0.1\lib\package.conf.d:
+>      Cabal-1.10.1.0 (Cabal-1.10.1.0-55f781465ee9f32289755ad706c71f0f)
+>      GLUT-2.1.2.1 (GLUT-2.1.2.1-2d30997b9a19d27be388572e75af52bf)
+>      HTTP-4000.1.1 (HTTP-4000.1.1-267a332938fa742ba5a5d59de0b46d60)
+>      HUnit-1.2.2.3 (HUnit-1.2.2.3-102fbfbd594cd6d38461f5c68d880996)
+>      OpenGL-2.2.3.0 (OpenGL-2.2.3.0-a58ce3ad6070e6b7932a3e779be57f75)
+>      Win32-2.2.0.1 (Win32-2.2.0.1-26cf39fdf591bdac61b11d5a443c62ab)
+>      array-0.3.0.2 (array-0.3.0.2-8e9cd0144e87fa9cc86cc9031631c4f3)
+>      base-4.3.1.0 (base-4.3.1.0-f520cd232cc386346843c4a12b63f44b)
+>      bin-package-db-0.0.0.0
+> (bin-package-db-0.0.0.0-97d865e5935b41538bcb29fc1040ae7d)
+>      bytestring-0.9.1.10
+> (bytestring-0.9.1.10-cd85f14e02463c02ba4c77d7adcdb54f)
+>      cgi-3001.1.7.4 (cgi-3001.1.7.4-659440ce11c2975fd9c9c471a1e8ff3b)
+>      containers-0.4.0.0
+> (containers-0.4.0.0-18deac99a132f04751d862b77aab136e)
+>      deepseq-1.1.0.2 (deepseq-1.1.0.2-09b3aed0c4982bbc6569c668100876fa)
+>      directory-1.1.0.0 (directory-1.1.0.0-3a2367d72569467a8af8a231656ff1b8)
+>      extensible-exceptions-0.1.1.2
+> (extensible-exceptions-0.1.1.2-d8c5b906654260efd7249f497d17a831)
+>      ffi-1.0 (builtin_ffi)
+>      fgl-5.4.2.3 (fgl-5.4.2.3-595811d6eabb1e1768685703ea66e982)
+>      filepath-1.2.0.0 (filepath-1.2.0.0-f132e9f7703da4e20a47ff2b9acf1ea1)
+>      (ghc-binary-0.5.0.2
+> (ghc-binary-0.5.0.2-aba2b5dca5546ea1a972188de48f87b5))
+>      ghc-prim-0.2.0.0 (ghc-prim-0.2.0.0-e1f7c380581d61d42b0360d440cc35ed)
+>      haskell-src-1.0.1.4
+> (haskell-src-1.0.1.4-7428a8c9049cd6bf5abdc0bbd2d417c5)
+>      (haskell2010-1.0.0.0
+> (haskell2010-1.0.0.0-53d9cd65595c551eea0c0269f534b5e0))
+>      haskell98-1.1.0.1 (haskell98-1.1.0.1-35ec26bae828637c1638c8be441b3d68)
+>      hpc-0.5.0.6 (hpc-0.5.0.6-481dbb43fb624c21ad3bb9434675e3ac)
+>      html-1.0.1.2 (html-1.0.1.2-a494249f98a0f38b1a8db28bc70f8b0b)
+>      integer-gmp-0.2.0.3
+> (integer-gmp-0.2.0.3-91607778cf3ae8f3948a50062b4f8479)
+>      mtl-2.0.1.0 (mtl-2.0.1.0-fb4d1695269b74308c1517c06b76e6e8)
+>      network-2.3.0.2 (network-2.3.0.2-47657e39a6118a978d9f443d72e85d4a)
+>      old-locale-1.0.0.2
+> (old-locale-1.0.0.2-6e2a3c0744e8cf4e0ac2d4e58659f7b5)
+>      old-time-1.0.0.6 (old-time-1.0.0.6-445ce39cbcebd38069c25c0f383b728d)
+>      parallel-3.1.0.1 (parallel-3.1.0.1-6eaa564e1ef1537bc88ad1fea6c90fe2)
+>      parsec-3.1.1 (parsec-3.1.1-9da59b00c02e52f9f62f3c87c7e0e2ec)
+>      pretty-1.0.1.2 (pretty-1.0.1.2-abc7c632374e50e1c1927987c2651f0f)
+>      process-1.0.1.5 (process-1.0.1.5-b3dded8e54a2e13d22af410bdcfafff4)
+>      random-1.0.0.3 (random-1.0.0.3-1abde37180be5476311abeefe300abc2)
+>      regex-base-0.93.2 (regex-base-0.93.2-9e1b027c41dbec856469a30982495bb9)
+>      regex-compat-0.93.1
+> (regex-compat-0.93.1-31c61fe0aee45e8a9853edf7a844f74e)
+>      regex-posix-0.94.4
+> (regex-posix-0.94.4-f5eb628ea5dae5f91552d5ea0e26359d)
+>      rts-1.0 (builtin_rts)
+>      stm-2.2.0.1 (stm-2.2.0.1-57e291244ee02349552a4f79caeb4ffe)
+>      syb-0.3 (syb-0.3-8db7bc4339a1cb8a6f2a46c40447ef0b)
+>      text-0.11.0.6 (text-0.11.0.6-398a3f02891247aea46662fc7379c4a5)
+>      time-1.2.0.3 (time-1.2.0.3-74ef6ac31cee9aec02b036978af002d2)
+>      transformers-0.2.2.0
+> (transformers-0.2.2.0-2fe7b735c63a6cbe8724038d8e4d812a)
+>      xhtml-3000.2.0.1 (xhtml-3000.2.0.1-ace31b2e48c396e565655b0f34f5d2b7)
+>      zlib-0.5.3.1 (zlib-0.5.3.1-5fbdf714525b76e0e601c2ffb25f2044)
+>
+> C:\Documents and Settings\abailly\Application
+> Data\ghc\i386-mingw32-7.0.3\package.conf.d:
+>      QuickCheck-2.4.1.1
+> (QuickCheck-2.4.1.1-04d68679694a517ba23022a4c6bc1cde)
+>      ghc-paths-0.1.0.8 (ghc-paths-0.1.0.8-be391faf057d651dbb92b73671fe9eee)
+>      template-haskell-2.5.0.0
+> (template-haskell-2.5.0.0-87f4f416a22a910e480ac9f269479a5f)
+>      utf8-string-0.3.7 (utf8-string-0.3.7-dcbcb8de655cdfe1c4c28c094f8c6799)
+>
+> Thanks again,
+> Arnaud
+>
+> On Sat, Aug 27, 2011 at 8:59 PM, Albert Y. C. Lai <trebla at vex.net
+> <mailto:trebla at vex.net>> wrote:
+>
+>     You have too many instances of template-haskell. The important parts
+>     are:
+>
+>
+>     package ghc-7.0.3-__fc75cf67c86ba2c0d64b07024a18d3__b4 is unusable
+>     due to missing or recursive dependencies:
+>       template-haskell-2.5.0.0-__7d9b1443ac5ab69e5ed705a487990d__eb
+>
+>     package
+>     template-haskell-2.5.0.0-__7d9b1443ac5ab69e5ed705a487990d__eb is
+>     shadowed by package
+>     template-haskell-2.5.0.0-__87f4f416a22a910e480ac9f269479a__5f
+>
+>     and in "ghc-pkg list -v":
+>
+>     D:/Program Files/Haskell Platform/2011.2.0.1\lib\__package.conf.d:
+>
+>
+>        template-haskell-2.5.0.0
+>     (template-haskell-2.5.0.0-__7d9b1443ac5ab69e5ed705a487990d__eb)
+>
+>     C:\Documents and Settings\abailly\Application
+>     Data\ghc\i386-mingw32-7.0.3\__package.conf.d:
+>
+>
+>         template-haskell-2.5.0.0
+>     (template-haskell-2.5.0.0-__87f4f416a22a910e480ac9f269479a__5f)
+>
+>     I don't know how you got to this unsafe state. But my article
+>     explains what's wrong with it. (Though my example has different
+>     version numbers on top of different ABI hashes).
+>
+>     The user instance of template-haskell
+>     (__87f4f416a22a910e480ac9f269479a__5f) is getting into the way. Lose
+>     it by doing "ghc-pkg unregister --user template-haskell" on it. Oh,
+>     it will complain about breaking other packages; well, lose them too.
+>
+>     (Or go one step further and lose all of C:\Documents and
+>     Settings\abailly\Application
+>     Data\ghc\i386-mingw32-7.0.3\__package.conf.d which means losing all
+>     user packages.)
+>
+>     (Reinstalling haskell platform changes nothing, as long as some user
+>     package gets into the way.)
+
+I do not understand why you had template-haskell in global and now you 
+don't, i.e., last time you still had
+
+D:/Program Files/Haskell Platform/2011.2.0.1\lib\package.conf.d:
+[...]
+    template-haskell-2.5.0.0 
+(template-haskell-2.5.0.0-7d9b1443ac5ab69e5ed705a487990deb)
+
+and now you don't have it.
+
+I clearly did not suggest getting rid of it.
+
+I only suggested getting rid of the user instance "ghc-pkg unregister 
+--user template-haskell" and/or getting rid of "C:\Documents and 
+Settings\abailly\Application Data\ghc\i386-mingw32-7.0.3\package.conf.d" 
+which are all just user instances, wouldn't lose global instances.
+
+I do not understand why you are so keen on replacing what comes with GHC 
+and/or Haskell Platform. I have said several times that such 
+replacements cause troubles.
+
+I give up. I am replying because I want to record that my suggestion 
+would not lead to an important part of the current state.
+
+

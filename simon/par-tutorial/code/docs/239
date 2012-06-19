@@ -1,0 +1,27 @@
+From schlepptop at henning-thielemann.de  Fri Apr  8 14:23:26 2011
+From: schlepptop at henning-thielemann.de (Henning Thielemann)
+Date: Fri, 08 Apr 2011 14:23:26 +0200
+Subject: [Haskell-cafe] fmap and LaTeX
+In-Reply-To: <BANLkTikhJJEUp3DWjXGxOKSo1gWed1AM9A@mail.gmail.com>
+References: <BANLkTikhJJEUp3DWjXGxOKSo1gWed1AM9A@mail.gmail.com>
+Message-ID: <4D9EFE3E.3000109@henning-thielemann.de>
+
+Mitar schrieb:
+> Hi!
+> 
+> Is there for <$> (fmap) operator some nice looking symbol in mathematics, LaTeX?
+> 
+> I am looking here:
+> 
+> http://www.soi.city.ac.uk/~ross/papers/Applicative.html
+> http://www.haskell.org/ghc/docs/6.12.1/html/libraries/base/Control-Applicative.html
+> 
+> but only for other operators there are nice symbols, and <$> is left as it is.
+> 
+> I have also tried \mathbin{<\$>} but it adds space around $ (at least
+> in lhs2tex), so it looks ugly.
+
+Does \langle\$\rangle look better for your taste?
+
+
+

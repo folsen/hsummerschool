@@ -1,0 +1,29 @@
+From wren at freegeek.org  Mon Dec 12 21:45:56 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Mon, 12 Dec 2011 15:45:56 -0500
+Subject: [Haskell-cafe] Module name space question
+In-Reply-To: <CACYs5AZrtu4whxerBMKe3g=_EVpN2292J6EYo-4SnuGR1JYRsQ@mail.gmail.com>
+References: <CAPTT2bYJLDkx__JRKehjiTfO-rcAQkQjnfwnR6z3gSAuHE-Y+w@mail.gmail.com>
+	<CAOrUaLaZaFH8hF_htPaKO1hTjRcR9wOmQ3w9yBGaOUZDqZygwg@mail.gmail.com>
+	<CACYs5AZrtu4whxerBMKe3g=_EVpN2292J6EYo-4SnuGR1JYRsQ@mail.gmail.com>
+Message-ID: <4EE66804.5090301@freegeek.org>
+
+On 12/12/11 9:32 AM, Ryan Newton wrote:
+> I don't know why Hoogle didn't find one of the packages.  I've often
+> wondered about this related question:
+>
+>     * Is there a place to browse the union of all namespaces in all hackage
+> packages?
+
+There is, and it's awesome:
+
+     http://folk.ntnu.no/hammar/explore-hackage/
+
+Though it can be a bit slow to load, so try not to hammer the server too 
+hard :)
+
+-- 
+Live well,
+~wren
+
+

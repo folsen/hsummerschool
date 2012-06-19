@@ -1,0 +1,57 @@
+From jesseschalken at gmail.com  Tue Dec 20 12:18:44 2011
+From: jesseschalken at gmail.com (Jesse Schalken)
+Date: Tue, 20 Dec 2011 22:18:44 +1100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <91793F0E-1C9F-4F4C-96F8-188A37273A21@gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAF1yvAQJX+f-MigNFF=6be12Uka6y45QD6oys_NQpxgREkRbaQ@mail.gmail.com>
+	<653CD606-D8B6-4BD8-AFD4-46738AF49DB3@gmail.com>
+	<CAF1yvAS6hc=tmmW74qvNdVXngCqV0LNNOXn2TUgckWHMJFszUA@mail.gmail.com>
+	<91793F0E-1C9F-4F4C-96F8-188A37273A21@gmail.com>
+Message-ID: <CAF1yvAQL9t5jxXaCsDuOx7o4NgHD-O_RioRJ=Yc_RHj0_TerBg@mail.gmail.com>
+
+On Tue, Dec 20, 2011 at 9:47 PM, Gregory Crosswhite
+<gcrosswhite at gmail.com>wrote:
+
+>
+> On Dec 20, 2011, at 8:40 PM, Jesse Schalken wrote:
+>
+> If you think a value might not reduce, return an error in an error monad.
+>
+>
+> Okay, I'm completely convinced!  Now all that we have to do is to solve
+> the halting problem to make your solution work...  :-)
+>
+
+Why do you have to solve the halting problem?
+
+Consider integer division by 0.
+
+intDiv x y = if y > x then 0 else 1 + (intDiv (x - y) y)
+
+
+This is correct, but does not reduce with y = 0. The Prelude version
+returns bottom in this case. Here is a version that returns an error in an
+Either String.
+
+intDiv :: (Ord a, Num a) => a -> a -> Either String a
+
+intDiv _ 0 = Left "Division by 0!"
+intDiv x y = if y > x then Right 0 else intDiv (x - y) y >>= (Right . (1 +))
+
+
+This is all I was talking about.
+
+
+
+Cheers,
+> Greg
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111220/afb2e665/attachment.htm>
+

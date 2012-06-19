@@ -1,0 +1,20 @@
+From this we've got two facts:
+ Pos :: * -> *
+ dictPosPerson :: Pos Person
+
+You could interpret this as:
+ 1) There is a set of types named Pos
+ 2) There is an element of this set named Person.
+
+
+> -- Is it the evaluation or the type checking that provides a proof of
+> type correctness?
+> -- getPos(Person "1" 2)
+
+The type inferencer constructs a proof that a Haskell source program is well typed. It does this by converting it to GHC core, which is a formal logical system. The core program itself is a proof that there is a program which has its type. The type checker for GHC core then checks that this proof is valid.
+
+Ben.
+
+
+
+

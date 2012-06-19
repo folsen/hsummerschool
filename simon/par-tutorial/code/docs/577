@@ -1,0 +1,45 @@
+From dagitj at gmail.com  Thu Apr 21 22:44:25 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Thu, 21 Apr 2011 13:44:25 -0700
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <4DB093A6.8000303@btinternet.com>
+References: <4DB093A6.8000303@btinternet.com>
+Message-ID: <BANLkTimOMrcd3_oizsRPYOK2bxzjP=UfXg@mail.gmail.com>
+
+On Thu, Apr 21, 2011 at 1:29 PM, Andrew Coppin
+<andrewcoppin at btinternet.com>wrote:
+
+> I'm sure this must be a VFAQ, but... There seems to be universal agreement
+> that Darcs is a nice idea, but is unsuitable for "real" projects. Even GHC
+> keeps talking about getting rid of Darcs. Can anybody tell me what the
+> "problems" with Darcs actually are?
+>
+
+It's been documented in the GHC discussions, on reddit, and elsewhere.  I
+would encourage you to look at the darcs-users mailing list archives and the
+ghc archives.
+
+My personal summary is as follows:
+  * There is religion/fan-boy-ism around git and in general vcs is subject
+to network effects.
+  * Github enables a level of collaboration that is hard to get with darcs.
+ Some people say this as: Github is the best thing about git.
+  * Performance concerns (for example, darcs annotate needs too much
+time/memory).
+  * Conflict merging issues (patch theory has flaws that lead to exponential
+time merges).
+
+Darcs has some additional flaws that people complain about, but which I
+don't think are core to the issue:
+  * Conflict markers are hard to understand
+  * patches as a set instead of linear history (patch soup complaints)
+  * It's written in Haskell
+  * It's not popular enough
+  * People say they just don't get patch theory
+
+I hope that helps,
+Jason
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110421/b3da186a/attachment.htm>
+

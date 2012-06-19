@@ -1,0 +1,41 @@
+From knsd at knsd.net  Wed Dec 21 09:52:12 2011
+From: knsd at knsd.net (Fedor Gogolev)
+Date: Wed, 21 Dec 2011 12:52:12 +0400
+Subject: [Haskell-cafe] Interruptible threads with IO loops
+Message-ID: <CAH-sQ5jrocgiuXiOmDaoaajkn7HRF5XWaXJK9kA2sE_cj4P0cQ@mail.gmail.com>
+
+Hello. I'm trying to get some threads that I can stop and get last
+values that was computed (and that values are IO values, in fact).
+Here is my first approach:
+
+module Main where
+
+import Control.Concurrent (MVar, threadDelay, forkIO, newMVar,
+putMVar, readMVar)
+
+tick :: Int -> IO Int
+tick v = return $ v + 1
+
+loop :: MVar Bool -> a -> (a -> IO a)  -> IO a
+loop var init loopfun = do
+   next <- loopfun init
+   shouldStop <- readMVar var
+   case shouldStop of
+       True -> return next
+       False -> loop var next loopfun
+
+runLoop :: Int -> IO ()
+runLoop timeout = do
+   var <- newMVar False
+   forkIO $ threadDelay timeout >> putMVar var True
+   value <- loop var 0 tick
+   print value
+
+main :: IO ()
+main = runLoop 30000000
+
+The problem is that it looks a little messy and what's worse it leaks
+memory. So I'm wondering if there is a better approach to do so or
+some fix to memory leak.
+
+

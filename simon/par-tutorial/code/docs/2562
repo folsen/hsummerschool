@@ -1,0 +1,27 @@
+From cdsmith at gmail.com  Tue Feb  1 15:44:58 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Tue, 01 Feb 2011 07:44:58 -0700
+Subject: [Haskell-cafe] Haskell for children?  Any experience?
+In-Reply-To: <E2AE717E-E1B2-456A-89DD-2694944A2994@me.com>
+References: <1296140663.3709.37.camel@godel>
+	<E2AE717E-E1B2-456A-89DD-2694944A2994@me.com>
+Message-ID: <1296571498.9035.29.camel@godel>
+
+Manuel,
+
+Wow, that gloss package is really cool, and exactly the sort of thing I
+was looking for.  As I've said before, I don't think I can prevent this
+from becoming about how to write games eventually.  Gloss looks like
+provides a nice way to approach graphics programming in a simple
+functional style, with a clean interface consisting entirely of
+high-level ideas, and which easily switches over to the game interface
+later.  Awesome!
+
+Thank you so much for pointing it out.
+
+--
+Chris Smith
+
+
+
+

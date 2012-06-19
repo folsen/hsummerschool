@@ -1,0 +1,76 @@
+From mkscrg at gmail.com  Tue Dec 27 19:12:13 2011
+From: mkscrg at gmail.com (Michael Craig)
+Date: Tue, 27 Dec 2011 13:12:13 -0500
+Subject: [Haskell-cafe] Composing Enumeratees in enumerator
+In-Reply-To: <CA+FqJiHons_5bL=-2DfF13X=a+CjJVmY6ikGYZ=no4KdCRUrkw@mail.gmail.com>
+References: <CAHa9zAGkw7mOvhk+4Q6Xe_p67qyi2TASVJD3z6QeoXFFfU-wCA@mail.gmail.com>
+	<CA+FqJiHons_5bL=-2DfF13X=a+CjJVmY6ikGYZ=no4KdCRUrkw@mail.gmail.com>
+Message-ID: <CAHa9zAG7Epb2x2fK3gxCP8F19CVJEbnn2P0SY4cTdJbdCCPthg@mail.gmail.com>
+
+Thanks for the replies, all. It's good to see that the other iteratee
+packages out there are addressing this issue.
+
+I still don't get why it's an issue in the first place. It seems to me like
+a pretty simple thing to implement:
+
+(=$=) :: (Monad m)
+      => Enumeratee a0 a1 m (Step a2 m b) -> Enumeratee a1 a2 m b
+      -> Enumeratee a0 a2 m b
+(=$=) e01 e12 step = Iteratee $ do
+    step' <- runIteratee $ e12 step
+    runIteratee . joinI $ e01 step'
+
+This puts a type restriction on the LHS enumeratee, but enumeratees are
+generally polymorphic in the last type param anyway. (And joinE has a
+similar restriction when composing an enumerator with an enumeratee.)
+
+Is there a good reason why enumerator doesn't export this or something
+analogous?
+
+Mike Craig
+
+
+On Sun, Dec 25, 2011 at 10:20 PM, Conrad Parker <conrad at metadecks.org>wrote:
+
+> On 24 December 2011 05:47, Michael Craig <mkscrg at gmail.com> wrote:
+> > I've been looking for a way to compose enumeratees in the enumerator
+> > package, but I've come up with nothing so far. I want this function
+> >
+> > (=$=) :: Monad m => Enumeratee a0 a1 m b -> Enumeratee a1 a2 m b ->
+> > Enumeratee a0 a2 m b
+> >
+> > I'm building a modular library on top of enumerator that facilitates
+> reading
+> > time series data from a DB, applying any number of transformations to it,
+> > and then writing it back / doing something else with it. I'd like to be
+> able
+> > to write simple transformations (enumeratees) and compose them without
+> > binding them to either a db reader (enumerator) or db writer (iteratee).
+> >
+> > I've been looking at the iterIO package as a possible alternative,
+> because
+> > it seems to allow easy composition of Inums (enumeratees). I'm a little
+> > skittish of it because it seems unpopular next to enumerator.
+>
+> Hi Michael,
+>
+> You could also look at the iteratee package. This is the signature of
+> the (><>) operator:
+>
+> (><>) :: (Nullable s1, Monad m) => (forall x. Enumeratee s1 s2 m x) ->
+> Enumeratee s2 s3 m a -> Enumeratee s1 s3 m a
+>
+> it's quite useful for composing enumeratees, likewise its friend (<><)
+> swims the other way.
+>
+>
+> http://hackage.haskell.org/packages/archive/iteratee/0.8.7.5/doc/html/Data-Iteratee-Iteratee.html
+>
+> cheers,
+>
+> Conrad.
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111227/883bd1f9/attachment.htm>
+

@@ -1,0 +1,21 @@
+From a.j.romanista at gmail.com  Wed Aug  3 01:06:33 2011
+From: a.j.romanista at gmail.com (Ata Jafari)
+Date: Wed, 3 Aug 2011 02:06:33 +0300
+Subject: [Haskell-cafe] Fractional Part
+Message-ID: <6753AB4C-1B54-402F-9384-5723C11FECBC@gmail.com>
+
+Hi everyone,
+I'm totally new to Haskell and functional programming. I try to solve  
+some problems from Proejct Euler with Haskell so that I can improve  
+myself in functional programming.
+In the first step I want to write a little code that can give me only  
+the decimal part of a float. For instance:
+if the number is (0.123) I want to obtain only the (123) part to do  
+some processes on that. (I mean the result of this code must be an  
+integer.)
+I don't expect any complete code, any suggestion and help will be  
+appreciated.
+Thanks
+Ata
+
+

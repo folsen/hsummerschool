@@ -1,0 +1,43 @@
+From chrisdone at googlemail.com  Sun Apr 24 22:37:53 2011
+From: chrisdone at googlemail.com (Christopher Done)
+Date: Sun, 24 Apr 2011 22:37:53 +0200
+Subject: [Haskell-cafe] How to keep cabal and ghci package versions in
+	sync?
+In-Reply-To: <BANLkTi=ydEhj+ornRrGrf9GSrfRkTZhKUw@mail.gmail.com>
+References: <loom.20110424T200650-84@post.gmane.org>
+	<BANLkTi=ydEhj+ornRrGrf9GSrfRkTZhKUw@mail.gmail.com>
+Message-ID: <BANLkTiks4w0m4L0SEkxkM+HRFUb8G298Cw@mail.gmail.com>
+
+On 24 April 2011 22:27, Rogan Creswick <creswick at gmail.com> wrote:
+
+> On Sun, Apr 24, 2011 at 11:13 AM, Gracjan Polak <gracjanpolak at gmail.com>
+> wrote:
+> > I have a project with a .cabal file listing package dependencies using
+> > the usual version constraints ==X.Y.* <Z.W or >=K.J syntax.
+> > Standard route cabal configure; cabal build works correctly as it is able
+> > to select working set of package versions.
+> >
+> > I have also a .ghci file. When I run GHCi it uses all latest installed
+> packages
+> > in the system. This prevents the project from loading.
+> >
+> > I tried to use 'cabal-dev ghci', but this still selects latest global
+> packages.
+>
+> This should only arise for the base ghc packages, which are tied
+> closely enough to ghc that you should probably switch ghc versions if
+> you want to work with different versions of those core packages.
+>
+> If you're installing additional packages globally, my only advice is:
+> Beware, there be dragons!  I strongly recommend that you ghc-pkg
+> unregister all the non-essential packages from your global package db
+> because:
+>
+
+I'll second this; I had the same problem and just uninstalled the global
+package and went ahead and uninstalled them all, no problems since. All my
+projects are under cabal-dev so it's not a problem.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110424/54791850/attachment.htm>
+

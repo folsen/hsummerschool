@@ -1,0 +1,78 @@
+From sh006d3592 at blueyonder.co.uk  Thu Dec 29 18:42:05 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Thu, 29 Dec 2011 17:42:05 +0000
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <jdh9h6$gba$1@dough.gmane.org>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <jdh9h6$gba$1@dough.gmane.org>
+Message-ID: <4EFCA66D.4060609@blueyonder.co.uk>
+
+On 29/12/2011 08:48, Heinrich Apfelmus wrote:
+> Steve Horne wrote:
+>> Heinrich Apfelmus wrote:
+>>>
+>>> Purity has nothing to do with the question of whether you can 
+>>> express IO in Haskell or not.
+>>>
+>> ....
+>>
+>>> The beauty of the IO monad is that it doesn't change anything about 
+>>> purity. Applying the function
+>>>
+>>>    bar :: Int -> IO Int
+>>>
+>>> to the value 2 will always give the same result:
+>>>
+>> Yes - AT COMPILE TIME by the principle of referential transparency it 
+>> always returns the same action. However, the whole point of that 
+>> action is that it might potentially be executed (with potentially 
+>> side-effecting results) at run-time. Pure at compile-time, impure at 
+>> run-time. What is only modeled at compile-time is realized at 
+>> run-time, side-effects included.
+>
+> Well, it's a matter of terminology: "impure" /= "has side effects". 
+> The ability of a language to describe side effects is not tied to its 
+> (im)purity.
+>
+> Again, purity refers to the semantics of functions (at run-time): 
+> given the same argument, will a function always return the same 
+> result? The answer to this question solely decides whether the 
+> language is pure or impure. Note that this depends on the meaning of 
+> "function" within that language. In C, side-effects are part of the 
+> semantics of functions, so it's an impure language. In Haskell, on the 
+> other hand, functions will always return the same result, so the 
+> language is pure. You could say that side effects have been moved from 
+> functions to some other type (namely IO) in Haskell.
+
+WRT the IO monad, "has side effects" is shorthand for "potentially has 
+side effects, and potentially is sensitive to side-effects". Both are 
+equally true - as soon as you opt to allow side-effects you also opt to 
+allow sensitivity to side-effects, at least as far as the type system is 
+concerned. For example an IORef - you can mutate the variable it 
+references, and whenever you dereference it the result depends on 
+whatever past mutations have occurred while the program was running.
+
+In a way, it's a shame - it might be interesting to separate causing and 
+reacting to side-effects in the type system (while allowing both to be 
+sequenced relative to each other of course - having I action and O 
+action both subtypes of IO action perhaps). It could be a useful 
+distinction to make in some cases in a 
+preventing-classes-of-bugs-through-typechecking kind of way. The "const" 
+keyword in C++ might be a relevant analogy - disallowing locally-caused 
+mutation of an "IORef" while allowing sensitivity to mutations caused 
+elsewhere.
+
+Anyway, if you're using IO actions, your code is not referentially 
+transparent and is therefore impure - by your own definition of 
+"impure". Causing side-effects may not be pedantically the issue, but 
+the mix of causing and reacting to them - ie interacting with the 
+"outside" - clearly means that some of your function results are 
+dependent on what's happening "outside" your program. That includes 
+side-effects "outside" your program yet caused by program program.
+
+Again, this is nothing new - it's clear from SPJs "Tackling the Awkward 
+Squad" that this is what the IO monad is meant for, and if it's evil 
+then at least it's controlled evil.
+
+
+

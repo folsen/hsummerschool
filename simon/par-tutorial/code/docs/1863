@@ -1,0 +1,48 @@
+From rrnewton at gmail.com  Mon Dec 12 15:32:01 2011
+From: rrnewton at gmail.com (Ryan Newton)
+Date: Mon, 12 Dec 2011 09:32:01 -0500
+Subject: [Haskell-cafe] Module name space question
+In-Reply-To: <CAOrUaLaZaFH8hF_htPaKO1hTjRcR9wOmQ3w9yBGaOUZDqZygwg@mail.gmail.com>
+References: <CAPTT2bYJLDkx__JRKehjiTfO-rcAQkQjnfwnR6z3gSAuHE-Y+w@mail.gmail.com>
+	<CAOrUaLaZaFH8hF_htPaKO1hTjRcR9wOmQ3w9yBGaOUZDqZygwg@mail.gmail.com>
+Message-ID: <CACYs5AZrtu4whxerBMKe3g=_EVpN2292J6EYo-4SnuGR1JYRsQ@mail.gmail.com>
+
+I don't know why Hoogle didn't find one of the packages.  I've often
+wondered about this related question:
+
+   * Is there a place to browse the union of all namespaces in all hackage
+packages?
+
+This would show the global Haskell/Hackage  namespace as it currently
+stands and I think would be useful for a number of different purposes.
+
+  -Ryan
+
+On Mon, Dec 12, 2011 at 8:10 AM, Yitzchak Gale <gale at sefer.org> wrote:
+
+> Christoph Breitkopf wrote:
+> > If anyone wants to look at the code in question:
+> > http://www.chr-breitkopf.de/comp/IntervalMap
+>
+> Looks interesting, thanks!
+>
+> > 3. Are there more wothwile operations on this data structure?
+>
+> Have a look at ranged sets:
+>
+> http://hackage.haskell.org/package/Ranged-sets
+>
+> Perhaps that will inspire you with some more ideas.
+>
+> Regards,
+> Yitz
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111212/818313a7/attachment.htm>
+

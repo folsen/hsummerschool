@@ -1,0 +1,143 @@
+From apfelmus at quantentunnel.de  Tue Dec 27 13:09:51 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Tue, 27 Dec 2011 13:09:51 +0100
+Subject: [Haskell-cafe] Reifying case expressions [was: Re: On stream
+ processing, and a new release of timeplot coming]
+In-Reply-To: <CALoEywPthWO=P-10hbo_VPQ894B5n1FN2WKJoGqFQkUGoYWsTA@mail.gmail.com>
+References: <CANVKUrWrvDiG7=vfDf=8Zn5_TFQtjawtYxMT6nGh7mroAJZR6w@mail.gmail.com>	<jd6tmi$5qd$1@dough.gmane.org>
+	<CALoEywPthWO=P-10hbo_VPQ894B5n1FN2WKJoGqFQkUGoYWsTA@mail.gmail.com>
+Message-ID: <jdccif$km9$1@dough.gmane.org>
+
+Sebastian Fischer wrote:
+> Heinrich Apfelmus wrote:
+>> Likewise, each function from lists can be represented in terms of our new
+>> data type [...]
+>>
+>>    length' :: ListTo a Int
+>>    length' = CaseOf
+>>        (0)
+>>        (\x -> fmap (1+) length')
+>>
+>>    length = interpret length'
+> 
+> This version of `length` is tail recursive while the previous version is
+> not. In general, all functions defined in terms of `ListTo` and `interpret`
+> are spine strict - they return a result only after consuming all input list
+> constructors.
+> 
+> This is what Eugene observed when defining the identity function as
+> 
+>     idC = CaseOf [] (\x -> (x:) <$> idC)
+> 
+> This version does not work for infinite lists. Similarly, `head` and `take`
+> cannot be defined as lazily as in the standard libraries.
+
+Indeed, the trouble is that my original formulation cannot return a 
+result before it has evaluated all the case expressions. To include 
+laziness, we need a way to return results early.
+
+Sebastian's  ListTransformer  type does precisely that for the special 
+case of lists as results, but it turns out that there is also a 
+completely generic way of returning results early. In particular, we can 
+leverage lazy evaluation for the result type.
+
+The idea is, of course, to reify another function. This time, it's going 
+to be  fmap
+
+     data ListTo a b where
+         Fmap   :: (b -> c) -> ListTo a b -> ListTo a c
+         CaseOf :: b -> (a -> ListTo a b) -> ListTo a b
+
+(GADT syntax due to the existential quantification implied by Fmap ). To 
+see why this works, have a look at the interpreter
+
+     interpret :: ListTo a b -> ([a] -> b)
+     interpret (Fmap f g)        = fmap f (interpret g)
+     interpret (CaseOf nil cons) = \ys -> case ys of
+         []     -> nil
+         (x:xs) -> interpret (cons x) xs
+
+In the case of functions, fmap  is simply function concatenation
+
+     fmap f (interpret g) = f . interpret g
+
+Now, the point is that our interpretation returns part of the result 
+early whenever  the function  f  is lazy and returns part of the result 
+early. For instance, we can write the identity function as
+
+     idL :: ListTo a [a]
+     idL = CaseOf [] $ \x -> Fmap (x:) idL
+
+When interpreted, this function will perform a pattern match on the 
+input list first, but then the  Fmap  will ensure that we return the 
+first element of the result. This seems incredible, so I encourage the 
+reader to check this by looking at the reduction steps for the expression
+
+     interpret idL (1:?)
+
+To summarize, we do indeed have  id = interpret idL .
+
+
+Of course, the result type is not restricted to lists, any other type 
+will do. For instance, here the definition of a short-circuiting  and
+
+     andL :: ListTo Bool Bool
+     andL = CaseOf True $ \b -> Fmap (\c -> if b then c else False) andL
+
+     testAnd = interpret andL (True:False:undefined)
+     -- *ListTo> testAnd
+     -- False
+
+With the right applicative instance, it also possible to implement  take 
+and friends, see also the example code at
+
+   https://gist.github.com/1523428
+
+Essentially, the  Fmap  constructor also allows us to define a properly 
+lazy function  const .
+
+
+> To avoid confusion, I chose new names for my new types.
+> 
+>     data ListConsumer a b
+>       = Done !b
+>       | Continue !b (a -> ListConsumer a b)
+
+I know that you chose these names to avoid confusion, but I would like 
+to advertise again the idea of choosing the *same* names for the 
+constructors as the combinators they represent
+
+     data ListConsumer a b
+         = Const b
+         | CaseOf b (a -> ListConsumer a b)
+
+     interpret :: ListConsumer a b -> ([a] -> b)
+     interpret (Const b)         = const b
+     interpret (CaseOf nil cons) = \ys -> case ys of
+         []     -> nil
+         (x:xs) -> interpret (const x) xs
+
+This technique for designing data structures has the huge advantage that 
+it's immediately clear how to interpret it and which laws are supposed 
+to hold. Especially in the case of lists, I think that this approach 
+clears up a lot of confusion about seemingly new concepts like Iteratees 
+and so on: Iteratees are just ordinary functions [a] -> b, albeit with a 
+slightly different representation in terms of familiar combinators like 
+  case of, const, or fmap.
+
+The "turn combinators into constructors" technique is the staple of 
+designing combinator libraries and goes back to at least Hughes' famous 
+paper
+
+   John Hughes. The Design of a Pretty-printing Library. (1995)
+   http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.38.8777
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

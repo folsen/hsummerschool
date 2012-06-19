@@ -1,0 +1,39 @@
+From iustin at google.com  Thu Dec 29 18:01:35 2011
+From: iustin at google.com (Iustin Pop)
+Date: Thu, 29 Dec 2011 18:01:35 +0100
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <20111229165524.GD17094@google.com>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>
+	<20111229132335.GY17094@google.com> <4EFC9AAD.5040906@unicaen.fr>
+	<20111229165524.GD17094@google.com>
+Message-ID: <20111229170135.GE17094@google.com>
+
+On Thu, Dec 29, 2011 at 05:55:24PM +0100, Iustin Pop wrote:
+> On Thu, Dec 29, 2011 at 05:51:57PM +0100, Jerzy Karczmarczuk wrote:
+> > Iustin Pop::
+> > >In practice too:
+> > >
+> > >bar _ = do
+> > >    s<- readFile "/tmp/x.txt"
+> > >    return (read s)
+> > >
+> > >Once you're in a monad that has 'state', the return value doesn't
+> > >strictly depend anymore on the function arguments.
+> > Nice example. PLEASE, show us the trace of its execution. Then, the
+> > discussion might be more fruitful
+> 
+> Sorry?
+> 
+> I did the same mistake of misreading the grand-parent's "IO Int" vs.
+> "Int", if that's what you're referring to.
+> 
+> Otherwise, I'm confused as what you mean.
+
+And to clarify better my original email: yes, (bar x) always gives you
+back the same IO action; but the results of said IO action are/can be
+different when executed.
+
+iustin
+
+

@@ -1,0 +1,29 @@
+From johan.tibell at gmail.com  Fri Feb  4 08:30:12 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Fri, 4 Feb 2011 08:30:12 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <20110204103813.6ffde171.mle+hs@mega-nerd.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<AANLkTi=tyKC19Fvie9c8QYN-P=R3oKM_Pm6zOpcmo4Qk@mail.gmail.com>
+	<201102032334.19964.daniel.is.fischer@googlemail.com>
+	<20110204103813.6ffde171.mle+hs@mega-nerd.com>
+Message-ID: <AANLkTinzw=jmdocvNM2RkRJotypEjHToduB72EOxeHsO@mail.gmail.com>
+
+On Fri, Feb 4, 2011 at 12:38 AM, Erik de Castro Lopo
+<mle+hs at mega-nerd.com> wrote:
+> However, one of the Haskell projects I work on is Ben Lippmeier's
+> DDC compiler. Thats about 50000 lines of Haskell code and finding
+> performance issues there is really difficult.
+
+Right. It can still be tricky. I think we can get rid of a large
+number of strictness issues by using strict data structures more
+often, this should help beginners in particular. For the rest better
+tooling would help. For example, a lint tool that marked up code with
+the strictness information inferred by the compiler would be useful. I
+had time to write one I would make the output look like HPC html
+reports, with one color for strict function arguments and one color
+for lazy function arguments.
+
+Johan
+
+

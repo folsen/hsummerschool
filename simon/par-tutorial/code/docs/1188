@@ -1,0 +1,39 @@
+From bos at serpentine.com  Wed Aug 17 18:29:13 2011
+From: bos at serpentine.com (Bryan O'Sullivan)
+Date: Wed, 17 Aug 2011 09:29:13 -0700
+Subject: [Haskell-cafe] why is Random in System?
+In-Reply-To: <CACYs5AYvvWeO1Xe2TMGR=gGnYonw8dsmg3m++NALY9-nDJEupQ@mail.gmail.com>
+References: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+	<A320995A-2DDA-4147-B804-098623C26914@deepbondi.net>
+	<CAKFCL4UtZAKrw-KazZtmCSi6cDZmb1mtm9of4E=0Ugr_9GXXvA@mail.gmail.com>
+	<20110817104607.43c9ae37@angst.streitmacht.eu>
+	<CACYs5AYvvWeO1Xe2TMGR=gGnYonw8dsmg3m++NALY9-nDJEupQ@mail.gmail.com>
+Message-ID: <CACw0niL_rKDTKg8KmAJr=eryfFeeOWuw84F6g84rJY04fVo1gg@mail.gmail.com>
+
+On Wed, Aug 17, 2011 at 8:56 AM, Ryan Newton <rrnewton at gmail.com> wrote:
+
+>
+> I'm the maintainer of random.  If people could decide on what the
+> alternative name would be we could put it through the library proposal
+> process.  It seems that one problem at this moment is the lack of a single,
+> clear "right" answer.  Replacing one debatable not-quite-right choice with
+> another may not be satisfying ;-).
+>
+
+The entire premise of that discussion seems quite ridiculous. All that
+renaming the modules will achieve is the breakage of several hundred
+packages. The roots of the module naming hierarchy - Control, Data, System,
+and so on - are so muddled and inconsistently used that the best advice you
+could give to people who raise this topic is to pretend those roots are
+simply not there.
+
+My proposal for this has been to use AES based crypto-prng.
+>
+
+We'd be better off if you could seek consensus from PRNG maintainers on a
+fixed-up Random class before attacking this problem, so that we'd have a
+better chance of achieving cross-package compatibility.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110817/e79bed00/attachment.htm>
+

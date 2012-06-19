@@ -1,0 +1,31 @@
+From dpw at CS.Princeton.EDU  Wed Dec 14 02:06:10 2011
+From: dpw at CS.Princeton.EDU (David Walker)
+Date: Tue, 13 Dec 2011 20:06:10 -0500 (EST)
+Subject: [Haskell-cafe] Off The Beaten Track:  Call for Participation
+In-Reply-To: <9575c673-a712-48a6-909a-05235bd04a93@suckerpunch-mbx-0.CS.Princeton.EDU>
+Message-ID: <fc96d3c7-fd51-4c89-8401-57e1d7295005@suckerpunch-mbx-0.CS.Princeton.EDU>
+
+Off The Beaten Track:  
+Underrepresented Problems for Programming Language Researchers
+
+http://www.cs.princeton.edu/~dpw/obt/
+
+A Workshop Co-located with POPL 2012
+Philadelphia, USA
+January 28, 2012
+
+Come and join us for OBT -- we have a great program filled with a diverse set of problems and ideas for programming language researchers.  And at the end of the day, we will have an open mic session to discuss directions for the PL community.  Our program is now up here:
+
+http://www.cs.princeton.edu/~dpw/obt/obt_program.html
+
+And you can register here:
+
+https://regmaster3.com/2012conf/POPL12/register.php
+
+A broader explanation of the workshop goals:
+
+Programming language researchers have the principles, tools, algorithms and abstractions to solve all kinds of problems, in all areas of computer science. However, identifying and evaluating new problems, particularly those that lie outside the typical core PL problems we all know and love, can be a significant challenge. Hence, the goal of this workshop is to identify and discuss problems that do not often show up in our top conferences, but where programming language researchers can make a substantial impact. The hope is that by holding such a forum and associating it directly with a top conference like POPL, we can slowly start to increase the diversity of problems that are studied by PL researchers and that by doing so we will increase the impact that our community has on the world.
+
+While many workshops associated with POPL have become more like mini-conferences themselves, this is not the goal for Off the Beaten Track. The workshop will be informal and structured to encourage discussion. It will also be centered around problems and problem areas as opposed to fully-formed solutions.
+
+

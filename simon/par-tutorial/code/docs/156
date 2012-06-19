@@ -1,0 +1,79 @@
+From dagitj at gmail.com  Tue Apr  5 23:12:23 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Tue, 5 Apr 2011 14:12:23 -0700
+Subject: [Haskell-cafe] Problems porting ghc6-6.10.1 to GNU/Hurd using
+	6.8.2
+In-Reply-To: <1302037330.6774.13.camel@hp.my.own.domain>
+References: <1301989420.5567.18.camel@hp.my.own.domain>
+	<1302037330.6774.13.camel@hp.my.own.domain>
+Message-ID: <BANLkTi=sQ+sXQi66-2TCRPCP6tQUgpS7rA@mail.gmail.com>
+
+On Tue, Apr 5, 2011 at 2:02 PM, Svante Signell <svante.signell at telia.com>wrote:
+
+> On Tue, 2011-04-05 at 09:43 +0200, Svante Signell wrote:
+> > Hi,
+> >
+> > I'm currently trying to upgrade Debian GNU/Hurd ghc6.8.2 to 6.10.1 (and
+> > further from there, due to requirements of ghc and haddock versions),
+> > and get stuck on configuring the random-1.0.0.1 library in stage1. I
+> > have tried versions of ghc6 are 6.10.1+dfsg1-1 to 6.10.1+dfsg1-5 (the
+> > latest not requiring ghc6.10 due to haddock 2.4.2). The commands are
+> > shown below: (added the -verbose=3 parameter)
+> ...
+> > Output:
+> > =======
+> > Creating dist (and its parents)
+> > (".../ghc/stage1-inplace/ghc",["--numeric-version"])
+> > .../ghc/stage1-inplace/ghc is version
+> > 6.10.1
+> > (".../utils/ghc-pkg/install-inplace/bin/ghc-pkg",["--version"])
+> > .../utils/ghc-pkg/install-inplace/bin/ghc-pkg
+> > is version 6.10.1
+> > (".../ghc/stage1-inplace/ghc",["--supported-languages"])
+> > Reading installed packages...
+> > (".../utils/ghc-pkg/install-inplace/bin/ghc-pkg",["dump","--global"])
+> >
+> > Hangs here!
+> >
+> > Running manually works OK!!
+> > $pwd/utils/ghc-pkg/install-inplace/bin/ghc-pkg --global-conf
+> $pwd/inplace-datadir/./package.conf "dump" "--global"
+> >
+> > Gives a lot of output here...
+> >
+> > Below is the ghc-pkg script:
+> >
+> > cat $pwd/utils/ghc-pkg/install-inplace/bin/ghc-pkg
+> > PKGCONF=$pwd/inplace-datadir/./package.conf
+> > exec $pwd/utils/ghc-pkg/install-inplace/libexec/ghc-pkg --global-conf
+> $PKGCONF ${1+"$@"}
+> >
+> > I've tried changing the shell from dash to bash but no changes. I also
+> > tried to escape some of the variables in the gkc-pkg shell script but
+> > without any luck.
+> >
+> > Anybody can help me here??
+>
+> Any pointers, or ideas how to make some progress. Other mailing lists?
+> It hangs at the same place independent of settings. like splitobjs,
+> profile or not, etc.
+>
+
+I would try the ghc users mailing list[1] or the Debian GNU/Hurd lists[2]
+(maybe other programs have similar failures on that platform?).  The last
+time I tried Debian Hurd was circa 2003 and lots of things were in flux and
+broken.  So, I have a hunch you're on your own to some extent.  Have you
+tried debugging tools like strace?
+
+Good luck!
+Jason
+
+[1] http://www.haskell.org/mailman/listinfo/glasgow-haskell-users
+<http://www.haskell.org/mailman/listinfo/glasgow-haskell-users>[2]
+http://www.debian.org/ports/hurd/hurd-contact
+
+<http://www.debian.org/ports/hurd/hurd-contact>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110405/97ea869a/attachment.htm>
+

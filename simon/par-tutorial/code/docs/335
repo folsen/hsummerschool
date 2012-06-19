@@ -1,0 +1,41 @@
+From wilfried.kirschenmann at gmail.com  Tue Apr 12 15:50:45 2011
+From: wilfried.kirschenmann at gmail.com (Wilfried Kirschenmann)
+Date: Tue, 12 Apr 2011 15:50:45 +0200
+Subject: [Haskell-cafe] Using DPH
+In-Reply-To: <C2EF4571-07CB-40B7-88DA-F99A1540EC2C@ouroborus.net>
+References: <BANLkTinHgYaHEVbO0geFP7wTUKQS4TqBiQ@mail.gmail.com>
+	<C2EF4571-07CB-40B7-88DA-F99A1540EC2C@ouroborus.net>
+Message-ID: <BANLkTi=P0H202p56WePu+AM4WKTO+3NzEA@mail.gmail.com>
+
+> Repa and DPH are different projects. The compilation mechanism and approach to parallelism is quite different between them. You only need -fvectorise to turn on the vectoriser for DPH code. You don't need (or want) -fvectorise for Repa programs. DPH is also still at the "research prototype" stage, and not yet at a point where you'd try to use it for anything real.
+>
+OK.
+
+
+> With your example code, you also need to use R.force at appropriate points, and add matches against @(Array _ [Region RangeAll (GenManifest _)]). The reasons for both of these are explained in [1]. Hopefully the second will be fixed by a subsequent GHC release. You must also add {-# INLINE fun #-} pragmas to polymorphic functions or you will pay the price of dictionary passing for the type class overloading.
+>
+> This runs but doesn't scale with an increasing number of threads. I haven't looked at why. If all the work is in R.sum then that might be the problem -- I haven't put much time into optimising reductions, just maps and filters.
+>
+surprisingly, when removing the R.force from the code you attached,
+performances are better (speed-up=2). I suppose but I am not sure that
+this allow for loop fusions beetween the R.map ant the R.sum.
+
+I use ghc 7.0.3, Repa 2.0.0.3 and LLVM 2.9.
+
+By the end, the performances with this new version (0.48s) is 15x
+better than my original version (6.9s)
+However, the equivalent sequential C code is still 15x better (0.034s).
+
+This may indeed be explained by the fact that all computations are
+performed inside the R.sum.
+Carrefully tuned, this function shouldn't scale well (x3 on a dual
+processor, each with 4 core)  since the performances are limited by
+the memory bandwidth. However, this implementation doesn't scale at
+all.
+Whthout R.force, parallel performances are exactly the same as
+sequential performances. With R.force, using the 8 core achieves a 1.1
+speed-up.
+
+Thank you for your help.
+
+

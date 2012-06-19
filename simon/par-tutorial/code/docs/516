@@ -1,0 +1,45 @@
+From michael at snoyman.com  Tue Apr 19 23:41:59 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 20 Apr 2011 00:41:59 +0300
+Subject: [Haskell-cafe] errors while installing yesod 0.8
+In-Reply-To: <BANLkTinnbgfJFA8pFptB9QwOSr3soP4DaQ@mail.gmail.com>
+References: <BANLkTinnbgfJFA8pFptB9QwOSr3soP4DaQ@mail.gmail.com>
+Message-ID: <BANLkTikrMOrmO-K-HBLTjBT4SCoPsWnJaA@mail.gmail.com>
+
+I haven't seen this error. What version of GHC are you using, and what OS?
+
+Michael
+
+On Wed, Apr 20, 2011 at 12:18 AM, Michael Litchard <michael at schmong.org>wrote:
+
+> Trying to install yesod 0.8 breaks when it's time to install
+> monad-control. Google wasn't very helpful, nor was the error message I
+> received
+>
+>
+>
+> mlitchard at apotheosis:~/monad-control$ cabal install
+> Resolving dependencies...
+> Configuring monad-control-0.2.0.1...
+> cabal: Error: some packages failed to install:
+> monad-control-0.2.0.1 failed during the configure step. The exception was:
+> ExitFailure 11
+>
+>
+> note: I've been trying to use the cab command to manage my packages, I
+> get the same error as above when I use cab instead of cabal.I mention
+> this just in case there is some unforseen problem having to do with
+> cab/cabal interaction.
+>
+> Has anyone experienced this problem, or know what I can do to get more
+> useful error messages that might reveal the cause of the breakage?
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110420/d14a2ad6/attachment.htm>
+

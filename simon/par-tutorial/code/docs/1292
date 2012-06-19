@@ -1,0 +1,51 @@
+From thomas.dubuisson at gmail.com  Tue Aug 23 21:27:40 2011
+From: thomas.dubuisson at gmail.com (Thomas DuBuisson)
+Date: Tue, 23 Aug 2011 12:27:40 -0700
+Subject: [Haskell-cafe] - Try to install ssh package by cabal.
+In-Reply-To: <CAFFbn6HHCB47kyjpbwGi2c-2TBiO7F=A0CJ03mjoNg5vv3ij_Q@mail.gmail.com>
+References: <CAFFbn6HHCB47kyjpbwGi2c-2TBiO7F=A0CJ03mjoNg5vv3ij_Q@mail.gmail.com>
+Message-ID: <CAOk36Jhi8YP+oW=6ypb9iYwKAWLMcvfLS5DbMdue2EZxGhk4Cw@mail.gmail.com>
+
+FYI: It's usually good to CC the package maintainer when a build fails
+for non-trivial reasons.
+
+At first glance it seems the SSH package was released when version 0.3
+of the ASN package was current.  The ASN package is now on version 0.5
+- so you can either add that constraint into the SSH package and try
+again or fix the SSH package to work with ASN 0.5 and send in a patch
+if that proves to be the case.
+
+Cheers,
+Thomas
+
+P.S. It does appear that the ASN changes break this, but when I add
+the version constraint I see that SSH implicitly uses
+FlexibleInstances, which must be made explicit in GHC 7 via a LANGUAGE
+pragma or equivalent.
+
+On Tue, Aug 23, 2011 at 11:58 AM, Lo?c Maury <lmaury at gmail.com> wrote:
+> Hello,
+>
+> I try to install the ssh package with cabal, but
+> unfortunately that doesn't work, I have this error :
+>
+> src/SSH/Crypto.hs:70:16:
+> Couldn't match expected type `Data.ASN1.Types.ASN1t' with actual type
+> `ASN1ConstructionType'
+>
+> I'am on Debian with ghc-7.0.1
+>
+> I don't know how I can resolve this issue ?
+>
+> Thank you for help
+>
+> Lo?c
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

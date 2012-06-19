@@ -1,0 +1,44 @@
+From dankna at gmail.com  Thu Feb 10 00:35:15 2011
+From: dankna at gmail.com (Dan Knapp)
+Date: Wed, 9 Feb 2011 18:35:15 -0500
+Subject: [Haskell-cafe] [Cabal-devel] Cabal && license combinations
+In-Reply-To: <1297178086.2402.5.camel@godel>
+References: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+	<1297178086.2402.5.camel@godel>
+Message-ID: <AANLkTin-FnLkMpjvPSAOGo+7gS8UWhT2t7GdBiPn1K-u@mail.gmail.com>
+
+  I haven't heard anyone mention this yet, and it's a biggie, so I
+guess I'd better de-lurk and explain it.  The issue is this:  There is
+a legal distinction between static and dynamic linking, or at least
+some licenses (the GPL is the one I'm aware of) believe that there is.
+ In particular, they assert that you are legally creating a "derived
+work" if you statically link with their library, and that your
+library, even if it's just a thin bindings wrapper, must therefore
+comply by their license terms.  They make no such claim for dynamic
+linking.
+
+  Of course, Haskell on most platforms and default configurations
+links everything statically!  So I believe this means that you have to
+comply by the licenses of all your dependencies!  Now, there's a
+difference between complying by those licenses and being under them
+yourself, but for example I believe this means that if we have a
+package named "hs-save-the-whales" that is under the GPL, and a
+front-end package "hs-redeem-them-for-valuable-cash-prizes" which
+makes use of the functionality in hs-save-the-whales, the front-end
+MUST be offered under the GPL, and, additionally, CANNOT be offered
+under BSD (I think).
+
+  I think it would be a very useful and valuable thing for Cabal to
+detect this situation and warn appropriately!  Contamination by
+undesired licenses is a serious flaw in the packaging of a package; it
+just happens to be a legal flaw rather than a technical one.  Indeed,
+I would argue that this is far more important than any hypothetical
+per-file licensing.
+
+
+-- 
+Dan Knapp
+"An infallible method of conciliating a tiger is to allow oneself to
+be devoured." (Konrad Adenauer)
+
+

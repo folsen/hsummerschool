@@ -1,0 +1,101 @@
+From fryguybob at gmail.com  Wed Aug 17 16:48:28 2011
+From: fryguybob at gmail.com (Ryan Yates)
+Date: Wed, 17 Aug 2011 10:48:28 -0400
+Subject: [Haskell-cafe] Haskell transformation of C code
+In-Reply-To: <5f8fdccd-bfcf-4936-9955-f78991536cb1@t29g2000vby.googlegroups.com>
+References: <5f8fdccd-bfcf-4936-9955-f78991536cb1@t29g2000vby.googlegroups.com>
+Message-ID: <CAO27hRo9obUx1V9gW8u2n7tMtO7Oej+JJfch-=JZ=WUDvQ8u+Q@mail.gmail.com>
+
+I had to stare at this for a while to see the difference.  In the C++
+version the comparison's in loop B and loop C are always between areas
+of triangles that are off by one in a single index.  In the haskell
+calArea though, comparisons are between the passed area and triangles
+off by one from the passed coordinates.  Recursive calls under calArea
+hold the invariant found in the C++ code, but in looPing area' is the
+area of a' b' c', but the recursive call is to looPing a'' b'' c''
+with area' so calArea is passed the indexes for a different triangle
+then the area it is given.  We can solve this by explicitly passing
+around the best result so far:
+
+looPing :: ( Num a , Ord a , Eq a , Floating a ) => Int -> Int -> Int
+-> Int -> a -> a -> Array Int ( Point a ) -> a
+looPing a b c n area best arr
+ | a == n = max best area
+ | otherwise = looPing a'' b'' c'' n area'' (max area' best) arr where
+	( a' , b' , c' , area' ) = calArea a b c n area arr
+	a'' = a' + 1
+	b'' = if a'' == b' then mod ( b' + 1 ) n else b'
+	c'' = if b'' == c' then mod ( c' + 1 ) n else c'
+	area'' = caltmp (a'' `mod` n) b'' c'' arr
+
+and solve now applies area twice:  looPing 0 1 2  n area area arr'
+
+This now matches the result from C++ for me.
+
+On Wed, Aug 17, 2011 at 8:09 AM, mukesh tiwari
+<mukeshtiwari.iiitm at gmail.com> wrote:
+> Hello all
+> I am trying implement this algorithm ?[
+> http://stackoverflow.com/questions/1621364/how-to-find-largest-triangle-in-convex-hull-aside-from-brute-force-search
+> ] in Haskell but i am getting wrong answer for some test cases. A c++
+> implementation which is accepted for this problem [ http://www.spoj.pl/problems/MTRIAREA
+> ] and i ? rewrote ?the C++ code in Haskell . Running both programs on
+> some ?random test cases produce different result . For Haskell
+> implementation , convex hull part is correct . Both codes [ c++ and
+> Haskell ] produced same convex hull so i am skeptical about
+> looPing :: ( Num a , Ord a , Eq a , Floating a ) => Int -> Int -> Int -
+>> Int -> a -> Array Int ( Point a ) -> a ?and calArea :: ( Num a , Ord
+> a , Floating a ) => Int -> Int -> Int ?-> Int ?-> a -> Array Int
+> ( Point a ) -> ( Int , Int , Int , a ) function . Could some one
+> please tell me what is wrong with these functions. I have posted both
+> code on ideone . Haskell code [ http://ideone.com/IlwBv ] and accepted
+> c++ for SPOJ problem [ http://ideone.com/vgNnt ] . For test case
+> 20
+> 886 9383
+> 6915 2777
+> 8335 7793
+> 492 5386
+> 1421 6649
+> 27 2362
+> 59 8690
+> 3926 7763
+> 3426 540
+> 5736 9172
+> 5368 5211
+> 6429 2567
+> 1530 5782
+> 5123 2862
+> 3135 4067
+> 9802 3929
+> 3058 4022
+> 8167 3069
+> 8456 1393
+> 8042 5011
+> -1
+> Haskell produced the convex hull [P 27.0 2362.0,P 3426.0 540.0,P
+> 8456.0 1393.0,P 9802.0 3929.0,P 8335.0 7793.0,P 5736.0 9172.0,P 886.0
+> 9383.0,P 59.0 8690.0] and maximum triangle area 31466755.50 while C++
+> code produced the convex hull
+> 27 2362
+> 3426 540
+> 8456 1393
+> 9802 3929
+> 8335 7793
+> 5736 9172
+> 886 9383
+> 59 8690
+> and maximum area 33642111.00 . Based on these observation , I think my
+> convex hull part is correct and I am stuck with looPing and calArea
+> function . I tried to write Haskell code many ways but no success so
+> it would be great if some one can tell me what is wrong with these two
+> functions .
+>
+> Thank you
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

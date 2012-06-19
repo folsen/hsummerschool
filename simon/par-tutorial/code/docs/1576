@@ -1,0 +1,71 @@
+From mail at joachim-breitner.de  Thu Dec  1 11:49:01 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Thu, 01 Dec 2011 11:49:01 +0100
+Subject: [Haskell-cafe] List fusion of nested lists
+In-Reply-To: <1322735919.2990.30.camel@kirk>
+References: <1322735299.2990.26.camel@kirk> <1322735919.2990.30.camel@kirk>
+Message-ID: <1322736541.2990.36.camel@kirk>
+
+Hi again,
+
+Am Donnerstag, den 01.12.2011, 11:38 +0100 schrieb Joachim Breitner:
+> Am Donnerstag, den 01.12.2011, 11:28 +0100 schrieb Joachim Breitner:
+> > Now I?d like to implement streaks in terms of build and foldr such that
+> > it is subject to list fusion.
+> 
+> one half of the task is quite doable:
+> 
+>         streaks' :: [Integer] -> [[Integer]]
+>         streaks' xs = foldr streaksF [] xs
+>         
+>         streaksF :: Integer -> [[Integer]] -> [[Integer]]
+>         streaksF i [] = [[i]]
+>         streaksF i ([x]:ys) = [i,x]:ys
+>         streaksF i ((x1:x2:xs):ys) = if i `compare` x1 == x1 `compare`
+>         x2
+>                                      then (i:x1:x2:xs):ys
+>                                      else [i]:(x1:x2:xs):ys
+> 
+> so I can make streaks a somewhat well-behaving consumer. The task to
+> create the lists using build remains.
+
+isn?t it always nice how posting questions help you think differently
+about the problem? Here is the next step in the construction; ensure
+that at least the outer list is subject to list fusion:
+
+        streaks'' :: [Integer] -> [[Integer]]
+        streaks'' xs = build $ \c n ->
+            uncurry c $ foldr (streaksF' c) ([],n) xs
+        
+        streaksF' :: ([Integer] -> b -> b) -> Integer -> ([Integer],b) -> ([Integer],b)
+        streaksF' c i ([],ys) = ([i],ys)
+        streaksF' c i ([x],ys) = ([i,x],ys)
+        streaksF' c i ((x1:x2:xs),ys) = if i `compare` x1 == x1 `compare` x2
+                                        then (i:x1:x2:xs, ys)
+                                        else ([i], (x1:x2:xs) `c` ys)
+
+It seems that the next steps are:
+     1. Add information to the accumulator of the foldr that carries the
+        information that is currently obtained by pattern matching (as
+        we cannot look a fusioned list any more).
+     2. Somehow replace the : and [] of the inner list by the functions
+        given by build. But have doubts that this is possible, these can
+        only be used inside the argument of build.
+
+Greetings,
+Joachim
+
+
+-- 
+Joachim Breitner
+  e-Mail: mail at joachim-breitner.de
+  Homepage: http://www.joachim-breitner.de
+  Jabber-ID: nomeata at joachim-breitner.de
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111201/0795c14c/attachment.pgp>
+

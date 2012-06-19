@@ -1,0 +1,31 @@
+From gale at sefer.org  Mon Apr  4 17:05:15 2011
+From: gale at sefer.org (Yitzchak Gale)
+Date: Mon, 4 Apr 2011 18:05:15 +0300
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <990986.91623.qm@web45110.mail.sp1.yahoo.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+	<BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+	<BANLkTimG9VyfjaNqN1khd89dyz8aNsV8cw@mail.gmail.com>
+	<990986.91623.qm@web45110.mail.sp1.yahoo.com>
+Message-ID: <BANLkTi=yfDjAGwmBY9tNP6xv4FkL22jVxQ@mail.gmail.com>
+
++1 for UTF-8 only.
+
+Brandon Moore wrote:
+> ...I don't see much to be gained by prohibiting other encodings.
+
+Universal portability of Haskell source code with respect to its
+encoding is to be gained. We can achieve that simplicity now
+with almost no cost. Why miss the opportunity?
+
+> In particular, I have read that systems set up for east asian scripts
+> often use UTF-16 as a default encoding.
+
+Default encoding is not an issue for any normal source code
+editing tool.
+
+Thanks,
+Yitz
+
+

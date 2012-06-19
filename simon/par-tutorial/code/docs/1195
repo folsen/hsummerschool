@@ -1,0 +1,51 @@
+From rrnewton at gmail.com  Wed Aug 17 21:27:14 2011
+From: rrnewton at gmail.com (Ryan Newton)
+Date: Wed, 17 Aug 2011 15:27:14 -0400
+Subject: [Haskell-cafe] why is Random in System?
+In-Reply-To: <CACw0niLTT0O=7etqtjRcWqwbJYxrvkSi-uayJd=SHuyAs0VxoQ@mail.gmail.com>
+References: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+	<A320995A-2DDA-4147-B804-098623C26914@deepbondi.net>
+	<CAKFCL4UtZAKrw-KazZtmCSi6cDZmb1mtm9of4E=0Ugr_9GXXvA@mail.gmail.com>
+	<20110817104607.43c9ae37@angst.streitmacht.eu>
+	<CACYs5AYvvWeO1Xe2TMGR=gGnYonw8dsmg3m++NALY9-nDJEupQ@mail.gmail.com>
+	<20110817182609.6ea45f32@angst.streitmacht.eu>
+	<CACYs5AYHyKZaeAZ3jzr8fZBWRMPC83VJNDdQByfVJmL31bcBqQ@mail.gmail.com>
+	<CACw0niLTT0O=7etqtjRcWqwbJYxrvkSi-uayJd=SHuyAs0VxoQ@mail.gmail.com>
+Message-ID: <CACYs5AZaLGqizse9r-PPW2odAgYXzx79e-w9HdKVsOho34vR7w@mail.gmail.com>
+
+>
+> The more fundamental problem is that splitting is neither well understood
+> nor generally safe, and as such it should not be in the basic Random class.
+>
+
+Would you mind elaborating?  Splitting was not well-understood by the
+original authors of System.Random; that much is in the comments.  Nor is it
+well understood by me.  But I am under the impression that it is well
+understood by Burton Smith and others who have worked on the topic, and that
+they assure us that using AES, RNG's under any series of splits are as
+strong as those generated in a linear sequence.  (And if you show otherwise,
+you have a crypto paper and quite a name for yourself.)
+
+
+> And I think we need splitting, especially as more Haskell programs become
+>> parallel.
+>
+>
+> I do not agree here, I'm afraid.
+>
+
+Could you expound on this also?  The people I know in the parallelism
+community seem to care a lot about deterministic PRNG in parallel programs.
+ For example, the Cilk folks at MIT and Intel who I work with are *modifying
+their runtime system *just to get deterministic parallel PRNG.
+
+For example our in our "Monad Par" package splittable RNG will allow us to
+add a variant of the monad that provides randomness and transparently routes
+the state through the "forks" in the parallel computation, retaining the
+model's determinism.
+
+-Ryan
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110817/9d3a543c/attachment-0001.htm>
+

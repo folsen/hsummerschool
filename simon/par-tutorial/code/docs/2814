@@ -1,0 +1,53 @@
+From ok at cs.otago.ac.nz  Mon Feb  7 23:05:30 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Tue, 8 Feb 2011 11:05:30 +1300
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D505D60.3090707@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>	<4D4D6B15.2060204@btinternet.com>
+	<AANLkTimj6PQP6o9NCcc+KXHJrc7+RwK3wQmg66KNMKur@mail.gmail.com>
+	<4D4EF972.2060309@btinternet.com>
+	<B7DEC147-6002-49F7-B756-D4CFF93D6625@cs.otago.ac.nz>
+	<4D505D60.3090707@btinternet.com>
+Message-ID: <4C3890B8-5D8B-46C6-AAFA-E081ABAFDB91@cs.otago.ac.nz>
+
+
+On 8/02/2011, at 10:00 AM, Andrew Coppin wrote:
+> I clearly have my languages mixed up.
+> 
+> The language I'm thinking of required all variables (even top-level ones) to be declared with "let" - unless the definition is recursive, in which case you have to say "letrec" (i.e., the compiler it too stupid to deduce this automatically). Apparently that isn't Clean...
+
+That sounds like an ML-family language, possibly OCAML.
+
+However, this is *not* a question of stupidity.  It's a question of scope rules.
+
+Example 1:
+
+let f x = 1;;
+let f x = if x = 0 then 0 else f x;;
+f 3;;
+
+This answers 1.
+
+Example 2:
+
+let f x = 1;;
+let rec f x = if x = 0 then 0 else f x;;
+f 3;;
+
+This goes into an infinite loop.
+
+If you don't like redeclaration, which is rather useful in an interactive
+top level, try nested:
+
+let f x = 1;;
+let g y = let f x = if x = 0 then 0 else f x in f (f y);;
+
+vs
+
+let f x = 1;;
+let g y = let rec f x = if x = 0 then 0 else f x in f (f y);;
+
+The distinction between let and letrec predates OCAML.  Scheme does it too.
+
+
+

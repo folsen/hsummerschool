@@ -1,0 +1,69 @@
+From apfelmus at quantentunnel.de  Sat Apr  9 15:58:18 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Sat, 09 Apr 2011 15:58:18 +0200
+Subject: [Haskell-cafe] Testing Implementation vs Model - Records or
+	Type Classes?
+In-Reply-To: <4D9F05B7.8090105@gmail.com>
+References: <inmm1b$ld4$1@dough.gmane.org> <4D9F05B7.8090105@gmail.com>
+Message-ID: <inpolr$55j$1@dough.gmane.org>
+
+Twan van Laarhoven wrote:
+>> For reference, here the full signature of the core combinators:
+>>
+>> data Event a
+>> data Behavior a
+>>
+>> instance Functor Behavior
+>> instance Applicative Behavior
+>> instance Functor Event
+>> instance Monoid (Event a)
+>>
+>> filter :: (a -> Bool) -> Event a -> Event a
+>> apply :: Behavior (a -> b) -> Event a -> Event b
+>> accumB :: a -> Event (a -> a) -> Behavior a
+>
+> The apply and accumB functions are harder. Is the Behavior 
+> implementation for the model really different from the one of the 
+> implementation, which seems to be {initial::a, changes::Event a}? If 
+> not, you could just generalize that type by making the event type a 
+> parameter
+> 
+>     data GenBehavior e a = GB a (E a)
+> 
+> If this is not the case,
+
+I have changed the both implementations completely, so this no longer an 
+option.
+
+> then instead of MPTCs you could also try type 
+> families,
+> 
+>     class ... => FRP event where
+>         data Behavior event
+>         apply :: Behavior event (a -> b) -> event a -> event b
+>         accumB :: a -> event (a -> a) -> Behavior event a
+> 
+> I don't know whether this is any better than the MPTC approach, though.
+
+Data type families have the advantage that I don't run into problems 
+with ambiguity. The following seems sensible to me:
+
+     class (Functor (Event f), Functor (Behavior f),
+            Applicative (Behavior f)) => FRP f where
+         apply :: Behavior f (a -> b) -> Event f a -> Event f b
+         ...
+
+where  f  is simply a dummy variable to index different FRP implementations.
+
+The problem with this is that I need the  FlexibleContexts  extension to 
+do that. There goes Haskell2010 compatibility.
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

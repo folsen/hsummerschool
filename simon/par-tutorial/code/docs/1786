@@ -1,0 +1,23 @@
+From shakthimaan at gmail.com  Fri Dec  9 16:41:54 2011
+From: shakthimaan at gmail.com (Shakthi Kannan)
+Date: Fri, 9 Dec 2011 21:11:54 +0530
+Subject: [Haskell-cafe] Haskell functions caller-callee details
+Message-ID: <CABG-yt37Ub0r_RZzb6pAu5aLM0ZJRz1E0rWktgz9QZbfgh9+oA@mail.gmail.com>
+
+Hi,
+
+Given a Haskell package is there a way I can get each functions'
+caller-callee details? Are there any existing tools/libraries that can
+help me get this data from the source?
+
+Appreciate any inputs in this regard.
+
+Thanks!
+
+SK
+
+-- 
+Shakthi Kannan
+http://www.shakthimaan.com
+
+

@@ -1,0 +1,36 @@
+From steve at fenestra.com  Fri Dec 16 17:35:39 2011
+From: steve at fenestra.com (Steve Schafer)
+Date: Fri, 16 Dec 2011 11:35:39 -0500
+Subject: [Haskell-cafe] What happens if you get hit by a bus?
+In-Reply-To: <CAMSTv-MFqNDsVR-xRGjozOpNzfRcL0mkV+edbT2wx9dMyXO0iw@mail.gmail.com>
+References: <CAEzeKYpOsDqafSoJFQkYioSg-0LTJaFY8WCUBkH2RiXOCZypjQ@mail.gmail.com>
+	<CABHqrU=7pLHm5Uv27YULEbcy9H1Jo+UkjxX8EUtbRCoxsDmX3w@mail.gmail.com>
+	<CAMSTv-MFqNDsVR-xRGjozOpNzfRcL0mkV+edbT2wx9dMyXO0iw@mail.gmail.com>
+Message-ID: <dmsme71f6co1u3h058l0jr8cg3ls8tmivt@4ax.com>
+
+On Fri, 16 Dec 2011 11:17:20 -0500, Brian Hurt <bhurt at spnz.org> wrote:
+
+>I think the "truck-factor" implications of the programming language as
+>dwarfed by the implications of everything else in the project.  Any project
+>of any significant size is going to have a huge amount of project-specific
+>information tucked up inside the programmers head.  It doesn't matter if
+>there are a million other programmers who know the language you used, or
+>only a dozen- if you're the only one who knows how things were done, and
+>more importantly, why they were done that way, and you get hit by a truck,
+>then your boss has a big problem.  Whether there are millions of candidate
+>replacement programmers, or only dozens, none of them had the
+>project-specific knowledge you had.  Finding a replacement who knows the
+>language is the least of his problems.
+
+I believe that you're absolutely right. I also believe that corporate
+decision makers rarely, if ever, think that way. And that's the problem:
+You have to deal with the perception, not the reality.
+
+So, that's the real question that needs to be answered: How do you deal
+with the _perception_ that hiring a Haskell developer instead of a
+Rails, etc. developer will result in more chaos when said developer is
+hit by a bus?
+
+-Steve Schafer
+
+

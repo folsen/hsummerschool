@@ -1,0 +1,125 @@
+From es at ertes.de  Thu Dec  1 14:06:55 2011
+From: es at ertes.de (Ertugrul =?UTF-8?B?U8O2eWxlbWV6?=)
+Date: Thu, 1 Dec 2011 14:06:55 +0100
+Subject: [Haskell-cafe] Ann: Netwire 3.0.0
+Message-ID: <20111201140655.748bf4af@angst.streitmacht.eu>
+
+Hello there,
+
+Netwire 3.0.0 is out:
+
+    <http://hackage.haskell.org/package/netwire>
+
+
+Overview
+--------
+
+Netwire is a library for high performance functional reactive
+programming, which calls its signal functions 'wires'.  It solves the
+classic problems of FRP through a number of simple concepts:
+
+  * It is based on an automaton arrow (similar to Yampa), so performance
+    problems like time leaks become local.  Getting high FRP performance
+    is the art of writing good primitive automata, which is simple
+    enough.
+
+  * Wire inhibition (ArrowZero), combination (ArrowPlus) and choice
+    (ArrowChoice) make switching combinators entirely obsolete.
+
+  * Events are based on inhibition, so non-happened events take no CPU
+    time.
+
+  * Very simple internal representation:  Writing custom primitive wires
+    is easy.  Since Netwire is developed mainly with libraries in mind,
+    its internals are exposed entirely.  If you need a wire that is not
+    predefined, just write an addon.
+
+  * Finally Netwire comes with a large set of predefined wires.
+
+This new version comes along with a major API change (hence the new
+major version number) -- hopefully the last one.
+
+The main change is that the Wire type is now a data family.  This gives
+the flexibility of Netwire 2 with the high performance of Netwire 1.  We
+are back to 600k FPS now for moderately complicated wires. =)
+
+
+Changes
+-------
+
+Major changes and new features include:
+
+  * Wire is now a data family.  Most wire features are now addons
+    through type classes, and every arrow can provide its own version of
+    them, which is optimized for their respective internal
+    representation.  Mainly you get back the high performance
+    monad-based wires from Netwire 1.
+
+  * Nondeterministic wires (see below).
+
+  * New wire transformers for supplying a clock, concurrent wires, and
+    memoization/caching.
+
+  * Improved ArrowLoop instance:  Inhibition is now allowed inside of
+    'rec', as long as it doesn't break data dependencies.  If it does,
+    you get a useful error message now instead of a fatal pattern match
+    failure.
+
+Minor changes:
+
+  * Measuring FPS without disturbing performance: avgFpsInt.
+  * The 'execute' wire is back.
+  * More convenient wire stepping and testing functions.
+  * Often you don't care about an event's value: gotEvent.
+
+
+Nondeterministic wires
+----------------------
+
+Now that Wire is a data family, you can have efficient nondeterministic
+wires by using a Kleisli-wrapped logic monad as the base arrow:
+
+    import Control.Monad.Logic
+
+    type MyWire = Wire e (Kleisli (LogicT IO))
+
+Now you can use branching in a MyWire computation:
+
+    x <- swallow branch -< [1..100]
+
+This will split the wire session into 101 branches at the first instant
+(it will always branch into a single inhibiting wire).  Suppose you have
+an HTTP bot.  You can now read URLs from a file and branch into an own
+wire for each URL:
+
+    url <- swallow (branch <<< execute) -< fmap lines (readFile "urls.txt")
+    quitWith <<< myBot -< url
+
+
+Performance
+-----------
+
+Netwire 3 easily outperforms Netwire 2 by a factor of 10-30.  Usually
+you will work with wire arrows on top of a Kleisli arrow.  Now that Wire
+is a data family you can have an efficient representation of that, which
+gets along entirely without the Kleisli constructor wrapping.
+
+Now the main bottleneck is the monadic actions performed.  This is very
+satisfactory.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111201/0502ce46/attachment.pgp>
+

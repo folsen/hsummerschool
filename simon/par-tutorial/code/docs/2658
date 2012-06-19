@@ -1,0 +1,43 @@
+From aslatter at gmail.com  Thu Feb  3 22:25:04 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Thu, 3 Feb 2011 15:25:04 -0600
+Subject: [Haskell-cafe] ($) not as transparent as it seems
+In-Reply-To: <4D4B1396.6070501@uni-bonn.de>
+References: <4D4B1396.6070501@uni-bonn.de>
+Message-ID: <AANLkTikBxMGROQM95RCEb6TZ7Pizrw92kf-9ZZnd8cgY@mail.gmail.com>
+
+On Thu, Feb 3, 2011 at 2:44 PM, Steffen Schuldenzucker
+<sschuldenzucker at uni-bonn.de> wrote:
+>
+> Dear cafe,
+>
+> does anyone have an explanation for this?:
+>
+>>>> error (error "foo")
+> *** Exception: foo
+>
+>>>> error $ error "foo"
+> *** Exception: *** Exception: foo
+
+I don't know if this is relevant, but I thought that the GHC compiler
+believes that all exceptions are equivalent and indistinguishable -
+that is, in the presence of multiple exceptional code-paths it will
+make optimizations that would not otherwise otherwise be sound.
+
+That might not be the issue here, but it is interesting.
+
+http://research.microsoft.com/en-us/um/people/simonpj/papers/imprecise-exn.htm
+
+Antoine
+
+
+>
+> -- Steffen
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

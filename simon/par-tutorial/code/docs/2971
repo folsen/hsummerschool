@@ -1,0 +1,85 @@
+From jakobusbenne at gmail.com  Sat Feb 12 17:15:26 2011
+From: jakobusbenne at gmail.com (htc2011)
+Date: Sat, 12 Feb 2011 08:15:26 -0800 (PST)
+Subject: [Haskell-cafe] Beginner: (Another) Binary Search Tree Question
+In-Reply-To: <201102121605.22200.daniel.is.fischer@googlemail.com>
+References: <1297522349134-3382773.post@n5.nabble.com>
+	<201102121605.22200.daniel.is.fischer@googlemail.com>
+Message-ID: <AANLkTi=Fp5MO+eF_VnXUFSHSY0odsFwxSfvsvrHsb33y@mail.gmail.com>
+
+
+Ha, of course -- I feel stupid now hehe. Thanks very much! :-)
+
+On 12 February 2011 15:06, Daniel Fischer [via Haskell] <
+ml-node+3382792-1536654726-149885 at n5.nabble.com> wrote:
+
+> On Saturday 12 February 2011 15:52:29, htc2011 wrote:
+>
+> > Hi all,
+> >
+> > I just started learning Haskell but am having some trouble getting the
+> > insertion into a binary search tree to
+> > work and was hoping that somebody could advise me on a possible
+> > solution. Thanks.
+> > Given the data type definition of the tree to be:
+> >
+> > Code:
+> >   data Ord a => BST a = EmptyBST | Node ( BST a ) a ( BST a ) deriving
+> > (Show,
+> >    Eq)
+> > And the insertion function to be:
+> >
+> > Code:
+> >  insert v EmptyBST = Node EmptyBST v EmptyBST
+> >    insert v (Node b a c)
+> >
+> >           | v<= a = Node a ( insert v b ) c
+> >           | otherwise = Node a b ( insert v c )
+>
+> You got the argument order wrong here, it should be tree-value-tree, but
+> you wrote value-tree-tree on both right hand sides (that would mean that a
+> and BST a are the same type, which would be an infinite type).
+>
+> >
+> > GHCI keeps telling me that I 'cannot construct an infinite type':
+> > ' Occurs check: cannot construct the infinite type: a = BST (BST a)
+> > Expected type: BST a -> BST (BST a) -> a
+> > Inferred type: BST a -> BST (BST a) -> BST (BST a)
+> > In the second argument of `Node', namely `(insert v b)'
+> > In the expression: Node a (insert v b) c'
+> > Upon adding the following signature:
+> >
+> > Code:
+> >    insert :: Ord a => a -> BST a -> BST a
+> >
+> > I get: Occurs check: cannot construct the infinite type.
+> >
+> > Sorry, but I'm quite lost. Any thoughts?
+> >
+> > Thanks.
+> > Benjamin
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> [hidden email] <http://user/SendEmail.jtp?type=node&node=3382792&i=0>
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+> ------------------------------
+>  If you reply to this email, your message will be added to the discussion
+> below:
+>
+> http://haskell.1045720.n5.nabble.com/Beginner-Another-Binary-Search-Tree-Question-tp3382773p3382792.html
+>  To unsubscribe from Beginner: (Another) Binary Search Tree Question, click
+> here<http://haskell.1045720.n5.nabble.com/template/NamlServlet.jtp?macro=unsubscribe_by_code&node=3382773&code=amFrb2J1c2Jlbm5lQGdtYWlsLmNvbXwzMzgyNzczfC01NzAyNTg4MzQ=>.
+>
+>
+
+-- 
+View this message in context: http://haskell.1045720.n5.nabble.com/Beginner-Another-Binary-Search-Tree-Question-tp3382773p3382871.html
+Sent from the Haskell - Haskell-Cafe mailing list archive at Nabble.com.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110212/beb03905/attachment.htm>
+

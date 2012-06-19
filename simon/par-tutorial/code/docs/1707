@@ -1,0 +1,39 @@
+From paul.r.ml at gmail.com  Tue Dec  6 18:07:47 2011
+From: paul.r.ml at gmail.com (Paul R)
+Date: Tue, 06 Dec 2011 18:07:47 +0100
+Subject: [Haskell-cafe] Where threadSleep is defined?
+In-Reply-To: <CAMXF=YDMgcP-Up=ywvLX1y+3vhiseefLSxbDz5Ee4zGUwf5RKQ@mail.gmail.com>
+	(dokondr@gmail.com's message of "Tue, 6 Dec 2011 19:41:58 +0300")
+References: <CAMXF=YDMgcP-Up=ywvLX1y+3vhiseefLSxbDz5Ee4zGUwf5RKQ@mail.gmail.com>
+Message-ID: <87zkf57hng.fsf@gmail.com>
+
+dokondr> Hi, I need to make the current process (executing thread) go to
+dokondr> sleep for a given amount of time.? Can't find where threadSleep
+dokondr> is defined.
+
+Maybe because there is no such threadSleep function in base packages,
+what do you think ?
+
+Ok, let's see if we can find what you are looking for ... You want
+a function that will pause your thread for an amout of time then pass.
+In other word, it would take an Int and do nothing else than wait as
+a side effect, right ? Something typed "Int -> IO ()" should do that,
+right ?
+
+  http://www.haskell.org/hoogle/?hoogle=Int+-%3E+IO+%28%29
+
+  => threadDelay :: Int -> IO ()
+     Suspends the current thread for a given number of microseconds ...
+
+And if you don't want to use the amazing power of hoogle, maybe you can
+simply go to your favorite search engine and type "haskell pause thread"
+in it. In mine, the first result is the doc of the Control.Concurrent
+module that has a "Waiting" section (linked in the toc) that has ...
+3 functions, amongst wich "threadDelay :: Int -> IO ()".
+
+Wasn't hard, was it ?
+
+-- 
+  Paul
+
+

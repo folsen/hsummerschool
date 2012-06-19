@@ -1,0 +1,64 @@
+From apfelmus at quantentunnel.de  Wed Dec 28 21:44:54 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Wed, 28 Dec 2011 21:44:54 +0100
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFB5468.4000607@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+Message-ID: <jdfv46$7r3$1@dough.gmane.org>
+
+Steve Horne wrote:
+> This is just my view on whether Haskell is pure, being offered up for 
+> criticism. I haven't seen this view explicitly articulated anywhere 
+> before, but it does seem to be implicit in a lot of explanations - in 
+> particular the description of Monads in SBCs "Tackling the Awkward 
+> Squad". I'm entirely focused on the IO monad here, but aware that it's 
+> just one concrete case of an abstraction.
+> 
+> Warning - it may look like trolling at various points. Please keep going 
+> to the end before making a judgement.
+> 
+> To make the context explicit, there are two apparently conflicting 
+> viewpoints on Haskell...
+> 
+> 1. The whole point of the IO monad is to support programming with
+>    side-effecting actions - ie impurity.
+> 2. The IO monad is just a monad - a generic type (IO actions), a couple
+>    of operators (primarily return and bind) and some rules - within a
+>    pure functional language. You can't create impurity by taking a
+>    subset of a pure language.
+> 
+> My view is that both of these are correct, each from a particular point 
+> of view. Furthermore, by essentially the same arguments, C is also both 
+> an impure language and a pure one. [...]
+
+Purity has nothing to do with the question of whether you can express IO 
+in Haskell or not.
+
+The word "purity" refers to the fact that applying a value
+
+    foo :: Int -> Int
+
+(a "function") to another value *always* evaluates to the same result. 
+This is true in Haskell and false in C.
+
+The beauty of the IO monad is that it doesn't change anything about 
+purity. Applying the function
+
+    bar :: Int -> IO Int
+
+to the value 2 will always give the same result:
+
+    bar 2 = bar (1+1) = bar (5-3)
+
+Of course, the point is that this result is an *IO action* of type  IO 
+Int , it's not the  Int  you would get "when executing this action".
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

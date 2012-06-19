@@ -1,0 +1,5 @@
+From a short look, it seems similar to the algorithm used in Data.List.sort 
+(except for the minrun stuff, which I think is not much of a concern for 
+linked lists).
+
+

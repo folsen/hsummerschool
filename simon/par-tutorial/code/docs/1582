@@ -1,0 +1,51 @@
+From andrew.butterfield at cs.tcd.ie  Thu Dec  1 16:24:33 2011
+From: andrew.butterfield at cs.tcd.ie (Andrew Butterfield)
+Date: Thu, 1 Dec 2011 15:24:33 +0000
+Subject: [Haskell-cafe] Program used for debugging
+In-Reply-To: <CACqaG6zY-i7kG-OyYiXH5U8N8X7zgKZ9yr-x7cfALin3SUXoTg@mail.gmail.com>
+References: <CACqaG6zY-i7kG-OyYiXH5U8N8X7zgKZ9yr-x7cfALin3SUXoTg@mail.gmail.com>
+Message-ID: <D30768B2-958E-4BC0-9E28-E0716141F1EA@cs.tcd.ie>
+
+
+On 1 Dec 2011, at 14:10, Yves Par?s wrote:
+
+> Hey,
+> 
+> What do you mostly use for debugging?
+> Simple calls to Debug.Trace.trace? Hpc? Hood?
+
+Debug.Trace, with some short helpers
+
+so  
+ dbg "x=" x  
+displays the value of x, provided x is in Show
+
+import Debug.Trace
+
+dbg msg x = dbgsh show msg x
+dbgsh sh msg x = trace (msg++sh x) x
+cdbg p msg x
+ | p x        =  dbg msg x
+ | otherwise  =  x
+
+-- if you want to tailor the "show":
+class Dshow t where dshow :: t -> String
+ddbg msg x = dbgsh dshow msg x
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+--------------------------------------------------------------------
+Andrew Butterfield     Tel: +353-1-896-2517     Fax: +353-1-677-2204
+Lero at TCD, Head of Foundations & Methods Research Group
+Director of Teaching and Learning - Undergraduate,
+School of Computer Science and Statistics,
+Room G.39, O'Reilly Institute, Trinity College, University of Dublin
+                          http://www.scss.tcd.ie/Andrew.Butterfield/
+--------------------------------------------------------------------
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111201/b5802fc0/attachment.htm>
+

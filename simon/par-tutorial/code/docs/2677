@@ -1,0 +1,72 @@
+From sschuldenzucker at uni-bonn.de  Fri Feb  4 00:38:14 2011
+From: sschuldenzucker at uni-bonn.de (Steffen Schuldenzucker)
+Date: Fri, 04 Feb 2011 00:38:14 +0100
+Subject: [Haskell-cafe] ($) not as transparent as it seems
+In-Reply-To: <201102032325.08513.daniel.is.fischer@googlemail.com>
+References: <4D4B1396.6070501@uni-bonn.de>
+	<AANLkTin-M1Z8Ee-fSEarauMZC99Gv8wsFviQDK4WtBoe@mail.gmail.com>
+	<201102032325.08513.daniel.is.fischer@googlemail.com>
+Message-ID: <4D4B3C66.4080708@uni-bonn.de>
+
+
+Thanks to all of you for making GHC's behaviour yet a bit clearer to me.
+
+On 02/03/2011 11:25 PM, Daniel Fischer wrote:
+> On Thursday 03 February 2011 23:03:36, Luke Palmer wrote:
+>    
+>> This is probably a result of strictness analysis.  error is
+>> technically strict, so it is reasonable to optimize to:
+>>
+>>      let e = error "foo" in e `seq` error e
+>>
+>>      
+> I think so too.
+> Unoptimised,
+>
+> module Errors where
+>
+> foo = error (error "foo")
+>
+> bar = error $ error "bar"
+>
+> produces the core
+> ========================================
+> Errors.bar :: forall a_aaN. a_aaN
+> [GblId]
+> Errors.bar =
+>    \ (@ a_aaN) ->
+>      GHC.Base.$
+>        @ [GHC.Types.Char]
+>        @ a_aaN
+>        (GHC.Err.error @ a_aaN)
+>        (GHC.Err.error @ [GHC.Types.Char] (GHC.Base.unpackCString# "bar"))
+>
+> a_rb8 :: [GHC.Types.Char]
+> [GblId, Str=DmdType b]
+> a_rb8 =
+>    GHC.Err.error @ [GHC.Types.Char] (GHC.Base.unpackCString# "foo")
+>
+> Errors.foo :: forall a_aaP. a_aaP
+> [GblId]
+> Errors.foo =
+>    (\ (@ a_aaP) ->  a_rb8)
+>    `cast` (forall a_aaP. CoUnsafe [GHC.Types.Char] a_aaP
+>            :: (forall a_aaP. [GHC.Types.Char]) ~ (forall a_aaP. a_aaP))
+> ==============================================
+>
+> The first argument to ($) is evaluated before the second [because the
+> function may be lazy), resulting in the start of the error message
+> "***Exception: ", then that error-call must evaluate its argument, error
+> "bar", which results in "***Exception: bar" (and terminates the thread) and
+> two "***Exception: " being printed. If I interpret the core correctly,
+> error is so well known to the compiler that it strips off the outer `error'
+> in foo even without optimisations (which surprises me a bit).
+>
+> With optimisations, ($) is inlined and `error $ error "bar"' is transformed
+> to error (error "bar"), from then on both have identical structure and
+> arrive at (mutatis mutandis) the same core (which is nearly the same as foo
+> got without optimisations).
+>    
+
+
+

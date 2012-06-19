@@ -1,0 +1,31 @@
+From haberg-1 at telia.com  Wed Dec 21 11:15:45 2011
+From: haberg-1 at telia.com (Hans Aberg)
+Date: Wed, 21 Dec 2011 11:15:45 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CAKFCL4U34bNDsbS6gk6yS+s0zohP7JYEDHNGKwScr4WCHSe+pA@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+	<CAL3m8eBx2=RNZJfqBSp=Bds4GXeu8vvAfXR_CPkPGJ+HZ-1-Xg@mail.gmail.com>
+	<1324433118.2665.6.camel@turminder-xuss.roaming.operationaldynamics.com>
+	<CAKFCL4WSnfvq2RBSTGA2drUBvj4kWP3Nej6bKPU2+6xJ=2WBdw@mail.gmail.com>
+	<A297518E-79B4-400B-A5A1-BAED03DD6CE5@telia.com>
+	<CAKFCL4U34bNDsbS6gk6yS+s0zohP7JYEDHNGKwScr4WCHSe+pA@mail.gmail.com>
+Message-ID: <A8CFC48D-0258-46A6-8CE4-DA3D91794DC5@telia.com>
+
+On 21 Dec 2011, at 11:03, Brandon Allbery wrote:
+
+> On Wed, Dec 21, 2011 at 04:51, Hans Aberg <haberg-1 at telia.com> wrote:
+>> The one on the list is not a mathematical symbol. It should be ? STAR OPERATOR U+22C6 or ? ASTERISK OPERATOR U+2217.
+>> 
+> ...except, at least in my current font, the former is microscopic and the latter not a whole lot better. The advantage of the one they chose is it's big and readable.  (That's part of why I assume it's intended for kinds, actually.)
+
+This problem is in my editor for unstyled text due to that if it a symbol is not available in the font selected, it just chooses a glyph from the next font available in alphabetical order.
+
+Hopefully such problem will be resolved in the future.
+
+Hans
+
+
+
+

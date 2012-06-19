@@ -1,0 +1,40 @@
+From dave at zednenem.com  Sat Dec  3 23:39:53 2011
+From: dave at zednenem.com (David Menendez)
+Date: Sat, 3 Dec 2011 17:39:53 -0500
+Subject: [Haskell-cafe] ismzero operator possible without equal
+	constraint
+In-Reply-To: <CAKjSnQGfZ+M9EuhBynauAi-nMSHTz2wdLLXZjnAeNW4RbKq=bg@mail.gmail.com>
+References: <CAGAUyt=YX3hkczvoKyFws4zCuFO00aoC8MsqFv0Bx6F7mJiEdQ@mail.gmail.com>
+	<CAKjSnQGfZ+M9EuhBynauAi-nMSHTz2wdLLXZjnAeNW4RbKq=bg@mail.gmail.com>
+Message-ID: <CAOv7PyqhteCft3jiVWStKZM0v7561F+G6hLj_PhRxUZOp+fFwg@mail.gmail.com>
+
+On Sat, Dec 3, 2011 at 3:55 PM, Antoine Latter <aslatter at gmail.com> wrote:
+> On Sat, Dec 3, 2011 at 10:55 AM, edgar klerks <edgar.klerks at gmail.com> wrote:
+>> Hi list,
+>>
+>> I am using MonadSplit
+>> (from?http://www.haskell.org/haskellwiki/New_monads/MonadSplit?)??for a
+>> project and now I want to make a library out of it. This seems to be
+>> straightforward, but I got stuck when I tried to move miszero out of the
+>> class:
+>>
+>> miszero :: m a -> Bool
+>>
+>> It tests if the provided monad instance is empty. My naive attempt was:
+>>
+>
+> You can write:
+>
+> miszero :: MonadPlus m => m a -> m Bool
+> miszero m = (m >> return False) <|> return True
+>
+> but that will invoke any monadic effects as well as determining the
+> nature of the value, which may not be what you want.
+
+It's almost certainly not what you want for the list monad.
+
+-- 
+Dave Menendez <dave at zednenem.com>
+<http://www.eyrie.org/~zednenem/>
+
+

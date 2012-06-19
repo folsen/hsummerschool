@@ -1,0 +1,67 @@
+From 2haskell at pkturner.org  Sat Dec 24 05:45:23 2011
+From: 2haskell at pkturner.org (Scott Turner)
+Date: Fri, 23 Dec 2011 23:45:23 -0500
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <BA99EE5C-74E0-4277-87BA-AFDED9BAC173@strictlypositive.org>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+	<BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+	<CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+	<jcvqjs$sb2$1@dough.gmane.org>
+	<3AEE194F-22A4-4E69-9EF3-A9AAB05689CB@strictlypositive.org>
+	<04595744-37C5-40A3-B1EA-DE9E9DA1AA08@yandex.ru>
+	<1833D7B2-62F5-4D63-9BCB-9B8CAB38B6EF@strictlypositive.org>
+	<86689E40-4277-48F0-8100-78CDCC311FBE@yandex.ru>
+	<BA99EE5C-74E0-4277-87BA-AFDED9BAC173@strictlypositive.org>
+Message-ID: <4EF558E3.6020807@pkturner.org>
+
+On 2011-12-23 13:46, Conor McBride wrote:
+>
+>>> The plan is to make a clearer distinction between "being" and "doing" by
+>>> splitting types clearly into an effect part and a value part, in a sort
+>>> of a Levy-style call-by-push-value way. The notation
+>>>
+>>> [<list of effects>]<value type>
+>>>
+>>> is a computation type whose inhabitants might *do* some of the
+>>> effects in
+>>> order to produce a value which *is* of the given value type.
+> 
+> The list of effects is arbitrary, and localizable, by means of defining
+> handlers.
+> So it's not a single monad.
+> 
+> It's probably still disappointing.
+
+On the contrary!
+
+> Haskell doesn't draw a clear line in types between the effect part
+> and the value part, or support easy fluidity of shifting roles
+> between the two. Rather we have two modes: (1) the
+> implicit partiality mode, where the value part is the whole of
+> the type and the notation is applicative;
+> (2) the explicit side-effect mode, where the type is an
+> effect operator applied to the value type and the notation
+> is imperative.
+
+I was drawn to call-by-push-value a few years ago while attempting to
+create a language which would support both call-by-value and
+call-by-name.  I haven't had the skill to express what I have felt to be
+the shortcoming of Haskell, but I believe you've put your finger right
+on it.
+
+> it's an attempt to re-rationalise techniques that emerged
+> from Haskell programming.
+Exactly.
+
+Haskell has grown a wealth of features/libraries/techniques for
+combining monads, yet the fundamental monad, evaluation, has a separate
+place in the language.
+
+    -- Scott Turner
+
+

@@ -1,0 +1,60 @@
+From gcrosswhite at gmail.com  Thu Dec 15 09:13:52 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Thu, 15 Dec 2011 18:13:52 +1000
+Subject: [Haskell-cafe] [Alternative]  summary of my understanding so far
+Message-ID: <E6897C72-6886-4B18-9005-E6BDA3E92D76@gmail.com>
+
+Hey everyone!
+
+First of all, it sounds like we all agree that the documentation for Alternative needs to be improved;  that alone would clear a lot of the confusion up.
+
+I think that a fairly convincing case has also been made that removing many/some from the typeclass doesn't help too much since they are generically defined in terms of the other methods.  Put another way, arguing that removing many/some makes Alternative more safe would be like arguing that removing "forever" from the definition of Monad (assuming it were currently a method rather than a function) made Monad more safe.  (On the other hand, it might be nice if many/some were not featured so prominently above other functions/combinators in the module.)
+
+As a corollary to the above paragraph, if the many/some methods *were* moved to a subclass --- call it, "Parser" --- then essentially this subclass would be redundant.  Nonetheless, such a subclass could still be useful because it supplies more information to the user about how the type behaves.  That is, while any user of an instance of Alternative can always theoretically use something like many/some, in practice a user might want to add the Parser constraint to their type just to get an extra guarantee that many/some not only exist but are well-behaved.
+
+Although many/some cause infinite loops for the current instance of Maybe and [], forever also causes loops for (return (undefined)) for any Monad.  Thus, even in the likely event that we decide to keep many/some in Alternative, it still makes sense to have Alternative instances for Maybe and [], despite the fact that they don't play well with many/some for non-empty values.
+
+In fact, if anything the existence of the Maybe and [] instances provides a strong reason *to* have the many/some methods inside Alternative, precisely because it gives us a customization point that allows us to make many and some provide well-defined answers for all values of these types.  To quote Ross Paterson's proposals:
+
+instance Alternative Maybe where
+   ...
+   some Nothing = Nothing
+   some (Just x) = Just (repeat x)
+
+   many Nothing = Just []
+   many (Just x) = Just (repeat x)
+
+instance Alternative [] where
+   ...
+   some [] = []
+   some (x:xs) = repeat (repeat x)
+
+   many [] = [[]]
+   many (x:xs) = repeat (repeat x)
+
+The only price that we pay for these instances is that, while some and many are still solutions of
+
+	? some v = (:) <$> v <*> many v
+	? many v = some v <|> pure []
+
+they no longer the *least* solutions of these equations.  In my opinion this is a relatively small price to pay since they nonetheless *are* solutions to these questions, and they have the nice property that they converge sensibly.  In fact, in a sense they are the least solutions to the equations that out of all the solutions that converge, though I don't know enough about the theory involved to use the proper technical terminology to express what I really mean, or even if what I just wrote was true.  :-)
+
+Anyway, as the above discussion illustrates, the existence of pure types that are instances of Alternative actually *adds* to the case of keeping some and maybe in Alternative.
+
+So in conclusion:
+
+1) Documentation really needs to be improved
+2) some/many cannot be physically separated from Alternative, but there *might* be an advantage to creating a subclass for them anyway purely for the sake of conveying more information about a type to users
+3) Maybe and [] are sensible instances of Alternative, even if many/some often enters an infinite loop.
+4) It is possible to provide special instance of many/some that satisfy the equations of many/some, with the slight disadvantage that these solutions are no longer the "least" solutions.
+
+Based on all of this, at this moment in time it seems to me that the most sensible way forward is to fix the documentation, tweak the definition of Alternative to no longer require the least solutions of the equations, and then to adopt the new instances for Maybe and [].
+
+Thoughts?
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/5a66fc74/attachment.htm>
+

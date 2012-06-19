@@ -1,0 +1,41 @@
+From haberg-1 at telia.com  Wed Dec 21 11:36:10 2011
+From: haberg-1 at telia.com (Hans Aberg)
+Date: Wed, 21 Dec 2011 11:36:10 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <4EF1B36D.3030009@btinternet.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+	<CA+qNEzLdy128SaENYYwRL1XhZXttwQJzRqcTTbh17gF1J_zoeQ@mail.gmail.com>
+	<B31F669A-0009-4EF0-B1DE-297A3E6F91D2@telia.com>
+	<20111221032717.GA1609@byron.anthology>
+	<61257AF9-EBCC-4F09-A836-1BA554014467@telia.com>
+	<CAF1yvART=Hvye5AYfg+KUOF2YnUo2uHbwLwFfV-j=vwv+9Kmyg@mail.gmail.com>
+	<4EF1B36D.3030009@btinternet.com>
+Message-ID: <E22BB7B8-6874-4A7D-98DE-C5B98946E965@telia.com>
+
+On 21 Dec 2011, at 11:22, Andrew Coppin wrote:
+
+> On 21/12/2011 10:09 AM, Jesse Schalken wrote:
+>> IIRC, Scite's default configuration is with non-monospace font. I
+>> actually found it quite appealing, and in fact forgot about it entirely
+>> after some usage. It is much easier on the eyes to read. The difference
+>> is really whether you care about aligning things mid-line or not, not to
+>> mention editor support (i.e. not Vim or other terminal-based editor).
+> 
+> SciTE's default binding /is/ proportional, not mono-space. I find it ever so irritating. Then again, I'm sure this one comes squarely down to personal preference, so it seems pointless to debate it.
+> 
+> LaTeX offers the possibility of mid-line alignment even if you don't use monospace - a feature which I haven't seen in any other text processing system. It's a pitty this isn't more widespread...
+
+Monospace isn't used in math (except in the days when one used typewriters), but alignments are of course used in matrices and multiline formulas, for example, which may correspond to uses in computer code.
+
+A problem is that LaTeX is used for rendering typeset pages, and not really suitable for writing direct computer code, though Unicode characters can improve the readability of LaTeX source code. The link below shows an example.
+
+Hans
+
+
+http://www.charlietanksley.net/philtex/the-unicode-math-package-for-xelatex-and-the-stix-fonts/
+
+
+
+

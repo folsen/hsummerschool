@@ -1,0 +1,45 @@
+From michael at snoyman.com  Sun Dec 11 03:51:15 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Sun, 11 Dec 2011 04:51:15 +0200
+Subject: [Haskell-cafe] web-routes-quasi: Generating a route type
+In-Reply-To: <20111209174808.26544db2@angst.streitmacht.eu>
+References: <20111209174808.26544db2@angst.streitmacht.eu>
+Message-ID: <CAKA2JgK+uJJdE2y0-oJaxpLXU03JVKSEccYymzShP_dY9evM5g@mail.gmail.com>
+
+Hi,
+
+web-routes-quasi is actually unmaintained. Yesod no longer uses it,
+instead using some internal code. If you'd like to use it, feel free.
+If you need to make any changes, you can feel free to release new
+versions of it as well.
+
+FWIW, I think you're looking for the createRoutes function.
+
+Michael
+
+2011/12/9 Ertugrul S?ylemez <es at ertes.de>:
+> Hello there,
+>
+> I'm trying to use the web-routes-quasi package outside of Yesod. ?Is
+> there any documentation on how to use TH to generate a route type just
+> like Yesod does? ?Or is that a Yesod-specific feature?
+>
+> I don't need the actual automatic dispatch or anything, just a type to
+> work with. ?If it's not possible, I will just go ahead and (ab-) use the
+> constructor strings.
+>
+>
+> Greets,
+> Ertugrul
+>
+> --
+> nightmare = unsafePerformIO (getWrongWife >>= sex)
+> http://ertes.de/
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

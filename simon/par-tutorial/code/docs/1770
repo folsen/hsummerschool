@@ -1,0 +1,52 @@
+From amindfv at gmail.com  Thu Dec  8 21:52:17 2011
+From: amindfv at gmail.com (Tom Murphy)
+Date: Thu, 8 Dec 2011 15:52:17 -0500
+Subject: [Haskell-cafe] Why doesn't this work? (palindrome :: IO)
+In-Reply-To: <CAKFCL4URW+=cq7MzWkj=-jJ-eO4_wdHDtAjiDTA=a2-+HX07Jw@mail.gmail.com>
+References: <BAY154-W299CF92BF320D6FE352A08A4B80@phx.gbl>
+	<CAKFCL4URW+=cq7MzWkj=-jJ-eO4_wdHDtAjiDTA=a2-+HX07Jw@mail.gmail.com>
+Message-ID: <CAO9Q0tW78wLVRnsz4JofQps5UqbAa6k-zb72hCfJV3DZ1J=UFQ@mail.gmail.com>
+
+On Wed, Dec 7, 2011 at 11:46 PM, Brandon Allbery <allbery.b at gmail.com>wrote:
+
+> On Wed, Dec 7, 2011 at 23:24, Alexej Segeda <aloscha_den_store at hotmail.com
+> > wrote:
+>
+>>                 case s of
+>>                    (s == reverse s)    -> putStrLn (s ++ " is a
+>> palindrome")
+>>                    otherwise           -> putStrLn (s ++ " is not a
+>> palindrome")
+>>
+>
+> case does pattern matching, not Boolean expressions.  (s == reverse s) is
+> not a useful pattern, and in fact is probably a syntax error because ==is not a valid infix constructor.
+>
+> If you want to do Boolean comparisons in a case, you need to use
+> something like
+>
+> > case () of
+> >   () | s == reverse s -> putStrLn "palindrome"
+> >   _                   -> putStrLn "nope"
+>
+>
+>
+
+This is kind of a hack of case, though. I think what the OP was looking for
+is
+
+palindrome :: IO ()
+palindrome = do putStrLn "Type in a word"
+                s <- getLine
+                isPalindrome s
+
+isPalindrome word
+  | (word == reverse word) = putStrLn (word ++ " is a palindrome")
+  | otherwise              = putStrLn (word ++ " is not a palindrome")
+
+
+amindfv / Tom
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/fd87a272/attachment.htm>
+

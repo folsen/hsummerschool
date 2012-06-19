@@ -1,0 +1,37 @@
+From lemming at henning-thielemann.de  Sat Apr 23 12:43:39 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Sat, 23 Apr 2011 12:43:39 +0200 (CEST)
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <iou9qr$g3p$1@dough.gmane.org>
+References: <4DB093A6.8000303@btinternet.com>
+	<BANLkTimX0eX78AAL5kmrUULt8TPoqduP8Q@mail.gmail.com>
+	<iou9qr$g3p$1@dough.gmane.org>
+Message-ID: <alpine.DEB.2.00.1104231237070.14885@anubis>
+
+
+On Sat, 23 Apr 2011, Heinrich Apfelmus wrote:
+
+> David Terei wrote:
+>> Good chance you've already read this but if not here is a good post by
+>>  Linus about his take on the problems with darcs:
+>> 
+>> http://markmail.org/message/vk3gf7ap5auxcxnb
+>
+> I always have to smile at the complaint that something is "academic". :D
+>
+> You know, like purely functional programming, that's soo academic. It's 
+> centered around some academic ideas, like mathematical functions, higher-rank 
+> types, monads and zygohistomorphic prepromorphisms, that have absolutely no 
+> relevance in real life, and that just don't work in practice. You do *not* 
+> want to write whole programs that way. At some
+> point, you need something that works at another level than pure functions. 
+> What the *hell* do you do?
+
+I also found the introduction about 'darcs' being too academic quite 
+silly. However at the end of his invited rant Linus proposes a requirement 
+(or may we call it 'axiom'?), that would be nice to be have: An identifier 
+(a 'version') that can be uniquely mapped to a set of files and their 
+contents. In Darcs this is the darcs history and it is usually the largest 
+part of submitted darcs patches.
+
+

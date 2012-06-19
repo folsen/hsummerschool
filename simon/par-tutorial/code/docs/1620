@@ -1,0 +1,60 @@
+From mle+hs at mega-nerd.com  Sat Dec  3 06:18:24 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Sat, 3 Dec 2011 16:18:24 +1100
+Subject: [Haskell-cafe] Weird interaction between literate haskell,
+ ghci and OverloadedStrings
+Message-ID: <20111203161824.f134a60f1a8a9ee4ece50ff4@mega-nerd.com>
+
+Hi,
+
+I'm working on a literate haskell document (actually TeX, but the
+example below is just test) and I'm using ByteStrings in the code.
+I know I can do:
+
+    ghci -XOverloadedStrings file.lhs
+
+or, after ghci is running I can do:
+
+    Main> :set -XOverloadedStrings
+
+but I'd like to embed a directive in the file so that when loaded
+in GHCi, I will automatically get OverloadedStrings. This is mainly
+so that it JustWorks(tm) when I pass the file on to someone else.
+
+Is there a way to do this?
+
+There is a short example file below. I'm using ghc-7.0.4 from Debian
+testing.
+
+Cheers,
+Erik
+
+
+----------8<----------8<----------8<----------8<----------
+> {-# LANGUAGE OverloadedStrings #-}
+
+This is just text that that ghc/ghci should ignore
+
+> import Data.ByteString                     (ByteString)
+> import qualified Data.ByteString.Char8     as BS
+
+Simple function:
+
+> newlineCount :: ByteString -> Int
+> newlineCount bs = BS.foldl foldFun 0 bs
+>   where foldFun s ch = if ch == '\n' then s + 1 else s
+
+Once this file is loaded, I should be able to do this:
+
+    newlineCount "abcd\ncdead\nasdasd\n"
+
+----------8<----------8<----------8<----------8<----------
+
+
+
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

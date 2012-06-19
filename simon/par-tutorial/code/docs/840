@@ -1,0 +1,103 @@
+From mokus at deepbondi.net  Thu Apr 28 18:08:57 2011
+From: mokus at deepbondi.net (James Cook)
+Date: Thu, 28 Apr 2011 12:08:57 -0400
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <20110428172708.22b30845@angst.streitmacht.eu>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<87vcy0vxdq.fsf@malde.org> <loom.20110428T091338-92@post.gmane.org>
+	<20110428172708.22b30845@angst.streitmacht.eu>
+Message-ID: <D93D71E8-A90A-4F44-844A-511FA3B3C6B8@deepbondi.net>
+
+
+On Apr 28, 2011, at 11:27 AM, Ertugrul Soeylemez wrote:
+
+> Gracjan Polak <gracjanpolak at gmail.com> wrote:
+>
+>> Ketil Malde <ketil <at> malde.org> writes:
+>>
+>>> In Haskell, I often need to add stubs of "undefined" in order to do
+>>> this.  I don't mind, since it is often very useful to say
+>>> *something* about the particular piece - e.g. I add the type
+>>> signature, establishing the shape of the missing piece without
+>>> bothering with the actual implementation just yet.
+>>
+>> Seconded.
+>
+> I don't see any problem with this.  Although I usually have a bottom- 
+> up
+> approach, so I don't do this too often, it doesn't hurt, when I have  
+> to.
+>
+
+Agreed - in fact, I have always thought of this style of coding as one  
+of the truly great things about Haskell, and was surprised to see it  
+presented as a negative.  The idea of that being a burden had never  
+even entered my mind.
+
+The fact that I can say "foo = undefined" and go about my business as  
+if foo were, in fact, an existing component, is nice.  But as you  
+point out, that can be done in pretty much any dynamically typed  
+language just as trivially.   The truly great thing about it is that I  
+can also say "foo :: (Bar a, Num b) => a -> b -> (qux -> m baz) -> f m  
+(x, Either q g)", etc., and the compiler can then tell me when I  
+misuse this *entirely fictitious* entity.   Or, when I'm done writing  
+my code that uses foo, I can say "foo :: ()" and let the compiler  
+errors tell me what sort of a creature I have asked "foo" to be.  Or,  
+I can just start coding "foo" and let the compiler tell me whether  
+what I do is consistent with how I've used it elsewhere.
+
+>
+>> Sometimes I wish for a -fphp flag that would turn some type errors
+>> into warnings. Example:
+>>
+>> v.hs:8:6:
+>>    Couldn't match expected type `[a]' against inferred type `()'
+>>    In the first argument of `a', namely `y'
+>>    In the expression: a y
+>>    In the definition of `c': c = a y
+>>
+>> GHC could substitute 'y = error "Couldn't match expected type `[a]'
+>> against inferred type `()'"' and compile anyway.
+>>
+>> Would that bring Haskell closer to Python?
+>
+> It would make people abuse that feature.  I don't want it.  Haskell is
+> so difficult to abuse compared to other languages, and I'd like to  
+> keep
+> it that way.
+
+Maybe, but it should be easy to make sure that you aren't using any  
+code that abuses it; just make sure you compile all your stuff with  
+that flag explicitly turned off - any code that "abuses" it would  
+simply fail to build.  I'd expect to be able to do that by setting "- 
+fno-php" as a global ghc-option in the cabal config file.  I'd  
+probably also advocate making that flag switch type errors to non- 
+suppressible warnings (that is, do not provide any way whatsoever in  
+the compiler to make those warnings silent).
+
+On a related note, I think that this sort of a feature would not  
+really get at the usual objection about strong static typing  
+incorrectly rejecting valid programs.  All this does is change it so  
+that such programs are, instead of being rejected, altered to throw  
+runtime errors in cases that could actually have worked but the type  
+system was not expressive enough to prove.  It would give what I think  
+of as the worst of both worlds:  Programs that can never work would be  
+allowed to slip past the compiler, and programs that could work if the  
+type system were smarter still won't work.
+
+I think the proper thing to do would be to translate such code into  
+code that uses Dynamic, or more likely some generalization of it.  It  
+would require some serious thought about how to deal with polymorphic  
+types, and especially ones that involve type classes.  All in all, it  
+seems to me that a full correct implementation of such a system would  
+essentially amount to embedding a full Haskell interpreter in the  
+compiled executable.
+
+Done right, though, it could be a pretty nice feature.  If nothing  
+else, it would let you experiment extensively in a nice safe little  
+sandbox to gain confidence in your dangerous untypeable code before  
+you "take the plunge" and use unsafeCoerce.
+
+-- James
+
+

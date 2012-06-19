@@ -1,0 +1,78 @@
+From uzytkownik2 at gmail.com  Mon Apr 11 15:14:13 2011
+From: uzytkownik2 at gmail.com (Maciej Marcin Piechotka)
+Date: Mon, 11 Apr 2011 15:14:13 +0200
+Subject: [Haskell-cafe] Foreign function performance: monadic vs pure
+In-Reply-To: <loom.20110411T135905-625@post.gmane.org>
+References: <loom.20110411T135905-625@post.gmane.org>
+Message-ID: <1302527654.18936.14.camel@localhost.localdomain>
+
+On Mon, 2011-04-11 at 12:09 +0000, Serguei Son wrote:
+> Consider two versions of sin wrapped:
+> foreign import ccall "math.h sin"
+>     c_sin_m :: CDouble -> IO CDouble
+> and
+> foreign import ccall "math.h sin"
+>     c_sin :: CDouble -> CDouble
+> 
+> One can invoke them so:
+> 
+> mapM c_sin_m [1..n]
+> mapM (return . c_sin) [1..n]
+> 
+> On my computer with n = 10^7 the first
+> version never finishes, whereas the second
+> one calculates the result within seconds.
+> 
+> To give you my context, I need to call
+> a random variable generator multiple times,
+> so that it must return IO a.
+> 
+> Any explanation for this behavior?
+
+Simple (but possibly wrong) - the first one is always evaluated (as it
+might have side-effects) while the second one is left in unevaluated
+form (return does not force effects):
+
+(values for 2^14)
+
+> mapM c_sin_m [1..n]
+1.087 s
+> mapM (return . c_sin) [1..n]
+0.021 s
+> mapM (\x -> return $! c_sin x) [1..n]
+1.160 s
+> return $ map c_sin [1..n]
+0.006 s
+> mapM (const (return undefined)) [1..n]
+0.011 s
+
+I.e.
+
+- c_sin_m have forced evaluation so you do 10^7 times save of Haskell
+context (it is not marked as unsafe) and call of function
+- return . c_sin have not forced evaluation so you do 10^7 times wrap
+unevaluated value into IO
+
+To compare:
+
+> foreign import ccall unsafe "math.h sin"
+>      c_sin_um :: CDouble -> IO CDouble
+> 
+> foreign import ccall unsafe "math.h sin"
+>      c_sin_u :: CDouble -> CDouble
+
+> main = mapM c_sin_um [1..n]
+0.028 s
+> main = mapM (\x -> return $! c_sin_u) [1..n]
+0.012 s
+> main = mapM (return . c_sin_u) [1..n]
+0.023 s
+
+I.e. it is difference in laziness of Haskell and the making sure that
+function may safely call back to Haskell (which sin does not).
+
+Regards
+
+
+
+

@@ -1,0 +1,23 @@
+From daniel.is.fischer at googlemail.com  Sat Feb 12 12:48:51 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sat, 12 Feb 2011 12:48:51 +0100
+Subject: [Haskell-cafe] Sub-optimal
+In-Reply-To: <4D566142.5060103@btinternet.com>
+References: <4D566142.5060103@btinternet.com>
+Message-ID: <201102121248.51271.daniel.is.fischer@googlemail.com>
+
+On Saturday 12 February 2011 11:30:26, Andrew Coppin wrote:
+> I have a small program that fills a file with random numbers. If I
+> compile it without optimisation, it runs in constant space. And yet, if
+> I supply -O2 (or even just -O1), for large output files the program
+> gobbles large amounts of RAM.
+>
+> Is this a known bug? (GHC 6.10.x)
+
+It's known to happen when optimising shares what shouldn't be shared. Try 
+compiling with -O2 -fno-cse (if that doesn't help, it doesn't necessarily 
+mean it's not unwanted sharing, though).
+And, please, let us see some code to identify the problem.
+
+
+

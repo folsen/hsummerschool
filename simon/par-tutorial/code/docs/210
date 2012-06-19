@@ -1,0 +1,42 @@
+From jpm at cs.uu.nl  Thu Apr  7 11:29:30 2011
+From: jpm at cs.uu.nl (=?ISO-8859-1?Q?Jos=E9_Pedro_Magalh=E3es?=)
+Date: Thu, 7 Apr 2011 11:29:30 +0200
+Subject: [Haskell-cafe] Local copy of hackageDB
+In-Reply-To: <BANLkTimnPo6rEa5bZV8ORez6KJrsvXKM1Q@mail.gmail.com>
+References: <BANLkTi=dXeg+movZswKiaTavDNaJxhHOuQ@mail.gmail.com>
+	<BANLkTimnPo6rEa5bZV8ORez6KJrsvXKM1Q@mail.gmail.com>
+Message-ID: <BANLkTinpCiUGOyf2pvuL=yp8pSOh5HirdA@mail.gmail.com>
+
+Hi Yitz,
+
+Thanks, but I don't really need a functional server or anything; I just want
+to have a local copy of Hackage on disk (latest versions only will do) and
+tell cabal-install to use that instead of the web.
+
+Regarding yackage, I don't think I can open ports on that machine either...
+
+
+Thanks,
+Pedro
+
+2011/4/7 Yitzchak Gale <gale at sefer.org>
+
+> Jos? Pedro Magalh?es wrote:
+> > I want to use cabal-install on a machine without internet access.
+>
+> Work is ongoing for a version of hackage that you can just
+> install on your own server. Perhaps the people working on that
+> can comment about the status.
+>
+> If all you want is a barebones server that you can upload
+> packages to for use via cabal-install, you can get:
+>
+> http://hackage.haskell.org/package/yackage
+>
+> Hope this helps,
+> Yitz
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110407/7e9e7593/attachment.htm>
+

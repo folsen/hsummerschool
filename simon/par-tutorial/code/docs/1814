@@ -1,0 +1,39 @@
+From mukeshtiwari.iiitm at gmail.com  Sat Dec 10 21:24:46 2011
+From: mukeshtiwari.iiitm at gmail.com (mukesh tiwari)
+Date: Sat, 10 Dec 2011 12:24:46 -0800 (PST)
+Subject: [Haskell-cafe] Parallel Matrix Multiplication
+In-Reply-To: <CAFHZvE8OMPEicyb0vkrw8Gw9Qs_nuefhu09uBZ5KabFwSyM-Ag@mail.gmail.com>
+References: <CAFHZvE8OMPEicyb0vkrw8Gw9Qs_nuefhu09uBZ5KabFwSyM-Ag@mail.gmail.com>
+Message-ID: <204a85ec-9b76-4f84-86a7-4d18c9b28027@n7g2000prb.googlegroups.com>
+
+I changed it bit and use pseq to force the computation but still its
+non of the sparks are converting.
+
+import Data.List
+import Control.Parallel
+
+parHelp :: ( Num a ) => [ a ] -> [ a ] -> a
+parHelp [] [] = 0
+parHelp ( x : xs ) ( y : ys ) = ret where
+        ret = par a ( pseq b ( a + b ) ) where
+            a = x * y
+            b = parHelp xs ys
+
+helpMult :: ( Num a ) => [ a ] -> [ [ a ] ] -> [ a ]
+helpMult _ [] = []
+helpMult x ( y : ys ) = ret where
+     ret =  par a ( pseq b  ( a : b ) ) where
+       a = parHelp x y
+       b = helpMult x ys
+
+mult :: ( Num a ) => [ [ a ] ] -> [ [ a ] ] -> [ [ a ] ]
+mult [] _ = []
+mult ( x : xs ) ys = ret where
+     ret = par a ( pseq b  ( a : b ) ) where
+        a = helpMult x ys
+        b = mult xs ys
+
+main = print $ mult [[1 .. 4 ] , [ 1 .. 4 ] , [ 1 .. 4 ] , [ 1 .. 4] ]
+( transpose [[1 .. 4 ] , [ 1 .. 4 ] , [ 1 .. 4 ] , [ 1 .. 4] ])
+
+

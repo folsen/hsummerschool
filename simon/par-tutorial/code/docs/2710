@@ -1,0 +1,52 @@
+From sschuldenzucker at uni-bonn.de  Fri Feb  4 13:16:36 2011
+From: sschuldenzucker at uni-bonn.de (Steffen Schuldenzucker)
+Date: Fri, 04 Feb 2011 13:16:36 +0100
+Subject: [Haskell-cafe] Extending GHCi
+In-Reply-To: <AANLkTintbzM_qEmFH=ijc5NudTTuk=eHqLYX1SAcXZ__@mail.gmail.com>
+References: <AANLkTintbzM_qEmFH=ijc5NudTTuk=eHqLYX1SAcXZ__@mail.gmail.com>
+Message-ID: <4D4BEE24.1020000@uni-bonn.de>
+
+On 02/04/2011 12:36 PM, C K Kashyap wrote:
+> Hi,
+> I am looking for a way to extend GHCI such that I can do something 
+> like this
+>
+> $ ghci
+> GHCi, version 6.12.3: http://www.haskell.org/ghc/  :? for help
+> Loading package ghc-prim ... linking ... done.
+> Loading package integer-gmp ... linking ... done.
+> Loading package base ... linking ... done.
+> Loading package ffi-1.0 ... linking ... done.
+> Prelude> startMyFunction
+> Prelude>
+>
+> startMyFunction will do a forkIO and listen on a network port for 
+> interaction with a remote process and will drop back to GHCI prompt 
+> where I can invoke haskell functions that'll control the way the 
+> interaction with the remote process occurs. Can this be done?
+I am not sure that I understand you correctly, but ghci simulates the IO 
+monad, so what about:
+
+Prelude> :l MyModule.hs
+*MyModule> conn <- waitForAndAcceptConnection
+*MyModule> someData <- getSomeData conn
+*MyModule> sendSomeAnswer conn $ processSomeData someData
+...
+
+-- Steffen
+
+>
+> Regards,
+> Kashyap
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>    
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110204/6fdfb779/attachment.htm>
+

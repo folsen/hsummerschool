@@ -1,0 +1,32 @@
+From paul.reiners at gmail.com  Fri Aug 19 22:40:45 2011
+From: paul.reiners at gmail.com (Paul Reiners)
+Date: Fri, 19 Aug 2011 15:40:45 -0500
+Subject: [Haskell-cafe] Question about data
+Message-ID: <CAGHv16uFODO0WSFP4h+m-i+XMFMiKkbCxJetVZk-QxP4fiEzqg@mail.gmail.com>
+
+I've created a simple type declaration:
+
+data MathExpression = Float
+    | Add MathExpression MathExpression
+    | Subtract MathExpression MathExpression
+    | Multiply MathExpression MathExpression
+    | Divide MathExpression MathExpression
+      deriving (Show)
+
+Now how do I create an instance of MathExpression which is just a Float?
+
+This doesn't work:
+
+*Main> let pi = 3.14 :: MathExpression
+
+<interactive>:1:10:
+    No instance for (Fractional MathExpression)
+      arising from the literal `3.14'
+    Possible fix:
+      add an instance declaration for (Fractional MathExpression)
+    In the expression: 3.14 :: MathExpression
+    In an equation for `pi': pi = 3.14 :: MathExpression
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110819/4c400329/attachment.htm>
+

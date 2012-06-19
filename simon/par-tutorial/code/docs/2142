@@ -1,0 +1,49 @@
+From aslatter at gmail.com  Tue Dec 20 19:12:37 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Tue, 20 Dec 2011 13:12:37 -0500
+Subject: [Haskell-cafe] Mitigating state-threading through an
+	application loop
+In-Reply-To: <CADN_yYSU0xsVGdWDXr-R3Bu2PFyKjcZoD5R93JKed854UOyDPg@mail.gmail.com>
+References: <CADN_yYSU0xsVGdWDXr-R3Bu2PFyKjcZoD5R93JKed854UOyDPg@mail.gmail.com>
+Message-ID: <CAKjSnQF6H7Km-7+Atp6RaALun6v=Xg1Wzafwn_1cjfjCycc7kQ@mail.gmail.com>
+
+On Tue, Dec 20, 2011 at 11:08 AM, Michael Serra <mk.serra at gmail.com> wrote:
+> Hello Haskellers,
+> ? I'm implementing a simple tree-manipulating (for sports tournaments)
+> application prototype, with SDL for graphics and simple user interaction.
+> For reference, I've posted the code on hpaste.? My question is about code
+> organization: everything was simple and elegant until I started writing the
+> program's display/event loop.? Every function in this section has to be
+> passed the same parameters - the application window to draw on, the font to
+> display text with, the tree representing the current application state,
+> etc.? The font is an especially egregious example of the problem, because
+> it's only used by one function but to get there it must be threaded through
+> all of them (looking at the hpaste, you will see I don't want to call
+> openFont on every invocation of drawTexts; what's needed is to call it once
+> in main and have the resulting value available to drawTxt.? So my question:
+> how can I mitigate the ugliness of this state-threading?? I understand this
+> is one purpose for monads; am I supposed to implement a monad transformer
+> for this?
+>
+> I think it would be great if I could define a type AppState as a tuple of
+> the various things I need to thread, and specify some kind of automatic
+> as-pattern, so that every function taking this AppState parameter would
+> implicitly have its components bound to certain preset names.? I've never
+> seen anyone do this however.? What is the right solution?
+>
+
+I've done that before in web-apps. It is conventional enough.
+
+To ease the threading-through of paramters you can use a Reader monad
+(perhaps ReaderT AppState IO). I don't know how well this fits in with
+the SDL libraries, though.
+
+Antoine
+
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

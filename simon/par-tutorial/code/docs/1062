@@ -1,0 +1,42 @@
+From allbery.b at gmail.com  Fri Aug 12 01:11:37 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Thu, 11 Aug 2011 19:11:37 -0400
+Subject: [Haskell-cafe] Trouble with readProcess
+In-Reply-To: <CAB6QvNNdKDWAX96LKDukDMgqFiPTkJ2icqEdWmv9a4C610ONaA@mail.gmail.com>
+References: <CAB6QvNMibG0QCKKtT0cOixDB0YqJBNsJQyGzHi0CB4u6LJrm+g@mail.gmail.com>
+	<20110811150527.5B9F6276C45@mail.avvanta.com>
+	<CAB6QvNNdKDWAX96LKDukDMgqFiPTkJ2icqEdWmv9a4C610ONaA@mail.gmail.com>
+Message-ID: <CAKFCL4XhryqiCwbZsQo=3W=TKh=sNjZL4tn3w+P=Y5Qkywodtw@mail.gmail.com>
+
+On Thu, Aug 11, 2011 at 11:29, Charles-Pierre Astolfi <cpa at crans.org> wrote:
+
+> I've found my mistake: I was calling readProcess cmd ["-p -t"] instead
+> of readProcess cmd ["-p","-t"]
+>
+> Not sure what are the semantics of quotation in this case, though. And
+> I'm pretty sure my analysis is wrong because of that :)
+>
+
+It's quite simple:  readProcess uses the low level exec*() series of
+functions under the hood.  Quoting is assumed to have already been dealt
+with; every parameter is a separate String (or (char *) in the C API) and
+passed literally.
+
+Quoting is used at the shell level (and shell-based APIs such as system())
+to enable the shell to correctly generate a list of literal (char *)
+parameters.
+
+In general, if an exec-style API takes a list of strings (e.g. C execve(),
+Haskell readProcess, Perl's multiple-parameter form of system), it's using
+the exec()-based API and you should pass argument strings exactly as you
+want the program to see them; if its a single string, it's using a
+system()-based API and you need to worry about quoting.  In this case, the
+tip-off is that the argument list is a [String] and not simply a String.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110811/ee46ad8a/attachment.htm>
+

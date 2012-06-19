@@ -1,0 +1,47 @@
+From felipe.lessa at gmail.com  Fri Apr 29 13:20:33 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Fri, 29 Apr 2011 08:20:33 -0300
+Subject: [Haskell-cafe] Iteratee: manyToOne
+In-Reply-To: <BANLkTinVRc3Znrbq2kWnkH5JNiCZTy4NMA@mail.gmail.com>
+References: <BANLkTinVRc3Znrbq2kWnkH5JNiCZTy4NMA@mail.gmail.com>
+Message-ID: <BANLkTimcUHOW_OugabKbrMzWNnKiAJyrCQ@mail.gmail.com>
+
+On Fri, Apr 29, 2011 at 6:32 AM, John Lato <jwlato at gmail.com> wrote:
+> If you do this, the user needs to take care to order the iteratees so that
+> the last iteratee has small leftovers. ?Consider:
+>
+> manyToOne [consumeALot, return ()]
+>
+> In this case, the entire stream consumed by the first iteratee will need to
+> be retained and passed on by manyToOne. ?In many cases, the user may not
+> know how much each iteratee will consume, which can make these semantics
+> problematic.
+>
+> Iteratee has 'enumPair', (renamed 'zip' in HEAD) which returns the leftovers
+> from whichever iteratee consumes more. ?This avoids the problem of retaining
+> extra data, and seems simpler to reason about. ?Although if you really need
+> to consume a predictable amount of data, the safest is probably to run the
+> whole thing in a 'take'.
+
+My motivation is: in general it is difficult (impossible?) to choose
+the iteratee that consumed more data because you don't know what the
+data is.  For example, if you give 'Chunks [a,b]' to two iteratees and
+one of them returns 'Chunks [c]' and the other one returns 'Chunks
+[d]', which one consumed more data?  The answer is that it depends on
+the types.  If they are Ints, both consumed the same, if they are
+ByteStrings, you would need to check if one is prefix of the other.
+What if one returns 'Chunks [c]' and the other one returns 'Chunks
+[d,e]'?  If they are ByteStrings, should we compare 'c' against 'd ++
+e'?
+
+So I thought it would be easier to program with an API that is
+predictable and immune to changes in block sizes.  If you don't want
+leftovers, just use 'manyToOne [..., dropWhile (const True)]', which
+guarantees that you won't leak.
+
+Cheers,
+
+-- 
+Felipe.
+
+

@@ -1,0 +1,70 @@
+From jmillikin at gmail.com  Tue Apr 26 05:06:43 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Mon, 25 Apr 2011 20:06:43 -0700
+Subject: [Haskell-cafe] Data.Enumerator.Text.utf8 not constant memory?
+In-Reply-To: <BANLkTim7U2uFxhCXM0S4rKygtNnds34S0g@mail.gmail.com>
+References: <BANLkTikvOg3DwT7iuCbkJeju-DsDKyd8xg@mail.gmail.com>
+	<BANLkTim7U2uFxhCXM0S4rKygtNnds34S0g@mail.gmail.com>
+Message-ID: <BANLkTik7rDk603uOm58TXRHK73qi7JATtQ@mail.gmail.com>
+
+*sigh*
+
+Another fine entry for john-millikin-is-an-idiot.txt
+
+Thank you for the patch Felipe, and for the bug report Skirmantas. I
+have uploaded 0.4.10 to Hackage.
+
+My sincere apologies for the inconvenience.
+
+On Mon, Apr 25, 2011 at 19:03, Felipe Almeida Lessa
+<felipe.lessa at gmail.com> wrote:
+> [CC'ing John Millikin, enumerator's maintainer]
+>
+> On Mon, Apr 25, 2011 at 7:10 PM, Skirmantas Kligys
+> <skirmantas.kligys at gmail.com> wrote:
+>> I expected to be able to do what SAX does in Java, i.e. to avoid loading the
+>> whole 2 gigabytes into memory. ?For warm-up, I wrote an iteratee to count lines
+>> in the file, and it does load the whole file into memory! ?After profiling, I
+>> see that the problem was Data.Enumerator.Text.utf8, it allocates up to 60
+>> megabytes when run on a 40 megabyte test file.
+>
+> It seems to me that this is a bug in enumerator's "strict" fold not
+> being strict at all =). ?The current version 0.4.9.1 of
+> Data.Enumerator.List.fold is
+>
+> -- | Consume the entire input stream with a strict left fold, one element
+> -- at a time.
+> --
+> -- Since: 0.4.8
+> fold :: Monad m => (b -> a -> b) -> b
+> ? ? ? -> Iteratee a m b
+> fold step = continue . loop where
+> ? ? ? ?f = L.foldl' step
+> ? ? ? ?loop acc stream = case stream of
+> ? ? ? ? ? ? ? ?Chunks [] -> continue (loop acc)
+> ? ? ? ? ? ? ? ?Chunks xs -> continue (loop (f acc xs))
+> ? ? ? ? ? ? ? ?EOF -> yield acc EOF
+>
+> Note that the list fold is strict (f = Data.List.foldl' step),
+> *however* the acc parameter of loop isn't strict at all! ?It just
+> creates a big, fat thunk with references to all of you input =(.
+>
+> But the fix is extremely easy, just change the 'Chunks xs' line to
+>
+> ? ? ? ? ? ? ? ?Chunks xs -> continue (loop $! f acc xs)
+>
+> Using only your iterLinesWc test with a 105 MiB file (a movie I had
+> lying around), with enumerator's definition it takes 220 MiB of memory
+> and 1.3~1.5 seconds according to +RTS -s. ?By doing only this very
+> change above, it takes 2 MiB of memory (100x improvement :P) and
+> 0.8~0.9 seconds.
+>
+> John Millikin, could you please apply the attached patch? =)
+>
+> Cheers,
+>
+> --
+> Felipe.
+>
+
+

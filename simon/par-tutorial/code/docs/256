@@ -1,0 +1,36 @@
+From qdunkan at gmail.com  Sat Apr  9 06:50:54 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Fri, 8 Apr 2011 21:50:54 -0700
+Subject: [Haskell-cafe] Is there a way to find out the type inferred for
+ a local function inside another function? :)
+In-Reply-To: <4D9FA0DA.70502@freegeek.org>
+References: <BANLkTik+PnKjxL2BxeA519EKMap-dqmfMA@mail.gmail.com>
+	<BANLkTikUdm3GQN6j1zEkk8OykXeVERgx6Q@mail.gmail.com>
+	<4D9EFE90.2000106@henning-thielemann.de>
+	<4D9FA0DA.70502@freegeek.org>
+Message-ID: <BANLkTi=3pqdQUdJofi4+8oC60XPQTtSNnQ@mail.gmail.com>
+
+>> I would not write large local functions at all. I would leave them
+>> top-level but do not export them. This also allows to test them from GHCi.
+>
+> The downside to this is when you want to use the worker/wrapper transform in
+> order to capture some local variables for a recursive function, instead of
+> passing them through the recursion.
+
+I do this a lot too, but it doesn't mean you have to have large
+functions.  The type of the worker is usually pretty trivially derived
+from the type of wrapper, e.g.
+
+wrapper :: A -> B -> C -> D
+wrapper a b = go 0
+  where go n c = ....
+
+I've had a couple of cases with large functions with large numbers of
+parameters that have a complicated recursion pattern and those are
+indeed hard to factor into top level functions because each internal
+definition uses a random assortment of variables (not necessarily
+worker/wrapper either).  I suppose a refactoring editor could pull
+inner definitions up to the top level and push them back down, but
+hopefully those hairball functions are not common.
+
+

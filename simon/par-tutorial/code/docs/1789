@@ -1,0 +1,27 @@
+From aspergesoepje at gmail.com  Fri Dec  9 20:45:26 2011
+From: aspergesoepje at gmail.com (L Corbijn)
+Date: Fri, 9 Dec 2011 20:45:26 +0100
+Subject: [Haskell-cafe] Generating Code
+Message-ID: <CAHTd3sihZABoWe7CoKhfFh-QHQ01PftATrTmiZymE5b-D_YS+Q@mail.gmail.com>
+
+Hello,
+
+In an attempt to reduce the amount of boring repetitive work to update
+the OpenGLRaw package I've created a generator to do it partially for
+me. It currently uses haskell-src-exts for representing the haskell
+source of the modules. Though haskell-src-exts does an excellent job
+for representing haskell source, it seems to be more aimed at parsing
+haskell source and doing something with it, rather than generating it.
+For cpp macros, say for the use of different calling conventions used,
+can't be used directly, nor is there a really good way to use comments
+(at least so it seems to me).
+
+So I'm interested if there are other libraries that are more suitable
+to the task of generating haskell code for library use, and thus
+generate 'human readable' exported code (so no TH). I'm also
+interested in how other projects generate code for their packages.
+
+Greetings,
+Lars Corbijn
+
+

@@ -1,0 +1,39 @@
+From paul.reiners at gmail.com  Wed Aug 17 19:37:16 2011
+From: paul.reiners at gmail.com (Paul Reiners)
+Date: Wed, 17 Aug 2011 12:37:16 -0500
+Subject: [Haskell-cafe] Compilation error in Chapter 5 of "Real World
+	Haskell"
+Message-ID: <CAGHv16t3VD14HbHu=kro_BoVNJr6DHxm6_9BsiAruwb+ABYVMQ@mail.gmail.com>
+
+I'm trying to do the following from Chapter 5 of "Real World Haskell":
+
+Our choice of naming for the source file and function is deliberate. To
+create an executable, *ghc* expects a module named Main that contains a
+function named main. The main function is the one that will be called when
+we run the program once we've built it. 6 comments<comments:%20show%20/%20hide>
+
+*ghc -o simple Main.hs SimpleJSON.o*
+
+---from
+http://book.realworldhaskell.org/read/writing-a-library-working-with-json-data.html
+
+When I do that, I get this error:
+
+C:\ch05>ghc -o simple Main.hs SimpleJSON.o
+[2 of 2] Compiling Main             ( Main.hs, Main.o )
+Linking simple.exe ...
+SimpleJSON.o:fake:(.data+0x0): multiple definition of
+`SimpleJSON_getArray_closure'
+.\SimpleJSON.o:fake:(.data+0x0): first defined here
+SimpleJSON.o:fake:(.text+0x54): multiple definition of
+`SimpleJSON_getArray_info'
+.\SimpleJSON.o:fake:(.text+0x54): first defined here
+SimpleJSON.o:fake:(.data+0x4): multiple definition of
+`SimpleJSON_getObject_closure'
+.\SimpleJSON.o:fake:(.data+0x4): first defined here
+
+What's going wrong here?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110817/e8442545/attachment.htm>
+

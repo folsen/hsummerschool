@@ -1,0 +1,30 @@
+From byorgey at seas.upenn.edu  Sun Dec 11 16:28:44 2011
+From: byorgey at seas.upenn.edu (Brent Yorgey)
+Date: Sun, 11 Dec 2011 10:28:44 -0500
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+In-Reply-To: <CAD+npnq+CWoy1hvKqiddTiYmj01kAx2qmgqYJr6Q2yMgkQK6QA@mail.gmail.com>
+References: <87k464b870.fsf@gnu.org>
+	<CAD+npnq+CWoy1hvKqiddTiYmj01kAx2qmgqYJr6Q2yMgkQK6QA@mail.gmail.com>
+Message-ID: <20111211152844.GA11089@seas.upenn.edu>
+
+On Sun, Dec 11, 2011 at 05:09:44PM +0400, Sergey Mironov wrote:
+> 
+> Hi. I am Awesome WM user thinking about swithcing to the xmonad. Could I
+> take an opportunity and ask about mouse support in xmonad/xmobar ?
+> Actually, I assume that xmobar does nothing with mouse, but what is a
+> common way of showing something like main menu to the user? Is there an
+> option of switching windows with mouse by pressing on some window's icon,
+> just like common DE does?
+
+Yes, see 
+
+  http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Hooks-EwmhDesktops.html
+
+xmonad itself does not provide something which the user can click on
+to switch windows, but if you use some other window-switcher program
+(e.g. one that comes with your favorite DE) the above module can be
+used to make xmonad to respond to it.
+
+-Brent
+
+

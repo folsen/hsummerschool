@@ -1,0 +1,122 @@
+From hvr at gnu.org  Fri Apr  1 12:37:09 2011
+From: hvr at gnu.org (Herbert Valerio Riedel)
+Date: Fri, 01 Apr 2011 12:37:09 +0200
+Subject: [Haskell-cafe] Weird multi-threading runtime behaviour of
+ single-threaded program with GHC-7.0.3
+Message-ID: <1301654229.3215.36.camel@duo>
+
+Hello,
+
+I'm experiencing an unexpected behaviour with GHC-7.0.3/x86_64's
+multithreading runtime when running some more demanding single-thread
+computations.
+
+I've isolated the part of the larger application which exposes the
+problem down to the parsing of a ~8MiB JSON file which causes quite a
+bit of memory allocations (source at end of email). The program is
+compiled with
+
+ghc --make -O2 -threaded -eventlog -rtsopts parse_aeson.hs
+
+and I ran it with and w/o the -N12 option on a 12-core machine (the
+problem is visible on a 4-core machine as well):
+
+$ time ./parse_aeson test.json
+0.000392s after readFile
+0.001016s parse was a success...
+6.050836s NFed parse-tree...
+6.050968s NFed parse-tree...
+no exception
+
+real    0m6.100s
+user    0m5.680s
+sys     0m0.419s
+
+
+$ time ./parse_aeson test.json +RTS -N12
+0.001249s after readFile
+0.001777s parse was a success...
+10.048607s NFed parse-tree...
+10.048738s NFed parse-tree...
+no exception
+
+real    0m10.125s
+user    0m57.496s
+sys     0m39.927s
+
+
+When observing top(1)'s output, I saw that all HECs consumed a
+substantial amount of cpu cycle, so I loaded up threadscope to see what
+the remaining 11 HECs were doing all the time.
+
+
+I've put the resulting eventlog files and screenshots of threadscope's
+visualization online at
+
+http://www.narf.at/~hvr/Haskell/parse_aeson.N0.eventlog.png
+http://www.narf.at/~hvr/Haskell/parse_aeson.N0.eventlog.xz
+
+http://www.narf.at/~hvr/Haskell/parse_aeson.N12.eventlog.png
+http://www.narf.at/~hvr/Haskell/parse_aeson.N12.eventlog.xz
+
+
+What's happening there? The actual processing work seems to be done in a
+single HEC... but what are the remaining 11 HECs doing exactly? Am I
+doing something wrong?
+
+
+What does it mean when the GC-bars in threadscope becomes green as in
+the middle of the screenshot below?
+
+http://www.narf.at/~hvr/Haskell/parse_aeson.N4.eventlog.pdf
+
+
+
+-------------------------------------------------------------------------
+-- also available at http://www.narf.at/~hvr/Haskell/parse_aeson.hs
+
+module Main where
+
+import Control.DeepSeq
+import Control.Exception
+import Data.Aeson
+import Data.Time
+import System.Environment
+import qualified Data.Attoparsec.Lazy as APL
+import qualified Data.ByteString.Lazy.Char8 as LB
+
+parseIt :: FilePath -> IO ()
+parseIt fn = do
+  t0 <- getCurrentTime
+
+  let putStrLn' !s = do
+        t0' <- getCurrentTime
+        putStrLn $ show (t0' `diffUTCTime` t0) ++ " " ++ s
+
+  json_text <- LB.readFile fn
+
+  putStrLn' "after readFile"
+  let Success p = decode json_text :: Result Value
+  putStrLn' "parse was a success..."
+  putStrLn' $ p `deepseq` "NFed parse-tree..."
+  putStrLn' $ p `deepseq` "NFed parse-tree..."
+
+decode :: FromJSON a => LB.ByteString -> Result a
+decode = either Error fromJSON . APL.eitherResult . APL.parse json
+
+main :: IO ()
+main = do
+  fns <- getArgs
+  case fns of
+    [fn] -> do
+      res <- try $ parseIt fn
+      case res of
+        Left e -> putStrLn $ "caught: " ++ show (e :: SomeException)
+        Right () -> putStrLn "no exception"
+
+    _    -> putStrLn "usage: parse_aeson <json-file>"
+
+
+
+
+

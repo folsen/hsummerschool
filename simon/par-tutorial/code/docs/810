@@ -1,0 +1,31 @@
+From trebla at vex.net  Wed Apr 27 23:47:00 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Wed, 27 Apr 2011 17:47:00 -0400
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <alpine.DEB.2.00.1104271123020.5485@anubis>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+Message-ID: <4DB88ED4.9000802@vex.net>
+
+On 11-04-27 05:30 AM, Henning Thielemann wrote:
+> I like to apply for the quote of the week. :-)
+>
+> "If Haskell is great because of its laziness,
+> then Python must be even greater,
+> since it is lazy at the type level."
+
+Using Data.Dynamic, Haskell has a story for laziness at the type level, too.
+
+Haskell has:
+value-level lazy, can opt-out
+type-level lazy, can opt-in
+continuations, can opt-in
+
+Python has:
+value-level eager, no choice
+type-level lazy, no choice
+no continuations, no choice
+
+If Python type laziness were that great, why isn't it rich in type-level 
+programs? Has anyone even added numbers in Python at the type level?
+
+

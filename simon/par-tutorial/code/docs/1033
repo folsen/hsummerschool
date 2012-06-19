@@ -1,0 +1,20 @@
+From R.Paterson at city.ac.uk  Thu Aug 11 14:08:21 2011
+From: R.Paterson at city.ac.uk (Paterson, Ross)
+Date: Thu, 11 Aug 2011 13:08:21 +0100
+Subject: [Haskell-cafe] ANNOUNCE: yap-0.0 - yet another prelude
+In-Reply-To: <CALoEywP7Rtv8cD=W4xaQWPuwTf_g=ErSSSdmYbTx7E3jqJ1FaA@mail.gmail.com>
+References: <562B8200B62844479E12147F0AA7B3B30B54B9A660@NSQ161EX.enterprise.internal.city.ac.uk>
+	<alpine.DEB.2.00.1108101638110.27064@anubis.informatik.uni-halle.de>,
+	<CALoEywP7Rtv8cD=W4xaQWPuwTf_g=ErSSSdmYbTx7E3jqJ1FaA@mail.gmail.com>
+Message-ID: <562B8200B62844479E12147F0AA7B3B30B55B16F07@NSQ161EX.enterprise.internal.city.ac.uk>
+
+Sebastian Fischer [fischer at nii.ac.jp] wrote:
+> I'm curious: what laws do you have in mind for '+', '-', and '0' that
+> do not hold in the multiplicative group of rational numbers with
+>
+>     (+) = (*); (-) = (/); 0 = 1
+>
+> ?
+
+x - x = zero, for one.  (with x the other 0)
+

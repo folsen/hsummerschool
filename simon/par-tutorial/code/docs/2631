@@ -1,0 +1,49 @@
+From michael at snoyman.com  Thu Feb  3 15:30:05 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Thu, 3 Feb 2011 16:30:05 +0200
+Subject: [Haskell-cafe] Yesod and concurrency
+In-Reply-To: <20110203141423.26838baf@tritium.streitmacht.eu>
+References: <20110131120934.6308c117@tritium.streitmacht.eu>
+	<AANLkTimESGib1ttJreNniUxViTy35NATjtHwz2qgZD5x@mail.gmail.com>
+	<20110203141423.26838baf@tritium.streitmacht.eu>
+Message-ID: <AANLkTinorfBiFAstMM7D7A_coqBVCjKWu=OwrQiAR587@mail.gmail.com>
+
+On Thu, Feb 3, 2011 at 3:14 PM, Ertugrul Soeylemez <es at ertes.de> wrote:
+> Michael Snoyman <michael at snoyman.com> wrote:
+>
+>> On Mon, Jan 31, 2011 at 1:09 PM, Ertugrul Soeylemez <es at ertes.de> wrote:
+>>
+>> > how well do WAI, Yesod and the 'persistent' package play with
+>> > concurrency? ?For example, I'd like to write a program, which
+>> > concurrently provides two related sites as well as a few background
+>> > workers, which do something with the database. ?My idea would look
+>> > something like this:
+>> >
+>> > ?main :: IO ()
+>> > ?main =
+>> > ? ?withMyAppPool $ \pool -> do
+>> > ? ? ?forkIO $ worker1 ... ? -- background worker
+>> > ? ? ?forkIO $ worker2 ... ? -- background worker
+>> > ? ? ?forkIO $ worker3 ... ? -- background worker
+>> > ? ? ?forkIO $ toWaiApp ... ?-- site 1
+>> > ? ? ?forkIO $ toWaiApp ... ?-- site 2
+>> >
+>> > Will I run into problems with this?
+>>
+>> There should not be any issues, just make sure you compile with
+>> -threaded. The persistent database connection pool should work just
+>> fine for this. If you find any issues, please let me know, but I have
+>> not had trouble in the past.
+>
+> I've run into the first problem with this. ?Without having to use
+> subsites, what's an easy method to use wai-handler-devel with such a
+> setup?
+
+I believe the new architecture in use for wai-handler-devel 0.2 (which
+will work with Yesod 0.7) should work properly with multi-threaded
+apps. But yes, there's no easy way to do this with the current
+wai-handler-devel.
+
+Michael
+
+

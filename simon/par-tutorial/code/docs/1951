@@ -1,0 +1,57 @@
+From ross at soi.city.ac.uk  Thu Dec 15 03:32:53 2011
+From: ross at soi.city.ac.uk (Ross Paterson)
+Date: Thu, 15 Dec 2011 02:32:53 +0000
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <593E3E01-7057-41E3-8BC8-C564F3009B8D@gmail.com>
+References: <CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+	<CACw0ni+Q=ixAAdWzmsbF+c1RkF74S2RV=fi_tX2B2puR0s5xvQ@mail.gmail.com>
+	<12B612A8-515C-4E86-BE7E-F2214AA5E210@deepbondi.net>
+	<CANd=OGHac+eas7SZjgruccP8n_Gh1a11bFdhUqzH-jmsZJxwFA@mail.gmail.com>
+	<CANd=OGGMg97zDT2t=4sxmtRmBKCLm=ue1NN705GRURNy+BhXhw@mail.gmail.com>
+	<20111215020337.GA21854@soi.city.ac.uk>
+	<593E3E01-7057-41E3-8BC8-C564F3009B8D@gmail.com>
+Message-ID: <20111215023253.GA22378@soi.city.ac.uk>
+
+On Thu, Dec 15, 2011 at 02:19:34AM +0000, Gregory Crosswhite wrote:
+> On Dec 15, 2011, at 12:03 PM, Ross Paterson wrote:
+> 
+>     The current definition says that some and many should be the least
+>     solutions of the equations
+> 
+>        some v = (:) <$> v <*> many v
+>        many v = some v <|> pure []
+> 
+>     We could relax that to just requiring that they satisfy these equations
+>     (which I think is what John wants).  In that case there would be another
+>     possible definition for Maybe:
+> 
+>        some Nothing = Nothing
+>        some (Just x) = Just (repeat x)
+> 
+>        many Nothing = Just []
+>        many (Just x) = Just (repeat x)
+> 
+> That is a really good idea!  In fact, this behavior was exactly what my
+> intuition had at first suggested to me that these methods should do.
+> 
+> But the part that still confuses me is:  why are these not considered the
+> "least" solutions of the equations?
+
+It has to do with the termination partial ordering -- the least solutions
+give a denotational description that's equivalent to what recursion computes.
+
+In this case, the least solutions are
+
+	some Nothing = Nothing
+	some (Just x) = _|_
+
+	many Nothing = Just []
+	many (Just x) = _|_
+
+It's easy to verify that these are solutions, and that they're less
+defined than the versions above.
+
+

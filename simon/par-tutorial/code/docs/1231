@@ -1,0 +1,35 @@
+From tilo.wiklund at gmail.com  Fri Aug 19 19:08:40 2011
+From: tilo.wiklund at gmail.com (Tilo Wiklund)
+Date: Fri, 19 Aug 2011 19:08:40 +0200
+Subject: [Haskell-cafe] Can I have a typeclass for topological spaces?
+In-Reply-To: <971591313070724@web40.yandex.ru>
+References: <971591313070724@web40.yandex.ru>
+Message-ID: <CAL7g+uOcFk0LBUc=i6BfSPQBQme1AXDLuCg_Shs5nZ9Rty2QJA@mail.gmail.com>
+
+You may want to, instead, check out the methods of point-free topology
+(also known as pointless topology) where you, basically, study
+topological spaces in terms of their open-set lattices.
+
+This allows you to use a more algebraic language which probably fits
+better into Haskell (I think this is used, for example, when studying
+topology within type theories). A search for stone-duality should give
+you somewhere to start (I know there are a sequence of posts on
+http://topologicalmusings.wordpress.com/ on the subject).
+
+Somewhat less known is the theory of formal topology (see for example
+n-lab http://ncatlab.org/nlab/show/formal+topology). Which might also
+be an approach to doing some topology in Haskell.
+
+Hope that's of some help :)
+
+On 11/08/2011, Grigory Sarnitskiy <sargrigory at ya.ru> wrote:
+> Hello! I just wonder whether it is possible to have a typeclass for
+> topological spaces?
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

@@ -1,0 +1,41 @@
+From jwlato at gmail.com  Tue Apr 12 15:14:49 2011
+From: jwlato at gmail.com (John Lato)
+Date: Tue, 12 Apr 2011 14:14:49 +0100
+Subject: [Haskell-cafe] Assimp FFI Library
+Message-ID: <BANLkTinZj+Mmq2PDyMS-=Mc7w7+xriR0jg@mail.gmail.com>
+
+>
+> From: Joel Burget <joelburget at gmail.com>
+> Subject: [Haskell-cafe] Assimp FFI Library
+> To: haskell-cafe at haskell.org
+> Message-ID: <BANLkTimW-71NcBRqnr68kRAvKZytE1uVwA at mail.gmail.com>
+> Content-Type: text/plain; charset="iso-8859-1"
+
+
+> 5. I've reduced a lot of boilerplate in Vec.hs by using the CPP
+> preprocessor
+> extension. I could reduce the boilerplate by another factor of 3 if I could
+> recursively call templates but that's not allowed. I would like to have one
+> template to generate both of these lines:
+>
+> > data Vec N2 Double t = Vec2D !Double !Double deriving (Show, Eq)
+> > data Vec N3 Double t = Vec3D !Double !Double !Double deriving (Show, Eq)
+>
+> Notice there is an extra !Double in the second. Is there an easy way to do
+> this? I don't know much about Template Haskell, would that work? Would it
+> be
+> easy?
+>
+
+Yes, it works, and it's pretty easy.  My adaptive-tuple package,
+http://hackage.haskell.org/package/adaptive-tuple, provides this (as well as
+strict vectors up to 20 elements).  Tuple is a bit of a misnomer.  You'll
+need to download the source to get the Template Haskell splices because they
+aren't exported (tarball from hackage, or via
+http://www.tiresiaspress.us/haskell/adaptive-tuple/)
+
+John L.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110412/00b9ddb0/attachment.htm>
+

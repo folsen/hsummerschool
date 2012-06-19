@@ -1,0 +1,42 @@
+From uzytkownik2 at gmail.com  Fri Apr 22 01:36:27 2011
+From: uzytkownik2 at gmail.com (Maciej Marcin Piechotka)
+Date: Fri, 22 Apr 2011 01:36:27 +0200
+Subject: [Haskell-cafe] QuickCheck, (Ord a)=> [a] -> Property problem
+In-Reply-To: <87ei4vl13w.fsf@eee.8325.org>
+References: <78a0d4c2-d239-490c-a490-491f0dcabfd5@f11g2000vbx.googlegroups.com>
+	<87k4ep540u.fsf@eee.8325.org>
+	<8d6edbcb-16f1-4501-b790-f45835c1c001@d12g2000vbz.googlegroups.com>
+	<87ei4vl13w.fsf@eee.8325.org>
+Message-ID: <1303428988.3329.8.camel@localhost.localdomain>
+
+On Thu, 2011-04-21 at 23:56 +0200, Nick Smallbone wrote:
+> "larry.liuxinyu" <liuxinyu95 at gmail.com> writes:
+> 
+> > Somebody told me that:
+> > Eduard Sergeev ? BTW, more recent QuickCheck (from Haskell Platform
+> > 2011.2.0.X - contains QuickCheck-2.4.0.1) seems to identifies the
+> > problem correctly:
+> >
+> > *** Failed! Falsifiable (after 3 tests and 2 shrinks):
+> > [0,1]
+> > False
+> 
+> I don't think this can be true: the problem occurs in GHCi and there's
+> no way for QuickCheck to detect it. And when I tested it I got the same
+> problem. There must be some difference between the properties you both
+> tested...
+> 
+> Nick
+> 
+
+There was an additional class contrain (Num a). Num default to Int IIRC.
+
+Regards
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110422/f2697214/attachment.pgp>
+

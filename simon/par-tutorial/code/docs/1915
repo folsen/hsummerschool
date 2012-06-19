@@ -1,0 +1,30 @@
+From gcrosswhite at gmail.com  Wed Dec 14 07:23:30 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Wed, 14 Dec 2011 16:23:30 +1000
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+Message-ID: <C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+
+
+On Dec 13, 2011, at 3:32 AM, Bryan O'Sullivan wrote:
+
+> Don't be silly. The purpose of some and many is to be used with combinators that are expected to fail sometimes. If you use them with combinators that always succeed, of course you're going to get an infinite loop.
+
+Yes, but how can someone using a typeclass *know* whether a type has values that will always succeed?
+
+> Apparently the confusion here lies with the fact that the documentation for some and many are too terse for their behaviour to be easily understood. That's a whole different category of problem than "ban them!".
+
+Nobody has been calling for them to be banned at all --- or at least, I haven't, and I am the one who has started the thread.  :-)  What we (if I may be so bold as to use the royal we here :-) ) would like would be for these methods to be moved into a separate class.  This way users of the classes will know whether their type has well-defined instance for some and many or not.
+
+Or, alternatively, we could add documentation making it clear that one should *only* make a type be an instance of Applicative *if* all values of that type will eventually fail in combination, thus ensuring that some and many will always be well defined.  Thus, in particular, Maybe would no longer be a well-formed instance of this type, though we might decide to keep it around anyway in order to avoid breaking old code.
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111214/500efd5d/attachment.htm>
+

@@ -1,0 +1,34 @@
+From jon.fairbairn at cl.cam.ac.uk  Wed Dec 28 16:23:47 2011
+From: jon.fairbairn at cl.cam.ac.uk (Jon Fairbairn)
+Date: Wed, 28 Dec 2011 15:23:47 +0000
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+References: <4EF57FC9.1030505@vex.net> <4EFAD085.8000605@vex.net>
+	<CACqaG6xKd+-szRC9tjTZsgH-fq_HwDnUwV2LbX8n1hHs60SdxQ@mail.gmail.com>
+	<CACqaG6wUApJdbOQMJqGkTURBLMS-hS2jGLJweOpDWEa+gQBWeQ@mail.gmail.com>
+	<CABLneZub4hpR+XLESBS8W6Y3mfXXJHgE6wJ6VWW0htS2O+D-jg@mail.gmail.com>
+	<CABLneZsjT5gJ0ReC4OYK7K482Zs+VvWp5RpTo7ANgfC3W0pNzg@mail.gmail.com>
+Message-ID: <wfipl0iut8.fsf@calligramme.charmers>
+
+Thiago Negri <evohunz at gmail.com> writes:
+
+> Lazy evaluation is one implementation of non-strict semantics, where
+> the arguments are evaluated only when they are needed.
+
+I would say this:
+
+* non-strict semantics require that no argument is evaluated
+  unless needed.
+
+* lazy evaluation is an implementation of non-strict semantics
+  in which no argument is evaluated more than once.
+
+As an example of something other than lazy, normal order
+reduction is non-strict, but arguments may be evaluated multiple
+times.
+
+-- 
+J?n Fairbairn                                 Jon.Fairbairn at cl.cam.ac.uk
+
+
+
+

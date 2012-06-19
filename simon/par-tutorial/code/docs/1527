@@ -1,0 +1,39 @@
+From tom.davie at gmail.com  Tue Aug 30 09:45:56 2011
+From: tom.davie at gmail.com (Thomas Davie)
+Date: Tue, 30 Aug 2011 08:45:56 +0100
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <DC21F228-66C0-4022-A0F6-9F69B2DA61E2@cs.otago.ac.nz>
+References: <4E568D11.30800@btinternet.com> <4E56CD99.6050703@vex.net>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+	<nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+	<4E57F43A.9030800@btinternet.com> <1314613976.1873.5.camel@picard>
+	<DC21F228-66C0-4022-A0F6-9F69B2DA61E2@cs.otago.ac.nz>
+Message-ID: <66AB8F5D-3904-4872-A91E-EA5D5DBADF24@gmail.com>
+
+That's reasonably believable ? streaming units on current CPUs can execute multiple floating point operations per cycle.
+if (*ra4 != 0xffc78948) { return false; }
+
+On 30 Aug 2011, at 02:30, Richard O'Keefe wrote:
+
+> 
+> On 29/08/2011, at 10:32 PM, Maciej Marcin Piechotka wrote:
+>> 
+>> According to random side (http://gruntthepeon.free.fr/ssemath/) not so
+>> new computers can compute 15.5 milions of serial logarithms per second
+>> (62 millions in total). I'd say that overhead of Integer might be much
+>> bigger then cost of logarithm.
+> 
+> That's floating-point logarithms, not Integer logarithms.
+> Single-precision floats, at that.
+> 
+> The code in question does not link at optimisation level 4.
+> At least some of the benchmark results are impossible to believe:
+>    benching          cephes_sinf .. 
+>    -> 12762.3 millions of vector evaluations/second
+>    ->   0 cycles/value on a 2000MHz computer
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110830/178444ac/attachment.htm>
+

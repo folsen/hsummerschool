@@ -1,0 +1,97 @@
+From christopher.svanefalk at gmail.com  Wed Apr 27 13:28:31 2011
+From: christopher.svanefalk at gmail.com (Christopher Svanefalk)
+Date: Wed, 27 Apr 2011 13:28:31 +0200
+Subject: [Haskell-cafe] Good reads?
+In-Reply-To: <BANLkTik71toDtgQoJY0q08Zkggi+G7jB7A@mail.gmail.com>
+References: <4DB73D9E.5080604@gmail.com>	<BANLkTimOotBg5WRFx7QY9fK3X5MrO=uaeQ@mail.gmail.com>
+	<BANLkTik71toDtgQoJY0q08Zkggi+G7jB7A@mail.gmail.com>
+Message-ID: <4DB7FDDF.4010401@gmail.com>
+
+First, thanks to everyone for your input! It is really appreciated, and
+I will be checking out the resources you provided.
+
+Also, a correction: /Haskell: The Craft of Functional Programming /is
+written by Simon Thompson, not Peyton-Jones. Mixup on my part there :)
+
+On 04/27/2011 01:44 AM, Eric Rasmussen wrote:
+> I'm currently reading Real World Haskell
+> (http://book.realworldhaskell.org/read/), and it's an excellent book.
+> It goes into detail on quite a few interesting and practical uses of
+> the language.
+>
+> Also, in the spirit of this discussion, is there a resource that
+> attempts to compare libraries for common tasks so developers can make
+> informed decisions without having to research each library or approach
+> on their own? As an example, in other languages you might read about
+> CSV parsing from a few different sources and see a general consensus
+> on how to approach it. After hours of digging through code on Hackage
+> and reading up on different approaches, I can't seem to find a
+> consensus in Haskell.
+>
+> If anyone knows of a book/resource that breaks down different
+> approaches to common problems and when/why you might choose one over
+> the other, I'm very interested.
+>
+> -Eric Rasmussen
+>
+>
+> On Tue, Apr 26, 2011 at 3:52 PM, Edward Amsden <eca7215 at cs.rit.edu
+> <mailto:eca7215 at cs.rit.edu>> wrote:
+>
+>     On Tue, Apr 26, 2011 at 5:48 PM, Christopher Svanefalk
+>     <christopher.svanefalk at gmail.com
+>     <mailto:christopher.svanefalk at gmail.com>> wrote:
+>     > I am currently reading through Peyton-Jones "Haskell: The Craft of
+>     > Functional Programming" (2nd ed.), as well as a great paper
+>     published by
+>     > one of my professors
+>     > (http://www.cse.chalmers.se/~rjmh/Papers/whyfp.html
+>     <http://www.cse.chalmers.se/%7Erjmh/Papers/whyfp.html>). However, what
+>     > other works, in your opinions, should I look into to get a more
+>     complete
+>     > understanding of functional programming?
+>
+>     You might consult the Typeclassopedia (Brent Yorgey).
+>
+>     Understanding these typeclasses helped me start understand the power
+>     of abstraction that Haskell (and FP in general) gives a programmer.
+>
+>     quoth the abstract:
+>     "The standard Haskell libraries feature a number of type classes with
+>     algebraic or category-theoretic underpinnings. Becoming a ?uent
+>     Haskell hacker requires intimate familiarity with them all, yet
+>     acquiring this familiarity often involves combing through a mountain
+>     of tutorials, blog posts, mailing list archives, and IRC logs.
+>
+>     "The goal of this article is to serve as a starting point for the
+>     student of Haskell wishing to gain a ?rm grasp of its standard type
+>     classes. The essentials of each type class are introduced, with
+>     examples, commentary, and extensive references for further reading."
+>
+>     http://www.haskell.org/wikiupload/8/85/TMR-Issue13.pdf, page 13
+>
+>     And from a fellow student: have fun!
+>
+>     --
+>     Edward Amsden
+>     Student
+>     Computer Science
+>     Rochester Institute of Technology
+>     www.edwardamsden.com <http://www.edwardamsden.com>
+>
+>     _______________________________________________
+>     Haskell-Cafe mailing list
+>     Haskell-Cafe at haskell.org <mailto:Haskell-Cafe at haskell.org>
+>     http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110427/d6f281ed/attachment.htm>
+

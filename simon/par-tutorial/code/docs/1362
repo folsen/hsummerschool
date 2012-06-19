@@ -1,0 +1,52 @@
+From vandijk.roel at gmail.com  Thu Aug 25 16:30:32 2011
+From: vandijk.roel at gmail.com (Roel van Dijk)
+Date: Thu, 25 Aug 2011 16:30:32 +0200
+Subject: [Haskell-cafe] Haddock chokes on function arguments
+In-Reply-To: <CAL4zPapf=s7un01+J2JnCaaTgm991bAHntXtRbcfzh-RuEoQOw@mail.gmail.com>
+References: <CAL4zPapf=s7un01+J2JnCaaTgm991bAHntXtRbcfzh-RuEoQOw@mail.gmail.com>
+Message-ID: <CABw4ky5kkWamsTDcg3JDmdsqBjkJz-2paU9Rka5X8JRBjqSKGA@mail.gmail.com>
+
+Does it help if you format it like this:
+
+-- |Apply a given function over all elements of a list and select one of the
+-- results.
+selector :: (Arbitrary b)
+         => [a]       -- ^ Elements to select from
+         -> (a -> b)  -- ^ Constructor to apply to selected element
+         -> Gen b
+selector list ctor = oneof (map (return . ctor) list)
+
+So placing the => and -> before the lines instead of after them?
+
+2011/8/25 Arnaud Bailly <arnaud.oqube at gmail.com>:
+> Hello,
+> while trying to generate Haddock documentation (Haddock version 2.9.2, (c)
+> Simon Marlow 2006), it chokes on the following fragment
+>
+> -- |Apply a given function over all elements of a list and select one of the
+> -- results.
+> selector :: (Arbitrary b) =>
+> ??????????? [a]????? -> -- ^ Elements to select from
+> ??????????? (a -> b) -> -- ^ Constructor to apply to selected element
+> ??????????? Gen b
+> selector list ctor = oneof (map (return . ctor) list)
+>
+> with the following error message:
+>
+> '?? parse error on input `-- ^ Elements to select from
+>
+> I am puzzled as this is exactly how arguments are supposed to be documented,
+> according to http://www.haskell.org/haddock/doc/html/ch03s02.html#id565220
+>
+> Any clues ?
+>
+> Arnaud
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

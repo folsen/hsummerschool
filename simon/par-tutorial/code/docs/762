@@ -1,0 +1,27 @@
+From bos at serpentine.com  Tue Apr 26 18:39:45 2011
+From: bos at serpentine.com (Bryan O'Sullivan)
+Date: Tue, 26 Apr 2011 09:39:45 -0700
+Subject: [Haskell-cafe] How to update the RNG per call (State monad)
+ when generating QuickCheck arbitraries?
+In-Reply-To: <BANLkTinUkUd9+KhfWA=hW6b3dFKpcK=Trg@mail.gmail.com>
+References: <BANLkTin-L8vXn70e=UBTtNGr5z=wHD1ZfA@mail.gmail.com>
+	<BANLkTinDU2Bx3+uNWDpyMLe0ZesT6wY3iQ@mail.gmail.com>
+	<BANLkTinUkUd9+KhfWA=hW6b3dFKpcK=Trg@mail.gmail.com>
+Message-ID: <BANLkTinPN3D13gNzo_3Cc7P_KiebCw-EXw@mail.gmail.com>
+
+On Tue, Apr 26, 2011 at 9:16 AM, Daniel Kahlenberg
+<d.kahlenberg at gmail.com>wrote:
+
+>
+> hold on I'd like to have the genArray call generating distinctive
+> results in one IO execution
+
+
+The problem you're seeing is due to the fact that you're not taking the
+final RNG state from the first execution of your code and passing it as the
+initial state to the second. Since you're initialising each one with the
+same RNG state, you're getting the same results in each case.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110426/f6861fba/attachment.htm>
+

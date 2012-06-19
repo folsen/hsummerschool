@@ -1,0 +1,33 @@
+From leimy2k at gmail.com  Wed Feb  9 18:21:49 2011
+From: leimy2k at gmail.com (David Leimbach)
+Date: Wed, 9 Feb 2011 09:21:49 -0800
+Subject: [Haskell-cafe] forkIO on GHCI does not seem to spawn the thread
+ in the background on some OSs
+In-Reply-To: <711625.47203.qm@web45115.mail.sp1.yahoo.com>
+References: <AANLkTinUd-EV-b6QUuUKmRwMj8qtUrf2=KeakGaEM0Jw@mail.gmail.com>
+	<AANLkTimZkt2pNzw=yPpPYnPAsssUVxVY7iXKsfA1zp4i@mail.gmail.com>
+	<711625.47203.qm@web45115.mail.sp1.yahoo.com>
+Message-ID: <AANLkTimFji9_-Z7Z6_Y=m6_G+g+emWyCHom_zAFFr24S@mail.gmail.com>
+
+> > It is  not always a thread.  ForkIO creates a spark and then the
+> > scheduler  decides when sparks should be scheduled to threads.  Thus
+> > you get a  guarantee of concurrent but not parallel execution.
+>
+> That is not correct - it is "par" that creates sparks may be discarded.
+>
+
+I guess I should have been clearer.  A forkIO thread is not an OS thread
+necessarily.  Sparks may become threads or be discarded in the par sense.
+
+
+
+> forkIO always creates new threads, though it is of course up to the
+> scheduler
+> when the threads are executed, and how many cores are used.
+>
+
+Yes, this is my understanding as well.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110209/ebdf0209/attachment.htm>
+

@@ -1,0 +1,40 @@
+From qdunkan at gmail.com  Fri Apr  8 14:54:47 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Fri, 8 Apr 2011 05:54:47 -0700
+Subject: [Haskell-cafe] Is there a way to find out the type inferred for
+ a local function inside another function? :)
+In-Reply-To: <4D9EFE90.2000106@henning-thielemann.de>
+References: <BANLkTik+PnKjxL2BxeA519EKMap-dqmfMA@mail.gmail.com>
+	<BANLkTikUdm3GQN6j1zEkk8OykXeVERgx6Q@mail.gmail.com>
+	<4D9EFE90.2000106@henning-thielemann.de>
+Message-ID: <BANLkTi=72-tDEbi5Q+33psAskHFsceAiKw@mail.gmail.com>
+
+On Fri, Apr 8, 2011 at 5:24 AM, Henning Thielemann
+<schlepptop at henning-thielemann.de> wrote:
+> Magnus Therning schrieb:
+>> AFAIK there is no way to do that, thouhg scion[1] may offer it.
+>>
+>> Personally I develop more complex local functions at the top-level,
+>> and once I'm happy with it I perform some re-factoring and move it in.
+>
+> I would not write large local functions at all. I would leave them
+> top-level but do not export them. This also allows to test them from GHCi.
+
+Agreed, I do this as well.  However, I occasionally would like to do a
+"reverse infer", for example:
+
+bigFunction = ... helper x y z
+
+helper = undefined
+
+Now I want to find out what type 'helper' should be in order that it
+typecheck within bigFunction.  Obviously 'undefined's type 'a'
+trivially satisfies that, so it can't be the most general possible
+type because that's always just 'a'.
+
+Currently what I do is declare a signature for helper, and then if it
+gets a type error try to figure out how to fix it.  It's usually not
+very hard, but it would be slick to have the signature filled in
+automatically.
+
+

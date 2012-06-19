@@ -1,0 +1,48 @@
+From conrad at metadecks.org  Thu Apr 21 03:36:14 2011
+From: conrad at metadecks.org (Conrad Parker)
+Date: Thu, 21 Apr 2011 10:36:14 +0900
+Subject: [Haskell-cafe] http://trac.haskell.org/ not redering correctly
+In-Reply-To: <4DAF4366.50600@btinternet.com>
+References: <20110417202926.0058e617.mle+hs@mega-nerd.com>
+	<4DADF6D0.2060801@btinternet.com>
+	<BANLkTimfgH3ShSwn33KUE9sYUTPJ_aXqpQ@mail.gmail.com>
+	<4DAF4366.50600@btinternet.com>
+Message-ID: <BANLkTi=16aMjj53QP99LErfxARc0GofHLw@mail.gmail.com>
+
+On 21 April 2011 05:34, Andrew Coppin <andrewcoppin at btinternet.com> wrote:
+>>> I notice that there's duplicate reports of the HTML documentation in the
+>>> Haskell Platform having chunks missing
+>>
+>> Which ticket numbers are these? Trac allows one of them to be closed
+>> as a duplicate. Perhaps you can do that, or at least provide those
+>> details in email here.
+>
+> When I get a minute I'll log in, mark the duplicates, and add a note to the
+> ticket confirming that the issue still exists.
+
+great!
+
+>>> I thought the purpose of filing a bug report was to get things fixed?
+>>
+>> The purpose of filing bug reports is to ensure that problems are not
+>> forgotten. It allows the community (people like you) to have a useful
+>> understanding of the problems that exist when choosing what tasks to
+>> put time and effort into fixing.
+>
+> *sigh* I guess that means the next step is to figure out if it's broken for
+> the Linux builds as well, or just for Windows. (Can't test for Mac OS since
+> I don't have access to the necessary hardware or software...)
+
+The first step would be to make a patch that works for you, and to
+attach it to the ticket. Other people could verify that it works on
+other platforms -- perhaps after attaching the patch you could mail
+this list and ask people to check it :)
+
+Then again if it's simply a matter of generating additional HTML text
+(as opposed to styling/rendering issues) then it should be
+straightforward to verify that the new content is added in the
+generated files without worrying about other platforms.
+
+Conrad.
+
+

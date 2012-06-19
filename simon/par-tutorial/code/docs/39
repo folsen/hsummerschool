@@ -1,0 +1,112 @@
+From bluescreen303 at gmail.com  Fri Apr  1 22:09:41 2011
+From: bluescreen303 at gmail.com (Mathijs Kwik)
+Date: Fri, 1 Apr 2011 22:09:41 +0200
+Subject: [Haskell-cafe] ArrowLoop and streamprocessors
+In-Reply-To: <AANLkTikVjoi79JKxiy=Zhb=-c+g5DZxaOnwOzeT-sCkX@mail.gmail.com>
+References: <AANLkTikxquh-8tpOtnOdQygjQVvaV21qBeucNPUaMk+V@mail.gmail.com>
+	<928741C4-271A-4C84-864F-AD6DE65F1855@alum.mit.edu>
+	<AANLkTinXRyf3qX_o=-uZr9yV_sVq4Ob-RzpVS2ecWhAg@mail.gmail.com>
+	<AANLkTimM+AfA5+wh9tOnyYDVxFQ3zuUjP+aPQB1NcNxO@mail.gmail.com>
+	<AANLkTikVjoi79JKxiy=Zhb=-c+g5DZxaOnwOzeT-sCkX@mail.gmail.com>
+Message-ID: <AANLkTikOBFO8Bn=E2OSup0kNiwT65Gump5SHLb1qwHqW@mail.gmail.com>
+
+On Fri, Apr 1, 2011 at 8:28 PM, Paul L <ninegua at gmail.com> wrote:
+>
+> Forgot to CC the list, please see below.
+>
+> On Wed, Mar 30, 2011 at 2:29 PM, Mathijs Kwik <bluescreen303 at gmail.com> wrote:
+>
+> > someBox :: Either A B ~> O
+> > someBox = handleA ||| handleB
+>
+> Not sure about this. If you are modeling the input as Either A B, then
+> you are excluding the possibility of both A and B occur at the same
+> time. I suggest you change the type to:
+>
+> someBox :: (Maybe A, Maybe B) ~> O
+
+In case they both occur, I just prioritize 1 over the other, so I
+handle A, and on the next run handle B.
+Your suggestion might come useful later on though, if prioritizing
+won't do the trick in certain cases.
+
+>
+> Based on your later comments, you implied that there could be multiple
+> B produced from one O. Then I'd suggest the following type:
+>
+> someBox :: (Maybe A, [B]) ~> O
+
+This implies that otherBox buffers its results somehow to produce the
+list of B's and present it as 1 result.
+I think this defies the CPS style stream processors goal.
+In reality, the outputs might be infinite, or just very very many,
+which will cause space leaks if they need to be buffered.
+
+>
+> > otherBox :: O ~> Either C B
+> >
+> > Also note that in this CPS style streamprocessing, there's no 1-on-1
+> > relation between input and output, so on 1 input (O), otherBox might
+> > produce 2 outputs (2 times C), or 4 outputs (3 times C and 1 time B).
+>
+> If the number of inputs do not match the number of outputs, I suggest
+> you change the type to:
+>
+> otherBox :: O ~> [Either C B]
+
+I think you are suggesting to use lists to essentially synchronize the
+input/output streams so every "step" of every part of the program will
+always produce an output for every input. In case no "real" output was
+produced, the result is just [].
+This is a very interesting thought but I think there will be issues with this.
+The "start" (someBox) will wait before every "run" until it receives
+the result from the "end", even if this is just [].
+If the loop becomes larger, includes heavy calculations, or has to
+wait for IO, this might take quite some time. Essentially the loop as
+a whole will be running as some kind of singleton. It will only
+restart if the last "run" has fully completed, meaning all inbetween
+steps are doing no processing in the mean time.
+Also, the full loop (every step within it) will need to run for every
+input. If someBox filters its inputs and only acts on 1 in a million
+of its inputs, it will now have to send [] downstream for every
+dropped input and wait for the end of the loop to feed-back [] to
+continue.
+
+>
+> > To "wire back" B's to someBox, I'm pretty sure I need to use ArrowLoop.
+> > But (loop :: a (b, d) (c, d) -> a b c) uses tuples, which means the
+> > processing will only continue when both inputs are available.
+> > So if I turn someBox into (A, B) ~> O and otherBox into O ~> (C, B),
+> > the processing will instantly halt, waiting for a B to arrive after
+> > the A comes in.
+>
+> You can do something like this, first, split the B out of the ouput:
+>
+> split :: [Either C B] ~> ([C], [B])
+>
+> Then the loop back:
+>
+> loop (someBox >>> otherBox >>> split) :: Maybe A ~> [C]
+
+I must say, you did solve the problem I posted and I am gonna have a
+look at its implications this weekend.
+It's probably not gonna work in all situations and in a way defeats
+stream processing's advantages, but it might still be useful in
+certain situations.
+
+Thanks you for your advice, it at least got me thinking in directions
+I didn't consider before.
+
+Mathijs
+
+>
+> --
+> Regards,
+> Paul Liu
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

@@ -1,0 +1,47 @@
+From cdsmith at gmail.com  Wed Aug  3 01:21:14 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Tue, 02 Aug 2011 17:21:14 -0600
+Subject: [Haskell-cafe] Fractional Part
+In-Reply-To: <6753AB4C-1B54-402F-9384-5723C11FECBC@gmail.com>
+References: <6753AB4C-1B54-402F-9384-5723C11FECBC@gmail.com>
+Message-ID: <1312327274.3538.15.camel@godel>
+
+On Wed, 2011-08-03 at 02:06 +0300, Ata Jafari wrote:
+> In the first step I want to write a little code that can give me only  
+> the decimal part of a float. For instance:
+
+properFraction from the RealFrac type class will divide into the real
+and fractional parts.  Once you've got the fractional part, converting
+that into an integer is a bit trickier.
+
+First, you should realize that it's only possible if the number has a
+terminating decimal representation, which happens precisely when it is
+rational, and in reduced fraction form, the denominator has only 2 and 5
+as prime factors.  Conveniently, an IEEE floating point number will
+always be of that form, so if you assume that the implementation uses an
+IEEE floating point format, you're golden!
+
+You'll then want to multiply both the numerator and denominator by a
+common multiplier to get the number of 2s and 5s in the factorization of
+the denominator to be the same.  Then the denominator is a power of 10,
+so the numerator is your answer.
+
+Some simple code might look like:
+
+toDecimalPart x = n * (5^k)
+    where (_, fracPart) = properFraction x
+          r             = toRational fracPart
+          d             = denominator r
+          n             = numerator r
+          k             = log2 d
+
+log2 1                   = 0
+log2 n | even n && n > 1 = 1 + log2 (n `quot` 2)
+       | otherwise       = error "log2 not an integer"
+
+-- 
+Chris Smith
+
+
+
+

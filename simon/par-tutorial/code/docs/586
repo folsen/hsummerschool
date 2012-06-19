@@ -1,0 +1,52 @@
+From uzytkownik2 at gmail.com  Fri Apr 22 01:32:04 2011
+From: uzytkownik2 at gmail.com (Maciej Marcin Piechotka)
+Date: Fri, 22 Apr 2011 01:32:04 +0200
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <BANLkTingNDExfXWS43FmdyMhrKjj+1S6BQ@mail.gmail.com>
+References: <4DB093A6.8000303@btinternet.com>
+	<2413044.1630.1303424178223.JavaMail.geo-discussion-forums@prcm34>
+	<BANLkTingNDExfXWS43FmdyMhrKjj+1S6BQ@mail.gmail.com>
+Message-ID: <1303428728.3329.5.camel@localhost.localdomain>
+
+On Thu, 2011-04-21 at 16:16 -0700, John Meacham wrote:
+> Um, the patch theory is what makes darcs "just work". There is no need
+> to understand it any more than you have to know VLSI design to
+> understand how your computer works. The end result is that darcs
+> repositories don't get corrupted and the order you integrate patches
+> doesn't affect things meaning cherrypicking is painless.
+> 
+
+While I appriciate the patch theory I don't think darcs fits the
+workflow of at least some people
+
+Assume following changes
+1. Feature X - file x.hs
+2. Feature Y - file y.hs and x.hs
+3. Feature Z - file z.hs and x.hs
+4. Fix to feature Y (changes x.hs)
+5. Fix to feature X (changes x.hs)
+
+Now before pushing I would like to have 3 nice commits. In git I can
+rewrite history by single command:
+
+# git rebase -i origin/master
+
+and edit the file to look like
+
+pick 1
+fixup 5
+pick 2
+fixup 4
+pick 3
+
+Manually/automatically check everything is ok.
+
+Regards
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110422/23904f7e/attachment.pgp>
+

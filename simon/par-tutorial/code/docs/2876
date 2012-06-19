@@ -1,0 +1,27 @@
+From kevin at froglingo.com  Wed Feb  9 06:02:30 2011
+From: kevin at froglingo.com (kevin at froglingo.com)
+Date: Wed, 09 Feb 2011 05:02:30 +0000
+Subject: [Haskell-cafe] semantics
+Message-ID: <W275202113688191297227750@webmail17>
+
+
+On Tue, Feb 8, 2011 at 07:55 pm, Conal Elliott <conal at conal.net> wrote:
+Here's my personal denotational answer to question 2: I think of a type as denoting a collection of (mathematical) values. If an expression e has type T, then the meaning (value) of e is a member of the collection denoted by T. This simple principle, which is fundamental to how I think of functional programming, has consequences in library design, which I've discussed at http://conal.net/blog/posts/notions-of-purity-in-haskell/ .
+
+When we consider a class of partial recursive functions as the type T, then what are the expressions (such as e in your statement above) for T?
+
+It seems that the type definition missed operations. For example, if a and b are two variables declared as integers, then we would not know how to calculate a + b if the type integers didn't include the plus operator.
+
+Defining a type as a set of values and a set of operations on the values is perfectly fine mathematically. But in the context of programming languages, a type seems to need its syntax anyhow in addition to be a set of values and a set of operations on the values. For example the type definition in C:
+
+typedef mydata {
+int a;
+char c;
+}
+
+The definition itself is the syntax while we may view the infinite many records {<0, 'a'>, <2, 'a'>, ..., <0, 'b>, ....} as its semantics (or the semantics was called a type earlier). 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110209/b0e1bd7b/attachment.htm>
+

@@ -1,0 +1,21 @@
+From scriptdevil.haskell at gmail.com  Wed Dec 21 04:27:18 2011
+From: scriptdevil.haskell at gmail.com (Ashok Gautham)
+Date: Wed, 21 Dec 2011 08:57:18 +0530
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <B31F669A-0009-4EF0-B1DE-297A3E6F91D2@telia.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+	<CA+qNEzLdy128SaENYYwRL1XhZXttwQJzRqcTTbh17gF1J_zoeQ@mail.gmail.com>
+	<B31F669A-0009-4EF0-B1DE-297A3E6F91D2@telia.com>
+Message-ID: <20111221032717.GA1609@byron.anthology>
+
+On Tue, Dec 20, 2011 at 11:17:32PM +0100, Hans Aberg wrote:
+> The monospace characters U+1D670-1D6A3 might be used for keywords. Font:
+>   http://www.stixfonts.org/
+
+I feel that monospace fonts should be used for all of programming. A
+language could use Unicode symbols, but if it enforces typography, it
+is destined to win an award for being really unusable
+
+

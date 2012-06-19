@@ -1,0 +1,67 @@
+From batterseapower at hotmail.com  Sun Aug  7 10:52:20 2011
+From: batterseapower at hotmail.com (Max Bolingbroke)
+Date: Sun, 7 Aug 2011 09:52:20 +0100
+Subject: [Haskell-cafe] Analyzing slow performance of a Haskell program
+In-Reply-To: <CAKaDkC7-vQo_AXRRX6-+P+PKV87b54D21k6bSnub=JYvH_mnRQ@mail.gmail.com>
+References: <CAKaDkC7-vQo_AXRRX6-+P+PKV87b54D21k6bSnub=JYvH_mnRQ@mail.gmail.com>
+Message-ID: <CAGXzfB60BDXV6vOJfk6YVBG7xjyhhmTDn=+ax6mjLBx5kY6B=A@mail.gmail.com>
+
+On 7 August 2011 06:15, Chris Yuen <kizzx2+haskell at gmail.com> wrote:
+> I am mainly interested in making the Haskell version perform
+> comparatively to the C# version. Right now it is at least 5x slower so
+> obviously I am missing something obvious)
+
+You have a "map" call which is immediately consumed by "solve". GHCs
+fusion wont' help you because "solve" is not defined in terms of
+foldr. Fusing this manually (http://hpaste.org/49936) you can get 10%
+improvement.
+
+Another source of problems is the divMod calls. There are two issues:
+  1. The result of the divMod is a pair of boxed Int64s. This can be
+worked around by using div and mod seperately instead, but that is
+actually slower even though it avoids the boxing.
+  2. The divMod is "checked": i.e. it throws a Haskell exception if
+the first argument is minBound or the second is 0. This means that
+divMod does two equality checks and one unboxing operation (which will
+just be an always-taken branch, thanks to pointer tagging) before it
+actually reaches GHC.Base.divInt#
+
+If I use divInt# and modInt# directly like so:
+
+{{{
+wordLength' :: Int64 -> Int64 -> Int64
+wordLength' !pad !n@(I64# n#)
+    | n < 10         = lenOnes n + pad
+    | n < 20         = lenTeens (n-10) + pad
+    | n < 100        = splitterTen
+    | n < 1000       = splitter 100 7
+    | n < 1000000    = splitter 1000 8
+    | otherwise      = splitter 1000000 7
+    where
+        splitterTen = let -- !(!t, !x) =  n `divMod` 10
+                          t = n# `divInt#` 10#
+                          x = n# `modInt#` 10#
+                      in wordLength' (lenTens (I64# t) + pad) (I64# x)
+        splitter !(I# d#) !suffix = let -- !(!t, !x) = n `divMod` d
+                                  t = n# `divInt#` d#
+                                  x = n# `modInt#` d#
+                              in wordLength' (wordLength' (suffix+pad)
+(I64# t)) (I64# x)
+}}}
+
+We sacrifice these checks but the code gets 25% faster again.
+
+I can't see anything else obviously wrong with the core, so the
+remaining issues are likely to be things like loop unrolling, turning
+div by a constant int divisor into a multiply and other code
+generation issues. I tried -fllvm but it has no effect. At a guess,
+this is because optimisations are impeded by the call to stg_gc_fun in
+the stack check that solve makes.
+
+In short I don't see how to get further without changing the algorithm
+or doing some hacks like manual unrolling. Maybe someone else has some
+ideas?
+
+Max
+
+

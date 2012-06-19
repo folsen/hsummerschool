@@ -1,0 +1,80 @@
+From michael at snoyman.com  Wed Aug 24 19:30:46 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 24 Aug 2011 20:30:46 +0300
+Subject: [Haskell-cafe] Lifting an enumerator
+In-Reply-To: <CAL1ky9q1Y7r7uosFgezEpZ2W_YQrpkoZ+jPR7eXdNXGLZFRERA@mail.gmail.com>
+References: <CAKA2JgKF0dN4N8Ge1_q-zemLZM93bWg_FjMtbaZGzrC2Gqnq4w@mail.gmail.com>
+	<CAL1ky9q1Y7r7uosFgezEpZ2W_YQrpkoZ+jPR7eXdNXGLZFRERA@mail.gmail.com>
+Message-ID: <CAKA2JgK_bADuUoQaADV4JmjyTUBcHnEQLBom7qdqDpZHhzB0Fg@mail.gmail.com>
+
+Actually, I'm looking for a slightly different type signature. Look at
+how I've implemented the special case of ErrorT:
+
+liftEnum :: Enumerator In IO (Either OcrError Out)
+         -> Enumerator In (ErrorT OcrError IO) Out
+
+There's a slightly different value for "b", which is what keeps track
+of the monadic state. This is the same trick used in MonadControlIO.
+My guess is that a final type signature would be something like:
+
+liftEnum
+  :: MonadTrans t
+  => (forall c. Enumerator a m c)
+  -> Enumerator a (t m) b
+
+Then the idea would be that, for each instance of MonadTrans, we would
+be encoding the state within that "c".
+
+Michael
+
+On Wed, Aug 24, 2011 at 8:23 PM, John Millikin <jmillikin at gmail.com> wrote:
+> The type signature
+>
+> ? ?liftEnum :: (Monad m, MonadTrans t) => Enumerator a m b ->
+> Enumerator a (t m) b
+>
+> expands to:
+>
+> ? ?liftEnum :: (Monad m, MonadTrans t) => (Step a m b -> Iteratee a m
+> b) -> Step a (t m) b -> Iteratee a (t m) b
+>
+> So you could implement it iff you can define:
+>
+> ? ?lower :: (Monad m, MonadTrans t) => t m a -> m a
+>
+> Which is not possible given the standard MonadTrans, but maybe
+> possible with a custom restricted typeclass such as your
+> MonadTransControl.
+>
+> On Wed, Aug 24, 2011 at 07:02, Michael Snoyman <michael at snoyman.com> wrote:
+>> Hi all,
+>>
+>> Max asked earlier[1] how to create a new instance of a class in
+>> Persistent using a monad transformer. Without getting into the
+>> specific details of persistent, I wanted to pose a question based on a
+>> much more general question: how can we lift the inner monad of an
+>> enumerator? We can easily do so for an Iteratee[2], but there is
+>> nothing to allow it for an Enumerator.
+>>
+>> At first glance, this problem looks very similar to the shortcomings
+>> of MonadIO when dealing with callbacks. In that case, you cannot use
+>> liftIO on a function that takes an `IO a` as a parameter. A solution
+>> to this issue is monad-control[3], which can be used to allow
+>> exception catching, memory allocation, etc.
+>>
+>> So I'm wondering: can we come up with a similar solution to this issue
+>> with enumerators? I have a working solution for the specific case of
+>> the ErrorT monad[4], but it would be great to be able to generalize
+>> it. Bonus points if we could express this in terms of the typeclasses
+>> already provided by monad-control.
+>>
+>> Michael
+>>
+>> [1] http://groups.google.com/group/yesodweb/browse_thread/thread/be2a77217a7f3343
+>> [2] http://hackage.haskell.org/packages/archive/enumerator/0.4.14/doc/html/Data-Enumerator.html#v:liftTrans
+>> [3] http://hackage.haskell.org/package/monad-control
+>> [4] https://gist.github.com/1168128
+>>
+>
+
+

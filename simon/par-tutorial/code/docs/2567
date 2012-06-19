@@ -1,0 +1,25 @@
+From creswick at gmail.com  Tue Feb  1 17:58:30 2011
+From: creswick at gmail.com (Rogan Creswick)
+Date: Tue, 1 Feb 2011 08:58:30 -0800
+Subject: [Haskell-cafe] Packages all screwed up
+In-Reply-To: <AANLkTina+VynOfraDbx4WEAPRqwQBUQDZRPESYxD9PNq@mail.gmail.com>
+References: <AANLkTimOAkVnV=V+Om6_EMFKsGStNuTFxAN+VDvAvUYR@mail.gmail.com>
+	<AANLkTikT0Vib4q2P5Ui3iJWnhtF4RcEnuqjsBn2hLVuF@mail.gmail.com>
+	<AANLkTina+VynOfraDbx4WEAPRqwQBUQDZRPESYxD9PNq@mail.gmail.com>
+Message-ID: <AANLkTi=tVcakA6BVtVsRPbQKMzreJyd9MPRGA_r+hGq_@mail.gmail.com>
+
+On Mon, Jan 31, 2011 at 11:16 PM, Arnaud Bailly <arnaud.oqube at gmail.com> wrote:
+> Hi,
+> Thanks for your answers.
+>
+> I did
+>
+>> cabal upgrade yesod
+
+I think 'upgrade' is deprecated, and known to break things on occasion
+(or at least have unexpected behavior--I'm not clear on the details).
+You can use 'cabal install' to upgrade packages.
+
+--Rogan
+
+

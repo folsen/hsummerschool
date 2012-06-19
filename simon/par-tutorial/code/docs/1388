@@ -1,0 +1,31 @@
+From fischer at nii.ac.jp  Fri Aug 26 10:50:58 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Fri, 26 Aug 2011 17:50:58 +0900
+Subject: [Haskell-cafe] a minor bug (memory leak) in ListLike package
+In-Reply-To: <CA+u6gbxBQbYsemAfigqLbv+8BETgH-aKusWiP45eM-Sq2nkFLA@mail.gmail.com>
+References: <4E544F7D.8030401@gmail.com>
+	<CA+u6gbzyx=_d6BbGtZ86GYpfDx3jg8o6zpM8Tcu3958wPpOffg@mail.gmail.com>
+	<CALoEywMxxgsZaC9CqgfT7ztgdkV-s3of_UtHsRYj5v1k6paMRA@mail.gmail.com>
+	<CA+u6gbxBQbYsemAfigqLbv+8BETgH-aKusWiP45eM-Sq2nkFLA@mail.gmail.com>
+Message-ID: <CALoEywPzMUe1Os7t5PNSH7GnQdxHRhHPfX5y33SVPCiDGhciyQ@mail.gmail.com>
+
+On Wed, Aug 24, 2011 at 3:47 PM, Ivan Lazar Miljenovic
+<ivan.miljenovic at gmail.com> wrote:
+> I was just trying to remember some of the tricks Daniel Peebles (aka
+> {co}pumpkin) used to do in #haskell with Data.List.genericLength.
+> I've never really used ListLike, but was just trying to guess why the
+> default implementation was as it is.
+
+Maybe he used lazy implementations of Num and Ord in combination with
+a definition like
+
+    length [] = 0
+    length (_:xs) = 1 + length xs
+
+But as John observed, the accumulating version of length does not
+provide such laziness and the accumulator might as well be made
+strict.
+
+Sebastian
+
+

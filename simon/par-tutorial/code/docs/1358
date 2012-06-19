@@ -1,0 +1,44 @@
+From es at ertes.de  Thu Aug 25 12:09:46 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Thu, 25 Aug 2011 12:09:46 +0200
+Subject: [Haskell-cafe] How to make callCC more dynamic
+References: <4E5524AB.5010108@gmail.com>
+	<CAJ-DSywaXiYfJX6+=84vRN6pQ-XJSQNCTxQaZUVBUy3Gz4Z8Jg@mail.gmail.com>
+	<CANcqPu4k5ZZAad0hq7m=Z3dQr-=HJSDVdKSfVwdOkjVh=sRiRw@mail.gmail.com>
+Message-ID: <20110825120946.202928de@angst.streitmacht.eu>
+
+bob zhang <bobzhang1988 at gmail.com> wrote:
+
+>   I was curious that we could bring really continuations into haskell,
+> the traditional callCC brings a lot of unnecessary type restrictions
+
+That's where the misconception lies.  The type parameter /is/ necessary
+for delimited continuations in Haskell.  By the way, I don't see how
+these continuations would be in any way not "real" or how the type
+parameter places any "restrictions", unless of course you want dynamic
+typing.
+
+The only operations I can imagine, which really restrict the type
+parameter, are the operation of aborting the entire computation and
+manipulating the result of it:
+
+    abort    :: a -> ContT a m a
+    mapContT :: (r -> r) -> ContT r m ()
+
+You can have undelimited CPS without the type parameter, but then you
+won't get any CPS effects.  As noted, you will just have an
+IdentityT-like monad transformer, which can at best improve the
+semantics of the underlying monad.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

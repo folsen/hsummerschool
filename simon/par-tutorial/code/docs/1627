@@ -1,0 +1,24 @@
+From v.dijk.bas at gmail.com  Sat Dec  3 12:42:36 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Sat, 3 Dec 2011 12:42:36 +0100
+Subject: [Haskell-cafe] ANNOUNCE: monad-control-0.3
+In-Reply-To: <CADLz5wW4oZbBtKMb7UQ8qQdn3UayBSQ-TL66VLG3hGXCUk_npg@mail.gmail.com>
+References: <CADLz5wW4oZbBtKMb7UQ8qQdn3UayBSQ-TL66VLG3hGXCUk_npg@mail.gmail.com>
+Message-ID: <CADLz5wVrSMBK+15gydRt9UdMMy8=F++yPyJJm_SA0kWwG1vDbQ@mail.gmail.com>
+
+On 3 December 2011 00:45, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+> Note that Peter Simons just discovered that these packages don't build
+> with GHC-7.0.4 (https://github.com/basvandijk/monad-control/issues/3).
+> I just committed some fixes which enable them to be build on GHC >=
+> 6.12.3. Hopefully I can release these fixes this weekend.
+
+I just released the fixes:
+
+http://hackage.haskell.org/package/monad-control-0.3.0.1
+http://hackage.haskell.org/package/lifted-base-0.1.0.1
+
+Cheers,
+
+Bas
+
+

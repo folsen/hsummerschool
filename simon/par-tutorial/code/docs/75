@@ -1,0 +1,55 @@
+From daniel.is.fischer at googlemail.com  Sun Apr  3 17:11:20 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sun, 3 Apr 2011 17:11:20 +0200
+Subject: [Haskell-cafe] error to Fail Conversion
+In-Reply-To: <64103.5893.qm@web33508.mail.mud.yahoo.com>
+References: <64103.5893.qm@web33508.mail.mud.yahoo.com>
+Message-ID: <201104031711.20865.daniel.is.fischer@googlemail.com>
+
+On Sunday 03 April 2011 16:31:10, Anwar Bari wrote:
+> HI Cafe
+>   I have problem with this function
+> value :: Theorm-> [(String,Int)] -> Tem -> Int
+> value _   env (Var s)      = maybe (error "Unknown variable.") id
+> (lookup s env) value mdl env (OP s _ _ l) = maybe (error "Function not
+> defined.") id (lookup (map (value mdl env) l) (S.toList $ maybe (error
+> 
+> "Uknown function.") id (fmap snd (multiLookup s (operations mdl)))))
+> 
+> This function is working fine, but I want to change error function to
+> fail function to be able use it in my GUI application.
+
+For that, you have to change the type.
+If the result type is Int, you can only have it return a bona fide Int or 
+an error.
+
+For more graceful failing, the result type needs to support some indication 
+of failure, it could be
+
+Maybe Int
+Either String Int
+[Int]
+
+or others. Normally, using some MonadError would be the most convenient.
+
+value :: (Error e, MonadError e m) =>
+            Theorem -> Environment -> Term -> m Int
+ 
+replacing
+
+maybe (error "foo") id
+
+with
+
+maybe (throwError $ strMsg "foo") return
+
+> I can't change the output of value function to IO Int,
+
+If you can change it at all, changing it as above and making your GUI-monad 
+suitable (i.e. providing a MonadError instance for it with a suitable error 
+type) would probably be the simplest.
+
+> any idea will help. Thanks
+> Nour.
+
+

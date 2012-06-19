@@ -1,0 +1,57 @@
+From ianwookim at gmail.com  Mon Dec 12 12:56:09 2011
+From: ianwookim at gmail.com (Ian-Woo Kim)
+Date: Mon, 12 Dec 2011 06:56:09 -0500
+Subject: [Haskell-cafe] ANNOUNCE: hxournal-0.5.0.0 - A pen notetaking
+	program written in haskell
+Message-ID: <CAPNnnrV329dsY_cB=K7q1-REUE5os7+u+psqN=rWeq9Crz6JEQ@mail.gmail.com>
+
+Hi, everyone,
+
+I am very pleased to announce a pen notetaking program: hxournal,
+which is written entirely in haskell using gtk2hs.
+
+I uploaded the package on hackage. This program accompanies with
+two library packages, xournal-parser and xournal-render for parsing
+and rendering xournal format file.
+
+http://hackage.haskell.org/package/hxournal
+http://hackage.haskell.org/package/xournal-parser
+http://hackage.haskell.org/package/xournal-render
+
+Installing hxournal should be very simple:
+> cabal update
+> cabal install hxournal
+
+hxournal can be currently regarded as a clone of xournal, which is a
+notetaking program developed in C. (See
+http://xournal.sourceforge.net)
+
+As xournal, hxournal can take wacom tablet X11 input in subpixel unit
+so that it can result in very smooth notetaking experience.
+
+Currently, basic pen operations and eraser operations, file open/save
+operations, rectangular selection, cut/copy/paste operations have been
+implemented. So the application is semi-usable. The file format is
+the same as xournal but gunzipped. So to view/edit xoj files generated
+from xournal, just gunzip the xoj files and read them in hxournal.
+Gunzipped xoj files generated from hxournal are readable in xournal
+program.
+
+One NEW special feature of hxournal compared with xournal:
+This program can make a split view (horizontal and vertical and
+arbitrary combination of them) of the same document similarly to emacs
+buffers and windows. Please try Horizontal/Vertical Split in View menu
+of the program. This will be convenient when notetaking a long
+document.
+
+The git repository is located at https://www.github.com/wavewave/hxournal
+The program web page and development web/wiki pages will be announced
+soon (it will be linked from package webpage on hackage anyway) and
+the detailed manual will be presented there.
+
+Thank you for your interest.
+Enjoy haskell notetaking!
+
+Ian-Woo Kim
+
+

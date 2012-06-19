@@ -1,0 +1,18 @@
+From oscarpicasso at gmail.com  Sat Aug 27 02:34:24 2011
+From: oscarpicasso at gmail.com (Oscar Picasso)
+Date: Fri, 26 Aug 2011 20:34:24 -0400
+Subject: [Haskell-cafe] Project Euler: request for comments
+Message-ID: <CAPkMFPnCdD4Od5ff6AZ8pu5peR_puk2y+ygZeuPLPX_Y4tUPhw@mail.gmail.com>
+
+Hi,
+
+I order to improve my Haskell skills I started (again) to solve the
+project euler problems with this language.
+I am now at problem 11 and would really appreciate any comment about
+my code in order to make it more elegant or efficient.
+
+My solutions can be found here: http://fp.opicasso.com/tag/projecteuler
+
+Oscar Picasso
+
+

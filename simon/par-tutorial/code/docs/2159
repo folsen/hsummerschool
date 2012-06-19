@@ -1,0 +1,62 @@
+From alex.solla at gmail.com  Wed Dec 21 05:24:47 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Tue, 20 Dec 2011 20:24:47 -0800
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+Message-ID: <CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+
+On Tue, Dec 20, 2011 at 1:46 AM, Ben Lippmeier <benl at ouroborus.net> wrote:
+
+>
+> On 20/12/2011, at 6:06 PM, Roman Cheplyaka wrote:
+>
+> > * Alexander Solla <alex.solla at gmail.com> [2011-12-19 19:10:32-0800]
+> >> * Documentation that discourages thinking about bottom as a 'value'.
+>  It's
+> >> not a value, and that is what defines it.
+> >
+> > In denotational semantics, every well-formed term in the language must
+> > have a value. So, what is a value of "fix id"?
+>
+> There isn't one!
+>
+>
+Indeed, that is my point.  "Bottom" is the representation of a computation
+which cannot be computed.  It does not have a semantic in anything less
+than the first infinite ordinal.  It should be treated as essentially
+unique.  It exists as a syntactic construct, but it cannot be given an
+interpretation in Haskell.
+
+In particular, we cannot compare "distinct" (or even indistinct) bottoms,
+because of the halting problem.  There is no consistent logic in which
+(forall x, x = x) does not hold.  Treating bottom the same way we treat 1,
+"abc", (Just 10), and the other (in principle) comparable values introduces
+contradiction to Haskell, as a logic.  (That is why bottom has the
+syntactic symbol _|_, the syntax for /the/ unique contradiction)
+
+Denotational semantics is nice, but it goes way out of the realm of
+realistic computation to deal with infinite ordinals just to have a
+complete semantic.  (We can't run computations even up to the first
+infinite ordinal in real life)
+
+I would rather have an incomplete semantic, and have all the incomplete
+parts collapsed into something we call "bottom".  We can then be smart and
+stay within a total fragment of the language (where bottom is guaranteed to
+not occur).  Or we may have to move into the non-total fragment of the
+language for performance reasons.  That's fine, but we shouldn't treat
+things like 'seq' as if they produce values.  'seq', 'unsafeCoerce', and
+many others are literally compiler magic, and as such, should be used with
+extreme care not warranted when dealing with "regular" values.
+
+I have used the phrase "proto-value" for describing these magical objects.
+ I just wish the documentation made the distinction between a "proto-value"
+and a real value more clear.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111220/4471d63e/attachment-0001.htm>
+

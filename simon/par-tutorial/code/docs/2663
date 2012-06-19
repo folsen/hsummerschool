@@ -1,0 +1,35 @@
+From catamorphism at gmail.com  Thu Feb  3 22:56:52 2011
+From: catamorphism at gmail.com (Tim Chevalier)
+Date: Thu, 3 Feb 2011 13:56:52 -0800
+Subject: [Haskell-cafe] hsmagick on OSX 10.6
+In-Reply-To: <354CC396-9411-440F-8972-3C4A7F56156D@gmail.com>
+References: <354CC396-9411-440F-8972-3C4A7F56156D@gmail.com>
+Message-ID: <AANLkTi=hkpHjzahPEgRE5mU6GMZcteNkTf-fnxF7UUJz@mail.gmail.com>
+
+On Thu, Feb 3, 2011 at 10:43 AM, Max Cantor <mxcantor at gmail.com> wrote:
+> Just out of curiosity, has anyone gotten this to work? ?I'm getting bus errors whenever I call readImage.
+>
+> If anyone out there has gotten it working and would tell me which versions they're using of the relevant bits, that would be very much appreciated. ?Also, I'll post all my debug info if there's someone who's gotten this to work.
+>
+
+Hi Max --
+
+I know that several people have used hsmagick successfully, but I
+don't have Mac OS 10.6 (I use 10.5.8), so I can't try to reproduce
+your problem.
+
+Vincent Gerard is taking over maintainership of the library, so you
+may want to cc him on any emails. In general it's not too safe to
+assume that any particular library maintainer reads haskell-cafe
+regularly :-)
+
+Cheers,
+Tim (hsmagick maintainer)
+
+
+-- 
+Tim Chevalier * http://cs.pdx.edu/~tjc/ * Often in error, never in doubt
+"an intelligent person fights for lost causes,realizing that others
+are merely effects" -- E.E. Cummings
+
+

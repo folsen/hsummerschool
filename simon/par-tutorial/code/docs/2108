@@ -1,0 +1,24 @@
+From wren at freegeek.org  Tue Dec 20 00:38:56 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Mon, 19 Dec 2011 18:38:56 -0500
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <3246599F-0563-46EA-81F6-A982457C2AD5@gmail.com>
+References: <fddfbd10-32f2-4f71-eb37-903da9b05ee3@me.com>
+	<3246599F-0563-46EA-81F6-A982457C2AD5@gmail.com>
+Message-ID: <4EEFCB10.8030005@freegeek.org>
+
+On 12/15/11 8:26 AM, Gregory Crosswhite wrote:
+> Put another way, the problem with Maybe computations is that if there
+> is a failure at any point in the computation than *the entire
+> computation fails*, and this means that you can't lazily generate a
+> list of results using some/many because you can't tell whether your
+> computation was a success or a failure until the entire infinite
+> computation has been run;
+
+exactamente.
+
+-- 
+Live well,
+~wren
+
+

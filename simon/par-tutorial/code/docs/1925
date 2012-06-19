@@ -1,0 +1,38 @@
+From michael at snoyman.com  Wed Dec 14 14:34:30 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 14 Dec 2011 15:34:30 +0200
+Subject: [Haskell-cafe] DB vs read/show for persisting large data
+In-Reply-To: <CAGdT1gqohuKtQPQdH2FS==HTqCtDVYvjKibD_wZ1vtF7Vxr_wA@mail.gmail.com>
+References: <CAGdT1gqohuKtQPQdH2FS==HTqCtDVYvjKibD_wZ1vtF7Vxr_wA@mail.gmail.com>
+Message-ID: <CAKA2JgJ3oyfKeyVR8p=D1xYcpbH_gVXzO6_NW5L5+rvK0uhS2w@mail.gmail.com>
+
+On Wed, Dec 14, 2011 at 3:31 PM, C K Kashyap <ckkashyap at gmail.com> wrote:
+> Hi,
+>
+> It has been on my todo list for some time now. I'd like to write a GTD tool
+> that has dependency tracking support. Haskell seems like a good choice for
+> this. I was wondering if there has been any past attempts with this?
+>
+> One thing that has been bothering me has been this - the persistence of
+> data. Should I use sqlite(or someother DB) or should I use Haskell's
+> read/show functions to read from and write to a file? I am slightly not
+> inclined towards NOT using DB because I want to implement all the business
+> logic in Haskell. I want to avoid having to generate SQL.
+>
+> It'll be great if I could get some feedback on the "read/show" approach - is
+> this even a viable option?
+>
+> Regards,
+> Kashyap
+
+Definite *don't* use read/show: if you make any updates to your data
+structures, all old files will be lost. I would recommend either using
+some standard file format (JSON/YAML... or even XML if you like) or
+using a database. If you want to avoid writing SQL, Persistent[1] may
+be a good fit.
+
+Michael
+
+[1] http://www.yesodweb.com/book/persistent
+
+

@@ -1,0 +1,21 @@
+From lemming at henning-thielemann.de  Tue Apr 19 18:16:00 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Tue, 19 Apr 2011 18:16:00 +0200 (CEST)
+Subject: [Haskell-cafe] [Haskell] select(2) or poll(2)-like function?
+In-Reply-To: <20110417202902.GA7656@nutty.outback.escape.de>
+References: <20110417202902.GA7656@nutty.outback.escape.de>
+Message-ID: <alpine.DEB.2.00.1104191814250.13388@anubis>
+
+
+On Sun, 17 Apr 2011, Matthias Kilian wrote:
+
+> is there something like select(2) or poll(2) available in the
+> standard (HP) libraries? I hoogled around a little bit but didn't
+> find anything. (Something like this will be crucial for networking
+> stuff listening on v4 and v6 sockets at the same time)
+
+A very basic thing to start from:
+    http://code.haskell.org/~thielema/poll/
+  It is still subject to change. We are planning to use this in alsa-seq.
+
+

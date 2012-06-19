@@ -1,0 +1,14 @@
+From timmaxw at gmail.com  Sat Feb 12 10:34:28 2011
+From: timmaxw at gmail.com (Tim Maxwell)
+Date: Sat, 12 Feb 2011 01:34:28 -0800
+Subject: [Haskell-cafe] Introducing monad-embed
+Message-ID: <277CAD9E-489C-408B-A556-DE5C90950DB0@gmail.com>
+
+Hi,
+
+monad-embed is an experimental programming language that parameterizes everything on a monad by default. Examples, source code, etc. are at <http://timmaxwell.org/pages/monad-embed/>.
+
+I posted about it on the Haskell subreddit a few months ago (see <http://bit.ly/cUZvrB>) but I was advised to re-post it in haskell-cafe as well.
+
+Tim Maxwell
+

@@ -1,0 +1,42 @@
+From clifford.beshers at gmail.com  Mon Aug 22 19:35:17 2011
+From: clifford.beshers at gmail.com (Clifford Beshers)
+Date: Mon, 22 Aug 2011 10:35:17 -0700
+Subject: [Haskell-cafe] Is it written down somewhere what sort of things
+ belong in Data.*?
+In-Reply-To: <CAJN_RF6rS-NEggRcm3ORJZpYFF56==5zauzsxU2Yb2rUF+e7Eg@mail.gmail.com>
+References: <CAJN_RF6rS-NEggRcm3ORJZpYFF56==5zauzsxU2Yb2rUF+e7Eg@mail.gmail.com>
+Message-ID: <CALCBE+9xu2GRMDqyuKo1jf5aBeeEtg6O_6d=A8-BuhTcmY_HOA@mail.gmail.com>
+
+I do not know of a specific definition, but I think the heuristic for
+inclusion in Data is that which is neither control nor chaos.
+
+By 'control' I mean functions that are often "baked into" other languages,
+such as exception handling, bracketing, but which can be implemented as
+library functions in Haskell.
+
+By 'chaos', I mean anything specialized to a particular field (e.g.,
+biology, physics), even if it be part of computer science, e.g., software
+management, computer graphics.
+
+What's left are data types and structures that are ubiquitous (e.g., lists,
+sets, maps), essential for basic communication (e.g., characters, text,
+encryption, serialization, persistence) or language (but not compiler)
+specific (e.g., reflection, dynamic typing, generics).
+
+
+On Mon, Aug 22, 2011 at 9:50 AM, David Fox <ddssff at gmail.com> wrote:
+
+> I'm never quite sure what the distinction is that defines the modules
+> under Data.*.  Can anyone explain?
+>
+> -david
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110822/a3d157d6/attachment.htm>
+

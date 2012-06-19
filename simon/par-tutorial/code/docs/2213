@@ -1,0 +1,28 @@
+From ivanperezdominguez at gmail.com  Wed Dec 21 20:39:17 2011
+From: ivanperezdominguez at gmail.com (Ivan Perez)
+Date: Wed, 21 Dec 2011 20:39:17 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <1324495758.2459.21.camel@fuzxxl>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CACZKWELLqTw3dzzuN412MGF9EBX-_S5kvoXjuyEoNKTjh-_9Dg@mail.gmail.com>
+	<CAKicEsNmJDy=Z5=5otZc6UUUwEN6=SoCCaQUQUjhfkpnsm7q2A@mail.gmail.com>
+	<CACZKWEK3uNB18WG9RDgb3J5rFugBb7oWebGYaqOXTHdAuAmySg@mail.gmail.com>
+	<1324495758.2459.21.camel@fuzxxl>
+Message-ID: <CACZKWEJJ=+cNyf3EhOxAX1=V3rKyE3mApA7Vni=0Sm3Sc2oGvw@mail.gmail.com>
+
+> In Haskell, most of these assumptions are invalid:
+>
+> ? ? ?* something may be curried or member of a strange typeclass (like
+> ? ? ? ?printf). No assumptions about the number of arguments can be
+> ? ? ? ?made
+> ? ? ?* It may be possible that we do not yet know the type of a because
+> ? ? ? ?we can't infer it's type without knowing the type of x
+> ? ? ?* show obj is definitely a String
+> ? ? ?* 2 is of type Num a => a. What if there are two something, one
+> ? ? ? ?with a parameter of type Int and one with a Float?
+>
+> You see, It's not so easy.
+I see. Thanks for such a clear explanation.
+
+

@@ -1,0 +1,28 @@
+From byorgey at seas.upenn.edu  Sun Dec 25 06:04:01 2011
+From: byorgey at seas.upenn.edu (Brent Yorgey)
+Date: Sun, 25 Dec 2011 00:04:01 -0500
+Subject: [Haskell-cafe] Images in Haddock documentation: best practices?
+Message-ID: <20111225050401.GA8834@seas.upenn.edu>
+
+Hi all,
+
+Although it doesn't seem to be documented in the user manual (!),
+Haddock supports inline images, using a <<url>> syntax.  I'd like to
+include some images in the documentation for a package I'm writing,
+but not sure of the best way.
+
+I can, of course, just make the images available under my UPenn
+personal web space, and link to them from the documentation.  But this
+seems fragile and ad-hoc.  Ideally, I'd like to bundle the images
+along with the cabal package, and reference them locally from within
+the documentation.  But I haven't figured out a way to do this.
+
+Any ideas?  Has anyone ever included images in Haddock docs before?
+Is it possible to bundle them with the package and refer to them
+locally?  Or does anyone have any other suggestions?  Are there
+specific ways Haddock and/or cabal could be improved to make this
+easier?
+
+-Brent
+
+

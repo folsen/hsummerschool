@@ -1,0 +1,179 @@
+From newton at mit.edu  Tue Feb  1 06:51:38 2011
+From: newton at mit.edu (Ryan Newton)
+Date: Tue, 1 Feb 2011 00:51:38 -0500
+Subject: [Haskell-cafe] Splittable random numbers
+In-Reply-To: <AANLkTik+kgtFMQu7HdEYWHzyEt0fhp70-BG9SQgopUQ1@mail.gmail.com>
+References: <59543203684B2244980D7E4057D5FBC11CFA8B3D@DB3EX14MBXC308.europe.corp.microsoft.com>
+	<20101110193333.GB11882@melkinpaasi.cs.helsinki.fi>
+	<AANLkTik3VwehvtbPi05H2wv0MturrP7WbbFXv9GygcLF@mail.gmail.com>
+	<AANLkTikLqCjP=EquysEbzkXCoYu+yB22Ho8JLRiii88+@mail.gmail.com>
+	<20110122144720.GM17274@ruuvi.it.helsinki.fi>
+	<AANLkTi=2W1bOL_FSa11X489Mo_uJvMdxXOKYmKQGvdSP@mail.gmail.com>
+	<AANLkTik+kgtFMQu7HdEYWHzyEt0fhp70-BG9SQgopUQ1@mail.gmail.com>
+Message-ID: <AANLkTinrQKkVh5UKGC5wMeaLbAd4p5PCb_oWFO6sMW8v@mail.gmail.com>
+
+Small update:
+
+I got the first results from the hardware accelerated version on a 3.33 ghz
+westmere machine.  Right now it does twice as well as the Gladman software
+version, which is also twice as well as the System.Random stdgen, and 1000
+times faster than a the Haskell implementation of AES that I got from the
+Crypto package:
+
+     How many random numbers can we generate in a second on one thread?
+      Cost of rdtsc (ffi call):    84
+      Approx getCPUTime calls per second: 209,798
+      Approx clock frequency:  3,331,093,772
+      First, timing with System.Random interface:
+ 76,811,104 random ints generated [constant zero gen]
+ 14,482,725 random ints generated [System.Random stdGen]
+     16,061 random ints generated [PureHaskell/reference]
+     32,309 random ints generated [PureHaskell]
+  2,401,893 random ints generated [Gladman inefficient]
+ 15,980,625 random ints generated [Gladman]
+  2,329,500 random ints generated [IntelAES inefficient]
+ 32,383,799 random ints generated [IntelAES]
+      Comparison to C's rand():
+ 71,392,408 random ints generated [rand/store in C loop]
+ 71,347,778 random ints generated [rand in Haskell loop]
+ 71,324,158 random ints generated [rand/store in Haskell loop]
+
+This is what Burton Smith originally thought, that AES based RNG would be
+pretty fast and even faster with hardware acceleration.
+
+-Ryan
+
+
+
+On Mon, Jan 31, 2011 at 1:25 AM, Ryan Newton <newton at mit.edu> wrote:
+
+> Hi Cafe,
+>
+> I've included Gladman's efficient, portable C implementation of AES
+> generating random numbers now, and the hardware-accelerated version is
+> working too.  I'm currently seeing higher throughput for even the software
+> based version than the builtin stdGen:
+>
+>
+>   First, timing with System.Random interface:
+>      13,051,964 random ints generated [System.Random stdGen]      ~ 252
+> cycles/int
+>          15,635 random ints generated [PureHaskell/reference]     ~ 210,763
+> cycles/int
+>          31,159 random ints generated [PureHaskell]               ~ 105,757
+> cycles/int
+>       2,180,488 random ints generated [Gladman inefficient]       ~ 1,511
+> cycles/int
+>      15,015,095 random ints generated [Gladman]                   ~ 219
+> cycles/int
+>
+> That seems like a good argument for cryptographic RNGs to me!
+>
+> I'm having a lot of trouble getting cabal to build/install it
+> successfully.  You can see what I've got there now.  I'd be interested to
+> know if anyone else can build it successfully.  It should work -- but only
+> by building the assembly code into a .so and assuming the build directory is
+> /opt/intel-aes ;-).
+>
+> I don't have real numbers for the hardware version yet because the Westmere
+> machine I'm logged into is redhat 5.4 and is giving me "GLIBC_2.7 not found"
+> errors.  You can run it for correctness purposes using an emulation tool
+> called sde (software development emulator)<http://software.intel.com/en-us/articles/intel-software-development-emulator/>that's based on dynamic binary translation.
+>
+> -Ryan
+>
+> P.S. Checkout command:
+> git clone git://github.com/rrnewton/intel-aes.git
+>
+>
+>
+>
+>
+> On Sat, Jan 29, 2011 at 8:52 AM, Ryan Newton <rrnewton at gmail.com> wrote:
+>
+>>  perhaps performance? Is this approach less robust with a faster,
+>>> non-cryptographic RNG?
+>>>
+>>
+>> Yes, I don't understand that either.  Is there a reason that using a
+>> weaker PRNG in this case is WORSE than using it in the non-splitting case?
+>> Is that why there is more of an impetus to use the cryptographic approach in
+>> this case?
+>>
+>> Anyway, taking for granted that the Burton approach is a useful thing to
+>> have implemented, I started developing a package for this stuff -- AES based
+>> RNG including both a haskell implementation and wrapping an AESNI-based C
+>> one .  I haven't posted it to Hackage yet, but you can find the git
+>> repository here:
+>>
+>>     https://github.com/rrnewton/intel-aes
+>>
+>> If you build with cabal and run the benchmark-intel-aes-rng executable, it
+>> will give you a breakdown like this:
+>>
+>>     How many random numbers can we generate in a second on one thread?
+>>       Cost of rdtsc (ffi call):    83
+>>       Approx getCPUTime calls per second: 205,640
+>>       Approx clock frequency:  3,306,891,339
+>>       First, timing with System.Random interface:
+>>        193,178,901 random ints generated [constant zero gen]
+>>         14,530,358 random ints generated [System.Random stdGen]
+>>             16,346 random ints generated [BurtonGenSlow/reference]
+>>             32,965 random ints generated [BurtonGenSlow]
+>>       Comparison to C's rand():
+>>        118,766,285 random ints generated [rand/store in C loop]
+>>        114,668,028 random ints generated [rand / Haskell loop]
+>>        114,675,116 random ints generated [rand/store Haskell]
+>>
+>> At the moment this is Haskell-only, I haven't included the wrapped Intel
+>> assembly code library yet.  As you can see, the pure-Haskell AES based RNG
+>> (BurtonGenSlow) is pretty slow.
+>>
+>> Would anyone else be interested in running those RNG testing tools
+>> (diehard, big crush) on this to make sure it is working correctly?
+>>
+>> Also I'd be happy if anyone with a performance-oriented-eye would like to
+>> take a look at what's going on.  Both for the sake of the serial performance
+>> (above) and because the parallel performance is currently *mysterious*(see below).
+>>
+>> I figure one of the main reasons for splittable RNG is deterministic
+>> parallel computations.  Thus it's important that all threads be able to run
+>> the RNG efficiently.  Right now, if you look at SimpleRNGBench.hs I'm just
+>> running the same RNG on numCapabilities threads.  Yet with that simple test
+>> I'm running into problems, summarized thus:
+>>
+>>   * I get substantial (3X) variance in program performance on consecutive
+>> runs.
+>>   * I see a minor hit in performance adding -threaded, but going from -N1
+>> to -N4 (even with a single-thread of work) yields a big hit in performance
+>> and increase in variance.
+>>   * -N4 with four actual threads of work is actually pretty good for the
+>> pure haskell version.  All four threads on my nehalem 3.33ghz can maintain
+>> 93% of their throughput in the serial case.  BUT the variance problem
+>> persists.
+>>   * I run a busy-wait loop that measures cpu frequency... and this seems
+>> to get messed up in threaded mode (even with -qm -qa).  I don't know why.
+>>   * I cannot killThread a haskell thread (forkIO or forkOS) that is
+>> currently running a divergent FFI call (safe or unsafe).  (See "time_c".)
+>>
+>> You can find the details in the DEVLOG here:
+>>
+>>    https://github.com/rrnewton/intel-aes/blob/master/CHANGELOG
+>>
+>> Let me know if you have any ideas.  I'm going to leave the Haskell version
+>> how it is and focus on wrapping the Intel asm (which has a permissive
+>> license).
+>>
+>> Cheers,
+>>   -Ryan
+>>
+>> P.S. Regarding this benchmarking -- would it be appropriate to use
+>> Criterion for this?  Or is it sufficient to measure aggregate throughput as
+>> I've been doing?
+>>
+>>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110201/8fa386af/attachment.htm>
+

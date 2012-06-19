@@ -1,0 +1,101 @@
+From nominolo at googlemail.com  Sat Dec 17 00:58:34 2011
+From: nominolo at googlemail.com (Thomas Schilling)
+Date: Fri, 16 Dec 2011 23:58:34 +0000
+Subject: [Haskell-cafe] Type checker for haskell-src-exts (was:
+ Typechecking Using GHC API)
+In-Reply-To: <CAMUA08QBgRYgwb65fjgt=v-XRg1XmvZUBmctShy786PH85Aw-g@mail.gmail.com>
+References: <CACz_ru0TWtc5a5ZCtXBXJYG+ikvYWwzGp707weqigNRwS4qfRQ@mail.gmail.com>
+	<CAOJG3uD_-=9HHXLpbJzo3R4yj1vn3v03jHunq_0=P7Kga+90fw@mail.gmail.com>
+	<CAMUA08QBgRYgwb65fjgt=v-XRg1XmvZUBmctShy786PH85Aw-g@mail.gmail.com>
+Message-ID: <CAOJG3uDQR2jDhm0LP_B0ZePE9zuzBy7cJB6kNDJkqCQmBDFY7Q@mail.gmail.com>
+
+On 16 December 2011 17:44, Niklas Broberg <niklas.broberg at gmail.com> wrote:
+> With all due respect, the sentiments you give voice to here are a large part
+> of what drives me to do this project in the first place. Haskell is not GHC,
+> and I think that the very dominant position of GHC many times leads to ill
+> thought-through extensions. Since GHC has no competitor, often extensions
+> (meaning behavior as denoted and delimited by some -X flag) are based on
+> what is most convenient from the implementation point of view, rather than
+> what would give the most consistent, logical and modular user experience
+> (not to mention
+> third-party-tool-implementor-trying-to-support-GHC-extensions experience).
+
+I agree.  Various record proposals have been rejected because of the
+"not easily implementable in GHC" constraint.  Of course, ease of
+implementation (and maintenance) is a valid argument, but it has an
+unusual weight if GHC is the (in practise) only implementation.  Other
+extensions seem to just get added on (what feels like) a whim (e.g.,
+RecordPuns).
+
+> As such, I'm not primarily doing this project to get a development tool out,
+> even if that certainly is a very neat thing. I'm just as much doing it to
+> provide a Haskell (front-end) implementation that can serve as a better
+> reference than GHC, one that very explicitly does *not* choose the
+> convenient route to what constitutes an extension, and instead attempts to
+> apply rigid consistency and modularity between extensions. Also, just like
+> for haskell-src-exts I hope to build the type checker from the roots with
+> the user interface as a core design goal, not as a tacked-on afterthought.
+>
+> Mind you, in no way do I intend any major criticism towards GHC or its
+> implementors. GHC is a truly amazing piece of software, indeed it's probably
+> my personal favorite piece of software of all times. That does not mean it
+> comes free of quirks and shady corners though, and it is my hope that by
+> doing what I do I can help shine a light on them.
+
+Weeeell... I've gotten a little bit of a different perspective on this
+since working at a company with very high code quality standards (at
+least for new code).  There is practically no observable code review
+happening.  I'm sure Dimitrios and Simon PJ review most of each
+other's code every now and then, but overall there is very little code
+review happening (and no formal, recorded code review whatsoever).
+Cleaning up the GHC code base is a huge task -- it uses lots of dirty
+tricks (global variables, hash tables, unique generation is
+non-deterministic, ...) which often complicate efforts tremendously (I
+tried).  The lack of a unit tests doesn't help (just rewriting code so
+that it can be tested would help quite a bit).
+
+Don't get me wrong, I certainly appreciate the work the GHC team is
+doing, but GHC strikes a fine balance between industrial needs and
+research needs.  I'm just wondering whether the balance is always
+right.
+
+> Answering your specific issues:
+>
+> 1) Yes, it's a lot of work. Probably not half as much as you'd think though,
+> see my previous mail about walking in the footsteps of giants. But beyond
+> that, I think it's work that truly needs to be done, for the greater good of
+> Haskell.
+
+Right OutsideIn(X) (the Journal paper description, not the ICFP'09
+version) seems like the right way to go.  I wasn't aware of the other
+paper (the original work on bidirectional type inference seemed very
+unpredictable in terms of when type annotations are needed, so I'm
+looking forward to how this new paper handles things).
+
+> 2) Well, I think I've done a reasonably good job keeping haskell-src-exts up
+> to date so far, even if the last year has been pretty bad in that regard
+> (writing a PhD thesis will do that to you). I'll keep doing it for the type
+> checker as well. But I am but one man, so if anyone else feels like joining
+> the project then they are more than welcome to.
+>
+> Sort-of-3) Yes, both implementation and maintenance are likely going to be
+> far more costly than the alternative to do a translation via the GHC API.
+> I'm not interested in that alternative though.
+
+Fair enough.  As I am interested in building reliable (and
+maintainable) development tools my priorities are obviously different.
+ For that purpose, using two different implementations can lead to
+very confusing issues for the user (that's why I was asking about bug
+compatibility).  Apart from the bus factor, there is also the
+bitrotting issue due to GHC's high velocity.  For example, even though
+HaRe does build again it doesn't support many commonly used GHC
+extensions and it is difficult to add them into the existing code base
+(which isn't pretty).
+
+Anyway, good luck with your endeavours.
+
+/ Thomas
+-- 
+Push the envelope. Watch it bend.
+
+

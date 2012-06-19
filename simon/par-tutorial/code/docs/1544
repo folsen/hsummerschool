@@ -1,0 +1,45 @@
+From simons at cryp.to  Tue Aug 30 22:16:01 2011
+From: simons at cryp.to (Peter Simons)
+Date: Tue, 30 Aug 2011 22:16:01 +0200
+Subject: [Haskell-cafe] Off-topic: Mathematics
+References: <4E5B4F1F.2090600@btinternet.com>
+	<CAOco6UKNogBmOpYR9hR4ONFZcYscv_t3hzaQO06BopCr_WO19A@mail.gmail.com>
+	<CAAJHNPAiHDi_g4UyB9gVan-Em67emi3gojx9s-E15hJADs6fDA@mail.gmail.com>
+	<4E5D2616.9010203@btinternet.com>
+Message-ID: <87ei027j0e.fsf@write-only.cryp.to>
+
+Hi Andrew,
+
+ > I know of several places where I can ask maths questions and half a
+ > dozen people will take guesses at what the correct solution might be.
+ > I haven't yet found anywhere where I can say "when would a
+ > chi-squared test be more appropriate than a KS test?" and get an
+ > informed, knowledgeable answer. (Answers from people who /know/ what
+ > they're talking about rather than just /think/ they know.)
+
+I believe this phenomenon is quite natural and easily explained. When
+you're asking a non-trivial question, hardly anyone just "knows" the
+correct answer -- especially when it comes to math. In order to answer
+your question, people have to dedicate time and effort to study the
+problem you're asking about. (Furthermore, formulating a coherent
+response is usually be a bit of an effort, too.)
+
+Now, a person who has profound knowledge of the subject you're asking
+about is not very likely to do this, because he is probably not going to
+learn anything in the process. Dedicating time and effort to studying
+your particular problem is not an appealing prospect. A person who has
+superficial understanding of the subject, however, is more likely to be
+fascinated by the problem, and consequently he is more likely to
+dedicate time and effort into formulating a response.
+
+In other words, even if Donald Knuth himself is reading the forum you're
+posting to, it doesn't mean that he is actually going to respond. On the
+other hand, if you're asking the right question, Donald Knuth just might
+respond to it, but not necessarily in the forum that you were originally
+asking in.
+
+Take care,
+Peter
+
+
+

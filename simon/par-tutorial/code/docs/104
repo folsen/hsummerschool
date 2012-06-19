@@ -1,0 +1,59 @@
+From daniel.is.fischer at googlemail.com  Mon Apr  4 12:34:44 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Mon, 4 Apr 2011 12:34:44 +0200
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+Message-ID: <201104041234.44543.daniel.is.fischer@googlemail.com>
+
+On Monday 04 April 2011 10:46:46, Roel van Dijk wrote:
+> I propose a few solutions:
+> 
+> A - Choose a single encoding for all source files.
+> 
+> This is wat GHC does: "GHC assumes that source files are ASCII or
+> UTF-8 only, other encodings are not recognised" [2]. UTF-8 seems like
+> a good candidate for such an encoding.
+
+If there's only a single encoding recognised, UTF-8 surely should be the 
+one (though perhaps Windows users might disagree, iirc, Windows uses UCS2 
+as standard encoding).
+
+> 
+> B - Specify encoding in the source files.
+> 
+> Start each source file with a special comment specifying the encoding
+> used in that file. See Python for an example of this mechanism in
+> practice [3]. It would be nice to use already existing facilities to
+> specify the encoding, for example:
+> {-# ENCODING <encoding name> #-}
+> 
+> An interesting idea in the Python PEP is to also allow a form
+> recognised by most text editors:
+> # -*- coding: <encoding name> -*-
+> 
+> C - Option B + Default encoding
+> 
+> Like B, but also choose a default encoding in case no specific
+> encoding is specified.
+
+default = UTF-8
+Laziness makes me prefer that over B.
+
+> 
+> I would further like to propose to specify the encoding of haskell
+> source files in the language standard. Encoding of source files
+> belongs somewhere between a language specification and specific
+> implementations. But the language standard seems to be the most
+> practical place.
+
+I'd agree.
+
+> 
+> This is not an official proposal. I am just interested in what the
+> Haskell community has to say about this.
+> 
+> Regards,
+> Roel
+
+

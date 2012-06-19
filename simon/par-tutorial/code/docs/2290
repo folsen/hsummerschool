@@ -1,0 +1,248 @@
+From ekirpichov at gmail.com  Mon Dec 26 09:32:13 2011
+From: ekirpichov at gmail.com (Eugene Kirpichov)
+Date: Mon, 26 Dec 2011 12:32:13 +0400
+Subject: [Haskell-cafe] Reifying case expressions [was: Re: On stream
+ processing, and a new release of timeplot coming]
+In-Reply-To: <CAPNUp09ijhVq6_W4q0gSO9kMR+7FmzHDo2Y+QDRgi2DTdO5b4Q@mail.gmail.com>
+References: <CANVKUrWrvDiG7=vfDf=8Zn5_TFQtjawtYxMT6nGh7mroAJZR6w@mail.gmail.com>
+	<jd6tmi$5qd$1@dough.gmane.org>
+	<CANVKUrWNdUcrdRpVguP68yNXPeQDqCbX0FxFOXA47MobV6L2zQ@mail.gmail.com>
+	<CAPNUp09ijhVq6_W4q0gSO9kMR+7FmzHDo2Y+QDRgi2DTdO5b4Q@mail.gmail.com>
+Message-ID: <CANVKUrXPP98hD+yvNNNdVJtvg9=2w-X3r3wK-2d+_PaqWEpMyw@mail.gmail.com>
+
+2011/12/26 G?bor Lehel <illissius at gmail.com>
+
+> On Sun, Dec 25, 2011 at 9:19 PM, Eugene Kirpichov <ekirpichov at gmail.com>
+> wrote:
+> > Hello Heinrich,
+> >
+> > Thanks, that's sure some food for thought!
+> >
+> > A few notes:
+> > * This is indeed analogous to Iteratees. I tried doing the same with
+> > Iteratees but failed, so I decided to put together something simple of my
+> > own.
+> > * The Applicative structure over this stuff is very nice. I was thinking,
+> > what structure to put on - and Applicative seems the perfect fit. It's
+> also
+> > possible to implement Arrows - but I once tried and failed; however, I
+> was
+> > trying that for a more complex stream transformer datatype (a hybrid of
+> > Iteratee and Enumerator).
+> > * StreamSummary is trivially a bifunctor. I actually wanted to make it an
+> > instance of Bifunctor, but it was in the category-extras package and I
+> > hesitated to reference this giant just for this purpose :) Probably
+> > bifunctors should be in prelude.
+>
+> Edward Kmett has been splitting that up into a variety of smaller
+> packages, for instance:
+>
+> http://hackage.haskell.org/package/bifunctors
+
+Actually it's not a bifunctor - it's a functor in one argument and
+contrafunctor in the other.
+Is there a name for such a structure?
+
+
+>
+>
+> > * Whereas StreamSummary a r abstracts deconstruction of lists, the dual
+> > datatype (StreamSummary a r ->) abstracts construction; however I just
+> now
+> > (after looking at your first definition of length) understood that it is
+> > trivially isomorphic to the regular list datatype - you just need to be
+> > non-strict in the state - listify :: ListTo a [a] = CaseOf [] (\x -> fmap
+> > (x:) listify). So you don't need functions of the form (forall r .
+> ListTo a
+> > r -> ListTo b r) - you just need (ListTo b [a]). This is a revelation for
+> > me.
+> >
+> > On Sun, Dec 25, 2011 at 2:25 PM, Heinrich Apfelmus
+> > <apfelmus at quantentunnel.de> wrote:
+> >>
+> >> Eugene Kirpichov wrote:
+> >>>
+> >>> In the last couple of days I completed my quest of making my graphing
+> >>> utility timeplot ( http://jkff.info/software/timeplotters ) not load
+> the
+> >>> whole input dataset into memory and consequently be able to deal with
+> >>> datasets of any size, provided however that the amount of data to
+> *draw*
+> >>> is
+> >>> not so large. On the go it also got a huge speedup - previously
+> >>> visualizing
+> >>> a cluster activity dataset with a million events took around 15 minutes
+> >>> and
+> >>> a gig of memory, now it takes 20 seconds and 6 Mb max residence.
+> >>> (I haven't yet uploaded to hackage as I have to give it a bit more
+> >>> testing)
+> >>>
+> >>> The refactoring involved a number of interesting programming patterns
+> >>> that
+> >>> I'd like to share with you and ask for feedback - perhaps something can
+> >>> be
+> >>> simplified.
+> >>>
+> >>> The source is at http://github.com/jkff/timeplot
+> >>>
+> >>> The datatype of incremental computations is at
+> >>>
+> >>>
+> https://github.com/jkff/timeplot/blob/master/Tools/TimePlot/Incremental.hs.
+> >>> Strictness is extremely important here - the last memory leak I
+> >>> eliminated
+> >>> was lack of bang patterns in teeSummary.
+> >>
+> >>
+> >> Your  StreamSummary  type has a really nice interpretation: it's a
+> >> reification of  case  expressions.
+> >>
+> >> For instance, consider the following simple function from lists to
+> >> integers
+> >>
+> >>    length :: [a] -> Int
+> >>    length xs = case xs of
+> >>        []     -> 0
+> >>        (y:ys) -> 1 + length ys
+> >>
+> >> We want to reify the case expression as constructor of a data type. What
+> >> type should it have? Well, a case expression maps a list  xs  to a
+> result,
+> >> here of type Int, via two cases: the first case gives a result and the
+> other
+> >> maps a value of type  a  to a function from lists to results again. This
+> >> explanation was probably confusing, so I'll just go ahead and define a
+> data
+> >> type that represents functions from lists  [a] to some result of type  r
+> >>
+> >>    data ListTo a r = CaseOf r (a -> ListTo a r)
+> >>
+> >>    interpret :: ListTo a r -> ([a] -> r)
+> >>    interpret (CaseOf nil cons) xs =
+> >>        case xs of
+> >>            []     -> nil
+> >>            (y:ys) -> interpret (cons y) ys
+> >>
+> >> As you can see, we are just mapping each  CaseOf  constructor back to a
+> >> built-in case expression.
+> >>
+> >> Likewise, each function from lists can be represented in terms of our
+> new
+> >> data type: simply replace all built-in case expressions with the new
+> >> constructor
+> >>
+> >>    length' :: ListTo a Int
+> >>    length' = CaseOf
+> >>        (0)
+> >>        (\x -> fmap (1+) length')
+> >>
+> >>    length = interpret length'
+> >>
+> >> The CaseOf may look a bit weird, but it's really just a straightforward
+> >> translation of the case expression you would use to define the function
+>  go
+> >>  instead.
+> >>
+> >> Ok, this length function is really inefficient because it builds a huge
+> >> expression of the form  (1+(1+...)). Let's implement a strict variant
+> >> instead
+> >>
+> >>    lengthL :: ListTo a Int
+> >>    lengthL = go 0
+> >>        where
+> >>        go !n = CaseOf (n) (\x -> go (n+1))
+> >>
+> >> While we're at it, let's translate two more list functions
+> >>
+> >>    foldL' :: (b -> a -> b) -> b -> ListTo a b
+> >>    foldL' f b = Case b (\a -> foldL' f $! f b a)
+> >>
+> >>    sumL    :: ListTo Int Int
+> >>    sumL    = foldL' (\b a -> a+b) 0
+> >>
+> >>
+> >> And now we can go for the point of this message: unlike ordinary
+> functions
+> >> from lists, we can compose these in lock-step! In particular, the
+> following
+> >> applicative instance
+> >>
+> >>    instance Applicative (ListTo a) where
+> >>        pure b = CaseOf b (const $ pure b)
+> >>        (CaseOf f fs) <*> (CaseOf x xs) =
+> >>            CaseOf (f x) (\a -> fs a <*> xs a)
+> >>
+> >> allows us to write a function
+> >>
+> >>    average :: ListTo Int Double
+> >>    average = divide <$> sumL <*> lengthL
+> >>        where
+> >>        divide a b = fromIntegral a / fromIntegral b
+> >>
+> >> that runs in constant space! Why does this work? Well, since we can now
+> >> inspect case expressions, we can choose to evaluate them in lock-step,
+> >> essentially computing  sum  and  length  with just one pass over the
+> input
+> >> list. Remember that the original definition
+> >>
+> >>    average xs = sum xs / length xs
+> >>
+> >> has a space leak because the input list xs is being shared.
+> >>
+> >>
+> >> Remarks:
+> >> 1. Reified case expressions are, of course, the same thing as Iteratees,
+> >> modulo chunking and weird naming.
+> >>
+> >> 2. My point is topped by scathing irony: if Haskell had a form of
+> *partial
+> >> evaluation*, we could write applicative combinators for *ordinary*
+> functions
+> >>  [a] -> r  and express  average  in constant space.  In other words,
+> partial
+> >> evaluation would make it unnecessary to reify case expressions for the
+> >> purpose of controlling performance / space leaks.
+> >>
+> >>
+> >> Best regards,
+> >> Heinrich Apfelmus
+> >>
+> >> --
+> >> http://apfelmus.nfshost.com
+> >>
+> >>
+> >> _______________________________________________
+> >> Haskell-Cafe mailing list
+> >> Haskell-Cafe at haskell.org
+> >> http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >
+> >
+> >
+> >
+> > --
+> > Eugene Kirpichov
+> > Principal Engineer, Mirantis Inc. http://www.mirantis.com/
+> > Editor, http://fprog.ru/
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >
+>
+>
+>
+> --
+> Work is punishment for failing to procrastinate effectively.
+>
+
+
+
+-- 
+Eugene Kirpichov
+Principal Engineer, Mirantis Inc. http://www.mirantis.com/
+Editor, http://fprog.ru/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111226/ed070832/attachment.htm>
+

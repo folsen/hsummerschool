@@ -1,0 +1,48 @@
+From johnsneer at operamail.com  Mon Dec  5 14:14:56 2011
+From: johnsneer at operamail.com (John Sneer)
+Date: Mon, 05 Dec 2011 13:14:56 +0000
+Subject: [Haskell-cafe] List x ByteString x Lazy Bytestring
+Message-ID: <1323090896.3764.140661007583849@webmail.messagingengine.com>
+
+Hello Caf?,
+
+  I've used Haskell and GHC to solve particular real life application. 4
+  tools were developed and their function is almost the same - they
+  modify textual input according to patterns found in the text. Thus, it
+  is something like a compiler, the result is also a text and it is not
+  parsed to tokens as patterns appear on a different level.
+
+  The tools differ in tasks and number of modifications performed,
+  otherwise, in principal, they are very much similar.
+
+  I used lists (Prelude, Data.List) to develop the tools. After
+  successfully completing the development, I've started to optimize the
+  code to make the tools faster. After modification of some algorithms
+  (which dropped the processing time notably), I started to change data
+  structures. I swapped lists with lazy bytestrings. Nevertheless, what
+  an unpleasant surprise, the processing speed dropped down,
+  significantly / more then 30% time needed). 
+
+  So my questions follow:
+- What kind of application is lazy bytestring suitable for?
+- Would it be worth using strict bytestring even if input files may be
+large? (They would fit in memory, but may consume whole)
+- If bytestring is not suitable for text manipulation, is there
+something faster than lists?
+- It would be nice to have native sort for lazy bytestring - would it be
+slower than  pack $ Data.List.sort $ unpack ?
+- If bytestring is suitable for text manipulation could we have some
+hGetTextualContents which translates Windows EOL (CR+LF) to LF?
+
+I'm sorry if the answers are obvious.
+Could anyone point me to some article/pages I could read about?
+
+  Thanks and regards,
+
+    John
+
+-- 
+http://www.fastmail.fm - A fast, anti-spam email service.
+
+
+

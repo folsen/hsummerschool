@@ -1,0 +1,29 @@
+From tom.davie at gmail.com  Fri Apr 29 11:53:15 2011
+From: tom.davie at gmail.com (Thomas Davie)
+Date: Fri, 29 Apr 2011 10:53:15 +0100
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <6C56E40B-5910-4166-A22A-80D8E866284E@ouroborus.net>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<003E6991-CB70-447D-8955-A69E3B1DD5E5@ouroborus.net>
+	<2A256AAE-0A04-4366-AFF3-4DEA076CA0B0@me.com>
+	<6C56E40B-5910-4166-A22A-80D8E866284E@ouroborus.net>
+Message-ID: <8DC38BB8-1EE4-41CC-9296-656665C15223@gmail.com>
+
+
+On 29 Apr 2011, at 10:42, Ben Lippmeier wrote:
+
+> 
+> On 29/04/2011, at 6:08 PM, Malcolm Wallace wrote:
+> 
+>> On 29 Apr 2011, at 05:38, Ben Lippmeier <benl at ouroborus.net> wrote:
+>> 
+>>> Laziness at the value level causes space leaks, 
+>> 
+>> This is well-worn folklore, but a bit misleading.  
+> 
+> :-) Like permanent markers in the hands of children causes suffering. It's not a tautology, but an overgeneralisation that holds more often than not. 
+
+I completely disagree, like Malcolm Wallace, space leaks in my code have *more often* been to do with being too strict than being too non-strict.
+
+Bob
+

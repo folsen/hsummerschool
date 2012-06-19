@@ -1,0 +1,41 @@
+From jmillikin at gmail.com  Wed Feb  2 07:02:36 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Tue, 1 Feb 2011 22:02:36 -0800
+Subject: [Haskell-cafe] Instancing "Typeable" for monad transformers?
+Message-ID: <AANLkTimSRmKMaYe05YtKAyEQCsZ6Wb=RZOqCxZYmQ3AU@mail.gmail.com>
+
+Is there any reasonable way to do this if I want to cast a monadic
+value? For example:
+
+> castState :: (Typeable a, Typeable s, Typeable1 m, Typeable b) => a -> Maybe (StateT s m b)
+> castState = Data.Typeable.cast
+
+None of the common monad transformers declare instances of Typeable,
+so I don't know if the concept itself even works.
+
+The use case here is one of my library users wants to return an
+Iteratee from code running in "hint", which requires any extracted
+values be typeable. My first attempt at an extension-free instance is
+something like this:
+
+> import Data.Enumerator
+> import Data.Typeable
+>
+> instance (Typeable a, Typeable1 m) => Typeable1 (Iteratee a m) where
+>       typeOf1 i = rep where
+>               typed :: (a -> b) -> b -> a -> a
+>               typed _ _ a = a
+>
+>               ia :: a -> Iteratee a m b
+>               ia = undefined
+>
+>               im :: m c -> Iteratee a m b
+>               im = undefined
+>
+>               rep = mkTyConApp (mkTyCon "Data.Enumerator.Iteratee") [tyA, tyM]
+>               tyA = typeOf (typed ia i undefined)
+>               tyM = typeOf1 (typed im i undefined)
+
+which, besides being ugly, I have no idea if it's correct.
+
+

@@ -1,0 +1,34 @@
+From kazu at iij.ad.jp  Fri Apr  1 04:19:05 2011
+From: kazu at iij.ad.jp (Kazu Yamamoto (=?iso-2022-jp?B?GyRCOzNLXE9CSScbKEI=?=))
+Date: Fri, 01 Apr 2011 11:19:05 +0900 (JST)
+Subject: [Haskell-cafe] A maintenance command of Haskell cabal packages
+In-Reply-To: <AANLkTikP-KNNvJzK0se-qtmh0-RCCJKyDh6XCgr4=Bjc@mail.gmail.com>
+References: <AANLkTinYm9K7WsGejSzdt8enjNtCB_3m2iwQ9Qtm_Ldq@mail.gmail.com>
+	<20110401.110734.86749460.kazu@iij.ad.jp>
+	<AANLkTikP-KNNvJzK0se-qtmh0-RCCJKyDh6XCgr4=Bjc@mail.gmail.com>
+Message-ID: <20110401.111905.240769933.kazu@iij.ad.jp>
+
+Hello,
+
+> Have you read this?
+> http://www.reddit.com/r/haskell/related/f3ykj/
+> psa_use_cabaldev_to_solve_dependency_problems/
+
+I did know this page. I will read it later. Thank you.
+
+> cabal-dev is a wrapper around cabal. It creates the directory
+> "cabal-dev" in your current directory when you run commands.
+
+Yes, I know. But when I typed "cabal-devel install" on a package
+directory, nothing happened.
+
+> If you understand how to use 'cabal' then 'cabal-dev' should be
+> pretty easy to figure out. Do you have any specific questions?
+
+I read its source but I could not found the code where cabal-dev
+passes GHC_PACKAGE_PATH to ghc. I don't know how cabal-dev can
+implement the sandbox featrue.
+
+--Kazu
+
+

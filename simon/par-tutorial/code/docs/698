@@ -1,0 +1,43 @@
+From andrewcoppin at btinternet.com  Mon Apr 25 12:13:19 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Mon, 25 Apr 2011 11:13:19 +0100
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <BANLkTi=S70WstLi83umF=v=LBVu1A7pbTQ@mail.gmail.com>
+References: <4DB093A6.8000303@btinternet.com>	<4DB3E7E8.8000907@btinternet.com>
+	<BANLkTi=S70WstLi83umF=v=LBVu1A7pbTQ@mail.gmail.com>
+Message-ID: <4DB5493F.4010804@btinternet.com>
+
+On 24/04/2011 06:33 PM, Jason Dagit wrote:
+>
+>
+> On Sun, Apr 24, 2011 at 2:05 AM, Andrew Coppin
+> <andrewcoppin at btinternet.com <mailto:andrewcoppin at btinternet.com>> wrote:
+>
+>     So I was a little surprised to discover that... Darcs doesn't
+>     actually support doing this. Darcs is only really interested in the
+>     result of applying *all* changes in a repo.
+>
+>     It seems daft to me that you would design a sophisticated system for
+>     splitting history into independent chunks, and then not let me
+>     manipulate them independently.
+>
+>
+> This is because of a deliberate choice that was made by David Roundy.
+> In darcs, you never have multiple branches within a single darcs
+> repository directory tree.
+
+Yes, this seems clear. I'm just wondering whether or not it's the best 
+design choice.
+
+> To get the effect you want, you simply
+> create two repositories.  One having only the patches for ghc 6.6 and
+> one having the patches of ghc 7.0 and then you pull just the patches you
+> want from 7.0 into 6.6.  There are options to 'darcs get' that help you
+> select the right set of patches to help you create the two repositories.
+
+It does mean that you duplicate information. You have [nearly] the same 
+set of patches stored twice, and you're not really storing the history 
+of the relationship between two branches, only the history of the branch 
+itself.
+
+

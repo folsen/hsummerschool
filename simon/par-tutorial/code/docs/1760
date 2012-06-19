@@ -1,0 +1,46 @@
+From aslatter at gmail.com  Thu Dec  8 16:39:26 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Thu, 8 Dec 2011 09:39:26 -0600
+Subject: [Haskell-cafe] Converting string to System.Time.ClockTime
+In-Reply-To: <CAMXF=YC2vorO4RdbegqgxHOgW_+ihnr+8t8yiio27NJrCy6Z1g@mail.gmail.com>
+References: <CAMXF=YB3WXB=O=g58=tEdprQvrO1peHvm0ntZRvbwvDTSjB9Hg@mail.gmail.com>
+	<CAPeieQFKXCVqRDEWui7LH89-1aNWm0jKjF5m6DCp2b63Ax2zFw@mail.gmail.com>
+	<CAMXF=YDUDcVCx4izBg-Uczd_k=+Q2SaXJrNSegNxJ6pVVt9Cqg@mail.gmail.com>
+	<CAMXF=YC-vb=FHSmfNEMjuyFJ5OSy6nckSGOJQNM3XU1Sjqrp5w@mail.gmail.com>
+	<CAKjSnQGOqRNhSXFz17fyFQHYZZaF88Sjf7-i0iLQRpehBBDKwg@mail.gmail.com>
+	<CAMXF=YC2vorO4RdbegqgxHOgW_+ihnr+8t8yiio27NJrCy6Z1g@mail.gmail.com>
+Message-ID: <CAKjSnQGUzbiEZQwdXQCZoeT==u5WQ2p-Gp4a46uE-4WYFSNYTA@mail.gmail.com>
+
+On Thu, Dec 8, 2011 at 9:30 AM, dokondr <dokondr at gmail.com> wrote:
+> Ok, maybe you could advise what packages to use for this simple scenario:
+>
+> I have two text strings with dates:
+>
+> s1 = "Wed, 07 Dec 2011 10:09:21 +0000"
+> s2 = "Wed, 07 Dec 2011 10:11:00 +0000"
+>
+> I need:
+> 1) Find how many seconds are between? these dates
+> 2) Calculate the date in the middle between these dates
+
+It looks like you already have 1) and 2) finished, using the 'time' package.
+
+> 3) Print out all three dates in the different format, like these:
+> ?2011,? 7 Dec, Wed, 10:11:00
+
+If you need to convert into a specific time-zone you can use the
+'utcToLocalTime' function in the 'time' package, which takes a UTCTime
+and a TimeZone to create a 'LocalTime'. I'm just guessing that you
+might want this, as your output format doesn't include time-zone
+information.
+
+Then for formatting, the 'Data.Time.Format' module in the 'time'
+package has the function 'formatTime', which uses the same sort of
+format string used by 'parseTime'.
+
+I hope that helps! It took me a while to find my way around the 'time'
+package properly.
+
+Antoine
+
+

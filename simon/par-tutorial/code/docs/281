@@ -1,0 +1,110 @@
+From svante.signell at telia.com  Mon Apr 11 00:42:17 2011
+From: svante.signell at telia.com (Svante Signell)
+Date: Mon, 11 Apr 2011 00:42:17 +0200
+Subject: [Haskell-cafe] ghc6: Re: Update: ... compiling ghc6
+In-Reply-To: <1302075048.6774.36.camel@hp.my.own.domain>
+References: <1301469485.21366.100.camel@hp.my.own.domain>
+	<20110330091340.GD5656@const.bordeaux.inria.fr>
+	<1301913325.32453.110.camel@s1499.it.kth.se>
+	<1302075048.6774.36.camel@hp.my.own.domain>
+Message-ID: <1302475337.17523.21.camel@hp.my.own.domain>
+
+Addressing both Haskell and Hurd people here. Any hints by anyone?
+
+On Wed, 2011-04-06 at 09:30 +0200, Svante Signell wrote:
+...
+> #5  0x011d3ce0 in __libc_read (fd=DWARF-2 expression error: DW_OP_reg
+> operations must be used either alone or in conjuction with DW_OP_piece
+> or DW_OP_bit_piece.
+> ) at ../sysdeps/mach/hurd/read.c:27
+> #6  0x084919c8 in s9qJ_ret ()
+> #7  0x0861f842 in StgRun ()
+> #8  0x087c44e0 in ?? ()
+
+Looking into this further, this looks like an error. What does it mean?
+from eglibc-2.11.2/sysdeps/mach/hurd/read.c
+
+/* Read NBYTES into BUF from FD.  Return the number read or -1.  */
+ssize_t
+__libc_read (int fd, void *buf, size_t nbytes)
+{
+  error_t err = HURD_FD_USE (fd, _hurd_fd_read (descriptor, buf,
+&nbytes, -1));
+  return err ? __hurd_dfail (fd, err) : nbytes;
+}
+
+
+The call is from the haskell binary cabal-bin but I don't have any debug
+info from that executable. Anybody fluent in Haskell? 
+
+(How to get debug info in Haskell with gdb?)
+
+Below is the (stripped-down) call and the source code cabal-bin.hs:
+cd libraries/random:
+../cabal-bin /usr/bin/ghc6 ../bootstrapping.conf configure --verbose=3
+--with-compiler=../../ghc/stage1-inplace/ghc
+--with-hc-pkg=../../utils/ghc-pkg/install-inplace/bin/ghc-pkg
+
+
+module Main (main) where
+
+import Control.Monad
+import Data.Maybe
+import Distribution.PackageDescription
+import Distribution.PackageDescription.Parse
+import Distribution.Simple
+import Distribution.Simple.Utils
+import Distribution.Verbosity
+import System.Directory
+import System.Environment
+import System.FilePath
+
+import qualified Distribution.Make   as Make
+import qualified Distribution.Simple as Simple
+
+setupProg :: FilePath
+setupProg = "./Setup"
+
+main :: IO ()
+main = do
+    unprocessedArgs <- getArgs
+    let verbosity = verbose
+    case unprocessedArgs of
+        ghc : packageConf : args ->
+            doit verbosity ghc packageConf args
+        _ -> die "Bad args"
+
+doit :: Verbosity -> FilePath -> FilePath -> [String] -> IO ()
+doit verbosity ghc packageConf args = do
+    exists <- doesFileExist setupProg
+    if exists then rawSystemExit verbosity setupProg args
+              else do
+        gpdFile <- defaultPackageDesc verbosity
+        gpd <- readPackageDescription verbosity gpdFile
+        let pd = packageDescription gpd
+        case buildType pd of
+      Just Simple    -> Simple.defaultMainArgs                     args
+      Just Make      -> Make.defaultMainArgs                       args
+      Just Configure -> defaultMainWithHooksArgs autoconfUserHooks args
+            _ | packageName pd == PackageName "Cabal" ->
+                              -- Cabal is special...*sigh*
+                         Simple.defaultMainArgs                    args
+              | otherwise  -> runSetup verbosity ghc packageConf   args
+
+runSetup :: Verbosity -> FilePath -> FilePath -> [String] -> IO ()
+runSetup verbosity ghc packageConf args = do
+    -- Don't bother building Setup if we are cleaning. If we need to
+    -- build Setup in order to build, and Setup isn't built already,
+    -- then there shouldn't be anything to clean anyway.
+    unless cleaning $
+        rawSystemExit verbosity ghc ["-package-conf", packageConf,
+                                     "--make", "Setup", "-o", "Setup"]
+    rawSystemExit verbosity "./Setup" args
+  where cleaning = case args of
+                   "clean" : _ -> True
+                   _ -> False
+
+
+
+
+

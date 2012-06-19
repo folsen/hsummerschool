@@ -1,0 +1,98 @@
+From david.hotham at blueyonder.co.uk  Thu Apr  7 20:17:46 2011
+From: david.hotham at blueyonder.co.uk (David Hotham)
+Date: Thu, 7 Apr 2011 19:17:46 +0100
+Subject: [Haskell-cafe] 'Progress bar' enumeratee
+In-Reply-To: <BANLkTikEh7aQfe2-JDq6DoCZ+SYw5MJ5Lg@mail.gmail.com>
+References: <inhd6m$h2n$1@dough.gmane.org>
+	<BANLkTikEh7aQfe2-JDq6DoCZ+SYw5MJ5Lg@mail.gmail.com>
+Message-ID: <inkv4a$vcu$1@dough.gmane.org>
+
+Very interesting - thanks!
+
+
+"Gregory Collins" <greg at gregorycollins.net> wrote in message 
+news:BANLkTikEh7aQfe2-JDq6DoCZ+SYw5MJ5Lg at mail.gmail.com...
+> My enumerator style may not be the best (I'm long-winded), but
+> personally when the stream types are the same on input and output I
+> often skip the Enumeratee stuff and just write an Enumerator wrapper.
+> To address your complaint here:
+>
+>> PS Implementations which involve "EB.take count" seem to me 
+>> unsatisfactory;
+>> one surely oughtn't need to have a large buffer to solve this problem
+>
+> I'd write a helping combinator:
+>
+>> module Main where
+>>
+>> import           Control.Monad              (when)
+>> import           Control.Monad.Trans
+>> import           Data.ByteString.Char8      (ByteString)
+>> import qualified Data.ByteString.Lazy.Char8 as L
+>> import           Data.Enumerator
+>> import qualified Data.Enumerator.List       as EL
+>> import           System.IO
+>>
+>> takeUpTo :: Monad m =>
+>>             Int
+>>          -> Iteratee ByteString m (Stream ByteString, Int)
+>> takeUpTo n' = continue k
+>>   where
+>>     n = toEnum n'
+>>
+>>     k EOF         = yield (EOF,0) EOF
+>>     k (Chunks xs) = if taken == 0
+>>                       then takeUpTo n'
+>>                       else yield (stream, taken) rest
+>>       where
+>>         s      = L.fromChunks xs
+>>         (a,b)  = L.splitAt n s
+>>         taken  = fromEnum $ L.length a
+>>         stream = Chunks $ L.toChunks a
+>>         rest   = Chunks $ L.toChunks b
+>>
+>
+> The code to run a side effect every N bytes is then pretty short (and
+> should be efficient):
+>
+>> sideEffectEveryNBytes :: Monad m =>
+>>                          Int      -- ^ run the side effect every N bytes
+>>                       -> m ()     -- ^ side effect
+>>                       -> Step ByteString m a
+>>                       -> Iteratee ByteString m a
+>> sideEffectEveryNBytes n act = flip checkContinue1 n $ \loop i k -> do
+>>         (str, taken) <- takeUpTo i
+>>         when (taken == i) $ lift act
+>>         (lift $ runIteratee $ k str) >>= loop (nextI $ i - taken)
+>>   where
+>>     nextI 0 = n
+>>     nextI i = i
+>
+> Here's your particular example:
+>
+>> example :: IO [ByteString]
+>> example = run_ $ enumList 1 [ "the quick brown "
+>>                             , "fox "
+>>                             , "jumped "
+>>                             , "over "
+>>                             , "the lazy dog" ] $$ it
+>>   where
+>>     it = do
+>>         xs <- sideEffectEveryNBytes 10 (putStr "." >> hFlush stdout) $$
+>>               EL.consume
+>>         lift $ putStrLn ""
+>>         return xs
+>
+> Running it:
+>
+>> *Main> example
+>> ....
+>> ["the quick ","brown ","fox ","jumped ","ove","r ","the lazy"," dog"]
+>
+> G
+> -- 
+> Gregory Collins <greg at gregorycollins.net> 
+
+
+
+

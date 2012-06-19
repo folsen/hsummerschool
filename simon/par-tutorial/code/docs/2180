@@ -1,0 +1,25 @@
+From felipe.lessa at gmail.com  Wed Dec 21 11:24:35 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Wed, 21 Dec 2011 08:24:35 -0200
+Subject: [Haskell-cafe] OOM when linking, increasingly a problem
+In-Reply-To: <CAAExw5uGb1dgsiYRq_io7cRbLZv1FE6qmCBnSfj3hL6xZJYiDw@mail.gmail.com>
+References: <20111221060645.GB3364@ohann>
+	<CANd=OGF0O0T-4CPMB+oFvB3hKFkk49H1-hZZUxPujenCzbRzKQ@mail.gmail.com>
+	<CAAExw5uGb1dgsiYRq_io7cRbLZv1FE6qmCBnSfj3hL6xZJYiDw@mail.gmail.com>
+Message-ID: <CANd=OGFgbfkHExFDP14qpzdSw2=0Q8FxWoM_4gYY94xRhzwzOw@mail.gmail.com>
+
+On Wed, Dec 21, 2011 at 8:18 AM, Magnus Therning <magnus at therning.org> wrote:
+> Sure, I can do that, but it would be even better to express
+> dissatisfaction and suggest a way to fix it. ?I don't have any idea of
+> what's going on though. ?Anyone with deeper knowledge?
+
+The problem with that module is cpolysArr.  An idea is to put that
+array in another module with NOINLINE and GHC_OPTIONS -O0.  Didn't
+test it, though.
+
+Cheers,
+
+-- 
+Felipe.
+
+

@@ -1,0 +1,62 @@
+From cdsmith at gmail.com  Fri Dec 30 04:38:31 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Thu, 29 Dec 2011 20:38:31 -0700
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFD24B2.6050807@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org> <4EFB8DFE.1060805@blueyonder.co.uk>
+	<jdh9h6$gba$1@dough.gmane.org> <4EFCA66D.4060609@blueyonder.co.uk>
+	<20111229180451.BFF53F3937@mail.avvanta.com>
+	<1325184067.16545.29.camel@godel> <4EFCBC99.60906@blueyonder.co.uk>
+	<1325193613.16545.57.camel@godel> <4EFCE34B.3010403@blueyonder.co.uk>
+	<1325201417.16545.96.camel@godel> <4EFD097D.3000600@blueyonder.co.uk>
+	<1325209025.16545.122.camel@godel> <4EFD24B2.6050807@blueyonder.co.uk>
+Message-ID: <1325216311.16545.173.camel@godel>
+
+On Fri, 2011-12-30 at 02:40 +0000, Steve Horne wrote:
+> Well, we're playing a semantic game anyway. Treating effects as
+> first-class concepts in themselves is fine, but IMO doesn't make
+> Haskell pure.
+
+Okay, so if you agree that:
+
+(a) IO actions are perfectly good values in the Haskell sense.
+(b) They are first class (can passed to/returned from functions, etc.).
+(c) When used as plain values, they have no special semantics.
+(d) An IO action is no more a Haskell function than an Int is.
+(e) All effects of a Haskell program are produced by the runtime system
+performing the IO action called "main" (evaluating expressions lazily as
+needed to do so), and NOT as a side-effect of the evaluation of
+expressions.
+
+Then we are completely in agreement on everything except whether the
+word "pure" should apply to a programming language with those semantics.
+Certainly the rest of the Haskell community describes this arrangement,
+with effects being first-class values and performing those effects being
+something done by the runtime system completely separate from evaluating
+expressions, as Haskell being pure.  You can choose your terminology.
+
+> I don't know the first thing about denotational semantics, but I do
+> know this - if you place run-time behaviour outside the scope of your
+> model of program semantics, that's just a limitation of your model. It
+> doesn't change anything WRT the program itself - it only limits the
+> understanding you can derive using that particular model.
+
+The important bit about purity is that programs with I/O fit in to the
+pure model just fine!  The pure model doesn't fully explain what the I/O
+actions do, of course, but crucially, they also do not BREAK the pure
+model.  It's a separation of concerns: I can figure out the higher-level
+stuff, and when I need to know about the meaning of the values of
+specific hairy and opaque data types like IO actions, or some complex
+data structure, or whatever... well, then I can focus in and work out
+the meaning of that bit when the time comes up.  The meanings of values
+in those specific complex types doesn't affect anything except those
+expressions that deal explicitly with that type.  THAT is why it's so
+crucial that values of IO types are just ordinary values, not some kind
+of magic thing with special evaluation rules tailored to them.
+
+-- 
+Chris Smith
+
+
+

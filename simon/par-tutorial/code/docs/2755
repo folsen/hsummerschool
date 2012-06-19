@@ -1,0 +1,60 @@
+From pjscott at iastate.edu  Sun Feb  6 06:26:37 2011
+From: pjscott at iastate.edu (Peter Scott)
+Date: Sun, 6 Feb 2011 00:26:37 -0500
+Subject: [Haskell-cafe] Storing passwords securely
+In-Reply-To: <885CD46D-B52F-47DD-B812-C16DB5A6862B@n-heptane.com>
+References: <AANLkTik_07tk=YgMiJyrUWyKj19gAadiA5Mp+wXTM_Zv@mail.gmail.com>
+	<885CD46D-B52F-47DD-B812-C16DB5A6862B@n-heptane.com>
+Message-ID: <AANLkTik6G+JsUeREyHara5MThRxNdkfsJte1YVDn-m-W@mail.gmail.com>
+
+On Sat, Feb 5, 2011 at 10:54 PM, Jeremy Shaw <jeremy at n-heptane.com> wrote:
+
+> Have you seen the PBKDF2 library?
+>
+> http://hackage.haskell.org/package/PBKDF2
+>
+> <http://hackage.haskell.org/package/PBKDF2> Does that look like a
+> reasonable way to store passwords securely?
+>
+
+Yes, I looked at it before I started on pwstore. The code does indeed
+calculate the PBKDF2 key derivation function, and the documentation is terse
+but descriptive. It's usable, but it's not *trivial* to use. With the PBKDF2
+library, a user has to:
+
+1. Understand what PBKDF2 is, at least well enough to know what the
+documentation is talking about when it mentions things like "length of prf
+output".
+
+2. Convert passwords to and from [Word8], which is not a very common type to
+have immediately on hand.
+
+3. Generate unique salts for each user. Easy, but it would be nice if the
+library handled this for you.
+
+4. Manage the salt and the hashed password separately. Again easy, but a
+small hassle.
+
+5. Store the salt and hashed password as byte vectors. Some storage methods
+may have trouble with data that may contain (for example) the '\NUL'
+character. This is why my library uses base64 encoding.
+
+Some more problems are that the library is slow (thanks to the unoptimized
+hash functions in Crypto) and the documentation is not as clear as it could
+be about what a newbie needs to do. Also, if you want to extend a bunch of
+existing hashed passwords with more iterations as hardware gets faster,
+there's no obvious easy way to do that with PBKDF2.
+
+In other words, while the PBKDF2 library is technically correct, it's not as
+slick and easy-to-use as a password storage library should be, and *must*
+be, if we want everyone to store passwords properly. One of the aphorisms of
+cryptography is "don't roll your own", but as long as the existing code
+feels like it's not quite what the users are looking for, there will still
+be the temptation to ignore this advice and roll your own anyway. I want to
+make something that people can use in ten minutes and say "there, I'm done."
+
+-Peter
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110206/c9927629/attachment.htm>
+

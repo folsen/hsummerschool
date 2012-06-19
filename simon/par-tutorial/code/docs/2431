@@ -1,0 +1,76 @@
+From sh006d3592 at blueyonder.co.uk  Thu Dec 29 23:17:18 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Thu, 29 Dec 2011 22:17:18 +0000
+Subject: [Haskell-cafe] On the purity of Haskell /Random generators
+In-Reply-To: <4EFCE0F6.8030604@unicaen.fr>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org> <4EFCC3CE.7050006@blueyonder.co.uk>
+	<451591325188516@web70.yandex.ru> <4EFCCFFD.9080908@unicaen.fr>
+	<4EFCD5CC.8050803@blueyonder.co.uk> <4EFCE0F6.8030604@unicaen.fr>
+Message-ID: <4EFCE6EE.1020109@blueyonder.co.uk>
+
+On 29/12/2011 21:51, Jerzy Karczmarczuk wrote:
+> Steve Horne :
+>> I only meant that there's random number handling support in the 
+>> Haskell library and, and least judging by type signatures, it's pure 
+>> functional code with no hint of the IO monad.
+> Look well at those functions, please.
+Challenge accepted. Some code (intended to be loaded into GHCi and 
+played with) that I once wrote when doing the ninety-nine problems thing 
+(the one that doesn't have ninety-nine problems - originally based on a 
+Prolog tutorial IIRC)...
+
+    --  Randomly select the specified number of items from the list
+    --
+    --  Usage in GHCi...
+    --
+    --  import System.Random
+    --  randSelect "this is a list" 5 (mkStdGen 9877087)
+    --
+    --  This will give the same results each time (for the same seed
+    given to mkStdGen)
+    --
+    --  randSelect' does the real work, but needs to know the length of
+    the remaining
+    --  list and doesn't do error checks (for efficiency reasons).
+    module P23 (randSelect) where
+       import System.Random
+
+       randSelect' :: RandomGen g => [x] -> Int -> Int -> g -> ([x], g)
+
+       randSelect' [] n l g = ([], g)  --  n and l should be == 0, but
+    no need for run-time check
+
+       --  optimisation cases - no choice left
+       randSelect' xs n l g | (n == l) = (xs, g)
+                            | (n == 0) = ([], g)
+
+       randSelect' (x:xs) n l g = let xsLen      = (l - 1)
+                                      (rnd, g')  = randomR (0, xsLen) g
+                                      (keep, n') = if (rnd < n) then
+    (True, (n-1)) else (False, n)
+                                      (xs', g'') = randSelect' xs n'
+    xsLen g'
+                                  in ((if keep then (x:xs') else xs'), g'')
+
+       randSelect :: RandomGen g => [x] -> Int -> g -> ([x], g)
+
+       randSelect xs n g = let len = (length xs)
+                           in if (n > len) then error "Not enough items
+    in the list!"
+                                           else randSelect' xs n len g
+
+I see no IO monad anywhere in there. Of course I'm cheating - providing 
+a constant seed at runtime. It's a bit like the classic "chosen by a 
+throw of a fair die" joke in a way. But the functions I'm using are pure.
+
+I don't claim to know every Haskell library function, of course. If 
+there's further functions for that, all well and good - but there's 
+still a perfectly adequate pure functional subset.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111229/7e18d96f/attachment.htm>
+

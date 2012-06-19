@@ -1,0 +1,52 @@
+From gcrosswhite at gmail.com  Wed Dec 21 08:10:38 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Wed, 21 Dec 2011 17:10:38 +1000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CAF1yvARk_+B0GwHG4+7zY_702bY9DRdmegkCSLypc+L41Rg9EQ@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAF1yvAQJX+f-MigNFF=6be12Uka6y45QD6oys_NQpxgREkRbaQ@mail.gmail.com>
+	<653CD606-D8B6-4BD8-AFD4-46738AF49DB3@gmail.com>
+	<CAF1yvAS6hc=tmmW74qvNdVXngCqV0LNNOXn2TUgckWHMJFszUA@mail.gmail.com>
+	<91793F0E-1C9F-4F4C-96F8-188A37273A21@gmail.com>
+	<CAF1yvAQL9t5jxXaCsDuOx7o4NgHD-O_RioRJ=Yc_RHj0_TerBg@mail.gmail.com>
+	<8DBF2B01-F624-4E53-926D-B96C4AD34576@gmail.com>
+	<CAF1yvAS3YzNBSXRQh8dm3bAbfcoUK5WR7z86mweMJ7j+sWqhrQ@mail.gmail.com>
+	<7ADADC00-BF20-4D36-9ADB-7DFDFB1BBC0B@gmail.com>
+	<CAF1yvARk_+B0GwHG4+7zY_702bY9DRdmegkCSLypc+L41Rg9EQ@mail.gmail.com>
+Message-ID: <6F6F64BC-9BB2-4623-B949-86F3C21FF578@gmail.com>
+
+
+On Dec 21, 2011, at 8:52 AM, Jesse Schalken wrote:
+
+> I don't have experience with proof assistants, but maybe my answer to this thread can be summed up as giving Haskell that kind of capability. ;) 
+
+Okay, then suffice it to say that most of what you said *is* implemented in real languages like Coq and Agda so you should check them out.  :-)  Unfortunately there are two hurdles one faces when using these languages:  first, it is often very cumbersome to actually prove all of the invariants you want to prove to make your code total, and second, there is not yet a nice way of doing I/O actions and/or interfacing with external libraries written in other languages.
+
+However, until we have solved the problems that make working entirely in dependently-typed languages a pain, we will need to stick with languages with weaker type systems like Haskell, which means that we can't get around _|_ since we cannot encode all of our invariants into the type system.
+
+Incidentally, I would highly recommend learning more about Coq and Agda.  There is a great textbook to start from available here:
+
+	http://adam.chlipala.net/cpdt/
+
+It is valuable because it is not Coq-specific but rather is a good general introduction to, exactly as the title promises, certified programming with dependent types.
+
+You should also really check out Agda;  the main difference between it and Coq is the language in which proofs are written.  To make a long story short, in Coq proofs are often easier to write because they use a specialized language for that purpose but this often makes them a bit of a black box, whereas in Agda the proofs are fully explicit which makes them much more transparent but also more verbose and often harder to write.  Unfortunately the documentation for Agda tends to be sparse and split over several kinds of documents (such as theses, papers, etc.) so isn't an obvious guide for me to recommend to you, but if you look around you should find enough information to get you started.  The home page is
+
+	http://wiki.portal.chalmers.se/agda/pmwiki.php
+
+For me part of the most exciting part was reading through the Agda standard libraries, which you can download from
+
+	http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Libraries.StandardLibrary
+
+Just reading through their code is enlightening because it shows you just how much power is available from dependent types;  the standard library also covers a lot more than Coq's does.  Unfortunately it also showcases one of the limitations of Agda, which is things can often get cryptic and arcane very quickly, especially since Agda makes you work with "universes" explicitly (Coq handles them implicitly) which adds another layer of complexity.  :-)  (FYI, the universes are a hierarchy such that values are at the bottom, types of values one rung up, types of types two rungs up, types of types of types three rungs up, etc.  Haskell is limited in only having a three-level hierarchy, with values, types, and kinds.)
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111221/7adb2fa3/attachment.htm>
+

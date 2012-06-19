@@ -1,0 +1,51 @@
+From fryguybob at gmail.com  Thu Feb  3 17:24:20 2011
+From: fryguybob at gmail.com (Ryan Yates)
+Date: Thu, 3 Feb 2011 11:24:20 -0500
+Subject: [Haskell-cafe] Review request for "platform independent
+ interactive graphics" with VNC
+In-Reply-To: <4D4ACEC4.3050608@dfki.de>
+References: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>
+	<4D4ACEC4.3050608@dfki.de>
+Message-ID: <AANLkTin0OSAka674PNKy_g9DWKz1RFF1G8eNcSg+mc4z@mail.gmail.com>
+
+I think you want:
+
+git clone git://github.com/ckkashyap/Chitra.git
+
+
+
+On Thu, Feb 3, 2011 at 10:50 AM, Christian Maeder
+<Christian.Maeder at dfki.de>wrote:
+
+> Am 03.02.2011 12:15, schrieb C K Kashyap:
+> > Hi,
+> > I've been working on a Haskell based platform independent graphics
+> rendering
+> > using VNC. I'd like it very much if you could take a look at it and give
+> me
+> > feedback. Using it is straight forward -
+> >
+> > git clone git at github.com:ckkashyap/Chitra.git
+>
+> This step failed for me with:
+>
+> maeder at leibniz:/local/maeder> git clone git at github.com:
+> ckkashyap/Chitra.git
+> Initialized empty Git repository in /local/maeder/Chitra/.git/
+> Permission denied (publickey).
+> fatal: The remote end hung up unexpectedly
+> maeder at leibniz:/local/maeder> git --version
+> git version 1.7.1
+>
+> What permission is needed?
+> Christian
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/962c6746/attachment.htm>
+

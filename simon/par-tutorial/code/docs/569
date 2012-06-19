@@ -1,0 +1,21 @@
+From felipe.lessa at gmail.com  Thu Apr 21 14:06:56 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Thu, 21 Apr 2011 09:06:56 -0300
+Subject: [Haskell-cafe] Hackage haddock not running?
+In-Reply-To: <BANLkTik_6YKPptkaNuGJhszM74ZOB8m+bQ@mail.gmail.com>
+References: <1303320363.2836.1.camel@godel>
+	<BANLkTik_6YKPptkaNuGJhszM74ZOB8m+bQ@mail.gmail.com>
+Message-ID: <BANLkTikKiKANYYLSk+XPjv8=rLhFZsKHDA@mail.gmail.com>
+
+The last package that got haddock'ed is [1].  The first package that
+isn't haddock'ed is [2].
+
+HTH, =)
+
+[1] http://hackage.haskell.org/package/acid-state-0.3
+[2] http://hackage.haskell.org/package/text-json-qq-0.3.0
+
+-- 
+Felipe.
+
+

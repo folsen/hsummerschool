@@ -1,0 +1,51 @@
+From jwlato at gmail.com  Tue Apr 12 11:11:05 2011
+From: jwlato at gmail.com (John Lato)
+Date: Tue, 12 Apr 2011 10:11:05 +0100
+Subject: [Haskell-cafe] Foreign function performance: monadic vs pure
+Message-ID: <BANLkTinuAUfMEQNwugoXd-ZJq4WqKOyj_w@mail.gmail.com>
+
+>
+> From: Gregory Collins <greg at gregorycollins.net>
+>
+> On Mon, Apr 11, 2011 at 3:55 PM, Serguei Son <serguei.son at gmail.com>
+> wrote:
+> > So if I must use a safe function returning IO a,
+> > there is no way to improve its performance? To give you
+> > a benchmark, calling gsl_ran_ugaussian a million times
+> > in pure C takes only a second or two on my system.
+>
+> In the C version, are you also producing a linked list containing all
+> of the values? Because that's what mapM does. Your test is mostly
+> measuring the cost of allocating and filling ~3 million machine words
+> on the heap. Try mapM_ instead.
+>
+
+I've done some rough tests of a few versions, and I believe Gregory's
+analysis is correct.  These are for calculating a sum of sines of 1..10^7
+with ghc-7.0.3.
+
+version              execution time
+IO, safe          - 4.08s
+Pure, safe     - 3.07s
+IO, unsafe      - 2.77s
+Pure, unsafe  - 1.95s
+
+For the IO versions, I used the following:
+
+main = foldM (\ !acc n -> fmap (acc +) $ c_sin_io n) [1..10^7] >>= print
+
+(this can possibly be improved; it was the first thing I thought of)
+
+The most important factor (as often the case with Haskell) is to pay
+attention to the space properties of your algorithm.  Instead of using mapM,
+which forces the spine of the list, it's much better to interleave the fold
+step with the other IO.
+
+Note that the "acc" parameter is strict, this is necessary to avoid building
+a thunk.
+
+John L.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110412/8261b891/attachment.htm>
+

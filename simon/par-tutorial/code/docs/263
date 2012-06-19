@@ -1,0 +1,30 @@
+From noteed at gmail.com  Sat Apr  9 19:51:44 2011
+From: noteed at gmail.com (Vo Minh Thu)
+Date: Sat, 9 Apr 2011 19:51:44 +0200
+Subject: [Haskell-cafe] Deciding equality of functions.
+In-Reply-To: <829991302369988@web85.yandex.ru>
+References: <829991302369988@web85.yandex.ru>
+Message-ID: <BANLkTikYVcTdV+QJ2f-4qgrhDBO5UT_uoQ@mail.gmail.com>
+
+2011/4/9 Grigory Sarnitskiy <sargrigory at ya.ru>:
+> I guess that deciding whether two functions are equal in most cases is algorithmically impossible. However maybe there exists quite a large domain of decidable cases? If so, how can I employ that in Haskell?
+>
+> It is a common situation when one has two implementations of the same function, one being straightforward but slow, and the other being fast but complex. It would be nice to be able to check if these two versions are equal to catch bugs in the more complex implementation.
+
+Hi,
+
+Instead a trying to decide if they are equal, I would simply go
+through a well-known route:
+
+Pick the simple implementation and test toroughly, to see if it is
+'correct' w.r.t. some specification. This involves things like unit
+tests and QuickCheck. Then apply those those tests to the second
+implementation once you're satified with the results of the first one.
+
+This transforms your problem of deciding if two functions are equal
+into trusting enough your two functions given some tests.
+
+Cheers,
+Thu
+
+

@@ -1,0 +1,41 @@
+From allbery.b at gmail.com  Sun Aug 14 19:43:01 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Sun, 14 Aug 2011 13:43:01 -0400
+Subject: [Haskell-cafe] Proposal #3339: Add (+>) as a synonym for mappend
+In-Reply-To: <CAOrUaLbs1Z5793Gn94D8AimdcgLABOpgF1C91UGaEXEXRxvJzg@mail.gmail.com>
+References: <c290c4f20906301437y343da916x15ae9d02f1fad2a0@mail.gmail.com>
+	<20090917133748.GA20813@soi.city.ac.uk>
+	<alpine.DEB.2.00.0909250114400.30756@anubis.informatik.uni-halle.de>
+	<CAK-tuPbPB8iz8mNbYmOmS1ijssSQq=DJs1P1xxaH4ENvnDugZg@mail.gmail.com>
+	<4E47CC47.3080105@earth.li>
+	<CAOrUaLY-FPLtvCinx9ieSGmRZt+XMvF=FaJnz7MFw-995XS5eg@mail.gmail.com>
+	<CAKFCL4URAoH_10mC7bPFt_fDsb1KVgHJ-=meJzvwGbYf8__g-A@mail.gmail.com>
+	<CAOrUaLbs1Z5793Gn94D8AimdcgLABOpgF1C91UGaEXEXRxvJzg@mail.gmail.com>
+Message-ID: <CAKFCL4WAOj167ravBiouVN1DU5pjnF0zkcuRs3Nhn9nHhobH5Q@mail.gmail.com>
+
+On Sun, Aug 14, 2011 at 13:38, Yitzchak Gale <gale at sefer.org> wrote:
+
+> Brandon Allbery wrote:
+> > Umm, I think the semigroups package will break everything that creates
+> > Monoid instances anyway.
+>
+> It has never broken anything for me. What do you mean?
+>
+
+Anything useful has to be modified to depend on SemiGroup as well to get
+mconcat or its replacement; that's why you jumped the proposal to begin
+with....  As others have noted, this is a rather intrusive change to the
+Haskell ecosystem.
+
+*If* it has in fact been decided to go ahead with it, *then* this proposal
+should be merged with yours since the best time to do it is when mconcat is
+being relocated anyway.  I don't think we've made it past the "if",
+especially given the comments so far.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110814/dde3cbd2/attachment.htm>
+

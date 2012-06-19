@@ -1,0 +1,29 @@
+From oleg at okmij.org  Thu Aug 25 09:18:17 2011
+From: oleg at okmij.org (oleg at okmij.org)
+Date: Thu, 25 Aug 2011 00:18:17 -0700 (PDT)
+Subject: [Haskell-cafe] Existential question
+In-Reply-To: <FE620BFD-772D-4FDA-BAC2-D2A3243D9E2A@yandex.ru>
+Message-ID: <20110825071817.5C529170BA@Adric.ern.nps.edu>
+
+
+> Ehm... what? How can you do such a replacement without losing, for
+> example, functions like this:
+> f (KI s h) i = snd $ h i $ fst $ h i s
+
+Well, if we eliminate the existential from
+
+   data Kl i o = forall s. Kl s (i ->  s ->  (s, o))
+
+following strictly the procedure we obtain
+
+	data S i o = S (i -> (S i o, o))
+
+It is the data type of infinite streams, with an extra input. Your
+function is obtaining the second element of the stream (assuming the
+constant input i).  Infinite streams form a monad, as described in
+great detail here:
+
+	http://patternsinfp.wordpress.com/2010/12/31/stream-monad/
+
+
+

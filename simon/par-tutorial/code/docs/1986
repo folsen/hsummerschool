@@ -1,0 +1,52 @@
+From nominolo at googlemail.com  Thu Dec 15 18:12:06 2011
+From: nominolo at googlemail.com (Thomas Schilling)
+Date: Thu, 15 Dec 2011 17:12:06 +0000
+Subject: [Haskell-cafe] [Alternative] some/many narrative
+In-Reply-To: <CA+qNEzJOdYjmjuob59jZA7Qk98VQbmr+gxcZf7bm9qOAFwn-iw@mail.gmail.com>
+References: <C561B101-D6D2-458C-98D4-7EEFCB5E60F5@gmail.com>
+	<CA+qNEzJOdYjmjuob59jZA7Qk98VQbmr+gxcZf7bm9qOAFwn-iw@mail.gmail.com>
+Message-ID: <CAOJG3uDQd=ZShPGw6hqPCMNo8eo4ft_8J+934oKHeoHQ1qAs+g@mail.gmail.com>
+
+On 15 December 2011 06:29, Chris Wong <chrisyco+haskell-cafe at gmail.com> wrote:
+
+> class (Applicative f, Monoid f) => Alternative f where
+> ? ?-- | Keep repeating the action (consuming its values) until it
+> fails, and then return the values consumed.
+
+I think this should be "collect" rather than "consume" and you can
+omit the parentheses.  I also think that we should include the
+original definition, which is more formally precise (although it could
+use with some examples).
+
+> ? ?--
+> ? ?-- [Warning]: This is only defined for actions that eventually fail
+
+Perhaps add the remark that we expect non-deterministic actions.
+
+> ? ?-- after being performed repeatedly, such as parsing. For pure values such
+> ? ?-- as 'Maybe', this will cause an infinite loop.
+> ? ?some :: f a -> f [a]
+> ? ?some v = ...
+>
+> ? ?-- | Similar to 'many', but if no values are consumed it returns
+> 'empty' instead of @f []@.
+> ? ?--
+> ? ?-- [Warning]: This is only defined for actions that eventually fail
+> ? ?-- after being performed repeatedly, such as parsing. For pure values such
+> ? ?-- as 'Maybe', this will cause an infinite loop.
+> ? ?many :: f a -> f [a]
+> ? ?many v = ...
+>
+> Warnings are repeated for emphasis :)
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+
+-- 
+Push the envelope. Watch it bend.
+
+

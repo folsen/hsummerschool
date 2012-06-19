@@ -1,0 +1,17 @@
+From bobzhang1988 at gmail.com  Wed Aug 24 03:10:21 2011
+From: bobzhang1988 at gmail.com (bob zhang)
+Date: Tue, 23 Aug 2011 21:10:21 -0400
+Subject: [Haskell-cafe] a minor bug (memory leak) in ListLike package
+Message-ID: <4E544F7D.8030401@gmail.com>
+
+Hi, John, there is a space leak problem in ListLike typeclass,
+in the method genericLength
+calclen !accum cl =
+calclen accum cl =
+--- thank you for your nice library
+btw, is there any way to derive ListLike interface automatically?
+for such type :
+newtype List a = List {[a]}
+Best,bob
+
+

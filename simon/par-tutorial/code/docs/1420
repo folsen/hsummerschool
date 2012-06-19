@@ -1,0 +1,34 @@
+From nowgate at yahoo.com  Sat Aug 27 22:24:03 2011
+From: nowgate at yahoo.com (michael rice)
+Date: Sat, 27 Aug 2011 13:24:03 -0700 (PDT)
+Subject: [Haskell-cafe] Modules and a main function
+In-Reply-To: <CAKFCL4WQECmogUVhx+_0z8YdC2qj5ZTQWx4tV73P_1tKuah=cg@mail.gmail.com>
+References: <1314473460.932.YahooMailNeo@web31101.mail.mud.yahoo.com>
+	<CAKFCL4WQECmogUVhx+_0z8YdC2qj5ZTQWx4tV73P_1tKuah=cg@mail.gmail.com>
+Message-ID: <1314476643.89544.YahooMailNeo@web31108.mail.mud.yahoo.com>
+
+I'm not sure how to do that. Please demonstrate.
+
+Michael
+
+
+________________________________
+From: Brandon Allbery <allbery.b at gmail.com>
+To: michael rice <nowgate at yahoo.com>
+Cc: "haskell-cafe at haskell.org" <haskell-cafe at haskell.org>
+Sent: Saturday, August 27, 2011 3:53 PM
+Subject: Re: [Haskell-cafe] Modules and a main function
+
+
+On Sat, Aug 27, 2011 at 15:31, michael rice <nowgate at yahoo.com> wrote:
+
+W/r/t the code below, would somebody please explain the sense of having a main function in a module that is not named Main.hs?
+
+It's embedded test code; you can build a test program for the StateGame monad by using the --main-is parameter to GHC, or leave that off and get a library.
+-- 
+brandon s allbery ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?allbery.b at gmail.com
+wandering unix systems administrator (available) ? ? (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110827/3719633d/attachment.htm>
+

@@ -1,0 +1,73 @@
+From leepike at gmail.com  Mon Apr 25 07:23:07 2011
+From: leepike at gmail.com (Lee Pike)
+Date: Sun, 24 Apr 2011 22:23:07 -0700
+Subject: [Haskell-cafe] Posix IO & Unicode lookup exception
+Message-ID: <BANLkTin6+xxcAZNm6pd+QEZfkMCt7LD-vQ@mail.gmail.com>
+
+Hi,
+
+I wanted to see if anyone had an idea about why the following program
+results in an exception.  The issue seems to be related to stdin to a
+POSIX file descriptors for a subprocess, and GHC's Unicode encoding
+lookup.  I've tried to make the program as simple as possible to make
+the issue obvious.
+
+Consider:
+
+> module Pipe where
+>
+> import System.Process
+> import System.IO
+> import System.Posix.IO
+>
+> main = sequence_ $ replicate 100000 f
+>
+> f = do
+>   (Just hin, _, _, prc) <-
+>     createProcess (shell "./pipe_c.out") { std_in = CreatePipe
+>                                          , std_out = UseHandle stdout
+>                                          , std_err = UseHandle stderr}
+>
+>   pin <- handleToFd hin
+>   _   <- fdWrite pin ("h\n")
+>   closeFd pin
+>   waitForProcess prc
+
+and a trivial C program to read in the data (but doing nothing with it):
+
+---------------------------------------
+#include <stdio.h>
+
+#define SIZE 10
+
+int main(void) {
+  char in[SIZE];
+
+  if(fgets(in, SIZE , stdin) != NULL);
+
+  return 0;
+}
+----------------------------------------
+
+and executing
+
+> gcc -Wall -o pipe_c.out pipe_c.c
+> ghci Pipe.hs
+> main
+  ...
+*** Exception: malloc: resource exhausted (out of memory)
+iconvOpen ("UTF-8","UTF-8"): resource exhausted (Cannot allocate memory)
+
+My best guess is that the GHC is calling iconv_open()
+<http://www.kernel.org/doc/man-pages/online/pages/man3/iconv_open.3.html>,
+but not making a subsequent call to iconv_close()
+<http://www.kernel.org/doc/man-pages/online/pages/man3/iconv_close.3.html>.
+ (Actually, my best guess is I'm making a silly mistake, but I'm
+having trouble seeing it. :) )
+
+I am running 2.6.35-28-generic (Ubuntu) and GHC 7.0.2, but I've
+observed the same issues with GHC 6.12.3.
+
+Lee
+
+

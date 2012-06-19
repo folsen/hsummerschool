@@ -1,0 +1,74 @@
+From tom.davie at gmail.com  Thu Feb  3 20:40:22 2011
+From: tom.davie at gmail.com (Thomas Davie)
+Date: Thu, 3 Feb 2011 19:40:22 +0000
+Subject: [Haskell-cafe] Reader monad wrapping State monad
+In-Reply-To: <24103.19922.qm@web31103.mail.mud.yahoo.com>
+References: <24103.19922.qm@web31103.mail.mud.yahoo.com>
+Message-ID: <53D93F29-C0AB-4DB9-8A4F-5D338F58E7E4@gmail.com>
+
+Is the idea here merely an exercise in using the state monad?  This can be easily performed using pure code.
+
+Bob
+
+On 3 Feb 2011, at 19:18, michael rice wrote:
+
+> Given the first program, it seems that the unchanging first element of the tuple could be handled by a Reader monad, leading to the second program, where b becomes the state, but how do I get the constant a from the Reader monad?
+> 
+> Michael 
+> 
+> ==================
+> 
+> import Control.Monad.State
+> 
+> type GeneratorState = State (Double,Double)
+> 
+> sqrtST :: GeneratorState Double
+> sqrtST = do (a,b0) <- get
+>             let b1 = (b0**2.0+a)/(2.0*b0)
+>             (if (abs (a-b1**2.0)) < 0.000001
+>               then
+>                 return b1
+>               else do
+>                 put (a,b1)
+>                 sqrtST)
+> 
+> mySqrt a = let b = a/2.0
+>            in fst ( runState sqrtST (a,b) )
+> 
+> {-
+> *Main> mySqrt 2.0
+> 1.4142135623746899
+> -}
+> 
+> ==================
+> 
+> import Control.Monad.Reader
+> import Control.Monad.State
+> 
+> type GeneratorState = State Double
+> 
+> sqrtST :: GeneratorState Double
+> sqrtST = do b0 <- get
+>             let a = ?
+>                 b1 = (b0**2.0+a)/(2.0*b0)
+>             (if (abs (a-b1**2.0)) < 0.000001
+>               then
+>                 return b1
+>               else do
+>                 put b1
+>                 sqrtST)
+> 
+> 
+> mySqrt a = let b = a/2.0
+>            in runReaderT (runState sqrtST b) a
+> 
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/cf37a406/attachment.htm>
+

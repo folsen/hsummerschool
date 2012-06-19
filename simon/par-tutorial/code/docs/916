@@ -1,0 +1,55 @@
+From ryani.spam at gmail.com  Tue Aug  2 19:16:15 2011
+From: ryani.spam at gmail.com (Ryan Ingram)
+Date: Tue, 2 Aug 2011 10:16:15 -0700
+Subject: [Haskell-cafe] difference between class context and deriving
+In-Reply-To: <4E37F44A.9070506@dit.ie>
+References: <4E37F44A.9070506@dit.ie>
+Message-ID: <CA+XKtKg5LMn0YtEZ0SYtYgpN6nngwuC4uEvKOgusu9ZmOt_SQg@mail.gmail.com>
+
+On Tue, Aug 2, 2011 at 5:57 AM, Patrick Browne <patrick.browne at dit.ie>wrote:
+
+> data Eq a => Set1 a = NilSet1 | ConsSet1 a (Set1 a)
+> data         Set2 a = NilSet2 | ConsSet2 a (Set2 a) deriving Eq
+>
+
+The former declaration is a language wart, IMO.  All it does is attach a
+restriction to the constructors of Set1; try
+
+> :t NilSet1
+NilSet1 :: Eq a => Set1 a
+> :t NilSet2
+NilSet2 :: Set2 a
+
+But it doesn't give you that restriction back when you use it:
+
+> let f (ConsSet1 v _) = v == v
+> :t f
+f :: Eq a => Set1 a -> Bool
+
+You'd think that since you had to provide the evidence (Eq a) when you
+constructed ConsSet1, that it'd be available, but it's not.
+
+-- Seems to have same type
+> :t ConsSet2 1 NilSet2
+> ConsSet2 1 NilSet2 :: forall t. (Num t) => Set2 t
+> :t ConsSet1 1 NilSet1
+> ConsSet1 1 NilSet1 :: forall t. (Num t) => Set1 t
+>
+
+Remember that Eq is a superclass of Num.
+
+> let f1 x = ConsSet1 x NilSet1
+> let f2 x = ConsSet2 x NilSet2
+> :t f1
+f1 :: Eq a => a -> Set1 a
+f2 :: a -> Set2 a
+
+'deriving Eq' on the definition of Set2 makes the instance  'instance Eq a
+=> Eq (Set2 a)'.  So you can construct Set2 at any type, and when the
+underlying type 'a' has equality, then 'Set2 a' does as well.
+
+  -- ryan
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110802/4e20b6aa/attachment.htm>
+

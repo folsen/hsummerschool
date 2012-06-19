@@ -1,0 +1,50 @@
+From michael at snoyman.com  Mon Apr  4 17:00:04 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Mon, 4 Apr 2011 18:00:04 +0300
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <990986.91623.qm@web45110.mail.sp1.yahoo.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+	<BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+	<BANLkTimG9VyfjaNqN1khd89dyz8aNsV8cw@mail.gmail.com>
+	<990986.91623.qm@web45110.mail.sp1.yahoo.com>
+Message-ID: <BANLkTimV1Ks2sKu5CoxBTJBi0Wkq0O4BVQ@mail.gmail.com>
+
+2011/4/4 Brandon Moore <brandon_m_moore at yahoo.com>:
+>>From: Michael Snoyman <michael at snoyman.com>
+>>Sent: Mon, April 4, 2011 5:22:02 AM
+>>
+>>Firstly, I personally would love to insist on using UTF-8 and be done with it. I
+>>
+>>see no reason to bother with other character encodings.
+>
+> If by "insist", you mean the standard insist that implementations support
+> UTF-8 by default.
+
+No, I mean that compliant compilers should only support UTF-8. I don't
+see a reason to allow the creation of Haskell files that can only be
+read by some compilers.
+
+> The rest of the standard already just talks about sequences of unicode
+> characters, so I don't see much to be gained by prohibiting other encodings.
+>
+> In particular, I have read that systems set up for east asian scripts
+> often use UTF-16 as a default encoding.
+
+I don't know about that, but I'd be very surprised if there are any
+editors out there that don't support UTF-8. If a user is
+inconvenienced once because he/she needs to change the default
+encoding to UTF-8, and the result is all Haskell files share the same
+encoding, I'm OK with that.
+
+@Colin: Even if UTF-16 was more space-efficient than UTF-8 (which I
+highly doubt[1]), I'd be incredibly surprised if this held true for
+Haskell source, which will almost certainly be at least 90%
+code-points below 128. For those code points, UTF-16 is twice the size
+as UTF-8.
+
+Michael
+
+[1] http://www.haskell.org/pipermail/haskell-cafe/2010-August/082268.html
+
+

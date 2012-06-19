@@ -1,0 +1,26 @@
+From eca7215 at cs.rit.edu  Mon Feb  7 20:28:48 2011
+From: eca7215 at cs.rit.edu (Edward Amsden)
+Date: Mon, 07 Feb 2011 14:28:48 -0500
+Subject: [Haskell-cafe] hsc2hs not using foreign.c types?
+Message-ID: <AANLkTikgXJX+g75Y-JrwVymHxO-hrjXqbvfaxJq8a5X-@mail.gmail.com>
+
+I'm just now trying to figure out how to use the FFI, along with hsc2hs.
+
+When I use the #type ... directive in my .hsc files to pull in a c
+typedef that is aliased to an integer, it puts in "Word32" instead of
+CInt. I was hoping to use this in my foreign imports:
+
+Two questions:
+- Can I declare a foreign import of a c function that takes a c 'int'
+to have a 'word32' input type in Haskell and will that function
+correctly?
+- Why doesn't hsc2hs use 'CInt' instead?
+
+-- 
+Edward Amsden
+Undergraduate
+Computer Science
+Rochester Institute of Technology
+www.edwardamsden.com
+
+

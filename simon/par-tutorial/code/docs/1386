@@ -1,0 +1,26 @@
+From informationen at gmx.de  Fri Aug 26 09:39:22 2011
+From: informationen at gmx.de (informationen)
+Date: Fri, 26 Aug 2011 09:39:22 +0200
+Subject: [Haskell-cafe] hoogle data no connection to host
+ http://code.galois.com/darcs/haskell-platform ...
+Message-ID: <20110826073922.GA23687@sirch>
+
+Hi,
+
+i installed Hoogle succesfullly with
+cabal install hoogle
+
+then i try to run
+hoogle data
+
+but the connection to 
+http://code.galois.com/darcs/haskell-platform/haskell-platform.cabal
+times out. 
+
+How can i download the data needed for the hoogle command line
+tool?
+
+Greetings
+Chris
+
+

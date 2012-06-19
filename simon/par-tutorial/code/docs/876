@@ -1,0 +1,82 @@
+From apfelmus at quantentunnel.de  Fri Apr 29 15:31:29 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Fri, 29 Apr 2011 15:31:29 +0200
+Subject: [Haskell-cafe] Inputs to classic FRP:
+	unsafeInterleaveIO/unsafePerformIO
+In-Reply-To: <BANLkTikRMf-=cnguQn7k1NWemOiy6rcwCQ@mail.gmail.com>
+References: <BANLkTi=XMKwyeK8VK5kyYJRuP1JS4RZS4g@mail.gmail.com>	<ip5s8s$j07$1@dough.gmane.org>	<BANLkTi=wwQsj9+QgttPzCE+H1W8RO7yjUw@mail.gmail.com>	<ip8e0s$ijh$1@dough.gmane.org>
+	<BANLkTikRMf-=cnguQn7k1NWemOiy6rcwCQ@mail.gmail.com>
+Message-ID: <ipeejj$ij1$1@dough.gmane.org>
+
+Ryan Ingram wrote:
+> Heinrich Apfelmus wrote:
+> 
+>> However, even in a demand-driven implementation, there is one optimization
+>> that I would like make: when there are multiple external events, say e1 and
+>> e2, the network splits into subnetworks that react only to one of the
+>> inputs. For instance, your example would split into two graphs
+>>
+>>  e1               e2
+>>  |  \             |  \
+>>  e3  e4     and   e3  e4
+>>  |   |            |   |
+>>  e5  e5           e5  e5
+>>
+>> that are independent of each other. Unlike successful filters, these
+>> subnetworks are known *statically* and it's worth splitting them out.
+>>
+> 
+> Yeah, I realize that as well, although you can get the same problem with a
+> single source, it just makes the network a bit more complicated:
+> 
+> e0 = source
+> e1 = fromLeft <$> filter isLeft e1
+> e2 = fromRight <$> filter isRight e1
+> -- rest of network the same
+> 
+> Anyways, the problem I was getting at is that lets say that e1 and e2 are
+> both Event Bool, and e1 has a True event at the same time that e2 has a
+> False event.
+> 
+> Then a behavior derived from e3 is False for that time (assuming behaviors
+> take the 'last' event in the list?), and a behavior from e4 is True for that
+> time.
+
+Yep, that's precisely what will happen. Internally, the four "pillars" 
+in the graph
+
+e1    e2
+| \-A |  \   A-\
+e3    e3 e4    e4
+|     |   |    |
+e5    e5 e5    e5
+
+1     2  3     4    -- pillar
+
+will simply be executed from left to right (in particular not in 
+depth-first search order). The edge connecting e1 and e4 signifies that 
+the value of e1 will be cached when the first pillar is executed, so 
+that it is available again a few pillars later when it's time for the 
+fourth pillar.
+
+
+Concerning the behaviors, also note that a behaviors change "slightly" 
+later than the events from which they are derived. Semantically, we have
+
+    stepper x ex = \time ->
+                   last $ x : [y | (time', y) <- ex, time' < time]
+
+In particular, the strict comparison  <  means that the behavior still 
+has the previous value when the event happens. So, indeed, a behavior 
+derived from e3 will pick up the last False while a behavior derived 
+from e4 will pick up the last True.
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

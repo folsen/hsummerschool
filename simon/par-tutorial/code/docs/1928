@@ -1,0 +1,30 @@
+From rustompmody at gmail.com  Wed Dec 14 14:56:11 2011
+From: rustompmody at gmail.com (Rustom Mody)
+Date: Wed, 14 Dec 2011 19:26:11 +0530
+Subject: [Haskell-cafe] indentation blues
+In-Reply-To: <0d62b1a11095f003e5019c4740a5fcfd@haxaire.org>
+References: <CAFrFfuGkeHEMfsitZoyaGWz=RZvuaUc8KKGK57dFdJL-kj_43w@mail.gmail.com>
+	<0d62b1a11095f003e5019c4740a5fcfd@haxaire.org>
+Message-ID: <CAJ+TeocYJPrPSTEujPFsfNR0=jCFZieqjPwh8KRgShzoK97w3Q@mail.gmail.com>
+
+Is the haskell-mode that comes out of the box with emacs (v 23.3) the one
+you folk use or do you use something more specific/uptodate?  How to find
+out? [There should be a haskell-mode-version...]
+
+To the folks from the (hesitating) vi-camp: Whatever you use, please take
+time to familiarize yourself with ghci.  Its my finding that the majority
+of vi aficionados imagine that programming is invariably tied to
+- having a main
+- built with make
+- run from a shell
+- back to vi
+
+This is way less performant than the tight feedback that an interpreter
+gives.  And for that ghci in an 'inferior' emacs buffer is better than
+anything else (for me).
+
+However vi-users can (probably?) use two shells -- one for vi, one for ghci
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111214/5aba5538/attachment.htm>
+

@@ -1,0 +1,27 @@
+From edwards.benj at gmail.com  Fri Dec  2 01:45:28 2011
+From: edwards.benj at gmail.com (Benjamin Edwards)
+Date: Fri, 2 Dec 2011 00:45:28 +0000
+Subject: [Haskell-cafe] Using QuickCheck to test against a database
+In-Reply-To: <CALzazPCn-AVqqjcOFgdCHgffTCKvdLY0_Ztq9AopjwBYt1WF+Q@mail.gmail.com>
+References: <87mxbbu9g7.fsf@googlemail.com>
+	<CALzazPCn-AVqqjcOFgdCHgffTCKvdLY0_Ztq9AopjwBYt1WF+Q@mail.gmail.com>
+Message-ID: <CAN6k4niUuGyWYcU+GcHiU1H64AZmKw4-W6CiRVsAHvPrvz_-tw@mail.gmail.com>
+
+>> Secondly, the initDb action is sensitive to the order actions are
+>> sequenced.
+>
+>
+> Do you mean with respect to other initDb actions?
+> Why is this? I thought you were using QuickCheck in order not to assume
+things about the state of the DB and that the necessary state is prepared
+solely by running the initDb action. Is this not the case then?
+>
+
+The initDb action is sensitive to the order in which *it* sequences things.
+With fk constraints there is a dependecy tree which must be respected.
+
+At least that's what I understood.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111202/4b55700f/attachment.htm>
+

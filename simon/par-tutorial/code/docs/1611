@@ -1,0 +1,55 @@
+From as at hacks.yi.org  Fri Dec  2 02:20:44 2011
+From: as at hacks.yi.org (austin seipp)
+Date: Thu, 1 Dec 2011 19:20:44 -0600
+Subject: [Haskell-cafe] "could not create compact unwind"
+In-Reply-To: <D2FB2631-015C-4EE7-B354-B74364238BD9@cs.otago.ac.nz>
+References: <87mxbbu9g7.fsf@googlemail.com>
+	<D2FB2631-015C-4EE7-B354-B74364238BD9@cs.otago.ac.nz>
+Message-ID: <CAEs96n1Uz2S4=NV1Ls4E=ojCcPbopmMfMsbhs2WLgTrsG+t3Eg@mail.gmail.com>
+
+The 'could not create compact unwind' message is a known (and still
+outstanding) linking issue on OS X. It should be harmless - it refers
+to the fact that OS X 10.6 uses "compact unwind info" for exceptions
+instead of DWARF unwind information, when possible. The exact cause
+isn't (yet) known. Generally this just means that the exception
+information falls back to being DWARF-based.
+
+If you want to blow away all your local packages, say:
+
+$ rm -rf ~/.ghc
+
+Note that will blow away every local package for every GHC version. If
+you have multiple versions installed, you should look in that
+directory first and then blow away the appropriate subdirectory (named
+something like '<arch>-darwin-<ghc-ver>'.)
+
+On Thu, Dec 1, 2011 at 7:07 PM, Richard O'Keefe <ok at cs.otago.ac.nz> wrote:
+> I just did
+> ? ? ? ?cabal install cabal-install
+> on a Mac running Mac OS 10.6.8 and got the eventual response
+> [44 of 44] Compiling Main ? ? ? ? ? ? ( Main.hs, dist/build/cabal/cabal-tmp/Main.o )
+> Linking dist/build/cabal/cabal ...
+> ld: warning: could not create compact unwind for .LFB3: non-standard register 5 being saved in prolog
+> Installing executable(s) in /home/cshome/o/ok/.cabal/bin
+>
+> I also had this problem today:
+> m% cabal install quickcheck
+> Resolving dependencies...
+> cabal: dependencies conflict: ghc-6.12.3 requires pretty ==1.0.1.2 however
+> pretty-1.0.1.2 was excluded because ghc-6.12.3 requires pretty ==1.0.1.1
+>
+> What's the procedure for wiping everything out and starting again?
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+
+-- 
+Regards,
+Austin
+
+

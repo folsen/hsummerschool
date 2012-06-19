@@ -1,0 +1,26 @@
+From creswick at gmail.com  Tue Apr 26 19:04:18 2011
+From: creswick at gmail.com (Rogan Creswick)
+Date: Tue, 26 Apr 2011 10:04:18 -0700
+Subject: [Haskell-cafe] How to keep cabal and ghci package versions in
+	sync?
+In-Reply-To: <loom.20110426T110933-984@post.gmane.org>
+References: <loom.20110424T200650-84@post.gmane.org>
+	<4DB560FA.6030105@henning-thielemann.de>
+	<loom.20110426T110933-984@post.gmane.org>
+Message-ID: <BANLkTimBXna=jO7RvAHe=BiVuDE9Pb4zMg@mail.gmail.com>
+
+On Tue, Apr 26, 2011 at 2:10 AM, Gracjan Polak <gracjanpolak at gmail.com> wrote:
+>
+> I kind of expected 'cabal-dev ghci' to do this for me.
+
+At the moment, cabal-dev ghci just uses the -package-conf and
+-no-user-package-conf flags to restrict ghci to the sandboxed and
+global package dbs.
+
+It's difficult to do more without parsing the content of the project's
+cabal file, and that parser isn't exposed through a library api (it's
+in cabal-install), which makes it a little difficult to use.
+
+--Rogan
+
+

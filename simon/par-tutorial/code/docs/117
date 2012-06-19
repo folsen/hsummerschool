@@ -1,0 +1,63 @@
+From yugang.bj at gmail.com  Mon Apr  4 16:19:46 2011
+From: yugang.bj at gmail.com (Gang Yu)
+Date: Mon, 4 Apr 2011 22:19:46 +0800
+Subject: [Haskell-cafe] broken on build encoding
+Message-ID: <BANLkTinxDmbWVd8eQSMKNrQHgS7j5+2gMA@mail.gmail.com>
+
+Hi, cafe,
+
+   I always get the following build failure when I try to install encoding:
+
+ Configuring encoding-0.6.4...
+Warning: This package indirectly depends on multiple versions of the same
+package. This is highly likely to cause a compile failure.
+package haskell98-1.0.1.1 requires random-1.0.0.2
+package HaXml-1.20.2 requires random-1.0.0.2
+package random-1.0.0.2 requires time-1.1.4
+package random-1.0.0.2 requires time-1.2.0.4
+Preprocessing library encoding-0.6.4...
+Building encoding-0.6.4...
+
+Data/Encoding/ByteSource.hs:124:0:
+     warning: extra tokens at end of #ifndef directive
+
+Data/Encoding/ByteSink.hs:104:0:
+     warning: extra tokens at end of #ifndef directive
+[ 1 of 65] Compiling Data.Static      ( Data/Static.hs,
+dist/build/Data/Static.o )
+[ 2 of 65] Compiling Data.Array.Static ( Data/Array/Static.hs,
+dist/build/Data/Array/Static.o )
+
+Data/Array/Static.hs:14:35:
+    Warning: Bindings containing unlifted types must use an outermost bang
+pattern:
+                 { (I# ri) = index (s, e) i }
+             *** This will be an error in GHC 6.14! Fix your code now!
+    In the expression: let (I# ri) = index (s, e) i in extract addr ri
+    In the definition of `!':
+        ! (StaticArray s e addr) i
+            = let (I# ri) = index ... i in extract addr ri
+[ 3 of 65] Compiling Data.Map.Static  ( Data/Map/Static.hs,
+dist/build/Data/Map/Static.o )
+[ 4 of 65] Compiling Control.Throws   ( Control/Throws.hs,
+dist/build/Control/Throws.o )
+[ 5 of 65] Compiling Data.Encoding.Exception ( Data/Encoding/Exception.hs,
+dist/build/Data/Encoding/Exception.o )
+[ 6 of 65] Compiling Data.Encoding.ByteSource ( Data/Encoding/ByteSource.hs,
+dist/build/Data/Encoding/ByteSource.o )
+
+Data/Encoding/ByteSource.hs:151:17:
+    Not in scope: data constructor `State'
+cabal: Error: some packages failed to install:
+encoding-0.6.4 failed during the building phase. The exception was:
+ExitFailure 1https://mail.google.com/mail/?shva=1#compose
+
+I manually installed a ghc-6.12.3, a ubuntu ghc-6.12.1, all the same?
+
+anybody can provide helps? thanks
+
+Gang
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110404/e29f6060/attachment.htm>
+

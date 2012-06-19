@@ -1,0 +1,66 @@
+From conal at conal.net  Wed Feb  9 07:37:34 2011
+From: conal at conal.net (Conal Elliott)
+Date: Tue, 8 Feb 2011 22:37:34 -0800
+Subject: [Haskell-cafe] semantics
+In-Reply-To: <W275202113688191297227750@webmail17>
+References: <W275202113688191297227750@webmail17>
+Message-ID: <AANLkTin8Y6ad2BWGP3nDZ6vLLUnGTcAkBkqK-rd8jSw5@mail.gmail.com>
+
+On Tue, Feb 8, 2011 at 9:02 PM, <kevin at froglingo.com> wrote:
+
+>
+> On Tue, Feb 8, 2011 at 07:55 pm,  Conal Elliott <conal at conal.net> wrote:
+>
+>> Here's my personal denotational answer to question 2: I think of a type as
+>> denoting a collection of (mathematical) values. If an expression e has type
+>> T, then the meaning (value) of e is a member of the collection denoted by T.
+>> This simple principle, which is fundamental to how I think of functional
+>> programming, has consequences in library design, which I've discussed at
+>> http://conal.net/blog/posts/notions-of-purity-in-haskell/ .
+>>
+> When we consider a class of partial recursive functions as the type T, then
+> what are the expressions (such as e in your statement above) for T?
+>
+
+There are many, including application of those functions and to those
+functions (in a language with higher-order functions), as well as variables
+& primitive constants. The grammar and type system mediates the legal
+expressions.
+
+
+>  It seems that the type definition missed operations. For example, if a and
+> b are two variables declared as integers, then we would not know how to
+> calculate a + b if the type integers didn't include the plus operator.
+>
+
+The original note didn't ask how to assign meanings to expressions, but
+denotational semantics (DS) is a clear & simple methodology. Meanings are
+defined compositionally. For instance, the meaning of "A + B" is a function
+of the meanings of the expressions A and B. Typically, DS is described as
+being functions on syntax, but syntax is just one data type, and I find it
+very useful for giving semantics to data types, in the same compositional
+style. For several examples, see
+http://conal.net/papers/type-class-morphisms .
+
+  - Conal
+
+
+>
+> Defining a type as a set of values and a set of operations on the values is
+> perfectly fine mathematically. But in the context of programming languages,
+> a type seems to need its syntax anyhow in addition to be a set of values and
+> a set of operations on the values. For example the type definition in C:
+>
+> typedef  mydata {
+> int a;
+> char c;
+> }
+>
+> The definition itself is the syntax while we may view the infinite many
+> records {<0, 'a'>, <2, 'a'>, ..., <0, 'b>, ....} as its semantics (or the
+> semantics was called a type earlier).
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110208/69969014/attachment.htm>
+

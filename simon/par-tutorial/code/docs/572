@@ -1,0 +1,40 @@
+From mikhail.vorozhtsov at gmail.com  Thu Apr 21 18:48:00 2011
+From: mikhail.vorozhtsov at gmail.com (Mikhail Vorozhtsov)
+Date: Thu, 21 Apr 2011 23:48:00 +0700
+Subject: [Haskell-cafe] Indexed monads and MonoLocalBinds
+Message-ID: <4DB05FC0.3080303@gmail.com>
+
+Hi Cafe,
+
+Here is another example of why 'let' should be sometimes generalised.
+I've been recently playing with indexed monads (for JSON processing) and 
+found out that the following code fails to typecheck:
+
+ >{-# LANGUAGE MonoLocalBinds #-}
+
+ >data M t t' a = M
+
+ >ipure :: a -> M t t a
+ >ipure a = M
+ >iseq :: M t t' a -> M t' t'' b -> M t t'' b
+ >iseq a b = M
+
+ >np :: M () Bool ()
+ >np = M
+
+ >test = p `iseq` np `iseq` p
+ >  where p = ipure ()
+
+Test.hs:13:27:
+     Couldn't match expected type `Bool' with actual type `()'
+     Expected type: M Bool t''0 b0
+       Actual type: M () () ()
+     In the second argument of `iseq', namely `p'
+     In the expression: p `iseq` np `iseq` p
+
+In practice that means that I need to provide a signature for almost 
+every monadic local binding that is used more than once, which is 
+unbearable, especially when monad transformers and complex indices are 
+used.<http://hackage.haskell.org/trac/ghc/blog/LetGeneralisationInGhc7>
+
+

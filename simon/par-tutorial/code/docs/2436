@@ -1,0 +1,82 @@
+From jerzy.karczmarczuk at unicaen.fr  Fri Dec 30 01:22:40 2011
+From: jerzy.karczmarczuk at unicaen.fr (Jerzy Karczmarczuk)
+Date: Fri, 30 Dec 2011 01:22:40 +0100
+Subject: [Haskell-cafe] On the purity of Haskell /Random generators
+In-Reply-To: <4EFCE6EE.1020109@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org> <4EFCC3CE.7050006@blueyonder.co.uk>
+	<451591325188516@web70.yandex.ru> <4EFCCFFD.9080908@unicaen.fr>
+	<4EFCD5CC.8050803@blueyonder.co.uk> <4EFCE0F6.8030604@unicaen.fr>
+	<4EFCE6EE.1020109@blueyonder.co.uk>
+Message-ID: <4EFD0450.3050609@unicaen.fr>
+
+Steve Horne :
+> Some code (intended to be loaded into GHCi and played with)
+>
+>     --  import System.Random
+>     --  randSelect "this is a list" 5 (mkStdGen 9877087)
+>     -- ...
+>     module P23 (randSelect) where
+>     -- ...
+>       randSelect' (x:xs) n l g = let xsLen      = (l - 1)
+>                                      (rnd, g')  = randomR (0, xsLen) g
+>     -- ...
+>
+> I see no IO monad anywhere in there. Of course I'm cheating - 
+> providing a constant seed at runtime.
+
+The last remark is irrelevant. Normally the seed IS constant, injected 
+once, then updated by the generator iself.
+
+I don't know what you are trying to prove. That you don't need monads? 
+Everybody knows this.
+Look at your own code. In randSelect' you write
+
+(rnd, g')  = randomR (0, xsLen) g
+
+**You don't need monads, because you do your own sequencing and 
+propagating the seed*, g -> g'.*  Your library internal:
+
+    randomR :: RandomGen g => (a, a) -> g -> (a, g)
+
+does the same thing, choosing a number within a range, *and propagating 
+g*. (I call it a "seed", but it is a Int seed wrapped within a StdGen...)
+
+OK, I repeat once more...
+Monads are useful ONLY to iterate the primitive generator, hiding the 
+seed. The generator itself (the algorithm of Pierre L'Ecuyer or any 
+other comparable) is obviously pure. The monadisation was a design 
+choice of Lennart Augustson, who decided to dump (hide) (StdGen s1 s2) 
+inside an IORef, but nobody is obliged to use it.
+
+There are alternatives, such as generating first an infinite random 
+stream, or your own manufacture. So, OK, you have your "pure" generator. 
+I explain why your question is based on some misunderstanding.
+
+All this has NOTHING to do whatsoever with the question of purity or 
+not. Haskell code is pure if you propagate the StdGen yourself, it 
+remains pure when the sequencing uses (>>=). Here this "mythical" World 
+which visibly frightens you, reduces to two integers32.
+Either they propagate in your code, or through the "iterate" functional, 
+or through the "bind". In the last case it is hidden, so it may 
+"change", since only ONE instance is accessible.
+
+[[Actually, one exercice I gave to my students was to implement an 
+iterable random generator using the State monad. Of course, there were 
+numerous suicides, and the survivors have been isolated in the Arkham 
+asylum, but the world is still there]].
+
+Clean uses "unique access variables" for the same purpose, and the Clean 
+users usually live normally with them.
+
+
+Jerzy
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111230/471c1307/attachment.htm>
+

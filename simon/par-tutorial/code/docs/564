@@ -1,0 +1,30 @@
+From trebla at vex.net  Thu Apr 21 03:31:31 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Wed, 20 Apr 2011 21:31:31 -0400
+Subject: [Haskell-cafe] impoosible dependencies
+In-Reply-To: <op.vt9azkjijmyckg@boqueron>
+References: <op.vt9azkjijmyckg@boqueron>
+Message-ID: <4DAF88F3.5070801@vex.net>
+
+On 11-04-20 05:51 PM, Kevin Quick wrote:
+> cabal: dependencies conflict: ghc-6.12.3 requires unix ==2.4.0.2 however
+> unix-2.4.0.2 was excluded because ghc-6.12.3 requires unix ==2.4.1.0
+
+[and later]
+
+> cabal: dependencies conflict: ghc-6.12.3 requires array ==0.3.0.2 however
+> array-0.3.0.2 was excluded because ghc-6.12.3 requires array ==0.3.0.1
+
+This no longer points to a hakyll problem, not even a cabal problem per 
+se. This is a problem with package inconsistencies you already have; 
+cabal merely does garbage-in garbage-out.
+
+The output of "ghc -v" will display wonders.
+
+The output of "ghc-pkg list -v" will also be of help.
+
+If you are interested in not treating package databases as a black box 
+plug-and-play appliance that "just works" (clearly, it doesn't), see my
+http://www.vex.net/~trebla/haskell/sicp.xhtml
+
+

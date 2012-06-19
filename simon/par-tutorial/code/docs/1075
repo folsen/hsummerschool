@@ -1,0 +1,112 @@
+From anton.kholomiov at gmail.com  Fri Aug 12 20:02:11 2011
+From: anton.kholomiov at gmail.com (Anton Kholomiov)
+Date: Fri, 12 Aug 2011 22:02:11 +0400
+Subject: [Haskell-cafe] library on common sub-expression elimination?
+In-Reply-To: <CAD6SzR+vyksmNWr+ZbxByf5wjKrH47oHjRA79EtgAKn34smGXg@mail.gmail.com>
+References: <CADDxdqNzqP1cRfqvHpWB30iaB+jpnTiQ6JJOaAZMb-to2h1Baw@mail.gmail.com>
+	<CAB2TPRBzH8=cH53GrYF6Gp8yFB8tSh7SAgRdiqqrYroWsZbL4A@mail.gmail.com>
+	<CADDxdqPHqr_Bn+hPAzfJZEW+2a+jPqUP-AaFrRjyPBszLhO_Xg@mail.gmail.com>
+	<CAB2TPRApFDU+QV8-2D=KsO6iRCxwH+AfLfF-vpzuE7y05e0zyA@mail.gmail.com>
+	<CAOHoMsnKcj1XQWtf4jjTpoSA5EMNFF0WjtHKsG2w=o7ubqw_Mw@mail.gmail.com>
+	<CAD6SzR+vyksmNWr+ZbxByf5wjKrH47oHjRA79EtgAKn34smGXg@mail.gmail.com>
+Message-ID: <CADDxdqNOv6RV=88kMuNiMXP3aWyHYGAa8MMNJ4yzoH1dgT+e7A@mail.gmail.com>
+
+Do you mean that x and y in
+
+x = a + 1
+y = a + 1
+
+are different from data-reify point of view?
+
+2011/8/12 Conal Elliott <conal at conal.net>
+
+> Note that data-reify will only find *some* common/equal sub-expressions,
+> namely the pointer-equal ones. In all of my code-generating ("deep") DSLs,
+> it's been very important for efficiency to also pull out
+> equal-but-pointer-unequal expressions.
+>
+>    - Conal
+>
+>
+> On Thu, Aug 11, 2011 at 4:41 AM, Vo Minh Thu <noteed at gmail.com> wrote:
+>
+>> I guess you refer to data-reify:
+>> http://hackage.haskell.org/package/data-reify
+>>
+>> 2011/8/11 Stephen Tetley <stephen.tetley at gmail.com>:
+>> > Strafunski and its successors (Uniplate, SYB, KURE) are really for
+>> > working on trees. If you want to work on graphs you would probably be
+>> > better of with something else.
+>> >
+>> > I think I overlooked that you want common sub-expression
+>> > _elimination_, rather than expression simplification. There are
+>> > libraries for observable sharing (Andy Gill's recent one is the
+>> > state-of-the-art, its on Hackage but I've forgotten its name) - that
+>> > are pertinent where you have built the expressions as an embedded DSL
+>> > in Haskell and you want sharing in code you generate from the Haskell
+>> > DSL.
+>> >
+>> >
+>> >
+>> > On 11 August 2011 08:57, Anton Kholomiov <anton.kholomiov at gmail.com>
+>> wrote:
+>> >> Thank you for the reference to Strafunski libraries, I read
+>> >> HaskellWiki, but I don't have a permission to visit their site.
+>> >> All links are forbidden.
+>> >>
+>> >> Can it be a function:
+>> >>
+>> >> fun :: Eq a => Tree a -> [(Int, (a, [Int]))]
+>> >>
+>> >> where tuple codes nodes, and Int's code edges.
+>> >>
+>> >> 2011/8/11 Stephen Tetley <stephen.tetley at gmail.com>
+>> >>>
+>> >>> Wouldn't this be dependent upon your AST and thus not readily
+>> >>> "package-able" as a library?
+>> >>>
+>> >>> Expression simplification has been a prime example for Strafunski
+>> >>> style traversal libraries. You might be able to find examples that you
+>> >>> can adapt to your own AST written with Uniplate or similar library.
+>> >>>
+>> >>> On 11 August 2011 05:00, Anton Kholomiov <anton.kholomiov at gmail.com>
+>> >>> wrote:
+>> >>> > Is there a library on common sub-expression elimination?
+>> >>> >
+>> >>>
+>> >>> _______________________________________________
+>> >>> Haskell-Cafe mailing list
+>> >>> Haskell-Cafe at haskell.org
+>> >>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>> >>
+>> >>
+>> >> _______________________________________________
+>> >> Haskell-Cafe mailing list
+>> >> Haskell-Cafe at haskell.org
+>> >> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>> >>
+>> >>
+>> >
+>> > _______________________________________________
+>> > Haskell-Cafe mailing list
+>> > Haskell-Cafe at haskell.org
+>> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+>> >
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110812/020389b6/attachment.htm>
+

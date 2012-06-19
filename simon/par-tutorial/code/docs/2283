@@ -1,0 +1,24 @@
+From da.waterworth at gmail.com  Sun Dec 25 10:30:49 2011
+From: da.waterworth at gmail.com (Daniel Waterworth)
+Date: Sun, 25 Dec 2011 09:30:49 +0000
+Subject: [Haskell-cafe] Siege, a DBMS written in Haskell
+Message-ID: <CAP6oseTDw10O6zPrZJ3Zw2EnNMW3=Hqk2Vn+-4SJEbJf9S2gvw@mail.gmail.com>
+
+Hi all,
+
+This is what I've been working on recently in my spare time,
+https://github.com/DanielWaterworth/siege . It's a DBMS written in
+Haskell, it's in a partially working state, you can start it up and
+interact with it using the redis protocol, it implements a subset of
+redis's commands.
+
+It stores it's data in immutable trees and supports two backends, one
+where it stores data to disk and another where it stores it's
+immutable nodes in a redis cluster and the head reference in
+zookeeper; the plan is to be CP in CAP theory. Feel free to butcher it
+for your own needs and I'd be really grateful to anyone who'd like to
+contribute.
+
+Daniel
+
+

@@ -1,0 +1,20 @@
+From stephen.tetley at gmail.com  Thu Aug 11 08:30:30 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Thu, 11 Aug 2011 07:30:30 +0100
+Subject: [Haskell-cafe] library on common sub-expression elimination?
+In-Reply-To: <CADDxdqNzqP1cRfqvHpWB30iaB+jpnTiQ6JJOaAZMb-to2h1Baw@mail.gmail.com>
+References: <CADDxdqNzqP1cRfqvHpWB30iaB+jpnTiQ6JJOaAZMb-to2h1Baw@mail.gmail.com>
+Message-ID: <CAB2TPRBzH8=cH53GrYF6Gp8yFB8tSh7SAgRdiqqrYroWsZbL4A@mail.gmail.com>
+
+Wouldn't this be dependent upon your AST and thus not readily
+"package-able" as a library?
+
+Expression simplification has been a prime example for Strafunski
+style traversal libraries. You might be able to find examples that you
+can adapt to your own AST written with Uniplate or similar library.
+
+On 11 August 2011 05:00, Anton Kholomiov <anton.kholomiov at gmail.com> wrote:
+> Is there a library on common sub-expression elimination?
+>
+
+

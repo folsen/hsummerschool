@@ -1,0 +1,34 @@
+From wren at freegeek.org  Sat Apr  9 01:55:14 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Fri, 08 Apr 2011 19:55:14 -0400
+Subject: [Haskell-cafe] Testing Implementation vs Model - Records or
+ Type Classes?
+In-Reply-To: <4D9F05B7.8090105@gmail.com>
+References: <inmm1b$ld4$1@dough.gmane.org> <4D9F05B7.8090105@gmail.com>
+Message-ID: <4D9FA062.8020107@freegeek.org>
+
+On 4/8/11 8:55 AM, Twan van Laarhoven wrote:
+> -- this class is useful beyond this FRP library,
+> -- you might already be able to find it on hackage somewhere
+> class Functor f => Filterable f where
+> filter :: (a -> Bool) -> f a -> f a
+> -- filter p . fmap f == fmap f . filter (p . f)
+> -- filter (const True) == id
+> -- filter p . filter q == filter (\x -> p x && q x)
+
+There are a few other methods that should be added to this typeclass. In 
+particular,
+
+     filterMap :: (a -> Maybe b) -> f a -> f b
+
+which fuses the first rule and saves the redundant passes and evaluations.
+
+In a similar vein you may want a class for versions that allow 
+applicative/monadic functions along with the sequenceA/sequence 
+capabilities of Traversable.
+
+-- 
+Live well,
+~wren
+
+

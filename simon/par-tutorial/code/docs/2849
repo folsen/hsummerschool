@@ -1,0 +1,64 @@
+From Christian.Maeder at dfki.de  Tue Feb  8 13:27:33 2011
+From: Christian.Maeder at dfki.de (Christian Maeder)
+Date: Tue, 08 Feb 2011 13:27:33 +0100
+Subject: [Haskell-cafe] Building Plaftorm 2010 2 on 64bit Linux
+In-Reply-To: <4D513575.6000803@fit.vutbr.cz>
+References: <4D511D52.90503@fit.vutbr.cz> <4D51316A.5070201@dfki.de>
+	<4D513575.6000803@fit.vutbr.cz>
+Message-ID: <4D5136B5.6040608@dfki.de>
+
+This looks like gcc is used as assembler.
+
+Try to add:
+
+  -pgma /usr/local/bin/gcc
+
+C.
+
+
+Am 08.02.2011 13:22, schrieb Du?an Kol??:
+> This is the end of the log:
+> 
+> *** Assembler:
+> /usr/bin/gcc -I. -c /tmp/ghc29474_0/ghc29474_0.s -o test.o
+> *** Deleting temp files:
+> Deleting: /tmp/ghc29474_0/ghc29474_0.s
+> *** Deleting temp dirs:
+> Deleting: /tmp/ghc29474_0
+> ghc: could not execute: /usr/bin/gcc
+> 
+> Otherwise gcc not mentioned, no error mentioned.
+> 
+> Dusan
+> 
+> 
+> On 02/08/2011 01:04 PM, Christian Maeder wrote:
+>> Does adding "-v" reveal when /usr/bin/gcc is used?
+>>
+>>    ghc -v -O2 --make test.hs -o test
+>>
+>> C.
+>>
+>> Am 08.02.2011 11:39, schrieb Du?an Kol??:
+>>> Hello all,
+>>>
+>>>    I'm trying to build platform on Linux 2.6.32.22 #1 SMP Tue Sep 21
+>>> 09:44:04 CEST 2010 x86_64 x86_64 x86_64 GNU/Linux. I've downloaded
+>>> binary of ghc6.12.3 for the purpose, but ghc doesn't work. ghci does
+>>> work, gcc does work, but for ghc I get:
+>>>
+>>> ghc -O2 --make test.hs -o test
+>>> [1 of 1] Compiling Main             ( test.hs, test.o )
+>>> ghc: could not execute: /usr/bin/gcc
+>>>
+>>> Even if I can easily compile gcc testc.c -o testc and run testc.
+>>>
+>>> Could anyone point me to a solution? Helps found by google pointed me to
+>>> try use option -pgmc gcc, which doesn't work. All other threads with
+>>> similar issue stayed unresoleved. :-(
+>>>
+>>> Thanks
+>>>
+>>>     Dusan
+
+

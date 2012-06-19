@@ -1,0 +1,75 @@
+From wren at freegeek.org  Mon Apr  4 05:35:32 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sun, 03 Apr 2011 23:35:32 -0400
+Subject: [Haskell-cafe] ANN: stm-chans: Additional types of channels for STM.
+Message-ID: <4D993C84.8080501@freegeek.org>
+
+--------------------------------------------
+-- stm-chans 1.0.0
+--------------------------------------------
+
+The stm-chans package offers a collection of channel types, similar to 
+Control.Concurrent.STM.TChan but with additional features. In particular 
+it offers these types:
+
+
+* Control.Concurrent.STM.TBChan:  Bounded FIFO channels.
+
+     When the channel is full, writers will block/retry. This ensures 
+that the writers do not get too far ahead of the readers, which helps to 
+make sure that memory and cpu resources are used responsibly.
+
+* Control.Concurrent.STM.TMChan:  Closeable FIFO channels.
+
+     This is like TChan (Maybe a) but with a monotonicity guarantee that 
+once Nothing is returned all future reads will be Nothing as well.
+
+* Control.Concurrent.STM.TBMChan: Bounded Closeable FIFO channels.
+
+     This combines the capabilities of TBChan and TMChan.
+
+
+In addition, the stm-chans package offers a (partial) compatibility 
+layer for some API improvements still making their way into the stm 
+package[1]. These new functions include:
+
+* tryReadTChan :: TChan a -> STM (Maybe a)
+
+     A version of readTChan which does not retry. Instead it returns 
+Nothing if no value is available.
+
+* peekTChan :: TChan a -> STM a
+
+     Get the next value from the TChan without removing it, retrying if 
+the channel is empty.
+
+* tryPeekTChan :: TChan a -> STM (Maybe a)
+
+     A version of peekTChan which does not retry. Instead it returns 
+Nothing if no value is available.
+
+
+[1] http://article.gmane.org/gmane.comp.lang.haskell.libraries/15507
+
+
+--------------------------------------------
+-- Links
+--------------------------------------------
+
+Homepage:
+     http://code.haskell.org/~wren/
+
+Hackage:
+     http://hackage.haskell.org/package/stm-chans
+
+Darcs:
+     http://community.haskell.org/~wren/stm-chans
+
+Haddock (Darcs version):
+     http://community.haskell.org/~wren/stm-chans/dist/doc/html/stm-chans
+
+-- 
+Live well,
+~wren
+
+

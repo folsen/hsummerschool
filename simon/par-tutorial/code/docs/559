@@ -1,0 +1,53 @@
+From john at n-brain.net  Thu Apr 21 00:12:34 2011
+From: john at n-brain.net (John A. De Goes)
+Date: Wed, 20 Apr 2011 16:12:34 -0600
+Subject: [Haskell-cafe] Question about the Monad instance for Iteratee
+	(from the enumerator package)
+In-Reply-To: <201104191427.47873.anotheraddress@gmx.de>
+References: <201104191427.47873.anotheraddress@gmx.de>
+Message-ID: <B85E5671-77A3-4641-8FFC-1F42E02DB406@n-brain.net>
+
+
+It's not OK and it's an artifact of the weak-typing and ill-defined semantics that pervade iteratee libraries. It's possible to do a lot of bad stuff, including binding with an iteratee yielding a remainder without consuming input.
+
+Regards,
+
+John A. De Goes
+Twitter: @jdegoes 
+LinkedIn: http://linkedin.com/in/jdegoes
+
+On Apr 19, 2011, at 6:27 AM, Daniel Sch?ssler wrote:
+
+> Hello,
+> 
+> for reference, said instance is:
+> 
+>> instance Monad m => Monad (Iteratee a m) where
+>> 	return x = yield x (Chunks [])
+>> 
+>> 	m0 >>= f = ($ m0) $ fix $
+>> 		\bind m -> Iteratee $ runIteratee m >>= \r1 ->
+>> 			case r1 of
+>> 				Continue k -> return (Continue (bind . k))
+>> 				Error err -> return (Error err)
+>> 				Yield x (Chunks []) -> runIteratee (f x)
+>> 				Yield x extra -> runIteratee (f x) >>= \r2 ->
+>> 					case r2 of
+>> 						Continue k -> runIteratee (k extra)
+>> 						Error err -> return (Error err)
+>> 						Yield x' _ -> return (Yield x' extra)
+> 
+> The thing I don't understand yet is the last line: Why is it OK to discard the 
+> leftover input from the (f x) Iteratee and yield just the leftover input from 
+> the first one (m0)?
+> 
+> Cheers,
+> Daniel
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+

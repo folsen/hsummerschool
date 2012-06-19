@@ -1,0 +1,31 @@
+From daniel.is.fischer at googlemail.com  Mon Apr 18 23:36:17 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Mon, 18 Apr 2011 23:36:17 +0200
+Subject: [Haskell-cafe] ANNOUNCE: floatshow-0.1 faster String
+	representations for Double and Float
+Message-ID: <201104182336.18707.daniel.is.fischer@googlemail.com>
+
+The Show instances for RealFloat types provided in base are very elegant,
+as they produce the shortest string which 'read' converts back to the
+original number. That, however, involves a check after each digit has been
+determined and arithmetic of usually fairly large Integers, which makes 
+these Show instances rather slow.
+
+For cases where having the conversion fast is more important than having it
+produce elegant output, the floatshow package provides alternative 
+conversions, which avoid the checks and reduce the occurrences of large 
+Integers by just producing a sufficiently long output string.
+
+The speed gain can be substantial if the numbers have exponents of large
+absolute modulus, but for the more common case of numbers whose exponents
+have small absolute modulus, the difference is (although still significant
+for Double) too small in my opinion to seriously consider replacing the
+Show instances. Therefore I've put these functions into their own package.
+
+In my benchmarks, the speed gain ranges from 4x to 10x for Double and from 
+1.25x to 5x for Float, so the package may be a useful alternative for tasks 
+requiring the output of many floating point numbers.
+
+Sadly, floatshow is non-portable and requires ghc >= 6.12.
+
+

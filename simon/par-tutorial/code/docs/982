@@ -1,0 +1,32 @@
+From ivan.miljenovic at gmail.com  Tue Aug  9 03:11:38 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Tue, 9 Aug 2011 11:11:38 +1000
+Subject: [Haskell-cafe] Couldn't match expected type `Integer' against
+ inferred type `Int'
+In-Reply-To: <83C78424-EB0E-46D6-9627-85F4DB14A295@gmail.com>
+References: <FCDFD17E-2B06-43C2-9419-EACAF7F16B9F@gmail.com>
+	<CA+u6gbycNufaMqz1-noeNwiXD64LE3hqVXDhJEcOQR7UJiijrw@mail.gmail.com>
+	<83C78424-EB0E-46D6-9627-85F4DB14A295@gmail.com>
+Message-ID: <CA+u6gbxgetn5N_H0FD1C4fwQmW1L8kmiGn1n5Yyz2sLNH_OR7A@mail.gmail.com>
+
+On 9 August 2011 11:06, Paul Reiners <paul.reiners at gmail.com> wrote:
+>
+> On Aug 8, 2011, at 7:59 PM, Ivan Lazar Miljenovic wrote:
+>
+>> On 9 August 2011 10:49, Paul Reiners <paul.reiners at gmail.com> wrote:
+>>> ? ? ? ? ? ? ? ? ?step acc x = acc * 10 + digitToInt x
+>>
+>> digitToInt returns an Int; as such the result of asInt_foldAux is an
+>> Int, but you've specified in its type signature that it should be
+>> returning an Integer.
+>
+> So is there something like digitToInteger? ?Or can I somehow cast the Int to an Integer?
+
+step acc x = acc * 10 + fromIntegral (digitToInt x)
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

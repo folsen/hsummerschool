@@ -1,0 +1,19 @@
+From simons at cryp.to  Sun Dec 18 23:06:32 2011
+From: simons at cryp.to (Peter Simons)
+Date: Sun, 18 Dec 2011 23:06:32 +0100
+Subject: [Haskell-cafe] Announce: The Haskell Platform 2011.4
+References: <CAFd+Dr3kaJorXBEqcSFfjES0JtOJ5eEOeZ3-bJSAAwj-1LFpdw@mail.gmail.com>
+Message-ID: <87vcpdttzr.fsf@write-only.cryp.to>
+
+Hi guys,
+
+ > We're pleased to announce the release of the Haskell Platform: a
+ > single, standard Haskell distribution for everyone.
+
+Haskell Platform 2011.4 is fully supported on NixOS <http://nixos.org/>.
+
+Take care,
+Peter
+
+
+

@@ -1,0 +1,42 @@
+From qubital at gmail.com  Sun Aug  7 05:55:36 2011
+From: qubital at gmail.com (anonymous)
+Date: Sat, 6 Aug 2011 22:55:36 -0500
+Subject: [Haskell-cafe] trouble using the aeson package
+Message-ID: <CA+MSfsLhH4mEd6o9z-m3nufXBvN5q1PNYrMbVT3sp73o5O_2fw@mail.gmail.com>
+
+I recently installed the aeson package using cabal-install without any
+trouble:
+?~? uname -rspi; cabal -V; ghc -V; ghc-pkg list | grep
+"aeson\|double-conversion"
+Linux 2.6.38-10-generic x86_64 x86_64
+cabal-install version 0.10.2
+using version 1.10.1.0 of the Cabal library
+The Glorious Glasgow Haskell Compilation System, version 7.0.3
+    aeson-0.3.2.9
+    double-conversion-0.2.0.1
+
+However when I try to use it I receive this error message:
+?> let f = Data.Aeson.String
+Loading package double-conversion-0.2.0.1 ... can't load .so/.DLL for:
+stdc++ (libstdc++.so: cannot open shared object file: No such file or
+directory)
+
+
+This is the version I have installed:
+?~? aptitude search stdc++ | grep ^i
+i   libstdc++6                      - The GNU Standard C++ Library
+v3
+i A libstdc++6-4.4-dev              - The GNU Standard C++ Library v3
+(developme
+i   libstdc++6-4.5-dev              - The GNU Standard C++ Library v3
+(developme
+
+?~? aptitude show libstdc++6-4.4-dev | head -n 4
+Package: libstdc++6-4.4-dev
+State: installed
+Automatically installed: yes
+Version: 4.4.5-15ubuntu1
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110806/8f79abd5/attachment.htm>
+

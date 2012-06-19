@@ -1,0 +1,91 @@
+From hesselink at gmail.com  Wed Dec 21 17:28:33 2011
+From: hesselink at gmail.com (Erik Hesselink)
+Date: Wed, 21 Dec 2011 17:28:33 +0100
+Subject: [Haskell-cafe] ANNOUNCE: partial-lens 0.0.1
+In-Reply-To: <alpine.LRH.2.00.1112211011510.22781@theorem.ca>
+References: <alpine.LRH.2.00.1112202242590.2743@theorem.ca>
+	<CAPeieQHvoS0ReBJy8xNOP_ki8W9_7efqCrC0Bu+0HSJGeRNPUg@mail.gmail.com>
+	<alpine.LRH.2.00.1112211011510.22781@theorem.ca>
+Message-ID: <CAPeieQH-xYNQ0KFX+qqpZxAkhSC0inP58cK8NUxfD=MBSoGZ1Q@mail.gmail.com>
+
+On Wed, Dec 21, 2011 at 16:39,  <roconnor at theorem.ca> wrote:
+> On Wed, 21 Dec 2011, Erik Hesselink wrote:
+>
+>> How does this relate to the Maybe lenses in fclabels [1]?
+>>
+>> Erik
+>>
+>> [1]
+>> http://hackage.haskell.org/packages/archive/fclabels/1.0.4/doc/html/Data-Label-Maybe.html
+>
+>
+> It appears to be somewhere between similar and the same.
+>
+> *** Comparison of API
+>
+> Data.Label.Maybe.get corresponds to Data.Lens.Partial.getPL
+>
+> Data.Label.Maybe.set roughly corresponds to Data.Lens.Partial.trySetPL
+> except that trySetPL will bail out early if the reference is null. ?We can
+> match the signature of set more precisely by:
+>
+> Data.Label.Maybe.set l v r ~ Data.Lens.Partial.trySetPL l r <*> pure v
+>
+> Data.Label.Maybe.modify would correspond to Data.Lens.Partial.tryModPL if I
+> had implemented it ... which maybe I ought to.
+>
+> Data.Label.Maybe.embed corresponds to a composition of totalLens and
+> maybeLens. ?More specifically
+>
+> Data.Label.Maybe.embed l ~ Data.Lens.Partial.maybeLens .
+> Data.Lens.Partial.totalLens l
+>
+> Data.Label.MaybeM.gets roughly corresponds to
+> Data.Lens.Partial.Lazy.accessPlus except that accessPlus is particular to
+> StateT because partial-lens is a Haskell 98 compliant package. ?I need to
+> write partial-lens-fd which will contain a function precisely corresponding
+> to Data.Label.MaybeM.gets
+>
+> I don't have Data.Label.MaybeM.asks, because there was no corresponding
+> functionality in data-lens. ?We should probably add a version of this.
+>
+> *** Comparison of representation
+>
+> The usual differences between data-lens and fclabels applies to partial-lens
+> as well. ?The representation for data-lens and partial-lens allows modify to
+> be done with one case analysis on a record since the getter and setters are
+> combined into one coalgebra whereas in fclabels two case analysis must be
+> done: one for the getter and one for the setter. ?When chains of lenses are
+> composed, I'm told the differences become more apparent.
+>
+> In partial-lens, the combination of getter and setter into a single
+> coalgebraic operations means that the getter and setter are statically
+> forced to return Nothing on the same record; but this is not enforced with
+> the fclabels representation.
+>
+> That said, perhaps the MaybeLens from fclabels is trying to do something
+> different. ?I don't know what laws you expect to hold for the getter and
+> setters of a maybe lens since it isn't documented (actually I appear to have
+> also forgotten to document the coalgebra laws for a comonad in my package)
+> so perhaps MaybeLens are intended to be more general than partial lenses.
+>
+> For example maybe a user wants to make it illegal to set the birth date to
+> be greater than the death date in a record. ?In this case getting the birth
+> date will succeed, but setting will fail if the provided birth date out of
+> bounds. ?This is possible to write using MaybeLens, but is impossible with
+> partial lenses since with partial-lenses either the reference is null,
+> meaning getting and setting both fail, or it is not null which means that
+> getting and setting both succeed.
+
+Thanks for the detailed explanation! It seems they are indeed (almost)
+the same, apart from the differences in representation.
+
+The original motivation for the Maybe lenses in fclabels was accessing
+record fields with Maybe types and composing these lenses (even in the
+presence of multiple Maybes). It does not come from a category
+theoretical starting point, hence no laws (yet). Your final example is
+interesting, I'd never considered doing something like that.
+
+Erik
+
+

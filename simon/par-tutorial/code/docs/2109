@@ -1,0 +1,37 @@
+From alex.solla at gmail.com  Tue Dec 20 04:10:32 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Mon, 19 Dec 2011 19:10:32 -0800
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <1324322427.2233.6.camel@fuzxxl>
+References: <1324322427.2233.6.camel@fuzxxl>
+Message-ID: <CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+
+On Mon, Dec 19, 2011 at 11:20 AM, Robert Clausecker <fuzxxl at gmail.com>wrote:
+
+> Image you would create your own language with a paradigm similar to
+> Haskell or have to chance to change Haskell without the need to keep any
+> compatibility. What stuff would you add to your language, what stuff
+> would you remove and what problems would you solve completely different?
+>
+> Thanks in advance for all answers, yours
+>
+
+* Lenses as the default record infrastructure.  (Maybe...)
+* Better organization of numeric (and algebraic/categorical) type classes
+in the Prelude.
+* Documentation that discourages thinking about bottom as a 'value'.  It's
+not a value, and that is what defines it.
+* Getting rid of the Functor/Monad nonsense.  (Every monad is in fact a
+functor, but we can't use fmap on arbitrary monads in Haskell)
+* The inclusion of something like Djinn to automatically generate free
+theorems from types.  It would be nice if GHCi included an interactive
+Djinn-like interface to generate alternative non-free functions for a type.
+* An API to make automating REPL and text editor interactions
+straight-forward.  (For example, if we were to use the hypothetical
+Djinn-like feature, we could select the implementation we want from a list
+and have it pasted into our text editor of choice automatically)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111219/db6440c8/attachment.htm>
+

@@ -1,0 +1,46 @@
+From daniel.is.fischer at googlemail.com  Thu Apr  7 22:08:18 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Thu, 7 Apr 2011 22:08:18 +0200
+Subject: [Haskell-cafe] Is there a way to find out the type inferred for
+	a local function inside another function? :)
+In-Reply-To: <BANLkTik+PnKjxL2BxeA519EKMap-dqmfMA@mail.gmail.com>
+References: <BANLkTik+PnKjxL2BxeA519EKMap-dqmfMA@mail.gmail.com>
+Message-ID: <201104072208.18552.daniel.is.fischer@googlemail.com>
+
+On Thursday 07 April 2011 21:52:29, KC wrote:
+> 
+
+There are probably better ways, but:
+
+module Infer where
+
+foo :: Num a => [a] -> a
+foo = go 0 0
+  where
+    go :: b
+    go i s (x:xs) = go (i+1) (s+i*x) xs
+    go _ s _ = s
+
+$ ghc Infer
+[1 of 1] Compiling Infer            ( Infer.hs, Infer.o )
+
+Infer.hs:7:5:
+    Could not deduce (b ~ (a0 -> a0 -> [a0] -> a0))
+    from the context (Num a)
+      bound by the type signature for foo :: Num a => [a] -> a
+      at Infer.hs:(4,1)-(8,16)
+      `b' is a rigid type variable bound by
+          the type signature for go :: b at Infer.hs:7:5
+    The equation(s) for `go' have three arguments,
+    but its type `b' has none
+    In an equation for `foo':
+        foo
+          = go 0 0
+          where
+              go :: b
+              go i s (x : xs) = go (i + 1) (s + i * x) xs
+              go _ s _ = s
+
+sort of does it.
+
+

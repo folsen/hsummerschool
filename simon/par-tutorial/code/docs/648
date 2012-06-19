@@ -1,0 +1,36 @@
+From wren at freegeek.org  Sat Apr 23 06:05:49 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sat, 23 Apr 2011 00:05:49 -0400
+Subject: [Haskell-cafe] Is Hugs dead?
+In-Reply-To: <1303474568.13029.4.camel@fuzxxl>
+References: <1303474568.13029.4.camel@fuzxxl>
+Message-ID: <4DB2501D.6000306@freegeek.org>
+
+On 4/22/11 8:16 AM, Robert Clausecker wrote:
+> Some weeks ago, I mirrored the hugs repo to github.
+> (https://github.com/fuzxxl/Hugs) This was, when I found out, that the
+> last commit was about 2 years ago. Also, since some of the dependencies
+> moved, I was unable to build hugs.
+>
+> Now my question is: Is Hugs dead? What's the status of development of
+> hugs?
+
+Alas, Hugs appears to be well and truly dead. Sept2006 seems to be the 
+last official release, and the bugs I've posted for Cabal/cabal-install 
+support seem to have a priority hovering around _|_.
+
+You can get an unofficial Feb2009 release from the corehugs[1] project 
+that forked off in 2008. Unfortunately corehugs seems to be dead too 
+(along with the Yhc it was forked to work with).
+
+Tis a shame to see all those projects go. It'd be nice to have a simple, 
+portable Haskell interpreter for shell scripting, embedded machines, etc.
+
+
+[1] http://code.google.com/p/corehugs/
+
+-- 
+Live well,
+~wren
+
+

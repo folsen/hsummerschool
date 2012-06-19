@@ -1,0 +1,30 @@
+From chrisdone at googlemail.com  Tue Apr  5 15:35:30 2011
+From: chrisdone at googlemail.com (Christopher Done)
+Date: Tue, 5 Apr 2011 15:35:30 +0200
+Subject: [Haskell-cafe] ANN: Google Summer of Code student application
+ period opens today
+In-Reply-To: <BANLkTik1qF-qdHvJTHFkdFYfbWxnJ3_MMg@mail.gmail.com>
+References: <AANLkTi=UBbYgQMeKsPGo2S9JxoG=1_OABB7hsZ7nmn5q@mail.gmail.com>
+	<1302008756-sup-3765@zezinho>
+	<BANLkTi=s0a-fiPH2uYvoH9zx9EONs-GXfA@mail.gmail.com>
+	<BANLkTik1qF-qdHvJTHFkdFYfbWxnJ3_MMg@mail.gmail.com>
+Message-ID: <BANLkTikD7kERqLg7dE35AySB95NwvMKTog@mail.gmail.com>
+
+On 5 April 2011 15:33, Vo Minh Thu <noteed at gmail.com> wrote:
+
+>  > I'm sure everyone is eager to have a parallel GHC and parallel Cabal. I
+> am.
+> > Waiting for 67 modules to build in order every time I change my types
+> file
+> > is not fun.
+>
+> You should parallelize yourself instead; while one thread is stuck
+> waiting for GHC or Cabal, the other ones can have fun.
+>
+
+I only came to look at Haskell-Cafe posts because I was waiting for builds.
+;-)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110405/d54ef6e4/attachment.htm>
+

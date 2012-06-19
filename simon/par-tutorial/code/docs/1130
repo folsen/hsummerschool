@@ -1,0 +1,61 @@
+From ekmett at gmail.com  Sun Aug 14 22:31:01 2011
+From: ekmett at gmail.com (Edward Kmett)
+Date: Sun, 14 Aug 2011 16:31:01 -0400
+Subject: [Haskell-cafe] Proposal #3339: Add (+>) as a synonym for mappend
+In-Reply-To: <1313346066.32611.23.camel@godel>
+References: <c290c4f20906301437y343da916x15ae9d02f1fad2a0@mail.gmail.com>
+	<20090917133748.GA20813@soi.city.ac.uk>
+	<alpine.DEB.2.00.0909250114400.30756@anubis.informatik.uni-halle.de>
+	<CAK-tuPbPB8iz8mNbYmOmS1ijssSQq=DJs1P1xxaH4ENvnDugZg@mail.gmail.com>
+	<4E47CC47.3080105@earth.li>
+	<CAOrUaLY-FPLtvCinx9ieSGmRZt+XMvF=FaJnz7MFw-995XS5eg@mail.gmail.com>
+	<CAKFCL4URAoH_10mC7bPFt_fDsb1KVgHJ-=meJzvwGbYf8__g-A@mail.gmail.com>
+	<CAOrUaLbs1Z5793Gn94D8AimdcgLABOpgF1C91UGaEXEXRxvJzg@mail.gmail.com>
+	<CAKFCL4WAOj167ravBiouVN1DU5pjnF0zkcuRs3Nhn9nHhobH5Q@mail.gmail.com>
+	<CAOrUaLaGq1i6fkz0cE1MiJ28JLFJdBaLqCv2PhQ26oG2yz_puQ@mail.gmail.com>
+	<1313346066.32611.23.camel@godel>
+Message-ID: <CAJumaK_rBWuxNUaJnzqPPZT8dLEAUT46UX2Bvy70VnYjGmu2UA@mail.gmail.com>
+
+I originally didn't have the package exporting those things.
+
+I would be amenable to standardization without them, but I use them in about
+20 packages that are built on top of semigroups, and naturals and non-empty
+lists come up when talking about semigroups a lot.
+
+Rather than having them live way up in extension land with the rest of my
+algebra libraries i moved them down to where they could do some good and
+admit some optimizations.
+
+On Sun, Aug 14, 2011 at 2:21 PM, Chris Smith <cdsmith at gmail.com> wrote:
+
+> On Sun, 2011-08-14 at 21:05 +0300, Yitzchak Gale wrote:
+> > Brandon Allbery wrote:
+> > > Anything useful has to be modified to depend on SemiGroup as well to
+> get
+> > > mconcat or its replacement; that's why you jumped the proposal to begin
+> > > with....
+> >
+> > Not at all. Types with Monoid instances need an additional
+> > instance, a Semgroup instance
+>
+> That does require depending on semigroups though, and I think that's
+> what Brandon was saying.
+>
+> Of course, the obvious solution to this would be to promote semigroups,
+> e.g., by adding it to the Haskell Platform or including it in base...
+> but the current semigroups package is a bit heavyweight for that; it
+> exports four new modules for what is really a very simple concept!
+>
+> --
+> Chris Smith
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110814/848c36b8/attachment.htm>
+

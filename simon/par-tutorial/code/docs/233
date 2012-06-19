@@ -1,0 +1,25 @@
+From magnus at therning.org  Fri Apr  8 09:50:00 2011
+From: magnus at therning.org (Magnus Therning)
+Date: Fri, 8 Apr 2011 08:50:00 +0100
+Subject: [Haskell-cafe] Is there a way to find out the type inferred for
+ a local function inside another function? :)
+In-Reply-To: <BANLkTik+PnKjxL2BxeA519EKMap-dqmfMA@mail.gmail.com>
+References: <BANLkTik+PnKjxL2BxeA519EKMap-dqmfMA@mail.gmail.com>
+Message-ID: <BANLkTikUdm3GQN6j1zEkk8OykXeVERgx6Q@mail.gmail.com>
+
+AFAIK there is no way to do that, thouhg scion[1] may offer it.
+
+Personally I develop more complex local functions at the top-level,
+and once I'm happy with it I perform some re-factoring and move it in.
+
+/M
+
+[1]: https://github.com/nominolo/scion/blob/master/README.markdown
+
+
+-- 
+Magnus Therning ? ? ? ? ? ? ? ? ? ? ?OpenPGP: 0xAB4DFBA4
+email: magnus at therning.org ? jabber: magnus at therning.org
+twitter: magthe ? ? ? ? ? ? ? http://therning.org/magnus
+
+

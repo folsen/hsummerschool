@@ -1,0 +1,66 @@
+From daniel.is.fischer at googlemail.com  Sun Aug  7 11:20:18 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sun, 7 Aug 2011 11:20:18 +0200
+Subject: [Haskell-cafe] Analyzing slow performance of a Haskell program
+In-Reply-To: <CAGXzfB60BDXV6vOJfk6YVBG7xjyhhmTDn=+ax6mjLBx5kY6B=A@mail.gmail.com>
+References: <CAKaDkC7-vQo_AXRRX6-+P+PKV87b54D21k6bSnub=JYvH_mnRQ@mail.gmail.com>
+	<CAGXzfB60BDXV6vOJfk6YVBG7xjyhhmTDn=+ax6mjLBx5kY6B=A@mail.gmail.com>
+Message-ID: <201108071120.18563.daniel.is.fischer@googlemail.com>
+
+On Sunday 07 August 2011, 10:52:20, Max Bolingbroke wrote:
+> In short I don't see how to get further without changing the algorithm
+> or doing some hacks like manual unrolling. Maybe someone else has some
+> ideas?
+
+Well, the C# implementation uses arrays for lookup while the Haskell 
+version uses list lookups
+
+                      in (tens !! fromIntegral t) ++ wordify x
+
+and case'd functions
+
+lenTens 0 = 0
+lenTens 1 = 3
+lenTens 2 = 6
+lenTens 3 = 6
+lenTens 4 = 5
+lenTens 5 = 5
+lenTens 6 = 5
+lenTens 7 = 7
+lenTens 8 = 6
+lenTens 9 = 6
+ 
+wordify is only called once at the end, so that should not have a 
+measurable impact, but the lenXXXs might.
+I'm not sure what
+
+CaseLen.$wlenTens :: GHC.Prim.Int# -> GHC.Prim.Int#
+[GblId,
+ Arity=1,
+ Str=DmdType L,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Arity=1, Value=True,
+         ConLike=True, Cheap=True, Expandable=True,
+         Guidance=IF_ARGS [12] 11 0}]
+CaseLen.$wlenTens =
+  \ (ww_shY :: GHC.Prim.Int#) ->
+    case ww_shY of _ {
+      __DEFAULT ->
+        CaseLen.lenTens1
+        `cast` (CoUnsafe GHC.Types.Int GHC.Prim.Int#
+                :: GHC.Types.Int ~ GHC.Prim.Int#);
+      0 -> 0;
+      1 -> 3;
+      2 -> 6;
+      3 -> 6;
+      4 -> 5;
+      5 -> 5;
+      6 -> 5;
+      7 -> 7;
+      8 -> 6;
+      9 -> 6
+    }
+
+means at a lower level, but it's certainly worth trying out whether an 
+unboxed array lookup is faster.
+
+

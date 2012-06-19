@@ -1,0 +1,16 @@
+From felipe.lessa at gmail.com  Wed Dec  7 13:48:06 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Wed, 7 Dec 2011 10:48:06 -0200
+Subject: [Haskell-cafe] terminateProcess leaves zombie processes around
+In-Reply-To: <CAN2DD_Ht0gt5p6AOzXB+yMALG=iKsA=Pmq91_amn4+qH7t59SA@mail.gmail.com>
+References: <CAN2DD_Ht0gt5p6AOzXB+yMALG=iKsA=Pmq91_amn4+qH7t59SA@mail.gmail.com>
+Message-ID: <CANd=OGEYkipJTNz_wpFRtEerPFWdcrdxJaEATA8pOrsUHm02tA@mail.gmail.com>
+
+Quick suggestion:  did you try using waitForProcess just after terminateProcess?
+
+Cheers,
+
+-- 
+Felipe.
+
+

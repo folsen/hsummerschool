@@ -1,0 +1,54 @@
+From felipe.lessa at gmail.com  Thu Dec 15 02:03:50 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Wed, 14 Dec 2011 23:03:50 -0200
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <12B612A8-515C-4E86-BE7E-F2214AA5E210@deepbondi.net>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+	<CACw0ni+Q=ixAAdWzmsbF+c1RkF74S2RV=fi_tX2B2puR0s5xvQ@mail.gmail.com>
+	<12B612A8-515C-4E86-BE7E-F2214AA5E210@deepbondi.net>
+Message-ID: <CANd=OGHac+eas7SZjgruccP8n_Gh1a11bFdhUqzH-jmsZJxwFA@mail.gmail.com>
+
+On Wed, Dec 14, 2011 at 4:09 PM, James Cook <mokus at deepbondi.net> wrote:
+> So a case could be made that, just as "forever (Just 1)" being nonsensical
+> doesn't invalidate "instance Monad Maybe", "some (Just 1)" being nonsensical
+> doesn't invalidate "instance Alternative Maybe". ?And on the other hand, a
+> case could be made that the importance of "some" and "many" justifies the
+> creation of a subclass of Alternative where they actually are mandated to be
+> meaningful rather than just definable.
+
+Being in the same typeclass means that you can defined
+
+  instance Alternative Maybe where
+
+>
+> I think we should take any further discussion off-list. Your messages from
+> last night betray a deep misunderstanding that I'm not sure everyone else
+> needs to sit through :-)
+>
+>
+> Obviously I can't speak for everyone, but I enjoy reading discussions like
+> this (and with a threaded mail reader, they're very easy to skip when I
+> don't feel like reading them). ?What seems like misunderstanding is often
+> actually another person's fundamental difference of perspective, and it can
+> be valuable to anyone who has skimmed the thread this far to see what, if
+> any, common ground can be found.
+>
+> -- James
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Felipe.
+
+

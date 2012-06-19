@@ -1,0 +1,60 @@
+From michael at schmong.org  Tue Apr 19 23:52:16 2011
+From: michael at schmong.org (Michael Litchard)
+Date: Tue, 19 Apr 2011 14:52:16 -0700
+Subject: [Haskell-cafe] errors while installing yesod 0.8
+In-Reply-To: <BANLkTikrMOrmO-K-HBLTjBT4SCoPsWnJaA@mail.gmail.com>
+References: <BANLkTinnbgfJFA8pFptB9QwOSr3soP4DaQ@mail.gmail.com>
+	<BANLkTikrMOrmO-K-HBLTjBT4SCoPsWnJaA@mail.gmail.com>
+Message-ID: <BANLkTi=oPA=fve0cuGjagQ9zMRpKODRhCw@mail.gmail.com>
+
+OS
+ Linux apotheosis 2.6.35-22-server #33-Ubuntu SMP Sun Sep 19 20:48:58
+UTC 2010 x86_64 GNU/Linux
+
+GHC
+
+The Glorious Glasgow Haskell Compilation System, version 6.12.3
+
+
+Is the problem here that I'm not using ghc 7? I try to be conservative
+with my compiler upgrades. But if this might be the problem it seems
+like a simple enough fix.
+
+
+On Tue, Apr 19, 2011 at 2:41 PM, Michael Snoyman <michael at snoyman.com> wrote:
+> I haven't seen this error. What version of GHC are you using, and what OS?
+> Michael
+>
+> On Wed, Apr 20, 2011 at 12:18 AM, Michael Litchard <michael at schmong.org>
+> wrote:
+>>
+>> Trying to install yesod 0.8 breaks when it's time to install
+>> monad-control. Google wasn't very helpful, nor was the error message I
+>> received
+>>
+>>
+>>
+>> mlitchard at apotheosis:~/monad-control$ cabal install
+>> Resolving dependencies...
+>> Configuring monad-control-0.2.0.1...
+>> cabal: Error: some packages failed to install:
+>> monad-control-0.2.0.1 failed during the configure step. The exception was:
+>> ExitFailure 11
+>>
+>>
+>> note: I've been trying to use the cab command to manage my packages, I
+>> get the same error as above when I use cab instead of cabal.I mention
+>> this just in case there is some unforseen problem having to do with
+>> cab/cabal interaction.
+>>
+>> Has anyone experienced this problem, or know what I can do to get more
+>> useful error messages that might reveal the cause of the breakage?
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

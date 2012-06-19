@@ -1,0 +1,36 @@
+From martin at debruin.se  Sat Dec 31 01:42:10 2011
+From: martin at debruin.se (Martin de Bruin)
+Date: Sat, 31 Dec 2011 01:42:10 +0100
+Subject: [Haskell-cafe] Twidge using hashtags
+Message-ID: <CAG0+f23JirM9PFCBwiyJmMDLV6vTJDnRA4g9PMGZf9R7M=APcg@mail.gmail.com>
+
+Hello!
+
+fairly new to twidge. Got it installed and have it setting status etc etc .
+I'm maintaing a local website supporting the eating of a seasonal pastry in
+a highly competitve fashion. A race of sorts. The contestant eating the
+most from january first to good friday wins. To keep the eating as
+transparent as possible one must report each pastry on the web. However, I
+feel this is not very 2012.
+
+I'm thinking about going about the new version allowing reporting to be
+done via twitter and picking it up with Twidge. To keep everything as much
+in the open as possible I'd like to have all contestants twittering the
+eating of a pastry mentioning the "official twitter account of the website"
+and throw in a hashtag like #report and then some comment.
+
+I'll then read the feed periodically via cron on the server and update the
+highscore database.
+
+Am I making sense? The longer I typed the above the more I started thinkng
+about just doing something in PHP...
+
+Any thoughts?
+
+Cheers
+
+Martin
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111231/35c7c1b5/attachment.htm>
+

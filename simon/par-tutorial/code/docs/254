@@ -1,0 +1,29 @@
+From wren at freegeek.org  Sat Apr  9 01:57:14 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Fri, 08 Apr 2011 19:57:14 -0400
+Subject: [Haskell-cafe] Is there a way to find out the type inferred for
+ a local function inside another function? :)
+In-Reply-To: <4D9EFE90.2000106@henning-thielemann.de>
+References: <BANLkTik+PnKjxL2BxeA519EKMap-dqmfMA@mail.gmail.com>	<BANLkTikUdm3GQN6j1zEkk8OykXeVERgx6Q@mail.gmail.com>
+	<4D9EFE90.2000106@henning-thielemann.de>
+Message-ID: <4D9FA0DA.70502@freegeek.org>
+
+On 4/8/11 8:24 AM, Henning Thielemann wrote:
+> Magnus Therning schrieb:
+>> AFAIK there is no way to do that, thouhg scion[1] may offer it.
+>>
+>> Personally I develop more complex local functions at the top-level,
+>> and once I'm happy with it I perform some re-factoring and move it in.
+>
+> I would not write large local functions at all. I would leave them
+> top-level but do not export them. This also allows to test them from GHCi.
+
+The downside to this is when you want to use the worker/wrapper 
+transform in order to capture some local variables for a recursive 
+function, instead of passing them through the recursion.
+
+-- 
+Live well,
+~wren
+
+

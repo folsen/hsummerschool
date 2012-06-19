@@ -1,0 +1,35 @@
+From stephen.tetley at gmail.com  Thu Apr 14 22:22:24 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Thu, 14 Apr 2011 21:22:24 +0100
+Subject: [Haskell-cafe] Type Classes in Haskell - how can I make GHC
+ make a choice of types, when the type chosen doesn't matter?
+In-Reply-To: <BANLkTik7xQmkZ1isBTTOzasR2AF9BB-fFQ@mail.gmail.com>
+References: <BANLkTinPdtvLyNLGA3M7hx8ngUEOec+How@mail.gmail.com>
+	<BANLkTim=kKW3V7vkZ4zs7yeg0Jg-_VEPkg@mail.gmail.com>
+	<BANLkTik7xQmkZ1isBTTOzasR2AF9BB-fFQ@mail.gmail.com>
+Message-ID: <BANLkTims5R=AbTO5uF0fMeqSYs=vZu9avA@mail.gmail.com>
+
+On 14 April 2011 20:35, Chris Dew <cmsdew at gmail.com> wrote:
+
+> Could you suggest how these constraints could be expressed in the
+> Haskell type system?
+>
+
+Hi Chris
+
+I'm afriad I'd have to decline - generally in Haskell implicit
+"lifters" are problematic, so it isn't something I'd be looking to
+solve.
+
+
+There was a thread on Haskell Cafe about them last November called
+"Making monadic code more concise", that you might find interesting -
+especially Oleg Kiselyov's comments:
+
+http://www.haskell.org/pipermail/haskell-cafe/2010-November/086445.html
+
+Best wishes
+
+Stephen
+
+

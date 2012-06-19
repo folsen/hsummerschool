@@ -1,0 +1,33 @@
+From mmitar at gmail.com  Mon Apr 11 03:03:07 2011
+From: mmitar at gmail.com (Mitar)
+Date: Mon, 11 Apr 2011 03:03:07 +0200
+Subject: [Haskell-cafe] Generating random graph
+Message-ID: <BANLkTikuGdF_zEOSZ23S=W8QgmmAtWzJeA@mail.gmail.com>
+
+Hi!
+
+I have made this function to generate a random graph for
+Data.Graph.Inductive library:
+
+generateGraph :: Int -> IO (Gr String Double)
+generateGraph graphSize = do
+  when (graphSize < 1) $ throwIO $ AssertionFailed $ "Graph size out
+of bounds " ++ show graphSize
+  let ns = map (\n -> (n, show n)) [1..graphSize]
+  es <- fmap concat $ forM [1..graphSize] $ \node -> do
+    nedges <- randomRIO (0, graphSize)
+    others <- fmap (filter (node /=) . nub) $ forM [1..nedges] $ \_ ->
+randomRIO (1, graphSize)
+    gen <- getStdGen
+    let weights = randomRs (1, 10) gen
+    return $ zip3 (repeat node) others weights
+  return $ mkGraph ns es
+
+But I noticed that graph has sometimes same weights on different
+edges. This is very unlikely to happen so probably I have some error
+using random generators. Could somebody tell me where?
+
+
+Mitar
+
+

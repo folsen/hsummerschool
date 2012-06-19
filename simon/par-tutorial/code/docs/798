@@ -1,0 +1,32 @@
+From jerzy.karczmarczuk at unicaen.fr  Wed Apr 27 15:07:45 2011
+From: jerzy.karczmarczuk at unicaen.fr (Jerzy Karczmarczuk)
+Date: Wed, 27 Apr 2011 15:07:45 +0200
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <4DB80841.8040304@gmail.com>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>	<34E1B523-F2C9-4875-98D2-728D5178DC89@gmail.com>
+	<4DB80841.8040304@gmail.com>
+Message-ID: <4DB81521.50800@unicaen.fr>
+
+
+> Thomas Davie wrote:
+>> This completely misses what laziness gives Haskell ? it gives a way of completing a smaller number of computations than it otherwise would have to at run time. (...)
+Tony Morris continues the ping-pong:
+> This is not what laziness gives us. Rather, it gives us terminating
+> programs that would otherwise not terminate.
+Next, please...
+
+You know, this suggests that you should read the parable of Blind Men 
+and the Elephant.
+
+Alright, my turn. I never wanted to write non-terminating programs (what 
+for?), and all my programs executed exactly those instructions they 
+should have executed, not more or less. I see ONE usage of laziness: the 
+possibility to write co-recursive equations, which become algorithms. 
+The possibility to represent processes as "data", which makes it easier 
+to reason upon them. Do we really need some dogmatic specification of 
+laziness?...
+
+Jerzy Karczmarczuk
+
+
+

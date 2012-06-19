@@ -1,0 +1,29 @@
+From d.kahlenberg at googlemail.com  Mon Apr 11 10:19:27 2011
+From: d.kahlenberg at googlemail.com (Daniel Kahlenberg)
+Date: Mon, 11 Apr 2011 10:19:27 +0200
+Subject: [Haskell-cafe] already installed packages alerted as not being
+	installed
+Message-ID: <BANLkTi=xDJO68sNZR5vi=NofwD3p0aZ3TA@mail.gmail.com>
+
+Hello cafe-readers,
+
+does anyone of you observe similar problems e. g. on a Windows with
+ghc-7.0.2 setup: When I'm trying cabal install threadscope (as an
+example package depending on gtk2hs, latter which I've installed using
+the stepwise approach of cabal unpack first, then cabal configure
+--user etc.) it complains about cairo etc. not being installed and
+tries to re-install it on-the-fly, failing due to whats described her:
+http://hackage.haskell.org/trac/gtk2hs/ticket/1203!
+
+When I install cabal-dev and cab first and then re-install everything
+with cab instead of cabal the issue with re-installing already
+installed packages described above disappears and only an "unknown
+symbol" message related to the correctly found installed cairo package
+remains. So is there an error in package database handling somewhere
+or changed semantics in cabal | ghc-pkg | (even) pkg-config flags I
+missed?
+
+Cheers
+Daniel
+
+

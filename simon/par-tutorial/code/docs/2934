@@ -1,0 +1,30 @@
+From wren at freegeek.org  Fri Feb 11 07:14:34 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Fri, 11 Feb 2011 01:14:34 -0500
+Subject: [Haskell-cafe] Cabal && license combinations
+In-Reply-To: <DB2F8BA0-6AAE-4699-83F1-BCF070E76889@me.com>
+References: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+	<DB2F8BA0-6AAE-4699-83F1-BCF070E76889@me.com>
+Message-ID: <4D54D3CA.3020107@freegeek.org>
+
+On 2/7/11 9:42 AM, Malcolm Wallace wrote:
+> To combine licences, just aggregate them. There is no lattice of
+> subsumption; no "more" or "less" restrictive ordering. It's simple: you
+> must obey all of them.
+
+In the event that my comments on the previous thread were a source of 
+confusion, I agree with the first and last sentences though the middle 
+one is a bit more ambiguous.
+
+Lawyers can argue about whether individual licenses as written (i.e., 
+MIT, BSD3, GPL,...) have any interesting preorder (i.e., other than 
+equality). But in practice distributors must adhere to sets of licenses, 
+and these sets have the obvious lattice structure: namely Malcolm's last 
+sentence. Again, whether this lattice has any interesting (i.e., 
+non-free) equalities is best left up to lawyers.
+
+-- 
+Live well,
+~wren
+
+

@@ -1,0 +1,36 @@
+From michael at orlitzky.com  Mon Dec 12 21:49:06 2011
+From: michael at orlitzky.com (Michael Orlitzky)
+Date: Mon, 12 Dec 2011 15:49:06 -0500
+Subject: [Haskell-cafe] HaXml 1.13 -> 1.22 upgrade
+In-Reply-To: <D93A33CA-12B5-4B89-A78A-88FD4C1BD78D@me.com>
+References: <4EE448DF.9030400@orlitzky.com>
+	<CAKjSnQE23zX7_jn8GnoA3tVABYYAM22CZ-Jqab8+YX3CK5K-fg@mail.gmail.com>
+	<4EE4C486.4060206@orlitzky.com>
+	<D93A33CA-12B5-4B89-A78A-88FD4C1BD78D@me.com>
+Message-ID: <4EE668C2.4030409@orlitzky.com>
+
+On 12/12/11 02:42, Malcolm Wallace wrote:
+> The extra parameter "i" is for "information" attached to each node of
+> the tree.  As you have correctly guessed, the parser fills in this
+> field with positional information relating to the original source
+> document, which is useful for instance if you are validating or
+> checking the original document.  When building new parts of a
+> document, it is perfectly fine to attach "noPos".
+>
+> You can alternatively replace all of the informational items in the
+> tree, with for instance "fmap (const ())" if you don't care about
+> them.
+>
+> The information fields are useful for other purposes though, e.g. to
+> hold the relevant xmlns namespace for subtrees; or to distinguish
+> added/removed/modified subtrees in a diff-like viewer.
+>
+> Regards, Malcolm
+
+Thanks, I understand what's going on now.
+
+I like the noPos solution because the other ones make the reader think 
+there's something important going on; with noPos, I can just comment 
+"gotta give it a Posn, and this is the only one I know how to make."
+
+

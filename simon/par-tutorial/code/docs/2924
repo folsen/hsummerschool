@@ -1,0 +1,72 @@
+From Christian.Maeder at dfki.de  Thu Feb 10 17:14:01 2011
+From: Christian.Maeder at dfki.de (Christian Maeder)
+Date: Thu, 10 Feb 2011 17:14:01 +0100
+Subject: [Haskell-cafe] Building Plaftorm 2010 2 on 64bit Linux
+In-Reply-To: <4D5409DE.1020504@fit.vutbr.cz>
+References: <4D511D52.90503@fit.vutbr.cz>	<4D51316A.5070201@dfki.de>	<4D513575.6000803@fit.vutbr.cz>	<4D5136B5.6040608@dfki.de>	<4D513824.4050606@fit.vutbr.cz>	<4D51446B.2000804@dfki.de>	<Pine.BSF.4.64.1102081505330.3584@kazi.fit.vutbr.cz>	<4D5165E0.5070905@dfki.de>	<4D53D6C8.6020708@fit.vutbr.cz>
+	<4D540683.7050403@dfki.de> <4D5409DE.1020504@fit.vutbr.cz>
+Message-ID: <4D540EC9.6060809@dfki.de>
+
+Well, happy lists CPP as extensions so maybe adding:
+
+  -pgmP "$pgmgcc -E -undef -traditional"
+
+helps.
+
+C.
+
+Am 10.02.2011 16:53, schrieb Du?an Kol??:
+> I have the following ghc script:
+> 
+> cat ghc
+> #!/bin/sh
+> exedir="/usr/local/lib/ghc-6.12i386/lib/ghc-6.12.3"
+> exeprog="ghc-stage2"
+> executablename="$exedir/$exeprog"
+> datadir="/usr/local/lib/ghc-6.12i386/share"
+> bindir="/usr/local/lib/ghc-6.12i386/bin"
+> topdir="/usr/local/lib/ghc-6.12i386/lib/ghc-6.12.3"
+> pgmgcc="/usr/local/bin/gcc"
+> executablename="$exedir/ghc"
+> exec "$executablename" -B"$topdir" -pgmc "$pgmgcc"  -pgml "$pgmgcc"
+> -pgma "$pgmgcc"  ${1+"$@"}
+> 
+> Du?an
+> 
+> On 02/10/2011 04:38 PM, Christian Maeder wrote:
+>> Am 10.02.2011 13:15, schrieb Du?an Kol??:
+>>> Well, that was probably the main problem :-(
+>>>
+>>> Unfortunately, even if, after performing all the stuff once again, I
+>>> made platform configured, make ended in compilation of happy with "old
+>>> story":
+>>>
+>>> Configuring happy-1.18.5...
+>>> "./Setup" "build"
+>>> Preprocessing executables for happy-1.18.5...
+>>> Building happy-1.18.5...
+>>> ghc: could not execute: /usr/bin/gcc
+>>>
+>>> Error:
+>>> Building the happy-1.18.5 package failed
+>>> make: *** [build.stamp] Error 2
+>> Maybe this time indeed gcc is called as linker and you should add
+>>   -pgml /usr/local/bin/gcc
+>>
+>> In fact my ghc script for ghc-7.0.1 contains:
+>>
+>> pgmgcc="/usr/bin/gcc"
+>> executablename="$exedir/ghc"
+>> exec "$executablename" -B"$topdir" -pgmc "$pgmgcc" -pgma "$pgmgcc" -pgml
+>> "$pgmgcc" -pgmP "$pgmgcc -E -undef -traditional" ${1+"$@"}
+>>
+>> Christian
+>>
+>>>
+>>> Even if all other items went OK, until happy :-(  and it is called happy
+>>> ;-) :-D
+>>>
+>>>
+>>> Dusan
+
+

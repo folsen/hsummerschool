@@ -1,0 +1,54 @@
+From dokondr at gmail.com  Thu Apr 14 13:42:50 2011
+From: dokondr at gmail.com (Dmitri O.Kondratiev)
+Date: Thu, 14 Apr 2011 15:42:50 +0400
+Subject: [Haskell-cafe] Programming Chalenges: The 3n+1 problem
+In-Reply-To: <BANLkTimu0cU1OUGaFixx-naids+6A5T0ww@mail.gmail.com>
+References: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+	<BANLkTimu0cU1OUGaFixx-naids+6A5T0ww@mail.gmail.com>
+Message-ID: <BANLkTi=_v2FiMMKLSZ6thUpk65dh3EAoNQ@mail.gmail.com>
+
+Thanks, everybody!
+Your feedback is a great food for my mind (as Lewis Carroll once wrote :)
+When asking "how to implement cache in Haskell" I was hopping that there
+exists some solution without using Data.Array, more "functional" approach,
+if I may say so  ...
+I must be wrong, though (need more time to fully comprehend solution that
+Steven described in this thread ).
+
+On Thu, Apr 14, 2011 at 3:22 PM, Ryan Ingram <ryani.spam at gmail.com> wrote:
+
+> So if we were to emulate your Java solution, we'd do
+>
+> import Data.Array
+>
+> cacheSize :: Int
+> cacheSize = 65536
+>
+> table :: Array Int Integer
+> table = listArray (1,cacheSize) (1 : map go [2..cacheSize]) where
+>     go n
+>         | even n = 1 + lookup (n `div` 2)
+>         | otherwise = 1 + lookup (3 * n + 1)
+>
+> lookup :: Integer -> Integer
+> lookup n
+>     | n < cacheSize = table ! (fromInteger n)
+>     | even n = 1 + lookup (n `div` 2)
+>     | otherwise = 1 + lookup (3 * n + 1)
+>
+> The rest of the code is just some simple i/o.
+>
+> The table is filled up lazily as you request values from it.
+>
+>
+> --
+All the best,
+Dmitri O. Kondratiev
+
+"This is what keeps me going: discovery"
+dokondr at gmail.com
+http://sites.google.com/site/dokondr/welcome
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110414/519a3ea5/attachment.htm>
+

@@ -1,0 +1,48 @@
+From psujkov at gmail.com  Wed Apr 20 14:01:22 2011
+From: psujkov at gmail.com (Paul Sujkov)
+Date: Wed, 20 Apr 2011 15:01:22 +0300
+Subject: [Haskell-cafe] An example of enumerator processing some data
+	between input and output
+In-Reply-To: <20110420060810.3A0A717116@Adric.ern.nps.edu>
+References: <20110420060810.3A0A717116@Adric.ern.nps.edu>
+Message-ID: <BANLkTikx3b1zqqs7KKVXat=B-0Qp1Sk4yA@mail.gmail.com>
+
+Hi Oleg,
+
+thank you for the answer, things are getting much clearer now.
+
+On 20 April 2011 09:08, <oleg at okmij.org> wrote:
+
+>
+> Paul Sujkov wrote:
+>
+> > I played a bit with the enumerator package, and I'm quite stuck with the
+> > question how to duplex data to two (or more) consumers
+>
+> Many packages have the combinator named enumPair (or something like
+> that). Here is one example
+>        http://okmij.org/ftp/ftp/Streams.html#1enum2iter
+> The combinator is quite useful for logging, for dumping the contents
+> of the stream as it is being processed.
+>
+> > actually I need to pipeline output of one consumer to another
+> > (outputting text after making some internal representation - with Show
+> > instance - with the parseData).
+>
+> You need enumeratees, which convert one stream into another. There are
+> many examples of those: e.g., converting a stream of bytes into a stream
+> of lines, or a stream of compressed/encoded data into the plaintext
+> stream. You enumerator package probably has them. The Stream.html page
+> also describes many examples of enumeratees.
+>
+>
+>
+>
+
+
+-- 
+Regards, Paul Sujkov
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110420/6a7a13e3/attachment.htm>
+

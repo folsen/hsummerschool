@@ -1,0 +1,44 @@
+From 2haskell at pkturner.org  Fri Dec 30 02:40:52 2011
+From: 2haskell at pkturner.org (Scott Turner)
+Date: Thu, 29 Dec 2011 20:40:52 -0500
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFD097D.3000600@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <jdh9h6$gba$1@dough.gmane.org>
+	<4EFCA66D.4060609@blueyonder.co.uk>
+	<20111229180451.BFF53F3937@mail.avvanta.com>
+	<1325184067.16545.29.camel@godel> <4EFCBC99.60906@blueyonder.co.uk>
+	<1325193613.16545.57.camel@godel>
+	<4EFCE34B.3010403@blueyonder.co.uk>
+	<1325201417.16545.96.camel@godel>
+	<4EFD097D.3000600@blueyonder.co.uk>
+Message-ID: <4EFD16A4.6020303@pkturner.org>
+
+On 2011-12-29 19:44, Steve Horne wrote:
+> [Interaction with its environment] is as much an aspect of what
+> Haskell defines as the functional core.
+> 
+> Switching mental models doesn't change the logic
+But it does. Other languages do not support the distinction between pure
+functions and I/O effects. In those languages a function call is what
+triggers I/O.
+
+Haskell uses a different set of types for I/O. It does not use functions
+for this. The distinction between pure functions and impure code,
+supported by the language, is a valuable logical tool.
+
+You refer to the fact that as part of executing the Haskell program, it
+is translated into an AST that does not make that distinction. The
+effect getAnIntFromTheUser is translated into a function. The type of
+the function says nothing about whether the function has an effect. In
+that sense Haskell is impure, but so what? That doesn't take away the
+power of Haskell's distinction between pure functions and impure types,
+for reasoning about Haskell code.
+
+> Either way, at run-time, Haskell is impure.
+No big deal. Who would want to use a language that you would call
+"pure"? Haskell has referential transparency. In Haskell, you have
+assurance that any function without IO in its type is as pure as the
+lambda calculus.
+
+

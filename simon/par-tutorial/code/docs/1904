@@ -1,0 +1,36 @@
+From brinchj at gmail.com  Tue Dec 13 16:52:47 2011
+From: brinchj at gmail.com (Johan Brinch)
+Date: Tue, 13 Dec 2011 16:52:47 +0100
+Subject: [Haskell-cafe] Sharing on equality
+In-Reply-To: <CACMox4PY4-G1VdCmrx_KEoJDnmLQVPF7707aNh0WoObypLzrog@mail.gmail.com>
+References: <CACMox4PY4-G1VdCmrx_KEoJDnmLQVPF7707aNh0WoObypLzrog@mail.gmail.com>
+Message-ID: <CACMox4N59GtgJZK1iFRCZYJZ_uO6QVTsOvk63W0UXKCwgS8b0g@mail.gmail.com>
+
+Hey all,
+
+Can GHC eliminate one of two equal ByteStrings, when they are compared
+and turns out to be equal?
+
+
+Say i have a map, ByteString -> Int.
+
+I now do a lookup on a ByteString and if it exists, I insert this
+ByteString into a list.
+
+Is it possible to avoid using more memory, than used by the keys in
+the map + the list structure?
+
+I.e. is it possible to eliminate the redundant ByteStrings somehow?
+
+I guess, this could be done by having lookup return the key as well,
+and then insert this key into the list, however, that's a bit ugly and
+somewhat anti-intuitive.
+
+
+Here's an example program, to illustrate the idea:
+https://gist.github.com/1472418
+
+-- 
+Johan Brinch
+
+

@@ -1,0 +1,155 @@
+From scm at iis.sinica.edu.tw  Mon Apr 11 10:16:33 2011
+From: scm at iis.sinica.edu.tw (Shin-Cheng Mu)
+Date: Mon, 11 Apr 2011 16:16:33 +0800
+Subject: [Haskell-cafe] CFP: APLAS 2011, Kenting, Taiwan
+Message-ID: <58FEF12B-AB31-4A19-8008-4E3F17C29A34@iis.sinica.edu.tw>
+
+==========================================================
+APLAS 2011 Call For Papers
+
+Ninth Asian Symposium on Programming Languages and Systems
+Kenting, Taiwan, December 5--7, 2011
+(co-located with CPP 2011)
+
+http://flolac.iis.sinica.edu.tw/aplas11/
+==========================================================
+
+BACKGROUND:
+APLAS aims at stimulating programming language research by 
+providing a forum for the presentation of latest results and 
+the exchange of ideas in topics concerned with programming 
+languages and systems. APLAS is based in Asia, but is an 
+international forum that serves the worldwide programming 
+language community.
+
+APLAS is sponsored by the Asian Association for Foundation of 
+Software (AAFS) founded by Asian researchers in cooperation with 
+many researchers from Europe and the USA. The past APLAS symposiums 
+were successfully held in Shanghai ('10), Seoul ('09), 
+Bangalore ('08), Singapore ('07), Sydney ('06), Tsukuba ('05), 
+Taipei ('04) and Beijing ('03) after three informal workshops.
+Proceedings of the past symposiums were published in
+Springer-Verlag's LNCS 6461, 5904, 5356, 4807, 4279, 3780, 3302, 
+and 2895.
+
+The 2011 edition will be held at Kenting, a seaside resort in 
+Southern Taiwan.
+
+
+TOPICS:
+The symposium is devoted to both foundational and practical 
+issues in programming languages and systems. Papers are solicited 
+on, but not limited to, the following topics:
+
++ semantics, logics, foundational theory;
++ design of languages and foundational calculi;
++ type systems;
++ compilers, interpreters, abstract machines;
++ program derivation and transformation;
++ program analysis, verification, model-checking, software security;
++ concurrency, constraints, domain-specific languages;
++ tools for programming, verification, implementation. 
+
+APLAS 2011 is not limited to topics discussed in previous
+symposiums. Papers identifying future directions of 
+programming and those addressing the rapid changes of the 
+underlying computing platforms are especially welcome. 
+Demonstration of systems and tools in the scope of APLAS are 
+welcome to the System and Tool presentations category. 
+Authors concerned about the appropriateness of a topic are
+welcome to consult with Program Chair prior to submission.
+
+
+IMPORTANT DATES:
+Abstract Deadline: June 13, 2011
+Submission Deadline: June 17, 2011 (GMT)
+Notification: August 29, 2011
+Camera-Ready: September 19, 2011
+
+INVITED SPEAKERS:
+Nikolaj Bjorner, Microsoft Research Redmond
+Ranjit Jhala, UC San Diego
+Peter O'Hearn, Queen Mary U. London
+Sriram Rajamani, Microsoft Research India
+
+SUBMISSION INFORMATION:
+We solicit submissions in two categories:
+
+Regular research papers, describing original research results,
+including tool development and case studies, from a perspective of
+scientific research. Regular research papers should not exceed 16
+pages in the Springer LNCS format, including bibliography and
+figures. They should clearly identify what has been accomplished and
+why it is significant. Submissions will be judged on the basis of
+significance, relevance, correctness, originality, and clarity. In
+case of lack of space, proofs, experimental results, or any
+information supporting the technical results of the paper could be
+provided as Appendix or a link to a web page.
+
+System and Tool presentations, describing systems or tools that
+support theory, program construction, reasoning, and/or program
+execution in the scope of APLAS. Unlike presentations of regular
+research papers, presentation of accepted papers in this category is
+expected to be centered around a demonstration. The paper and the
+demonstration should identify the novelties of the tools and use
+motivating examples. System and Tool papers should not
+exceed 8 pages in the Springer LNCS format, including bibliography and
+figures. Submissions will be judged based on both the papers and the
+systems or tools as described in the papers. It is highly desirable
+that the tools are available on the web.
+
+Papers should be submitted electronically via the submission web page
+at http://www.easychair.org/conferences/?conf=aplas2011. Acceptable
+formats are PostScript or PDF, viewable by Ghostview or Acrobat
+Reader. Submitted papers must be unpublished and not submitted for
+publication elsewhere. Papers must be written in English. The
+proceedings are planned to be published as a volume in
+Springer-Verlag's Lecture Notes in Computer Science series. Accepted
+papers must be presented at the conference.
+
+
+GENERAL CHAIR:
+Tyng-Ruey Chuang, Academia Sinica, Taiwan
+
+PROGRAM CHAIR:
+Hongseok Yang, Queen Mary U. London
+aplas2011 at easychair.org
+
+PROGRAM COMMITTEE:
+Lars Birkedal (ITU, Denmark)
+James Brotherston (Imperial College, UK) 
+Kung Chen (National Chengchi U., Taiwan) 
+Wenguang Chen (Tsinghua U., China) 
+Wei-Ngan Chin (NUS, Singapore) 
+Javier Esparza (TUM, Germany) 
+Xinyu Feng (USTC, China) 
+Jerome Feret (INRIA, France) 
+Matthew Fluet (RIT, USA) 
+Rajiv Gupta (UC Riverside, USA) 
+Masahito Hasegawa (Kyoto U., Japan) 
+Radha Jagadeesan (Depaul U., USA) 
+Naoki Kobayashi (Tohoku U., Japan) 
+Daniel Kroning (U. Oxford, UK) 
+Rupak Majumdar (MPI-SWS, Germany) 
+Andrzej Murawski (U. Leicester, UK) 
+Paulo Oliva (Queen Mary U. London, UK) 
+Doron Peled (Bar Ilan U., Israel) 
+Sukyoung Ryu (KAIST, Korea) 
+Sriram Sankaranarayanan (U. Colorado, USA) 
+Armando Solar-Lezama (MIT, USA) 
+Sam Staton (U. Cambridge, UK)
+Viktor Vafeiadis (MPI-SWS, Germany)
+Kapil Vaswani (MSR, India) 
+Martin Vechev (IBM, USA)
+Peng Wu (IBM, USA) 
+Hongseok Yang (Queen Mary U. London, UK) 
+Pen-Chung Yew (Academia Sinica, Taiwan) 
+
+ORGANIZERS:
+Mike Dodds, U. Cambridge (Poster chair)
+Shin-Cheng Mu, Academia Sinica, Taiwan (Local arrangement chair)
+Noam Rinetzky, Queen Mary U. London (Publicity chair)
+Yih-Kuen Tsay, National Taiwan University (Finance chair)
+
+
+

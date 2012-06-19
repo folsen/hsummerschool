@@ -1,0 +1,37 @@
+From alexey.skladnoy at gmail.com  Thu Aug  4 00:10:34 2011
+From: alexey.skladnoy at gmail.com (Alexey Khudyakov)
+Date: Thu, 04 Aug 2011 02:10:34 +0400
+Subject: [Haskell-cafe] strictness properties of monoidal folds
+In-Reply-To: <CALoEywNW_WZuu+xnQsenNyo_cDnyiZF9Dcpn5CcO73YaZDbgYQ@mail.gmail.com>
+References: <CALoEywNW_WZuu+xnQsenNyo_cDnyiZF9Dcpn5CcO73YaZDbgYQ@mail.gmail.com>
+Message-ID: <4E39C75A.9080104@gmail.com>
+
+On 02.08.2011 08:16, Sebastian Fischer wrote:
+> Data.Foldable also provides the monoidal fold function foldMap. It is
+> left unspecified whether the elements are accumulated leftwards,
+> rightwards or in some other way, which is possible because the combining
+> function is required to be associative. Does this additional freedom for
+> implementors go so far as to allow for strict accumulation? Is it safe
+> to implement foldMap (without prime) with a strict accumulator or are
+> there examples where lazy accumulation is useful like in the above foldr
+> example and distinguishable from strict accumulation without breaking
+> the monoid laws?
+>
+Left and right folds behave identically for finite structures but they 
+are different for infinite ones. Here is an example:
+
+> island = map First $ Just "Snark" : repeat Nothing
+>
+> foldr mappend mempty island = First {getFirst = Just "Snark"}
+> foldl mappend mempty island = ?
+
+If mappend is lazy arguments then strict and lazy could be distingushed. 
+And Last indeed offers an example:
+
+ > island = [ error "Boojum", Last (Just "Snark") ]
+ >
+ > foldl  mappend mempty island = Last {getLast = Just "Snark"}
+ > foldl' mappend mempty island = Last {getLast = *** Exception: Boojum
+
+
+

@@ -1,0 +1,38 @@
+From drcygnus at gmail.com  Mon Dec 26 22:21:51 2011
+From: drcygnus at gmail.com (Jonathan Daugherty)
+Date: Mon, 26 Dec 2011 13:21:51 -0800
+Subject: [Haskell-cafe] [ANNOUNCE] HaskellNet has a new maintainer
+Message-ID: <CAG3npK_rbRV0veZh-JWBqndvuoz87ru+KdjWpJCWF4bHMaBaTw@mail.gmail.com>
+
+Hi all,
+
+I recently took over maintenance duties for the HaskellNet library
+from its previous maintainer, Robert Wills:
+
+  http://hackage.haskell.org/package/HaskellNet
+
+The codebase has been moved to GitHub:
+
+  https://github.com/jtdaugherty/HaskellNet
+
+So far my focus on HaskellNet has been code cleanup and pruning.  Once
+I'm confident I didn't introduce any silly bugs, I'll do a new release
+on Hackage.
+
+After that, I plan to:
+
+ - Write protocol tests against scripted installations of popular
+implementations, such as Dovecot
+ - Split up HaskellNet into SMTP, IMAP, and POP packages
+
+So, if you are a HaskellNet user and have an interest in these
+changes, speak up!  In addition, if you are interested in maintaining
+one or more of the resulting smaller packages (especially POP), let me
+know!
+
+Thanks,
+
+-- 
+? Jonathan Daugherty
+
+

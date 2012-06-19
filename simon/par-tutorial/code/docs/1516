@@ -1,0 +1,119 @@
+From byorgey at seas.upenn.edu  Tue Aug 30 04:04:07 2011
+From: byorgey at seas.upenn.edu (Brent Yorgey)
+Date: Mon, 29 Aug 2011 22:04:07 -0400
+Subject: [Haskell-cafe] [xmonad] Cabal install problem
+In-Reply-To: <CAK1sapRBtVwX4mkNp5Gx5ik6nNE+D3DkeXmvL-KQ3bFbktm9YA@mail.gmail.com>
+References: <CAK1sapQp8e0f1gFh8ieiV74wCAsgb9e3CNEiVMDagnRW_8O_HA@mail.gmail.com>
+	<20110829154931.198579cga3hbrgwb@webmail.seas.upenn.edu>
+	<20110829204140.GA21917@seas.upenn.edu>
+	<CAK1sapRBtVwX4mkNp5Gx5ik6nNE+D3DkeXmvL-KQ3bFbktm9YA@mail.gmail.com>
+Message-ID: <20110830020407.GA16065@seas.upenn.edu>
+
+On Tue, Aug 30, 2011 at 12:30:08AM +0300, Tayfur Yilmaz wrote:
+> > >
+> > > Quoting Tayfur Yilmaz <yilmaz.tayfur at gmail.com>:
+> > >
+> > > >Hi everyone
+> > > >I have some problem for install 'cabal-install package'  I downloaded
+> > and
+> > > >succesfully build a binary source ghc-7.0.2. Then I want to install
+> > > >cabal-0.10.2 and ? see some warning and last output like this
+> > > >Linking Setup ...
+> > > >Configuring Cabal-1.10.1.0...
+> > > >Setup: At least the following dependencies are missing:
+> > > >base >=4 && <3 && >=2 && <5, unix >=2.0 && <2.5
+> > > >
+> > > >Error during cabal-install bootstrap:
+> > > >Configuring the Cabal package failed
+> > > >
+> > > >Then ? want to use cabal-0.8 and output like this
+> > > >Linking Setup ...
+> > > >Configuring Cabal-1.8.0.2...
+> > > >Setup: At least the following dependencies are missing:
+> > > >base >=4 && <3 && >=1 && <5,
+> > > >filepath >=1 && <1.2,
+> > > >unix >=2.1 && <2.5
+> > > >
+> > > >Error during cabal-install bootstrap:
+> > > >Configuring the Cabal package failed
+> > > >
+> > > >So Which compatible versiyon for cabal-install version I use Kde4 on
+> > > >Pardus<http://www.pardus.org.tr/>
+> > > >
+> > > >Best Regards
+> 
+> Can someone describe install packages sort list..
+> I read some document and
+> 1.Firstly ? download a binary version  of Ghc (version 7.0.2)
+> (bootstrap.py)
+
+bootstrap.py?  There should not be any python scripts involved in
+installing a binary version of GHC.  Where did you download it from?
+
+After installing it, does it work?  If you type ghci at a command
+prompt, what happens?
+
+
+-Brent
+
+> 2. cabal-install package download and install bu I send this bug
+> 
+> And now I want to build hackage platform
+> 
+> Command
+>   $ sudo ./configure
+> Output
+> **************************************************
+> *
+> *     Haskell Platform Source Installer
+> *
+> *     For the Haskell Platform 2011.2.0.1 and GHC 7.0.3
+> *
+> **************************************************
+> checking build system type... i686-pc-linux-gnu
+> checking host system type... i686-pc-linux-gnu
+> checking target system type... i686-pc-linux-gnu
+> *checking for ghc... notfound*
+> configure: error:
+>   This installer for the Haskell Platform requires ghc to be installed first
+> *  If ghc is installed not on the PATH then use --with-ghc= and
+> --with-ghc-pkg=*
+> Command
+>  $ sudo ./configure --with-ghc= --with-ghc-pkg=
+> Output
+> **************************************************
+> *
+> *     Haskell Platform Source Installer
+> *
+> *     For the Haskell Platform 2011.2.0.1 and GHC 7.0.3
+> *
+> **************************************************
+> checking build system type... i686-pc-linux-gnu
+> checking host system type... i686-pc-linux-gnu
+> checking target system type... i686-pc-linux-gnu
+> *checking for hsc2hs... notfound*
+> configure: error: The hsc2hs program could not be found.
+>   It is usually installed along with ghc. You may need to specify
+> --with-hsc2hs=
+> 
+> Command
+> sudo ./configure --with-ghc= --with-ghc-pkg= --with-hsc2hs=
+> Output
+> **************************************************
+> *
+> *     Haskell Platform Source Installer
+> *
+> *     For the Haskell Platform 2011.2.0.1 and GHC 7.0.3
+> *
+> **************************************************
+> checking build system type... i686-pc-linux-gnu
+> checking host system type... i686-pc-linux-gnu
+> checking target system type... i686-pc-linux-gnu
+> checking version of ghc...
+> *configure: error:  does not seem to work (or maybe it is not actually ghc).
+> *
+> 
+> 
+> I build ghc binary and why I can't solve this problems.
+
+

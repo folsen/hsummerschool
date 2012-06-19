@@ -1,0 +1,21 @@
+From hesselink at gmail.com  Thu Dec 22 22:30:05 2011
+From: hesselink at gmail.com (Erik Hesselink)
+Date: Thu, 22 Dec 2011 22:30:05 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <CAJ+Teodkyj9NjK5vv_B9rgJDcj8Lf1VskFx7tBPi6TW=6G9xSg@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAPNUp08sh8UV2J0_MR67Gj6AWwNJjVhB+oWaf8tgy-stD+csGQ@mail.gmail.com>
+	<CAJ+Teodkyj9NjK5vv_B9rgJDcj8Lf1VskFx7tBPi6TW=6G9xSg@mail.gmail.com>
+Message-ID: <CAPeieQHGEd=Dfawkb3jEw0X2-bWm-P+esZEAA6LqAjvsaweXBg@mail.gmail.com>
+
+> I would have compose (probably not called '.') read the same way we read
+this sentence (and unix pipes) ie left to right.
+
+You can use >>> from Control.Arrow for that if you want.
+
+Erik
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111222/8da8fb84/attachment.htm>
+

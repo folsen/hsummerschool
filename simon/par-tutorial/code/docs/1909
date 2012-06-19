@@ -1,0 +1,22 @@
+From nominolo at googlemail.com  Tue Dec 13 23:38:31 2011
+From: nominolo at googlemail.com (Thomas Schilling)
+Date: Tue, 13 Dec 2011 22:38:31 +0000
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CAKjSnQH34_bAW4Z0QOzctR9v0VRx8FziZvveP-_wjv9KLp4a2w@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CAM0WKeUf4Y6MgXK1Wvpc=C_ti7okBx_-fyAYjmEuJAMDC2g4PA@mail.gmail.com>
+	<CAKjSnQH34_bAW4Z0QOzctR9v0VRx8FziZvveP-_wjv9KLp4a2w@mail.gmail.com>
+Message-ID: <CAOJG3uCGyf0L9V0zK6GOCMUmsXwfnyDS9UMRqsyubLHpDtyxGg@mail.gmail.com>
+
+On 12 December 2011 22:39, Antoine Latter <aslatter at gmail.com> wrote:
+> But now they look as if they are of equal importance with the other
+> class methods, which is not really true.
+
+Maybe, but something like this is best fixed by improving
+documentation, not by shuffling things around and needlessly breaking
+APIs.  I also agree that if an Alternative instance doesn't make sense
+it should be removed.   The current documentation is indeed very terse
+indeed.  In particular it needs a section on the pitfalls that users
+are likely to run into (like infinite loops).
+
+

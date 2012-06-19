@@ -1,0 +1,37 @@
+From felipe.lessa at gmail.com  Thu Apr 28 18:10:25 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Thu, 28 Apr 2011 13:10:25 -0300
+Subject: [Haskell-cafe] Iteratee: manyToOne
+In-Reply-To: <BANLkTi=tGAyb8JgxiHuEkQ9SnCoSdSqFTw@mail.gmail.com>
+References: <BANLkTinwOoNcVGx1awFANAywZUyxnUpWPg@mail.gmail.com>
+	<BANLkTi=tGAyb8JgxiHuEkQ9SnCoSdSqFTw@mail.gmail.com>
+Message-ID: <BANLkTiktsAiQQ2c56KK7vxdR3WcuKxRvow@mail.gmail.com>
+
+On Thu, Apr 28, 2011 at 12:09 PM, Felipe Almeida Lessa
+<felipe.lessa at gmail.com> wrote:
+> I foresee one problem: what is the leftover of 'manyToOne xs' if each
+> x in xs needs different lengths of input?
+>
+> One possible untested-but-compiling solution:
+[snip]
+
+Like I said, that manyToOne implementation isn't very predictable
+about leftovers.  But I guess that if all your iteratees consume the
+same input OR if you don't care about leftovers, then it should be
+okay.
+
+*Main> E.run $ E.enumList 1 [5 :: Int, 6, 7] E.$$ manyToOne [return 1,
+maybe 2 id `fmap` E.head, return 3, maybe 4 id `fmap` (E.head >>
+E.head)] >>= \xs -> (,) xs `fmap` E.head
+Right ([1,5,3,6],Just 7)
+*Main> E.run $ E.enumList 10 [5 :: Int, 6, 7] E.$$ manyToOne [return
+1, maybe 2 id `fmap` E.head, return 3, maybe 4 id `fmap` (E.head >>
+E.head)] >>= \xs -> (,) xs `fmap` E.head
+Right ([1,5,3,6],Just 6)
+
+Cheers,
+
+-- 
+Felipe.
+
+

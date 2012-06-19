@@ -1,0 +1,64 @@
+From da.waterworth at gmail.com  Sat Dec 24 10:26:47 2011
+From: da.waterworth at gmail.com (Daniel Waterworth)
+Date: Sat, 24 Dec 2011 09:26:47 +0000
+Subject: [Haskell-cafe] State Machine Composition
+In-Reply-To: <20111222140045.115705ea@angst.streitmacht.eu>
+References: <CAP6oseSLBuHBobxGH291dR=hFFjkGVG8XMTSzFaLoVG3GumVOQ@mail.gmail.com>
+	<20111222140045.115705ea@angst.streitmacht.eu>
+Message-ID: <CAP6oseTpHHwA+pmfCbvNx-RjKMaMRw8SSu-d+ni+jYUk1_c7+g@mail.gmail.com>
+
+I must admit, I haven't looked into arrows in a great deal of detail,
+perhaps I should.
+
+Daniel
+
+2011/12/22 Ertugrul S?ylemez <es at ertes.de>:
+> Daniel Waterworth <da.waterworth at gmail.com> wrote:
+>
+>> I made this simple state machine combinator library today. I think it
+>> works as a simple example of a good use for GADTs.
+>>
+>> https://gist.github.com/1507107
+>
+> Aren't your examples all special cases of the generic automaton arrow?
+> There are two ways to represent it, both with their advantages and
+> disadvantages:
+>
+> ? ?newtype Auto a b = Auto (a -> (b, Auto a b))
+>
+> ? ?countFrom :: Int -> Auto a Int
+> ? ?countFrom n = Auto (\_ -> (n, countFrom (succ n)))
+>
+> or:
+>
+> ? ?data Auto a b = forall s. Auto s ((a, s) -> (b, s))
+>
+> ? ?countFrom :: Int -> Auto a Int
+> ? ?countFrom n0 = Auto n0 (\(_, s) -> (s, succ s))
+>
+> These state machines have local state and can be composed using
+> applicative and arrow interfaces:
+>
+> ? ?liftA2 (+) (countFrom 3) (countFrom 5)
+>
+> ? ?proc x -> do
+> ? ? ? ?n1 <- countFrom 10 -< ()
+> ? ? ? ?n2 <- someOtherMachine -< x
+> ? ? ? ?anotherMachine -< n1 + n2
+>
+>
+> Greets,
+> Ertugrul
+>
+>
+> --
+> nightmare = unsafePerformIO (getWrongWife >>= sex)
+> http://ertes.de/
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

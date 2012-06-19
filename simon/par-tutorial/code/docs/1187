@@ -1,0 +1,73 @@
+From es at ertes.de  Wed Aug 17 18:26:09 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Wed, 17 Aug 2011 18:26:09 +0200
+Subject: [Haskell-cafe] why is Random in System?
+References: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+	<A320995A-2DDA-4147-B804-098623C26914@deepbondi.net>
+	<CAKFCL4UtZAKrw-KazZtmCSi6cDZmb1mtm9of4E=0Ugr_9GXXvA@mail.gmail.com>
+	<20110817104607.43c9ae37@angst.streitmacht.eu>
+	<CACYs5AYvvWeO1Xe2TMGR=gGnYonw8dsmg3m++NALY9-nDJEupQ@mail.gmail.com>
+Message-ID: <20110817182609.6ea45f32@angst.streitmacht.eu>
+
+Ryan Newton <rrnewton at gmail.com> wrote:
+
+> I'm the maintainer of random.  If people could decide on what the
+> alternative name would be we could put it through the library proposal
+> process.  It seems that one problem at this moment is the lack of a
+> single, clear "right" answer.  Replacing one debatable not-quite-right
+> choice with another may not be satisfying ;-).
+>
+> Also, what Thomas says is right.  The current implementation is SLOW
+> and WEAK, which would not seem to make a good default implementation.
+> The goal is to replace it with something better so that the default
+> random package is strong in at least one dimension.  I think this is
+> important because I imagine many people use the default package, for
+> example because they don't want to scour hackage and try all the
+> alternatives.
+>
+> My proposal for this has been to use AES based crypto-prng.  I think
+> that is fast enough (i.e. faster than what's currently there), very
+> strong, and splittable.  New Intel and AMD hardware has hardware
+> support for AES which makes it even faster.  The intel-aes package
+> provides this functionality, with and without hardware support.  But
+> there's work left to do in terms of testing, making sure its cross
+> platform, etc.  Anyone who's interested in helping (especially with
+> Windows support) would be warmly welcomed!
+
+Using a cryptographically strong random number generator here is
+probably a very bad idea.  Two reasons:
+
+Firstly while being faster than the current implementation an AES-based
+implementation will still be considerably slower than the Mersenne
+Twister algorithm.  This may or may not be true, if hardware AES support
+is there, but don't just assume that everybody has AES instructions now.
+For example I don't have them.
+
+Secondly there is no standard requiring that the default random number
+generator is cryptographically safe.  Changing this particular
+implementation, which is the one most people use, to a CSPRNG will make
+people take for granted that System.Random is safe to use in
+security-related products, because it would be very convenient.  This
+will render strong security products trivially weak, when compiled with
+the wrong Haskell distribution, and you will find packages with
+statements like:  "We assume that you use Ryan Newton's distribution of
+the random package."
+
+I would rather propose the Mersenne Twister as the default random number
+generator.  You could add AES as a secondary generator for people
+requiring cryptographic strength, but then do it properly, i.e. impure,
+because most people, when reading about a PRNG with "AES" anywhere in
+its name, will just assume that it's a CSPRNG.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

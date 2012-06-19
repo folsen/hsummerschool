@@ -1,0 +1,46 @@
+From travitch at cs.wisc.edu  Sun Aug 14 23:51:39 2011
+From: travitch at cs.wisc.edu (Tristan Ravitch)
+Date: Sun, 14 Aug 2011 16:51:39 -0500
+Subject: [Haskell-cafe] ANNOUNCE: taffybar: an alternative status bar
+ for xmonad
+In-Reply-To: <CAKdSjNGhUvvr9T6b7vgrAe90hDJwp8up7Ap=GV5rD0wix=7V=w@mail.gmail.com>
+References: <20110813155648.GE13469@cs.wisc.edu>
+	<CAKdSjNGhUvvr9T6b7vgrAe90hDJwp8up7Ap=GV5rD0wix=7V=w@mail.gmail.com>
+Message-ID: <20110814215138.GI30981@cs.wisc.edu>
+
+On Sun, Aug 14, 2011 at 02:45:24PM -0700, Alexander Dunlap wrote:
+
+> I apologize if I'm missing something obvious here, but when I try to
+> run taffybar I get
+>
+> Launching custom binary /home/alex/.cache/taffybar/taffybar-linux-i386
+>
+> taffybar-linux-i386: ConnectionError "connectSession:
+> DBUS_SESSION_BUS_ADDRESS is missing or invalid."
+>
+> Is there some D-BUS configuration that needs to happen before the
+> package is usable?
+
+Sorry, I assumed you would have dbus running already.  If you add a
+line like:
+
+  eval `dbus-launch --auto-syntax`
+
+early in your ~/.xsession (if logging in via some graphical login
+manager) or ~/.xinitrc (if starting X via startx).  That should work
+for any normal -sh-style or -csh-style shell.
+
+That command starts DBus and sets the DBUS_SESSION* environment
+variables, and both xmonad and taffybar need to have the same settings
+for that variable, so make sure you execute that command before
+starting either of them.
+
+I'll add some notes in the documentation about this.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110814/ce23fe93/attachment.pgp>
+

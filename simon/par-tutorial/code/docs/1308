@@ -1,0 +1,26 @@
+From wren at freegeek.org  Wed Aug 24 07:45:13 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Wed, 24 Aug 2011 01:45:13 -0400
+Subject: [Haskell-cafe] a minor bug (memory leak) in ListLike package
+In-Reply-To: <CANcqPu6BSBtbQwtwgvLH01tbN3MaXe=yknBMhrACShZNjyK3DQ@mail.gmail.com>
+References: <4E544F7D.8030401@gmail.com>
+	<CA+u6gbzyx=_d6BbGtZ86GYpfDx3jg8o6zpM8Tcu3958wPpOffg@mail.gmail.com>
+	<CANcqPu6BSBtbQwtwgvLH01tbN3MaXe=yknBMhrACShZNjyK3DQ@mail.gmail.com>
+Message-ID: <4E548FE9.3080205@freegeek.org>
+
+On 8/23/11 11:17 PM, bob zhang wrote:
+> I think 3 < genericLength [1..] should fail, that laziness is not we want.
+
+And it'd be more efficient to use
+
+     lengthBound 3 (<) [1..]
+
+where lengthBound is from list-extras:Data.List.Extras.LazyLength. The 
+efficiency comes from using Int rather than a chain of pointers for lazy 
+Peano numbers.
+
+-- 
+Live well,
+~wren
+
+

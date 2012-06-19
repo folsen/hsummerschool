@@ -1,0 +1,32 @@
+From michael at orlitzky.com  Sun Dec 11 07:08:31 2011
+From: michael at orlitzky.com (Michael Orlitzky)
+Date: Sun, 11 Dec 2011 01:08:31 -0500
+Subject: [Haskell-cafe] HaXml 1.13 -> 1.22 upgrade
+Message-ID: <4EE448DF.9030400@orlitzky.com>
+
+I'm trying to migrate one my programs from the old HaXml API to the new. 
+Please, someone save me.
+
+I'm currently stuck with this, which works in 1.13. All of the filters 
+work on Content, so I make some from the root element with the 
+"root_elem = CElem root" line.
+
+   -- |Takes an XML String as an argument, and returns the
+   -- status that was parsed from it. Should only be used
+   -- on XML string where a <status> is a top-level element.
+   parse_status :: String -> [Status]
+   parse_status xml_data =
+     catMaybes maybe_status
+     where
+       (Document _ _ root _) = xmlParse xml_file_name xml_data
+       root_elem = CElem root
+       status_element = (single_status root_elem)
+       maybe_status = map status_from_content status_element
+
+In the new API, xmlParse returns the root element with type (Element i) 
+rather than just Element. And the Content constructor I have to use is 
+(CElem (Element i) i), but I have no way to pass the correct 'i' to it.
+
+I just want to parse a few elements from an XML file.
+
+

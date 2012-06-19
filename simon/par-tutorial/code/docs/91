@@ -1,0 +1,38 @@
+From klondikehaskellcafe at xiscosoft.es  Mon Apr  4 07:31:05 2011
+From: klondikehaskellcafe at xiscosoft.es (klondike)
+Date: Mon, 04 Apr 2011 07:31:05 +0200
+Subject: [Haskell-cafe] Improvements to crypto-API: CTR CMAC and SIV modes
+Message-ID: <4D995799.3020508@xiscosoft.es>
+
+Hi,
+
+The attached files provide some preliminary support for the CTR, CMAC
+and SIV modes of operation on the crypto-api for both strict and lazy
+bytestrings.
+
+My main worries here are that the implementations may be vulnerable to
+timing attacks, and that the code in CPolys may be subject to copyright
+restrictions since it may be a derivative work from "Table of Low-Weight
+Binary Irreducible Polynomials" by Gadiel Seroussi (since all I did was
+apply transformations to the original PDF to get the data).
+
+As a side note, if I have time I'll improve the dbl and shift operations
+so they can work directly over the bytestrings which may be faster than
+converting and back. I'll also try both parallelizing the implementation
+of the counter mode and make it work with transformations other than
+adding one.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: crypto-api.tar.bz
+Type: application/x-bzip
+Size: 45696 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110404/9c7ce8f5/attachment-0001.bin>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 262 bytes
+Desc: OpenPGP digital signature
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110404/9c7ce8f5/attachment-0001.pgp>
+

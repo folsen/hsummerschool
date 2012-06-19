@@ -1,0 +1,34 @@
+From feeder.of.the.bears at gmail.com  Mon Dec 19 23:35:10 2011
+From: feeder.of.the.bears at gmail.com (David Pollak)
+Date: Mon, 19 Dec 2011 14:35:10 -0800
+Subject: [Haskell-cafe] How to get Cabal to spit out a .a library suitable
+	for linking into C/Objective-C
+Message-ID: <CAH6e9LjZ1YEQt99B9sier-9sJNqq+zviGkEOoMK_h-AHN_EOyw@mail.gmail.com>
+
+Howdy,
+
+I'm trying to figure out how to get Cabal configured to compile and link my
+Haskell code such that the code can be part of C and/or Objective-C code
+such that all the Haskell dependencies are rolled into a .a file and can be
+linked by a normal C linker (e.g., ld).
+
+I've been through
+http://haskell.org/ghc/docs/6.12.2/html/users_guide/ffi-ghc.html#using-own-mainand
+the associated linked, but I'm unable to find out the Cabal
+incantation
+to output a library that's linkable into my other code.  Any pointers or
+examples would be greatly appreciated.
+
+Thanks,
+
+David
+
+-- 
+Visi.Pro, Cloud Computing for the Rest of Us http://visi.pro
+Lift, the simply functional web framework http://liftweb.net
+Follow me: http://twitter.com/dpp
+Blog: http://goodstuff.im
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111219/2fdcb730/attachment.htm>
+

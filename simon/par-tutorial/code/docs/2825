@@ -1,0 +1,31 @@
+From leepike at gmail.com  Tue Feb  8 08:12:14 2011
+From: leepike at gmail.com (Lee Pike)
+Date: Mon, 7 Feb 2011 23:12:14 -0800
+Subject: [Haskell-cafe] Unrecognized function symbols in .prof
+Message-ID: <AANLkTikbpo9GbQwVpuwqgpQrjoHcqKAkE+b7X7sU2YV3@mail.gmail.com>
+
+Hi,
+
+I am profiling a Haskell program using GHC, and after executing the
+program with +RTS -p, I get a .prof file that lists the cost centers
+of the program.  Some of the cost centers listed are for function
+symbols that do not exist in the given module.  For example, I have in
+my .prof file:
+
+COST CENTRE              MODULE   %time %alloc
+==_a2MT                        Foo           19.8    0.0
+==_a2R8                         Foo           17.8    0.0
+==_a2Bg                         Bar           13.7    0.0
+                  ....                     ....
+
+It appears these are generated symbols; how do I find out what those
+function symbols correspond to?  (In this case, my assumption is that
+these symbols refer to instances of the Eq class, but I'm not sure.)
+
+[I couldn't find anything about this in the GHC online documentation
+or via Googling, but sorry if I missed it.]
+
+Thanks,
+Lee
+
+

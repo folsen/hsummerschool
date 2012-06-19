@@ -1,0 +1,25 @@
+From hesselink at gmail.com  Fri Dec  9 21:17:25 2011
+From: hesselink at gmail.com (Erik Hesselink)
+Date: Fri, 9 Dec 2011 21:17:25 +0100
+Subject: [Haskell-cafe] Generating Code
+In-Reply-To: <CAHTd3sihZABoWe7CoKhfFh-QHQ01PftATrTmiZymE5b-D_YS+Q@mail.gmail.com>
+References: <CAHTd3sihZABoWe7CoKhfFh-QHQ01PftATrTmiZymE5b-D_YS+Q@mail.gmail.com>
+Message-ID: <CAPeieQEdWhripdkdVo-=2ZXbNdgOL7Xq+idrwzTOiZuL=AMtZQ@mail.gmail.com>
+
+On Fri, Dec 9, 2011 at 20:45, L Corbijn <aspergesoepje at gmail.com> wrote:
+> So I'm interested if there are other libraries that are more suitable
+> to the task of generating haskell code for library use, and thus
+> generate 'human readable' exported code (so no TH). I'm also
+> interested in how other projects generate code for their packages.
+
+Since you ask how other packages solve this problem, and since most
+packages use template haskell, I have to ask: why can't you use
+template haskell for this?
+
+Another option (also not code generation, but very useful in reducing
+boilerplate) is generic programming, for example using the 'regular'
+package, or the new generics in GHC 7.2.
+
+Erik
+
+

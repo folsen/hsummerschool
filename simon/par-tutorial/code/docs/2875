@@ -1,0 +1,18 @@
+From kevin at froglingo.com  Wed Feb  9 04:15:20 2011
+From: kevin at froglingo.com (kevin at froglingo.com)
+Date: Wed, 09 Feb 2011 03:15:20 +0000
+Subject: [Haskell-cafe] semantics
+Message-ID: <W196087320234061297221320@webmail59>
+
+
+On Tue, Feb 8, 2011 at 2:01 PM, Alexander Solla <alex.solla at gmail.com> wrote:
+> It is hard to come up with a single operational semantic for types, because they do so many different things, and there is a semantic for each interpretation.
+
+G. Hillebrand, P. C. Kanellakis (in paper "Functional Database Query Languages as Typed Lambda Calculi of Fixed Order" and others) encoded tuples, lists, tables, the relational algebra, complex objects, and others in typed lambda calculus. The different things (I guess we can call them types here) were able to be compared with the uniformed (opeartional) semantics.
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110209/4325c6a6/attachment.htm>
+

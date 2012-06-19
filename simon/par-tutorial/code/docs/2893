@@ -1,0 +1,58 @@
+From cdsmith at gmail.com  Wed Feb  9 18:57:40 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Wed, 09 Feb 2011 10:57:40 -0700
+Subject: [Haskell-cafe] Synthetic values?
+In-Reply-To: <AANLkTimsWsfdkPLK4yQRHt3OcBGUiN2FGAwG52DvKCpD@mail.gmail.com>
+References: <AANLkTimsWsfdkPLK4yQRHt3OcBGUiN2FGAwG52DvKCpD@mail.gmail.com>
+Message-ID: <1297274260.19300.52.camel@godel>
+
+On Wed, 2011-02-09 at 18:15 +0100, Cristiano Paris wrote:
+> I've a type problem that I cannot solve and, before I keep banging my
+> head against an unbreakable wall, I'd like to discuss it with the
+> list.
+
+If I'm understanding your high-level goals correctly, then you're going
+about things the wrong way.  It looks like in your "Sealed" type, you're
+accumulating a list of type class constraints that are needed by a
+phantom type, in order to access the value.  But type classes are open;
+anyone can make any new type an instance of the type class whenever they
+want.
+
+In particular, you say:
+
+> ------------
+> unseal :: p -> Sealed p a -> a
+> unseal _ (Sealed x) = x
+> ------------
+> 
+> Basically this function requires a witness value of the type p to
+> peel-off the Sealed value. Notice that:
+> 
+> ------------
+> unseal undefined $ appendLog "Foo" "Bar"
+> ------------
+> 
+> won't work as the undefined value is unconstrained. That's good,
+> because otherwise it'd very easy to circumvent the enforcing
+> mechanism.
+
+This is not true, though.  One could just as easily write:
+
+    data Dummy
+    instance PRead Dummy
+    instance PWrite Dummy
+
+    unseal (undefined :: Dummy) $ appendLog "Foo" "Bar"
+
+and they've circumvented your security checks.
+
+I think you'll need to back up and rethink your base strategy.  Without
+really understanding fully what you want, I'll still point out that
+there are tricks with existentials that work when you need someone to
+have an authentic token to do something; e.g., see the ST monad.
+
+-- 
+Chris Smith
+
+
+

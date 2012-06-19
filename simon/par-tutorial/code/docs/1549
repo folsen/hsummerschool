@@ -1,0 +1,52 @@
+From fischer at nii.ac.jp  Wed Aug 31 01:53:51 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Wed, 31 Aug 2011 08:53:51 +0900
+Subject: [Haskell-cafe] Pointed, but not Applicative
+In-Reply-To: <CA+XKtKjJgu+X_ZYj9yqjwEX9ZbA1jj-rnyqRPRb91sFFM4Q9zA@mail.gmail.com>
+References: <j3d40s$nb1$1@dough.gmane.org>
+	<CALoEywNocmymRvbdW6Tv5-JvKeMBQ=gY=p6Za+pZxU+0K-m+dg@mail.gmail.com>
+	<1314588296.2724.10.camel@picard>
+	<CA+XKtKhTb_Pk6wSP4zNo-MxWkcxiNU7KFNcnSZ3C-Tv7QkgBSQ@mail.gmail.com>
+	<CAD6SzRKaYbAV3p6rqyOzn-HFw7Eqz+YM9zPL8X=Ot7z18mxafg@mail.gmail.com>
+	<CA+XKtKjJgu+X_ZYj9yqjwEX9ZbA1jj-rnyqRPRb91sFFM4Q9zA@mail.gmail.com>
+Message-ID: <CALoEywNetgBLv5czC=r8MYy7E1LQZv3QZ=c_Sf=yK528EuN3XQ@mail.gmail.com>
+
+On Wed, Aug 31, 2011 at 6:13 AM, Ryan Ingram <ryani.spam at gmail.com> wrote:
+> technically it violates 'fmap id' == 'id' [...]
+>
+> If you add this FList law, though, you're OK:
+>
+> runFList fl as = runFList fl [] ++ as
+
+I think the idea of functional lists is that the monoids of 'lists'
+and 'functions on lists' are isomorphic with isomorphisms toFList and
+toList:
+
+    toFList [] = id
+    toFList (xs++ys) = toFList xs . toFList ys
+
+    toList id = []
+    toList (f . g) = toList f ++ toList g
+
+These can be defined as:
+
+    toFList = (++)
+    toList = ($[])
+
+Eliding newtypes, runFList is just the identity function so we need to check
+
+    f l = toList f ++ l
+
+to verify your law. This is the same as
+
+    f = toFList (toList f)
+
+which (once we know that toList and toFList are isomorphisms) does
+indeed hold because:
+
+    toFList . toList = id
+    toList . toFList = id
+
+Sebastian
+
+

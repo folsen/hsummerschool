@@ -1,0 +1,24 @@
+From daniel.is.fischer at googlemail.com  Mon Aug 29 01:17:11 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Mon, 29 Aug 2011 01:17:11 +0200
+Subject: [Haskell-cafe] Project Euler: request for comments
+In-Reply-To: <CAMLKXyn4Sw=Z5QYB7fWzRavRJRv03rpyrQxEOYJZUgPaz3YBdw@mail.gmail.com>
+References: <CAPkMFPnCdD4Od5ff6AZ8pu5peR_puk2y+ygZeuPLPX_Y4tUPhw@mail.gmail.com>
+	<CAMLKXy=+ssLowPaqjvotTnYvQaTR0WxAJzFVai377R4sGuQRZQ@mail.gmail.com>
+	<CAMLKXyn4Sw=Z5QYB7fWzRavRJRv03rpyrQxEOYJZUgPaz3YBdw@mail.gmail.com>
+Message-ID: <201108290117.11385.daniel.is.fischer@googlemail.com>
+
+On Monday 29 August 2011, 00:56:52, KC wrote:
+> I just noticed that the 20x20 grid has some "00" entries; thus, time
+> could be saved by not touching any of the grid entries 3 cells away.
+> Same for the "01" entries.
+> 
+> The challenge, of course, is in finding these entries in the first
+> place. :)
+
+Multiplication is cheap, looking for zeros (or ones) would take much more 
+time than the multiplications one could avoid, so it'd be a net loss (it 
+could become a gain if longer sequences were to be considered; depends on 
+the proportion of zeros in the grid and the length).
+
+

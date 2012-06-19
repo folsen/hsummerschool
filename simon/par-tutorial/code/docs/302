@@ -1,0 +1,19 @@
+From shahn at cs.tu-berlin.de  Mon Apr 11 14:54:16 2011
+From: shahn at cs.tu-berlin.de (=?UTF-8?B?U8O2bmtl?= Hahn)
+Date: Mon, 11 Apr 2011 14:54:16 +0200
+Subject: [Haskell-cafe] Emscripten: compiling LLVM to JavaScript
+Message-ID: <inutlj$jq5$1@dough.gmane.org>
+
+Hi all!
+
+I haven't tried the tool myself, but it seems interesting to the Haskell 
+efforts to compile to JavaScript:
+
+http://syntensity.blogspot.com/2011/04/emscripten-10.html
+
+Cheers,
+S?nke
+
+
+
+

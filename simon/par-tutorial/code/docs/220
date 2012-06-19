@@ -1,0 +1,36 @@
+From daniel.is.fischer at googlemail.com  Thu Apr  7 17:30:31 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Thu, 7 Apr 2011 17:30:31 +0200
+Subject: [Haskell-cafe] parsec - source position information
+In-Reply-To: <BANLkTin6C82gsiszKu01JEbFHkxgrc_OUw@mail.gmail.com>
+References: <BANLkTin6C82gsiszKu01JEbFHkxgrc_OUw@mail.gmail.com>
+Message-ID: <201104071730.31684.daniel.is.fischer@googlemail.com>
+
+On Thursday 07 April 2011 17:22:56, Ozgur Akgun wrote:
+> Hi,
+> 
+> Is there a way to get source position[1] information from parsec while
+> defining a
+> parser? It surely knows about source positions, as they are used while
+> reporting a parsing error.
+> 
+> data Identifier = Identifier String SourcePos
+> 
+> pIdentifier :: Parser Identifier
+> pIdentifier = do
+>     pos <- ??
+
+    pos <- getPosition
+
+>     s   <- pString
+>     return (Identifier s pos)
+> 
+> [1]
+> http://hackage.haskell.org/packages/archive/parsec/3.0.0/doc/html/Text-P
+> arsec.html#t:SourcePos
+> 
+> Thanks in advance,
+> 
+> Ozgur
+
+

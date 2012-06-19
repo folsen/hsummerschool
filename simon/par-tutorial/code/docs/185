@@ -1,0 +1,68 @@
+From dagitj at gmail.com  Wed Apr  6 23:32:40 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Wed, 6 Apr 2011 14:32:40 -0700
+Subject: [Haskell-cafe] How to contact OpenGL package maintainer (where
+	is Sven?)
+In-Reply-To: <AANLkTinoGT8qa10+ZO6PEG5EOeMm=r3Cf2Rpeoe7tEts@mail.gmail.com>
+References: <AANLkTinoGT8qa10+ZO6PEG5EOeMm=r3Cf2Rpeoe7tEts@mail.gmail.com>
+Message-ID: <BANLkTikBKDkFLViTqt+UoixiX9gUQi_Gqg@mail.gmail.com>
+
+No response yet from Sven after about a month and no one seems to have heard
+from him in over a year.
+
+I'm going to take over for now under the assumption that Sven is missing.
+
+== My plans for moving forward ==
+  * Assemble an opengl taskforce, a few people have already mentioned an
+interest in being on the team
+  * clean up the current cabal files (I already wrote patches for that)
+  * put the repos on github to make team collaboration easier
+  * add the RULES that Andy Gill suggested for realToFrac
+  * look at adding instances for MArray so that GLfloat et al can be stored
+in IOUArrays
+  * add support for opengl 4.x
+  * look at adding deprecation pragmas for deprecated opengl calls
+  * new hackage releases
+  * anything else that comes up
+
+Thanks,
+Jason
+
+On Sun, Mar 27, 2011 at 2:11 PM, Jason Dagit <dagitj at gmail.com> wrote:
+
+> I sent the message below to Haskell-Cafe about a week ago. I got one
+> response saying that Sven has disappeared in the past but reappeared when
+> updates were necessary.  I still haven't heard from Sven.  Now I'm widening
+> my search.  My original email to Sven was on March 11th.
+>
+> It looks like the OpenGL packages on hackage[1,2,3,4] have not been
+> updated in some time.  No updates later than Oct 2009.  I tried to email
+> Sven directly using the email address listed on hackage but after over two
+> weeks I still haven't heard from him.  I sent some patches to the opengl list
+> about a week ago but I noticed that Sven hasn't posted on that list since
+> Oct 2009 when he released the current version of OpenGLRaw.  None of the
+> public darcs repos have patches newer than Oct 2009.  Also, the homepage url
+> listed in the packages is a 404:
+> http://www.haskell.org/HOpenGL/
+>
+> My concern is that Sven has disappeared for some reason.  I hope he's well.
+>  He has always done top notch work in the past maintaining these libraries.
+>  Perhaps he's simply busy or lost interest?
+>
+> Does anyone know if he was looking for a new maintainer?  Perhaps you've
+> heard from him more recently than Oct 2009?
+>
+> If a new maintainer is needed, I would consider nominating myself :)
+>
+> Thanks,
+> Jason
+>
+> [1] http://hackage.haskell.org/package/OpenGLRaw
+> [2] http://hackage.haskell.org/package/OpenGL
+> [3] http://hackage.haskell.org/package/GLURaw
+> [4] http://hackage.haskell.org/package/GLUT
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110406/ec47dd11/attachment.htm>
+

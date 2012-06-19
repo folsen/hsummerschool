@@ -1,0 +1,81 @@
+From gcrosswhite at gmail.com  Tue Dec 20 15:09:12 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Wed, 21 Dec 2011 00:09:12 +1000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CAF1yvAS3YzNBSXRQh8dm3bAbfcoUK5WR7z86mweMJ7j+sWqhrQ@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAF1yvAQJX+f-MigNFF=6be12Uka6y45QD6oys_NQpxgREkRbaQ@mail.gmail.com>
+	<653CD606-D8B6-4BD8-AFD4-46738AF49DB3@gmail.com>
+	<CAF1yvAS6hc=tmmW74qvNdVXngCqV0LNNOXn2TUgckWHMJFszUA@mail.gmail.com>
+	<91793F0E-1C9F-4F4C-96F8-188A37273A21@gmail.com>
+	<CAF1yvAQL9t5jxXaCsDuOx7o4NgHD-O_RioRJ=Yc_RHj0_TerBg@mail.gmail.com>
+	<8DBF2B01-F624-4E53-926D-B96C4AD34576@gmail.com>
+	<CAF1yvAS3YzNBSXRQh8dm3bAbfcoUK5WR7z86mweMJ7j+sWqhrQ@mail.gmail.com>
+Message-ID: <7ADADC00-BF20-4D36-9ADB-7DFDFB1BBC0B@gmail.com>
+
+
+On Dec 20, 2011, at 11:21 PM, Jesse Schalken wrote:
+
+> On Tue, Dec 20, 2011 at 10:43 PM, Gregory Crosswhite <gcrosswhite at gmail.com> wrote:
+> 
+> On Dec 20, 2011, at 9:18 PM, Jesse Schalken wrote:
+> 
+>> Why do you have to solve the halting problem?
+> 
+> You have to solve the halting problem if you want to replace every place where _|_ could occur with an Error monad (or something similar), because _|_ includes occasions when functions will never terminate.
+> 
+> I think we're talking about different things. By "bottom" I mean the function explicitly returns "error ..." or "undefined". In those cases, it should go in an error monad instead. In cases where there is an infinite loop, the function doesn't return anything because it never finishes, and indeed this separate problem will never be solved while remaining Turing complete because it is the halting problem.
+
+Then honestly you should choose a different term because I am pretty certain that my use of the term "bottom" is the commonly accepted one which (among other places) appears in denotation semantics.
+
+> 
+>> Consider integer division by 0.  [...]
+>> This is all I was talking about.
+> 
+> But imagine there was an occasion where you *knew* that the divisor was never zero --- say, because the divisor was constructed to be a natural number.
+> 
+> Then use a separate type for natural numbers excluding 0. Then you can define a total integer division function on it (although the return value may be zero and so needs a different type).
+
+That would certainly be a lovely idea *if* we were programming in Agda, but I was under the assumption that this conversation was about Haskell.  :-)
+
+>  
+> Now there is no point in running in the Error monad because there will never such a runtime error;  in fact, it is not clear what you would even *do* with a Left value anyway, short of terminating the program and printing and error, which is what would have happened anyway.
+> 
+> What you do with a Left value is up to you - that's the point, you now have a choice.
+
+Yes, but it is a pointless choice because if you had any reason to believe that your value was an invalid input to a function you would have checked it by now or used an alternative non-partial function that did run in an Error monad for that specific purpose.
+
+> In fact, the value might not even be being handled by you, in which case someone else now has a choice.  Handling of the error is done in the same place as handling of the result, no IO needed.
+
+Yes, but all that the user of your library knows at this point is that there is a bug somewhere in your library that violated an invariant.  Nearly all of the time there is no way to recover from this in a useful way and so all the user will end up doing in response to your Left value is to abort anyway.
+
+> The point is your program shouldn't be able to make assumptions about values without proving them with types.
+
+I agree but, again, we aren't talking about Agda here, we are talking about Haskell.  :-)
+
+> The whole term "untrusted data" baffles me. How often can you actually "trust" your data?
+
+All the time!  For example, if I create a counter that starts at 1, only increase it, and give nobody else access to it, then I can be as certain as it is possible to be can be that it is not 0.
+
+Also, there are occasionally times when I essentially check that a Maybe value is Just in one part of the code, and then in another part of the code need to extract the value from the Just;  in such cases there is no point in using method *other* than simply fromJust to extract the value.
+
+(Of course, it would be better to have condensed all of this into a single case statement in the first place, but sometimes --- say, when interfacing with others' libraries --- this ends up not being an available option.)
+
+> When you send your software out into the wild, what assumptions can you make about its input?
+
+None, which is why in that case you need to test your input in that case.
+
+> Also I would like to think this "wasted overhead" can be optimised away at some stage of compilation, or somehow removed without the programmer needing to think about it.
+
+I was thinking in terms of overhead from the coder's point of view, not from the compiler's point of view.
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111221/153de10d/attachment.htm>
+

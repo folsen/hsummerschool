@@ -1,0 +1,51 @@
+From ionfish at gmail.com  Mon Apr 25 15:22:31 2011
+From: ionfish at gmail.com (Benedict Eastaugh)
+Date: Mon, 25 Apr 2011 14:22:31 +0100
+Subject: [Haskell-cafe] Trouble with currying and uncurrying...
+In-Reply-To: <4DB57318.4040509@iac.es>
+References: <4DB57318.4040509@iac.es>
+Message-ID: <BANLkTinYxqby2Ews+Pv03oh7mr9OXyVsow@mail.gmail.com>
+
+On 25 April 2011 14:11, Angel de Vicente <angelv at iac.es> wrote:
+
+> OK, I have tried it and it works, but I don't understand the syntax for
+> curry. Until now I have encountered only functions that take the same number
+> of arguments as the function definition or less (partial application), but
+> this syntax looks a bit new to me. curry is supposed to have as its argument
+> one function of type (a,b) -> c and produce another function, but then the
+> second line gives three arguments to curry, the function itself and the
+> variables x and y.
+>
+> What I'm missing here?
+
+You can think of all functions in Haskell as taking only one argument.
+So curry has one argument, which is a function that takes a pair (in
+this case g). The value of curry g is another function (the curried
+version of g) which takes two arguments.
+
+This is clearer when written out like so:
+
+g :: (a, b) -> c
+
+h :: a -> b -> c
+h = curry g
+
+h x y = g (x, y)
+
+So by simple substitution we can see that
+
+curry g x y = g (x, y)
+
+It might be even clearer if we add parentheses, since function
+application associates to the left:
+
+(curry g) x y = g (x, y)
+
+Hope this clears things up. For more information you could have a look
+at the Gentle Introduction's section on functions:
+
+http://www.haskell.org/tutorial/functions.html
+
+Benedict.
+
+

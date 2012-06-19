@@ -1,0 +1,41 @@
+From ivanperezdominguez at gmail.com  Tue Dec 13 14:00:54 2011
+From: ivanperezdominguez at gmail.com (Ivan Perez)
+Date: Tue, 13 Dec 2011 14:00:54 +0100
+Subject: [Haskell-cafe] ANNOUNCE: hxournal-0.5.0.0 - A pen notetaking
+ program written in haskell
+In-Reply-To: <CAKFCL4XQceD_Y0Cv4oViYrfCwLRcbeG9EQOjOMScCfDZ=iWq4g@mail.gmail.com>
+References: <CAPNnnrV329dsY_cB=K7q1-REUE5os7+u+psqN=rWeq9Crz6JEQ@mail.gmail.com>
+	<CACZKWEL6=_f+HTckrrgqCZj-EWKHJpw3TSEaBvXOBhZFOeFAOg@mail.gmail.com>
+	<CAPNnnrXoaY36PRRvM3_EtoX+HFLkyRy_F-jtr11qZtW-4izVGQ@mail.gmail.com>
+	<CAKFCL4XQceD_Y0Cv4oViYrfCwLRcbeG9EQOjOMScCfDZ=iWq4g@mail.gmail.com>
+Message-ID: <CACZKWE+UZdbnc5RjfUrpLs-YDoWPomBbqceUHThkniJR4cwTqw@mail.gmail.com>
+
+Unfortunately, I have all the *-dev packages I need. Like somebody
+else said, it's a different problem.
+
+Linking the file worked for me.
+
+Cheers
+
+On 13 December 2011 02:43, Brandon Allbery <allbery.b at gmail.com> wrote:
+> On Mon, Dec 12, 2011 at 19:22, Ian-Woo Kim <ianwookim at gmail.com> wrote:
+>>
+>> A workaround is to make a symbolic link to libstdc++.so.6 with the
+>> name of libstdc++.so in /usr/lib or /usr/local/lib or other dynamic
+>> library path like the following.
+>>
+>> ln -s /usr/lib/libstdc++.so.6 /usr/lib/libstdc++.so
+>
+>
+> This is an indication that you have not installed your distribution's -dev
+> package for the library in question. ?You should do so instead of making the
+> symlink manually.
+>
+> (cabal has no support for this kind of thing)
+>
+> --
+> brandon s allbery ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?allbery.b at gmail.com
+> wandering unix systems administrator (available) ? ? (412) 475-9364 vm/sms
+>
+
+

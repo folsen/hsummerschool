@@ -1,0 +1,85 @@
+From aslatter at gmail.com  Tue Apr 12 19:10:46 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Tue, 12 Apr 2011 12:10:46 -0500
+Subject: [Haskell-cafe] RFC: Extendable and Easy-To-Use Logger (HLogger)
+In-Reply-To: <4DA48066.10805@jonkristensen.com>
+References: <4DA48066.10805@jonkristensen.com>
+Message-ID: <BANLkTimPcJn9qe08dzODwk0-StEngvY+kQ@mail.gmail.com>
+
+On Tue, Apr 12, 2011 at 11:40 AM, Jon Kristensen
+<technology at jonkristensen.com> wrote:
+> Hello Haskellers!
+>
+> I have developed a very simple logging library to be extendable and
+> easy-to-use. You can see the current release at
+> http://hackage.haskell.org/package/hlogger/. The SimpleHLogger module is an
+> example of what a HLogger implementation could look like. It could be used
+> like this:
+>
+> import System.Log.SimpleHLogger
+>
+> main = do
+>
+> ? logger <- simpleLogger "test"
+>
+> ? loggerLog logger (Just ("LoggerTest", "main")) Debug "Test"
+>
+> ? loggerStop logger
+>
+> As I have now implemented everything that I could think of, I would like to
+> ask the Haskell community to give some feedback on HLogger so that I can
+> continuing improving it. Some questions:
+>
+
+It looks very simple, which is nice.
+
+Just about the only things I would add:
+
+* A standard-out/standard-error logger
+* A monoid instance for the Logger type
+* Convinience functions for logging without context and logging at a
+specific error level:
+
+> logError myLogger "Oh no!"
+> logDebug myLogger "a thing happened"
+
+These might be in a separate module, so I can define them for myslef
+based on some logContext function, so that in my module I can define:
+
+> logError msg = logContext "Module.Name" LogLevelError msg
+
+You might even be able to offer a separate package with
+TemplateHaskell splices to build these helpers. Maybe I'm going off
+the deep-end it terms of complexity.
+
+
+Have you looked into HsLogger at all? This project has a confusingly
+similar name - so much so I thought that your email was about
+HsLogger!
+
+
+Take care,
+Antoine
+
+> Do you have any general/architectural thoughts on things I might be doing
+> wrong?
+> Is the ease-of-use goal contradicting making this library useful in more
+> complex applications?
+> Do I want to redesign HLogger to allow loggers to have a mutable state, and
+> if so, how can I do that?
+> Is there a nice way to provide the module and the function than using (Just
+> ("LoggerTest, "main)) (shortening it somehow, I guess)?
+>
+> Thanks!
+>
+> Warm regards,
+> Jon Kristensen
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

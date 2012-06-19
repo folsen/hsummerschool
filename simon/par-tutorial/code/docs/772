@@ -1,0 +1,38 @@
+From uzytkownik2 at gmail.com  Tue Apr 26 22:13:55 2011
+From: uzytkownik2 at gmail.com (Maciej Piechotka)
+Date: Tue, 26 Apr 2011 22:13:55 +0200
+Subject: [Haskell-cafe] ANNOUNCE: iteratee-compress 0.2.0.0
+In-Reply-To: <BANLkTinK2XuJGNdu+2bqo=a_fMjHwwn7OA@mail.gmail.com>
+References: <1303554570.3911.8.camel@localhost.localdomain>
+	<BANLkTinK2XuJGNdu+2bqo=a_fMjHwwn7OA@mail.gmail.com>
+Message-ID: <1303848837.4352.35.camel@localhost.localdomain>
+
+On Mon, 2011-04-25 at 15:47 +0900, Conrad Parker wrote:
+> On 23 April 2011 19:29, Maciej Piechotka <uzytkownik2 at gmail.com> wrote:
+> > Iteratee-compress provides compressing and decompressing enumerators
+> > including flushing (using John Lato's implementation). Currently only
+> > gzip and bzip is provided but LZMA is planned.
+> >
+> > Changes from previous version:
+> >  - Add BZip support
+> >
+> 
+> Cool :)
+> 
+> I notice the haddocks on hackage have not been generated; would this
+> be due to libbz2-dev missing on the hackage server?
+> 
+> Conrad.
+
+No - you need to wait as it is a batch process. Currently it is
+up-to-date.
+
+Regards
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110426/06ddb0aa/attachment.pgp>
+

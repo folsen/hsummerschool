@@ -1,0 +1,15 @@
+From conal at conal.net  Thu Feb  3 10:33:23 2011
+From: conal at conal.net (Conal Elliott)
+Date: Thu, 3 Feb 2011 01:33:23 -0800
+Subject: [Haskell-cafe] How to #include into .lhs files?
+Message-ID: <AANLkTinGuuGe2ihAUZGTkLM+scGYLVp14iXBhU-toA1O@mail.gmail.com>
+
+Does anyone have a working example of #include'ing Haskell code into a
+bird-tracks-style .lhs file with GHC? Every way I try leads to parsing
+errors. Is there documentation about how it's supposed to work?
+
+Help much appreciated.   - Conal
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/d2939097/attachment.htm>
+

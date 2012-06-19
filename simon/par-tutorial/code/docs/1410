@@ -1,0 +1,49 @@
+From oscarpicasso at gmail.com  Sat Aug 27 16:03:46 2011
+From: oscarpicasso at gmail.com (Oscar Picasso)
+Date: Sat, 27 Aug 2011 10:03:46 -0400
+Subject: [Haskell-cafe] Project Euler: request for comments
+In-Reply-To: <201108271047.39470.daniel.is.fischer@googlemail.com>
+References: <CAPkMFPnCdD4Od5ff6AZ8pu5peR_puk2y+ygZeuPLPX_Y4tUPhw@mail.gmail.com>
+	<201108271047.39470.daniel.is.fischer@googlemail.com>
+Message-ID: <CAPkMFPnPMeoio49zKqfO3X+XX26s0vDAHBC6AAxiRs86Axey9A@mail.gmail.com>
+
+Daniel,
+
+There are included as gists on the link provided. After your remark, I
+looked at the generated html code in my blog. The gists are actually
+displayed by running a javascript.
+Maybe your browser settings don't allow to display them.
+
+If so, you can also look directly at the gists:
+pb 01: https://gist.github.com/1161280
+pb 02: https://gist.github.com/1161302
+pb 03: https://gist.github.com/1161406
+pb 04: https://gist.github.com/1161435
+pb 05: https://gist.github.com/1161450
+pb 06: https://gist.github.com/1163746
+pb 07: https://gist.github.com/1163835
+pb 08: https://gist.github.com/1163872
+pb 09: https://gist.github.com/1166852
+pb 010: https://gist.github.com/1172509
+pb 011: https://gist.github.com/1172521
+
+On Sat, Aug 27, 2011 at 4:47 AM, Daniel Fischer
+<daniel.is.fischer at googlemail.com> wrote:
+> On Saturday 27 August 2011, 02:34:24, Oscar Picasso wrote:
+>> Hi,
+>>
+>> I order to improve my Haskell skills I started (again) to solve the
+>> project euler problems with this language.
+>> I am now at problem 11 and would really appreciate any comment about
+>> my code in order to make it more elegant or efficient.
+>
+> I don't see any code, where would I have to look?
+>
+>>
+>> My solutions can be found here: http://fp.opicasso.com/tag/projecteuler
+>>
+>> Oscar Picasso
+>
+>
+
+

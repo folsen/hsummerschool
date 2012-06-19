@@ -1,0 +1,24 @@
+From ckkashyap at gmail.com  Sun Aug 21 06:45:53 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Sun, 21 Aug 2011 10:15:53 +0530
+Subject: [Haskell-cafe] Embedding Perl RegEx in Haskell
+In-Reply-To: <CAKFCL4VrTnhzQwbp2N3RTL=4jzQT+6cUF9a814OgeHRSAZ1Adw@mail.gmail.com>
+References: <CAGdT1gqMvi3ihocy6Yg4A0z0C0uu0GVzSPStNCzZLrwCAbS=Ew@mail.gmail.com>
+	<CAKFCL4VrTnhzQwbp2N3RTL=4jzQT+6cUF9a814OgeHRSAZ1Adw@mail.gmail.com>
+Message-ID: <CAGdT1gqXgEej_Z8ELZ8SncRNJ_iOmm92MPjTRP8oC73BY1P7-g@mail.gmail.com>
+
+>
+>
+> Why not just go with anchorHead and anchorTail or similar?  And a capture
+> could simply be
+>
+>
+Thanks for your inputs Brandon. I've updated the code with anchors. Still
+trying to get a hold of captures.
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110821/e271b450/attachment.htm>
+

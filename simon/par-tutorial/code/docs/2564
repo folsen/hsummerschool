@@ -1,0 +1,42 @@
+From job.vranish at gmail.com  Tue Feb  1 16:40:43 2011
+From: job.vranish at gmail.com (Job Vranish)
+Date: Tue, 1 Feb 2011 10:40:43 -0500
+Subject: [Haskell-cafe] Timeout exceptions sometimes don't work,
+	even in pure (non FFI) code
+Message-ID: <AANLkTin88_iqV7koFRzfwAR+djwTJKYXczPePigG4mbT@mail.gmail.com>
+
+I'm trying to test some properties with quickcheck. If these tests fail,
+they will almost certainly fail by nontermination.
+I've been using the 'within' function to catch these nontermination cases.
+However, I was surprised to find that this doesn't always work.
+'within' uses the 'timeout' function under the hood. Here is an example that
+demonstrates the problem:
+
+import System.Timeout
+import Control.Exception
+
+works :: Int -> Int
+works x = sum $ cycle [x]
+
+doesntWork :: Int -> Int
+doesntWork x = last $ cycle [x]
+
+test1 = timeout 1 $ evaluate $ works 5 == 5            -- terminates
+test2 = timeout 1 $ evaluate $ doesntWork 5 == 5   -- never terminates
+
+
+test1 returns Nothing as expected, but test2 never terminates. Why?
+
+I thought timeout exceptions are supposed to always work with pure (non FFI)
+Haskell code.
+Is there any way I can work around this?
+
+I'm using ghc 6.12.2
+
+Thanks,
+
+- Job
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110201/06324de7/attachment.htm>
+

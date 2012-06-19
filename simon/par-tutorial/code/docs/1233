@@ -1,0 +1,39 @@
+From allbery.b at gmail.com  Fri Aug 19 22:11:50 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Fri, 19 Aug 2011 16:11:50 -0400
+Subject: [Haskell-cafe] custom SQL-to-Haskell type conversion in HDBC
+In-Reply-To: <CAPeieQHBYE9f+QrJodRtFscdgy5+_hzUYR5YnDWRrCJCv9kUYw@mail.gmail.com>
+References: <20110819052316.GA27130@houseag.com>
+	<CAPeieQEGXOJgfvA+FF2yTbhPnWA9vv7Xk8EghLj-2LiYy1Edyg@mail.gmail.com>
+	<20110819140939.GA27362@houseag.com>
+	<CAPeieQGnDo5TR6F1hWPjvWWV0+nrW0=6iPm9z-xxJ2HfiOkY4g@mail.gmail.com>
+	<20110819145341.GB27362@houseag.com>
+	<CAPeieQHBYE9f+QrJodRtFscdgy5+_hzUYR5YnDWRrCJCv9kUYw@mail.gmail.com>
+Message-ID: <CAKFCL4Xi9H-x4GPMjbzrRS9-tSSqdE4EsaV2_diQ=a4ObAL3bg@mail.gmail.com>
+
+On Fri, Aug 19, 2011 at 11:45, Erik Hesselink <hesselink at gmail.com> wrote:
+
+> Note that PostgreSQL also doesn't work with decimals as precision:
+>
+> postgres=# select 1::decimal(4,2) * 1::decimal(4,2);
+> ?column?
+> ----------
+>   1.0000
+> (1 row)
+>
+> That should be 1.00 instead if you want the precision correctly
+> represented.
+>
+
+Er?  Last I checked, that was exactly how precision worked over
+multiplication; otherwise you are incorrectly discarding precision present
+in the original values.  Unless you're assuming the OP actually wants an
+incorrect flat precision model....
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110819/6f4404b5/attachment.htm>
+

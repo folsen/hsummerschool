@@ -1,0 +1,40 @@
+From schlepptop at henning-thielemann.de  Mon Apr  4 10:06:56 2011
+From: schlepptop at henning-thielemann.de (Henning Thielemann)
+Date: Mon, 04 Apr 2011 10:06:56 +0200
+Subject: [Haskell-cafe] llvm package on Windows
+In-Reply-To: <4D992D27.3090602@mcmaster.ca>
+References: <4D992D27.3090602@mcmaster.ca>
+Message-ID: <4D997C20.7020805@henning-thielemann.de>
+
+Jacques Carette schrieb:
+> I am trying to install llvm-0.9.0.1 on Windows (through cygwin), on top
+> of a clean install of Haskell Platform 2010.2.0.0.
+> 
+> I do
+> cabal install llvm --configure-option --with-llvm-prefix="C:\\llvm"
+> (which is where I unpacked llvm-gcc4.2-2.8-x86-mingw43.tar.bz2).  This
+> fails with
+> 
+> .....mingw\bin\ld.exe: cannot find -lLLVMXCoreAsmPrinter
+> (which is indeed the first -l option on the gcc line).
+
+Does the LLVMXCoreAsmPrinter library exist on your machine? If not, then
+certainly building LLVM went wrong. If it exists then my next question
+would be, whether this is a particular problem with LLVMXCoreAsmPrinter
+or whether this is just the first library GHC tried to bind to.
+
+I could suggest to try to build the current state of the package from
+   http://code.haskell.org/llvm/
+ but I suspect that the building problem would be the same.
+
+> [I also tried the llvm-ht package, same issue; I can't tell which of the
+> 2 packages is 'best' from the online doc]
+
+llvm-ht was a little modification by me. In the meantime I could
+incorporate my changes to the main llvm package. I may flag llvm-ht as
+deprecated.
+
+Btw. there is also the haskell-llvm mailing list.
+http://projects.haskell.org/cgi-bin/mailman/listinfo/haskell-llvm
+
+

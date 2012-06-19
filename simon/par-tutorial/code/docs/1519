@@ -1,0 +1,28 @@
+From trebla at vex.net  Tue Aug 30 05:56:21 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Mon, 29 Aug 2011 23:56:21 -0400
+Subject: [Haskell-cafe] [xmonad] Cabal install problem
+In-Reply-To: <20110830020407.GA16065@seas.upenn.edu>
+References: <CAK1sapQp8e0f1gFh8ieiV74wCAsgb9e3CNEiVMDagnRW_8O_HA@mail.gmail.com>	<20110829154931.198579cga3hbrgwb@webmail.seas.upenn.edu>	<20110829204140.GA21917@seas.upenn.edu>	<CAK1sapRBtVwX4mkNp5Gx5ik6nNE+D3DkeXmvL-KQ3bFbktm9YA@mail.gmail.com>
+	<20110830020407.GA16065@seas.upenn.edu>
+Message-ID: <4E5C5F65.4050406@vex.net>
+
+I am also interested in the complete output of "ghc -v" and "ghc-pkg 
+list -v".
+
+Meanwhile, the pros may notice that
+
+>>>>> Configuring Cabal-1.10.1.0...
+
+is very suspicious because GHC 7.0.2 comes with exactly Cabal-1.10.1.0, 
+so there is no normal reason why it is being re-installed 
+(cabal-install's bootstrap.sh certainly detects that, and I have just 
+tested it); and immediately next
+
+>>>>> Setup: At least the following dependencies are missing:
+>>>>> base>=4&&  <3&&  >=2&&  <5, unix>=2.0&&  <2.5
+
+base >= 4 && <3 is very very ill, usually a sign of a very messed up 
+collection of packages.
+
+

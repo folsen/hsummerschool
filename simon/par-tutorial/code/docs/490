@@ -1,0 +1,70 @@
+From fox at ucw.cz  Tue Apr 19 16:40:33 2011
+From: fox at ucw.cz (Milan Straka)
+Date: Tue, 19 Apr 2011 16:40:33 +0200
+Subject: [Haskell-cafe] A paper relating to Data.Set and Data.Map
+In-Reply-To: <20110419.102040.45287750.kazu@iij.ad.jp>
+References: <20110419.102040.45287750.kazu@iij.ad.jp>
+Message-ID: <20110419144033.GA21934@auryn.cz>
+
+Hi Kazu and all,
+
+> Hello libraries and cafe,
+> 
+> We (Hirai and I) would like to tell you our paper relating to
+> Data.Set and Data.Map. "Balancing Weight-Balanced Trees" is now
+> accepted and will appear in Journal of Functional Programming.
+> The camera-ready version of the paper is available from:
+> 
+> 	http://www.mew.org/~kazu/proj/weight-balanced-tree/
+> 
+> Please recall that Taylor Campbell reported a bug of Data.Map in last
+> Summer. In some cases, the balance of Data.Map is broken after delete
+> operations. This triggered our research.
+> 
+> 	http://article.gmane.org/gmane.comp.lang.haskell.libraries/13444
+> 
+> Though Data.Set/Data.Map are based of a variant Weight-Balanced tree
+> by Adams, we target the original Weight-Balanced tree by Nievergelt
+> and Reingold. They are parameterized algorithms and the difference of
+> two algorithms is quite small. But the original has smaller conditions
+> which are gentle for proof.
+> 
+> We identified the valid area of two parameters of the original
+> Weight-Balanced tree and showed <3,2> is only one integer solution.
+> Soundness is proved in Coq and completeness is verified with four
+> algorithms to generate counterexamples for the outside of the valid
+> area.
+> 
+> "wttree.scm" of MIT/GNU Scheme and slib have already incorporated our
+> fixes. When I offered our fixes to MIT/GNU Scheme, Taylor Campbell
+> appeared again. I understand that he is an MIT/GNU Scheme guy and
+> found the bug of Data.Map when re-implementing "wttree.scm" consulting
+> Data.Map. :-)
+> 
+> We think it's Haskell community turn now. Data.Set/Data.Map are still
+> based on the variant whose soundness is not proved yet. If interested,
+> let's discuss whether or not we should replace the variant with the
+> original in Data.Set/Data.Map.
+> 
+> We guess that Milan Straka, a big contributer of the container
+> package, has his opinion. We welcome opinions from other people, two.
+
+I wrote a paper containing the proof of correctness of Adams' trees and
+therefore of Data.{Set,Map}. The paper got accepted to the TFP 2011. The
+draft is available at http://fox.ucw.cz/papers/bbtree/ . That should
+settle the question of soundness of the current implementation.
+
+The analysis and the benchmark included in the paper suggest to use
+different representation and parameters for best performance -- I will
+submit patches soon.
+
+One nice side-effect is that just by reordering the constructors of
+Data.IntSet and Data.IntMap, I got 10% and 9% speedup (measured with
+the containers-benchmark package). These changes will be part of the
+patches I am going to make. (See the pages 13 and 14 of the paper
+for some discussion about this phenomenon.)
+
+Cheers,
+Milan Straka
+
+

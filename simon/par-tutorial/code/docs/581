@@ -1,0 +1,25 @@
+From felipe.lessa at gmail.com  Fri Apr 22 00:37:24 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Thu, 21 Apr 2011 19:37:24 -0300
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <2413044.1630.1303424178223.JavaMail.geo-discussion-forums@prcm34>
+References: <4DB093A6.8000303@btinternet.com>
+	<2413044.1630.1303424178223.JavaMail.geo-discussion-forums@prcm34>
+Message-ID: <BANLkTi=_3AEm_OeQqjT-QxuXNNTJYuXysw@mail.gmail.com>
+
+On Thu, Apr 21, 2011 at 7:16 PM, John Millikin <jmillikin at gmail.com> wrote:
+> My chief complaint is that it's built on "patch theory", which is
+> ill-defined and doesn't seem particularly useful. The Bazaar/Git/Mercurial
+> DAG model is much easier to understand and work with.
+
+For me its greatest asset is the patch theory.  I find it much easier
+to understand than git's model.  I don't know about hg/bzr, but I
+guess they have a model similar to git's.  So I guess this point is up
+to debate.  =)
+
+Cheers,
+
+-- 
+Felipe.
+
+

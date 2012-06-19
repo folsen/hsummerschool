@@ -1,0 +1,45 @@
+From bytbox at gmail.com  Sun Dec  4 06:53:00 2011
+From: bytbox at gmail.com (Scott Lawrence)
+Date: Sun, 04 Dec 2011 00:53:00 -0500
+Subject: [Haskell-cafe] Anonymous, Unique Types, maybe
+Message-ID: <4EDB0ABC.10705@gmail.com>
+
+(Sorry if this email is rather unclear - I know my desired end result, 
+but neither how to acheive nor explain it well. Here goes.)
+
+I'm processing lists, using them sortof as streams. (Whether that's a 
+good idea isn't the issue here - but let me know if it isn't!) 
+Fundamentally, there are two types of operations (at least, that are 
+relevant here) - those that change the length of the list and those that 
+don't.
+
+Some operators might take more than one list/stream as an argument, 
+combining them in some way or another. Obviously, if the lists were 
+different lengths, the operator would fail. I don't want that to happen 
+at run time, so I want to check for it statically, presumably via the 
+type system. I could do this manually:
+
+type AList = [Event]
+type BList = [Event]
+type CList = [Event]
+
+myMapish :: AList -> AList
+mySelect :: AList -> (Event -> Bool) -> BList
+myOtherSelect :: BList -> CList
+
+but I'd rather not have to manually define a new type for every new list 
+length:
+
+myMapish :: List a -> List a
+mySelect :: List a -> List ?
+
+The '?' would be an anonymous, unique type - unless there's a better way 
+to accomplish this.
+
+Hope that was clear, and thanks (as always) for the help (and being 
+awesome).
+
+-- 
+Scott Lawrence
+
+

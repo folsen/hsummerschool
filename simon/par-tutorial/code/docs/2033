@@ -1,0 +1,79 @@
+From niklas.broberg at gmail.com  Fri Dec 16 18:44:24 2011
+From: niklas.broberg at gmail.com (Niklas Broberg)
+Date: Fri, 16 Dec 2011 18:44:24 +0100
+Subject: [Haskell-cafe] Type checker for haskell-src-exts (was:
+ Typechecking Using GHC API)
+In-Reply-To: <CAOJG3uD_-=9HHXLpbJzo3R4yj1vn3v03jHunq_0=P7Kga+90fw@mail.gmail.com>
+References: <CACz_ru0TWtc5a5ZCtXBXJYG+ikvYWwzGp707weqigNRwS4qfRQ@mail.gmail.com>
+	<CAOJG3uD_-=9HHXLpbJzo3R4yj1vn3v03jHunq_0=P7Kga+90fw@mail.gmail.com>
+Message-ID: <CAMUA08QBgRYgwb65fjgt=v-XRg1XmvZUBmctShy786PH85Aw-g@mail.gmail.com>
+
+On Thu, Dec 15, 2011 at 6:24 PM, Thomas Schilling
+<nominolo at googlemail.com>wrote:
+
+> What exactly are the hopes for such a type checker?  I can understand
+> it being interesting as a research project, but as a realistic tools
+> there are two huge issues:
+>
+>  1. It's going to take a LOT of time to reach feature parity with
+> GHC's type checker.
+>
+>  2. Assuming that can be done, how is it going to be maintained and
+> kept up to date with GHC?
+>
+> If it is going to be used as a development tool, both of these are a
+> major requirement.  I haven't looked into the issues, but I'd expect
+> it would be more realistic (although definitely not trivial) to
+> translate from GHC's internal AST into an annotated haskell-src-exts
+> AST.
+>
+
+With all due respect, the sentiments you give voice to here are a large
+part of what drives me to do this project in the first place. Haskell is
+not GHC, and I think that the very dominant position of GHC many times
+leads to ill thought-through extensions. Since GHC has no competitor, often
+extensions (meaning behavior as denoted and delimited by some -X flag) are
+based on what is most convenient from the implementation point of view,
+rather than what would give the most consistent, logical and modular user
+experience (not to mention
+third-party-tool-implementor-trying-to-support-GHC-extensions experience).
+
+As such, I'm not primarily doing this project to get a development tool
+out, even if that certainly is a very neat thing. I'm just as much doing it
+to provide a Haskell (front-end) implementation that can serve as a better
+reference than GHC, one that very explicitly does *not* choose the
+convenient route to what constitutes an extension, and instead attempts to
+apply rigid consistency and modularity between extensions. Also, just like
+for haskell-src-exts I hope to build the type checker from the roots with
+the user interface as a core design goal, not as a tacked-on afterthought.
+
+Mind you, in no way do I intend any major criticism towards GHC or its
+implementors. GHC is a truly amazing piece of software, indeed it's
+probably my personal favorite piece of software of all times. That does not
+mean it comes free of quirks and shady corners though, and it is my hope
+that by doing what I do I can help shine a light on them.
+
+Answering your specific issues:
+
+1) Yes, it's a lot of work. Probably not half as much as you'd think
+though, see my previous mail about walking in the footsteps of giants. But
+beyond that, I think it's work that truly needs to be done, for the greater
+good of Haskell.
+
+2) Well, I think I've done a reasonably good job keeping haskell-src-exts
+up to date so far, even if the last year has been pretty bad in that regard
+(writing a PhD thesis will do that to you). I'll keep doing it for the type
+checker as well. But I am but one man, so if anyone else feels like joining
+the project then they are more than welcome to.
+
+Sort-of-3) Yes, both implementation and maintenance are likely going to be
+far more costly than the alternative to do a translation via the GHC API.
+I'm not interested in that alternative though.
+
+Cheers,
+
+/Niklas
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111216/d6af7e34/attachment-0001.htm>
+

@@ -1,0 +1,44 @@
+From chrisdone at googlemail.com  Tue Aug 30 10:46:37 2011
+From: chrisdone at googlemail.com (Christopher Done)
+Date: Tue, 30 Aug 2011 10:46:37 +0200
+Subject: [Haskell-cafe] GHCI Feature Request: Last Successful
+ Compilation State Saved
+In-Reply-To: <CAJrReyhTdrtzSGmPWgXWG9yHGzcKiHL=EnCGuBD3GwAtqHqEWA@mail.gmail.com>
+References: <CAJrReygxTo_DVA6B4bNozP0WR+_X7ZqQs=ERdHhuXKJNc-3+0A@mail.gmail.com>
+	<CAM_wFVtTiY=gz7aA==5DZ5YEXxZeabECMhrO3FHKw7wmOdacuA@mail.gmail.com>
+	<201108272331.01371.daniel.is.fischer@googlemail.com>
+	<6D6D37B1-79CF-4709-8C86-CFFC8B602360@dbp.mm.st>
+	<CAJrReyhTdrtzSGmPWgXWG9yHGzcKiHL=EnCGuBD3GwAtqHqEWA@mail.gmail.com>
+Message-ID: <CAAJHNPBWLOcT-uP18DTfp6+c+3pAfpxYN16HiqVN=7MSCn+ENg@mail.gmail.com>
+
+Oh, I didn't reply all. Whoops.
+
+On 28 August 2011 13:40, Christopher Done <chrisdone at googlemail.com> wrote:
+> On 27 August 2011 22:59, aditya siram <aditya.siram at gmail.com> wrote:
+>> I would like for the GHCI interpreter to save its environment before
+>> reloading a file and allowed the user to revert back to that state if the
+>> compilation was unsuccessful.
+>>
+>> Many times I've changed files, loaded them, hit a compilation error and
+>> needed, for example, the inferred type signature of some function. Even
+>> though that function hasn't been changed I have to either fix my code, undo
+>> a bunch of changes or comment out the last change I made and reload in order
+>> to do a ":type" on the function. This really breaks the flow of development.
+>
+> This has been bugging me for a long time and it's been on my TODO list
+> for haskell-emacs: https://github.com/chrisdone/haskell-emacs
+>
+> I just implemented it. http://i.imgur.com/A71T5.png
+>
+> I just run two ghci processes, one for compiling, one for merely
+> loading the code in when the former succeeds.
+>
+> It's not a very pleasant hack but in conjunction with :set
+> -fobject-code it is fast and does not consume that much more memory.
+> Considering tibbe's report is 4 years old, I think this solution is
+> better than nothing.
+>
+> Set hs-config-preliminary-load-file to t in hs-config.el and it will
+> do a preliminary load in a separate GHCi process.
+
+

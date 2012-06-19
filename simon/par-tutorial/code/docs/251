@@ -1,0 +1,65 @@
+From uzytkownik2 at gmail.com  Sat Apr  9 00:49:39 2011
+From: uzytkownik2 at gmail.com (Maciej Marcin Piechotka)
+Date: Sat, 09 Apr 2011 00:49:39 +0200
+Subject: [Haskell-cafe] Stateful iteratees
+In-Reply-To: <20110407190452.356fcca6@angst.streitmacht.eu>
+References: <20110407190452.356fcca6@angst.streitmacht.eu>
+Message-ID: <1302302979.28436.26.camel@localhost.localdomain>
+
+On Thu, 2011-04-07 at 19:04 +0200, Ertugrul Soeylemez wrote:
+> Hello fellow Haskellers,
+> 
+> I'm trying to solve a very practical problem:  I need a stateful
+> iteratee monad transformer.  Explicit state passing is very inconvenient
+> and would destroy the elegance of my library.
+> 
+> There are two approaches to this:
+> 
+>   1. type MyT a m = Iteratee a (StateT MyConfig m)
+>   2. type MyT a m = StateT MyConfig (Iteratee a m)
+> 
+> Both work well except in two very specific corner cases:
+> 
+>   - I need to convert the transformer to 'Iteratee a m', i.e. remove the
+>     state layer.  This is obviously trivial with the second variant, but
+>     seems very difficult with the first one, if it's possible at all.
+> 
+>   - I need to use control structures of Iteratee like catchError.  This
+>     is obviously trivial with the first variant, but very inconvenient
+>     with the second, because I would need to reinvent many wheels.
+> 
+> Does someone know a cleaner, more elegant solution?  Encapsulating the
+> state in the iteratee's input type is not an option.
+> 
+> Many thanks in advance.
+
+The first thing that come to my mind.
+
+runWithState :: Iteratee a (StateT s m) b -> s -> Iteratee a m (b, s)
+runWithState i s = do
+    let onDone v st = return (Right (v, st))
+        onCont c err = return (Left (c, err))
+    (i', s') <- runStateT (runIter i onDone onCont) s
+    case i' of
+      Left (c, err) -> icont (\str -> runWithState (c str) s') err
+      Right (v, st) -> idone (v, s') st
+
+I believe it is equivalent to:
+
+runWithState :: Iteratee a (StateT s m) b -> s -> Iteratee a m (b, s)
+runWithState i s = do
+    let onDone v st = do
+            s' <- get
+            return (idone (v, s') st)
+        onCont c err = do
+            s' <- get
+            return (icont (\str -> runWithState (c str) s') err)
+    joinIM $ evalStateT (runIter i onDone onCont) s
+
+I haven't tested but it compiles so it should work.
+
+
+
+
+
+

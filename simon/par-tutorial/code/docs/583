@@ -1,0 +1,34 @@
+From mle+hs at mega-nerd.com  Fri Apr 22 01:02:05 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Fri, 22 Apr 2011 09:02:05 +1000
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <2413044.1630.1303424178223.JavaMail.geo-discussion-forums@prcm34>
+References: <4DB093A6.8000303@btinternet.com>
+	<2413044.1630.1303424178223.JavaMail.geo-discussion-forums@prcm34>
+Message-ID: <20110422090205.d77ec94c.mle+hs@mega-nerd.com>
+
+John Millikin wrote:
+
+> My chief complaint is that it's built on "patch theory", which is 
+> ill-defined and doesn't seem particularly useful. The Bazaar/Git/Mercurial 
+> DAG model is much easier to understand and work with.
+> 
+> Possibly as a consequence of its shaky foundation, Darcs is much slower than 
+> the competition -- this becomes noticeable for even very small repositories, 
+> when doing a lot of branching and merging.
+
+I have two projects, one has about 50k lines of C code thats kept in
+Bzr and the other has 50k lines of Haskell code thats kept in Darcs.
+They both have similar sized commit and branch histories.
+
+I find the speed on Bzr and Darcs on those two projects to be pretty
+much the same. Most operations on a local repo take well less than 5
+seconds. Git may be faster but if its under 5 seconds who cares.
+
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

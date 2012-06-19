@@ -1,0 +1,31 @@
+From steve at fenestra.com  Mon Aug 29 16:11:31 2011
+From: steve at fenestra.com (Steve Schafer)
+Date: Mon, 29 Aug 2011 10:11:31 -0400
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <4E5B427D.3040605@btinternet.com>
+References: <4E568D11.30800@btinternet.com> <4E56CD99.6050703@vex.net>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+	<nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+	<4E57F43A.9030800@btinternet.com>
+	<b25g57lk7fbp5td6lp31qigptnr6rvfh67@4ax.com>
+	<4E58CDB5.2010900@btinternet.com>
+	<CAKFCL4VsuQrdmfM5EfBK_DBokMTC7SVP=u_UTJZV+17vABOvCg@mail.gmail.com>
+	<4E5B427D.3040605@btinternet.com>
+Message-ID: <397n57l2ntl85mnld541nsfuo204ucdfov@4ax.com>
+
+On Mon, 29 Aug 2011 08:40:45 +0100, you wrote:
+
+>If you're doing, say, cryptography, then thousand-bit random integers 
+>that need to be serialised are fairly common...
+
+This is the part that makes no sense to me. Yes, you are absolutely
+correct that large, multiple-byte integers play a big role in
+cryptography. But those are invariably FIXED LENGTH multiple-byte
+integers. As I mentioned before, to the best of my knowledge, no one
+uses variable-size representations in those kinds of
+computationally-intensive applications.
+
+-Steve Schafer
+
+

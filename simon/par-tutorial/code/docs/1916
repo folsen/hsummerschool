@@ -1,0 +1,126 @@
+From ianwookim at gmail.com  Wed Dec 14 07:32:52 2011
+From: ianwookim at gmail.com (Ian-Woo Kim)
+Date: Wed, 14 Dec 2011 01:32:52 -0500
+Subject: [Haskell-cafe] ANNOUNCE: hxournal-0.5.0.0 - A pen notetaking
+ program written in haskell
+In-Reply-To: <CAPNnnrXB6bL_sShjLJZ7MUS3hSsw4ZCCaxnpKmyPWTqPWvJpMA@mail.gmail.com>
+References: <CAPNnnrV329dsY_cB=K7q1-REUE5os7+u+psqN=rWeq9Crz6JEQ@mail.gmail.com>
+	<CACZKWEL6=_f+HTckrrgqCZj-EWKHJpw3TSEaBvXOBhZFOeFAOg@mail.gmail.com>
+	<CAPNnnrXoaY36PRRvM3_EtoX+HFLkyRy_F-jtr11qZtW-4izVGQ@mail.gmail.com>
+	<CAKFCL4XQceD_Y0Cv4oViYrfCwLRcbeG9EQOjOMScCfDZ=iWq4g@mail.gmail.com>
+	<CACZKWE+UZdbnc5RjfUrpLs-YDoWPomBbqceUHThkniJR4cwTqw@mail.gmail.com>
+	<CACZKWEKOV-c+1=EpNbU6aycuyQVWUUx6yFYJBxp9M16bMfV-=g@mail.gmail.com>
+	<CAPNnnrXB6bL_sShjLJZ7MUS3hSsw4ZCCaxnpKmyPWTqPWvJpMA@mail.gmail.com>
+Message-ID: <CAPNnnrVSVQyTpY6jwX8_oz+f_SD0TTGfKSgBP1ok7-AD3spc=w@mail.gmail.com>
+
+Hi, Ivan,
+
+I modified hxournal. New source code is now on github repository.
+https://www.github.com/wavewave/hxournal
+
+Now it has a very rudimentary config file. The config file should be
+located at $HOME/.hxournal
+
+Sample configuration file is hxournal.conf.sample in hxournal.
+There you can change the name of your X11 device. Current default
+is "Core Pointer" for core mouse event, "stylus" for wacom pen,
+"eraser" for wacom eraser. If you look at the message when hxournal
+start, you will notice what device name your X11 uses. If they are
+different from the default setup, then please change .hxournal file
+according to that.
+
+I implemented now "Use XInput" menu in Options menu. So once you
+toggle it, you can choose whether you use wacom input or core mouse
+pointer input. Default starting value of it is also set as xinput
+variable in configuration file ("true" or "false" value)
+
+If you can test this and report to me, I will appreciate it very much.
+It will be hxournal ver 0.5.1 if successful.
+
+I started hxournal webpage on http://ianwookim.org/hxournal
+and hxournal dev wiki page on github page. From now on, the discussion
+about this development will happen there.
+
+Thank you .
+
+best,
+Ian-Woo Kim
+
+
+
+
+
+On Tue, Dec 13, 2011 at 2:42 PM, Ian-Woo Kim <ianwookim at gmail.com> wrote:
+> Hi, Ivan,
+>
+> Thank you very much for testing.
+> Yes, I need to have many testers.
+>
+> For your problem, first, please send me the console output of hxournal
+> when you start the application. ?I guess its stylus name problem in
+> X11 setting.
+> Currently, the detection of wacom pen in hxournal is by checking
+> a xinput device which is named as "stylus". (as defined in Xorg.conf
+> in /etc/X11/)
+> So you need to change X11 name to "stylus" or modify line 23 of the
+> source code csrc/c_initdevice.c ?.
+>
+> I am going to modify this soon. ?(not yet figured out how to detect
+> the tablet generally,
+> so I am thinking of making a configuration file for hxournal which has
+> an information of
+> the device. )
+> It has another problem that it always connects to wacom pen if you
+> have wacom tablet, so mouse input is ignored. I need to enable user to
+> choose mouse/wacom input.
+>
+> I released it rather early for getting some attention of interested people.
+> Let me notify you when modifying the code.
+>
+> Thank you again for your interest.
+>
+> Ian-Woo
+>
+>
+> On Tue, Dec 13, 2011 at 8:03 AM, Ivan Perez
+> <ivanperezdominguez at gmail.com> wrote:
+>> In other news, the program runs, but I can't draw anything. I tried it
+>> with a wacom and a mouse.
+>>
+>> Ian-Woo, let me know if you need me to run some tests or to try a new
+>> version before you release it.
+>> As a fan of xournal, I'd be glad to do so.
+>>
+>> Cheers,
+>> Ivan.
+>>
+>> On 13 December 2011 14:00, Ivan Perez <ivanperezdominguez at gmail.com> wrote:
+>>> Unfortunately, I have all the *-dev packages I need. Like somebody
+>>> else said, it's a different problem.
+>>>
+>>> Linking the file worked for me.
+>>>
+>>> Cheers
+>>>
+>>> On 13 December 2011 02:43, Brandon Allbery <allbery.b at gmail.com> wrote:
+>>>> On Mon, Dec 12, 2011 at 19:22, Ian-Woo Kim <ianwookim at gmail.com> wrote:
+>>>>>
+>>>>> A workaround is to make a symbolic link to libstdc++.so.6 with the
+>>>>> name of libstdc++.so in /usr/lib or /usr/local/lib or other dynamic
+>>>>> library path like the following.
+>>>>>
+>>>>> ln -s /usr/lib/libstdc++.so.6 /usr/lib/libstdc++.so
+>>>>
+>>>>
+>>>> This is an indication that you have not installed your distribution's -dev
+>>>> package for the library in question. ?You should do so instead of making the
+>>>> symlink manually.
+>>>>
+>>>> (cabal has no support for this kind of thing)
+>>>>
+>>>> --
+>>>> brandon s allbery ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?allbery.b at gmail.com
+>>>> wandering unix systems administrator (available) ? ? (412) 475-9364 vm/sms
+>>>>
+
+

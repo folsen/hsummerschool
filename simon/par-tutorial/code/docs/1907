@@ -1,0 +1,87 @@
+From ianwookim at gmail.com  Tue Dec 13 20:42:32 2011
+From: ianwookim at gmail.com (Ian-Woo Kim)
+Date: Tue, 13 Dec 2011 14:42:32 -0500
+Subject: [Haskell-cafe] ANNOUNCE: hxournal-0.5.0.0 - A pen notetaking
+ program written in haskell
+In-Reply-To: <CACZKWEKOV-c+1=EpNbU6aycuyQVWUUx6yFYJBxp9M16bMfV-=g@mail.gmail.com>
+References: <CAPNnnrV329dsY_cB=K7q1-REUE5os7+u+psqN=rWeq9Crz6JEQ@mail.gmail.com>
+	<CACZKWEL6=_f+HTckrrgqCZj-EWKHJpw3TSEaBvXOBhZFOeFAOg@mail.gmail.com>
+	<CAPNnnrXoaY36PRRvM3_EtoX+HFLkyRy_F-jtr11qZtW-4izVGQ@mail.gmail.com>
+	<CAKFCL4XQceD_Y0Cv4oViYrfCwLRcbeG9EQOjOMScCfDZ=iWq4g@mail.gmail.com>
+	<CACZKWE+UZdbnc5RjfUrpLs-YDoWPomBbqceUHThkniJR4cwTqw@mail.gmail.com>
+	<CACZKWEKOV-c+1=EpNbU6aycuyQVWUUx6yFYJBxp9M16bMfV-=g@mail.gmail.com>
+Message-ID: <CAPNnnrXB6bL_sShjLJZ7MUS3hSsw4ZCCaxnpKmyPWTqPWvJpMA@mail.gmail.com>
+
+Hi, Ivan,
+
+Thank you very much for testing.
+Yes, I need to have many testers.
+
+For your problem, first, please send me the console output of hxournal
+when you start the application.  I guess its stylus name problem in
+X11 setting.
+Currently, the detection of wacom pen in hxournal is by checking
+a xinput device which is named as "stylus". (as defined in Xorg.conf
+in /etc/X11/)
+So you need to change X11 name to "stylus" or modify line 23 of the
+source code csrc/c_initdevice.c  .
+
+I am going to modify this soon.  (not yet figured out how to detect
+the tablet generally,
+so I am thinking of making a configuration file for hxournal which has
+an information of
+the device. )
+It has another problem that it always connects to wacom pen if you
+have wacom tablet, so mouse input is ignored. I need to enable user to
+choose mouse/wacom input.
+
+I released it rather early for getting some attention of interested people.
+Let me notify you when modifying the code.
+
+Thank you again for your interest.
+
+Ian-Woo
+
+
+On Tue, Dec 13, 2011 at 8:03 AM, Ivan Perez
+<ivanperezdominguez at gmail.com> wrote:
+> In other news, the program runs, but I can't draw anything. I tried it
+> with a wacom and a mouse.
+>
+> Ian-Woo, let me know if you need me to run some tests or to try a new
+> version before you release it.
+> As a fan of xournal, I'd be glad to do so.
+>
+> Cheers,
+> Ivan.
+>
+> On 13 December 2011 14:00, Ivan Perez <ivanperezdominguez at gmail.com> wrote:
+>> Unfortunately, I have all the *-dev packages I need. Like somebody
+>> else said, it's a different problem.
+>>
+>> Linking the file worked for me.
+>>
+>> Cheers
+>>
+>> On 13 December 2011 02:43, Brandon Allbery <allbery.b at gmail.com> wrote:
+>>> On Mon, Dec 12, 2011 at 19:22, Ian-Woo Kim <ianwookim at gmail.com> wrote:
+>>>>
+>>>> A workaround is to make a symbolic link to libstdc++.so.6 with the
+>>>> name of libstdc++.so in /usr/lib or /usr/local/lib or other dynamic
+>>>> library path like the following.
+>>>>
+>>>> ln -s /usr/lib/libstdc++.so.6 /usr/lib/libstdc++.so
+>>>
+>>>
+>>> This is an indication that you have not installed your distribution's -dev
+>>> package for the library in question. ?You should do so instead of making the
+>>> symlink manually.
+>>>
+>>> (cabal has no support for this kind of thing)
+>>>
+>>> --
+>>> brandon s allbery ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?allbery.b at gmail.com
+>>> wandering unix systems administrator (available) ? ? (412) 475-9364 vm/sms
+>>>
+
+

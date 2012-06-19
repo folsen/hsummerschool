@@ -1,0 +1,50 @@
+From apfelmus at quantentunnel.de  Mon Apr 25 10:01:03 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Mon, 25 Apr 2011 10:01:03 +0200
+Subject: [Haskell-cafe] More ideas for controlled mutation
+In-Reply-To: <1303646089-sup-2399@ezyang>
+References: <1303646089-sup-2399@ezyang>
+Message-ID: <ip39nv$jup$1@dough.gmane.org>
+
+Edward Z. Yang wrote:
+> Laziness can be viewed as a form of controlled mutation, where
+> we overwrite a thunk with its actual value, thus only running
+> the code once and reaping great time benefits.
+> 
+> [..]
+> 
+> Hash tables take advantage of this fact by simply chaining together values
+> in a linked list if they land in the same bucket.  Could we have similarly
+> bucketized memoization?  What we want here is for a *thunk to possibly
+> evaluate to different values, but calls to the API be observationally
+> equivalent.*  That is, if the only way I can inspect a dictionary list
+> is do a lookup, I don't care if my representation is [(1,4),(2,2)] or
+> [(2,2),(1,4)].  An obvious way to do this is to use unsafePerformIO to
+> read out an IORef stating the value currently being looked up, and
+> have the thunk evaluate to the pair of that key and the result.  There
+> are some synchronization concerns, of course: ideally we would only
+> take out a lock on the thunk once we realize that the value doesn't
+> already exist in the memotable, but I don't think there's a way in GHC Haskell
+> to observe if a value is a thunk or not (maybe such a mechanism would be
+> useful?)
+
+The thing is that lazy evaluation is referentially transparent while "I 
+don't care about [(1,4),(2,2)] vs [(2,2),(1,4)]" is not. In the latter 
+case, you have a proof obligation to the compiler that your API does not 
+expose the difference between these two values. But in Haskell, you have 
+no way of convincing the compiler that you fulfilled that proof 
+obligation! (At least, I don't see any obvious one. Maybe a clever abuse 
+of parametricity helps.) It might be an option in Agda, though.
+
+In that light, it is entirely reasonable that you have to use 
+unsafePerformIO .
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

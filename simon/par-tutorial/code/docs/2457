@@ -1,0 +1,52 @@
+From omari at smileystation.com  Fri Dec 30 05:20:40 2011
+From: omari at smileystation.com (Omari Norman)
+Date: Thu, 29 Dec 2011 23:20:40 -0500
+Subject: [Haskell-cafe] Text.Regex.Base throws exceptions with
+ makeRegexOptsM
+In-Reply-To: <201112300124.02713.daniel.is.fischer@googlemail.com>
+References: <20111229225246.GB13805@barry.normanonet.net>
+	<201112300124.02713.daniel.is.fischer@googlemail.com>
+Message-ID: <20111230042040.GC3975@cameron.normanonet.net>
+
+On Fri, Dec 30, 2011 at 01:24:02AM +0100, Daniel Fischer wrote:
+> For Either, there used to be
+> 
+> instance Error e => Monad (Either e) where
+>     ...
+>     fail s = Left (strMsg s)
+> 
+> in mtl's Control.Monad.error, and all was fine if one used the regex 
+> functions with e.g. (Either String) as the Monad.
+> 
+> Recently, however, it was decided to have
+> 
+> instance Monad (Either e) where
+>     ...
+>     fail s = error s -- not explicitly, but by Monad's default method
+> 
+> in Control.Monad.Instances. So now, if you have a pattern-match failure 
+> using (Either String), you don't get a nice 'Left message' but an error.
+
+Thanks so much, I would never have figured all this out. Spent a lot of
+time tonight rummaging through mtl and transformers and
+Control.Monad.Instances.
+
+> Now, what can you do to get the equivalent of the old (Either String)?
+> 
+> Use 'ErrorT String Identity'.
+
+This I tried. It turned out that it didn't work though and I had the
+same problem. I am guessing it is because my module has some imports at
+the top that are bringing the instances in Control.Monad.Instances into
+scope. Then it seems the Monad instance in Control.Monad.Instances
+(which is using the default "fail", which calls "error") is being used,
+rather than the instance from Control.Monad.Trans.Error. Only now do I
+really understand why orphan instances are bad:
+
+http://www.haskell.org/haskellwiki/Orphan_instance
+
+A simple fix for it all was to wrap Either in a newtype and then define
+a Monad instance for the newtype. --Omari
+
+
+

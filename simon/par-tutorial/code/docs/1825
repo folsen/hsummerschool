@@ -1,0 +1,39 @@
+From sergueyz at gmail.com  Sun Dec 11 13:52:13 2011
+From: sergueyz at gmail.com (Serguey Zefirov)
+Date: Sun, 11 Dec 2011 16:52:13 +0400
+Subject: [Haskell-cafe] Hardware description in Haskell.
+Message-ID: <CABFQQ=C0ybeTt8mSi_d43FGHL+hCA6=_SwBLVD4AwLN9SCYoJw@mail.gmail.com>
+
+I would like to introduce my over-than-two years long project, HHDL:
+
+http://thesz.mskhug.ru/svn/hhdl/hackage/hhdl/
+
+(I prefer to pronounce it as a ha-ha-dee-el, this way it is more fun)
+
+It allows one to create digital hardware description in Haskell and
+then generate VHDL code (Verilog is on the way). Okay, it would allow
+one to do all that some day. I hope it will come sooner than later.
+
+I try to make all wires as typed as I can and to support algebraic
+types with patetrn matching. I wrote a simple example to demonstrate
+some of those facilities:
+
+http://thesz.mskhug.ru/svn/hhdl/hackage/hhdl/src/Hardware/HHDL/Examples/RunningSumMaybes.hs
+
+This is a simple accumulator that accepts a Maybe Word8 input. The
+resulting VHDL is very wordy, but looks superficially correct.
+
+I wrote two posts about HHDL:
+
+http://thesz.livejournal.com/1284055.html - slightly outdated as HHDL
+now generates VHDL that typechecks and allows one to name inputs and
+outputs
+http://thesz.livejournal.com/1284541.html - motivation behind HHDL
+
+There is no package for Hackage, because I do not feel HHDL is worth
+it right now. For example, I tested it on ghc 6.12.1, not later
+versions, the library code is messy. But HHDL is good enough for some
+scrutiny and critique by Haskell users who is into hardware
+description.
+
+

@@ -1,0 +1,44 @@
+From agocorona at gmail.com  Fri Dec  9 22:58:58 2011
+From: agocorona at gmail.com (Alberto G. Corona )
+Date: Fri, 9 Dec 2011 22:58:58 +0100
+Subject: [Haskell-cafe] ANNOUNCE: Workflow-0.5.8.0
+Message-ID: <CAArEJmauuJCxuq16Pui0KKVLDqFEn12L8N_X76Bt=7DjYHB-wg@mail.gmail.com>
+
+This is A new version of the package workflow.   I probably will
+change the name of this package since it is  too generic.
+
+A workflow can be seen as a persistent thread that executes a monadic
+computation. Therefore, it can be used in very time consuming
+computations such are CPU intensive calculations with intermediate
+results or with  procedures that are most of the time waiting for the
+response of a process or an user, that are prone to comunication
+failures, timeouts or shutdowns.
+
+Workflow has a   operation, called "step" that lift the monadic
+computation to the Workflow monad. This bring services of transparent
+state loogging, so that the computation can be restarted at the point
+of stop/failure.  Additionally , the package has persistent queues,
+persistent data collections, and persistent timeouts (whit which the
+workflow can wait for days, months or even years, more than the
+average time between failures). This is important for programming
+office workflow or in election processes where the user has a limited
+time to decide/vote.
+
+This version has many improvements: it admits Data.Binary
+serialization for logging (besides RefSerialize of previous versions).
+. It also has  an EDSL of high level monadic combinators that
+represent workflow patterns. For example, split, merge,
+synchronization, votation etc.
+
+There are examples in the online documentation and some demos in the package.
+
+My motivation for developping Workflow is to use it in a project for
+electronic democracy in the Web. If anyone is interested in the
+package Workflow and/or electronic democracy, I will be happy to talk
+with him.
+
+Hope to be useful
+
+Alberto.
+
+

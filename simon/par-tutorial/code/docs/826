@@ -1,0 +1,22 @@
+From olshanskydr at gmail.com  Thu Apr 28 16:39:28 2011
+From: olshanskydr at gmail.com (Dmitry Olshansky)
+Date: Thu, 28 Apr 2011 18:39:28 +0400
+Subject: [Haskell-cafe] Iteratee: manyToOne
+Message-ID: <BANLkTinwOoNcVGx1awFANAywZUyxnUpWPg@mail.gmail.com>
+
+Hello,
+
+does somewhere exist function with type like this - manyToOne :: [Iteratee a
+m b] -> Iteratee a m [b] ?
+
+I.e. I need to process one input through many Iteratees indepentently in
+constant space and collect results.
+
+It is similar by type with sequenceM but as far as I understand sequenceM
+won't use the same input for all Iteratees.
+
+Dima
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110428/8f80d180/attachment.htm>
+

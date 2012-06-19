@@ -1,0 +1,53 @@
+From iustin at google.com  Thu Dec 29 13:28:43 2011
+From: iustin at google.com (Iustin Pop)
+Date: Thu, 29 Dec 2011 13:28:43 +0100
+Subject: [Haskell-cafe] Windows: openFile gives permission denied when
+ file in use
+In-Reply-To: <4EFC5B02.1080908@btinternet.com>
+References: <CAKA2JgLc1Q-Lf_yOuhQdb1JKuUkiRYuS=hQ7wQw_+jqCMQOEYQ@mail.gmail.com>
+	<CAKjSnQH=mNONY7mC7-nEt-R51A0PULg-GhPvWiQ59vrOxpznuw@mail.gmail.com>
+	<4EFC53B7.2010806@btinternet.com>
+	<20111229120637.GV17094@google.com>
+	<4EFC5B02.1080908@btinternet.com>
+Message-ID: <20111229122843.GW17094@google.com>
+
+On Thu, Dec 29, 2011 at 12:20:18PM +0000, Andrew Coppin wrote:
+> >>Every time I hear "oh, I don't think Windows can
+> >>handle that", I sigh with resignation.
+> >
+> >Sorry to say, but it seems you yourself are unaware of the "extensive
+> >and highly flexible" locking facilities on Linux :) The defaults on
+> >Linux are advisory locking, not mandatory, but claiming Linux doesn't
+> >support locking is plain wrong.
+> 
+> I would suggest that advisory locking isn't particularly useful.
+
+In my experience (as an application writer) it is very useful; it's just
+a different paradigm, not a weaker one. Off-hand I don't remember a case
+where having mandatory locking would have improved things.
+
+> I
+> gather that Linux does now support real locking though. (And file
+> update notifications, and ACLs, and lots of other things that
+> Windows has had for far longer.)
+
+Hrmm: "Mandatory File Locking For The Linux Operating System, 15 April
+1996" :)
+
+> Either way, I have no interest in starting a Windows vs Linux
+> flamewar. 
+
+Me neither - I just wanted to point out that your email sounded _too_
+eager to blame the current state of affairs on the fact that Linux
+doesn't support proper locking. Whereas, the problem is just one of
+taking into account platform differences better.
+
+> I'm just saying it would be nice if Haskell could support
+> more of what these two OSes have to offer.
+
+Totally agreed!
+
+all the best,
+iustin
+
+

@@ -1,0 +1,62 @@
+From amindfv at gmail.com  Mon Aug 22 20:53:40 2011
+From: amindfv at gmail.com (Tom Murphy)
+Date: Mon, 22 Aug 2011 11:53:40 -0700
+Subject: [Haskell-cafe] Please take the State of Haskell, 2011 survey
+In-Reply-To: <CAK-tuPaV7P=WcjVkeOW6wTRzRj9xZn7YAyZytyidFJ5x5AyazQ@mail.gmail.com>
+References: <CAK-tuPZy24xAtMfCF9ZA_zH_-8Riqwdpdw3J+x1Hjfwxo1JoqQ@mail.gmail.com>
+	<CAK-tuPaV7P=WcjVkeOW6wTRzRj9xZn7YAyZytyidFJ5x5AyazQ@mail.gmail.com>
+Message-ID: <CAO9Q0tVB+hixvAvffoSOfTayNet5U4kgiek5LKPFnJxi16cjGQ@mail.gmail.com>
+
+Thanks for running this again: very informative.
+
+
+
+"We ought to be able to write a library with a Par monad for distributed
+parallel algorithms."
+
+If someone were to do this they might want to start here:
+http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/monad-par.pdf
+
+
+"I've started thinking about writing a medium sized tutorial, perhaps 60
+pages or so, covering everything you need to know to be able to write
+production quality Haskell code."
+
+This would be such a valuable resource for the community.
+
+Tom
+
+On Mon, Aug 22, 2011 at 9:56 AM, Johan Tibell <johan.tibell at gmail.com>wrote:
+
+> [bcc: haskell@, beginners@]
+>
+> Hi all,
+>
+> On Sun, Jul 17, 2011 at 1:21 PM, Johan Tibell <johan.tibell at gmail.com>
+> wrote:
+> > I've put together a quick, 12-question State of Haskell, 2011 survey:
+> >
+> >
+> http://blog.johantibell.com/2011/07/its-time-for-this-years-state-of.html
+> >
+> > The survey will hopefully give us some insight into how people use
+> > Haskell and perhaps also some ideas on how Haskell tools and libraries
+> > could be improved.
+>
+> The results of this survey are now available:
+>
+>
+> http://blog.johantibell.com/2011/08/results-from-state-of-haskell-2011.html
+>
+> Cheers,
+> Johan
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110822/485d9e9e/attachment.htm>
+

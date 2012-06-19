@@ -1,0 +1,47 @@
+From uzytkownik2 at gmail.com  Tue Apr 26 17:47:34 2011
+From: uzytkownik2 at gmail.com (Maciej Marcin Piechotka)
+Date: Tue, 26 Apr 2011 17:47:34 +0200
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <201104261634.43200.daniel.is.fischer@googlemail.com>
+References: <4DB093A6.8000303@btinternet.com>
+	<201104261551.51295.daniel.is.fischer@googlemail.com>
+	<20110426140455.GA2543@elliptictech.com>
+	<201104261634.43200.daniel.is.fischer@googlemail.com>
+Message-ID: <1303832855.4352.0.camel@localhost.localdomain>
+
+On Tue, 2011-04-26 at 16:34 +0200, Daniel Fischer wrote:
+> On Tuesday 26 April 2011 16:04:55, Nick Bowler wrote:
+> > On 2011-04-26 15:51 +0200, Daniel Fischer wrote:
+> > > On Tuesday 26 April 2011 15:35:42, Ivan Lazar Miljenovic wrote:
+> > > > How do you "see" how git branches are related to each other?
+> > > 
+> > > To some extent, you can see such a relation in gitk. For mercurial, hg
+> > > glog also shows a bit. I suppose there's also something to visualise
+> > > branches in bazaar, but I've never used that, so I don't know.
+> > > 
+> > > So, with gitk/glog, you can see that foo branched off bar after commit
+> > > 0de8793fa1bc..., then checkout/update to that commit [or bar's head],
+> > > checkout/update to foo's head/tip and compare.
+> > 
+> > No need to do a checkout; gitk can visualize any or all branches of the
+> > repository simultaneously.
+> 
+> Yes, at least if you're only interested in the genealogy.
+> When I think about how branches are related, I think of contents at least 
+> as much as of genealogy. Can gitk show the code next to each other?
+> I wouldn't be surprised, but I haven't yet found a way to do it (but I've 
+> only taken a couple of short looks, so that doesn't say much).
+
+I cannot say for gitk but gitview does it does it for sure:
+
+gitview --all --date-order
+
+Regards
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110426/1fcb699e/attachment.pgp>
+

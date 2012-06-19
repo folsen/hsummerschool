@@ -1,0 +1,31 @@
+From ckkashyap at gmail.com  Thu Feb  3 17:27:16 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Thu, 3 Feb 2011 21:57:16 +0530
+Subject: [Haskell-cafe] Review request for "platform independent
+ interactive graphics" with VNC
+In-Reply-To: <AANLkTimbkBWCgfTMST7k70VVnG=QdeUPt63Rp=gucRkU@mail.gmail.com>
+References: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>
+	<AANLkTimbkBWCgfTMST7k70VVnG=QdeUPt63Rp=gucRkU@mail.gmail.com>
+Message-ID: <AANLkTimYU2jRg0hYNVFwerMzoH++_MxUzM3bNy2BrOzs@mail.gmail.com>
+
+>
+>
+> Attached is the Cabal file I used to build (it wasn't clear what license
+> things are under so those fields are commented out).
+>
+>
+> Thanks a ton Rayan ... I am glad you liked it.
+I've checked in the cabal file - I am not familiar with it though ... how
+exactly can I use it to build the project?
+
+Also, do you have an idea how it can be incorporated into GHCI - As in, the
+program should do a forkIO and in one thread, handle network and on the
+other prompt an interactive ghci shell that'll let one modify the screen
+buffer in an expressive way in haskell!
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/5547c406/attachment.htm>
+

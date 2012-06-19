@@ -1,0 +1,34 @@
+From nhn at Cs.Nott.AC.UK  Wed Dec  7 17:14:08 2011
+From: nhn at Cs.Nott.AC.UK (Henrik Nilsson)
+Date: Wed, 07 Dec 2011 16:14:08 +0000
+Subject: [Haskell-cafe] How did iteratees get their names?
+In-Reply-To: <20111207164800.73553acf@angst.streitmacht.eu>
+References: <CACruqwTG3fOEbwiTMohwTG8Mt-9HR=r+gHKu5BVLg0MT_JnTrQ@mail.gmail.com>	<20111207154812.36c674b5@angst.streitmacht.eu>	<4EDF8474.1040502@cs.nott.ac.uk>
+	<20111207164800.73553acf@angst.streitmacht.eu>
+Message-ID: <4EDF90D0.5010500@cs.nott.ac.uk>
+
+Hi Ertugrul,
+
+ > Coroutines actually capture this kind of composition (where some code
+ > interrupts itself to hand control over to some other code) very well.
+ > Perhaps it would be better to use terms from that abstraction instead.
+ > In fact, iteratees are a special case of coroutines.
+
+That would seem to make sense, if there is appropriate terminology.
+
+And if we are indeed talking about co-routines, i.e. cooperation
+between peers, routines of equal status, that would in itself suggest
+that the X-or and X-ee names that imply an asymmetric relationship
+are somewhat unfortunate choices conveying the wrong intuition.
+
+Best,
+
+/Henrik
+
+-- 
+Henrik Nilsson
+School of Computer Science
+The University of Nottingham
+nhn at cs.nott.ac.uk
+
+

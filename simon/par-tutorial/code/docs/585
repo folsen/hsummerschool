@@ -1,0 +1,58 @@
+From john at repetae.net  Fri Apr 22 01:16:07 2011
+From: john at repetae.net (John Meacham)
+Date: Thu, 21 Apr 2011 16:16:07 -0700
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <2413044.1630.1303424178223.JavaMail.geo-discussion-forums@prcm34>
+References: <4DB093A6.8000303@btinternet.com>
+	<2413044.1630.1303424178223.JavaMail.geo-discussion-forums@prcm34>
+Message-ID: <BANLkTingNDExfXWS43FmdyMhrKjj+1S6BQ@mail.gmail.com>
+
+Um, the patch theory is what makes darcs "just work". There is no need
+to understand it any more than you have to know VLSI design to
+understand how your computer works. The end result is that darcs
+repositories don't get corrupted and the order you integrate patches
+doesn't affect things meaning cherrypicking is painless.
+
+I think the main problem with patch theory is with its PR. It is a
+super cool algorithm and rightly droundy should be proud of it so he
+highlighted it. I think this caused people to think they had to
+understand the patch theory rather than just sit back and enjoy it.
+
+Incidentally, I wrote a github like site based around darcs a few
+years ago at codehole.org. It is just used internally by me for
+certain projects. but if people were interested, I could resume work
+on it and make it public.
+
+    John
+
+On Thu, Apr 21, 2011 at 3:16 PM, John Millikin <jmillikin at gmail.com> wrote:
+> My chief complaint is that it's built on "patch theory", which is
+> ill-defined and doesn't seem particularly useful. The Bazaar/Git/Mercurial
+> DAG model is much easier to understand and work with.
+>
+> Possibly as a consequence of its shaky foundation, Darcs is much slower than
+> the competition -- this becomes noticeable for even very small repositories,
+> when doing a lot of branching and merging.
+>
+> I think it's been kept alive in the Haskell community out of pure "eat our
+> dogfood" instinct; IMO if having a VCS written in Haskell is important, it
+> would be better to just write a new implementation of an existing tool. Of
+> course, nobody cares that much about what language their VCS is written in,
+> generally.
+>
+> Beyond that, the feeling I get of the three major DVCS alternatives is:
+>
+> git: Used by Linux kernel hackers, and Rails plugin developers who think
+> they're more important than Linux kernel hackers
+>
+> hg/bzr: Used by people who don't like git's UI, and flipped heads/tails when
+> picking a DVCS (hg and bzr are basically equivalent)
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

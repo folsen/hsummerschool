@@ -1,0 +1,49 @@
+From v.dijk.bas at gmail.com  Sat Dec  3 14:42:06 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Sat, 3 Dec 2011 14:42:06 +0100
+Subject: [Haskell-cafe] Weird interaction between literate haskell,
+ ghci and OverloadedStrings
+In-Reply-To: <20111203211931.6e9baf3a5eb56f9bdee9c9aa@mega-nerd.com>
+References: <20111203161824.f134a60f1a8a9ee4ece50ff4@mega-nerd.com>
+	<1322902919.2611.1.camel@kirk>
+	<20111203211931.6e9baf3a5eb56f9bdee9c9aa@mega-nerd.com>
+Message-ID: <CADLz5wUJEDg0uaE6Nr9dCOrU01t2=zhkrfjrZ1oWfR0MXyAXRA@mail.gmail.com>
+
+On 3 December 2011 11:19, Erik de Castro Lopo <mle+hs at mega-nerd.com> wrote:
+> Joachim Breitner wrote:
+>
+>> it does not seem to be related to literate haskell, if I copy the code
+>> from your file into a .hs without the "> ", ghci still does not activate
+>> the OverloadedStrings extension when loading the file.
+>
+> I hadn't noticed that.
+>
+>> I?d consider this a bug until the developers explain why this should or
+>> cannot be different, and suggest you file it as such.
+>
+> I agree. I've lodged a bug report here:
+>
+> ? ?http://hackage.haskell.org/trac/ghc/ticket/5673
+
+I think it's very dangerous if language extensions "leak" from modules
+by default. For example if someone creates a library and needs to use
+some unsafe language extensions like:
+
+{-# LANGUAGE UndecidableInstances, OverlappingInstances, IncoherentInstances #-}
+module SomeLib where ...
+
+You surely don't want to silently enable these in some unsuspecting client:
+
+module MyFirstHaskellModule where
+import SomeLib
+...
+
+I can imagine having a pragma for explicitly exporting language extensions:
+
+{-# EXPORT_LANGUAGE OverloadedStrings #-}
+
+Cheers,
+
+Bas
+
+

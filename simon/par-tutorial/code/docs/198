@@ -1,0 +1,6 @@
+       From (haskell.org), scored 33 with 9 comments.
+       Read on [23]reddit.
+       Read the [24]original post.
+
+     * "Reactive-banana and the essence of FRP". I implemented a small FRP
+       library that can be mixed freely with imperative code.

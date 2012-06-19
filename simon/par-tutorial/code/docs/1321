@@ -1,0 +1,43 @@
+From iustin at google.com  Wed Aug 24 14:59:19 2011
+From: iustin at google.com (Iustin Pop)
+Date: Wed, 24 Aug 2011 14:59:19 +0200
+Subject: [Haskell-cafe] Function composition in run-time?
+In-Reply-To: <CAMXF=YC1fXFEbBy6CWPpdQJScAFbHcLEViQKH77MiAQ4_6i0nA@mail.gmail.com>
+References: <CAMXF=YBZRy0t2ffQHAAhqVeNzmODQWLq5-DFa_U43OUbYerjEA@mail.gmail.com>
+	<20110824124451.GS17168@google.com>
+	<CAMXF=YC1fXFEbBy6CWPpdQJScAFbHcLEViQKH77MiAQ4_6i0nA@mail.gmail.com>
+Message-ID: <20110824125919.GT17168@google.com>
+
+On Wed, Aug 24, 2011 at 04:57:19PM +0400, dokondr wrote:
+> On Wed, Aug 24, 2011 at 4:44 PM, Iustin Pop <iustin at google.com> wrote:
+> 
+> > On Wed, Aug 24, 2011 at 04:35:42PM +0400, dokondr wrote:
+> > > Hi,
+> > > What is the Haskell way to compose functions in run-time?
+> > > Depending on configuration parameters I need to be able to compose
+> > function
+> > > in several ways without recompilation.
+> >
+> >
+> A simple alternative to if would be:
+> >
+> >  options = [ ("foo", f1 . f2 . f3)
+> >            , ("bar", f1 . f3 )]
+> >
+> > and then "lookup param options". I don't know if this is what you're
+> > looking for, though.
+> >
+> >
+> Thanks!
+> Yes, this is what I need - simple and easy. Yet, how function application
+> will work in this case ?
+> I mean after lookup returns me a composition ... need to check what type
+> will it be.
+
+Well, as with your 'if', all compositions must have the same type, since
+lists are homogeneous.
+
+regards,
+iustin
+
+

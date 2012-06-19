@@ -1,0 +1,96 @@
+From alexey.skladnoy at gmail.com  Wed Feb  9 20:14:44 2011
+From: alexey.skladnoy at gmail.com (Alexey Khudyakov)
+Date: Wed, 09 Feb 2011 22:14:44 +0300
+Subject: [Haskell-cafe] Synthetic values?
+In-Reply-To: <AANLkTimsWsfdkPLK4yQRHt3OcBGUiN2FGAwG52DvKCpD@mail.gmail.com>
+References: <AANLkTimsWsfdkPLK4yQRHt3OcBGUiN2FGAwG52DvKCpD@mail.gmail.com>
+Message-ID: <4D52E7A4.7020705@gmail.com>
+
+On 09.02.2011 20:15, Cristiano Paris wrote:
+> Now the problem.
+>
+> I would like to enforce permissions not at the role level, but at the
+> permissions level. Let's say that I want to leave "unseal" unchanged,
+> I'd like to "construct" a p-value for unseal "combining" functions
+> checking for single permissions, that is, in pseudo-code:
+
+> So far I got only frustration. In principle it seems possible to
+> achieve this result because everything is known at compile time and
+> the type-checked should have all the information available to enforce
+> the security constraints.
+>
+> Anyhow, I couldn't write any usable code.
+>
+
+Text below is literate haskell
+
+My solution is based on heterogenous lists and require number of
+language extensions. I'd recomend to read paper "Strongly typed
+heterogeneous collections"[1] which describe this technique in detail
+
+ > {-# LANGUAGE TypeOperators #-}
+ > {-# LANGUAGE OverlappingInstances #-}
+ > {-# LANGUAGE FlexibleInstances #-}
+
+So lets start with definition of type classes for permissions and data
+types which represent such permissions.
+
+ > class PRead  a
+ > class PWrite a
+
+ > data WRead  = WRead
+ > data WWrite = WWrite
+
+Now interestig part begins. We need to compose different permissons. I
+define heterogenous list for that purpose. It's nothing more than a
+nested tuple in disguise.
+
+ > data a ::: b = a ::: b
+ > infixr :::
+
+List has instance for some permission if it has corresponding type in
+it. Please note that I make use of overlapping here. You may need to
+read about it.
+
+Also list need some terminator. WRead is not instance of PRead whereas
+WRead ::: () is. I will use () for that purpose. It's OK since all
+type classes here are closed.
+
+ > instance            PRead (WRead ::: b)
+ > instance PRead b => PRead (a ::: b)
+
+ > instance             PWrite (WWrite ::: b)
+ > instance PWrite b => PWrite (a ::: b)
+
+Here is function for checking that everything is working as expected
+
+ > withR :: PRead a => a -> ()
+ > withR _ = ()
+
+ > withW :: PWrite a => a -> ()
+ > withW _ = ()
+
+ > withWR :: (PRead a, PWrite a) => a -> ()
+ > withWR _ = ()
+
+ > r  = WRead ::: ()
+ > w  = WWrite ::: ()
+ > rw = WRead  ::: WWrite ::: ()
+
+[1] http://homepages.cwi.nl/~ralf/HList/
+
+
+
+P.S. You can use phantom types to propagate type information. I feel
+that carrying undefined is morally dubious practice.
+
+ > data T a = T
+ > newtype Sealed p a = Sealed a
+
+ > unseal :: T p -> Sealed p a -> a
+ > unseal _ (Sealed x) = x
+
+ > admin :: T (WRead  ::: WWrite ::: ())
+ > admin = T
+
+

@@ -1,0 +1,41 @@
+From wren at freegeek.org  Sat Apr 23 06:20:40 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sat, 23 Apr 2011 00:20:40 -0400
+Subject: [Haskell-cafe] naming convention for maybes?
+In-Reply-To: <BANLkTi=ftrj1T4RHbHg0ETJRZMNbLH-uRQ@mail.gmail.com>
+References: <BANLkTi=ftrj1T4RHbHg0ETJRZMNbLH-uRQ@mail.gmail.com>
+Message-ID: <4DB25398.2010205@freegeek.org>
+
+On 4/22/11 1:14 PM, Evan Laforge wrote:
+> Here's a simple issue that's been with me for a while.  As do many
+> people, I use plural variable names for lists, so if a Block as called
+> 'block' then [Block] is 'blocks'.
+>
+> The other pattern that comes up a lot is 'Maybe Block'.  When I have
+> to name it, I call it 'maybe_block', e.g.
+>
+> maybe_block<- lookup something
+> case maybe_block of
+>    Just block ->  ...
+>
+> However, this maybe_ prefix is rather long and unwieldy.  I have
+> considered things like 'm' or 'mb' but they don't suggest Maybe to me.
+>   An 'm' prefix or suffix is already implying 'monad'.
+
+I tend to use 'm', but you're right that it causes confusion about 
+whether mFoo is "monadic foo" or "maybe foo". Perhaps I should start 
+using 'mb' instead...
+
+> If '?' were
+> allowed in identifiers I could use it as a suffix.
+
+I'd love it if '?' were allowed as an identifier suffix, though the 
+lispers will assume it's a predicate rather than a maybe. While we're at 
+it, three cheers for allowing '!' as an identifier suffix for indicating 
+strictness (because the apostrophe has plenty of other uses).
+
+-- 
+Live well,
+~wren
+
+

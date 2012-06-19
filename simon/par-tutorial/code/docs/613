@@ -1,0 +1,33 @@
+From stephen.tetley at gmail.com  Fri Apr 22 12:55:39 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Fri, 22 Apr 2011 11:55:39 +0100
+Subject: [Haskell-cafe] Global memoization in Haskell
+In-Reply-To: <BANLkTin6V_yw7SfrWX_=p9mMbavHO+Oy0Q@mail.gmail.com>
+References: <BANLkTinjxvEKkudVqoeJ7qZwEnvfOow9WQ@mail.gmail.com>
+	<BANLkTin6V_yw7SfrWX_=p9mMbavHO+Oy0Q@mail.gmail.com>
+Message-ID: <BANLkTinuTOU8ogHaApFW=TQHzMAMmzDbeg@mail.gmail.com>
+
+On 22 April 2011 09:50, Albert Zeyer <albzey at googlemail.com> wrote:
+[SNIP]
+> I would be interested in implementing such thing myself as an addon
+> for GHC and doing some benchmarks. Could you maybe:
+> - Give me some hints where to start in GHC? I never really have worked
+> on GHC so far.
+> - Suggest some good benchmark code? I am mostly interesting in how
+> this performs in huge real-world applications, so having some toy
+> benchmark problems would be nice but some more huge benchmark problems
+> would be better. Best would be some pool of both small and big
+> benchmark programs.
+
+Hi Albert
+
+There isn't much value to automatic memoization as people have already
+pointed out on SO - if you believe otherwise, you're probably better
+off proving a case on paper first before attempting to implement it in
+GHC.
+
+Best wishes
+
+Stephen
+
+

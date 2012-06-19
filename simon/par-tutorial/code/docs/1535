@@ -1,0 +1,29 @@
+From chrisdone at googlemail.com  Tue Aug 30 19:15:10 2011
+From: chrisdone at googlemail.com (Christopher Done)
+Date: Tue, 30 Aug 2011 19:15:10 +0200
+Subject: [Haskell-cafe] GHCI Feature Request: Last Successful
+ Compilation State Saved
+In-Reply-To: <945EF39F-3E20-4FE2-A6D3-DD688DF8FBF5@dbp.mm.st>
+References: <CAJrReygxTo_DVA6B4bNozP0WR+_X7ZqQs=ERdHhuXKJNc-3+0A@mail.gmail.com>
+	<CAM_wFVtTiY=gz7aA==5DZ5YEXxZeabECMhrO3FHKw7wmOdacuA@mail.gmail.com>
+	<201108272331.01371.daniel.is.fischer@googlemail.com>
+	<6D6D37B1-79CF-4709-8C86-CFFC8B602360@dbp.mm.st>
+	<CAJrReyhTdrtzSGmPWgXWG9yHGzcKiHL=EnCGuBD3GwAtqHqEWA@mail.gmail.com>
+	<CAAJHNPBWLOcT-uP18DTfp6+c+3pAfpxYN16HiqVN=7MSCn+ENg@mail.gmail.com>
+	<945EF39F-3E20-4FE2-A6D3-DD688DF8FBF5@dbp.mm.st>
+Message-ID: <CAAJHNPCqfR7v1BMx__bvCWLaAz26NVomj3vKoS8+LufMAHNLCg@mail.gmail.com>
+
+On 30 August 2011 17:48, Daniel Patterson <lists.haskell at dbp.mm.st> wrote:
+> Chris, this is amazing! One question - do you have support for tramping in and running ghci remotely (or would that be easy to add)? I primarily develop inside virtual-machines, so while the source code lives where emacs lives, all the libraries are installed inside the virtual-machine (and the source also lives there, of course).
+
+So either
+
+1) You put all your source files on the server, too and then run the
+GHCi process under tramp and access the files via tramp.
+
+2) Sounds like you'd prefer to keep your files local, which, I suppose
+means you want to send code to the server when you trigger a compile?
+
+Could be done, could be done. I'll ponder it.
+
+

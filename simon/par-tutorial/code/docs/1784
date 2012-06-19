@@ -1,0 +1,45 @@
+From alexander.kjeldaas at gmail.com  Fri Dec  9 14:16:23 2011
+From: alexander.kjeldaas at gmail.com (Alexander Kjeldaas)
+Date: Fri, 9 Dec 2011 14:16:23 +0100
+Subject: [Haskell-cafe] Cabal issue
+In-Reply-To: <CAMtV1SGHTbEvS2RY65bzVVwtudvrjt0S51suc_DvPizQgdUBcg@mail.gmail.com>
+References: <CAMtV1SGHTbEvS2RY65bzVVwtudvrjt0S51suc_DvPizQgdUBcg@mail.gmail.com>
+Message-ID: <CAHVSqQd0+E1M1aouDBB3tkbv-PbXN41WjUNZLNqLEd_SRHLLKg@mail.gmail.com>
+
+Not what you asked for, but..
+Although the documentation looks somewhat cryptic, and I have not use it at
+all, a nix + cabal option seems to be in the works.
+
+Search google for "nix haskell".  I am guessing that their Hydra continuous
+build system which is built on top of nix also could do wonders for hackage.
+
+Alexander
+
+On 9 December 2011 12:20, Kevin Jardine <kevinjardine at gmail.com> wrote:
+
+> I understand that this may have been addressed before on this list in some
+> form, so I'll be brief:
+>
+> Had problem with deprecated package, was told my only option was to wipe
+> my Haskell install and start over. Is this true and if so, doesn't this
+> mean that Cabal (or the package management system that it is a part of) is
+> broken?
+>
+> Details here:
+>
+> https://plus.google.com/u/0/111705054912446689620/posts/V1186HGWEap
+>
+> Kevin
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111209/ba0999d7/attachment.htm>
+

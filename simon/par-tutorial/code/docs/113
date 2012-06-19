@@ -1,0 +1,74 @@
+From tako at codejive.org  Mon Apr  4 15:38:17 2011
+From: tako at codejive.org (Tako Schotanus)
+Date: Mon, 4 Apr 2011 15:38:17 +0200
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <cf2cd99d-30fa-c4e3-8a1e-e45c7680c398@me.com>
+References: <BANLkTikgr7xBJj-f6OLPjm+CWRjdhnPQtQ@mail.gmail.com>
+	<cf2cd99d-30fa-c4e3-8a1e-e45c7680c398@me.com>
+Message-ID: <BANLkTimG0JSWFYQSFKSrU0mPEzv_q6Q2HA@mail.gmail.com>
+
+That's not what the official unicode site says in its FAQ:
+http://unicode.org/faq/utf_bom.html#bom4 and
+http://unicode.org/faq/utf_bom.html#bom<http://unicode.org/faq/utf_bom.html#bom4>
+5
+
+Cheers,
+-Tako
+
+
+On Mon, Apr 4, 2011 at 15:18, malcolm.wallace <malcolm.wallace at me.com>wrote:
+
+> BOM is not part of UTF8, because UTF8 is byte-oriented.  But applications
+> should be prepared to read and discard it, because some applications
+> erroneously generate it.
+>
+>
+> Regards,
+>     Malcolm
+>
+>
+> On 04 Apr, 2011,at 02:09 PM, Antoine Latter <aslatter at gmail.com> wrote:
+>
+> On Mon, Apr 4, 2011 at 7:30 AM, Max Bolingbroke
+> <batterseapower at hotmail.com> wrote:
+> > On 4 April 2011 11:34, Daniel Fischer <daniel.is.fischer at googlemail.com>
+> wrote:
+> >> If there's only a single encoding recognised, UTF-8 surely should be the
+> >> one (though perhaps Windows users might disagree, iirc, Windows uses
+> UCS2
+> >> as standard encoding).
+> >
+> > Windows APIs use UTF-16, but the encoding of files (which is the
+> > relevant point here) is almost uniformly UTF-8 - though of course you
+> > can find legacy apps making other choices.
+> >
+>
+> Would we need to specifically allow for a Windows-style leading BOM in
+> UTF-8 documents? I can never remember if it is truly a part of UTF-8
+> or not.
+>
+> > Cheers,
+> > Max
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110404/28a15e5f/attachment.htm>
+

@@ -1,0 +1,94 @@
+From dbanas at banasfamily.net  Sun Aug 28 22:54:09 2011
+From: dbanas at banasfamily.net (David Banas)
+Date: Sun, 28 Aug 2011 13:54:09 -0700
+Subject: [Haskell-cafe] Make shared library - questions
+Message-ID: <1314564849.2064.11.camel@dbanas-eeepc>
+
+
+> I'm trying to compile shared library. This library will use as part of
+> plugin for some program.
+> If I compile library with option -dynamic my library has links for HS
+> libraries like libHSbase-4.2.0.2-ghc6.12.3.so and so on.
+> But program has crashed constantly.
+> 
+> Is it possible to make shared library without -dynamic flag? I want to
+> try
+> to make library without dependencies.
+
+I struggled with this, too.
+Here's my makefile, which is now working:
+
+  1 GCC = gcc
+  2 CFLAGS += -I/usr/lib/ghc-6.12.3/include/ -g -fPIC
+  3 
+  4 HC      = ghc
+  5 HC_OPTS = -cpp $(EXTRA_HC_OPTS)
+  6 EXTRA_HC_OPTS = -package parsec
+  7 HC_LOPTS = -no-hs-main -shared -package parsec
+  8 #GHCOPTS := -prof -auto-all -caf-all
+  9 
+ 10 HSRCS = AMIParse.hs AMIModel.hs ApplicativeParsec.hs
+ 11 CSRCS = ami_model.c ami_test.c
+ 12 SRCS  = $(HSRCS) $(CSRCS)
+ 13 OBJS = AMIParse.o  AMIModel.o  ami_model.o AMIModel_stub.o
+ApplicativeParsec.o
+ 14 
+ 15 .SUFFIXES : .o .hs .hi .lhs .hc .s .c
+ 16 .PHONY : all depend rebuild clean
+ 17 
+ 18 all: ami_test
+ 19 
+ 20 ami_test: ami_test.o libami.so
+ 21         $(HC) -dynamic -o $@ -L. -lami ami_test.o
+ 22 
+ 23 libami.so : $(OBJS)
+ 24         rm -f $@
+ 25         $(HC) -o $@ $(HC_LOPTS) $^
+ 26 
+ 27 depend:
+ 28         $(HC) -M $(HC_OPTS) $(HSRCS)
+ 29 
+ 30 rebuild:
+ 31         $(MAKE) clean
+ 32         $(MAKE) all
+ 33 
+ 34 clean:
+ 35         rm -f *.hi *.o *.out ami_test *.so
+ 36 
+ 37 # Standard suffix rules
+ 38 .o.hi:
+ 39         @:
+ 40 
+ 41 .lhs.o:
+ 42         $(HC) -c $< $(HC_OPTS)
+ 43 
+ 44 .hs.o:
+ 45         $(HC) -c $< $(HC_OPTS)
+ 46 
+ 47 .o-boot.hi-boot:
+ 48         @:
+ 49 
+ 50 .lhs-boot.o-boot:
+ 51         $(HC) -c $< $(HC_OPTS)
+ 52 
+ 53 .hs-boot.o-boot:
+ 54         $(HC) -c $< $(HC_OPTS)
+ 55 
+ 56 # Individual cases
+ 57 AMIModel_stub.o: AMIModel.hs
+ 58         $(HC) -c $< $(HC_OPTS)
+ 59 
+ 60 # DO NOT DELETE: Beginning of Haskell dependencies
+ 61 ApplicativeParsec.o : ApplicativeParsec.hs
+ 62 AMIParse.o : AMIParse.hs
+ 63 AMIParse.o : ApplicativeParsec.hi
+ 64 AMIModel.o : AMIModel.hs
+ 65 AMIModel.o : AMIParse.hi
+ 66 # DO NOT DELETE: End of Haskell dependencies
+
+Good luck!
+-db
+
+
+
+

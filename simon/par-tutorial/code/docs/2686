@@ -1,0 +1,38 @@
+From wren at freegeek.org  Fri Feb  4 03:19:27 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Thu, 03 Feb 2011 21:19:27 -0500
+Subject: [Haskell-cafe] OSX i386/x86 and x86_64 - time to switch
+ supported platforms?
+In-Reply-To: <B34591F6-86C2-471A-9E61-5B609FACF5F3@gmail.com>
+References: <801E1648-B34B-4F93-9BAB-9A05EC77D747@gmail.com>
+	<C9311AB9-65D8-4ACE-B20B-F429039934CB@gmail.com>
+	<4D4B5308.4000009@freegeek.org>
+	<3C972E29-7228-4F5F-84A7-4FC13C938B82@cs.otago.ac.nz>
+	<B34591F6-86C2-471A-9E61-5B609FACF5F3@gmail.com>
+Message-ID: <4D4B622F.8020501@freegeek.org>
+
+Max Cantor wrote:
+> someone? wrote:
+>> I think the original poster is saying that the targeted architecture for OS X support
+>> should be the architecture that OS X assumes by default, and these days that's x86_64.
+
+That sounds reasonable to me. The big caveat is that OSX >= 10.5.8 && < 
+10.6 should still be targeted as well. While non-x86_64 Macs are quite 
+old, OSX 10.6 is still pretty new and so there are a lot of people still 
+using 10.5 (and our department still has a couple boxes running 10.4).
+
+So even though 10.5.8 defaults to 32-bit, it should still be actively 
+supported (as an x86_64 architecture). Just pass the necessary flags to 
+gcc :)
+
+
+>> It would be really nice for x86 mode to be well supported for a while longer.
+
+Yes, it'd be really nice to support 32-bit mode for a while yet, even if 
+it isn't actively being targeted for improvements.
+
+-- 
+Live well,
+~wren
+
+

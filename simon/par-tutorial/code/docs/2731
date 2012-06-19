@@ -1,0 +1,27 @@
+From batterseapower at hotmail.com  Sat Feb  5 09:13:59 2011
+From: batterseapower at hotmail.com (Max Bolingbroke)
+Date: Sat, 5 Feb 2011 08:13:59 +0000
+Subject: [Haskell-cafe] MonadPeelIO instance for monad transformers on
+ top of "forall"
+In-Reply-To: <AANLkTinT+i4dMSzp_xXOJH82oRSF=QWbfQbzRQMq7mPD@mail.gmail.com>
+References: <AANLkTimhhfkBJ3iS6xjgoAnV0dQ5GfG+otb9BDOHp3So@mail.gmail.com>
+	<AANLkTinT+i4dMSzp_xXOJH82oRSF=QWbfQbzRQMq7mPD@mail.gmail.com>
+Message-ID: <AANLkTi=dQV_Efbyy2RrfrtGpv07XqL+H=BYgV3_5gRhw@mail.gmail.com>
+
+On 5 February 2011 02:35, Sebastian Fischer <fischer at nii.ac.jp> wrote:
+> I have not used monad-peel before so please ignore my comment if I am
+> missing something obvious. The documentation mentions that "Instances of
+> MonadPeelIO should be constructed via MonadTransPeel, using peelIO =
+> liftPeel peelIO". I think this would work at least in your simplified
+> example as ReaderT is an instance of MonadTransPeel. Maybe you can take the
+> same route with your actual transformer?
+
+I did indeed try this, but the error message was even more
+incomprehensible than my attempt to lift the MonadPeelIO (ReaderT ()
+IO) instance directly! My reading of the error was that it suffers
+from the same problem (too little polymorphism).
+
+Cheers,
+Max
+
+

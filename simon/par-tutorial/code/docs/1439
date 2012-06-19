@@ -1,0 +1,54 @@
+From cdsmith at gmail.com  Sun Aug 28 18:57:58 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Sun, 28 Aug 2011 10:57:58 -0600
+Subject: [Haskell-cafe] GHC API question
+In-Reply-To: <CAOJG3uBDc+QhdaqS2RvDEeNd3uJx7R=H5fk6DB_PD_C16e+edw@mail.gmail.com>
+References: <1314507463.5744.10.camel@godel> <1314545902.5744.14.camel@godel>
+	<CAOJG3uBDc+QhdaqS2RvDEeNd3uJx7R=H5fk6DB_PD_C16e+edw@mail.gmail.com>
+Message-ID: <1314550678.5744.22.camel@godel>
+
+On Sun, 2011-08-28 at 17:47 +0100, Thomas Schilling wrote:
+> I don't think you can link GHCi with binaries compiled in profiling
+> mode.  You'll have to build an executable.
+
+Okay... sorry to be obtuse, but what exactly does this mean?  I'm not
+using GHCi at all: I *am* in an executable built with profiling info.
+
+I'm doing this:
+
+        dflags <- GHC.getSessionDynFlags
+        let dflags' = dflags {
+            GHC.ghcMode = GHC.CompManager,
+            GHC.ghcLink = GHC.LinkInMemory,
+            GHC.hscTarget = GHC.HscAsm,
+            GHC.optLevel = 2,
+            GHC.safeHaskell = GHC.Sf_Safe,
+            GHC.packageFlags = [GHC.TrustPackage "gloss" ],
+            GHC.log_action = addErrorTo codeErrors
+            }
+        GHC.setSessionDynFlags dflags'
+        target <- GHC.guessTarget filename Nothing
+        GHC.setTargets [target]
+        r      <- fmap GHC.succeeded (GHC.load GHC.LoadAllTargets)
+
+and then if r is true:
+
+        mods <- GHC.getModuleGraph
+        let mainMod = GHC.ms_mod (head mods)
+        Just mi <- GHC.getModuleInfo mainMod
+        let tyThings = GHC.modInfoTyThings mi
+        let var = chooseTopLevel varname tyThings
+        session <- GHC.getSession
+        v       <- GHC.liftIO $ GHC.getHValue session (GHC.varName var)
+        return (unsafeCoerce# v)
+
+Here, I know that chooseTopLevel is working, but the getHValue part only
+works without profiling.  So is this still hopeless, or do I just need
+to find the right additional flags to add to dflags'?
+
+-- 
+Chris Smith
+
+
+
+

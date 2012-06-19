@@ -1,0 +1,47 @@
+From jwlato at gmail.com  Tue Feb  1 12:41:34 2011
+From: jwlato at gmail.com (John Lato)
+Date: Tue, 1 Feb 2011 11:41:34 +0000
+Subject: [Haskell-cafe] Inheritance and Wrappers
+Message-ID: <AANLkTi=3pSG0U+3H+0GU7E3h+0z9nMgbq1YgmKyJauQ5@mail.gmail.com>
+
+>
+> From: Steffen Schuldenzucker <sschuldenzucker at uni-bonn.de>
+>
+> On 01/31/2011 08:58 PM, MattMan wrote:
+> > [...]
+> >
+> > data Wrapper a = Wrap a
+> > instance (Num a) =>  AbGroup (Wrapper a) where
+> >       add (Wrap i) (Wrap j) = Wrap(i+j)
+> >
+> > However, this is clumsy.  Is there something else I can do?  Thanks
+> This is the normal approach. You can do funny things with the
+> OverlappingInstances extension, but it is probably not what you want.
+>
+> The problem is that the compiler only considers the heads of the
+> instance declarations when determining which instance to use for a
+> specific type. So an instance like this:
+>
+>  > instance (Num a) => AbGroup a where ...
+>
+> means: Some type matching 'a' (that is, any type) is an instance of
+> 'AbGroup' if and only if it is an instance of 'Num'.
+>
+
+I would word this differently.  I would say this instance means: Some type
+matching 'a' (that is, any type) is an instance of 'AbGroup'.  It is an
+error to use AbGroup methods if 'a' does not have a Num instance in scope.
+
+The important point is that this declares an AbGroup instance for every
+type, not just types with Num instances.  Which means that this instance is
+much less useful than you would hope.
+
+I would probably use either Henning's approach of separate functions or an
+automatic deriving mechanism.  I've never understood why Haskellers are so
+averse to writing new instances anyway.
+
+John
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110201/0e256838/attachment.htm>
+

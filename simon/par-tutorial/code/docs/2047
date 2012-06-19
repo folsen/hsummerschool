@@ -1,0 +1,46 @@
+From gcrosswhite at gmail.com  Sat Dec 17 06:22:26 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Sat, 17 Dec 2011 15:22:26 +1000
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <CAL3m8eALLyBZ69+uWFMTaiYCkqSNZ+p+2QgT0-YFece-Gxz48w@mail.gmail.com>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+	<CAL3m8eALLyBZ69+uWFMTaiYCkqSNZ+p+2QgT0-YFece-Gxz48w@mail.gmail.com>
+Message-ID: <09BAB2A2-F899-43DF-8386-226905D254EF@gmail.com>
+
+
+On Dec 17, 2011, at 12:51 PM, Matthew Farkas-Dyck wrote:
+
+> By my reason, the instance (Monoid a => Monoid (Maybe a)) is
+> appropriate, since we have another class for inner-type-agnostic
+> choice -- Alternative! (and MonadPlus, but that's essentially the
+> same, and would be if (Functor m => Applicative m => Monad m), as it
+> ought).
+
+Yes, but the problem here is that having different behavior for Alternative, MonadPlus, and Monoid instances is inherently confusing, in the sense that this would almost certainly surprise someone who wasn't already aware of the difference between the instances.
+
+Regardless, even if we keep the current behavior, we *really* *really* need to improve the documentation for the Monoid instance of Maybe.  Currently it reads:
+
+ "Lift a semigroup into Maybe forming a Monoid according to http://en.wikipedia.org/wiki/Monoid: "Any semigroup S may be turned into a monoid simply by adjoining an element e not in S and defining e*e = eand e*s = s = s*e for all s  S." Since there is no "Semigroup" typeclass providing just mappend, we use Monoid instead."
+
+Now, I just happened to have recently spent time studying the properties of Semigroups and Monoids, so this explanation made perfect sense to me and was a beautiful way of explaining what is going on.  A typical user, however --- which would have included me roughly one month ago :-) --- would have looked at this and just seen goobledegook which reinforced their perception that Haskell is first and foremost a playground for mathematicians.  It would be much, much better for the documentation to be something like this:
+
+============================================================
+
+The Monoid instance for Maybe has the property that, for all x and y, (Just x) wins when combined (on either side) with Nothing values, and when (Just x) is combined with (Just y) then the result is (Just (x `mappend` y)).
+
+For the more mathematically inclined, you may think of this as being equivalent to the standard practice of turning an arbitrary semigroup into a monoid by simply adding a new element to the semigroup to serve as the identity element, where in this case the identity element is the Nothing value of Maybe;  unfortunately, since the base libraries do not come with a Semigroup typeclass, this process is expressed in code as lifting from the Monoid typeclass.
+
+NOTE THAT the behavior of the Monoid instance of Maybe is DIFFERENT from the behavior of the MonadPlus and Alternative instance of Maybe.  For the latter two typeclasses, the behavior is that when (Just x) is combined with (Just y) the x and y values themselves are not combined but rather y is discarded so (Just x) simply wins;  put another way, for all x and z, we have that (Just x) `mappend` z is *always* equal to (Just x), regardless of whether z is equal to Nothing or whether it is equal to (Just y) for some y.  For this reason, unlike the instance for Monoid, the instances for these MonadPlus and Alternative place no additional constraints on the type lifted into Maybe.
+
+============================================================
+
+Incidentally, would people be interested in me sending a patch to update the documentation to be more along these lines?  (After applying your feedback, of course!)  If so, could you point me to where I could learn about the process for doing so?
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111217/ce6a6cc9/attachment.htm>
+

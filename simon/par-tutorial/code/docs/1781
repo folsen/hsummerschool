@@ -1,0 +1,30 @@
+From allbery.b at gmail.com  Fri Dec  9 11:37:32 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Fri, 9 Dec 2011 05:37:32 -0500
+Subject: [Haskell-cafe] Why doesn't this work? (palindrome :: IO)
+In-Reply-To: <CACqaG6yx73ctBZ4XX8dqucZ7mt=Fi6Nk2paPMFrYmAju5wBdqQ@mail.gmail.com>
+References: <BAY154-W299CF92BF320D6FE352A08A4B80@phx.gbl>
+	<CAKFCL4URW+=cq7MzWkj=-jJ-eO4_wdHDtAjiDTA=a2-+HX07Jw@mail.gmail.com>
+	<CAO9Q0tW78wLVRnsz4JofQps5UqbAa6k-zb72hCfJV3DZ1J=UFQ@mail.gmail.com>
+	<CAKFCL4XiSN55t5abyHghGD2sCSkEvywSBui0Pn3XLyaRO4-zvg@mail.gmail.com>
+	<CACqaG6wDeUbpW7zkMF1NqzbYXBU2fXsayzgW6Tv47xL_OTjxww@mail.gmail.com>
+	<CAKFCL4Wp-h+s8Bw6aj=JWOm+jLLjkqO-AO=OB7+es_=erTrqrA@mail.gmail.com>
+	<CACqaG6yx73ctBZ4XX8dqucZ7mt=Fi6Nk2paPMFrYmAju5wBdqQ@mail.gmail.com>
+Message-ID: <CAKFCL4XnQjo-djkec6HvHmzLGLCTxT-KnEzHpGqo8jY=_+EzFw@mail.gmail.com>
+
+On Fri, Dec 9, 2011 at 05:16, Yves Par?s <limestrael at gmail.com> wrote:
+
+> I agree with all that, but in *this *special case, I think that
+>
+
+I should also note that the OP mentioned using if, but was
+surprised/confused by the behavior of case, which is why that's what we've
+been focusing on.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111209/b449b108/attachment.htm>
+

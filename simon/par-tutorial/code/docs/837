@@ -1,0 +1,21 @@
+From cdsmith at gmail.com  Thu Apr 28 17:43:36 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Thu, 28 Apr 2011 09:43:36 -0600
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <20110428153638.GA2875@elliptictech.com>
+References: <20110428150502.GA2484@elliptictech.com>
+	<c1af5782-ef43-e377-e7d4-a401588b4cbd@me.com>
+	<20110428153638.GA2875@elliptictech.com>
+Message-ID: <BANLkTimX0zG95Znau=9MD4nUnC4A2qbn9g@mail.gmail.com>
+
+There seems to be some misunderstanding here.  I didn't suggest you share a
+separate build directory between repositories... I suggested you have a
+single repository that is the one you are currently building in, and that
+you synchronize it with various other repositories as you swap "branches".
+That process should touch the modification times on the files that are
+changed, such that your partial builds are as trustworthy as partial builds
+are likely to be (that is, not very... but passable).
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110428/e751622c/attachment.htm>
+

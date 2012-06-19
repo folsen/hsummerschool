@@ -1,0 +1,35 @@
+From ivan.miljenovic at gmail.com  Tue Feb  8 00:30:29 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Tue, 8 Feb 2011 10:30:29 +1100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTinkP3V6AopOA+CrwkeQCWRMHtTzKzro3VOWxhiS@mail.gmail.com>
+References: <AANLkTinkP3V6AopOA+CrwkeQCWRMHtTzKzro3VOWxhiS@mail.gmail.com>
+Message-ID: <AANLkTikgiT9ujJi5PpLxr4-E8aWyOfVRog_yaDPs2MHC@mail.gmail.com>
+
+On 8 February 2011 09:57, John Lato <jwlato at gmail.com> wrote:
+> I think the real problem we have with container classes has a lot more to do
+> with what we would use them for.? That is, Haskell already has Monoid,
+> Foldable and Traversable.? These three (especially Foldable) cover nearly
+> everything OOP programmers would expect out of generic container operations.
+
+That was what my rewrite was going to be using.  The problem, however,
+is two-fold:
+
+* Dealing with types of kind * vs kind * -> *
+
+* Dealing with types of kind * -> * that have a restriction on the
+type parameter (e.g. Set).
+
+I was basing my approach on Ganesh's rmonad [1] library whilst taking
+into account the Functor => Applicative => Monad hierarchy when
+re-defining the classes, but the approach was very quickly becoming
+unwieldy.
+
+[1]: http://hackage.haskell.org/package/rmonad
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

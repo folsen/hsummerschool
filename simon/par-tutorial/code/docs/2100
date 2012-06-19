@@ -1,0 +1,33 @@
+From ddssff at gmail.com  Mon Dec 19 22:44:25 2011
+From: ddssff at gmail.com (David Fox)
+Date: Mon, 19 Dec 2011 13:44:25 -0800
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <1324322427.2233.6.camel@fuzxxl>
+References: <1324322427.2233.6.camel@fuzxxl>
+Message-ID: <CAJN_RF75kmWuphhyKzsSTiuQmxj5=LqEfcrgGRHyF-ang-yg7Q@mail.gmail.com>
+
+After eight years I'm still discovering why various decisions made in
+Haskell are right.
+
+On Mon, Dec 19, 2011 at 11:20 AM, Robert Clausecker <fuzxxl at gmail.com>wrote:
+
+> Image you would create your own language with a paradigm similar to
+> Haskell or have to chance to change Haskell without the need to keep any
+> compatibility. What stuff would you add to your language, what stuff
+> would you remove and what problems would you solve completely different?
+>
+> Thanks in advance for all answers, yours
+>
+>        Robert Clausecker
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111219/d1840677/attachment.htm>
+

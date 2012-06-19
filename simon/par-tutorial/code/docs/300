@@ -1,0 +1,56 @@
+From giba.dmb at gmail.com  Mon Apr 11 14:41:06 2011
+From: giba.dmb at gmail.com (Gilberto Garcia)
+Date: Mon, 11 Apr 2011 09:41:06 -0300
+Subject: [Haskell-cafe] how to optmize this code?
+In-Reply-To: <BANLkTi==Vw5bALOPoVoLz9-U+eEO7zBdWA@mail.gmail.com>
+References: <AANLkTi=dv3Of9GA5jmAzo09HG7J1jZxobRerr+v9QRZ_@mail.gmail.com>
+	<BANLkTi==Vw5bALOPoVoLz9-U+eEO7zBdWA@mail.gmail.com>
+Message-ID: <BANLkTimOAkZaNG1C44rqSOmiLDn3MMfMuQ@mail.gmail.com>
+
+Hi Guys,
+
+Thanks all for the suggestions, I have certainly improved my knowledge.
+I made a blog post to show all the possible solution a problem can
+have. you can check it out at katacoder.blogspot.com
+
+Giba
+
+On Sun, Apr 10, 2011 at 3:35 AM, Johan Tibell <johan.tibell at gmail.com> wrote:
+> Hi Gilberto,
+>
+> On Wed, Mar 30, 2011 at 4:39 PM, Gilberto Garcia <giba.dmb at gmail.com> wrote:
+>> fkSum :: Int -> [Int] -> Int
+>> fkSum a [] = 0
+>> fkSum a (b) = foldl (+) 0 (filter (\x -> isMultiple x b) [1..a])
+>>
+>> isMultiple :: Int -> [Int] -> Bool
+>> isMultiple a [] = False
+>> isMultiple a (x:xs) = if (mod a x == 0) then True else isMultiple a xs
+>
+> You can make both these functions a little bit more efficient by
+> making them strict in the first argument, like so:
+>
+> {-# LANGUAGE BangPatterns #-}
+>
+> fkSum :: Int -> [Int] -> Int
+> fkSum !a [] = 0
+> fkSum a (b) = foldl (+) 0 (filter (\x -> isMultiple x b) [1..a])
+>
+> isMultiple :: Int -> [Int] -> Bool
+> isMultiple !a [] = False
+> isMultiple a (x:xs) = if (mod a x == 0) then True else isMultiple a xs
+>
+> This change ensures that the first argument is always evaluated.
+> Before `fkSum undefined []` would return 0, now it results in an
+> error. The upside is that when a function is strict in an argument,
+> GHC can use a more efficient calling convention for the function. In
+> this case it means that instead of passing the first argument as a
+> pointer to a machine integer, it can pass the machine integer directly
+> (in a register).
+>
+> This optimization is particularly worthwhile for accumulator parameters.
+>
+> Johan
+>
+
+

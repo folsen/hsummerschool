@@ -1,0 +1,42 @@
+From dagitj at gmail.com  Thu Dec  8 02:35:37 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Wed, 7 Dec 2011 17:35:37 -0800
+Subject: [Haskell-cafe] terminateProcess leaves zombie processes around
+In-Reply-To: <CAKFCL4UMRz2ig9YA8o4FQRCgEsgOdu8RTVKUiMc0ae3egN5OyA@mail.gmail.com>
+References: <CAN2DD_Ht0gt5p6AOzXB+yMALG=iKsA=Pmq91_amn4+qH7t59SA@mail.gmail.com>
+	<CAKFCL4UMRz2ig9YA8o4FQRCgEsgOdu8RTVKUiMc0ae3egN5OyA@mail.gmail.com>
+Message-ID: <CAJ-DSyyzivrXm3PjoZw6GVML6gLSeN_pxybT6JQnKwVX2mYkpw@mail.gmail.com>
+
+On Wed, Dec 7, 2011 at 7:19 AM, Brandon Allbery <allbery.b at gmail.com> wrote:
+> On Wed, Dec 7, 2011 at 06:47, Dan Ros?n <danr at student.gu.se> wrote:
+>>
+>> I'm using Haskell to run a lot of instances of an Automated Thorem Prover,
+>> eprover. I have pasted a smaller version of my program at
+>> http://hpaste.org/54954. It runs eprover sequentially on all input files,
+>> with a timeout of 100ms. Unfortunately, it leaves a lot of zombie processes
+>> around, probably due to the fact that terminateProcess fails to terminate
+>> them, even though eprover terminates on SIGTERM.
+>
+>
+> They *do* terminate; a zombie is a dead process waiting for its parent to
+> reap it with waitForProcess. ?There's also some POSIX stuff you can do to
+> have them auto-reaped, but doing that correctly and portably is somewhat
+> painful.
+
+You can use a double fork to make this portable and not painful.  It's
+just that you have to fork twice, which can be expensive in some
+cases.
+
+Explanation here: http://stackoverflow.com/a/881434/5113
+
+Here is a Haskell example from xmonad:
+http://hackage.haskell.org/packages/archive/xmonad/0.7/doc/html/src/XMonad-Core.html#doubleFork
+
+If you're planning to send a SIGTERM later, then double forking may
+make that harder as I think you'd have to communicate the PID up one
+level.
+
+I hope that helps,
+Jason
+
+

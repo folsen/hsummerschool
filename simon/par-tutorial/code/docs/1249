@@ -1,0 +1,30 @@
+From tom at zwizwa.be  Sat Aug 20 22:41:52 2011
+From: tom at zwizwa.be (Tom Schouten)
+Date: Sat, 20 Aug 2011 22:41:52 +0200
+Subject: [Haskell-cafe] Existential question
+In-Reply-To: <CA+XKtKjN9w83x6mbcM++MZC11jk=YcUanvNuJtAwdWv7VQO+=w@mail.gmail.com>
+References: <4E4C536F.2040800@zwizwa.be>
+	<CA+XKtKjN9w83x6mbcM++MZC11jk=YcUanvNuJtAwdWv7VQO+=w@mail.gmail.com>
+Message-ID: <4E501C10.5000200@zwizwa.be>
+
+On 08/19/2011 08:50 AM, Ryan Ingram wrote:
+>
+> ki1 :: KI () Int
+> ki1 = KI @Int (\() s -> (s+1, s))
+>
+> ki2 :: KI () Int
+> ki2 = KI @() (\() () -> ((), 0))
+>
+> f :: Bool -> KI () Int
+> f x = if x then ki1 else ki2
+>
+> iso f = KI ?? ??
+>
+> The problem is that we have multiple possible internal state types!
+
+Aha!
+Nice counterexample.
+Thanks :)
+
+
+

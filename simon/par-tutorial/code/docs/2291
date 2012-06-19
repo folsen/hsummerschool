@@ -1,0 +1,45 @@
+From ekcburak at hotmail.com  Mon Dec 26 16:46:50 2011
+From: ekcburak at hotmail.com (Burak Ekici)
+Date: Mon, 26 Dec 2011 15:46:50 +0000
+Subject: [Haskell-cafe] parListChunk problem
+Message-ID: <COL123-W5426FBBA5985EA8184AC03CDAE0@phx.gbl>
+
+
+Hi there,
+ 
+I was not able to parallelize the below code by "parListChunk" 
+strategy. Actually, code works fine without ant mistake in the
+result but no improvement in the performance handled.
+
+Threadscope demonstrates that parallelization happens after 
+the sequential run of the program which is meaningless. In short,
+parListChunk is not working as intended. As far as I know, it should
+divide an arbitrarily given list into its chunks and then apply the given 
+function to each sub-list (chunk) in parallel with reducing the evaluation 
+of each element of each chunk into head normal form, if you use 
+"rdeepseq" as the input strategy. 
+
+In the below code, I want to divide the given list into 2000 chunks and then
+apply "ersa" function to each chunk in parallel with evaluating each element
+into its head normal form in serial internally. However, as I wrote, it first runs 
+in serial after than the parallel scenario I admire to happen at the beginning
+happens.
+
+How can I solve this problem?
+
+Thanks in advance,
+Burak.
+
+
+ersa :: RSAPublicKey -> [Integer] -> [Integer]
+ersa (PUB n e) (x:xs) = ersa (PUB n e) (xs) ++ [expm n x e]
+ersa (PUB n e) []     = []
+ 
+splitToEnc :: RSAPublicKey -> [Integer] -> [Integer]
+splitToEnc (PUB n e) []     = []
+splitToEnc (PUB n e) (x:xs) =  (ersa (PUB n e) (x:xs)) `using` parListChunk 2000 rdeepseq
+ 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111226/1abbe33e/attachment.htm>
+

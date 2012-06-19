@@ -1,0 +1,25 @@
+From conrad at metadecks.org  Mon Apr 25 08:47:29 2011
+From: conrad at metadecks.org (Conrad Parker)
+Date: Mon, 25 Apr 2011 15:47:29 +0900
+Subject: [Haskell-cafe] ANNOUNCE: iteratee-compress 0.2.0.0
+In-Reply-To: <1303554570.3911.8.camel@localhost.localdomain>
+References: <1303554570.3911.8.camel@localhost.localdomain>
+Message-ID: <BANLkTinK2XuJGNdu+2bqo=a_fMjHwwn7OA@mail.gmail.com>
+
+On 23 April 2011 19:29, Maciej Piechotka <uzytkownik2 at gmail.com> wrote:
+> Iteratee-compress provides compressing and decompressing enumerators
+> including flushing (using John Lato's implementation). Currently only
+> gzip and bzip is provided but LZMA is planned.
+>
+> Changes from previous version:
+> ?- Add BZip support
+>
+
+Cool :)
+
+I notice the haddocks on hackage have not been generated; would this
+be due to libbz2-dev missing on the hackage server?
+
+Conrad.
+
+

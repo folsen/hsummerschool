@@ -1,0 +1,53 @@
+From spam at scientician.net  Fri Dec 30 19:47:18 2011
+From: spam at scientician.net (Bardur Arantsson)
+Date: Fri, 30 Dec 2011 19:47:18 +0100
+Subject: [Haskell-cafe] (...) Random generators
+In-Reply-To: <4EFDDAE9.7030101@unicaen.fr>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org> <4EFCC3CE.7050006@blueyonder.co.uk>
+	<451591325188516@web70.yandex.ru> <4EFCCFFD.9080908@unicaen.fr>
+	<jdk5r8$koe$1@dough.gmane.org> <4EFDDAE9.7030101@unicaen.fr>
+Message-ID: <jdl0vu$59c$1@dough.gmane.org>
+
+On 12/30/2011 04:38 PM, Jerzy Karczmarczuk wrote:
+ > Bardur Arantsson:
+ >> Random streams are not referentially transparent, though, AFAICT...?
+ >>
+ >> Either way this thread has gone on long enough, let's not prolong it
+ >> needlessly with this side discussion.
+ >
+ > Sure.
+ > But the discussion on randomness is /per se/ interesting, especially in
+ > a functional setting.
+ >
+ > Anyway, nobody can convince Steve Horne. Perhaps as an "unintentional"
+ > side-effect...
+ >
+ > But random streams, or rather pseudo-random streals (infinite lazy
+ > lists, as the example I gave, the `iterate` of `next`) are as
+ > referentially transparent as any Haskell data. Really.
+ >
+
+Of course -- if you just have a starting seed and the rest of the 
+sequence is known from there. I was thinking of e.g. those "periodic 
+re-initialization" ways of doing RNG.
+
+ > I *NEVER* used
+ > "true" random numbers, even to initialize a generator, since in the
+ > simulation business it is essential that you can repeat the sequence on
+ > some other platform, with some other parameters, etc.
+ >
+
+I've heard this a lot from physicists -- of course if you run a 
+simulation reproducibility can be extremely important (e.g. for 
+double-checking computations across different machines). However, if 
+you're doing crypto it may not be so desirable :).
+
+Anyway, I'm out of this thread too :).
+
+Cheers,
+
+
+

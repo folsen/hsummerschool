@@ -1,0 +1,225 @@
+From dstcruz at gmail.com  Thu Dec  8 06:11:01 2011
+From: dstcruz at gmail.com (Daniel Santa Cruz)
+Date: Thu, 8 Dec 2011 00:11:01 -0500
+Subject: [Haskell-cafe] Haskell Weekly News: Issue 210
+Message-ID: <CA+V-9CzG9QJtmWmpb6Vv9mRPnxNVjc0--bLfvqA0igPJYCnh6w@mail.gmail.com>
+
+Welcome to issue 210 of the HWN, a newsletter covering developments in
+the Haskell community. This release covers the week of November 27 to
+December 3, 2011.
+
+You can find the HTML version at:
+http://contemplatecode.blogspot.com/2011/12/haskell-weekly-news-issue-210.html
+
+Announcements
+
+   Heinrich Hordegen announced a tentative 2012 meeting schedule for
+   Munich Haskell group.
+   [1] http://goo.gl/JrnP6
+
+New and Updated Projects
+
+   * data-timeout (Mikhail Vorozhtsov) Allows one to specify time
+     units for timeouts and convert between them.
+     [2] http://goo.gl/fbfGM
+
+   * Netwire (Ertugrul Soylemez; 3.0.0) Major API change.
+     [3] http://goo.gl/8hPwS
+
+   * monad-control (Bas van Dijk; 0.3) New and improved API.
+     [4] http://goo.gl/so3s9
+
+Quotes of the Week
+
+   * Jafet: They're not nasty; their niceness is just distributed over
+     more people
+
+   * copumpkin: U NEED MOANAD
+
+   * xplat: i have a feeling that trying to write an interesting
+     dependently-typed program in Shen at any time in the near future
+     would be like trying to host a holiday dinner starting with an
+     empty lot, 2x4s, a stack of window panes, some cables and wiring
+     boxes, sheets of drywall, disconnected appliances, roof shingles,
+     rolls of insulation and bags of concrete
+
+   * Axman6: {-# PRAGMA ThisShitNeedsMoarFast #-}
+
+Top Reddit Stories
+
+   * Name Your Type Variables!
+     Domain: amateurtopologist.com, Score: 71, Comments: 38
+     On Reddit: [5] http://goo.gl/I2uny
+     Original: [6] http://goo.gl/yRbmO
+
+   * Insane Haskell Professor on Lambda Calculus. Wait for it...
+     Domain: youtube.com, Score: 66, Comments: 17
+     On Reddit: [7] http://goo.gl/uDQJS
+     Original: [8] http://goo.gl/IauHk
+
+   * criterion 0.6 produces shiny new performance reports
+     Domain: bos.github.com, Score: 63, Comments: 8
+     On Reddit: [9] http://goo.gl/F2K76
+     Original: [10] http://goo.gl/x720h
+
+   * [commit: base] master: Add traceStack :: String -> a -> a
+     Domain: haskell.org, Score: 48, Comments: 5
+     On Reddit: [11] http://goo.gl/HCbf2
+     Original: [12] http://goo.gl/JzO3O
+
+   * Elm: functional reactive web-programming (compiles to html, css, js).
+Just added reactive values, basic canvas support, and new interactive
+examples.
+     Domain: elm-lang.org, Score: 45, Comments: 19
+     On Reddit: [13] http://goo.gl/mKS9a
+     Original: [14] http://goo.gl/ASt27
+
+   * Snap 0.7 released
+     Domain: snapframework.com, Score: 41, Comments: 1
+     On Reddit: [15] http://goo.gl/R3A8Y
+     Original: [16] http://goo.gl/SVgXy
+
+   * Haskell Communities and Activities Report - November 2011 edition
+     Domain: haskell.org, Score: 35, Comments: 0
+     On Reddit: [17] http://goo.gl/X82AK
+     Original: [18] http://goo.gl/CGKAr
+
+   * "fix' f = f (fix' f)" vs. "fix f = let x = f x in x"
+     Domain: groups.google.com, Score: 33, Comments: 15
+     On Reddit: [19] http://goo.gl/vadtO
+     Original: [20] http://goo.gl/SQSFL
+
+   * Announcing cabal-src: solve (some of) cabal dependency hell
+     Domain: yesodweb.com, Score: 32, Comments: 15
+     On Reddit: [21] http://goo.gl/PIB4S
+     Original: [22] http://goo.gl/00LZz
+
+   * aeson 0.4: easier, faster, nicer
+     Domain: github.com, Score: 31, Comments: 18
+     On Reddit: [23] http://goo.gl/G1J5A
+     Original: [24] http://goo.gl/DQ4bc
+
+   * Package authors: Please use Packdeps!
+     Domain: yesodweb.com, Score: 24, Comments: 10
+     On Reddit: [25] http://goo.gl/bLYvt
+     Original: [26] http://goo.gl/fNh9n
+
+   * Slides from my guest lecture at Stanford
+     Domain: blog.johantibell.com, Score: 22, Comments: 14
+     On Reddit: [27] http://goo.gl/ITFkN
+     Original: [28] http://goo.gl/4w1tK
+
+Top StackOverflow Questions
+
+   * How to write a Haskell function that takes a variadic function as an
+argument
+     votes: 28, answers: 1
+     Read on SO: [29] http://goo.gl/JqZ3H
+
+   * Functional lenses
+     votes: 18, answers: 2
+     Read on SO: [30] http://goo.gl/Qn2Ff
+
+   * Haskell : An example of a Foldable which is not a Functor?
+     votes: 17, answers: 2
+     Read on SO: [31] http://goo.gl/42lSo
+
+   * How does IncoherentInstances work?
+     votes: 17, answers: 1
+     Read on SO: [32] http://goo.gl/O1Ha4
+
+   * Minimum specification for Haskell library type classes?
+     votes: 16, answers: 2
+     Read on SO: [33] http://goo.gl/L7mO6
+
+   * Expressive and composable error types
+     votes: 16, answers: 1
+     Read on SO: [34] http://goo.gl/vkoZb
+
+   * Distributed Haskell state of the art in 2011?
+     votes: 16, answers: 2
+     Read on SO: [35] http://goo.gl/mx0kd
+
+   * Is it possible to implement liftM2 in Scala?
+     votes: 15, answers: 1
+     Read on SO: [36] http://goo.gl/p6TDl
+
+   * Are Haskell FlexibleInstances a stable extension to the language?
+     votes: 15, answers: 1
+     Read on SO: [37] http://goo.gl/sQc37
+
+   * Is Milner let polymorphism a rank 2 feature?
+     votes: 13, answers: 4
+     Read on SO: [38] http://goo.gl/kOcnW
+
+Until next time,
+Daniel Santa Cruz
+
+References
+
+   1. http://comments.gmane.org/gmane.comp.lang.haskell.cafe/94240
+   2. http://comments.gmane.org/gmane.comp.lang.haskell.libraries/16691
+   3. http://comments.gmane.org/gmane.comp.lang.haskell.cafe/94245
+   4. http://comments.gmane.org/gmane.comp.lang.haskell.general/19038
+   5.
+http://www.amateurtopologist.com/blog/2011/10/11/name-your-type-variables/
+   6.
+http://www.reddit.com/r/haskell/comments/mxz3k/name_your_type_variables/
+   7. http://www.youtube.com/watch?v=5TMojC0Nb6A
+   8.
+http://www.reddit.com/r/haskell/comments/mw094/insane_haskell_professor_on_lambda_calculus_wait/
+   9. http://bos.github.com/criterion/
+  10.
+http://www.reddit.com/r/haskell/comments/mx8vw/criterion_06_produces_shiny_new_performance/
+  11.
+http://www.haskell.org/pipermail/cvs-libraries/2011-November/014698.html
+  12.
+http://www.reddit.com/r/haskell/comments/muq40/commit_base_master_add_tracestack_string_a_a/
+  13. http://elm-lang.org/Elm.elm
+  14.
+http://www.reddit.com/r/haskell/comments/mwbvj/elm_functional_reactive_webprogramming_compiles/
+  15. http://snapframework.com/blog/2011/12/01/snap-0.7-released
+  16. http://www.reddit.com/r/haskell/comments/mwx4t/snap_07_released/
+  17. http://www.haskell.org/communities/11-2011/html/report.html
+  18.
+http://www.reddit.com/r/haskell/comments/mzbia/haskell_communities_and_activities_report/
+  19.
+http://groups.google.com/group/stanford-11au-cs240h/browse_thread/thread/41005683f4479eeb
+  20.
+http://www.reddit.com/r/haskell/comments/mt7nt/fix_f_f_fix_f_vs_fix_f_let_x_f_x_in_x/
+  21. http://www.yesodweb.com/blog/2011/11/cabal-src
+  22.
+http://www.reddit.com/r/haskell/comments/mrz9p/announcing_cabalsrc_solve_some_of_cabal/
+  23. https://github.com/bos/aeson/blob/0.4.0.0/release-notes.markdown
+  24.
+http://www.reddit.com/r/haskell/comments/mvtmk/aeson_04_easier_faster_nicer/
+  25. http://www.yesodweb.com/blog/2011/12/please-use-packdeps
+  26.
+http://www.reddit.com/r/haskell/comments/mvp4w/package_authors_please_use_packdeps/
+  27.
+http://blog.johantibell.com/2011/11/slides-from-my-guest-lecture-at.html
+  28.
+http://www.reddit.com/r/haskell/comments/mvoqd/slides_from_my_guest_lecture_at_stanford/
+  29.
+http://stackoverflow.com/questions/8353845/how-to-write-a-haskell-function-that-takes-a-variadic-function-as-an-argument
+  30. http://stackoverflow.com/questions/8307370/functional-lenses
+  31.
+http://stackoverflow.com/questions/8359115/haskell-an-example-of-a-foldable-which-is-not-a-functor
+  32.
+http://stackoverflow.com/questions/8371499/how-does-incoherentinstances-work
+  33.
+http://stackoverflow.com/questions/8320039/minimum-specification-for-haskell-library-type-classes
+  34.
+http://stackoverflow.com/questions/8320855/expressive-and-composable-error-types
+  35.
+http://stackoverflow.com/questions/8362998/distributed-haskell-state-of-the-art-in-2011
+  36.
+http://stackoverflow.com/questions/8366518/is-it-possible-to-implement-liftm2-in-scala
+  37.
+http://stackoverflow.com/questions/8367423/are-haskell-flexibleinstances-a-stable-extension-to-the-language
+  38.
+http://stackoverflow.com/questions/8296695/is-milner-let-polymorphism-a-rank-2-feature
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/fb01afb7/attachment.htm>
+

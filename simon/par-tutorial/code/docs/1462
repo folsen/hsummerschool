@@ -1,0 +1,24 @@
+From fischer at nii.ac.jp  Mon Aug 29 05:00:19 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Mon, 29 Aug 2011 12:00:19 +0900
+Subject: [Haskell-cafe] Pointed, but not Applicative
+In-Reply-To: <j3d40s$nb1$1@dough.gmane.org>
+References: <j3d40s$nb1$1@dough.gmane.org>
+Message-ID: <CALoEywNocmymRvbdW6Tv5-JvKeMBQ=gY=p6Za+pZxU+0K-m+dg@mail.gmail.com>
+
+On Sun, Aug 28, 2011 at 12:41 AM, S?nke Hahn <shahn at cs.tu-berlin.de> wrote:
+> I was wondering which
+> type could be an instance of Pointed, but not of Applicative. But I can't
+> think of one. Any ideas?
+
+Functional lists:
+
+    type FList a = [a] -> [a]
+
+they have a Monoid instance for empty and append, a "point" function
+for singletons but Applicative or Monad cannot be defined without
+converting back and forth to ordinary lists.
+
+Sebastian
+
+

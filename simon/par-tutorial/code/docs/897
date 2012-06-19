@@ -1,0 +1,40 @@
+From patrick.browne at dit.ie  Mon Aug  1 00:48:14 2011
+From: patrick.browne at dit.ie (Patrick Browne)
+Date: Sun, 31 Jul 2011 22:48:14 -0000
+Subject: [Haskell-cafe] logic and types
+Message-ID: <4E5EBA42.5060805@dit.ie>
+
+Hi,
+Below are some questions about the logical interpretation of types and
+type classes.
+
+Thanks,
+Pat
+
+module J where
+type Id = String
+type Position = Integer
+data Person = Person Id Position deriving Show
+
+-- Is this an axiom at type level?
+class Pos a  where
+ getPos :: a -> Position
+-- The :type command says
+-- forall a. (Pos a) => a -> Position
+-- How do I write this in logic? (e.g. implies, and, or, etc)
+-- What exactly is being asserted about the type variable and/or about
+the class?
+-- I am not sure of the respective roles of => and -> in a logical context
+
+
+-- Is the following a fact at type level, class level or both?
+instance Pos Person where
+  getPos (Person i p) = p
+
+-- Is it the evaluation or the type checking that provides a proof of
+type correctness?
+-- getPos(Person "1" 2)
+
+This message has been scanned for content and viruses by the DIT Information Services E-Mail Scanning Service, and is believed to be clean. http://www.dit.ie
+
+

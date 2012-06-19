@@ -1,0 +1,104 @@
+From daniil.elovkov at gmail.com  Sat Apr 30 09:55:36 2011
+From: daniil.elovkov at gmail.com (Daniil Elovkov)
+Date: Sat, 30 Apr 2011 11:55:36 +0400
+Subject: [Haskell-cafe] versioning of Haskell packages
+In-Reply-To: <BANLkTikbWaCt2GDDR++jnC_T5E3NWQn29Q@mail.gmail.com>
+References: <4DBB3633.2000200@gmail.com>
+	<BANLkTikbWaCt2GDDR++jnC_T5E3NWQn29Q@mail.gmail.com>
+Message-ID: <4DBBC078.6030308@gmail.com>
+
+On 30.04.2011 5:06, Rogan Creswick wrote:
+> On Fri, Apr 29, 2011 at 3:05 PM, Daniil Elovkov
+> <daniil.elovkov at gmail.com>  wrote:
+>> Hello list
+>>
+>> I have an idea on versioning of Haskell packages and a small question about
+>> release model of Haskell Platform. Since the latter is shorter let's start
+>> with it.
+>>
+>> So, what is the release model of Haskell Platform? Is it released every N
+>> months and frozen at that point? Or some intermediate package/compiler
+>> updates can make the new version to appear out of schedule?
+>>
+>> Now, about package versioning. Haskell packages are flourishing and evolving
+>> at a high speed. Packages depend on other package and they evolve
+>> asynchronously. In result it is easy to end up in need of multiple versions
+>> of the same package in one program or maybe stumble upon other
+>> conflicts/problems. I'm expressing myself a little vaguely because I don't
+>> have a good example in my head right now.
+>>
+>> However, the idea is to maintain not just multi-digit version names that
+>> don't carry any semantics except that 1.1.3 is later than 1.1.2, but also
+>> somehow describe compatibility between versions.
+>>
+>> This way, even if the package A has jumped from 1.0 to 1.5 and the dependent
+>> package B has been stagnant all this time (and B depends on A 1.0), if we
+>> have information that 1.5 is compatible with 1.0, then we can safely use A
+>> 1.5 while building B. Or we could use whatever version of A is found in the
+>> system as long as its compatible with A 1.0 that B depends on.
+>
+> I think the PVP (Package Versioning Policy) covers a lot of what
+> you're discussing, but I may misunderstand:
+>
+> http://www.haskell.org/haskellwiki/Package_versioning_policy
+>
+> We *do* still have some trouble maintaining / enforcing the PVP in
+> general, and there are a few things that it doesn't cover (I don't
+> believe exception behavior is covered, for example, although I'd argue
+> that throwing more exceptions than a previous version introduces a
+> substantial API change. Anyhow, that's a different rant. ;).
+>
+> Finer granularity would be great -- if it can be done autonomously.
+>
+> I think that raising awareness of the PVP and refining the tools to
+> check for necessary version bumps would be a great step in the right
+> direction.
+>
+
+Mmm, thanks for the link, it makes sense. Version numbers that encode 
+whether interface has changed or not.
+
+But I would think it's useful to decouple version numbers and 
+specification of compatibility relation, that is not to encode it in 
+versions themselves but sepcify separately. Version numbers are simple 
+things. But compatibilty specification language can become more and more 
+sophisticated with time, versions numbers will immediately become 
+unsuitable for it.
+
+You have mentioned exceptions. That's quite an advanced example. But why 
+not. In some very distant future, we may want to be able to say 'This 
+new version is compatible with the previous one but it throws more 
+exceptions'. Or 'the function f has the same interface but has become 
+more strict'.
+
+Alright, those 2 examples are a bit too sophisticated maybe. But what I 
+envisioned in the first place is this. In my program/package I specify 
+the fact that I successfully built it with the package X version 
+A.B.C.D.E.F and I don't care about the versioning policies of X. When 
+the package X evolves to any version, as long as the author of X says 
+that it's compatible with the version I used it's safe to use the newer 
+version.
+
+The key thing is not trying to predict the future but only telling that 
+I built it with this version and it works.
+
+Also I think that fixing A.B digits for package interface may not always 
+be a good idea. If the interface is quite simple and very stable but the 
+implementaion evolves from beta to a finalised high-quality production 
+code, then it would be desirable to reflect the fact in the version.
+
+And the last argument in favor of the separate compatibility 
+specification language would be that it should be somewhat easier to 
+force package authors to provide compatibilty information than to follow 
+versioning policy. Compatibilty data would sit in a separate cabal 
+headers/sections and cabal could complain if they are omitted. Of 
+course, the author could write some stubs there and not bother about it.
+
+Also, at the bottom of the PVP wiki page there's a link to a blog post 
+'Eternal compatibility'. I'd think it's quite a radical approach to 
+include every older version of modules in every new release of the package.
+
+-- 
+Daniil Elovkov
+
+

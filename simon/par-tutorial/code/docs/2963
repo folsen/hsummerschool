@@ -1,0 +1,32 @@
+From ckkashyap at gmail.com  Sat Feb 12 15:08:31 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Sat, 12 Feb 2011 19:38:31 +0530
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <AANLkTinRwfq-hikWx=U-1hZvvyEwG=U4oL_ZypiayRye@mail.gmail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+	<AANLkTinRwfq-hikWx=U-1hZvvyEwG=U4oL_ZypiayRye@mail.gmail.com>
+Message-ID: <AANLkTi=sA-Mkfgd1e0kbij8P=w+e3DyTgqs5SYXsyXQ2@mail.gmail.com>
+
+>
+> many of the subtleties encountered in the process.  I am often 100%
+> sure of the correctness of my refactors.
+>
+>
+While I have an intuitive understanding of what you mean about the
+correctness of refactoring ... I personally feel much more comfortable
+refactoring Haskell code ... as in - as long as I apease the compiler,
+things work correctly!!!
+This is certainly not true in case of imperative languages ... In all my
+work experience, I've always found folks and myself very very uncomfortable
+making changes to existing code ... which in my opinion contributes to
+software bloat!
+
+Anyway, how can one go about explaining to an imperative programmer with no
+FP exposure - what aspect of Haskell makes it easy to refactor?
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110212/de0383c8/attachment.htm>
+

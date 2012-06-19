@@ -1,0 +1,28 @@
+From ivansichfreitas at gmail.com  Thu Dec 15 20:27:00 2011
+From: ivansichfreitas at gmail.com (Ivan S. Freitas)
+Date: Thu, 15 Dec 2011 17:27:00 -0200
+Subject: [Haskell-cafe] indentation blues
+In-Reply-To: <CACbaDy699DUq_763j+Q0fcRboTRu_Ngu62YkbKW_Guv5Pv8NVg@mail.gmail.com>
+References: <CAFrFfuGkeHEMfsitZoyaGWz=RZvuaUc8KKGK57dFdJL-kj_43w@mail.gmail.com>
+	<0d62b1a11095f003e5019c4740a5fcfd@haxaire.org>
+	<CAJ+TeocYJPrPSTEujPFsfNR0=jCFZieqjPwh8KRgShzoK97w3Q@mail.gmail.com>
+	<CACbaDy699DUq_763j+Q0fcRboTRu_Ngu62YkbKW_Guv5Pv8NVg@mail.gmail.com>
+Message-ID: <CAG2tFJwevgV1Jg5HG5OkArZ1jvdkHwSKXzF27UWkThvaPY4-7w@mail.gmail.com>
+
+For vim, there is a indent script, I don't remember exactly where I
+found it but it's on my github repo:
+https://github.com/ISF/dotfiles/blob/master/.vim/indent/haskell.vim
+
+(And don't forget the haskellmode for vim)
+
+Also, I've used the haskell mode of emacs with vimpulse to emulate vim
+motions. It is pretty good, indentation works out-of-the-box (except
+that you can't use indent-region), and the inferior handling works
+well. I still prefer vim to use with haskell, specially when editing
+my xmonad configuration.
+
+-- 
+Ivan Sichmann Freitas
+GNU/Linux user #509059
+
+

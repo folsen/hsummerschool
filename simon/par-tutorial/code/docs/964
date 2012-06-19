@@ -1,0 +1,16 @@
+From ok at cs.otago.ac.nz  Mon Aug  8 03:58:18 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Mon, 8 Aug 2011 13:58:18 +1200
+Subject: [Haskell-cafe] Declarative configuration languages?
+Message-ID: <5897AB6F-0A17-45FB-9E07-4BF4E9424AC2@cs.otago.ac.nz>
+
+A colleague just asked me
+	I'm trying to kick off some work into middleware for configuration of large-scale,
+	distributed systems.  Have you come across any elegant, declarative configuration
+	languages used for this sort of job?
+
+I've found a couple of papers, but I've never _used_ any of the systems.
+Any recommendations?
+
+
+

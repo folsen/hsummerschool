@@ -1,0 +1,51 @@
+From anders.cj.persson at gmail.com  Fri Apr  1 08:32:28 2011
+From: anders.cj.persson at gmail.com (Anders Persson)
+Date: Fri, 1 Apr 2011 08:32:28 +0200
+Subject: [Haskell-cafe] A maintenance command of Haskell cabal packages
+In-Reply-To: <20110401.143814.613498438030484319.kazu@iij.ad.jp>
+References: <AANLkTikP-KNNvJzK0se-qtmh0-RCCJKyDh6XCgr4=Bjc@mail.gmail.com>
+	<20110401.111905.240769933.kazu@iij.ad.jp>
+	<AANLkTi=dG8OV9XzB9KkcZOkdE-azR-b6MrnLbiGBbyEE@mail.gmail.com>
+	<20110401.143814.613498438030484319.kazu@iij.ad.jp>
+Message-ID: <E80D4054-CDB2-4619-9112-BDE1A49505CF@gmail.com>
+
+https://github.com/creswick/cabal-dev/issues#issue/15
+
+My workaround was to create a link:
+ln -s ~/Library/Haskell/repo-cache ~/.cabal/packages
+Cheers,
+Anders
+
+On Apr 1, 2011, at 7:38 AM, Kazu Yamamoto (????) wrote:
+
+> Hello,
+> 
+>>>> cabal-dev is a wrapper around cabal. It creates the directory
+>>>> "cabal-dev" in your current directory when you run commands.
+>>> 
+>>> Yes, I know. But when I typed "cabal-devel install" on a package
+>>> directory, nothing happened.
+>> 
+>> Can you give a specific example? Surely *something* happened :)
+> 
+> I guess this happens with Haskell Platform for MacOS only. In this
+> environment, .cabal/config specifies as follows:
+> 
+> 	remote-repo-cache: /Users/<user>/Library/Haskell/repo-cache
+> 
+> But cabal-dev refers to /Users/<user>/.cabal/packages. After
+> "cabal-dev update" to create it, everything becomes fine to me.
+> 
+> Thank you.
+> 
+> --Kazu
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110401/93d10d73/attachment.htm>
+

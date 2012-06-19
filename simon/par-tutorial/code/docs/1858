@@ -1,0 +1,41 @@
+From gale at sefer.org  Mon Dec 12 11:37:28 2011
+From: gale at sefer.org (Yitzchak Gale)
+Date: Mon, 12 Dec 2011 12:37:28 +0200
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+Message-ID: <CAOrUaLap26sWmxfXEVdJUc_qJ2QEq1t+p1TNwH-JLx_=UXfTxw@mail.gmail.com>
+
+Gregory Crosswhite wrote:
+>> could we split the some/many methods out from Alternative? ?They simply
+>> don't make sense except in a subset of possible Alternatives --- in most
+>> cases they just result in an infinite loop...
+
+That is a very good point. I would be in favor of such a
+change, even though it would be somewhat disruptive.
+
+>> I suspect that there are not more than a couple of packages
+>> out there that make active use of the some/many instances of Alternative;
+>> it is really only parser packages that need some/many, and users most
+>> likely use the versions included with the packages themselves rather than
+>> the Alternative version.
+
+No, I have *tons* of modules that contain parser code and import those.
+I suspect many others do too. But I am prepared to bite the bullet;
+this is a real wart.
+
+>> It thus makes sense for there to be some subclass of Alternative
+>> called something like "Consumptive" that contains these methods.
+
+Brandon Allbery wrote:
+> "Parsive"
+
+I like that better.
+
+But let's not get stuck on bikeshedding. I'm in favor
+no matter what name is chosen.
+
+Thanks,
+Yitz
+
+

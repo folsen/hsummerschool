@@ -1,0 +1,20 @@
+From batterseapower at hotmail.com  Thu Aug 11 08:51:51 2011
+From: batterseapower at hotmail.com (Max Bolingbroke)
+Date: Thu, 11 Aug 2011 07:51:51 +0100
+Subject: [Haskell-cafe] ANNOUNCE: Chell: A quiet test runner (low-output
+ alternative to test-framework)
+In-Reply-To: <CAL1ky9q1t3KnboogKho2ZvsFF1BYF0RhzNZPu66p=ZTngcoB1A@mail.gmail.com>
+References: <CAL1ky9q1t3KnboogKho2ZvsFF1BYF0RhzNZPu66p=ZTngcoB1A@mail.gmail.com>
+Message-ID: <CAGXzfB4wE7nOpoD6S29jC-_ku5j9EUYEbUp1Xn47P9a_8uX_Kw@mail.gmail.com>
+
+On 11 August 2011 05:17, John Millikin <jmillikin at gmail.com> wrote:
+> This is just a quick package I whipped up out of frustration with
+> test-framework scrolling an error message out of sight, for the
+> millionth time.
+
+Patches to make test-framework less noisy (either by default or with a
+flag) will be gratefully accepted, if anyone wants to give it a go :-)
+
+Max
+
+

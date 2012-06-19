@@ -1,0 +1,37 @@
+From felipe.lessa at gmail.com  Mon Apr 18 12:06:05 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Mon, 18 Apr 2011 07:06:05 -0300
+Subject: [Haskell-cafe] How to contact OpenGL package maintainer (where
+	is Sven?)
+In-Reply-To: <1303111814.2482.6.camel@kirk>
+References: <AANLkTinoGT8qa10+ZO6PEG5EOeMm=r3Cf2Rpeoe7tEts@mail.gmail.com>
+	<BANLkTikBKDkFLViTqt+UoixiX9gUQi_Gqg@mail.gmail.com>
+	<1303055619.2613.27.camel@kirk>
+	<BANLkTimKH=YLSMYhHDOTSx8xiUEYAs=PrA@mail.gmail.com>
+	<1303062686.2613.34.camel@kirk>
+	<BANLkTi=EstBKYvO1xM+=r37U4XyTn9Yz0Q@mail.gmail.com>
+	<1303111814.2482.6.camel@kirk>
+Message-ID: <BANLkTikYEEYGyXmd7c7pnxqZaS8ZmkiwKw@mail.gmail.com>
+
+On Mon, Apr 18, 2011 at 4:30 AM, Joachim Breitner
+<mail at joachim-breitner.de> wrote:
+> Also, the policies that make life a bit more harder for us are also the
+> policies that make Debian a good distribution: E.g. manually creating a
+> copyright file describing who all has copyright on the files, and what
+> license the files are under ? .cabal has fields for that, but
+> unfortunately, they very often do not reflect the reality of the .hs
+> files. Or the other one, requiring that an upload of a source package is
+> accompanied by a manually built and signed binary package ensures that
+> the maintainer actually checked that the package builds and hopefully
+> has tested it.
+
+Is it a good solution to have a Debian package containing many Cabal
+packages?  For example, 'opengl-utils' with all OpenGL-related
+packages?  Maybe this could be a good compromise.
+
+Cheers,
+
+--
+Felipe.
+
+

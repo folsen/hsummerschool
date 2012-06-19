@@ -1,0 +1,41 @@
+From tim at timcowlishaw.co.uk  Thu Aug  4 09:16:51 2011
+From: tim at timcowlishaw.co.uk (Tim Cowlishaw)
+Date: Thu, 4 Aug 2011 08:16:51 +0100
+Subject: [Haskell-cafe] Deriving instances with GADTs
+In-Reply-To: <CA+ZFbn9820HP3G_TT=_ybQkPhk3nvAG71z7Dzskv9zi-OQO4-A@mail.gmail.com>
+References: <CAMugUeLnbiV51r1VhsoePzBxBGb_qrBj286zF1=KDkh3WA_DaQ@mail.gmail.com>
+	<CA+ZFbn9820HP3G_TT=_ybQkPhk3nvAG71z7Dzskv9zi-OQO4-A@mail.gmail.com>
+Message-ID: <CAMugUeKJ=a9A5PYGEzo7WN-ksOB3ufkj4NuWYrOROdE=3O1DKw@mail.gmail.com>
+
+2011/8/4 Jos? Pedro Magalh?es <jpm at cs.uu.nl>:
+
+> Here you seem to be using newtype deriving in particular, which behaves
+> differently from standard deriving. Compiling with -ddump-deriv will show
+> you the instances GHC is generating, which can help in debugging.
+
+Aah - this is very useful, thanks!
+
+> Note however that deriving instances for GADTs is not trivial, in general.
+> In particular, you should not assume that GHC knows that `s` can only be
+> instantiated with `Buy` and `Sell` since (because we lack a proper kind
+> system) nothing prevents you from later using, say, `Order Int Limit`
+> somewhere.
+
+Aah - this is something like what I suspected (The type signature for
+OrderListLevel doesn't preclude eg OrderListLevel Int which would need
+an instance of (Eq|Show) for Order Int Limit, which does not exist.
+
+> I describe the issue in more detail in the paper:
+>>
+>> Jos? Pedro Magalh?es and Johan Jeuring. Generic Programming for Indexed
+>> Datatypes.
+>> Color pdf: http://dreixel.net/research/pdf/gpid.pdf
+>> Greyscale pdf: http://dreixel.net/research/pdf/gpid_nocolor.pdf
+
+Oh, brilliant, thank you! I'll take a look now.
+
+Thanks,
+
+Tim
+
+

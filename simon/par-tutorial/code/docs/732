@@ -1,0 +1,46 @@
+From apfelmus at quantentunnel.de  Tue Apr 26 09:29:32 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Tue, 26 Apr 2011 09:29:32 +0200
+Subject: [Haskell-cafe] Inputs to classic FRP:
+	unsafeInterleaveIO/unsafePerformIO
+In-Reply-To: <BANLkTi=XMKwyeK8VK5kyYJRuP1JS4RZS4g@mail.gmail.com>
+References: <BANLkTi=XMKwyeK8VK5kyYJRuP1JS4RZS4g@mail.gmail.com>
+Message-ID: <ip5s8s$j07$1@dough.gmane.org>
+
+Edward Amsden wrote:
+> As far as I can tell, with classic FRP implementations (those which
+> use behaviors as a first-class abstraction), the only way to create a
+> behavior or
+> event based on some external input (for instance keypresses or
+> microphone input) is to do something with unsafePerformIO or
+> unsafeInterleaveIO. A behavior is a value, which when evaluated at a
+> specific time would have to either block its evaluation until input
+> could be read, or check the input at that particular time.
+> 
+> Is there any other way of implementing external behaviors besides that?
+
+Yes, there are other ways, see for example the implementation here: 
+http://tinyurl.com/frp-automaton . This is essentially a pure variant of 
+Ryan's implementation.
+
+My implementation has a serious problem, namely that sharing is lost. I 
+think this is the case for Ryan's implementation as well. The state of a 
+behavior will be duplicated and updates multiple times. This can be 
+fixed by observing sharing, of course.
+
+I'm currently working on a push-driven FRP implementation. (Though I'm 
+getting second thoughts as to whether the small increase in efficiency 
+is worth the implementation cost.) See also
+
+http://apfelmus.nfshost.com/blog/2011/04/24-frp-push-driven-sharing.html
+
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

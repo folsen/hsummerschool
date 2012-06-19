@@ -1,0 +1,24 @@
+From ozgurakgun at gmail.com  Fri Dec  2 17:21:43 2011
+From: ozgurakgun at gmail.com (Ozgur Akgun)
+Date: Fri, 2 Dec 2011 16:21:43 +0000
+Subject: [Haskell-cafe] cabal install --hyperlink-source ?
+In-Reply-To: <4ED8F93A.1070001@imn.htwk-leipzig.de>
+References: <4ED8F93A.1070001@imn.htwk-leipzig.de>
+Message-ID: <CALzazPDv+6pNWRwzbftnqbkHiB+Z+72qnaxRepBYGg6H7wspLw@mail.gmail.com>
+
+On 2 December 2011 16:13, Johannes Waldmann <waldmann at imn.htwk-leipzig.de>wrote:
+
+> but I don't see how to pass options
+> from "cabal install" to  "cabal haddock" (e.g., --hyperlink-source)
+>
+
+As it seems, it is not possible.
+
+http://stackoverflow.com/questions/2472630/enable-hyperlink-source-for-cabal-install
+
+--
+Ozgur
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111202/7682f48d/attachment.htm>
+

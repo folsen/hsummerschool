@@ -1,0 +1,41 @@
+From bos at serpentine.com  Wed Aug 17 20:39:12 2011
+From: bos at serpentine.com (Bryan O'Sullivan)
+Date: Wed, 17 Aug 2011 11:39:12 -0700
+Subject: [Haskell-cafe] why is Random in System?
+In-Reply-To: <CACYs5AYHyKZaeAZ3jzr8fZBWRMPC83VJNDdQByfVJmL31bcBqQ@mail.gmail.com>
+References: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+	<A320995A-2DDA-4147-B804-098623C26914@deepbondi.net>
+	<CAKFCL4UtZAKrw-KazZtmCSi6cDZmb1mtm9of4E=0Ugr_9GXXvA@mail.gmail.com>
+	<20110817104607.43c9ae37@angst.streitmacht.eu>
+	<CACYs5AYvvWeO1Xe2TMGR=gGnYonw8dsmg3m++NALY9-nDJEupQ@mail.gmail.com>
+	<20110817182609.6ea45f32@angst.streitmacht.eu>
+	<CACYs5AYHyKZaeAZ3jzr8fZBWRMPC83VJNDdQByfVJmL31bcBqQ@mail.gmail.com>
+Message-ID: <CACw0niLTT0O=7etqtjRcWqwbJYxrvkSi-uayJd=SHuyAs0VxoQ@mail.gmail.com>
+
+On Wed, Aug 17, 2011 at 11:10 AM, Ryan Newton <rrnewton at gmail.com> wrote:
+
+> The problem with Mersenne twister is that it doesn't split well.  The main
+> reason for crypto prng in this package would not be to advertise to people
+> that "System.Random can be used for security-related apps" *but to make
+> splitting reasonably safe*.
+
+
+The more fundamental problem is that splitting is neither well understood
+nor generally safe, and as such it should not be in the basic Random class.
+A more sensible API would have a Random class that lacks a split operation,
+and a SplittableRandom class that permits it, as you mention later in your
+message. Most current PRNGs could then be instances of Random, but not
+SplittableRandom.
+
+And I think we need splitting, especially as more Haskell programs become
+> parallel.
+
+
+I do not agree here, I'm afraid.
+
+By the way, my mwc-random package is at least as fast as mersenne-twister,
+has smaller state, and is pure Haskell.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110817/93f528ec/attachment.htm>
+

@@ -1,0 +1,30 @@
+From bos at serpentine.com  Mon Dec 12 18:06:05 2011
+From: bos at serpentine.com (Bryan O'Sullivan)
+Date: Mon, 12 Dec 2011 09:06:05 -0800
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+Message-ID: <CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+
+On Sun, Dec 11, 2011 at 9:18 PM, Gregory Crosswhite
+<gcrosswhite at gmail.com>wrote:
+
+>
+> It is only recently that I have been able to grok what some and many are
+> even about (I think), and they seem to only make sense in cases where
+> executing the Alternative action results in a portion of some input being
+> consumed or not consumed.  "some v" means "consume at least one v and
+> return the list of items consumed or fail", and "many v" means "consume
+> zero or more v and return the list of items consumed or the empty list of
+> none are consume".
+>
+
+There is absolutely no implication of consuming anything in the definitions
+of many or some. This is how they happen to behave when used in the context
+of some parsing libraries, but that's all. If many or some always go into
+an infinite loop for some Alternative instance, then I suspect that the
+instance itself is either broken or shouldn't exist.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111212/702748fe/attachment.htm>
+

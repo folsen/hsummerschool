@@ -1,0 +1,47 @@
+From stevenleecollins at gmail.com  Tue Feb  1 06:07:43 2011
+From: stevenleecollins at gmail.com (Steven Collins)
+Date: Tue, 1 Feb 2011 00:07:43 -0500
+Subject: [Haskell-cafe] Automatically move cursor focus in split window in
+ haskell-mode in emacs on load (C-c C-l) command?
+Message-ID: <AANLkTikAgd=YBCYF4dbuPf2wt=j=hr5CBoXH=KYABSEU@mail.gmail.com>
+
+I'm using haskell-mode-2.8.0 and emacs 22.2.1 on Ubuntu 9.10
+
+The following elisp code works for me to change the focus to the GHCi buffer
+(window) after the C-c C-l command in Haskell Mode.  Try this in your .emacs
+file.
+
+
+(defadvice inferior-haskell-load-file (after change-focus-after-load)
+  "Change focus to GHCi window after C-c C-l command"
+  (other-window 1))
+
+(ad-activate 'inferior-haskell-load-file)
+
+I have this after the haskell mode configuration section of my .emacs file.
+
+Remeber to go to the Emacs-lisp menu and 'Byte-compile and Load' after
+adding the above code to your .emacs file.
+
+  To understand what the elisp code is doing you can go to the help menu in
+emacs, then drill down via 'Search Documentation ' , then 'Find any object
+by name'.  Which will put you in the mini-buffer.  Type in either defadvice
+or ad-activate to see the documentation for these functions. If you are a
+little rusty on elisp this documentation may be a little hard to understand.
+
+  Basically this is what's happening.  The function that is bound to the C-c
+C-l command is inferior-haskell-load-file.  Which is an elisp function name
+and part of the elisp haskell mode code.  The defadvice is kind of
+overloading this function.   We are telling emacs that 'after' executing the
+'inferior-haskell-load-file' function,  execute our new function who's name
+is 'change-focus-after-load'.  The body of our function is just one
+expression (other-window 1).
+  This is the kind of stuff that makes it easy to modify (hack)
+the functionality of emacs to do what you want.
+
+I hope this helps and enjoy hacking in Haskell
+Steven
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110201/a834bdfe/attachment.htm>
+

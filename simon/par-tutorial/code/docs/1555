@@ -1,0 +1,421 @@
+From eric at well-typed.com  Wed Aug 31 09:39:42 2011
+From: eric at well-typed.com (Eric Y. Kow)
+Date: Wed, 31 Aug 2011 08:39:42 +0100
+Subject: [Haskell-cafe] Parallel Haskell Digest 5
+Message-ID: <20110831073942.GA24751@dewdrop.local>
+
+Parallel Haskell Digest
+=======================
+Edition 5
+2011-08-31
+
+Hello Haskellers!
+
+Eric here, reprising my role as Parallel Haskell Digester.  Many thanks
+to Nick for good stewardship of the digest and nice new directions for
+the future.  This month we have Erlang PhDs (and a postdoc), new
+partners, two Monad Reader articles in progress and some strategies.  As
+usual, this digest is made possible by the [Parallel GHC Project][n0].
+
+News
+----------------------------------------------------------------------
+[Scalable Erlang PostDoc and 2 PhD Studentships][n1] (8 Aug)
+
+What, Erlang?! Yes, you are reading the right digest.  If you're
+generally into parallelism and concurrency in functional programming
+languages, you may be especially interested to know about this
+announcement from Phil Trinder.
+
+> RELEASE project - A High-level Paradigm for Reliable Large-scale
+> Server Software - is funded by the EU Framework 7 programme for 36
+> months from October 2011. Its aim is to scale the radical
+> concurrency-oriented programming paradigm to build reliable
+> general-purpose software, such as server-based systems, on massively
+> parallel machines (100 000 cores).
+
+Word of the Month
+----------------------------------------------------------------------
+Last month, we had `par` and `pseq` as our twin words of the month.
+Let's pursue this little train of parallel thought; our next word the
+month is *strategy*.  Strategies have been around since the 1993
+paper [Algorithm + Strategy = Parallelism][asp]; that's before even
+we started using monads in Haskell! They've recently been revamped 
+in Simon Marlow's [Seq no More][seq-nm] paper, and it's this version
+of strategies that we'll be exploring here.
+
+Strategies are built on top of the `par` and `pseq` primitives we saw in
+the [last digest][phd4].  They provide a nice way to express the often
+complicated logic we need to make the best use of parallelism in our
+code. Use of strategies can also help to make parallel code easier to
+read and maintain because they allow us to more cleanly separate the
+core logic from our code that which pertains to our use of parallelism.
+
+Before delving into strategies, let's take a small notational detour
+by introducing the `Eval` monad.  Suppose we wanted a parallel version
+of the `map` function, something that would apply a function to each
+item of a list.  Using the `par` and `pseq` from the last digest, we
+might express this function
+
+    parMap :: (a -> b) -> [a] -> [b]
+    parMap f [] = []
+    parMap f (a:as) = b `par` bs `pseq` (b:bs)
+     where
+      b  = f a
+      bs = parMap f as
+
+If we look carefully at the code we can observe that there is something
+inherently sequential in the way we have expressed this parallel
+computation: first spark off `f a` then recurse to the tail of the list,
+and finally cons.
+
+The `Eval` monad builds off the insight that expressing parallelism is
+fundamentally (perhaps counterintuitively) about ordering things.
+Monads are well-suited for expressing ordering relationships, and so
+they have been been pressed to work for expressing parallel computation
+as well.
+
+    data Eval a
+    instance Monad Eval
+
+    runEval :: Eval a -> a
+    rpar :: a -> Eval a
+    rseq :: a -> Eval a
+
+`Eval` is just a strict identity monad, with `rpar` and `rseq` as
+counterparts to `par` and `pseq`.  We use `Eval` to compose sequences
+of parallel computation, which we extract the results of by using the
+`runEval` function.  If you're not familiar with monads, you can get
+away with just treating `Eval` as new notation, or rather, borrowed
+notation, the same that we use IO, parser combinator libraries,
+QuickCheck and a plethora of other useful monads.  It's worth noting
+also that despite appearances, we are still in purely functional
+territory -- no IO here!  -- with the notion of sequencing being
+limited to controlling parallelism and evaluation depth.
+
+To make use of `Eval` for our `parMap` function, we could write
+a version like the below.  It introduces a change of type, from
+returning `[b]` to `Eval [b]`.  In the general case, we could
+just use the `runEval` function to get our result back,
+but we are not baking it into `parMap` because we would typically
+want to use then function within a greater `Eval` context anyway.
+
+    parMap :: (a -> b) -> [a] -> Eval [b]
+    parMap f [] = return []
+    parMap f (a:as) = do
+      b  <- rpar  (f a)
+      bs <- parMap f as
+      return (b:bs)
+
+As before, this function captures the basic idea of its sequential
+counterpart `map`: apply function, recurse to tail, cons new head to new
+tail.  This is a passable parallel map, but there are still two things
+which are unfortunate about it.  First, we have repeated the
+implementation of map, not a big deal for such a small function but a
+potential maintenance problem for more complex code.  Second, we have
+only captured one sort of parallel evaluation firing off sparks for all
+the cons cells, but in practice getting parallelism right requires some
+often careful tuning to get the right level of granularity and account
+for dependencies.  For instance, what if instead of doing each cell in
+parallel, we wanted to bunch them up into chunks so as to minimise the
+coordination overhead?  What we need is a way to express ideas about
+running code in parallel (such as ?break into chunks and run each chunk
+simultaneously"), preferably avoid duplicating existing code or
+otherwise making it more complicated than it needs to be.
+
+This is where strategies come in.  A strategy is just a function that
+turns some data into an `Eval` sequence.  We've already encountered two
+strategies above, `rpar` which sparks off a parallel evaluation, and
+`rseq` which evaluates its argument to weak head normal form.  Many more
+strategies possible particularly when they are custom designed for
+specific data types.  Also, if we have a strategy, we can imagine
+wanting to use it.  This we capture with `using`, which applies the
+strategy function and runs the resulting sequence.  Parallel evaluation
+aside, you can almost pretty much think of <code>x `using` s</code> as
+being semequivalent to as `id x` but you'll want to watch out for a
+couple of caveats described the tutorial [Parallel and Concurrent
+Programming in Haskell][smtutorial].
+
+    Strategy a = a -> Eval a
+
+    using :: a -> Strategy a -> a
+    x `using` s = runEval (s x)
+
+Now that we've put a name to the idea of building `Eval` sequences,
+we can think about trying to generalise our `parMap`.  One way would
+be to write a higher-order strategy.  This `parList` function is
+almost identical to `parMap`, except that instead of applying any
+function to a list we limit ourselves to just applying some strategy
+on it.  
+
+    parList :: Strategy a -> Strategy [a]
+    parList strat []     = return []
+    parList strat (x:xs) = do
+      x'  <- rpar (x `using` strat)
+      xs' <- parList xs strat
+      return (x':xs')
+
+We can then define `parMap` by parameterising `parList` with `rseq`
+to get a parallel list strategy which we then apply to `map f xs`.
+(Food for thought: why `parList rseq` instead of `parList r0`?
+Reply to the Haskell-Cafe posting if you think you know why!)
+
+    parMap :: (a -> b) -> [a] -> Eval [b]
+    parMap f xs = map f xs `using` parList rseq
+
+We have now achieved two things.  First we've improve the modularity
+of our code by separating algorithm (`map f xs`) from coordination
+(`parList rseq`).  Notice how we are now reusing map instead of
+reimplementing it, and notice as well how we now have a reusable
+`parList` that we can use apply to any situation that involves
+a list.  Second, by isolating the algorithm from the coordination code
+we have given ourselves a lot more flexibility to switch strategies.  To
+bunch our list up into coarser-grained chunks, for example, we could
+just swap out `parList` with `parListChunk` 
+
+    parMap :: (a -> b) -> [a] -> Eval [b]
+    parMap f xs = map f xs `using` parListChunk 100 rseq
+
+In this word of the month, we have very lightly touched on the idea
+of strategies as a compositional way of expressing parallel
+coordination and improving the modularity of our code.  To make use of
+strategies, we basically need to be aware of two or three things:
+
+1. How to apply a strategy: <code>foo `using` s</code> evaluates the
+   value `foo` with strategy `s`
+
+2. Useful strategies from the library: the basics are `r0` which does
+   nothing, `rseq` which evaluates its argument to weak head normal form,
+   `rdeepseq` which evaluates it all the way down to normal form, and
+   `rpar` which sparks the value for parallel evaluation.  Be sure to check
+   out [Control.Parallel.Strategies][straddock] for more sophisticated 
+   strategies such as `parListChunk`, which divides the list into chunks
+   and applies a strategy to each one of the chunks in parallel.
+
+3. (Optionally) How to build strategies, the simplest way being
+   to use the `dot` function to compose two strategies sequentially.
+   If you implement your own strategies instead of combining those
+   from the library, you may want to have a look at the [Seq no
+   More][seq-nm] for a little safety note.
+
+If you want to know more about strategies, the first place to look is
+probably the tutorial [Parallel and Concurrent Programming in
+Haskell][smtutorial] (there is a nice example in there, implementing a
+parallel K-means algorithm) and followed by the
+Control.Parallel.Strategies API.  You could also just dive in and give
+it a try on some of your own code.  It's sometimes just a matter of
+grabbing a strategy and `using` it.
+
+Parallel GHC Project Update
+----------------------------------------------------------------------
+The Parallel GHC Project is an MSR-funded project to push forward
+the use of parallel Haskell in the real world. The aim is to demonstrate 
+that parallel Haskell can be employed successfully in industrial projects.
+
+Speaking of industrial projects, our recent search for a new project
+partner has been successful!  In fact, we will be welcoming two new
+partners to the project, the research and development group of Spanish
+telecoms company Telef?nica, and VETT a UK-based payment processing
+company.  We are excited to be working with the teams at Telef?nica I+D
+and VETT.  There may be some Cloud Haskell in our future; stay tuned for
+more details about the respective partner projects.
+
+Also coming up are a couple of Monad Reader articles featuring work from
+the Parallel GHC project.
+
+Kazu Yamamoto has been writing an article for the upcoming Monad Reader
+special edition on parallelism and concurrency.  He'll be revisiting
+Mighttpd (pronounced "Mighty"), a high-performance web server written in
+Haskell in late 2009. Since Mighttpd came out the Haskell web
+programming landscape has evolved considerably, with the release of GHC
+7 and development of several web application frameworks.  The new
+mighttpd takes advantage of GHC 7's new IO manager as well as the Yesod
+Web Application Interface (WAI) and the HTTP engine Warp.  Do check out
+his article when it comes out for proof that "we can implement a high
+performance web server in Haskell, which is comparable to highly tuned
+web servers written in C", or if you can't wait, try his [most recent
+slides][mighttpd] on the topic.
+
+Bernie Pope and Dmitry Astapov have been working on an article about the
+Haskell MPI binding developed in the context of this project.  You can
+find out more about the binding on its [Hackage][hackage-mpi] and
+[GitHub][github-mpi] pages.
+
+Blogs, Papers, and Packages
+----------------------------------------------------------------------
+*   [Data Parallel Haskell and Repa for GHC 7.2.1][b1] (11 Aug)
+  
+    Ben Lippmeier has updated the Data Parallel Haskell libraries on Hackage to go
+    with the newly released GHC 7.2.1. While DPH is still a technology preview,
+    this new version is significantly more robust than previous ones.
+    If nested data parallelism isn't what you're after, Ben has also updated 
+    the Repa library for parallel arrays.  See [PH Digest 3][phd3] for more
+    details.  
+  
+*   [thespian: Lightweight Erlang-style Actors for Haskell][b2] (18 Aug)
+
+    Alex Constandache update Hackage with this intriguing library.
+    I wrote to Alex asking about about the relationship with Cloud
+    Haskell.  It turns out Alex had somewhat similar goals in mind
+    and may be focusing on Cloud Haskell instead.
+  
+*   [dbus-core 0.9][b3] (23 Jul)
+
+    John Millikin announced "the first significant release to dbus-core in
+    a while" with significant improvements to both the API and
+    implementation.  In particular, dbus-client has been merged into
+    dbus-core.  See the announcement for more details then a quick code
+    sample showing the new simple API in action.  For the curious,
+    D-Bus is an inter-process communication mechanism used in desktop
+    environments like Gnome.
+  
+Mailing list discussions
+---------------------------------------------------------------------
+*   [How to ensure code executes in the context of a specific OS thread?][m1] (4 Jul)
+  
+    Jason Dagit has found the correct handling of GUI events on OS X
+    requires checking for events and responding to them from the main
+    thread. He  wanted to know if such thing was even possible on the
+    threaded RTS, particularly so that he could use the library from GHCi.
+    David Pollak has a [bit of code][hs-ipad]  that provides a
+    runOnMain function using an FFI call to a bit objective C code.  Simon
+    Marlow pointed out that for compiled code, the main thread is a bound
+    thread, bound to the main thread of the process. Simon is specifically
+    talking about the threaded RTS here as this is already trivially true
+    of the non-thread one.  The question still remains open for GHCi.
+  
+*   [Cloud Haskell][m2] (22 Jul)
+
+    Tom Murphy was curious to see anybody was using [Cloud
+    Haskell][cloud-hs] yet.  It looks like we have a couple people who are
+    *thinking* of using it:  Tim Cowlishaw might be using it for his
+    masters thesis project (A Haskell EDSL for agent-based simulation).
+    Julian Porter, who we mentioned in the last digest for his Monad
+    Reader article, is planning to make his MapReduce monad framework work
+    on the distribute cluster.  Now how about those of us who have
+    actually given it try?
+  
+    As for the Parallel GHC project, it's worth mentioning that our new
+    partners are planning to use Cloud Haskell in their projects.  We'll
+    be sure to report back to the community about the results.
+  
+*   [A language that runs on the JVM or .NET...][m4] (31 Jul)
+
+    KC was hoping for a version of Haskell "that runs on the JVM or .NET
+    has the advantage of Oracle & Microsoft making those layers more
+    parallelizable".  Austin Seipp replied that it basically boils down to
+    it being [a lot of work][why-no-jvm].  Chris Smith also cautions that
+    while there may be many good reasons to easy to want a Haskell.Net or
+    a Jaskell, Haskell parallelism and concurrency may not be one of them.
+    Parallel and concurrent Haskell code relies generates a large volume
+    of lightweight threads. Simply using their JVM or CLR counterparts as
+    they are would not do.
+  
+    Are you interested in seeing a serious and long-term effort towards
+    Haskell on the JVM?  See the [FAQ][why-no-jvm] and get in touch!
+  
+*   [Error in the asynchronous exception operational semantics][m6] (9 Aug)
+
+    Edward Z. Yang noticed at the end of [Asynchronous Exceptions as an
+    Effect][async1] (Harrison et. al) that the authors have found an
+    error in the operational semantics described in [Asynchronous
+    Exceptions in Haskell][async2].  Anybody know what it is?  
+  
+    Meanwhile, David Barbour took the opportunity to say
+    > All you need to know about asynchronous exceptions is: *don't use them!* 
+    > They're too difficult to reason about, in terms of failure modes and such.
+    > Use TVars or MVars instead.
+  
+*   [Haskell Actors, Linda, publish / subscribe models?][m7] (13 Aug)
+
+    Dmitri O. Kondratiev needs to "build a framework to coordinate task
+    producers / consumers distributed in the same and different address
+    spaces.  He needs to scale a data processing application somewhat
+    Hadoop-like way yet in more flexible manner, without Hadoop-specific
+    distributed FS constraints." At this point, Ryan Newton suggested
+    "Cloud Haskell", which was greeted by with joy and great enthusiasm.
+    "Finally Erlang actor model of communication comes to Haskell!"
+    Keep us posted, Dmitri.
+   
+*   [More generic parfoldr than this... ][m8](23 Jul)
+
+    Prabhat Totoo tried to implement a parallel foldr function by breaking
+    the input listed chunks, mapping foldr over each chunk, and running
+    foldr over the list of results.  This solution only works if the input
+    and output of the folded function have the same type.  Prabhat wanted
+    to know how he could go about generalising his parallel fold. Also
+    while doing some timings, he noticed that the regular presumably
+    sequential fold improved with multiple cores. What's up with that?
+    
+    Conal Elliott make the point that Prabhat's current
+    parallelise-by-reassociating solution is only correct for an
+    associative operation, which is forcibly of type (a -> a -> a).  Have
+    a look at the the rest of the thread for an exploration of parallel
+    fold by Kevin Hammond, Conal Elliot and Sebastien Fischer.  
+  
+Stack Overflow and Reddit
+----------------------------------------------------------------------
+
+* [Are 'par' and 'pseq' good for data parallelism?][s1]
+* [Difference between MVar and a TVar?][s2]
+* [How to sort a list [MVar a] using a values?][s3]
+* [Understanding BlockedIndefinitelyOnMVar in Concurrent code][s4]
+* [Poor performance / lockup with STM][s5]
+* [If one of Haskell's goals is concurrency, then why is it based on the ?-calculus and not on a process calculus?][s6]
+
+Help and Feedback
+----------------------------------------------------------------------
+
+If you'd like to make an announcement in the next Haskell Parallel
+Digest, then get in touch with me, Eric Kow, at
+<parallel at well-typed.com>. Please feel free to leave any comments and
+feedback!
+
+[phd3]: http://www.well-typed.com/blog/55
+[phd4]: http://www.well-typed.com/blog/56
+[smtutorial]: http://community.haskell.org/~simonmar/par-tutorial.pdf
+[asp]:  http://www.macs.hw.ac.uk/~dsg/gph/papers/abstracts/strategies.html 
+[seq-nm]:   http://research.microsoft.com/apps/pubs/default.aspx?id=138042
+[mighttpd]: http://www.mew.org/~kazu/material/2011-mighttpd.pdf
+[hackage-mpi]: http://hackage.haskell.org/package/haskell-mpi
+[github-mpi]:  https://github.com/bjpop/haskell-mpi
+[straddock]:   http://hackage.haskell.org/packages/archive/parallel/3.1.0.1/doc/html/Control-Parallel-Strategies.html
+
+[hs-ipad]: https://github.com/dpp/LispHaskellIPad
+[cloud-hs]:   http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/
+[why-no-jvm]: http://www.haskell.org/haskellwiki/GHC:FAQ#Why_isn.27t_GHC_available_for_.NET_or_on_the_JVM.3F
+[async1]:  http://www.cs.missouri.edu/~harrison/papers/mpc08.pdf
+[async2]:  http://community.haskell.org/~simonmar/papers/async.pdf
+[actors]:  http://hackage.haskell.org/cgi-bin/hackage-scripts/package/actor
+[ph-libs]: http://www.haskell.org/haskellwiki/Applications_and_libraries/Concurrency_and_parallelism
+
+[n0]: http://www.haskell.org/haskellwiki/Parallel_GHC_Project
+[n1]: http://www.haskell.org/pipermail/haskell-cafe/2011-August/094484.html
+
+[b1]: http://tumblr.justtesting.org/post/8778213236
+[b2]: http://hackage.haskell.org/package/thespian-0.999
+[b3]: http://www.haskell.org/pipermail/haskell-cafe/2011-July/094203.html
+
+[m1]: http://www.haskell.org/pipermail/haskell-cafe/2011-July/093722.html
+[m2]: http://www.haskell.org/pipermail/haskell-cafe/2011-July/094176.html
+[m4]: http://www.haskell.org/pipermail/haskell-cafe/2011-July/094398.html
+[m6]: http://www.haskell.org/pipermail/haskell-cafe/2011-August/094521.html
+[m7]: http://www.haskell.org/pipermail/haskell-cafe/2011-August/094614.html
+[m8]: https://groups.google.com/d/topic/parallel-haskell/97dmSXickYM/discussion
+
+[s1]: http://stackoverflow.com/questions/6844378/are-par-and-pseq-good-for-data-parallelism
+[s2]: http://stackoverflow.com/questions/6915079/difference-between-tvar-and-tmvar
+[s3]: http://stackoverflow.com/questions/6955651/how-to-sort-a-list-mvar-a-using-a-values
+[s4]: http://stackoverflow.com/questions/6847307/understanding-blockedindefinitelyonmvar-in-concurrent-code
+[s5]: http://stackoverflow.com/questions/6439925/poor-performance-lockup-with-stm
+[s6]: http://www.reddit.com/r/haskell/comments/jlipx/if_one_of_haskells_goals_is_concurrency_then_why/
+
+-- 
+Eric Kow <http://erickow.com>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110831/45b2a100/attachment-0001.pgp>
+

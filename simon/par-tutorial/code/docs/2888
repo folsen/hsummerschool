@@ -1,0 +1,70 @@
+From patrickm7860 at yahoo.co.uk  Wed Feb  9 17:57:34 2011
+From: patrickm7860 at yahoo.co.uk (Patrick M)
+Date: Wed, 9 Feb 2011 16:57:34 +0000 (GMT)
+Subject: [Haskell-cafe] haskell prop. logic
+Message-ID: <94880.46535.qm@web24803.mail.ird.yahoo.com>
+
+Hello all I'm working on a project and I'm down to my last 3 functions.I need 
+some help(in any form) with them as I'm a beginner in haskell.I tried to create 
+a description on how the functions should behave below ,if you still have some 
+questions don't hesitate to ask.
+Also here is the code for the function I've written so far(some with help). 
+http://pastebin.com/fQp40ucg
+    propagateUnits :: Formula->Formula
+If a clause in a propositional formula contains only one literal, then that 
+literal must be true (so that the particular clause can be satisfied). When this 
+happens,we can remove the unit clauses (the ones that contain only one literal), 
+all the clauses where the literal appears and also,  from the remaining clauses, 
+we can delete the negation of the literal (because if P is true, -P will be 
+false).For example, in the formula (P v Q v R) ^ (-P v Q v -R) ^ (P) we have one 
+unit clause (the third clause(P) ). Because this one has to be true for the 
+whole formula to be true we assign True to P and try to find
+a satisfying assignment for the remaining formula. Finally because -P cannot be 
+true (given the assigned value of P) then the second clause is reduced by 
+eliminating the symbol -P . This simplification results in the revised formula 
+(Q v -R).
+The resulting simplification can create other unit clauses. For example in the 
+formula (-P v Q) ^ (P) is simplified to (Q) when the unit clause (P) is 
+propagated. This makes (Q) a unit clause which can now also be simplified to 
+give a satisfying assignment to the formula. The function should apply unit 
+propagation until it can no longer make any further simplifications.
+Note that if both P  and -P are unit clauses then the formula is unsatisfiable. 
+In this case the function should return a formula with an empty clause in it to 
+indicate that the formula could not be satisfied.
+
+        update :: Node -> [Node]
+The update function should take in a Node and return a list of the Nodes that 
+result from assigning True to an unassigned atom in one case and False in the 
+other (ie. a case
+split). So the list returned should have two nodes as elements. One node should 
+contain the formula with an atom assigned True and the model updated with this 
+assignment, and the other should contain the formula with the atom assigned 
+False and the model updated to show this. The lists of unassigned atoms of each 
+node should also be updated accordingly. This function should use your 
+implemented assign function to make the assignments. It should also use the 
+chooseAtom function provided to select the literal to  assign.
+
+    search :: (Node -> [Node]) -> [Node] -> Int -> (Bool, Int)
+The search function should perform a backtracking search. The function takes the 
+update function as input and uses it to generate nodes in the search space. The 
+search function also takes in a list which has one element, the initial node 
+consisting of the formula along with an initial model. It should generate nodes 
+using the update function and check nodes using the given check function. If a 
+node is unsatisfiable then it should
+abandon that branch of the search. If a node is satisfiable then a satisfying 
+assignment has been found and so it should return True. If a node is neither 
+satisfiable or unsatisfiable then it should generate new nodes from this node. 
+If all possible branches of the search space have been tried, i.e. the list of 
+nodes to try has become the empty list, then it should return False since all 
+possible assignments have been  tried. The search function also has an Int 
+argument which should be an integer that tracks how many
+calls to the update function have been made. The search function should return a 
+pair consisting of the truth value of the formula and the number of calls to 
+update made.
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110209/9131c4dc/attachment.htm>
+

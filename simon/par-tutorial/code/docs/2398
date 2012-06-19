@@ -1,0 +1,45 @@
+From donn at avvanta.com  Thu Dec 29 18:49:43 2011
+From: donn at avvanta.com (Donn Cave)
+Date: Thu, 29 Dec 2011 09:49:43 -0800 (PST)
+Subject: [Haskell-cafe] Windows: openFile gives permission denied
+	whenfilein use
+In-Reply-To: <CAKjSnQG-E9QAhJmJwU=J_W0WF540a4+evbYFr34vDV5kKqyWTg@mail.gmail.com>
+References: <CAKA2JgLc1Q-Lf_yOuhQdb1JKuUkiRYuS=hQ7wQw_+jqCMQOEYQ@mail.gmail.com>
+	<CAKjSnQH=mNONY7mC7-nEt-R51A0PULg-GhPvWiQ59vrOxpznuw@mail.gmail.com>
+	<4EFC53B7.2010806@btinternet.com> 
+	<20111229165359.A1CC3F393A@mail.avvanta.com>
+	<CAKjSnQG-E9QAhJmJwU=J_W0WF540a4+evbYFr34vDV5kKqyWTg@mail.gmail.com>
+Message-ID: <20111229174943.D6DF093C2E@mail.avvanta.com>
+
+Quoth Antoine Latter <aslatter at gmail.com>,
+...
+>> http://www.haskell.org/pipermail/libraries/2011-October/016978.html
+>>
+>> ... wherein Ian Lynagh proposed to remove this feature and let the
+>> programmer enforce locking or not, as in other programming languages'
+>> base I/O libraries.  This met with enthusiastic universal support,
+>> so whatever the Report may say, it looks to me like the GHC libraries
+>> will eventually not do this.
+>>
+>
+> Wouldn't this lead to 'getContents' and friends being much less safe
+> than they already are? Or would we have to do something at the GHC
+> runtime level of things to add locking?
+
+Interesting question.  I tend to steer clear of that function, rather
+than try to keep track of all the things that can go wrong with it!
+but I would guess, the effect is the same on any I/O strategy that
+executes the same way: e.g. if you were to read pieces of the file
+iteratively you would be similarly exposed to the possibility of
+concurrent modifications.
+
+That risk may be less obvious with getContents if you take the naive
+view that it returns the contents of the file in the same way that normal
+I/O operations return data, but then you will eventually be punished for
+that naivety anyway!
+
+Are you aware of some possible special issue with getContents?
+
+	Donn
+
+

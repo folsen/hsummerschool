@@ -1,0 +1,33 @@
+From ckkashyap at gmail.com  Thu Feb  3 12:15:00 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Thu, 3 Feb 2011 16:45:00 +0530
+Subject: [Haskell-cafe] Review request for "platform independent interactive
+	graphics" with VNC
+Message-ID: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>
+
+Hi,
+I've been working on a Haskell based platform independent graphics rendering
+using VNC. I'd like it very much if you could take a look at it and give me
+feedback. Using it is straight forward -
+
+git clone git at github.com:ckkashyap/Chitra.git
+cd Chitra
+make
+./Main 100 100 5900
+
+Main starts off a vncserver listening on port 5900. A standard vncviewer can
+be
+used to connect to 'localhost' and you can see a 100 x 100 screen. Clicking
+on
+the screen will set the pixel on the click location.
+
+What I eventually want to do is somehow integrate this piece with GHCI in
+such
+a manner that one can use GHCI to draw things on the VNC buffer.
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/7ef9a969/attachment.htm>
+

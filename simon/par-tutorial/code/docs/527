@@ -1,0 +1,25 @@
+From brandon_m_moore at yahoo.com  Wed Apr 20 03:01:36 2011
+From: brandon_m_moore at yahoo.com (Brandon Moore)
+Date: Tue, 19 Apr 2011 18:01:36 -0700 (PDT)
+Subject: [Haskell-cafe] Haskell from SML - referrential Transparency?!
+In-Reply-To: <08EF9DA445C4B5439C4733E1F35705BAD9080AD1CC@MAIL.cs.mum.edu>
+References: <08EF9DA445C4B5439C4733E1F35705BAD9080AD1BB@MAIL.cs.mum.edu>
+	<201104192116.17262.daniel.is.fischer@googlemail.com>
+	<08EF9DA445C4B5439C4733E1F35705BAD9080AD1BE@MAIL.cs.mum.edu>
+	<201104192228.24087.daniel.is.fischer@googlemail.com>
+	<08EF9DA445C4B5439C4733E1F35705BAD9080AD1CC@MAIL.cs.mum.edu>
+Message-ID: <103928.84983.qm@web45113.mail.sp1.yahoo.com>
+
+> Thanks.
+
+> 
+> It was the "no computation needed" difference that I was missing,  and was 
+>including (falsely) in my expectations for "same result", i.e. including  the 
+>same traces.
+
+To be clear, Debug.trace is not referentially transparent. It's only supposed to 
+be used for debugging.
+
+Brandon
+
+

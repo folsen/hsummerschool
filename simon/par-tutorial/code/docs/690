@@ -1,0 +1,30 @@
+From ketil at malde.org  Sun Apr 24 23:41:23 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Sun, 24 Apr 2011 23:41:23 +0200
+Subject: [Haskell-cafe] More ideas for controlled mutation
+In-Reply-To: <1303646089-sup-2399@ezyang> (Edward Z. Yang's message of "Sun,
+	24 Apr 2011 08:31:36 -0400")
+References: <1303646089-sup-2399@ezyang>
+Message-ID: <87wrijz5rw.fsf@malde.org>
+
+"Edward Z. Yang" <ezyang at MIT.EDU> writes:
+
+> I've been toying around with some ideas where we do alternative
+> forms of controlled mutation.  One such idea has to do with memoization.
+  [..]
+> Hash tables take advantage of this fact by simply chaining together values
+> in a linked list if they land in the same bucket.  [...]
+> An obvious way to do this is to use unsafePerformIO to
+> read out an IORef stating the value currently being looked up, and
+> have the thunk evaluate to the pair of that key and the result.  There
+> are some synchronization concerns, of course:
+
+Seen this?
+
+http://augustss.blogspot.com/2011/04/ugly-memoization-heres-problem-that-i.html
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

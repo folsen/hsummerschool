@@ -1,0 +1,88 @@
+From v.dijk.bas at gmail.com  Wed Apr 20 14:10:17 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Wed, 20 Apr 2011 14:10:17 +0200
+Subject: [Haskell-cafe] Need comments on a libusb asynchronous
+	select/poll loop
+In-Reply-To: <20110420101624.GA2636@X52D.localdomain>
+References: <20110419130604.GA26986@X52D.localdomain>
+	<BANLkTikQk4cg0poLVscuj2WW+ORNNNwm2g@mail.gmail.com>
+	<20110420101624.GA2636@X52D.localdomain>
+Message-ID: <BANLkTi=euuEpTddGRPw8rZ0rrs5=Z-wzPg@mail.gmail.com>
+
+On 20 April 2011 12:16, John Obbele <john.obbele at gmail.com> wrote:
+> On Tue, Apr 19, 2011 at 10:36:50PM +0200, Bas van Dijk wrote:
+>> Great! I have wished for an asynchronous implementation since version
+>> 0.1 of usb but didn't really had a need for it nor the time to
+>> implement it. However recently at work I have begun using my usb
+>> library in an application which should run on a resource constraint
+>> device. So any CPU cycles saved by using an asynchronous
+>> implementation is a win. Since we both have a need for it maybe we can
+>> work together?
+>
+> Yes. Your help is very welcomed and I was hoping to integrate the
+> code with System.USB anyway.
+>
+> Tight resource constraint and performance are not really my
+> priorities (I'm trying to get isopackets transfers), so my code
+> is far from being optimal. But at least, I've got some dumb
+> control read and write requests working, that can be a start ,)
+
+Indeed, support for isochronous transfers is the only thing still
+missing from the usb library. Having direct support for asynchronous
+transfers allows to add it.
+
+>> > The issues are:
+>> >
+>> > 1) I don't know how to expose the asynchronous API to Haskell. (How would
+>> > you 'functionalize' it ?)
+>>
+>> I also started with trying to come up with an asynchronous _interface_
+>> but realized that's probably not what users need. An asynchronous
+>> interface is difficult to program against. However an asynchronous
+>> _implementation_ is desirable over a synchronous one because of
+>> efficiency.
+>>
+>> [... fast-forwarding ...]
+>>
+>> What we actually want is a synchronous interface with the same API as
+>> we have now but with an implementation that uses the asynchronous
+>> interface from libusb and integrate that with the new GHC event
+>> manager.
+>
+> Yep ! The asynchronous stuff is a necessary burden, but on the
+> implementation side only. Client in Haskell should not have to
+> think to much about callbacks.
+>
+> I'm just discovering the GHC event manager. It looks fine and I
+> will try to replace my Epoll bindings with it. If I can in the
+> same time, I'll try to merge what I've done with the source code
+> available on your github ... but no promise since I've mainly
+> worked with low-level bit twiddlings.
+
+I have a first implementation of an asynchronously implemented
+'control' function ready in the 'async' branch:
+
+https://github.com/basvandijk/usb/tree/async
+
+It differs slightly from my previous sketch in that I setup the event
+handling in the newCtx function.
+
+> You schematic code for control packets is ok, but the hard part
+> will probably be in managing concurrent requests (from multiple
+> forkIO computations or from a background iso-packets
+> communication) and then redispatching processed events from
+> libusb back to Haskell.
+> ... and this without forgetting something to cancel requested URB :(
+
+I haven't implemented asynchronous transfers yet that actually
+transfer user data let alone isochronous transfers. (These are next on
+my list though). However I don't think concurrent requests are hard.
+Each request has it's own transfer structure. When a transfer
+completes the blocked thread that is executing the request gets woken
+up and continues.
+
+Regards,
+
+Bas
+
+

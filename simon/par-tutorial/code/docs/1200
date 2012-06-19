@@ -1,0 +1,32 @@
+From aslatter at gmail.com  Thu Aug 18 04:49:04 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Wed, 17 Aug 2011 21:49:04 -0500
+Subject: [Haskell-cafe] FFI question - FunPtrs to top-level functions
+Message-ID: <CAKjSnQG7h4DtpOSFrFOhjoW+FkVFrWUh=FCmqdSWCO8iNPJfVQ@mail.gmail.com>
+
+Hi Haskell,
+
+I have a question about the Haskell FFI and creating FunPtrs to
+Haskell functions.
+
+Does anyone have any recommendations for when I have a top-level
+function that I would like to pass to a C function as a function
+pointer (that is called via a foreign import)?
+
+I know that the FFI provides the "wrapper" foreign import I can use to
+wrap Haskell functions, but then I would need to jump through hoops to
+manage the liefetime of of the FunPtr wrapper. If I were closing over
+interesting state I would want this - but the function
+(side-effectfully) operates only on its arguments (and the Haskell
+RTS, of course).
+
+Is it "okay" to place an "unsafePerformIO $ mkWrapper myFunc" as a
+top-level declaration, or am I journeying into uncharted lands?
+
+Is there something clever I can do with foreign exports and foreign
+imports, or is this just making things too complex?
+
+Thanks,
+Antoine
+
+

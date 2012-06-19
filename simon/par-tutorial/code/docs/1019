@@ -1,0 +1,49 @@
+From greg at gregweber.info  Thu Aug 11 02:53:00 2011
+From: greg at gregweber.info (Greg Weber)
+Date: Wed, 10 Aug 2011 17:53:00 -0700
+Subject: [Haskell-cafe] Announce: file-location 0.2.4
+Message-ID: <CAKRanNChDniTW=91xytQgO_ZpVA8ur=YR3HWkYMd_6_NYbfH-w@mail.gmail.com>
+
+Were you excited when Simon Marlow announced he might be able to add stack
+traces to Haskell? Would you settle for just the first line of the stack
+trace? It is a little known fact that template haskell exposes the file and
+line number information.
+
+file-location contains common debugging/error/exception functions and
+template haskell versions that give file location information.
+
+    > $(err "OH NO!")
+    main:Main main.hs:16:1 OH NO!
+
+    > debug [1,2,3]
+    DEBUG: [1,2,3]
+    [1,2,3]
+
+    > $(dbg) [1,2,3]
+    DEBUG main:Main main.hs:1:3 [1,2,3]
+    [1,2,3]
+
+    ($(thrwIO) AException) `catch` \e -> putStrLn ("Caught " ++ show (e ::
+AException))
+    Caught AException "main:Main test/main.hs:25:6"
+
+
+Don't like the exception dependency? Use version 0.2.3 for now until the
+exceptions are split into a separate package.
+Just want the debug helpers (like the debug function) but not interested in
+the template haskell? The library is already split into modules based on
+dependencies. The near future plan is to separate this into separate
+packages, including one with the non-TH debug helpers.
+
+Also see the github README for more examples:
+https://github.com/gregwebs/FileLocation.hs
+
+I think haskell could use a few more debug helpers. Perhaps some of these
+could be pushed back into the standard distribution.
+
+Thanks, and I am looking forward to your feedback,
+Greg Weber
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110810/d1df14a1/attachment.htm>
+

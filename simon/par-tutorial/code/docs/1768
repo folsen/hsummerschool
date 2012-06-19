@@ -1,0 +1,221 @@
+From byorgey at seas.upenn.edu  Thu Dec  8 19:50:20 2011
+From: byorgey at seas.upenn.edu (Brent Yorgey)
+Date: Thu, 8 Dec 2011 13:50:20 -0500
+Subject: [Haskell-cafe] More liberal than liberal type synonyms
+In-Reply-To: <CAPNUp08aeZ_4AyVN6yUs6NObhEqca1eJYngNPzyE7k3C0Yd40w@mail.gmail.com>
+References: <CAHEA9tPH_uO0UjQ7yUe8j5fGC=NsqVAsodfVJS+x1e7LOhGxrw@mail.gmail.com>
+	<CAN0wsw=4tK-BLDms1j3_iPz-igVOX=+=SUenh7Le=MGH=dULtw@mail.gmail.com>
+	<CAH_oh=wSOk3mJjtmV3VtWfu5JdvXWUQwtpGzeo23iTgAr=mxDQ@mail.gmail.com>
+	<CACqaG6ykwGvGMFnwY43TYt6-HYm6cJ2sVPLff+BrO10XAhS1nQ@mail.gmail.com>
+	<CAN0wswkbFNi=O1a+35iYHKyVNPOSu8hpGcVE16sOBsq1ODrJcQ@mail.gmail.com>
+	<CACqaG6zfA9nBb8NX+Fhpp+Lg+zxckz04-Qty=Q5Nh3rzkBjxSA@mail.gmail.com>
+	<CAN0wswnKWLw37iFMahWX32znb7cdMGFop3K3tVXs8bjPVT86Mg@mail.gmail.com>
+	<CAPNUp08aeZ_4AyVN6yUs6NObhEqca1eJYngNPzyE7k3C0Yd40w@mail.gmail.com>
+Message-ID: <20111208185020.GA8569@seas.upenn.edu>
+
+On Wed, Dec 07, 2011 at 04:47:47PM +0100, G?bor Lehel wrote:
+> On Wed, Dec 7, 2011 at 1:07 PM, Dmitry Kulagin <dmitry.kulagin at gmail.com> wrote:
+> >> For short, type synonyms work for mere aliases, but not for full-fledged> type-level non-inductive functions.> And sometimes we intuitively want to use them as such.
+> > Thank you, Yves! It is now more clear for me.
+> >
+> > Still, it seems that ability to use partially applied type synonyms would be
+> > very natural (and useful) extension to the language. It would allow to avoid
+> > boilerplate code associated with creating "really new" types instead of just
+> > using synonims for existing ones.
+> 
+> The problem as I understand it is that partially-applied type synonyms
+> are in effect type level lambdas, and type checking in the presence of
+> type level lambdas requires higher-order unification, which is
+> undecidable in general. Restricted cases might be possible, I'm not an
+> expert in the field. GHC hackers could probably elaborate.
+> 
+> [1] http://stackoverflow.com/questions/8248217/are-there-type-level-combinators-will-they-exist-in-some-future
+> [2]
+> http://en.wikipedia.org/wiki/Unification_(computer_science)#Higher-order_unification
+
+It's actually type *inference* that requires higher-order unification
+in the presence of type-level lambdas, not type checking.  This might
+not be a huge deal: we just have to clearly state that enabling
+-XPartialTypeFunApps means that you may have to provide some explicit
+type annotations in places where type inference cannot figure things
+out.  We already have extensions like this (e.g. RankNTypes).
+
+The bigger problem for the moment is that for various technical
+reasons, enabling partial applications of type functions can lead to
+unsoundness (i.e. typechecked programs which nonetheless crash at
+runtime) in the way that type equality is handled.  For more details
+see 
+
+  http://stackoverflow.com/questions/7866375/why-does-ghc-think-that-this-type-variable-is-not-injective/7950614#7950614
+
+I agree that the ability to use partially applied type
+synonyms/functions would be natural and useful.  I hope we will
+eventually see a version of GHC which supports it but there are some
+nontrivial technical issues to be worked out first.
+
+-Brent
+
+> 
+> >
+> > On Wed, Dec 7, 2011 at 3:51 PM, Yves Par?s <limestrael at gmail.com> wrote:
+> >> Ah, maybe Dan could tell us if it works only with GHC 7.
+> >>
+> >> Dmitry, I had your problem many times. The last time was when I saw you
+> >> could define the ContT monad in terms of Cont (the opposite is done in the
+> >> mtl).
+> >> It leads to a simpler code, but you are stucked when trying to define ContT
+> >> as an instance of MonadTrans:
+> >>
+> >> data Cont r a = ...
+> >> -- [instances of Monad Cont, blah blah blah]
+> >>
+> >> type ContT r m a = Cont r (m a)
+> >>
+> >> instance MonadTrans (ContT r) where? -- This doesn't compile, even if it is
+> >> logical
+> >> ? lift = ...
+> >>
+> >> For short, type synonyms work for mere aliases, but not for full-fledged
+> >> type-level non-inductive functions.
+> >> And sometimes we intuitively want to use them as such.
+> >>
+> >>
+> >> 2011/12/7 Dmitry Kulagin <dmitry.kulagin at gmail.com>
+> >>>
+> >>> > Dmitry, does your code work with LiberalTypeSynonyms extention
+> >>> > activated?
+> >>> No, the same error:
+> >>> Type synonym `StateA' should have 1 argument, but has been given 0
+> >>>
+> >>> But I have GHC 6.12.3
+> >>>
+> >>> Dmitry
+> >>> 2011/12/7 Yves Par?s <limestrael at gmail.com>:
+> >>> > This is impossible:
+> >>> > in the definition of 'StateT s m a', m must be a monad and then have the
+> >>> > *
+> >>> > -> * kind.
+> >>> > So you cannot pass (StateA a), because it has simply the * kind.
+> >>> >
+> >>> > Dmitry, does your code work with LiberalTypeSynonyms extention
+> >>> > activated?
+> >>> >
+> >>> >
+> >>> > 2011/12/7 ?ystein Kolsrud <kolsrud at gmail.com>
+> >>> >>
+> >>> >> You should be able to write something like this:
+> >>> >>
+> >>> >> type StateB a b = StateT SomeOtherState (StateA a) b
+> >>> >>
+> >>> >> Best regards, ?ystein Kolsrud
+> >>> >>
+> >>> >>
+> >>> >> On Wed, Dec 7, 2011 at 11:48 AM, Dmitry Kulagin
+> >>> >> <dmitry.kulagin at gmail.com>
+> >>> >> wrote:
+> >>> >>>
+> >>> >>> Hi Dan,
+> >>> >>>
+> >>> >>> I am still pretty new in Haskell, but this problem annoys me already.
+> >>> >>>
+> >>> >>> If I define certain monad as a type synonym:
+> >>> >>>
+> >>> >>> ? ?type StateA a = StateT SomeState SomeMonad a
+> >>> >>>
+> >>> >>> Then I can't declare new monad based on the synonym:
+> >>> >>>
+> >>> >>> ? ?type StateB a = StateT SomeOtherState StateA a
+> >>> >>>
+> >>> >>> The only way I know to overcome is to declare StateA without `a':
+> >>> >>>
+> >>> >>> ? ?type StateA = StateT SomeState SomeMonad
+> >>> >>>
+> >>> >>> But it is not always possible with existing code base.
+> >>> >>>
+> >>> >>> I am sorry, if this is offtopic, but it seemed to me that the problem
+> >>> >>> is realted to partially applied type synomyms you described.
+> >>> >>>
+> >>> >>> Thanks!
+> >>> >>> Dmitry
+> >>> >>>
+> >>> >>> On Tue, Dec 6, 2011 at 10:59 PM, Dan Doel <dan.doel at gmail.com> wrote:
+> >>> >>> > Greetings,
+> >>> >>> >
+> >>> >>> > In the process of working on a Haskell-alike language recently, Ed
+> >>> >>> > Kmett and I realized that we had (without really thinking about it)
+> >>> >>> > implemented type synonyms that are a bit more liberal than GHC's.
+> >>> >>> > With
+> >>> >>> > LiberalTypeSynonyms enabled, GHC allows:
+> >>> >>> >
+> >>> >>> > ? ?type Foo a b = b -> a
+> >>> >>> > ? ?type Bar f = f String Int
+> >>> >>> >
+> >>> >>> > ? ?baz :: Bar Foo
+> >>> >>> > ? ?baz = show
+> >>> >>> >
+> >>> >>> > because Bar expands to saturate Foo. However, we had also
+> >>> >>> > implemented
+> >>> >>> > the following, which fails in GHC:
+> >>> >>> >
+> >>> >>> > ? ?type Foo a b = b -> a
+> >>> >>> > ? ?type Bar f = f (Foo Int) (Foo Int)
+> >>> >>> > ? ?type Baz f g = f Int -> g Int
+> >>> >>> >
+> >>> >>> > ? ?quux :: Bar Baz
+> >>> >>> > ? ?quux = id
+> >>> >>> >
+> >>> >>> > That is: type synonyms are allowed to be partially applied within
+> >>> >>> > other type synonyms, as long as similar transitive saturation
+> >>> >>> > guarantees are met during their use.
+> >>> >>> >
+> >>> >>> > I don't know how useful it is, but I was curious if anyone can see
+> >>> >>> > anything wrong with allowing this (it seems okay to me after a
+> >>> >>> > little
+> >>> >>> > thought), and thought I'd float the idea out to the GHC developers,
+> >>> >>> > in
+> >>> >>> > case they're interested in picking it up.
+> >>> >>> >
+> >>> >>> > -- Dan
+> >>> >>> >
+> >>> >>> > _______________________________________________
+> >>> >>> > Haskell-Cafe mailing list
+> >>> >>> > Haskell-Cafe at haskell.org
+> >>> >>> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >>> >>>
+> >>> >>> _______________________________________________
+> >>> >>> Haskell-Cafe mailing list
+> >>> >>> Haskell-Cafe at haskell.org
+> >>> >>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >>> >>
+> >>> >>
+> >>> >>
+> >>> >>
+> >>> >> --
+> >>> >> Mvh ?ystein Kolsrud
+> >>> >>
+> >>> >> _______________________________________________
+> >>> >> Haskell-Cafe mailing list
+> >>> >> Haskell-Cafe at haskell.org
+> >>> >> http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >>> >>
+> >>> >
+> >>
+> >>
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> 
+> 
+> 
+> -- 
+> Work is punishment for failing to procrastinate effectively.
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+> 
+
+

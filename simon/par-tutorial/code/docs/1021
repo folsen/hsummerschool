@@ -1,0 +1,244 @@
+From dstcruz at gmail.com  Thu Aug 11 04:05:09 2011
+From: dstcruz at gmail.com (Daniel Santa Cruz)
+Date: Wed, 10 Aug 2011 22:05:09 -0400
+Subject: [Haskell-cafe] Haskell Weekly News: Issue 194
+Message-ID: <CA+V-9CyUBRpLQpi++2MUN471VF-PxJ+oaHNYO+yLzNk1Z+pJ3Q@mail.gmail.com>
+
+   Welcome to issue 194 of the HWN, a newsletter covering developments in
+   the Haskell community. This release covers the week of July 31 to
+   August 6, 2011.
+   [1] http://goo.gl/8hDku
+
+   You can find a HTML rendition of this newsletter at:
+
+http://contemplatecode.blogspot.com/2011/08/haskell-weekly-news-issue-194.html
+
+Announcements
+
+   Andy Gill has issued a call for papers for the 23rd Symposium on
+   Implementation and Application of Functinal Languages (IFL 2011) to be
+   held at the University of Kansan, in Lawrence, Kansas, USA. The
+   symposium is scheduled for October 3-5, 2011.
+   [2] http://goo.gl/hHD2H
+
+   Anil Madhavapeddy issued a call for participation to the Commercial
+   Users of Functional Programming Workshop (CUFP 2011), which will be
+   co-located with the ICFP 2011 in Tokyo, Japan, on September 22-24,
+   2011.
+   [3] http://goo.gl/BvPpj
+
+   The GHC team annouced the release of GHC 7.2.1
+   [4] http://goo.gl/0gTL3
+
+New and Updated Projects
+
+   * Eddie (Mike Meyer): A tool for shell scripting with haskell.
+     [5] http://goo.gl/tzdbv
+
+   * HROOT (Ian-Woo Kim): Haskell binding to the ROOT analysis
+     package.
+     [6] http://goo.gl/qJ1Bb
+
+   * vector-algorithms (Dan Doel): Efficient Algorithms for Vector
+     Arrays.
+     [7] http://goo.gl/YZmxR
+
+   * Alex (Simon Marlow): Update. A lexical analyser generator for
+     Haskell.
+     [8] http://goo.gl/dDYrl
+
+Quotes of the Week
+
+   * kmc: when computer scientists rebuild the world after the
+     apocalypse, we will have hanging gardens with trees that grow
+     downward
+
+   * kmc: a wise man once said that the entire world can be described as
+     convex combinations of drugs, math, and cardboard
+
+   * roconnor: as a rule of thumb, avoid any packages shipped with the
+     Haskell Plaform.
+
+   * kmc: Try the new GHC IO Scheduler! It's got what plants crave!
+
+   * kmc: I refuse to believe that any loving god would invent the
+     monomorphism restriction
+
+   * AlanPerlis: It is easier to write an incorrect program than
+     understand a correct one.
+
+   * [kmc] do you have a theory where the stack overflow is
+        coming from?
+     [copumpkin] joel spolsky
+
+   * @faq is it possible to find things Haskell can't do?
+     [lambdabot] The answer is: Yes! Haskell can do that.
+
+   * kmc: Haskell isn't really designed by mathematicians. it's designed
+     by people who programmers would consider to be mathematicians and
+     mathematicians would consider to be programmers
+
+Top Reddit Stories
+
+   * "I'm very tempted to want to move to a functional programming language.
+Haskell or Ocaml or something" -John Carmack
+     Domain: youtube.com, Score: 120, Comments: 62
+     On Reddit: [9] http://goo.gl/enBuK
+     Original: [10] http://goo.gl/WXfZy
+
+   * That seems like a challenge! Whatever happened to the hs->js compiler?
+     Domain: xkcd.com, Score: 48, Comments: 12
+     On Reddit: [11] http://goo.gl/okkWU
+     Original: [12] http://goo.gl/HykNt
+
+   * The Conditional Choice Operator
+     Domain: zenzike.com, Score: 47, Comments: 15
+     On Reddit: [13] http://goo.gl/npdIK
+     Original: [14] http://goo.gl/tdb4J
+
+   * Haskell For Kids! Introduction to My Upcoming Class
+     Domain: cdsmith.wordpress.com, Score: 47, Comments: 31
+     On Reddit: [15] http://goo.gl/Gnmg9
+     Original: [16] http://goo.gl/y1pEF
+
+   * seL4, a formally verified version of the L4 microkernel, was
+spec-prototyped in Haskell (PDF)
+     Domain: sigops.org, Score: 23, Comments: 8
+     On Reddit: [17] http://goo.gl/fq0t9
+     Original: [18] http://goo.gl/mCrEu
+
+   * Hi guys, I made a Haskell to Clojure translator. Check it out :D
+     Domain: github.com, Score: 17, Comments: 21
+     On Reddit: [19] http://goo.gl/Fxdwa
+     Original: [20] http://goo.gl/OL86U
+
+   * Moderator Guidelines : Them's the rules.
+     Domain: self.haskell, Score: 12, Comments: 0
+     On Reddit: [21] http://goo.gl/UPz94
+     Original: [22] http://goo.gl/UPz94
+
+   * Library of conditional one-liners and combinators?
+     Domain: self.haskell, Score: 11, Comments: 39
+     On Reddit: [23] http://goo.gl/dTmX1
+     Original: [24] http://goo.gl/dTmX1
+
+   * Zoom, a thor/rake-like task runner for Haskell (very alpha)
+     Domain: github.com, Score: 10, Comments: 3
+     On Reddit: [25] http://goo.gl/KkW9v
+     Original: [26] http://goo.gl/LqYUE
+
+   * Yesod form overhaul
+     Domain: yesodweb.com, Score: 8, Comments: 1
+     On Reddit: [27] http://goo.gl/biQuv
+     Original: [28] http://goo.gl/lxuYj
+
+   * ETA on the Haskell Platform 2011.4.0.0 release?
+     Domain: self.haskell, Score: 8, Comments: 3
+     On Reddit: [29] http://goo.gl/gydgP
+     Original: [30] http://goo.gl/gydgP
+
+Top StackOverflow Questions
+
+   * Speed comparison C vs python vs erlang vs haskell
+     votes: 50, answers: 8
+     Read on SO: [31] http://goo.gl/XEZ9Z
+
+   * Recursion schemes for dummies?
+     votes: 37, answers: 2
+     Read on SO: [32] http://goo.gl/nnhGb
+
+   * Is it possible to place inequality constraints on haskell type
+variables?
+     votes: 11, answers: 1
+     Read on SO: [33] http://goo.gl/VnexA
+
+   * Haskell: Prefer pattern-matching or member access?
+     votes: 9, answers: 6
+     Read on SO: [34] http://goo.gl/E225N
+
+   * Difference between TVar and TMVar
+     votes: 7, answers: 2
+     Read on SO: [35] http://goo.gl/lmn1R
+
+   * Java's Interface and Haskell's type class: differences and
+similarities?
+     votes: 7, answers: 6
+     Read on SO: [36] http://goo.gl/fMGpH
+
+   * Haskell code accompanying the Paul Hudak 1994 US Navy experiment paper
+[migrated]
+     votes: 7, answers: 0
+     Read on SO: [37] http://goo.gl/fpVO5
+
+About the Haskell Weekly News
+
+   To help create new editions of this newsletter, please send stories to
+   dstcruz at gmail.com.
+
+   Until next time,
+   Daniel Santa Cruz
+
+References
+
+   1. http://haskell.org/
+   2. http://permalink.gmane.org/gmane.comp.lang.haskell.general/18868
+   3. http://permalink.gmane.org/gmane.comp.lang.haskell.general/18873
+   4. http://www.haskell.org/ghc/download_ghc_7_2_1
+   5. http://permalink.gmane.org/gmane.comp.lang.haskell.general/18867
+   6. http://permalink.gmane.org/gmane.comp.lang.haskell.cafe/91469
+   7. http://permalink.gmane.org/gmane.comp.lang.haskell.general/18871
+   8. http://permalink.gmane.org/gmane.comp.lang.haskell.general/18874
+   9.
+http://www.youtube.com/watch?v=4zgYG-_ha28&feature=player_detailpage#t=4193s
+  10.
+http://www.reddit.com/r/haskell/comments/jap3x/im_very_tempted_to_want_to_move_to_a_functional/
+  11. http://www.xkcd.com/934/
+  12.
+http://www.reddit.com/r/haskell/comments/j9nef/that_seems_like_a_challenge_whatever_happened_to/
+  13. http://zenzike.com/posts/2011-08-01-the-conditional-choice-operator
+  14.
+http://www.reddit.com/r/haskell/comments/j6rbd/the_conditional_choice_operator/
+  15. http://cdsmith.wordpress.com/2011/08/03/haskell-for-kids-introduction/
+  16.
+http://www.reddit.com/r/haskell/comments/j8ac0/haskell_for_kids_introduction_to_my_upcoming_class/
+  17. http://www.sigops.org/sosp/sosp09/papers/klein-sosp09.pdf
+  18.
+http://www.reddit.com/r/haskell/comments/ja27r/sel4_a_formally_verified_version_of_the_l4/
+  19. https://github.com/dmead/Clojure-translate
+  20.
+http://www.reddit.com/r/haskell/comments/jarp0/hi_guys_i_made_a_haskell_to_clojure_translator/
+  21.
+http://www.reddit.com/r/haskell/comments/j8df0/moderator_guidelines_thems_the_rules/
+  22.
+http://www.reddit.com/r/haskell/comments/j8df0/moderator_guidelines_thems_the_rules/
+  23.
+http://www.reddit.com/r/haskell/comments/j51yw/library_of_conditional_oneliners_and_combinators/
+  24.
+http://www.reddit.com/r/haskell/comments/j51yw/library_of_conditional_oneliners_and_combinators/
+  25. https://github.com/iand675/Zoom
+  26.
+http://www.reddit.com/r/haskell/comments/ja6fo/zoom_a_thorrakelike_task_runner_for_haskell_very/
+  27. http://www.yesodweb.com/blog/2011/08/yesod-form-overhaul
+  28. http://www.reddit.com/r/haskell/comments/j8gta/yesod_form_overhaul/
+  29.
+http://www.reddit.com/r/haskell/comments/jaa8t/eta_on_the_haskell_platform_2011400_release/
+  30.
+http://www.reddit.com/r/haskell/comments/jaa8t/eta_on_the_haskell_platform_2011400_release/
+  31.
+http://stackoverflow.com/questions/6964392/speed-comparison-c-vs-python-vs-erlang-vs-haskell
+  32.
+http://stackoverflow.com/questions/6941904/recursion-schemes-for-dummies
+  33.
+http://stackoverflow.com/questions/6939043/is-it-possible-to-place-inequality-constraints-on-haskell-type-variables
+  34.
+http://stackoverflow.com/questions/6913130/haskell-prefer-pattern-matching-or-member-access
+  35.
+http://stackoverflow.com/questions/6915079/difference-between-tvar-and-tmvar
+  36.
+http://stackoverflow.com/questions/6948166/javas-interface-and-haskells-type-class-differences-and-similarities
+  37.
+http://stackoverflow.com/questions/6953020/haskell-code-accompanying-the-paul-hudak-1994-us-navy-experiment-paper-migrated
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110810/64ed4f97/attachment.htm>
+

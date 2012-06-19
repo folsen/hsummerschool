@@ -1,0 +1,30 @@
+From allbery.b at gmail.com  Mon Aug 29 01:20:43 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Sun, 28 Aug 2011 19:20:43 -0400
+Subject: [Haskell-cafe] Unexpected Typeable behaviour; Prelude.undefined
+In-Reply-To: <79B22C4D-B42B-463E-9689-479D878E6DB7@st-andrews.ac.uk>
+References: <79B22C4D-B42B-463E-9689-479D878E6DB7@st-andrews.ac.uk>
+Message-ID: <CAKFCL4XGT69tz5jBbKf1pTr831uwt3t1Sd+k-VU4XBP19wQF_g@mail.gmail.com>
+
+On Sun, Aug 28, 2011 at 18:44, Philip Holzenspies <pkfh at st-andrews.ac.uk>wrote:
+
+> instance (Typeable1 m, Monad m) => Typeable (MyADT m) where
+>        typeOf t@(MyADT _)
+>
+
+typeOf is usually invoked with an undefined parameter; it should use types,
+never values.  Here you've defined it to deconstruct what it's passed, which
+means that anything that uses it in the usual way (`typeOf (undefined ::
+someType)') will immediately throw undefined.
+
+You don't need a deconstructor there; you (correctly) throw away the value,
+and it doesn't provide any type information not already available from the
+instance declaration.  `typeOf t' should be good enough.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110828/c1e6776d/attachment.htm>
+

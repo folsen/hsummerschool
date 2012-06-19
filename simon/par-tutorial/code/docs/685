@@ -1,0 +1,36 @@
+From nadine.and.henry at pobox.com  Sun Apr 24 18:11:20 2011
+From: nadine.and.henry at pobox.com (nadine.and.henry at pobox.com)
+Date: Sun, 24 Apr 2011 11:11:20 -0500
+Subject: [Haskell-cafe] generics and sql
+In-Reply-To: <1303659091-sup-6152@ezyang>
+References: <19892.12751.507521.701489@myth.localdomain>
+	<1303655313-sup-8301@ezyang>
+	<19892.16921.384581.22002@myth.localdomain>
+	<1303659091-sup-6152@ezyang>
+Message-ID: <19892.19368.552678.735324@myth.localdomain>
+
+>>>>> "EZY" == Edward Z Yang <ezyang at MIT.EDU> writes:
+
+    EZY> Where did 'query' come from?  Edward
+
+I left that out because it was just a prebuilt db query.  It came from
+something like:
+
+dataNames :: Data a => a -> [String]          
+dataNames = constrFields . toConstr
+
+loanNames = datanames (loan :: Loan) 
+{- yielding:
+["loan_address","loan_initialAmount","loan_interestRate","loan_term","loan_originated","loan_minimumPayment","loan_usualPayment","loan_familiarName","loan_password","loan_lastVisit","loan_nextToLastVisit","loan_emailAddress"] -}
+
+
+
+let query = "INSERT INTO loans (" ++ loanNames ++ ") values (" ++ 
+               (intercalate ", " (replicate (length loanNames) "?")) ++
+               ")"
+
+
+Best wishes,
+H
+
+

@@ -1,0 +1,117 @@
+From evohunz at gmail.com  Fri Aug 12 01:29:09 2011
+From: evohunz at gmail.com (Thiago Negri)
+Date: Thu, 11 Aug 2011 20:29:09 -0300
+Subject: [Haskell-cafe] Help understanding Haskell runtime costs
+In-Reply-To: <4E44021E.9000708@henning-thielemann.de>
+References: <CABLneZt3otBqHq9u+NeGck_jrQ-n=s0oqBn7qtHFuSGOuCV0mQ@mail.gmail.com>
+	<4E44021E.9000708@henning-thielemann.de>
+Message-ID: <CABLneZs+-OFACR9S-SpbiC=n5076-jvU_GMnTiN8Ek90JLZW=g@mail.gmail.com>
+
+So, thanks to Henning Thielemann I was able to make a code a little
+more functional.
+I did find ByteString module that really speed things up.
+
+I got 0.04 seconds with the following snippet:
+
+-- code start
+import qualified Data.ByteString.Char8 as BS
+import Data.Char (toLower)
+
+main :: IO ()
+main = interact' $ unlines' . solveAll . takeWhile ((/= '*') . head') . lines'
+
+solveAll :: [String'] -> [String']
+solveAll = map $ toStr . solve
+
+toStr :: Bool -> String'
+toStr True = makeString' "Y"
+toStr False = makeString' "N"
+
+solve :: String' -> Bool
+solve = isTautogram . words'
+
+isTautogram :: [String'] -> Bool
+isTautogram (x:xs) = all ((== firstChar) . normalizeHead) xs
+    where firstChar = normalizeHead x
+
+normalizeHead :: String' -> Char
+normalizeHead = toLower . head'
+
+-- optimizations
+type String' = BS.ByteString
+interact' = BS.interact
+unlines' = BS.unlines
+lines' = BS.lines
+head' = BS.head
+words' = BS.words
+makeString' = BS.pack
+-- code end
+
+Thanks all,
+Thiago.
+
+2011/8/11 Henning Thielemann <schlepptop at henning-thielemann.de>:
+> On 09.08.2011 01:43, Thiago Negri wrote:
+>>
+>> Hello all,
+>>
+>> I'm relatively new to Haskell and trying to solve some online judge's
+>> problems in it.
+>> One of the problems is to say if a given sentence is a tautogram or not.
+>> A tautogram is just a sentence with all the words starting with the same
+>> letter.
+>>
+>> My first try (solution is ok) was to do it as haskeller as possible,
+>> trying to overcome my imperative mind.
+>> But it did bad at performance (0.30 secs of runtime, 4.6 mb of memory):
+>>
+>> -- code start
+>> import Data.Char (toLower)
+>>
+>> main = getContents>>= ?mapM_ (putStrLn . toStr . isTautogram . words)
+>> . takeWhile (/= "*") . lines
+>
+> That's still imperative! :-)
+>
+> How about 'interact' and using 'unlines' instead of 'putStrLn' ?
+>
+>
+>> toStr :: Bool -> ?[Char]
+>
+> You may want to write String instead of [Char] for clarity.
+>
+>> toStr True = "Y"
+>> toStr False = "N"
+>>
+>> isTautogram :: [[Char]] -> ?Bool
+>> isTautogram (x:[]) = True
+>
+> I assume this case is not necessary, since ?all [] == True ?anyway.
+>
+>> isTautogram (x:xs) = all ((== firstChar) . toLower . head) xs
+>> ? ? where firstChar = toLower . head $ x
+>
+> It is maybe more elegant, not to compare all words with the first one, but
+> to compare adjacent words in the list:
+>
+> all (zipWith (...) xs (drop 1 xs))
+>
+>
+>> Note that the only thing that changed between the two tries was the
+>> main-loop.
+>> The second version runs faster (got 0.11 secs) and with less memory (3.6
+>> mb)
+>>
+>> Can someone explain to me what is really going on?
+>> Maybe pointing out how I can achieve these optimizations using
+>> profiling information...
+>
+> Interesting observation. I do not see a problem quickly.
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

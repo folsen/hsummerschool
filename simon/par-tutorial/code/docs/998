@@ -1,0 +1,130 @@
+From kizzx2+haskell at gmail.com  Tue Aug  9 18:47:51 2011
+From: kizzx2+haskell at gmail.com (Chris Yuen)
+Date: Wed, 10 Aug 2011 00:47:51 +0800
+Subject: [Haskell-cafe] Analyzing slow performance of a Haskell program
+In-Reply-To: <CABjzJLA5HCOziGokibZuWWdf3jNXB5rad+=67tB-E_cYF+MN0Q@mail.gmail.com>
+References: <CAKaDkC7-vQo_AXRRX6-+P+PKV87b54D21k6bSnub=JYvH_mnRQ@mail.gmail.com>
+	<CAGXzfB60BDXV6vOJfk6YVBG7xjyhhmTDn=+ax6mjLBx5kY6B=A@mail.gmail.com>
+	<201108071120.18563.daniel.is.fischer@googlemail.com>
+	<CAKaDkC40kbdfEinqsUuoaexpD4JCmfX-wTvt5MZt9NPdU--ELA@mail.gmail.com>
+	<CANVKUrXxHLgmGcYwk+hJHyME22TUDVoZ2n4K0T7afqH1LHZqpg@mail.gmail.com>
+	<CAKaDkC4Ab3yoG0UoaN9C4CM+1-goZ_yswqOLcBz7ejE6LfLg8w@mail.gmail.com>
+	<CACw0niLT_DORERkF0PqQMephH1-h7pYS1ajT-Vsk3S6v9tOHMw@mail.gmail.com>
+	<CABjzJLA5HCOziGokibZuWWdf3jNXB5rad+=67tB-E_cYF+MN0Q@mail.gmail.com>
+Message-ID: <CAKaDkC6ZVxsqLFKMCTa+hB-UZM7JBNoB+SiU+M9qCeQaEeCs1w@mail.gmail.com>
+
+Hi all,
+
+Thanks Bryan, reading your clean code was good for my Haskell health :)
+
+I took your code and did some more research. I think I have found the
+answer. I have written an extensive analysis in my blog post
+http://cfc.kizzx2.com/index.php/in-search-of-performance-in-haskell/(comments
+are very much welcome, btw :)
+
+Here are summaries of key points:
+
+- I was using GHC 32-bit. Int is 32-bit there, so I needed Int64. It turns
+out 64-bit operations in 32-bit programs are just darn slow. Maybe it's a
+Windows problem. On Linux 64 bit GHC Int is 64 bit so everything just works.
+Changing Int64 to Int liberates me from many `fromIntegral` which saved 20%
+- Changing `divMod` to `quotRem` saved another 20%
+- Using `Data.Vector.Unboxed` and `unsafeIndex` saved another 15% or so
+- Moving the "length" arrays to `where` clause in `solve` with bang patterns
+on them save some more.
+
+This was a great learning experience! Now I have more questions :P
+
+1. Why are bangs needed on the length arrays?
+
+If I remove them from below, performance drops 10%. I thought `unsafeIndex`
+is straight in both arguments, no?
+
+wordLength i = go i
+  where
+    go n
+      | n < 10 = lengthOnes !! n
+      | n < 20 = lengthTeens !! (n-10)
+      | n < 100 = (lengthTens !! (n // 10)) + (lengthOnes !! (n % 10))
+      | n < 1000 = (lengthOnes !! (n // 100)) + 7 + go (n % 100)
+      | n < 1000000 = go (n // 1000) + 8 + go (n % 1000)
+      | otherwise = go (n // 1000000) + 7 + go (n % 1000000)
+    !lengthOnes = lengthVec ones
+    !lengthTens = lengthVec tens
+    !lengthTeens = lengthVec teens
+
+2. Why the single element worker wrapper pattern (`go` functions) increases
+performance?
+
+If we change wordLength to
+
+wordLength n
+  | n < 10 = lengthOnes !! n
+  | n < 20 = lengthTeens !! (n-10)
+  | n < 100 = (lengthTens !! (n // 10)) + (lengthOnes !! (n % 10))
+  | n < 1000 = (lengthOnes !! (n // 100)) + 7 + wordLength (n % 100)
+  | n < 1000000 = wordLength (n // 1000) + 8 + wordLength (n % 1000)
+  | otherwise = wordLength (n // 1000000) + 7 + wordLength (n % 1000000)
+  where
+    !lengthOnes = lengthVec ones
+    !lengthTens = lengthVec tens
+    !lengthTeens = lengthVec teens
+
+The performance drops by another 10%. This really surprised me. `go i`
+seemed obvious to me and I don't understand how it could make any
+difference. The full source code is available to GHC so it shouldn't be
+related to call-by-pointer problem? If this is the case, shouldn't we always
+wrap a "go" function for **any** recursive functions?
+
+Thanks!
+
+Chris
+
+On Tue, Aug 9, 2011 at 9:09 AM, Reiner Pope <reiner.pope at gmail.com> wrote:
+
+> On 9 August 2011 10:06, Bryan O'Sullivan <bos at serpentine.com> wrote:
+>
+>> On Mon, Aug 8, 2011 at 9:24 AM, Chris Yuen <kizzx2+haskell at gmail.com>wrote:
+>>
+>>>
+>>> For reference I have asked the same question on StackOverflow. One person
+>>> suggested that the reason might be that Int64 on Windows is broken (
+>>> http://stackoverflow.com/questions/6970904/analyzing-slow-performance-of-a-haskell-program/6976448#6976448
+>>> ).
+>>>
+>>
+>> No, they're barking up the wrong tree.
+>>
+>> I've put an idiomatic Haskell translation of your C++ algorithm at
+>> https://gist.github.com/1133048#file_wordy.hs
+>>
+>> (I've also included a copy of your original C++, with a bug fixed, in the
+>> same gist.)
+>>
+>> As you can see, the two are almost identical. Not surprisingly, each one
+>> spends the bulk of its time computing word lengths.
+>>
+>> GHC simply doesn't do a great job of compiling fairly tight code like
+>> this. gcc generates about 100 lines of assembly that's mostly easy to follow
+>> (except for some bit-twiddling tricks to avoid div instructions). Although
+>> the Core it generates looks fine, GHC spends quite a bit of time in its
+>> generated assembly on what looks to me like STG housekeeping (it spends only
+>> 0.3% of its time in the garbage collector, because it doesn't allocate
+>> memory). The overall result is that the Haskell code runs about 5x more
+>> slowly than the C++ code.
+>>
+>>
+> GHC generating bad assembly suggests trying the llvm codegen (see
+> http://donsbot.wordpress.com/2010/02/21/smoking-fast-haskell-code-using-ghcs-new-llvm-codegen/).
+> Compiling Bryan's code with
+>
+> $ ghc -O2 -fllvm Wordy.hs
+>
+> it now runs only 2x slower than the C++ code.
+>
+> Reiner
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110810/7f97be61/attachment.htm>
+

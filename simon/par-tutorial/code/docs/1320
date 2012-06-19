@@ -1,0 +1,41 @@
+From dokondr at gmail.com  Wed Aug 24 14:57:19 2011
+From: dokondr at gmail.com (dokondr)
+Date: Wed, 24 Aug 2011 16:57:19 +0400
+Subject: [Haskell-cafe] Function composition in run-time?
+In-Reply-To: <20110824124451.GS17168@google.com>
+References: <CAMXF=YBZRy0t2ffQHAAhqVeNzmODQWLq5-DFa_U43OUbYerjEA@mail.gmail.com>
+	<20110824124451.GS17168@google.com>
+Message-ID: <CAMXF=YC1fXFEbBy6CWPpdQJScAFbHcLEViQKH77MiAQ4_6i0nA@mail.gmail.com>
+
+On Wed, Aug 24, 2011 at 4:44 PM, Iustin Pop <iustin at google.com> wrote:
+
+> On Wed, Aug 24, 2011 at 04:35:42PM +0400, dokondr wrote:
+> > Hi,
+> > What is the Haskell way to compose functions in run-time?
+> > Depending on configuration parameters I need to be able to compose
+> function
+> > in several ways without recompilation.
+>
+>
+A simple alternative to if would be:
+>
+>  options = [ ("foo", f1 . f2 . f3)
+>            , ("bar", f1 . f3 )]
+>
+> and then "lookup param options". I don't know if this is what you're
+> looking for, though.
+>
+>
+Thanks!
+Yes, this is what I need - simple and easy. Yet, how function application
+will work in this case ?
+I mean after lookup returns me a composition ... need to check what type
+will it be.
+
+-- 
+All the best,
+dokondr
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110824/ff6420fd/attachment.htm>
+

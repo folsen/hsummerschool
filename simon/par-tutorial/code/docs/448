@@ -1,0 +1,25 @@
+From hthiel.char at zonnet.nl  Sat Apr 16 20:14:03 2011
+From: hthiel.char at zonnet.nl (Hans van Thiel)
+Date: Sat, 16 Apr 2011 20:14:03 +0200
+Subject: [Haskell-cafe] Cairo and Haskell
+Message-ID: <1302977643.2050.53.camel@localhost.localdomain>
+
+Hello Paulo,
+
+<< I guess that would be using Cairo so I can have a 2d canvas to draw
+in and maybe even preview before exporting to PDF. However, I can't find
+any documentation on Cairo with Haskell or any code examples related to
+what I want to do. >>
+
+With regard to export to pdf and other formats this might be useful:
+http://muitovar.com/gtk2hs/app1.html (There's a Spanish translation
+too.) However, this tutorial is a few years old now, and I don't know if
+it's still up to date for the later Gtk2Hs versions.
+
+Best Regards,
+
+Hans van Thiel
+
+
+
+

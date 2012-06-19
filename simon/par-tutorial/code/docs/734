@@ -1,0 +1,29 @@
+From andrew.pennebaker at gmail.com  Tue Apr 26 10:38:05 2011
+From: andrew.pennebaker at gmail.com (Andrew Pennebaker)
+Date: Tue, 26 Apr 2011 04:38:05 -0400
+Subject: [Haskell-cafe] HipmunkPlayground compile error
+Message-ID: <BANLkTikwaNs0eNkrogMadOn00qhFab=AHA@mail.gmail.com>
+
+$ system_profiler SPSoftwareDataType | grep "System Version"
+      System Version: Mac OS X 10.6.7 (10J869)
+$ ghc --version
+The Glorious Glasgow Haskell Compilation System, version 7.0.2
+$ cabal --version
+cabal-install version 0.10.2
+using version 1.10.1.0 of the Cabal library
+$ cabal install hipmunkplayground
+...
+Updating documentation index /Users/andrew/Library/Haskell/doc/index.html
+cabal: Error: some packages failed to install:
+GLFW-0.4.2 failed during the building phase. The exception was:
+ExitFailure 1
+HipmunkPlayground-5.2.0.3 depends on GLFW-0.4.2 which failed to install.
+
+Cheers,
+
+Andrew Pennebaker
+www.yellosoft.us
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110426/9219ba8e/attachment.htm>
+

@@ -1,0 +1,37 @@
+From edgar.klerks at gmail.com  Sat Dec  3 17:55:20 2011
+From: edgar.klerks at gmail.com (edgar klerks)
+Date: Sat, 3 Dec 2011 17:55:20 +0100
+Subject: [Haskell-cafe] ismzero operator possible without equal constraint
+Message-ID: <CAGAUyt=YX3hkczvoKyFws4zCuFO00aoC8MsqFv0Bx6F7mJiEdQ@mail.gmail.com>
+
+Hi list,
+
+I am using MonadSplit (from
+http://www.haskell.org/haskellwiki/New_monads/MonadSplit )  for a project
+and now I want to make a library out of it. This seems to be
+straightforward, but I got stuck when I tried to move miszero out of the
+class:
+
+miszero :: m a -> Bool
+
+It tests if the provided monad instance is empty. My naive attempt was:
+
+miszero :: (Eq (m a), MonadPlus m) => m a -> Bool
+miszero =  ( == mzero )
+
+This works, but not correctly. It adds an Eq constraint that is unneeded. I
+would prefer to have something like:
+
+miszero :: MonadPlus m => m a -> Bool
+
+
+Because I am not comparing the contents of the monad. I don't even touch
+it.  Is this possible to write?
+
+with kind regards,
+
+Edgar
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111203/c0bbcf1a/attachment.htm>
+

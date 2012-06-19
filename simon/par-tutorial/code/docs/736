@@ -1,0 +1,27 @@
+From gracjanpolak at gmail.com  Tue Apr 26 11:10:45 2011
+From: gracjanpolak at gmail.com (Gracjan Polak)
+Date: Tue, 26 Apr 2011 09:10:45 +0000 (UTC)
+Subject: [Haskell-cafe] How to keep cabal and ghci package versions in
+	sync?
+References: <loom.20110424T200650-84@post.gmane.org>
+	<4DB560FA.6030105@henning-thielemann.de>
+Message-ID: <loom.20110426T110933-984@post.gmane.org>
+
+Henning Thielemann <schlepptop <at> henning-thielemann.de> writes:
+> You can manually select packages for GHCi with '-package' option.
+> However I do not know a way to automatically syncronise this with the
+> dependencies from the Cabal file.
+> 
+
+I kind of expected 'cabal-dev ghci' to do this for me.
+
+Thanks for help, I'm cleaning my packages for now.
+
+-- 
+Gracjan
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+From aslatter at gmail.com  Mon Aug 29 18:25:58 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Mon, 29 Aug 2011 11:25:58 -0500
+Subject: [Haskell-cafe] Text.Parsec.Prim
+In-Reply-To: <CAEgBARUKmEuWeWUn+injh19VFRMn2toxko3mK46xw=NOFrgQzg@mail.gmail.com>
+References: <mailman.1602.1314634120.22584.haskell-cafe@haskell.org>
+	<CAEgBARUKmEuWeWUn+injh19VFRMn2toxko3mK46xw=NOFrgQzg@mail.gmail.com>
+Message-ID: <CAKjSnQGqRwbdHHzX2iE52-_=-QR97gi=2V3yWs6s7JSNmvvwOA@mail.gmail.com>
+
+On Mon, Aug 29, 2011 at 11:12 AM, Roly Perera
+<roly.perera at dynamicaspects.org> wrote:
+> Hi,
+>
+> I seem to have some trouble accessing this module. I would like to use
+> the type synonym ParsecT directly.
+>
+> I'm running GHC 6.12.1. According to Hoogle, the type I want is part
+> of parsec-3.1.1, in module Text.Parsec.Prim. But if try to import
+> Text.Parsec.Prim, GHC complains
+>
+> Could not find module `Text.Parsec.Prim':
+>
+> Can anyone help me with this? In the 2+ years I've been using parsec
+> I've never managed to use ParsecT directly, but now it would be very
+> useful.
+>
+
+There might be something off about your packages database.
+
+I just did:
+
+$ cabal update
+$ cabal install parsec
+$ ghci
+> import Text.Parsec.Prim
+
+and it went fine.
+
+Also, the module "Text.Parsec" re-exports the entirety of
+"Text.Parsec.Prim", so you won't get much advantage importing the
+"Prim" module on its own.
+
+Antoine
+
+

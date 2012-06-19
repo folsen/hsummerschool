@@ -1,0 +1,24 @@
+From dons at galois.com  Fri Feb 11 05:26:22 2011
+From: dons at galois.com (Don Stewart)
+Date: Thu, 10 Feb 2011 20:26:22 -0800
+Subject: [Haskell-cafe] Data.ByteString.Lazy.ByteString
+	vs	Data.ByteString.Lazy.Internal.ByteString
+In-Reply-To: <AANLkTi=G-6ftfBTwZHZfFt9n43H7dTZfrf57ZgZUmJFm@mail.gmail.com>
+References: <AANLkTi=G-6ftfBTwZHZfFt9n43H7dTZfrf57ZgZUmJFm@mail.gmail.com>
+Message-ID: <20110211042622.GV14969@whirlpool.galois.com>
+
+ckkashyap:
+>    Hi,
+>    I noticed that even though I declare the type of a function in my code as?
+>    Data.ByteString.Lazy.ByteString ... when I check it out in ghci using :t,
+>    it shows this -?Data.ByteString.Lazy.Internal.ByteString
+>    Is this expected?
+
+Yep, the 'Internal' module is where the type is defined, and then
+re-exported through the regular module.
+
+All is well.
+
+-- Don
+
+

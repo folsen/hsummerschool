@@ -1,0 +1,28 @@
+From simon at joyful.com  Thu Aug 25 20:56:39 2011
+From: simon at joyful.com (Simon Michael)
+Date: Thu, 25 Aug 2011 11:56:39 -0700
+Subject: [Haskell-cafe] ANN: shelltestrunner 1.1
+Message-ID: <03AFA601-B8A2-4821-AEFA-6DECBE6CD266@joyful.com>
+
+I'm pleased to announce shelltestrunner 1.1.
+
+shelltestrunner tests command-line programs or arbitrary shell
+commands.  It reads simple declarative tests specifying a command,
+some input, and the expected output, error output and exit status.
+Tests can be run selectively, in parallel, with a timeout, in color,
+and/or with differences highlighted. Projects using it include
+hledger, yesod, and berp. shelltestrunner is free software released
+under GPLv3+.
+
+New in 1.1:
+
+  * bump process dependency to allow building with GHC 7.2.1
+
+  * new `-a/--all` flag shows all failure output without truncating
+
+Home page: http://joyful.com/shelltestrunner
+
+Install: $ cabal install shelltestrunner
+
+
+

@@ -1,0 +1,38 @@
+From daniel.is.fischer at googlemail.com  Wed Apr 20 12:04:23 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Wed, 20 Apr 2011 12:04:23 +0200
+Subject: [Haskell-cafe] QuickCheck, (Ord a)=> [a] -> Property problem
+In-Reply-To: <78a0d4c2-d239-490c-a490-491f0dcabfd5@f11g2000vbx.googlegroups.com>
+References: <78a0d4c2-d239-490c-a490-491f0dcabfd5@f11g2000vbx.googlegroups.com>
+Message-ID: <201104201204.23491.daniel.is.fischer@googlemail.com>
+
+On Wednesday 20 April 2011 11:43:08, larry.liuxinyu wrote:
+> Hi,
+> 
+> I found there is similar question as:
+> http://groups.google.com/group/haskell-cafe/browse_thread/thread/7439262
+> e9ac80dd2/91ca18e11ff00649?lnk=gst&q=QuickCheck+Ord+a#91ca18e11ff00649
+> 
+> I am still think it's very strange. For example:
+> 
+> prop_foo :: (Ord a) => [a] -> Property
+> prop_foo xs = not (null xs) ==> maximum xs == minimum xs
+> 
+> This is an extreme case that the property is always wrong.
+
+Not always, replicate n x has this property.
+
+> 
+> However, QuickCheck produces:
+> *Main> test prop_foo
+> OK, passed 100 tests.
+
+> 
+> This works at least, However, since 'a'<'b', they are order-able, what
+> if I want to test prop_foo works for char?
+
+ghci> test (prop_foo :: [Char] -> Property)
+
+You have to determine the type, by an explicit signature or by context.
+
+

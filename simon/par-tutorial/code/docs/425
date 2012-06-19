@@ -1,0 +1,42 @@
+From mail at joachim-breitner.de  Fri Apr 15 15:26:45 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Fri, 15 Apr 2011 18:56:45 +0530
+Subject: [Haskell-cafe] build fails due to sem_close...
+In-Reply-To: <1302867097.3047.14.camel@skalniknb>
+References: <1302867097.3047.14.camel@skalniknb>
+Message-ID: <1302874005.2644.98.camel@kirk>
+
+Hi,
+
+Am Freitag, den 15.04.2011, 13:31 +0200 schrieb Jiri Skala:
+> Hi all,
+> I've got error listed below when I've tried to build ghc-7.0.2 on ppc64
+> arch. I 've tested patch from Debian (-pthread option) but this didn't
+> fix the issue.
+> 
+> Any idea what's wrong?
+> 
+> Thanks for any tip/help.
+
+it should help :-). Have you run autoconf after changing configure.in,
+and have you rebuilt unix afterwards? We have:
+
+# ghc-pkg field unix extra-libraries
+extra-libraries: rt util dl pthread
+
+Greetings,
+Joachim
+
+-- 
+Joachim "nomeata" Breitner
+  mail: mail at joachim-breitner.de | ICQ# 74513189 | GPG-Key: 4743206C
+  JID: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+  Debian Developer: nomeata at debian.org
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110415/26d859fb/attachment.pgp>
+

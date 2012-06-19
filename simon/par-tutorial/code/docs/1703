@@ -1,0 +1,59 @@
+From joey at kitenet.net  Tue Dec  6 16:32:52 2011
+From: joey at kitenet.net (Joey Hess)
+Date: Tue, 6 Dec 2011 11:32:52 -0400
+Subject: [Haskell-cafe] ANNOUNCE: monad-control-0.3
+In-Reply-To: <CADLz5wX6aSLyjxpjZ_H00e4vQdf=-6gAbMsXZ_vKrROWFrMzjQ@mail.gmail.com>
+References: <CADLz5wW4oZbBtKMb7UQ8qQdn3UayBSQ-TL66VLG3hGXCUk_npg@mail.gmail.com>
+	<CADLz5wVs3AGCagikDMJVKVm-RJjgMhCbs7LJtxGPqi_rLbjRqQ@mail.gmail.com>
+	<20111206030316.GA25805@gnu.kitenet.net>
+	<CADLz5wX6aSLyjxpjZ_H00e4vQdf=-6gAbMsXZ_vKrROWFrMzjQ@mail.gmail.com>
+Message-ID: <20111206153252.GA2777@gnu.kitenet.net>
+
+Bas van Dijk wrote:
+> You can use the following:
+> 
+> {-# LANGUAGE GeneralizedNewtypeDeriving, TypeFamilies, MultiParamTypeClasses #-}
+> 
+> import Control.Applicative
+> import Control.Monad
+> import Control.Monad.Base
+> import Control.Monad.Trans.Class
+> import Control.Monad.Trans.Control
+> import Control.Monad.Trans.State
+> import Control.Monad.IO.Class
+> 
+> newtype Annex a = Annex { runAnnex :: StateT AnnexState IO a }
+>        deriving (Applicative, Functor, Monad, MonadIO)
+> 
+> data AnnexState = AnnexState
+> 
+> instance MonadBase IO Annex where
+>     liftBase = Annex . liftBase
+> 
+> instance MonadBaseControl IO Annex where
+>     newtype StM Annex a = StAnnex (StM (StateT AnnexState IO) a)
+>     liftBaseWith f = Annex $ liftBaseWith $ \runInIO ->
+>                        f $ liftM StAnnex . runInIO . runAnnex
+> 
+> When I have some time I will add some better documentation to monad-control.
+
+Hmm, very close. With -Wall, I get:
+
+Annex.hs:54:10:
+    Warning: No explicit method nor default method for `restoreM'
+    In the instance declaration for `MonadBaseControl IO Annex'
+
+And my program crashes at runtime (!)
+
+No instance nor default method for class operation Control.Monad.Trans.Control.restoreM
+
+-- 
+see shy jo
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 828 bytes
+Desc: Digital signature
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111206/dc29f35f/attachment.pgp>
+

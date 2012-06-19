@@ -1,0 +1,44 @@
+From wren at freegeek.org  Fri Feb  4 02:38:50 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Thu, 03 Feb 2011 20:38:50 -0500
+Subject: [Haskell-cafe] Problems with iteratees
+In-Reply-To: <4D4B45FE.1020305@gmail.com>
+References: <4D49FF9B.9090009@freegeek.org> <4D4B4567.4010505@gmail.com>
+	<4D4B45FE.1020305@gmail.com>
+Message-ID: <4D4B58AA.3020501@freegeek.org>
+
+On 2/3/11 7:19 PM, Brandon S Allbery KF8NH wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 2/3/11 19:16 , Brandon S Allbery KF8NH wrote:
+>> POSIX FIFOs and GHC's nonblocking file descriptors implementation don't play
+>> well together; you should launch the writer end first and let it block
+>
+> More specifically, I think what's happening here is that a non-blocking
+> open() of a FIFO returns with the fd not actually open yet, a situation
+> which isn't expected, and a blocking open will block until the other side is
+> opened.
+
+When opening the Fd[1], the program does block until the other end is 
+opened by another process (verified via printf debugging). But I'll keep 
+that in mind while digging around. I was aware of semi-closed handles, 
+but not semi-open Fds.
+
+
+[1] Via (System.Posix.IO.openFd file System.Posix.IO.ReadOnly Nothing 
+System.Posix.IO.defaultFileFlags). Unfortunately, if compiled under GHC 
+<= 6.12.1 with -threaded, then openFd will always throw an error about 
+the system call being interrupted by GHC's thread scheduling timer. This 
+bug is fixed in unix-2.4.1.0 which, IIRC, requires GHC-7. The problem is 
+that the earlier implementation of openFd uses throwErrnoPathIfMinus1, 
+instead of throwErrnoPathIfMinus1Retry (which does not exist in base <= 
+4.3.0.0). Cf.,
+
+http://www.haskell.org/pipermail/glasgow-haskell-users/2009-December/018147.html
+
+-- 
+Live well,
+~wren
+
+

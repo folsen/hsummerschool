@@ -1,0 +1,47 @@
+From patai_gergely at fastmail.fm  Tue Apr 19 10:39:18 2011
+From: patai_gergely at fastmail.fm (Patai Gergely)
+Date: Tue, 19 Apr 2011 10:39:18 +0200
+Subject: [Haskell-cafe] Confusing performance variation while optimising a
+	tight loop
+Message-ID: <1303202358.7914.1442758705@webmail.messagingengine.com>
+
+Hello all,
+
+I've been trying to improve the performance of Hemkay, my MOD player.
+The mixing routines are in a separate library with no special
+dependencies. Most of the time is spent in a small loop in the
+mixToBuffer function [1] (note that this version is not the master
+branch in case you give it a try). Each iteration does the following: it
+advances a pointer in a waveform (float vector) with a fractional amount
+(depending on the frequency at which it's played back), multiplies it by
+the desired volume and distributes it over the two channels (two more
+multiplication). The case where the step is less than zero is special
+cased for efficiency (lines 170-183), but commenting that out won't
+affect the output, just make it take about 15% more time. The isEmpty
+and stepWave' functions come from the Music module.
+
+The confusion is the following: a waveform can be of three kinds (empty,
+single-shot or looped), which is represented by a plain sum type. In the
+fastest version I match this pattern twice for every sample output
+(through the isEmpty and stepWave' functions). Since the kind of
+waveform doesn't change during this tight loop, I figured I could speed
+it up by moving the pattern match out of the loop and only increasing
+the index into the vector, thereby doing strictly less work per sample.
+This is the version on lines 204-234. However, this modification makes
+the program twice as slow as the original, and I simply don't understand
+what I'm doing wrong or what could possibly cause this!
+
+The speed test is a self-contained program in the test directory, you
+can compile it after installing the library. If you pass it a MOD music
+file, it'll perform mixing and quit immediately afterwards.
+
+Gergely
+
+[1]
+https://github.com/cobbpg/hemkay-core/blob/vector/Sound/Hemkay/Mixer.hs
+
+-- 
+http://www.fastmail.fm - The professional email service
+
+
+

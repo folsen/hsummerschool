@@ -1,0 +1,14 @@
+From martindemello at gmail.com  Tue Dec 13 01:50:24 2011
+From: martindemello at gmail.com (Martin DeMello)
+Date: Mon, 12 Dec 2011 16:50:24 -0800
+Subject: [Haskell-cafe] indentation blues
+Message-ID: <CAFrFfuGkeHEMfsitZoyaGWz=RZvuaUc8KKGK57dFdJL-kj_43w@mail.gmail.com>
+
+The vim autoindent for haskell is really bad :( Is there a better
+indent.hs file floating around somewhere? Alternatively, is the emacs
+haskell mode better enough that it's worth my time learning my way
+around emacs and evil?
+
+martin
+
+

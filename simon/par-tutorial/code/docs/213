@@ -1,0 +1,34 @@
+From magnus at therning.org  Thu Apr  7 14:18:08 2011
+From: magnus at therning.org (Magnus Therning)
+Date: Thu, 7 Apr 2011 13:18:08 +0100
+Subject: [Haskell-cafe] Local copy of hackageDB
+In-Reply-To: <1302171567-sup-8769@nixos>
+References: <BANLkTi=dXeg+movZswKiaTavDNaJxhHOuQ@mail.gmail.com>
+	<1302171567-sup-8769@nixos>
+Message-ID: <BANLkTimWixajCFjUx-33_Cq-txo7m1SPpQ@mail.gmail.com>
+
+On Thu, Apr 7, 2011 at 11:21, Marc Weber <marco-oweber at gmx.de> wrote:
+> Local copy ?
+> You know that hackage is hosting several thausands of source archives -
+> also old versions you don't want?
+>
+> Do you want to mirror everything locally?
+>
+> Fetching "latest" versions only to generate hashes takes many hours.
+> (Experience from hack-nix).
+
+There's a tar-ball served from
+http://hackage.haskell.org/packages/hackage.html
+(http://hackage.haskell.org/cgi-bin/hackage-scripts/archive.tar) which
+contains the latest version of all packages.  I think that's what the
+OP is using.  Downloading a 150MB tar-ball shouldn't take many hours,
+if you're on a decent connection.
+
+/M
+
+-- 
+Magnus Therning ? ? ? ? ? ? ? ? ? ? ?OpenPGP: 0xAB4DFBA4
+email: magnus at therning.org ? jabber: magnus at therning.org
+twitter: magthe ? ? ? ? ? ? ? http://therning.org/magnus
+
+

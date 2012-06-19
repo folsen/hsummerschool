@@ -1,0 +1,34 @@
+From gcrosswhite at gmail.com  Thu Dec 15 09:49:13 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Thu, 15 Dec 2011 18:49:13 +1000
+Subject: [Haskell-cafe] Alternative versus Monoid
+Message-ID: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+
+Hey everyone,
+
+First, thank you all for this great discussion!  I unfortunately have been home due to health concerns which gets really boring after a while, so being able to participate in such a fun intellectual exercise like has really been making my day.  :-D  Sorry that this has resulted in such a flood of commentary on the list!
+
+Antoine Latter has pointed out to me that (using my own words here) essentially entire parser libraries are built around the assumption that many and some are sensibly defined the way that they are, and that as a result much of their functionality simply doesn't make sense for Maybe and [].
+
+So maybe the best approach to take really is to remove the instance for Maybe and [] from Alternative.  After all, some and many simply are not well-behaved for them, and if you are using Alternative you are expecting them to be well-behaved.
+
+Now, on the other hand, one might argue:  but Maybe and [] have well-defined functions for empty and <|>, so since some and many are defined in terms of these operations, shouldn't that make Maybe and [] natural instances of Alternative anyway?
+
+And *this* is where Haskell separates its way from other languages.  In others language we may very well just say, "Well, good point, why not make them instances of Alternative, and simply not worry about the fact that some and many don't behave well --- just don't use them like that!"
+
+But in Haskell we don't do things this way.  When we make something be an instance of a typeclass, we want that to *mean* something.  In the case of Alternative, we want, among other things, for it to mean that our type has sensible meanings for some and many --- and if Maybe and [] simply do not meet this criteria, then THEN THEY DESERVE TO BE CAST OUT!
+
+I know, I know, I can hear you all shouting:  This is blasphemy! This is madness! 
+
+Madness?  This... IS HASKELL!
+
+But on a more serious note, it turns out that we *already* have a typeclass that does everything that Alternative does but without the "some" and "many" baggage:  it's called "Monoid"!  So we can already get all of the features that we need (and most likely have been using anyway) by using the Monoid instances for Maybe and [] and just forgetting about the existence of Alternative entirely.
+
+So at the end of the day... what is the point of even making Maybe and [] instances of Alternative?
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/93a20510/attachment.htm>
+

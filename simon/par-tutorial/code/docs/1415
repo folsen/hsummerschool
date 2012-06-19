@@ -1,0 +1,14 @@
+From schernichkin at gmail.com  Sat Aug 27 19:08:46 2011
+From: schernichkin at gmail.com (=?UTF-8?B?0KHRgtCw0L3QuNGB0LvQsNCyINCn0LXRgNC90LjRh9C60LjQvQ==?=)
+Date: Sat, 27 Aug 2011 21:08:46 +0400
+Subject: [Haskell-cafe] HJavaScript: representing build-in global function.
+Message-ID: <CANYoZUQ8fRq4VS1k_tFghfoH3wdUPFSUT6juM0OWL3PGJMVTXg@mail.gmail.com>
+
+Hi Cafe! Does someone know how to represent js build-in global
+function (such as parseInt(), parseFloat(), eval()) with HJavaScript?
+Perhaps JConst: JCall (JConst "parseInt") (JString "123")?
+
+-- 
+Sincerely, Stanislav Chernichkin.
+
+

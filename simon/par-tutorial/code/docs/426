@@ -1,0 +1,24 @@
+From pocmatos at gmail.com  Fri Apr 15 15:54:19 2011
+From: pocmatos at gmail.com (Paulo J. Matos)
+Date: Fri, 15 Apr 2011 14:54:19 +0100
+Subject: [Haskell-cafe] Cairo and Haskell
+Message-ID: <io9imb$1n8$1@dough.gmane.org>
+
+Hi,
+
+I would like to use Haskell to generate automatically a poster.
+I guess that would be using Cairo so I can have a 2d canvas to draw in 
+and maybe even preview before exporting to PDF.
+
+However, I can't find any documentation on Cairo with Haskell or any 
+code examples related to what I want to do.
+
+Any suggestions?
+
+Cheers,
+
+--
+PMatos
+
+
+

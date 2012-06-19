@@ -1,0 +1,43 @@
+From ok at cs.otago.ac.nz  Tue Apr 12 07:48:07 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Tue, 12 Apr 2011 17:48:07 +1200
+Subject: [Haskell-cafe] Tuple
+In-Reply-To: <93578.14795.qm@web33505.mail.mud.yahoo.com>
+References: <93578.14795.qm@web33505.mail.mud.yahoo.com>
+Message-ID: <26257935-97CA-4416-A76F-8B36AFBE5D04@cs.otago.ac.nz>
+
+
+On 11/04/2011, at 4:49 AM, Anwar Bari wrote:
+
+> HI Cafe 
+>     I have to make a function to check that I have one occurrence of the last 
+> element (z) of the same list [a,b] in the tuple 
+> 
+> [([a,b],z)] 
+> For example
+> [([1,2],3),([1,1],5),([1,3],6).......]  this is true because there is one single 
+> z for each single list.
+> 
+> while this one is false 
+> [([1,2],3),([1,2],5),([1,3],6).......] because 3&5 were found for the same list 
+> [1,2]
+> 
+> any Idea how to code this Fn. 
+
+Let m = length xs
+
+has_duplicate_key [] = False
+has_duplicate_key ((k,v):xs) =
+   if null [v' | (k',v') <- xs, k' == k]
+      then has_duplicate_key xs
+      else True
+
+is perhaps the obvious code, but it's O(n**2).
+Sorting on the first element of the pairs takes
+O(n.lg n) time, and then checking for two adjacent
+(k,v),(k,v') pairs takes O(n).
+
+You can also use Data.Map in a fairly obvious way.
+
+
+

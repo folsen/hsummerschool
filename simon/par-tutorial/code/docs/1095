@@ -1,0 +1,28 @@
+From ivan.miljenovic at gmail.com  Sat Aug 13 14:18:25 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Sat, 13 Aug 2011 22:18:25 +1000
+Subject: [Haskell-cafe] Diffs for hackage
+In-Reply-To: <1313233067.4424.12.camel@kirk>
+References: <CALqQuoi88Uk7GF3QeFSxBwzYybc6w69h4sxPGmk_HjbKgyhbTg@mail.gmail.com>
+	<1313233067.4424.12.camel@kirk>
+Message-ID: <CA+u6gbxTPvLscpn82GvyoTAr88yJj+B7=qqfYHwRP14tXWmDaw@mail.gmail.com>
+
+On 13 August 2011 20:57, Joachim Breitner <mail at joachim-breitner.de> wrote:
+> Maybe it would already help to add a "changelog-file" field to .cabal,
+> just as with license-file, and reject packages on hackage that do not
+> have this field and file, and later decide if we need a more
+> standardized format for changelogs.
+
+I agree, but it would be nice to also have optional readme-file,
+todo-file and doc-files fields (the latter to let us avoid banging
+documentation in with "extra-source-files").
+
+As for a standardised format... I'm not sure if we need to enforce a
+particular format, as long as it's understandable.
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

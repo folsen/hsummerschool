@@ -1,0 +1,17 @@
+ From what I could determine from a basic Clean introduction, Clean is 
+very *unlike* Haskell, having a far more verbose and low-level syntax. 
+(E.g., the compiler can't even determine whether a binding is recursive 
+or not for itself. You have to say that manually.) It seems a very 
+unecessarily complicated and messy language - which makes the name 
+rather ironic.
+
+> You can even compile Haskell 98
+> code with the latest (experimental) Clean compiler and having it
+> interact with Clean code and vice-versa [2]. The main difference is
+> Clean's use of uniqueness typing.
+
+As I say, I thought the main difference is that Clean is strict (which 
+is why you can get good performance). Uniqueness typing is an 
+interesting idea, that looks like it might be useful for more than mere I/O.
+
+

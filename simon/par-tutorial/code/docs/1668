@@ -1,0 +1,81 @@
+From dokondr at gmail.com  Mon Dec  5 15:53:35 2011
+From: dokondr at gmail.com (dokondr)
+Date: Mon, 5 Dec 2011 17:53:35 +0300
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAHZd2pm0B6WESqF5Y9CYzt8tvhKFGa+gJtpE89HFrvsHyBBCkg@mail.gmail.com>
+References: <CAHZd2pn--Umo43nENkrtXKLwh1TYs-SJpHNT8QGCjOfhkTCZFg@mail.gmail.com>
+	<CAMXF=YBAufCAuVWEJ1KFndFvjm0fY5zCcQRq1B=1_bgrmG1evg@mail.gmail.com>
+	<CAMXF=YB5si2DCHBjH5S94_seLhGBzQG4MPWZx_9pnohWsCMXAg@mail.gmail.com>
+	<CAHZd2pm0B6WESqF5Y9CYzt8tvhKFGa+gJtpE89HFrvsHyBBCkg@mail.gmail.com>
+Message-ID: <CAMXF=YCpAGRVX7QZDMek+7ibFgQgXDiGW=T6wq9NKM_A-N=Okg@mail.gmail.com>
+
+Balazs, thanks for your comments!
+The first comment works just fine.
+With </> operator I get this:
+
+Main System.Environment.Executable System.FilePath> "/abc" </> "/"
+"/"
+
+Instead of getting "/abc/" I get "/". What am I doing wrong?
+
+On Mon, Dec 5, 2011 at 6:03 PM, Balazs Komuves <bkomuves at gmail.com> wrote:
+
+>
+> Two small comments:
+>
+> 1) This should work on Windows too, if you just leave out the word "Posix"
+> from the source:
+> import System.FilePath (splitFileName)
+>
+> 2) In general when dealing with paths, use the </> operator (from
+> System.FilePath)
+> instead of ++ "/" ++
+>
+> Balazs
+>
+>
+> On Mon, Dec 5, 2011 at 1:44 PM, dokondr <dokondr at gmail.com> wrote:
+>
+>> This is how I finally solved this problem for POSIX complaint system:
+>>
+>> --
+>> -- TestRun
+>> --
+>> module Main where
+>> import System.Cmd (rawSystem)
+>> import System.Directory (getCurrentDirectory)
+>> import System.Environment.Executable (ScriptPath(..), getScriptPath)
+>> import System.FilePath.Posix (splitFileName)
+>>
+>> main = do
+>>
+>>   path <- getMyPath
+>>   putStrLn $ "myPath = " ++ path
+>>   let cmdLine = path ++ "args.sh"
+>>   rawSystem cmdLine  ["iphone", "test-twitts.txt"]
+>>
+>> {--
+>> data ScriptPath Source
+>>
+>> Constructors:
+>> Executable FilePath    it was (probably) a proper compiled executable
+>> RunGHC FilePath        it was a script run by runghc/runhaskell
+>> Interactive                     we are in GHCi
+>> --}
+>>
+>> getMyPath = do
+>>   curDir <- getCurrentDirectory -- from System.Directory
+>>   scriptPath  <- getScriptPath -- from System.Environment.Executable
+>>   let path = getMyPath' scriptPath curDir
+>>   return path
+>>
+>> getMyPath' (Executable path) _ = fst (splitFileName path)
+>> getMyPath' (RunGHC path) _  = fst (splitFileName path)
+>> getMyPath' Interactive curDir = curDir++"/"
+>>
+>>
+>>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111205/39b957a2/attachment.htm>
+

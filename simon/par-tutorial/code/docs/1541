@@ -1,0 +1,21 @@
+From trebla at vex.net  Tue Aug 30 21:19:33 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Tue, 30 Aug 2011 15:19:33 -0400
+Subject: [Haskell-cafe] Text.Parsec.Prim
+In-Reply-To: <CAEgBARWas5vNWHdMcMibfUv3VezBex4EOQOtD5EN-QAUeHYBxQ@mail.gmail.com>
+References: <mailman.1602.1314634120.22584.haskell-cafe@haskell.org>	<CAEgBARUKmEuWeWUn+injh19VFRMn2toxko3mK46xw=NOFrgQzg@mail.gmail.com>	<CAKjSnQGqRwbdHHzX2iE52-_=-QR97gi=2V3yWs6s7JSNmvvwOA@mail.gmail.com>
+	<CAEgBARWas5vNWHdMcMibfUv3VezBex4EOQOtD5EN-QAUeHYBxQ@mail.gmail.com>
+Message-ID: <4E5D37C5.3060001@vex.net>
+
+On 11-08-29 12:35 PM, Roly Perera wrote:
+> Cool. I assumed that since I already had Parsec installed as part of
+> the Haskell Platform it wouldn't have made any difference, but
+> actually it sorted it. Thanks a lot!
+
+The combination of "ghc 6.12.1" and "haskell platform" suggests it is a 
+pretty old haskell platform, whose parsec is version 2. It does not have 
+ParsecT.
+
+Your recent "cabal install parsec" gets you version 3.
+
+

@@ -1,0 +1,40 @@
+From limestrael at gmail.com  Sat Dec 31 13:43:02 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Sat, 31 Dec 2011 13:43:02 +0100
+Subject: [Haskell-cafe] Are all monads functions?
+In-Reply-To: <4EFEFF81.9000803@unicaen.fr>
+References: <CACqaG6y79_uXmOm4Snxg9H=zmLaemqQN+rG3eHHR3W0xB2bxAg@mail.gmail.com>
+	<4EFEFF81.9000803@unicaen.fr>
+Message-ID: <CACqaG6zMEe-7BbgEMJZ8izo_6S=31vfSSLv5NOzKyJ3nhDbFRg@mail.gmail.com>
+
+Maybe and [] have still the same meaning: they can be seen as functions:
+- they represent the result(s) that might or might not have a computation
+- *they have to be called/ran/executed* (wichever term you prefer) through
+Data.Maybe.maybe or Data.List.foldX, so that we can extract some value out
+of them.
+It's just that their input is () (void). But in Haskell, the type:
+() -> Maybe a
+is useless, Maybe a is sufficient.
+
+Maybe in that case "procedure" is then a better term than function.
+
+2011/12/31 Jerzy Karczmarczuk <jerzy.karczmarczuk at unicaen.fr>
+
+> Yves Par?s :
+>
+>  all standard Monads are newtypes wrapping functions
+>>
+> What about Maybe and [] ?
+>
+> Jerzy Karczmarczuk
+>
+>
+> ______________________________**_________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/**mailman/listinfo/haskell-cafe<http://www.haskell.org/mailman/listinfo/haskell-cafe>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111231/733ec9ab/attachment.htm>
+

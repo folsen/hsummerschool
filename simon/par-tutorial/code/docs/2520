@@ -1,0 +1,38 @@
+From limestrael+haskell at gmail.com  Sat Dec 31 13:09:37 2011
+From: limestrael+haskell at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Sat, 31 Dec 2011 13:09:37 +0100
+Subject: [Haskell-cafe] Are all monads functions?
+Message-ID: <CACqaG6y79_uXmOm4Snxg9H=zmLaemqQN+rG3eHHR3W0xB2bxAg@mail.gmail.com>
+
+Hello Caf?,
+
+One thought occur to me recently when explaining the concept of Monad to
+non-haskellers: internally, all standard Monads are newtypes wrapping
+functions:
+StateT is, WriterT is, ContT is. Even IO and ST are, both conceptually and
+in their implementation by GHC.
+ParsecT (not part of mtl, but still) is. And so on...
+
+So I'm saying that most of the time, we define a new monad:
+- either by building a monad stack of existing transformers (thus "melting"
+their internal functions),
+- or by creating a newtype containing a custom function.
+
+Thinking thusly, >>= would then just be a special function composition
+operator: in the spirit of '.' but for a specific type of functions.
+
+So my questions are:
+- Is it reasonable to think like that, or are there too many monads that
+cannot be defined like that, and then contradict me?
+- Is it reasonable to present monads to newcomers by saying : monads are
+basically always functions. 'return x' will then be a function that always
+return 'x' regardless of its input and >>= is a special composition for
+this occasion.
+
+
+-- 
+The ? is a lie.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111231/02e9a3fe/attachment.htm>
+

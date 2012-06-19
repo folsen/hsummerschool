@@ -1,0 +1,62 @@
+From dons00 at gmail.com  Mon Apr 18 18:48:44 2011
+From: dons00 at gmail.com (Don Stewart)
+Date: Mon, 18 Apr 2011 09:48:44 -0700
+Subject: [Haskell-cafe] [Haskell] select(2) or poll(2)-like function?
+In-Reply-To: <BANLkTin9cS6OUqTg4avRpcET4DS_oBFLUg@mail.gmail.com>
+References: <20110417202902.GA7656@nutty.outback.escape.de>
+	<BANLkTikg=DFzHqm6qwdnxui7dkH8-Zz-7w@mail.gmail.com>
+	<BANLkTikRwK-Xo2fubid32+pyo7vubi9BPQ@mail.gmail.com>
+	<20110418060108.GA28930@login.cse.iitk.ac.in.cse.iitk.ac.in>
+	<20110418031317.41afd6f9@bhuda.mired.org>
+	<BANLkTin29BVd=+u0TisYBj7itd8PSTrhLw@mail.gmail.com>
+	<20110418060024.2785d3c3@bhuda.mired.org>
+	<20110418125639.047707c7@angst.streitmacht.eu>
+	<20110418075557.08f999d1@bhuda.mired.org>
+	<20110418175439.32a11749@angst.streitmacht.eu>
+	<BANLkTin9cS6OUqTg4avRpcET4DS_oBFLUg@mail.gmail.com>
+Message-ID: <BANLkTinWP+kbBRVG5iVrcK80MU4V4_XpfQ@mail.gmail.com>
+
+Redirecting to haskell-cafe@, where this kind of long discussion belongs.
+
+On Mon, Apr 18, 2011 at 9:07 AM, Colin Adams
+<colinpauladams at googlemail.com> wrote:
+>
+>
+> On 18 April 2011 16:54, Ertugrul Soeylemez <es at ertes.de> wrote:
+>>
+>> >
+>> > Well, *someone* has to worry about robustness and scalability. Users
+>> > notice when their two minute system builds start taking four minutes
+>> > (and will be at my door wanting me to fix it) because something didn't
+>> > scale fast enough, or have to be run more than once because a failing
+>> > component build wasn't restarted properly. I'm willing to believe that
+>> > haskell lets you write more scalable code than C, but C's tools for
+>> > handling concurrency suck, so that should be true in any language
+>> > where someone actually thought about dealing with concurrency beyond
+>> > locks and protected methods. The problem is, the only language I've
+>> > found where that's true that *also* has reasonable tools to deal with
+>> > scaling beyond a single system is Eiffel (which apparently abstracts
+>> > things even further than haskell - details like how concurrency is
+>> > achieved or how many concurrent operations you can have are configured
+>> > when you start an application, *not* when writing it). Unfortunately,
+>> > Eiffel has other problems that make it undesirable.
+>>
+>> I can't make a comparison, because I don't know Eiffel.
+>
+> I do, and I don't recognize what the OP is referring to - I suspect he meant
+> Erlang.
+>
+> --
+> Colin Adams
+> Preston, Lancashire, ENGLAND
+> ()? ascii ribbon campaign - against html e-mail
+> /\? www.asciiribbon.org?? - against proprietary attachments
+>
+> _______________________________________________
+> Haskell mailing list
+> Haskell at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell
+>
+>
+
+

@@ -1,0 +1,154 @@
+From caseyh at istar.ca  Fri Apr 29 04:13:15 2011
+From: caseyh at istar.ca (caseyh at istar.ca)
+Date: Thu, 28 Apr 2011 22:13:15 -0400
+Subject: [Haskell-cafe] -- Extension for "Pearls of Functional Algorithm
+ Design" by Richard Bird, 2010,
+ page 25 #Haskell -- Extension for "Pearls of Functional Algorithm Design" by
+ Richard Bird, -- 2010,
+ page 25 #Haskell -- This version assumes 3 disjoint ordered sets represented
+ as sorted arrays.ts.
+Message-ID: <20110428221315.31327av7hnlwon23@webmail.uniserve.com>
+
+-- Extension for "Pearls of Functional Algorithm Design" by Richard  
+Bird, 2010, page 25 #Haskell
+
+-- O(log|X|+log|Y|+log|Z|) performance
+
+-- Question: is there a way to get the type signature as the following:
+-- smallest :: (Ord a) => Int -> [Array Int a] -> a
+
+
+module SelectionProblem where
+
+import Data.Array
+import Data.List
+
+
+-- Works on 2 finite ordered disjoint sets represented as sorted arrays.
+smallest :: (Ord a) => Int -> (Array Int a, Array Int a) -> a
+smallest k (xa,ya) =
+~~~~search k (xa,ya) (0,m+1) (0,n+1)
+~~~~~~~~where
+~~~~~~~~(0,m) = bounds xa
+~~~~~~~~(0,n) = bounds ya
+
+
+-- Removed some of the "indexitis" at the cost of calling another function.
+search :: (Ord a) => Int -> (Array Int a, Array Int a) -> (Int,Int) ->  
+(Int,Int) -> a
+search k (xa,ya) (lx,rx) (ly,ry)
+~~~~| lx == rx  = ya ! (k+ly)
+~~~~| ly == ry  = xa ! (k+lx)
+~~~~| otherwise = case (xa ! mx < ya ! my) of
+~~~~~~~~~~~~~~~~~~~~~~(True)    -> smallest2h k (xa,ya)  
+((lx,mx,rx),(ly,my,ry))
+~~~~~~~~~~~~~~~~~~~~~~(False)   -> smallest2h k (ya,xa)  
+((ly,my,ry),(lx,mx,rx))
+~~~~~~~~~~~~~~~~~~where
+~~~~~~~~~~~~~~~~~~~~~~mx = (lx+rx) `div` 2
+~~~~~~~~~~~~~~~~~~~~~~my = (ly+ry) `div` 2
+
+
+-- Here the sorted arrays are in order by their middle elements.
+-- Only cutting the leading or trailing array by half.
+
+-- Here xa is the first array and ya the second array by their middle  
+elements.
+
+smallest2h :: (Ord a) => Int -> (Array Int a, Array Int a) ->  
+((Int,Int,Int),(Int,Int,Int)) -> a
+smallest2h k (xa,ya) ((lx,mx,rx),(ly,my,ry)) =
+~~~~case (k<=mx-lx+my-ly) of
+~~~~~~(True)    -> search k (xa,ya) (lx,rx) (ly,my)
+~~~~~~(False)   -> search (k-(mx-lx)-1) (xa,ya) (mx+1,rx) (ly,ry)
+
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+-- Works on 3 finite ordered disjoint sets represented as sorted arrays.
+
+smallest3 :: (Ord a) => Int -> (Array Int a, Array Int a, Array Int a) -> a
+smallest3 k (xa,ya,za) =
+~~~~-- On each recursive call the order of the arrays can switch.
+~~~~search3 k (xa,ya,za) (0,bx+1) (0,by+1) (0,bz+1)
+~~~~~~~~where
+~~~~~~~~(0,bx) = bounds xa
+~~~~~~~~(0,by) = bounds ya
+~~~~~~~~(0,bz) = bounds za
+
+
+-- Removed some of the "indexitis" at the cost of calling another function.
+search3 :: (Ord a) => Int -> (Array Int a, Array Int a, Array Int a) ->
+~~~~~~~~~~~~(Int,Int) -> (Int,Int) -> (Int,Int) -> a
+search3 k (xa,ya,za) (lx,rx) (ly,ry) (lz,rz)
+~~~~| lx == rx && ly == ry  = za ! (k+lz)
+~~~~| ly == ry && lz == rz  = xa ! (k+lx)
+~~~~| lx == rx && lz == rz  = ya ! (k+ly)
+
+~~~~| lx == rx  = search k (ya,za) (ly,ry) (lz,rz)
+~~~~| ly == ry  = search k (xa,za) (lx,rx) (lz,rz)
+~~~~| lz == rz  = search k (xa,ya) (lx,rx) (ly,ry)
+
+~~~~| otherwise = case (xa ! mx < ya ! my, xa ! mx < za ! mz, ya ! my  
+< za ! mz) of
+~~~~~~~~~~~~~~~~~~~~~~(True, True, True)    -> smallest3h k (xa,ya,za)  
+((lx,mx,rx),(ly,my,ry),(lz,mz,rz)) -- a<b<c
+~~~~~~~~~~~~~~~~~~~~~~(True, True, False)   -> smallest3h k (xa,za,ya)  
+((lx,mx,rx),(lz,mz,rz),(ly,my,ry)) -- a<c<b
+~~~~~~~~~~~~~~~~~~~~~~(False, True, True)   -> smallest3h k (ya,xa,za)  
+((ly,my,ry),(lx,mx,rx),(lz,mz,rz)) -- b<a<c
+~~~~~~~~~~~~~~~~~~~~~~(False, False, True)  -> smallest3h k (ya,za,xa)  
+((ly,my,ry),(lz,mz,rz),(lx,mx,rx)) -- b<c<a
+~~~~~~~~~~~~~~~~~~~~~~(True, False, False)  -> smallest3h k (za,xa,ya)  
+((lz,mz,rz),(lx,mx,rx),(ly,my,ry)) -- c<a<b
+~~~~~~~~~~~~~~~~~~~~~~(False, False, False) -> smallest3h k (za,ya,xa)  
+((lz,mz,rz),(ly,my,ry),(lx,mx,rx)) -- c<b<a
+
+~~~~~~~~~~~~~~~~~~where
+~~~~~~~~~~~~~~~~~~~~~~mx = (lx+rx) `div` 2
+~~~~~~~~~~~~~~~~~~~~~~my = (ly+ry) `div` 2
+~~~~~~~~~~~~~~~~~~~~~~mz = (lz+rz) `div` 2
+
+
+-- Here the sorted arrays are in order by their middle elements.
+-- Only cutting the leading or trailing array by half.
+
+-- Here xa is the first array, ya the second array, and za the third  
+array by their middle elements.
+smallest3h :: (Ord a) => Int -> (Array Int a, Array Int a, Array Int a) ->
+~~~~~~~~((Int,Int,Int),(Int,Int,Int),(Int,Int,Int)) -> a
+smallest3h k (xa,ya,za) ((lx,mx,rx),(ly,my,ry),(lz,mz,rz)) =
+~~~~case (k<=mx-lx+my-ly+mz-lz) of
+~~~~~~(True)    -> search3 k (xa,ya,za) (lx,rx) (ly,ry) (lz,mz)
+~~~~~~(False)   -> search3 (k-(mx-lx)-1) (xa,ya,za) (mx+1,rx) (ly,ry) (lz,rz)
+
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+-- To convert a list into an array indexed from 0.
+xa = listArray (0, length xs - 1) xs
+ya = listArray (0, length ys - 1) ys
+za = listArray (0, length zs - 1) zs
+
+xs = [0,17..90]
+ys = [1,13..69]
+zs = [7,24..91]
+
+
+ua = listArray (0, length us - 1) us
+va = listArray (0, length vs - 1) vs
+wa = listArray (0, length ws - 1) ws
+
+us = [0,17..100]
+vs = [101,121..200]
+ws = [201,221..300]
+
+
+-- *SelectionProblem> sort (xs++ys++zs)
+-- [0,1,7,13,17,24,25,34,37,41,49,51,58,61,68,75,85]
+
+
+
+

@@ -1,0 +1,16 @@
+From clawsie at fastmail.fm  Fri Apr 22 19:32:39 2011
+From: clawsie at fastmail.fm (brad clawsie)
+Date: Fri, 22 Apr 2011 10:32:39 -0700
+Subject: [Haskell-cafe] fishing for ST mutable Vector examples
+Message-ID: <liliz22nuw.fsf@inside.sv3.smugmug.net>
+
+hi all
+
+i was wondering if anyone could post some minimal examples on using
+mutable Vectors in the ST monad. i've been digging around in the usual
+places but haven't been able to find anything to get me over the hump
+
+thanks in advance
+brad
+
+

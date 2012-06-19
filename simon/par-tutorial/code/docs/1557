@@ -1,0 +1,33 @@
+From roconnor at theorem.ca  Wed Aug 31 16:43:27 2011
+From: roconnor at theorem.ca (roconnor at theorem.ca)
+Date: Wed, 31 Aug 2011 10:43:27 -0400 (EDT)
+Subject: [Haskell-cafe] Pointed, but not Applicative
+In-Reply-To: <j3d40s$nb1$1@dough.gmane.org>
+References: <j3d40s$nb1$1@dough.gmane.org>
+Message-ID: <alpine.LRH.2.00.1108311032290.4786@theorem.ca>
+
+On Sat, 27 Aug 2011, S?nke Hahn wrote:
+
+> Hi!
+>
+> I was reading through the Typeclassopedia ([1]) and I was wondering which 
+> type could be an instance of Pointed, but not of Applicative. But I can't 
+> think of one. Any ideas?
+
+(Identity :+: Store s) is a comonad that is also instance of Pointed, but 
+I do not believe it is an instance Applicative.
+
+newtype SemiStore s a = (Identity :+: Store s) a
+
+instance Pointed (SemiStore s) where
+   pure a = Inl (Identity a)
+
+Coalgebras of the (Identity :+: Store s) comonad form the type of partial 
+lenses so this isn't just an academic functor.
+
+-- 
+Russell O'Connor                                      <http://r6.ca/>
+``All talk about `theft,''' the general counsel of the American Graphophone
+Company wrote, ``is the merest claptrap, for there exists no property in
+ideas musical, literary or artistic, except as defined by statute.''
+

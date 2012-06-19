@@ -1,0 +1,32 @@
+From haskell-cafe at ocharles.org.uk  Wed Dec 14 12:22:43 2011
+From: haskell-cafe at ocharles.org.uk (Oliver Charles)
+Date: Wed, 14 Dec 2011 11:22:43 +0000
+Subject: [Haskell-cafe] indentation blues
+References: <CAFrFfuGkeHEMfsitZoyaGWz=RZvuaUc8KKGK57dFdJL-kj_43w@mail.gmail.com>
+	<0d62b1a11095f003e5019c4740a5fcfd@haxaire.org>
+	<CB6B6261-5249-49A2-A921-47648377B81B@gaillourdet.net>
+	<beadf17d97e7f6a6dda563061ed149df@haxaire.org>
+	<CAFrFfuGbsnf+MjGDtjrs-CWcZH7yqe1mO+p9EcsA_14YRxBitQ@mail.gmail.com>
+	<3E086548-E5C7-4426-A72B-D7900BC1144F@gaillourdet.net>
+	<CAGoS-TSExhb2p7WpqygmM4kD4y=cddTcyaB-5gweLUuXxCB3rQ@mail.gmail.com>
+Message-ID: <878vmftn24.fsf@io.office.last.fm>
+
+Paul Koerbitz <paul.koerbitz at gmail.com> writes:
+
+> Hello,
+> TL;DR: If you have some time try emacs, the viper / vimpulse plugins are
+> pretty good and the editor is awesome in general. Haskell indentation is
+> good.
+
+Not to go too off topic, but I'm not sure people are aware there's
+another Vim emulation system called Evil:
+
+    http://gitorious.org/evil/pages/Home
+
+Started March this year apparently, and should be the successor to
+vimpulse.
+
+- Ollie
+
+
+

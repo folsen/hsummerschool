@@ -1,0 +1,44 @@
+From daniel.is.fischer at googlemail.com  Tue Feb  8 23:07:30 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Tue, 8 Feb 2011 23:07:30 +0100
+Subject: [Haskell-cafe] Unrecognized function symbols in .prof
+In-Reply-To: <20110208211814.GA1626@flit>
+References: <AANLkTikbpo9GbQwVpuwqgpQrjoHcqKAkE+b7X7sU2YV3@mail.gmail.com>
+	<AANLkTik2Q8YNAzau5tv1e5M_S4ORxBK86RZ9JgYGkxuO@mail.gmail.com>
+	<20110208211814.GA1626@flit>
+Message-ID: <201102082307.31088.daniel.is.fischer@googlemail.com>
+
+On Tuesday 08 February 2011 22:18:14, Roman Cheplyaka wrote:
+> * Iavor Diatchki <iavor.diatchki at gmail.com> [2011-02-07 23:45:58-0800]
+>
+> > Another option would be to look at the generated core by using
+> > -ddump-simpl when compiling. This will generate a whole bunch of
+> > output, which you can redirect to a file and the search for the
+> > mysterious symbols inside.
+>
+> IIRC they are generated at random each time.
+>
+
+Yes, but if you -ddump-simpl the profiling compilation, the profiling 
+symbols should be those in the generated core, shouldn't they?
+
+Unfortunately, that won't help Lee since his mysterious symbols come from a 
+library (unless he goes to the trouble of unpacking the library and 
+recompiling it in his source tree to get the symbols).
+
+> > On Mon, Feb 7, 2011 at 11:12 PM, Lee Pike <leepike at gmail.com> wrote:
+> > > Hi,
+> > >
+> > > I am profiling a Haskell program using GHC, and after executing the
+> > > program with +RTS -p, I get a .prof file that lists the cost centers
+> > > of the program. ?Some of the cost centers listed are for function
+> > > symbols that do not exist in the given module. ?For example, I have
+> > > in my .prof file:
+> > >
+> > > COST CENTRE ? ? ? ? ? ? ?MODULE ? %time %alloc
+> > > ==_a2MT ? ? ? ? ? ? ? ? ? ? ? ?Foo ? ? ? ? ? 19.8 ? ?0.0
+> > > ==_a2R8 ? ? ? ? ? ? ? ? ? ? ? ? Foo ? ? ? ? ? 17.8 ? ?0.0
+> > > ==_a2Bg ? ? ? ? ? ? ? ? ? ? ? ? Bar ? ? ? ? ? 13.7 ? ?0.0
+
+
+

@@ -1,0 +1,84 @@
+From d.kahlenberg at googlemail.com  Tue Apr 26 12:04:49 2011
+From: d.kahlenberg at googlemail.com (Daniel Kahlenberg)
+Date: Tue, 26 Apr 2011 12:04:49 +0200
+Subject: [Haskell-cafe] How to update the RNG per call (State monad) when
+ generating QuickCheck arbitraries?
+Message-ID: <BANLkTin-L8vXn70e=UBTtNGr5z=wHD1ZfA@mail.gmail.com>
+
+Maybe this is a beginners question... But here my problems description:
+
+> import Random
+> import Control.Monad
+> import qualified Control.Monad.State as S
+> import Test.QuickCheck.Gen
+> import Test.QuickCheck.Arbitrary
+
+Each thing can have one of three types:
+
+> data Ontology = Thing1 Bool
+>               | ThingK Bool
+>               deriving (Show, Eq)
+
+> instance Arbitrary Ontology where
+>    arbitrary =
+>        oneof [ return $ Thing1 True
+>              , return $ ThingK True
+>              , return $ Thing1 False
+>              , return $ ThingK False ]
+
+Liked to have a state monad runner for my arbitrary things as in "Real World
+Haskell", "Chapter 14. Monads" ("Random values in the state monad").
+
+[RWH]:
+
+> -- file: ch14/Random.hs
+> type RandomState a = S.State StdGen a
+
+[RWH]:
+
+< -- file: ch14/Random.hs
+< getRandom :: Random a => RandomState a
+< getRandom =
+<   S.get >>= \gen ->
+<   let (val, gen') = random gen in
+<   S.put gen' >>
+<   return val
+
+[RWH]:
+
+< -- file: ch14/Random.hs
+< getTwoRandoms :: Random a => RandomState (a, a)
+< getTwoRandoms = liftM2 (,) getRandom getRandom
+
+[RWH]:
+
+< -- file: ch14/Random.hs
+< runTwoRandoms :: IO (Int, Int)
+< runTwoRandoms = do
+<   oldState <- getStdGen
+<   let (result, newState) = S.runState getTwoRandoms oldState
+<   setStdGen newState
+<   return result
+
+Thought getRandom function would be the best place to inject my unGen function
+call, but cannot get it to type-check:
+
+> getRandom :: Random a => RandomState [a]
+> getRandom =
+>   S.get >>= \gen ->
+>   let (val, gen') = liftM2 (,) (unGen arbitrary gen 12) (random gen) in
+>   S.put gen' >>
+>   return val
+
+A function not almost fulfilling my needs but the Random Number Generator isn't
+updated... I liked to have different [Ontology] occasions per call:
+
+> genArray :: [Ontology]
+> genArray = unGen arbitrary (mkStdGen 42) 12 :: [Ontology]
+
+Does anyone have the patience to help me out at least one step further?
+
+Cheers
+Daniel
+
+

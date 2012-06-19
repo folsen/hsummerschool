@@ -1,0 +1,51 @@
+From vandijk.roel at gmail.com  Mon Feb  7 22:43:29 2011
+From: vandijk.roel at gmail.com (Roel van Dijk)
+Date: Mon, 7 Feb 2011 22:43:29 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D505D60.3090707@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+	<4D4D6B15.2060204@btinternet.com>
+	<AANLkTimj6PQP6o9NCcc+KXHJrc7+RwK3wQmg66KNMKur@mail.gmail.com>
+	<4D4EF972.2060309@btinternet.com>
+	<B7DEC147-6002-49F7-B756-D4CFF93D6625@cs.otago.ac.nz>
+	<4D505D60.3090707@btinternet.com>
+Message-ID: <AANLkTimeNvw1r+D6rvtqWj0YvjLRBEMVHDFDZJ+djequ@mail.gmail.com>
+
+On 7 February 2011 22:00, Andrew Coppin <andrewcoppin at btinternet.com> wrote:
+> I clearly have my languages mixed up.
+>
+> The language I'm thinking of required all variables (even top-level ones) to
+> be declared with "let" - unless the definition is recursive, in which case
+> you have to say "letrec" (i.e., the compiler it too stupid to deduce this
+> automatically). Apparently that isn't Clean...
+
+You are not necessarily wrong. Clean, like Haskell, is a moving
+target. To quote the paper "Exchanging Sources Between Clean and
+Haskell" [1]:
+
+  The year of 1987 was a founding one for two pure, lazy, and
+  strongly typed functional programming languages. Clean (Brus et
+  al., 1987) was presented to the public for the first time and
+  the first steps towards a common functional language, later
+  named Haskell, were taken (Hudak et al., 2007).
+
+  Clean was conceived at the Radboud University Nijmegen as a core
+  language that is directly based on the computational model of
+  functional term graph rewriting to generate efficient code. It
+  also serves as an intermediate language for the compilation of
+  other functional languages (Koopman and N?cker, 1988;
+  Plasmeijer and van Eekelen, 1993). For these reasons, it
+  deliberately used a sparse syntax (van Eekelen et al., 1990):
+  ?... at some points one can clearly recognize that [..] Clean
+  is a compromise between a functional programming language and
+  an intermediate language used to produce efficient code. For
+  instance, a minimal amount of syntactic sugar is added in [..]
+  Clean.?. Later, the core language was sugared.
+
+The Clean of 1987?1994 sounds a lot like the language you are
+talking about.
+
+1 - http://www.cs.ru.nl/~thomas/publications/groj10-exchanging-sources-between.pdf
+
+

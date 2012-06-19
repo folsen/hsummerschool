@@ -1,0 +1,46 @@
+From allbery.b at gmail.com  Thu Dec 15 08:34:07 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Thu, 15 Dec 2011 02:34:07 -0500
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <9ED90057-4B37-4E6E-A956-5BA2E952E4CB@gmail.com>
+References: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+	<CAKjSnQFvJrz1iFd8XsGbK4q7ZK9F0qjXXUHdoTn1XVmeeAm+OQ@mail.gmail.com>
+	<430054FA-800C-408C-8B75-9C3422293133@gmail.com>
+	<CAKjSnQFUxUbDAen_p7DPobzusVo30_6q=x2yzQejsnWe914ZnQ@mail.gmail.com>
+	<CAKFCL4U+wDf69+D6fz-hiBRJcHCUK4tB0pJ_nuZB-z3nucwxDQ@mail.gmail.com>
+	<CAKjSnQE3umAo-aefkTqPjT5+=M9cr=s9e84yKAx-HQx5Qjo_Bg@mail.gmail.com>
+	<9ED90057-4B37-4E6E-A956-5BA2E952E4CB@gmail.com>
+Message-ID: <CAKFCL4VUW-203r8ySNVb1whn8N3wSNPp8NtGA7nj7=Uz_ANtDA@mail.gmail.com>
+
+On Thu, Dec 15, 2011 at 02:23, Gregory Crosswhite <gcrosswhite at gmail.com>wrote:
+
+> On Dec 15, 2011, at 3:36 PM, Antoine Latter wrote:
+>
+> Even
+> the operators at hand ('many' and 'some') are partial in parsing, but
+> I'm not prepared to throw them out.
+>
+>
+> Okay, I must confess that this straw man has been causing my patience to
+> get a little thing.  *Nobody* here is saying that many and some should be
+> thrown out, since there are clearly many contexts where they are very
+> useful.  The *most* that has been suggested is that they should be moved
+> into a subclass in order to make it explicit when they are sensible, and
+> that is *hardly* banning them.
+>
+
+This.
+
+I was always under the impression that the Haskell Way was to capture
+constraints in the type system instead of letting them be runtime failures;
+here we have some combinators that appear to require an additional
+constraint, and active opposition to describing that constraint in the
+type!
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/64008c6d/attachment.htm>
+

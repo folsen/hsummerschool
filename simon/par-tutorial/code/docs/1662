@@ -1,0 +1,131 @@
+From tom.schrijvers at ugent.be  Mon Dec  5 14:05:17 2011
+From: tom.schrijvers at ugent.be (Tom Schrijvers)
+Date: Mon, 5 Dec 2011 14:05:17 +0100
+Subject: [Haskell-cafe] FLOPS 2012: final call for papers & deadline
+	extension
+Message-ID: <CAPB6rfH6PAL1_iBZgVbydG=+7AXkOjMoAtE-u3JC6MLK62hymw@mail.gmail.com>
+
+                        Final Call For Papers
+                        =====================
+
+  _EXTENDED SUBMISSION DEADLINE : December 16, 2011_
+
+  *Eleventh International Symposium on Functional and Logic
+Programming (FLOPS 2012)*
+  May 23-25, 2012
+  Kobe, Japan
+  [http://www.org.kobe-u.ac.jp/flops2012/]
+
+  FLOPS is a forum for research on all issues concerning declarative
+  programming, including functional programming and logic programming,
+  and aims to promote cross-fertilization and integration between the
+  two paradigms. Previous FLOPS meetings were held in Fuji Susono
+  (1995), Shonan Village (1996), Kyoto (1998), Tsukuba (1999), Tokyo
+  (2001), Aizu (2002), Nara (2004), Fuji Susono (2006), Ise (2008),
+  and Sendai (2010).
+
+Topics
+======
+  FLOPS solicits original papers in all areas of functional and logic
+  programming, including (but not limited to):
+  - Declarative Pearls: new and excellent declarative programs with
+    illustrative applications.
+  - Language issues: language design and constructs, programming methodology,
+    integration of paradigms, interfacing with other languages, type systems,
+    constraints, concurrency and distributed computing.
+  - Foundations: logic and semantics, rewrite systems and narrowing, type
+    theory, proof systems.
+  - Implementation issues: compilation techniques, memory management, program
+    analysis and transformation, partial evaluation, parallelism.
+  - Applications: case studies, real-world applications, graphical user
+    interfaces, Internet applications, XML, databases, formal methods and model
+    checking.
+
+  The proceedings will be published as an LNCS volume. The proceedings
+  of the previous meeting (FLOPS 2010) were published as LNCS 6009.
+
+PC co-Chairs
+============
+  - Tom Schrijvers (Ghent University, Belgium)
+  - Peter Thiemann (University of Freiburg, Germany)
+
+PC Members
+==========
+ - Salvador Abreu (University of Evora, Portugal)
+ - Thorsten Altenkirch (University of Nottingham, UK)
+ - Sebastian Brand (NICTA, Australia)
+ - Giuseppe Castagna (CNRS Univ Paris 7, France)
+ - Sebastian Fischer (Germany)
+ - Marco Gavanelli (University of Ferrara, Italy)
+ - Joxan Jaffar (National University of Singapore, Singapore)
+ - Barry Jay (University of Sydney, Australia)
+ - Andy King (University of Kent, UK)
+ - Claude Kirchner (INRIA, France)
+ - Neelakantan R. Krishnaswami (Microsoft Cambridge, UK)
+ - Yulya Lierler (University of Kentucky, USA)
+ - Keiko Nakata (Tallinn University of Technology, Estonia)
+ - Peter Schneider-Kamp (University of Southern Denmark, Denmark)
+ - Olin Shivers (Northeastern University, USA)
+ - Paul Tarau (University of Northern Texas, USA)
+ - Kazunori Ueda (Waseda University, Japan)
+ - Meng Wang (Chalmers Technical University, Sweden)
+
+General Chair and Local co-Chairs
+=================================
+  - Naoyuki Tamura (Kobe University, Japan)
+  - Mutsunori Banbara (Kobe University, Japan)
+  - Katsutoshi Hirayama (Kobe University, Japan)
+
+Submission
+==========
+  Submissions must be unpublished and not submitted for publication
+  elsewhere. Work that already appeared in unpublished or informally
+  published workshops proceedings may be submitted. Submissions should
+  fall into one of the following categories:
+  - Regular research papers: they should describe new results and will be
+    judged on originality, correctness, and significance.
+  - System descriptions: they should contain a link to a working system and
+    will be judged on originality, usefulness, and design.
+  Submissions must be written in English and can be up to 15 pages
+  long, though pearls are typically considerably shorter. Authors are
+  required to use LaTeX2e and the Springer llncs class file, available at
+  [http://www.springer.de/comp/lncs/authors.html].
+
+  Regular research papers should be supported by proofs and/or
+  experimental results. In case of lack of space, this supporting
+  information should be made accessible otherwise (e.g., a link to a
+  web page, or an appendix). Papers should be submitted electronically
+  at [https://www.easychair.org/conferences/?conf=flops2012].
+
+Important Dates
+===============
+  - Submission deadline : December 16, 2011	(EXTENDED)
+  - Author notification : February 3, 2012
+  - Camera-ready copy : March 2, 2012
+
+Place and Related Events
+========================
+  Takikawa Memorial Hall, Kobe University,
+  1-1 Rokkodai, Nada, Kobe 657-8501 Japan.
+
+  The 23rd International Conference on Rewriting Techniques and
+  Applications (RTA 2012) and satellite workshops including WFLP 2012
+  will be held in the week after FLOPS at Nagoya, Japan.
+
+Some Previous FLOPS
+===================
+  - FLOPS 2010, Sendai: [http://www.kb.ecei.tohoku.ac.jp/flops2010/]
+  - FLOPS 2008, Ise: [http://www.math.nagoya-u.ac.jp/~garrigue/FLOPS2008/]
+  - FLOPS 2006, Fuji Susono: [http://hagi.is.s.u-tokyo.ac.jp/FLOPS2006/]
+
+Sponsors
+========
+  - Japan Society for Software Science and Technology (JSSST) SIGPPL
+
+In Cooperation with
+===================
+  - ACM SIGPLAN
+  - Asian Association for Foundation of Software (AAFS)
+  - Association for Logic Programming (ALP)
+
+

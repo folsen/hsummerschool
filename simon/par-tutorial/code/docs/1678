@@ -1,0 +1,49 @@
+From jv at informatik.uni-bonn.de  Mon Dec  5 20:37:43 2011
+From: jv at informatik.uni-bonn.de (=?ISO-8859-1?Q?Janis_Voigtl=E4nder?=)
+Date: Mon, 05 Dec 2011 20:37:43 +0100
+Subject: [Haskell-cafe] Haskell at University in Munich
+In-Reply-To: <mailman.3.1323082802.17074.haskell-cafe@haskell.org>
+References: <mailman.3.1323082802.17074.haskell-cafe@haskell.org>
+Message-ID: <4EDD1D87.3040402@informatik.uni-bonn.de>
+
+Am 05.12.2011 12:00, schrieb <bartek at sudety.it>:
+> Hello Haskell Cafe,
+>
+> I would be grateful for any information regarding Haskell (or at least
+> Functional Programming) lectures at Universities near to Munich, Germany
+> (Master or Bachelor). Unconfirmed information I've got regarding LMU and TUM
+> are not promising.
+
+Is Munich really that bad? FP'ers at LMU and TUM, please speak up.
+(I know that at least research-wise there are quite a few around there,
+though I don't know what they do in teaching.)
+
+> If Munich and 200 km circle do not provide with any offer, perhaps
+
+Less than 200 km from Munich: 
+http://db.inf.uni-tuebingen.de/teaching/ws1112/afp
+
+Also, Germany extends farther than 200 km beyond Munich. :-)
+
+Say, Bonn:
+
+http://www.iai.uni-bonn.de/~jv/teaching/dp11/
+
+http://www.iai.uni-bonn.de/~jv/teaching/ffp/
+
+> you may know what is available in Europe, limiting language of study
+> to [German, English,Polish]?
+
+The thread Sean pointed to may provide information on that. Obvious
+candidates are Utrecht and Chalmers, both teaching in English I suppose,
+at least at Master level.
+
+Best,
+Janis.
+
+-- 
+Jun.-Prof. Dr. Janis Voigtl?nder
+http://www.iai.uni-bonn.de/~jv/
+mailto:jv at iai.uni-bonn.de
+
+

@@ -1,0 +1,68 @@
+From illissius at gmail.com  Fri Apr  1 13:52:10 2011
+From: illissius at gmail.com (=?ISO-8859-1?Q?G=E1bor_Lehel?=)
+Date: Fri, 1 Apr 2011 13:52:10 +0200
+Subject: [Haskell-cafe] SoC project: advice requested
+Message-ID: <AANLkTi=SacKCY_KdVQ66zqL44cPXLBVZePrUmXeBoWVU@mail.gmail.com>
+
+Hi all,
+
+I would very much like to apply for a Summer of Code project this
+year; however, I'm having trouble nailing down a project which is both
+(a) of appropriate scope and (b) which interests and motivates me.
+There's also obviously the question of needing a mentor for the
+project. Regarding (b), I'm finding it hard to get really excited
+about hacking on Cabal or other infrastructure: I'd much rather like
+to add some kind of new, interesting, and useful capability to GHC
+itself. Naturally, this comes into a kind of tension with (a). I'd
+love to work on something type system related, but have the feeling
+that going from 'amateur Haskeller' to 'type theory and GHC expert'
+within the course of a single summer is likely going to be too much.
+(Feel free to correct me on this point, though!)
+
+The two projects I've been able to think of which seem like they
+*might* be appropriate are: integrating the standard 'deriving'
+mechanism with Template Haskell to support deriving custom classes;
+and adding native FFI support for passing C structs / tuples
+(arbitrary products?) of FFI-able types by value, as discussed in [1].
+Would either of these be not-too-big / would anyone be willing to
+mentor them? Alternately, I'd be very happy to receive suggestions
+about other GHC-related work which would be considered appropriate.
+(Or, heck, any other compiler.)
+
+A related problem is that, having done only minimal GHC hacking so
+far, drawing up a detailed plan / design in advance as part of the
+proposal would be difficult. If this is considered necessary and there
+is someone willing to mentor the project I'd be happy to research the
+problem in advance of the submission deadline so I can submit a more
+detailed proposal. Alternately, if it's deemed acceptable to learn the
+ropes / come up to speed as part of the SoC itself that's fine by me
+as well. (Wasn't this sort of the point originally?)
+
+Background info: I've taken part in the SoC once before, back in 2006
+(when I applied to KDE to work on Krita). I don't yet have any Hackage
+packages to my name, however I'm working on a C++-to-Haskell bindings
+generator for my bachelor's thesis (the primary target being Qt*)
+which is likely to spawn quite a few. (I've avoided making any noise
+about this because I didn't want to put the cart before the horse: the
+plan was (and still is) to announce something once there is something
+worth announcing, and it's not at that point quite yet.)
+
+Apologies for not writing this email a couple weeks earlier; I have a
+day job and next to the thesis it didn't leave much time to brainstorm
+and research. (The job isn't Haskell-related and doesn't even pay as
+well, so if I get accepted I'll have no compunctions scaling it back
+(even completely). And the deadline for the thesis is May 15th, which
+is convenient enough.)
+
+Thanks,
+~g
+
+[1] http://www.mail-archive.com/haskell-cafe at haskell.org/msg61034.html
+
+* Yes, I know qtHaskell exists. I have some, how to say, 'differences
+of opinion' with regards to its API, and it's not open source anyways.
+
+-- 
+Work is punishment for failing to procrastinate effectively.
+
+

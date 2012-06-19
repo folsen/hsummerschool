@@ -1,0 +1,45 @@
+From lrpalmer at gmail.com  Thu Apr 14 20:02:48 2011
+From: lrpalmer at gmail.com (Luke Palmer)
+Date: Thu, 14 Apr 2011 12:02:48 -0600
+Subject: [Haskell-cafe] Programming Chalenges: The 3n+1 problem
+In-Reply-To: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+References: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+Message-ID: <BANLkTimyamji1S+GSpdbw9bk7iT3SDHOTg@mail.gmail.com>
+
+On Thu, Apr 14, 2011 at 4:29 AM, Dmitri O.Kondratiev <dokondr at gmail.com>wrote:
+
+> 3n+1 is the first, "warm-up" problem at Programming Chalenges site:
+>
+> http://www.programming-challenges.com/pg.php?page=downloadproblem&probid=110101&format=html
+>
+> (This problem illustrates Collatz conjecture:
+>
+> http://en.wikipedia.org/wiki/3n_%2B_1#Program_to_calculate_Collatz_sequences
+> )
+>
+> As long as the judge on this site takes only C and Java solutions, I
+> submitted in Java some add-hock code (see at the end of this message) where
+> I used recursion and a cache of computed cycles. Judge accepted my code and
+> measured  0.292 sec with best overall submissions of 0.008 sec to solve the
+> problem.
+>
+> *** Question: I wonder how to implement cache for this problem in Haskell?
+> At the moment, I am not so much interested in the speed of the code, as in
+> nice implementation.
+>
+
+This is the exact problem data-memocombinators was written to solve.
+http://hackage.haskell.org/packages/archive/data-memocombinators/0.4.1/doc/html/Data-MemoCombinators.html
+
+For this problem, it is too slow to memoize everything; you have to use a
+bounded memo table.  That's why I use a combinator-based memo approach as
+opposed to the type-directed approach used in eg. MemoTrie.  The memo table
+you need is something like
+
+    switch (<10^6) integral id
+
+Luke
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110414/772b1e5b/attachment.htm>
+

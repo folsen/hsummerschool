@@ -1,0 +1,39 @@
+From john.obbele at gmail.com  Fri Apr 15 20:23:57 2011
+From: john.obbele at gmail.com (John Obbele)
+Date: Fri, 15 Apr 2011 20:23:57 +0200
+Subject: [Haskell-cafe] ANN: bindings to xfconf-4.8.0.0
+Message-ID: <20110415182357.GA19646@X52D.localdomain>
+
+Hi all,
+
+I'm very happy to announce my first hackageDB package: xfconf[0], a
+Haskell binding to the XFCE xfconfd configuration d?mon.
+
+It's mainly a pet project I have done to learn Haskell using the
+FFI and QuickCheck but if someone can find it useful or
+instructive I would be happy.
+
+This package allows easy access to your favorite XFCE desktop settings
+(wallpaper, colors, police, etc.) and easier synchronisations between
+the configuration backend and your own Gtk+2 widget properties (a
+feature missing in gconf but now part of gsettings).
+
+A practical use of this binding can be found in hThemes[1], a
+quick&dirty front-end to switch between pre-defined desktop themes (eg.
+switching from a light-white theme for daytime to a dark-black one for
+your nightly hack sessions).
+
+[0.a]: http://hackage.haskell.org/package/xfconf
+[0.b]: http://patch-tag.com/r/obbele/xfconf/home
+[1]:   http://patch-tag.com/r/obbele/hThemes/home
+
+
+Thanks to Andy Stewart and Axel Simon for their help in integrating
+xfconf to the gtk2hs stack.
+
+Any comments on this first work are welcomed ,-)
+
+regards,
+/John
+
+

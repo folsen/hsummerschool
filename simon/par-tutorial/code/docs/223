@@ -1,0 +1,33 @@
+From greg at gregorycollins.net  Thu Apr  7 19:12:01 2011
+From: greg at gregorycollins.net (Gregory Collins)
+Date: Thu, 7 Apr 2011 19:12:01 +0200
+Subject: [Haskell-cafe] Stateful iteratees
+In-Reply-To: <20110407190452.356fcca6@angst.streitmacht.eu>
+References: <20110407190452.356fcca6@angst.streitmacht.eu>
+Message-ID: <BANLkTikE_5XoYE7-no9aGuTXhs91xMHmGQ@mail.gmail.com>
+
+On Thu, Apr 7, 2011 at 7:04 PM, Ertugrul Soeylemez <es at ertes.de> wrote:
+> Hello fellow Haskellers,
+>
+> I'm trying to solve a very practical problem: ?I need a stateful
+> iteratee monad transformer. ?Explicit state passing is very inconvenient
+> and would destroy the elegance of my library.
+>
+> There are two approaches to this:
+>
+> ?1. type MyT a m = Iteratee a (StateT MyConfig m)
+> ?2. type MyT a m = StateT MyConfig (Iteratee a m)
+>
+> Both work well except in two very specific corner cases:
+>
+> ?- I need to convert the transformer to 'Iteratee a m', i.e. remove the
+> ? ?state layer. ?This is obviously trivial with the second variant, but
+> ? ?seems very difficult with the first one, if it's possible at all.
+
+Why can't you use #1 and do this when you call "run_"?
+
+G
+-- 
+Gregory Collins <greg at gregorycollins.net>
+
+

@@ -1,0 +1,52 @@
+From alexander.dunlap at gmail.com  Sun Aug 14 23:45:24 2011
+From: alexander.dunlap at gmail.com (Alexander Dunlap)
+Date: Sun, 14 Aug 2011 14:45:24 -0700
+Subject: [Haskell-cafe] ANNOUNCE: taffybar: an alternative status bar
+	for xmonad
+In-Reply-To: <20110813155648.GE13469@cs.wisc.edu>
+References: <20110813155648.GE13469@cs.wisc.edu>
+Message-ID: <CAKdSjNGhUvvr9T6b7vgrAe90hDJwp8up7Ap=GV5rD0wix=7V=w@mail.gmail.com>
+
+On 13 August 2011 08:56, Tristan Ravitch <travitch at cs.wisc.edu> wrote:
+> I've wanted a slightly fancier status bar than xmobar for a while, so
+> I finally made one. ?It uses gtk2hs and dbus extensively, so if you
+> hate either of those things it probably isn't for you. ?Being written
+> in gtk, though, it can have more graphical widgets.
+>
+> ?http://hackage.haskell.org/package/taffybar
+>
+> Current feature highlights:
+>
+> ?* It has a system tray
+> ?* Generic graph widget for things like CPU/memory
+> ?* XMonad log over DBus so it can be restarted independently of xmonad
+> ?* Graphical battery widget
+>
+> There is still a lot that I want to add but I figured getting some
+> feedback early would be handy. ?Documentation is currently at
+> http://pages.cs.wisc.edu/~travitch/taffybar until I figure out how to
+> appease Hackage (see the System.Taffybar module).
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+I apologize if I'm missing something obvious here, but when I try to
+run taffybar I get
+
+Launching custom binary /home/alex/.cache/taffybar/taffybar-linux-i386
+
+taffybar-linux-i386: ConnectionError "connectSession:
+DBUS_SESSION_BUS_ADDRESS is missing or invalid."
+
+Is there some D-BUS configuration that needs to happen before the
+package is usable?
+
+Thanks,
+Alex
+
+

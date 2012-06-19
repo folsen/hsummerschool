@@ -1,0 +1,18 @@
+From cdsmith at gmail.com  Fri Apr 15 16:17:45 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Fri, 15 Apr 2011 08:17:45 -0600
+Subject: [Haskell-cafe] Cairo and Haskell
+In-Reply-To: <io9imb$1n8$1@dough.gmane.org>
+References: <io9imb$1n8$1@dough.gmane.org>
+Message-ID: <BANLkTikYTHOmmYOcxmxVk+YMRn2NE=D0Pw@mail.gmail.com>
+
+Haskell has Cairo bindings as part of gtk2hs.  The package on Hackage is
+called 'cairo'.  You can certainly preview on the screen, but I'm less sure
+about exporting to PDF, since the bindings were intended for GUI
+programming.  At least PNG output is possible, though; PDF may be, as well.
+
+http://hackage.haskell.org/package/cairo
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110415/56dee697/attachment.htm>
+

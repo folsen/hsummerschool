@@ -1,0 +1,38 @@
+From ezyang at MIT.EDU  Wed Apr 13 10:32:25 2011
+From: ezyang at MIT.EDU (Edward Z. Yang)
+Date: Wed, 13 Apr 2011 04:32:25 -0400
+Subject: [Haskell-cafe] Debugging with gdb?
+In-Reply-To: <1302682215.7958.38.camel@hp.my.own.domain>
+References: <1302677977.7958.22.camel@hp.my.own.domain>
+	<BANLkTin4kk5T3_9zgen3NB-Wgp2zHCUAnA@mail.gmail.com>
+	<1302682215.7958.38.camel@hp.my.own.domain>
+Message-ID: <1302683173-sup-9475@ezyang>
+
+Hello Svante,
+
+I have a few recommendations, places where I'd check:
+
+1. Consult the arguments passed to read() usign GDB (your libc has
+   debugging symbols) and see if they are obviously wrong.  It seems
+   more plausible that they are something that would be right for
+   Linux, but not so right for Hurd.
+
+2. Take the source code for ghc-pkg, and start adding debug prints,
+   checking to see if the print is triggered or not (it will be useful
+   if you can figure out what command you can run to just recompile
+   ghc-pkg).  See if you can reduce the program to a minimal one
+   that still hangs.
+
+3. Compile GHC with the flag -ddump-stg, and pipe all of this output
+   to a file.  With any luck, the block s9qJ will have been present
+   during this stage, at which point you can use it to trace back to
+   a file.  Note that due to lazy evaluation, s9qJ is probably /not/
+   actually the culprit, which is why I recommend doing (2) first; it's
+   a lot easier to wade around smaller bits of code.
+
+Another recommendation is to bootstrap 6.8.3. (the last 6.8 release)
+first, before attempting 6.10.1.
+
+Edward
+
+

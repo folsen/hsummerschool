@@ -1,0 +1,37 @@
+From dagitj at gmail.com  Mon Apr  4 22:42:36 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Mon, 4 Apr 2011 13:42:36 -0700
+Subject: [Haskell-cafe] Using _ on the RHS of an equation?
+Message-ID: <BANLkTimKpc4MS6Odkk26OJK_OpNuMhhn8A@mail.gmail.com>
+
+I think I got this idea from JHC, but I'm unable to find it documented in
+the JHC manual at the moment.  The idea is that when _ appears on the RHS of
+an equation it is another name for undefined.
+
+Here is a hypothetical example, inspired by code I've seen in FFI
+definitions:
+
+\begin{code}
+{-# LANGUAGE EmptyDataDecls #-}
+data Bar
+instance Storable Bar where
+  sizeOf _ = sizeOf #{size struct Bar}
+  alignment _ = alignment (_ :: CDouble) -- here we could have just as
+succinctly said alignment (1 :: CDouble)
+
+data Foo -- the struct Foo on the C side contains a Bar
+
+instance Storable Foo where
+  sizeOf _ = sizeOf #{size struct Foo}
+  alignment _ = alignment (_ :: Bar) -- we can't instantiate a Bar
+\end{code}
+
+Is this something people would be interested in having as an extension in
+GHC?  Or is it just too fluffy for anyone to really care?
+
+Thanks,
+Jason
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110404/021ff232/attachment.htm>
+

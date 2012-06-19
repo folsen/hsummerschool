@@ -1,0 +1,25 @@
+From allbery.b at gmail.com  Tue Aug 23 22:32:12 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Tue, 23 Aug 2011 16:32:12 -0400
+Subject: [Haskell-cafe] Performance of concurrent array access
+In-Reply-To: <CADdwyZ=MTFYz8NZt_KxpH1VfvbkFfpnhRHamvJar_gS-fe-awg@mail.gmail.com>
+References: <CADdwyZ=MTFYz8NZt_KxpH1VfvbkFfpnhRHamvJar_gS-fe-awg@mail.gmail.com>
+Message-ID: <CAKFCL4VjGCwF1Rq1MGtCC7PVdYDqUm2vEf_UQVkyqqnCwjVjJQ@mail.gmail.com>
+
+On Tue, Aug 23, 2011 at 16:04, Andreas Voellmy <andreas.voellmy at gmail.com>wrote:
+
+> I found that changing the array type used in the implementation of
+> DirectAddressTable from IOArray to IOUArray fixes this problem.
+
+
+Since the main observable effect of this change is strictness, I'd
+immediately suspect you're storing unevaluated thunks in the array which get
+forced when printed instead of in their appropriate threads.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110823/9003fa61/attachment.htm>
+

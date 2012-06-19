@@ -1,0 +1,46 @@
+From rrnewton at gmail.com  Fri Aug 19 20:03:26 2011
+From: rrnewton at gmail.com (Ryan Newton)
+Date: Fri, 19 Aug 2011 14:03:26 -0400
+Subject: [Haskell-cafe] why is Random in System?
+In-Reply-To: <CACw0niJ7hMvruoujK3oyDAcHgf8EcUJkSta4QBQTQtT0Sdmv2g@mail.gmail.com>
+References: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+	<A320995A-2DDA-4147-B804-098623C26914@deepbondi.net>
+	<CAKFCL4UtZAKrw-KazZtmCSi6cDZmb1mtm9of4E=0Ugr_9GXXvA@mail.gmail.com>
+	<20110817104607.43c9ae37@angst.streitmacht.eu>
+	<CACYs5AYvvWeO1Xe2TMGR=gGnYonw8dsmg3m++NALY9-nDJEupQ@mail.gmail.com>
+	<20110817182609.6ea45f32@angst.streitmacht.eu>
+	<CACYs5AYHyKZaeAZ3jzr8fZBWRMPC83VJNDdQByfVJmL31bcBqQ@mail.gmail.com>
+	<CACw0niLTT0O=7etqtjRcWqwbJYxrvkSi-uayJd=SHuyAs0VxoQ@mail.gmail.com>
+	<CACYs5AZaLGqizse9r-PPW2odAgYXzx79e-w9HdKVsOho34vR7w@mail.gmail.com>
+	<CACw0niJ7hMvruoujK3oyDAcHgf8EcUJkSta4QBQTQtT0Sdmv2g@mail.gmail.com>
+Message-ID: <CACYs5AaTJUDVGqH8kxA5A6G7yGnhZ_5UQj0qwJ+N99s+QCkgBw@mail.gmail.com>
+
+> Yep, but don't conflate determinism with splitting. In the imperative
+> world, you normally know how many CPUs you have, so you initialize one PRNG
+> per CPU, and simply go from there; there's no need for splitting. In the
+> parallel community, people are going out of their way to *avoid*
+>  splitting.
+>
+
+I'm having trouble thinking of scenarios where per-CPU does the trick.  Do
+you mean one per pthread rather than one per CPU?
+
+In the Cilk case, you've got to deal with work stealing of course.  So you
+want rand() to generate a result that is determined by the current
+stack-frame's position in the binary-tree of spawns.  In the work I was
+referring to:
+
+
+http://groups.csail.mit.edu/sct/wiki/index.php?title=Other_Projects#Deterministic_Parallel_Random-Number_Generation
+
+... they try a bunch of different methods and I can't remember if any of
+them split the RNG "eagerly" as they go down the spawn tree or if they just
+record the tree-index on the way down and then read it out when they
+generated randoms.  (I think the latter.)
+
+Cheers,
+  -Ryan
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110819/bdd41d71/attachment.htm>
+

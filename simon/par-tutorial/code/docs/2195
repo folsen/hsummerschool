@@ -1,0 +1,103 @@
+From ivanperezdominguez at gmail.com  Wed Dec 21 14:10:45 2011
+From: ivanperezdominguez at gmail.com (Ivan Perez)
+Date: Wed, 21 Dec 2011 14:10:45 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <1324322427.2233.6.camel@fuzxxl>
+References: <1324322427.2233.6.camel@fuzxxl>
+Message-ID: <CACZKWELLqTw3dzzuN412MGF9EBX-_S5kvoXjuyEoNKTjh-_9Dg@mail.gmail.com>
+
+In general, I like haskell the way it is, but there are a few things
+that I would like to see:
+(I am no language designer, so I don't know about the theoretical
+implications that these
+might have. Also, let me know if there exists a clean way to do any of
+the following):
+
+- Using subranges of instances of Ord in type definitions, a la Ada.
+For instance, saying:
+
+type MyNumber = [2..6]
+
+(maybe "data MyNumber" would be more appropriate, I don't know).
+
+I really don't want to have to write
+data MyNumber = Two | Three | Four | Five | Six
+and implement all the necessary operations for them.
+
+- Guards wherever I want, for instance:
+
+myFunction = do
+  monadicRes <- monadicOp
+  | monadicRes == 1 || monadicRes == 7 = doA
+  | monadicRes == 6 || monadicRes == 8 = doB
+  | otherwise = doC
+
+This is easily avoidable with an aux function, but sometimes there's just
+too many variables in the conditions and you don't want to carry them
+all in the aux function's signature. I could (painfully) live with
+
+myFunction = do
+  monadicRes <- monadicOp
+  if monadicRes == 1 || monadicRes == 7
+  then doA
+  elseif monadicRes == 6 || monadicRes == 8
+  then doB
+  else doC
+
+even though it's way too verbose and reminds me of java.
+
+I often end up finding that the following construction is cleaner than
+the possible alternatives:
+
+myFunction = do
+  monadicRes <- monadicOp
+  case () of
+   _ | monadicRes == 1 || monadicRes == 7 = doA
+      | monadicRes == 6 || monadicRes == 8 = doB
+      | otherwise = doC
+
+even though it's very ugly to have those useless () _ there.
+
+Unfortunately, my proposal could give way to slightly ugly nested guards
+(which are cleaner than nested ifs, but not very nice anyway).
+myFunction arg
+  | arg == 1
+    | arg == 7 = doA
+    | arg == 8 = doB
+  | otherwise = doC
+
+- Function overloading without classes. If it's not done, there must
+be a good reason for it
+(many good reasons, probably), but I really miss it.
+
+Most other features I need, such as easy-to-use nested-record access
+methods, my own deriving definitions, compile-time expansion of
+expressions, etc. are covered by existing libraries and extensions.
+
+I really have no problems with the monad/functor separation that
+somebody mentioned.
+Maybe Monad is not the best name for that class if it's not true that
+every Monad is a
+Functor, but it's not very confusing anyway.
+
+Cheers,
+Ivan
+
+On 19 December 2011 20:20, Robert Clausecker <fuzxxl at gmail.com> wrote:
+> Image you would create your own language with a paradigm similar to
+> Haskell or have to chance to change Haskell without the need to keep any
+> compatibility. What stuff would you add to your language, what stuff
+> would you remove and what problems would you solve completely different?
+>
+> Thanks in advance for all answers, yours
+>
+> ? ? ? ?Robert Clausecker
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

@@ -1,0 +1,55 @@
+From johan.tibell at gmail.com  Fri Apr  1 16:47:51 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Fri, 1 Apr 2011 16:47:51 +0200
+Subject: [Haskell-cafe] SoC project: advice requested
+In-Reply-To: <AANLkTi=SacKCY_KdVQ66zqL44cPXLBVZePrUmXeBoWVU@mail.gmail.com>
+References: <AANLkTi=SacKCY_KdVQ66zqL44cPXLBVZePrUmXeBoWVU@mail.gmail.com>
+Message-ID: <AANLkTikafOpvwDmEpyoDuKmp0aJJHTgoG10z0yeL2xbs@mail.gmail.com>
+
+Hi G?bor,
+
+There are a few non-Cabal projects on the ideas list
+(http://hackage.haskell.org/trac/summer-of-code/report/1). Just
+thought I mentioned it in case you missed it.
+
+2011/4/1 G?bor Lehel <illissius at gmail.com>:
+> Alternately, I'd be very happy to receive suggestions
+> about other GHC-related work which would be considered appropriate.
+> (Or, heck, any other compiler.)
+
+Perhaps you could send an email to the GHC mailing list and ask if
+they have any good GSoC projects? I'm not sure the Simons are reading
+every post on this list.
+
+> A related problem is that, having done only minimal GHC hacking so
+> far, drawing up a detailed plan / design in advance as part of the
+> proposal would be difficult. If this is considered necessary and there
+> is someone willing to mentor the project I'd be happy to research the
+> problem in advance of the submission deadline so I can submit a more
+> detailed proposal. Alternately, if it's deemed acceptable to learn the
+> ropes / come up to speed as part of the SoC itself that's fine by me
+> as well. (Wasn't this sort of the point originally?)
+
+It's not required but it helps. Us mentors need to figure out if
+you're likely to finish your project or not. Showing that you
+understand what needs to be done is a good sign. If you're not sure
+what needs to be done there's still a chance you'll get accepted if
+people who already know GHC thinks one summer is enough time to both
+get familiar with GHC and add something worthwhile.
+
+> Background info: I've taken part in the SoC once before, back in 2006
+> (when I applied to KDE to work on Krita). I don't yet have any Hackage
+> packages to my name, however I'm working on a C++-to-Haskell bindings
+> generator for my bachelor's thesis (the primary target being Qt*)
+> which is likely to spawn quite a few. (I've avoided making any noise
+> about this because I didn't want to put the cart before the horse: the
+> plan was (and still is) to announce something once there is something
+> worth announcing, and it's not at that point quite yet.)
+
+How about adding Haskell support for SWIG? Being able to call C++
+libraries from Haskell would be very useful.
+
+Cheers,
+Johan
+
+

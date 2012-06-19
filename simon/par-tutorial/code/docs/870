@@ -1,0 +1,52 @@
+From jwlato at gmail.com  Fri Apr 29 11:32:10 2011
+From: jwlato at gmail.com (John Lato)
+Date: Fri, 29 Apr 2011 10:32:10 +0100
+Subject: [Haskell-cafe] Iteratee: manyToOne
+Message-ID: <BANLkTinVRc3Znrbq2kWnkH5JNiCZTy4NMA@mail.gmail.com>
+
+>
+> From: Felipe Almeida Lessa <felipe.lessa at gmail.com>
+>
+> On Thu, Apr 28, 2011 at 1:10 PM, Felipe Almeida Lessa
+> <felipe.lessa at gmail.com> wrote:
+> > On Thu, Apr 28, 2011 at 12:09 PM, Felipe Almeida Lessa
+> > <felipe.lessa at gmail.com> wrote:
+> >> I foresee one problem: what is the leftover of 'manyToOne xs' if each
+> >> x in xs needs different lengths of input?
+> >>
+> >> One possible untested-but-compiling solution:
+> > [snip]
+> >
+> > Like I said, that manyToOne implementation isn't very predictable
+> > about leftovers. ?But I guess that if all your iteratees consume the
+> > same input OR if you don't care about leftovers, then it should be
+> > okay.
+>
+> Sorry for replying to myself again. =)
+>
+> I think you can actually give predictable semantics to manyToOne:
+> namely, the leftovers from the last iteratee are returned.  This new
+> implementation should be better:
+>
+
+If you do this, the user needs to take care to order the iteratees so that
+the last iteratee has small leftovers.  Consider:
+
+manyToOne [consumeALot, return ()]
+
+In this case, the entire stream consumed by the first iteratee will need to
+be retained and passed on by manyToOne.  In many cases, the user may not
+know how much each iteratee will consume, which can make these semantics
+problematic.
+
+Iteratee has 'enumPair', (renamed 'zip' in HEAD) which returns the leftovers
+from whichever iteratee consumes more.  This avoids the problem of retaining
+extra data, and seems simpler to reason about.  Although if you really need
+to consume a predictable amount of data, the safest is probably to run the
+whole thing in a 'take'.
+
+John Lato
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110429/692f0935/attachment.htm>
+

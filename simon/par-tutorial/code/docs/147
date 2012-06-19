@@ -1,0 +1,31 @@
+From noteed at gmail.com  Tue Apr  5 15:33:51 2011
+From: noteed at gmail.com (Vo Minh Thu)
+Date: Tue, 5 Apr 2011 15:33:51 +0200
+Subject: [Haskell-cafe] ANN: Google Summer of Code student application
+ period opens today
+In-Reply-To: <BANLkTi=s0a-fiPH2uYvoH9zx9EONs-GXfA@mail.gmail.com>
+References: <AANLkTi=UBbYgQMeKsPGo2S9JxoG=1_OABB7hsZ7nmn5q@mail.gmail.com>
+	<1302008756-sup-3765@zezinho>
+	<BANLkTi=s0a-fiPH2uYvoH9zx9EONs-GXfA@mail.gmail.com>
+Message-ID: <BANLkTik1qF-qdHvJTHFkdFYfbWxnJ3_MMg@mail.gmail.com>
+
+2011/4/5 Christopher Done <chrisdone at googlemail.com>:
+> On 5 April 2011 15:17, Marco T?lio Gontijo e Silva <marcot at marcot.eti.br>
+> wrote:
+>>
+>> I plan to apply to the Google Summer of Code, to work on the
+>> parallelization of
+>> Cabal Install. ?As stated in some comments, this project may be too small
+>> for
+>> three months, so I included some other things in my proposal. ?The first
+>> is to
+>> work on making GHC parallel while building different modules.
+>
+> I'm sure everyone is eager to have a parallel GHC and parallel Cabal. I am.
+> Waiting for 67 modules to build in order every time I change my types file
+> is not fun.
+
+You should parallelize yourself instead; while one thread is stuck
+waiting for GHC or Cabal, the other ones can have fun.
+
+

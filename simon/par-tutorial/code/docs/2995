@@ -1,0 +1,42 @@
+From iusty at k1024.org  Sun Feb 13 10:50:16 2011
+From: iusty at k1024.org (Iustin Pop)
+Date: Sun, 13 Feb 2011 10:50:16 +0100
+Subject: [Haskell-cafe] Why is there no "splitSeperator" function in
+ Data.List
+In-Reply-To: <AANLkTim+z3eNe_s4xR4YBz95o6ArXGWzA-VUMsW7ExqS@mail.gmail.com>
+References: <1297526447.2361.4.camel@robert-desktop>
+	<AANLkTim+z3eNe_s4xR4YBz95o6ArXGWzA-VUMsW7ExqS@mail.gmail.com>
+Message-ID: <20110213095016.GA6508@teal.hq.k1024.org>
+
+On Sat, Feb 12, 2011 at 11:21:37AM -0500, Gwern Branwen wrote:
+> On Sat, Feb 12, 2011 at 11:00 AM, Robert Clausecker <fuzxxl at gmail.com> wrote:
+> > Is there any reason, that one can't find a function that splits a list
+> > at a seperator in the standard library? I imagined something like this:
+> >
+> >
+> > ? ?splitSeperator :: Eq a => a -> [a] -> [[a]]
+> >
+> > ? ?splitSeperator ',' "foo,bar,baz"
+> > ? ? ?--> ["foo","bar","baz"]
+> >
+> > Or something similar? This is needed so often, even if I can implement
+> > it in one line, is there any reason why it's not in the libs?
+> 
+> See http://hackage.haskell.org/package/split
+> 
+> The reason it's not in Data.List is because there are a bazillion
+> different splits one might want (when I was pondering the issue before
+> Brent released it, I had collected something like 8 different proposed
+> splits), so no agreement could ever be reached.
+
+It is curious though that the Python community managed to agree on a
+single implementation and include that in the standard library? So it is
+possible :)
+
+I also needed a split function and ended up with coding one that behaves
+like the Python one for my project.
+
+regards,
+iustin
+
+

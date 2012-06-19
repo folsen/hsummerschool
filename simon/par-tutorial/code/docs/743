@@ -1,0 +1,36 @@
+From mle+hs at mega-nerd.com  Tue Apr 26 14:27:46 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Tue, 26 Apr 2011 22:27:46 +1000
+Subject: [Haskell-cafe] Wai and http-enumerator not as lazy as I'd like
+Message-ID: <20110426222746.57ea8526.mle+hs@mega-nerd.com>
+
+Hi all,
+
+I'm using Wai and http-enumerator to build a http proxy. The core of
+the code looks like this:
+
+    import qualified Network.HTTP.Enumerator     as HE
+    import qualified Network.Wai                 as Wai
+
+    serveRequest :: forall (m :: * -> *).
+             (MonadControlIO m, Failure HE.HttpException m) =>
+             HE.Request m -> m Wai.Response
+    serveRequest request
+     = do   HE.Response sc rh bs <- HE.withManager $ HE.httpLbsRedirect request
+            return $ Wai.responseLBS (mkStatus sc) rh bs
+
+This works but does not run in constant space as I would have hoped.
+The thing is, HE.httpLbsRedirect returns a lazy ByteString and
+Wai.responseLBS writes a lazy ByteString, so why isn't the whole thing
+lazy?
+
+I'd appreciate any clues.
+
+Cheers,
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

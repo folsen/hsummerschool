@@ -1,0 +1,38 @@
+From daniel.is.fischer at googlemail.com  Thu Dec  8 18:35:14 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Thu, 8 Dec 2011 18:35:14 +0100
+Subject: [Haskell-cafe] Recommended class instances for container type
+In-Reply-To: <CAPTT2bY8hzwAP2ueNEUXijKnfriNXs7oVAEfSwQF8=wApj5-Uw@mail.gmail.com>
+References: <CAPTT2bbaiCeJWsYPJfufKaRmOBAA7gcsEtbMYzXcZJX5xFvnUw@mail.gmail.com>
+	<CACw0niLbg6bMWQkEiU9a6yxU11pczyaFX0vKar8LAmi5R+ZCjw@mail.gmail.com>
+	<CAPTT2bY8hzwAP2ueNEUXijKnfriNXs7oVAEfSwQF8=wApj5-Uw@mail.gmail.com>
+Message-ID: <201112081835.14620.daniel.is.fischer@googlemail.com>
+
+On Thursday 08 December 2011, 18:13:50, Christoph Breitkopf wrote: 
+> Well, including a some file via CPP did look experimental enough to me.
+> I'd like to stay away from GHC-only code, if possible.
+
+CPP is standard (maybe not in the sense that it's included in the language 
+standard, but every implementation I'm aware of supports CPP).
+
+> 
+> > At some point, if you want your container class to be useful to
+> > others, you'll want to implement Foldable and Traversable.
+> 
+> Being useful to others would be the whole point in releasing it at all
+> :-)
+> 
+> Thanks for your explanations - I take this as: "Yes, the Haskell
+> community is really using all this stuff in production code, so better
+> offer it, or your library might not be that usable."
+
+To varying extent. Stuff can be quite usable without Data or Typeable 
+instances. You can start with what you consider most important and add the 
+rest when you get feature requests.
+
+> I'll try to be complete, then.
+> 
+> - Chris
+
+
+

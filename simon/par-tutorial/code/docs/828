@@ -1,0 +1,40 @@
+From nbowler at elliptictech.com  Thu Apr 28 17:05:02 2011
+From: nbowler at elliptictech.com (Nick Bowler)
+Date: Thu, 28 Apr 2011 11:05:02 -0400
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <1304000463.23817.25.camel@godel>
+References: <4DB093A6.8000303@btinternet.com> <4DB3E7E8.8000907@btinternet.com>
+	<BANLkTi=S70WstLi83umF=v=LBVu1A7pbTQ@mail.gmail.com>
+	<4DB5493F.4010804@btinternet.com>
+	<D47B6B3C-B39D-475B-BCED-2E7758A5ED7A@me.com>
+	<4DB89687.30705@earth.li> <ipb02s$oap$1@dough.gmane.org>
+	<1304000463.23817.25.camel@godel>
+Message-ID: <20110428150502.GA2484@elliptictech.com>
+
+On 2011-04-28 08:21 -0600, Chris Smith wrote:
+> It seems to me the same problems could be solved without the necessary
+> increase in complexity by:
+> 
+> (a) Keeping repositories in sibling directories with names.
+> 
+> (b) Keeping a working directory that you build in as one of these, and
+> switching it to match various other named repositories as needed.  Then
+> your build files are still there.
+
+Unfortunately, sharing a build directory between separate repositories
+does not work.  After a build from one repository, all the outputs from
+that build will have modification times more recent than all the files
+in the other repository.
+
+When switching branches, git (and other systems) update the mtimes on
+all files that changed, which will cause build systems to notice that
+the outputs are out of date.  'cd' does not do this.  Thus, if you have
+separate repo directories (call them A and B) with different versions of
+some file, and you share a build directory between them, it is very
+likely that after building A, a subsequent build of B will fail to work
+correctly.
+
+-- 
+Nick Bowler, Elliptic Technologies (http://www.elliptictech.com/)
+
+

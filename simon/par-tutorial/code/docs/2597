@@ -1,0 +1,50 @@
+From felipe.lessa at gmail.com  Wed Feb  2 21:15:40 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Wed, 2 Feb 2011 18:15:40 -0200
+Subject: [Haskell-cafe] [web-devel] http-enumerator: redirects,
+	streaming and keep-alive
+In-Reply-To: <AANLkTimXn=Dkb-eAkSUNMnVqs6wsT7DqG_UDBV4qyWzT@mail.gmail.com>
+References: <AANLkTimXn=Dkb-eAkSUNMnVqs6wsT7DqG_UDBV4qyWzT@mail.gmail.com>
+Message-ID: <AANLkTimwZVTvrSaTzRGQ+8XqAgL9Lyu3yC2ZaA=RfymD@mail.gmail.com>
+
+On Wed, Feb 2, 2011 at 11:57 AM, Michael Snoyman <michael at snoyman.com> wrote:
+> As far as keep-alive goes, I still need to do a bit more research, but
+> my basic idea (with credit to Bryan O'Sullivan):
+>
+> * http (and family) will all take an extra argument, Maybe Manager.
+> * Manager will be an abstract type that will keep an MVar (Map (Host,
+> Port, IsSecure) Socket).
+> * If http is provided with a Manager, then it uses the Socket
+> available in the Manager. If none is available, it creates a new
+> Socket and places it in the Manager.
+> * If http is *not* provided with a Manager, then it creates a new
+> socket and closes it before returning.
+> * There will be a newManager :: IO Manager, and a closeManager ::
+> Manager -> IO (), which closes all Sockets in the Manager and empties
+> out the inner Map.
+
+How about concurrent use of Manager?  Should we do
+
+A)
+  do m <- newManager
+       forM xs $ forkIO $ doSomething m
+
+B)
+  forM xs $ forkIO $ do
+    m <- newManager
+    doSomething m
+
+While B) should work with any sane Manager implementation, it is not
+optimal.  If all your connections are to the same host, than both
+approaches are the same.  But if access hosts O and P, for example,
+than it is possible that Manager m1 has an open connection to O, but
+you try connect to O using another Manager m2.  That means that
+ideally we should support approach A) as well.  However, to support A
+a simple Map inside an MVar isn't sufficient.
+
+Cheers! =)
+
+-- 
+Felipe.
+
+

@@ -1,0 +1,32 @@
+From daniel.is.fischer at googlemail.com  Mon Aug  8 19:54:41 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Mon, 8 Aug 2011 19:54:41 +0200
+Subject: [Haskell-cafe] Analyzing slow performance of a Haskell program
+In-Reply-To: <CAKaDkC4Ab3yoG0UoaN9C4CM+1-goZ_yswqOLcBz7ejE6LfLg8w@mail.gmail.com>
+References: <CAKaDkC7-vQo_AXRRX6-+P+PKV87b54D21k6bSnub=JYvH_mnRQ@mail.gmail.com>
+	<CANVKUrXxHLgmGcYwk+hJHyME22TUDVoZ2n4K0T7afqH1LHZqpg@mail.gmail.com>
+	<CAKaDkC4Ab3yoG0UoaN9C4CM+1-goZ_yswqOLcBz7ejE6LfLg8w@mail.gmail.com>
+Message-ID: <201108081954.42052.daniel.is.fischer@googlemail.com>
+
+On Monday 08 August 2011, 18:24:45, Chris Yuen wrote:
+> Where is the `unsafeAt` function?
+
+Data.Array.Base
+
+> I can't seem to find it (
+> http://haskell.org/hoogle/?hoogle=unsafeat).
+
+Data.Array.Base is not haddocked (there's a reason for that), so hoogle 
+doesn't know about its functions.
+
+> 
+> For reference I have asked the same question on StackOverflow. One
+> person suggested that the reason might be that Int64 on Windows is
+> broken (
+> http://stackoverflow.com/questions/6970904/analyzing-slow-performance-o
+> f-a-haskell-program/6976448#6976448 ).
+
+As far as I know, there's no 64-bit GHC for windows, so that might well 
+have performance impact even on 64-bit windows.
+
+

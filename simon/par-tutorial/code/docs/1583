@@ -1,0 +1,26 @@
+From dokondr at gmail.com  Thu Dec  1 17:12:21 2011
+From: dokondr at gmail.com (dokondr)
+Date: Thu, 1 Dec 2011 19:12:21 +0300
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+Message-ID: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+
+Hi,
+When my program starts it needs to know a complete path to the directory
+from which it was invoked.
+In terms of standard shell (sh) I need the Haskell function that will do
+equivalent to:
+
+#!/bin/sh
+path=$(dirname $0)
+
+How to get this path in Haskell?
+
+getProgName :: IO String
+defined System.Environment only returns a file name of the program without
+its full path.
+
+Thanks!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111201/c32fb7fe/attachment.htm>
+

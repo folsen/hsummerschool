@@ -1,0 +1,33 @@
+From ckkashyap at gmail.com  Thu Feb  3 17:20:18 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Thu, 3 Feb 2011 21:50:18 +0530
+Subject: [Haskell-cafe] Review request for "platform independent
+ interactive graphics" with VNC
+In-Reply-To: <4D4ACEC4.3050608@dfki.de>
+References: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>
+	<4D4ACEC4.3050608@dfki.de>
+Message-ID: <AANLkTik3OuqBfZ2GVS7J-OJr4XHhXb6RQC=ieUK7aiQP@mail.gmail.com>
+
+>
+>
+> maeder at leibniz:/local/maeder> git clone git at github.com:
+> ckkashyap/Chitra.git
+> Initialized empty Git repository in /local/maeder/Chitra/.git/
+> Permission denied (publickey).
+> fatal: The remote end hung up unexpectedly
+> maeder at leibniz:/local/maeder> git --version
+> git version 1.7.1
+>
+> What permission is needed?
+> Christian
+>
+
+Oops, you can use git://github.com/ckkashyap/Chitra.git  - sorry about that.
+You can also visit https://github.com/ckkashyap/Chitra
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/f9ee4a7f/attachment.htm>
+

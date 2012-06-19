@@ -1,0 +1,33 @@
+From limestrael at gmail.com  Mon Dec  5 15:09:27 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Mon, 5 Dec 2011 15:09:27 +0100
+Subject: [Haskell-cafe] List x ByteString x Lazy Bytestring
+In-Reply-To: <20111205134940.GA21037@x200>
+References: <1323090896.3764.140661007583849@webmail.messagingengine.com>
+	<20111205134940.GA21037@x200>
+Message-ID: <CACqaG6ypYKCRgJEY7hKnS_nGHLrB7fDdxY5OG4oRUV7KhNTY8A@mail.gmail.com>
+
+However the performance issues seem odd: text is based on bytestring.
+
+2011/12/5 Simon Hengel <sol at typeful.net>
+
+> Hi,
+>
+> > - If bytestring is not suitable for text manipulation, is there
+> > something faster than lists?
+> Have a look at the text package[1].
+>
+> Cheers,
+> Simon
+>
+> [1] http://hackage.haskell.org/package/text
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111205/78b2a2c2/attachment.htm>
+

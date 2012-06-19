@@ -1,0 +1,33 @@
+From allbery.b at gmail.com  Tue Dec 13 02:43:33 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Mon, 12 Dec 2011 20:43:33 -0500
+Subject: [Haskell-cafe] ANNOUNCE: hxournal-0.5.0.0 - A pen notetaking
+ program written in haskell
+In-Reply-To: <CAPNnnrXoaY36PRRvM3_EtoX+HFLkyRy_F-jtr11qZtW-4izVGQ@mail.gmail.com>
+References: <CAPNnnrV329dsY_cB=K7q1-REUE5os7+u+psqN=rWeq9Crz6JEQ@mail.gmail.com>
+	<CACZKWEL6=_f+HTckrrgqCZj-EWKHJpw3TSEaBvXOBhZFOeFAOg@mail.gmail.com>
+	<CAPNnnrXoaY36PRRvM3_EtoX+HFLkyRy_F-jtr11qZtW-4izVGQ@mail.gmail.com>
+Message-ID: <CAKFCL4XQceD_Y0Cv4oViYrfCwLRcbeG9EQOjOMScCfDZ=iWq4g@mail.gmail.com>
+
+On Mon, Dec 12, 2011 at 19:22, Ian-Woo Kim <ianwookim at gmail.com> wrote:
+
+> A workaround is to make a symbolic link to libstdc++.so.6 with the
+> name of libstdc++.so in /usr/lib or /usr/local/lib or other dynamic
+> library path like the following.
+>
+> ln -s /usr/lib/libstdc++.so.6 /usr/lib/libstdc++.so
+>
+
+This is an indication that you have not installed your distribution's -dev
+package for the library in question.  You should do so instead of making
+the symlink manually.
+
+(cabal has no support for this kind of thing)
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111212/d2ff45f9/attachment.htm>
+

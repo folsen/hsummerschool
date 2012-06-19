@@ -1,0 +1,56 @@
+From tom at zwizwa.be  Sun Aug 21 12:22:03 2011
+From: tom at zwizwa.be (Tom Schouten)
+Date: Sun, 21 Aug 2011 12:22:03 +0200
+Subject: [Haskell-cafe] Existential question
+In-Reply-To: <CANd=OGGJdZD6gU__K770RYXag=whmuCXDq=WX5C+iF4Bt4fmrw@mail.gmail.com>
+References: <20110818052743.3D7181712D@Adric.ern.nps.edu>	<4E502694.4090801@zwizwa.be>
+	<CANd=OGGJdZD6gU__K770RYXag=whmuCXDq=WX5C+iF4Bt4fmrw@mail.gmail.com>
+Message-ID: <4E50DC4B.1070703@zwizwa.be>
+
+On 08/21/2011 05:33 AM, Felipe Almeida Lessa wrote:
+> On Sat, Aug 20, 2011 at 6:26 PM, Tom Schouten<tom at zwizwa.be>  wrote:
+>> data Kl i o = forall s. Kl s (i ->    s ->    (s, o))
+>>
+>> This is an Arrow.  At first I wondered if there was also an associated
+>> Monad, hence the iso function.
+> Given
+>
+>    data Kl i o = forall s. Kl s (i ->    s ->    (s, o))
+>
+>    instance ArrrowApply KI where
+>      ...
+>
+> then 'ArrowMonad KI' [1] is a monad isomorphic to
+>
+>    data KIM o = forall s. KIM s (s ->  (s, o))
+>
+> Is this what you are looking for?
+>
+Yes, but I run into the same problem.
+
+
+data Kl i o = forall s. Kl (i -> s -> (s, o))
+
+-- OK
+instance Category Kl where
+   id = Kl $ \ i () -> ((), i)
+   (.) (Kl u2) (Kl u1) = (Kl u12) where
+     u12 a (s1, s2) = ((s1',s2'), c) where
+       (s1', b) = u1 a s1
+       (s2', c) = u2 b s2
+
+-- OK
+instance Arrow Kl where
+   arr f = Kl $ \i () -> ((), f i)
+   first (Kl u) = (Kl u') where
+     u' (i, x) s = (s', (o, x)) where
+       (s', o) = u i s
+
+-- Can't make this work.  The problem seems to be the same as before:
+-- there's no way to require that the hidden types of both Kl
+-- constructors are the same.
+instance ArrowApply Kl where
+   app = Kl $ \((Kl f), a) -> f a
+
+
+

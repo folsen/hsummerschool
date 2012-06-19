@@ -1,0 +1,46 @@
+From as at hacks.yi.org  Thu Aug 11 20:17:51 2011
+From: as at hacks.yi.org (austin seipp)
+Date: Thu, 11 Aug 2011 13:17:51 -0500
+Subject: [Haskell-cafe] [Haskell] ANNOUNCE: GHC version 7.2.1
+In-Reply-To: <4E440E7E.5080908@henning-thielemann.de>
+References: <20110809200130.GA28700@matrix.chaos.earth.li>
+	<4E440E7E.5080908@henning-thielemann.de>
+Message-ID: <CAEs96n2AoSNRFdPKg7GMOfCj5rf=Gbz-OcLpqYGfZXi=bb2WMQ@mail.gmail.com>
+
+VECTORISE is for Data Parallel Haskell. It's only relevant to GHC's
+internal vectorisation pass - I don't actually think there is any use
+case for it in user code at the moment, it's only used by the DPH
+libraries/special prelude, etc.
+
+On Thu, Aug 11, 2011 at 12:16 PM, Henning Thielemann
+<schlepptop at henning-thielemann.de> wrote:
+> On 09.08.2011 22:01, Ian Lynagh wrote:
+>>
+>> The GHC Team is pleased to announce a new major release of GHC, 7.2.1.
+>>
+>> The 7.2 branch is intended to be more of a "technology preview" than
+>> normal GHC stable branches; in particular, it supports a significantly
+>> improved version of DPH, as well as new features such as compiler
+>> plugins and "safe Haskell". The design of these new features may evolve
+>> as we get more experience with them. See the release notes for more
+>> details of what's new and what's changed.
+>
+> These sound like a lot of exciting news. The release notes also mention a
+> VECTORISE pragma, that is not mentioned in
+> ? http://www.haskell.org/ghc/docs/7.2.1/html/users_guide/pragmas.html
+> and not in the index. Is it about the planned GHC support for SSE/AltiVec
+> vector units or is it about DPH?
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Regards,
+Austin
+
+

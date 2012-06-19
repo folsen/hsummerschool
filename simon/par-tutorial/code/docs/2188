@@ -1,0 +1,45 @@
+From hesselink at gmail.com  Wed Dec 21 12:38:19 2011
+From: hesselink at gmail.com (Erik Hesselink)
+Date: Wed, 21 Dec 2011 12:38:19 +0100
+Subject: [Haskell-cafe] ANNOUNCE: partial-lens 0.0.1
+In-Reply-To: <alpine.LRH.2.00.1112202242590.2743@theorem.ca>
+References: <alpine.LRH.2.00.1112202242590.2743@theorem.ca>
+Message-ID: <CAPeieQHvoS0ReBJy8xNOP_ki8W9_7efqCrC0Bu+0HSJGeRNPUg@mail.gmail.com>
+
+How does this relate to the Maybe lenses in fclabels [1]?
+
+Erik
+
+[1] http://hackage.haskell.org/packages/archive/fclabels/1.0.4/doc/html/Data-Label-Maybe.html
+
+On Wed, Dec 21, 2011 at 04:54,  <roconnor at theorem.ca> wrote:
+> Do you miss null references from your old imperative programming days? Wish
+> that the worlds best imperative language had null references? ?Now your
+> wishes have come true with the new partial-lens package!
+>
+> partial-lens augment edwardk's data-lens package with partial lens. Partial
+> lenses are like regular lenses but have the possibility of not referencing
+> anything. ?In other words, null references are possible. ?One notable
+> different with null references from this package is that you can set them
+> without getting a run-time error. ?Instead setting a null reference is a
+> no-op; however it is possible to determine if setting failed from the return
+> value of the assignment operation.
+>
+> Actually I don't have any applications for partial lenses myself, so if you
+> find this library useful, please let me know. ?I wrote this mostly because
+> we know what partial lenses are in theory (they are the coalgebras of the
+> (Identity :+: Store b) comonad) but I wanted to see what a real library
+> would look like.
+>
+> --
+> Russell O'Connor ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?<http://r6.ca/>
+> ``All talk about `theft,''' the general counsel of the American Graphophone
+> Company wrote, ``is the merest claptrap, for there exists no property in
+> ideas musical, literary or artistic, except as defined by statute.''
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

@@ -1,0 +1,53 @@
+From dmbarbour at gmail.com  Mon Aug 22 21:53:32 2011
+From: dmbarbour at gmail.com (David Barbour)
+Date: Mon, 22 Aug 2011 12:53:32 -0700
+Subject: [Haskell-cafe] Question about data
+In-Reply-To: <CAAOQMSs9zUM+=g5mVyXD47wk19xcEPDcj6r2qHfMBE4a0LAFnA@mail.gmail.com>
+References: <CAGHv16uFODO0WSFP4h+m-i+XMFMiKkbCxJetVZk-QxP4fiEzqg@mail.gmail.com>
+	<CAAOQMSs9zUM+=g5mVyXD47wk19xcEPDcj6r2qHfMBE4a0LAFnA@mail.gmail.com>
+Message-ID: <CAAOQMSv4=_j-ZnRMPGMKmiv_3oX3LUf+Whv2OWhUchR9qwAxNg@mail.gmail.com>
+
+In addition to fixing 'Float', you should define the 'Fractional' instance
+for MathExpression. This would let you use:
+   let pi = 3.14 :: MathExpression
+
+So your instance of Fractional would look like:
+
+
+instance Num MathExpression where
+  (+) a b = Add a b
+  (*) a b = Multiply a b
+  (-) a b = Subtract a b
+  negate b = Subtract 0 b
+  fromInteger = MathFloat . fromInteger
+  abs    = undefined
+  signum = undefined
+instance Fractional MathExpression where
+  fromRational = MathFloat . fromRational
+  (/) a b = Divide a b
+  recip b = Divide 1 b
+
+That would give 'fromRational' and 'fromInteger' which are the main numeric
+conversion functions.
+
+Regards,
+
+Dave
+
+On Fri, Aug 19, 2011 at 1:40 PM, Paul Reiners <paul.reiners at gmail.com>wrote:
+
+> I've created a simple type declaration:
+>
+> data MathExpression = Float
+>     | Add MathExpression MathExpression
+>     | Subtract MathExpression MathExpression
+>     | Multiply MathExpression MathExpression
+>     | Divide MathExpression MathExpression
+>       deriving (Show)
+>
+> Now how do I create an instance of MathExpression which is just a Float?
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110822/0fa907a2/attachment.htm>
+

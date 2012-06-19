@@ -1,0 +1,108 @@
+From guthrie at mum.edu  Tue Apr 19 21:38:18 2011
+From: guthrie at mum.edu (Gregory Guthrie)
+Date: Tue, 19 Apr 2011 14:38:18 -0500
+Subject: [Haskell-cafe] Haskell from SML - referrential Transparency?!
+In-Reply-To: <201104192116.17262.daniel.is.fischer@googlemail.com>
+References: <08EF9DA445C4B5439C4733E1F35705BAD9080AD1BB@MAIL.cs.mum.edu>
+	<201104192116.17262.daniel.is.fischer@googlemail.com>
+Message-ID: <08EF9DA445C4B5439C4733E1F35705BAD9080AD1BE@MAIL.cs.mum.edu>
+
+Oops;
+No - my (further) mistake. It is not IO() - f1 returns a data structure which implements Show, and the test is really:
+
+    Test1 = do print "Test1:"
+                  print f1
+(etc..)
+
+Thanks for the alert on trace.
+
+I used it like this:
+allocate :: Store -> (Store, Location)
+allocate ( Store(bot,top,sto) ) |
+         trace("allocate "++ show bot ++ show top)
+          False = undefined
+allocate ( Store(bot,top,sto) )  =
+        let newtop  = top+1
+
+and it does seem to show every allocation on the first run of f1, but then nothing on the second.
+SO it is not just a first call to allocate, but all calls under an invocation of f1 that don't show.
+Makes me wonder if f1 is even being re-evaluated.
+
+I did post the code - but don't expect anyone to really wade through and debug for me!  :-)
+(The issues that I am asking about are a9b, a9bb at line 435, 438)
+http://hpaste.org/45851/haskell_from_sml_question
+
+thanks for the help.
+-------------------------------------------
+
+> -----Original Message-----
+> From: Daniel Fischer [mailto:daniel.is.fischer at googlemail.com]
+> Sent: Tuesday, April 19, 2011 2:16 PM
+> To: haskell-cafe at haskell.org
+> Cc: Gregory Guthrie
+> Subject: Re: [Haskell-cafe] Haskell from SML - referrential Transparency?!
+> 
+> On Tuesday 19 April 2011 21:10:09, Gregory Guthrie wrote:
+> > I am pretty new to Haskell, so need some clarification.
+> > I am porting some code from SML, and getting a result that surprises me.
+> >
+> > I basically have some functions which work like this:
+> >     f1 =  fa fb fc
+> >     test1 = do print "test1:"
+> >                          f1
+> 
+> So f1 :: IO something
+> 
+> Being an IO-action, f1 can return different things in different invocations since the world in
+> which it runs has changed (it might read a file which was modified between the first and the
+> second invocation, for example).
+> 
+> >
+> > But I ran a few tests, and got odd results - so I ran the same  test
+> > function twice, and got different results - that was my surprise. I
+> > did
+> > this:
+> >     f1 =  fa fb fc
+> >     f2 =  fa fb fc
+> >     test2 = do print "test1:"
+> >                          f1
+> >                          f2
+> >
+> > and I get different results from the two executions (f1,f2), even
+> > though they have exactly the same definition. Reversing their order,
+> > gives the exact same results (i.e. the results are still different, and in the
+> > same original order as f2;f1). Even doing   (f1;f1) gives two different
+> > results.
+> 
+> Depending on what f1 does, that may be perfectly normal or a serious bug.
+> We'd need to see more of the code to determine which.
+> 
+> >
+> > Seems to me that by referential transparency, I should always get the
+> > same result from the function(s).
+> >
+> > So, I added some Debug.trace to the argument functions which are used,
+> > and I get a trace from the first call(s), but none from the second
+> > one(s), although I do get the result from each.
+> 
+> Did you do it in the form
+> 
+> fa = trace ("fa") realFa
+> 
+> ?
+> 
+> Then the trace is only evaluated the first time fa is evaluated, even if fa is called later
+> again.
+> 
+> >
+> > It is as if because of the laziness, it someone cached some of the
+> > intermediate results, so did not re-invoke the functions.
+> >
+> > Anyway, totally confused. I must be missing something significant here.
+> > Thanks for any clarification! (The original code is a bit long, so I
+> > did not include here...)
+> 
+> http://hpaste.org/
+> 
+> perhaps?
+

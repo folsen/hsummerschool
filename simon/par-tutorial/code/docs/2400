@@ -1,0 +1,75 @@
+From balicki.aleksander at gmail.com  Thu Dec 29 18:52:58 2011
+From: balicki.aleksander at gmail.com (Aleksander Balicki)
+Date: Thu, 29 Dec 2011 09:52:58 -0800 (PST)
+Subject: [Haskell-cafe]  data-structure-inferrer,
+ standard library on steroids
+Message-ID: <16980320.1643.1325181178186.JavaMail.geo-discussion-forums@vbls16>
+
+Hi,
+
+I'm writing a project and was wondering what other people think about it.
+
+This project is meant to be a compiler feature/wrapper that analyzes your 
+code and chooses the best data structure depending on your source code. It 
+analyzes the functions used on a wildcard data structure and chooses the 
+type of structure that minimizes the time complexity. It nearly supports C 
+language and hopefully some other languages too. The purpose is that you 
+don't have to care which data structure to use ever again :D (hopefully, if 
+it works well, lol).
+
+
+Maybe some illustrative examples:
+
+int main()
+{
+ds d; //data structure
+while(something) {
+insert(d, 5);
+}
+
+while(!empty(d)) {
+printf("%d\n, max(d));
+delete_max(d);
+}
+}
+
+Here dsinf would infer some kind of a heap (or possibly a rbt with max 
+element cache).
+
+int main()
+{
+ds d; //data structure
+while(something)
+insert(d, 5);
+
+while(something)
+update(d, 2, 7);
+ while(something)
+delete(d, 1);
+
+printf("25 is in the set", search(d, 25));
+}
+
+Here it would be hashtable (it differs from the earlier, because we don't 
+need element ordering).
+
+if anybody wants to hack it, the C api is in dsimp/ds.h and some tests in 
+C/tests/.
+
+
+I have some ideas how to extend it from trivial cases, the ideas are in 
+github issues.
+
+repo: git clone https://github.com/alistra/data-structure-inferrer.git
+hackage: http://hackage.haskell.org/package/data-structure-inferrer-1.0
+
+
+So just let me know what you think ;]
+
+Also does anybody know a good ~MIT licenced library of data structures 
+written in C (they're needed for the auto-compile option)?
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111229/e14da676/attachment.htm>
+

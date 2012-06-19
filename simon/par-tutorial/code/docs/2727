@@ -1,0 +1,28 @@
+From brandon_m_moore at yahoo.com  Sat Feb  5 04:36:58 2011
+From: brandon_m_moore at yahoo.com (Brandon Moore)
+Date: Fri, 4 Feb 2011 19:36:58 -0800 (PST)
+Subject: [Haskell-cafe] Extending GHCi
+In-Reply-To: <AANLkTintbzM_qEmFH=ijc5NudTTuk=eHqLYX1SAcXZ__@mail.gmail.com>
+References: <AANLkTintbzM_qEmFH=ijc5NudTTuk=eHqLYX1SAcXZ__@mail.gmail.com>
+Message-ID: <178721.99260.qm@web45106.mail.sp1.yahoo.com>
+
+>Hi,
+>I am looking for a way to extend GHCI such that I can do something like this
+>
+>startMyFunction will do a forkIO and listen on a network port for interaction 
+>with a remote process and will drop back to GHCI prompt where I can invoke 
+>haskell functions that'll control the way the interaction with the remote 
+>process occurs. Can this be done?
+
+
+What part of that doesn't already work? You can forkIO threads in GHCi,
+you can listen on the network. If you have written the server so it can be
+controlled from another thread, you can run those controlling functions
+at the prompt while the server is working.
+
+Brandon
+
+
+      
+
+

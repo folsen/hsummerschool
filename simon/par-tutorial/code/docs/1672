@@ -1,0 +1,32 @@
+From limestrael at gmail.com  Mon Dec  5 16:11:47 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Mon, 5 Dec 2011 16:11:47 +0100
+Subject: [Haskell-cafe] List x ByteString x Lazy Bytestring
+In-Reply-To: <CAK-tuPZf5CQ41z8O9c-rW4QfyEms_oKKr5xWfUQcj=xWySHO9A@mail.gmail.com>
+References: <1323090896.3764.140661007583849@webmail.messagingengine.com>
+	<20111205134940.GA21037@x200>
+	<CACqaG6ypYKCRgJEY7hKnS_nGHLrB7fDdxY5OG4oRUV7KhNTY8A@mail.gmail.com>
+	<CAK-tuPZf5CQ41z8O9c-rW4QfyEms_oKKr5xWfUQcj=xWySHO9A@mail.gmail.com>
+Message-ID: <CACqaG6x2XUzNK348fTo3GLB+D=ZuaQM9RrhakwYegPnzUQAvDA@mail.gmail.com>
+
+Oh, sorry, my bad.
+I misunderstood the dependency.
+
+2011/12/5 Johan Tibell <johan.tibell at gmail.com>
+
+> On Mon, Dec 5, 2011 at 6:09 AM, Yves Par?s <limestrael at gmail.com> wrote:
+>
+>> However the performance issues seem odd: text is based on bytestring.
+>
+>
+> This is not the case. Text is based on ByteArray#, GHC internal type for
+> blocks of bytes. The text package depends on the bytestring package because
+> it allows you to encode/decode Text<->ByteString.
+>
+> -- Johan
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111205/92d92618/attachment.htm>
+

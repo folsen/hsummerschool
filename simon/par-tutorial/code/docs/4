@@ -1,0 +1,30 @@
+From conrad at metadecks.org  Fri Apr  1 03:59:23 2011
+From: conrad at metadecks.org (Conrad Parker)
+Date: Fri, 1 Apr 2011 10:59:23 +0900
+Subject: [Haskell-cafe] A maintenance command of Haskell cabal packages
+In-Reply-To: <20110401.104845.79254511.kazu@iij.ad.jp>
+References: <20110401.104845.79254511.kazu@iij.ad.jp>
+Message-ID: <AANLkTinYm9K7WsGejSzdt8enjNtCB_3m2iwQ9Qtm_Ldq@mail.gmail.com>
+
+On 1 April 2011 10:48, Kazu Yamamoto <kazu at iij.ad.jp> wrote:
+> Hello cafe,
+>
+> Let me announce a maintenance command of Haskell cabal packages.
+>
+> ? ? ? ?http://www.mew.org/~kazu/proj/cab/en/
+>
+> ----
+> "cab" is a MacPorts-like maintenance command of Haskell cabal
+> packages. Some part of this program is a wrapper to "ghc-pkg" and
+> "cabal".
+>
+> If you are always confused due to inconsistency of two commands, or if
+> you want a way to check all outdated packages, or if you want a way to
+> remove outdated packages recursively, this command helps you.
+> ----
+
+whoah, it has uninstall!!! awesome!
+
+Conrad.
+
+

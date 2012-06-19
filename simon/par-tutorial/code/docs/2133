@@ -1,0 +1,50 @@
+From apfelmus at quantentunnel.de  Tue Dec 20 14:18:19 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Tue, 20 Dec 2011 14:18:19 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <4EF05DCC.4040607@informatik.uni-marburg.de>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<4EF05DCC.4040607@informatik.uni-marburg.de>
+Message-ID: <jcq1ur$rjf$1@dough.gmane.org>
+
+Tillmann Rendel wrote:
+> Hi,
+> 
+> Robert Clausecker wrote:
+>> Image you would create your own language with a paradigm similar to
+>> Haskell or have to chance to change Haskell without the need to keep any
+>> compatibility. What stuff would you add to your language, what stuff
+>> would you remove and what problems would you solve completely different?
+> 
+> I would try to improve the language's support for the embedding of 
+> domain-specific embedded languages (aka. combinator libraries). Such 
+> embedding requires the integration of a domain-specific language's 
+> syntax, static semantics and dynamic semantics. Some (more or less far 
+> fetched) ideas about these three areas follow.
+
+I think this is a very good point. The things I would like to see:
+
+* Better syntax for observable sharing. Doaitse Swierstra proposed a 
+"grammer" construct that is basically a  let  statement where the binder 
+names can be observed. I'm not entirely sure whether that is the most 
+general or sufficient syntax, but something along these lines.
+
+* Meta-programming / partial evaluation. When designing a DSL, it is 
+often the case that you know how to write an optimizing compiler for 
+your DSL because it's usually a first-order language. However, trying to 
+squeeze that into GHC rules is hopeless. Having some way of compiling 
+code at run-time would solve that. Examples:
+** Conal Elliott's image description language Pan
+** Henning Thielemann's synthesizer-llvm
+
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

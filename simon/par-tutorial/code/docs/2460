@@ -1,0 +1,36 @@
+From abau at imn.htwk-leipzig.de  Fri Dec 30 08:21:02 2011
+From: abau at imn.htwk-leipzig.de (Alexander Bau)
+Date: Fri, 30 Dec 2011 08:21:02 +0100
+Subject: [Haskell-cafe] Type classes in Typing Haskell in Haskell
+Message-ID: <op.v7aj1cfmc34wtk@europa>
+
+Hi,
+
+recently I tried the Typing Haskell in Haskell library. But I was  
+wondering why this program type checks:
+
+> -- plusMfun is standard '+': Num a => a -> a -> a
+> test =  let Just classEnv = ( addCoreClasses <:> addNumClasses )  
+> initialEnv
+>       e = Ap ( Ap (Var "+") (Lit $ LitStr "3")) (Lit $ LitStr "5")
+>       impl = ("foo",[([],e)])
+>   in
+>     putStrLn $ pretty $ runTI $ tiImpls classEnv [plusMfun] [impl]
+
+I was expecting some kind of typechecking error, because [Char] is no
+instance of Num. But I get this:
+
+> ([isIn1 cNum (TAp tList tChar)],
+>  ["foo" :>:
+>     Forall []
+>       ([] :=>
+>          (TAp tList tChar))])
+
+The predicate says that if [Char] would be in Num then the type of the  
+expression would be [Char]. But actually [Char] isn't in Num. So, how do I  
+provoke a type check error in this case?
+
+Thanks in advance.
+
+
+

@@ -1,0 +1,38 @@
+From schlepptop at henning-thielemann.de  Mon Apr 18 09:39:40 2011
+From: schlepptop at henning-thielemann.de (Henning Thielemann)
+Date: Mon, 18 Apr 2011 09:39:40 +0200
+Subject: [Haskell-cafe] Data.StateVar and packages sizes (Was: How to
+ contact OpenGL package maintainer)
+In-Reply-To: <1303111814.2482.6.camel@kirk>
+References: <AANLkTinoGT8qa10+ZO6PEG5EOeMm=r3Cf2Rpeoe7tEts@mail.gmail.com>
+	<BANLkTikBKDkFLViTqt+UoixiX9gUQi_Gqg@mail.gmail.com>
+	<1303055619.2613.27.camel@kirk>
+	<BANLkTimKH=YLSMYhHDOTSx8xiUEYAs=PrA@mail.gmail.com>
+	<1303062686.2613.34.camel@kirk>
+	<BANLkTi=EstBKYvO1xM+=r37U4XyTn9Yz0Q@mail.gmail.com>
+	<1303111814.2482.6.camel@kirk>
+Message-ID: <4DABEABC.6080407@henning-thielemann.de>
+
+Joachim Breitner schrieb:
+
+> Am Sonntag, den 17.04.2011, 12:39 -0700 schrieb Jason Dagit:
+> 
+> 
+>> In this specific case, I'll do what I can to clean things up but your
+>> request makes me pause and think that the debian packaging for cabal
+>> packages is not automated enough.  As haskell developers it seems a
+>> little odd to me that we need to consider the cost of creating new
+>> packages for the sake of debian.  I like debian, so please don't take
+>> that the wrong way :)
+> 
+> the observation is correct, but unfortunately hard to change ? Debian is
+> large, slow moving, and unlikely to change policies for a corner-case
+> such as Haskell libraries. 
+
+As a user I had the impression that the packages become more and more
+divided into smaller packages (like TeX) and I found this useful, since
+I only need space for the functionality that I really use.
+
+
+
+

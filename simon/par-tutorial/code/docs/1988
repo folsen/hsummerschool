@@ -1,0 +1,63 @@
+From nominolo at googlemail.com  Thu Dec 15 18:28:49 2011
+From: nominolo at googlemail.com (Thomas Schilling)
+Date: Thu, 15 Dec 2011 17:28:49 +0000
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+Message-ID: <CAOJG3uD+qf_p5kEFNLZ8Ap0Fs3CBYtKjDHG68bs5dsF2CGzoRA@mail.gmail.com>
+
+May I ask what the problem is you're trying to solve?
+
+If you want to access datafiles in an installed program then Cabal can
+help you with that.  See
+http://www.haskell.org/cabal/users-guide/#accessing-data-files-from-package-code
+
+If you want to do more complicated things, maybe take a look at how
+GHC does it.  For example, on OS X (and other Unix-based systems) the
+"ghc" command is actually a script:
+
+$ cat `which ghc`
+#!/bin/sh
+exedir="/Library/Frameworks/GHC.framework/Versions/7.0.3-x86_64/usr/lib/ghc-7.0.3"
+exeprog="ghc-stage2"
+executablename="$exedir/$exeprog"
+datadir="/Library/Frameworks/GHC.framework/Versions/7.0.3-x86_64/usr/share"
+bindir="/Library/Frameworks/GHC.framework/Versions/7.0.3-x86_64/usr/bin"
+topdir="/Library/Frameworks/GHC.framework/Versions/7.0.3-x86_64/usr/lib/ghc-7.0.3"
+pgmgcc="/Developer/usr/bin/gcc"
+executablename="$exedir/ghc"
+exec "$executablename" -B"$topdir" -pgmc "$pgmgcc" -pgma "$pgmgcc"
+-pgml "$pgmgcc" -pgmP "$pgmgcc -E -undef -traditional" ${1+"$@"}
+
+/ Thomas
+
+On 1 December 2011 16:12, dokondr <dokondr at gmail.com> wrote:
+> Hi,
+> When my program starts it needs to know a complete path to the directory
+> from which it was invoked.
+> In terms of standard shell (sh) I need the Haskell function that will do
+> equivalent to:
+>
+> #!/bin/sh
+> path=$(dirname $0)
+>
+> How to get this path in Haskell?
+>
+> getProgName :: IO String
+> defined System.Environment only returns a file name of the program without
+> its full path.
+>
+> Thanks!
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Push the envelope. Watch it bend.
+
+

@@ -1,0 +1,56 @@
+From miguelimo38 at yandex.ru  Fri Aug 19 14:28:16 2011
+From: miguelimo38 at yandex.ru (MigMit)
+Date: Fri, 19 Aug 2011 16:28:16 +0400
+Subject: [Haskell-cafe] Problem with types
+In-Reply-To: <CAKit5aAe_sZnyq+=F7adYfFobvtvmTu0qzF5Wi18Wn63iDzraw@mail.gmail.com>
+References: <CAKit5aAe_sZnyq+=F7adYfFobvtvmTu0qzF5Wi18Wn63iDzraw@mail.gmail.com>
+Message-ID: <83C040B4-3FB7-4386-A5CE-FBEA829A2E90@yandex.ru>
+
+p :: (forall o. M o -> M o) -> ...
+
+?????????? ? iPad
+
+19.08.2011, ? 16:06, Anupam Jain <ajnsit at gmail.com> ???????(?):
+
+> Hi all,
+> 
+> Suppose I have a compound data type -
+> 
+> data M o = M (String,o)
+> 
+> Now, I can define a function that works for ALL M irrespective of o. For example -
+> 
+> f :: M o -> M o
+> f (M (s,o)) = M (s++"!", o)
+> 
+> I can also use this function in an expression, applying it to different types without problem -
+> 
+> p = (m1',m2') where
+>   m1 = M ("1", ())
+>   m2 = M ("2", True)
+>   m1' = f m1
+>   m2' = f m2
+> 
+> Main*> p
+> (M ("1!",()),M ("2!",True))
+> 
+> However, if I try to parameterise over the function 'f' it does not work!  -
+> 
+> p f = (m1',m2') where
+>   m1 = M ("1", ())
+>   m2 = M ("2", True)
+>   m1' = f m1
+>   m2' = f m2
+> 
+> It doesn't even typecheck, producing the error - "Couldn't match expected type 'Bool' with actual type '()'"
+> 
+> Is there a particular reason for this? How can I define a function like 'p' within Haskell?
+> 
+> Thanks,
+> Anupam Jain
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

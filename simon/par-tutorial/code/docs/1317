@@ -1,0 +1,57 @@
+From arseniy.alekseyev at gmail.com  Wed Aug 24 14:52:29 2011
+From: arseniy.alekseyev at gmail.com (Arseniy Alekseyev)
+Date: Wed, 24 Aug 2011 13:52:29 +0100
+Subject: [Haskell-cafe] Function composition in run-time?
+In-Reply-To: <CAMXF=YBZRy0t2ffQHAAhqVeNzmODQWLq5-DFa_U43OUbYerjEA@mail.gmail.com>
+References: <CAMXF=YBZRy0t2ffQHAAhqVeNzmODQWLq5-DFa_U43OUbYerjEA@mail.gmail.com>
+Message-ID: <CAEnSgTnLh4EO1nPE3UxxginFquPovub0M39aKZD0O3aNthhXmg@mail.gmail.com>
+
+If your functions have the same type, then you can easily collect them
+in a data structure, say list, and fold that.
+
+For example:
+
+function :: String -> (String -> String)
+function "f1" = f1
+function "f2" = f2
+function "f3" = f3
+
+runAUserSpecifiedComposition :: String -> F
+runAUserSpecifiedComposition = foldl (.) id . map function . words
+
+runAUserSpecifiedComposition "f1 f2 f3" should be equal to (f1 . f2 . f3) now.
+
+On 24 August 2011 13:35, dokondr <dokondr at gmail.com> wrote:
+> Hi,
+> What is the Haskell way to compose functions in run-time?
+> Depending on configuration parameters I need to be able to compose function
+> in several ways without recompilation.
+> When program starts it reads configuration parameters from a text file. For
+> example, I have three functions, f1, f2, f3,? each doing some string
+> processing. I need to support two configurations of string processors :
+>
+> if param1
+> ?? then sp = f1 . f2 . f3
+> ?? else sp = f1 . f3
+>
+> I'd like to avoid 'if' somehow and instead use some declarative way to
+> specify code to run in external configuration file. In other words I need
+> some easy tools to create mini DSLs without all the efforts usually involved
+> with implementing full-blown DSL.
+>
+> Thanks,
+> Dmitri
+>
+>
+>
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

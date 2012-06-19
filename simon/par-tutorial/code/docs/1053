@@ -1,0 +1,38 @@
+From nathan.d.howell at gmail.com  Thu Aug 11 18:09:16 2011
+From: nathan.d.howell at gmail.com (Nathan Howell)
+Date: Thu, 11 Aug 2011 09:09:16 -0700
+Subject: [Haskell-cafe] ANNOUNCE: Chell: A quiet test runner (low-output
+ alternative to test-framework)
+In-Reply-To: <CAL1ky9oMiN8P0gFS6sSb-gHdar=hkRbVv+v6uVatedjpFYY-kw@mail.gmail.com>
+References: <CAKRanNDhqzL-t1z-ykP0sHY1ktQqOLX6JwAONsCzHxRJhsNF8A@mail.gmail.com>
+	<CAL1ky9qJ2v=+QHYbLDiAfR9m4TdxBjKNa_mTLq_MDFFAVBB4Og@mail.gmail.com>
+	<CAKRanNBtoZcbW2sTRMJAF_hpNjVYQ10pxe4i-wk=z9SfCqYHzg@mail.gmail.com>
+	<CAL1ky9oEp_-hjDeEdWgd3bn-UxpHEN+AfOUGnfrO_XTyRjq+xw@mail.gmail.com>
+	<CAKRanNDCXQ+6=0QOUEQmUDCQrLJJLov85JdW5Vjekb1qFgPO6Q@mail.gmail.com>
+	<CAL1ky9oMiN8P0gFS6sSb-gHdar=hkRbVv+v6uVatedjpFYY-kw@mail.gmail.com>
+Message-ID: <CAD84eiFHAxx2dAojwX334d4VLFppTUpNPKWG4Ph+_n1RK9es-g@mail.gmail.com>
+
+Is this different than the "--hide-successes" flag for test-framework? Looks
+like it was added a few months back:
+https://github.com/batterseapower/test-framework/commit/afd7eeced9a4777293af1e17eadab4bf485fd98f
+
+-n
+
+On Thu, Aug 11, 2011 at 8:21 AM, John Millikin <jmillikin at gmail.com> wrote:
+
+> The output I didn't like wasn't coming from HUnit, it was coming from
+> the test aggregator I used (test-framework). It prints one line per
+> test case run, whether it passed or failed.
+>
+> That means every time I ran my test suite, it would print *thousands*
+> of lines to the terminal. Any failure immediately scrolled up and out
+> of sight, so I'd have to either Ctrl-C and hunt it down, or wait for
+> the final report when all the tests had finished running.
+>
+> Chell does the same thing as test-framework (aggregates tests into
+> suites, runs them, reports results), but does so quietly. It only
+> reports failed and aborted tests.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110811/275d8f34/attachment.htm>
+

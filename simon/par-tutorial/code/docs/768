@@ -1,0 +1,41 @@
+From jwlato at gmail.com  Tue Apr 26 20:13:41 2011
+From: jwlato at gmail.com (John Lato)
+Date: Tue, 26 Apr 2011 19:13:41 +0100
+Subject: [Haskell-cafe] Question about the Monad instance for Iteratee
+ (from the enumerator package)
+In-Reply-To: <15128733.38.1303839156635.JavaMail.geo-discussion-forums@prgz24>
+References: <BANLkTim9=_0Znfrq-VHAWjiFqT8YnL8n0w@mail.gmail.com>
+	<15128733.38.1303839156635.JavaMail.geo-discussion-forums@prgz24>
+Message-ID: <BANLkTinTzoo0e83jv=XWnwAdmFfuMrOAiw@mail.gmail.com>
+
+On Tue, Apr 26, 2011 at 6:32 PM, John Millikin <jmillikin at gmail.com> wrote:
+
+> On Tuesday, April 26, 2011 7:19:25 AM UTC-7, John Lato wrote:
+>
+>> I'd be interested to see the results of a shootout between iteratee and
+>> enumerator.  I would expect them to be basically equivalent most of the
+>> time, with maybe two or three operations with a small (but consistent)
+>> difference one way or the other.
+>>
+>
+> I did some basic benchmarks a few months ago; if I remember correctly, it
+> depends almost entirely on how well GHC optimizes CPS on a particular
+> platform. The relative performace was very similar to Lennart Kolmodin's
+> benchmarks of "binary" at <
+> http://lennartkolmodin.blogspot.com/2011/02/binary-by-numbers.html >. In
+> particular, CPS/"iteratee" is faster on 32-bit, while state
+> passing/"enumerator" is faster on 64-bit.
+>
+> This difference exists for almost all operations, and was on the order of
+> 5-15% depending on the shape of the input. I couldn't figure out a good way
+> to benchmark the libraries themselves when there's so much noise from the
+> compiler.
+>
+
+That figures.  Thanks for sharing this.
+
+John L.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110426/1af3fc94/attachment.htm>
+

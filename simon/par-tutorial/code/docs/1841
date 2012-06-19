@@ -1,0 +1,49 @@
+From felipe.lessa at gmail.com  Sun Dec 11 19:33:28 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Sun, 11 Dec 2011 16:33:28 -0200
+Subject: [Haskell-cafe] Tracing Prelude.read exceptions
+In-Reply-To: <CAMXF=YAirXjOETJcvbOFCTbxdmJaVmkr7bK3eQhZdBkTEpOSKw@mail.gmail.com>
+References: <CAMXF=YAirXjOETJcvbOFCTbxdmJaVmkr7bK3eQhZdBkTEpOSKw@mail.gmail.com>
+Message-ID: <CANd=OGHTfCFLXu4DX2UbyGNuDbFGNimqMM+zz+b7wOtvqcOLPA@mail.gmail.com>
+
+On Sun, Dec 11, 2011 at 4:19 PM, dokondr <dokondr at gmail.com> wrote:
+> Hi,
+> I got quite used to a sequence providing simple data persistence :
+> 1) Store my data to a file:
+> writeFile fileName (show someData)
+>
+> 2) Some time later read this data back:
+> line <- readFile fileName
+> let someData = read line :: SomeDataType
+
+I can't help you with your question, but I suggest using safecopy [1]
+even for simple cases.  It's *much* faster and also safer.  Also, it's
+easy to use, just use
+
+  L.writeFile fileName $ S.runPutLazy $ safePut someData
+
+and
+
+  ret <- S.runGetLazy safeGet <$> L.readFile fileName
+  case ret of
+    Left err -> print err
+    Right someData -> ...
+
+where
+
+  import Control.Applicative ((<$>))
+  import qualified Data.ByteString.Lazy as L -- [2]
+  import qualified Data.Serialize.Get as S -- [3]
+  import qualified Data.Serialize.Put as S -- [4]
+
+Cheers,
+
+[1] http://hackage.haskell.org/package/safecopy
+[2] http://hackage.haskell.org/packages/archive/bytestring/0.9.2.0/doc/html/Data-ByteString-Lazy.html
+[3] http://hackage.haskell.org/packages/archive/cereal/0.3.4.0/doc/html/Data-Serialize-Get.html
+[4] http://hackage.haskell.org/packages/archive/cereal/0.3.4.0/doc/html/Data-Serialize-Put.html
+
+-- 
+Felipe.
+
+

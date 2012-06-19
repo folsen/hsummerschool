@@ -1,0 +1,67 @@
+From andrewcoppin at btinternet.com  Sat Feb  5 16:35:36 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Sat, 05 Feb 2011 15:35:36 +0000
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTimTak3jHpg_RPattKoACvkUU31tQydCsgjjS=Oc@mail.gmail.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<AANLkTimTak3jHpg_RPattKoACvkUU31tQydCsgjjS=Oc@mail.gmail.com>
+Message-ID: <4D4D6E48.3000903@btinternet.com>
+
+On 03/02/2011 10:15 PM, Johan Tibell wrote:
+
+> First, we need to stop pretending that you can use Haskell effectively
+> without first learning to reason about program evaluation order.
+
+Writing a program in *any* language without understanding the 
+performance implications of different language constructs is unlikely to 
+produce performant code. OTOH, Haskell is unusual in just how easily 
+seemingly trivial alternations of a few characters can cause utterly 
+*giagintic* performance differences in both time and space.
+
+> Learning how is not terrible difficult, but there's very little
+> material on how to do it [1]. Some of us have learnt it the hard way
+> by experimentation or by talking to people who do understand lazy
+> evaluation [2] (the Simons, Don, and Bryan to name a few).
+
+I think perhaps the problem is that Haskell's execution model is so 
+utterly *implicit*. In some imperative languag, if you call an expensive 
+function, it will be expensive. In Haskell, if you call an expensive 
+function and then never touch the result, it's cheap. Touch the result 
+once, and you might get fusion. Touch it twice and suddenly the space 
+complexity of the program changes. So simply adding a debug statement 
+can utterly transform your program's runtime.
+
+What it comes down to is: Tiny changes sometimes have profound effects.
+
+Best of all, there is little tool support for detecting these effects. 
+If you change your program and it suddenly slows down, you need to go 
+look at what you just changed. But if you write a brand new program and 
+it's drop-dead slow, where do you start looking? (Assuming you're not 
+writing a micro-benchmark.)
+
+> At the very
+> least we need to teach people how to tell which arguments a pure
+> function is strict in by looking at its definition.
+
+That's not necessarily tractible. It depends on what other functions you 
+call. Many functions have obvious strictness properties, but very few 
+have *documented* strictness properties.
+
+> That keeping a simple map of counters is tricky should tell us
+> that something is wrong.
+
+Agreed.
+
+> Many strictness related problems
+> people have are due to common data types like Maybe, tuples, and
+> arrays being lazy. This is rarely what you want.
+
+I'm not sure that's 100% true. You might have a function that returns a 
+tuple, and on occasion you're only actually interested in one of the two 
+results. But that looks like the exception rather than the rule.
+
+Lazy lists are rather useful, but it looks like strict lists would be 
+useful too. The number of times I've written !String and then thought 
+"hey, wait, that's not helping me..."
+
+

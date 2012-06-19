@@ -1,0 +1,14 @@
+From vs at foldr.org  Tue Apr 19 19:25:21 2011
+From: vs at foldr.org (Volker Stolz)
+Date: Tue, 19 Apr 2011 19:25:21 +0200
+Subject: [Haskell-cafe] Stack overflow in simple code with getStdRandom
+	/ randomR (GHC)
+In-Reply-To: <alpine.DEB.2.00.1104191916520.13388@anubis>
+References: <64F46328-A550-4FCE-A197-4C508BAFE96F@foldr.org>
+	<alpine.DEB.2.00.1104191916520.13388@anubis>
+Message-ID: <14DF5384-5044-4803-80DB-0AEAB7218455@foldr.org>
+
+Blimey, I didn't notice that Krzysztof came to the same conclusion a bit earlier today, so I guess the answer is somewhere in his remark "One possible solution is to make cell holding std gen strict.". I'd still be interested in how to profile for this scenario, though.
+
+  -Volker
+

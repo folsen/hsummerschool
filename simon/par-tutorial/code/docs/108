@@ -1,0 +1,85 @@
+From daniel.is.fischer at googlemail.com  Mon Apr  4 14:41:29 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Mon, 4 Apr 2011 14:41:29 +0200
+Subject: [Haskell-cafe] Fast conversion between Vector Double and Vector
+	CDouble
+In-Reply-To: <BANLkTime8Omz8PAPtu_HVAQfhafR+=bsCg@mail.gmail.com>
+References: <BANLkTime8Omz8PAPtu_HVAQfhafR+=bsCg@mail.gmail.com>
+Message-ID: <201104041441.30359.daniel.is.fischer@googlemail.com>
+
+On Monday 04 April 2011 13:54:39, Bas van Dijk wrote:
+> Hello,
+> 
+> I just rewrote my levmar library[1] to use Vectors (from the vector
+> package[2]) instead of lists. I was expecting to see a significant
+> performance improvement. Unfortunately I only saw a 10% improvement.
+> However, I noticed I had a lot of conversions from Vector Double to
+> Vector CDouble and visa versa in my code:
+> 
+> import Data.Vector.Storable ( Vector )
+> 
+> mapRealToFrac ? (Storable ?, Storable ?, Real ?, Fractional ?)
+>               ? Vector ? ? Vector ?
+> mapRealToFrac = VS.map realToFrac
+> 
+> When I replace this with:
+> 
+> mapRealToFrac = unsafeCoerce
+> 
+> My application computes the same result but does it 28 times faster!
+> 
+> My question are:
+> 
+> 1) Is this always safe? In other words: are the runtime
+> representations of Double and CDouble always equivalent or do they
+> vary between platforms?
+
+It's not always safe, it seems to be different for NHC.
+In Foreign.C.Types, you find
+
+#ifndef __NHC__
+<snip> -- | These types are are represented as @newtype at s of
+<paraphrase> the corresponding Haskell types
+<snip>
+#else
+<snip>
+#endif
+
+for the integral and floating types.
+So for the time being, it's safe except possibly on NHC, as long as it is 
+(and can be) only used to convert between the corresponding Haskell and C 
+types
+(so
+
+#ifdef __NHC__
+mapRealToFrac = VS.map realToFrac
+#else
+mapRealToFrac = unsafeCoerce
+#endif
+
+would also cater for NHC).
+
+> 
+> 2) Can the same improvement be accomplished using RULE pragma's?
+
+For GHC, probably, but rule-firings aren't always predictable.
+For example, it could be that the rule for realToFrac fires first.
+
+> 
+> 3) Are there disadvantages of using CDouble instead of Double in the
+> levmar API?
+
+You'd have to write the conversion code every time you use it from Haskell, 
+wouldn't you?
+
+> For some reason it feels wrong to use CDouble in the API
+> but I don't have a good argument against it yet.
+> 
+> Thanks,
+> 
+> Bas
+> 
+> [1] http://hackage.haskell.org/package/levmar
+> [2] http://hackage.haskell.org/package/vector
+
+

@@ -1,0 +1,55 @@
+From jgoerzen at complete.org  Thu Aug 11 17:44:00 2011
+From: jgoerzen at complete.org (John Goerzen)
+Date: Thu, 11 Aug 2011 10:44:00 -0500
+Subject: [Haskell-cafe] New releases and BSD3 license
+In-Reply-To: <CAGE_JKYNbOHhhADSPXifraiv-xtSU74TyBW70X6=nGDJwcYKtQ@mail.gmail.com>
+References: <4E42D87C.9040602@complete.org>
+	<CAGE_JKYNbOHhhADSPXifraiv-xtSU74TyBW70X6=nGDJwcYKtQ@mail.gmail.com>
+Message-ID: <4E43F8C0.40902@complete.org>
+
+Thanks, Jeremy -- appreciate it!
+-- John
+
+On 08/10/2011 02:57 PM, Jeremy Shaw wrote:
+> Awesome!
+>
+> I believe MissingH includes some code that I contributed (or used to).
+> That can all be licensed BSD3.
+>
+> - jeremy
+>
+> On Wed, Aug 10, 2011 at 2:14 PM, John Goerzen<jgoerzen at complete.org>  wrote:
+>> Hello,
+>>
+>> I would like to announce new versions of the following:
+>>
+>> hslogger
+>> convertible
+>> HDBC
+>> HDBC-odbc
+>> HDBC-postgresql
+>> HDBC-sqlite3
+>>
+>> By popular, insistent, persistent, and patient request<grin>, all have been
+>> relicensed under the 3-clause BSD license.  I am also working to make that
+>> happen with MissingH, but have to receive permission from a few third
+>> parties first.
+>>
+>> Additionally, this will be my last upload of the HDBC* packages. Nicolas Wu
+>> has kindly agreed to step in as HDBC maintainer.  Nicolas has recently
+>> contributed a lot of good things towards HDBC and has more time to maintain
+>> it than I do.
+>>
+>> Thanks,
+>>
+>> -- John Goerzen
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+>
+
+
+

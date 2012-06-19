@@ -1,0 +1,74 @@
+From limestrael+haskell at gmail.com  Sat Dec 24 08:54:43 2011
+From: limestrael+haskell at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Sat, 24 Dec 2011 08:54:43 +0100
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+In-Reply-To: <4EF57FC9.1030505@vex.net>
+References: <4EF57FC9.1030505@vex.net>
+Message-ID: <CACqaG6yr-PVvri=+2e5rTgXiiHHOoccM2fLaq6CcBMC2Ub1p2g@mail.gmail.com>
+
+See that's typically the speech that scares people away from Haskell...
+
+-- 
+The ? is a lie.
+
+2011/12/24 Albert Y. C. Lai <trebla at vex.net>
+
+> Most individuals of the Haskell community have long been maintaining a
+> cognitive dissonance; some cases turn into plain hypocrisy. You might
+> excuse it for its ancient and prominent origin: Richard Bird and/or Philip
+> Wadler themselves wrote like "it is too lazy", "make it more strict" 13
+> years ago and surely more. But perpetuating it is not helping.
+>
+> I have not written this complaint until now because I have been waiting
+> for unmistakable evidence, a smoking gun, a red hand so caught that you
+> cannot explain away, for example you cannot explain that "one sentence is
+> from one person, the other sentence is from a different person".
+>
+> So, on IRC in #haskell, from the same person, speaking on the same topic
+> in the same context, in the same interval of 3 minutes (the first two
+> sentences in the same minute):
+>
+> 1. a function f is strict if  f ? = ?
+> 2. ? represents any computation which does not terminate, i.e. an
+> exception or an infinite loop
+> 3. "strict" describes the denotational semantics
+>
+> People, could you please make up your mind already? It has been more than
+> 13 years.
+>
+> Denotational semantics:
+> A. There are no computational steps. There is no termination, and there is
+> no non-termination, since there are no steps to finish, and no steps to
+> keep going.
+> B. ? represents "no information", not "non-termination". There is no
+> "non-termination" to represent.
+> C. fix id = ? because ? is the least fixed point of id, not because fix id
+> non-terminates. There is nothing to terminate or non-terminate.
+> D. You say strict, more strict, less strict; non-strict, more non-strict,
+> less non-strict. You don't say eager, and you don't say lazy.
+>
+> Operational semantics:
+> A. There is no ?; it does not appear in any sequence of computational
+> steps, finitely long or infinitely long.
+> B. You say eager, more eager, less eager; lazy, more lazy, less lazy; or
+> speculative, more speculative, less speculative; or any other adjectives
+> for evaluation strategies. You don't say strict, and you don't say
+> non-strict.
+>
+> "Semantics", "semantically speaking":
+> A. Which semantics, which semantically? There are two.
+> B. Actually there are more, but apparently two is already enough to cause
+> all kinds of incoherent statements. If I draw your attention to algebraic
+> semantics, will you start saying "it is too lazy, need to make it more
+> idempotent"?
+>
+>
+> ______________________________**_________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/**mailman/listinfo/haskell-cafe<http://www.haskell.org/mailman/listinfo/haskell-cafe>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111224/803b4608/attachment.htm>
+

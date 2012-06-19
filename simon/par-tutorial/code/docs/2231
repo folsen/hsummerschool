@@ -1,0 +1,54 @@
+From conor at strictlypositive.org  Thu Dec 22 20:56:12 2011
+From: conor at strictlypositive.org (Conor McBride)
+Date: Thu, 22 Dec 2011 19:56:12 +0000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <jcvqjs$sb2$1@dough.gmane.org>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+	<BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+	<CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+	<jcvqjs$sb2$1@dough.gmane.org>
+Message-ID: <3AEE194F-22A4-4E69-9EF3-A9AAB05689CB@strictlypositive.org>
+
+
+On 22 Dec 2011, at 17:49, Bardur Arantsson wrote:
+
+> Alexander Solla wrote:
+>
+>> I happen to only write Haskell programs that terminate.  It is not  
+>> that
+>> hard.  We must merely restrict ourselves to the total fragment of the
+>> language, and there are straight-forward methods to do so.
+>
+> Do (web/XML-RPC/whatever) server type programs terminate?
+
+No, but "total" and "terminating" are not the same. Those *co*programs
+will, if they're any good, be total by virtue of their productivity
+rather than their termination.
+
+What's slightly controversial is the claim that we "must merely restrict
+ourselves to the total fragment of the language". It would be more
+controversial to claim that some new Haskell-like language should
+restrict us to total programs. I'd be glad if "pure" meant "total", but
+partiality were an effect supported by the run-time system. Then we
+could choose to restrict ourselves, but we wouldn't be restricted by the
+language.
+
+This is not the first time the issue has surfaced, nor will it be the
+last. It's customary at this point to object that one wouldn't want to
+program with the monadic notation, just for the effect of partiality.
+I'd counter that I don't want to program with the monadic notation,
+for any effects: I'd like to program with an applicative notion, but
+in monadic types. That's what I'd do different, and for me, the subject
+is not a hypothetical question.
+
+All the best
+
+Conor
+
+
+

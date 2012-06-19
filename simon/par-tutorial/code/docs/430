@@ -1,0 +1,17 @@
+From midfield at gmail.com  Fri Apr 15 16:42:22 2011
+From: midfield at gmail.com (Ben)
+Date: Fri, 15 Apr 2011 07:42:22 -0700
+Subject: [Haskell-cafe] timsort
+Message-ID: <0835D321-E7EF-477B-8102-1D14B369ED47@gmail.com>
+
+hello --
+
+has anyone every implemented (and benchmarked) timsort in haskell?
+
+http://bugs.python.org/file4451/timsort.txt
+
+it is a stable mergesort-like algorithm, seems like a good fit for haskell.
+
+best, ben
+
+

@@ -1,0 +1,47 @@
+From alex.solla at gmail.com  Mon Aug  8 23:09:23 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Mon, 8 Aug 2011 14:09:23 -0700
+Subject: [Haskell-cafe] For class Monoid;
+ better names than mempty & mappend might have been: mid (mident) &
+ mbinop
+In-Reply-To: <4E3FA4A0.1020100@henning-thielemann.de>
+References: <CAMLKXykX-mZmpS1Qx74Pew9uSeGHyDOw+EjeZiZMUTvsn2qPXA@mail.gmail.com>
+	<CAKjSnQGmkvp9SKXbhhyMKyur9x9F860JNsQM3H_8O7f5mmC+Uw@mail.gmail.com>
+	<4E3FA4A0.1020100@henning-thielemann.de>
+Message-ID: <CAO0Ooq2+2uSyVsbZ0prL_XGnH=oPZSZO0x6N=kBCNOURdHXEmg@mail.gmail.com>
+
+On Mon, Aug 8, 2011 at 1:56 AM, Henning Thielemann <
+schlepptop at henning-thielemann.de> wrote:
+
+> On 24.07.2011 22:20, Antoine Latter wrote:
+>
+>> On Sat, Jul 23, 2011 at 1:41 PM, KC<kc1956 at gmail.com>  wrote:
+>>
+>>> It would be easier for beginners to "grok".
+>>>
+>>>
+>> I think that assumes that all beginners have a strong foundation in
+>> algebra. Although it does have the advantage that the names are as
+>> abstract as the class.
+>>
+>
+> As pointed out earlier in this list, the name of the class and the methods
+> are inconsistent. Monoid refers to a general algebraic structure, whereas
+> mempty and mappend refer to certain instances like lists.
+
+
+I don't know what the intention for the names was, but I read them as
+"syntactic" empty and append, as in the monoid constructs of algebra.  In
+other words, we construct "words" by "appending" (or "concatenating")
+elements of a monoid.  And we have an "empty" word.
+
+This usage is common enough in mathematics.
+
+After all, if we use the Monoid class interface for a type, we are
+explicitly using the monoid operations, and not the type's underlying
+interpretation for appending words in the type.  Why should the generic
+monoid operator names reflect the underlying usage?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110808/970b92a7/attachment.htm>
+

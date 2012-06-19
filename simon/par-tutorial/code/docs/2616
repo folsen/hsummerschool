@@ -1,0 +1,28 @@
+From roma at ro-che.info  Thu Feb  3 09:37:38 2011
+From: roma at ro-che.info (Roman Cheplyaka)
+Date: Thu, 3 Feb 2011 10:37:38 +0200
+Subject: [Haskell-cafe] Status update on {code, trac, projects, planet,
+ community}.haskell.org
+In-Reply-To: <1296610402.8387.1874.camel@localhost>
+References: <1296610402.8387.1874.camel@localhost>
+Message-ID: <20110203083738.GA10988@flit>
+
+* Duncan Coutts <duncan.coutts at googlemail.com> [2011-02-02 01:33:22+0000]
+> These are all hosted on the community server. The community server was
+> hacked on the 26th January and we took it offline. The server was
+> running an old version of debian that was no longer supported with
+> security updates. (Ironically, two days previously the infrastructure
+> team had been discussing the fact that nobody seemed to have any time
+> available to do the planned migration to a new host). The hacker
+> replaced sshd which we noticed because the ssh host signature changed
+> and it started prompting for passwords (we use key-based rather than
+> password based logins).
+
+Might be related:
+http://sourceforge.net/blog/sourceforge-attack-full-report/
+
+-- 
+Roman I. Cheplyaka :: http://ro-che.info/
+Don't worry what people think, they don't do it very often.
+
+

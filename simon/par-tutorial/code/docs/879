@@ -1,0 +1,67 @@
+From nominolo at googlemail.com  Fri Apr 29 19:01:16 2011
+From: nominolo at googlemail.com (Thomas Schilling)
+Date: Fri, 29 Apr 2011 19:01:16 +0200
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+In-Reply-To: <1303974242010-4345891.post@n5.nabble.com>
+References: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+	<201104260103.51102.daniel.is.fischer@googlemail.com>
+	<1303776032428-4339787.post@n5.nabble.com>
+	<201104280200.50065.daniel.is.fischer@googlemail.com>
+	<1303974242010-4345891.post@n5.nabble.com>
+Message-ID: <BANLkTindkzckpZ1anK0vFbtD4tjXpxmV6g@mail.gmail.com>
+
+My guess is that you're doing all indexing work inside a single GHC
+API session.  When loading external packages GHC caches all .hi files
+in memory -- and never unloads them.   Therefore, if you have a large
+package DB, that'll consume a lot of memory.  For similar reasons you
+can also run into problems with redefined instances if you happen to
+process two packages that define the same instances because they too
+are cached and never flushed.
+
+The workaround is to start multiple sessions and then combine the
+resulting output.
+
+I don't know how much of a problem the Haddock + TH issue is that
+David mentioned.  In any case you should make sure that haddock can
+see the installed packages so it doesn't need to compile any
+dependencies for TH.
+
+On 28 April 2011 09:04, jutaro <jnf at arcor.de> wrote:
+> Hi Daniel,
+>
+> that seemed to be a real odyssey. I will try to install the statistics
+> package
+> when I find time. Guess it is this one on hackage:
+> http://hackage.haskell.org/package/statistics.
+> Just some remarks:
+> In case of problems with metadata it is helpful to stop the GUI and call
+> leksah-server from the command line. (leksah-server -s collects metainfo for
+> new packages).
+> What happens then is that leksah-server calls GHC-API and Haddock as a
+> library, which itself uses GHC-API.
+> So its a bit like running Haddock on a package, which usually may fail, but
+> it is uncommon to have this kind of problems. (It happened one time before
+> with a type level library, which defined all integers between 1 and several
+> thousands...).
+>
+> J?rgen
+>
+> PS: The server at leksah.org has reached its limit yesterday, the Windows
+> installer alone was downloaded about 2000 times! But it should work now.
+>
+> --
+> View this message in context: http://haskell.1045720.n5.nabble.com/ANN-Leksah-0-10-0-tp4332741p4345891.html
+> Sent from the Haskell - Haskell-Cafe mailing list archive at Nabble.com.
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Push the envelope. Watch it bend.
+
+

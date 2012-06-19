@@ -1,0 +1,48 @@
+From psujkov at gmail.com  Tue Apr 19 19:37:24 2011
+From: psujkov at gmail.com (Paul Sujkov)
+Date: Tue, 19 Apr 2011 20:37:24 +0300
+Subject: [Haskell-cafe] An example of enumerator processing some data
+ between input and output
+In-Reply-To: <BANLkTikGUbmC_zwbB_2Fne7bToC4fAZYdQ@mail.gmail.com>
+References: <BANLkTikGUbmC_zwbB_2Fne7bToC4fAZYdQ@mail.gmail.com>
+Message-ID: <BANLkTikRZOABQqDLZUDWvzLdDajbJJ8kbA@mail.gmail.com>
+
+Actually, I may be quite wrong with the task. While duplexing the input is
+an interesting thing to do, actually I need to pipeline output of one
+consumer to another (outputting text after making some internal
+representation - with Show instance - with the parseData). The answer to
+this one should be easy, but I still do not see it.
+
+On 19 April 2011 20:10, Paul Sujkov <psujkov at gmail.com> wrote:
+
+> Hi haskellers,
+>
+> I played a bit with the enumerator package, and I'm quite stuck with the
+> question how to duplex data to two (or more) consumers using combinators
+> from xml-enumerator (for example) package. What I mean is:
+>
+> main = withFile "out.xml" WriteMode $ \h ->
+>        parseFile "in.xml" decodeEntities $
+>        (joinI $ renderText $$ iterHandle h) >> (force "data required"
+> parseData)
+>
+> where parseData is a simple xml-enumerator parser. Combining consumers in
+> such a way I can get text being output to the file "out.xml" (like in the
+> example given) or parsed with parseData (if I switch the order of the
+> consumers), but not both. Can anybody tell me how to make a pipe (input ->
+> process -> output) to have text both parsed and then put back to the file?
+> While pretty straightforward with the arrow approach, it doesn't seem
+> obvious to me with the iteratees :(
+>
+> --
+> Regards, Paul Sujkov
+>
+
+
+
+-- 
+Regards, Paul Sujkov
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110419/b4a3d7ba/attachment.htm>
+

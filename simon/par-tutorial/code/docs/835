@@ -1,0 +1,46 @@
+From nbowler at elliptictech.com  Thu Apr 28 17:36:38 2011
+From: nbowler at elliptictech.com (Nick Bowler)
+Date: Thu, 28 Apr 2011 11:36:38 -0400
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <c1af5782-ef43-e377-e7d4-a401588b4cbd@me.com>
+References: <20110428150502.GA2484@elliptictech.com>
+	<c1af5782-ef43-e377-e7d4-a401588b4cbd@me.com>
+Message-ID: <20110428153638.GA2875@elliptictech.com>
+
+On 2011-04-28 15:23 +0000, malcolm.wallace wrote:
+> Then I suggest that your build tools are broken. ?Rebuilding should
+> not depend on an _ordering_ between modification times of source and
+> object, merely on whether the timestamp of the source file is
+> different to its timestamp the last time we looked. ?(This requires
+> your build tools to keep a journal/log, yes, but it is the only safe
+> way to do it.)
+
+Right.  The /order/ of the timestamps is wrong when a build directory is
+shared between repositories (isn't that what I said?).  Try it yourself
+with cabal: it will fail.
+
+Consider two repos, A and B, each with different versions of foo.x,
+that (when compiled) produces the output foo.y.  We store the build in
+the directory "C".
+
+Initially, say A/foo.x has a mtime of 1, and B/foo.x has an mtime of 2.
+
+We do a build of A, producing the output file C/foo.y.  say C/foo.y now
+has a mtime of 3.
+
+Now we do a build in B.  The build system sees that C/foo.y has a
+mtime of 3, which is newer than B/foo.x's mtime of 2.  The build
+system therefore does not rebuild C/foo.y.
+
+> It is relatively common to change source files to have an older
+> timestamp rather than a newer one. ?This should not cause your build
+> system to ignore them. ?It can happen for any number of reasons:
+> restoring from backup, switching repository, bisecting the history of
+> a repo, clock skew on different machines, ....
+
+All of these operations update the mtimes on the files...
+
+-- 
+Nick Bowler, Elliptic Technologies (http://www.elliptictech.com/)
+
+

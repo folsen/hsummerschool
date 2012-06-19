@@ -1,0 +1,28 @@
+From jesper.louis.andersen at gmail.com  Sat Feb  5 17:19:48 2011
+From: jesper.louis.andersen at gmail.com (Jesper Louis Andersen)
+Date: Sat, 5 Feb 2011 17:19:48 +0100
+Subject: [Haskell-cafe] Concurrency best practices?
+In-Reply-To: <4D4D770D.8030503@btinternet.com>
+References: <4D4D1C63.2000906@freegeek.org>
+	<AANLkTim5x9V+2zAukpwADGeD-6qh6HJF72TbaQcJKbkp@mail.gmail.com>
+	<4D4D770D.8030503@btinternet.com>
+Message-ID: <AANLkTinas8xxKLSK=3q2_2yxhnmUmK+_0Kr2-JMhQLw0@mail.gmail.com>
+
+On Sat, Feb 5, 2011 at 17:13, Andrew Coppin <andrewcoppin at btinternet.com> wrote:
+> On 05/02/2011 12:56 PM, Jesper Louis Andersen wrote:
+>
+> Presumably messages added to the channel appear immediately after the
+> transaction commits. The problem is, I think GHC's STM implementation might
+> mean that if two transactions both try to log a message, they both get
+> rolled back...
+>
+
+Yes, this is the performance caveat I was hinting at. When logging
+becomes heavy and transactions are *not* completing, you will have
+transaction retries due to the logging. If the transaction completes
+however, it is not that much of a problem.
+
+-- 
+J.
+
+

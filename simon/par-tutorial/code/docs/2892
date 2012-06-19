@@ -1,0 +1,31 @@
+From frodo at theshire.org  Wed Feb  9 18:56:29 2011
+From: frodo at theshire.org (Cristiano Paris)
+Date: Wed, 9 Feb 2011 18:56:29 +0100
+Subject: [Haskell-cafe] Synthetic values?
+In-Reply-To: <4D52D24E.7020406@uni-bonn.de>
+References: <AANLkTimsWsfdkPLK4yQRHt3OcBGUiN2FGAwG52DvKCpD@mail.gmail.com>
+	<4D52D24E.7020406@uni-bonn.de>
+Message-ID: <AANLkTikdrhCs2tob=o4-acYdwerc1ra3FXacFmEw1syO@mail.gmail.com>
+
+On Wed, Feb 9, 2011 at 18:43, Steffen Schuldenzucker
+<sschuldenzucker at uni-bonn.de> wrote:
+> ...
+>>>> let good = appendLog "Foo" "Bar" :: Sealed Admin String
+>>>> unseal (undefined :: Admin) good
+> "FooBar"
+
+That's true, but putting apart the problem I posed, in my construction
+I wouldn't expose unseal directly nor the Sealed constructor. This
+way, you should not be able to recreate the unseal function and you'd
+be given only specialized "unseal" functions for each role, like
+unsealAsAdmin, unsealAsUser and so on.
+
+Thank you for adding to the discussion.
+
+-- 
+Cristiano
+
+GPG Key: 4096R/C17E53C6 2010-02-22
+Fingerprint = 4575 4FB5 DC8E 7641 D3D8? 8EBE DF59 B4E9 C17E 53C6
+
+

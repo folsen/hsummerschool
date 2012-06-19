@@ -1,0 +1,48 @@
+From hesselink at gmail.com  Fri Aug 19 10:33:01 2011
+From: hesselink at gmail.com (Erik Hesselink)
+Date: Fri, 19 Aug 2011 10:33:01 +0200
+Subject: [Haskell-cafe] custom SQL-to-Haskell type conversion in HDBC
+In-Reply-To: <20110819052316.GA27130@houseag.com>
+References: <20110819052316.GA27130@houseag.com>
+Message-ID: <CAPeieQEGXOJgfvA+FF2yTbhPnWA9vv7Xk8EghLj-2LiYy1Edyg@mail.gmail.com>
+
+On Fri, Aug 19, 2011 at 07:23, Henry House <hajhouse at hajhouse.org> wrote:
+> Does there exist any sample code or other resources on writing a custom
+> SQL-to-Haskell datatype converter instance for use with HDBC that would be
+> accessible to someone just starting with Haskell? The reason I need this is
+> because of this problem (using PostgreSQL):
+>
+> Prelude Database.HDBC.PostgreSQL Database.HDBC> res <- (quickQuery db "select 1::numeric(5,4);" [])
+> Prelude Database.HDBC.PostgreSQL Database.HDBC> res
+> [[SqlRational (1 % 1)]]
+> Prelude Database.HDBC.PostgreSQL Database.HDBC> res <- (quickQuery db "select 1::numeric(5,0);" [])
+> [[SqlRational (1 % 1)]]
+>
+> where db is a database connection. The SQL values 1::numeric(5,4) and
+> 1::numeric(5,0) are supposed to be fixed-precision numbers having 4 and zero
+> significant decimal figures after the decimal point, respectively. Both are
+> offered by HDBC as the same SqlValue, SqlRational (1 % 1) but they are not
+> really the same at all. The precision information has been lost. The native
+> outputs of PostgreSQL, before HDBC's type conversion, are 1.0000 and 1 for
+> 'select 1::numeric(5,4);' and 'select 1::numeric(5,0);', respectively.
+
+Do you really need the precision info about the column, or do you just
+need the values at the right precision? Because you get the last thing
+already:
+
+Prelude Database.HDBC.PostgreSQL Database.HDBC Data.Ratio
+Control.Monad> (fromSql . head . head) `liftM` (quickQuery db "select
+1.231 ::numeric(5,0);" []) :: IO Rational
+1 % 1
+Prelude Database.HDBC.PostgreSQL Database.HDBC Data.Ratio
+Control.Monad> (fromSql . head . head) `liftM` (quickQuery db "select
+1.231 ::numeric(5,4);" []) :: IO Rational
+1231 % 1000
+
+If you need the precision information, perhaps 'describeResult' will
+give you what you need. I've never used it, but it looks like it
+might.
+
+Erik
+
+

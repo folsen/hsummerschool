@@ -1,0 +1,104 @@
+From alex.solla at gmail.com  Wed Apr 27 22:28:04 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Wed, 27 Apr 2011 13:28:04 -0700
+Subject: [Haskell-cafe] Parsing binary 'hierachical' objects for lazy
+	developers
+In-Reply-To: <20110427181603.GA16627@X52D.localdomain>
+References: <20110427181603.GA16627@X52D.localdomain>
+Message-ID: <BANLkTik1xiMgO0XbO0dpkPwkiMg5Dgx2ig@mail.gmail.com>
+
+On Wed, Apr 27, 2011 at 11:16 AM, John Obbele <john.obbele at gmail.com> wrote:
+
+> Hi Haskellers,
+>
+>
+> I'm currently serializing / unserializing a bunch of bytestrings
+> which are somehow related to each others and I'm wondering if
+> there was a way in Haskell to ease my pain.
+>
+> The first thing I'm looking for, is to be able to automatically
+> derive "Serializable" objects, for example:
+>
+>
+Happstack has "Serialize" type class, and uses TemplateHaskell to automate
+deriving instances.  I don't know if they are binary compatible with cereal
+(i.e., that you could serialize with one and deserialize with the other, or
+vice-versa)
+
+
+> ---------------------------------------------------------------
+> import Data.Serialize -- using cereal as an example
+>
+> data MyFlag = One | Two | Three
+>
+> instance Serialize [MyFlag] where
+>    put = putWord16le . marshalFlags
+>    get = unmarshal `fmap` getWord16le
+>
+> data ObjectA = ObjectA { attribute0 :: Word8
+>                       , attribute1 :: Word16le
+>                       , attribute2 :: [MyFlag]
+>                       } deriving (Serialize) -- magic goes here!
+> ---------------------------------------------------------------
+>
+> Unfortunately ghci complains that 'Serialize' is not a derivable
+> class. Yet, deriving the Serialize instance for ObjectA should be
+> simple, since all the three attributes are already serializable
+> themselves...
+>
+>
+
+>
+> Second issue, I would like to find a way to dispatch parsers. I'm
+> not very good at expressing my problem in english, so I will use
+> another code example:
+>
+
+This sounds very hard in the general case.  Others have shown you how to
+dispatch on two types.  But there is no general data type which combines all
+(or even arbitrarily many) types.  Somehow, "Read" is able to do this, but I
+don't know what kind of magic it uses.
+
+
+>
+> ---------------------------------------------------------------
+> -- let's say we have two objects with almost the same structure:
+> data ObjectA = ObjectA { objLength   :: Int
+>                       , objType     :: TypeId
+>                       , attribute2a :: [MyFlag]
+>                       }
+>
+> data ObjectB = ObjectB { objLength   :: Int
+>                       , objType     :: TypeId
+>                       , attribute2b :: Word32le
+>                       }
+> ---------------------------------------------------------------
+>
+> When we begin to deserialize theses objects, we don't know their
+> final type, we just know how to read their length and their
+> typeId.
+>
+> Only then can we determine if what we are parsing is an ObjectA
+> or an ObjectB.
+>
+> Once we now the object type, we can resume the parsing and return
+> either an ObjectA or ObjectB.
+>
+> Oki, so I may have read too much of Peter Seibel's chapter on
+> binary-data parsing in Common Lisp or spent too much time working
+> on object-oriented code, but currently, I have no idea on how to
+> write this 'simply' in Haskell :(
+>
+>
+> any help would be welcome
+> /john
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110427/697e88ce/attachment.htm>
+

@@ -1,0 +1,47 @@
+From fmaste at gmail.com  Fri Apr 29 05:34:45 2011
+From: fmaste at gmail.com (Federico Mastellone)
+Date: Fri, 29 Apr 2011 00:34:45 -0300
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <alpine.DEB.2.00.1104271123020.5485@anubis>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+Message-ID: <BANLkTin7OYE9hcdpWxunK5upQTRxLewx2Q@mail.gmail.com>
+
+By reading John Hughes's paper "Why Functional Programming Matters" it
+is easy to understand why lazy evaluation is great, I don't see that
+kind of benefits with lazy typing.
+
+On Wed, Apr 27, 2011 at 6:30 AM, Henning Thielemann
+<lemming at henning-thielemann.de> wrote:
+>
+> I like to apply for the quote of the week. :-)
+>
+> ?"If Haskell is great because of its laziness,
+> ? then Python must be even greater,
+> ? since it is lazy at the type level."
+>
+> Dynamically typed languages only check types if they have to, that is if
+> expressions are actually computed. Does this prove that laziness at type
+> level as in Python is a great thing or does this prove that laziness at the
+> value level as in Haskell is a bad thing or does this prove nothing?
+>
+> Hope for controversial discussion ...
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+Federico Mastellone
+Computer Science Engineer - ITBA
+".. there are two ways of constructing a software design: One way is
+to make it so simple that there are obviously no deficiencies, and the
+other way is to make it so complicated that there are no obvious
+deficiencies. The first method is far more difficult."
+
+Tony Hoare, 1980 ACM Turing Award Lecture.
+
+

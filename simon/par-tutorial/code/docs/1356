@@ -1,0 +1,66 @@
+From es at ertes.de  Thu Aug 25 11:14:36 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Thu, 25 Aug 2011 11:14:36 +0200
+Subject: [Haskell-cafe] haskell or lazy functional as procedure language
+References: <4E553855.30806@gmail.com>
+Message-ID: <20110825111436.4043648b@angst.streitmacht.eu>
+
+Permjacov Evgeniy <permeakra at gmail.com> wrote:
+
+> Ok, I know, I want something strange. But consider situation, when one
+> is starting a project and finds, that he need s
+>
+> 1) ACID relational storage
+> 2) Power of good RDBMS system (postgresql for example)
+> 3) Power of some very hight level language and compiled (haskell for
+> example) for stored procedures
+> 4) And all data processing MUST be performed inside RDBMS
+> 5) And does not have enough money to by Oracle ore other commercial RDBMS.
+>
+> I already considered using ghc with postgresql. It could be very, very
+> good pair, but.... ghc runtime cannot be re-initialized, and reqular
+> way for stored procedures in postgresql is calling function from
+> shared object (meaning, I have to shut down ghc runtime each time
+> stored procedure ended).
+>
+> What other options do you see?
+
+I'm using a Haskell + PostgreSQL combination a lot.  For access to the
+database I mostly use the HDBC library.  In general much if not most of
+my data processing is written in the database language PL/PgSQL, which
+has a very low barrier and can really do most of what you need easily,
+likely much more easily than an interface to an external PL could do.
+
+However, in my case the Haskell application is still the main program.
+You can exploit the full power of both without moving everything into
+the database, and honestly I wouldn't do that, because it would make
+things more complex.  I also believe it's not really possible without
+writing a full-fledged Haskell extension for PostgreSQL, because just
+running programs cannot do long term concurrency well, for example.
+
+Rather I have the view that the database should do the data logic and
+the data logic only.  But it should do it so well that you can easily
+access the database from multiple programs without problems.  As soon as
+that goal is reached (though you can use PostgreSQL rules to some
+extent, in general you will want to write real procedures), there is
+really little reason not to let the Haskell program be primary.
+
+If by some policy you are forced to have the database primary, then you
+are pretty lost with Haskell.  You should consider following A.M.'s
+advice or just use one of the built-in PLs like Python.  As said, when
+it comes to data logic, PL/PgSQL performs very well and can express many
+things concisely, so in many cases you won't even need an external
+language.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

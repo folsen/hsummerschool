@@ -1,0 +1,22 @@
+From the.dead.shall.rise at gmail.com  Fri Dec 30 05:49:34 2011
+From: the.dead.shall.rise at gmail.com (Mikhail Glushenkov)
+Date: Fri, 30 Dec 2011 04:49:34 +0000 (UTC)
+Subject: [Haskell-cafe] Level of Win32 GUI support in the Haskell
+	platform
+References: <4EFD1992.60702@blueyonder.co.uk>
+Message-ID: <loom.20111230T054042-612@post.gmane.org>
+
+Hi,
+
+Steve Horne <sh006d3592 <at> blueyonder.co.uk> writes:
+
+> 
+> I've been for functions like GetMessage, TranslateMessage and 
+> DispatchMessage in the Haskell Platform Win32 library - the usual 
+> message loop stuff - and not finding them. Hoogle says "no results found".
+
+Haskell Platform includes the Win32 package which provides access to these
+functions. Hoogle doesn't index Windows-only packages, unfortunately.
+
+
+

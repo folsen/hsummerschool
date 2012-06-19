@@ -1,0 +1,94 @@
+From kolmodin at gmail.com  Wed Apr 20 23:13:57 2011
+From: kolmodin at gmail.com (Lennart Kolmodin)
+Date: Wed, 20 Apr 2011 23:13:57 +0200
+Subject: [Haskell-cafe] Data.Binary.IncrementalGet remake
+In-Reply-To: <BANLkTikvq23sJUnz=-psmuPD6qCtLRmi4g@mail.gmail.com>
+References: <BANLkTimwtaSOPxDw8EyKqSe-P=hx4DdNwg@mail.gmail.com>
+	<BANLkTikvq23sJUnz=-psmuPD6qCtLRmi4g@mail.gmail.com>
+Message-ID: <BANLkTinw1eDmo5iG6yQWXKi86BGmN+avAw@mail.gmail.com>
+
+Hi,
+
+On Wed, Apr 20, 2011 at 8:35 PM, Antoine Latter <aslatter at gmail.com> wrote:
+
+> On Wed, Apr 20, 2011 at 1:03 PM, Sergey Mironov <ierton at gmail.com> wrote:
+> > Hello cafe.
+> >
+> > Haskell wiki told me about continuation-based parser
+> > Data.Binary.IncrementalGet [1] from binary-strict package. I found the
+> > idea very useful and tried to use it. Original library by Lennart
+> > Kolmodin raises some questions. The lib's main data structures are:
+> >
+>
+> Lennart Kolmodin has a branch of Binary with incremental get which
+> supports lookAhead:
+>
+> https://github.com/kolmodin/binary/tree/cps
+
+
+Thanks Antonine for noting this.
+
+
+> I don't have performance measurements, but if you look-ahead too far
+> it obviously isn't good for memory consumption.
+
+
+Indeed you trade off memory consumption if you're not careful with
+lookAhead, as you would do with any depth-first parser allowing choice.
+Although I haven't benchmarked, I think it has a more memory efficient
+implementation than the increasingly popular text parsing library attoparsec
+(foundation of haskell's fastest json library, aeson).
+
+
+> Antoine
+>
+> > data IResult a = IFailed S String
+> >               | IFinished S a
+> >               | IPartial (B.ByteString -> IResult a)
+> >
+> > newtype Get r a = Get { unGet :: S -> (a -> S -> IResult r) -> IResult r
+> }
+> >
+> > instance Monad (Get r) where
+> >  return a = Get (\s -> \k -> k a s)
+> >  m >>= k = Get (\s -> \cont -> unGet m s (\a -> \s' -> unGet (k a) s'
+> cont))
+> >  fail err = Get (\s -> const $ IFailed s err)
+> >
+> > Here, "S" is parser's state. It works well, but currently doesn't
+> > support lookAhead. I tried to add such function and gave up to do it
+> > having current implementation, but write simpler one instead. Please
+> > see IncrementalGet2.hs (link [2] below). Remake is briefly tested, has
+> > no ghc-specific optimizations, but allows user to peek data from
+> > stream.
+> >
+> > What bothering me is the fact that I could actually miss idea (or part
+> > of idea) of the original. If it is so, please let me know :) For
+> > example, what is the point of using separate result type r in original
+> > Get r a?
+>
+
+In the case of parsing with binary, I don't think there are any serious
+limitations with not being able to specify your own "r" in "Get r a". I ran
+into something during the implementation, but I'm afraid it wasn't
+noteworthy enough to remember :) Possibly it had to do something with saving
+continuations for later use, and how flexible you could be when using them?
+Hmm.. Anyway, not a problem in binary.
+
+Work has been done lately by Johan Tibell to make the builder (part of the
+Put monad) efficient, and with very good progress. I've worked on the CPS
+based parsing.
+Our aim is to provide the easiest to use, and at the same time, the fastest,
+binary parsing library out there.
+Expect much internal change, yet backwards compatibility, with the next
+release :)
+Unfortunately I've been extremely busy lately, so don't expect a release for
+a few more months. I invite everybody to try out the new code and try to
+benchmark and break it :)
+
+Cheers,
+Lennart Kolmodin
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110420/5ceb65f8/attachment.htm>
+

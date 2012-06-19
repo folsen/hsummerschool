@@ -1,0 +1,36 @@
+From bertram.felgenhauer at googlemail.com  Thu Aug 25 16:42:58 2011
+From: bertram.felgenhauer at googlemail.com (Bertram Felgenhauer)
+Date: Thu, 25 Aug 2011 16:42:58 +0200
+Subject: [Haskell-cafe] Cabal-1.10.1.0 and bytestring-0.9.2.0 hackage
+	problem.
+Message-ID: <20110825144258.GC2485@24f89f8c-e6a1-4e75-85ee-bb8a3743bb9f>
+
+Dear list,
+
+Cabal-1.10.1.0 contains a bug that causes it to fail to parse the
+test-suite target of bytestring-0.9.2.0. Since cabal-install parses
+all package descriptions to before resolving dependencies, users
+with that version of Cabal are stuck.
+
+Now it seems somebody realised this problem and removed
+bytestring-0.9.2.0 from hackage. However,
+
+1. http://hackage.haskell.org/package/bytestring is now broken.
+2. The downloadeble package index (00-index.tar) still contains
+   the bytestring-0.9.2.0 cabal file, so the problem persists.
+
+As a workaround, one can remove the cabal file from the downloaded
+index manually,
+
+tar -f ~/.cabal/packages/hackage.haskell.org/00-index.tar --delete bytestring/0.9.2.0
+
+(or rebuild Cabal / cabal-install starting with
+'cabal unpack Cabal; cabal unpack cabal-install')
+
+But it really needs to be fixed on the hackage server.
+
+Best regards,
+
+Bertram
+
+

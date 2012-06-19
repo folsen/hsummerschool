@@ -1,0 +1,30 @@
+From cdsmith at gmail.com  Fri Dec 30 05:07:45 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Thu, 29 Dec 2011 21:07:45 -0700
+Subject: [Haskell-cafe] Level of Win32 GUI support in the Haskell
+ platform
+In-Reply-To: <4EFD1992.60702@blueyonder.co.uk>
+References: <4EFD1992.60702@blueyonder.co.uk>
+Message-ID: <1325218065.16545.175.camel@godel>
+
+On Fri, 2011-12-30 at 01:53 +0000, Steve Horne wrote:
+> I've been for functions like GetMessage, TranslateMessage and 
+> DispatchMessage in the Haskell Platform Win32 library - the usual 
+> message loop stuff - and not finding them. Hoogle says "no results found".
+
+I see them in the Win32 package.
+
+http://hackage.haskell.org/packages/archive/Win32/2.2.1.0/doc/html/Graphics-Win32-Window.html#v:getMessage
+
+> Alternatively, should I be doing dialog-based coding and leaving Haskell 
+> to worry about message loops behind the scenes?
+
+Various people recommend the gtk (aka Gtk2Hs) and wx packages for that.
+I've never been able to get wx to build, but gtk works fine.  Others
+(mostly those using macs) report the opposite.
+
+-- 
+Chris Smith
+
+
+

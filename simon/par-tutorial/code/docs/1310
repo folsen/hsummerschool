@@ -1,0 +1,32 @@
+From ivan.miljenovic at gmail.com  Wed Aug 24 08:47:21 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Wed, 24 Aug 2011 16:47:21 +1000
+Subject: [Haskell-cafe] a minor bug (memory leak) in ListLike package
+In-Reply-To: <CALoEywMxxgsZaC9CqgfT7ztgdkV-s3of_UtHsRYj5v1k6paMRA@mail.gmail.com>
+References: <4E544F7D.8030401@gmail.com>
+	<CA+u6gbzyx=_d6BbGtZ86GYpfDx3jg8o6zpM8Tcu3958wPpOffg@mail.gmail.com>
+	<CALoEywMxxgsZaC9CqgfT7ztgdkV-s3of_UtHsRYj5v1k6paMRA@mail.gmail.com>
+Message-ID: <CA+u6gbxBQbYsemAfigqLbv+8BETgH-aKusWiP45eM-Sq2nkFLA@mail.gmail.com>
+
+On 24 August 2011 15:54, Sebastian Fischer <fischer at nii.ac.jp> wrote:
+>>
+>> I _think_ this may cause problems with some data types (e.g.
+>> http://hackage.haskell.org/packages/archive/numbers/2009.8.9/doc/html/Data-Number-Natural.html
+>> ) that require the extra laziness (that is, you can do things like ` 3
+>> < genericLength [1..] ' and have it return True).
+>
+> Does the current version support this? The use of an accumulator (that
+> is presumably returned after consuming the complete input) seems to
+> suggest that your example would diverge anyway (but I did not try).
+
+I was just trying to remember some of the tricks Daniel Peebles (aka
+{co}pumpkin) used to do in #haskell with Data.List.genericLength.
+I've never really used ListLike, but was just trying to guess why the
+default implementation was as it is.
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

@@ -1,0 +1,55 @@
+From kevinjardine at gmail.com  Sun Dec 18 22:26:54 2011
+From: kevinjardine at gmail.com (Kevin Jardine)
+Date: Sun, 18 Dec 2011 22:26:54 +0100
+Subject: [Haskell-cafe] Adding state to a library
+In-Reply-To: <CAMtV1SEMsWhBd57t8EjZ=0Q3BA=87E=H_krzPEfyDdvnd5KPUA@mail.gmail.com>
+References: <CAMtV1SEMsWhBd57t8EjZ=0Q3BA=87E=H_krzPEfyDdvnd5KPUA@mail.gmail.com>
+Message-ID: <CAMtV1SGKo9vNvBnkQ=riq3BHwON71VU+QZXcQnL9-=zr5xoSAA@mail.gmail.com>
+
+My apologies. My last message was sent prematurely.
+
+I have a library of functions that all take a config parameter (and usually
+others) and return results in the IO monad.
+
+It is sometimes useful to drop the config parameter by using a state-like
+monad..
+
+I have found that I can wrap all my functions like so:
+
+withLibrary cfg f = f cfg
+
+stateF a b c d =
+   getConfig >>= \cfg -> liftIO $ withLibrary cfg
+   libraryF a b c d
+
+notice that I need stateF and libraryF lines, each with n parameters.
+
+Upgrading my library like this is rather tedious.
+
+I would prefer to just write something like
+
+stateF = upgrade libraryF
+
+but I can find no way to define the function upgrade in Haskell.
+
+This must be a fairly common problem. Is there a simple solution?
+
+On Sun, Dec 18, 2011 at 10:20 PM, Kevin Jardine <kevinjardine at gmail.com>wrote:
+
+> I have a library of functions that all take cfg parameter (and usually
+> others) and return results in the IO monad.
+>
+> It is sometimes useful to drop the config parameter by using a state-like
+> monad..
+>
+> I have found that I can wrap all my functions like so:
+>
+> withLibrary cfg f = f cfg
+>
+> stateF a b c d =
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111218/84d258cf/attachment.htm>
+

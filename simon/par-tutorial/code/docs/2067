@@ -1,0 +1,47 @@
+From limestrael at gmail.com  Sun Dec 18 20:04:55 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Sun, 18 Dec 2011 20:04:55 +0100
+Subject: [Haskell-cafe] How hard is it to start a web startup using
+	Haskell?
+In-Reply-To: <CAMSgvCJ_GR4DMaMmYJLF=XBt=n+w2_YQrS8D+HwcyWE5uxewDg@mail.gmail.com>
+References: <loom.20111218T175134-76@post.gmane.org>
+	<CAMSgvCJ_GR4DMaMmYJLF=XBt=n+w2_YQrS8D+HwcyWE5uxewDg@mail.gmail.com>
+Message-ID: <CACqaG6yMbHfQE8Sg3DPc_QQvWbUve5D146kaRTaMk+PdCW+RAg@mail.gmail.com>
+
+Bryan O' Sullivans's company and Scrive may not be relevant examples, as
+they employ respectively people like, well... ^^ Bryan O'Sullivan and
+Magnus Carlsson (the Haskeller, not the singer).
+So you can expect such people to do wonders.
+But for instance I personnaly have one or two ideas of web developement
+(and I'd love to carry them out using Yesod), but since I've simply been
+using Haskell for 2~3 years (and only as a hobby) and since the only guy I
+personnaly know who is the closest to a Haskeller is a friend who is
+beginning to read RWH.
+
+
+2011/12/18 Carlos L?pez Camey <c.lopez at kmels.net>
+
+> > The question 'How hard is it to start a technical startup with Haskell?'
+> > happened a couple of times on this list. Sometimes it was in the form
+> 'How hard
+> > is to find Haskell programmers?' or 'Are there any Haskell jobs?'.
+> >
+> > I'd like to provide one data point as an answer:
+> >
+> >
+> http://www.reddit.com/r/haskell/comments/ngbbp/haskell_only_esigning_startup_closes_second_angel/
+> >
+>
+> Hi Gracjan, here is Bryan O' Sullivan's "Running a Startup on Haskell"
+> in case you haven't seen it:
+> http://www.infoq.com/presentations/Running-a-Startup-on-Haskell
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111218/714c5760/attachment.htm>
+

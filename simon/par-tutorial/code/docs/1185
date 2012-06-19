@@ -1,0 +1,88 @@
+From rrnewton at gmail.com  Wed Aug 17 17:56:36 2011
+From: rrnewton at gmail.com (Ryan Newton)
+Date: Wed, 17 Aug 2011 11:56:36 -0400
+Subject: [Haskell-cafe] why is Random in System?
+In-Reply-To: <20110817104607.43c9ae37@angst.streitmacht.eu>
+References: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+	<A320995A-2DDA-4147-B804-098623C26914@deepbondi.net>
+	<CAKFCL4UtZAKrw-KazZtmCSi6cDZmb1mtm9of4E=0Ugr_9GXXvA@mail.gmail.com>
+	<20110817104607.43c9ae37@angst.streitmacht.eu>
+Message-ID: <CACYs5AYvvWeO1Xe2TMGR=gGnYonw8dsmg3m++NALY9-nDJEupQ@mail.gmail.com>
+
+Hi all,
+
+I'm the maintainer of random.  If people could decide on what the
+alternative name would be we could put it through the library proposal
+process.  It seems that one problem at this moment is the lack of a single,
+clear "right" answer.  Replacing one debatable not-quite-right choice with
+another may not be satisfying ;-).
+
+Also, what Thomas says is right.  The current implementation is SLOW and
+WEAK, which would not seem to make a good default implementation.  The goal
+is to replace it with something better so that the default random package is
+strong in at least one dimension.  I think this is important because I
+imagine many people use the default package, for example because they don't
+want to scour hackage and try all the alternatives.
+
+My proposal for this has been to use AES based crypto-prng.  I think that is
+fast enough (i.e. faster than what's currently there), very strong, and
+splittable.  New Intel and AMD hardware has hardware support for AES which
+makes it even faster.  The intel-aes package provides this functionality,
+with and without hardware support.  But there's work left to do in terms of
+testing, making sure its cross platform, etc.  Anyone who's interested in
+helping (especially with Windows support) would be warmly welcomed!
+
+Cheers,
+  -Ryan
+
+
+
+On Wed, Aug 17, 2011 at 4:46 AM, Ertugrul Soeylemez <es at ertes.de> wrote:
+
+> Brandon Allbery <allbery.b at gmail.com> wrote:
+>
+> > > > I've noticed there's a convention to put modules having to deal
+> > > > with randomness into System.Random.  I thought System was for OS
+> > > > interaction?  Granted getting a random seed usually means going to
+> > > > the OS, but isn't the rest of it, like generating random
+> > > > sequences, distributions, selecting based on probability,
+> > > > shuffling, etc. all non-OS related algorithms?
+> > >
+> > > System definitely does seem like an odd choice.  In most cases the
+> > > only interaction any PRNG, even when accessed via the FFI, has with
+> > > the "system" is - as you say - to get an initial seed value for a
+> > > global instance.
+> >
+> > I'd be tempted to guess that the whole reason it's under System is the
+> > IO component.
+>
+> That's not really valid, is it?  After all the new 'time' package is
+> also stationed under the Data tree, and it has a similarly large IO
+> component.  I have to say, it seems very intuitive to me to look for it
+> under Data, even though I'm not sure why.  Probably I'm just used to it.
+> Time has a strong connection to the operating system and the hardware,
+> so it could just as well go into the System tree.  For
+> (non-cryptographic) randomness however we are dealing with numerical
+> data, for which the connection to the system is mere convenience, so I
+> wouldn't mind finding it under Data at all.
+>
+>
+> Greets,
+> Ertugrul
+>
+>
+> --
+> nightmare = unsafePerformIO (getWrongWife >>= sex)
+> http://ertes.de/
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110817/074f8bc6/attachment.htm>
+

@@ -1,0 +1,19 @@
+From es at ertes.de  Wed Dec 21 13:54:28 2011
+From: es at ertes.de (Ertugrul =?UTF-8?B?U8O2eWxlbWV6?=)
+Date: Wed, 21 Dec 2011 13:54:28 +0100
+Subject: [Haskell-cafe] Test
+Message-ID: <20111221135428.2cc6501a@angst.streitmacht.eu>
+
+This is a test.  Please disregard.
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111221/f1437551/attachment.pgp>
+

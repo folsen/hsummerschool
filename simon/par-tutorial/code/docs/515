@@ -1,0 +1,29 @@
+From michael at schmong.org  Tue Apr 19 23:18:57 2011
+From: michael at schmong.org (Michael Litchard)
+Date: Tue, 19 Apr 2011 14:18:57 -0700
+Subject: [Haskell-cafe] errors while installing yesod 0.8
+Message-ID: <BANLkTinnbgfJFA8pFptB9QwOSr3soP4DaQ@mail.gmail.com>
+
+Trying to install yesod 0.8 breaks when it's time to install
+monad-control. Google wasn't very helpful, nor was the error message I
+received
+
+
+
+mlitchard at apotheosis:~/monad-control$ cabal install
+Resolving dependencies...
+Configuring monad-control-0.2.0.1...
+cabal: Error: some packages failed to install:
+monad-control-0.2.0.1 failed during the configure step. The exception was:
+ExitFailure 11
+
+
+note: I've been trying to use the cab command to manage my packages, I
+get the same error as above when I use cab instead of cabal.I mention
+this just in case there is some unforseen problem having to do with
+cab/cabal interaction.
+
+Has anyone experienced this problem, or know what I can do to get more
+useful error messages that might reveal the cause of the breakage?
+
+

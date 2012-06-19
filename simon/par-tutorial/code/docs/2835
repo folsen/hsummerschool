@@ -1,0 +1,38 @@
+From ketil at malde.org  Tue Feb  8 11:23:08 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Tue, 08 Feb 2011 11:23:08 +0100
+Subject: [Haskell-cafe] Help needed for converting IOArray to ByteString
+In-Reply-To: <AANLkTi=Jcb3iFQ1Brbr5B0pQKcEGRHu7Z4AEbuy8g1=c@mail.gmail.com>
+	(C. K. Kashyap's message of "Tue, 8 Feb 2011 15:09:00 +0530")
+References: <AANLkTimFRPKHbpL36uwim2GtTdknVY6pdK2-dJn7FwGU@mail.gmail.com>
+	<AANLkTin5aMcwt7UfP=PHVJOOwya9XttFC=gxDtkfR5nN@mail.gmail.com>
+	<AANLkTikhXnwh7FD+nE=tur-qZ5NB_XxaqEQEg+vR7TJS@mail.gmail.com>
+	<AANLkTi=kOA1NtuVuv=UVLZwmaDk2vE026BWcNPXUs-HS@mail.gmail.com>
+	<AANLkTi=Jcb3iFQ1Brbr5B0pQKcEGRHu7Z4AEbuy8g1=c@mail.gmail.com>
+Message-ID: <87wrlaomer.fsf@malde.org>
+
+C K Kashyap <ckkashyap at gmail.com> writes:
+
+> I am currently using a list of tuples - [(Int,Int,Int)] to represent an
+> image buffer.
+  [...]
+> Looks like this is pretty slow, 
+
+Unsurprisingly, as there's a huge space overhead, and (depending on
+usage, but probably even worse) linear access time.
+
+> I wonder if working with [Word8] will also suffer from performance hit?
+
+If the only thing you use [Word8] for is converting between arrays (for
+image processing) and bytestrings (for IO), it is an O(n) cost added to
+an already O(n) operation, so it's probably liveable.  
+
+The intermediate list might be optimized away, and in any case, your
+program might still be limited by disk bandwidth, so if you're lucky,
+it boils down to a matter of using 20% or 40% CPU when doing file IO.
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

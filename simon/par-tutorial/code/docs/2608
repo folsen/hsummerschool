@@ -1,0 +1,76 @@
+From brandon_m_moore at yahoo.com  Thu Feb  3 03:35:27 2011
+From: brandon_m_moore at yahoo.com (Brandon Moore)
+Date: Wed, 2 Feb 2011 18:35:27 -0800 (PST)
+Subject: [Haskell-cafe] Inheritance and Wrappers
+In-Reply-To: <AANLkTikKFYxQJQOwv5nvPgafaCMK0R7nLhze4mhScBY1@mail.gmail.com>
+References: <AANLkTi=3pSG0U+3H+0GU7E3h+0z9nMgbq1YgmKyJauQ5@mail.gmail.com>
+	<AANLkTimK9ttKW8wv5CK+u4y-DLnBrfNFOg5UvjtnAFBc@mail.gmail.com>
+	<AANLkTi=5Nk1dLZZVfCmfnHE3pZBaMMmUy1S6jdtSfVvP@mail.gmail.com>
+	<AANLkTikKFYxQJQOwv5nvPgafaCMK0R7nLhze4mhScBY1@mail.gmail.com>
+Message-ID: <842201.36239.qm@web45108.mail.sp1.yahoo.com>
+
+
+>OK, what about this as a use case then. I want to create a type class 'Term' 
+>with only one function in it. The function returns a 'termTag' which labels the 
+
+>"kind" of a value in a DSL.  
+>
+>class Term a where
+>   termTag :: a -> String
+>
+>
+>A user of this type-class can happily provide an instance without any other type 
+>
+>class requirement. However, I want those types which are instances of Data to be 
+>
+>an instance of Term automatically. On top of that, I don't want to stop the user 
+>
+>from creating a special instance for their data type.
+>
+>I want to be able to write the following instance to accomplish that:
+>
+>instance Data t => Term t where
+>    termTag = show . toConstr
+
+
+A much more predictable option is to provide this default implementation
+as a function
+
+termTagData :: (Data t) => (t -> String)
+
+and let the library clients use it in their instances if the behavior is fine:
+
+instance Term MyT where
+  termTag = termTagData
+
+>And if the user wants to write a more specific instance, they should be welcome 
+
+>to do so:
+>
+>instance Term UserDT where
+>    termTag (...) = ...
+>
+>I am not very much interested in the technical details about how things 
+>currently are, I am more interested in a discussion about why (if?) this would 
+>be considered a design flaw?
+
+
+Here's one thing to consider:
+
+Can you write a function
+
+f :: (Data a) => a -> String
+f x = termTag x
+
+It would seem the Data a => Term a instance justifies
+this function, and it will always use the default instance.
+
+Now, what happens if "f" is applied to a value of some type
+T which is an instance of Data, but has a custom Term instance?
+
+Brandon.
+
+
+      
+
+

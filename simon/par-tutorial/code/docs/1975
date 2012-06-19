@@ -1,0 +1,56 @@
+From aslatter at gmail.com  Thu Dec 15 10:06:23 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Thu, 15 Dec 2011 03:06:23 -0600
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <4F9EC2FA-4C8B-4D43-9D6A-9E5E96F59CD0@gmail.com>
+References: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+	<CAKjSnQFvJrz1iFd8XsGbK4q7ZK9F0qjXXUHdoTn1XVmeeAm+OQ@mail.gmail.com>
+	<430054FA-800C-408C-8B75-9C3422293133@gmail.com>
+	<CAKjSnQFUxUbDAen_p7DPobzusVo30_6q=x2yzQejsnWe914ZnQ@mail.gmail.com>
+	<CAKFCL4U+wDf69+D6fz-hiBRJcHCUK4tB0pJ_nuZB-z3nucwxDQ@mail.gmail.com>
+	<CAKjSnQE3umAo-aefkTqPjT5+=M9cr=s9e84yKAx-HQx5Qjo_Bg@mail.gmail.com>
+	<9ED90057-4B37-4E6E-A956-5BA2E952E4CB@gmail.com>
+	<CAKjSnQG17eroGuo3w0YMaAesiMPOFuc-ykt_oYBH+BSfL1ocMg@mail.gmail.com>
+	<07ACF6DD-2F8B-4833-8AA1-24864241D6C1@gmail.com>
+	<4F9EC2FA-4C8B-4D43-9D6A-9E5E96F59CD0@gmail.com>
+Message-ID: <CAKjSnQH+7=z4Yrg6VAhU_0+W72sKKeWnmSD7YS+b9T4V7vuWwg@mail.gmail.com>
+
+On Thu, Dec 15, 2011 at 2:20 AM, Gregory Crosswhite
+<gcrosswhite at gmail.com> wrote:
+>
+> On Dec 15, 2011, at 6:19 PM, Gregory Crosswhite wrote:
+>
+> After all, we already have the Monad typeclass which gives them essentially
+> the same functionality.
+>
+>
+> Make that the *Monoid* typeclass. ?:-)
+
+And this is an interesting discussion all of its own!
+
+Should the monoid instance of a Functor do what List does - which is
+analogious to its append or choice operation (where applicable), or
+should it do what Maybe does, which is lift the operation into its
+contained type? (That is, (Just x) `mappend` (Just y) ==> Just (x
+`mappend` y)).
+
+Since the Monoid instance for Maybe doesn't offer choice between
+Nothing and Some, it would be nice to have a standard choice operation
+that we could use for Maybe.
+
+Which is sort of what Alternative is - offering choice over a functor
+which supports it. Except that the notion of what choice means is
+richer in a parser than in Maybe (parsers may backtrack (like List)
+and parsing has some sort of stateful effect, which affects the
+success of future parses).
+
+It is an interesting dilemma.
+
+I am also fond of using Alternative (disguised as MonadPlus) in the
+Happstack sense, for building a web-site routing table. In the truest
+sense I am composing alternative responses to an input request, but
+using 'many', 'some', or 'sepEndBy` in this context would be odd.
+
+Antoine
+
+

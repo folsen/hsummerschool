@@ -1,0 +1,24 @@
+From sh006d3592 at blueyonder.co.uk  Fri Dec 30 01:42:09 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Fri, 30 Dec 2011 00:42:09 +0000
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <CAA+2x_VzE3zHgL89K8V+EQoPLMS89XtsTpU+Kn_aK6F1WKmObg@mail.gmail.com>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<CAA+2x_VzE3zHgL89K8V+EQoPLMS89XtsTpU+Kn_aK6F1WKmObg@mail.gmail.com>
+Message-ID: <4EFD08E1.3080304@blueyonder.co.uk>
+
+On 30/12/2011 00:16, Sebastien Zany wrote:
+> Steve Horne wrote:
+>
+>     I haven't seen this view explicitly articulated anywhere before
+>
+>
+> See Conal Elliott's blog post The C language is purely functional 
+> <http://conal.net/blog/posts/the-c-language-is-purely-functional>.
+Thanks - yes, that's basically the same point. More concise - so 
+clearer, but not going into all the same issues - but still the same theme.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111230/91d59a3f/attachment.htm>
+

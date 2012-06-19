@@ -1,0 +1,35 @@
+From v.dijk.bas at gmail.com  Fri Dec 16 14:56:29 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Fri, 16 Dec 2011 14:56:29 +0100
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <20111216042614.GB15053@seas.upenn.edu>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+	<20111216042614.GB15053@seas.upenn.edu>
+Message-ID: <CADLz5wVmAYTjGq1+ST87=0oGmUoYdZUTCj=Xcv=u_5_8D3hWvQ@mail.gmail.com>
+
+On 16 December 2011 05:26, Brent Yorgey <byorgey at seas.upenn.edu> wrote:
+> I, for one, would be
+> quite in favor of changing the current Monoid (Maybe a) instance to
+> correspond to the failure-and-prioritized-choice semantics
+
+So lets do this. Some questions:
+
+1) What about the First type? Do we {-# DEPRECATE #-} it?
+
+2) What about the Last type? It could be deprecated in favor of Dual.
+
+3) Do we need a new type (like the current Maybe) for lifting
+semigroups into a Monoid? IMHO we don't since the semigroup package
+does a better job with the Option type (like Brent mentioned).
+
+4) How much code will break from this change?
+
+5) Anyone up for proposing this to libraries at haskell.org?
+
+Regards,
+
+Bas
+
+

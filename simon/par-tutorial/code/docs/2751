@@ -1,0 +1,33 @@
+From qdunkan at gmail.com  Sat Feb  5 20:37:44 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Sat, 5 Feb 2011 11:37:44 -0800
+Subject: [Haskell-cafe] Concurrency best practices?
+In-Reply-To: <AANLkTinas8xxKLSK=3q2_2yxhnmUmK+_0Kr2-JMhQLw0@mail.gmail.com>
+References: <4D4D1C63.2000906@freegeek.org>
+	<AANLkTim5x9V+2zAukpwADGeD-6qh6HJF72TbaQcJKbkp@mail.gmail.com>
+	<4D4D770D.8030503@btinternet.com>
+	<AANLkTinas8xxKLSK=3q2_2yxhnmUmK+_0Kr2-JMhQLw0@mail.gmail.com>
+Message-ID: <AANLkTi=4-qa_Ktg4h=aGOKr2S9RLQdF0k9CgxaHHRSvv@mail.gmail.com>
+
+On Sat, Feb 5, 2011 at 8:19 AM, Jesper Louis Andersen
+<jesper.louis.andersen at gmail.com> wrote:
+> On Sat, Feb 5, 2011 at 17:13, Andrew Coppin <andrewcoppin at btinternet.com> wrote:
+>> On 05/02/2011 12:56 PM, Jesper Louis Andersen wrote:
+>>
+>> Presumably messages added to the channel appear immediately after the
+>> transaction commits. The problem is, I think GHC's STM implementation might
+>> mean that if two transactions both try to log a message, they both get
+>> rolled back...
+>>
+>
+> Yes, this is the performance caveat I was hinting at. When logging
+> becomes heavy and transactions are *not* completing, you will have
+> transaction retries due to the logging. If the transaction completes
+> however, it is not that much of a problem.
+
+I recall reading that clojure has a concept of associative
+combination.  If you can declare that certain operations are
+associative then the runtime doesn't have to care if they get out of
+order.
+
+

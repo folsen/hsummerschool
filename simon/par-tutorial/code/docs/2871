@@ -1,0 +1,114 @@
+From ccshan at cs.rutgers.edu  Tue Feb  8 21:31:03 2011
+From: ccshan at cs.rutgers.edu (Chung-chieh Shan)
+Date: Tue, 8 Feb 2011 15:31:03 -0500
+Subject: [Haskell-cafe] ACM SIGPLAN Workshop on ML
+Message-ID: <7pl828-dk8.ln1@mantle.bostoncoop.net>
+
+ACM SIGPLAN Workshop on ML
+Sunday, 18 September 2011, Tokyo, Japan (co-located with ICFP)
+http://conway.rutgers.edu/ml2011/
+
+CALL FOR CONTENT
+
+The ML family of programming languages includes dialects known as
+Standard ML, Objective Caml, and F#.  These languages have inspired
+a large amount of computer-science research, both practical and
+theoretical.  This workshop aims to provide a forum for discussion and
+research on ML and related technology (higher-order, typed, or strict
+languages).
+
+The format of ML 2011 will continue the return in 2010 to a more
+informal model: a workshop with presentations selected from submitted
+abstracts.  Presenters will be invited to submit working notes, source
+code, and extended papers for distribution to the attendees, but the
+workshop will not publish proceedings, so any contributions may be
+submitted for publication elsewhere.  We hope that this format will
+encourage the presentation of exciting (if unpolished) research and
+deliver a lively workshop atmosphere.
+
+SCOPE
+
+We seek research presentations on topics related to ML, including but
+not limited to
+
+  * applications: case studies, experience reports, pearls, etc.
+  * extensions: higher forms of polymorphism, generic programming,
+    objects, concurrency, distribution and mobility, semi-structured
+    data handling, etc.
+  * type systems: inference, effects, overloading, modules, contracts,
+    specifications and assertions, dynamic typing, error reporting, etc.
+  * implementation: compilers, interpreters, type checkers, partial
+    evaluators, runtime systems, garbage collectors, etc.
+  * environments: libraries, tools, editors, debuggers, cross-language
+    interoperability, functional data structures, etc.
+  * semantics: operational, denotational, program equivalence,
+    parametricity, mechanization, etc.
+
+Research presentations should describe new ideas, experimental results,
+significant advances in ML-related projects, or informed positions
+regarding proposals for next-generation ML-style languages.  We
+especially encourage presentations that describe work in progress, that
+outline a future research agenda, or that encourage lively discussion.
+
+In addition to research presentations, we seek both Status Reports
+and Demos that emphasize the practical application of ML research and
+technology.
+
+Status Reports:  Status reports are intended as a way of informing
+others in the ML community about the status of ML-related research or
+implementation projects, as well as communicating insights gained from
+such projects.  Status reports need not present original research, but
+should deliver new information.  In the abstract submission, describe
+the project and the specific technical content to be presented.
+
+Demos:  Live demonstrations or tutorials should show new developments,
+interesting prototypes, or work in progress, in the form of tools,
+libraries, or applications built on or related to ML.  In the abstract
+submission, describe the demo and its technical content, and be sure
+to include the demo's title, authors, collaborators, references, and
+acknowledgments.  (Please note that you will need to provide all the
+hardware and software required for your demo; the workshop organizers
+are only able to provide a projector.)
+
+Each presentation should take 20-25 minutes, except demos, which should
+take 10-15 minutes.  The exact time will be decided based on the number
+of accepted submissions.  We plan to make videos of the presentations
+available on ACM Digital Library.
+
+SUBMISSION INSTRUCTIONS
+
+Email submissions to ccshan AT cs.rutgers.edu.  Submissions should be
+at most two pages, in PDF format, and printable on US Letter or A4
+sized paper.  Persons for whom this poses a hardship should contact the
+program chair.  Submissions longer than a half a page should include a
+one-paragraph synopsis suitable for inclusion in the workshop program.
+
+IMPORTANT DATES
+
+  * 2011-06-17: Submission
+  * 2011-07-22: Notification
+  * 2011-09-18: Workshop
+
+PROGRAM COMMITTEE
+
+    Amal Ahmed (Indiana University)
+    Andrew Tolmach (Portland State University)
+    Anil Madhavapeddy (University of Cambridge)
+    Chung-chieh Shan (chair) (Rutgers University)
+    Joshua Dunfield (Max Planck Institute for Software Systems)
+    Julia Lawall (University of Copenhagen)
+    Keisuke Nakano (University of Electro-Communications)
+    Martin Elsman (SimCorp)
+    Walid Taha (Halmstad University)
+
+STEERING COMMITTEE
+
+    Eijiro Sumii (chair) (Tohoku University)
+    Andreas Rossberg (Google)
+    Jacques Garrigue (Nagoya University)
+    Matthew Fluet (Rochester Institute of Technology)
+    Robert Harper (Carnegie Mellon University)
+    Yaron Minsky (Jane Street)
+
+
+

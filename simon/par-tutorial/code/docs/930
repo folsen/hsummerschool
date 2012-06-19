@@ -1,0 +1,210 @@
+From dstcruz at gmail.com  Thu Aug  4 04:24:48 2011
+From: dstcruz at gmail.com (Daniel Santa Cruz)
+Date: Wed, 3 Aug 2011 22:24:48 -0400
+Subject: [Haskell-cafe] Haskell Weekly News: Issue 193
+Message-ID: <CA+V-9CyCVbSh+GNrrf+23hBN3VOgL3VDWNSPAwfXiyNwpJQ+xw@mail.gmail.com>
+
+   Welcome to issue 193 of the HWN, a newsletter covering developments in
+   the Haskell community. This release covers the week of July 24 to
+   30, 2011.
+   [1] http://goo.gl/8hDku
+
+   You can find an HTML rendition of this issue at:
+   http://contemplatecode.blogspot.com/2011/08/haskell-weekly-news-issue-193.html
+
+Announcements
+
+   Wouter Swierstra issued a call for participation to the 16th ACM
+   SIGPLAN International Conference on Function Programming (ICFP 2011) to
+   be held in Tokyo, Japon on September 19-21, 2011.
+   [2] http://goo.gl/ob6Tq
+
+New and Updated Projects
+
+   These projects were announced in the mailing lists:
+
+   * syntactic (Emil Axelsson): Update to version 0.5
+     [3] http://goo.gl/sKutg
+
+   * Yi (Jeff Wheeler): Update to version 0.6.4.0
+     [4] http://goo.gl/Tr2Ns
+
+Quotes of the Week
+
+   * sipa: it can optimize non-terminating programs into programs that
+     output "<<loop>>" and quit; that's an optimization of infinity% !
+
+   * fazzone: People generally seem to react the same way to "My first
+     assembly was x86" as "My dog died" -- "Oh my god, I'm so sorry"
+
+   * [danharaj] I hate myself
+     [edwardk] happy to help
+
+   * bos: the number of people who grok rank-K types is inversely
+     proportional to ackermann(K)
+
+   * copumpkin: holy shit, I'm unsafeCoerce
+
+   * quicksilver: edwardk had this brilliant idea of how he could
+     stress-test our package architecture
+
+   * chrisdone: monoid sounds like a name for a hairless alien species
+     that communicates telepathically from star trek
+
+   * [copumpkin] I basically translated repa to agda and made it all
+     		 safe n shit. also all slow n shit
+     [thoughtpolice] safe n shit,
+     		     like, type systems yo
+
+   * theorbtwo: Well, that's one way to respond to ghc having
+     overly-long error messages. Just replace all error messges with
+     "that's the stupidist shit I've ever heard".
+
+   * acowley: I'm 101% sure I never would have figured it out. I was
+     told all hope was lost, then simonmar swung in on his web shooters
+     and figured it out
+
+   * quicksilver: agda is an alluring trap for haskell programmers who
+     hope to write better code. instead they end up writing no code.
+
+Top Reddit Stories
+
+   * my humble rant about the Haskell learning curve
+     Domain: willowbend.cx, Score: 66, Comments: 134
+     On Reddit: [5] http://goo.gl/g1buw
+     Original: [6] http://goo.gl/3xDxl
+
+   * GHC 7.2.* release candidates are now available
+     Domain: haskell.org, Score: 28, Comments: 17
+     On Reddit: [7] http://goo.gl/0C0gx
+     Original: [8] http://goo.gl/cvec5
+
+   * oleg compares iteratee with python's yield
+     Domain: haskell.org, Score: 27, Comments: 12
+     On Reddit: [9] http://goo.gl/8YQKq
+     Original: [10] http://goo.gl/BafGo
+
+   * Report from HacPDX-II about progress on the new Hackage server
+     Domain: well-typed.com, Score: 26, Comments: 0
+     On Reddit: [11] http://goo.gl/vBr7N
+     Original: [12] http://goo.gl/QXy9a
+
+   * Arrow = Category + Applicative? (Part I)
+     Domain: cdsmith.wordpress.com, Score: 26, Comments: 34
+     On Reddit: [13] http://goo.gl/Zs5Yg
+     Original: [14] http://goo.gl/AsfL1
+
+   * Profunctors in Haskell - A Neighborhood of Infinity
+     Domain: blog.sigfpe.com, Score: 19, Comments: 11
+     On Reddit: [15] http://goo.gl/58CbB
+     Original: [16] http://goo.gl/IKI9H
+
+   * BlockedIndefinitelyOnMVar : Inside 1712B
+     Domain: blog.ezyang.com, Score: 19, Comments: 3
+     On Reddit: [17] http://goo.gl/3Xtn0
+     Original: [18] http://goo.gl/4osPH
+
+   * The Great Yesod Reorganization of 2011
+     Domain: yesodweb.com, Score: 18, Comments: 8
+     On Reddit: [19] http://goo.gl/ZGNoa
+     Original: [20] http://goo.gl/V4buP
+
+   * Is there a Haskell code formatter?
+     Domain: stackoverflow.com, Score: 16, Comments: 32
+     On Reddit: [21] http://goo.gl/lQOX3
+     Original: [22] http://goo.gl/AthoZ
+
+   * Building a Rate of Return System in Haskell ? Part 3, Annualized Returns
+     Domain: blog.virtucal.com, Score: 9, Comments: 7
+     On Reddit: [23] http://goo.gl/0QGPB
+     Original: [24] http://goo.gl/R6am5
+
+Top StackOverflow Questions
+
+   * Is there a Haskell code formatter?
+     votes: 18, answers: 1
+     Read on SO: [25] http://goo.gl/AthoZ
+
+   * Help in understanding pointfree code
+     votes: 17, answers: 1
+     Read on SO: [26] http://goo.gl/Ryy5c
+
+   * Haskell: What is Weak Head Normal Form?
+     votes: 17, answers: 5
+     Read on SO: [27] http://goo.gl/3CHAB
+
+   * Understanding GHC assembly output
+     votes: 13, answers: 1
+     Read on SO: [28] http://goo.gl/ujlve
+
+   * What are Haskell's monad transformers in categorical terms?
+     votes: 13, answers: 1
+     Read on SO: [29] http://goo.gl/vMPdO
+
+   * Managing a stateful computation system in Haskell
+     votes: 12, answers: 1
+     Read on SO: [30] http://goo.gl/HABkL
+
+   * Am I using reactive-banana right?
+     votes: 11, answers: 1
+     Read on SO: [31] http://goo.gl/7jiKr
+
+   * Is there an object-identity-based, thread-safe memoization
+library somewhere?
+     votes: 11, answers: 2
+     Read on SO: [32] http://goo.gl/7vGvl
+
+   * Is there a practical way of using natural numbers in Haskell?
+     votes: 11, answers: 2
+     Read on SO: [33] http://goo.gl/hJBK9
+
+   * Current state of integrating unit tests with Haskell's Cabal?
+     votes: 10, answers: 1
+     Read on SO: [34] http://goo.gl/nm8Zc
+
+About the Haskell Weekly News
+
+   To help create new editions of this newsletter, please send stories to
+   dstcruz at gmail.com.
+
+   Until next time,
+   Daniel Santa Cruz
+
+References
+
+ 1. http://haskell.org/
+ 2. http://permalink.gmane.org/gmane.comp.science.types.announce/2446
+ 3. http://permalink.gmane.org/gmane.comp.lang.haskell.cafe/91427
+ 4. http://permalink.gmane.org/gmane.editors.yi.devel/5550
+ 5. http://willowbend.cx/2011/07/22/whats-wrong-with-learning-haskell/
+ 6. http://www.reddit.com/r/haskell/comments/j0say/my_humble_rant_about_the_haskell_learning_curve/
+ 7. http://www.haskell.org/ghc/dist/7.2.1-rc1/
+ 8. http://www.reddit.com/r/haskell/comments/j3yly/ghc_72_release_candidates_are_now_available/
+ 9. http://www.haskell.org/pipermail/haskell-cafe/2011-July/094384.html
+10. http://www.reddit.com/r/haskell/comments/j32c4/oleg_compares_iteratee_with_pythons_yield/
+11. http://www.well-typed.com/blog/57
+12. http://www.reddit.com/r/haskell/comments/iznjs/report_from_hacpdxii_about_progress_on_the_new/
+13. http://cdsmith.wordpress.com/2011/07/30/arrow-category-applicative-part-i/
+14. http://www.reddit.com/r/haskell/comments/j4h6a/arrow_category_applicative_part_i/
+15. http://blog.sigfpe.com/2011/07/profunctors-in-haskell.html
+16. http://www.reddit.com/r/haskell/comments/iyima/profunctors_in_haskell_a_neighborhood_of_infinity/
+17. http://blog.ezyang.com/2011/07/blockedindefinitelyonmvar/
+18. http://www.reddit.com/r/haskell/comments/j1ld6/blockedindefinitelyonmvar_inside_1712b/
+19. http://www.yesodweb.com/blog/2011/07/yesod-reorg
+20. http://www.reddit.com/r/haskell/comments/iz2ew/the_great_yesod_reorganization_of_2011/
+21. http://stackoverflow.com/questions/6870148/is-there-a-haskell-code-formatter
+22. http://www.reddit.com/r/haskell/comments/j31f4/is_there_a_haskell_code_formatter/
+23. http://blog.virtucal.com/cyclical/2011/7/28/building-a-rate-of-return-system-in-haskell-part-3-annualize.html
+24. http://www.reddit.com/r/haskell/comments/j2gyp/building_a_rate_of_return_system_in_haskell_part/
+25. http://stackoverflow.com/questions/6870148/is-there-a-haskell-code-formatter
+26. http://stackoverflow.com/questions/6797247/help-in-understanding-pointfree-code
+27. http://stackoverflow.com/questions/6872898/haskell-what-is-weak-head-normal-form
+28. http://stackoverflow.com/questions/6808867/understanding-ghc-assembly-output
+29. http://stackoverflow.com/questions/6854303/what-are-haskells-monad-transformers-in-categorical-terms
+30. http://stackoverflow.com/questions/6835777/managing-a-stateful-computation-system-in-haskell
+31. http://stackoverflow.com/questions/6812533/am-i-using-reactive-banana-right
+32. http://stackoverflow.com/questions/6878193/is-there-an-object-identity-based-thread-safe-memoization-library-somewhere
+33. http://stackoverflow.com/questions/6884220/is-there-a-practical-way-of-using-natural-numbers-in-haskell
+34. http://stackoverflow.com/questions/6787231/current-state-of-integrating-unit-tests-with-haskells-cabal
+
+

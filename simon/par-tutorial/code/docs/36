@@ -1,0 +1,52 @@
+From ninegua at gmail.com  Fri Apr  1 20:47:37 2011
+From: ninegua at gmail.com (Paul L)
+Date: Fri, 1 Apr 2011 11:47:37 -0700
+Subject: [Haskell-cafe] Asynchronous Arrows need Type Specialization -
+	Help!
+In-Reply-To: <AANLkTi=p=Zi=k32sAROAiC7Ea4SRiSbzTqAp+B2YF7CS@mail.gmail.com>
+References: <AANLkTi=p=Zi=k32sAROAiC7Ea4SRiSbzTqAp+B2YF7CS@mail.gmail.com>
+Message-ID: <AANLkTi=jizU+TYLiLr7jP10bKdpdBHduDLVaa7svo0fr@mail.gmail.com>
+
+On Sun, Mar 20, 2011 at 10:18 PM, David Barbour <dmbarbour at gmail.com> wrote:
+
+> The (***) and (&&&) operations, as specified in Control.Arrow, are
+> inherently synchronization points.
+>
+> Ideally one could do something like:
+>
+> ?(a1 *** a2) >>> first a3
+>
+> and the output from a1 would be piped directly as input to a3, without
+> touching a2. However, arrows also allow:
+>
+> ?(a1 *** a2) >>> arr f
+>
+> And, in this case, the current state of a1 and a2 must be combined
+> into a stream of pairs so that f may be mapped over the stream.
+> Obtaining both streams at a single place (a single vat) and time is a
+> synchronizing operation. The synchronization operations are severely
+> undermining the intended scalability and performance of this agent
+> abstraction.
+
+If what you mean by "synchronization" is that for every output of a1
+there must be an output of a2, then YES.
+
+But if you mean that both the outputs of a1 and a2 have to be
+available (fully evaluated) due to the tupling, then NO, at least not
+in Haskell where things are evaluated lazily.
+
+Even in the former case, when the number of outputs from a1 and a2 do
+not match up, you can still model them as type:
+
+  a1 :: a ~> [b]
+  a2 :: c ~> [d]
+
+BTW, according to arrow laws,  ?(a1 *** a2) >>> first a3 is equivalent
+to (a1 >>> a3) *** a2, does the latter look more appealing to you? If
+yes, I don't see where is the problem, unless you intentionally want
+to make them different, and then it is no longer arrow.
+-- 
+Regards,
+Paul Liu
+
+

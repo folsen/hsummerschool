@@ -1,0 +1,165 @@
+From d.kahlenberg at googlemail.com  Wed Apr 27 11:14:16 2011
+From: d.kahlenberg at googlemail.com (Daniel Kahlenberg)
+Date: Wed, 27 Apr 2011 11:14:16 +0200
+Subject: [Haskell-cafe] How to update the RNG per call (State monad)
+ when generating QuickCheck arbitraries?
+In-Reply-To: <BANLkTinrM4cc_DiPEHuJkmwFdwty=u6ygg@mail.gmail.com>
+References: <BANLkTin-L8vXn70e=UBTtNGr5z=wHD1ZfA@mail.gmail.com>
+	<BANLkTinDU2Bx3+uNWDpyMLe0ZesT6wY3iQ@mail.gmail.com>
+	<BANLkTinrM4cc_DiPEHuJkmwFdwty=u6ygg@mail.gmail.com>
+Message-ID: <BANLkTi=ZSSwXdr9ZPnvhf1mo3V3P1rKxEA@mail.gmail.com>
+
+Hello,
+
+> the final RNG state from the first execution of your code and passing it as the initial > state to the second
+
+original intention of my question: How can I change the runOneRandom
+function (with RNG updates) to return [ThingK True...] samples instead
+of Int?
+
+My solution so far:
+
+> import Random
+> import Control.Monad
+> import qualified Control.Monad.State as S
+> import Test.QuickCheck.Gen
+> import Test.QuickCheck.Arbitrary
+
+Each thing can have one of three types:
+
+> data Ontology = Thing1 Bool
+>               | ThingK Bool
+>               deriving (Show, Eq)
+
+> instance Arbitrary Ontology where
+>    arbitrary =
+>        oneof [ return $ Thing1 True
+>              , return $ ThingK True
+>              , return $ Thing1 False
+>              , return $ ThingK False ]
+
+Liked to have a state monad runner for my arbitrary things as in "Real World
+Haskell", "Chapter 14. Monads" ("Random values in the state monad").
+
+[RWH]:
+
+> -- file: ch14/Random.hs
+> type RandomState a = S.State StdGen a
+
+[RWH]:
+
+> -- file: ch14/Random.hs
+> getRandom :: Random a => RandomState a
+> getRandom =
+>   S.get >>= \gen ->
+>   let (val, gen') = random gen in
+>   S.put gen' >>
+>   return val
+
+[RWH]:
+
+> getOneRandom :: Random a => RandomState a
+> getOneRandom = getRandom
+
+[RWH]:
+
+< runOneRandom :: IO Int
+< runOneRandom = do
+<   oldState <- getStdGen
+<   let (result, newState) = S.runState getOneRandom oldState
+<   setStdGen newState
+<   return result
+
+Updated RNG is used. TODO How to sort out empty lists.
+
+> runOneRandom2 :: IO [Ontology]
+> runOneRandom2 = do
+>   oldState <- getStdGen
+>   let (result, newState) = S.runState (getOneRandom :: RandomState Int) oldState
+>   setStdGen newState
+>   let result2 = unGen arbitrary newState 12 :: [Ontology]
+>   return result2
+
+To compare the behaviour: But the Random Number Generator isn't
+updated... I liked to have different [Ontology] occasions per call:
+
+> genArray :: [Ontology]
+> genArray = unGen arbitrary (mkStdGen 42) 12 :: [Ontology]
+
+
+On more question remains though: Is there a more haskellish way of
+doing this, especially having behaviour more like the arbitrary
+function with no empty samples allowed?
+
+Cheers
+Daniel
+
+2011/4/26 Daniel Kahlenberg <d.kahlenberg at googlemail.com>:
+> Oh thanks,
+>
+> hold on I'd like to have the genArray call generating distinctive
+> results in one IO execution (meaning when
+> I load the .lhs file in ghci):
+>
+> Prelude> genArray
+> [ThingK True,Thing1 False]
+>
+> and when calling immediately again e. g.
+>
+> Prelude> genArray
+> [Thing1 True]
+>
+> By now I only get one and the same again, i. e.:
+>
+> Prelude> genArray
+> [ThingK True]
+>
+> Prelude> genArray
+> [ThingK True]
+>
+> ...
+>
+> so I thought an adaptation of the `runTwoRandoms` approach as described
+> in the RWH book could help.
+>
+> In other words the genArray should have similar behaviour as e. g. a
+> `runOneRandom` function defined like:
+>
+>> getOneRandom :: Random a => RandomState a
+>> getOneRandom = getRandom
+>
+>> runOneRandom :: IO Int
+>> runOneRandom = do
+>> ? oldState <- getStdGen
+>> ? let (result, newState) = S.runState getOneRandom oldState
+>> ? setStdGen newState
+>> ? return result
+>
+> ... the rest of the code as in my first post...
+>
+> Testing it, different numbers expected as the RNG is updated each call:
+>
+> Prelude> runOneRandom
+> 2033303743
+>
+> Prelude> runOneRandom
+> -566930973
+>
+> ...
+>
+> Cheers
+> Daniel
+>
+> 2011/4/26 Bryan O'Sullivan <bos at serpentine.com>:
+>> On Tue, Apr 26, 2011 at 3:04 AM, Daniel Kahlenberg
+>> <d.kahlenberg at googlemail.com> wrote:
+>>>
+>>> Thought getRandom function would be the best place to inject my unGen
+>>> function
+>>> call, but cannot get it to type-check:
+>>
+>> You haven't described what it is you're actually trying to do, and I'm
+>> afraid your code doesn't help to understand that.
+>
+
+

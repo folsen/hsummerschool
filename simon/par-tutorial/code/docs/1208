@@ -1,0 +1,39 @@
+From malcolm.wallace at me.com  Thu Aug 18 16:52:38 2011
+From: malcolm.wallace at me.com (malcolm.wallace)
+Date: Thu, 18 Aug 2011 14:52:38 +0000 (GMT)
+Subject: [Haskell-cafe] writing a good Setup.hs is *hard* (was: broken
+	on	install encoding 0.6.6)
+In-Reply-To: <CAHjep=zq26dxU0E8NwMkgvbn9rPPRo_1=7kjJC161PSw6ZC17A@mail.gmail.com>
+Message-ID: <b98e056f-56e5-60fb-a279-b898415134d6@me.com>
+
+
+On 17 Aug, 2011,at 03:11 PM, Rogan Creswick <creswick at gmail.com> wrote:
+
+> encoding-0.6.6 uses it's own source during the build process! It
+> actually has to be partially compiled before the build tool can build
+> encoding (!). I'm *amazed* that this actually works at all
+> (impressed, too), 
+ 
+This is by design.  It is intended that when the Cabal library itself is configured and built by an existing installation of Cabal, the installation process can make use of the newer features in the current sources, rather than being restricted to bootstrapping with some arbitrary previous version.  So in general, you can distribute a self-contained package that contains the code/tools needed to build itself.  (As you note, this does not work out so well if those build tools are not self-contained, but depend on not-yet-installed packages.)
+> issues in HaXml 1.19 (pretty is an undocumented dependency, although I
+> am unsure if that was true at the time 1.19 and encoding-0.6.6 were
+> released.
+
+The first version of the pretty package (split from base) was uploaded to hackage on 3rd Nov 2007.
+HaXml-1.19 was uploaded to hackage on 23rd Oct 2007.
+So yes, the dependencies of HaXml-1.19 were correct when it was released.  HaXml-1.19.2 was the first release to support the newly split pretty/base, in January 2008.
+
+However encoding-0.6.6 was released in June 2011, so I would say that its dependency on HaXml >= 1.19 must be bogus, and should be at least >= 119.2?
+> (and you'll find that the current HaXml won't work for the current
+> encodings release, as Gang Yu did).
+ 
+I apologise that there are a number of 1.22.* releases of HaXml that do not build at all with ghc-7.x.  I believe 1.22.5 should fix all of the build issues.  (The only differences between 1.22.* releases arebuild-system and documentation related.)
+
+If the encodings package does not work with HaXml-1.22.5 for some other reason, then perhaps there is some API change, which means that encodings' dependency on HaXml should have a stricter upper bound.
+
+Regards,
+    Malcolm
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110818/b6c41a3c/attachment.htm>
+

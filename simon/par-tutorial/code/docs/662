@@ -1,0 +1,65 @@
+From uzytkownik2 at gmail.com  Sat Apr 23 13:32:57 2011
+From: uzytkownik2 at gmail.com (Maciej Marcin Piechotka)
+Date: Sat, 23 Apr 2011 13:32:57 +0200
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <iou9qr$g3p$1@dough.gmane.org>
+References: <4DB093A6.8000303@btinternet.com>
+	<BANLkTimX0eX78AAL5kmrUULt8TPoqduP8Q@mail.gmail.com>
+	<iou9qr$g3p$1@dough.gmane.org>
+Message-ID: <1303558377.3911.22.camel@localhost.localdomain>
+
+On Sat, 2011-04-23 at 12:31 +0200, Heinrich Apfelmus wrote:
+> David Terei wrote:
+> > Good chance you've already read this but if not here is a good post by
+> >  Linus about his take on the problems with darcs:
+> > 
+> > http://markmail.org/message/vk3gf7ap5auxcxnb
+> 
+> I always have to smile at the complaint that something is "academic". :D
+> 
+> You know, like purely functional programming, that's soo academic. It's 
+> centered around some academic ideas, like mathematical functions, 
+> higher-rank types, monads and zygohistomorphic prepromorphisms, that 
+> have absolutely no relevance in real life, and that just don't work in 
+> practice. You do *not* want to write whole programs that way. At some
+> point, you need something that works at another level than pure 
+> functions. What the *hell* do you do?
+> 
+> I think a better invective would be "amazing".
+> 
+> 
+> Best regards,
+> Heinrich Apfelmus
+
+To be fair he "realize[s] that's a pretty weak flame, and I'm sorry". He
+gives reason why he thinks it have no meaning in real live like:
+
+"Fundmantal example: somebody has a problem/bug. Tell me how to tell a
+developer what his exact version is - without creating new tags, and
+without having to synchronize the archives. Just tell the developer what
+version he is at."
+
+I'm not English native speaker but there are 2 reasons why we may assume
+that he does not think "academic == irrelevant":
+
+ - quotes around word usually denotes non-literal meaning (in this
+context)
+ - IIRC "that" can be used only in defing relative clauses. Therefore he
+does not think (or he might not think) academic idea have no meaning in
+real life but those particular ideas.
+
+I'm not saying that he's right but he implied much less that it one
+would assume from quote <<"academic">>.
+
+Regards
+
+I think that quotes around the word + structure of sentence (relative
+clause with that which implies it is non-defining) 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110423/0d0fb1c2/attachment.pgp>
+

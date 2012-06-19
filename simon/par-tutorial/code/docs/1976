@@ -1,0 +1,46 @@
+From niklas.broberg at gmail.com  Thu Dec 15 11:07:45 2011
+From: niklas.broberg at gmail.com (Niklas Broberg)
+Date: Thu, 15 Dec 2011 11:07:45 +0100
+Subject: [Haskell-cafe] Typechecking Using GHC API
+In-Reply-To: <CAAN2PXNTn6g_baMPDwOgiEfF0zO6KeE+PaF_NwwuwtS11T1+=w@mail.gmail.com>
+References: <CAAN2PXNTn6g_baMPDwOgiEfF0zO6KeE+PaF_NwwuwtS11T1+=w@mail.gmail.com>
+Message-ID: <CAMUA08TN_VJWaqSZkw3ZG-PS2afCzN6ZL=YpwnvGwXOLHN1zUA@mail.gmail.com>
+
+Currently: Your only option is to use GHC API if you want type checking. I
+can't help you with that, sorry.
+
+Envisioned: The function you ask for can definitely be written for
+haskell-src-exts, which I know you are currently using. I just need to
+complete my type checker for haskell-src-exts first. Which is not a small
+task, but one that has been started. I doubt it will be done in time for
+your project though, sorry.
+
+Best regards,
+
+/Niklas
+
+On Tue, Dec 13, 2011 at 6:16 PM, Sh NJP <shayan.njp at gmail.com> wrote:
+
+> Hi,
+>
+> I do some pre-processing on a normal Haskell code ( -F ). The
+> pre-processor needs to know the type of each expression.
+> What are the possibilities to do so?
+> Can I use GHC API to employ GHC type checker? If yes, any good tutorial?
+> Is it too naive to think of a function, f :: String -> AnnotatedAST , that
+> takes Haskell code and returns its corresponding abstract syntax tree
+> annotated with types?
+>
+> Thanks,
+>  /shayan
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/e11bd7e8/attachment.htm>
+

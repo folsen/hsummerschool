@@ -1,0 +1,32 @@
+From gcrosswhite at gmail.com  Wed Dec 21 10:15:20 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Wed, 21 Dec 2011 19:15:20 +1000
+Subject: [Haskell-cafe] Interruptible threads with IO loops
+In-Reply-To: <CAH-sQ5jrocgiuXiOmDaoaajkn7HRF5XWaXJK9kA2sE_cj4P0cQ@mail.gmail.com>
+References: <CAH-sQ5jrocgiuXiOmDaoaajkn7HRF5XWaXJK9kA2sE_cj4P0cQ@mail.gmail.com>
+Message-ID: <D90F9E28-E21D-4630-8BA2-D3F04E491F3D@gmail.com>
+
+
+On Dec 21, 2011, at 6:52 PM, Fedor Gogolev wrote:
+
+> Hello. I'm trying to get some threads that I can stop and get last
+> values that was computed (and that values are IO values, in fact).
+> Here is my first approach:
+> [...]
+> tick :: Int -> IO Int
+> tick v = return $ v + 1
+> [...]
+> The problem is that it looks a little messy and what's worse it leaks
+> memory. So I'm wondering if there is a better approach to do so or
+> some fix to memory leak.
+
+I don't have any tips for cleaning up the code off the top of my head, but I suspect that the memory leak is coming from the fact that the expression (v+1) is not being forced, which means that each iteration of the loop is constructing a new thunk with a reference to the old thunk resulting in a data structure that is growing in memory usage over time.  In this case the fix is easy:  just replace "return" in "tick" with "evaluate" from Control.Exception, since "evaluate" guarantees in this case that the expression will be evaluated before being returned.
+
+(Caveat:  What I said about "evaluate" will be true for numeric expressions, but for non-trivial data structures "evaluate" only ensures that the expression is evaluated to something called weak-head normal form, which essentially means that it will only evaluate enough of the expression to figure out what the outermost constructor of the datatype is;  it just so happens that for numeric expressions the outermost data constructor is enough to give you the numeric value.)
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111221/cad9da0b/attachment.htm>
+

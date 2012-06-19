@@ -1,0 +1,69 @@
+From hajhouse at hajhouse.org  Fri Aug 19 16:53:41 2011
+From: hajhouse at hajhouse.org (Henry House)
+Date: Fri, 19 Aug 2011 07:53:41 -0700
+Subject: [Haskell-cafe] custom SQL-to-Haskell type conversion in HDBC
+In-Reply-To: <CAPeieQGnDo5TR6F1hWPjvWWV0+nrW0=6iPm9z-xxJ2HfiOkY4g@mail.gmail.com>
+References: <20110819052316.GA27130@houseag.com>
+	<CAPeieQEGXOJgfvA+FF2yTbhPnWA9vv7Xk8EghLj-2LiYy1Edyg@mail.gmail.com>
+	<20110819140939.GA27362@houseag.com>
+	<CAPeieQGnDo5TR6F1hWPjvWWV0+nrW0=6iPm9z-xxJ2HfiOkY4g@mail.gmail.com>
+Message-ID: <20110819145341.GB27362@houseag.com>
+
+On Friday, 19 August 2011, Erik Hesselink wrote:
+> On Fri, Aug 19, 2011 at 16:09, Henry House <hajhouse at hajhouse.org> wrote:
+> > On Friday, 19 August 2011, Erik Hesselink wrote:
+> >> Do you really need the precision info about the column, or do you just
+> >> need the values at the right precision? Because you get the last thing
+> >> already:
+> >>
+> >> Prelude Database.HDBC.PostgreSQL Database.HDBC Data.Ratio
+> >> Control.Monad> (fromSql . head . head) `liftM` (quickQuery db "select
+> >> 1.231 ::numeric(5,0);" []) :: IO Rational
+> >> 1 % 1
+> >> Prelude Database.HDBC.PostgreSQL Database.HDBC Data.Ratio
+> >> Control.Monad> (fromSql . head . head) `liftM` (quickQuery db "select
+> >> 1.231 ::numeric(5,4);" []) :: IO Rational
+> >> 1231 % 1000
+> >
+> > I'm not sure I understand the distinction --- to my way of thinking,
+> > getting the value at the right precision means getting the correct
+> > number of significant decimal digits, which both your example and mine
+> > fail to provide.
+> >
+> > Prelude Database.HDBC.PostgreSQL Database.HDBC Data.Ratio Control.Monad>
+> > (fromSql . head . head) `liftM`
+> > ? (quickQuery db "select 1.231 ::numeric(10,4);" []) :: IO Rational
+> > -- gives 1231 % 1000 == 1.231 in decimal notation
+> > Prelude Database.HDBC.PostgreSQL Database.HDBC Data.Ratio Control.Monad>
+> > (fromSql . head . head) `liftM`
+> > ? (quickQuery db "select 1.231 ::numeric(10,8);" []) :: IO Rational
+> > -- still gives 1231 % 1000 but should be 1.21310000 in decimal notation
+> > -- or 1231000 % 1000000 in rational notation
+> 
+> The % notation is a rational, so 'infinite' precision. So '1 % 1' and
+> '1000 % 1000' are exactly the same, semantically. It's like fractions
+> instead of decimal digits.
+
+You're right, of course. My example was something of an abuse of
+notation to include a notion of precision where it is actually an
+incompatible concept.
+
+> Why exactly do you need the precision information?
+
+Empirical measurements (e.g., sizes of some fields in hectares) are
+precise only to a certain level of measurement error. Thus, the area
+measurements 1 ha and 1.000 ha are not equivalent or interchangeable.
+Database engines recognize this fact by providing different data types
+for rational numbers and fixed-precision decimal numbers.
+
+The bottom line for me is that the conversion of a fixed-precision
+decimal number as a rational is both throwing away information (the
+precision) as well as introducing bogus information (the notion that the
+result value has greater --- i.e., infinite --- precision that was in
+fact intended when that value was stored).
+
+-- 
+Henry House
++1 530 848-1238
+
+

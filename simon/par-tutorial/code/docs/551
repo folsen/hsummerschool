@@ -1,0 +1,40 @@
+From v.dijk.bas at gmail.com  Wed Apr 20 20:27:18 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Wed, 20 Apr 2011 20:27:18 +0200
+Subject: [Haskell-cafe] Need comments on a libusb asynchronous
+	select/poll loop
+In-Reply-To: <BANLkTimB13gfEGgJoGZZan4kYepVMtHmAA@mail.gmail.com>
+References: <20110419130604.GA26986@X52D.localdomain>
+	<BANLkTikQk4cg0poLVscuj2WW+ORNNNwm2g@mail.gmail.com>
+	<BANLkTi=ZY1rBuK5+c1xK-k+swTwSqgnfnw@mail.gmail.com>
+	<BANLkTinxh+4LutE3OA2hC0_0m0-Nogv8SA@mail.gmail.com>
+	<BANLkTi=5rFFjMzOisGE2hf8oTMhVxXt6YQ@mail.gmail.com>
+	<BANLkTinMfjrWLEfie-_xQ_rbmxxxUTJw+g@mail.gmail.com>
+	<BANLkTimB13gfEGgJoGZZan4kYepVMtHmAA@mail.gmail.com>
+Message-ID: <BANLkTi=2jUxUTwXkYr6wawEN5F6rvNeYpg@mail.gmail.com>
+
+On 20 April 2011 18:34, Johan Tibell <johan.tibell at gmail.com> wrote:
+> On Wed, Apr 20, 2011 at 6:11 PM, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+>> I still need to add appropriate conditions for checking whether the
+>> program is using the threaded RTS. What is the recommended approach
+>> for this?
+>>
+>> I see GHC.Conc.IO uses a dynamic check:
+>>
+>> foreign import ccall unsafe "rtsSupportsBoundThreads" threaded :: Bool
+>>
+>> Is this also available to me as a library author?
+>
+> I think there's a ticket for adding something along the lines of
+>
+> ? ?getSystemEventManager :: IO (Maybe EventManager)
+>
+> If that returns Just em, you're in the threaded RTS and have an EventManager.
+
+Whoever is proposing[1] that is a real genius! ;-)
+
+[1] http://thread.gmane.org/gmane.comp.lang.haskell.libraries/15458/focus=15543
+
+Bas
+
+

@@ -1,0 +1,27 @@
+From lemming at henning-thielemann.de  Sat Apr  9 10:20:43 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Sat, 09 Apr 2011 10:20:43 +0200 (CEST)
+Subject: [Haskell-cafe] =?utf-8?q?_Re=3A_=5BHaskell=5D_ANNOUNCE=3A_normald?=
+ =?utf-8?q?istribution-1=2E0_=E2=80=93_Minimum_fuss_normally_distributed_r?=
+ =?utf-8?q?andom_values=2E?=
+In-Reply-To: <BANLkTi=KNARaNrQiBxpqxDqxatmV_wXD1Q@mail.gmail.com>
+References: <BANLkTi=KNARaNrQiBxpqxDqxatmV_wXD1Q@mail.gmail.com>
+Message-ID: <alpine.DEB.2.00.1104091016360.4967@anubis>
+
+
+On Sat, 9 Apr 2011, Bjorn Buckwalter wrote:
+
+> Internally the library uses the Central Limit Theorem to approximate
+> normally distributed values from multiple uniformly distributed random
+> values.
+
+You may also like to look into the 'dsp' package, that contains some 
+clever algorithms for production of normally distributed random values up 
+to many digits of accuracy.
+
+http://hackage.haskell.org/packages/archive/dsp/0.2.1/doc/html/Numeric-Random-Distribution-Normal.html
+
+The 'dsp' package is also Haskell 98 but could certainly be split into 
+smaller packages.
+
+

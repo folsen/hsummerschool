@@ -1,0 +1,26 @@
+From gale at sefer.org  Sun Apr  3 12:32:09 2011
+From: gale at sefer.org (Yitzchak Gale)
+Date: Sun, 3 Apr 2011 13:32:09 +0300
+Subject: [Haskell-cafe] Can't connect to local yackage server
+Message-ID: <BANLkTi=K_LxbjW6u2MvQifNtswTa9-5bRQ@mail.gmail.com>
+
+On Mac OS X 10.6.7, after upgrading to yackage 0.1.0.1:
+
+After running yackage -l, I cannot connect to it even directly
+from localhost. I get the message:
+
+  This Yackage server only talks to local clients
+
+On a Linux server it seems to work fine though.
+
+On the Mac, when I do "telnet localhost" I get:
+
+  Trying ::1...
+
+Could it be that yackage 0.1.0.1 doesn't recognize the
+IPv6 notion of localhost?
+
+Thanks,
+Yitz
+
+

@@ -1,0 +1,41 @@
+From gale at sefer.org  Mon Dec 12 11:17:40 2011
+From: gale at sefer.org (Yitzchak Gale)
+Date: Mon, 12 Dec 2011 12:17:40 +0200
+Subject: [Haskell-cafe] No instance for (Read POSIXTime)
+In-Reply-To: <CAMXF=YAfN9DzAEATV-4e92M3r3LtJMFkfRjkuz98Rp7-6H9YcQ@mail.gmail.com>
+References: <CAMXF=YBDfLb1shH=UqO4GjLEbK=d02rmsOock_vMhCFEXm=cOg@mail.gmail.com>
+	<CAOrUaLYhC7AgFKtPBgiqANaaBJF+9k-cPBHjq97TyJy_+qqV+g@mail.gmail.com>
+	<CAMXF=YAfN9DzAEATV-4e92M3r3LtJMFkfRjkuz98Rp7-6H9YcQ@mail.gmail.com>
+Message-ID: <CAOrUaLZNe=m7=hthrSt5ay0DZjMMTHkDR9nKLb0kox6=0Can9w@mail.gmail.com>
+
+dokondr wrote:
+> All I actually need
+> is some way to get *seconds* since epoch from the system, so I could
+> manipulate them as integers.
+
+Well, you already have that - that's exactly what POSIXTime
+is. It is a numerical type, an instance of the RealFrac
+class. So perhaps you can do all of your calculations within
+that type itself, without converting it to anything else.
+
+If you really do need to convert it, *please* don't do
+that by going all the way to String and back!
+Just cast it or convert like you would any other
+numerical type.
+
+To make it a Fractional, like Float, Double, or Rational,
+use realToFrac.
+
+Since POSIX allows time to be specified with
+granularity much finer than seconds, the POSIXTime
+type is not an instance of Integral. (Even on
+operating systems where POSIX does happen to
+be counted in whole seconds.)
+So to get to an Integral type, you'll need to use
+some kind of rounding function, like round, floor,
+or ceiling.
+
+Regards,
+Yitz
+
+

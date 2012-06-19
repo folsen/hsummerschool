@@ -1,0 +1,43 @@
+From nomeata at debian.org  Fri Aug 12 19:33:04 2011
+From: nomeata at debian.org (Joachim Breitner)
+Date: Fri, 12 Aug 2011 19:33:04 +0200
+Subject: [Haskell-cafe] Distributions link on Hackage
+In-Reply-To: <87obzwm57o.fsf@write-only.cryp.to>
+References: <87obzwm57o.fsf@write-only.cryp.to>
+Message-ID: <1313170384.2494.18.camel@kirk>
+
+Hi,
+
+Am Donnerstag, den 11.08.2011, 15:46 +0200 schrieb Peter Simons:
+> the home page of a package on Hackage links to various distributions to
+> show which versions are available, i.e. Fedora, Debian, FreeBSD, etc. In
+> NixOS, we have fairly up-to-date package set, and I would like to see
+> that distribution included on Hackage.
+> 
+> Now I wonder how to get that done? Can anyone advice on the procedure to
+> add support for a distribution to Hackage?
+
+have a look at 
+http://hackage.haskell.org/trac/hackage/ticket/570
+for the history of the feature,
+http://people.debian.org/~nomeata/cabalDebianMap.txt for the format for
+the file you have to provide, and open a ticket at aboves trac for it to
+be included.
+
+Greetings,
+Joachim
+
+
+-- 
+Joachim "nomeata" Breitner
+Debian Developer
+  nomeata at debian.org | ICQ# 74513189 | GPG-Keyid: 4743206C
+  JID: nomeata at joachim-breitner.de | http://people.debian.org/~nomeata
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110812/e03e32d5/attachment.pgp>
+

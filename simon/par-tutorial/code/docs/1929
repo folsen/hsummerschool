@@ -1,0 +1,58 @@
+From marco-oweber at gmx.de  Wed Dec 14 14:59:11 2011
+From: marco-oweber at gmx.de (Marc Weber)
+Date: Wed, 14 Dec 2011 14:59:11 +0100
+Subject: [Haskell-cafe] DB vs read/show for persisting large data
+In-Reply-To: <CAKA2JgJ3oyfKeyVR8p=D1xYcpbH_gVXzO6_NW5L5+rvK0uhS2w@mail.gmail.com>
+References: <CAGdT1gqohuKtQPQdH2FS==HTqCtDVYvjKibD_wZ1vtF7Vxr_wA@mail.gmail.com>
+	<CAKA2JgJ3oyfKeyVR8p=D1xYcpbH_gVXzO6_NW5L5+rvK0uhS2w@mail.gmail.com>
+Message-ID: <1323870692-sup-1533@nixos>
+
+Excerpts from Michael Snoyman's message of Wed Dec 14 14:34:30 +0100 2011:
+> On Wed, Dec 14, 2011 at 3:31 PM, C K Kashyap <ckkashyap at gmail.com> wrote:
+> Definite *don't* use read/show: if you make any updates to your data
+> structures, all old files will be lost.
+
+Well you can work around it:
+
+  data MyDataV1 = {
+    name :: String
+  }
+  deriving (Read,Show)
+
+then you make an update:
+
+    data MyDataV2 = {
+      name :: String,
+      age : Int
+    }
+    deriving (Read,Show)
+
+then you can do 
+  let (v1 :: MyDataV1) = tryReadDataToMaybe data
+  let (v2 :: MyDataV2) = tryReadDataToMaybe data
+  let real_data = upgrade v1 `or` v2
+
+
+But you already see that you start writing boilerplate code.
+It can be done for easy data structures .. But it soon will be a night
+mare if you have complex data.
+
+If you use a version control system you don't loose your data - it will
+just be "hard to update".
+
+For prototyping deriving binary or read/show instances are a nice way to
+get started. serialization to JSON/XML can be implemented later when you
+change your data format as well eventually.
+
+So it depends on your task. If you want to use read/show etc you have to
+think about file locking and such.
+
+Have a look at the "derive" package (hackage) which can derive more
+instances than just read/show (eg json).
+
+You can still use a sqlite database use it as binary storage...
+Depends on whether all your data fits into memory.
+
+Marc Weber
+
+

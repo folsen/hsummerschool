@@ -1,0 +1,21 @@
+From jmillikin at gmail.com  Fri Apr 22 05:23:09 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Thu, 21 Apr 2011 20:23:09 -0700 (PDT)
+Subject: [Haskell-cafe] Question about the Monad instance for Iteratee
+ (from the enumerator package)
+In-Reply-To: <BANLkTikqY93k8566ew7J4HuDyWZGX-5DEQ@mail.gmail.com>
+Message-ID: <22632902.1832.1303442589303.JavaMail.geo-discussion-forums@prgs21>
+
+John Lato's "iteratee" package is based on IterateeMCPS.hs[1]. I used 
+IterateeM.hs for "enumerator", because when I benchmarked them the non-CPS 
+version was something like 10% faster on most operations.
+
+The new IterateeM.hs solves some problems with the old encoding, but I 
+haven't switched "enumerator" to it yet because it would break backwards 
+compatibility.
+
+[1] http://okmij.org/ftp/Haskell/Iteratee/IterateeMCPS.hs
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110421/e1b4f0e5/attachment-0001.htm>
+

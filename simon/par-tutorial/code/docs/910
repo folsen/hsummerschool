@@ -1,0 +1,24 @@
+From cdsmith at gmail.com  Mon Aug  1 18:40:30 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Mon, 01 Aug 2011 10:40:30 -0600
+Subject: [Haskell-cafe] Regular Expression Parsing via derivatives
+In-Reply-To: <CACYWy82BhLuDE7CYR0P_0jWGDsDvMji8i4-f+OfPuyXTZo7BWg@mail.gmail.com>
+References: <CACYWy82xwE0aZvGt_yuVuejyhKvafvg8Ekod0q9trJzG1ub3VQ@mail.gmail.com>
+	<CAKjSnQFRUK=Y0adyWHVGF+_z3OonfWAW_YTeCpLqNOrkFN_bVg@mail.gmail.com>
+	<CACYWy82BhLuDE7CYR0P_0jWGDsDvMji8i4-f+OfPuyXTZo7BWg@mail.gmail.com>
+Message-ID: <1312216830.25339.209.camel@godel>
+
+On Mon, 2011-08-01 at 12:38 -0400, Alex Clemmer wrote:
+> Hmm. Not sure how I missed that. And, I also inquired about developing
+> a "core featre" instead of a library -- implying disparity where in
+> retrospect there doesn't appear to be any.
+
+Right... the only regular expression support for Haskell at all comes in
+the form of libraries.  One of the nice things about Haskell is how
+little has to be built in to the language.
+
+-- 
+Chris Smith
+
+
+

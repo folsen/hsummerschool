@@ -1,0 +1,23 @@
+From andrewcoppin at btinternet.com  Sat Feb  5 16:16:47 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Sat, 05 Feb 2011 15:16:47 +0000
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <201102032237.33997.daniel.is.fischer@googlemail.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<201102032237.33997.daniel.is.fischer@googlemail.com>
+Message-ID: <4D4D69DF.5050002@btinternet.com>
+
+On 03/02/2011 09:37 PM, Daniel Fischer wrote:
+> To illustrate your prediction about the side-issues:
+>
+> On Thursday 03 February 2011 22:10:51, Andrew Coppin wrote:
+>> Consider for a moment the original implementation with Data.Map. Adding
+>> a seq or two here will do no good at all; seq reduces to WHNF. What we
+>> are wanting is NF, and I can see no way at all of doing that.
+>
+> Check out Data.Map.insertWith'
+
+Random fact: Data.Map.insertWith' exists. Data.IntMap.insertWith' does 
+*not* exist.
+
+

@@ -1,0 +1,34 @@
+From bobzhang1988 at gmail.com  Wed Aug 24 06:17:59 2011
+From: bobzhang1988 at gmail.com (bob zhang)
+Date: Wed, 24 Aug 2011 00:17:59 -0400
+Subject: [Haskell-cafe] a minor bug (memory leak) in ListLike package
+In-Reply-To: <CA+u6gbyhRBZ45WZ=yhPrPoWskFWcwvbeTtNXN-W34uDFmMbGOg@mail.gmail.com>
+References: <4E544F7D.8030401@gmail.com>	<CA+u6gbzyx=_d6BbGtZ86GYpfDx3jg8o6zpM8Tcu3958wPpOffg@mail.gmail.com>	<CANcqPu6BSBtbQwtwgvLH01tbN3MaXe=yknBMhrACShZNjyK3DQ@mail.gmail.com>
+	<CA+u6gbyhRBZ45WZ=yhPrPoWskFWcwvbeTtNXN-W34uDFmMbGOg@mail.gmail.com>
+Message-ID: <4E547B77.2060000@gmail.com>
+
+? 11-8-23 ??11:37, Ivan Lazar Miljenovic ??:
+> It might not be what_you_  want, but it might be what others want.  If
+> you're concerned with efficiency, then wouldn't you use length rather
+> than genericLength?
+>
+length is identical to genericLength in ListLike except type signature.
+but still,
+import Data.Number
+import Data.List
+import qualified Data.ListLike as L
+(3 :: Natural) < genericLength [1..] (work)
+(3 :: Natural) < L.genericLength [1..] (non-terminating)
+
+If you want laziness, L.genericLength should be defined like this
+L.genericLength [] = 0
+L.genericLength (_:l) = 1 + L.genericLength l
+the genericLength used in ListLike package used tail recursion while 
+non-strict.
+and also, a strict length is still needed (currently, length is 
+identical to genericLength)
+
+Thank you
+bob
+
+

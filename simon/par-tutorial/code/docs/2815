@@ -1,0 +1,30 @@
+From qdunkan at gmail.com  Mon Feb  7 23:31:17 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Mon, 7 Feb 2011 14:31:17 -0800
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4C3890B8-5D8B-46C6-AAFA-E081ABAFDB91@cs.otago.ac.nz>
+References: <4D4B19DB.5000907@btinternet.com>
+	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+	<4D4D6B15.2060204@btinternet.com>
+	<AANLkTimj6PQP6o9NCcc+KXHJrc7+RwK3wQmg66KNMKur@mail.gmail.com>
+	<4D4EF972.2060309@btinternet.com>
+	<B7DEC147-6002-49F7-B756-D4CFF93D6625@cs.otago.ac.nz>
+	<4D505D60.3090707@btinternet.com>
+	<4C3890B8-5D8B-46C6-AAFA-E081ABAFDB91@cs.otago.ac.nz>
+Message-ID: <AANLkTimFCRqGM=LHq=5OsR5HzqFmmNzm9i=LwoEAq7WP@mail.gmail.com>
+
+> The distinction between let and letrec predates OCAML. ?Scheme does it too.
+
+Haskell's choice of recursive everywhere is nice for the syntax, but
+occasionally error prone.  I don't actually use explicit recursion too
+often because there are functions for that, but I still occasionally
+typo a variable name and make a circular reference, say naming a
+function's output the same as one of its inputs.  If they're the same
+type then you get that least-friendly of crashes: an error-less hang
+with no indications about where it is.  It means you sometimes can't
+reuse variable names when it would be better to shadow the old one and
+sometimes wind up with tricks like 'x <- return $ f x'.
+
+So there's a case to be made for letrec too.
+
+

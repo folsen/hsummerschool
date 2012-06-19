@@ -1,0 +1,36 @@
+From trebla at vex.net  Fri Apr 15 00:31:10 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Thu, 14 Apr 2011 18:31:10 -0400
+Subject: [Haskell-cafe] Questioning seq
+In-Reply-To: <4DA7358F.1080501@btinternet.com>
+References: <4DA7358F.1080501@btinternet.com>
+Message-ID: <4DA775AE.80500@vex.net>
+
+On 11-04-14 01:57 PM, Andrew Coppin wrote:
+> 3. How is pseq different from seq?
+
+An example to show that there are non-unique evaluation orders to 
+fulfill the mere strictness promise of seq:
+
+import Data.List(foldl')
+() & () = ()
+main = print (foldl' (&) () (replicate 2500000 ()))
+
+with ghc with -O0 : fast, no stack overflow
+with ghc with -O or -O2: slow, stack overflow
+
+ghc versions 6.12.3, 7.0.2, 7.0.3
+
+Look at the core code (-ddump-simpl) to verify evaluation orders.
+
+Repeat the experiment and observations with pseq:
+
+import GHC.Conc(pseq)
+() & () = ()
+foldl' :: (a -> b -> a) -> a -> [b] -> a
+foldl' op z xs = go z xs where
+   go z [] = z
+   go z (x:xs) = let z' = op z x in z' `pseq` go z' xs
+main = print (foldl' (&) () (replicate 2500000 ()))
+
+

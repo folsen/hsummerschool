@@ -1,0 +1,80 @@
+From fischer at nii.ac.jp  Thu Apr 14 15:43:19 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Thu, 14 Apr 2011 15:43:19 +0200
+Subject: [Haskell-cafe] Programming Chalenges: The 3n+1 problem
+In-Reply-To: <BANLkTi=_v2FiMMKLSZ6thUpk65dh3EAoNQ@mail.gmail.com>
+References: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+	<BANLkTimu0cU1OUGaFixx-naids+6A5T0ww@mail.gmail.com>
+	<BANLkTi=_v2FiMMKLSZ6thUpk65dh3EAoNQ@mail.gmail.com>
+Message-ID: <BANLkTi=-k79X6GOJBw43uhPN1N3SwWKkqw@mail.gmail.com>
+
+Hi Dimitri,
+
+> When asking "how to implement cache in Haskell" I was hopping that there
+> exists some solution without using?Data.Array, more "functional" approach,
+> if I may say so ?...
+
+Steven's second solution is purely functional. It uses so-called tries
+to cache results instead of mutable arrays. Here is an alternative
+definition of Steven's `fixmemo` function:
+
+    fixmemo :: HasTrie a => ((a -> b) -> (a -> b)) -> (a -> b)
+    fixmemo f = fix (memo . f)
+
+It uses the standard fixpoint combinator
+
+    Data.Function.fix :: (a -> a) -> a
+
+and has a similar (but more restrictive) type. In order to understand
+Steven's solution you need to know how to define recursive functions
+using a fixpoint combinator. For example, you can define the Fibonacci
+function as follows:
+
+    fibonacci :: Int -> Integer
+    fibonacci = fix fib
+
+    fib :: (Int -> Integer) -> (Int -> Integer)
+    fib fib 0 = 0
+    fib fib 1 = 1
+    fib fib n = fib (n-1) + fib (n-2)
+
+Note how the first argument `fib` of the function `fib` shadows the
+name of the global function `fib`.
+
+The advantage of this complicated definition is that you get a
+memoized version of the `fibonacci` function simply by using `fixmemo`
+instead of `fix`:
+
+    memoFib :: Int -> Integer
+    memoFib = fixmemo fib
+
+This definition avoids to recompute the same recursive calls over and
+over again in is therefore much faster than the original version.
+
+That said, memoization helps to solve your original problem only if
+you reuse the cache for different top-level calls of the Collatz
+length function. According to the Collatz conjecture no argument
+appears again when computing the Collatz length of a number (otherwise
+the computation would not terminate).
+
+Ryan's solution achieves reuse of the cache by defining it at the top
+level and you can do the same with tries. For the `fib` example it
+would look like this:
+
+    fibCache :: Int :->: Integer
+    fibCache = trie (fib cachedFib)
+
+    cachedFib :: Int -> Integer
+    cachedFib = untrie fibCache
+
+Now even independent calls to `cachedFib` reuse previously computed results.
+
+In my experiments, caching did not pay off, even for computing the
+maximum Collatz length of a given range. Without caching it took less
+than 5 seconds to compute the maximum Collatz length of all numbers
+between 1 and 1000000. With caching, it took 30 seconds.
+
+Cheers,
+Sebastian
+
+

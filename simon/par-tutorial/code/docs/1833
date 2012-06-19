@@ -1,0 +1,44 @@
+From aslatter at gmail.com  Sun Dec 11 16:36:30 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Sun, 11 Dec 2011 09:36:30 -0600
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+In-Reply-To: <87vcpn5fl2.fsf@write-only.cryp.to>
+References: <87k464b870.fsf@gnu.org> <87d3bw102d.fsf@write-only.cryp.to>
+	<CAKFCL4VhQe89QZmTM6Wxm+7KR6KOT7+qQe-xYCNBt8i3fR+zjg@mail.gmail.com>
+	<87fwgrblkq.fsf@gnu.org> <87vcpn5fl2.fsf@write-only.cryp.to>
+Message-ID: <CAKjSnQE-eFSEFhbJU9-_LeNiYcPGOi5xiv6eGos3kUWiXkB+2Q@mail.gmail.com>
+
+On Sun, Dec 11, 2011 at 8:48 AM, Peter Simons <simons at cryp.to> wrote:
+> Hi Jose,
+>
+> ?> Peter, would using parsec 3.x be an acceptable solution to you?
+>
+> well, we can link xmobar with parsec 3.x on NixOS. The situation
+> is tricky, though, because the latest version of parsec that we
+> have, 3.1.2, doesn't compile with GHC 6.10.4 anymore, so we'd
+> have to use some older version to work around that problem. That
+> kind of setup somewhat complicated to maintain, which is why I
+> would prefer to compile xmobar with parsec 2 2 if at all
+> possible.
+>
+
+Hi Peter,
+
+What errors are you getting compiling with GHC 6.10.4? If its a small
+thing I certainly don't mind patching things.
+
+> Generally speaking, though, GHC 6.10.4 support is not a high
+> priority. I just thought it might be worth pointing out that
+> backwards compatibility has been lost in the 0.14 release,
+> because earlier versions worked just fine.
+>
+> Take care,
+> Peter
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

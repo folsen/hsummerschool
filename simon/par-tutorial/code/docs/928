@@ -1,0 +1,61 @@
+From bgamari.foss at gmail.com  Thu Aug  4 00:53:00 2011
+From: bgamari.foss at gmail.com (Ben Gamari)
+Date: Wed, 03 Aug 2011 18:53:00 -0400
+Subject: [Haskell-cafe] Fwd: shootout
+In-Reply-To: <4E34A15B.70404@tp1.rub.de>
+References: <CAFd+Dr30e1odf4HRNSE6hwVy3pReio44tKkd2_+JQ7AVWoF3cg@mail.gmail.com>
+	<42529BBC-8E36-427E-AF0B-AD5AD206B38C@gmail.com>
+	<4E34A15B.70404@tp1.rub.de>
+Message-ID: <87fwli2jlf.fsf@gmail.com>
+
+On Sun, 31 Jul 2011 02:27:07 +0200, Thorsten Hater <th at tp1.rub.de> wrote:
+Non-text part: multipart/mixed
+> Good Evening,
+> 
+> can anybody confirm that this implementation is somewhat faster
+> than the current benchmark (at expense of memory consumption)?
+> 
+> Cheers, Thorsten
+> 
+Somewhat faster is an understatement I would say:
+
+$ ghc --version
+The Glorious Glasgow Haskell Compilation System, version 7.0.3
+$ ghc -O2 -threaded -rtsopts fasta-old.hs -XBangPatterns
+[1 of 1] Compiling Main             ( fasta-old.hs, fasta-old.o )
+Linking fasta-old ...
+$ ghc -O2 -threaded -rtsopts fasta-new.hs
+[1 of 1] Compiling Main             ( fasta-new.hs, fasta-new.o )
+Linking fasta-new ...
+$ time ./fasta-old +RTS -N2 -RTS 25000000 >| old
+
+real	0m21.173s
+user	0m18.380s
+sys	0m0.910s
+$ time ./fasta-new +RTS -N2 -RTS 25000000 >| new
+
+real	0m4.809s
+user	0m2.190s
+sys	0m0.730s
+$ diff -q old new
+$ 
+$ time ./fasta-old +RTS -N1 -RTS 25000000 >| old
+
+real	0m19.069s
+user	0m16.670s
+sys	0m0.630s
+$ time ./fasta-new +RTS -N1 -RTS 25000000 >| new
+
+real	0m3.797s
+user	0m1.500s
+sys	0m0.600s
+$ diff -q old new
+$ 
+
+This is on a dual-core Core 2 running at 2.1GHz. I'm honestly not sure
+why performance doesn't improve with two threads, but I think I've made
+the point.
+
+- Ben
+
+

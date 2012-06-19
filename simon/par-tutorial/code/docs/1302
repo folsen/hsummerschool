@@ -1,0 +1,21 @@
+From alex.solla at gmail.com  Wed Aug 24 01:56:56 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Tue, 23 Aug 2011 16:56:56 -0700
+Subject: [Haskell-cafe] Conflict with Network.CGI and System.Random
+In-Reply-To: <CAAXYtEcNU4bxEGCs6RRF-HgiuPy1LoXB6P6St=LfS40fwW-25A@mail.gmail.com>
+References: <CAAXYtEcNU4bxEGCs6RRF-HgiuPy1LoXB6P6St=LfS40fwW-25A@mail.gmail.com>
+Message-ID: <CAO0Ooq0cuZhNJFexZPQzoMcYZoU7Q9sS=+Tzd1V0bTG0Zm4=pw@mail.gmail.com>
+
+CGI m a is an instance of MonadIO if m is, so
+
+import Control.Monad.Trans
+
+cgiTMain = do
+   gen <- liftIO getStdGen
+   ...
+
+should work.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110823/6666cd61/attachment.htm>
+

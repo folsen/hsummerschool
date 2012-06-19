@@ -1,0 +1,25 @@
+From chrisyco+haskell-cafe at gmail.com  Tue Dec 20 22:51:33 2011
+From: chrisyco+haskell-cafe at gmail.com (Chris Wong)
+Date: Wed, 21 Dec 2011 10:51:33 +1300
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+Message-ID: <CA+qNEzLdy128SaENYYwRL1XhZXttwQJzRqcTTbh17gF1J_zoeQ@mail.gmail.com>
+
+> One thing that concerns me is the use of capital letters to distinguish type
+> and class names and constructors from values. ?If I was doing it over I
+> would use a typographical distinction like italics for types, bold for
+> classes. ?That way we could have a constructor named??, a function named??,
+> a class named??.
+
+It's Algol all over again! Will we have to typeset our keywords in bold too?
+
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

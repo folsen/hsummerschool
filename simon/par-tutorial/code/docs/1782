@@ -1,0 +1,23 @@
+From kevinjardine at gmail.com  Fri Dec  9 12:20:17 2011
+From: kevinjardine at gmail.com (Kevin Jardine)
+Date: Fri, 9 Dec 2011 12:20:17 +0100
+Subject: [Haskell-cafe] Cabal issue
+Message-ID: <CAMtV1SGHTbEvS2RY65bzVVwtudvrjt0S51suc_DvPizQgdUBcg@mail.gmail.com>
+
+I understand that this may have been addressed before on this list in some
+form, so I'll be brief:
+
+Had problem with deprecated package, was told my only option was to wipe my
+Haskell install and start over. Is this true and if so, doesn't this mean
+that Cabal (or the package management system that it is a part of) is
+broken?
+
+Details here:
+
+https://plus.google.com/u/0/111705054912446689620/posts/V1186HGWEap
+
+Kevin
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111209/f062752e/attachment.htm>
+

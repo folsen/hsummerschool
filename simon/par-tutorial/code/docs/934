@@ -1,0 +1,32 @@
+From ivan.miljenovic at gmail.com  Thu Aug  4 09:12:09 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Thu, 4 Aug 2011 17:12:09 +1000
+Subject: [Haskell-cafe] library-profiling default
+In-Reply-To: <CAH1Pdbm6NC+LJLmJ+zK_vKEK+kEAqSiGcAn1KrsbTfXYLdSRMQ@mail.gmail.com>
+References: <CAH1Pdbm6NC+LJLmJ+zK_vKEK+kEAqSiGcAn1KrsbTfXYLdSRMQ@mail.gmail.com>
+Message-ID: <CA+u6gbzr2PbOOXoMhhaG_gsU7bMm7zxuOjMwcN20czatNB5UgA@mail.gmail.com>
+
+On 4 August 2011 17:06, Tom Doris <tomdoris at gmail.com> wrote:
+> Hi
+> Is there a good reason that the default for library-profiling in
+> .cabal/config is set to False? It seems a lot of people hit the problem of
+> trying to profile for the first time, finding it doesn't work because
+> profiling libraries haven't been installed, then they have to walk the
+> dependencies reinstalling everything.
+> Is there a major cost or problem with just defaulting this to True?
+> Apologies if this is answered elsewhere, I saw various discussions on why it
+> is difficult to automatically build required libs with profiling on demand,
+> but nothing that discussed changing the default so that they are always
+> built.
+
+My guess is that this way, it reduces the build-time for users that
+are just using cabal-install to get Haskell programs (darcs, pandoc,
+etc.) or using Haskell for assignments but with no need/interest in
+profiling.
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

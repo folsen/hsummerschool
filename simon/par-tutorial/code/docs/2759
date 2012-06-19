@@ -1,0 +1,48 @@
+From mwotton at gmail.com  Sun Feb  6 12:43:16 2011
+From: mwotton at gmail.com (Mark Wotton)
+Date: Sun, 6 Feb 2011 18:43:16 +0700
+Subject: [Haskell-cafe] community server & hasktags learned recursing
+	into directories
+In-Reply-To: <AANLkTimdfjFB5gS2YPmCC7oCkqHxjrMeN_EJgJoTT1t4@mail.gmail.com>
+References: <1296858891-sup-7850@localhost.localdomain>
+	<AANLkTinKOOh375m=5+3-5-y+kDeduMxVfEBj3nbK1sdn@mail.gmail.com>
+	<AANLkTimdfjFB5gS2YPmCC7oCkqHxjrMeN_EJgJoTT1t4@mail.gmail.com>
+Message-ID: <AANLkTimL4MMdqyVj4kM36KaZJz2=po7WxdeAdkQ1_L_V@mail.gmail.com>
+
+On Sat, Feb 5, 2011 at 6:43 AM, Ivan Lazar Miljenovic
+<ivan.miljenovic at gmail.com> wrote:
+> On 5 February 2011 10:14, Luke Palmer <lrpalmer at gmail.com> wrote:
+>> I host all my modules on github. ?It is a very supportive environment
+>> for spontaneous collaborative development. ?c.h.o is a nice place, but
+>> lacks in maturity in comparison. ?As long as there is a complete, free
+>> place like github around, why not use it?
+>
+> 1) Github uses git, not darcs.
+
+Git is good enough for serious use.
+
+> 2) I know who runs/controls c.h.o, but not github (so if something
+> goes wrong...)
+
+If something goes wrong, the maintainer of c.h.o can commiserate with
+you about it being down.
+I suspect he/she doesn't have a large team of dedicated sysadmins to
+put it right, or a set of redundant servers.
+
+> 3) Maturity? I can put darcs repos there, how mature does it need to be?
+
+integrated pull requests, commenting systems, notifications of
+updates, issue trackers...
+
+if you particularly want to use something else for each of these,
+that's fine, but it's nice to have a reasonable default.
+
+mark
+
+-- 
+A UNIX signature isn't a return address, it's the ASCII equivalent of a
+black velvet clown painting. It's a rectangle of carets surrounding a
+quote from a literary giant of weeniedom like Heinlein or Dr. Who.
+? ? ? ? -- Chris Maeda
+
+

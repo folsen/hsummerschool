@@ -1,0 +1,48 @@
+From aaronngray.lists at gmail.com  Sat Feb 12 23:27:41 2011
+From: aaronngray.lists at gmail.com (Aaron Gray)
+Date: Sat, 12 Feb 2011 22:27:41 +0000
+Subject: [Haskell-cafe] How large is the Haskell community ?
+In-Reply-To: <20110213083140.467377bf.mle+hs@mega-nerd.com>
+References: <AANLkTi=gxXMJxzSj9oYu+NKbRwKeFbg=2=mNLndOQJez@mail.gmail.com>
+	<20110212202452.GA14969@whirlpool.galois.com>
+	<AANLkTintJRZV6EsRePV=o610Ced23QKzFi9EN42umrWK@mail.gmail.com>
+	<20110213083140.467377bf.mle+hs@mega-nerd.com>
+Message-ID: <AANLkTimkagkYsBuYuuDQzpyNi2j=DuK6asbN8Htp9+k_@mail.gmail.com>
+
+On 12 February 2011 21:31, Erik de Castro Lopo <mle+hs at mega-nerd.com> wrote:
+
+> Aaron Gray wrote:
+>
+> > On 12 February 2011 20:24, Don Stewart <dons at galois.com> wrote:
+> >
+> > > aaronngray.lists:
+> > > >    I was wondering if anyone had an idea or estimate as to how large
+> the
+> > > >    Haskell community is ?
+> > >
+> > > No one knows. There are many figures that you could use to estimate the
+> > > size (e.g. I try to gather signifcant stats in yearly reports about
+> > > Hackage)
+> > >
+> > >  * In 2010, for example, 138,000 unique IPs downloaded the Haskell
+> > > Platform.
+> > >
+> > >    http://www.galois.com/~dons/talks/hiw-hackage-y2.pdf
+> > >
+> > >
+> > Right 138,000, but that would not account for gateways :|
+>
+> Or people who get Haskell related stuff via their Linux distribution
+> (specifically Debian, Ubuntu and Fedora, but possibly others as well).
+>
+
+Then there are people who download it, look at it and maybe find it too
+complex to use ?
+
+I am wondering if mailing list statistics would be the best guide ?
+
+Aaron
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110212/c9e856b2/attachment.htm>
+

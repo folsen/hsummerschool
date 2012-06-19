@@ -1,0 +1,179 @@
+From dokondr at gmail.com  Thu Apr 14 12:29:31 2011
+From: dokondr at gmail.com (Dmitri O.Kondratiev)
+Date: Thu, 14 Apr 2011 14:29:31 +0400
+Subject: [Haskell-cafe] Programming Chalenges: The 3n+1 problem
+Message-ID: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+
+3n+1 is the first, "warm-up" problem at Programming Chalenges site:
+http://www.programming-challenges.com/pg.php?page=downloadproblem&probid=110101&format=html
+
+(This problem illustrates Collatz conjecture:
+http://en.wikipedia.org/wiki/3n_%2B_1#Program_to_calculate_Collatz_sequences
+)
+
+As long as the judge on this site takes only C and Java solutions, I
+submitted in Java some add-hock code (see at the end of this message) where
+I used recursion and a cache of computed cycles. Judge accepted my code and
+measured  0.292 sec with best overall submissions of 0.008 sec to solve the
+problem.
+
+*** Question: I wonder how to implement cache for this problem in Haskell?
+At the moment, I am not so much interested in the speed of the code, as in
+nice implementation.
+
+To illustrate my question I add the problem description and my Java solution
+at the end of this message.
+Thanks!
+
+*** Problem
+
+Consider the following algorithm to generate a sequence of numbers. Start
+with an integer *n*. If *n* is even, divide by 2. If *n* is odd, multiply by
+3 and add 1. Repeat this process with the new value of *n*, terminating
+when *n* = 1. For example, the following sequence of numbers will be
+generated for *n* = 22:
+22 11 34 17 52 26 13 40 20 10 5 16 8 4 2 1
+It is *conjectured* (but not yet proven) that this algorithm will terminate
+at *n* = 1 for every integer *n*. Still, the conjecture holds for all
+integers up to at least 1, 000, 000.
+
+For an input *n*, the *cycle-length* of *n* is the number of numbers
+generated up to and *including* the 1. In the example above, the cycle
+length of 22 is 16. Given any two numbers *i* and *j*, you are to determine
+the maximum cycle length over all numbers between *i* and *j*, *including* both
+endpoints.
+
+InputThe input will consist of a series of pairs of integers *i* and *j*,
+one pair of integers per line. All integers will be less than 1,000,000 and
+greater than 0.
+
+OutputFor each pair of input integers *i* and *j*, output *i*, *j* in the
+same order in which they appeared in the input and then the maximum cycle
+length for integers between and including *i* and *j*. These three numbers
+should be separated by one space, with all three numbers on one line and
+with one line of output for each line of input.
+
+Sample Input
+
+1 10
+100 200
+201 210
+900 1000
+
+Sample Output
+
+1 10 20
+100 200 125
+201 210 89
+900 1000 174
+
+*** my Java solution
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+public class Main {
+	final static BufferedReader reader_ = new BufferedReader(new
+InputStreamReader(System.in));
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new Problem().run();
+	}		
+	static String[] ReadLn() {
+		String[] tokens = null;
+		try {
+			String line = reader_.readLine();
+			String REGEX_WHITESPACE = "\\s+";
+			String cleanLine = line.trim().replaceAll(REGEX_WHITESPACE, " ");
+			tokens = cleanLine.split(REGEX_WHITESPACE);			
+		} catch (Exception e) {}
+		return tokens;
+	}
+}
+
+class Problem implements Runnable {
+	long CACHE_SIZE = 65536;
+	private final long[] cache_ = new long[(int) CACHE_SIZE];
+	/**
+	 * Compute cycle length for a single number
+	 *
+	 * @param n number for which we find cycle length
+	 * @return cycle length
+	 */	
+	long cycleLen(long n) {
+		long len = 1;
+		if (n != 1) {
+			len = getFromCache(n);
+			if (len == 0) { //not yet in cache
+				// Recursively compute and store all intermediate values of cycle length
+				if ((n & 1) == 0) {
+					len = 1 + cycleLen(n >> 1);
+				} else {
+					len = 1 + cycleLen(n * 3 + 1);
+				}
+				putInCache(n, len);
+			}
+		}
+		return len;
+	}
+	
+	void putInCache(long n, long len) {
+		if(n < CACHE_SIZE) {
+			cache_[(int)n] = len;
+		}
+	}
+	
+	long getFromCache(long n) {
+		long result = 0;
+		if(n < CACHE_SIZE) {
+			result = cache_[(int)n];
+ 		}
+		return result;
+	}
+	
+	/**
+	 * Find max cycle on interval
+	 *
+	 * @param from interval start
+	 * @param to interval end
+	 * @return max cycle
+	 */
+	Long maxCycle(Long from, Long to) {
+		Long result = 0L;
+		Long cycle = 0L;
+		// Get all values of cycle length on the interval and put these
+values into a sorted set
+		for (long i = from; i <= to; i++) {
+			cycle = cycleLen(i);
+			if (cycle > result)
+				result = cycle;
+		}
+		return result;
+	}
+	
+	public void run() {
+		String[] tokens = null;
+		long from, to, result = 0;
+		long arg1, arg2 = 0;
+		while ((tokens = Main.ReadLn()) != null) {
+			if (tokens.length == 2) {
+				arg1 = new Long(tokens[0]).longValue();
+				arg2 = new Long(tokens[1]).longValue();
+				from = (arg1 <= arg2) ? arg1 : arg2;
+				to = (arg2 >=  arg1 ) ? arg2 : arg1;
+				result = maxCycle(from, to);
+				out(arg1+" "+arg2+" "+result);
+			}
+		}
+	}
+	
+	static void out(String msg) {
+		System.out.println(msg);
+	}	
+	
+}
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110414/6addf7a9/attachment.htm>
+

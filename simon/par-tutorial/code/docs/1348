@@ -1,0 +1,26 @@
+From jwlato at gmail.com  Thu Aug 25 02:31:32 2011
+From: jwlato at gmail.com (John Lato)
+Date: Thu, 25 Aug 2011 01:31:32 +0100
+Subject: [Haskell-cafe] a minor bug (memory leak) in ListLike package
+In-Reply-To: <CA+u6gbxBQbYsemAfigqLbv+8BETgH-aKusWiP45eM-Sq2nkFLA@mail.gmail.com>
+References: <4E544F7D.8030401@gmail.com>
+	<CA+u6gbzyx=_d6BbGtZ86GYpfDx3jg8o6zpM8Tcu3958wPpOffg@mail.gmail.com>
+	<CALoEywMxxgsZaC9CqgfT7ztgdkV-s3of_UtHsRYj5v1k6paMRA@mail.gmail.com>
+	<CA+u6gbxBQbYsemAfigqLbv+8BETgH-aKusWiP45eM-Sq2nkFLA@mail.gmail.com>
+Message-ID: <CAJ727GgY2sNfvJCN7p4ez4p3SJNQ3Sn87Tocv7wJnQYCAmYw7Q@mail.gmail.com>
+
+On Wed, Aug 24, 2011 at 7:47 AM, Ivan Lazar Miljenovic
+<ivan.miljenovic at gmail.com> wrote:
+>
+> I was just trying to remember some of the tricks Daniel Peebles (aka
+> {co}pumpkin) used to do in #haskell with Data.List.genericLength.
+> I've never really used ListLike, but was just trying to guess why the
+> default implementation was as it is.
+
+Unfortunately I can't answer this either (although I can make a good
+guess); it's from John Goerzen's original code.  And really, any
+thanks for ListLike should go to him; he did all the work.
+
+John L.
+
+

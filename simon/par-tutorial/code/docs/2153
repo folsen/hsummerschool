@@ -1,0 +1,27 @@
+From andrew at operationaldynamics.com  Wed Dec 21 03:05:18 2011
+From: andrew at operationaldynamics.com (Andrew Cowie)
+Date: Wed, 21 Dec 2011 13:05:18 +1100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <CAL3m8eBx2=RNZJfqBSp=Bds4GXeu8vvAfXR_CPkPGJ+HZ-1-Xg@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+	<CAL3m8eBx2=RNZJfqBSp=Bds4GXeu8vvAfXR_CPkPGJ+HZ-1-Xg@mail.gmail.com>
+Message-ID: <1324433118.2665.6.camel@turminder-xuss.roaming.operationaldynamics.com>
+
+On Tue, 2011-12-20 at 16:53 -0500, Matthew Farkas-Dyck wrote:
+> Two of three ain't bad (^_~)
+
+Now we just need ? to replace \, ? to replace ->, and ? to replace /=
+(which still looks like division assignment no matter how hard I squint
+my eyes. 25 years of C and C derived languages is hard to forget).
+
+Hey, forget replacing, wouldn't it be wonderful if the compiler would
+just accept them as synonyms?
+
+AfC
+Sydney
+
+
+
+

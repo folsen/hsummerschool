@@ -1,0 +1,48 @@
+From colinpauladams at googlemail.com  Tue Apr 26 07:23:37 2011
+From: colinpauladams at googlemail.com (Colin Adams)
+Date: Tue, 26 Apr 2011 06:23:37 +0100
+Subject: [Haskell-cafe] Haskell from SML - referrential Transparency?!
+In-Reply-To: <BANLkTimre4qAah9rQdOmGO-BUzK31_KaZg@mail.gmail.com>
+References: <08EF9DA445C4B5439C4733E1F35705BAD9080AD1BB@MAIL.cs.mum.edu>
+	<201104192116.17262.daniel.is.fischer@googlemail.com>
+	<08EF9DA445C4B5439C4733E1F35705BAD9080AD1BE@MAIL.cs.mum.edu>
+	<BANLkTimre4qAah9rQdOmGO-BUzK31_KaZg@mail.gmail.com>
+Message-ID: <BANLkTikZ3=t5-BrtKFLmMGnwUHV7RbgVMA@mail.gmail.com>
+
+On 26 April 2011 00:53, Ryan Ingram <ryani.spam at gmail.com> wrote:
+
+> I've been working on Haskell for quite a while and it's not too often that
+> a beginner shows me a new trick--this trick with trace seems really cool and
+> I hadn't seen it before.
+>
+> f x | trace ("f " ++ show x) False = undefined
+> f ... -- rest of regular definition
+>
+> Makes it really easy to add the trace and then later comment it out.  One
+> problem I always have with traces the usual way is that adding/removing them
+> is kind of annoying--it can change the indentation of your code, etc.  So
+> this trick is really useful!
+>
+
+Yes. It would be much better if trace were a primitive, whose semantics were
+to ignore the first argument and yield the second argument as a value. But
+these semantics would be changed by supplying an argument to the runtime (so
+you could turn tracing on-and-off between runs).
+
+Actually, this still isn't very convenient. Better would be to have another
+String argument - the trace key. Then the runtime argument would list those
+trace keys for which tracing should be performed.
+
+
+This way you never have to edit the code to add and remove tracing (though
+you may want to remove many trace statements when you are convinced the code
+is thoroughly debugged).
+-- 
+Colin Adams
+Preston, Lancashire, ENGLAND
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110426/da604540/attachment.htm>
+

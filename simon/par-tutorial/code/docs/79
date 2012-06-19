@@ -1,0 +1,61 @@
+From daniel.is.fischer at googlemail.com  Sun Apr  3 21:55:32 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sun, 3 Apr 2011 21:55:32 +0200
+Subject: [Haskell-cafe] Haskell programs as specifications
+In-Reply-To: <4D98C9AE.5030200@dit.ie>
+References: <4D987E66.1070902@dit.ie>
+	<201104031639.10251.daniel.is.fischer@googlemail.com>
+	<4D98C9AE.5030200@dit.ie>
+Message-ID: <201104032155.33115.daniel.is.fischer@googlemail.com>
+
+On Sunday 03 April 2011 21:25:34, Patrick Browne wrote:
+> Daniel,
+> I think that the definition of other in Link makes bi-directional travel
+> possible in prog1. The function other takes an edge and the first node
+> and returns the other (second) node of that edge. So we can begin our
+> journey at the end and arrive at the start
+> 
+> other (Edge (Node "end") (Node "start")) (Node "end")
+>  =gives=>  Node "start"
+> 
+> Or we can begin at the start and end at the end.
+> 
+> other (Edge (Node "start") (Node "end")) (Node "start")
+>   =gives=>  Node "end"
+> 
+> So prog1 allows a car to go in both directions.
+
+If you have edges in both directions, yes.
+But that's not the point for t1.
+In t1, you only have (Edge start end), and a car located at start.
+Then you (try to) move the car along that edge and check whether it is 
+afterwards located at end.
+other (Edge start end) start =gives=> end, for both, one-way and two-way 
+roads, so the move yields (Car end), its location is end and t1 == True.
+
+
+> 
+> Pat
+> 
+> On 03/04/2011 15:39, Daniel Fischer wrote:
+> > On Sunday 03 April 2011 16:04:22, Patrick Browne wrote:
+> >> Hi,
+> >> Attached are two programs that represent one-way and two-way traffic
+> >> on a road. I can get the programs to produce reasonable results that
+> >> match our intuitive ideas of roads.
+> >> However, I have 2 question about the programs:
+> >> 
+> >> 1)I cannot get the result suggested by the author that t1 should give
+> >> true in prog1 and false in prog2.
+> > 
+> > Only took a short look, but that'd probably be because it's wrong, t1
+> > should give True for both.
+> > You have a road r from a to b and a car c at a. Then after you move
+> > the car along the road, it will be located at b, regardless of
+> > whether it's a one- way road or traffic may flow in both directions.
+> 
+> This message has been scanned for content and viruses by the DIT
+> Information Services E-Mail Scanning Service, and is believed to be
+> clean. http://www.dit.ie
+
+

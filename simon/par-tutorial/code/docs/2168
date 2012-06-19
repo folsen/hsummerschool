@@ -1,0 +1,31 @@
+From felipe.lessa at gmail.com  Wed Dec 21 10:00:29 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Wed, 21 Dec 2011 07:00:29 -0200
+Subject: [Haskell-cafe] OOM when linking, increasingly a problem
+In-Reply-To: <20111221060645.GB3364@ohann>
+References: <20111221060645.GB3364@ohann>
+Message-ID: <CANd=OGF0O0T-4CPMB+oFvB3hKFkk49H1-hZZUxPujenCzbRzKQ@mail.gmail.com>
+
+On Wed, Dec 21, 2011 at 4:06 AM, Magnus Therning <magnus at therning.org> wrote:
+> I've started to run out of memory when linking certain packages. ?The
+> culprits at the moment are crypto-api (Crypto.CPoly) and
+> Agda-executable.
+[snip]
+> crypto-api is a library package, so I some similar trick isn't really
+> a possibility there :( ?Is there anything I can do about this?
+
+That module is something I really hate, since every time I develop
+something that uses any form of HTTP there's a package that indirectly
+pulls crypto-api.  Since there are many times where I use cabal-dev or
+virthual-env, the party begins!
+
+So I guess you could e-mail crypto-api's maintainer and express your
+dissatisfaction?  crypto-api is meant to be a core package in
+Haskell's cryptography world, this situation is far from ideal.
+
+Cheers,
+
+-- 
+Felipe.
+
+

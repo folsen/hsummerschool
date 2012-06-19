@@ -1,0 +1,34 @@
+From bertram.felgenhauer at googlemail.com  Wed Apr 13 14:31:10 2011
+From: bertram.felgenhauer at googlemail.com (Bertram Felgenhauer)
+Date: Wed, 13 Apr 2011 14:31:10 +0200
+Subject: [Haskell-cafe] Generating random graph
+In-Reply-To: <BANLkTikuGdF_zEOSZ23S=W8QgmmAtWzJeA@mail.gmail.com>
+References: <BANLkTikuGdF_zEOSZ23S=W8QgmmAtWzJeA@mail.gmail.com>
+Message-ID: <20110413123110.GA2897@24f89f8c-e6a1-4e75-85ee-bb8a3743bb9f>
+
+Hi Mitar,
+
+> I have made this function to generate a random graph for
+> Data.Graph.Inductive library:
+> 
+> generateGraph :: Int -> IO (Gr String Double)
+> generateGraph graphSize = do
+>   when (graphSize < 1) $ throwIO $ AssertionFailed $ "Graph size out
+> of bounds " ++ show graphSize
+>   let ns = map (\n -> (n, show n)) [1..graphSize]
+>   es <- fmap concat $ forM [1..graphSize] $ \node -> do
+>     nedges <- randomRIO (0, graphSize)
+>     others <- fmap (filter (node /=) . nub) $ forM [1..nedges] $ \_ ->
+> randomRIO (1, graphSize)
+>     gen <- getStdGen
+
+Others have already remarked that you could implement this as a pure
+function. However, the mistake is the use of  getStdGen  here, which
+is (almost?) never what you need: two consecutive valls of getStdGen
+will return the same generator. You should call newStdGen  instead.
+
+Best regards,
+
+Bertram
+
+

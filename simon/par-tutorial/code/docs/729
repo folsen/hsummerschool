@@ -1,0 +1,81 @@
+From caseyh at istar.ca  Tue Apr 26 05:50:43 2011
+From: caseyh at istar.ca (caseyh at istar.ca)
+Date: Mon, 25 Apr 2011 23:50:43 -0400
+Subject: [Haskell-cafe] -- Extension for "Pearls of Functional Algorithm
+ Design" by Richard Bird, 2010, page 25 #Haskell
+Message-ID: <20110425235043.1215658agj1unp5f@webmail.uniserve.com>
+
+-- Extension for "Pearls of Functional Algorithm Design" by Richard Bird,
+-- 2010, page 25 #Haskell
+
+-- This version assumes 3 disjoint ordered sets represented as lists.
+-- So either: x<y XOR x>y
+-- Since it uses lists it is no faster than the divide and conquer approach.
+
+-- I might try to convert this version to sorted arrays for
+-- O(log|X|+log|Y|+log|Z|) performance
+-- If I can figure out how to do it without suffering from "indexitis".
+
+
+
+smallest3'' :: Ord a => Int -> ([a], [a], [a]) -> a
+
+smallest3'' k ([],[],ts) = ts !! k
+smallest3'' k (zs,[],[]) = zs !! k
+smallest3'' k ([],ws,[]) = ws !! k
+
+smallest3'' k ([],ws,ts) = smallest'' k (ws,ts)
+smallest3'' k (zs,[],ts) = smallest'' k (zs,ts)
+smallest3'' k (zs,ws,[]) = smallest'' k (zs,ws)
+
+smallest3'' k (zs,ws,ts) =
+~~~~case (a<b, b<c, a<c) of
+~~~~~~(True, True, True)    -> smallest3h'' k  
+((zs,p,ys),(ws,q),(ts,o,rs)) -- a<b<c
+~~~~~~(True, False, True)   -> smallest3h'' k  
+((zs,p,ys),(ts,o),(ws,q,us)) -- a<c<b
+~~~~~~(False, True, True)   -> smallest3h'' k  
+((ws,q,vs),(zs,p),(ts,o,rs)) -- b<a<c
+~~~~~~(False, True, False)  -> smallest3h'' k  
+((ws,q,vs),(ts,o),(zs,p,xs)) -- b<c<a
+~~~~~~(True, False, False)  -> smallest3h'' k  
+((ts,o,ss),(zs,p),(ws,q,us)) -- c<a<b
+~~~~~~(False, False, False) -> smallest3h'' k  
+((ts,o,ss),(ws,q),(zs,p,xs)) -- c<b<a
+
+~~~~where
+~~~~~~p = (length zs) `div` 2
+~~~~~~q = (length ws) `div` 2
+~~~~~~o = (length ts) `div` 2
+
+~~~~~~(xs, a : ys)  = splitAt p zs
+~~~~~~(us, b : vs)  = splitAt q ws
+~~~~~~(rs, c : ss)  = splitAt o ts
+
+~~~~~~smallest3h'' k ((zs,p,ys),(ws,q),(ts,o,rs)) =
+~~~~~~~~case (k<=p+q+o) of
+~~~~~~~~~~(True)    -> smallest3'' k (zs,ws,rs)
+~~~~~~~~~~(False)   -> smallest3'' (k-p-1) (ys,ws,ts)
+
+
+
+
+smallest'' :: Ord a => Int -> ([a], [a]) -> a
+smallest'' k ([],ws) = ws !! k
+smallest'' k (zs,[]) = zs !! k
+smallest'' k (zs,ws) =
+~~~~case (a<b, k<=p+q) of
+~~~~~~(True, True)  -> smallest'' k (zs,us)
+~~~~~~(True, False) -> smallest''(k-p-1) (ys,ws)
+~~~~~~(False, True) -> smallest'' k (xs,ws)
+~~~~~~(False, False)-> smallest''(k-q-1) (zs,vs)
+~~~~where
+~~~~~~p = (length zs) `div` 2
+~~~~~~q = (length ws) `div` 2
+~~~~~~(xs, a : ys)  = splitAt p zs
+~~~~~~(us, b : vs)  = splitAt q ws
+
+
+
+
+

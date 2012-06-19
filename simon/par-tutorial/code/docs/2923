@@ -1,0 +1,52 @@
+From cdsmith at gmail.com  Thu Feb 10 17:04:30 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Thu, 10 Feb 2011 09:04:30 -0700
+Subject: [Haskell-cafe] [Cabal-devel] Cabal && license combinations
+In-Reply-To: <8739nw9v7a.fsf@malde.org>
+References: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+	<1297178086.2402.5.camel@godel>
+	<AANLkTin-FnLkMpjvPSAOGo+7gS8UWhT2t7GdBiPn1K-u@mail.gmail.com>
+	<8739nw9v7a.fsf@malde.org>
+Message-ID: <1297353870.19300.88.camel@godel>
+
+On Thu, 2011-02-10 at 08:59 +0100, Ketil Malde wrote:
+> I disagree - the linked executable must, but not the wrapper by itself.
+> It's source code, i.e. text, thus a creative work, and therefore
+> covered by copyright - on its own.
+
+You're certainly right from a legal standpoint.  But being right doesn't
+actually matter.  The instant anyone actually compiles an application
+that uses your library, however indirectly, they are bound by the terms
+of the underlying library as well.  So your bindings are effectively
+covered by the underlying license anyway (unless you're choosing a
+license for the sake of people who will never produce any usable end
+result...)
+
+Sure you could attach yet another license; but unless you deliberately
+intend to be even more restrictive, there's no reason whatsoever to
+license the thin bindings layer differently from the library it is
+binding to.  Doing so would just be potentially misleading people about
+the licenses they need to comply with, especially when the bindings are
+to libraries that are not packaged with Cabal and do not have a uniform
+place to record their license terms.
+
+> So this may be a problem for distributions, which ship compiled and
+> linked binaries.  But generally not for authors, darcs repositories or
+> Hackage, which only ship source code.
+
+Of course it is a concern for authors!  Do you really think authors
+write libraries, and then just don't care whether potential users can
+actually use them?  If you don't expect anyone to ever link a program,
+even indirectly, against your library, then you probably shouldn't have
+bothered distributing it; but if you do expect that, then you typically
+make choices when developing an application based on what rights you
+want *those* people to have.  The reasonable expectation in Haskell is
+that they'll probably statically link; and you should read licenses of
+your dependencies, and carefully choose dependencies, accordingly.
+
+-- 
+Chris Smith
+
+
+
+

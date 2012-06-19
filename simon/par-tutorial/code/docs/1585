@@ -1,0 +1,15 @@
+From simon.hengel at wiktory.org  Thu Dec  1 17:49:47 2011
+From: simon.hengel at wiktory.org (Simon Hengel)
+Date: Thu, 1 Dec 2011 17:49:47 +0100
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+Message-ID: <20111201164947.GA12511@x200>
+
+> How to get this path in Haskell?
+Maybe FindBin or executable-path work.
+
+Cheers,
+Simon
+
+

@@ -1,0 +1,26 @@
+From gale at sefer.org  Mon Dec 12 14:10:59 2011
+From: gale at sefer.org (Yitzchak Gale)
+Date: Mon, 12 Dec 2011 15:10:59 +0200
+Subject: [Haskell-cafe] Module name space question
+In-Reply-To: <CAPTT2bYJLDkx__JRKehjiTfO-rcAQkQjnfwnR6z3gSAuHE-Y+w@mail.gmail.com>
+References: <CAPTT2bYJLDkx__JRKehjiTfO-rcAQkQjnfwnR6z3gSAuHE-Y+w@mail.gmail.com>
+Message-ID: <CAOrUaLaZaFH8hF_htPaKO1hTjRcR9wOmQ3w9yBGaOUZDqZygwg@mail.gmail.com>
+
+Christoph Breitkopf wrote:
+> If anyone wants to look at the code in question:
+> http://www.chr-breitkopf.de/comp/IntervalMap
+
+Looks interesting, thanks!
+
+> 3. Are there more wothwile operations on this data structure?
+
+Have a look at ranged sets:
+
+http://hackage.haskell.org/package/Ranged-sets
+
+Perhaps that will inspire you with some more ideas.
+
+Regards,
+Yitz
+
+

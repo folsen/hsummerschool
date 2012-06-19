@@ -1,0 +1,46 @@
+From nominolo at googlemail.com  Sun Dec 11 16:27:53 2011
+From: nominolo at googlemail.com (Thomas Schilling)
+Date: Sun, 11 Dec 2011 15:27:53 +0000
+Subject: [Haskell-cafe] Haskell Summers of Code retrospective (updated
+	for 2011)
+In-Reply-To: <CAMwO0gzH_FydogGopsE_J6t5SUrZSOjUc=CjZHHdpc8rAr2RWg@mail.gmail.com>
+References: <CAMwO0gzH_FydogGopsE_J6t5SUrZSOjUc=CjZHHdpc8rAr2RWg@mail.gmail.com>
+Message-ID: <CAOJG3uBmN1BL8_H6xfXXO6wGQ33mOO8whNb3mTpxYJ_O2YSgjw@mail.gmail.com>
+
+I would be interested in what the hold-up is with the two Cabal
+projects.  Does the work need more clean-up or is it just stuck in the
+Duncan-code-review pipeline?  If Duncan is indeed the bottleneck,
+maybe we should look into ways of taking some of the work off Duncan.
+
+On 11 December 2011 02:57, Gwern Branwen <gwern0 at gmail.com> wrote:
+> The Wheel turns, and months come and pass, leaving blog posts that
+> fade into 404s; a wind rose in Mountain View, whispering of the coming
+> Winter...
+>
+> Tonight I sat down and finally looked into the 2011 SoCs to see how
+> they turned out and judge them according to my whimsically arbitrary
+> and subjective standards:
+> http://www.gwern.net/Haskell%20Summer%20of%20Code#results-1
+>
+> They turned out pretty much as I predicted - but then I *would* say
+> that, wouldn't I?
+>
+> (Also submitted to /r/haskell for those who swing that way:
+> http://www.reddit.com/r/haskell/comments/n82ln/summer_of_code_2011_retrospective/
+> )
+>
+> --
+> gwern
+> http://www.gwern.net
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+
+-- 
+Push the envelope. Watch it bend.
+
+

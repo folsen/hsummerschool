@@ -1,0 +1,39 @@
+From ivan.miljenovic at gmail.com  Fri Feb 11 12:16:43 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Fri, 11 Feb 2011 22:16:43 +1100
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+Message-ID: <AANLkTi=2Z_vzNt6YN81=J8TeSCnz1c4_EEi1HKrAXbLL@mail.gmail.com>
+
+On 11 February 2011 22:06, C K Kashyap <ckkashyap at gmail.com> wrote:
+> Hi Folks,
+> I've come across this a few times - "In Haskell, once can prove the
+> correctness of the code" - Is this true?
+
+I'm not quite sure where you got that...
+
+But since Haskell is pure, we can also do equational reasoning, etc.
+to help prove correctness.  Admittedly, I don't know how many people
+actually do so...
+
+> I know that static typing and strong typing of Haskell eliminate a whole
+> class of problems - is that related to the proving correctness?
+> Is it about Quickcheck - if so, how is it different from having test sutites
+> in projects using mainstream languages?
+
+QuickCheck doesn't prove correctness: I had a bug that survived
+several releases tested regularly during development with a QC-based
+testsuite before it arose (as it required a specific condition to be
+satisfied for the bug to happen).  As far as I know, a testsuite - no
+matter what language or what tools/methodologies are used - for a
+non-trivial piece of work just provides reasonable degree of assurance
+of correctness; after all, there could be a bug/problem you hadn't
+thought of!
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

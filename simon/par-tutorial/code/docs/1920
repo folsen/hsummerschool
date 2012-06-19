@@ -1,0 +1,93 @@
+From paul.koerbitz at gmail.com  Wed Dec 14 11:02:45 2011
+From: paul.koerbitz at gmail.com (Paul Koerbitz)
+Date: Wed, 14 Dec 2011 11:02:45 +0100
+Subject: [Haskell-cafe] indentation blues
+In-Reply-To: <3E086548-E5C7-4426-A72B-D7900BC1144F@gaillourdet.net>
+References: <CAFrFfuGkeHEMfsitZoyaGWz=RZvuaUc8KKGK57dFdJL-kj_43w@mail.gmail.com>
+	<0d62b1a11095f003e5019c4740a5fcfd@haxaire.org>
+	<CB6B6261-5249-49A2-A921-47648377B81B@gaillourdet.net>
+	<beadf17d97e7f6a6dda563061ed149df@haxaire.org>
+	<CAFrFfuGbsnf+MjGDtjrs-CWcZH7yqe1mO+p9EcsA_14YRxBitQ@mail.gmail.com>
+	<3E086548-E5C7-4426-A72B-D7900BC1144F@gaillourdet.net>
+Message-ID: <CAGoS-TSExhb2p7WpqygmM4kD4y=cddTcyaB-5gweLUuXxCB3rQ@mail.gmail.com>
+
+Hello,
+
+TL;DR: If you have some time try emacs, the viper / vimpulse plugins are
+pretty good and the editor is awesome in general. Haskell indentation is
+good.
+
+I was a hardcore vim user and switched to emacs because the REPL for
+clojure was just aweful in vim. I am using the vi keybindings (viper-mode)
+and in addition vimpulse (which adds vim-like bindings on top of viper). It
+isn't a perfect vim emulation, but I would say it is good enough. All the
+keystrokes I use frequently work. The biggest frustration is that the
+viper-mode is not automatically turned on in many modes (check out
+viper-in-more-modes for that). I find the combination of emacs commands for
+the lesser used commands with vim keybings for text editing incredibly
+powerful.
+
+Apart from the keybind issues, emacs is a really awesome editor! I mean you
+will spend time at first learning and customizing it, but I wish I would
+have started sooner! There are a lot of features that are a huge leg up
+compared to vim (I love how 'files open' is distinct from 'file(s)
+currently shown in buffer(s)' for example) and if you want something it is
+probably out there.
+
+cheers
+Paul
+
+On Tue, Dec 13, 2011 at 12:14, Jean-Marie Gaillourdet
+<jmg at gaillourdet.net>wrote:
+
+>
+> On 13.12.2011, at 11:43, Martin DeMello wrote:
+>
+> > On Tue, Dec 13, 2011 at 2:34 AM, Adrien Haxaire <adrien at haxaire.org>
+> wrote:
+> >>
+> >>> Regarding, your question whether this is worth switching from vim to
+> >>> emacs. I've been using both editors for some years and I very much
+> >>> doubt, that "you wouldn't spend much time learning emacs". If you are
+> >>> comfortable with vim, stick with it, unless you are interested in
+> >>> Emacs or one of its really great modes: org and auctex/reftex.
+> >>>
+> >>> Regarding, the vi emulations, I'd say they are nice should you ever
+> >>> be forced to use emacs for some time. But I don't recommend them, I've
+> >>> tried them all. They are not the real thing. Most of them are vi not
+> >>> vim emulators. And they always feel like second class citizens in
+> >>> emacs land. YMMW.
+> >>
+> >> Thanks for your feedback. I've never tried vim so I couldn't tell
+> precisely.
+> >>
+> >> I thought the emulations were nice enough to save time learning emacs.
+> If
+> >> they are second class citizens, I agree it would be wiser to stick with
+> vim
+> >> then.
+> >
+> > yeah, i was assuming the emulations were nice enough to support my vim
+> > habits too. if they aren't, not even a good haskell mode would make
+> > emacs comfortable enough to use given my years of ingrained vim.
+>
+> I am not saying they are bad, but when I returned to emacs after two years
+> of using vim, I was disappointed by their functionality and especially by
+> the integration between third-party emacs-modes and the vi emulations.
+> Though, I believe there is some work on new vim emulators. I am not sure on
+> their status. They are probably no non-brainer option, yet.
+>
+> What I really liked about Claus Reinke's haskell-mode for vim was the
+> ability to insert update statements with one command.
+>
+> Cheers,
+>  Jean
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111214/cd385a79/attachment.htm>
+

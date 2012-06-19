@@ -1,0 +1,28 @@
+From v.dijk.bas at gmail.com  Wed Apr 20 16:07:56 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Wed, 20 Apr 2011 16:07:56 +0200
+Subject: [Haskell-cafe] Need comments on a libusb asynchronous
+	select/poll loop
+In-Reply-To: <BANLkTi=euuEpTddGRPw8rZ0rrs5=Z-wzPg@mail.gmail.com>
+References: <20110419130604.GA26986@X52D.localdomain>
+	<BANLkTikQk4cg0poLVscuj2WW+ORNNNwm2g@mail.gmail.com>
+	<20110420101624.GA2636@X52D.localdomain>
+	<BANLkTi=euuEpTddGRPw8rZ0rrs5=Z-wzPg@mail.gmail.com>
+Message-ID: <BANLkTikzF1+FTx5b74wettyKMVdF8UHcVQ@mail.gmail.com>
+
+On 20 April 2011 14:10, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+> I haven't implemented asynchronous transfers yet that actually
+> transfer user data...
+
+And now I have:
+
+asynchronously implemented readControl and writeControl:
+https://github.com/basvandijk/usb/blob/async/System/USB/Internal.hs#L1360
+
+Next up are readBulk, writeBulk, readInterrupt and writeInterrupt.
+
+When that's done I will begin with isochronous transfers.
+
+Bas
+
+

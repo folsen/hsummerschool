@@ -1,0 +1,21 @@
+From roma at ro-che.info  Tue Dec 20 08:06:44 2011
+From: roma at ro-che.info (Roman Cheplyaka)
+Date: Tue, 20 Dec 2011 09:06:44 +0200
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+Message-ID: <20111220070644.GA32105@sniper>
+
+* Alexander Solla <alex.solla at gmail.com> [2011-12-19 19:10:32-0800]
+> * Documentation that discourages thinking about bottom as a 'value'.  It's
+> not a value, and that is what defines it.
+
+In denotational semantics, every well-formed term in the language must
+have a value. So, what is a value of "fix id"?
+
+-- 
+Roman I. Cheplyaka :: http://ro-che.info/
+
+

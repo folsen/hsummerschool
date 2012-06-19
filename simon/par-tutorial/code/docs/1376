@@ -1,0 +1,21 @@
+From dagitj at gmail.com  Fri Aug 26 00:11:51 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Thu, 25 Aug 2011 15:11:51 -0700
+Subject: [Haskell-cafe] ping haskell.org timeout
+In-Reply-To: <CAFLa5WPXwUP=tGWc1ubAAa3NUhWvAYx-bhFNKydFFS1tpMO+UQ@mail.gmail.com>
+References: <CAFLa5WPXwUP=tGWc1ubAAa3NUhWvAYx-bhFNKydFFS1tpMO+UQ@mail.gmail.com>
+Message-ID: <CAJ-DSyzj92O-h=ApUKceUcQM4JOHKyJZQXwHQy8WunKjOsuynQ@mail.gmail.com>
+
+On Thu, Aug 25, 2011 at 2:39 PM, Greg Fitzgerald <garious at gmail.com> wrote:
+> "cabal update" hangs. ?"ping haskell.org" times out. ?But haskell.org and
+> hackage webpages are loading just fine. ?What's going on?
+
+Lots of servers turn off ICMP packet responses these days so ping
+isn't as reliable as it once was for detecting when a server is
+running.
+
+I'm not sure why cabal update would hang.
+
+Jason
+
+

@@ -1,0 +1,56 @@
+From ok at cs.otago.ac.nz  Mon Dec 19 04:01:30 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Mon, 19 Dec 2011 16:01:30 +1300
+Subject: [Haskell-cafe] [Alternative] summary of my understanding so far
+In-Reply-To: <02D04C33-5E50-4804-89C5-D15F0C2D4AA0@gmail.com>
+References: <E6897C72-6886-4B18-9005-E6BDA3E92D76@gmail.com>
+	<CAL3m8eDmauVuJAn_qac7U3Su0A7qMuvPjz0efd7s=coEd6H6rw@mail.gmail.com>
+	<14CB30D2-F2CF-41DF-BBFA-FF9A3923AF67@cs.otago.ac.nz>
+	<CAKFCL4X=ZhpiyMaCci6J5UAa-i-TFy_Tc+LbE37BDPHkepB0Cw@mail.gmail.com>
+	<02D04C33-5E50-4804-89C5-D15F0C2D4AA0@gmail.com>
+Message-ID: <86C92414-E423-4D48-99B7-49AA60BC77A3@cs.otago.ac.nz>
+
+
+On 19/12/2011, at 3:44 PM, Gregory Crosswhite wrote:
+> So what do you all think about my own suggestion for the documentation?
+
+It is an improvement.
+
+Documentation for a library module needs to start by telling people what
+it is for.  For a particular function, someone needs to know very quickly
+"is this what I am looking for? is this the kind of thing I _should_ have
+been looking for?"
+
+One important thing about the Monoid instance for Maybe is that
+
+	There is more than one way to turn Maybe into a Monoid.
+	One way treats Maybe a as a truncated [a] and does not
+	depend on any properties of a, it takes
+	mappend (Just x) _ = Just x
+
+	The other requires a itself to be a Monoid, and lift's
+	a's operations to Maybe a:
+	mappend (Just x) (Just y) = mappend x y
+	The latter, more interesting, case is the one implemented here.
+
+(In the same way, bounded integers like Int can be viewed as Monoids in
+at least 4 ways, only two of which are predefined in Data.Monoid.
+   mempty = minBound
+   mappend = max
+
+   mempty = maxBound
+   mappend = min
+are the other two.  In fact these apply to anything that is Bounded and Ord.)
+
+The point is not that your proposed documentation doesn't say that, but it
+doesn't say that the MonadPlus reading is a *LEGITIMATE* way to view Maybe
+as a Monoid, which happens not to have been the one chosen; also that this
+possibility that the Monoid instance you WANT might not be the one you GET
+is to me the first thing you need to understand about it.  Yes, there is a
+blanket warning about this, but it specifically mentions Num.  Whenever it
+is possible for a reasonable person to want a Monoid instance and get one
+that is not the instance s/he wanted, it's worth highlighting in the docs.
+
+
+
+

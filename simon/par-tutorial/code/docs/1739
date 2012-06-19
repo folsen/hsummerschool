@@ -1,0 +1,37 @@
+From ketil at malde.org  Wed Dec  7 21:53:59 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Wed, 07 Dec 2011 21:53:59 +0100
+Subject: [Haskell-cafe] How did iteratees get their names?
+In-Reply-To: <4EDF8474.1040502@cs.nott.ac.uk> (Henrik Nilsson's message of
+	"Wed, 07 Dec 2011 15:21:24 +0000")
+References: <CACruqwTG3fOEbwiTMohwTG8Mt-9HR=r+gHKu5BVLg0MT_JnTrQ@mail.gmail.com>
+	<20111207154812.36c674b5@angst.streitmacht.eu>
+	<4EDF8474.1040502@cs.nott.ac.uk>
+Message-ID: <87hb1c2jdk.fsf@malde.org>
+
+Henrik Nilsson <nhn at Cs.Nott.AC.UK> writes:
+
+>> Just like chatter and chattee, employer and employee, there is an
+>> iterator (usually as part of an enumerator/ee) and an iteratee.
+
+> Thanks for the attempt to explain. But I, at least, remain mystified,
+> and I agree with Douglas that the terminology is confusing.
+
+FWIW, I always thought it was a kind of pun on the iterators in OO-land.
+
+There, the iterator is a cursor-like object, and the program controls it to
+iterate over the input -- typically a collection or similar.  Iteratees
+invert this, the "program" is in the form of an iteratee, and it is
+being iterated by the input (enumerator).  
+
+So the iterator is actively controlling a passive (or reactive) input,
+while the iteratee is reactively processing an active or controlling
+input.
+
+Or something, I'm hardly an authority on this.  I hope it makes sense.
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

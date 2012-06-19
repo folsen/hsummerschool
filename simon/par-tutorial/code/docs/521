@@ -1,0 +1,31 @@
+From trebla at vex.net  Wed Apr 20 00:24:47 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Tue, 19 Apr 2011 18:24:47 -0400
+Subject: [Haskell-cafe] HXT and xhtml page encoded in cp1251
+In-Reply-To: <4DACA7D5.1040206@gmail.com>
+References: <4DACA7D5.1040206@gmail.com>
+Message-ID: <4DAE0BAF.5030105@vex.net>
+
+On 11-04-18 05:06 PM, Dmitry V'yal wrote:
+> The readDocument arrow fails with the following message:
+>
+> fatal error: encoding scheme not supported: "WINDOWS-1251"
+>
+> Can someone suggest a workaround for my use case?
+
+If you have a Handle (from file or Network for example),
+
+import System.IO(hGetContents, hSetEncoding, mkTextEncoding)
+import Text.XML.HXT.Core
+
+do e <- mkTextEncoding "WINDOWS-1251"
+    -- or "CP1251" depending on OS
+    hSetEncoding your'handle e
+    s <- hGetContents your'handle
+    t <- runX (readString [...] s >>> ...)
+    ...
+
+If you don't have a Handle but a ByteString (from Network.HTTP for 
+example), dump it into a file first, then use the above.
+
+

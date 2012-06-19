@@ -1,0 +1,45 @@
+From chrisdone at googlemail.com  Sun Aug 21 22:39:50 2011
+From: chrisdone at googlemail.com (Christopher Done)
+Date: Sun, 21 Aug 2011 22:39:50 +0200
+Subject: [Haskell-cafe] why the name lambda calculus?
+In-Reply-To: <BFBE5DB6-D4E9-4543-9F57-4576A6B7A3E6@uvm.edu>
+References: <CAGdT1gpjdu9+F6QOP0ULtrCS9JKyRT89ZorDf-2tOsavR1poOg@mail.gmail.com>
+	<BFBE5DB6-D4E9-4543-9F57-4576A6B7A3E6@uvm.edu>
+Message-ID: <CAAJHNPDWr_BxUAzOstCrkVuc0PEdsvoOLsiX3Y3SNpfSxVbUew@mail.gmail.com>
+
+IIRC Church found it easy to write on paper.
+
+On 21 August 2011 21:11, Jack Henahan <jhenahan at uvm.edu> wrote:
+> The short answer is "because Church said so". But yes, it is basically because ? is the abstraction operator in the calculus.
+>
+> Why not alpha or beta calculus? What would we call alpha and beta conversion, then? :D
+>
+> On Aug 21, 2011, at 12:37 PM, C K Kashyap wrote:
+>
+>> Hi,
+>> Can someone please tell me what is the root of the name lambda calculus? Is it just because of the symbol lambda that is used?
+>> Why not alpha or beta calculus?
+>> Regards,
+>> Kashyap
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+> Jack Henahan
+> jhenahan at uvm.edu
+> ==
+> Computer science is no more about computers than astronomy is about telescopes.
+> -- Edsger Dijkstra
+> ==
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

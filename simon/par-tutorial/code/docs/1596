@@ -1,0 +1,58 @@
+From dokondr at gmail.com  Thu Dec  1 20:47:19 2011
+From: dokondr at gmail.com (dokondr)
+Date: Thu, 1 Dec 2011 22:47:19 +0300
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAJ9AoK8q_3pLsjob_mZHjU1Jr9ZkSig-wjjJiWZXB71mxL92GQ@mail.gmail.com>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+	<CANd=OGGcwRC9FfTA8KJQyzsQBDL3YycF2MYx4hMiN7vxeBwTFg@mail.gmail.com>
+	<20111201174112.GA14096@x200>
+	<CANd=OGGXOQYrKrnw9QpDaqgjC-JGsH7jFJB8Hx-OJjCTZP7KGQ@mail.gmail.com>
+	<CAMXF=YCD8ODsmF53id9U=h+SsnuN1T8RvcvY2htwBgRFGgW85A@mail.gmail.com>
+	<CAJ9AoK8q_3pLsjob_mZHjU1Jr9ZkSig-wjjJiWZXB71mxL92GQ@mail.gmail.com>
+Message-ID: <CAMXF=YDSCykcE9i-31ASqvzT-dJwOj0YbeRg_v77FVY98WRJcA@mail.gmail.com>
+
+To be precise, $0 always contains the path to the program called. You are
+right, this path will change depending on location from which the program
+was called. So $0 is OK for my case, while current directory  is unrelated.
+
+Try this:
+
+#!/bin/sh
+
+echo "Arg 0: $0"
+echo "All Parameters:  [$@]"
+
+Again, any way to get the same functionality in GHC?
+
+
+On Thu, Dec 1, 2011 at 10:32 PM, Giovanni Tirloni <gtirloni at sysdroid.com>wrote:
+
+> On Thu, Dec 1, 2011 at 5:26 PM, dokondr <dokondr at gmail.com> wrote:
+>
+>> On the contrary, standard shell variable $0 - contains a full path to the
+>> program location in the directory structure, no matter from what directory
+>> the program was called.
+>>
+>>
+> Are you sure?
+>
+> $ zero.sh
+> ./zero.sh
+>
+> $ ./zero.sh
+> ./zero.sh
+>
+> $ /home/gtirloni/zero.sh
+> /home/gtirloni/zero.sh
+>
+>
+>
+> --
+> Giovanni
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111201/7ee71930/attachment.htm>
+

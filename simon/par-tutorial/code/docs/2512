@@ -1,0 +1,49 @@
+From ivanperezdominguez at gmail.com  Fri Dec 30 22:56:39 2011
+From: ivanperezdominguez at gmail.com (Ivan Perez)
+Date: Fri, 30 Dec 2011 22:56:39 +0100
+Subject: [Haskell-cafe] Level of Win32 GUI support in the Haskell
+	platform
+In-Reply-To: <loom.20111230T054042-612@post.gmane.org>
+References: <4EFD1992.60702@blueyonder.co.uk>
+	<loom.20111230T054042-612@post.gmane.org>
+Message-ID: <CACZKWEJTvKYi6L5DsuknaP=-i40xZWCFqD_DKqAN+yViu08ovg@mail.gmail.com>
+
+I'm using Gtk2hs in windows (and linux) with no big problems. Cairo also works.
+Glade does not allow me to use accents in the user interfaces on windows, but
+otherwise works ok.
+
+I haven't tried wx on windows. It works on linux and it provides a
+more "natural" interface
+(gtk will look like gtk also in windows). I found wx a bit limited (I
+couldn't dock my app into
+the traybar), but it was enough to write a sudoku UI.
+
+I'm releasing apps using gtk2hs on windows and my clients haven't complained so
+far. You'll need to strip your apps if you are planning to distribute
+them, otherwise you'll
+carry more than 15MB with every executable.
+
+Cheers,
+Ivan.
+
+On 30 December 2011 05:49, Mikhail Glushenkov
+<the.dead.shall.rise at gmail.com> wrote:
+> Hi,
+>
+> Steve Horne <sh006d3592 <at> blueyonder.co.uk> writes:
+>
+>>
+>> I've been for functions like GetMessage, TranslateMessage and
+>> DispatchMessage in the Haskell Platform Win32 library - the usual
+>> message loop stuff - and not finding them. Hoogle says "no results found".
+>
+> Haskell Platform includes the Win32 package which provides access to these
+> functions. Hoogle doesn't index Windows-only packages, unfortunately.
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

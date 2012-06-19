@@ -1,0 +1,64 @@
+       From (blog.ezyang.com), scored 19 with 3 comments.
+       Read on [22]reddit.
+       Read the [23]original post.
+
+    Top StackOverflow Questions
+
+     * [24]Difference between State, ST, IORef, and MVar
+       votes: 16, answers: 3
+
+     * [25]Duality approaches in functional programming
+       votes: 11, answers: 1
+
+     * [26]What are the main differences of language features between
+       Haskell and the functional part of F#? [closed]
+       votes: 9, answers: 5
+
+     * [27]Using the Maybe Monad in "reverse" in Haskell
+       votes: 9, answers: 3
+
+     * [28]How to reason about space complexity in Haskell
+       votes: 8, answers: 1
+
+About the Haskell Weekly News
+
+   To help create new editions of this newsletter, please send stories to
+   dstcruz at gmail.com. I'm in dire need of finding good "quotes of the
+   week". If you happen to come across any, please don't hesitate to send
+   it along.
+
+   Until next time,
+   Daniel Santa Cruz
+
+References
+
+   1. http://haskell.org/
+   2. http://article.gmane.org/gmane.comp.lang.haskell.general/18636
+   3. http://article.gmane.org/gmane.comp.lang.haskell.cafe/87815
+   4. http://www.reddit.com/r/haskell/comments/ghs1x/typeclassopedia_second_edition_call_for/
+   5. http://byorgey.wordpress.com/2011/04/03/call-for-contributions-second-edition-of-the-typeclassopedia/
+   6. http://www.reddit.com/r/haskell/comments/gj7ud/highperformance_web_applications_in_haskell/
+   7. http://qconlondon.com/dl/qcon-london-2011/slides/GregoryCollins_HighPerformanceWebApplicationsInHaskell.pdf
+   8. http://www.reddit.com/r/haskell/comments/gjb52/haskell_for_the_cloud_new_paper_by_jeff_epstein/
+   9. http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/
+  10. http://www.reddit.com/r/haskell/comments/ghtlf/yhc_is_dead/
+  11. http://yhc06.blogspot.com/2011/04/yhc-is-dead.html
+  12. http://www.reddit.com/r/haskell/comments/gk1tp/what_is_a_functional_language_robert_harper/
+  13. http://existentialtype.wordpress.com/2011/03/16/what-is-a-functional-language/
+  14. http://www.reddit.com/r/haskell/comments/ghdvn/functions_are_values/
+  15. http://existentialtype.wordpress.com/2011/04/02/functions-are-values/
+  16. http://www.reddit.com/r/haskell/comments/gir70/understanding_practical_api_design_static_typing/
+  17. http://blog.tmorris.net/understanding-practical-api-design-static-typing-and-functional-programming/
+  18. http://www.reddit.com/r/haskell/comments/ghs81/platform_robots_in_nikki_and_the_robots_a_haskell/
+  19. http://joyridelabs.de/blog/?p=612
+  20. http://www.reddit.com/r/haskell/comments/ghrmv/a_model_for_denotative_continuoustime_programming/
+  21. http://creativelad.wordpress.com/2011/04/03/dctp-model/
+  22. http://www.reddit.com/r/haskell/comments/gk1w4/type_kata_local_data_type/
+  23. http://blog.ezyang.com/2011/04/type-kata-local-data-type/
+  24. http://stackoverflow.com/questions/5545517/difference-between-state-st-ioref-and-mvar
+  25. http://stackoverflow.com/questions/5557810/duality-approaches-in-functional-programming
+  26. http://stackoverflow.com/questions/5541487/what-are-the-main-differences-of-language-features-between-haskell-and-the-functi
+  27. http://stackoverflow.com/questions/5606228/using-the-maybe-monad-in-reverse-in-haskell
+  28. http://stackoverflow.com/questions/5552433/how-to-reason-about-space-complexity-in-haskell
+
+

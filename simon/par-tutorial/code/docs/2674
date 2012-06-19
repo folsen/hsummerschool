@@ -1,0 +1,61 @@
+From dan.doel at gmail.com  Thu Feb  3 23:42:49 2011
+From: dan.doel at gmail.com (Dan Doel)
+Date: Thu, 3 Feb 2011 17:42:49 -0500
+Subject: [Haskell-cafe] ($) not as transparent as it seems
+In-Reply-To: <AANLkTimp6PhnOULhyo7ZbEc9ZsCJiX=jUhkRwpaHdt=n@mail.gmail.com>
+References: <4D4B1396.6070501@uni-bonn.de>
+	<AANLkTin-M1Z8Ee-fSEarauMZC99Gv8wsFviQDK4WtBoe@mail.gmail.com>
+	<AANLkTimp6PhnOULhyo7ZbEc9ZsCJiX=jUhkRwpaHdt=n@mail.gmail.com>
+Message-ID: <201102031742.49402.dan.doel@gmail.com>
+
+On Thursday 03 February 2011 5:12:54 PM Tim Chevalier wrote:
+> On Thu, Feb 3, 2011 at 2:03 PM, Luke Palmer <lrpalmer at gmail.com> wrote:
+> > This is probably a result of strictness analysis.  error is
+> > technically strict, so it is reasonable to optimize to:
+> > 
+> >    let e = error "foo" in e `seq` error e
+> 
+> Yes, and you can see this in the Core code that Don posted: in version
+> (A), GHC optimized away the outer call to error. But in version (B),
+> the demand analyzer only knows that ($) is strict in its first
+> argument -- it's not strict in its second. So it's not obviously safe
+> to do the same optimization: the demand analyzer doesn't "look
+> through" higher-order function arguments IIRC. (You can confirm this
+> for yourself if you also want to read the demand analyzer output.)
+> 
+> If ($) were getting inlined, the code would look the same coming into
+> demand analysis in both cases, so you wouldn't see a difference. So
+> I'm guessing you're compiling with -O0.
+
+Whatever is going on, it has to be active during ghci, because all these 
+differences can be seen during interpretation (in 7.0.1, at least).
+
+  Prelude> error (error "foo")
+  *** Exception: foo
+  Prelude> error $ error "foo"
+  *** Exception: *** Exception: foo
+  Prelude> let g :: (a -> b) -> a -> b ; g f x = f x in g error (error "foo")
+  *** Exception: foo
+  Prelude> let g :: (a -> b) -> a -> b ; g f x = f x
+  Prelude> g error (error "foo")
+  *** Exception: *** Exception: foo
+  Prelude> let foo = error "foo" in error foo
+  *** Exception: foo
+  Prelude> let foo = error "foo"
+  Prelude> error foo
+  *** Exception: *** Exception: foo
+
+Actually compiling seems to remove the difference in 7.0.1, at least, because 
+the output is always:
+
+  Foo: foo
+
+regardless of ($) or not ('fix error' hangs without output as well, which 
+isn't what I thought would happen).
+
+Anyhow, that rules out most general-purpose optimizations (including 
+strictness analysis, I thought).
+
+- Dan
+
+

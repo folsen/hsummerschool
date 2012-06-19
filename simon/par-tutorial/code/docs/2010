@@ -1,0 +1,56 @@
+From thomas.thorne21 at gmail.com  Fri Dec 16 11:34:03 2011
+From: thomas.thorne21 at gmail.com (Tom Thorne)
+Date: Fri, 16 Dec 2011 10:34:03 +0000
+Subject: [Haskell-cafe] SMP parallelism increasing GC time dramatically
+In-Reply-To: <CAHFo2uqbRtxXoHkZm0mJRoCRyrNY9FvBRmf9Aw8Bhk-Q-bEOYg@mail.gmail.com>
+References: <CAJdww1=DM+hvU97zdR_Jg01-Jqaw9jE9cJ8Brdc512C92p-LwQ@mail.gmail.com>
+	<CACYs5AY8KYBoCJwdjbWf4hVTVwufcUsdGAzVJR_76qo+WfmRQQ@mail.gmail.com>
+	<CAJdww1kHV9Ns5abq=At=wBhL_9CazACfRfLub-f7D7CLdE2SUg@mail.gmail.com>
+	<CAK-tuPbka4K6kdRWwK9ET+LqfSqf7h9qcmPjmq6Z9Yx2ZN9iww@mail.gmail.com>
+	<CAJdww1m2oAchxDZrwFqi6Vk6_-kuGB7nFVjcVROLqgFND5evpA@mail.gmail.com>
+	<CAJdww1=iLB+M-HiYNvU+mZr9446fw0j-KKkRETuLJhxhCzhX2g@mail.gmail.com>
+	<CAOJG3uC9zyNvhd=1rnYOi8Z1dCV2n7Z08WJAK1kQdfpZCe=hAQ@mail.gmail.com>
+	<CAJdww1=cfRuVEGtg-Qdcf2pPc0gvxGkN1GzZ8z5bQ6cbxBypZg@mail.gmail.com>
+	<CAHFo2uqbRtxXoHkZm0mJRoCRyrNY9FvBRmf9Aw8Bhk-Q-bEOYg@mail.gmail.com>
+Message-ID: <ECDE7D92C28048EEB321CB7DBE101751@gmail.com>
+
+Hi, 
+
+I can't remember if it was threadscope that crashed or the RTS, since I was also having segfaults in the RTS because of this bug, that is fixed in 7.2.2: http://hackage.haskell.org/trac/ghc/ticket/5552
+
+I successfully used threadscope by running my code for fewer iterations to produce a smaller log, and it was helpful to make sure I was dividing work equally between the threads.
+
+I think I still have the log file that was about 1.8GB so I will try running threadscope on it and see what happens.
+
+The performance problems I was having turned out to be fixed completely by changing the GC options passed to the RTS.
+
+thanks!
+
+Tom 
+
+
+On Friday, 16 December 2011 at 09:20, Mikolaj Konarski wrote:
+
+> On Mon, Oct 10, 2011 at 15:55, Tom Thorne <thomas.thorne21 at gmail.com (mailto:thomas.thorne21 at gmail.com)> wrote:
+> > Yes I will try to run threadscope on it, I tried it before and the event log output produced about 1.8GB, and then crashed.
+> 
+> 
+> Hi Tom,
+> 
+> I'm one of the TS/ghc-events hackers and I'd like to learn more,
+> fix it or at least put it on the TS/ghc-events issue tracker
+> (http://trac.haskell.org/ThreadScope). Could you help me reproduce
+> the problem? Did ThreadScope crash or RTS? Which versions?
+> Was it 1.8GB of the log file or RAM? Did you succeed eventually?
+> Any other TS feedback?
+> 
+> Thank you,
+> Mikolaj
+> 
+> 
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111216/1458f699/attachment.htm>
+

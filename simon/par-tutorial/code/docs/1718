@@ -1,0 +1,34 @@
+From ekcburak at hotmail.com  Wed Dec  7 09:51:56 2011
+From: ekcburak at hotmail.com (Burak Ekici)
+Date: Wed, 7 Dec 2011 08:51:56 +0000
+Subject: [Haskell-cafe] Neither of the sparks are converted into OS threads
+ but parallelization happens surprisingly!!!
+Message-ID: <COL123-W176C01AA51AD68F08BCC6ACDBB0@phx.gbl>
+
+
+Dear List,
+
+I have a point misunderstood!
+
+I am using second generation strategies of Haskell to parallelize some 
+number of algorithms in Haskell. 
+
+The missing point here is that:
+In some cases, neither of created sparks are converted into OS threads,
+but parallelization happens surprisingly, when I use threadscope to see 
+what had happened during the evaluation.
+
+What happened to me was that 2 sparks were created one of which was pruned, 
+none of which was converted into OS threads and the last one was missing, however,
+parallelism happened!!! I wonder what is the reason for this?
+
+Could someone aware, please shed light on the issue?
+Thanks in advance.
+
+Saluti,
+Burak.
+ 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111207/63dc5729/attachment.htm>
+

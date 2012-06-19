@@ -1,0 +1,22 @@
+From jake.mcarthur at gmail.com  Tue Apr 19 21:28:49 2011
+From: jake.mcarthur at gmail.com (Jake McArthur)
+Date: Tue, 19 Apr 2011 14:28:49 -0500
+Subject: [Haskell-cafe] Haskell from SML - referrential Transparency?!
+In-Reply-To: <08EF9DA445C4B5439C4733E1F35705BAD9080AD1BB@MAIL.cs.mum.edu>
+References: <08EF9DA445C4B5439C4733E1F35705BAD9080AD1BB@MAIL.cs.mum.edu>
+Message-ID: <BANLkTikofCnTg4u+ceLqQ4afjJKEfYBN+w@mail.gmail.com>
+
+You can think of IO actions as values (which don't change)
+representing imperative programs to execute (which may have different
+results each time you execute them). So, `fa fb fc` represents the
+exact same value as `fa fb fc`, but if you execute that value multiple
+times you may get different results. Here are a couple safe ways to
+execute IO actions:
+
+* From your `main` function
+* In GHCi (if the value you give it is an action, it *executes* it,
+otherwise it *prints* it)
+
+- Jake
+
+

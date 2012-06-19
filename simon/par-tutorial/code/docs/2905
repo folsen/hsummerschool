@@ -1,0 +1,279 @@
+From dstcruz at gmail.com  Thu Feb 10 03:15:30 2011
+From: dstcruz at gmail.com (Daniel Santa Cruz)
+Date: Wed, 9 Feb 2011 21:15:30 -0500
+Subject: [Haskell-cafe] Haskell Weekly News: Issue 168 - February 09, 2011
+Message-ID: <AANLkTikesz8g31N9ipfE+=CfL+zGkgw6uwaczVfGn2u0@mail.gmail.com>
+
+   Welcome to issue 168 of the HWN, a newsletter covering developments in
+   the [1]Haskell community. This release covers the week of January 30 to
+   February 5, 2011.
+
+Announcements
+
+   Maciej Piechotka [2]announced version 0.1.1 of nanoparsec. "Nanoparsec
+   is currently simply a port of attoparsec on ListLike (the abstraction
+   of lists used by iteratee)."
+
+   Graham Hutton [3]announced the availability of studenships in
+   Functional Programming at the University of Nottingham, UK.
+
+   Ashley Yakeley [4]made a small update to time (1.2.0.4) that "fixes a
+   bug in parseTime."
+
+   George Giorgidze [5]announced the release to Hackage of Database
+   Supported Haskell (DSH).
+
+   Simon Hengel [6]announced the release of HackageOneFive, "a tiny Snap
+   app that provides reverse dependency lookup for all packages on
+   Hackage."
+
+Quotes of the Week
+
+     * alpounet: map succ/pred is a scandinavian name generator or what?
+       ... well, scandinavian and aztec
+     * dons: Think of a monad as a spacesuit full of nuclear waste in the
+       ocean next to a container of apples. Now, you can't put oranges in
+       the space suite or the nuclear waste falls in the ocean, *but* the
+       apples are carried around anyway, and you just take what you need.
+     * Apocalisp: a unit of clarity is a clarinet
+     * roconnor: My coq has failed me
+     * roconnor: I mean, I could, and do, say that a lens is just a monoid
+       natural transformation from the coalgebra functiors from haskell
+       functors to haskell types.
+     * Saizan: "not being ML" is a quite sound principle syntax-wise
+     * lpsmith: well, getting rid of airliners certainly *is* one way of
+       eliminating their potential use as weapons against larger buildings
+     * ddarius: The reason edwardk writes so many Haskell packages is to
+       ward the Perl from penetrating his heart.
+     * monochrom: most people tend to deny the usefulness of useful
+       alternative perspectives --- their entrenched vested interests
+       demand it. as they grow older they also have more influence and
+       power over "the state of the art" to preserve their self-fulfilling
+       prophecy that "the alternative is useless" --- by controlling what
+       practice looks like, they can control what looks useless.
+     * edwardk: i learned to program becaise i'd lied and told a kid that
+       i'd written a disassembler, then had to make good on the claim.
+
+Top Reddit Stories
+
+   * Quine Central ... because everyone needs to be able to make nth
+order quines
+     Domain: blog.sigfpe.com, Score: 40, Comments: 7
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/fc4cs/quine_central_because_everyone_needs_to_be_able/
+     Original: http://blog.sigfpe.com/2011/01/quine-central.html
+
+   * jhc 0.7.7 is out
+     Domain: haskell.org, Score: 38, Comments: 0
+     On Reddit: http://www.reddit.com/r/haskell/comments/fbqo7/jhc_077_is_out/
+     Original: http://www.haskell.org/pipermail/jhc/2011-January/000874.html
+
+   * Hulk: A Haskell IRC server
+     Domain: chrisdone.com, Score: 32, Comments: 1
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/fbrie/hulk_a_haskell_irc_server/
+     Original: http://chrisdone.com/posts/2011-01-30-hulk-haskell-irc-server.html
+
+   * Status update on {code, trac, projects, planet, community}.haskell.org
+     Domain: haskell.org, Score: 25, Comments: 0
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/fdnjp/status_update_on_code_trac_projects_planet/
+     Original: http://www.haskell.org/pipermail/haskell-cafe/2011-February/088829.html
+
+   * All about MVars : Inside T5
+     Domain: blog.ezyang.com, Score: 23, Comments: 4
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/fduxb/all_about_mvars_inside_t5/
+     Original: http://blog.ezyang.com/2011/02/all-about-mvars/
+
+   * Text: a visual programming language based on Haskell, demo
+     Domain: vimeo.com, Score: 21, Comments: 3
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/fbgxd/text_a_visual_programming_language_based_on/
+     Original: http://vimeo.com/19273744
+
+   * [SO] Why is GHC so big?
+     Domain: stackoverflow.com, Score: 21, Comments: 10
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/fczht/so_why_is_ghc_so_big/
+     Original: http://stackoverflow.com/questions/4858585/why-is-ghc-so-large-big
+
+   * Haskell Weekly News: Issue 167
+     Domain: contemplatecode.blogspot.com, Score: 21, Comments: 0
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/fe63a/haskell_weekly_news_issue_167/
+     Original: http://contemplatecode.blogspot.com/2011/02/haskell-weekly-news-issue-167.html
+
+   * The F# Team are Hiring (functional programming jobs)
+     Domain: haskell.org, Score: 20, Comments: 6
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/fcvec/the_f_team_are_hiring_functional_programming_jobs/
+     Original: http://www.haskell.org/pipermail/haskell/2011-January/022523.html
+
+   * Recently Uploaded: DSH-0.4.2 Natural Sql Queries without the need
+to write Sql strings.
+     Domain: hackage.haskell.org, Score: 20, Comments: 2
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/fesjj/recently_uploaded_dsh042_natural_sql_queries/
+     Original: http://hackage.haskell.org/package/DSH
+
+   * Specifying behaviors in a purely functional language
+     Domain: io7m.com, Score: 16, Comments: 0
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/fdvux/specifying_behaviors_in_a_purely_functional/
+     Original: http://io7m.com/articles/itefs/
+
+Top StackOverflow Answers
+   * Why is GHC so large/big?
+     votes: 29
+     Read on SO:
+http://stackoverflow.com/questions/4858585/why-is-ghc-so-large-big/4867236#4867236
+
+     It's a bit silly really.  Every library that comes with GHC is provided
+     in no less than 4 flavours:
+
+
+     static
+     dynamic
+     profiled
+     GHCi
+
+
+     The GHCi version is just the static version linked together in a single .o
+     file.  The other three versions all have their own set of interface files
+     (.hi files) too.  The profiled versions seem to be about twice the size
+     of the ...
+
+   * Why `(map digitToInt) . show` is so fast?
+     votes: 24
+     Read on SO:
+http://stackoverflow.com/questions/4841078/why-map-digittoint-show-is-so-fast/4842308#4842308
+
+     Seeing as I can't add comments yet, I'll do a little bit more work and
+     just analyze all of them.  I'm putting the analysis at the top; however,
+     the relevant data is below.  (Note: all of this is done in 6.12.3 as
+     well - no GHC 7 magic yet.)
+
+
+     Analysis:
+
+     Version 1: show is pretty good for ints, especially those as short as we
+     have.  Making strings actually ...
+
+   * What Justification for the type of f x = f x in Haskell is there?
+     votes: 15
+     Read on SO:
+http://stackoverflow.com/questions/4847008/what-justification-for-the-type-of-f-x-f-x-in-haskell-is-there/4847171#4847171
+
+     Okay, starting from the function definition f x = f x, let's step through
+     and see what we can deduce about the type of f.
+
+     Start with a completely unspecified type variable, a. Can we deduce more
+     than that? Yes, we observe that f is a function taking one argument, so
+     we can change a into a function between two unknown type variables,
+     which we'll call b -> ...
+
+   * . versus $ in haskell
+     votes: 14
+     Read on SO:
+http://stackoverflow.com/questions/4876828/versus-in-haskell/4876900#4876900
+
+     Prelude> :t ($)
+     ($) :: (a -> b) -> a -> b
+     Prelude> :t (.)
+     (.) :: (b -> c) -> (a -> b) -> a -> c
+
+     $ applies a function to a value.
+     . composes two functions.
+
+     So I can write f $ g x which is "apply f to (g of x)" or f . g $ x which
+     is "apply the composition of f and g to x". One common style is to pile
+     up dots on the left with a ...
+
+   * Starting a game development in an exotic language I am just
+learning (Lisp, Haskell, ...)
+     votes: 12
+     Read on SO:
+http://stackoverflow.com/questions/4867656/starting-a-game-development-in-an-exotic-language-i-am-just-learning-lisp-haske/4868879#4868879
+
+     If you could write a game in C, you can write one in Haskell. The biggest
+     difficulties many people have with it are:
+
+
+     Lack of support for OOP, which is what most people are familiar with these
+     days. Old-fashioned procedural code, on the other hand, is actually very
+     pleasant to write in Haskell; the IO type distinguishes effect-free
+     functions from procedures ...
+
+   * Haskell: Check if Int is in a list of Int's
+     votes: 11
+     Read on SO:
+http://stackoverflow.com/questions/4846974/haskell-check-if-int-is-in-a-list-of-ints/4847029#4847029
+
+     First find the type of the function you need.
+
+     To "Check if" means to return either True or False, a Bool.
+
+     So the function takes an Int, a list of Int (aka [Int]) and returns Bool:
+
+     Int -> [Int] -> Bool
+
+     Now ask hoogle.
+
+     elem :: Eq a => a -> [a] -> Bool
+
+     Hoogle is a very useful tool. You can integrate it with ghci.
+
+Top StackOverflow Questions
+
+   * Why is GHC so large/big?
+     votes: 32, answers: 5
+     Read on SO:
+http://stackoverflow.com/questions/4858585/why-is-ghc-so-large-big
+
+   * Starting a game development in an exotic language I am just
+learning (Lisp, Haskell, ?)
+     votes: 16, answers: 10
+     Read on SO:
+http://stackoverflow.com/questions/4867656/starting-a-game-development-in-an-exotic-language-i-am-just-learning-lisp-haske
+
+   * Why `(map digitToInt) . show` is so fast?
+     votes: 8, answers: 2
+     Read on SO:
+http://stackoverflow.com/questions/4841078/why-map-digittoint-show-is-so-fast
+
+   * Transforming expression given in prefix notation, identifying
+common subexpressions and dependencies
+     votes: 7, answers: 6
+     Read on SO:
+http://stackoverflow.com/questions/4843237/transforming-expression-given-in-prefix-notation-identifying-common-subexpressio
+
+   * Practical use of curried functions?
+     votes: 7, answers: 6
+     Read on SO:
+http://stackoverflow.com/questions/4888480/practical-use-of-curried-functions
+
+About the Haskell Weekly News
+
+   You can find an html version of this newsletter at:
+   http://contemplatecode.blogspot.com/2011/02/haskell-weekly-news-issue-168.html
+
+
+   To help create new editions of this newsletter, please send stories to
+   dstcruz at gmail.com. I'm in dire need of finding good "quotes of the
+   week". If you happen to come across any, please don't hesitate to send
+   it along.
+
+   Until next time,
+   Daniel Santa Cruz
+
+References
+
+   1. http://haskell.org/
+   2. http://permalink.gmane.org/gmane.comp.lang.haskell.cafe/85781
+   3. https://groups.google.com/d/topic/fa.haskell/rURgYMjEZhU/discussion
+   4. https://groups.google.com/d/topic/fa.haskell/l-I05W30DWU/discussion
+   5. http://permalink.gmane.org/gmane.comp.lang.haskell.cafe/85961
+   6. https://groups.google.com/d/topic/fa.haskell/vp2P5w8GbkM/discussion
+
+

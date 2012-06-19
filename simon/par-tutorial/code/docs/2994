@@ -1,0 +1,30 @@
+From allbery.b at gmail.com  Sun Feb 13 04:25:36 2011
+From: allbery.b at gmail.com (Brandon S Allbery KF8NH)
+Date: Sat, 12 Feb 2011 22:25:36 -0500
+Subject: [Haskell-cafe] Is Show special? Of course not but...
+In-Reply-To: <AANLkTinMq30qykq+T_VZ_7gpqybAzPvdU1VXeKKz=pOT@mail.gmail.com>
+References: <AANLkTikfYO9WjuHe0QiygJsGFYZq5nswK6barGgpci5f@mail.gmail.com>	<201102112000.12131.daniel.is.fischer@googlemail.com>
+	<AANLkTinMq30qykq+T_VZ_7gpqybAzPvdU1VXeKKz=pOT@mail.gmail.com>
+Message-ID: <4D574F30.4040208@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 2/11/11 14:20 , Cristiano Paris wrote:
+> God! It seems like I'm reading the small-character lines of a contract :)
+
+Wait until you encounter the equivalent of rules-lawyering in the type system :)
+
+- -- 
+brandon s. allbery     [linux,solaris,freebsd,perl]    allbery.b at gmail.com
+system administrator  [openafs,heimdal,too many hats]                kf8nh
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk1XTzAACgkQIn7hlCsL25U+RACgzzqpTAJLum60odY8dpOi6dGQ
+kyIAnRp5cM3QbrkzYu7OzTQgOzeXWdXw
+=P20S
+-----END PGP SIGNATURE-----
+
+

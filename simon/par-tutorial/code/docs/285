@@ -1,0 +1,72 @@
+From aslatter at gmail.com  Mon Apr 11 06:05:23 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Sun, 10 Apr 2011 23:05:23 -0500
+Subject: [Haskell-cafe] [Haskell-beginners] Calling a foreign function:
+	superlinear comlexity
+In-Reply-To: <loom.20110411T010719-100@post.gmane.org>
+References: <loom.20110411T010719-100@post.gmane.org>
+Message-ID: <BANLkTi=XHqt1hF9FsVSSODOYD0jFYtP+gQ@mail.gmail.com>
+
+On Sun, Apr 10, 2011 at 6:26 PM, Serguei Son <serguei.son at gmail.com> wrote:
+> I call GSL's gsl_ran_ugaussian function in the following way (using
+> bindings-gsl):
+>
+> module Main where
+>
+> import Bindings.Gsl.RandomNumberGeneration
+> import Bindings.Gsl.RandomNumberDistributions
+> import Foreign
+> import Control.Monad
+> import Data.List
+>
+> main = do
+> ? ? ? ?let n = 100000
+> ? ? ? ?p <- peek p'gsl_rng_mt19937
+> ? ? ? ?rng <- c'gsl_rng_alloc p
+> ? ? ? ?lst <- replicateM n $ c'gsl_rng_uniform rng
+> ? ? ? ?print $ sum lst
+>
+> As I increase n from 10^4 to 10^5 to 10^6 execution time grows superlinearly.
+>
+
+Not sure if it is related, but this thread also documents issues folks
+had with replicateM and performance:
+
+http://www.haskell.org/pipermail/haskell-cafe/2011-March/090419.html
+
+Antoine
+
+> To forestall the answer that the reason is the overhead of List,
+> this code scales approximately linearly:
+>
+> module Main where
+>
+>
+> import Foreign
+> import Control.Monad
+> import Data.List
+>
+> main = do
+> ? ? ? ?let n = 100000
+> ? ? ? ?let lst = map sin [1..n]
+> ? ? ? ?print $ sum lst
+>
+> Another interesting observation: when I wrap the sin function
+> of math.h with signature CDouble -> IO CDouble calling it
+> repeatedly scales superlinearly, whereas when I wrap it as a pure
+> function calling it repeatedly scales linearly.
+>
+> What is the reason for this performance and how can
+> I make the first code scale linearly in execution time?
+>
+>
+>
+>
+>
+> _______________________________________________
+> Beginners mailing list
+> Beginners at haskell.org
+> http://www.haskell.org/mailman/listinfo/beginners
+>
+
+

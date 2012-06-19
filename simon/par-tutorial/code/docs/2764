@@ -1,0 +1,32 @@
+From johan.tibell at gmail.com  Sun Feb  6 19:38:11 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Sun, 6 Feb 2011 19:38:11 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4D69DF.5050002@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<201102032237.33997.daniel.is.fischer@googlemail.com>
+	<4D4D69DF.5050002@btinternet.com>
+Message-ID: <AANLkTikGbr6o=kU7m4Vubz4NXGKR5uzSBhx01vzLXm02@mail.gmail.com>
+
+On Sat, Feb 5, 2011 at 4:16 PM, Andrew Coppin
+<andrewcoppin at btinternet.com> wrote:
+> Random fact: Data.Map.insertWith' exists. Data.IntMap.insertWith' does *not*
+> exist.
+
+The containers library is a mess. For example, Data.Map has 10+
+functions (e.g. adjust) that don't have strict counterparts even
+though the strict version is most likely what you want. Some functions
+do allow you to force the value before it's inserted into the map just
+because you can piggy-back on the evaluation of a constructor e.g.
+
+    update :: Ord k => (a -> Maybe a) -> k -> Map k a -> Map k a
+
+    f = update g someKey someMap
+      where g = (\ v -> let v' = v + 1 in v' `seq` Just v')
+
+Since the implementation must evaluate the result of g to decide
+whether to remove the element or not.
+
+Johan
+
+

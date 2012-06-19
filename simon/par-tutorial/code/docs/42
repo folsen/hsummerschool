@@ -1,0 +1,151 @@
+From ninegua at gmail.com  Fri Apr  1 23:57:44 2011
+From: ninegua at gmail.com (Paul L)
+Date: Fri, 1 Apr 2011 14:57:44 -0700
+Subject: [Haskell-cafe] Asynchronous Arrows need Type Specialization -
+	Help!
+In-Reply-To: <AANLkTinVhEQXVO7UP6xLEtBhM797dhcS5f477HUgV2OF@mail.gmail.com>
+References: <AANLkTi=p=Zi=k32sAROAiC7Ea4SRiSbzTqAp+B2YF7CS@mail.gmail.com>
+	<AANLkTi=jizU+TYLiLr7jP10bKdpdBHduDLVaa7svo0fr@mail.gmail.com>
+	<AANLkTinVhEQXVO7UP6xLEtBhM797dhcS5f477HUgV2OF@mail.gmail.com>
+Message-ID: <AANLkTinst+ut2LN5vZOKEzeGbgummz3nsoZ4kCoS4+UR@mail.gmail.com>
+
+I now understand where you are coming from, but I don't quite get your
+motivation to develop new classes for arrows. Tupling is Haskell is of
+course very lazy, it does not evaluate any of its element. As for the
+spatial and logical concepts, don't you think they are over-specifying
+what is really necessary for your system model?
+
+So I guess what I'm having trouble with is your arr f example. If f is
+sufficiently lazy, it does not evaluate the elements in its input
+tuple at all. Most pure functions we use to wire up arrows are like
+this: arr fst, arr snd, arr swap, arr (\x -> (x, x)), etc.
+
+I also don't quite follow your example of passing a time stamp
+together with value. Do you intend to keep the time stamp always
+updated? If you are getting unwanted results, it is perhaps due to
+wrong computation, rather than the composition to a pure functions.
+Maybe you want to give a specific example of "f".
+
+Regards,
+Paul Liu
+
+On Fri, Apr 1, 2011 at 1:55 PM, David Barbour <dmbarbour at gmail.com> wrote:
+> On Fri, Apr 1, 2011 at 11:47 AM, Paul L <ninegua at gmail.com> wrote:
+>> On Sun, Mar 20, 2011 at 10:18 PM, David Barbour <dmbarbour at gmail.com> wrote:
+>>
+>>> The (***) and (&&&) operations, as specified in Control.Arrow, are
+>>> inherently synchronization points.
+>>>
+>>> Ideally one could do something like:
+>>>
+>>> ?(a1 *** a2) >>> first a3
+>>>
+>>> and the output from a1 would be piped directly as input to a3, without
+>>> touching a2. However, arrows also allow:
+>>>
+>>> ?(a1 *** a2) >>> arr f
+>>>
+>>> And, in this case, the current state of a1 and a2 must be combined
+>>> into a stream of pairs so that f may be mapped over the stream.
+>>> Obtaining both streams at a single place (a single vat) and time is a
+>>> synchronizing operation. The synchronization operations are severely
+>>> undermining the intended scalability and performance of this agent
+>>> abstraction.
+>>
+>> If what you mean by "synchronization" is that for every output of a1
+>> there must be an output of a2, then YES.
+>>
+>> But if you mean that both the outputs of a1 and a2 have to be
+>> available (fully evaluated) due to the tupling, then NO, at least not
+>> in Haskell where things are evaluated lazily.
+>
+> What I mean by synchronization is that the outputs from a1 and a2 must
+> occur at the same logical or physical space and time.
+>
+> Assume 'a1' and 'a2' represent external, asynchronous resources.
+> * 'a1' loads a file, with latency 40 milliseconds. ?(input is filename)
+> * 'a2' is a database query, with a latency of 100 milliseconds. (input is query)
+>
+> (a1 *** a2) both loads a file and performs a query, then tuples the
+> results as (r1,r2).
+>
+> (a1 *** a2 >>> first a3) further processes the file state r1,
+> generating (r3,r2).
+>
+> Logically, a pair is a spatial-temporal concept: if you have a pair,
+> you have access to a fst and a snd value at the same place and the
+> same time. This synchronization is obvious if you pass values into an
+> 'arr' arrow. The 'physical' synchronization issue is that the naive
+> way to implement (a1 *** a2) is to wait for both resources to be
+> available (time) in the same thread (space), then generate a tuple
+> that couples the responses.
+>
+> For my programming model, however, I must avoid both forms of
+> synchronization. The 'logical' synchronization is minimized. You might
+> model this, roughly, by pairing the responses with their latencies:
+> ((40,r1),(100,r2)). This would essentially be a 'futures' passing
+> style. The idea is that '(a1 *** a2) >>> first a3' might generate
+> something like ((80,r3),(100,r2)). ?Explicit synchronization might
+> bring this to ((100,r3),(100,r2)).
+>
+> Futures passing might work well enough for the problem as I've
+> explained it to you. My programming model is operating under several
+> additional constraints to support reactivity, concurrency,
+> parallelism, scalability, distribution, and open systems. Under the
+> more stringent requirements, I've been unable to make futures fit the
+> problem. However, in the time since my last Haskell-cafe post, I have
+> found a way to leverage GADTs to at least keep elements of a product
+> distinct under-the-hood and minimize physical synchronization.
+>
+> ?data A a d r where
+> ? ?Aprim :: a d r -> A a d r
+> ? ?Aid :: A a r r
+> ? ?Acomp :: A a d' r -> A a d d' -> A a d r
+> ? ?Aarr :: (d -> r) -> A a d r
+> ? ?Aprod :: A a d r -> A a d' r' -> A (a,a') (d,d')
+> ? ?Adup :: A a (a,a)
+> ? ?Afst :: A a (b,c) b
+> ? ?Asnd :: A a (b,c) c
+> ? ?...
+>
+>>
+>> BTW, according to arrow laws, ??(a1 *** a2) >>> first a3 is equivalent
+>> to (a1 >>> a3) *** a2, does the latter look more appealing to you? If
+>> yes, I don't see where is the problem, unless you intentionally want
+>> to make them different, and then it is no longer arrow.
+>
+> While both expressions should have equivalent observable properties,
+> neither Haskell nor Arrow laws assure they will possess the same
+> operational characteristics. ?In a naive implementation, the latter
+> will generally be the more efficient option.
+>
+> For efficiency reasons, I have also abandoned Ross's Control.Arrow.
+> The main problem with it is Ross's use of pragmas:
+>
+> {-# RULES
+> "first/arr" ?forall f . first (arr f) = arr (first f)
+> "second/arr" ? ?forall f . second (arr f) = arr (second f)
+> "product/arr" ? forall f g . arr f *** arr g = arr (f *** g)
+> "fanout/arr" ? ?forall f g . arr f &&& arr g = arr (f &&& g)
+> ?#-}
+>
+> These rules go the wrong direction, making the program more opaque to
+> the runArrow operation, and actually change both the physical and
+> logical synchronization characteristics for the worse. I.e. if I pass
+> ((80,r3),(100,r2)) to 'arr f', the output becomes available at logical
+> time 100 rather than time 80.
+>
+> Peter Gammie suggested use of Adam Megacz's Generalized Arrows, which
+> would avoid this problem by use of an opaque product type that can
+> only be converted to a pair by an explicit operation (i.e. 'synch :: a
+> (b**c) (b,c)' for opaque product type (**)). I'm still debating
+> whether to take this approach.
+>
+
+
+
+-- 
+Regards,
+Paul Liu
+
+

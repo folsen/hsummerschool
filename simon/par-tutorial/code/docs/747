@@ -1,0 +1,98 @@
+From daniel.is.fischer at googlemail.com  Tue Apr 26 15:15:18 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Tue, 26 Apr 2011 15:15:18 +0200
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+In-Reply-To: <1303776032428-4339787.post@n5.nabble.com>
+References: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+	<201104260103.51102.daniel.is.fischer@googlemail.com>
+	<1303776032428-4339787.post@n5.nabble.com>
+Message-ID: <201104261515.44280.daniel.is.fischer@googlemail.com>
+
+On Tuesday 26 April 2011 02:00:32, jutaro wrote:
+> Well, it is a bit more intricate to invert the sides. After
+> * swapping LeftP and RightP in Edit Prefs -> Initial Pane positions
+> * Close all panes and pane groups. (You may leave an editor window open,
+> so that you better see what happens in the next steps).
+> * Collapse all (Hit Ctrl-1 - 2 times)
+> * Split vertical (Hit Ctrl-2), put the focus to the left, split
+> horizontal (Hit Ctrl-3)
+> * Go to Panes Menu and reopen the Log and the Browser and an editor
+> Window * Configure tabs as you like
+> * Save the session or restart Leksah
+> 
+
+Intricate indeed. If some day you have too much time, consider adding 
+configuration options for that. Until then, how about putting that in the 
+docs?
+
+> > How do I configure autocompletion to only begin after three or four
+> > letters
+> > have been typed?
+> 
+> Go to Edit Prefs -> GUI Options, and select "Complete only on Hotkey",
+> then hit
+> Ctrl-Space if you want completion.
+> 
+
+Not ideal (for me), but good enough I think. Although, I find kate's 
+configuration option to start autocompletion after n letters *very* nice.
+
+> Daniel Fischer wrote:
+> > Decreasing indentation via backspace goes one column per backspace,
+> > how can
+> > I configure it to go to the next (previous) tab position on backspace
+> > in the leading whitespace of a line?
+> 
+> You can't do this currently, but you can post a wish for enhancement to
+> our issue tracker.
+> 
+
+Pity. 
+Quoth Hamish:
+> <shift><tab> works, but it is a bit dumb.
+> 
+> Changing <backspace> is on my wish list too.  I think we should make
+> it look at the text above to find the correct indentation points.
+
+So there's initial support for it, good sign.
+
+> 
+> Please try to run Leksah with the default config
+> (~/.leksah-0.10/packageSources)
+> 
+
+Will do. Unfortunately I had to wipe the old OS from disk and now have to 
+rebuild a couple of GHCs and a load of libraries (different gmp version), 
+that'll take a while.
+
+
+> 
+> Indeed leksah may use more memory on the first run
+
+That's natural, collecting the data isn't free.
+
+> (actually it is ghc, which uses it).
+
+I'm not sure about that. According to top, leksah-server used that much 
+memory long after ghc ran last. And on the second start, it didn't invoke 
+ghc (at least, no ghc was reported by top). Looks a bit as though it 
+doesn't write the data soon enough. Or it could have been the first sign of 
+my OS crashing.
+
+> But on consecutive starts it may use about/up to 150MB, but not the
+> numbers you give.
+
+That's more reasonable. We'll see.
+
+> So please try to run Leksah with the default config, and see if the
+> problem remains.
+
+Yes, but as mentioned above, that'll not be immediately.
+
+> 
+> J?rgen
+
+Thanks,
+Daniel
+
+

@@ -1,0 +1,28 @@
+From jwlato at gmail.com  Tue Feb  1 13:50:25 2011
+From: jwlato at gmail.com (John Lato)
+Date: Tue, 1 Feb 2011 12:50:25 +0000
+Subject: [Haskell-cafe] Inheritance and Wrappers
+In-Reply-To: <AANLkTimK9ttKW8wv5CK+u4y-DLnBrfNFOg5UvjtnAFBc@mail.gmail.com>
+References: <AANLkTi=3pSG0U+3H+0GU7E3h+0z9nMgbq1YgmKyJauQ5@mail.gmail.com>
+	<AANLkTimK9ttKW8wv5CK+u4y-DLnBrfNFOg5UvjtnAFBc@mail.gmail.com>
+Message-ID: <AANLkTikQtNBqOAE8uHb4nSPibH4HGkecXvUxgU-3HVXs@mail.gmail.com>
+
+On Tue, Feb 1, 2011 at 11:47 AM, Ozgur Akgun <ozgurakgun at gmail.com> wrote:
+
+> On 1 February 2011 11:41, John Lato <jwlato at gmail.com> wrote:
+>
+>> The important point is that this declares an AbGroup instance for every
+>> type, not just types with Num instances.
+>>
+>
+> So, is there a way to declare an AbGroup instance for the types with num
+> instances only?
+>
+
+Not to my knowledge.
+
+John
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110201/f45776c4/attachment.htm>
+

@@ -1,0 +1,67 @@
+From rrnewton at gmail.com  Mon Aug 15 21:41:45 2011
+From: rrnewton at gmail.com (Ryan Newton)
+Date: Mon, 15 Aug 2011 15:41:45 -0400
+Subject: [Haskell-cafe] Haskell Actors, Linda,
+	publish / subscribe models?
+In-Reply-To: <CAMXF=YAyMvO-L=JTAF6MdEfrq-_NRd-bfs5BkqjbskA9ENUDUw@mail.gmail.com>
+References: <CAMXF=YBjfyjA8NqSH9HyngS_UZDr_4cYJiv_8Lh1zNfepJYs9w@mail.gmail.com>
+	<CAMXF=YCWVwkGgj9ci80hbDcYLJv-_GwgEybBdRDU7=FCTWm+vw@mail.gmail.com>
+	<CAKJoN-o=UMdqYcBrG8cQL-J5f=23Ekj4bCQcoYhp2Di4EGPt=g@mail.gmail.com>
+	<CAMXF=YAyMvO-L=JTAF6MdEfrq-_NRd-bfs5BkqjbskA9ENUDUw@mail.gmail.com>
+Message-ID: <CACYs5AZzhXknAyOYec6WBwgRmQR272aT0As4GMogo2JbkLLuuQ@mail.gmail.com>
+
+It seems that the recent "Cloud Haskell" paper is relevant:
+
+
+http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/remote.pdf
+
+The repo is here:
+
+   https://github.com/jepst/CloudHaskell
+
+I haven't tried it yet myself but would like to.
+
+Cheers,
+  -Ryan
+
+
+On Mon, Aug 15, 2011 at 10:32 AM, dokondr <dokondr at gmail.com> wrote:
+
+>
+>
+> On Mon, Aug 15, 2011 at 12:36 PM, Holger Reinhardt <hreinhardt at gmail.com>wrote:
+>
+>> Hi,
+>>
+>> the actor package seems unmaintained and probably doesn't fit your needs.
+>> If you want to implement some kind of publish/subscribe system over the
+>> network, I'd suggest you take a look at ZeroMQ[1] and AMQP[2].
+>> AMQP is probably easier to get started with, but it requires you to set up
+>> a dedicated broker, which (if you have very high throughput) might become a
+>> bottleneck. ZeroMQ, on the other hand, allows for a more decentralized
+>> architecture.
+>>
+>> Regards,
+>> Holger
+>>
+>> [1] http://hackage.haskell.org/package/zeromq-haskell
+>> [2] http://hackage.haskell.org/package/amqp
+>>
+>>
+>> Thanks! I will try these out.
+> I wish I could find something that will provide a *single* publish /
+> subscribe framework to work with threads *both* in the same and separate
+> address spaces.
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110815/b45908da/attachment.htm>
+

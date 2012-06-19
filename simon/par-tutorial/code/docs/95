@@ -1,0 +1,34 @@
+From colinpauladams at googlemail.com  Mon Apr  4 10:51:56 2011
+From: colinpauladams at googlemail.com (Colin Adams)
+Date: Mon, 4 Apr 2011 09:51:56 +0100
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+Message-ID: <BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+
+2011/4/4 Roel van Dijk <vandijk.roel at gmail.com>
+
+> Hello,
+>
+> The Haskell 2010 language specification states that "Haskell uses
+> the Unicode character set" [1]. I interpret this as saying that,
+> at the lowest level, a Haskell program is a sequence of Unicode
+> code points. The standard doesn't say how such a sequence should
+> be encoded. You can argue that the encoding of source files is
+> not part of the language. But I think it would be highly
+> practical to standardise on an encoding scheme.
+>
+> Strictly speaking it is not possible to reliably exchange Haskell
+> source files on the byte level. If I download some package from
+> hackage I can't tell how the source files are encoded from just
+> looking at the files.
+>
+
+Not from looking with your eyes perhaps. Does that matter? Your text editor,
+and the compiler, can surely figure it out for themselves. There aren't many
+Unicode encoding formats, and there aren't very many possibilities for the
+leading characters of a Haskell source file, are there?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110404/febf0c32/attachment.htm>
+

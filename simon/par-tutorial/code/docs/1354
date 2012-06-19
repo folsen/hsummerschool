@@ -1,0 +1,157 @@
+From arnaud.oqube at gmail.com  Thu Aug 25 08:56:15 2011
+From: arnaud.oqube at gmail.com (Arnaud Bailly)
+Date: Thu, 25 Aug 2011 08:56:15 +0200
+Subject: [Haskell-cafe] Issue with lhs2TeX 1.17
+Message-ID: <CAL4zPaqjEKYHzBouRjo6_Zd3YA3WZ2wGc9NiuBq6JXTH4sWh9w@mail.gmail.com>
+
+Hello,
+I recently reinstalled (using cabal) lhs2TeX v 1.17 (Haskell Platform
+installation 2011.2.0, Windows XP SP2, MiKTeX 2.8) and I cannot run latex
+anymore on the .tex files produced.
+Any clues about this ? Did I forgot to install some package ? This is not
+clear from the documentation which seems to imply cabal install does the
+right thing (TM).
+
+Thanks in advance for you help.
+Arnaud
+
+PS: Here is the beginning of the compilation output for latex
+
+Running `LaTeX' on `foo' with ``latex  -interaction=nonstopmode "\input"
+"foo.tex"''
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8)
+entering extended mode
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation,
+german, ngerman, german-x-2009-06-19, ngerman-x-2009-06-19, french, loaded.
+(d:\projets\foo.tex
+("D:\Program Files\MiKTeX 2.8\tex\latex\base\article.cls"
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+("D:\Program Files\MiKTeX 2.8\tex\latex\base\size11.clo"))
+("D:\Program Files\MiKTeX 2.8\tex\latex\ams\math\amstext.sty"
+("D:\Program Files\MiKTeX 2.8\tex\latex\ams\math\amsgen.sty"))
+("D:\Program Files\MiKTeX 2.8\tex\latex\amsfonts\amssymb.sty"
+("D:\Program Files\MiKTeX 2.8\tex\latex\amsfonts\amsfonts.sty"))
+("C:\Documents and Settings\abailly\Application
+Data\MiKTeX\2.8\tex\latex\stmaryrd\stmaryrd.sty")
+("C:\Documents and Settings\abailly\Application
+Data\MiKTeX\2.8\tex\latex\polytable\polytable.sty"
+("C:\Documents and Settings\abailly\Application
+Data\MiKTeX\2.8\tex\latex\lazylist\lazylist.sty") ("D:\Program Files\MiKTeX
+2.8\tex\latex\tools\array.sty"))
+("C:\Documents and Settings\abailly\Application
+Data\MiKTeX\2.8\tex\latex\a4wide\a4wide.sty"
+("C:\Documents and Settings\abailly\Application
+Data\MiKTeX\2.8\tex\latex\ntgclass\a4.sty")) (d:\projets\foo.aux)
+("D:\Program Files\MiKTeX 2.8\tex\latex\amsfonts\umsa.fd")
+("D:\Program Files\MiKTeX 2.8\tex\latex\amsfonts\umsb.fd")
+("C:\Documents and Settings\abailly\Application
+Data\MiKTeX\2.8\tex\latex\stmaryrd\ustmry.fd")
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ $[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][][][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][][]
+
+Overfull \hbox (25.83325pt too wide) in paragraph at lines 116--186
+ [][][][][][]$
+("D:\Program Files\MiKTeX 2.8\tex\latex\base\omscmr.fd")
+! Missing $ inserted.
+<inserted text>
+                $
+l.609 \end{pboxed}
+
+! Extra }, or forgotten $.
+<recently read> \egroup
+
+l.609 \end{pboxed}
+
+! Missing $ inserted.
+<inserted text>
+                $
+l.609 \end{pboxed}
+
+! Extra }, or forgotten $.
+<recently read> \egroup
+
+l.609 \end{pboxed}
+
+! Missing $ inserted.
+<inserted text>
+                $
+l.609 \end{pboxed}
+
+! Extra }, or forgotten $.
+\mbox #1->\leavevmode \hbox {#1}
+
+l.609 \end{pboxed}
+
+! Missing $ inserted.
+<inserted text>
+                $
+l.609 \end{pboxed}
+
+
+! LaTeX Error: \mathit allowed only in math mode.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110825/15650fc2/attachment.htm>
+

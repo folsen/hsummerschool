@@ -1,0 +1,40 @@
+From daniel.is.fischer at googlemail.com  Sat Apr  2 13:12:58 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sat, 2 Apr 2011 13:12:58 +0200
+Subject: [Haskell-cafe] Setting up cabal on EC2
+In-Reply-To: <BANLkTimJYaaFxBo1F8HVPSJNUKoy5pT_zQ@mail.gmail.com>
+References: <BANLkTimY_R7GFE2dTB5qjJAeJ6w4uJMkiw@mail.gmail.com>
+	<201104021121.32011.daniel.is.fischer@googlemail.com>
+	<BANLkTimJYaaFxBo1F8HVPSJNUKoy5pT_zQ@mail.gmail.com>
+Message-ID: <201104021312.59307.daniel.is.fischer@googlemail.com>
+
+On Saturday 02 April 2011 11:51:03, Lyndon Maydwell wrote:
+> The version of cabal-install on this page seems to be out of date:
+> http://www.haskell.org/cabal/download.html
+
+So-so. Probably the majority of users are still on ghc-6.*, for them, 0.8.2 
+is the right choice. The page should have two links, one for ghc-6 and one 
+for ghc-7, but I guess the Cabal cabal is too busy doing more important 
+things (like writing code) to always think of updating the web-page.
+
+> 
+> Luckily the other releases are listed at
+> http://www.haskell.org/cabal/release.
+> 
+> This seems to have solved my issue.
+
+Good.
+Just a tip, generally, it's easier to get stuff from hackage,
+http://hackage.haskell.org/package/cabal-install
+in this case.
+You can see the dependencies listed there, and see what version fits best 
+with what you have. If something depends on an older version of a library 
+than you have, that's a bad sign. If something depends on a newer version 
+of time, process, directory, random (a couple of others, basically what ghc 
+itself was built with), that's a bad sign too.
+When in doubt,
+$ cabal install whatever --dry-run
+If that says it would install a library you already have, be careful, that 
+may introduce the dreaded diamond dependency problem.
+
+

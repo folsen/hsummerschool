@@ -1,0 +1,33 @@
+From johan.tibell at gmail.com  Sun Feb  6 22:37:57 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Sun, 6 Feb 2011 22:37:57 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4F0EC9.8060005@gmail.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<201102032237.33997.daniel.is.fischer@googlemail.com>
+	<4D4D69DF.5050002@btinternet.com>
+	<AANLkTikGbr6o=kU7m4Vubz4NXGKR5uzSBhx01vzLXm02@mail.gmail.com>
+	<4D4EFB05.2040902@btinternet.com>
+	<AANLkTik1NpiS-E5xV3hNQFO1-s8Vd4g_CJCPGJXM2J68@mail.gmail.com>
+	<4D4F0EC9.8060005@gmail.com>
+Message-ID: <AANLkTi=ai-Fi-qSJNVtMdf-1jxLh5bjQ2QRCB9vn849E@mail.gmail.com>
+
+On Sun, Feb 6, 2011 at 10:12 PM, Alexey Khudyakov
+<alexey.skladnoy at gmail.com> wrote:
+> Well Foldable and Traversable provide set of generic operations for
+> containers. Although they are quite limited, containter must be polymorphic
+> (e.g. no IntMap) and parameter must be of any type (e.g. no unboxed vectors)
+> both are still quite useful.
+
+I looked into providing instances for these but IIRC the performance
+was really bad. Someone need to look at inlining/specialization for
+these.
+
+> Also there is a container-classes package which provide set of type class
+> for containers.
+
+I'd like to avoid MPTC and fundeps if possible.
+
+Johan
+
+

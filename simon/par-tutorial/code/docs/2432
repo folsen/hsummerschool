@@ -1,0 +1,51 @@
+From 2haskell at pkturner.org  Thu Dec 29 23:47:47 2011
+From: 2haskell at pkturner.org (Scott Turner)
+Date: Thu, 29 Dec 2011 17:47:47 -0500
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4C2D9E5B-8D54-4074-B23B-3CC83DEBB729@mobileink.com>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org>
+	<4C2D9E5B-8D54-4074-B23B-3CC83DEBB729@mobileink.com>
+Message-ID: <4EFCEE13.4030006@pkturner.org>
+
+On 2011-12-29 15:23, Gregg Reynolds wrote:
+> On Dec 29, 2011, at 1:21 PM, Heinrich Apfelmus wrote:
+> 
+>> Why would  IO Int  be something special or mysterious?
+> 
+> I'm pretty sure IO is non-deterministic, non-computable, etc.  In other words not the same as computation.
+> 
+>> It's an ordinary value like everything else; it's on the same footing as [Char], Maybe Int, Int -> String, Bool, and so on. I see no difference between the list  [1,2,3] :: [Int]  and the action  "pick a random number between 1 and 6" :: IO Int  .
+> 
+> We'll have to agree to disagree - I see a fundamental difference.
+
+You're misunderstanding the location of disagreement. We all know very
+well how IO Int is special.
+
+The example "pick a random number between 1 and 6" was unfortunate. I hope
+    fmap read getLine :: IO Int
+serves better.  The Haskell community says this expression indicates a
+"value".  To be clear,
+    fmap read getline
+has the same value wherever it is written in a program or however many
+times it is called, or however many different Int values it produces.
+This definition of 'value' is at the heart of how we understand Haskell
+to be referentially transparent and pure.
+
+You can disagree, but if you hold that this expression does not have a
+value until at execution time it produces an Int, then your
+unconventional terminology will lead to confusion.
+
+So what is the benefit of using Haskell?  Isn't
+    fmap read getline
+just as problematic as the C function
+    gets()
+regardless of whether you call it pure?  In Haskell, the type of
+    fmap read getline
+prevents it from being used in arbitrary parts of the program, so the
+programmer or compiler can use the type to know whether a function is
+performing I/O or other effects.
+
+

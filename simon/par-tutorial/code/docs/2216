@@ -1,0 +1,76 @@
+From sanket.agrawal at gmail.com  Wed Dec 21 23:21:10 2011
+From: sanket.agrawal at gmail.com (Sanket Agrawal)
+Date: Wed, 21 Dec 2011 17:21:10 -0500
+Subject: [Haskell-cafe] How to define Storable instance for data constructor
+	with storable vectors
+Message-ID: <CALyR41q=E9xkGzo46YDqAC3AHOeA7=qv9wj9nYKV-MTWZhx=PQ@mail.gmail.com>
+
+I am trying to write a union data structure which can store vectors - a
+simplified definition of data structure is below:
+---------------------
+-- V is Data.Vector.Storable
+data Elems = I {-# UNPACK #-} !GHC.Int.Int32
+             | S {-# UNPACK #-} !GHC.Int.Int32 {-# UNPACK #-} !(Ptr CChar)
+             | T {-# UNPACK #-} !(V.Vector Elems)
+---------------------
+
+What I can't figure out is how to store Vector elements when defining
+Storable instance for Elems type - the main stumbling block is that my
+approach requires defining a Storable instance of ForeignPtr. Snippets of
+code below:
+
+---------------------
+instance Storable Elems where
+  sizeOf _ = ...
+  alignment _ = ...
+
+ {-# INLINE poke #-}
+  poke p x = case x of
+      ...
+      T x -> do
+              poke (castPtr p :: Ptr Word8) 3 -- store a tag for data
+constructor T. We will check it when doing peek
+              let (fp,_,n) = V.unsafeToForeignPtr x
+              poke (castPtr p1) n
+              poke (castPtr (p1 `plusPtr` 8)) fp
+
+      where  p1 = (castPtr p :: Ptr Word8) `plusPtr` 1 -- get pointer to
+start of the element. First byte is type of element
+
+
+  {-# INLINE peek #-}
+  peek p = do
+            let p1 = (castPtr p::Ptr Word8) `plusPtr` 1 -- get pointer to
+start of the element. First byte is type of element
+            t <- peek (castPtr p::Ptr Word8)
+            case t of
+             .... -- handle all data constructors except T here
+              _ -> do
+                    x <- peek (castPtr p1 :: Ptr Int)
+                    y <- peek (castPtr (p1 `plusPtr` 8) :: Ptr (ForeignPtr
+Elems))
+                    return (T (V.unsafeFromForeignPtr y 0 x)) -- return
+vector elements
+
+
+---------------------
+
+If I use above approach, I will need to define Storable instance of
+ForeignPtr for Elems data type. Is it possible to define peek/poke
+operations for storing vectors, using something other than ForeignPtr? I
+prefer using ForeignPtr because it has finalizer associated with it. I
+guess it might be possible to store Ptr through withForeignPtr, but then
+how do you convert back from the Ptr to Vector in peek?
+
+If storing the ForeignPtr is a cleaner approach, how would Storable
+definition for ForeignPtr look like? GHC code for ForeignPtr seems to
+export only ForeignPtr constructor.
+
+I am aware above code is not portable (e.g., assumption that Int is 8
+bytes). That is not really an issue because I am writing code for a very
+specific platform. If there is a library defined somewhere which has
+already dealt with similar issue, I will very much appreciate pointers.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111221/e7b33d56/attachment.htm>
+

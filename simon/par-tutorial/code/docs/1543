@@ -1,0 +1,23 @@
+From trebla at vex.net  Tue Aug 30 21:30:03 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Tue, 30 Aug 2011 15:30:03 -0400
+Subject: [Haskell-cafe] installing/reinstalling haskell platform with
+ profiling enabled on windows
+In-Reply-To: <CABypoYyzya+16obfF1VmdzJhG8ZHsTXTa238KF+9gcYiq4DEyQ@mail.gmail.com>
+References: <CABypoYyzya+16obfF1VmdzJhG8ZHsTXTa238KF+9gcYiq4DEyQ@mail.gmail.com>
+Message-ID: <4E5D3A3B.1040309@vex.net>
+
+On 11-08-30 10:52 AM, MH wrote:
+> How can I install/reinstall haskell platform with profiling enabled on
+> windows?
+
+It already is.
+
+Program Files (x86)\Haskell 
+Platform\2011.2.0.1\lib\extralibs\text-0.11.0.6\ghc-7.0.3\libHStext-0.11.0.6_p.a
+Program Files (x86)\Haskell 
+Platform\2011.2.0.1\lib\extralibs\text-0.11.0.6\ghc-7.0.3\Data\Text.p_hi
+
+are just a few examples.
+
+

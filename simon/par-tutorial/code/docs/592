@@ -1,0 +1,28 @@
+From jake.mcarthur at gmail.com  Fri Apr 22 02:39:15 2011
+From: jake.mcarthur at gmail.com (Jake McArthur)
+Date: Thu, 21 Apr 2011 19:39:15 -0500
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <1303432288.3329.11.camel@localhost.localdomain>
+References: <4DB093A6.8000303@btinternet.com>
+	<2413044.1630.1303424178223.JavaMail.geo-discussion-forums@prcm34>
+	<BANLkTingNDExfXWS43FmdyMhrKjj+1S6BQ@mail.gmail.com>
+	<1303428728.3329.5.camel@localhost.localdomain>
+	<BANLkTi=Ymnx0HDiM9e4HFA=9rDn5Nc3Ecg@mail.gmail.com>
+	<1303432288.3329.11.camel@localhost.localdomain>
+Message-ID: <BANLkTikj4+mpS1BjtO-94R6+GF+3Jh398Q@mail.gmail.com>
+
+On Thu, Apr 21, 2011 at 7:31 PM, Maciej Marcin Piechotka
+<uzytkownik2 at gmail.com> wrote:
+> Last time I checked it disallowed my as 5 depended on 4 which depended
+> on 3 which depended on 2 which depended on 1 as all changed x.hs
+
+Merely changing the same file is not sufficient for that. In order for
+Darcs to say patch A depends on patch B they must change the same
+lines.
+
+That said, rebase has its uses. It's due in an upcoming version of
+Darcs, actually.
+
+- Jake
+
+

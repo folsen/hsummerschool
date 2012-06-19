@@ -1,0 +1,207 @@
+From dstcruz at gmail.com  Thu Feb  3 01:44:18 2011
+From: dstcruz at gmail.com (Daniel Santa Cruz)
+Date: Wed, 2 Feb 2011 19:44:18 -0500
+Subject: [Haskell-cafe] Haskell Weekly News: Issue 167 - February 02, 2011
+Message-ID: <AANLkTin0FPvyN4JtBrvk77Rufu3FZq8XQFpEdubYnAs3@mail.gmail.com>
+
+   Welcome to issue 167 of the HWN, a newsletter covering developments in
+   the [1]Haskell community. This release covers the week of January 23 to
+   29, 2011.
+
+   This week I've added a section which compiles a list of the top answers
+   given in StackOverflow during the week. These seem to be of more
+   interest to more experienced Haskell users than the newbie questions
+   usually posted on the site. See what you think.
+
+Announcements
+
+   R. Emre Basar [2]annouced the release of follower, a tool that allows
+   you to follow people's tweets without having an account with Twitter.
+
+   Alberto Ruiz [3]announced hmatrix version 0.11, a package for numerical
+   computation based on LAPACK and SGL.
+
+   Michael Snoyman [4]made some point updates for WAI and Warp. "They fix
+   some documentation issues, add some status aliases, make it possible to
+   handle exceptions more easily, and make things more responsive on
+   Windows."
+
+   Antoine Latter [5]announced a minor point release for Parsec 3.1.0.
+
+   John Meacham [6]announced version 0.7.7 of jhc is out! "This release
+   fixes a large number of bugs that cropped up when compiling haskell out
+   in the wild as well as adds some more features. A major one being the
+   garbage collector is enabled by default."
+
+Quotes of the Week
+
+     * Twey: Maybe Bool: the Haskell equivalent to True/False/FileNotFound
+     * elliott: Only two things in the universe are certain: Death, and
+       two of the libraries you've decided to use taking different types
+       of ByteString.
+     * shapr: my personal heuristics judge Haskell as totally practical,
+       perhaps too practical.
+     * monochrom: the guys that I see when I look into the irc window
+       believe that I'm just a bunch of text.
+     * bernardh: Refactoring: spend a week to get where you were
+     * Question: How do I use "fix", and how does it work? Answer (by
+       TomMD): The prank answer is "fix has no real use, it's just there
+       so you can type 'fix error' in ghci and feel good about yourself."
+
+Top Reddit Stories
+
+   * Haskell at Bump
+     Domain: devblog.bu.mp, Score: 44, Comments: 9
+     On Reddit: http://www.reddit.com/r/haskell/comments/f8cr8/haskell_at_bump/
+     Original: http://devblog.bu.mp/haskell-at-bump
+
+   * How to write a simple TCP Server in Haskell
+     Domain: catonmat.net, Score: 35, Comments: 5
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/faa80/how_to_write_a_simple_tcp_server_in_haskell/
+     Original: http://catonmat.net/blog/simple-haskell-tcp-server
+
+   * Snap Framework article in IEEE Internet Computing
+     Domain: steve.vinoski.net, Score: 32, Comments: 1
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/fa0e0/snap_framework_article_in_ieee_internet_computing/
+     Original: http://steve.vinoski.net/blog/2011/01/21/column-on-the-snap-framework/
+
+   * My Dream GHCi Session, Take 2
+     Domain: cdsmith.wordpress.com, Score: 23, Comments: 5
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/f8im5/my_dream_ghci_session_take_2/
+     Original: http://cdsmith.wordpress.com/2011/01/24/my-dream-ghci-session-take-2/
+
+   * Text: a visual programming language based on Haskell, demo
+     Domain: vimeo.com, Score: 20, Comments: 3
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/fbgxd/text_a_visual_programming_language_based_on/
+     Original: http://vimeo.com/19273744
+
+   * Hoogle Embed
+     Domain: neilmitchell.blogspot.com, Score: 16, Comments: 3
+     On Reddit: http://www.reddit.com/r/haskell/comments/f7iqa/hoogle_embed/
+     Original: http://neilmitchell.blogspot.com/2011/01/hoogle-embed.html
+
+   * What does this mean for Haskell on Android?
+     Domain: reddit.com, Score: 15, Comments: 12
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/f9o67/what_does_this_mean_for_haskell_on_android/
+     Original: http://www.reddit.com/r/Android/comments/f97zh/google_not_happy_with_number_of_android_app/c1ebkji
+
+   * Evolving a computer with Genprog (exercises from the TECS book)
+     Domain: jpmoresmau.blogspot.com, Score: 13, Comments:
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/f7y6a/evolving_a_computer_with_genprog_exercises_from/
+     Original: http://jpmoresmau.blogspot.com/2011/01/evolving-computer-with-tecs-and-genprog.html
+
+   * All about MVars : Inside T5
+     Domain: blog.ezyang.com, Score: 13, Comments: 4
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/fduxb/all_about_mvars_inside_t5/
+     Original: http://blog.ezyang.com/2011/02/all-about-mvars/
+
+   * What textbooks would be useful to start approaching the
+low-hanging fruit on the ghc project?
+     Domain: self.haskell, Score: 12, Comments: 8
+     On Reddit:
+http://www.reddit.com/r/haskell/comments/f8dm5/what_textbooks_would_be_useful_to_start/
+     Original: /r/haskell/comments/f8dm5/what_textbooks_would_be_useful_to_start/
+
+Top StackOverflow Answers
+
+   * What is an idiomatic way to add lists in Haskell?
+     Votes: 14
+     Read on SO:
+http://stackoverflow.com/questions/4776750/what-is-an-idiomatic-way-to-add-lists-in-haskell/4776775#4776775
+
+     There is a zipWith library function that combines two lists by using
+     a supplied function. It does exactly what you want here and you get:
+
+    	  addLists = zipWith (+)
+
+     This uses (+) to combine the elements of lists given as further arguments.
+
+   * Why don't the Haskell standard libraries make more use of polymorphism?
+     Votes: 15
+     Read on SO:
+http://stackoverflow.com/questions/4779028/why-dont-the-haskell-standard-libraries-make-more-use-of-polymorphism/4780331#4780331
+
+     There is a very good pragmatic reason that "standard" Haskell
+     (Prelude + base + maybe some more) doesn't use more polymorphism:
+
+     Designing general-use type classes is hard. Good designs for classes that
+     abstract over container types like lists, arrays and
+"bytestrings" (personally
+     I don't really consider Bytestring a container) aren't floating
+round waiting  ?
+
+   * How do I use fix, and how does it work?
+     Votes: 17
+     Read on SO:
+http://stackoverflow.com/questions/4787421/how-do-i-use-fix-and-how-does-it-work/4787577#4787577
+
+     You are doing nothing wrong.  fix id is an infinite loop.
+
+     When we say that fix returns the least fixed point of a function, we
+     mean that in the domain theory sense.  So fix (\x -> 2*x-1) is not going
+     to return 1, because although 1 is a fixed point of that function, it
+     is not the least one in the domain ordering.
+
+     I can't describe the domain ordering in  ?
+
+Top StackOverflow Questions
+
+   * Why don't the Haskell standard libraries make more use of polymorphism?
+     votes: 20, answers: 4
+     Read on SO:
+http://stackoverflow.com/questions/4779028/why-dont-the-haskell-standard-libraries-make-more-use-of-polymorphism
+
+   * How do I use fix, and how does it work?
+     votes: 11, answers: 3
+     Read on SO:
+http://stackoverflow.com/questions/4787421/how-do-i-use-fix-and-how-does-it-work
+
+   * Why wrapping the Data.Binary.Put monad creates a memory leak?
+     votes: 11, answers: 2
+     Read on SO:
+http://stackoverflow.com/questions/4828902/why-wrapping-the-data-binary-put-monad-creates-a-memory-leak
+
+   * Is there any kind of statistical natural language processing
+library for Haskell?
+     votes: 9, answers: 1
+     Read on SO:
+http://stackoverflow.com/questions/4808702/is-there-any-kind-of-statistical-natural-language-processing-library-for-haskell
+
+   * How do you structure a stateful module in Haskell?
+     votes: 8, answers: 2
+     Read on SO:
+http://stackoverflow.com/questions/4785379/how-do-you-structure-a-stateful-module-in-haskell
+
+About the Haskell Weekly News
+
+   You can find an html version of this newsletter at my blog:
+   http://contemplatecode.blogspot.com/2011/02/haskell-weekly-news-issue-167.html
+
+   Special thanks to Jean-Philippe Gariepy for sending in a quote for this
+   week's quotes! We need more eyes!
+
+   To help create new editions of this newsletter, please send stories to
+   dstcruz at gmail.com. I'm in dire need of finding good "quotes of the
+   week". If you happen to come across any, please don't hesitate to send
+   it along.
+
+   Until next time,
+   Daniel Santa Cruz
+
+References
+
+   1. http://haskell.org/
+   2. http://permalink.gmane.org/gmane.comp.lang.haskell.cafe/85566
+   3. http://permalink.gmane.org/gmane.comp.lang.haskell.cafe/85648
+   4. https://groups.google.com/d/topic/haskell-cafe/Yd2ADZzonSI/discussion
+   5. http://permalink.gmane.org/gmane.comp.lang.haskell.cafe/85761
+   6. https://groups.google.com/d/topic/fa.haskell/T6EM4jbhj8w/discussion
+
+

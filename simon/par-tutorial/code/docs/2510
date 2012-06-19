@@ -1,0 +1,173 @@
+From chris at chrisdornan.com  Fri Dec 30 22:33:12 2011
+From: chris at chrisdornan.com (Chris Dornan)
+Date: Fri, 30 Dec 2011 21:33:12 -0000
+Subject: [Haskell-cafe] purity and the season of good will
+Message-ID: <05f501ccc73a$a2e3a400$e8aaec00$@chrisdornan.com>
+
+(Whether readers would consider the post [or indeed this post] an act of
+trollery was mooted and mentioned several times in the original post - my
+thoughts at the end. I am writing this because I would have expected
+somebody to have said this by now. If it has been said then my sincere
+apologies. Meta issues, flames, etc., to me and not the list of course.)
+ 
+ 
+Pure versus Impure
+ 
+I suspect introducing C into this discussion may not help clarify the
+fundamental issue.
+ 
+As anyone with experience of programming in Haskell appreciates, there is a
+big difference between (e.g.) these two functions for taking the sum of two
+integers:
+ 
+plus   :: Int -> Int -> Int
+ 
+plusIO :: Int -> Int -> IO Int
+ 
+The choice is a profound one and will affect their construction as well as
+the contexts they can be used and so forth. 
+ 
+Haskell supports both styles of programming and allows them to be safely and
+freely intermixed with the type system guaranteeing to keep them properly
+separated.
+ 
+The type system and static semantics are critical to the Haskell approach to
+IO and 'purity'.  I can't see how it can be meaningfully pushed into the
+background in any discussion or comparative discussion of these issues. 
+ 
+ 
+In Short
+ 
+If the programming context in question doesn't provide any equivalent formal
+separation in its type system of plus-like functions and plusIO-like
+computations, that programmers use in practice to guide the construction of
+their programs, then how can the said programming context be considered
+equivalent to Haskell's treatment of pure functions and effects-generating
+computations.
+ 
+You just need to consider your own Haskell programming activity and how the
+type system keeps calculations and I/O actions separate to see this point. I
+doubt if any extra theory (or theology!) will add much insight.
+ 
+ 
+That T word Again (or not)
+ 
+Let's keep this forward-looking. With the email piling in as I write this,
+please consider whether this continuation of this discussion is likely to be
+helpful to the general readers of this list or whether it will confuse or
+discourage them, before adding to it.
+ 
+ 
+A Happy New Year to you,
+ 
+ 
+Chris
+ 
+ 
+From: haskell-cafe-bounces at haskell.org
+[mailto:haskell-cafe-bounces at haskell.org] On Behalf Of Steve Horne
+Sent: 28 December 2011 17:40
+To: Haskell Cafe Mailing List
+Subject: [Haskell-cafe] On the purity of Haskell
+ 
+This is just my view on whether Haskell is pure, being offered up for
+criticism. I haven't seen this view explicitly articulated anywhere before,
+but it does seem to be implicit in a lot of explanations - in particular the
+description of Monads in SBCs "Tackling the Awkward Squad". I'm entirely
+focused on the IO monad here, but aware that it's just one concrete case of
+an abstraction.
+
+Warning - it may look like trolling at various points. Please keep going to
+the end before making a judgement.
+
+To make the context explicit, there are two apparently conflicting
+viewpoints on Haskell...
+1.	The whole point of the IO monad is to support programming with
+side-effecting actions - ie impurity.
+2.	The IO monad is just a monad - a generic type (IO actions), a couple
+of operators (primarily return and bind) and some rules - within a pure
+functional language. You can't create impurity by taking a subset of a pure
+language.
+My view is that both of these are correct, each from a particular point of
+view. Furthermore, by essentially the same arguments, C is also both an
+impure language and a pure one.
+
+See what I mean about the trolling thing? I'm actually quite serious about
+this, though - and by the end I think Haskell advocates will generally
+approve.
+
+First assertion... Haskell is a pure functional language, but only from the
+compile-time point of view. The compiler manipulates and composes IO actions
+(among other things). The final resulting IO actions are finally swallowed
+by unsafePerformIO or returned from main. However, Haskell is an impure
+side-effecting language from the run-time point of view - when the composed
+actions are executed. Impurity doesn't magically spring from the ether - it
+results from the translation by the compiler of IO actions to executable
+code and the execution of that code.
+
+In this sense, IO actions are directly equivalent to the AST nodes in a C
+compiler. A C compiler can be written in a purely functional way - in
+principle it's just a pure function that accepts a string (source code) and
+returns another string (executable code). I'm fudging issues like separate
+compilation and #include, but all of these can be resolved in principle in a
+pure functional way. Everything a C compiler does at compile time is
+therefore, in principle, purely functional.
+
+In fact, in the implementation of Haskell compilers, IO actions almost
+certainly *are* ASTs. Obviously there's some interesting aspects to that
+such as all the partially evaluated and unevaluated functions. But even a
+partially evaluated function has a representation within a compiler that can
+be considered an AST node, and even AST nodes within a C compiler may
+represent partially evaluated functions.
+
+Even the return and bind operators are there within the C compiler in a
+sense, similar to the do notation in Haskell. Values are converted into
+actions. Actions are sequenced. Though the more primitive form isn't
+directly available to the programmer, it could easily be explicitly present
+within the compiler.
+
+What about variables? What about referential transparency?
+
+Well, to a compiler writer (and equally for this argument) an identifier is
+not the same thing as the variable it references.
+
+One way to model the situation is that for every function in a C program,
+all explicit parameters are implicitly within the IO monad. There is one
+implicit parameter too - a kind of IORef to the whole system memory.
+Identifiers have values which identify where the variable is within the big
+implicit IORef. So all the manipulation of identifiers and their
+reference-like values is purely functional. Actual handling of variables
+stored within the big implicit IORef is deferred until run-time.
+
+So once you accept that there's an implicit big IORef parameter to every
+function, by the usual definition of referential transparency, C is as
+transparent as Haskell. The compile-time result of each function is
+completely determined by its (implicit and explicit) parameters - it's just
+that that result is typically a way to look up the run-time result within
+the big IORef later.
+
+What's different about Haskell relative to C therefore...
+1.	The style of the "AST" is different. It still amounts to the same
+thing in this argument, but the fact that most AST nodes are simply
+partially-evaluated functions has significant practical consequences,
+especially with laziness mixed in too. There's a deep connection between the
+compile-time and run-time models (contrast C++ templates).
+2.	The IO monad is explicit in Haskell - side-effects are only
+permitted (even at run-time) where the programmer has explicitly opted to
+allow them.
+3.	IORefs are explicit in Haskell - instead of always having one you
+can have none, one or many. This is relevant to an alternative definition of
+referential transparency. Politicians aren't considered transparent when
+they bury the relevant in a mass of the irrelevant, and even pure functions
+can be considered to lack transparency in that sense. Haskell allows (and
+encourages) you to focus in on the relevant - to reference an IORef Bool or
+an IORef Int rather than dealing with an IORef Everything.
+That last sentence of the third point is my most recent eureka - not so long
+ago I posted a "Haskell is just using misleading definitions - it's no more
+transparent than C" rant, possibly on Stack Overflow. Wrong again :-(
+
+So - what do you think?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111230/caf82a71/attachment-0001.htm>
+

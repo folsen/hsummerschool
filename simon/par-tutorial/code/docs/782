@@ -1,0 +1,78 @@
+From apfelmus at quantentunnel.de  Wed Apr 27 08:44:43 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Wed, 27 Apr 2011 08:44:43 +0200
+Subject: [Haskell-cafe] Inputs to classic FRP:
+	unsafeInterleaveIO/unsafePerformIO
+In-Reply-To: <BANLkTi=wwQsj9+QgttPzCE+H1W8RO7yjUw@mail.gmail.com>
+References: <BANLkTi=XMKwyeK8VK5kyYJRuP1JS4RZS4g@mail.gmail.com>	<ip5s8s$j07$1@dough.gmane.org>
+	<BANLkTi=wwQsj9+QgttPzCE+H1W8RO7yjUw@mail.gmail.com>
+Message-ID: <ip8e0s$ijh$1@dough.gmane.org>
+
+Ryan Ingram wrote:
+> Apfelmus, I hope you don't abandon your efforts, at least for the selfish
+> reason that I enjoy reading your blog entries about trying to implement it!
+
+:D  My reasoning was that a temporary demand-driven implementation would 
+allow me to release the library sooner; I want people to start using the 
+library and experiment with FRP. I can always add the push-driven 
+implementation later.
+
+However, even in a demand-driven implementation, there is one 
+optimization that I would like make: when there are multiple external 
+events, say e1 and e2, the network splits into subnetworks that react 
+only to one of the inputs. For instance, your example would split into 
+two graphs
+
+   e1               e2
+   |  \             |  \
+   e3  e4     and   e3  e4
+   |   |            |   |
+   e5  e5           e5  e5
+
+that are independent of each other. Unlike successful filters, these 
+subnetworks are known *statically* and it's worth splitting them out.
+
+That said, it appears to me that this optimization is quite tricky even 
+in a demand-driven setting! I can as well stick to the push-driven 
+implementation I have already started.
+
+
+> I was looking at your last entry and trying to understand if/how you solve
+> the order-dependency problem for events.  In particular:
+> 
+> source events e1, e2
+> 
+> e3 = e1 union e2
+> e4 = e2 union e1
+> 
+> e5 = e3 union e4
+> 
+> The graph from your description would look something like
+> 
+> 
+> e1      e2
+> | \-A  / \   A-\
+> e3    e3 e4    e4
+> |     |   |    |
+> e5    e5 e5    e5
+> 
+> When I was looking at the FRP problem before, it felt a lot like the
+> 'adaptive' problem, so I was looking at Umut Acar's papers and trying to
+> build something along those lines.  But perhaps your API is simple enough
+> that you don't need that degree of complexity.
+
+Thanks, I'll have a look at his work. It's really very similar to some 
+kind of adaptive computation. What currently irks me about my 
+push-driven implementation is that it is ad-hoc. I would really like to 
+start from a demand-driven implementation and systematically transform 
+it into a push-driven one.
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

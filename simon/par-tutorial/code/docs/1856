@@ -1,0 +1,65 @@
+From chbreitkopf at googlemail.com  Mon Dec 12 10:42:53 2011
+From: chbreitkopf at googlemail.com (Christoph Breitkopf)
+Date: Mon, 12 Dec 2011 10:42:53 +0100
+Subject: [Haskell-cafe] Module name space question
+Message-ID: <CAPTT2bYJLDkx__JRKehjiTfO-rcAQkQjnfwnR6z3gSAuHE-Y+w@mail.gmail.com>
+
+Hi,
+
+I recently asked about what interfaces to implement for a new data type.
+Following the rule that the last 10% of work take the second 90% of time,
+some other questions have come up.
+
+If anyone wants to look at the code in question:
+http://www.chr-breitkopf.de/comp/IntervalMap
+
+Some time ago, I was looking for a data structure to search in sets of
+possibly
+overlapping intervals, and found only Data.SegmentTree, which did not fit
+my needs
+(nice term for "I did not understand the type signatures").
+
+So I started to roll my own IntervalMap implementation. But yesterday I used
+Hayoo instead of Hoogle for the first time, and found
+Data.IntervalMap.FingerTree.
+This has an Interface that I _do_ understand, and, while slightly different
+from my
+aims (depite the name, it seems more like a multi-map and does not offer
+lookup
+of specific keys), it raises some tasks/questions:
+
+Tasks: Benchmark against my implementation, and maybe scrap own if it
+performs worse.
+
+And questions:
+
+1. Why doesn't Hoogle find this?
+
+2. Module name space pollution
+
+I would have been so bold to name my module Data.IntervalMap. Now, since
+even
+Ross Patterson uses a submodule name instead, what is the accepted practice?
+If I decide to release my class after all, what should be the name?
+Data.IntervalMap.RedBlackTree ? Or even
+Data.IntervalMap.MyDomaindNameOrSomething.
+An I even have a module Data.IntervalMap.Interval, so if Ross had decided
+to put
+his Interval type into a separate module, even FingerTree vs RedBlackTree
+would not
+have prevented a name clash.
+
+3. Are there more wothwile operations on this data structure?
+
+Data.IntervalMap.FingerTree has 'dominators', which I missed.
+A function to extract the interval with the largest endpoint might be
+useful, too.
+Any more ideas?
+
+TIA,
+
+Chris
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111212/0add8b87/attachment.htm>
+

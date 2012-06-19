@@ -1,0 +1,65 @@
+From es at ertes.de  Tue Apr 12 11:21:49 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Tue, 12 Apr 2011 11:21:49 +0200
+Subject: [Haskell-cafe] Stateful iteratees
+References: <20110407190452.356fcca6@angst.streitmacht.eu>
+	<1302302979.28436.26.camel@localhost.localdomain>
+Message-ID: <20110412112149.76b4c29f@angst.streitmacht.eu>
+
+Maciej Marcin Piechotka <uzytkownik2 at gmail.com> wrote:
+
+> > Does someone know a cleaner, more elegant solution?  Encapsulating the
+> > state in the iteratee's input type is not an option.
+>
+> The first thing that come to my mind.
+>
+> runWithState :: Iteratee a (StateT s m) b -> s -> Iteratee a m (b, s)
+> runWithState i s = do
+>     let onDone v st = return (Right (v, st))
+>         onCont c err = return (Left (c, err))
+>     (i', s') <- runStateT (runIter i onDone onCont) s
+>     case i' of
+>       Left (c, err) -> icont (\str -> runWithState (c str) s') err
+>       Right (v, st) -> idone (v, s') st
+>
+> I believe it is equivalent to:
+>
+> runWithState :: Iteratee a (StateT s m) b -> s -> Iteratee a m (b, s)
+> runWithState i s = do
+>     let onDone v st = do
+>             s' <- get
+>             return (idone (v, s') st)
+>         onCont c err = do
+>             s' <- get
+>             return (icont (\str -> runWithState (c str) s') err)
+>     joinIM $ evalStateT (runIter i onDone onCont) s
+
+Thanks for the code.  It might come in handy, but for the current
+implementation I decided not to use this approach, but instead to
+generalize over 'm', which gives me better composability, for example:
+
+  MailMonad m => Iteratee SmtpResponse m ()
+
+Library users can write their own monads and make them instances of
+MailMonad, which is very easy, because there is only one function to
+implement.  This seems to solve my original problem.
+
+
+> I haven't tested but it compiles so it should work.
+
+I loved that statement -- specifically because it's not far-fetched in
+Haskell.  You wouldn't dare to write anything like that in any of the
+more commonly used languages. =)
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

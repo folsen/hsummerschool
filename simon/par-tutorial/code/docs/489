@@ -1,0 +1,53 @@
+From john.obbele at gmail.com  Tue Apr 19 16:35:34 2011
+From: john.obbele at gmail.com (John Obbele)
+Date: Tue, 19 Apr 2011 16:35:34 +0200
+Subject: [Haskell-cafe] Need comments on a libusb asynchronous
+ select/poll loop
+In-Reply-To: <BANLkTim866Givw+zukTNXtoDnQBSAMUxeg@mail.gmail.com>
+References: <20110419130604.GA26986@X52D.localdomain>
+	<BANLkTim866Givw+zukTNXtoDnQBSAMUxeg@mail.gmail.com>
+Message-ID: <20110419143534.GB26986@X52D.localdomain>
+
+On Tue, Apr 19, 2011 at 08:52:44AM -0500, Antoine Latter wrote:
+> Maybe I'm misunderstanding something, but why why I want to use epoll
+> directly instead of just using forkIO plus threadWaitRead and
+> threadWaitWrite?
+> 
+> http://hackage.haskell.org/packages/archive/base/latest/doc/html/Control-Concurrent.html#v:threadWaitRead
+> 
+> As a developer, the concurrency model offered by the
+> Control.Concurrency module has always been friendly to me.
+
+So instead of blindly following the C documentation on how to
+poll libusb, I should simply spawn a forkIO on each file
+descriptors and wait for the threadWait{Write,Read} to do their
+magic ?
+
+Something like:
+
+readAsyncIO = do $
+    zipfds <- getLibusbFileDescriptorsStruct
+    mapM_ (forkIO . monitor) zipfds
+
+ where monitor args@(readOrWrite, fd) = do
+        if isRead readOrWrite
+            then threadWaitRead fd
+            else threadWaitWrite fd
+        libusbHandleAllPendingsEvents
+        monitor args -- loop recursion
+
+Of course, I would have to use MVars or libusb lock API to verify
+that no two Haskell threads were trying to flush the events pool
+at the same time.
+
+hum ... wait, we don't use locks in Haskell, we use STM, don't we ?
+
+> Maybe there was something in the other thread I missed.
+I'm always lost in these long discussions about the overall
+merits of this one method or this another one.
+
+A (real) example helps me better to grasp the notions.
+
+/john
+
+

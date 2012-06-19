@@ -1,0 +1,40 @@
+From allbery.b at gmail.com  Mon Aug 29 10:45:57 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Mon, 29 Aug 2011 04:45:57 -0400
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <CAHVSqQcLzAcgT-Zbue70AnRezPUOfwdsCtotEoE_7P7UBvTC2w@mail.gmail.com>
+References: <4E568D11.30800@btinternet.com> <4E56CD99.6050703@vex.net>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+	<nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+	<4E57F43A.9030800@btinternet.com>
+	<b25g57lk7fbp5td6lp31qigptnr6rvfh67@4ax.com>
+	<4E58CDB5.2010900@btinternet.com>
+	<CAKFCL4VsuQrdmfM5EfBK_DBokMTC7SVP=u_UTJZV+17vABOvCg@mail.gmail.com>
+	<CAHVSqQcLzAcgT-Zbue70AnRezPUOfwdsCtotEoE_7P7UBvTC2w@mail.gmail.com>
+Message-ID: <CAKFCL4Vz9EJ0x-wHETPz7hv+Vj5_ZjXKbn==7h3C7Vfg1OAcPQ@mail.gmail.com>
+
+On Mon, Aug 29, 2011 at 04:08, Alexander Kjeldaas <
+alexander.kjeldaas at gmail.com> wrote:
+
+> All search engines deal with compressed integers, all compressors do, and
+> most people doing bit-manipulation. Golomb, gamma, elias, rice coding, they
+> all need this. Heck, even the Intel engineers chose to optimize this
+> function by including the BSR instruction in the 386 architecture.  This is
+> a basic building block.
+>
+> Don't underestimate the bit, it is coming back with a vengeance. Bit-coding
+> is everywhere now, because of the memory hierarchy.  No haskeller should be
+> left behind.
+>
+
+Is it so basic that we must throw out the current meaning of bitSize, with
+all *its* uses, to satisfy yours?
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110829/fc204051/attachment.htm>
+

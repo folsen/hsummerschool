@@ -1,0 +1,57 @@
+From jake.mcarthur at gmail.com  Fri Apr 22 02:19:11 2011
+From: jake.mcarthur at gmail.com (Jake McArthur)
+Date: Thu, 21 Apr 2011 19:19:11 -0500
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <1303428728.3329.5.camel@localhost.localdomain>
+References: <4DB093A6.8000303@btinternet.com>
+	<2413044.1630.1303424178223.JavaMail.geo-discussion-forums@prcm34>
+	<BANLkTingNDExfXWS43FmdyMhrKjj+1S6BQ@mail.gmail.com>
+	<1303428728.3329.5.camel@localhost.localdomain>
+Message-ID: <BANLkTi=Ymnx0HDiM9e4HFA=9rDn5Nc3Ecg@mail.gmail.com>
+
+On Thu, Apr 21, 2011 at 6:32 PM, Maciej Marcin Piechotka
+<uzytkownik2 at gmail.com> wrote:
+> Assume following changes
+> 1. Feature X - file x.hs
+> 2. Feature Y - file y.hs and x.hs
+> 3. Feature Z - file z.hs and x.hs
+> 4. Fix to feature Y (changes x.hs)
+> 5. Fix to feature X (changes x.hs)
+>
+> Now before pushing I would like to have 3 nice commits. In git I can
+> rewrite history by single command:
+>
+> # git rebase -i origin/master
+>
+> and edit the file to look like
+>
+> pick 1
+> fixup 5
+> pick 2
+> fixup 4
+> pick 3
+>
+> Manually/automatically check everything is ok.
+
+% darcs unrec -a -p 'Fix to feature X'
+Finished unrecording.
+% darcs amend -a -p 'Feature X'
+Thu Apr 21 19:11:54 CDT 2011  Jake McArthur <Jake.McArthur at gmail.com>
+  * Feature X
+Shall I amend this patch? [yN...], or ? for more options: y
+Finished amending patch:
+Thu Apr 21 19:14:41 CDT 2011  Jake McArthur <Jake.McArthur at gmail.com>
+  * Feature X
+% darcs unrec -a -p 'Fix to feature Y'
+Finished unrecording.
+% darcs amend -a -p 'Feature Y'
+Thu Apr 21 19:12:12 CDT 2011  Jake McArthur <Jake.McArthur at gmail.com>
+  * Feature Y
+Shall I amend this patch? [yN...], or ? for more options: y
+Finished amending patch:
+Thu Apr 21 19:14:50 CDT 2011  Jake McArthur <Jake.McArthur at gmail.com>
+  * Feature Y
+
+- Jake
+
+

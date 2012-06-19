@@ -1,0 +1,33 @@
+From allbery.b at gmail.com  Sat Aug 27 22:40:07 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Sat, 27 Aug 2011 16:40:07 -0400
+Subject: [Haskell-cafe] Modules and a main function
+In-Reply-To: <1314476643.89544.YahooMailNeo@web31108.mail.mud.yahoo.com>
+References: <1314473460.932.YahooMailNeo@web31101.mail.mud.yahoo.com>
+	<CAKFCL4WQECmogUVhx+_0z8YdC2qj5ZTQWx4tV73P_1tKuah=cg@mail.gmail.com>
+	<1314476643.89544.YahooMailNeo@web31108.mail.mud.yahoo.com>
+Message-ID: <CAKFCL4VZ7K1trEVMRkz3D8vKGL-TnnR0MRhiVXmWwoOCuBEOtA@mail.gmail.com>
+
+On Sat, Aug 27, 2011 at 16:24, michael rice <nowgate at yahoo.com> wrote:
+
+> I'm not sure how to do that. Please demonstrate.
+>
+
+If you just compile it normally you have an unexported binding called "main"
+which is effectively (and actually, when compiled with optimization)
+discarded.  If you do
+
+    ghc --make --main-is GameState GameState.hs
+
+then GHC will use GameState.main as the entry point (instead of Main.main)
+and build a program instead of a library.
+
+http://www.haskell.org/ghc/docs/latest/html/users_guide/options-phases.html#options-linker
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110827/06cd0c2e/attachment.htm>
+

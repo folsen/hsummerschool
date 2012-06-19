@@ -1,0 +1,41 @@
+From bytbox at gmail.com  Sun Aug  7 02:00:24 2011
+From: bytbox at gmail.com (Scott Lawrence)
+Date: Sat, 6 Aug 2011 20:00:24 -0400
+Subject: [Haskell-cafe] Prelude> read "1234" :: String -> "***
+ Exception: Prelude.read: no parse
+In-Reply-To: <1312675079.94971.YahooMailClassic@web31105.mail.mud.yahoo.com>
+References: <1312675079.94971.YahooMailClassic@web31105.mail.mud.yahoo.com>
+Message-ID: <CAB5U38btFZxVMUONYfRaKbTegXa2wNKAsF8pnn24bap2vkT44Q@mail.gmail.com>
+
+read expects strings to be quoted:
+
+Prelude> read "\"1234\"" :: String
+"1234"
+
+
+On Sat, Aug 6, 2011 at 19:57, michael rice <nowgate at yahoo.com> wrote:
+
+> Prelude> read "1234" :: Int
+> 1234
+> Prelude> read "1234" :: String
+> "*** Exception: Prelude.read: no parse
+>
+> Why?
+>
+> Michael
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+
+-- 
+Scott Lawrence
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110806/8da80ae8/attachment.htm>
+

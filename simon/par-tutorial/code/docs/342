@@ -1,0 +1,44 @@
+From agocorona at gmail.com  Tue Apr 12 19:57:54 2011
+From: agocorona at gmail.com (Alberto G. Corona )
+Date: Tue, 12 Apr 2011 19:57:54 +0200
+Subject: [Haskell-cafe] syntactic sugar for heterogeneous lists
+Message-ID: <BANLkTin9Uj95e-vagiLCeZovp6gbvqfQtw@mail.gmail.com>
+
+Hi Cafe:
+
+http://hackage.haskell.org/trac/ghc/ticket/1245
+
+
+I also want some kind of syntactic sugar for H. Lists.
+
+The absence of syntactic sugar makes heterogeneous list to look scary.
+People in haskell is accostumed to syntactic sugaring, so people think of
+not sugared expressions as second class.
+
+I? don't know the details, but it seems that tuples are in the language to
+cover the heterogeneous flexibility thing that homogeneous lists may not
+provide, but they introduce its own inflexibilities; These repeating
+instances for two, three, four and so on tuples makes them artificial and
+repetitive. In its comparison, a complex but unique H. List instance look
+elegant. specially if it is sugarized.
+
+An alternative to sugarize H.Lists preserving tuples could be to use {} to
+sugarize H. lists as
+
+   {x,y,z}
+
+and desugarize it into:
+
+x :*: y :*: z :*: {}
+
+Just like [] means empty list, {} would mean HNil, the empty heterogeneous
+list.
+
+
+But this alternative , if implemented, would soon render tuples  obsolete.
+These (,,) (,,,) constructors may create marginally faster and compact
+structures, but they are much less manageable.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110412/4e96834a/attachment.htm>
+

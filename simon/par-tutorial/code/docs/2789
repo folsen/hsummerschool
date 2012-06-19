@@ -1,0 +1,30 @@
+From ketil at malde.org  Mon Feb  7 10:25:02 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Mon, 07 Feb 2011 10:25:02 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTi=O-hT+T6ZLrMVWdyU+qio--Wcx-zqB5Zs4-3gG@mail.gmail.com>
+	(Johan Tibell's message of "Fri, 4 Feb 2011 08:26:32 +0100")
+References: <4D4B19DB.5000907@btinternet.com>
+	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+	<AANLkTi=O-hT+T6ZLrMVWdyU+qio--Wcx-zqB5Zs4-3gG@mail.gmail.com>
+Message-ID: <87mxm8ryc1.fsf@malde.org>
+
+Johan Tibell <johan.tibell at gmail.com> writes:
+
+>> The GHC documentation says the information is in the interface files,
+>> but they are binary now, and I can't find it there.
+
+> ghc --show-iface HI_FILE
+
+> The strictness signatures are a bit hard to parse though. Having a
+> cheat sheet would be nice.
+
+Am I the only one who keep thinking it'd be great to have this
+incorporated in my Emacs haskell-mode?  Along with a nice interface to
+core, please.  And a pony.
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

@@ -1,0 +1,17 @@
+From schlepptop at henning-thielemann.de  Mon Apr 11 18:42:44 2011
+From: schlepptop at henning-thielemann.de (Henning Thielemann)
+Date: Mon, 11 Apr 2011 18:42:44 +0200
+Subject: [Haskell-cafe] Tuple
+In-Reply-To: <93578.14795.qm@web33505.mail.mud.yahoo.com>
+References: <93578.14795.qm@web33505.mail.mud.yahoo.com>
+Message-ID: <4DA32F84.5050502@henning-thielemann.de>
+
+Anwar Bari schrieb:
+
+>      I have to make a function to check that I have one occurrence of the last 
+> element (z) of the same list [a,b] in the tuple 
+
+How about using Data.Map?
+
+
+

@@ -1,0 +1,15 @@
+From ok at cs.otago.ac.nz  Mon Dec 12 23:19:01 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Tue, 13 Dec 2011 11:19:01 +1300
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CAOrUaLap26sWmxfXEVdJUc_qJ2QEq1t+p1TNwH-JLx_=UXfTxw@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CAOrUaLap26sWmxfXEVdJUc_qJ2QEq1t+p1TNwH-JLx_=UXfTxw@mail.gmail.com>
+Message-ID: <CF53E7A4-01A5-4AB7-8727-5FFB6A93C444@cs.otago.ac.nz>
+
+Perhaps the most urgent change would simply be better documentation
+for what 'some' and 'many' are all about.  Some examples would be nice.
+
+
+
+

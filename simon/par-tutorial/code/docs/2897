@@ -1,0 +1,31 @@
+From frodo at theshire.org  Wed Feb  9 21:19:20 2011
+From: frodo at theshire.org (Cristiano Paris)
+Date: Wed, 9 Feb 2011 21:19:20 +0100
+Subject: [Haskell-cafe] Synthetic values?
+In-Reply-To: <4D52E7A4.7020705@gmail.com>
+References: <AANLkTimsWsfdkPLK4yQRHt3OcBGUiN2FGAwG52DvKCpD@mail.gmail.com>
+	<4D52E7A4.7020705@gmail.com>
+Message-ID: <AANLkTi=suZcK0vzdNNBA7PCCEwnBRjRrTEriocO2-vTO@mail.gmail.com>
+
+On Wed, Feb 9, 2011 at 20:14, Alexey Khudyakov
+<alexey.skladnoy at gmail.com> wrote:
+> ...
+> My solution is based on heterogenous lists and require number of
+> language extensions. I'd recomend to read paper "Strongly typed
+> heterogeneous collections"[1] which describe this technique in detail
+
+Curious: I read the paper just because I had an idea about how to
+solve the problem but it led me to no solution even though it helped
+me a lot in understanding some advanced type mechanism.
+
+I'll read your solution later and come back to you with a comment.
+
+Thank you in the meantime.
+
+-- 
+Cristiano
+
+GPG Key: 4096R/C17E53C6 2010-02-22
+Fingerprint = 4575 4FB5 DC8E 7641 D3D8? 8EBE DF59 B4E9 C17E 53C6
+
+

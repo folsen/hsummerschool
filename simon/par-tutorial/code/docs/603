@@ -1,0 +1,26 @@
+From karel.gardas at centrum.cz  Fri Apr 22 09:24:23 2011
+From: karel.gardas at centrum.cz (Karel Gardas)
+Date: Fri, 22 Apr 2011 09:24:23 +0200
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <1303428842.3329.7.camel@localhost.localdomain>
+References: <4DB093A6.8000303@btinternet.com>
+	<1303428842.3329.7.camel@localhost.localdomain>
+Message-ID: <4DB12D27.1050904@centrum.cz>
+
+On 04/22/11 01:34 AM, Maciej Marcin Piechotka wrote:
+> On Thu, 2011-04-21 at 21:29 +0100, Andrew Coppin wrote:
+>> I'm sure this must be a VFAQ, but... There seems to be universal
+>> agreement that Darcs is a nice idea, but is unsuitable for "real"
+>> projects. Even GHC keeps talking about getting rid of Darcs. Can anybody
+>> tell me what the "problems" with Darcs actually are?
+>
+> I believe the biggest problem was (i.e. when migration started) that
+> there is no big-name-hosting supporting darcs. When code.haskell.org
+> went down people were cut off from code.
+
+http://www.patch-tag.com/ is not enough for you?
+
+Cheers,
+Karel
+
+

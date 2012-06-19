@@ -1,0 +1,78 @@
+From daniel.is.fischer at googlemail.com  Sun Aug 14 22:17:28 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sun, 14 Aug 2011 22:17:28 +0200
+Subject: [Haskell-cafe] how to read CPU time vs wall time report from
+	GHC?
+In-Reply-To: <20110814195321.GB13795@teal.hq.k1024.org>
+References: <4E480FD8.7070301@uu.nl> <4E4814C4.5020600@uu.nl>
+	<20110814195321.GB13795@teal.hq.k1024.org>
+Message-ID: <201108142217.28777.daniel.is.fischer@googlemail.com>
+
+On Sunday 14 August 2011, 21:53:21, Iustin Pop wrote:
+> On Sun, Aug 14, 2011 at 08:32:36PM +0200, Wishnu Prasetya wrote:
+> > On 14-8-2011 20:25, Iustin Pop wrote:
+> > >On Sun, Aug 14, 2011 at 08:11:36PM +0200, Wishnu Prasetya wrote:
+> > >>Hi guys,
+> > >>
+> > >>I'm new in parallel programming with Haskell. I made a simple test
+> > >>program using that par combinator etc, and was a bit unhappy that it
+> > >>turns out to be  slower than its sequential version. But firstly, I
+> > >>dont fully understand how to read the runtime report produced by GHC
+> > >>
+> > >>with -s option:
+> > >>   SPARKS: 5 (5 converted, 0 pruned)
+> > >>   
+> > >>   INIT  time    0.02s  (  0.01s elapsed)
+> > >>   MUT   time    3.46s  (  0.89s elapsed)
+> > >>   GC    time    5.49s  (  1.46s elapsed)
+> > >>   EXIT  time    0.00s  (  0.00s elapsed)
+> > >>   Total time    8.97s  (  2.36s elapsed)
+> > >>
+> > >>As I understand it from the documentation, the left time-column is
+> > >>the CPU time, whereas the right one is elapses wall time. But how
+> > >>come that the wall time is less than the CPU time? Isn't wall time =
+> > >>user's perspective of time; so that is CPU time + IO + etc?
+> > >
+> > >Yes, but if you have multiple CPUs, then CPU time "accumulates"
+> > >faster than wall-clock time.
+> > >
+> > >Based on the above example, I guess you have or you run the program
+> > >on 4 cores (2.36 * 4 = 9.44, which means you got a very nice ~95%
+> > >efficiency).
+> > >
+> > >regards,
+> > >iustin
+> > 
+> > That makes sense... But are you sure thats how i should read this?
+> 
+> As far as I know, this is correct.
+
+It is indeed. CPU time is the sum of CPU time for all threads, which is 
+typically larger than elapsed time when several threads run in parallel.
+
+> 
+> > I dont want to jump happy too early.
+> 
+> Well, you algorithm does work in parallel, but if you look at the GC/MUT
+> time, ~60% of the total runtime is spent in GC, so you have a space leak
+> or an otherwise inefficient algorithm.
+
+Not enough data to make more than guesses concerning the cause, but 60% GC 
+definitely indicates a problem with the algorithm (resp. its 
+implementation),
+
+> The final speedup is just
+> 3.46s/2.36s, i.e. 1.46x instead of ~4x, so you still have some work to
+> do to make this better.
+
+We don't know the times for a non-threaded run (or an -N1 run), so it could 
+be anything from a slowdown to a > 4? speedup (but it's likely to be a 
+speedup by a factor < 4?).
+
+> 
+> At least, this is how I read those numbers.
+> 
+> regards,
+> iustin
+
+

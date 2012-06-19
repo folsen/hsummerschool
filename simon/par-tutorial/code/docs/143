@@ -1,0 +1,35 @@
+From julian.porter at porternet.org  Tue Apr  5 14:20:52 2011
+From: julian.porter at porternet.org (Julian Porter)
+Date: Tue, 5 Apr 2011 13:20:52 +0100
+Subject: [Haskell-cafe] Problems with haskell98 package in GHC
+In-Reply-To: <BANLkTi=VhEpHw6d1b+3BMKyf05VnBZe+nw@mail.gmail.com>
+References: <BANLkTinxDmbWVd8eQSMKNrQHgS7j5+2gMA@mail.gmail.com>
+	<201104041652.56745.daniel.is.fischer@googlemail.com>
+	<BANLkTikOHvvT2sjXHvV6tY06C6VO4n2eXA@mail.gmail.com>
+	<201104051110.18480.daniel.is.fischer@googlemail.com>
+	<BANLkTi=VhEpHw6d1b+3BMKyf05VnBZe+nw@mail.gmail.com>
+Message-ID: <5F1FA166-405E-4130-86AA-22D709FC9874@porternet.org>
+
+Hello,
+
+I recently tried upgrading the package haskell98 to version 1.1.0.1.  Two things went wrong:
+
+(1) Some of the time the build failed because it said it couldn't build time-1.2.0.4 (which I already had installed)
+(2) Even when I finally managed to get it to build and install, compiling code led to this error message:
+
+ Bad interface file: /usr/local/lib/haskell98-1.1.0.1/ghc-6.12.3/IO.hi
+        Something is amiss; requested module  haskell98:IO differs from name found in the interface file haskell98-1.1.0.1:IO
+
+I'm running GHC version 6.12.3.  Any help much appreciated.
+ 
+Julian Porter
+julian.porter at porternet.org
+http://about.me/julian.porter
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110405/c6e74e43/attachment.htm>
+

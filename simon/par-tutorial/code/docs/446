@@ -1,0 +1,62 @@
+From felipe.lessa at gmail.com  Sat Apr 16 15:55:33 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Sat, 16 Apr 2011 10:55:33 -0300
+Subject: [Haskell-cafe] "import" functionality in DSLs
+In-Reply-To: <20110416132930.GA20119@ece.utexas.edu>
+References: <20110416132930.GA20119@ece.utexas.edu>
+Message-ID: <BANLkTi=ObTp+_VtiZ1rTBuov-33qYXUDUA@mail.gmail.com>
+
+On Sat, Apr 16, 2011 at 10:29 AM, Nikhil A. Patil
+<patil.nikhil at gmail.com> wrote:
+>> doit :: DSL Term
+>> doit = do (+) <- (+)
+>> ? ? ? ? ? n0 ?<- n0
+>> ? ? ? ? ? k ? <- k
+>> ? ? ? ? ? -- begin beautiful DSL code
+>> ? ? ? ? ? let x = k + n0
+>> ? ? ? ? ? return $ x + x
+
+I guess the core problem is that on each time you say '(+) <- (+)',
+you may actually get something different depending on what
+'define_function' does.  You say yourself that these functions change
+a hidden state.  So, without any internal changes, I doubt you could
+do something better.
+
+One possible solution may be to have a special case for your Prelude
+functions and constants that never change.  That is, if currently you
+have
+
+  data Term = Term Key ...
+  type Key = Integer
+
+and you store other informations about each term on your hidden state,
+then you may use
+
+  data Term = Term Key ...
+  data Key = Prelude Integer | User Integer
+
+Your define_* functions always return User keys, however now you can
+have unsafe versions of them that take a key as argument.  Then your
+Prelude would be
+
+> module DSLPrelude where
+>
+> (+) :: Term -> Term -> Term
+> n0  :: Term
+> k   :: Term
+> (+) = unsafe_define_function t1 "+" 2
+> n0  = unsafe_define_constant t2 "0"
+> k   = unsafe_define_constant t3 "k"
+>
+> t1, t2, t3 :: Key
+> (t1:t2:t3:_) = map Prelude [1..]
+
+Of course, this is a lot of handwaving, but you haven't provided any
+details about your internal implementation.
+
+HTH,
+
+-- 
+Felipe.
+
+

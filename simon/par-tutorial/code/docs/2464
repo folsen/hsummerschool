@@ -1,0 +1,83 @@
+From spam at scientician.net  Fri Dec 30 11:47:33 2011
+From: spam at scientician.net (Bardur Arantsson)
+Date: Fri, 30 Dec 2011 11:47:33 +0100
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFCE482.8010104@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk>
+	<jdh9h6$gba$1@dough.gmane.org> <4EFC3B4E.9020304@unicaen.fr>
+	<4EFCAC61.6000201@blueyonder.co.uk>
+	<1325192463.16545.42.camel@godel>
+	<4EFCE482.8010104@blueyonder.co.uk>
+Message-ID: <jdk4sc$f0v$1@dough.gmane.org>
+
+On 12/29/2011 11:06 PM, Steve Horne wrote:
+> On 29/12/2011 21:01, Chris Smith wrote:
+>> On Thu, 2011-12-29 at 18:07 +0000, Steve Horne wrote:
+>>> By definition, an intentional effect is a side-effect. To me, it's by
+>>> deceptive redefinition - and a lot of arguments rely on mixing
+>>> definitions - but nonetheless the jargon meaning is correct within
+>>> programming and has been for decades. It's not going to go away.
+>>>
+>>> Basically, the jargon definition was coined by one of the pioneers of
+>>> function programming - he recognised a problem and needed a simple way
+>>> to describe it, but in some ways the choice of word is unfortunate.
+>> I don't believe this is true. "Side effect" refers to having a FUNCTION
+>> -- that is, a map from input values to output values -- such that when
+>> it is evaluated there is some effect in addition to computing the
+>> resulting value from that map. The phrase "side effect" refers to a
+>> very specific confusion: namely, conflating the performing of effects
+>> with computing the values of functions.
+> Yes - again, by definition that is true. But that definition is not the
+> everyday definition of side-effect.
+
+ > Repeating and explaining one
+> definition doesn't make the other go away.
+>
+
+That's what you seem to be doing a lot in this thread. It's very hard to 
+glean what *exactly* you're trying to argue since you seem to be all 
+over the place.
+
+(I hope this isn't taken as an insult, it certainly isn't meant as one.)
+
+Maybe a summary of your argument + counter-arguments (as you understand 
+them) on a wiki would be helpful? Mail threads with 40+ posts aren't 
+really useful for hashing out this kind of thing.
+
+
+> 1. To say that the C printf function has the side-effect of printing to
+> the screen - that's true.
+
+No, it has the "effect" of printing to the screen. When you call 
+printf() you *intend* for it to print something.
+
+> 2. To say that the C printf function has no side-effects because it
+> works correctly - the only effects are intentional - that's also true.
+>
+
+I realize this is nitpicking, but all of its effects may not be 
+intentional. For example, given certain terminal settings it may also 
+flush the buffer if you have a newline in the argument string. That's a 
+side effect (may be desirable/undesirable).
+
+[--snip--]
+> Using similar mixed definitions to conclude that every C program is full
+> of bugs (basically equating intentional effects with side-effects, then
+> equating side-effects with unintentional bugs) is a fairly common thing
+> in my experience, but it's a logical fallacy. If you aren't aware of the
+> two definitions of side-effect, it's hard to get deal with that.
+>
+> Some people don't want anyone to figure out the fallacy - they like
+> having this convenient way to attack C, irrespective of whether it's
+> valid or not. Rare I think - mostly it's more confusion and memetics.
+> But still, I'm convinced there's some sophistry in this. And I'm not the
+> only person to think so, and to have reacted against that in the past.
+>
+> Extra sad - you don't need that fallacy to attack C. It's redundant. C
+> is quite happy to demonstrate its many failings.
+
+That's the flimsiest straw man I've ever seen.
+
+
+

@@ -1,0 +1,41 @@
+From magnus at therning.org  Tue Feb  8 13:36:18 2011
+From: magnus at therning.org (Magnus Therning)
+Date: Tue, 8 Feb 2011 12:36:18 +0000
+Subject: [Haskell-cafe] Building Plaftorm 2010 2 on 64bit Linux
+In-Reply-To: <4D511D52.90503@fit.vutbr.cz>
+References: <4D511D52.90503@fit.vutbr.cz>
+Message-ID: <AANLkTinhbu3M46dap=Xp5OPmhfOUJ1_hv5J8H5ghO-uT@mail.gmail.com>
+
+2011/2/8 Du?an Kol?? <kolar at fit.vutbr.cz>:
+> Hello all,
+>
+> ?I'm trying to build platform on Linux 2.6.32.22 #1 SMP Tue Sep 21 09:44:04
+> CEST 2010 x86_64 x86_64 x86_64 GNU/Linux. I've downloaded binary of
+> ghc6.12.3 for the purpose, but ghc doesn't work. ghci does work, gcc does
+> work, but for ghc I get:
+>
+> ghc -O2 --make test.hs -o test
+> [1 of 1] Compiling Main ? ? ? ? ? ? ( test.hs, test.o )
+> ghc: could not execute: /usr/bin/gcc
+>
+> Even if I can easily compile gcc testc.c -o testc and run testc.
+>
+> Could anyone point me to a solution? Helps found by google pointed me to try
+> use option -pgmc gcc, which doesn't work. All other threads with similar
+> issue stayed unresoleved. :-(
+
+I'm guessing you actually do have good reasons for going this route,
+but I thought I'd ask, just to make sure ;-)
+
+Why are you going this route, of manually compiling HP using a
+pre-built binary from haskell.org, instead of using your Linux
+distro's pre-built (and well tested) version?
+
+/M
+
+-- 
+Magnus Therning ? ? ? ? ? ? ? ? ? ? ?OpenPGP: 0xAB4DFBA4
+email: magnus at therning.org ? jabber: magnus at therning.org
+twitter: magthe ? ? ? ? ? ? ? http://therning.org/magnus
+
+

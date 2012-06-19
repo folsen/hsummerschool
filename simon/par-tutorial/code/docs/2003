@@ -1,0 +1,59 @@
+From byorgey at seas.upenn.edu  Fri Dec 16 05:26:14 2011
+From: byorgey at seas.upenn.edu (Brent Yorgey)
+Date: Thu, 15 Dec 2011 23:26:14 -0500
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+Message-ID: <20111216042614.GB15053@seas.upenn.edu>
+
+On Thu, Dec 15, 2011 at 09:05:13PM +0000, Conor McBride wrote:
+> 
+> On 15 Dec 2011, at 15:19, Brent Yorgey wrote:
+> 
+> >On Thu, Dec 15, 2011 at 06:49:13PM +1000, Gregory Crosswhite wrote:
+> >>
+> >>So at the end of the day... what is the point of even making
+> >>Maybe and [] instances of Alternative?
+> >
+> >The Alternative and Monoid instances for [] are equivalent.  However,
+> >the Alternative and Monoid instances for Maybe are not. To wit:
+> >
+> >>(Just (Sum  4)) <|> (Just (Sum 3))
+> > Just (Sum {getSum = 4})
+> >
+> >>(Just (Sum 4)) `mappend` (Just (Sum 3))
+> > Just (Sum {getSum = 7})
+> 
+> The current monoid instance for Maybe is, in my view, unfortunate.
+> 
+> Types are about semantic purpose, not just data representation.
+> Many purposes can be represented in the same way. We should identify
+> the purpose of a type (or type constructor), then define instances
+> consistent with that purpose. And better, we acquire by instance
+> inference compound instances consistent with that purpose! (A similar
+> view is often articulated well by Conal Elliott. But perhaps it's
+> just a "Con" thing.)
+> 
+> The purpose of Maybe, it seems to me, is to model failure and
+> prioritized choice, after the manner of exceptions. It's clear
+> what the failure-and-prioritized-choice monoid is.
+> 
+> It so happens that the same data representation can be used to make
+> a semigroup into a monoid by attaching an identity element. That's
+> a different semantic purpose, which deserves a different type.
+
+I agree.  Moreover, the current Monoid instance for (Maybe a) does not
+even achieve this, since it requires a *Monoid* instance on a, rather
+than a semigroup.  
+
+Note that the 'semigroups' package defines an 'Option' type which does
+lift Semigroup instances to Monoid instances.  I, for one, would be
+quite in favor of changing the current Monoid (Maybe a) instance to
+correspond to the failure-and-prioritized-choice semantics (i.e. the
+semantics currently given to the 'First' wrapper).
+
+-Brent
+
+

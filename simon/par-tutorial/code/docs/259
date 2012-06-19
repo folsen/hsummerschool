@@ -1,0 +1,17 @@
+From schlepptop at henning-thielemann.de  Sat Apr  9 15:17:01 2011
+From: schlepptop at henning-thielemann.de (Henning Thielemann)
+Date: Sat, 09 Apr 2011 15:17:01 +0200
+Subject: [Haskell-cafe] how to optmize this code?
+In-Reply-To: <AANLkTi=dv3Of9GA5jmAzo09HG7J1jZxobRerr+v9QRZ_@mail.gmail.com>
+References: <AANLkTi=dv3Of9GA5jmAzo09HG7J1jZxobRerr+v9QRZ_@mail.gmail.com>
+Message-ID: <4DA05C4D.7020008@henning-thielemann.de>
+
+Gilberto Garcia schrieb:
+
+> isMultiple :: Int -> [Int] -> Bool
+> isMultiple a [] = False
+> isMultiple a (x:xs) = if (mod a x == 0) then True else isMultiple a xs
+
+I think this one can be written in terms of 'List.any'.
+
+

@@ -1,0 +1,61 @@
+From lykahb at gmail.com  Sat Apr 30 17:00:16 2011
+From: lykahb at gmail.com (Boris Lykah)
+Date: Sat, 30 Apr 2011 18:00:16 +0300
+Subject: [Haskell-cafe] Template Haskell support for GADTs
+Message-ID: <BANLkTi=C6Ri8y4Spcgwm=qURva9qKUVdyw@mail.gmail.com>
+
+Hi all!
+
+I am writing a library which allows to refer to the separate fields of
+a datatype. The fields are described as GADT with one constructor for
+each field. The constructors return GADT with the field type. The
+auxiliary data structures for this should be generated automatically
+via Template Haskell.
+
+I found that the GADTs produced by TH are not equivalent to the usual
+ones. They require additional  extension -XTypeFamilies(for the
+equality constraints) along with -XGADTs, and, which is more
+important, are less type-safe. To describe the data structure I used
+ForallC as it was suggested in the closed ticket
+http://hackage.haskell.org/trac/ghc/ticket/3497 (Template Haskell
+support for GADTs)
+
+This is simplified code for data Sample = Sample {foo::String,
+bar::Int} written manually:
+
+data SampleField a where
+  FooField :: SampleField String
+  BarField :: SampleField Int
+
+and a GADT with similar structure generated via TH.
+
+$(do
+    let gadt = mkName "THSampleField"
+    let tv = mkName "a"
+    let con1 = forallC [plainTV tv] (cxt $ [equalP (varT tv) (conT
+''String)]) $ normalC (mkName "THFooField") []
+    let con2 = forallC [plainTV tv] (cxt $ [equalP (varT tv) (conT
+''Int)]) $ normalC (mkName "THBarField") []
+    result <- dataD (cxt []) gadt [plainTV tv] [con1, con2] []
+    return [result]
+ )
+which produces
+data THSampleField a where
+  THFooField :: a ~ String => THSampleField a
+  THBarField :: a ~ Int => THSampleField a
+
+The expression
+asTypeOf FooField BarField
+fails to compile as expected because String cannot match Int, but
+asTypeOf THFooField THBarField
+is a valid expression of type (THSampleField a), which is very
+confusing and breaks the existing code.
+
+Am I missing something? If this is the only way to create the GADTs
+then I think we should consider reopening the ticket.
+
+-- 
+Regards,
+Boris
+
+

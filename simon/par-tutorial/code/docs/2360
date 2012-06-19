@@ -1,0 +1,165 @@
+From fischer at nii.ac.jp  Wed Dec 28 22:45:50 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Wed, 28 Dec 2011 22:45:50 +0100
+Subject: [Haskell-cafe] space-efficient,
+ composable list transformers [was: Re: Reifying case expressions
+ [was: Re: On stream processing, and a new release of timeplot coming]]
+Message-ID: <CALoEywNvsFaLctSQKx0LwbvMiGnE5KgWsuaeS6JN5W7YJpoHAQ@mail.gmail.com>
+
+Hello Heinrich,
+
+On Tue, Dec 27, 2011 at 1:09 PM, Heinrich Apfelmus <
+apfelmus at quantentunnel.de> wrote:
+
+> Sebastian Fischer wrote:
+>
+>> all functions defined in terms of `ListTo` and `interpret`
+>> are spine strict - they return a result only after consuming all input
+>> list
+>> constructors.
+>
+> Indeed, the trouble is that my original formulation cannot return a result
+> before it has evaluated all the case expressions. To include laziness, we
+> need a way to return results early.
+>
+> Sebastian's  ListTransformer  type does precisely that for the special
+> case of lists as results,
+
+
+Hmm, I think it does more than that.. (see below)
+
+but it turns out that there is also a completely generic way of returning
+> results early. In particular, we can leverage lazy evaluation for the
+> result type.
+>
+
+This is nice! It would be cool if we could get the benefits of ListConsumer
+and ListTransformer in a single data type.
+
+I know that you chose these names to avoid confusion, but I would like to
+> advertise again the idea of choosing the *same* names for the constructors
+> as the combinators they represent [...] This technique for designing data
+> structures has the huge advantage that it's immediately clear how to
+> interpret it and which laws are supposed to hold.
+
+
+I also like your names better, although they suggest that there is a single
+possible interpretation function. Even at the expense of blinding eyes to
+the possibility of other interpretation functions, I agree that it makes
+things clearer to use names from a *motivating* interpretation. In
+hindsight, my names for the constructors of ListTransformer seem to be
+inspired by operations on handles. So, `Cut` should have been named `Close`
+instead..
+
+
+> Especially in the case of lists, I think that this approach clears up a
+> lot of confusion about seemingly new concepts like Iteratees and so on.
+
+
+A share the discomfort with seemingly alien concepts and agree that clarity
+of exposition is crucial, both for the meaning of defined combinators and
+their implementation. We should aim at combinators that people are already
+familiar with, either because they are commonplace (like id, (.), or fmap)
+or because they are used by many other libraries (like the Applicative
+combinators).
+
+A good way to explain the meaning of the combinators is via the meaning of
+the same combinators on a familiar type. Your interpretation function is a
+type-class morphism from `ListTo a b` to `[a] -> b`. For Functor we have:
+
+    interpret (fmap f a)  =  fmap f (interpret a)
+
+On the left side, we use `fmap` for `ListTo a` on the right side for `((->)
+l)`. Similarly, we have the following properties for the coresponding
+Applicative instances:
+
+    interpret (pure x)  =  pure x
+    interpret (a <*> b)  =  interpret a <*> interpret b
+
+Such morphism properties simplify how to think about programs a lot,
+because one can think about programs as if they were written in the
+*meaning* type without knowing anything about the *implementation* type.
+The computed results are the same but they are computed more efficiently.
+
+Your `ListTo` type achieves space efficiency for Applicative composition of
+list functions by executing them in lock-step. Because of the additional
+laziness provided by the `Fmap` constructor, compositions like
+
+    interpret a . interpret b
+
+can also be executed in constant space. However, we cannot use the space
+efficient Applicative combinators again to form parallel compositions of
+sequential ones because we are already in the meaning type.
+
+We could implement composition for the `ListTo` type as follows
+
+    (<.) :: ListTo b c -> ListTo a [b] -> ListTo a c
+    a <. b = interpret a <$> b
+
+But if we use a result of this function as argument of <*>, then the
+advantage of using `ListTo` is lost. While
+
+    interpret ((,) <$> andL <*> andL)
+
+runs in constant space,
+
+    interpret ((,) <$> (andL <. idL) <*> (andL <. idL))
+
+does not.
+
+The ListTransformer type supports composition in lock-step via a category
+instance. The meaning of `ListTransformer a b` is `[a] -> [b]` with the
+additional restriction that all functions `f` in the image of the
+interpretation function are incremental:
+
+    xs `isPrefixOf` ys  ==>  f xs `isPrefixOf` f ys
+
+Composition as implemented in the ListTransformer type satisfies morphism
+properties for the category instance:
+
+    transformList id  =  id
+    transformList (a . b)  =  transformList a . transformList b
+
+As it is implemented on the ListTransformer type directly (without using
+the interpretation function), it can be combined with the Applicative
+instance for parallel composition without losing space efficiency.
+
+The Applicative instance for `ListTransformer` is different from the
+Applicative instance for `ListTo` (or `ListConsumer`). While
+
+    interpret ((,) <$> idL <*> idL)
+
+is of type `[a] -> ([a],[a])`
+
+    transformList ((,) <$> idL <*> idL)
+
+is of type `[a] -> [(a,a)]`. We could achieve the latter behaviour with the
+former instance by using an additional fmap. But
+
+    uncurry zip <$> ((,) <$> idL <*> idL)
+
+has the same disadvantages regarding space efficiency as referred to above
+because the computation of `zip` cannot occur in lock-step with another
+computation.
+
+The meaning of the Applicative instance of `ListTransformer` can again be
+described using morphism properties on Applicative structures. The
+corresponding structure on the meaning type `[a] -> [b]` is the following
+combination of the Applicative instances for functions and for ZipLists.
+
+    fmap f a = liftA (fmap f) a
+    pure x = pure (getZipList (pure x))
+    a <*> b = getZipList <$> liftA2 (<*>) (ZipList <$> a) (ZipList <$> b)
+
+I have a gut feeling that the laziness provided by the `Fmap` constructor
+is too implicit to be useful for the kind of lock-step composition provided
+by ListTransformer. So I don't have high hopes that we can unify
+`ListConsumer` and `ListTransformer` into a single type.
+
+Do you have an idea?
+
+Sebastian
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111228/340ea6c0/attachment.htm>
+

@@ -1,0 +1,78 @@
+From ezyang at MIT.EDU  Sun Apr 24 16:36:13 2011
+From: ezyang at MIT.EDU (Edward Z. Yang)
+Date: Sun, 24 Apr 2011 10:36:13 -0400
+Subject: [Haskell-cafe] generics and sql
+In-Reply-To: <19892.12751.507521.701489@myth.localdomain>
+References: <19892.12751.507521.701489@myth.localdomain>
+Message-ID: <1303655313-sup-8301@ezyang>
+
+Hmm, this is a bit peculiar.  The problem is you don't get
+control over how gmapQ invokes the function toSql: it will
+only ever be done with the type signature Data d => d -> u.
+There is good reason for this too: imagined you tried to run
+gmapQ toSql on a data-type that contained a member that was
+not convertible to a SqlValue: then it ought to fail with a type
+error!
+
+You may be able to work around this with more generics madness:
+use Typeable to check if the types of all the fields are kosher,
+and then do an appropriate casts before invoking toSql.  But you
+won't get particularly good static guarantees doing it this way.
+
+So... what are you really trying to do? :-)
+
+Edward
+
+Excerpts from nadine.and.henry's message of Sun Apr 24 10:21:03 -0400 2011:
+> Dear Group,
+> 
+> Greetings.  I have a feeling that what I am trying to do is easy, I
+> just don't know how to say it in Haskell.  Let's start with:
+> 
+> > {-# LANGUAGE 
+> >    DeriveDataTypeable,  GeneralizedNewtypeDeriving  #-}
+> > 
+> > import Database.HDBC
+> > import Data.Typeable (Typeable)
+> > import Data.Data 
+> > data C = C { str :: String, dbl:: Double }
+> >   deriving (Eq, Ord, Typeable, Data)
+> > 
+> > a :: C
+> > a = C "twelve" 12.0
+> > 
+> 
+> Now I load this up in ghci and I can do the following:
+> 
+>  toSql . str $ a  -- result: SqlString "twelve"
+>  toSql . dbl $ a  -- result: SqlDouble 12.0
+> 
+> but what I would really like to do is something like:
+> 
+> gmapQ toSql $ a
+> 
+> which results in:
+> <interactive>:1:7:
+>     Could not deduce (Convertible d SqlValue)
+>       arising from a use of `toSql'
+>     from the context (Data d)
+>       bound by a type expected by the context: Data d => d -> SqlValue
+>       at <interactive>:1:1-11
+>     Possible fix:
+>       add (Convertible d SqlValue) to the context of
+>         a type expected by the context: Data d => d -> SqlValue
+>       or add an instance declaration for (Convertible d SqlValue)
+>     In the first argument of `gmapQ', namely `toSql'
+>     In the expression: gmapQ toSql
+> 
+> In other words, I'm looking for a function with a signature:
+> 
+> (Whatever Instances I neeed here) => a -> [SqlValue]
+> 
+> I have tried various incantations of type signatures, but thus far I
+> can't get it right.  Can someone point me in the right direction?  Thanks.
+> 
+> Henry Laxen
+> 
+
+

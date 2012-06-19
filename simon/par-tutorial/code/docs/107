@@ -1,0 +1,22 @@
+From batterseapower at hotmail.com  Mon Apr  4 14:30:08 2011
+From: batterseapower at hotmail.com (Max Bolingbroke)
+Date: Mon, 4 Apr 2011 13:30:08 +0100
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <201104041234.44543.daniel.is.fischer@googlemail.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<201104041234.44543.daniel.is.fischer@googlemail.com>
+Message-ID: <BANLkTikCVkoytBCdtPsEc4U7SSpMXgTbwQ@mail.gmail.com>
+
+On 4 April 2011 11:34, Daniel Fischer <daniel.is.fischer at googlemail.com> wrote:
+> If there's only a single encoding recognised, UTF-8 surely should be the
+> one (though perhaps Windows users might disagree, iirc, Windows uses UCS2
+> as standard encoding).
+
+Windows APIs use UTF-16, but the encoding of files (which is the
+relevant point here) is almost uniformly UTF-8 - though of course you
+can find legacy apps making other choices.
+
+Cheers,
+Max
+
+

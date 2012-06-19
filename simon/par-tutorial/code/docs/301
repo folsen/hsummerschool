@@ -1,0 +1,39 @@
+From cdsmith at gmail.com  Mon Apr 11 14:45:23 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Mon, 11 Apr 2011 06:45:23 -0600
+Subject: [Haskell-cafe] Fucntion composing
+In-Reply-To: <DF47C447-E80D-4A31-9655-7CE52D738FFE@mac.com>
+References: <DF47C447-E80D-4A31-9655-7CE52D738FFE@mac.com>
+Message-ID: <1302525923.4360.22.camel@godel>
+
+On Mon, 2011-04-11 at 11:22 +0200, Adam Krauze wrote:
+> f :: (Num a) => [a] -> [a] -> [(a,a)]  // f takes two lists and zips them into one in some special way
+> g :: (Num a) => a -> [(a,a)] -> [a]  // g using some Num value calculates list of singletons from list of pairs
+> 
+> Prelude> let h x y = (g 0 (f x y))
+> 
+> How to do pointfree definition of h?
+
+You can eliminate the second point, y, pretty easily by just using
+function composition:
+
+    let h x = g 0 . f x
+
+To eliminate x, we can first rewrite this expression using a section of
+the (.) operator.
+
+    let h x = (g 0 .) (f x)
+
+and then introduce another function composition:
+
+    let h = (g 0 .) . f
+
+Whether that's clearer than the pointed definition is up for debate, but
+there it is.  Just keep in mind that sections of (.) are very confusing
+to some people.
+
+-- 
+Chris Smith
+
+
+

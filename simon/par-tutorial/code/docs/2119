@@ -1,0 +1,45 @@
+From jesseschalken at gmail.com  Tue Dec 20 11:30:55 2011
+From: jesseschalken at gmail.com (Jesse Schalken)
+Date: Tue, 20 Dec 2011 21:30:55 +1100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+Message-ID: <CAF1yvAQJX+f-MigNFF=6be12Uka6y45QD6oys_NQpxgREkRbaQ@mail.gmail.com>
+
+On Tue, Dec 20, 2011 at 8:46 PM, Ben Lippmeier <benl at ouroborus.net> wrote:
+
+>
+> On 20/12/2011, at 6:06 PM, Roman Cheplyaka wrote:
+>
+> > * Alexander Solla <alex.solla at gmail.com> [2011-12-19 19:10:32-0800]
+> >> * Documentation that discourages thinking about bottom as a 'value'.
+>  It's
+> >> not a value, and that is what defines it.
+> >
+> > In denotational semantics, every well-formed term in the language must
+> > have a value. So, what is a value of "fix id"?
+>
+> There isn't one!
+>
+> Bottoms will be the null pointers of the 2010's, you watch.
+>
+
+This ?1000. Errors go in an error monad.
+
+
+> Ben.
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111220/a672dc32/attachment.htm>
+

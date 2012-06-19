@@ -1,0 +1,131 @@
+From tad.doxsee at gmail.com  Sun Apr  3 22:00:03 2011
+From: tad.doxsee at gmail.com (Tad Doxsee)
+Date: Sun, 3 Apr 2011 13:00:03 -0700
+Subject: [Haskell-cafe] fundeps => type family
+Message-ID: <BANLkTikku7ZaKtOJZHh6Fkn+Y=0jTn8aDw@mail.gmail.com>
+
+Hi All,
+
+Last week I asked a question with the subject "object oriented
+technique".  I got a lot very helpful answers and I thank all who
+contributed.  At the end of my question, I alluded to some problems
+that I was having with what I wanted to do next, which was to add
+additional polymorphism.  I figured out a solution, which is:
+
+-------------------------------------------------
+
+{-# LANGUAGE ExistentialQuantification #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE FunctionalDependencies #-}
+
+data Rectangle a = MkRectangle { rx, ry, rw, rh :: a }
+                        deriving (Eq, Show)
+
+drawRect :: Show a => Rectangle a -> String
+drawRect r = "Rect (" ++ show (rx r) ++ ", "  ++ show (ry r) ++ ") -- "
+             ++ show (rw r) ++ " x " ++ show (rh r)
+
+
+data Circle a = MkCircle {cx, cy, cr :: a}
+                        deriving (Eq, Show)
+
+drawCirc :: Show a => Circle a -> String
+drawCirc c = "Circ (" ++ show (cx c) ++ ", " ++ show (cy c)++ ") -- "
+             ++ show (cr c)
+
+r1 = MkRectangle 0 0 3 2
+r2 = MkRectangle 1 1 4 5
+c1 = MkCircle 0 0 5
+c2 = MkCircle 2 0 7
+
+
+class ShapeC a s | s -> a where
+  draw :: s -> String
+  copyTo :: s -> a -> a -> s
+
+{-
+-- GADT version
+data ShapeD a  where
+  MkShapeD :: ShapeC a s => s -> ShapeD a
+-}
+
+-- Existential Quantification version
+data ShapeD a = forall s . ShapeC a s => MkShapeD s
+
+instance ShapeC a (ShapeD a) where
+  draw (MkShapeD s) = draw s
+  copyTo (MkShapeD s) x y = MkShapeD (copyTo s x y)
+
+
+mkShape :: ShapeC a s => s -> ShapeD a
+mkShape s = MkShapeD s
+
+instance Show a => ShapeC a (Rectangle a) where
+  draw = drawRect
+  copyTo (MkRectangle _ _ rw rh) x y = MkRectangle x y rw rh
+
+instance Show a => ShapeC a (Circle a) where
+  draw = drawCirc
+  copyTo (MkCircle _ _ r) x y = MkCircle x y r
+
+r1s = MkShapeD r1
+r2s = MkShapeD r2
+c1s = MkShapeD c1
+c2s = MkShapeD c2
+
+shapes1 = [r1s, r2s, c1s, c2s]
+drawing1 = map draw shapes1
+
+shapes2 = map mkShape rs ++ map mkShape cs
+drawing2 = map draw shapes2
+
+-- copy the shapes to the origin then draw them
+shapes3 = map (\s -> copyTo s 0 0) shapes2
+drawing3 = map draw shapes3
+
+-------------------------------------------------
+
+The main difference with my previous version is that the above
+is polymorphic in the type for the origin and dimensions.
+(I used a Double previously.)
+
+Also, the above version uses existential quantification instead
+of GADTs, only because some said that that method is more
+"standard".
+
+I had to use functional dependencies in the defintion of class
+ShapeC to get it to compile and run.
+
+Ed Yang's excellent post
+(http://blog.ezyang.com/2011/03/type-tech-tree)
+says that type families are equivalent to multiparameter type classes
++ functional dependencies, so I tried to rewrite the above using
+type families, but I got stuck. Also the GHC documentaton
+(http://www.haskell.org/ghc/docs/7.0-latest/html/users_guide/type-families.html#id636192)
+says that
+
+   "Equality constraints ... enable a simple translation of programs
+    using functional dependencies into programs using family
+    synonyms instead.
+
+So I tried:
+
+class (T s ~ a) => ShapeC a s where
+  type T s :: *
+  draw :: s -> String
+  copyTo :: s -> T s -> T s -> s
+
+but got a compile error:
+
+  Alas, GHC 7.0 still cannot handle equality superclasses: T s ~ a
+
+So my question is, how does one convert the above code to use type
+families instead of functional dependencies?  Is one technique
+preferable over another?
+
+Thanks,
+
+Tad
+
+

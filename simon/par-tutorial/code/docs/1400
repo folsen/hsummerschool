@@ -1,0 +1,42 @@
+From daniel.is.fischer at googlemail.com  Fri Aug 26 22:37:25 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Fri, 26 Aug 2011 22:37:25 +0200
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <4E57F43A.9030800@btinternet.com>
+References: <4E568D11.30800@btinternet.com>
+	<nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+	<4E57F43A.9030800@btinternet.com>
+Message-ID: <201108262237.26047.daniel.is.fischer@googlemail.com>
+
+On Friday 26 August 2011, 21:30:02, Andrew Coppin wrote:
+> You wouldn't want to know how many bits you need to store on disk to 
+> reliably recreate the value? Or how many bits of randomness you need to 
+> compute a value less than or equal to this one?
+> 
+> I suppose I could use a binary logarithm. I'm just concerned that it 
+> would be rather slow. After all, I'm not interested in the exact 
+> logarithm (which is fractional), just the number of bits (which is a 
+> small integer)...
+
+As of GHC-7.2, there's GHC.Integer.Logarithms in both, integer-gmp and 
+integer-simple, providing
+
+integerLog2# :: Integer -> Int#
+
+(integer-* lives before base, so there's no Int yet) which exploits the 
+representation of Integers and should be fast enough [at least for
+integer-gmp, where it's bounded time for normally represented values, the 
+representation of Integers in integer-simple forces it to be O(log n)].
+
+Caution: integerLog2# expects its argument to be positive, havoc might 
+ensue if it isn't.
+
+GHC.Float exports
+
+integerLogBase :: Integer -> Integer -> Int
+
+also before 7.2, now it calls the above if the base is 2, so should have 
+decent performance. (It requires that the base is > 1 and the second 
+argument positive, of course.)
+
+

@@ -1,0 +1,32 @@
+From allbery.b at gmail.com  Sat Dec 10 00:25:03 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Fri, 9 Dec 2011 18:25:03 -0500
+Subject: [Haskell-cafe] Cabal issue
+In-Reply-To: <CAMtV1SGHTbEvS2RY65bzVVwtudvrjt0S51suc_DvPizQgdUBcg@mail.gmail.com>
+References: <CAMtV1SGHTbEvS2RY65bzVVwtudvrjt0S51suc_DvPizQgdUBcg@mail.gmail.com>
+Message-ID: <CAKFCL4VK+A+7ruVMu06awww_kg6bkUvr-GFz8Y5J+O8diF++8A@mail.gmail.com>
+
+On Fri, Dec 9, 2011 at 06:20, Kevin Jardine <kevinjardine at gmail.com> wrote:
+
+> Had problem with deprecated package, was told my only option was to wipe
+> my Haskell install and start over. Is this true and if so, doesn't this
+> mean that Cabal (or the package management system that it is a part of) is
+> broken?
+>
+
+http://ivanmiljenovic.wordpress.com/2010/03/15/repeat-after-me-cabal-is-not-a-package-manager/
+
+(in short:  yes, it's broken, and probably not fixable.  cabal is a
+friendlyish wrapper for ghc-pkg, which is not a package manager in the
+sense many people want it to be, and it never will be.)
+
+Something *really* needs to be done about its absurd willingness to blindly
+override bootlibs and thereby break things, though.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111209/03460cd5/attachment.htm>
+

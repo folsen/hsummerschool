@@ -1,0 +1,76 @@
+From jpmoresmau at gmail.com  Wed Apr 13 09:41:03 2011
+From: jpmoresmau at gmail.com (JP Moresmau)
+Date: Wed, 13 Apr 2011 09:41:03 +0200
+Subject: [Haskell-cafe] RFC: Extendable and Easy-To-Use Logger (HLogger)
+In-Reply-To: <op.vtuheazdpz0j5l@zen5.arnhem.chello.nl>
+References: <4DA48066.10805@jonkristensen.com>
+	<BANLkTi=dcW5p5WCAdFMRNb3cWwN8P4tKSA@mail.gmail.com>
+	<op.vtuheazdpz0j5l@zen5.arnhem.chello.nl>
+Message-ID: <BANLkTimw+ZRY6SMhpURS4KOHk7m2DryZ8w@mail.gmail.com>
+
+Jon, thanks for HLogger! For my (small) needs I was looking for a
+simple logging solution, and I couldn't get HSLogger to do what I
+wanted, whereas your simpleLogger fitted the bill perfectly.
+I suppose a good thing would be conditional buffering, as other noted:
+in development mode I want to get my log entries flushed to disk
+immediately, while in production I don't want to impact the
+performance of my running application by waiting for the logs.
+I didn't think that the invocations needed to be made easier: I just
+used "logNotice logger message", hard to do shorter.
+
+JP
+
+On Tue, Apr 12, 2011 at 11:45 PM, Henk-Jan van Tuyl <hjgtuyl at chello.nl> wrote:
+> On Tue, 12 Apr 2011 19:10:09 +0200, Gregory Collins
+> <greg at gregorycollins.net> wrote:
+>
+>> On Tue, Apr 12, 2011 at 6:40 PM, Jon Kristensen
+>> <technology at jonkristensen.com> wrote:
+>>>
+>>> Hello Haskellers!
+>>>
+>>> As I have now implemented everything that I could think of, I would like
+>>> to
+>>> ask the Haskell community to give some feedback on HLogger so that I can
+>>> continuing improving it. Some questions:
+>>>
+>>> Do you have any general/architectural thoughts on things I might be doing
+>>> wrong?
+>>
+>> 1) Use "Text" as the string type, not "String"
+>>
+>> 2) Re: SimpleLogger: writing to and flushing the log file upon
+>> receiving each message is absolutely the wrong thing to do in
+>> high-performance code. Each write() is a context switch into the
+>> kernel, and doing it this way will kill your throughput (in messages
+>> per second). What we do in our webserver (which relies on
+>> high-throughput access logging) is to buffer messages to the log
+>> channel in memory, and perform the actual writes in a separate worker
+>> thread no more often than once every N seconds.
+>
+> If you want to know what the last thing was that your application was doing,
+> before it crashed (e.g. at the customers site), you better write every
+> message immediately to disk.
+>
+> Regards,
+> Henk-Jan van Tuyl
+>
+>
+> --
+> http://Van.Tuyl.eu/
+> http://members.chello.nl/hjgtuyl/tourdemonad.html
+> --
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+JP Moresmau
+http://jpmoresmau.blogspot.com/
+
+

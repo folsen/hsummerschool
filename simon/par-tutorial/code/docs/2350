@@ -1,0 +1,53 @@
+From byorgey at seas.upenn.edu  Wed Dec 28 16:14:15 2011
+From: byorgey at seas.upenn.edu (Brent Yorgey)
+Date: Wed, 28 Dec 2011 10:14:15 -0500
+Subject: [Haskell-cafe] Reifying case expressions [was: Re: On stream
+ processing, and a new release of timeplot coming]
+In-Reply-To: <CANVKUrXPP98hD+yvNNNdVJtvg9=2w-X3r3wK-2d+_PaqWEpMyw@mail.gmail.com>
+References: <CANVKUrWrvDiG7=vfDf=8Zn5_TFQtjawtYxMT6nGh7mroAJZR6w@mail.gmail.com>
+	<jd6tmi$5qd$1@dough.gmane.org>
+	<CANVKUrWNdUcrdRpVguP68yNXPeQDqCbX0FxFOXA47MobV6L2zQ@mail.gmail.com>
+	<CAPNUp09ijhVq6_W4q0gSO9kMR+7FmzHDo2Y+QDRgi2DTdO5b4Q@mail.gmail.com>
+	<CANVKUrXPP98hD+yvNNNdVJtvg9=2w-X3r3wK-2d+_PaqWEpMyw@mail.gmail.com>
+Message-ID: <20111228151415.GA10301@seas.upenn.edu>
+
+On Mon, Dec 26, 2011 at 12:32:13PM +0400, Eugene Kirpichov wrote:
+> 2011/12/26 G?bor Lehel <illissius at gmail.com>
+> 
+> > On Sun, Dec 25, 2011 at 9:19 PM, Eugene Kirpichov <ekirpichov at gmail.com>
+> > wrote:
+> > > Hello Heinrich,
+> > >
+> > > Thanks, that's sure some food for thought!
+> > >
+> > > A few notes:
+> > > * This is indeed analogous to Iteratees. I tried doing the same with
+> > > Iteratees but failed, so I decided to put together something simple of my
+> > > own.
+> > > * The Applicative structure over this stuff is very nice. I was thinking,
+> > > what structure to put on - and Applicative seems the perfect fit. It's
+> > also
+> > > possible to implement Arrows - but I once tried and failed; however, I
+> > was
+> > > trying that for a more complex stream transformer datatype (a hybrid of
+> > > Iteratee and Enumerator).
+> > > * StreamSummary is trivially a bifunctor. I actually wanted to make it an
+> > > instance of Bifunctor, but it was in the category-extras package and I
+> > > hesitated to reference this giant just for this purpose :) Probably
+> > > bifunctors should be in prelude.
+> >
+> > Edward Kmett has been splitting that up into a variety of smaller
+> > packages, for instance:
+> >
+> > http://hackage.haskell.org/package/bifunctors
+> 
+> Actually it's not a bifunctor - it's a functor in one argument and
+> contrafunctor in the other.
+> Is there a name for such a structure?
+
+"Bifunctor" is usually used for such things as well.  Data.Bifunctor
+only covers bifunctors which are covariant in both arguments.
+
+-Brent
+
+

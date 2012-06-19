@@ -1,0 +1,78 @@
+From ok at cs.otago.ac.nz  Mon Feb  7 22:13:31 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Tue, 8 Feb 2011 10:13:31 +1300
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTi=5+umqSsdMudWGQgGkNWnp-rnTea+Ao=DZBgNe@mail.gmail.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<AANLkTimTak3jHpg_RPattKoACvkUU31tQydCsgjjS=Oc@mail.gmail.com>
+	<4D4D6E48.3000903@btinternet.com> <4D4FC689.1080107@xyxyx.org>
+	<AANLkTinwgZZ=aTz4mAQiGU2M1j9OuPRnrS9O2Au=K+b3@mail.gmail.com>
+	<4D4FE75F.1000107@xyxyx.org>
+	<AANLkTi=5+umqSsdMudWGQgGkNWnp-rnTea+Ao=DZBgNe@mail.gmail.com>
+Message-ID: <72E6D6A1-956D-425E-B933-6392C8CAA0F7@cs.otago.ac.nz>
+
+
+On 8/02/2011, at 3:47 AM, G?bor Lehel wrote:
+> 
+> I dunno. As a language extension, would - let's call it BangTypes - be
+> backwards-incompatible in any way?
+
+Let's look at an intermediate step first, BangFunctions.
+
+What this does is to say that there are two versions of "->":
+
+   t1 -> t2
+
+      What we have right now, which might be evaluated or not.
+
+   !t1 -> t2
+
+      The function wants its argument evaluated.  Suppose f is a
+      value of this type.  Then a use of f is rather like a
+      use of (\x -> x `seq` f x) and we can already write that.
+
+Now if you write
+
+	f :: !t1 -> t2
+	f p1 = e1
+	...
+	f pn = en
+
+you're making the function strict whether it would have been strict
+or lazy.  But again, with BangPatterns we can already do that:
+
+        f !(p1) = e1
+	...
+	f !(pn) = en
+
+The advantage of BangPatterns is that they can be precisely and
+selectively located.
+
+The advantages of BangFunctions include
+ - the forced strictness is part of the function's (published)
+   *interface*, not its implementation
+ - the question of what happens if some patterns for an argument
+   are banged and some are not does not arise (I *think* that this
+   can avoid some mistakes)
+ - it's compatible with BangTypes but simpler.
+
+So in some sense there is (now) nothing new here *except* putting
+the information where people can easily see it.
+
+BangTypes could be rather more complicated.  Clean 2 offers
+lazy, head strict spine lazy, head lazy spine strict, head and spine
+strict, head unboxed spine lazy, head unboxed spine strict
+for lists, which are all different types; it also offers
+strictness-polymorphic lists.  I never actually made use of this
+because having so many kinds of list made my head spin.
+Roughly speading, Clean 1 had BangFunctions, Clean 2 BangTypes.
+
+One of the things that makes me wary of BangPatterns is that it seems
+as though it's headed in a BangTypes kind of direction.
+
+Oh, by the way, I got the Clean syntax wrong.
+![a] means "lazy list evaluated to WHNF";
+[a!] means "value is spine strict".
+
+
+

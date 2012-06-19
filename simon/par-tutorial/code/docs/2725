@@ -1,0 +1,27 @@
+From ivan.miljenovic at gmail.com  Sat Feb  5 00:43:59 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Sat, 5 Feb 2011 10:43:59 +1100
+Subject: [Haskell-cafe] community server & hasktags learned recursing
+	into directories
+In-Reply-To: <AANLkTinKOOh375m=5+3-5-y+kDeduMxVfEBj3nbK1sdn@mail.gmail.com>
+References: <1296858891-sup-7850@localhost.localdomain>
+	<AANLkTinKOOh375m=5+3-5-y+kDeduMxVfEBj3nbK1sdn@mail.gmail.com>
+Message-ID: <AANLkTimdfjFB5gS2YPmCC7oCkqHxjrMeN_EJgJoTT1t4@mail.gmail.com>
+
+On 5 February 2011 10:14, Luke Palmer <lrpalmer at gmail.com> wrote:
+> I host all my modules on github. ?It is a very supportive environment
+> for spontaneous collaborative development. ?c.h.o is a nice place, but
+> lacks in maturity in comparison. ?As long as there is a complete, free
+> place like github around, why not use it?
+
+1) Github uses git, not darcs.
+2) I know who runs/controls c.h.o, but not github (so if something
+goes wrong...)
+3) Maturity? I can put darcs repos there, how mature does it need to be?
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

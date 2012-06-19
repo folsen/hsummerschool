@@ -1,0 +1,24 @@
+  From this I gather, one can not generally kill Haskell threads
+  while they are in the midst of foreign calls. I guess
+  interrupting execution to terminate the program is special
+  since you don't expect anything to work properly afterward.
+
+> If the asynchronous API has the ability to cancel a query given
+> some handler, you instead want to set up a custom kill thread function
+> that checks if a thread has an active query and then performs
+> another FFI call to perform that cancellation.
+
+  It turns out the PGcancel exists for this purpose. Is it safe
+  and reasonable to make query cancellation a ThreadKilled
+  handler in the query thread?
+
+  I gather I need to write the busy loop for polling for data in
+  Haskell. Although libpq has a procedure -- PGgetResult -- that
+  polls for data, it would not respond to killThread.
+
+--
+Jason Dusek
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+

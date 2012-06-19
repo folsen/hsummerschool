@@ -1,0 +1,34 @@
+From donn at avvanta.com  Mon Feb  7 04:10:18 2011
+From: donn at avvanta.com (Donn Cave)
+Date: Sun,  6 Feb 2011 19:10:18 -0800 (PST)
+Subject: [Haskell-cafe] coding style vs. foreign interfaces
+Message-ID: <20110207031018.F30AA276C45@mail.avvanta.com>
+
+I just noticed a handful of spelling errors, in a package that isn't
+all that obscure.  Enums from a C interface -
+
+data AlarmingNews =
+   --  ALARM_STUFF_WENT_WRONG
+   AlarmStufWentWrong | ...
+
+(oops, should have been Stuff, not Stuf.)
+
+Who can blame the guy, after all, because this renaming work is not
+only kind of a mind-numbing and trivial job, it's quite gratuitous.
+
+Of the people who are apt to be interested, a sizeable percentage
+already will be familiar with ALARM_STUFF_WENT_WRONG, and as the
+"nice" Haskell spelling offers no practical advantage at all, it's
+purely a waste of their time to translate from one to the other.
+Is screenflicker_frequency() going to be screenFlickerFrequency,
+or screenflickerFrequency?  gah!
+
+I know it's enshrined in many years of convention by now, but if
+anyone might ever consider the matter again, my vote would be,
+when adopting foreign interfaces essentially unchanged, that the
+spellings also be preserved to whatever extent practicable.
+
+thanks!
+	Donn Cave
+
+

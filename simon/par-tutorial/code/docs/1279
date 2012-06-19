@@ -1,0 +1,37 @@
+From ivan.miljenovic at gmail.com  Tue Aug 23 04:55:39 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Tue, 23 Aug 2011 12:55:39 +1000
+Subject: [Haskell-cafe] Why no Monoid, Num, Integral,
+	or Floating RVarT instances?
+In-Reply-To: <CAJAU91d-nAxJFjyN3M3jFTTqjAhaCDnf2hYnBUx8rVWn0O=_4A@mail.gmail.com>
+References: <CAJAU91d-nAxJFjyN3M3jFTTqjAhaCDnf2hYnBUx8rVWn0O=_4A@mail.gmail.com>
+Message-ID: <CA+u6gbxMvCAT03kkX69_8k1rY2u_Q3=6FqxbZFBXrsmzK1f=PA@mail.gmail.com>
+
+On 23 August 2011 12:17, Barend Venter <barendventer at gmail.com> wrote:
+> It seems like you should be able to get instances for:
+>
+> (Monoid m) => Monoid (RVarT n m)
+> (Num m) => Num (RVarT n m)
+>
+> and so forth for integral and floating
+
+If you're referring to RVarT from random-fu, why not ask the
+maintainer rather than all of -cafe?
+http://hackage.haskell.org/package/random-fu-0.1.0.0
+
+> Just wondering if I am missing something here or if there is any
+> particular thing I'm missing. I am aware you would probably not be
+> able to do an Eq or Show instance but me understanding was that in the
+> case of the (Num b) => Num (a -> b) instance the solution was simply
+> to leave those things undefined.
+
+Well, yes, but where is the Num instance for (a -> b) defined? Not in
+the Prelude it isn't, presumably because of this lack of Eq and Show
+instances: http://haskell.org/ghc/docs/latest/html/libraries/base/Prelude.html#t:Num
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

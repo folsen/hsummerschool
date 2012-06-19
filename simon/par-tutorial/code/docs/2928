@@ -1,0 +1,21 @@
+From thedward at barsoom.net  Thu Feb 10 22:18:05 2011
+From: thedward at barsoom.net (Thedward Blevins)
+Date: Thu, 10 Feb 2011 15:18:05 -0600
+Subject: [Haskell-cafe] ghci command line execution
+In-Reply-To: <F7C8D201-FD5B-4386-B858-8B64DFA0FA5C@gmail.com>
+References: <F7C8D201-FD5B-4386-B858-8B64DFA0FA5C@gmail.com>
+Message-ID: <AANLkTim+FAkywvdg6EcjRzoAJY7Szgq_vg5u76_aywmP@mail.gmail.com>
+
+On Thu, Feb 10, 2011 at 08:44, Thomas Davie <tom.davie at gmail.com> wrote:
+>
+> A while ago I remember someone showing me some tool, I *think* ghci that allowed you to pass it a function of type String -> String as an input, and have it simply run that function on stdin (presumably using interact) to achieve useful things like this...
+>
+> $ cat myFile.txt | ghci -e 'unlines . zipWith (\x y -> show x ++ " " ++ y) [1..] . lines'
+>
+> Does anyone know what it was that I saw being used here?
+
+Maybe you are thinking of this?
+
+http://www.joachim-breitner.de/blog/archives/156-Haskell-on-the-Command-Line.html
+
+

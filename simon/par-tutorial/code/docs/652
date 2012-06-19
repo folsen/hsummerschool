@@ -1,0 +1,31 @@
+From qdunkan at gmail.com  Sat Apr 23 07:52:51 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Sat, 23 Apr 2011 11:22:51 +0530
+Subject: [Haskell-cafe] There is no null; Maybe/Option types
+In-Reply-To: <BANLkTi=irBB_YvfEm3ms0Vxd6xDb7tcPcg@mail.gmail.com>
+References: <BANLkTi=irBB_YvfEm3ms0Vxd6xDb7tcPcg@mail.gmail.com>
+Message-ID: <BANLkTi=oYmQrjTwnhSZM21qg2OC4oe65hQ@mail.gmail.com>
+
+> Most of the (non-IO) runtime errors I get using Haskell software is due to head or fromJust, it's actually quite annoying.
+
+Just singling this one out because I've heard it before.  I've never
+gotten a runtime error from these.  It seems quite easy to just not
+use these functions.
+
+It's already basically been said, but to add more personal experience:
+
+For the original blog post, I think the title is pretty easily
+falsifiable just from practical experience: haskell's Maybe *did* save
+me from NPEs and that's why I don't see them.  The problem is not that
+a key lookup may fail in a map or whatever and now you have to
+propagate that Nothing, the problem is that they pop out of just about
+any code at just about any time and are not covered by the tests
+because you can't test all code in all ways, so production apps wind
+up crashing from them.  That's the thing I see all the time in java,
+and don't see in haskell.  And I don't think it's just redefining the
+problem either, I only rarely get "unexpected Lefts" once the app has
+gotten past the tests.
+
+So that's the practical result I actually care about.
+
+

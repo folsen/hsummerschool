@@ -1,0 +1,28 @@
+From alexey.skladnoy at gmail.com  Thu Apr 28 17:17:22 2011
+From: alexey.skladnoy at gmail.com (Alexey Khudyakov)
+Date: Thu, 28 Apr 2011 19:17:22 +0400
+Subject: [Haskell-cafe] Binary and Serialize classes
+In-Reply-To: <BANLkTinQ3xKU3Fu5N74oSM36sCDuPd7=rw@mail.gmail.com>
+References: <BANLkTinQ3xKU3Fu5N74oSM36sCDuPd7=rw@mail.gmail.com>
+Message-ID: <BANLkTikUJ_kgs=8DdMaunH4ckc7Zyg7b7Q@mail.gmail.com>
+
+> Speaking of that Double instance... both data-binary and cereal use
+> decodeFloat and encodeFloat which mean they suffer from the same
+> problems as realToFrac, namely that -0 becomes 0 and NaN becomes
+> -Infinity (I'm not sure why the latter happens since the decoded
+> values differ... must be a problem with encodeFloat). ?It's tempting
+> to just get the ieee754 bitmap out and serialize that. ?I know I've
+> seen this question around before, but is it possible to somehow cast a
+> D# directly to bytes? ?I know I can write a C function and FFI that
+> in, but it would be tidier to do it all in haskell. ?I guess I can
+> probably use castPtr and memCpy, but I don't see the required
+> addressOf. ?I.e. how would I write 'memcpy(buf, &d, sizeof(double));'?
+>
+Also serialized data takes ~3 times more space than IEEE754
+representation. It's a concern when a lot of data is serialized.
+Serialization in IEEE754 format is implemented already for binary.
+You can check package data-binary-ieee754[1] for
+
+[1] http://hackage.haskell.org/package/data-binary-ieee754
+
+

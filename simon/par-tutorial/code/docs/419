@@ -1,0 +1,83 @@
+From aslatter at gmail.com  Fri Apr 15 04:52:33 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Thu, 14 Apr 2011 21:52:33 -0500
+Subject: [Haskell-cafe] ghc7 bug? associated type + implicit parameters
+In-Reply-To: <201104150015.05830.mikkonecny@googlemail.com>
+References: <201104150015.05830.mikkonecny@googlemail.com>
+Message-ID: <BANLkTinf2ACJ6S=ufJHGeU6+SHoFAKa6gA@mail.gmail.com>
+
+Someone on the ghc-users list might have an idea. I recommend filing a
+bug report:
+
+http://hackage.haskell.org/trac/ghc/wiki/ReportABug
+
+Even if the behavior isn't wrong, in could use a better error message!
+
+Antoine
+
+2011/4/14 Michal Kone?n? <mikkonecny at googlemail.com>:
+> Hi,
+>
+> I have stumbled across some strange behaviour in ghc7.
+>
+> The following compiles fine with ghc 6.12.3:
+>
+> {-# LANGUAGE ImplicitParams #-}
+> {-# LANGUAGE TypeFamilies #-}
+> {-# LANGUAGE NoMonomorphismRestriction #-}
+>
+> module Test where
+>
+> class C t where
+> ? ?type TF t
+> ? ?ttt :: TF t -> t
+>
+> b :: (C t, ?x :: TF t) => t
+> b = ttt ?x
+>
+> but ghc7 says:
+>
+> ? ?Could not deduce (?x::TF t)
+> ? ? ?arising from a use of implicit parameter `?x'
+> ? ?from the context (C t, ?x::TF t)
+> ? ? ?bound by the type signature for b :: (C t, ?x::TF t) => t
+> ? ? ?at Test.hs:13:1-10
+> ? ?In the first argument of `ttt', namely `?x'
+> ? ?In the expression: ttt ?x
+> ? ?In an equation for `b': b = ttt ?x
+>
+> Moreover, when I comment out the type declaration for b, it compiles and the
+> inferred type for b is identical to the one in the above program:
+>
+> *Test> :t b
+> b :: (C t, ?x::TF t) => t
+>
+> It feels to me like a bug but I am not entirely confident. ?Any ideas?
+>
+> Michal
+> --
+> |o| Michal Konecny <mikkonecny at gmail.com>
+> |o| ? ?http://www-users.aston.ac.uk/~konecnym/
+> |o| ? ?office: (+42) (0)121 204 3462
+> |o| PGP key http://www-users.aston.ac.uk/~konecnym/ki.aston
+>
+> --
+> |o| Michal Konecny <mikkonecny at gmail.com>
+> |o| ? ?http://www-users.aston.ac.uk/~konecnym/
+> |o| ? ?office: (+42) (0)121 204 3462
+> |o| PGP key http://www-users.aston.ac.uk/~konecnym/ki.aston
+>
+> --
+> |o| Michal Konecny <mikkonecny at gmail.com>
+> |o| ? ?http://www-users.aston.ac.uk/~konecnym/
+> |o| ? ?office: (+42) (0)121 204 3462
+> |o| PGP key http://www-users.aston.ac.uk/~konecnym/ki.aston
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

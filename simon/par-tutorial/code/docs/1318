@@ -1,0 +1,27 @@
+From daniel.is.fischer at googlemail.com  Wed Aug 24 14:52:52 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Wed, 24 Aug 2011 14:52:52 +0200
+Subject: [Haskell-cafe] different results after compilation
+In-Reply-To: <20110824164519.6841b6e4@mk.mtw.ru>
+References: <20110824164519.6841b6e4@mk.mtw.ru>
+Message-ID: <201108241452.52824.daniel.is.fischer@googlemail.com>
+
+On Wednesday 24 August 2011, 14:45:19, ????? ?????? wrote:
+> I have some script:
+> $ runhaskell readfile.hs
+> fromList [(Merchant {nick = "01010", location = "prontera", x = 184, y
+> = 94},Shop {buy = ShopBuy {titleB = "AB> Green Salad=5k", itemsB =
+> fromList [(Item {itemId = 12065, price = 5000, refine = "", card1 = 0,
+> card2 = 0, card3 = 0, card4 = 0},(100,97))]}, sell = ShopSell {titleS =
+> "", itemsS = fromList []}})]
+> $ ghc --make readfile.hs
+>  Linking readfile ...
+> $ ./readfile
+> $
+> 
+> why results are different?
+
+Can we see the code?
+
+
+

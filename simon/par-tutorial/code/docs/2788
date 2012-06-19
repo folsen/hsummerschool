@@ -1,0 +1,32 @@
+From malcolm.wallace at me.com  Mon Feb  7 09:59:07 2011
+From: malcolm.wallace at me.com (Malcolm Wallace)
+Date: Mon, 07 Feb 2011 08:59:07 +0000
+Subject: [Haskell-cafe] coding style vs. foreign interfaces
+In-Reply-To: <20110207031018.F30AA276C45@mail.avvanta.com>
+References: <20110207031018.F30AA276C45@mail.avvanta.com>
+Message-ID: <F63B4F62-011F-4183-ACC8-22A6C35AC6AE@me.com>
+
+
+On 7 Feb 2011, at 03:10, Donn Cave wrote:
+
+> I just noticed a handful of spelling errors, in a package that isn't
+> all that obscure.  Enums from a C interface -
+>
+> data AlarmingNews =
+>   --  ALARM_STUFF_WENT_WRONG
+>   AlarmStufWentWrong | ...
+
+FWIW, if you generate these bindings with a tool (e.g. hsc2hs, c2hs),  
+then there are standard machine-generated translations, which follow  
+simple rules (so are easy to guess) and being mechanical, are always  
+spelled as expected.  For example
+
+     aLARM_STUFF_WENT_WRONG
+
+for a constant Haskell Int value corresponding to the C enum or CPP  
+constant.
+
+Regards,
+     Malcolm
+
+

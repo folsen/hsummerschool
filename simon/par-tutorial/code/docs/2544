@@ -1,0 +1,92 @@
+From lazycat.manatee at gmail.com  Tue Feb  1 12:15:02 2011
+From: lazycat.manatee at gmail.com (Andy Stewart)
+Date: Tue, 01 Feb 2011 19:15:02 +0800
+Subject: [Haskell-cafe] plugins and internal error: stg_ap_v_ret
+In-Reply-To: <AANLkTi=DHLCDckohxnDexjMCQe5QGcGJOL6uycjyknVe@mail.gmail.com>
+	(Michael Snoyman's message of "Tue, 1 Feb 2011 11:37:37 +0200")
+References: <AANLkTimg-r4PTWXSBTfepqrwB37Gz-F0UYsNRbJL3x8V@mail.gmail.com>
+	<87ei7sh4ts.fsf@gmail.com>
+	<AANLkTi=DHLCDckohxnDexjMCQe5QGcGJOL6uycjyknVe@mail.gmail.com>
+Message-ID: <87fws8ypjd.fsf@gmail.com>
+
+Hi Michael,
+
+I have write some dynamic-loading code for my Manatee project
+(http://hackage.haskell.org/package/manatee)
+
+Dynload.hs use GHC API, if you interested it, you can read source code:
+
+https://patch-tag.com/r/AndyStewart/manatee-core/snapshot/current/content/pretty/Manatee/Core/Dynload.hs
+
+Cheers,
+
+  -- Andy
+
+Michael Snoyman <michael at snoyman.com> writes:
+
+> Hi Andy,
+>
+> plugins *is* working in general for me for some trivial test cases.
+> It's specifically this use case with WAI that's causing trouble, which
+> implies to me I'm misusing the API somehow.
+>
+> Michael
+>
+> On Tue, Feb 1, 2011 at 4:22 AM, Andy Stewart <lazycat.manatee at gmail.com> wrote:
+>> Hi Michael,
+>>
+>> plugins use it's own function instead GHC API, so it's easy to break
+>> with new version GHC.
+>>
+>> ?-- Andy
+>>
+>> Michael Snoyman <michael at snoyman.com>
+>> writes:
+>>
+>>> Hi all,
+>>>
+>>> I'm trying to convert wai-handler-devel to use plugins instead of
+>>> hint, but cannot even get some basic usages to work properly. I've put
+>>> together a minimal example that loads a WAI application from a
+>>> separate file and runs it, but this immediately causes the program to
+>>> crash saying:
+>>>
+>>> loader: internal error: stg_ap_v_ret
+>>> ? ? (GHC version 6.12.3 for i386_unknown_linux)
+>>> ? ? Please report this as a GHC bug: ?http://www.haskell.org/ghc/reportabug
+>>>
+>>> Is this an actual bug in GHC, or am I misusing the plugins package?
+>>>
+>>> The two source files:
+>>>
+>>> MyModule.hs
+>>> {-# LANGUAGE OverloadedStrings #-}
+>>> module MyModule where
+>>>
+>>> import Network.Wai
+>>> import Data.ByteString.Lazy.Char8 ()
+>>>
+>>> myapp _ = responseLBS status200 [("Content-Type", "text/plain")] "myapp"
+>>>
+>>> loader.hs
+>>> import System.Plugins.Make
+>>> import System.Plugins.Load
+>>> import Network.Wai.Handler.Warp (run)
+>>>
+>>> main :: IO ()
+>>> main = do
+>>> ? ? MakeSuccess _ obj <- makeAll "MyModule.hs" []
+>>> ? ? LoadSuccess _ app <- load_ obj [] "myapp"
+>>> ? ? run 3000 app
+>>>
+>>> Thanks,
+>>> Michael
+>>
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+
+

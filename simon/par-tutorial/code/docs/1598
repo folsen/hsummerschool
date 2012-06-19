@@ -1,0 +1,41 @@
+From jeremy at n-heptane.com  Thu Dec  1 21:04:41 2011
+From: jeremy at n-heptane.com (Jeremy Shaw)
+Date: Thu, 1 Dec 2011 14:04:41 -0600
+Subject: [Haskell-cafe] Hackage down!
+In-Reply-To: <CAEzeKYqmnxL830zNhYKrC8owyQO3o4VPK9szdRC7fBavxsAjrg@mail.gmail.com>
+References: <CA+L91bOB+qMoSExJ_MOyV=eMp5yez1C5mtX43CCTb_W7wfCF9g@mail.gmail.com>
+	<CAPTT2bZ71zrja5LCEYeqSqmmRZ-eWc4FFaCqEJCaWQ5dVmeq1w@mail.gmail.com>
+	<00C900DF-592C-48CF-9AD5-60B07F395250@me.com>
+	<CAEzeKYqmnxL830zNhYKrC8owyQO3o4VPK9szdRC7fBavxsAjrg@mail.gmail.com>
+Message-ID: <CAGE_JKZ9dc4rw5Hh3rFR3a6Fv4TxvH3z_RBooZLqq-tymVsr+Q@mail.gmail.com>
+
+Mirroring is a key feature of Hackage 2. But, Hackage 2 needs more
+love before it can be released. More lovers would make it go faster
+though!
+
+- jeremy
+
+On Thu, Dec 1, 2011 at 1:36 PM, Michael Litchard <michael at schmong.org> wrote:
+> Does anyone know of a hackage mirror? It now occurs to me I should
+> have a local mirror, it's that essential.
+>
+> On Thu, Dec 1, 2011 at 9:24 AM, Malcolm Wallace <malcolm.wallace at me.com> wrote:
+>> And, amusingly, ?http://downforeveryoneorjustme.com/ is also down, having exceeded its Google App Engine quota.
+>>
+>> [ But the similarly named .org site still works, and confirms that hackage is down. ]
+>>
+>> Regards,
+>> ? ?Malcolm
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

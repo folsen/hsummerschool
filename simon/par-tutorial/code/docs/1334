@@ -1,0 +1,30 @@
+From es at ertes.de  Wed Aug 24 18:54:16 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Wed, 24 Aug 2011 18:54:16 +0200
+Subject: [Haskell-cafe] How to make callCC more dynamic
+References: <4E5524AB.5010108@gmail.com>
+Message-ID: <20110824185416.3174a297@angst.streitmacht.eu>
+
+bob zhang <bobzhang1988 at gmail.com> wrote:
+
+> I thought the right type for ContT should be
+> newtype ContT m a = ContT {runContT :: forall r. (a-> m r) -> m r}
+
+No, that will effectively make it impossible to make use of CPS effects,
+hence turning your ContT into an IdentityT-like monad transformer, which
+can only change the semantics of the underlying monad.  More concretely
+what you are implementing here is a codensity as you can find it in the
+monad-ran package by Edward K.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

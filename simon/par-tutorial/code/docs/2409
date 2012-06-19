@@ -1,0 +1,17 @@
+From trebla at vex.net  Thu Dec 29 19:35:59 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Thu, 29 Dec 2011 13:35:59 -0500
+Subject: [Haskell-cafe] Convert Double to Data.Fixed
+In-Reply-To: <CANVKUrUzudNo9dp_H0c086Dv+oSY7fTfN=SCbz8Z=YqOmtC9eA@mail.gmail.com>
+References: <CANVKUrUzudNo9dp_H0c086Dv+oSY7fTfN=SCbz8Z=YqOmtC9eA@mail.gmail.com>
+Message-ID: <4EFCB30F.90607@vex.net>
+
+On 11-12-26 10:55 AM, Eugene Kirpichov wrote:
+> How do I most efficiently convert a Double to a Data.Fixed?
+
+Double is an instance of Real, Fixed E12 is an instance of Fractional, 
+they are eligible for realToFrac.
+
+Similarly for many time types.
+
+

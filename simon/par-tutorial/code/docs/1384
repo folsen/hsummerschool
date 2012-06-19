@@ -1,0 +1,53 @@
+From ketil at malde.org  Fri Aug 26 08:46:56 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Fri, 26 Aug 2011 08:46:56 +0200
+Subject: [Haskell-cafe] ping haskell.org timeout
+In-Reply-To: <CAJ-DSyz3K6fTmr-ut_D61LWX6v5z5Grrz=_5-G+eeBLtQGyYEQ@mail.gmail.com>
+	(Jason Dagit's message of "Thu, 25 Aug 2011 21:45:52 -0700")
+References: <CAFLa5WPXwUP=tGWc1ubAAa3NUhWvAYx-bhFNKydFFS1tpMO+UQ@mail.gmail.com>
+	<CAJ-DSyzj92O-h=ApUKceUcQM4JOHKyJZQXwHQy8WunKjOsuynQ@mail.gmail.com>
+	<87zkiw248m.fsf@malde.org>
+	<CAJ-DSyz3K6fTmr-ut_D61LWX6v5z5Grrz=_5-G+eeBLtQGyYEQ@mail.gmail.com>
+Message-ID: <87pqjs1xgf.fsf@malde.org>
+
+Jason Dagit <dagitj at gmail.com> writes:
+
+>>> Lots of servers turn off ICMP packet responses these days
+
+>> Because users don't really need error messages, that's privileged
+>> information for system administrators.
+
+> Besides, if someone is trying to debug http protocol issues using
+> ICMP, they're taking an awfully indirect route.
+
+Yes, first thing would be to check the log files.  Oh, wait, users don't
+have read permissions for those...
+
+> I think the reason it gets disabled is typically well intentioned.
+
+And we all know where that road leads - to frustration and low quality
+services, that's where.
+
+Sorry for my grumpiness - this is a constant struggle for me. :-)
+
+>> It takes a while to complete with no visual feedback. ?Perhaps the
+>> network is just slow? ?Or perhaps the web pages are cached somewhere
+>> along the way?
+
+> All of those are plausible [..]
+
+Perhaps 'cabal update' should provide some visual feedback by default?
+There's -v, but there's still a noticable pause (15 seconds on a fairly
+beefy computer and a good connection) between "Downloaded to [..]" and
+"Reading available packages...".
+
+The index is 3MB, it's probably not big enough that a smarter protocol
+(rsync/rdiff?) would improve things?  Except perhaps checking that it
+has been updated since the last update - that'd probably save a ton of
+bandwidth if/when people do automatic updates.
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

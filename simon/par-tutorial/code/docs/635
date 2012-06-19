@@ -1,0 +1,46 @@
+From qdunkan at gmail.com  Fri Apr 22 20:29:19 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Fri, 22 Apr 2011 23:59:19 +0530
+Subject: [Haskell-cafe] naming convention for maybes?
+In-Reply-To: <alpine.DEB.2.00.1104221952160.28351@anubis>
+References: <BANLkTi=ftrj1T4RHbHg0ETJRZMNbLH-uRQ@mail.gmail.com>
+	<D9258BBD-CF3E-4165-9981-C37A3E2DC439@alum.mit.edu>
+	<4DB1BFAD.6070401@gmail.com>
+	<alpine.DEB.2.00.1104221952160.28351@anubis>
+Message-ID: <BANLkTikkTSBwYN+scfCYY0k7GcN7O4ev3Q@mail.gmail.com>
+
+> Of course, naming will always be a matter of taste. For instance I would not
+> write maybe_something, because I prefer camel case, that is, maybeSomething.
+> On the other hand, I already wrote some Wiki articles that you may read as
+> suggestions for certain naming conventions:
+> ?http://www.haskell.org/haskellwiki/Qualified_names
+> ?http://www.haskell.org/haskellwiki/Pairs_of_identifiers
+> ?and other articles in Category:Style. You may add an article for
+> suggestions of how to name lists, maybes, eithers etc.
+
+WRT to camel vs. underscores, I think it's mostly orthogonal, because
+you can always convert between them: mbX or mb_x.  Of course a nice
+thing about the trailing 's' is that it's the same for both.
+
+I wish I had ideas for the other types... when there isn't something
+more descriptive, I just concatenate pairs, e.g. [(Code, Name)]
+becomes code_names (codeNames for the camels).  Eithers I don't have
+to name often, but I do the same concatenation.  Maps are key_to_val,
+or just to_key (then 'lookup key to_val' reads nicely), or by_key, or
+sometimes plural like "vals", depending on the context.  Sets I use
+plural like lists.
+
+For functions, 'is_' for predicates, like many other languages.  '_of'
+for projections.
+
+Of course for the variables, often the nicest is to avoid the name
+entirely by giving it directly to some combinator.  If we had the
+'lambda case' or monadic case then I could get rid of a lot of my
+'maybe_' names.
+
+Hmm, maybe I do have some opinions :)
+
+Sounds like 'mb' is pretty widespread, and it seems like something I
+could get used to, so maybe I'll start using that.
+
+

@@ -1,0 +1,28 @@
+From donn at avvanta.com  Tue Dec 27 01:40:31 2011
+From: donn at avvanta.com (Donn Cave)
+Date: Mon, 26 Dec 2011 16:40:31 -0800 (PST)
+Subject: [Haskell-cafe] How to get Cabal to spit out a .a library
+	suitable	for linking into C/Objective-C
+Message-ID: <20111227004031.30D21F393A@mail.avvanta.com>
+
+Sorry about the belated response, but this shouldn't be a problem since
+it isn't going to be very helpful anyway!
+
+I've managed to follow the process described on this page:
+http://www.haskell.org/haskellwiki/Using_Haskell_in_an_Xcode_Cocoa_project
+to link Haskell code to a non-Haskell main program, via Xcode.
+
+You've probably already seen this, it's mostly about a few iterations
+of trial and error linking, to get the list of GHC library dependencies,
+which is what you need whether you're using Xcode or not.  If you really
+need a single library with your code and all those dependencies, that
+may be technically feasible, though awfully tedious.
+
+The only clear problem I encountered while experimenting with it is that
+GHC run time options need ghc -rtsopts, so they're unavailable if your
+program isn't built by ghc.  I believe I worked around that with a special
+rtsmain.o, could probably recover the details if that's of interest.
+
+	Donn
+
+

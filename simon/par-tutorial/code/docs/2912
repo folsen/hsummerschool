@@ -1,0 +1,66 @@
+From duncan.coutts at googlemail.com  Thu Feb 10 12:12:04 2011
+From: duncan.coutts at googlemail.com (Duncan Coutts)
+Date: Thu, 10 Feb 2011 11:12:04 +0000
+Subject: [Haskell-cafe] [Cabal-devel] Cabal && license combinations
+In-Reply-To: <AANLkTin-FnLkMpjvPSAOGo+7gS8UWhT2t7GdBiPn1K-u@mail.gmail.com>
+References: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+	<1297178086.2402.5.camel@godel>
+	<AANLkTin-FnLkMpjvPSAOGo+7gS8UWhT2t7GdBiPn1K-u@mail.gmail.com>
+Message-ID: <1297336324.29009.464.camel@localhost>
+
+On Wed, 2011-02-09 at 18:35 -0500, Dan Knapp wrote:
+> I haven't heard anyone mention this yet, and it's a biggie, so I
+> guess I'd better de-lurk and explain it.  The issue is this:  There is
+> a legal distinction between static and dynamic linking, or at least
+> some licenses (the GPL is the one I'm aware of) believe that there is.
+>  In particular, they assert that you are legally creating a "derived
+> work" if you statically link with their library, and that your
+> library, even if it's just a thin bindings wrapper, must therefore
+> comply by their license terms.  They make no such claim for dynamic
+> linking.
+
+I think you're in danger of adding confusion rather than removing it.
+The LGPL provides some alternative terms for dynamic linking but you
+still must comply with the license.
+
+> Of course, Haskell on most platforms and default configurations
+> links everything statically!  So I believe this means that you have to
+> comply by the licenses of all your dependencies!
+
+You always have to do that.
+
+> Now, there's a difference between complying by those licenses and
+> being under them yourself, but for example I believe this means that
+> if we have a package named "hs-save-the-whales" that is under the GPL,
+> and a front-end package "hs-redeem-them-for-valuable-cash-prizes"
+> which makes use of the functionality in hs-save-the-whales, the
+> front-end MUST be offered under the GPL, and, additionally, CANNOT be
+> offered under BSD (I think).
+
+No, that is wrong. There is no difference between GPL code depending on
+BSD code and BSD code depending on GPL code. The direction of the
+dependency is irrelevant. In both cases the end user/distributor must
+comply with both licenses.
+
+> I think it would be a very useful and valuable thing for Cabal to
+> detect this situation and warn appropriately!  Contamination by
+> undesired licenses is a serious flaw in the packaging of a package; it
+> just happens to be a legal flaw rather than a technical one.  Indeed,
+> I would argue that this is far more important than any hypothetical
+> per-file licensing.
+
+We are already working on a feature that will show the full set of
+licenses that the end user must comply with (a patch has been submitted
+and it's been through one round of review so far). In your example that
+would mean you expect the set to be {BSD} but the tool will show you
+that it is in fact {BSD, GPL}. You can then use that as your warning
+that the set of licenses is not what you expected.
+
+The tool will not claim that {BSD, GPL} is wrong, because it isn't! What
+is wrong is expectations not matching reality, and hopefully that's what
+the tool can help with.
+
+Duncan
+
+
+

@@ -1,0 +1,35 @@
+From catamorphism at gmail.com  Wed Apr 13 09:25:21 2011
+From: catamorphism at gmail.com (Tim Chevalier)
+Date: Wed, 13 Apr 2011 00:25:21 -0700
+Subject: [Haskell-cafe] Debugging with gdb?
+In-Reply-To: <1302677977.7958.22.camel@hp.my.own.domain>
+References: <1302677977.7958.22.camel@hp.my.own.domain>
+Message-ID: <BANLkTikeebx+phmXL1b-0yiNFGsUfTiDJA@mail.gmail.com>
+
+On Tue, Apr 12, 2011 at 11:59 PM, Svante Signell
+<svante.signell at telia.com> wrote:
+> Hi,
+>
+> As I don't know anything about Haskell, can I make a stupid question: Is
+> there any method to create debug symbols for a Haskell program, and is
+> it possible to debug with gdb?
+>
+
+You can run gdb on a Haskell program, but it's unlikely you'll learn
+anything useful unless you're a compiler writer trying to debug your
+compiler or runtime system.
+
+ghci (the interactive version of GHC) has a built-in debugger that may
+be the closest thing to what you're used to with gdb. There is also a
+small cottage industry of debuggers that are more tailored to the
+process of debugging a functional program.
+
+Cheers,
+Tim
+
+-- 
+Tim Chevalier * http://cs.pdx.edu/~tjc/ * Often in error, never in doubt
+"an intelligent person fights for lost causes,realizing that others
+are merely effects" -- E.E. Cummings
+
+

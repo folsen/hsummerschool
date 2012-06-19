@@ -1,0 +1,32 @@
+From vandijk.roel at gmail.com  Mon Apr  4 15:45:40 2011
+From: vandijk.roel at gmail.com (Roel van Dijk)
+Date: Mon, 4 Apr 2011 15:45:40 +0200
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <8762qu2ng5.fsf@malde.org>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+	<BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+	<BANLkTimG9VyfjaNqN1khd89dyz8aNsV8cw@mail.gmail.com>
+	<8762qu2ng5.fsf@malde.org>
+Message-ID: <BANLkTim_553KKmdDuxSz_HAG7PrqBSbPkg@mail.gmail.com>
+
+2011/4/4 Ketil Malde <ketil at malde.org>:
+> I think the safest thing to do is to require source to be ASCII, and
+> provide escapes for code points >127...
+
+I do not think that that is the safest option. The safest is just
+writing down whatever GHC does. Escape codes for non-ASCII would break
+a lot of packages and make programming really painful. Consider the
+following, utf-8 encoded, file:
+
+http://code.haskell.org/numerals/test/Text/Numeral/Language/ZH/TestData.hs
+
+I don't want to imagine writing that with escape characters. It would
+also be very error prone, not being able to readily read what you
+write.
+
+But the overall consensus appears to be UTF-8 as the default encoding.
+I will write an official proposal to amend the haskell language
+specification. (Probably this evening, utc+1).
+
+

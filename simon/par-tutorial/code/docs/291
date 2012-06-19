@@ -1,0 +1,58 @@
+From d.kahlenberg at googlemail.com  Mon Apr 11 10:54:44 2011
+From: d.kahlenberg at googlemail.com (Daniel Kahlenberg)
+Date: Mon, 11 Apr 2011 10:54:44 +0200
+Subject: [Haskell-cafe] already installed packages alerted as not being
+	installed
+In-Reply-To: <20110411.173233.34530666.kazu@iij.ad.jp>
+References: <BANLkTi=xDJO68sNZR5vi=NofwD3p0aZ3TA@mail.gmail.com>
+	<20110411.173233.34530666.kazu@iij.ad.jp>
+Message-ID: <BANLkTi=nYibmVeNdhrzpx-9KbVfNYL4SEg@mail.gmail.com>
+
+Kazu,
+
+thanks I wanted to mention that the "unknown symbol" error is very
+likely not related to the cab tool as the same error appears, when
+using the cabal - tool. I guess we can ignore it even in the context
+of my main question, sorry for being to verbose. What I found more
+interesting is, that cab doesn't try to re-install an installed
+package - already in the database too, as ghc-pkg output pretends -
+which is expected behaviour. The cabal system frontend obviously does
+trying to reinstall the package though. This seems like different
+model of reality...
+
+Cheers
+Daniel
+
+2011/4/11 Kazu Yamamoto <kazu at iij.ad.jp>:
+> Hello,
+>
+>> When I install cabal-dev and cab first and then re-install everything
+>> with cab instead of cabal the issue with re-installing already
+>> installed packages described above disappears and only an "unknown
+>> symbol" message related to the correctly found installed cairo package
+>> remains. So is there an error in package database handling somewhere
+>> or changed semantics in cabal | ghc-pkg | (even) pkg-config flags I
+>> missed?
+>
+> "cab" is just a wrapper for "cabal" and "cabal-dev" for installation.
+> So, I have no idea about what's going on.
+>
+> Please try "cab install <package> -n" to see what will happen before
+> typing "cab install <package>". If you find the word "reinstall", you
+> should not install the package because the installation operation will
+> break your package environment.
+>
+> You can analyze package dependency with:
+> cab deps <package> -r
+> cab revdeps <package> -r
+> cab list -r
+>
+> Adding the "-a" option displays global packages also.
+>
+> I recommend to use a sandbox when you try to resolve a dependency
+> problem.
+>
+> --Kazu
+>
+
+

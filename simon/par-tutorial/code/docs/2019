@@ -1,0 +1,21 @@
+From v.dijk.bas at gmail.com  Fri Dec 16 15:24:22 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Fri, 16 Dec 2011 15:24:22 +0100
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <CADLz5wVmAYTjGq1+ST87=0oGmUoYdZUTCj=Xcv=u_5_8D3hWvQ@mail.gmail.com>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+	<20111216042614.GB15053@seas.upenn.edu>
+	<CADLz5wVmAYTjGq1+ST87=0oGmUoYdZUTCj=Xcv=u_5_8D3hWvQ@mail.gmail.com>
+Message-ID: <CADLz5wU18eL9Jg4UGwF8rQjKsj4TTEvjBtuK+upW1sDfZA7=mg@mail.gmail.com>
+
+Attached is a git patch for base which makes the proposed changes.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: maybe_monad_failure-and-prioritized-choice_semantics.patch
+Type: text/x-patch
+Size: 4057 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111216/eee497d0/attachment.bin>
+

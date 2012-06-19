@@ -1,0 +1,23 @@
+From emax at chalmers.se  Mon Aug 15 13:32:26 2011
+From: emax at chalmers.se (Emil Axelsson)
+Date: Mon, 15 Aug 2011 13:32:26 +0200
+Subject: [Haskell-cafe] Haskell syntax highlighting in a public blog
+In-Reply-To: <CAPkMFP=hAnOKN2sxCB8=RbYwXEfePBRfNEFS_Ru=8WYt=Pif7Q@mail.gmail.com>
+References: <CAPkMFP=hAnOKN2sxCB8=RbYwXEfePBRfNEFS_Ru=8WYt=Pif7Q@mail.gmail.com>
+Message-ID: <4E4903CA.2000505@chalmers.se>
+
+2011-08-09 03:54, Oscar Picasso skrev:
+> Hi,
+>
+> Is there a public blog that that allow syntax highlighting of Haskell code?
+
+One option is to write the post in Markdown and use Pandoc (with syntax 
+highlighting) to convert to HTML. The process (for Blogger) is described 
+here:
+
+http://flygdynamikern.blogspot.com/2009/03/blogging-with-pandoc-literate-haskell.html
+
+/ Emil
+
+
+

@@ -1,0 +1,41 @@
+From aslatter at gmail.com  Mon Dec 26 19:42:24 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Mon, 26 Dec 2011 13:42:24 -0500
+Subject: [Haskell-cafe] Non-exhaustive pattern match warning (incorrect?)
+In-Reply-To: <4EF8BB12.3010603@orlitzky.com>
+References: <4EF8BB12.3010603@orlitzky.com>
+Message-ID: <CAKjSnQGDkoHbMz0e1-CVTVu-4Lc0ZDy5ZD2Pw-086cciDunFRg@mail.gmail.com>
+
+On Mon, Dec 26, 2011 at 1:21 PM, Michael Orlitzky <michael at orlitzky.com> wrote:
+> I'm cleaning up some old projects, and hit this:
+>
+> ?src/Octet.hs:47:27:
+> ? ?Warning: Pattern match(es) are non-exhaustive
+> ? ?In a record-update construct: Patterns not matched: Octet.None
+>
+> But in the source, I've checked for that case:
+>
+> ?class Maskable a where
+> ? ?apply_mask :: a -> Maskbits -> Bit -> a
+>
+> ?instance Maskable Octet where
+> ? ?apply_mask _ Maskbits.None _ = Octet.None
+> ? ?apply_mask Octet.None _ _ ? ?= Octet.None
+> ? ?apply_mask oct mask bit
+> ? ? ? ?| mask == Eight = oct
+> ? ? ? ?| mask == Seven = oct { b8 = bit } -- Line 47
+> ? ? ? ?...
+> ? ? ? ?| otherwise = Octet.None
+>
+>
+> Am I overlooking something, or did I already match Octet.None?
+>
+
+What is your definition of the 'Octet' type?
+
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

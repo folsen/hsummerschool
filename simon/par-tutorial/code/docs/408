@@ -1,0 +1,35 @@
+From jv at informatik.uni-bonn.de  Thu Apr 14 20:10:03 2011
+From: jv at informatik.uni-bonn.de (=?ISO-8859-1?Q?Janis_Voigtl=E4nder?=)
+Date: Thu, 14 Apr 2011 20:10:03 +0200
+Subject: [Haskell-cafe] Questioning seq
+In-Reply-To: <mailman.39371.1302803850.12585.haskell-cafe@haskell.org>
+References: <mailman.39371.1302803850.12585.haskell-cafe@haskell.org>
+Message-ID: <4DA7387B.9020706@informatik.uni-bonn.de>
+
+Am 14.04.2011 18:57:35 schrieb Andrew Coppin<andrewcoppin at btinternet.com>:
+> A couple of questions:
+>
+> 1. Why is the existence of polymorphic seq bad?
+
+See http://www.iai.uni-bonn.de/~jv/acta.pdf, Sections 1 and 2 and
+pointers therein.
+
+Also, numerous discussions on this list over the years.
+
+Best,
+Janis.
+
+> 2. Why would the existence of polymorphic rnf be worse?
+>
+> 3. How is pseq different from seq?
+>
+> That is all...
+>
+
+
+-- 
+Jun.-Prof. Dr. Janis Voigtl?nder
+http://www.iai.uni-bonn.de/~jv/
+mailto:jv at iai.uni-bonn.de
+
+

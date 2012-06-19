@@ -1,0 +1,66 @@
+From sh006d3592 at blueyonder.co.uk  Thu Dec 29 05:52:57 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Thu, 29 Dec 2011 04:52:57 +0000
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <CAKjSnQF0BJj8c9oQBAP-etip+YO-dnWj2dXmXNVWLVSigpkZ9g@mail.gmail.com>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk>
+	<CAKjSnQF0BJj8c9oQBAP-etip+YO-dnWj2dXmXNVWLVSigpkZ9g@mail.gmail.com>
+Message-ID: <4EFBF229.4040707@blueyonder.co.uk>
+
+On 29/12/2011 01:53, Antoine Latter wrote:
+> The beauty of the IO monad is that it doesn't change anything about
+> purity. Applying the function
+>
+>    bar :: Int ->  IO Int
+>
+> to the value 2 will always give the same result:
+>
+>> Yes - AT COMPILE TIME by the principle of referential transparency it always
+>> returns the same action. However, the whole point of that action is that it
+>> might potentially be executed (with potentially side-effecting results) at
+>> run-time. Pure at compile-time, impure at run-time. What is only modeled at
+>> compile-time is realized at run-time, side-effects included.
+>>
+> I don't think I would put it that way - the value 'bar 2' is a regular
+> Haskell value. I can put it in a list, return it from a function and
+> all other things:
+>
+> myIOActions :: [IO Int]
+> myIOActions = [bar 2, bar (1+1), bar (5-3)]
+>
+> And I can pick any of the elements of the list to execute in my main
+> function, and I get the same main function either way.
+Yes - IO actions are first class values in Haskell. They can be derived 
+using all the functional tools of the language. But if this points out a 
+flaw in my logic, it's only a minor issue in my distinction between 
+compile-time and run-time.
+
+Basically, there is a phase when a model has been constructed 
+representing the source code. This model is similar in principle to an 
+AST, though primarily (maybe entirely?) composed of unevaluated 
+functions rather than node-that-represents-whatever structs. This phase 
+*must* be completed during compilation. Of course evaluation of some 
+parts of the model can start before even parsing is complete, but that's 
+just implementation detail.
+
+Some reductions (if that's the right term for a single evaluation step) 
+of that model cannot be applied until run-time because of the dependence 
+on run-time inputs. Either the reduction implies the execution of an IO 
+action, or an argument has a data dependency on an IO action.
+
+Many reductions can occur either at compile-time or run-time.
+
+In your list-of-actions example, the list is not an action itself, but 
+it's presumably a part of the expression defining main which returns an 
+IO action. The evaluation of the expression to select an action may have 
+to be delayed until run-time with the decision being based on run-time 
+input. The function that does the selection is still pure. Even so, this 
+evaluation is part of the potentially side-effecting evaluation and 
+execution of the main IO action. Overall, the run-time execution is 
+impure - a single side-effect is enough.
+
+So... compile-time pure, run-time impure.
+
+
+

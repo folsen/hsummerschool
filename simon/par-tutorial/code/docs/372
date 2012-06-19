@@ -1,0 +1,31 @@
+From schlepptop at henning-thielemann.de  Wed Apr 13 23:30:16 2011
+From: schlepptop at henning-thielemann.de (Henning Thielemann)
+Date: Wed, 13 Apr 2011 23:30:16 +0200
+Subject: [Haskell-cafe] Fucntion composing
+In-Reply-To: <DF47C447-E80D-4A31-9655-7CE52D738FFE@mac.com>
+References: <DF47C447-E80D-4A31-9655-7CE52D738FFE@mac.com>
+Message-ID: <4DA615E8.6090006@henning-thielemann.de>
+
+Adam Krauze schrieb:
+> Hello,
+> as I am newbie to Haskell  and my introductory question is:
+> 
+> given functions say f and g with type signatures
+> 
+> f :: (Num a) => [a] -> [a] -> [(a,a)]  // f takes two lists and zips them into one in some special way
+> g :: (Num a) => a -> [(a,a)] -> [a]  // g using some Num value calculates list of singletons from list of pairs
+> 
+> of course  g 0 :: (Num a) => [(a,a)] ->[a]
+> 
+> now I want to create function h :: (Num a) => [a] -> [a] -> [a] in such way
+> 
+> that (g 0) consumes output of f.
+> 
+> But when I try 
+> 
+> Prelude> :t (g 0).f
+
+http://www.haskell.org/haskellwiki/Composing_functions_with_multiple_values
+
+
+

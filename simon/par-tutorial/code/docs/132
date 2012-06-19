@@ -1,0 +1,20 @@
+From mmitar at gmail.com  Tue Apr  5 02:55:57 2011
+From: mmitar at gmail.com (Mitar)
+Date: Tue, 5 Apr 2011 02:55:57 +0200
+Subject: [Haskell-cafe] lhs2tex and comment
+Message-ID: <BANLkTikK9bLHqxCXqYF_jboPLDY2FS0VGQ@mail.gmail.com>
+
+Hi!
+
+I have problems with lhs2tex and nested (long) comments. It formats it
+all in one long line and does not wrap it. Is there a way to define
+those comments so that it would maybe automatically wrap them at the
+end of the page? (And still take into the account possible indentation
+of comments.) Or at least to not ignore newlines in comments?
+
+I am using poly mode.
+
+
+Mitar
+
+

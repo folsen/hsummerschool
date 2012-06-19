@@ -1,0 +1,19 @@
+From cdsmith at gmail.com  Tue Feb  8 16:46:28 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Tue, 08 Feb 2011 08:46:28 -0700
+Subject: [Haskell-cafe] File position
+In-Reply-To: <4D515E29.8060704@gmail.com>
+References: <4D515E29.8060704@gmail.com>
+Message-ID: <1297179988.2402.6.camel@godel>
+
+On Tue, 2011-02-08 at 18:15 +0300, Permjacov Evgeniy wrote:
+> Is there any way to get current position from System.IO.Handle as
+> Integer?
+
+Have you looked at hTell in System.IO?
+
+-- 
+Chris Smith
+
+
+

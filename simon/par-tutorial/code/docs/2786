@@ -1,0 +1,23 @@
+From ckkashyap at gmail.com  Mon Feb  7 06:06:22 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Mon, 7 Feb 2011 10:36:22 +0530
+Subject: [Haskell-cafe] Extending GHCi
+In-Reply-To: <178721.99260.qm@web45106.mail.sp1.yahoo.com>
+References: <AANLkTintbzM_qEmFH=ijc5NudTTuk=eHqLYX1SAcXZ__@mail.gmail.com>
+	<178721.99260.qm@web45106.mail.sp1.yahoo.com>
+Message-ID: <AANLkTikupXX8ZFV3AYGXQQ6Ox7v1OpZUjuRXygAc-+3x@mail.gmail.com>
+
+>
+>
+>
+> What part of that doesn't already work? You can forkIO threads in GHCi,
+> you can listen on the network. If you have written the server so it can be
+> controlled from another thread, you can run those controlling functions
+> at the prompt while the server is working.
+>
+>
+> Thanks Brandon  .. I was looking for a confirmation.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110207/f3470c36/attachment.htm>
+

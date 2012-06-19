@@ -1,0 +1,20 @@
+From pumpkingod at gmail.com  Mon Aug  8 17:21:47 2011
+From: pumpkingod at gmail.com (Daniel Peebles)
+Date: Mon, 8 Aug 2011 11:21:47 -0400
+Subject: [Haskell-cafe] Is there a program to check if a matrix is
+	totally unimodular?
+In-Reply-To: <CAMLKXynJa1bq12qPQfJ4r-oc_p_ttpwMRPrno230PL9apmbZtw@mail.gmail.com>
+References: <CAMLKXynJa1bq12qPQfJ4r-oc_p_ttpwMRPrno230PL9apmbZtw@mail.gmail.com>
+Message-ID: <CANaM3xCQph4PTAr3P+qUEy4o4nDrs-ScfqcRrXKd0Omwy6G5RA@mail.gmail.com>
+
+I haven't come across unimodular matrices before, but according to the
+definition on wikipedia it seems fairly straightforward to implement a naive
+algorithm to decide it.
+
+Also, have you considered trying IRC for these sorts of short questions? The
+#haskell IRC channel on freenode is helpful and seems better suited to
+asking questions like this, if you just want quick answers. There's a
+shorter lag than a mailing list, and the IRC medium seems closer to the
+kinds of things I've seen you ask.
+
+

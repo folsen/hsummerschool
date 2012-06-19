@@ -1,0 +1,41 @@
+From mauricio.antunes at gmail.com  Mon Apr  4 04:43:31 2011
+From: mauricio.antunes at gmail.com (mauricio.antunes at gmail.com)
+Date: Mon, 4 Apr 2011 02:43:31 +0000 (UTC)
+Subject: [Haskell-cafe] HDF5 binding (was: why is ghci trying to load
+	hsc file ??)
+References: <20110226171334.5490d00e@windy.deldotd.com>
+	<871v2px23g.fsf@tac.ki.iif.hu>
+	<206B7FA3-5D14-4BC1-A740-4A84A7D16100@deepbondi.net>
+Message-ID: <inbb8j$dnf$1@dough.gmane.org>
+
+>>> I worked out a small hdf5 binding using cabal and bindings-DSL and
+>>> sqlite3 as my example.
+
+>> I just wanted to add that I also started an HDF5 binding recently
+>> (using hsc2hs only).  It does more than enough for me ATM, so I don't
+>> develop it actively, but if you want to pursue this (and I think
+>> it would be a useful addition to Hackage), we may share experience
+>> and code.  My binding is part of a bigger project, but I meant to
+>> split it out anyway.
+
+> What an interesting coincidence, that makes at least three of
+> us. Apparently it's an idea whose time has come.  Mine is also an
+> incomplete low-level binding but is currently under semi-active
+> development and I aim to make it cover the entire hdf5.h interface.
+> If anyone is interested in it I've put it on github at:
+>
+> https://github.com/mokus0/bindings-hdf5
+>
+
+Bindings to the full hdf5 were supposed to be in the example set for
+bindings-DSL. It doesn't use pkg-config, though, and hdf5 developers
+didn't like the idea of adding support. I wanted reference bindings-*
+libraries to be free of linking problems some users might not be able
+to solve or understand, so I gave up.
+
+Best,
+Maur?cio
+
+
+
+

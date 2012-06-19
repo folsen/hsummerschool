@@ -1,0 +1,15 @@
+From stephen.tetley at gmail.com  Sat Dec 31 16:50:05 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Sat, 31 Dec 2011 15:50:05 +0000
+Subject: [Haskell-cafe] Avoiding parametric function binding
+In-Reply-To: <op.v7c0dyztjmyckg@boqueron>
+References: <op.v7c0dyztjmyckg@boqueron>
+Message-ID: <CAB2TPRBmHeX8eZyNuVvstwdRNX==f1fb9zJ5W+=R1BeYJqv2DA@mail.gmail.com>
+
+Maybe you want a deconstructor (sometime called an eliminator)?
+
+deconsVar :: (Maybe Int -> a) -> (Maybe String -> a) -> Var -> a
+deconsVar f g (V1 a) = f a
+deconsVar f g (V2 b) = g b
+
+

@@ -1,0 +1,31 @@
+From es at ertes.de  Fri Dec  9 17:48:08 2011
+From: es at ertes.de (Ertugrul =?UTF-8?B?U8O2eWxlbWV6?=)
+Date: Fri, 9 Dec 2011 17:48:08 +0100
+Subject: [Haskell-cafe] web-routes-quasi: Generating a route type
+Message-ID: <20111209174808.26544db2@angst.streitmacht.eu>
+
+Hello there,
+
+I'm trying to use the web-routes-quasi package outside of Yesod.  Is
+there any documentation on how to use TH to generate a route type just
+like Yesod does?  Or is that a Yesod-specific feature?
+
+I don't need the actual automatic dispatch or anything, just a type to
+work with.  If it's not possible, I will just go ahead and (ab-) use the
+constructor strings.
+
+
+Greets,
+Ertugrul
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111209/4ab00490/attachment.pgp>
+

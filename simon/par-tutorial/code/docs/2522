@@ -1,0 +1,20 @@
+From stephen.tetley at gmail.com  Sat Dec 31 13:36:02 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Sat, 31 Dec 2011 12:36:02 +0000
+Subject: [Haskell-cafe] Are all monads functions?
+In-Reply-To: <4EFEFF81.9000803@unicaen.fr>
+References: <CACqaG6y79_uXmOm4Snxg9H=zmLaemqQN+rG3eHHR3W0xB2bxAg@mail.gmail.com>
+	<4EFEFF81.9000803@unicaen.fr>
+Message-ID: <CAB2TPRAur3oNYn7j9Lb2hkvEXN+T9xc3CiQ-f=Sbuc4XF8k37A@mail.gmail.com>
+
+On 31 December 2011 12:26, Jerzy Karczmarczuk
+<jerzy.karczmarczuk at unicaen.fr> wrote:
+> Yves Par?s :
+>
+>> all standard Monads are newtypes wrapping functions
+>
+> What about Maybe and [] ?
+
+And Identity ...
+
+

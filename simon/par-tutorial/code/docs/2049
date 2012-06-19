@@ -1,0 +1,37 @@
+From gcrosswhite at gmail.com  Sat Dec 17 06:39:44 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Sat, 17 Dec 2011 15:39:44 +1000
+Subject: [Haskell-cafe] Type checker for haskell-src-exts (was:
+	Typechecking Using GHC API)
+In-Reply-To: <CAOJG3uDQR2jDhm0LP_B0ZePE9zuzBy7cJB6kNDJkqCQmBDFY7Q@mail.gmail.com>
+References: <CACz_ru0TWtc5a5ZCtXBXJYG+ikvYWwzGp707weqigNRwS4qfRQ@mail.gmail.com>
+	<CAOJG3uD_-=9HHXLpbJzo3R4yj1vn3v03jHunq_0=P7Kga+90fw@mail.gmail.com>
+	<CAMUA08QBgRYgwb65fjgt=v-XRg1XmvZUBmctShy786PH85Aw-g@mail.gmail.com>
+	<CAOJG3uDQR2jDhm0LP_B0ZePE9zuzBy7cJB6kNDJkqCQmBDFY7Q@mail.gmail.com>
+Message-ID: <AF3E066E-A548-4597-951D-7F1B5180E878@gmail.com>
+
+
+On Dec 17, 2011, at 9:58 AM, Thomas Schilling wrote:
+
+> Weeeell... I've gotten a little bit of a different perspective on this
+> since working at a company with very high code quality standards (at
+> least for new code).  There is practically no observable code review
+> happening.  I'm sure Dimitrios and Simon PJ review most of each
+> other's code every now and then, but overall there is very little code
+> review happening (and no formal, recorded code review whatsoever).
+> Cleaning up the GHC code base is a huge task -- it uses lots of dirty
+> tricks (global variables, hash tables, unique generation is
+> non-deterministic, ...) which often complicate efforts tremendously (I
+> tried).  The lack of a unit tests doesn't help (just rewriting code so
+> that it can be tested would help quite a bit).
+
+So in other words, would it be helpful it we recruited GHC janitors?  That is, similar to how we have the Trac which gives people bug reports to pick out and work on, would it make sense to have a Trac or some other process which gives people chunks of code to clean up and/or make easier to test?
+
+(I am of course inspired in suggesting this by the Linux kernel janitors, though it doesn't look like the project has survived, and maybe that portends ill for trying to do the same for GHC...)
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111217/54a09960/attachment.htm>
+

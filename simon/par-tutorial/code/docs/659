@@ -1,0 +1,48 @@
+From hamish.k.mackenzie at googlemail.com  Sat Apr 23 12:39:38 2011
+From: hamish.k.mackenzie at googlemail.com (Hamish Mackenzie)
+Date: Sat, 23 Apr 2011 22:39:38 +1200
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+In-Reply-To: <1303552084.2479.23.camel@kirk>
+References: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+	<1303552084.2479.23.camel@kirk>
+Message-ID: <F76D565C-979D-4C58-867A-8795FFC601B1@googlemail.com>
+
+On 23 Apr 2011, at 21:48, Joachim Breitner wrote:
+> I am checking what is to be done to get this new release into Debian,
+> and I notice quite a few changes to the dependencies, including some
+> duplication of existing libraries (haddock-leksah, haddock-process).
+> 
+> That is something we would definitely like to avoid in Debian. Can you
+> tell us why exactly you need different packages, e.g. a link to the bug
+> report where you ask for inclusion of your changes? Ideally, we would in
+> Debian incorporate your changes in the Debian package of process or
+> haddock, but of course only if they are reviewed by upstream and will
+> eventually be merged.
+
+Dependancy on haddock-leksah only applies if you are using ghc-6.10.
+If you are only supporting ghc 6.12 and above you can ignore it.
+
+This is what is in the leksah-server.cabal file...
+   if (impl(ghc >= 6.12))
+      build-depends: haddock >= 2.7.2 && <2.10
+   else
+      build-depends: haddock-leksah == 2.5.0
+
+process-leksah is still needed.  The feature request is here...
+ http://hackage.haskell.org/trac/ghc/ticket/3994
+Favonia has recently made some suggestions and raised some concerns
+and I imagine it may take a little while to resolve those.
+
+Once it is in we will need to update some of the imports as
+process-leksah module names are different to avoid conflicts.
+
+> Also, is there a chance that the features of binary-shared will be
+> merged into binary eventually?
+
+We would like to see it included and we will prepare a patch and submit
+it to trac/ghc for consideration.
+
+Thanks,
+Hamish
+
+

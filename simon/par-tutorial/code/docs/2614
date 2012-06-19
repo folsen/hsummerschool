@@ -1,0 +1,48 @@
+From oleg at okmij.org  Thu Feb  3 09:07:41 2011
+From: oleg at okmij.org (oleg at okmij.org)
+Date: Thu,  3 Feb 2011 00:07:41 -0800 (PST)
+Subject: [Haskell-cafe] Problems with iteratees
+Message-ID: <20110203080741.35A361712D@Adric.ern.nps.edu>
+
+
+I agree with Maciej Wos' diagnosis and solution. I'd like to point out
+that the Tiff library has to do a similar processing: use an iteratee
+to read bytes from the outer stream and to produce elements for the
+inner stream (e.g., signed 32-bit integers). In your version of the
+Iteratee library, please look at Data/Iteratee/Codecs/Tiff.hs and
+search for the following fragment:
+
+  -- Read the array of long integers
+  -- of 1 element: the offset field contains the value
+  read_value typ e' 1 | typ == TT_long || typ == TT_slong = ...
+
+  -- of n elements
+  read_value typ e' count | typ == TT_long || typ == TT_slong = do
+      offset <- endianRead4 e'
+      return . Just . TEN_INT $ \iter_int -> return $ do
+            Iter.seek (fromIntegral offset)
+            let iter = convStream
+                         (liftM (either (const Nothing) (Just . (:[]) . conv_long typ)) (checkErr (endianRead4 e')))
+                         iter_int
+            Iter.joinI $ Iter.joinI $ Iter.takeR (4*count) iter
+
+
+Of relevance is the line that contains convStream. Please notice
+(const Nothing) that Maciej was talking about.
+
+The newer version has a somewhat more convenient sequence_stream
+function, which creates a nested stream using the supplied iteratee to
+read from the outer stream and produce an element for the inner stream.
+The function is particularly useful if you read the inner stream all
+the way, until it is exhausted. Here is how the above read_value
+clause looks now
+
+			-- of n elements
+  read_value typ count | typ == TT_long || typ == TT_slong = do 
+    offset <- endian_read4
+    let converter = endian_read4 >>= return . conv_long typ
+    return . Just . TEN_INT $ \iter_int -> do
+            seek_stream (fromIntegral offset)
+            runI =<< takeR (4*count) (sequence_stream converter iter_int)
+
+

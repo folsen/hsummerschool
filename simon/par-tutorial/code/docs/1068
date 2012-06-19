@@ -1,0 +1,40 @@
+From ckkashyap at gmail.com  Fri Aug 12 15:21:29 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Fri, 12 Aug 2011 18:51:29 +0530
+Subject: [Haskell-cafe] Building ? using kleene closure {not haskell
+	specific}
+In-Reply-To: <CALoEywMLuw9N_XLQo0itOTEJvuonfA5HMdGV+9awMWSTbtE_Vw@mail.gmail.com>
+References: <CAGdT1goYBsA=9WbXH57T9=ps9tZHX8pqWbiFRo4ZiKW-gg1=Ww@mail.gmail.com>
+	<CALoEywMLuw9N_XLQo0itOTEJvuonfA5HMdGV+9awMWSTbtE_Vw@mail.gmail.com>
+Message-ID: <CAGdT1gprWCp0jDhV2-z8J5-mQ7zTWDd4oP+kPzPWb9gXdDUFtg@mail.gmail.com>
+
+On Fri, Aug 12, 2011 at 4:34 PM, Sebastian Fischer <fischer at nii.ac.jp>wrote:
+
+> > I can easily understand how + can be built but am having trouble with
+> > building ? (zero or one).
+>
+> If there is a regular expression e for the empty word, one can define ? as
+>
+>    a? = e | a
+>
+> If there is a regular expression o that never matches one can define e as
+>
+>    e = o*
+>
+> If there are character classes one can define o as
+>
+>    o = []
+>
+> Apart from that, I have no idea..
+>
+> Sebastian
+>
+
+Thanks Sebastian ... this is what I was asking for. I'll try and digest it.
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110812/aa075e68/attachment.htm>
+

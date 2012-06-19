@@ -1,0 +1,42 @@
+From andersk at MIT.EDU  Sat Feb  5 05:19:49 2011
+From: andersk at MIT.EDU (Anders Kaseorg)
+Date: Fri, 4 Feb 2011 23:19:49 -0500 (EST)
+Subject: [Haskell-cafe] MonadPeelIO instance for monad transformers on
+	top of "forall"
+In-Reply-To: <alpine.DEB.2.02.1102041820130.12561@dr-wily.mit.edu>
+References: <AANLkTimhhfkBJ3iS6xjgoAnV0dQ5GfG+otb9BDOHp3So@mail.gmail.com>
+	<alpine.DEB.2.02.1102041630280.12561@dr-wily.mit.edu>
+	<AANLkTikwE10qMs+n6b-dMMcHXkNCVtaAQR4E7TxQVmCx@mail.gmail.com>
+	<alpine.DEB.2.02.1102041820130.12561@dr-wily.mit.edu>
+Message-ID: <alpine.DEB.2.02.1102042256060.12561@dr-wily.mit.edu>
+
+On Fri, 4 Feb 2011, Anders Kaseorg wrote:
+> but isn?t M isomorphic to ReaderT () IO (via unM :: M a -> ReaderT () IO 
+> a, M . mapReaderT liftIO :: IO a -> M a)?
+
+Er, M . mapReaderT liftIO :: ReaderT () IO a -> M a.  Of course that 
+doesn?t actually type check until you eta-expand it: (\x -> M (mapReaderT 
+liftIO x)) :: ReaderT () IO a -> M a.
+
+Just to demonstrate that I didn?t use the triviality of ReaderT (), here?s 
+a less trivial example with ReaderT and StateT:
+
+  data M a = M { unM :: forall m. MonadPeelIO m => ReaderT Int (StateT Char m) a }
+  instance Monad M
+    return x = M (return x)
+    M mx >>= fxmy = M (mx >>= unM . fxmy)
+  instance MonadIO M where
+    liftIO io = M (liftIO io)
+
+  -- M ? ReaderT Int (StateT Char IO)
+  fromM :: M a -> ReaderT Int (StateT Char IO) a
+  fromM = unM
+  toM :: ReaderT Int (StateT Char IO) a -> M a
+  toM mx = M (mapReaderT (mapStateT liftIO) mx)
+
+  instance MonadPeelIO M where
+    peelIO = toM (liftM (\k (M mx) -> liftM toM (k mx)) peelIO)
+
+Anders
+
+

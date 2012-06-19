@@ -1,0 +1,39 @@
+From gcrosswhite at gmail.com  Wed Dec 21 11:22:01 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Wed, 21 Dec 2011 20:22:01 +1000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <jcq1ur$rjf$1@dough.gmane.org>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<4EF05DCC.4040607@informatik.uni-marburg.de>
+	<jcq1ur$rjf$1@dough.gmane.org>
+Message-ID: <3F6B1798-1EE9-480C-B3F8-BBA973982A5E@gmail.com>
+
+
+On Dec 20, 2011, at 11:18 PM, Heinrich Apfelmus wrote:
+
+> Tillmann Rendel wrote:
+>> Hi,
+>> Robert Clausecker wrote:
+>>> Image you would create your own language with a paradigm similar to
+>>> Haskell or have to chance to change Haskell without the need to keep any
+>>> compatibility. What stuff would you add to your language, what stuff
+>>> would you remove and what problems would you solve completely different?
+>> I would try to improve the language's support for the embedding of domain-specific embedded languages (aka. combinator libraries). Such embedding requires the integration of a domain-specific language's syntax, static semantics and dynamic semantics. Some (more or less far fetched) ideas about these three areas follow.
+> 
+> I think this is a very good point. The things I would like to see:
+> 
+> * Better syntax for observable sharing. Doaitse Swierstra proposed a "grammer" construct that is basically a  let  statement where the binder names can be observed. I'm not entirely sure whether that is the most general or sufficient syntax, but something along these lines.
+> 
+> * Meta-programming / partial evaluation. When designing a DSL, it is often the case that you know how to write an optimizing compiler for your DSL because it's usually a first-order language. However, trying to squeeze that into GHC rules is hopeless. Having some way of compiling code at run-time would solve that. Examples:
+> ** Conal Elliott's image description language Pan
+> ** Henning Thielemann's synthesizer-llvm
+
+I am not disagreeing with anything that you have said here, but in a way it seems like the problem is more fundamental than all of these things since metaprogramming and type-programming in Haskell is not first-class, so it really isn't a language that is designed for DSLs even though people get a surprisingly long way abusing it for this purpose.  :-)  Really what we need is a language built from the ground up for this purpose, such as Lisp, but without the parts of Lisp that cause us to use Haskell instead.  :-)
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111221/90044cfc/attachment.htm>
+

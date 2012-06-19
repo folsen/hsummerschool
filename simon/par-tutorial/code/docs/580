@@ -1,0 +1,42 @@
+From wagnerdm at seas.upenn.edu  Fri Apr 22 00:17:17 2011
+From: wagnerdm at seas.upenn.edu (wagnerdm at seas.upenn.edu)
+Date: Thu, 21 Apr 2011 18:17:17 -0400
+Subject: [Haskell-cafe] ANN: HacPhi 2011
+Message-ID: <20110421181717.35803149fh9l6965@webmail.seas.upenn.edu>
+
+Greetings,
+
+I am very pleased to officially announce HacPhi 2011, a Haskell  
+hackathon/get-together to be held July 29-31 at the University of  
+Pennsylvania in Philadelphia supported by contributions from Amgen,  
+Jane Street, and Microsoft Research.  The hackathon will officially  
+kick off at 2:30 Friday afternoon, and go until 5pm on Sunday (with  
+breaks for sleep, of course).  Last year's HacPhi was a lot of fun,  
+drawing an international crowd, and many people have already expressed  
+interest in coming back this year.  Come meet your Haskelly  
+brothers-in-arms!  I want to stress that everyone is welcome---you do  
+not have to be a Haskell guru.  Helping hack on someone else's project  
+could be a great way to increase your Haskell-fu.
+
+If you plan on coming, please officially register [1].  Registration,  
+travel, lodging and many other details can be found on the HacPhi wiki  
+[2].
+
+We're also looking for a few people interested in giving short (15-20  
+min.) talks, probably on Saturday afternoon.  Anything of interest to  
+the Haskell community is fair game---a project you've been working on,  
+a paper, a quick tutorial.  If you'd like to give a talk, add it on  
+the wiki [3].
+
+Hope to see you in Philadelphia!
+
+- The Hac ? team
+Brent Yorgey (byorgey)
+Daniel Wagner (dmwit)
+Chris Casinghino (ccasin)
+
+[1] http://haskell.org/haskellwiki/Hac_?/Register
+[2] http://haskell.org/haskellwiki/Hac_?
+[3] http://haskell.org/haskellwiki/Hac_?/Talks
+
+

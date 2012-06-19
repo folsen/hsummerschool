@@ -1,0 +1,44 @@
+From dev at mobileink.com  Fri Dec 30 16:23:20 2011
+From: dev at mobileink.com (Gregg Reynolds)
+Date: Fri, 30 Dec 2011 09:23:20 -0600
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFCCA86.4020709@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<4EFB8DFE.1060805@blueyonder.co.uk>
+	<jdh9h6$gba$1@dough.gmane.org> <4EFCA66D.4060609@blueyonder.co.uk>
+	<jdiesl$5sp$1@dough.gmane.org> <4EFCCA86.4020709@blueyonder.co.uk>
+Message-ID: <ADFFAE52-B3FF-4BFD-B891-78650E8DB9FD@mobileink.com>
+
+
+On Dec 29, 2011, at 2:16 PM, Steve Horne wrote:
+> 
+> Of course you can extract values out of IO actions to work with them - the bind operator does this for you nicely, providing the value as an argument to the function you pass to the right-hand argument of the bind. But that function returns another IO action anyway - although you've extracted a value out and the value affects a computation, all you can do with it in the long run is return another IO action.
+> 
+> Even so, that value can only be extracted out at run-time, after the action is executed.
+> 
+> So, consider the following...
+> 
+> getAnIntFromTheUser :: IO Int
+> 
+> From a pure functional point of view, that should return the same action every time. Well, the partially evaluated getAnIntFromTheUser has the same structure each time - but the actual Int packaged inside the action isn't decided until runtime, when the action is executed. At compile-time, that action can only be partially evaluated - the final value OF THE ACTION depends on what Int the user chooses to give because that Int is a part of the action value.
+
+Howdy Steve,
+
+You are correct that Haskell is not, strictly speaking "pure" - no language that does anything useful (e.g. IO) can possibly be purely functional.  But there seems to be a certain amount of language policing in the "Haskell community" - "pure" means what we mean when we use it to describe Haskell, and don't you dare use it otherwise.  Ok, but that just leads to riddles like "when is a pure language impure?"  A: when it isn't pure.
+
+Several posts to this thread have insisted that IO values are really values like any other values, can be reasoned about, etc. and that the process yielding the value (including possible side-effects) is therefore irrelevant or secondary or etc..  Well, you can reason about them indirectly, by virtue of their types, but you can't reason about the values themselves, because they are non-deterministic and undecidable.  And the process clearly is relevant, since it motivates the use of the value in the first place.  Not much point in a pure IO value that does not cause IO, and if the side effects were truly irrelevant to the use of such values then we would not need monads to order their evaluation.  So the argument that all of Haskell is immaculately, purely functional is pure hooey, for me at least.  I completely understand what people mean when they talk like this; I just think it's a misuse of English.
+
+Now one way of understanding all this is to say that it implicates the static/dynamic (compile-time/run-time) distinction: you don't know what e.g. IO values are until runtime, so this distinction is critical to distinguishing between pure and impure.  I gather this is your view.
+
+I think that is reasonable, but with the caveat that it must be at the right level of abstraction.  I don't think ASTs etc. enter into it - those are implementation techniques, and the only generalization we can apply to compilers is that they do implement the language definition, not how they do it (not all C compilers use ASTs).  The right level of abstraction (IMHO) is the distinction between atemporality and temporality.  The functional stuff is atemporal, which means among other things that evaluation is unordered (evaluation being a temporal process).  Adding IO etc. capabilities to the purely functional fragment of a language infects it with temporality.  But we can model temporality using order, so we can dispense with the notion of run-time and say that IO etc. stuff adds an ordered fragment to the unordered fragment.  One goal of the language is then to enforce a strict correspondence between the order of events outside the program (e.g. keystrokes) and "events" inside the program (getchar).
+
+The beauty of the monad solution is not that it magically transforms non-functional stuff like IO into functional stuff, but that it exploits type discipline to make such operations *mimic* purely functional stuff in a sense - but only at the level of typing.  Impure operations then have purely functional type discipline while remaining essentially non-functional.  So I think of Haskell as a quasi-pure or hybrid language.  C on the other hand is totally impure (except for predefined constants like '1').  For totally pure languages you have to look elsewhere, e.g. logics - there are no pure programming languages.
+
+It's fairly easy to grasp the point by going back to Turing's original insight.  The cornerstone of his ideas was not the machine but the human calculator working with pencil and paper, finite memory, etc.  So to see the diff all you have to do is think about what a human does with a problem (program) written on paper.  Give the human calculator a computable task - add 2+2 - and you can be confident you will receive a definite answer in a finite amount of time.  Lard this with a non-computable step - add 2 + 2 + getInt - and all bets are off.  In this case, the calculator must pick up a phone and listen for an integer, or (avoiding machine metaphors) go to the window and look for a sign.  There are two problems: we don't know which sign may appear, and worse, we don't even know *if* a sign will appear.  Our poor hack may remain at the window waiting for Godot to appear with a sign for the rest of time.  So the problem we have given the calculator is not a purely functional one, and the text that expresses the problem (the program) cannot be written in a purely functional language.  More to the point with respect to the "Haskell is immaculate" argument, even if the calculator does receive a sign, this does not change the nature of the problem text - it still contains a non-computable step.
+
+Regarding side-effects, they can be (informally) defined pretty simply:  any non-computational effect caused by a computation is a side-effect.  Such effects can be designed and exploited, as when a bit (voltage?) pattern is used to drive output display, but the fundamental distinction is computational cause v. non-computational effect.  This excludes inefficient computation, which is not distinguished by a definition in terms of the goal of the computation.  If you define side-effect as anything not contributing to the final result of the computation then only perfectly efficient algorithms would be free of side-effects.  But that clashes with intuition - you could insert code to compute pi to the 100th place in a a simple Fibonnaci number generator; that would be inefficient but I doubt many would call it a side-effect.  On the other hand, every real-world computation has at least two side effects:  consumption of energy and production of heat.  Intentional side effects like IO are no different - they are parasitical on primitive side-effects of computation, such as the energizing of a bit pattern somewhere on a chip detected and translated to a light pattern on a screen.  The interesting thing (to me) is that these days chip designers are using the heat produced by computation something like the way they treat the bit patterns produced by computation - both may be treated as by-products of computation and put to use (or controlled) by design.  (Conspiracy nuts should be all over sided-effects; in principle you could design a chip such that produces some kind of side effect that could be detected and "read", exposing the hidden computation.)
+
+Cheers,
+
+-Gregg
+

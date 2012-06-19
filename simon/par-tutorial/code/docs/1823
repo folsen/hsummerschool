@@ -1,0 +1,31 @@
+From roma at ro-che.info  Sun Dec 11 12:18:45 2011
+From: roma at ro-che.info (Roman Cheplyaka)
+Date: Sun, 11 Dec 2011 13:18:45 +0200
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+In-Reply-To: <87fwgrblkq.fsf@gnu.org>
+References: <87k464b870.fsf@gnu.org> <87d3bw102d.fsf@write-only.cryp.to>
+	<CAKFCL4VhQe89QZmTM6Wxm+7KR6KOT7+qQe-xYCNBt8i3fR+zjg@mail.gmail.com>
+	<87fwgrblkq.fsf@gnu.org>
+Message-ID: <20111211111845.GA12470@sniper>
+
+* Jose A. Ortega Ruiz <jao at gnu.org> [2011-12-11 08:43:01+0100]
+> On Sun, Dec 11 2011, Brandon Allbery wrote:
+> 
+> [...]
+> 
+> > xmobar currently requires parsec 3.x; the above is the symptom of
+> > building it against 2.x.
+> 
+> Aha, thanks for pointing this out, guys.
+> 
+> Peter, would using parsec 3.x be an acceptable solution to you?
+
+To avoid problems like this, please specify version constraints in the
+.cabal file. See [1] for the details.
+
+[1]: http://www.haskell.org/cabal/users-guide/#build-information
+
+-- 
+Roman I. Cheplyaka :: http://ro-che.info/
+
+

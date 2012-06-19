@@ -1,0 +1,25 @@
+From johan.tibell at gmail.com  Fri Dec 30 04:02:00 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Thu, 29 Dec 2011 19:02:00 -0800
+Subject: [Haskell-cafe] ANN: ekg-0.2 - Remote monitoring of processes
+Message-ID: <CAK-tuPYtHhitwA8UEAu4j+hNh1dW08XchOw2vPBhtUssWyEukA@mail.gmail.com>
+
+(I forgot to announce v0.1 so this is a combined announcement.)
+
+I'm proud to announce the ekg [1] library. The library lets you remotely
+monitor any running Haskell program, using your web browser or an automated
+monitoring program.
+
+The library lets you monitor garbage collector and memory usage statistics
+(similar to what's provided by +RTS -s, but live), but also lets you
+defined your own counters that you can update from within your program.
+
+For some more examples see:
+http://blog.johantibell.com/2011/12/remotely-monitor-any-haskell.html
+http://blog.johantibell.com/2011/12/more-monitoring-goodies.html
+
+1. http://hackage.haskell.org/package/ekg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111229/27247bf1/attachment-0001.htm>
+

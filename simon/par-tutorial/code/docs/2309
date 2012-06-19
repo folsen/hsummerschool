@@ -1,0 +1,58 @@
+From fischer at nii.ac.jp  Tue Dec 27 04:23:39 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Tue, 27 Dec 2011 04:23:39 +0100
+Subject: [Haskell-cafe] Reifying case expressions [was: Re: On stream
+ processing, and a new release of timeplot coming]
+In-Reply-To: <1B24EF42-8545-4CFD-8905-E95EE6D55D9B@gmail.com>
+References: <CANVKUrWrvDiG7=vfDf=8Zn5_TFQtjawtYxMT6nGh7mroAJZR6w@mail.gmail.com>
+	<jd6tmi$5qd$1@dough.gmane.org>
+	<CALoEywPthWO=P-10hbo_VPQ894B5n1FN2WKJoGqFQkUGoYWsTA@mail.gmail.com>
+	<1B24EF42-8545-4CFD-8905-E95EE6D55D9B@gmail.com>
+Message-ID: <CALoEywOzq7ZSMk9sfMZErtLkDvTAbeqMfQ1GohCNV+cYBONpNg@mail.gmail.com>
+
+2011/12/26 Eugene Kirpichov <ekirpichov at gmail.com>
+
+> Whoa. Sebastian, you're my hero ? I've been struggling with defining Arrow
+> for ListTransformer for a substantial time without success, and here you
+> got it, dramatically simpler than I thought it could be done (I was using
+> explicit queues).
+>
+
+This stuff is tricky. I noticed that my Applicative instance did not
+satisfy all required laws. I think I could fix this by changing the
+implementation of pure to
+
+    pure x = Put x $ pure x
+
+in analogy to the ZipList instance. At least, QuickCheck does not complain
+anymore (I did not write proofs).
+
+The original definition of `pure` was inspired by Chris Smith's post on the
+connection of Category/Applicative and Arrow:
+
+
+http://cdsmith.wordpress.com/2011/08/13/arrow-category-applicative-part-iia/
+
+However, even with the fixed Applicative instance, the Arrow instance does
+not satisfy all laws. ListTransformer seems to be a type that has valid
+Category and Applicative instances which do not give rise to a valid Arrow
+instance as outlined by Chris. One of his additional axioms relating
+Category and Applicative does not hold.
+
+I have extended the (corrected) code with QuickCheck tests:
+
+    https://gist.github.com/1521467
+
+I wonder if now this datatype of yours is isomorphic to StreamSummary b r
+> -> StreamSummary a r.
+>
+
+Not sure what you mean here. StreamSummary seems to be the same as
+ListConsumer but I don't see how functions from consumers to consumers are
+list transformers, i.e., functions from lists to lists.
+
+Sebastian
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111227/fc59ba8b/attachment.htm>
+

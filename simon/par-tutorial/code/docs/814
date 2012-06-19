@@ -1,0 +1,22 @@
+From andrew.pennebaker at gmail.com  Thu Apr 28 04:24:06 2011
+From: andrew.pennebaker at gmail.com (Andrew Pennebaker)
+Date: Wed, 27 Apr 2011 22:24:06 -0400
+Subject: [Haskell-cafe] GHC repositories
+Message-ID: <BANLkTi=yoOKJTnWznpmrQgN35jJeYCKTFw@mail.gmail.com>
+
+Now that GHC has a git
+repository<http://hackage.haskell.org/trac/ghc/wiki/Repositories>,
+could that change be reflected in the docs<http://www.haskell.org/ghc/download>
+?
+
+It's hard to work with folks on Trac to debug GHC when I can't find the
+latest version (changesets are now git, not svn).
+
+Cheers,
+
+Andrew Pennebaker
+www.yellosoft.us
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110427/fee3592c/attachment.htm>
+

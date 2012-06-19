@@ -1,0 +1,17 @@
+From haskell-cafe at ocharles.org.uk  Mon Dec 19 20:00:44 2011
+From: haskell-cafe at ocharles.org.uk (Oliver Charles)
+Date: Mon, 19 Dec 2011 19:00:44 +0000
+Subject: [Haskell-cafe] Idiomatic Aeson
+References: <CAOGW7Kxu2A2bmq2dJ6boU-GU2x6RvX59AtoXN9J0DED_HMk3=g@mail.gmail.com>
+Message-ID: <871us0pesj.fsf@googlemail.com>
+
+Hi, I'm not sure it directly helps, but I had a bit of trouble getting
+off the ground with Aeson too. Here's some of my code using Aeson, maybe
+there will be something in here that helps you?
+
+https://github.com/ocharles/BookBrainz/blob/master/src/BookBrainz/Search.hs
+
+- Ollie
+
+
+

@@ -1,0 +1,70 @@
+From sh006d3592 at blueyonder.co.uk  Fri Dec 30 02:26:08 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Fri, 30 Dec 2011 01:26:08 +0000
+Subject: [Haskell-cafe] On the purity of Haskell /Random generators
+In-Reply-To: <4EFD0450.3050609@unicaen.fr>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org> <4EFCC3CE.7050006@blueyonder.co.uk>
+	<451591325188516@web70.yandex.ru> <4EFCCFFD.9080908@unicaen.fr>
+	<4EFCD5CC.8050803@blueyonder.co.uk> <4EFCE0F6.8030604@unicaen.fr>
+	<4EFCE6EE.1020109@blueyonder.co.uk> <4EFD0450.3050609@unicaen.fr>
+Message-ID: <4EFD1330.6020607@blueyonder.co.uk>
+
+On 30/12/2011 00:22, Jerzy Karczmarczuk wrote:
+> Steve Horne :
+>> Some code (intended to be loaded into GHCi and played with)
+>>
+>>     --  import System.Random
+>>     --  randSelect "this is a list" 5 (mkStdGen 9877087)
+>>     -- ...
+>>     module P23 (randSelect) where
+>>     -- ...
+>>       randSelect' (x:xs) n l g = let xsLen      = (l - 1)
+>>                                      (rnd, g')  = randomR (0, xsLen) g
+>>     -- ...
+>>
+>> I see no IO monad anywhere in there. Of course I'm cheating - 
+>> providing a constant seed at runtime.
+>
+> The last remark is irrelevant. Normally the seed IS constant, injected 
+> once, then updated by the generator iself.
+>
+> I don't know what you are trying to prove.
+I don't know why you think I'm trying to prove something here.
+
+Earlier, I mentioned that Haskell provides pure functional random number 
+support in the library - as part of going off on a tangent and, as it 
+happens, of making a mistake. I specifically said something like "with 
+no mention of the IO monad" with respect to type signatures.
+
+You said "Look well at those functions, please". I accepted your 
+challenge. I looked well. I still say that Haskell provides pure 
+functional random number support in the library.
+
+My "last remark" was there basically because of the earlier mistake - 
+acknowledging that I've bypassed the whole issue of where the seed comes 
+from, which may for all I know be supported by a library IO action, and 
+which would be relevant given how this randomness thread started. That 
+was my first mistake in this randomness thread - another mistake I made 
+was saying unsafePerformIO might reasonably be used to sneak in entropy.
+
+Basically, I replied to your challenge - nothing more. I really don't 
+even care much about random numbers - that's why my easiest reference 
+was from back when I was doing those tutorials. There is no deep point 
+here unless you're making one I haven't understood yet.
+
+As for whether or not Haskell is pure - this randomness thread isn't 
+relevant to that any more.
+
+If you see my reference to purity as a weasel way of insinuating that 
+there's also impurity in Haskell - I don't need to insinuate that, I've 
+openly stated my view and explained my reasoning as well as I'm able. 
+What point is there in being a cowardly weasel if you also paint a 
+bullseye on your head and shout "Here I am!"?
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111230/78fdd143/attachment.htm>
+

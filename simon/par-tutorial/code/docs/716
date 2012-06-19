@@ -1,0 +1,61 @@
+From daniel.is.fischer at googlemail.com  Tue Apr 26 01:03:50 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Tue, 26 Apr 2011 01:03:50 +0200
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+In-Reply-To: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+References: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+Message-ID: <201104260103.51102.daniel.is.fischer@googlemail.com>
+
+On Friday 22 April 2011 12:40:17, Hamish Mackenzie wrote:
+> Yesterday we uploaded our official 0.10.0 release (0.10.0.4) to Hackage
+
+I'm trying to try it, but I run into a couple of problems.
+Most are probably me looking in the wrong places, so let's begin with 
+those.
+
+By default, the editor pane is on the left hand side and the module browser 
+or whatnot on the right. Very irritating. How do I switch the positions?
+I tried swapping LeftP and RightP in Edit Prefs -> Initial Pane positions, 
+but to no avail.
+
+Autocomplete starts at the first letter of any new word, so writing a 
+function definition
+
+bar j
+  | j == 0 = whatever
+  | otherwise = somethingElse
+
+requires paying attention and taking some action to not end up with
+
+bar join| j == whatever ...
+
+How do I configure autocompletion to only begin after three or four letters 
+have been typed?
+
+Decreasing indentation via backspace goes one column per backspace, how can 
+I configure it to go to the next (previous) tab position on backspace in 
+the leading whitespace of a line?
+
+Now, those configuration questions out of the way:
+On first startup, I pointed leksah to ~/.cabal/packages/hackage.haskell.org 
+for sources (hoping it would know to unpack them and copy them to 
+~/.leksah-0.10/packageSources, run haddock on them and what else it needs). 
+It did indeed copy a bunch of sources there and invoked cabal and ghc a 
+number of times, but it left out about half of the installed packages.
+It used an awful lot of memory to do that, peak about 1300MB virtual, 800MB 
+resident, which means swapping and thrashing (unless I shut down 
+practically everything else - I have only 1G of RAM).
+Okay, for collecting metadata on the first startup, I could live with that 
+(though, if it handled packages sequentially, it should use less memory).
+
+But on the second startup and the third, although it didn't invoke cabal or 
+ghc anymore,  the memory usage was about the same, effectively knocking out 
+my system for more than ten minutes.
+On the third, I had not enough patience and killed it, leksah-server showed 
+no signs of stopping within two minutes after kill -TERM, so I had to kill 
+-KILL it.
+
+What can I do to make leksah a good memory-citizen?
+With the current behaviour, it is unusable for me, unfortunately.
+
+

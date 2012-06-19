@@ -1,0 +1,26 @@
+From aditya.siram at gmail.com  Sat Aug 27 22:59:14 2011
+From: aditya.siram at gmail.com (aditya siram)
+Date: Sat, 27 Aug 2011 15:59:14 -0500
+Subject: [Haskell-cafe] GHCI Feature Request: Last Successful Compilation
+	State Saved
+Message-ID: <CAJrReygxTo_DVA6B4bNozP0WR+_X7ZqQs=ERdHhuXKJNc-3+0A@mail.gmail.com>
+
+Hi all,
+I would like for the GHCI interpreter to save its environment before
+reloading a file and allowed the user to revert back to that state if the
+compilation was unsuccessful.
+
+Many times I've changed files, loaded them, hit a compilation error and
+needed, for example, the inferred type signature of some function. Even
+though that function hasn't been changed I have to either fix my code, undo
+a bunch of changes or comment out the last change I made and reload in order
+to do a ":type" on the function. This really breaks the flow of development.
+
+
+Thanks for considering.
+
+-deech
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110827/efa59ccc/attachment.htm>
+

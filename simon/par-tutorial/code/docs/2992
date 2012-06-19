@@ -1,0 +1,33 @@
+From allbery.b at gmail.com  Sun Feb 13 03:40:57 2011
+From: allbery.b at gmail.com (Brandon S Allbery KF8NH)
+Date: Sat, 12 Feb 2011 21:40:57 -0500
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+Message-ID: <4D5744B9.6090309@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 2/11/11 06:06 , C K Kashyap wrote:
+> I've come across this a few times - "In Haskell, once can prove the
+> correctness of the code" - Is this true?
+
+Only up to a point.  While most of the responses so far focus on the
+question from one direction, the other is epitomized by a Knuth quote:
+
+"Beware of bugs in the above code; I have only proved it correct, not tried it."
+
+- -- 
+brandon s. allbery     [linux,solaris,freebsd,perl]    allbery.b at gmail.com
+system administrator  [openafs,heimdal,too many hats]                kf8nh
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk1XRLkACgkQIn7hlCsL25XbNgCfSifYHygWPmG6UJUZZzeVXZWd
++fYAn1Tv1IJlt6H8R4t6TxSKX1h3xwQG
+=AdfB
+-----END PGP SIGNATURE-----
+
+

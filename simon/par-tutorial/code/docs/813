@@ -1,0 +1,136 @@
+From dstcruz at gmail.com  Thu Apr 28 03:13:41 2011
+From: dstcruz at gmail.com (Daniel Santa Cruz)
+Date: Wed, 27 Apr 2011 21:13:41 -0400
+Subject: [Haskell-cafe] Haskell Weekly News: Issue 179
+Message-ID: <BANLkTimxkvAMRZhhY0MiEMXnMAvMFYcs5g@mail.gmail.com>
+
+   Welcome to issue 179 of the HWN, a newsletter covering developments in
+   the Haskell community. This release covers the week of April 16 to 23, 2011.
+
+Announcements
+
+   Alex Mason announced (http://goo.gl/2qtyM) the second annual
+   Australian Haskell Hackathon to be heald from Friday July 8th to
+   Sunday July 10th, at the UNSW's Computer Science building in
+   Sydney. Come share with your fellow Australasian Haskellers!
+
+   "The Hac" team invited us (http://goo.gl/8EQfI) to HacPhi 2011, a
+   Haskell hackathon/get-together to be held July 29 to 31 at the
+   University of Pennsylvania, in Philadelphia. Daniel Wagner wanted
+   to stress that "everyone is welcome--you do not have to be a
+   Haskell guru. Helping hack on someone else's project could be a
+   great way to increase your Haskell-fu."
+
+   Robert Clausecker asked "Is Hugs dead?" (http://goo.gl/639dC). Sad
+   to see projects of this sort fade into the past.
+
+Quotes of the Week
+
+   * copumpkin: THE POWER OF MIXFIX COMPELS YOU (to not use it much)
+
+Top Reddit Stories
+
+   * Why Darcs users care about consistency
+     Domain: koweycode.blogspot.com, Score: 59, Comments: 3
+     On Reddit: http://goo.gl/oBU0r
+     Original: http://goo.gl/lnUCU
+
+   * Review: Learn You a Haskell for Great Good!
+     Domain: jerf.org, Score: 57, Comments: 15
+     On Reddit: http://goo.gl/BjJq7
+     Original: http://goo.gl/P7u3x
+
+   * The Haskell Heap : Inside P4
+     Domain: blog.ezyang.com, Score: 37, Comments: 3
+     On Reddit: http://goo.gl/EoV5D
+     Original: http://goo.gl/ropku
+
+   * First-class modules for Haskell : Shields and Peyton Jones, 2001 :: PDF
+     Domain: research.microsoft.com, Score: 27, Comments: 1
+     On Reddit: http://goo.gl/7renV
+     Original: http://goo.gl/7lHV4
+
+   * Darcs hacking sprint 6 report
+     Domain: blog.darcs.net, Score: 27, Comments: 13
+     On Reddit: http://goo.gl/ljO1O
+     Original: http://goo.gl/xRr6r
+
+   * Ugly memoization
+     Domain: augustss.blogspot.com, Score: 25, Comments: 8
+     On Reddit: http://goo.gl/D6FoV
+     Original: http://goo.gl/IUL1M
+
+   * Monoids for Maybe
+     Domain: byorgey.wordpress.com, Score: 23, Comments: 2
+     On Reddit: http://goo.gl/yVU7O
+     Original: https://byorgey.wordpress.com/2011/04/18/monoids-for-maybe/
+
+   * Don't forget to think about GC flags when doing performance tuning
+     Domain: stackoverflow.com, Score: 20, Comments: 3
+     On Reddit: http://goo.gl/6xzEj
+     Original: http://goo.gl/Xwkro
+
+   * Haskell videos on video.google.com, which shuts down for good on
+April 29th 2011
+     Domain: google.com, Score: 20, Comments: 5
+     On Reddit: http://goo.gl/MizlZ
+     Original: http://goo.gl/CxnBK
+
+   * Evaluation on the Haskell Heap
+     Domain: blog.ezyang.com, Score: 20, Comments: 2
+     On Reddit: http://goo.gl/EX5aE
+     Original: http://goo.gl/cU7Nt
+
+Top StackOverflow Questions
+
+   * What are the primary theoretical difficulties with adding
+ML-style modules to Haskell?
+     votes: 27, answers: 3
+     Read on SO: http://goo.gl/8An0y
+
+   * Optimizing numerical array performance in Haskell
+     votes: 25, answers: 1
+     Read on SO: http://goo.gl/ykzlV
+
+   * lenses, fclabels, data-accessor - which library for structure
+access and mutation is better
+     votes: 17, answers: 1
+     Read on SO: http://goo.gl/c74uO
+
+   * In Haskell performing 'and' and 'or' for boolean functions
+     votes: 15, answers: 5
+     Read on SO: http://goo.gl/0U5pI
+
+   * Automatic memoizing in functional programming languages
+     votes: 11, answers: 4
+     Read on SO: http://goo.gl/hg8Ei
+
+   * Alternative implementations of Haskell's standard library type classes
+     votes: 9, answers: 3
+     Read on SO: http://goo.gl/LDp9u
+
+   * Scheme vs Haskell for an Introduction to Functional Programming? [migrated]
+     votes: 8, answers: 0
+     Read on SO: http://goo.gl/lbeX3
+
+   * Writing loops for interactive IO: problems with do-notation and layout
+     votes: 5, answers: 1
+     Read on SO: http://goo.gl/HVRrR
+
+   * Python-"is"-like equality operator for Haskell/GHC
+     votes: 5, answers: 4
+     Read on SO: http://goo.gl/7Z4mA
+
+   * Optimising a Haskell XML parser
+     votes: 5, answers: 1
+     Read on SO: http://goo.gl/fsqqw
+
+About the Haskell Weekly News
+
+   To help create new editions of this newsletter, please send stories to
+   dstcruz at gmail.com.
+
+   Until next time,
+   Daniel Santa Cruz
+
+

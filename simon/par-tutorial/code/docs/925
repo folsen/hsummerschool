@@ -1,0 +1,55 @@
+From miguelimo38 at yandex.ru  Wed Aug  3 22:09:01 2011
+From: miguelimo38 at yandex.ru (Miguel Mitrofanov)
+Date: Thu, 4 Aug 2011 00:09:01 +0400
+Subject: [Haskell-cafe] Difference between class and instance contexts
+In-Reply-To: <7400d2001bd4.4e39b00d@dit.ie>
+References: <7400d2001bd4.4e39b00d@dit.ie>
+Message-ID: <C0FD997E-4641-4273-AF6F-3C255AADD145@yandex.ru>
+
+Try
+
+:t (foo 2, moo 2)
+
+On 3 Aug 2011, at 23:31, Patrick Browne wrote:
+
+> Below are examples of using the sub-class context at class level and at instance level.
+>  In this simple case they seem to give the same results
+> In general, are there certain situations in which one or the other is preferred?
+> Pat
+> module CLASS where
+> -- class and sub-class
+> class Class a where
+>  foo :: a -> a
+>  foo a = a
+> class Class a => SubClass a where
+>  moo :: a -> a
+>  moo a = foo a
+> instance Class Integer where
+> instance SubClass Integer where
+> *CLASS> :t foo 2
+> foo 2 :: forall t. (Class t, Num t) => t
+> *CLASS> :t moo 2
+> moo 2 :: forall t. (SubClass t, Num t) => t
+> module INSTANCE where
+> -- Using context at instance level
+> -- Is 
+> class Class a where
+>  foo :: a -> a
+>  foo a = a
+> class SubClass a where
+>  moo :: a -> a
+> 
+> instance Class Integer where
+> instance Class Integer => SubClass Integer where 
+>    moo a = foo a
+> INSTANCE> :t foo 2
+> foo 2 :: forall t. (Class t, Num t) => t
+> INSTANCE> :t moo 2
+> moo 2 :: forall t. (SubClass t, Num t) => t
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+

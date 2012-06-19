@@ -1,0 +1,37 @@
+From omari at smileystation.com  Thu Dec 29 23:52:46 2011
+From: omari at smileystation.com (Omari Norman)
+Date: Thu, 29 Dec 2011 17:52:46 -0500
+Subject: [Haskell-cafe] Text.Regex.Base throws exceptions with makeRegexOptsM
+Message-ID: <20111229225246.GB13805@barry.normanonet.net>
+
+Hi folks,
+
+I'm using Text.Regex.Base with the TDFA and PCRE backends. I want to
+compile regular expressions first and make sure the patterns were
+actually valid, so I used makeRegexOptsM, which indicates a bad regular
+expression by calling fail. That allows you to use makeRegexOptsM with
+Maybe or with (Either String) (assuming that Either String is an
+instance of Monad, which of course is defined in Control.Monad.Error.)
+
+Doing this with Maybe Regex works like it should--bad pattern gives you
+a Nothing. But if you want to see the error message by using Either
+String, an exception gets thrown with the bad pattern, rather than
+getting a Left String.
+
+Why is this? Seems like an odd bug somewhere. I am a Haskell novice, but
+I looked at the code for Text.Regex.Base and for the TDFA and PCRE
+backends and there's nothing in there to suggest this kind of
+behavior--it should work with Either String.
+
+The attached code snippet demonstrates the problem. I'm on GHC 7.0.3
+(though I also got the problem with 6.12.3) and regex-base-0.93.2 and
+regex-tdfa-1.1.8 and regex-pcre-0.94.2. Thanks very much for any tips or
+ideas. --Omari
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: RegexTest.hs
+Type: text/x-haskell
+Size: 662 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111229/3a1491de/attachment.hs>
+

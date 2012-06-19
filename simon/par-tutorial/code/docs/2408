@@ -1,0 +1,54 @@
+From aslatter at gmail.com  Thu Dec 29 19:34:55 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Thu, 29 Dec 2011 12:34:55 -0600
+Subject: [Haskell-cafe] Windows: openFile gives permission
+ deniedwhenfilein use
+In-Reply-To: <20111229182846.0BCA4276CB8@mail.avvanta.com>
+References: <CAKA2JgLc1Q-Lf_yOuhQdb1JKuUkiRYuS=hQ7wQw_+jqCMQOEYQ@mail.gmail.com>
+	<CAKjSnQH=mNONY7mC7-nEt-R51A0PULg-GhPvWiQ59vrOxpznuw@mail.gmail.com>
+	<4EFC53B7.2010806@btinternet.com>
+	<20111229165359.A1CC3F393A@mail.avvanta.com>
+	<CAKjSnQG-E9QAhJmJwU=J_W0WF540a4+evbYFr34vDV5kKqyWTg@mail.gmail.com>
+	<20111229174943.D6DF093C2E@mail.avvanta.com>
+	<CAKjSnQEHERKqmoGpY2aJ80B=n1_pOZsAOVy7DJYOYexNFT1w4w@mail.gmail.com>
+	<20111229182846.0BCA4276CB8@mail.avvanta.com>
+Message-ID: <CAKjSnQE6X5X492kFW6wdzD8FiBv5JjOLxWu8wdkriFDtSWwz2Q@mail.gmail.com>
+
+On Thu, Dec 29, 2011 at 12:28 PM, Donn Cave <donn at avvanta.com> wrote:
+> Quoth Antoine Latter <aslatter at gmail.com>,
+> ...
+>> Would this program then loop:
+>>
+>> append fromFilePath toFilePath = do
+>> ? str <- readFile fromFile
+>> ? writeFile toFile str
+>>
+>> if 'from' and 'to' where the same file?
+>>
+>> Currently the locking prevents this.
+>
+> Do you mean, locking makes that work, or just makes it fail in a
+> different way? ?Anyway, I think that's an example that would have
+> the same issues without hGetContents - that is, any way you set
+> out to overwrite a file by modifying its contents, you have the
+> same problem.
+>
+
+Locking makes this fail with an exception, I think. Not locking would
+make this mis-behave.
+
+And lets pretend I wrote the function that was in my head:
+
+append fromFilePath toFilePath = do
+   str <- readFile fromFile
+   appendFile toFile str
+
+Here, without locking, I would expect to fill my disk up, whereas
+previously my program would have crashed before writing out any data.
+
+Maybe these are pathological examples, but they are (I think!) the
+justification for having the locking in the first place.
+
+Antoine
+
+

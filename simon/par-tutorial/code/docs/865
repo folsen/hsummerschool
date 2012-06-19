@@ -1,0 +1,75 @@
+From michael at snoyman.com  Fri Apr 29 09:59:52 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Fri, 29 Apr 2011 10:59:52 +0300
+Subject: [Haskell-cafe] Wai and http-enumerator not as lazy as I'd like
+In-Reply-To: <20110429094923.4659644e.mle+hs@mega-nerd.com>
+References: <20110426222746.57ea8526.mle+hs@mega-nerd.com>
+	<BANLkTikENiNJh1h_4cG0SLZBzx+OPs9YCA@mail.gmail.com>
+	<20110429094923.4659644e.mle+hs@mega-nerd.com>
+Message-ID: <BANLkTi=M8NryiW-CUCT6xjEGK9eSxS+Pyw@mail.gmail.com>
+
+On Fri, Apr 29, 2011 at 2:49 AM, Erik de Castro Lopo
+<mle+hs at mega-nerd.com> wrote:
+> Antoine Latter wrote:
+>
+>> None of the "lbs" functions in http-enumerator can operate in constant
+>> space - they are all built on top of the utility function "lbsIter"
+>> which provides a warning:
+>>
+>> > Convert the HTTP response into a Response value.
+>> >
+>> > Even though a Response contains a lazy bytestring, this function does not utilize lazy
+>> > I/O, and therefore the entire response body will live in memory. If you want constant >
+>> > memory usage, you'll need to write your own iteratee and use http or httpRedirect
+>> > directly.
+>
+> Thanks Antoine. I know I read the documention a number of times
+> but still managed to fall into that trap. I think it was because
+> I tired using httpDirect, couldn't figure it out and then fell
+> back to using the non-lazy lbs version.
+>
+> Basically I need a serveRequest function with a signature:
+>
+> ?? ?import qualified Network.HTTP.Enumerator ? ? as HE
+> ?? ?import qualified Network.Wai ? ? ? ? ? ? ? ? as Wai
+>
+> ? ? serveRequest :: (MonadControlIO m, Failure HE.HttpException m) =>
+> ?? ? ? ? ? ? ? ?? ? ? ? HE.Request m -> m Wai.Response
+>
+> that calls httpRedirect to do a lazy download of the specified data and
+> returns it as a Wai.Response using the ResponseEnumerator constructor.
+>
+> Unfortunately, I've tried a bunch if stuff and nothing I've come up with
+> even comes close t type checking.
+>
+> Has anyone done anything like this and care to shed some light?
+
+It's a little bit complicated, but hopefully this should help out:
+
+
+import qualified Network.Wai as Wai
+import qualified Network.Wai.Handler.Warp as Warp
+import qualified Network.HTTP.Enumerator as HTTP
+import Control.Monad.IO.Class (liftIO)
+import Data.Maybe (fromJust)
+import qualified Data.Enumerator as Enum
+import qualified Data.Enumerator.List as EnumList
+import Data.Enumerator ((=$))
+import Blaze.ByteString.Builder (fromByteString)
+
+main :: IO ()
+main = Warp.run 3000 app
+
+app :: Wai.Application
+app _ = liftIO $ HTTP.withManager $ \m -> return $
+Wai.ResponseEnumerator $ \f ->
+    Enum.run_ $ HTTP.httpRedirect myReq (toBuilder f) m
+  where
+    toBuilder f a b = EnumList.map fromByteString =$ f a b
+
+myReq :: HTTP.Request m
+myReq = fromJust $ HTTP.parseUrl "http://www.yesodweb.com/"
+
+Michael
+
+

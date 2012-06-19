@@ -1,0 +1,92 @@
+From mukeshtiwari.iiitm at gmail.com  Sat Dec 10 19:14:47 2011
+From: mukeshtiwari.iiitm at gmail.com (mukesh tiwari)
+Date: Sat, 10 Dec 2011 23:44:47 +0530
+Subject: [Haskell-cafe] Parallel Matrix Multiplication
+Message-ID: <CAFHZvE8OMPEicyb0vkrw8Gw9Qs_nuefhu09uBZ5KabFwSyM-Ag@mail.gmail.com>
+
+Hello all
+I am trying to learn parallel Haskell and  I have gone through couple of
+resources ( Real world Haskell and
+http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/AFP08-notes.pdf
+).
+I understood par and pseq and I wrote matrix multiplication using these two
+function but it does not look.  Although I did not get all these details
+but none of the sparks converted which is really important for parallel
+programming. Could some one please tell me how to improve this. Also kindly
+recommend me some  literature for parallel programming in Haskell.
+
+Regards
+Mukesh Tiwari
+
+import Data.List
+import Control.Parallel
+
+parHelp :: ( Num a ) => [ a ] -> [ a ] -> a
+parHelp [] [] = 0
+parHelp ( x : xs ) ( y : ys ) = ret where
+        ret = par a ( pseq a ( a + parHelp xs ys ) ) where
+            a = x * y
+
+
+helpMult :: ( Num a ) => [ a ] -> [ [ a ] ] -> [ a ]
+helpMult _ [] = []
+helpMult x ( y : ys ) = ret where
+     ret =  par a ( pseq a  ( a : helpMult x ys ) ) where
+       a = parHelp x y
+
+
+mult :: ( Num a ) => [ [ a ] ] -> [ [ a ] ] -> [ [ a ] ]
+mult [] _ = []
+mult ( x : xs ) ys = ret where
+     ret = par a ( pseq a  ( a : mult xs ys ) ) where
+        a = helpMult x ys
+
+main = print $ mult [[1 .. 4 ] , [ 1 .. 4 ] , [ 1 .. 4 ] , [ 1 .. 4] ] (
+transpose [[1 .. 4 ] , [ 1 .. 4 ] , [ 1 .. 4 ] , [ 1 .. 4] ])
+
+[user at haskell Programming]$ ghc -O2 -threaded -rtsopts Matpar.hs
+[1 of 1] Compiling Main             ( Matpar.hs, Matpar.o )
+Linking Matpar ...
+[user at haskell Programming]$ ./Matpar +RTS -N2 -s
+./Matpar +RTS -N2 -s
+[[10,20,30,40],[10,20,30,40],[10,20,30,40],[10,20,30,40]]
+          85,480 bytes allocated in the heap
+           5,216 bytes copied during GC
+          47,328 bytes maximum residency (1 sample(s))
+          22,304 bytes maximum slop
+               2 MB total memory in use (0 MB lost due to fragmentation)
+
+  Generation 0:     0 collections,     0 parallel,  0.00s,  0.00s elapsed
+  Generation 1:     1 collections,     0 parallel,  0.00s,  0.00s elapsed
+
+  Parallel GC work balance: -nan (0 / 0, ideal 2)
+
+                        MUT time (elapsed)       GC time  (elapsed)
+  Task  0 (worker) :    0.00s    (  0.00s)       0.00s    (  0.00s)
+  Task  1 (worker) :    0.00s    (  0.00s)       0.00s    (  0.00s)
+  Task  2 (bound)  :    0.00s    (  0.00s)       0.00s    (  0.00s)
+  Task  3 (worker) :    0.00s    (  0.00s)       0.00s    (  0.00s)
+
+*  SPARKS: 84 (0 converted, 0 pruned)*
+
+  INIT  time    0.00s  (  0.00s elapsed)
+  MUT   time    0.00s  (  0.00s elapsed)
+  GC    time    0.00s  (  0.00s elapsed)
+  EXIT  time    0.00s  (  0.00s elapsed)
+  Total time    0.00s  (  0.00s elapsed)
+
+  %GC time      33.3%  (13.5% elapsed)
+
+  Alloc rate    42,761,380 bytes per MUT second
+
+  Productivity  33.3% of total user, 45.0% of total elapsed
+
+gc_alloc_block_sync: 0
+whitehole_spin: 0
+gen[0].sync_large_objects: 0
+gen[1].sync_large_objects: 0
+[user at haskell Programming]$
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111210/2e1f6734/attachment.htm>
+

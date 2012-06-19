@@ -1,0 +1,23 @@
+From dons at galois.com  Sat Feb 12 21:24:52 2011
+From: dons at galois.com (Don Stewart)
+Date: Sat, 12 Feb 2011 12:24:52 -0800
+Subject: [Haskell-cafe] How large is the Haskell community ?
+In-Reply-To: <AANLkTi=gxXMJxzSj9oYu+NKbRwKeFbg=2=mNLndOQJez@mail.gmail.com>
+References: <AANLkTi=gxXMJxzSj9oYu+NKbRwKeFbg=2=mNLndOQJez@mail.gmail.com>
+Message-ID: <20110212202452.GA14969@whirlpool.galois.com>
+
+aaronngray.lists:
+>    I was wondering if anyone had an idea or estimate as to how large the
+>    Haskell community is ?
+
+No one knows. There are many figures that you could use to estimate the
+size (e.g. I try to gather signifcant stats in yearly reports about
+Hackage)
+
+ * In 2010, for example, 138,000 unique IPs downloaded the Haskell Platform.    
+
+    http://www.galois.com/~dons/talks/hiw-hackage-y2.pdf
+
+-- Don
+
+

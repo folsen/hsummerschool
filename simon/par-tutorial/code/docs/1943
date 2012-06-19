@@ -1,0 +1,24 @@
+From v.dijk.bas at gmail.com  Wed Dec 14 19:43:44 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Wed, 14 Dec 2011 19:43:44 +0100
+Subject: [Haskell-cafe] DB vs read/show for persisting large data
+In-Reply-To: <4EE8B132.3070100@goto10.org>
+References: <CAGdT1gqohuKtQPQdH2FS==HTqCtDVYvjKibD_wZ1vtF7Vxr_wA@mail.gmail.com>
+	<CAKA2JgJ3oyfKeyVR8p=D1xYcpbH_gVXzO6_NW5L5+rvK0uhS2w@mail.gmail.com>
+	<1323870692-sup-1533@nixos> <4EE8B132.3070100@goto10.org>
+Message-ID: <CADLz5wX4B6a6k6zPdV61BX6Jabnx8RKdq25Qs0e5pp=ae98C0w@mail.gmail.com>
+
+On 14 December 2011 15:22, Claude Heiland-Allen <claude at goto10.org> wrote:
+> I ran into this very nightmare in one project, and was recommend safecopy
+> [0] by someone on the #haskell IRC channel. ?I've not (yet) used it but it
+> looks very nice!
+>
+> [0] http://hackage.haskell.org/package/safecopy
+
+Or better yet, use acid-state which is build on top of safecopy:
+
+http://acid-state.seize.it/
+
+Bas
+
+

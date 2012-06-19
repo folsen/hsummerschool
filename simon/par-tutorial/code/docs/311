@@ -1,0 +1,46 @@
+From kc1956 at gmail.com  Mon Apr 11 18:14:31 2011
+From: kc1956 at gmail.com (KC)
+Date: Mon, 11 Apr 2011 09:14:31 -0700
+Subject: [Haskell-cafe] Emscripten: compiling LLVM to JavaScript
+In-Reply-To: <BANLkTimU01+fzsND_pSVh-rXquHCUKMGNw@mail.gmail.com>
+References: <inutlj$jq5$1@dough.gmane.org>
+	<BANLkTimU01+fzsND_pSVh-rXquHCUKMGNw@mail.gmail.com>
+Message-ID: <BANLkTimOKck6qwkdkB=xOqayNQZRGPYviw@mail.gmail.com>
+
+Can JS in a browser call out to heavy computational routines in Haskell?
+
+I suppose JS run as a scripting language outside the browser can call
+out to Haskell.
+
+Can Haskell open and interact with a browser window without going
+through a server like component?
+
+
+On Mon, Apr 11, 2011 at 9:02 AM, Christopher Done
+<chrisdone at googlemail.com> wrote:
+> On 11 April 2011 14:54, S?nke Hahn <shahn at cs.tu-berlin.de> wrote:
+>>
+>> I haven't tried the tool myself, but it seems interesting to the Haskell
+>> efforts to compile to JavaScript:
+>>
+>> http://syntensity.blogspot.com/2011/04/emscripten-10.html
+>
+> Good grief, that sounds incredibly awesome. GHC ? LLVM ? JS. Get all GHC's
+> goodies *and* not have to write JS for targeting browsers.
+> Very interested. I will mess with it tonight.
+> Cheers!
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+
+
+-- 
+--
+Regards,
+KC
+
+

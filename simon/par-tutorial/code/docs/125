@@ -1,0 +1,55 @@
+From gale at sefer.org  Mon Apr  4 17:51:41 2011
+From: gale at sefer.org (Yitzchak Gale)
+Date: Mon, 4 Apr 2011 18:51:41 +0300
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <BANLkTimG0JSWFYQSFKSrU0mPEzv_q6Q2HA@mail.gmail.com>
+References: <BANLkTikgr7xBJj-f6OLPjm+CWRjdhnPQtQ@mail.gmail.com>
+	<cf2cd99d-30fa-c4e3-8a1e-e45c7680c398@me.com>
+	<BANLkTimG0JSWFYQSFKSrU0mPEzv_q6Q2HA@mail.gmail.com>
+Message-ID: <BANLkTima2QW7Q+u2n4-Ry7bNQexCzDWNiw@mail.gmail.com>
+
+malcolm.wallace wrote:
+>> BOM is not part of UTF8, because UTF8 is byte-oriented. ?But applications
+>> should be prepared to read and discard it, because some applications
+>> erroneously generate it.
+
+For maximum portability, the standard should be require compilers
+to accept and discard an optional BOM as the first character of a
+source code file.
+
+Tako Schotanus wrote:
+> That's not what the official unicode site says in its FAQ:
+>?http://unicode.org/faq/utf_bom.html#bom4?and?http://unicode.org/faq/utf_bom.html#bom5
+
+That FAQ clearly states that BOM is part of some "protocols".
+It carefully avoids stating whether it is part of the encoding.
+
+It is certainly not erroneous to include the BOM
+if it is part of the protocol for the applications being used.
+Applications can include whatever characters they'd like, and
+they can use whatever handshake mechanism they'd like to
+agree upon an encoding. The BOM mechanism is common
+on the Windows platform. It has since appeared in other
+places as well, but it is certainly not universally adopted.
+
+Python supports a pseudo-encoding called "utf8-bom" that
+automatically generates and discards the BOM in support
+of that handshake mechanism But it isn't really an encoding,
+it's a convenience.
+
+Part of the source of all this confusion is some documentation
+that appeared in the past on Microsoft's site which was unclear
+about the fact that the BOM handshake is a protocol adopted
+by Microsoft, not a part of the encoding itself. Some people
+claim that this was intentional, part of the "extend and embrace"
+tactic Microsoft allegedly employed in those days in an effort
+to expand its monopoly.
+
+The wording of the Unicode FAQ is obviously trying to tip-toe
+diplomatically around this issue without arousing the ire of
+either pro-Microsoft or anti-Microsoft developers.
+
+Thanks,
+Yitz
+
+

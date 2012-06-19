@@ -1,0 +1,83 @@
+From apfelmus at quantentunnel.de  Wed Dec 28 22:01:20 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Wed, 28 Dec 2011 22:01:20 +0100
+Subject: [Haskell-cafe] Haskell meta-programming
+In-Reply-To: <CAJ727GgiqOxJvo87GEkWZGL3i6x5DSNdTNJkVTzcy-6gdh4p6g@mail.gmail.com>
+References: <CAJ727GgiqOxJvo87GEkWZGL3i6x5DSNdTNJkVTzcy-6gdh4p6g@mail.gmail.com>
+Message-ID: <jdg030$do6$1@dough.gmane.org>
+
+John Lato wrote:
+>> From: Heinrich Apfelmus <apfelmus at quantentunnel.de>
+>>
+>> * Meta-programming / partial evaluation. When designing a DSL, it is
+>> often the case that you know how to write an optimizing compiler for
+>> your DSL because it's usually a first-order language. However, trying to
+>> squeeze that into GHC rules is hopeless. Having some way of compiling
+>> code at run-time would solve that. Examples:
+>> ** Conal Elliott's image description language Pan
+>> ** Henning Thielemann's synthesizer-llvm
+> 
+> I've been thinking about this, and I suspect that meta-programming in
+> Haskell may not be that far off.  Suppose you have a Meta monad
+> 
+>     data Meta a = Meta { runMeta :: a}
+> 
+> with the magical property that the compiler will optimize/recompile
+> expressions of type `Meta a` when they are run via `runMeta`.  That
+> would provide usable metaprogramming, and I think it would have all
+> the desired type properties etc.
+> 
+> Of course no compiler currently has that facility, but we could use a
+> different monad, perhaps something like this:
+> 
+>     data ThMeta a = ThMeta { runThMeta :: Language.Haskell.TH.ExpQ }
+> 
+> now we just need to get the compiler to run an arbitrary TH splice and
+> check that the types match after `runThMeta` is called.  I think this
+> is already possible via the GHC api.  It would have the undesirable
+> property that some expressions could be ill-typed, and this wouldn't
+> be known until run-time, but it's a start.
+> 
+> That's about as far as I got before I discovered a much more
+> worked-out version on Oleg's site (with Chung-chieh Shan and Yukiyoshi
+> Kameyama).  Of course they've tackled a lot of the awkward typing
+> issues that my simple construct rudely pushes onto the user.
+> 
+> I'm probably showing my naivety here, and I haven't fully digested
+> their papers yet, but I wouldn't be surprised to see applications
+> using Haskell metaprogramming within a relatively short time.
+
+You are probably referring to the paper
+
+   Kameyama, Y; Kiselyov, O; Shan, C.
+   Computational Effects across Generated Binders:
+     Maintaining future-stage lexical scope.
+   http://www.cs.tsukuba.ac.jp/techreport/data/CS-TR-11-17.pdf
+
+As far as I understand, they are dealing with the problem of binding 
+variables in your ThMeta thing.
+
+
+While this is certainly useful, I think the main problem is that GHC 
+currently lacks a way to compile Template Haskell splices (or similar) 
+at runtime. For instance, Henning is currently using LLVM to dynamically 
+generate code, but the main drawback is that you can't freely mix it 
+with existing Haskell code.
+
+Put differently, I would say that DSLs often contain stages which are 
+first-order and thus amenable to aggressive optimization, but they 
+frequently also contain higher-order parts which should at least survive 
+the optimization passes. A simple example would be list fusion on [Int 
+-> Int]: the fusion is first-order, but the list elements are 
+higher-order. You need some kind of genuine partial evaluation to deal 
+with that.
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

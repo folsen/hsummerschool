@@ -1,0 +1,23 @@
+From steve at fenestra.com  Fri Aug 26 20:36:34 2011
+From: steve at fenestra.com (Steve Schafer)
+Date: Fri, 26 Aug 2011 14:36:34 -0400
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <4E57D6D5.8030407@btinternet.com>
+References: <4E568D11.30800@btinternet.com> <4E56CD99.6050703@vex.net>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+Message-ID: <nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+
+On Fri, 26 Aug 2011 18:24:37 +0100, you wrote:
+
+>I would usually want #3 or #4.
+
+Out of curiosity, what for? While I do occasionally need to get a
+"logarithmic size estimate" of a number (which is basically what #3 and
+#4 are), the specific requirements in each case tend to vary, enough so
+that it's unlikely that a single function (other than simply taking the
+logarithm) can handle the majority of applications.
+
+-Steve Schafer
+
+

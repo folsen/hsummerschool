@@ -1,0 +1,28 @@
+From gmane at brianhv.org  Fri Dec 30 22:32:26 2011
+From: gmane at brianhv.org (Brian Victor)
+Date: Fri, 30 Dec 2011 16:32:26 -0500
+Subject: [Haskell-cafe] Plugins on ghc 7.2: GHC does not export
+	defaultCallbacks
+Message-ID: <jdlal9$2ai$1@dough.gmane.org>
+
+Hi all,
+
+As a getting-my-feet-wet project I was starting to look into using 
+plugins-auto with the yesod devel server, but I was quickly stymied 
+because the plugins package isn't building on GHC 7.2. The error I get 
+locally is the same as the one reported by hackage[1]. In short, 
+defaultCallbacks seems to be gone from 7.2.
+
+It doesn't look like that function has simply been moved. So can someone 
+give me an idea about how to proceed?
+
+Thanks!
+
+[1] 
+http://hackage.haskell.org/packages/archive/plugins/1.5.1.4/logs/failure/ghc-7.2
+
+-- 
+Brian
+
+
+

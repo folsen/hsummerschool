@@ -1,0 +1,70 @@
+From hamish.k.mackenzie at googlemail.com  Fri Apr 22 12:40:17 2011
+From: hamish.k.mackenzie at googlemail.com (Hamish Mackenzie)
+Date: Fri, 22 Apr 2011 22:40:17 +1200
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+Message-ID: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+
+Yesterday we uploaded our official 0.10.0 release (0.10.0.4) to Hackage
+and we have Windows and OS X installers at http://leksah.org/download.html
+
+Anyone using an earlier version should upgrade.
+
+This release is mainly small improvements and bug fixes.  Some of the
+improvements include:
+
+* Better messages for some common problems.
+* Improved grep (now searches all source directories in your workspace)
+* Updated build system for more reliable rebuilding of dependent
+  packages in your workspace
+
+We have automated the building of the Leksah installers and this should
+allow us to do more frequent releases in the future.
+
+There is a lot more to do and we would love to hear from anyone who has
+time to help out.
+
+Worth mentioning because they can be hard to find:
+
+* <Ctrl> R adds missing imports
+* <Ctrl> <Enter> evaluates current line or selection in GHCi 
+* Right click menu in the editor has other debug functions
+* Comment and uncomment are now <Ctrl> D and <Ctrl> <Shift> D
+
+To build Leksah yourself:
+
+* Install Gtk and GtkSourceView2 (C libraries and headers)
+* Install The Haskell Platform (or GHC >= 6.12.3)
+* cabal update
+* cabal install gtk2hs-buildtools
+* cabal install leksah  
+* leksah
+
+Making a Gtk application look nice on Windows and OS X is not easy so
+we recommend using one of these prebuilt binaries:
+
+Windows users using GHC 7.0.3
+http://leksah.org/packages/leksah-0.10.0.4-ghc-7.0.3.exe
+
+Windows users using GHC 6.12.3
+http://leksah.org/packages/leksah-0.10.0.4-ghc-6.12.3.exe
+
+OS X 10.6 users using GHC 7.0.3
+http://leksah.org/packages/leksah-0.8.0.6.dmg
+
+(These installers do not install Gtk2Hs packages on your system)
+
+Please consult http://leksah.org/download.html for more details about
+installation! Background information can be found in the Leksah manual
+http://leksah.org/leksah_manual.pdf.
+
+Known bugs and problems:
+
+* Leksah does not run with GHC 6.12.2
+  (http://http://hackage.haskell.org/trac/ghc/ticket/4038) 
+
+Have fun 
+J?rgen & Hamish
+See you on #leksah IRC
+
+
+

@@ -1,0 +1,64 @@
+From vandijk.roel at gmail.com  Mon Apr  4 10:46:46 2011
+From: vandijk.roel at gmail.com (Roel van Dijk)
+Date: Mon, 4 Apr 2011 10:46:46 +0200
+Subject: [Haskell-cafe] Encoding of Haskell source files
+Message-ID: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+
+Hello,
+
+The Haskell 2010 language specification states that "Haskell uses
+the Unicode character set" [1]. I interpret this as saying that,
+at the lowest level, a Haskell program is a sequence of Unicode
+code points. The standard doesn't say how such a sequence should
+be encoded. You can argue that the encoding of source files is
+not part of the language. But I think it would be highly
+practical to standardise on an encoding scheme.
+
+Strictly speaking it is not possible to reliably exchange Haskell
+source files on the byte level. If I download some package from
+hackage I can't tell how the source files are encoded from just
+looking at the files.
+
+I propose a few solutions:
+
+A - Choose a single encoding for all source files.
+
+This is wat GHC does: "GHC assumes that source files are ASCII or
+UTF-8 only, other encodings are not recognised" [2]. UTF-8 seems like
+a good candidate for such an encoding.
+
+B - Specify encoding in the source files.
+
+Start each source file with a special comment specifying the encoding
+used in that file. See Python for an example of this mechanism in
+practice [3]. It would be nice to use already existing facilities to
+specify the encoding, for example:
+{-# ENCODING <encoding name> #-}
+
+An interesting idea in the Python PEP is to also allow a form
+recognised by most text editors:
+# -*- coding: <encoding name> -*-
+
+C - Option B + Default encoding
+
+Like B, but also choose a default encoding in case no specific
+encoding is specified.
+
+I would further like to propose to specify the encoding of haskell
+source files in the language standard. Encoding of source files
+belongs somewhere between a language specification and specific
+implementations. But the language standard seems to be the most
+practical place.
+
+This is not an official proposal. I am just interested in what the
+Haskell community has to say about this.
+
+Regards,
+Roel
+
+
+[1] - http://www.haskell.org/onlinereport/haskell2010/haskellch2.html#x7-150002.1
+[2] - http://www.haskell.org/ghc/docs/7.0-latest/html/users_guide/separate-compilation.html#source-files
+[3] - http://www.python.org/dev/peps/pep-0263/
+
+

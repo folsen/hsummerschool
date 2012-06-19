@@ -1,0 +1,58 @@
+From colinpauladams at gmail.com  Fri Dec 30 18:04:19 2011
+From: colinpauladams at gmail.com (Colin Adams)
+Date: Fri, 30 Dec 2011 17:04:19 +0000
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <FD41967A-36F7-4203-87E3-D4392146C53D@mobileink.com>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <jdh9h6$gba$1@dough.gmane.org>
+	<4EFCA66D.4060609@blueyonder.co.uk> <jdiesl$5sp$1@dough.gmane.org>
+	<4EFCCA86.4020709@blueyonder.co.uk> <jdjtv1$6r0$1@dough.gmane.org>
+	<CAD6SzRLxjE7Xgi6dXMknwt0oFRN_m3Z868jAKnsayR=w1=Se6w@mail.gmail.com>
+	<FD41967A-36F7-4203-87E3-D4392146C53D@mobileink.com>
+Message-ID: <CABHqrUm6W8Gw66E7S8RVQe3os5TqDQiPCn-vtuxw4aPOf2R2rA@mail.gmail.com>
+
+On 30 December 2011 16:59, Gregg Reynolds <dev at mobileink.com> wrote:
+
+>
+> On Fri, Dec 30, 2011 at 12:49 AM, Heinrich Apfelmus <
+> apfelmus at quantentunnel.de> wrote:
+>
+>>
+>> The function
+>>
+>>  f :: Int -> IO Int
+>>  f x = getAnIntFromTheUser >>= \i -> return (i+x)
+>>
+>> is pure according to the common definition of "pure" in the context of
+>> purely functional programming. That's because
+>>
+>>  f 42 = f (43-1) = etc.
+>>
+>> Put differently, the function always returns the same IO action, i.e. the
+>> same value (of type  IO Int) when given the same parameter.
+>>
+>
+>
+>
+> time t:  f 42   (computational process implementing func application
+> begins?)
+> t+1:   <keystroke> = 1
+> t+2:  43   (? and ends)
+>
+> time t+3:  f 42
+> t+4:  <keystroke> = 2
+> t+5:  44
+>
+> Conclusion:  f 42 != f 42
+>
+> (This seems so extraordinarily obvious that maybe Heinrich has something
+> else in mind.)
+>
+> This seems such an obviously incorrect conclusion.
+
+f42 is a funtion for returning a program for returning an int, not a
+function for returning an int.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111230/bd728c41/attachment.htm>
+

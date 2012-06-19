@@ -1,0 +1,50 @@
+From aeyakovenko at gmail.com  Tue Dec 13 19:55:58 2011
+From: aeyakovenko at gmail.com (Anatoly Yakovenko)
+Date: Tue, 13 Dec 2011 10:55:58 -0800
+Subject: [Haskell-cafe] acid state
+In-Reply-To: <CANd=OGFHFKHB3OvZ3hPJu2GBe0PAiY7SCsAWJYn301yY1WDS3g@mail.gmail.com>
+References: <CAOu_qeEM7ej+AEZVjHMawm2Z0w-We=N4aLt6R6p5oUfqUDFwMg@mail.gmail.com>
+	<CANd=OGFHFKHB3OvZ3hPJu2GBe0PAiY7SCsAWJYn301yY1WDS3g@mail.gmail.com>
+Message-ID: <CAOu_qeEgTHyvKyHbNhpwJ4MY8ACJt1j6eEDh+regw=+1O7TujA@mail.gmail.com>
+
+Ah, i think i get it.
+
+On Tue, Dec 13, 2011 at 12:48 AM, Felipe Almeida Lessa
+<felipe.lessa at gmail.com> wrote:
+> On Tue, Dec 13, 2011 at 4:55 AM, Anatoly Yakovenko
+> <aeyakovenko at gmail.com> wrote:
+>> So I am trying to understand how acid state works. ?The HelloWorld
+>> example has a
+>>
+>> type Message = String
+>> data Database = Database [Message]
+>>
+>> $(deriveSafeCopy 0 'base ''Database)
+>>
+>> -- Transactions are defined to run in either the 'Update' monad
+>> -- or the 'Query' monad.
+>> addMessage :: Message -> Update Database ()
+>> addMessage msg
+>> ? ?= do Database messages <- get
+>> ? ? ? ? put $ Database (msg:messages)
+>>
+>>
+>> It seems to me that since the Dababase is a list of messages every
+>> update would require acid-state to rewrite the list into the file, so
+>> each update would get slower as the list gets bigger, but what I am
+>> seeing is that updates are constant time regardless of the size of the
+>> list. ?So how does it work?
+>
+> acid-state doesn't write the whole thing to the disk every time
+> there's a transaction. ?Instead, it just writes the transaction on a
+> transaction log. ?So it will just write something like "AddMessage
+> msg" to the disk. ?Periodically, checkpoints are created which *do*
+> have all your data inside them (but even so, checkpoints are written
+> asynchronously).
+>
+> Cheers,
+>
+> --
+> Felipe.
+
+

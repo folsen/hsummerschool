@@ -1,0 +1,21 @@
+From kevinjardine at gmail.com  Sun Dec 18 22:20:13 2011
+From: kevinjardine at gmail.com (Kevin Jardine)
+Date: Sun, 18 Dec 2011 22:20:13 +0100
+Subject: [Haskell-cafe] Adding state to a library
+Message-ID: <CAMtV1SEMsWhBd57t8EjZ=0Q3BA=87E=H_krzPEfyDdvnd5KPUA@mail.gmail.com>
+
+I have a library of functions that all take cfg parameter (and usually
+others) and return results in the IO monad.
+
+It is sometimes useful to drop the config parameter by using a state-like
+monad..
+
+I have found that I can wrap all my functions like so:
+
+withLibrary cfg f = f cfg
+
+stateF a b c d =
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111218/8e64dfa4/attachment.htm>
+

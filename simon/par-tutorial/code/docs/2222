@@ -1,0 +1,29 @@
+From gcrosswhite at gmail.com  Thu Dec 22 04:20:25 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Thu, 22 Dec 2011 13:20:25 +1000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+	<BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+	<CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+Message-ID: <208A690A-6B94-4461-90D5-F68150E2707D@gmail.com>
+
+
+On Dec 22, 2011, at 12:25 PM, Alexander Solla wrote:
+
+> It is not "limiting" to make distinctions that capture real differences.  An overly broad generalization limits what can be proved.  Can we prove that every vehicle with wheels has a motor?  Of course not -- bicycles exist.  Can we prove every car has a motor?  Yes we can.  Throwing bottoms into the collection of values is like throwing bicycles into the collection of cars.  We can say /less/ about the collection than we could before, /because/ the collection is more general.
+
+Sure, throwing bottom into the set of values means that we can no longer prove as many nice properties about them.  However, since bottom *does* exist in this set since functions cannot be guaranteed to terminate, the properties that we do prove will have more relevance.
+
+Cheers,
+Greg
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111222/35982a49/attachment.htm>
+

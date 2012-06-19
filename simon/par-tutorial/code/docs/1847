@@ -1,0 +1,40 @@
+From roma at ro-che.info  Sun Dec 11 23:01:02 2011
+From: roma at ro-che.info (Roman Cheplyaka)
+Date: Mon, 12 Dec 2011 00:01:02 +0200
+Subject: [Haskell-cafe] ANNOUNCE: smallcheck-0.6;
+	test-framework-smallcheck-0.1
+Message-ID: <20111211220102.GA15828@sniper>
+
+I'm pleased to announce a new release of SmallCheck.
+
+The highlights for this release are:
+
+* Default Generic implementation of Serial instance, contributed by Bas van Dijk
+  
+    This means that you don't need to write instances by hand for your types
+    to generate test values for them. See [1] for the details.
+    [1]: http://hackage.haskell.org/packages/archive/smallcheck/0.6/doc/html/Test-SmallCheck-Series.html#g:5
+
+* Revised, organised into modules and documented API
+
+* Integration with test-framework, through test-framework-smallcheck package
+
+    It allows to organize SmallCheck properties into a test suite (possibly
+    together with HUnit or QuickCheck tests), apply timeouts, get nice
+    statistics etc. 
+
+    Thanks to Max Bolingbroke for cooperation on this front.
+
+Please refer to the README for more information about SmallCheck:
+
+    https://github.com/feuerbach/smallcheck/blob/master/README.md
+
+Hackage links:
+
+    http://hackage.haskell.org/package/smallcheck-0.6
+    http://hackage.haskell.org/package/test-framework-smallcheck-0.1
+
+-- 
+Roman I. Cheplyaka :: http://ro-che.info/
+
+

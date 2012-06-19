@@ -1,0 +1,20 @@
+From michael at snoyman.com  Tue Apr 26 06:57:47 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Tue, 26 Apr 2011 07:57:47 +0300
+Subject: [Haskell-cafe] plugins and cabal build
+Message-ID: <BANLkTimugDfWXFb0-HepHGqGOyspQAztLg@mail.gmail.com>
+
+Hi all,
+
+I'm experimenting with using the plugins package for yesod devel
+server. The basic approach is to use cabal for building the object
+files, and then load them with plugins. I can get everything to work
+when I compile with "ghc --make", but I believe name mangling is
+getting in the way with the "cabal build" route. Can someone give some
+guidance on how to properly mangle the function names so that plugins
+can load them?
+
+Thanks,
+Michael
+
+

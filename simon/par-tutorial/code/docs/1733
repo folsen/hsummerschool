@@ -1,0 +1,33 @@
+From allbery.b at gmail.com  Wed Dec  7 16:33:56 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Wed, 7 Dec 2011 10:33:56 -0500
+Subject: [Haskell-cafe] terminateProcess leaves zombie processes around
+In-Reply-To: <CANd=OGFTwVzfTE2LyW=oth2u1iXVf1bsPS4=RCxdTHWRf4zk0g@mail.gmail.com>
+References: <CAN2DD_Ht0gt5p6AOzXB+yMALG=iKsA=Pmq91_amn4+qH7t59SA@mail.gmail.com>
+	<CAKFCL4UMRz2ig9YA8o4FQRCgEsgOdu8RTVKUiMc0ae3egN5OyA@mail.gmail.com>
+	<CANd=OGFTwVzfTE2LyW=oth2u1iXVf1bsPS4=RCxdTHWRf4zk0g@mail.gmail.com>
+Message-ID: <CAKFCL4WwCSX2Mcz=g_3gaGE8osvsCdPCS7SWs+OWEgReosJTNg@mail.gmail.com>
+
+On Wed, Dec 7, 2011 at 10:27, Felipe Almeida Lessa
+<felipe.lessa at gmail.com>wrote:
+
+> On Wed, Dec 7, 2011 at 1:19 PM, Brandon Allbery <allbery.b at gmail.com>
+> wrote:
+> > They *do* terminate; a zombie is a dead process waiting for its parent to
+> > reap it with waitForProcess.  There's also some POSIX stuff you can do to
+> > have them auto-reaped, but doing that correctly and portably is somewhat
+> > painful.
+>
+> But zombie processes do consume a row in the process table, right?  If
+> so, then it's bad to have them around.
+
+
+Yes, and they count against the per-uid process limit.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111207/d7bbba30/attachment.htm>
+

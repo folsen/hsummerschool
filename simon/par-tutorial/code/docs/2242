@@ -1,0 +1,83 @@
+From anton.kholomiov at gmail.com  Fri Dec 23 22:46:09 2011
+From: anton.kholomiov at gmail.com (Anton Kholomiov)
+Date: Sat, 24 Dec 2011 00:46:09 +0300
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <1324322427.2233.6.camel@fuzxxl>
+References: <1324322427.2233.6.camel@fuzxxl>
+Message-ID: <CADDxdqP9gAeXnHKnZ8Ss5S1pb_YhMi198cd6+MZnp19zqFH7gQ@mail.gmail.com>
+
+I'd like to make special syntax for folds, so that fold is built in
+the type definition. Maybe it can be some special
+braces or just fold(..). So we can write the same function in
+place of foldr, maybe, either and so on and don't have to define
+them by hand.
+
+Inside special fold-braces one can write functions (separated with | as
+inside of type declaration) that have apropriate types. Constructors define
+the order of functions inside fold-braces.
+
+Handful of examples:
+
+data List a = Nil | Cons a (List a)
+
+length :: List a -> List a
+length = fold( 0 | const (+1) )
+
+(++) :: List a -> List a -> List a
+a ++ b = fold( b | Cons ) a
+
+head :: List a -> a
+head = fold( undefined | const )
+
+data Maybe a = Nothing | Just a
+
+fromJust :: Maybe a -> a
+fromJust = fold (undefined | id)
+
+data Nat = Zero | Succ Nat
+
+add :: Nat -> Nat -> Nat
+add a = fold (a | Succ)
+
+mul :: Nat -> Nat -> Nat
+mul a = fold (Zero | add a)
+
+
+Maybe something similiar for unfolds but I have no syntax here.
+
+----------
+
+I'd like to invent some type-system that can allow me to say that
+ (.), (>>>), (>=>)
+are the same things just as
+ id and pure
+
+I'd like to have in place of Monad-class special case of Category class
+We can express return and (>>=) with id and (.) in Monad's typing.
+
+return = id
+ma >>= mf = (mf . const ma) ()
+
+where id and (.) are
+
+class Kleisli m where
+  id :: a -> m a
+  (.) :: (b -> m c) -> (a -> m b) -> (a -> m c)
+
+I'd like to parametrise it over m so Kleisli
+can become a special case of Category.
+
+And we ?can? define ($) in terms of id, (.), const and (),
+
+($) :: Category cat => cat a b -> ?dom cat a?-> ?cod cat b?
+f $ a = (f . const a) ()
+
+so (=<<) becomes just ($)
+
+
+Anton
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111224/18fc6be0/attachment.htm>
+

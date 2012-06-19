@@ -1,0 +1,32 @@
+From dokondr at gmail.com  Fri Dec  9 10:43:27 2011
+From: dokondr at gmail.com (dokondr)
+Date: Fri, 9 Dec 2011 12:43:27 +0300
+Subject: [Haskell-cafe] No instance for (Read POSIXTime)
+Message-ID: <CAMXF=YBDfLb1shH=UqO4GjLEbK=d02rmsOock_vMhCFEXm=cOg@mail.gmail.com>
+
+Hi,
+I need to read / write epoch seconds  from / to plain text files.
+When I try to read POSIXTime that I use in my own data type:
+
+data TimedClassRecT = TCR {timeStamp :: POSIXTime, classCosMap :: Map.Map
+String Float}
+                      deriving (Eq, Read, Show)
+
+I get the following error:
+
+No instance for (Read POSIXTime)
+      arising from the 'deriving' clause of a data type declaration
+    Possible fix:
+      add an instance declaration for (Read POSIXTime)
+      or use a standalone 'deriving instance' declaration,
+           so you can specify the instance context yourself
+    When deriving the instance for (Read TimedClassRecT)
+
+What should I do to provide Read instance for POSIXTime? I would rather not
+implement it myself.
+
+Thanks!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111209/09b927d9/attachment.htm>
+

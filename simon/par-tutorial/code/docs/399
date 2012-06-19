@@ -1,0 +1,55 @@
+From Christian.Maeder at dfki.de  Thu Apr 14 13:53:40 2011
+From: Christian.Maeder at dfki.de (Christian Maeder)
+Date: Thu, 14 Apr 2011 13:53:40 +0200
+Subject: [Haskell-cafe] Programming Chalenges: The 3n+1 problem
+In-Reply-To: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+References: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+Message-ID: <4DA6E044.5030504@dfki.de>
+
+Am 14.04.2011 12:29, schrieb Dmitri O.Kondratiev:
+> 3n+1 is the first, "warm-up" problem at Programming Chalenges site:
+> http://www.programming-challenges.com/pg.php?page=downloadproblem&probid=110101&format=html
+> <http://www.programming-challenges.com/pg.php?page=downloadproblem&probid=110101&format=html>
+>
+> (This problem illustrates Collatz conjecture:
+> http://en.wikipedia.org/wiki/3n_%2B_1#Program_to_calculate_Collatz_sequences)
+>
+> As long as the judge on this site takes only C and Java solutions, I
+> submitted in Java some add-hock code (see at the end of this message)
+> where I used recursion and a cache of computed cycles. Judge accepted my
+> code and measured  0.292 sec with best overall submissions of 0.008 sec
+> to solve the problem.
+>
+> *** Question: I wonder how to implement cache for this problem in
+> Haskell? At the moment, I am not so much interested in the speed of the
+> code, as in nice implementation.
+
+I'ld use something like:
+
+import qualified Data.Map as Map
+
+addToMap :: Integer -> Map.Map Integer Integer
+   -> Map.Map Integer Integer
+addToMap n m = case Map.lookup n m of
+   Nothing -> let
+     l = if even n then div n 2 else 3 * n + 1
+     p = addToMap l m
+     Just s = Map.lookup l p
+     in Map.insert n (s + 1) p
+   Just _ -> m
+
+addRangeToMap :: Integer -> Integer -> Map.Map Integer Integer
+   -> Map.Map Integer Integer
+addRangeToMap i j m = if j < i then m else
+   addRangeToMap i (j - 1) $ addToMap j m
+
+getMaxLength :: Integer -> Integer -> Map.Map Integer Integer -> Integer
+getMaxLength i j =
+     Map.foldWithKey (\ k l -> if i > k || k > j then id else max l) 0
+
+-- putting it all togeter
+getRangeMax :: Integer -> Integer -> Integer
+getRangeMax i j = getMaxLength i j $ addRangeToMap i j
+   $ Map.singleton 1 1
+
+

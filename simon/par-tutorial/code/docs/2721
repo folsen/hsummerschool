@@ -1,0 +1,35 @@
+From batterseapower at hotmail.com  Fri Feb  4 23:41:21 2011
+From: batterseapower at hotmail.com (Max Bolingbroke)
+Date: Fri, 4 Feb 2011 22:41:21 +0000
+Subject: [Haskell-cafe] MonadPeelIO instance for monad transformers on
+	top of "forall"
+In-Reply-To: <alpine.DEB.2.02.1102041630280.12561@dr-wily.mit.edu>
+References: <AANLkTimhhfkBJ3iS6xjgoAnV0dQ5GfG+otb9BDOHp3So@mail.gmail.com>
+	<alpine.DEB.2.02.1102041630280.12561@dr-wily.mit.edu>
+Message-ID: <AANLkTikwE10qMs+n6b-dMMcHXkNCVtaAQR4E7TxQVmCx@mail.gmail.com>
+
+On 4 February 2011 21:41, Anders Kaseorg <andersk at mit.edu> wrote:
+> On Fri, 4 Feb 2011, Max Bolingbroke wrote:
+>> data M a = M { unM :: forall m. MonadPeelIO m => Reader.ReaderT () m a }
+>
+> Maybe this won?t help in your actual code, but isn?t M isomorphic to IO
+> (via unM :: M a -> IO a, M . liftIO :: IO a -> M a)?
+
+Well, yes :-). My real code actually has a non-trivial ReaderT
+transformer and a StateT transformer it reaches "m". I had hoped that
+by restricting to ReaderT () the problem would be simpler and hence
+clearer.
+
+> instance MonadPeelIO M where
+>   peelIO = M (liftIO (liftM (\k (M mx) -> liftM (\my -> (M (liftIO my))) (k mx)) peelIO))
+
+This doesn't type check for me (I think the root of the trouble is you
+peelIO in the IO monad, but then later do (k mx) where mx is not an IO
+computation). Is this definition trying to exploit the isomorphism, or
+do you think that this is a solution to the general class of problems
+I'm having trouble with?
+
+Thanks for your reply!
+Max
+
+

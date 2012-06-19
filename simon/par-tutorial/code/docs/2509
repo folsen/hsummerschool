@@ -1,0 +1,68 @@
+From sh006d3592 at blueyonder.co.uk  Fri Dec 30 22:29:09 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Fri, 30 Dec 2011 21:29:09 +0000
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFE215F.1020800@pkturner.org>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<4EFB8DFE.1060805@blueyonder.co.uk>
+	<jdh9h6$gba$1@dough.gmane.org> <4EFCA66D.4060609@blueyonder.co.uk>
+	<jdiesl$5sp$1@dough.gmane.org> <4EFCCA86.4020709@blueyonder.co.uk>
+	<ADFFAE52-B3FF-4BFD-B891-78650E8DB9FD@mobileink.com>
+	<4EFE11E0.8030508@blueyonder.co.uk> <4EFE215F.1020800@pkturner.org>
+Message-ID: <4EFE2D25.30504@blueyonder.co.uk>
+
+On 30/12/2011 20:38, Scott Turner wrote:
+> On 2011-12-30 14:32, Steve Horne wrote:
+>> A possible way to implement a Haskell program would be...
+>>
+>>   1. Apply rewrite rules to evaluate everything possible without
+>>      executing primitive IO actions.
+>>   2. Wait until you need to run the program.
+>>   3. Continue applying rewrite rules to evaluate everything possible, but
+>>      this time executing primitive IO actions (and substituting run-time
+>>      inputs into the model) as and when necessary so that the rewriting
+>>      can eliminate them.
+> This is inadequate, because it is does not specify when the program's
+> various IO actions are executed, or even which of them are executed.
+Yes it does. Specifying when all the various IO actions are executed 
+relative to each other is what the IO *monad* is for.
+
+IIRC, there is a little hand-waving that SPJ confesses to about that - 
+basically that each term will only be reduced once.
+>   Try
+>      print "first" `seq` print "second"
+> or
+>      let x = print "x" in print "value"
+> Also, "evaluate everything possible" is strangely hard to match up with
+> the concepts involved in Haskell's non-strict evaluation.
+I didn't say what order to evaluate it in. For example, in this 
+expression...
+
+   let a = (2*2) in (a+a)
+
+One valid next evaluation (rewriting) set would give...
+
+   (2*2)+(2*2)
+
+Another would give...
+
+   let a = 4 in (a+a)
+
+I don't care which you choose. I don't demand that only concrete 
+arithmetic steps count. I don't demand that evaluation must be bottom-up 
+or top-down or left-to-right. Only that as many evaluation steps as 
+possible are applied.
+
+The hand-waving there - the infinity issue. For a lazy list, we need a 
+very careful definition of "possible". That's one reason why even lazy 
+evaluation implies at least a particular preferred evaluation order - 
+just not the same order as for strict evaluation.
+
+Anyway, you cannot use rewriting to extract a result out of a primitive 
+IO action without executing the IO action. Even if every IO action was 
+of type IO () this still applies by the rules of the Haskell language - 
+you cannot extract that () out of a (putStrLn "Hello") until you execute 
+that action.
+
+
+

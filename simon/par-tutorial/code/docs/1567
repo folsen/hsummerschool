@@ -1,0 +1,18 @@
+From yrazes at gmail.com  Wed Aug 31 23:20:13 2011
+From: yrazes at gmail.com (yrazes)
+Date: Wed, 31 Aug 2011 16:20:13 -0500
+Subject: [Haskell-cafe] Data structure
+Message-ID: <CA+LmyckE5nLBUiaKthy271fHvdeTbz56+6HL+jO0=DC=dFrpxQ@mail.gmail.com>
+
+Hi guys,
+
+I want to compare data structure between Haskell, Java, Lisp and C. I am
+wondering if I could compare list comprehention in haskell with the vector
+class in Java, macros in common lisp and dynamic arrays in C.
+
+Thanks,
+Julita
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110831/a241be0e/attachment.htm>
+

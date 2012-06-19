@@ -1,0 +1,178 @@
+From mukeshtiwari.iiitm at gmail.com  Sat Aug  6 13:12:05 2011
+From: mukeshtiwari.iiitm at gmail.com (mukesh tiwari)
+Date: Sat, 6 Aug 2011 04:12:05 -0700 (PDT)
+Subject: [Haskell-cafe] Rotating calipers
+Message-ID: <2a65257e-8039-48ce-85af-39d5a2b2494c@u28g2000prm.googlegroups.com>
+
+Hello all , I am trying to understand rotating calipers [
+http://en.wikipedia.org/wiki/Rotating_calipers ] but i am not sure if
+understood this algorithm correctly . I tried to use the almost same
+algorithm given on wiki but with four calipers to solve the problem
+[ http://cgm.cs.mcgill.ca/~orm/rotcal.html ]. My approach is find
+xminP, xmaxP, yminP ymaxP and their corresponding calipers will be ( 0
+* i - j ) , ( o * i + j ) , ( i + 0 * j ) and ( -i + 0 * j ). I
+implemented the algorithm in Haskell but its not working . I am not
+sure if i have followed the wiki algorithm correctly and could some
+one please tell me what is wrong with implementation. It would be
+great if some one can explain this algorithm in   pseudo  code which
+explains the rotating caliper and their implementation details . In
+case of indentation , see here [ http://hpaste.org/49907 ] .
+Thank you
+Mukesh Tiwari
+
+import Data.List
+import Data.Array
+import Data.Maybe
+import Data.Function
+import Text.Printf
+import qualified Data.ByteString.Char8 as BS
+
+data Point a = P a a deriving ( Show , Ord , Eq )
+data Vector a = V a a deriving ( Show , Ord , Eq )
+data Turn = S | L | R deriving ( Show , Eq , Ord , Enum  )
+
+--start of convex hull
+
+compPoint :: ( Num  a , Ord a ) => Point a -> Point a -> Ordering
+compPoint ( P x1 y1 ) ( P x2 y2 )
+  | compare x1 x2 == EQ = compare y1 y2
+  | otherwise = compare x1 x2
+
+findMinx :: ( Num a , Ord a ) => [ Point a ] -> [ Point a ]
+findMinx xs = sortBy ( \x  y  -> compPoint  x y  ) xs
+
+compAngle ::(Num a , Ord a ) => Point a -> Point a -> Point a ->
+Ordering
+compAngle ( P x1 y1 ) ( P x2 y2 ) ( P x0 y0 ) = compare ( (  y1 - y0 )
+* ( x2 - x0 )  ) ( ( y2 - y0) * ( x1 - x0 ) )
+
+sortByangle :: ( Num a , Ord a ) => [ Point a ] -> [ Point a ]
+sortByangle (z:xs) = z : sortBy ( \x y -> compAngle x y z ) xs
+
+findTurn :: ( Num a , Ord a , Eq a ) => Point a -> Point a -> Point a -
+> Turn
+findTurn ( P x0 y0 ) ( P x1 y1 ) ( P x2 y2 )
+ | ( y1 - y0 ) * ( x2- x0 ) < ( y2 - y0 ) * ( x1 - x0 ) = L
+ | ( y1 - y0 ) * ( x2- x0 ) == ( y2 - y0 ) * ( x1 - x0 ) = S
+ | otherwise = R
+
+findHull :: ( Num a , Ord a  )  => [ Point a ] ->   [ Point a ] ->
+[ Point a ]
+findHull [x]  ( z : ys )  = findHull [ z , x ]  ys  --incase of second
+point  on line from x to z
+findHull xs  [] = xs
+findHull ( y : x : xs )  ( z : ys )
+  | findTurn x y z == R = findHull (  x : xs )   ( z:ys )
+  | findTurn x y z == S = findHull (  x : xs )   ( z:ys )
+  | otherwise = findHull ( z : y : x : xs  )   ys
+
+
+convexHull ::( Num a , Ord a )  => [ Point a ] -> [ Point a ]
+convexHull xs = reverse . findHull [ y , x ]  $ ys where
+        ( x : y : ys ) = sortByangle . findMinx $ xs
+
+
+--end of convex hull
+
+--start of rotating caliper part http://en.wikipedia.org/wiki/Rotating_calipers
+--dot product for getting angle
+
+angVectors :: ( Num a , Ord a , Floating a ) => Vector a -> Vector a -
+> a
+angVectors ( V ax ay ) ( V bx by ) = theta where
+    dot = ax * bx + ay * by
+    a = sqrt $ ax ^ 2 + ay ^ 2
+    b = sqrt $ bx ^ 2 + by ^ 2
+    theta = acos $ dot / a / b
+
+--rotate the vector x y by angle t
+
+rotVector :: ( Num a , Ord a , Floating a ) => Vector a -> a -> Vector
+a
+rotVector ( V x y ) t = V ( x * cos t - y * sin t ) ( x * sin t + y *
+cos t )
+
+--dist between two parallel vectors
+
+distVec :: ( Num a , Ord a , Floating a ) => Vector a -> Vector a ->
+a
+distVec ( V x1 y1 ) ( V x2 y2 ) = sqrt $ ( x1 - x2 ) ^ 2 + ( y1 - y2 )
+^ 2
+--rotating caliipers
+
+rotCal :: ( Num a , Ord a , Floating a ) => Array Int ( Point a )  ->
+a -> [ Int ] -> [ Vector a ] -> a -> Int -> a
+rotCal arr ang  [ pa , pb , qa , qb] [ cpa , cpb , cqa , cqb ] area  n
+   | 2 * ang > pi = area
+   | otherwise = rotCal arr ang' [ pa' , pb' , qa' , qb' ] [ cpa' ,
+cpb' , cqa' , cqb' ] area' n where
+	P x1 y1 = arr ! pa
+	P x2 y2 = arr ! ( mod ( pa + 1 ) n )
+	P x3 y3 = arr ! pb
+	P x4 y4 = arr ! ( mod ( pb + 1 ) n )
+
+	P x5 y5 = arr ! qa
+	P x6 y6 = arr ! ( mod ( qa + 1 ) n )
+	P x7 y7 = arr ! qb
+	P x8 y8 = arr ! ( mod ( qb + 1 ) n )
+
+	t1 = angVectors cpa ( V ( x2 - x1 ) ( y2 - y1 ) )
+	t2 = angVectors cpb ( V ( x4 - x3 ) ( y4 - y3 ) )
+	t3 = angVectors cqa ( V ( x6 - x5 ) ( y6 - y5 ) )
+	t4 = angVectors cqb ( V ( x8 - x7 ) ( y8 - y7 ) )
+	t = minimum [ t1 , t2 , t3 , t4 ]
+
+        cpa' = rotVector cpa  t
+	cpb' = rotVector cpb  t
+	cqa' = rotVector cqa  t
+	cqb' = rotVector cqb  t
+
+	ang' = ang + t
+	( pa' , pb' , qa' , qb' ) = fN [ t1 , t2 , t3 , t4 ] t where
+		fN [ t1 , t2 , t3 , t4 ] t
+		   | t == t1 = ( mod ( pa + 1 ) n , pb , qa , qb )
+		   | t == t2 = ( pa , mod ( pb + 1 ) n , qa , qb )
+		   | t == t3 = ( pa , pb , mod ( qa + 1 ) n , qb )
+		   | otherwise = ( pa , pb , qa , mod ( qb + 1 ) n )
+
+	width = distVec cpa' cpb'
+	length = distVec cqa' cqb'
+	area' = min area $ length * width
+
+solve :: ( Num a , Ord a , Floating a ) => [ Point a ] -> a
+solve [] = 0
+solve [ p ] = 0
+solve [ p1 , p2 ] =  0
+solve [ p1 , p2 , p3 ] = 0
+solve arr =  rotCal arr' 0 [ pa , pb , qa , qb ] [ cpa , cpb , cqa ,
+cqb ] area   n where
+	   y1 = minimumBy ( on  compare fN1  ) arr
+	   y2 = maximumBy ( on  compare fN1  ) arr
+	   x1 = minimumBy ( on  compare fN2  ) arr
+	   x2 = maximumBy ( on  compare fN2  ) arr
+	   pa = fromJust . findIndex (  == y1 ) $ arr
+	   pb = fromJust . findIndex (  == y2 ) $ arr
+	   qa = fromJust . findIndex (  == x1 ) $ arr
+	   qb = fromJust . findIndex (  == x2 ) $ arr
+	   cpa = V 1 0
+	   cpb = V ( -1 ) 0
+	   cqa = V 0 ( -1 )
+	   cqb = V 0 1
+	   area = 1e9
+	   n = length arr
+	   arr' = listArray ( 0 , n ) arr
+	   fN1 ( P x y ) = y
+	   fN2 ( P x y ) = x
+
+--end of rotating caliper
+
+
+
+final :: ( Num a , Ord a , Floating a ) => [ Point a ] -> a
+final [] = 0
+final [ p ] = 0
+final [ p1 , p2 ] =  0
+final [ p1 , p2 , p3 ] = 0
+final arr = solve . convexHull $ arr
+
+

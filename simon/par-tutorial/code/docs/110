@@ -1,0 +1,33 @@
+From steve at fenestra.com  Mon Apr  4 14:47:06 2011
+From: steve at fenestra.com (Steve Schafer)
+Date: Mon, 04 Apr 2011 08:47:06 -0400
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <BANLkTikCVkoytBCdtPsEc4U7SSpMXgTbwQ@mail.gmail.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<201104041234.44543.daniel.is.fischer@googlemail.com>
+	<BANLkTikCVkoytBCdtPsEc4U7SSpMXgTbwQ@mail.gmail.com>
+Message-ID: <dvejp65jqs0p7n6p7c0s348auhaum8uq0q@4ax.com>
+
+On Mon, 4 Apr 2011 13:30:08 +0100, you wrote:
+
+>Windows APIs use UTF-16...
+
+The newer ones, at least. The older ones usually come in two flavors,
+UTF-16LE and 8-bit code page-based.
+
+>...but the encoding of files (which is the relevant point here) is
+>almost uniformly UTF-8 - though of course you can find legacy apps
+>making other choices.
+
+If you're talking about files written and read by the operating system
+itself, then perhaps. But my experience is that there are a lot of
+applications that use UTF-16LE, especially ones that typically only work
+with smaller files (configuration files, etc.).
+
+As for Haskell, I would still vote for UTF-8 only, though. The only
+reason to favor anything else is legacy compatibility with existing
+Haskell source files, and that isn't really an issue here.
+
+-Steve Schafer
+
+

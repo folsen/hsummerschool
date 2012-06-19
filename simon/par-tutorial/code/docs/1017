@@ -1,0 +1,18 @@
+From dave.a.tapley at gmail.com  Thu Aug 11 00:04:25 2011
+From: dave.a.tapley at gmail.com (Dave Tapley)
+Date: Wed, 10 Aug 2011 23:04:25 +0100
+Subject: [Haskell-cafe] Potential problem with AC-Vector-Fancy package
+Message-ID: <CALaNiFmSjO5yZqe0vOaiXWX4Rc-AaQvYxE7QBZQcbvRXYcGw3g@mail.gmail.com>
+
+Is anyone maintaining the AC-Vector-Fancy package?
+I haven't had a reply from the latest maintainer (Andrew Coppin) on Hackage,
+so I thought I'd open it up to cafe:
+
+I think I have found a problem with the union function:
+If you look here: http://hpaste.org/49889
+You will see that line 4 gives a different result to lines 6, 8, 10; this
+shouldn't be the case because union is commutative.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110810/049f46fa/attachment.htm>
+

@@ -1,0 +1,44 @@
+From haberg-1 at telia.com  Tue Dec 27 01:54:51 2011
+From: haberg-1 at telia.com (Hans Aberg)
+Date: Tue, 27 Dec 2011 01:54:51 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <20111227000239.7FFF0276CB6@mail.avvanta.com>
+References: <3314C57F-5571-44F7-80A6-C9840004B415@telia.com>
+	<20111227000239.7FFF0276CB6@mail.avvanta.com>
+Message-ID: <10CB628C-05CD-4CB9-A40A-56918181006C@telia.com>
+
+On 27 Dec 2011, at 01:02, Donn Cave wrote:
+
+> Quoth Hans Aberg,
+> ...
+>> For example, I set one entry so that typing x |-> a becomes x ? a, the
+>> TeX \mapsto, in Unicode ? RIGHTWARDS ARROW FROM BAR U+21A6.
+>> 
+>> It might be tedious to make a lot of entries, though, but something to
+>> start with.
+> 
+> Something to finish me with, too.  I wouldn't be able to do much
+> in a programming world that used glyphs like that.
+
+The symbol I chose is the one normally used in math. You can see it here:
+  https://en.wikipedia.org/wiki/Function_(mathematics)
+
+>  My vision
+> isn't perfect, but I think it's within a fairly normal range,
+> and it isn't good enough to decode a lot of hieroglyphics at
+> normal font size at reading speed.
+
+Higher resolution displays might help, but larger ones are expected to come the next year.
+
+> The ASCII limit of 100 or so normal characters may be a barrier
+> to expression, but it's a boost to comprehension.
+
+
+Common combinations tend to evolve in symbols. The ASCII combinations are just makeshift.
+
+Hans
+
+
+
+

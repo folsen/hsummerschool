@@ -1,0 +1,17 @@
+From dimitris at microsoft.com  Thu Dec 15 19:04:53 2011
+From: dimitris at microsoft.com (Dimitrios Vytiniotis)
+Date: Thu, 15 Dec 2011 18:04:53 +0000
+Subject: [Haskell-cafe] smt solver bindings
+Message-ID: <C0207498A084F14E85CA5D588539FA0F0B81CE80@DB3EX14MBXC311.europe.corp.microsoft.com>
+
+
+I've a quick question:
+
+Are there Haskell wrappers for the Z3 C API around?
+
+Thanks!
+d-
+
+
+
+

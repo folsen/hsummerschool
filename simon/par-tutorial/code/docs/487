@@ -1,0 +1,22 @@
+From andrew.pennebaker at gmail.com  Tue Apr 19 16:04:05 2011
+From: andrew.pennebaker at gmail.com (Andrew Pennebaker)
+Date: Tue, 19 Apr 2011 10:04:05 -0400
+Subject: [Haskell-cafe] Trac configuration error
+Message-ID: <BANLkTikvXZTdSiZnjwDfgC9RTXW4Bak2xQ@mail.gmail.com>
+
+Try to visit http://trac.haskell.org/ghc.
+
+<type 'exceptions.IOError'>
+
+Python 2.5.2: /usr/bin/pythonTue Apr 19 15:02:32 2011A problem occurred in a
+Python script.
+
+
+Cheers,
+
+Andrew Pennebaker
+www.yellosoft.us
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110419/bd90a388/attachment.htm>
+

@@ -1,0 +1,44 @@
+From nccb2 at kent.ac.uk  Wed Feb  9 16:44:32 2011
+From: nccb2 at kent.ac.uk (Neil Brown)
+Date: Wed, 09 Feb 2011 15:44:32 +0000
+Subject: [Haskell-cafe] Possible bug in Control.Concurrent
+In-Reply-To: <AANLkTikWsDP+Jo5i9fqs7dLqLOewZATs0bzBw_pYftzJ@mail.gmail.com>
+References: <AANLkTikWsDP+Jo5i9fqs7dLqLOewZATs0bzBw_pYftzJ@mail.gmail.com>
+Message-ID: <4D52B660.40308@kent.ac.uk>
+
+On 09/02/11 15:34, Krzysztof Skrz?tnicki wrote:
+> Hello Cafe,
+>
+> Here is a simple program that yields strange results:
+>
+> module Main where
+>
+> import Control.Concurrent
+> import Control.Concurrent.Chan
+> import Control.Monad
+>
+> main = do
+>  c <- newChan
+>  writeChan c 1
+>  forkIO $ forever $ do
+>    i <- readChan c
+>    print ("forkio",i)
+> isEmptyChan c >>= print
+>
+>
+> Now, this is strange thing: we put single element into the channel. We 
+> take it out.
+
+What your program does is put a single element into the channel, and 
+then *repeatedly* try to take one out (notice the forever you have in 
+there!).  Judging by the results, the program deadlocks, which seems 
+like a reasonable outcome to me.
+
+Thanks,
+
+Neil.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110209/26f8acd6/attachment.htm>
+

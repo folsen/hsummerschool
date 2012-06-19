@@ -1,0 +1,86 @@
+From deteego at gmail.com  Sat Apr 30 11:25:01 2011
+From: deteego at gmail.com (Mathew de Detrich)
+Date: Sat, 30 Apr 2011 19:25:01 +1000
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+In-Reply-To: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+References: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+Message-ID: <BANLkTimgfozpwJKq3Q-X-CgVLFjC6EBhaA@mail.gmail.com>
+
+Is there going to be any plans to integrate Yi into Leksah as you originally
+planned to, or is that idea for the short term out the window?
+
+On Fri, Apr 22, 2011 at 8:40 PM, Hamish Mackenzie <
+hamish.k.mackenzie at googlemail.com> wrote:
+
+> Yesterday we uploaded our official 0.10.0 release (0.10.0.4) to Hackage
+> and we have Windows and OS X installers at http://leksah.org/download.html
+>
+> Anyone using an earlier version should upgrade.
+>
+> This release is mainly small improvements and bug fixes.  Some of the
+> improvements include:
+>
+> * Better messages for some common problems.
+> * Improved grep (now searches all source directories in your workspace)
+> * Updated build system for more reliable rebuilding of dependent
+>  packages in your workspace
+>
+> We have automated the building of the Leksah installers and this should
+> allow us to do more frequent releases in the future.
+>
+> There is a lot more to do and we would love to hear from anyone who has
+> time to help out.
+>
+> Worth mentioning because they can be hard to find:
+>
+> * <Ctrl> R adds missing imports
+> * <Ctrl> <Enter> evaluates current line or selection in GHCi
+> * Right click menu in the editor has other debug functions
+> * Comment and uncomment are now <Ctrl> D and <Ctrl> <Shift> D
+>
+> To build Leksah yourself:
+>
+> * Install Gtk and GtkSourceView2 (C libraries and headers)
+> * Install The Haskell Platform (or GHC >= 6.12.3)
+> * cabal update
+> * cabal install gtk2hs-buildtools
+> * cabal install leksah
+> * leksah
+>
+> Making a Gtk application look nice on Windows and OS X is not easy so
+> we recommend using one of these prebuilt binaries:
+>
+> Windows users using GHC 7.0.3
+> http://leksah.org/packages/leksah-0.10.0.4-ghc-7.0.3.exe
+>
+> Windows users using GHC 6.12.3
+> http://leksah.org/packages/leksah-0.10.0.4-ghc-6.12.3.exe
+>
+> OS X 10.6 users using GHC 7.0.3
+> http://leksah.org/packages/leksah-0.8.0.6.dmg
+>
+> (These installers do not install Gtk2Hs packages on your system)
+>
+> Please consult http://leksah.org/download.html for more details about
+> installation! Background information can be found in the Leksah manual
+> http://leksah.org/leksah_manual.pdf.
+>
+> Known bugs and problems:
+>
+> * Leksah does not run with GHC 6.12.2
+>  (http://http://hackage.haskell.org/trac/ghc/ticket/4038)
+>
+> Have fun
+> J?rgen & Hamish
+> See you on #leksah IRC
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110430/b93483ac/attachment.htm>
+

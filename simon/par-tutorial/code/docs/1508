@@ -1,0 +1,33 @@
+From roly.perera at dynamicaspects.org  Mon Aug 29 18:35:07 2011
+From: roly.perera at dynamicaspects.org (Roly Perera)
+Date: Mon, 29 Aug 2011 18:35:07 +0200
+Subject: [Haskell-cafe] Text.Parsec.Prim
+In-Reply-To: <CAKjSnQGqRwbdHHzX2iE52-_=-QR97gi=2V3yWs6s7JSNmvvwOA@mail.gmail.com>
+References: <mailman.1602.1314634120.22584.haskell-cafe@haskell.org>
+	<CAEgBARUKmEuWeWUn+injh19VFRMn2toxko3mK46xw=NOFrgQzg@mail.gmail.com>
+	<CAKjSnQGqRwbdHHzX2iE52-_=-QR97gi=2V3yWs6s7JSNmvvwOA@mail.gmail.com>
+Message-ID: <CAEgBARWas5vNWHdMcMibfUv3VezBex4EOQOtD5EN-QAUeHYBxQ@mail.gmail.com>
+
+Cool. I assumed that since I already had Parsec installed as part of
+the Haskell Platform it wouldn't have made any difference, but
+actually it sorted it. Thanks a lot!
+
+On 29 August 2011 18:25, Antoine Latter <aslatter at gmail.com> wrote:
+> There might be something off about your packages database.
+>
+> I just did:
+>
+> $ cabal update
+> $ cabal install parsec
+> $ ghci
+>> import Text.Parsec.Prim
+>
+> and it went fine.
+>
+> Also, the module "Text.Parsec" re-exports the entirety of
+> "Text.Parsec.Prim", so you won't get much advantage importing the
+> "Prim" module on its own.
+>
+> Antoine
+
+

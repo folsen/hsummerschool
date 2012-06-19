@@ -1,0 +1,70 @@
+From hvr at gnu.org  Tue Aug 30 11:08:22 2011
+From: hvr at gnu.org (Herbert Valerio Riedel)
+Date: Tue, 30 Aug 2011 11:08:22 +0200
+Subject: [Haskell-cafe] Decompressing and http-enumerator
+In-Reply-To: <CABHqrUm-kq0jwDNZMQKjZQmPS1R=+958ORMgzio19Ot19n94HQ@mail.gmail.com>
+References: <CAKA2Jg+u_BtN5WKrTc4T_mgmuxP5==ASbsh5rvxJaQhVK64MTg@mail.gmail.com>
+	<CAHZrzdqdDtoPa+eQS5XtyRFx-2=1WtOQf=eDERvQuzu_dsMwAw@mail.gmail.com>
+	<1314628133.4827.61.camel@duo>
+	<CAKA2JgLMewSVmsDKK9R4eDP9zS4f2fZSVA16WP-zhUsLWaoF5Q@mail.gmail.com>
+	<CABHqrUm-kq0jwDNZMQKjZQmPS1R=+958ORMgzio19Ot19n94HQ@mail.gmail.com>
+Message-ID: <1314695302.2712.32.camel@duo>
+
+On Mon, 2011-08-29 at 16:50 +0100, Colin Adams wrote:
+> On 29 August 2011 16:45, Michael Snoyman <michael at snoyman.com> wrote:
+>         "chunked" is the only valid transfer-encoding[1], while gzip
+>         must be
+>         specified on the content-encoding header[2]. For a simple
+>         example of
+>         these two, look at the response headers from Haskellers[3] in
+>         something like Chrome developer tools.
+>         
+>         [1]
+>         http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6
+>         [2]
+>         http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5
+>         [3] http://www.haskellers.com/
+> 
+> Well [1] contradicts your claim:
+> 
+> "The Internet Assigned Numbers Authority (IANA) acts as a registry for
+> transfer-coding value tokens. Initially, the registry contains the
+> following tokens: "chunked" (section 3.6.1), "identity" (section
+> 3.6.2), "gzip" (section 3.5), "compress" (section 3.5), and
+> "deflate" (section 3.5). "
+
+This added paragraph was actually one of the major changes between
+RFC2068 and RFC2616, in order to enhance the "Transfer-Encoding" field
+to become "full-fledged" as the "Content-Encoding" field was, as the
+previous definitions were deemed to have "significant problems".[1]
+
+So, using 'Content-Encoding: gzip' was required before RFC2616... but w/
+RFC2616 'Transfer-Encoding: gzip, chunked' becomes possible too...
+
+It's also been a long standing bug/deficiency in Firefox[2].
+
+
+So, RFC2616 differentiates between the 'entity' (= the actual
+information content, mostly end-to-end) and the 'message' (= transfer
+"wire format", mostly hop-by-hop). The content-* headers pertain to the
+'entity', whereas the transfer-* headers describe the 'message' format.
+
+But I have to admit, that we have an unfortunate situation here, where
+the real-world implementations of RFC2616 don't follow the intent of the
+RFC (or alternatively: they implement the obsolete RFC2068). And I'm
+well aware that a 100% compliant RFC2616 implementation most likely will
+cause a lot of trouble in terms of interoperability... maybe the
+HTTPbis[3] effort will improve on the situation...
+
+
+Long story short: HTTP client libraries should be flexible enough to let
+the client-code decide whether transparent decoding of the specified
+Content-Encoding is desired or not.
+
+
+ [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.6.3
+ [2]: https://bugzilla.mozilla.org/show_bug.cgi?id=68517
+ [3]: http://tools.ietf.org/wg/httpbis/
+
+
+

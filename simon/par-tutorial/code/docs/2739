@@ -1,0 +1,30 @@
+From jesper.louis.andersen at gmail.com  Sat Feb  5 13:56:50 2011
+From: jesper.louis.andersen at gmail.com (Jesper Louis Andersen)
+Date: Sat, 5 Feb 2011 13:56:50 +0100
+Subject: [Haskell-cafe] Concurrency best practices?
+In-Reply-To: <4D4D1C63.2000906@freegeek.org>
+References: <4D4D1C63.2000906@freegeek.org>
+Message-ID: <AANLkTim5x9V+2zAukpwADGeD-6qh6HJF72TbaQcJKbkp@mail.gmail.com>
+
+On Sat, Feb 5, 2011 at 10:46, wren ng thornton <wren at freegeek.org> wrote:
+
+> Sometimes I need those threads to do some IO like printing logging info.
+
+Logging is easy, especially if you don't mind a performance hit.
+Create an STM.TChan and throw each log message on it. Have a separate
+forkIO'ed process that reads off log messages and prints them. The
+model one step up is to generalize the logger so it forwards log
+messages to handlers. This way you can do logging to stdout, binary
+serialized logging to disk, logging to memory ring buffers, logging to
+databases and so on. This generalized model is used a lot in Erlang.
+
+The price however, is that you may be running into a bottleneck upon
+entering messages on the TChan because sadly I can't remember if it is
+asynchronous or synchronous when you add messages to it. It won't work
+for general IO either (Though perhaps it is a Writer monad).
+
+
+-- 
+J.
+
+

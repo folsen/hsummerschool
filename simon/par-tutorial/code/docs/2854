@@ -1,0 +1,42 @@
+From Christian.Maeder at dfki.de  Tue Feb  8 14:26:03 2011
+From: Christian.Maeder at dfki.de (Christian Maeder)
+Date: Tue, 08 Feb 2011 14:26:03 +0100
+Subject: [Haskell-cafe] Building Plaftorm 2010 2 on 64bit Linux
+In-Reply-To: <4D513824.4050606@fit.vutbr.cz>
+References: <4D511D52.90503@fit.vutbr.cz>
+	<4D51316A.5070201@dfki.de>	<4D513575.6000803@fit.vutbr.cz>
+	<4D5136B5.6040608@dfki.de> <4D513824.4050606@fit.vutbr.cz>
+Message-ID: <4D51446B.2000804@dfki.de>
+
+There seems to be confusion about 32bit and 64bit assembly.
+Can you compile and link without optimization?
+
+C.
+
+Am 08.02.2011 13:33, schrieb Du?an Kol??:
+> Well, it helped, but not getting output anyway:
+> 
+> /tmp/ghc32376_0/ghc32376_0.s: Assembler messages:
+> 
+> /tmp/ghc32376_0/ghc32376_0.s:35:0:
+>      Error: bad register name `%rbp)'
+> 
+> /tmp/ghc32376_0/ghc32376_0.s:36:0:  Error: bad register name `%r15'
+> 
+> /tmp/ghc32376_0/ghc32376_0.s:38:0:  Error: bad register name `%r12'
+> 
+> /tmp/ghc32376_0/ghc32376_0.s:39:0:
+>      Error: bad register name `%r13)'
+> 
+> /tmp/ghc32376_0/ghc32376_0.s:41:0:
+>      Error: bad register name `%r12)'
+> 
+> /tmp/ghc32376_0/ghc32376_0.s:42:0:  Error: bad register name `%rbx'
+> 
+> 
+> ... and many other similar lines
+> 
+> 
+> Is my installation of gcc broken? :-O
+
+

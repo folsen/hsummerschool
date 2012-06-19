@@ -1,0 +1,66 @@
+From amindfv at gmail.com  Sun Dec 25 03:01:58 2011
+From: amindfv at gmail.com (Tom Murphy)
+Date: Sat, 24 Dec 2011 21:01:58 -0500
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+In-Reply-To: <CAHEA9tMg1pFRqHVb+oU6i0zHwbCxDHmeBmfCvaCn_j-VB+axXQ@mail.gmail.com>
+References: <4EF57FC9.1030505@vex.net>
+	<CAHEA9tMg1pFRqHVb+oU6i0zHwbCxDHmeBmfCvaCn_j-VB+axXQ@mail.gmail.com>
+Message-ID: <CAO9Q0tXSGNDV2o3Qrkh+H3sQhK1_LWch+XLZUW16wYkN+HvJ5A@mail.gmail.com>
+
+"I have not written this complaint until now because I have been waiting
+for unmistakable evidence, a smoking gun, a red hand so caught that you
+cannot explain away,"
+     It's not a murder trial! The number-one nice thing about the Haskell
+community is that they _thoroughly_ listen to people. I think you'd get a
+similarly informative discussion, sending just the second half of this
+email.
+
+That said, 2 points:
+
+
+On Sat, Dec 24, 2011 at 1:49 PM, Dan Doel <dan.doel at gmail.com> wrote:
+
+> [...]
+> I think it's good to be clear on all these specifics, and people could
+> do with a better recognition of the difference between (non-)strict
+> and (lazy)eager (hint: you can have an eager, non-strict language). [...]
+>
+
+     +1.
+     I'm pretty sure _none_ of the Haskell texts have a definitive
+comparison of strict, non-strict, lazy, and eager.
+     The Haskell Wiki has this (and only this) to say about Eager
+Evaluation:
+"Eager evaluation is an implementation of the strict semantics as can be
+found in OCaml and usually in imperative languages. A kind of opposite is
+lazy evaluation." [0]
+     We can do better.
+
+
+     On the other hand:
+     I'd _strongly_ argue against "making up our minds" about definitions
+within the Haskell community. Most of these concepts aren't
+Haskell-specific.
+     An example of something to avoid is our definitions of "concurrency"
+and "parallellism." We as a community have specific, good definitions of
+each term. [1] So does the Erlang community. [2] Yet the definitions don't
+have anything to do with each other, which makes talking across communities
+more difficult.
+
+
+amindfv / Tom
+
+
+[0] http://www.haskell.org/haskellwiki/Eager_evaluation
+
+[1]
+http://learnyousomeerlang.com/the-hitchhikers-guide-to-concurrency#dont-panic,
+paragraph 4
+
+[2]
+http://book.realworldhaskell.org/read/concurrent-and-multicore-programming.html,
+"Defining concurrency and parallelism"
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111224/929630c5/attachment.htm>
+

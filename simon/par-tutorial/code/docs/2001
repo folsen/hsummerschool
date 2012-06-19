@@ -1,0 +1,21 @@
+From ok at cs.otago.ac.nz  Fri Dec 16 02:48:10 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Fri, 16 Dec 2011 14:48:10 +1300
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAKFCL4XzJzWiJ1mdawNmTC_Vuwt13cJ=GqRO=-t=_Q=Z2==9BA@mail.gmail.com>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+	<1323960481.2894.10.camel@cslin101.csunix.comp.leeds.ac.uk>
+	<CAKFCL4XzJzWiJ1mdawNmTC_Vuwt13cJ=GqRO=-t=_Q=Z2==9BA@mail.gmail.com>
+Message-ID: <5A1D418E-987B-4E04-9655-879E901E2AE9@cs.otago.ac.nz>
+
+
+On 16/12/2011, at 11:55 AM, Brandon Allbery wrote:
+> 
+> Note that "exec -a" is a bash-ism and not portable to POSIX shells
+
+Recent versions of ksh also support this, so it's not just bash.
+But there are certainly a lot of POSIX shells that don't, including
+the version of ksh on my main machine.
+
+
+

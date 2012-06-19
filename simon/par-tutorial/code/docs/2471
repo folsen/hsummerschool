@@ -1,0 +1,31 @@
+From cdsmith at gmail.com  Fri Dec 30 17:06:16 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Fri, 30 Dec 2011 09:06:16 -0700
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <op.v7a9obs3shvy2l@artyom-nbook>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org> <4EFB8DFE.1060805@blueyonder.co.uk>
+	<jdh9h6$gba$1@dough.gmane.org> <4EFCA66D.4060609@blueyonder.co.uk>
+	<jdiesl$5sp$1@dough.gmane.org> <4EFCCA86.4020709@blueyonder.co.uk>
+	<ADFFAE52-B3FF-4BFD-B891-78650E8DB9FD@mobileink.com>
+	<op.v7a9obs3shvy2l@artyom-nbook>
+Message-ID: <1325261176.16545.181.camel@godel>
+
+On Fri, 2011-12-30 at 18:34 +0200, Artyom Kazak wrote:
+> I wonder: can writing to memory be called a ?computational effect?? If  
+> yes, then every computation is impure. If no, then what?s the difference  
+> between memory and hard drive?
+
+The difference is that our operating systems draw an abstraction
+boundary such that memory is private to a single program, while the hard
+drive is shared between independent entities.  It's not the physical
+distinction (which has long been blurred by virtual memory and caches
+anyway), but the fact that they are on different sides of that
+abstraction boundary.
+
+-- 
+Chris Smith
+
+
+
+

@@ -1,0 +1,20 @@
+From david.waern at gmail.com  Thu Dec  8 14:38:13 2011
+From: david.waern at gmail.com (David Waern)
+Date: Thu, 8 Dec 2011 14:38:13 +0100
+Subject: [Haskell-cafe] Disjunctive patterns
+In-Reply-To: <CALgsdJLSZvMjei3rW_Ppx65zDanSRNPza4x1uwx4EGnEUTJJOQ@mail.gmail.com>
+References: <CALgsdJLSZvMjei3rW_Ppx65zDanSRNPza4x1uwx4EGnEUTJJOQ@mail.gmail.com>
+Message-ID: <CAN8ZjBH2gsOVb-qwuQgkGOdBZJ2bZQBRUUMuzYnBpAxcEDvPjA@mail.gmail.com>
+
+2011/12/8 Asger Feldthaus <asger.feldthaus at gmail.com>:
+> Haskell doesn't seem to support disjunctive patterns, and I'm having a
+> difficult time writing good Haskell code in situations that would otherwise
+> call for that type of pattern.
+
+I've also missed this after having done a bit of OCaml coding. Perhaps
+if a good syntax can be found (since | is already taken) it could be
+added as an extension to GHC.
+
+David
+
+

@@ -1,0 +1,28 @@
+From stephen.tetley at gmail.com  Fri Apr 22 14:08:29 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Fri, 22 Apr 2011 13:08:29 +0100
+Subject: [Haskell-cafe] Global memoization in Haskell
+In-Reply-To: <BANLkTikmCW0cLofhzUw+-6GKsuUBdJdr+w@mail.gmail.com>
+References: <BANLkTinjxvEKkudVqoeJ7qZwEnvfOow9WQ@mail.gmail.com>
+	<BANLkTin6V_yw7SfrWX_=p9mMbavHO+Oy0Q@mail.gmail.com>
+	<BANLkTinuTOU8ogHaApFW=TQHzMAMmzDbeg@mail.gmail.com>
+	<BANLkTikmCW0cLofhzUw+-6GKsuUBdJdr+w@mail.gmail.com>
+Message-ID: <BANLkTinHE-G=Yq2ibS6BYy3wcf-HWO3Spg@mail.gmail.com>
+
+Hi Albert
+
+My contention is that there are specific programs (or specific
+functions within them) that memoization improves - hence adding
+memoization to those programs rather than the compiler is the way to
+go.
+
+Not that I've looked deeply, but I think adding memoization to GHC
+would be a pretty substantial undertaking. In the first instance where
+do you put the memo-ed values? - if you're doing it for all functions
+you might have to change the RTS as well as the compiler.
+
+Best wishes
+
+Stephen
+
+

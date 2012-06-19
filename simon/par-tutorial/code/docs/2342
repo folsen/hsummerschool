@@ -1,0 +1,53 @@
+From trebla at vex.net  Wed Dec 28 09:17:09 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Wed, 28 Dec 2011 03:17:09 -0500
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+In-Reply-To: <4EF57FC9.1030505@vex.net>
+References: <4EF57FC9.1030505@vex.net>
+Message-ID: <4EFAD085.8000605@vex.net>
+
+There are two flavours of MonadState, Control.Monad.State.Lazy and 
+Control.Monad.State.Strict. There are two flavours of ByteString, 
+Data.ByteString.Lazy and Data.Bytestring (whose doc says "strict"). 
+There are two flavours of I/O libraries, lazy and strict. There are 
+advices of the form: "the program uses too much memory because it is too 
+lazy; try making this part more strict". Eventually, someone will ask 
+what are "lazy" and "strict". Perhaps you answer this (but there are 
+other answers, we'll see):
+
+"lazy refers to such-and-such evaluation order. strict refers to f ? = 
+?, but it doesn't specify evaluation order."
+
+That doesn't answer the question. That begs the question: Why do 
+libraries seem to make them a dichotomy, when they don't even talk about 
+the same level? And the make-it-more-strict advice now becomes: "the 
+program uses too much memory because of the default, known evaluation 
+order; try making this part use an unknown evaluation order", and this 
+unknown is supposed to use less memory because...?
+
+I answer memory questions like this: the program uses too much memory 
+because it is too lazy---or nevermind "lazy", here is the current 
+evaluation order of the specific compiler, this is why it uses much 
+memory; now change this part to the other order, it uses less memory. I 
+wouldn't bring in the denotational level; there is no need.
+
+(Sure, I use seq to change evaluation order, which may be overriden by 
+optimizations in rare cases. So change my answer to: now add seq here, 
+which normally uses the other order, but optimizations may override it 
+in rare cases, so don't forget to test. Or use pseq.)
+
+I said "people, make up your mind". I do not mean a whole group of 
+people for the rest of their lives make up the same mind and choose the 
+same one semantics. I mean this: Each individual, in each context, for 
+each problem, just how many levels of semantics do you need to solve it? 
+(Sure sure, I know contexts that need 4. What about daily programming 
+problems: time, memory, I/O order?)
+
+MigMit questioned me on the importance of using the words properly. 
+Actually, I am fine with using the words improperly, too: "the program 
+uses too much memory because it is too lazy, lazy refers to 
+such-and-such evaluation order; try making this part more strict, strict 
+refers to so-and-so evaluation order".
+
+
+

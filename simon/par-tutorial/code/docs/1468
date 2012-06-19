@@ -1,0 +1,30 @@
+From aslatter at gmail.com  Mon Aug 29 06:03:52 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Sun, 28 Aug 2011 23:03:52 -0500
+Subject: [Haskell-cafe] Bug in GC's ordering of ForeignPtr finalization?
+In-Reply-To: <87ty907ub0.fsf@gmail.com>
+References: <8739h1pbaq.fsf@gmail.com> <87pqjprzu2.fsf@gmail.com>
+	<CAKjSnQGPRu7nWbLiuLX4niUyRNNbziNwBsX1s3+WyYx+9aTpcw@mail.gmail.com>
+	<87ty907ub0.fsf@gmail.com>
+Message-ID: <CAKjSnQEMxdCD+2jXefoMPS=iyqd8wHFY6GovRQ_rOJXwtSW4dg@mail.gmail.com>
+
+On Sun, Aug 28, 2011 at 10:47 PM, Ben Gamari <bgamari.foss at gmail.com> wrote:
+> On Sun, 28 Aug 2011 22:26:05 -0500, Antoine Latter <aslatter at gmail.com> wrote:
+>> One problem you might be running in to is that the optimization passes
+>> can notice that a function isn't using all of its arguments, and then
+>> it won't pass them. These even applies if the arguments are bound
+>> together in a record type.
+>>
+> In this case I wouldn't be able to reproduce the problem with
+> optimization disabled, no? Unfortunately, this is not the case; the
+> problem persists even with -O0.
+>
+
+Perhaps? I don't know the details about how the GC decides when
+something is reachable. The scenario I described (which sounds similar
+to yours?) is only safe in Haskell when using functions like
+touchForeignPtr.
+
+Antoine
+
+

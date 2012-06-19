@@ -1,0 +1,51 @@
+From dagitj at gmail.com  Sun Apr 10 03:50:31 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Sat, 9 Apr 2011 18:50:31 -0700
+Subject: [Haskell-cafe] FFI for a beginner
+In-Reply-To: <BANLkTi=ANMjLUdHKLQPB=TJ-Ng7PaoE0YQ@mail.gmail.com>
+References: <BANLkTi=5O6CLOsL27_-Cv5bkoKuruYtZUQ@mail.gmail.com>
+	<BANLkTi=ANMjLUdHKLQPB=TJ-Ng7PaoE0YQ@mail.gmail.com>
+Message-ID: <BANLkTimYitKDuyUHq5AuQ7eTGTwJtyem3A@mail.gmail.com>
+
+I don't know how to make ghc load them without using either hsc2hs or c2hs.
+I've had better experiences with hsc, but your mileage may vary.
+
+On Apr 8, 2011 3:34 AM, "Andrew Pennebaker" <andrew.pennebaker at gmail.com>
+wrote:
+
+ncurses is proving too difficult to setup, so I'm working on a new library
+called charm. The C code works by itself, but I can't compile a Haskell
+wrapper for it. While the tutorials at
+HaskellWiki<http://www.haskell.org/haskellwiki/FFI_complete_examples>are
+helpful, they're outdated. Argh! The
+docs<http://www.haskell.org/ghc/docs/latest/html/users_guide/ffi-ghc.html#glasgow-foreign-headers>say
+that -#include pragmas no longer work, but fail to explain how to load
+code without them. Suffice to say I have no recourse but trial and error.
+
+GitHub: charm <https://github.com/mcandre/charm> and
+hscharm<https://github.com/mcandre/hscharm>
+
+<https://github.com/mcandre/charm>$ make
+cp /usr/include/charm.c .
+ghc --make -fforce-recomp -o hellocharm hellocharm.hs charm.hs charm.c
+-I/usr/include -dylib-install-name /usr/lib/libcharm.dynlib
+[1 of 2] Compiling Charm            ( charm.hs, charm.o )
+[2 of 2] Compiling Main             ( hellocharm.hs, hellocharm.o )
+Linking hellocharm ...
+ld: duplicate symbol _Charm_getWidth_info in charm.o and charm.o
+collect2: ld returned 1 exit status
+make: *** [hellocharm] Error 1
+
+Cheers,
+
+Andrew Pennebaker
+www.yellosoft.us
+
+_______________________________________________
+Haskell-Cafe mailing list
+Haskell-Cafe at haskell.org
+http://www.haskell.org/mailman/listinfo/haskell-cafe
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110409/59e10c6a/attachment.htm>
+

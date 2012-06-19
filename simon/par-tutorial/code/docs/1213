@@ -1,0 +1,27 @@
+From dbanas at banasfamily.net  Fri Aug 19 05:32:39 2011
+From: dbanas at banasfamily.net (David Banas)
+Date: Thu, 18 Aug 2011 20:32:39 -0700
+Subject: [Haskell-cafe] Failed link to mixed-language shared object.
+Message-ID: <1313724759.23760.4.camel@dbanas-eeepc>
+
+Hi all,
+
+Does this trigger recollection in anyone:
+
+dbanas at dbanas-eeepc:~/prj/haskell/AMIParse/trunk$ make
+ghc -dynamic -o ami_test -L. -lami ami_test.o
+./libami.so: undefined reference to `__stginit_haskell98_MarshalArray_'
+./libami.so: undefined reference to `__stginit_haskell98_MarshalError_'
+collect2: ld returned 1 exit status
+make: *** [ami_test] Error 1
+dbanas at dbanas-eeepc:~/prj/haskell/AMIParse/trunk$ 
+
+?
+Know what I need to do?
+
+Thanks,
+-db
+
+
+
+

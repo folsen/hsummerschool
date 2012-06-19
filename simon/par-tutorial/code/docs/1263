@@ -1,0 +1,53 @@
+From ok at cs.otago.ac.nz  Mon Aug 22 02:29:32 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Mon, 22 Aug 2011 12:29:32 +1200
+Subject: [Haskell-cafe] custom SQL-to-Haskell type conversion in HDBC
+In-Reply-To: <CAPeieQEpqcF4FZm5L_VdYvDtCYRS=qJBbShaEq6rM_9GF5u5FA@mail.gmail.com>
+References: <20110819052316.GA27130@houseag.com>
+	<CAPeieQEGXOJgfvA+FF2yTbhPnWA9vv7Xk8EghLj-2LiYy1Edyg@mail.gmail.com>
+	<20110819140939.GA27362@houseag.com>
+	<CAPeieQGnDo5TR6F1hWPjvWWV0+nrW0=6iPm9z-xxJ2HfiOkY4g@mail.gmail.com>
+	<20110819145341.GB27362@houseag.com>
+	<CAPeieQHBYE9f+QrJodRtFscdgy5+_hzUYR5YnDWRrCJCv9kUYw@mail.gmail.com>
+	<CAKFCL4Xi9H-x4GPMjbzrRS9-tSSqdE4EsaV2_diQ=a4ObAL3bg@mail.gmail.com>
+	<CAPeieQEpqcF4FZm5L_VdYvDtCYRS=qJBbShaEq6rM_9GF5u5FA@mail.gmail.com>
+Message-ID: <9CD9C8A5-E996-44E1-A82D-DCEB84232A3B@cs.otago.ac.nz>
+
+
+On 20/08/2011, at 11:41 PM, Erik Hesselink wrote:
+> 
+> This is the way I was taught to do it in physics. See also http://en.m.wikipedia.org/wiki/Significance_arithmetic
+
+There are at least two different "readings" of fixed precision arithmetic.
+
+(1) A number with d digits after the decimal point is
+    a *precise* integer times 10**-d.
+
+    Under this reading,   scale(x) ? scale(y) => scale(max(x,y))
+			  scale(x) ? scale(y) => scale(x+y)
+			  scale(x) ? scale(y) => an exact rational number
+			  scale(x) < scale(y) is well-defined even when x ~= y
+			  scale(x) = scale(y) is well-defined even when x ~= y
+
+(2) A number with d digits after the decimal point represents
+    *some* number in the range (as written) ? (10**-d)/2
+
+    Under this reading,   scale(x) ? scale(y) => scale(min(x,y))
+			  scale(x) ? scale(y) => depends on the value of the numbers
+			  scale(x) < scale(y) is often undefined even when x = y
+			  scale(x) = scale)y) is often undefined even when x = y
+
+    The web page Erik Hesselink pointed to includes the example 8.02*8.02 = 64.3
+    (NOT 64.32).
+
+Values in data bases often represent sums of money, for which reading (1) is
+appropriate.  One tenth of $2.53 is $0.253; rounding that to $0.25 would in
+some circumstances count as fraud.
+
+Of course, values in data bases often represent physical measurements, for which
+reading (2) is appropriate.  There is, however, no SQL data type that expresses
+this intent.
+
+
+
+

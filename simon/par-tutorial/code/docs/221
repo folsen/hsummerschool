@@ -1,0 +1,34 @@
+From ozgurakgun at gmail.com  Thu Apr  7 17:31:35 2011
+From: ozgurakgun at gmail.com (Ozgur Akgun)
+Date: Thu, 7 Apr 2011 16:31:35 +0100
+Subject: [Haskell-cafe] parsec - source position information
+In-Reply-To: <BANLkTimW7BnfvMMM5Lg5Ohurfn3E6qzW4w@mail.gmail.com>
+References: <BANLkTin6C82gsiszKu01JEbFHkxgrc_OUw@mail.gmail.com>
+	<BANLkTimW7BnfvMMM5Lg5Ohurfn3E6qzW4w@mail.gmail.com>
+Message-ID: <BANLkTikaMvfsEn5oAe5okz2_UQrZHHHLUA@mail.gmail.com>
+
+Thanks!
+
+On 7 April 2011 16:27, Christopher Done <chrisdone at googlemail.com> wrote:
+
+> On 7 April 2011 17:22, Ozgur Akgun <ozgurakgun at gmail.com> wrote:
+>>
+>> Is there a way to get source position[1] information from parsec while
+>> defining a
+>> parser? It surely knows about source positions, as they are used while
+>> reporting a parsing error.
+>>
+>
+>
+> http://hackage.haskell.org/packages/archive/parsec/3.0.0/doc/html/Text-Parsec-Prim.html#v:getPosition
+> <http://hackage.haskell.org/packages/archive/parsec/3.0.0/doc/html/Text-Parsec-Prim.html#v:getPosition>
+>
+
+
+
+-- 
+Ozgur Akgun
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110407/735c8acb/attachment.htm>
+

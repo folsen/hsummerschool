@@ -1,0 +1,58 @@
+From klas_ivarsson at yahoo.com  Mon Aug 29 13:31:52 2011
+From: klas_ivarsson at yahoo.com (KlasI)
+Date: Mon, 29 Aug 2011 04:31:52 -0700 (PDT)
+Subject: [Haskell-cafe] Problems creating Haskell-dll without -fvia-C
+Message-ID: <1314617512681-4745874.post@n5.nabble.com>
+
+Hi! 
+
+I recently read a haskell-cafe-thread telling me that the compiler option
+-fvia-C 
+will be removed. This gets me a bit worried... 
+
+I use -fvia-C when I build my haskell dll, and it works just fine (Haskell
+2010.2.0.0): 
+
+ghc -c Adder.hs -O2 -fvia-C 
+ghc -c StartEnd.c 
+ghc -shared -o Adder.dll Adder.o Adder_stub.o StartEnd.o Adder.def 
+  
+Next I create a lib which can be imported in Visual C++: 
+
+lib /machine:i386 /def:SingThing.def 
+
+
+BUT...if I remove the flag -fvia-C, the program crashes when I run it:( 
+
+
+I've tried experimenting with a few things: 
+
+*  Haskell FFI's calling conventions ccall/stdcall 
+
+*  Skipping the .def file 
+
+*  Skipping "lib /machine:i386 /def:SingThing.def", instead trying the
+approach descibed in: 
+
+http://blogs.msdn.com/b/satnam_singh/archive/2011/04/19/creating-a-windows-dll-from-a-haskell-program-and-calling-it-from-c.aspx
+  
+
+Can anyone please give me a hint of whats going on? 
+
+I guess it must be somthing with pointers and calling conventions, but I'm
+banging my head against the wall now:( 
+
+Cheers Klas 
+
+(Btw... I should mention that the simple Adder.hs example actually works
+without -fvia-C, my 
+ dll is more advanced, but I'm following the same compiling procedure) 
+ 
+
+
+
+--
+View this message in context: http://haskell.1045720.n5.nabble.com/Problems-creating-Haskell-dll-without-fvia-C-tp4745874p4745874.html
+Sent from the Haskell - Haskell-Cafe mailing list archive at Nabble.com.
+
+

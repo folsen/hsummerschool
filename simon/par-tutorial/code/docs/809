@@ -1,0 +1,54 @@
+From serialhex at gmail.com  Wed Apr 27 23:44:16 2011
+From: serialhex at gmail.com (serialhex)
+Date: Wed, 27 Apr 2011 17:44:16 -0400
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <4DB88BA5.9090805@unicaen.fr>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<34E1B523-F2C9-4875-98D2-728D5178DC89@gmail.com>
+	<4DB80841.8040304@gmail.com> <4DB81521.50800@unicaen.fr>
+	<BANLkTikupnpPXpHKs0-29kycVf9784waXw@mail.gmail.com>
+	<4DB88BA5.9090805@unicaen.fr>
+Message-ID: <BANLkTin5wkhqk_XO5qqrvn=7D_ZLOiPFwA@mail.gmail.com>
+
+so, as a n00b to haskell i can't say much about its laziness, and not
+knowing much about how python works i'm about the same there.  though i do
+know ruby, and afaik ruby doesn't _care_ what type something is, just if it
+can do something.  example from the rails framework:
+
+#-------
+class NilClass  # nil is mostly equivalent to c's NULL
+  def blank?
+    true
+  end
+end
+
+class String
+  def blank?
+    self.size == 0
+  end
+end
+
+["", "person", nil].each do |element|
+  puts element unless element.blank?
+end
+#-------
+
+the output of course would simply be "person", but that's not the object of
+my post.  in ruby they use what some call "duck typing"  if it looks like a
+duck and quacks like a duck... it's a duck.  unlike in most other
+programming languages where you have to draw blood in order to check if it's
+a duck (i mean, it could be a goose for all we know, and we all know what
+geese do to our programs...)  and while this programming style might be
+useful in this (and many other) contexts, there are probably a bunch of
+others where it only gets in the way.
+
+also, in case you are wondering... haskell is going to be the second
+language i delve into.  i've already started ruby and will have to un-learn
+a bunch of things because of that from what i read, but i find a number of
+haskells features to be interesting.  and hey, it's a new way to think about
+problems right?
+hex
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110427/a27db3e7/attachment-0001.htm>
+

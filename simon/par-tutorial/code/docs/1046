@@ -1,0 +1,31 @@
+From Christian.Maeder at dfki.de  Thu Aug 11 17:11:32 2011
+From: Christian.Maeder at dfki.de (Christian Maeder)
+Date: Thu, 11 Aug 2011 17:11:32 +0200
+Subject: [Haskell-cafe] Trouble with readProcess
+In-Reply-To: <CAB6QvNMibG0QCKKtT0cOixDB0YqJBNsJQyGzHi0CB4u6LJrm+g@mail.gmail.com>
+References: <CAB6QvNMibG0QCKKtT0cOixDB0YqJBNsJQyGzHi0CB4u6LJrm+g@mail.gmail.com>
+Message-ID: <4E43F124.3020309@dfki.de>
+
+Am 11.08.2011 16:45, schrieb Charles-Pierre Astolfi:
+> Hi -cafe,
+>
+> I'm using readProcess and I don't know how to handle this issue:
+>
+> readProcess cmd [opt1,opt2] seems to execute the following:
+
+are you sure that your argument strings do not contain the quotes, 
+possibly by calling "show" on arguments that are already strings.
+
+C.
+
+> $ cmd "opt1" "opt2"
+>
+> That is usually fine, but I'm using an external program that doesn't
+> understand the quotes, so I need to execute instead:
+> $ cmd opt1 opt2
+>
+> How should I do that?
+> --
+> Cp
+
+

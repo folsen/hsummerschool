@@ -1,0 +1,50 @@
+From hjgtuyl at chello.nl  Tue Apr 12 23:45:36 2011
+From: hjgtuyl at chello.nl (Henk-Jan van Tuyl)
+Date: Tue, 12 Apr 2011 23:45:36 +0200
+Subject: [Haskell-cafe] RFC: Extendable and Easy-To-Use Logger (HLogger)
+In-Reply-To: <BANLkTi=dcW5p5WCAdFMRNb3cWwN8P4tKSA@mail.gmail.com>
+References: <4DA48066.10805@jonkristensen.com>
+	<BANLkTi=dcW5p5WCAdFMRNb3cWwN8P4tKSA@mail.gmail.com>
+Message-ID: <op.vtuheazdpz0j5l@zen5.arnhem.chello.nl>
+
+On Tue, 12 Apr 2011 19:10:09 +0200, Gregory Collins  
+<greg at gregorycollins.net> wrote:
+
+> On Tue, Apr 12, 2011 at 6:40 PM, Jon Kristensen
+> <technology at jonkristensen.com> wrote:
+>> Hello Haskellers!
+>>
+>> As I have now implemented everything that I could think of, I would  
+>> like to
+>> ask the Haskell community to give some feedback on HLogger so that I can
+>> continuing improving it. Some questions:
+>>
+>> Do you have any general/architectural thoughts on things I might be  
+>> doing
+>> wrong?
+>
+> 1) Use "Text" as the string type, not "String"
+>
+> 2) Re: SimpleLogger: writing to and flushing the log file upon
+> receiving each message is absolutely the wrong thing to do in
+> high-performance code. Each write() is a context switch into the
+> kernel, and doing it this way will kill your throughput (in messages
+> per second). What we do in our webserver (which relies on
+> high-throughput access logging) is to buffer messages to the log
+> channel in memory, and perform the actual writes in a separate worker
+> thread no more often than once every N seconds.
+
+If you want to know what the last thing was that your application was  
+doing, before it crashed (e.g. at the customers site), you better write  
+every message immediately to disk.
+
+Regards,
+Henk-Jan van Tuyl
+
+
+-- 
+http://Van.Tuyl.eu/
+http://members.chello.nl/hjgtuyl/tourdemonad.html
+--
+
+

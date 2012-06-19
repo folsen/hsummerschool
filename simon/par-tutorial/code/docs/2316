@@ -1,0 +1,47 @@
+From ianwookim at gmail.com  Tue Dec 27 13:57:04 2011
+From: ianwookim at gmail.com (Ian-Woo Kim)
+Date: Tue, 27 Dec 2011 07:57:04 -0500
+Subject: [Haskell-cafe] ANNOUNCE: xournal-convert-0.1
+Message-ID: <CAPNnnrXcfne_GMg4khD0jLdtEvoXARJdjkNQnQUiDcTmpK1iZg@mail.gmail.com>
+
+Hi, all,
+
+I have uploaded a utility program xournal-convert which is a
+command-line utility for changing xournal file format to various other
+formats. Currently, converting xournal file format (xoj) to several
+SVG files for each page and index.html for navigating all those pages
+are implemented. I will support more output formats as I implement. I
+think that SVG/html support must be useful to some people as it is
+now.
+This program depends on xournal-types, xournal-render and
+xournal-parser libraries which are also used for hxournal program ( a
+notetaking program written in haskell. similar to xournal)
+
+Installation should be simple.
+Just type
+> cabal update
+> cabal install xournal-convert
+
+In command line, you can run the program like
+> xournal-convert makesvg --dest=[destination folder] xojfilename
+Currently, this program only accepts gunzipped xoj file. For xoj file
+you generated from xournal program, you need to rename the file as
+xxx.xoj.gz (xxx is some filename) and gunzip xxx.xoj.gz to make
+gunzipped xoj format file. For files from hxournal, you can just use
+the file directly.
+
+By this program, you can simply generate static webpages for each
+xournal file. I personally found this useful for reading my notes on
+the web.
+
+Note:
+As for hxournal, the current version is 0.6.1.0. It currently supports
+pdf background and has undo/redo and smoother scrolling (not completed
+yet though). If you are interested, please try the latest version.
+
+Thank you for your interest. Happy holidays.
+
+best regards,
+Ian-Woo Kim
+
+

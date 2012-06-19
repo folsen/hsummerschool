@@ -1,0 +1,109 @@
+From aslatter at gmail.com  Thu Feb 10 18:41:26 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Thu, 10 Feb 2011 11:41:26 -0600
+Subject: [Haskell-cafe] MissingH won't upgrade
+In-Reply-To: <AANLkTi=wfCGKY_DUFRObYkUjgQVLOP+EDepAHZ5iKCS3@mail.gmail.com>
+References: <AANLkTi=wfCGKY_DUFRObYkUjgQVLOP+EDepAHZ5iKCS3@mail.gmail.com>
+Message-ID: <AANLkTi=0qXXcgXTvkQORVzE5nCa1b+7WN94tZjZbkOiK@mail.gmail.com>
+
+It looks a bit suspicious that the haskell98 module is installed in
+your user-level package database. Maybe that's okay, but I wouldn't
+try it myself.
+
+Do you know how that happened? What does `ghc-pkg list --user` show?
+
+Antoine
+
+On Thu, Feb 10, 2011 at 9:24 AM, Andrew Pennebaker
+<andrew.pennebaker at gmail.com> wrote:
+> Specs:
+>
+> cabal-install 0.8.2
+> Cabal 1.8.0.6
+> GHC 6.12.3
+> Mac OS X 10.6.6
+> MacBook Pro 5,1
+>
+> $ cabal upgrade missingh
+> Resolving dependencies...
+> Configuring regex-base-0.93.2...
+> Preprocessing library regex-base-0.93.2...
+> Building regex-base-0.93.2...
+> [1 of 4] Compiling Text.Regex.Base.RegexLike ( Text/Regex/Base/RegexLike.hs,
+> dist/build/Text/Regex/Base/RegexLike.o )
+> [2 of 4] Compiling Text.Regex.Base.Context ( Text/Regex/Base/Context.hs,
+> dist/build/Text/Regex/Base/Context.o )
+> [3 of 4] Compiling Text.Regex.Base ?( Text/Regex/Base.hs,
+> dist/build/Text/Regex/Base.o )
+> [4 of 4] Compiling Text.Regex.Base.Impl ( Text/Regex/Base/Impl.hs,
+> dist/build/Text/Regex/Base/Impl.o )
+> Registering regex-base-0.93.2...
+> Installing library in /Users/andrew/.cabal/lib/regex-base-0.93.2/ghc-6.12.3
+> Registering regex-base-0.93.2...
+> Configuring regex-posix-0.94.4...
+> Preprocessing library regex-posix-0.94.4...
+> Building regex-posix-0.94.4...
+> [1 of 6] Compiling Text.Regex.Posix.Wrap (
+> dist/build/Text/Regex/Posix/Wrap.hs, dist/build/Text/Regex/Posix/Wrap.o )
+> [2 of 6] Compiling Text.Regex.Posix.String ( Text/Regex/Posix/String.hs,
+> dist/build/Text/Regex/Posix/String.o )
+> [3 of 6] Compiling Text.Regex.Posix.Sequence ( Text/Regex/Posix/Sequence.hs,
+> dist/build/Text/Regex/Posix/Sequence.o )
+> [4 of 6] Compiling Text.Regex.Posix.ByteString (
+> Text/Regex/Posix/ByteString.hs, dist/build/Text/Regex/Posix/ByteString.o )
+> [5 of 6] Compiling Text.Regex.Posix.ByteString.Lazy (
+> Text/Regex/Posix/ByteString/Lazy.hs,
+> dist/build/Text/Regex/Posix/ByteString/Lazy.o )
+> [6 of 6] Compiling Text.Regex.Posix ( Text/Regex/Posix.hs,
+> dist/build/Text/Regex/Posix.o )
+> Registering regex-posix-0.94.4...
+> Installing library in /Users/andrew/.cabal/lib/regex-posix-0.94.4/ghc-6.12.3
+> Registering regex-posix-0.94.4...
+> Configuring regex-compat-0.93.1...
+> Preprocessing library regex-compat-0.93.1...
+> Building regex-compat-0.93.1...
+> [1 of 1] Compiling Text.Regex ? ? ? ( Text/Regex.hs, dist/build/Text/Regex.o
+> )
+> Registering regex-compat-0.93.1...
+> Installing library in
+> /Users/andrew/.cabal/lib/regex-compat-0.93.1/ghc-6.12.3
+> Registering regex-compat-0.93.1...
+> Configuring MissingH-1.1.0.3...
+> Preprocessing library MissingH-1.1.0.3...
+> Preprocessing executables for MissingH-1.1.0.3...
+> Building MissingH-1.1.0.3...
+> [ 1 of 47] Compiling System.Console.GetOpt.Utils (
+> src/System/Console/GetOpt/Utils.hs, dist/build/System/Console/GetOpt/Utils.o
+> )
+> [ 2 of 47] Compiling System.Debian ? ?( src/System/Debian.hs,
+> dist/build/System/Debian.o )
+> [ 3 of 47] Compiling System.IO.WindowsCompat (
+> src/System/IO/WindowsCompat.hs, dist/build/System/IO/WindowsCompat.o )
+> [ 4 of 47] Compiling System.Posix.Consts ( src/System/Posix/Consts.hs,
+> dist/build/System/Posix/Consts.o )
+> [ 5 of 47] Compiling System.IO.StatCompat ( src/System/IO/StatCompat.hs,
+> dist/build/System/IO/StatCompat.o )
+> [ 6 of 47] Compiling System.IO.PlafCompat ( src/System/IO/PlafCompat.hs,
+> dist/build/System/IO/PlafCompat.o )
+> [ 7 of 47] Compiling Data.Compression.Inflate (
+> src/Data/Compression/Inflate.hs, dist/build/Data/Compression/Inflate.o )
+> [ 8 of 47] Compiling Data.Hash.MD5.Zord64_HARD (
+> src/Data/Hash/MD5/Zord64_HARD.lhs, dist/build/Data/Hash/MD5/Zord64_HARD.o )
+> src/Data/Hash/MD5/Zord64_HARD.lhs:4:2:
+> ?? ?Bad interface file:
+> /Users/andrew/.cabal/lib/haskell98-1.1.0.0/ghc-6.12.3/Word.hi
+> ?? ? ? ?Something is amiss; requested module ?haskell98:Word differs from
+> name found in the interface file haskell98-1.1.0.0:Word
+> cabal: Error: some packages failed to install:
+> MissingH-1.1.0.3 failed during the building phase. The exception was:
+> ExitFailure 1
+> Cheers,
+> Andrew Pennebaker
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

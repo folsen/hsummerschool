@@ -1,0 +1,33 @@
+From allbery.b at gmail.com  Fri Feb  4 01:19:10 2011
+From: allbery.b at gmail.com (Brandon S Allbery KF8NH)
+Date: Thu, 03 Feb 2011 19:19:10 -0500
+Subject: [Haskell-cafe] Problems with iteratees
+In-Reply-To: <4D4B4567.4010505@gmail.com>
+References: <4D49FF9B.9090009@freegeek.org> <4D4B4567.4010505@gmail.com>
+Message-ID: <4D4B45FE.1020305@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 2/3/11 19:16 , Brandon S Allbery KF8NH wrote:
+> POSIX FIFOs and GHC's nonblocking file descriptors implementation don't play
+> well together; you should launch the writer end first and let it block
+
+More specifically, I think what's happening here is that a non-blocking
+open() of a FIFO returns with the fd not actually open yet, a situation
+which isn't expected, and a blocking open will block until the other side is
+opened.
+
+- -- 
+brandon s. allbery     [linux,solaris,freebsd,perl]    allbery.b at gmail.com
+system administrator  [openafs,heimdal,too many hats]                kf8nh
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk1LRf4ACgkQIn7hlCsL25V8dQCgjD+pLVt9LbyqRJ8VYeF8XuLt
+ieQAoJl/3ws1hh8OJtrjVTyPx9gDRGgW
+=EcXI
+-----END PGP SIGNATURE-----
+
+

@@ -1,0 +1,28 @@
+From dagitj at gmail.com  Thu Apr 28 08:20:10 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Wed, 27 Apr 2011 23:20:10 -0700
+Subject: [Haskell-cafe] HipmunkPlayground compile error
+In-Reply-To: <4DB8F10B.8030601@vex.net>
+References: <BANLkTikwaNs0eNkrogMadOn00qhFab=AHA@mail.gmail.com>
+	<BANLkTikjbKovV3PkRkh6+1190AoCpXeR-g@mail.gmail.com>
+	<BANLkTi=+bey1M4KJz6YDy+xwCWhvckJUpQ@mail.gmail.com>
+	<4DB8F10B.8030601@vex.net>
+Message-ID: <BANLkTi=A3ARRW6BwVxoC_C0A4JxwWeAe2A@mail.gmail.com>
+
+On Wed, Apr 27, 2011 at 9:46 PM, Albert Y. C. Lai <trebla at vex.net> wrote:
+
+> Perhaps the linker ran out of memory.
+>
+
+I don't think so.  In my experience, when gnu ld crashes from out of memory
+it gets a segfault, which translates to error code 9, (or was it 11?), and
+then cabal will print ExitFailure 9 (or was it 11?).
+
+Similarly, ExitFailure 127 means cabal couldn't find an executable it needed
+to run.
+
+Jason
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110427/d20f9e6c/attachment.htm>
+

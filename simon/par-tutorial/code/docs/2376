@@ -1,0 +1,79 @@
+From michael at snoyman.com  Thu Dec 29 09:43:35 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Thu, 29 Dec 2011 10:43:35 +0200
+Subject: [Haskell-cafe] Windows: openFile gives permission denied when
+ file in use
+In-Reply-To: <CAKjSnQE+tKmD+YSviFX_z+csMyP29V1sZTEyWn3pT_g0o3ChGw@mail.gmail.com>
+References: <CAKA2JgLc1Q-Lf_yOuhQdb1JKuUkiRYuS=hQ7wQw_+jqCMQOEYQ@mail.gmail.com>
+	<CAKjSnQE+tKmD+YSviFX_z+csMyP29V1sZTEyWn3pT_g0o3ChGw@mail.gmail.com>
+Message-ID: <CAKA2Jg+YpbS0Y9XmSthEnYWRTJtJFU_wfVWVH4qdcWh=jMV1-g@mail.gmail.com>
+
+On Thu, Dec 29, 2011 at 3:45 AM, Antoine Latter <aslatter at gmail.com> wrote:
+> On Wed, Dec 28, 2011 at 3:52 PM, Michael Snoyman <michael at snoyman.com> wrote:
+>> Hi all,
+>>
+>> I just received a bug report from a client that, when an input file is
+>> open in FrameMaker, my program gives a "permission denied error". This
+>> bug is reproducible with a simple Haskell program:
+>>
+>> import System.IO
+>>
+>> main = do
+>> ? ?putStrLn "here1"
+>> ? ?h <- openFile "filename.txt" ReadMode
+>> ? ?putStrLn "here2"
+>>
+>> I tried writing a simple C program using fopen, and it ran just fine.
+>> Does anyone have experience with this issue, and know of a workaround?
+>>
+>
+> When GHC opens files for reading, it asks windows to disallow write
+> access to the file. I'm guessing that Framemaker has the file open for
+> writing, so GHC can't get that permission.
+>
+> I imagine that the Haskell runtime does this to make lazy-io less crazy.
+>
+> Here's the call GHC makes:
+> https://github.com/ghc/packages-base/blob/0e1a02b96cfd03b8488e3ff4ce232466d6d5ca77/include/HsBase.h#L580
+>
+> To open a file for reading in your C demo in a similar way you could
+> do something like:
+>
+> fd = _sopen("file_name", _O_RDONLY | _O_NOINHERIT,_SH_DENYWR, 0);
+>
+> Here "_SH_DENYWR" is telling windows to deny others from writing to this file.
+>
+> Here's the msdn link for _sopen and _wsopen:
+> http://msdn.microsoft.com/en-us/library/w7sa2b22%28VS.80%29.aspx
+>
+> I haven't tested any of that, but that should help you in reproducing
+> how GHC opens files for read on windows.
+>
+> You should be able to use System.Win32.File.createFile with a share
+> mode of (fILE_SHARE_READ .|. fILE_SHARE_WRITE) and then wrangling a
+> Haskell Handle out of that, but I haven't tried it.
+>
+> Or you could modify the call to _wsopen and FFI call that - it takes
+> fewer parameters and might be less confusing.
+>
+> Antoine
+
+Thanks for the advice Antoine, it was spot on. I modified my
+uri-conduit package with the following commit:
+
+https://github.com/snoyberg/xml/commit/a4763739093c525d8f509b11e72a2d17894afaac
+
+Since conduits re-implement buffering themselves, I don't think
+there's any advantage to wrapping up the FD in a Handle again, except
+perhaps for better integration with the async calls of the
+multi-threaded runtime. But since I'm not using that for my Windows
+code, and I don't think the multi-threaded runtime supports Windows
+particularly well in the first place, this seems like an acceptable
+trade-off.
+
+Does anyone see any issues with the code? Would it be useful for me to
+expose this code elsewhere, such as in conduit itself?
+
+Michael
+
+

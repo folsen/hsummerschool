@@ -1,0 +1,38 @@
+From bos at serpentine.com  Wed Dec 14 18:37:25 2011
+From: bos at serpentine.com (Bryan O'Sullivan)
+Date: Wed, 14 Dec 2011 09:37:25 -0800
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+	<CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+	<CACw0ni+xEokzO6K7gkGT=SwaggGqG-HkNq+bsyqvj4ZQFaKhwg@mail.gmail.com>
+	<C5444EAB-A657-47A5-9063-58188124D025@gmail.com>
+Message-ID: <CACw0ni+Q=ixAAdWzmsbF+c1RkF74S2RV=fi_tX2B2puR0s5xvQ@mail.gmail.com>
+
+On Tue, Dec 13, 2011 at 10:23 PM, Gregory Crosswhite
+<gcrosswhite at gmail.com>wrote:
+
+
+> This way users of the classes will know whether their type has
+> well-defined instance for some and many or not.
+>
+
+But that's *precisely* what the Alternative class is already for! If you
+are writing an Alternative instance *at all*, then you are asserting that
+it *must* be possible and reasonable to replicate the existing behaviour
+of some and many.
+
+The fact that those functions are currently methods of the class is
+completely irrelevant, and perhaps this is a source of your confusion. They
+can be - *and used to be* - implemented as normal functions with
+Alternative class constraints, then at some point someone moved them into
+the class itself, solely to allow implementors to write faster versions.
+
+I think we should take any further discussion off-list. Your messages from
+last night betray a deep misunderstanding that I'm not sure everyone else
+needs to sit through :-)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111214/1c2aeef3/attachment.htm>
+

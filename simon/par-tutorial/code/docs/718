@@ -1,0 +1,124 @@
+From jnf at arcor.de  Tue Apr 26 02:00:32 2011
+From: jnf at arcor.de (jutaro)
+Date: Mon, 25 Apr 2011 17:00:32 -0700 (PDT)
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+In-Reply-To: <201104260103.51102.daniel.is.fischer@googlemail.com>
+References: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+	<201104260103.51102.daniel.is.fischer@googlemail.com>
+Message-ID: <1303776032428-4339787.post@n5.nabble.com>
+
+
+Daniel Fischer wrote:
+> 
+> On Friday 22 April 2011 12:40:17, Hamish Mackenzie wrote:
+>> Yesterday we uploaded our official 0.10.0 release (0.10.0.4) to Hackage
+> 
+> I'm trying to try it, but I run into a couple of problems.
+> Most are probably me looking in the wrong places, so let's begin with 
+> those.
+> 
+> By default, the editor pane is on the left hand side and the module
+> browser 
+> or whatnot on the right. Very irritating. How do I switch the positions?
+> I tried swapping LeftP and RightP in Edit Prefs -> Initial Pane positions, 
+> but to no avail.
+> 
+
+Well, it is a bit more intricate to invert the sides. After 
+* swapping LeftP and RightP in Edit Prefs -> Initial Pane positions
+* Close all panes and pane groups. (You may leave an editor window open,
+so that you better see what happens in the next steps).
+* Collapse all (Hit Ctrl-1 - 2 times)
+* Split vertical (Hit Ctrl-2), put the focus to the left, split horizontal
+(Hit Ctrl-3)
+* Go to Panes Menu and reopen the Log and the Browser and an editor Window
+* Configure tabs as you like
+* Save the session or restart Leksah 
+
+
+Daniel Fischer wrote:
+>  
+> Autocomplete starts at the first letter of any new word, so writing a 
+> function definition
+> 
+> bar j
+>   | j == 0 = whatever
+>   | otherwise = somethingElse
+> 
+> requires paying attention and taking some action to not end up with
+> 
+> bar join| j == whatever ...
+> 
+> How do I configure autocompletion to only begin after three or four
+> letters 
+> have been typed?
+> 
+Go to Edit Prefs -> GUI Options, and select "Complete only on Hotkey", then
+hit
+Ctrl-Space if you want completion.
+
+
+Daniel Fischer wrote:
+>  
+> Decreasing indentation via backspace goes one column per backspace, how
+> can 
+> I configure it to go to the next (previous) tab position on backspace in 
+> the leading whitespace of a line?
+> 
+You can't do this currently, but you can post a wish for enhancement to our
+issue tracker.
+
+
+Daniel Fischer wrote:
+>  
+> Now, those configuration questions out of the way:
+> On first startup, I pointed leksah to
+> ~/.cabal/packages/hackage.haskell.org 
+> for sources (hoping it would know to unpack them and copy them to 
+> ~/.leksah-0.10/packageSources, run haddock on them and what else it
+> needs). 
+> 
+
+Please try to run Leksah with the default config
+(~/.leksah-0.10/packageSources) 
+
+
+Daniel Fischer wrote:
+>  
+> It did indeed copy a bunch of sources there and invoked cabal and ghc a 
+> number of times, but it left out about half of the installed packages.
+> It used an awful lot of memory to do that, peak about 1300MB virtual,
+> 800MB 
+> resident, which means swapping and thrashing (unless I shut down 
+> practically everything else - I have only 1G of RAM).
+> Okay, for collecting metadata on the first startup, I could live with that 
+> (though, if it handled packages sequentially, it should use less memory).
+> 
+> But on the second startup and the third, although it didn't invoke cabal
+> or 
+> ghc anymore,  the memory usage was about the same, effectively knocking
+> out 
+> my system for more than ten minutes.
+> On the third, I had not enough patience and killed it, leksah-server
+> showed 
+> no signs of stopping within two minutes after kill -TERM, so I had to kill 
+> -KILL it.
+> 
+> What can I do to make leksah a good memory-citizen?
+> With the current behaviour, it is unusable for me, unfortunately.
+> 
+
+Indeed leksah may use more memory on the first run (actually it is ghc,
+which uses it).
+But on consecutive starts it may use about/up to 150MB, but not the numbers
+you give.
+So please try to run Leksah with the default config, and see if the problem
+remains.
+
+J?rgen
+
+--
+View this message in context: http://haskell.1045720.n5.nabble.com/ANN-Leksah-0-10-0-tp4332741p4339787.html
+Sent from the Haskell - Haskell-Cafe mailing list archive at Nabble.com.
+
+

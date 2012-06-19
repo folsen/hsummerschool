@@ -1,0 +1,67 @@
+From daniel.is.fischer at googlemail.com  Thu Apr 28 02:00:49 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Thu, 28 Apr 2011 02:00:49 +0200
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+In-Reply-To: <1303776032428-4339787.post@n5.nabble.com>
+References: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+	<201104260103.51102.daniel.is.fischer@googlemail.com>
+	<1303776032428-4339787.post@n5.nabble.com>
+Message-ID: <201104280200.50065.daniel.is.fischer@googlemail.com>
+
+Good thing I didn't send too soon this time:)
+
+On Tuesday 26 April 2011 02:00:32, jutaro wrote:
+> 
+> Please try to run Leksah with the default config
+> (~/.leksah-0.10/packageSources)
+> 
+
+> 
+> Indeed leksah may use more memory on the first run (actually it is ghc,
+> which uses it).
+> But on consecutive starts it may use about/up to 150MB, but not the
+> numbers you give.
+> So please try to run Leksah with the default config, and see if the
+> problem remains.
+
+I started with:
+
+"Worked like a charm. Generating the metadata on first start max'ed at 
+about 260MB, which seems reasonable. On the second start - without 
+[de]installing any package - leksah came up almost immediately"
+
+And that's true so far, but the thing is, I hadn't yet installed all 
+packages I had before.
+
+So I installed the remaining packages (criterion and some of its 
+dependencies) and tried again. First, to see whether my borked OS had 
+anything to do with it, I moved ~/.leksah-0.10, started leksah and again 
+pointed it to ~/.cabal...; again used very much memory, swapping, 
+thrashing, kill -KILL. So it was not the OS (as expected). Then I deleted 
+the new ~/.leksah-0.10, started leksah, this time with the default config. 
+The same, swapping, thrashing, kill -KILL.
+
+Hm, perhaps too many packages at once? What if we give it fewer?
+So, delete ~/.leksah-0.10, copy the old one, start again. No dice.
+
+Time for sleuthing. Unregister the new packages, delete .leksah and copy 
+old, start leksah. Quick and easy.
+Install stuff package by package. erf, fine. data-accessor, fine, ... . 
+Chart, fine. statistics - boom. It grew to 1435m virtual memory, resident 
+changing between 430m and 800m, constantly swapping, showed no sign of 
+finishing after about five hours at 0-3% CPU with occasional bursts of a 
+couple of seconds at >50%.
+
+A chattier version of leksah-server indicates that it hangs on 
+Statistics.Function.partialSort, but if debugM writes are buffered, it 
+could well be something else.
+
+So, is it just me or is statistics generally toxic for leksah?
+
+> 
+> J?rgen
+
+Another problem: leksah.org isn't reachable anymore, 87.230.23.84 now 
+resolves to a homoeopathist.
+
+

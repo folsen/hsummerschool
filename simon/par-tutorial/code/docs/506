@@ -1,0 +1,20 @@
+From felipe.lessa at gmail.com  Tue Apr 19 21:26:00 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Tue, 19 Apr 2011 16:26:00 -0300
+Subject: [Haskell-cafe] Haskell from SML - referrential Transparency?!
+In-Reply-To: <08EF9DA445C4B5439C4733E1F35705BAD9080AD1BB@MAIL.cs.mum.edu>
+References: <08EF9DA445C4B5439C4733E1F35705BAD9080AD1BB@MAIL.cs.mum.edu>
+Message-ID: <BANLkTikZEaJxwuri6+0WTHKNVNAEv2t10Q@mail.gmail.com>
+
+On Tue, Apr 19, 2011 at 4:10 PM, Gregory Guthrie <guthrie at mum.edu> wrote:
+> and I get different results from the two executions (f1,f2), even though
+> they have exactly the same definition. Reversing their order, gives the
+> exact same results (i.e. the results are still different, and in the same
+> original order as f2;f1). Even doing?? (f1;f1) gives two different results.
+
+This shows that referential transparency is working nicely.
+
+-- 
+Felipe.
+
+

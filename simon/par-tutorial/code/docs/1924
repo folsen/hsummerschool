@@ -1,0 +1,27 @@
+From ckkashyap at gmail.com  Wed Dec 14 14:31:24 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Wed, 14 Dec 2011 19:01:24 +0530
+Subject: [Haskell-cafe] DB vs read/show for persisting large data
+Message-ID: <CAGdT1gqohuKtQPQdH2FS==HTqCtDVYvjKibD_wZ1vtF7Vxr_wA@mail.gmail.com>
+
+Hi,
+
+It has been on my todo list for some time now. I'd like to write a GTD tool
+that has dependency tracking support. Haskell seems like a good choice for
+this. I was wondering if there has been any past attempts with this?
+
+One thing that has been bothering me has been this - the persistence of
+data. Should I use sqlite(or someother DB) or should I use Haskell's
+read/show functions to read from and write to a file? I am slightly not
+inclined towards NOT using DB because I want to implement all the business
+logic in Haskell. I want to avoid having to generate SQL.
+
+It'll be great if I could get some feedback on the "read/show" approach -
+is this even a viable option?
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111214/fa82ffc3/attachment.htm>
+

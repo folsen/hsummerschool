@@ -1,0 +1,126 @@
+From rrnewton at gmail.com  Wed Aug 17 20:10:30 2011
+From: rrnewton at gmail.com (Ryan Newton)
+Date: Wed, 17 Aug 2011 14:10:30 -0400
+Subject: [Haskell-cafe] why is Random in System?
+In-Reply-To: <20110817182609.6ea45f32@angst.streitmacht.eu>
+References: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+	<A320995A-2DDA-4147-B804-098623C26914@deepbondi.net>
+	<CAKFCL4UtZAKrw-KazZtmCSi6cDZmb1mtm9of4E=0Ugr_9GXXvA@mail.gmail.com>
+	<20110817104607.43c9ae37@angst.streitmacht.eu>
+	<CACYs5AYvvWeO1Xe2TMGR=gGnYonw8dsmg3m++NALY9-nDJEupQ@mail.gmail.com>
+	<20110817182609.6ea45f32@angst.streitmacht.eu>
+Message-ID: <CACYs5AYHyKZaeAZ3jzr8fZBWRMPC83VJNDdQByfVJmL31bcBqQ@mail.gmail.com>
+
+The problem with Mersenne twister is that it doesn't split well.  The main
+reason for crypto prng in this package would not be to advertise to people
+that "System.Random can be used for security-related apps" *but to make
+splitting reasonably safe*.  It's not good enough to have a known-bad
+generator under splitting provided as the default.  And I think we need
+splitting, especially as more Haskell programs become parallel.  Would it
+address your concerns to not mention the crypto nature of the standard
+implementation in the System.Random documentation?
+
+I think there's also a reasonable argument to lean towards *correctness* over
+performance in Haskell's defaults.  For example, unconstrained Num bindings
+default to Integer and likewise random numbers could be as strong as
+possible by default, and those looking for raw rands/sec throughput could
+make other informed choices.
+
+I had thought that maybe we could bifurcate the "stdgen" concept into a fast
+and a strong version, which could be say Mersenne Twister and AES
+respectively.  But, again, the problem comes if the fast version is expected
+to be splittable as well.
+
+With "SplittableGen" factored out from "RandomGen" I suppose it would be
+possible for the fast version to NOT offer splitting.  However, Mersenne
+Twister is best used with an imperative interface, you can see the tension
+in the pure version of the mersenne package on hackage:
+
+  http://hackage.haskell.org/package/mersenne-random-pure64-0.2.0.3
+
+Please also see Burton Smith's comments below in response to my proposal to
+offer a MT + AES combination.
+
+Best,
+  -Ryan
+
+---------- Forwarded message ----------
+From: Burton Smith <burtons at microsoft.com>
+Date: Tue, Jun 28, 2011 at 1:28 PM
+Subject: RE: AESNI-based splittable random number generation for Haskell
+To: "Newton, Ryan R" <ryan.r.newton at intel.com>
+
+Mersenne Twister (MT)is a poor choice in my opinion.  First, the generator
+state is large (2496 bytes) and it must be copied on each call to next.
+ Split is worse; it will generate twice as many bytes per call as next will.
+
+Second, I see no good way to guarantee independence of the two generators
+emanating from a split.  MT is hard to initialize anyway, and giant-stepping
+it to define the newly split generator (as we did back in the 80's paper) is
+not only hard for an LFSR like MT but, worse yet, it doesn't work for
+Haskell or other fine-grain concurrent languages because split and next will
+commute.  Other tree RNGs, e.g. SPRNG, have the same commutativity issue.
+ Block ciphers address this issue head-on by reducing the split independence
+problem to a crypto problem.
+
+A better choice might be some block cipher other than AES.  Two
+possibilities are XTEA and RC4.  Both are in Wikipedia.  RC4 has 256 bytes
+of key "state", still bigger than I would like.
+
+Another scheme is to make the number of rounds an option.  With AESNI, this
+could scream.
+
+Burton
+
+
+On Wed, Aug 17, 2011 at 12:26 PM, Ertugrul Soeylemez <es at ertes.de> wrote:
+
+> Ryan Newton <rrnewton at gmail.com> wrote:
+>
+
+
+> Using a cryptographically strong random number generator here is
+> probably a very bad idea.  Two reasons:
+>
+> Firstly while being faster than the current implementation an AES-based
+> implementation will still be considerably slower than the Mersenne
+> Twister algorithm.  This may or may not be true, if hardware AES support
+> is there, but don't just assume that everybody has AES instructions now.
+> For example I don't have them.
+>
+> Secondly there is no standard requiring that the default random number
+> generator is cryptographically safe.  Changing this particular
+> implementation, which is the one most people use, to a CSPRNG will make
+> people take for granted that System.Random is safe to use in
+> security-related products, because it would be very convenient.  This
+> will render strong security products trivially weak, when compiled with
+> the wrong Haskell distribution, and you will find packages with
+> statements like:  "We assume that you use Ryan Newton's distribution of
+> the random package."
+>
+> I would rather propose the Mersenne Twister as the default random number
+> generator.  You could add AES as a secondary generator for people
+> requiring cryptographic strength, but then do it properly, i.e. impure,
+> because most people, when reading about a PRNG with "AES" anywhere in
+> its name, will just assume that it's a CSPRNG.
+>
+>
+> Greets,
+> Ertugrul
+>
+>
+> --
+> nightmare = unsafePerformIO (getWrongWife >>= sex)
+> http://ertes.de/
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110817/f34a60ae/attachment.htm>
+

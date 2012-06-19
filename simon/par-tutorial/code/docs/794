@@ -1,0 +1,27 @@
+From felipe.lessa at gmail.com  Wed Apr 27 13:34:09 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Wed, 27 Apr 2011 08:34:09 -0300
+Subject: [Haskell-cafe] [web-devel] [GSoC] Text/UTF-8: Call for
+	Benchmarks
+In-Reply-To: <BANLkTikJnUhgHDiA3OceAR15Dz9tE9msOA@mail.gmail.com>
+References: <BANLkTikJnUhgHDiA3OceAR15Dz9tE9msOA@mail.gmail.com>
+Message-ID: <BANLkTik4ZBtNu+WDw8vKD9xsEGSjcnoPFQ@mail.gmail.com>
+
+On Wed, Apr 27, 2011 at 8:24 AM, Jasper Van der Jeugt
+<jaspervdj at gmail.com> wrote:
+> UTF-8 and UTF-16 both have advantages and disadvantages, which
+> actually makes it a pretty complicated choice. I've written about this
+> a little in my [3] (especially see Tom Harper's master dissertation if
+> you're interested in the subject).
+
+About [3]: conversion to UTF-8 from UTF-8 while reading isn't O(1)
+because you have to at least check if it really is valid UTF-8.  On
+the other hand, writing shouldn't need anything because the library
+guarantees that all Texts have valid internal representations.
+
+Thanks,
+
+-- 
+Felipe.
+
+

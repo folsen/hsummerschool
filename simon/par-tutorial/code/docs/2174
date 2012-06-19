@@ -1,0 +1,48 @@
+From jesseschalken at gmail.com  Wed Dec 21 11:09:01 2011
+From: jesseschalken at gmail.com (Jesse Schalken)
+Date: Wed, 21 Dec 2011 21:09:01 +1100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <61257AF9-EBCC-4F09-A836-1BA554014467@telia.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+	<CA+qNEzLdy128SaENYYwRL1XhZXttwQJzRqcTTbh17gF1J_zoeQ@mail.gmail.com>
+	<B31F669A-0009-4EF0-B1DE-297A3E6F91D2@telia.com>
+	<20111221032717.GA1609@byron.anthology>
+	<61257AF9-EBCC-4F09-A836-1BA554014467@telia.com>
+Message-ID: <CAF1yvART=Hvye5AYfg+KUOF2YnUo2uHbwLwFfV-j=vwv+9Kmyg@mail.gmail.com>
+
+IIRC, Scite's default configuration is with non-monospace font. I actually
+found it quite appealing, and in fact forgot about it entirely after some
+usage. It is much easier on the eyes to read. The difference is really
+whether you care about aligning things mid-line or not, not to mention
+editor support (i.e. not Vim or other terminal-based editor).
+
+On Wed, Dec 21, 2011 at 8:58 PM, Hans Aberg <haberg-1 at telia.com> wrote:
+
+> On 21 Dec 2011, at 04:27, Ashok Gautham wrote:
+>
+> > On Tue, Dec 20, 2011 at 11:17:32PM +0100, Hans Aberg wrote:
+> >> The monospace characters U+1D670-1D6A3 might be used for keywords. Font:
+> >>  http://www.stixfonts.org/
+> >
+> > I feel that monospace fonts should be used for all of programming. A
+> > language could use Unicode symbols, but if it enforces typography, it
+> > is destined to win an award for being really unusable
+>
+> I have some books from the 1980s which does not use monospace; it seems to
+> be a later movement. Using it for all symbols would be awkward.
+>
+> Hans
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111221/0b80c06e/attachment.htm>
+

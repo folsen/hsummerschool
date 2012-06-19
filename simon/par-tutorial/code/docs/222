@@ -1,0 +1,44 @@
+From es at ertes.de  Thu Apr  7 19:04:52 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Thu, 7 Apr 2011 19:04:52 +0200
+Subject: [Haskell-cafe] Stateful iteratees
+Message-ID: <20110407190452.356fcca6@angst.streitmacht.eu>
+
+Hello fellow Haskellers,
+
+I'm trying to solve a very practical problem:  I need a stateful
+iteratee monad transformer.  Explicit state passing is very inconvenient
+and would destroy the elegance of my library.
+
+There are two approaches to this:
+
+  1. type MyT a m = Iteratee a (StateT MyConfig m)
+  2. type MyT a m = StateT MyConfig (Iteratee a m)
+
+Both work well except in two very specific corner cases:
+
+  - I need to convert the transformer to 'Iteratee a m', i.e. remove the
+    state layer.  This is obviously trivial with the second variant, but
+    seems very difficult with the first one, if it's possible at all.
+
+  - I need to use control structures of Iteratee like catchError.  This
+    is obviously trivial with the first variant, but very inconvenient
+    with the second, because I would need to reinvent many wheels.
+
+Does someone know a cleaner, more elegant solution?  Encapsulating the
+state in the iteratee's input type is not an option.
+
+Many thanks in advance.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

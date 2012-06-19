@@ -1,0 +1,95 @@
+From wren at freegeek.org  Mon Dec 19 23:46:58 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Mon, 19 Dec 2011 17:46:58 -0500
+Subject: [Haskell-cafe] Sharing on equality
+In-Reply-To: <CACMox4N59GtgJZK1iFRCZYJZ_uO6QVTsOvk63W0UXKCwgS8b0g@mail.gmail.com>
+References: <CACMox4PY4-G1VdCmrx_KEoJDnmLQVPF7707aNh0WoObypLzrog@mail.gmail.com>
+	<CACMox4N59GtgJZK1iFRCZYJZ_uO6QVTsOvk63W0UXKCwgS8b0g@mail.gmail.com>
+Message-ID: <4EEFBEE2.50806@freegeek.org>
+
+On 12/13/11 10:52 AM, Johan Brinch wrote:
+> Hey all,
+>
+> Can GHC eliminate one of two equal ByteStrings, when they are compared
+> and turns out to be equal?
+>
+>
+> Say i have a map, ByteString ->  Int.
+>
+> I now do a lookup on a ByteString and if it exists, I insert this
+> ByteString into a list.
+>
+> Is it possible to avoid using more memory, than used by the keys in
+> the map + the list structure?
+>
+> I.e. is it possible to eliminate the redundant ByteStrings somehow?
+
+Somehow? yes. Probably the easiest route is just to use:
+
+     -- Or better yet, use one of the HashMap structures
+     type MyMap a = Map ByteString (ByteString,a)
+
+     myInsert :: ByteString -> a -> MyMap a -> MyMap a
+     myInsert k v = insert k (k,v)
+
+     myLookup :: ByteString -> MyMap a -> Maybe a
+     myLookup k = fmap snd . lookup k
+
+     ...
+
+If you really care a lot about memory overhead and sharing, there are 
+two other approaches which are more work but have nice payoffs.
+
+The first option is to use a trie structure which automatically prunes 
+the key segments and allows you to reconstruct the keys. The 
+bytestring-trie package does this. This approach has its own set of 
+costs and benefits compared to plain mapping structures, so whether you 
+want to go down this road will depend on what functionality you need. If 
+you don't actually need the trie functionality (e.g., the ability to get 
+the subtrie of all keys with a given prefix, or the ability to look up 
+the values for all prefixes of a given key), then you're probably better 
+off using a hashtable-based solution, like the hashmap or 
+unordered-containers packages.
+
+The second option is to use interning in order to ensure uniqueness of 
+your expensive structures. That is, you implement the interface:
+
+     type InternId
+     -- e.g., newtype InternId = IId Int
+
+     instance Eq InternId
+     -- this should be faster than (Eq a)
+
+     -- you should also have instances for use in unboxed arrays, etc
+
+     type InternTable a
+     -- e.g., newtype InternTable a = IT (IntMap a, Map a InternId)
+
+     intern :: a -> InternTable a -> (InternTable a, InternId)
+
+     unintern :: InternId -> InternTable a -> a
+
+     ...
+
+And then you pass around the InternIds instead of the actual strings. 
+This ensures low memory overhead for passing around and duplicating 
+things, ensures fast equality comparisons, and ensures uniqueness 
+whenever you need to deal with the actual structure instead of an 
+identifier for it. Of course, you can generalize this idea to any data 
+structure, not just strings; just google for "hash consing".
+
+I have a decently tuned implementation of ByteString interning laying 
+around, which I'm hoping to put on Hackage before classes start up again 
+in January. Of course, for extremely fine tuning we'd want to adjust the 
+size of the InternId representation based on a heuristic upper-bound on 
+the number of items we'll have, so that we can pack the unboxed arrays 
+more tightly or do tricks like packing four 8-bit ids into a Word32. Of 
+course, presenting a nice API for that would require using associated 
+types which is GHC-only (the fundep version wouldn't be quite so 
+pretty). I'll probably do that in the future once I locate some round tuits.
+
+-- 
+Live well,
+~wren
+
+

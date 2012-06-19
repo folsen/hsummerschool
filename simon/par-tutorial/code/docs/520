@@ -1,0 +1,68 @@
+From michael at schmong.org  Wed Apr 20 00:10:41 2011
+From: michael at schmong.org (Michael Litchard)
+Date: Tue, 19 Apr 2011 15:10:41 -0700
+Subject: [Haskell-cafe] errors while installing yesod 0.8
+In-Reply-To: <BANLkTi=tznqXgekcbqgU30s9bUT4CbrKBQ@mail.gmail.com>
+References: <BANLkTinnbgfJFA8pFptB9QwOSr3soP4DaQ@mail.gmail.com>
+	<BANLkTi=tznqXgekcbqgU30s9bUT4CbrKBQ@mail.gmail.com>
+Message-ID: <BANLkTimaTu9+5rbvUnMsY733WnXA4iB1ZA@mail.gmail.com>
+
+New information, may be helpful.
+
+I manually installed hamlet 0.8 with cabal-dev, and it seemed to
+install. Here is the message
+
+
+Registering hamlet-0.8.0...
+Installing library in
+/home/mlitchard/hamlet-0.8.0/cabal-dev//lib/hamlet-0.8.0/ghc-6.12.3
+Registering hamlet-0.8.0...
+
+Then I tried to manually install yesod. Here's what I got.
+
+mlitchard at apotheosis:~$ cd yesod-0.8.0/
+mlitchard at apotheosis:~/yesod-0.8.0$ cabal-dev install
+Resolving dependencies...
+cabal: cannot configure yesod-0.8.0. It requires hamlet ==0.8.*
+There is no available version of hamlet that satisfies ==0.8.*
+
+I noticed it did not install in the $HOME/.cabal/ path. How do make
+sure it does that?
+I think if I can get it to install in the right place this will work out.
+
+On Tue, Apr 19, 2011 at 2:52 PM, Rogan Creswick <creswick at gmail.com> wrote:
+> On Tue, Apr 19, 2011 at 2:18 PM, Michael Litchard <michael at schmong.org> wrote:
+>> mlitchard at apotheosis:~/monad-control$ cabal install
+>> Resolving dependencies...
+>> Configuring monad-control-0.2.0.1...
+>> cabal: Error: some packages failed to install:
+>> monad-control-0.2.0.1 failed during the configure step. The exception was:
+>> ExitFailure 11
+>>
+>>
+>> note: I've been trying to use the cab command to manage my packages, I
+>> get the same error as above when I use cab instead of cabal.I mention
+>> this just in case there is some unforseen problem having to do with
+>> cab/cabal interaction.
+>>
+>> Has anyone experienced this problem, or know what I can do to get more
+>> useful error messages that might reveal the cause of the breakage?
+>
+> You might learn more by issuing the configure / build steps manually
+> (I think `cabal configure` will produce an error). ?Upping the
+> verbosity will also help:
+>
+> # get pages and pages of details:
+> $ cabal install --verbose=3
+>
+> I would first suggest trying cabal-dev, though (cab can delegate to
+> cabal-dev now too, but I haven't played with it yet).
+>
+> $ cabal-dev install yesod-0.8
+>
+> will either work or fail in a way that we can more easily reproduce.
+>
+> --Rogan
+>
+
+

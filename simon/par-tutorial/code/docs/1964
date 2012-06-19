@@ -1,0 +1,35 @@
+From aslatter at gmail.com  Thu Dec 15 06:36:53 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Wed, 14 Dec 2011 23:36:53 -0600
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <CAKFCL4U+wDf69+D6fz-hiBRJcHCUK4tB0pJ_nuZB-z3nucwxDQ@mail.gmail.com>
+References: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+	<CAKjSnQFvJrz1iFd8XsGbK4q7ZK9F0qjXXUHdoTn1XVmeeAm+OQ@mail.gmail.com>
+	<430054FA-800C-408C-8B75-9C3422293133@gmail.com>
+	<CAKjSnQFUxUbDAen_p7DPobzusVo30_6q=x2yzQejsnWe914ZnQ@mail.gmail.com>
+	<CAKFCL4U+wDf69+D6fz-hiBRJcHCUK4tB0pJ_nuZB-z3nucwxDQ@mail.gmail.com>
+Message-ID: <CAKjSnQE3umAo-aefkTqPjT5+=M9cr=s9e84yKAx-HQx5Qjo_Bg@mail.gmail.com>
+
+On Wed, Dec 14, 2011 at 10:57 PM, Brandon Allbery <allbery.b at gmail.com> wrote:
+> On Wed, Dec 14, 2011 at 23:49, Antoine Latter <aslatter at gmail.com> wrote:
+>>
+>> Or we could not use 'some' and 'many' with list and maybe :-)
+>
+>
+> Yes, yes, we get the message, a wink and a nod is all that's needed to
+> discard the nonsensical notion that types and typeclasses *mean* something.
+>
+
+That's the interesting thing about type-classes like Alternative and
+Functor - they mean very little, and are used in widely varying
+contexts. Heck, Control.Monad.void has the type signature "Functor f a
+=> f a -> f ()" - how many functors is that operator sensible for?
+
+There are a lot of combinators you can build from (<|>) and empty that
+go terribly wrong for Maybe and List but are still quite useful. Even
+the operators at hand ('many' and 'some') are partial in parsing, but
+I'm not prepared to throw them out.
+
+Antoine
+
+

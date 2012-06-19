@@ -1,0 +1,25 @@
+From lemming at henning-thielemann.de  Fri Apr 29 22:40:42 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Fri, 29 Apr 2011 22:40:42 +0200 (CEST)
+Subject: [Haskell-cafe] How to make ghc 7 with llvm?
+In-Reply-To: <20110429115800.133733c9.mle+hs@mega-nerd.com>
+References: <BANLkTim17m2=ymk-f-ZcKQKbwF_Z5z=4Xg@mail.gmail.com>
+	<20110429115800.133733c9.mle+hs@mega-nerd.com>
+Message-ID: <alpine.DEB.2.00.1104292230420.15203@anubis>
+
+
+On Fri, 29 Apr 2011, Erik de Castro Lopo wrote:
+
+> Magicloud Magiclouds wrote:
+>
+>> Then when I install other packages, they may complain that the binary 
+>> format is not llvm, so they install some libraries again.
+>
+> You seem to think there is a problem where this is no problem :-).
+
+Nontheless it might be interesting to let GHC emit LLVM bitcode. As far as 
+I understand, this would enable LLVM's Link Time Optimizations.
+
+http://llvm.org/docs/LinkTimeOptimization.html
+
+

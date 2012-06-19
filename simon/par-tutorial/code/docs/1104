@@ -1,0 +1,52 @@
+From mail at joachim-breitner.de  Sat Aug 13 23:39:48 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Sat, 13 Aug 2011 23:39:48 +0200
+Subject: [Haskell-cafe] Diffs for hackage
+In-Reply-To: <1313233067.4424.12.camel@kirk>
+References: <CALqQuoi88Uk7GF3QeFSxBwzYybc6w69h4sxPGmk_HjbKgyhbTg@mail.gmail.com>
+	<1313233067.4424.12.camel@kirk>
+Message-ID: <1313271588.2485.15.camel@kirk>
+
+Hi,
+
+Am Samstag, den 13.08.2011, 12:57 +0200 schrieb Joachim Breitner:
+> Maybe it would already help to add a "changelog-file" field to .cabal,
+> just as with license-file, and reject packages on hackage that do not
+> have this field and file, and later decide if we need a more
+> standardized format for changelogs.
+
+here is a first step in improving the Haskell ecosystem with that
+regard:
+The patch attached to http://hackage.haskell.org/trac/hackage/ticket/873
+makes "cabal check" remind the author that a changelog file is good
+practice (without fixing a name or format, or adding a field to
+the .cabal file). I hope it gets applied (hence CC?ing cabal-devel).
+
+Changing developers? behavior by nudging tools is something that works
+great in Debian ? if you want a change to get implemented across
+multiple packages, make sure lintian tells you about it. Hoping that
+people tend to run cabal check before uploading their package, they
+would now be reminded to include a changelog file.
+
+The next steps towards great changes documentation would then be:
+ * Defining a changelog-file field in cabal.
+ * Adding support to hackage to display the changelog.
+ * Possibly define a suggested format for changelogs.
+
+Greetings,
+Joachim
+
+
+-- 
+Joachim "nomeata" Breitner
+  mail at joachim-breitner.de  |  nomeata at debian.org  |  GPG: 0x4743206C
+  xmpp: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110813/85fa36ab/attachment.pgp>
+

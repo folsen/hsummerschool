@@ -1,0 +1,49 @@
+From oleg at okmij.org  Thu Apr 21 08:32:15 2011
+From: oleg at okmij.org (oleg at okmij.org)
+Date: Wed, 20 Apr 2011 23:32:15 -0700 (PDT)
+Subject: [Haskell-cafe] Question about the Monad instance for Iteratee
+	(from the	enumerator package)
+Message-ID: <20110421063215.9E9A817116@Adric.ern.nps.edu>
+
+
+Daniel Schuessler wrote:
+
+> The thing I don't understand yet is the last line: Why is it OK to discard the
+> leftover input from the (f x) Iteratee and yield just the leftover input from
+> the first one (m0)?
+
+First of all, the question is about an older version of Iteratee. For
+example, the following code 
+	http://okmij.org/ftp/Haskell/Iteratee/Iteratee.hs
+defines Iteratee a bit differently so the question does not apply.
+
+> data Iteratee a = IE_done a
+>                 | IE_cont (Maybe ErrMsg) (Stream -> (Iteratee a,Stream))
+>
+> instance Monad Iteratee where
+>     return = IE_done
+>     IE_done a   >>= f = f a
+>     IE_cont e k >>= f = IE_cont e (docase . k)
+>      where
+>      docase (IE_done a, stream)   = case f a of
+>                    IE_cont Nothing k -> k stream
+>                    i                 -> (i,stream)
+>      docase (i, s)  = (i >>= f, s)
+
+No left-over is discarded any more. 
+
+Your question is about the previous design, called `The second design'
+described in Iteratee.hs. The corresponding comment block answers your
+question, please search for ``Justification for the case IE_done x
+s >>= f''.
+
+Please see
+	http://okmij.org/ftp/Haskell/Iteratee/IterateeM.hs
+for the `production' case of Iteratee in a base monad. The file
+IterateeM.hs talks about one more design, and its drawbacks. 
+
+It's all about finding the optimal trade-off, I guess.
+
+
+
+

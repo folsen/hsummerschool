@@ -1,0 +1,38 @@
+From michael at snoyman.com  Fri Feb  4 07:00:24 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Fri, 4 Feb 2011 08:00:24 +0200
+Subject: [Haskell-cafe] AES on 32-bit system
+Message-ID: <AANLkTi=BQsuAF-Hmp94n6NqKU_P_rrv+17_rfVHVkpo7@mail.gmail.com>
+
+Hi everyone,
+
+Does anyone else have trouble installing the AES package on a 32-bit
+system? My system at home installs it just fine, but my VPS chokes
+with the following error messages (plus a bunch of warnings):
+
+cbits/ctr_inc.c:11:0:
+     error: 'uint_64t' undeclared (first use in this function)
+
+cbits/ctr_inc.c:11:0:
+     error: (Each undeclared identifier is reported only once
+
+cbits/ctr_inc.c:11:0:  error: for each function it appears in.)
+
+cbits/ctr_inc.c:11:0:
+     error: 'ctr' undeclared (first use in this function)
+
+cbits/ctr_inc.c:11:0:  error: expected expression before ')' token
+
+It's actually for this very reason that I'm still maintaining the
+OpenSSL backend for http-enumerator: I think the tls package is stable
+enough now to be used in production environments (kudos to Vincent by
+the way). However, I can't use it in production if I can't build one
+of its dependencies. This bug is also preventing me from adding some
+nice features to http-enumerator, such as checking validity of SSL
+certificates.
+
+Anyone have any thoughts?
+
+Michael
+
+

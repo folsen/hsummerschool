@@ -1,0 +1,69 @@
+From cmsdew at gmail.com  Thu Apr 14 21:35:30 2011
+From: cmsdew at gmail.com (Chris Dew)
+Date: Thu, 14 Apr 2011 20:35:30 +0100
+Subject: [Haskell-cafe] Type Classes in Haskell - how can I make GHC
+ make a choice of types, when the type chosen doesn't matter?
+In-Reply-To: <BANLkTim=kKW3V7vkZ4zs7yeg0Jg-_VEPkg@mail.gmail.com>
+References: <BANLkTinPdtvLyNLGA3M7hx8ngUEOec+How@mail.gmail.com>
+	<BANLkTim=kKW3V7vkZ4zs7yeg0Jg-_VEPkg@mail.gmail.com>
+Message-ID: <BANLkTik7xQmkZ1isBTTOzasR2AF9BB-fFQ@mail.gmail.com>
+
+@Stephen Tetley - The stream class exists simply to allow for the
+creation of a ->> operator which can be used to 'Stream' data through
+multiple pure and IO functions, on the way to some form of output.
+It's probably not a great idea, as there are more idiomatic solutions
+in Haskell - I'm sure someone will mention arrows.
+
+I want the result of (->>) to be what the following function requires,
+either an 'a' or and 'IO a'.  This is too unconstrained if the
+following function is flexible in it's input.  (e.g. another
+application of (->>)).   Hence my original problem.
+
+a and b have are related, but not in a way I know how to express in
+Haskell.  They are constrained to: a == b || IO a == b || a == IO b. c
+and d have a similar constraint.
+
+Could you suggest how these constraints could be expressed in the
+Haskell type system?
+
+Thanks,
+
+Chris.
+
+On 14 April 2011 14:28, Stephen Tetley <stephen.tetley at gmail.com> wrote:
+> Hi Chris
+>
+> What does the Stream class *do* though?
+>
+> class Stream a b c d where
+> ? ?(->>) :: a -> ?(b -> ?c) -> ?d
+>
+> Even with Neil's change its still quite unusual:
+>
+> class Stream a b c where
+> ?(->>) :: a -> (b -> c) -> c
+>
+> In the first formulation there is an input of type a, a function (b ->
+> c) and a result of a completely different type d.
+>
+> In Neil's class the function relates to the type of the answer but not
+> to the input.
+>
+> The "difficult" type classes in Haskell - Applicative, Monad, and
+> Arrows / Category - are related to some degree to fairly standard
+> combinators on functions. But they generalize the combinators to
+> operate on other types than the function type (->). As there isn't a
+> relation between input and output, I don't quite see how the Stream
+> type could start as a combinator.
+>
+> Best wishes
+>
+> Stephen
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

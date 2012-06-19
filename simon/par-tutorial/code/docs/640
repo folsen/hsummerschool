@@ -1,0 +1,58 @@
+From uzytkownik2 at gmail.com  Fri Apr 22 21:53:04 2011
+From: uzytkownik2 at gmail.com (Maciej Marcin Piechotka)
+Date: Fri, 22 Apr 2011 21:53:04 +0200
+Subject: [Haskell-cafe] There is no null; Maybe/Option types
+In-Reply-To: <alpine.DEB.2.00.1104222123290.28351@anubis>
+References: <BANLkTi=irBB_YvfEm3ms0Vxd6xDb7tcPcg@mail.gmail.com>
+	<alpine.DEB.2.00.1104222123290.28351@anubis>
+Message-ID: <1303501989.3911.4.camel@localhost.localdomain>
+
+On Fri, 2011-04-22 at 21:26 +0200, Henning Thielemann wrote:
+> On Fri, 22 Apr 2011, Christopher Done wrote:
+> 
+> > Use of Fantom's save invoke and Maybe are more or less the same.
+> > 
+> > -- Hard way
+> > email = if userList /= Nothing
+> >            then let user = findUser "bob" (fromJust userList)
+> >                 in if user /= Nothing
+> >                       then getEmail (fromJust user)
+> >                       else Nothing
+> >            else Nothing
+> 
+> In idiomatic Haskell you would write
+> 
+> case userList of
+>     Nothing -> Nothing
+>     Just plainUserList =
+>        let user = findUser "bob" plainUserList
+>        ...
+> 
+> since (userList /= Nothing) requires an Eq instance without need and it 
+> requires fromJust. Or was there an educational purpose to write it with 
+> (/= Nothing) ?
+
+Using 'more advanced haskell'
+
+email = getEmail =<< findUser "bob" =<< userList
+
+or
+
+email = do ul <- userList
+           user <- findUser "bob" ul
+           getEmail user
+
+Regards
+
+PS. If you worried what is (=<<) it is generalised maybe (i.e. if you
+observe maybe, concatMap etc. follow similar pattern - it turns out it
+is common pattern and it is worth to be generalised).
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110422/8f489ff5/attachment.pgp>
+

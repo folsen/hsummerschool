@@ -1,0 +1,14 @@
+From jason.dusek at gmail.com  Mon Apr 18 00:48:01 2011
+From: jason.dusek at gmail.com (Jason Dusek)
+Date: Sun, 17 Apr 2011 22:48:01 +0000
+Subject: [Haskell-cafe] Killing threads in foreign calls.
+In-Reply-To: <1303071453-sup-8381@ezyang>
+References: <BANLkTiktXLdW40vHBwhgzzZwvWWZ9WiX6w@mail.gmail.com>
+	<1303071453-sup-8381@ezyang>
+Message-ID: <BANLkTi=Pgd_6Wp8AM6PFzPt2mTOpNfUF4A@mail.gmail.com>
+
+On Sun, Apr 17, 2011 at 20:26, Edward Z. Yang <ezyang at mit.edu> wrote:
+> This is a fairly nontrivial problem. ?First off, let me tell you
+> what you do not /actually/ want to happen: you don't want the OS
+> level thread performing the foreign call to actually be killed...
+

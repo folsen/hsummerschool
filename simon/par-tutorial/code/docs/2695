@@ -1,0 +1,30 @@
+From ckkashyap at gmail.com  Fri Feb  4 07:27:41 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Fri, 4 Feb 2011 11:57:41 +0530
+Subject: [Haskell-cafe] Review request for "platform independent
+ interactive graphics" with VNC
+In-Reply-To: <4D4AEA86.1000902@dfki.de>
+References: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>
+	<4D4ACEC4.3050608@dfki.de>
+	<AANLkTik3OuqBfZ2GVS7J-OJr4XHhXb6RQC=ieUK7aiQP@mail.gmail.com>
+	<4D4ADBD9.5050504@dfki.de>
+	<AANLkTimecmbjBJm+_b8Mtx43HDcZpmxQdTrrROpGz5oF@mail.gmail.com>
+	<4D4AE95C.9030009@dfki.de> <4D4AEA86.1000902@dfki.de>
+Message-ID: <AANLkTimUbrS2cV+GeiDx00MOxo1+pw6Mr7WS0E6AZHei@mail.gmail.com>
+
+>
+> FrameBufferUpdateRequest x=0, y=0 width =1, height=1
+> FrameBufferUpdateRequest x=1, y=0 width =99, height=1
+> FrameBufferUpdateRequest x=0, y=1 width =100, height=99
+> Main: <socket: 7>: hPutBuf: resource vanished (Connection reset by peer)
+>
+>
+I was not taking care of partial updates, I've taken care of it now.  Btw,
+what vncviewer are you using?
+
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110204/5cb36422/attachment.htm>
+

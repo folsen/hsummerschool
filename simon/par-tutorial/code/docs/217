@@ -1,0 +1,33 @@
+From noteed at gmail.com  Thu Apr  7 17:16:02 2011
+From: noteed at gmail.com (Vo Minh Thu)
+Date: Thu, 7 Apr 2011 17:16:02 +0200
+Subject: [Haskell-cafe] Local copy of hackageDB
+In-Reply-To: <BANLkTi=dXeg+movZswKiaTavDNaJxhHOuQ@mail.gmail.com>
+References: <BANLkTi=dXeg+movZswKiaTavDNaJxhHOuQ@mail.gmail.com>
+Message-ID: <BANLkTi=5UiX67h+XfH+zTcQ+SYCUA8yOpw@mail.gmail.com>
+
+2011/4/7 Jos? Pedro Magalh?es <jpm at cs.uu.nl>:
+> Hi all,
+>
+> I want to use cabal-install on a machine without internet access. I tried
+> downloading http://hackage.haskell.org/cgi-bin/hackage-scripts/archive.tar,
+> unpacking it and setting the local-repo field in the config file to this
+> location but that doesn't work, as cabal-install says that it is missing the
+> package list for the local repo. What should I do?
+
+Hello,
+
+In addition of the (unpacked) archive, you also need to provide a
+00-index.tar.gz file.
+
+It is an archive with all the .cabal that are available in the repo.
+You can find info about its layout at the following page
+http://hackage.haskell.org/trac/hackage/wiki/HackageDB
+
+I don't know if such a index file is available for the archive.tar you
+have, but it should be straightforward to create it.
+
+HTH,
+Thu
+
+

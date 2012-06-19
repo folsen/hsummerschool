@@ -1,0 +1,36 @@
+From apfelmus at quantentunnel.de  Sat Apr 23 12:31:55 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Sat, 23 Apr 2011 12:31:55 +0200
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <BANLkTimX0eX78AAL5kmrUULt8TPoqduP8Q@mail.gmail.com>
+References: <4DB093A6.8000303@btinternet.com>
+	<BANLkTimX0eX78AAL5kmrUULt8TPoqduP8Q@mail.gmail.com>
+Message-ID: <iou9qr$g3p$1@dough.gmane.org>
+
+David Terei wrote:
+> Good chance you've already read this but if not here is a good post by
+>  Linus about his take on the problems with darcs:
+> 
+> http://markmail.org/message/vk3gf7ap5auxcxnb
+
+I always have to smile at the complaint that something is "academic". :D
+
+You know, like purely functional programming, that's soo academic. It's 
+centered around some academic ideas, like mathematical functions, 
+higher-rank types, monads and zygohistomorphic prepromorphisms, that 
+have absolutely no relevance in real life, and that just don't work in 
+practice. You do *not* want to write whole programs that way. At some
+point, you need something that works at another level than pure 
+functions. What the *hell* do you do?
+
+I think a better invective would be "amazing".
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

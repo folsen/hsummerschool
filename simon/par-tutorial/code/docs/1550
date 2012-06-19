@@ -1,0 +1,38 @@
+From fischer at nii.ac.jp  Wed Aug 31 03:21:47 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Wed, 31 Aug 2011 10:21:47 +0900
+Subject: [Haskell-cafe] Pointed, but not Applicative
+In-Reply-To: <CALoEywNetgBLv5czC=r8MYy7E1LQZv3QZ=c_Sf=yK528EuN3XQ@mail.gmail.com>
+References: <j3d40s$nb1$1@dough.gmane.org>
+	<CALoEywNocmymRvbdW6Tv5-JvKeMBQ=gY=p6Za+pZxU+0K-m+dg@mail.gmail.com>
+	<1314588296.2724.10.camel@picard>
+	<CA+XKtKhTb_Pk6wSP4zNo-MxWkcxiNU7KFNcnSZ3C-Tv7QkgBSQ@mail.gmail.com>
+	<CAD6SzRKaYbAV3p6rqyOzn-HFw7Eqz+YM9zPL8X=Ot7z18mxafg@mail.gmail.com>
+	<CA+XKtKjJgu+X_ZYj9yqjwEX9ZbA1jj-rnyqRPRb91sFFM4Q9zA@mail.gmail.com>
+	<CALoEywNetgBLv5czC=r8MYy7E1LQZv3QZ=c_Sf=yK528EuN3XQ@mail.gmail.com>
+Message-ID: <CALoEywMi5DghpBNAAdQxYWmZeKEuK7juQrPKhj97TV7iXnMT5Q@mail.gmail.com>
+
+> ? ?toFList [] = id
+> ? ?toFList (xs++ys) = toFList xs . toFList ys
+>
+> ? ?toList id = []
+> ? ?toList (f . g) = toList f ++ toList g
+
+These laws do not *define* the isomorphisms because their behavior on
+singletons is not fixed. Combining them with laws using a 'point'
+function for functional lists
+
+    point = (:)
+
+the isomorphisms are characterized uniquely:
+
+    toFList [x] = point x
+    toList (point x) = [x]
+
+This might be an argument in favor of a Pointed class without Functor
+constraint as it shows that other pointed structures have reasonable
+laws involving 'point' as well.
+
+Sebastian
+
+

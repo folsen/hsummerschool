@@ -1,0 +1,24 @@
+From dagitj at gmail.com  Fri Aug 19 22:58:00 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Fri, 19 Aug 2011 13:58:00 -0700
+Subject: [Haskell-cafe] Question about data
+In-Reply-To: <CAOk36JiJasqUVFDEhVNNJ_C0Y9N_BHKKD7WwfhMLFbwr7N40Xw@mail.gmail.com>
+References: <CAGHv16uFODO0WSFP4h+m-i+XMFMiKkbCxJetVZk-QxP4fiEzqg@mail.gmail.com>
+	<CAOk36JiJasqUVFDEhVNNJ_C0Y9N_BHKKD7WwfhMLFbwr7N40Xw@mail.gmail.com>
+Message-ID: <CAJ-DSyyW62zLqzWGoC7iCJsQnVemQ13VDWW9CdGwqxu-3qD_BQ@mail.gmail.com>
+
+On Fri, Aug 19, 2011 at 1:45 PM, Thomas DuBuisson
+<thomas.dubuisson at gmail.com> wrote:
+> This is not a valid data declaration. ?You can't have a "Float" field
+> without any constructor name and have it still of type
+
+And the reason why it accepts 'data MathExpr = Float', is because data
+constructors and types live in separate namespaces.  There is already
+a type called Float in the Prelude, but there is no 'Float' data
+constructor.
+
+(Just pointing this out in case it's not obvious!)
+
+Jason
+
+

@@ -1,0 +1,140 @@
+From andreas.voellmy at gmail.com  Tue Aug 23 22:04:24 2011
+From: andreas.voellmy at gmail.com (Andreas Voellmy)
+Date: Tue, 23 Aug 2011 16:04:24 -0400
+Subject: [Haskell-cafe] Performance of concurrent array access
+Message-ID: <CADdwyZ=MTFYz8NZt_KxpH1VfvbkFfpnhRHamvJar_gS-fe-awg@mail.gmail.com>
+
+Hi,
+
+I am getting my feet writing concurrent programs in Haskell with GHC for
+multicore machines. As a first step I decided to write a program that reads
+and writes concurrently to an IOArray, with no synchronization whatsoever.
+I'm doing this to establish a baseline to compare with the performance of
+other data structures that do use appropriate synchronization mechanisms. I
+ran in to some surprising results, namely that in many cases, I am not
+getting any speed up at all. Here are the details...
+
+I write a couple variations on a single program. The main idea is that I
+wrote a DirectAddressTable data structure, which is simply a wrapper around
+an IOArray providing insert and lookup methods:
+
+-- file DirectAddressTable.hs
+module DirectAddressTable
+       ( DAT
+       , newDAT
+       , lookupDAT
+       , insertDAT
+       , getAssocsDAT
+       )
+       where
+
+import Data.Array.IO
+import Data.Array.MArray
+import Data.Int (Int32)
+
+data DAT = DAT (IOArray Int32 Char)
+
+-- create a fixed size array; missing keys have value '-'.
+newDAT :: Int32 -> IO (DAT)
+newDAT n = do a <- newArray (0, n - 1) '-'
+              return (DAT a)
+
+-- lookup an item.
+lookupDAT :: DAT -> Int32 -> IO (Maybe Char)
+lookupDAT (DAT a) i = do c <- readArray a i
+                         return (if c=='-' then Nothing else Just c)
+
+-- insert an item
+insertDAT :: DAT -> Int32 -> Char -> IO ()
+insertDAT (DAT a) i v = writeArray a i v
+
+-- get all associations (exclude missing items, i.e. those whose value is
+'-').
+getAssocsDAT :: DAT -> IO [(Int32,Char)]
+getAssocsDAT (DAT a) =
+  do assocs <- getAssocs a
+     return [ (k,c) | (k,c) <- assocs, c /= '-' ]
+
+ I then have a main program that initializes a new table, forks some
+threads, with each thread writing and reading some fixed number of values to
+the just initialized table. The overall number of elements to write is
+fixed. The number of threads to use is a taken from a command line argument,
+and the elements to process are evenly divided among the threads.
+
+-- file DirectTableTest.hs
+import DirectAddressTable
+import Data.Int (Int32)
+import Control.Concurrent
+import Control.Parallel
+import System.Environment
+
+main =
+  do args <- getArgs
+     let numThreads = read (args !! 0)
+     vs <- sequence (replicate numThreads newEmptyMVar)
+     a <- newDAT arraySize
+     sequence_ [ forkIO (doLotsOfStuff numThreads i a >>= putMVar v) | (i,v)
+<- zip [1..] vs]
+     sequence_ [ takeMVar v >>= \a -> getAssocsDAT a >>= \xs -> print (last
+xs)  | v <- vs]
+
+doLotsOfStuff :: Int -> Int -> DAT -> IO DAT
+doLotsOfStuff numThreads i a =
+  do let p j c = insertDAT a j c >> lookupDAT a j >>= \v -> v `pseq` return
+()
+     sequence_ [ p j c | (j,c) <- bunchOfKeys j ]
+     return a
+  where  bunchOfKeys i = take numElems $ zip cyclicIndices $ drop i
+cyclicChars
+         numElems      = numberOfElems `div` numThreads
+
+cyclicIndices = cycle [0..highestIndex]
+cyclicChars   = cycle chars
+chars         = ['a'..'z']
+
+-- Parameters
+arraySize :: Int32
+arraySize     = 100
+highestIndex  = arraySize - 1
+numberOfElems = 10 * 1000 * 1000
+
+
+I compiled this with "ghc --make -rtsopts -threaded  -fforce-recomp -O2
+DirectTableTest.hs".
+Running "time ./DirectTableTest 1 +RTS -N1" takes about 1.4 seconds and
+running "time ./DirectTableTest 2 +RTS -N2" take about 2.0 seconds! Using
+one more core than worker threads is a little better, with "time
+./DirectTableTest 1 +RTS -N1" takes about 1.4 seconds and running "time
+./DirectTableTest 1 +RTS -N2" and "time ./DirectTableTest 2 +RTS -N3"
+both taking about 1.4 seconds.
+Running with the "-N2 -s" option shows that productivity is 95.4% and GC is
+4.3%. Looking at a run of the program with ThreadScope I don't see anything
+too alarming. Each HEC yields once per ms when a GC occurs. Running with 4
+cores gives a time of about 1.2 seconds, which is at least a little better
+than 1 core. More cores doesn't improve over this.
+
+I found that changing the array type used in the implementation of
+DirectAddressTable from IOArray to IOUArray fixes this problem. With this
+change, the running time of "time ./DirectTableTest 1 +RTS -N1" is takes
+about 1.4 seconds whereas the running "time ./DirectTableTest 2 +RTS -N2" is
+about 1.0 seconds. Increasing to 4 cores gives a run time of 0.55 seconds.
+Running with "-s" shows a GC time of %3.9 percent. Under ThreadScope I can
+see that both threads yield every 0.4 ms, more frequently than in the
+previous program.
+
+Finally, I tried one more variation. Instead of having the threads work on
+the same shared array, I had each thread work on its own array. This scales
+nicely (as you would expect), more or less like the second program, with
+either IOArray or IOUArray implementing the DirectAddressTable data
+structure.
+
+I understand why IOUArray might perform better than IOArray, but I don't
+know why it scales better to multiple threads and cores. Does anyone know
+why this might be happening or what I can do to find out what is going on?
+
+Regards,
+Andreas
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110823/939f3a56/attachment.htm>
+

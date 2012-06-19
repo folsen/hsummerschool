@@ -1,0 +1,28 @@
+From schlepptop at henning-thielemann.de  Sat Apr 23 17:01:37 2011
+From: schlepptop at henning-thielemann.de (Henning Thielemann)
+Date: Sat, 23 Apr 2011 17:01:37 +0200
+Subject: [Haskell-cafe] There is no null; Maybe/Option types
+In-Reply-To: <874o5p17ap.fsf@malde.org>
+References: <BANLkTi=irBB_YvfEm3ms0Vxd6xDb7tcPcg@mail.gmail.com>
+	<BANLkTi=oYmQrjTwnhSZM21qg2OC4oe65hQ@mail.gmail.com>
+	<874o5p17ap.fsf@malde.org>
+Message-ID: <4DB2E9D1.2010907@henning-thielemann.de>
+
+Ketil Malde schrieb:
+
+> Maybe is in a sense easier, as 'Maybe a' and 'a' are different types,
+> while there isn't a similarly elegant type distinction between lists
+> that may be empty and lists with at least one element.  Maybe is really
+> quite brilliant.
+
+type NonEmptyList a = (a, [a])
+
+data NonEmptyList a = NonEmptyList a [a]
+
+I use the second one frequently for quick check testing and especially
+for testing on infinite lists. Unfortunately, the Prelude functions like
+'cycle' (for input and output) and 'group' (for sublists of the result
+list) do not use that type.
+
+
+

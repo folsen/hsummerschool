@@ -1,0 +1,26 @@
+From lmaury at gmail.com  Tue Aug 23 20:58:57 2011
+From: lmaury at gmail.com (=?ISO-8859-1?Q?Lo=EFc_Maury?=)
+Date: Tue, 23 Aug 2011 20:58:57 +0200
+Subject: [Haskell-cafe]  - Try to install ssh package by cabal.
+Message-ID: <CAFFbn6HHCB47kyjpbwGi2c-2TBiO7F=A0CJ03mjoNg5vv3ij_Q@mail.gmail.com>
+
+Hello,
+
+I try to install the ssh package with cabal, but
+unfortunately that doesn't work, I have this error :
+
+src/SSH/Crypto.hs:70:16:
+Couldn't match expected type `Data.ASN1.Types.ASN1t' with actual type
+`ASN1ConstructionType'
+
+I'am on Debian with ghc-7.0.1
+
+I don't know how I can resolve this issue ?
+
+Thank you for help
+
+Lo?c
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110823/e07b2030/attachment.htm>
+

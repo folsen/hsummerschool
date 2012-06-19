@@ -1,0 +1,49 @@
+From s.w.b.prasetya at uu.nl  Mon Aug 15 00:10:27 2011
+From: s.w.b.prasetya at uu.nl (Wishnu Prasetya)
+Date: Mon, 15 Aug 2011 00:10:27 +0200
+Subject: [Haskell-cafe] how to read CPU time vs wall time report from
+ GHC?
+In-Reply-To: <201108142305.04706.daniel.is.fischer@googlemail.com>
+References: <4E480FD8.7070301@uu.nl>
+	<201108142217.28777.daniel.is.fischer@googlemail.com>
+	<4E483325.3060404@uu.nl>
+	<201108142305.04706.daniel.is.fischer@googlemail.com>
+Message-ID: <4E4847D3.4050506@uu.nl>
+
+On 14-8-2011 23:05, Daniel Fischer wrote:
+> On Sunday 14 August 2011, 22:42:13, Wishnu Prasetya wrote:
+>> On 14-8-2011 22:17, Daniel Fischer wrote:
+>>> We don't know the times for a non-threaded run (or an -N1 run), so it
+>>> could be anything from a slowdown to a>   4? speedup (but it's likely
+>>> to be a speedup by a factor<   4?).
+>> Well, the -N1 is below. The sequential version of the program has almost
+>> the same profile:
+>>
+>>     SPARKS: 5 (1 converted, 4 pruned)
+>>
+>>     INIT  time    0.00s  (  0.00s elapsed)
+>>     MUT   time    2.78s  (  2.99s elapsed)
+>>     GC    time    4.35s  (  4.15s elapsed)
+>>     EXIT  time    0.00s  (  0.00s elapsed)
+>>     Total time    7.13s  (  7.14s elapsed)
+>>
+>> Am I correct then to say that the speed up with respect to sequential is
+>> equal to: tot-elapse-time-N1 / tot-elapse-N4 ? So I have 7.14 / 2.36 =
+>> 3.0 speed up, and not 1.46 as Iustin said?
+> Yes (with respect to wall-clock time of course).
+> That's not too bad, though it should be possible to increase that factor.
+>
+>> I'll probably have to do something with that GC :)
+> But that should be the first target, there's probably some low-hanging
+> fruit there.
+> Maybe increasing the size of the allocation area (+RTS -Ax) or the heap
+> (+RTS -Hx) would already do some good.
+> Also do heap profiling to find out what most likely takes so much GC time
+> (before compiling for profiling, running with +RTS -hT could produce useful
+> information).
+Ah ok. Thanks a lot for all the answers and tips.
+
+--Wish.
+
+
+

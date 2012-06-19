@@ -1,0 +1,50 @@
+From simon.hengel at wiktory.org  Wed Apr  6 18:46:47 2011
+From: simon.hengel at wiktory.org (Simon Hengel)
+Date: Wed, 6 Apr 2011 18:46:47 +0200
+Subject: [Haskell-cafe] ANNOUNCE: DocTest-0.2.0
+Message-ID: <20110406164647.GA7363@x200>
+
+I just uploaded a new version of DocTest[1] to Hackage.
+
+
+WHAT IS DocTest?
+================
+
+DocTest is a port of Python's doctest[2] to Haskell.  It can be used to
+verify, that examples in Haddock comments[3] do still work.  This also
+provides you with a simple mechanism to write unit test, without the
+burden of maintaining a dedicated test suite.
+
+A basic example of usage is at [4].
+
+
+WHAT'S NEW IN THIS VERSION?
+===========================
+
+Support for blank lines in the result of an expression (analogous to the
+<BLANKLINE>-feature of Python's doctest).  Here is an example of usage:
+
+    -- |
+    -- Some example:
+    --
+    -- >>> putStrLn "foo\n\nbar"
+    -- foo
+    -- <BLANKLINE>
+    -- bar
+
+Currently this is implemented in DocTest, but we will move it to Haddock
+with the next release.
+
+Cheers,
+Simon
+
+[1] http://hackage.haskell.org/cgi-bin/hackage-scripts/package/DocTest
+[2] http://docs.python.org/library/doctest.html
+[3] http://www.haskell.org/haddock/doc/html/ch03s08.html#id566093
+[4] http://haskell.org/haskellwiki/DocTest
+_______________________________________________
+Haskell-Cafe mailing list
+Haskell-Cafe at haskell.org
+http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

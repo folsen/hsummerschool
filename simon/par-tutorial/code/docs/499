@@ -1,0 +1,26 @@
+From trevor at galois.com  Tue Apr 19 19:24:12 2011
+From: trevor at galois.com (Trevor Elliott)
+Date: Tue, 19 Apr 2011 10:24:12 -0700
+Subject: [Haskell-cafe] ANNOUNCE: cereal-0.3.1.0
+Message-ID: <4DADC53C.7020407@galois.com>
+
+Hi Everyone,
+
+I'm proud to announce version 0.3.1.0 of the cereal
+binary-(de)serialization library [1]!
+
+This version includes some new functionality contributed by Lemmih, that
+adds support for partial parses in the Get monad.  The changes don't
+modify the API presented in 0.3.0.0, instead adding a new runPartialGet
+function for the Get monad when partial parses are desired.
+
+[1] http://hackage.haskell.org/package/cereal-0.3.1.0
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: smime.p7s
+Type: application/pkcs7-signature
+Size: 3612 bytes
+Desc: S/MIME Cryptographic Signature
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110419/3fd9c69a/attachment.bin>
+

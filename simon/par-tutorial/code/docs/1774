@@ -1,0 +1,25 @@
+From trevor at galois.com  Fri Dec  9 02:55:21 2011
+From: trevor at galois.com (Trevor Elliott)
+Date: Thu, 08 Dec 2011 17:55:21 -0800
+Subject: [Haskell-cafe] [ANNOUNCE] cereal-0.3.5.0
+Message-ID: <4EE16A89.90102@galois.com>
+
+Hi Everyone,
+
+I'm pleased to announce the release of cereal version 0.3.5.0!  New to 
+this release is support for default, generic implementations of the get 
+and put methods of the Serialize class, when support is available.  This 
+functionality comes to you courtesy of Bas van Dijk.
+
+Happy Hacking!
+
+--trevor
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: smime.p7s
+Type: application/pkcs7-signature
+Size: 2298 bytes
+Desc: S/MIME Cryptographic Signature
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/e4ffd84a/attachment.bin>
+

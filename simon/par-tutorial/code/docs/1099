@@ -1,0 +1,51 @@
+From mail at joachim-breitner.de  Sat Aug 13 17:13:58 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Sat, 13 Aug 2011 17:13:58 +0200
+Subject: [Haskell-cafe] Diffs for hackage
+In-Reply-To: <CA+u6gbyuNX-L1DA3nWrTL_4vpVtTt23G-9Mb4pO3yyA6G=j7Qg@mail.gmail.com>
+References: <CALqQuoi88Uk7GF3QeFSxBwzYybc6w69h4sxPGmk_HjbKgyhbTg@mail.gmail.com>
+	<1313233067.4424.12.camel@kirk>
+	<CA+u6gbxTPvLscpn82GvyoTAr88yJj+B7=qqfYHwRP14tXWmDaw@mail.gmail.com>
+	<CAJN_RF5VUseVkYjt-7Q23dfpbSPHxJrmBTaTdKNd5s4hCRkvHQ@mail.gmail.com>
+	<CA+u6gbyuNX-L1DA3nWrTL_4vpVtTt23G-9Mb4pO3yyA6G=j7Qg@mail.gmail.com>
+Message-ID: <1313248438.4424.18.camel@kirk>
+
+Hi,
+
+Am Sonntag, den 14.08.2011, 00:29 +1000 schrieb Ivan Lazar Miljenovic:
+> On 14 August 2011 00:25, David Fox <ddssff at gmail.com> wrote:
+> > Debian's packaging has a very strict changelog format where each entry
+> > combines a log entry with the package name, the version number, the
+> > author's name and email, and the date.  This creates a very nice,
+> > centralized, authoritative source for these pieces of information that
+> > can't be accidentally omitted or allowed to become stale.
+> 
+> Is this for the actual Debian packages, or even for source tarballs
+> that they get from upstream?
+
+it?s for the packaging work, here is an example:
+http://packages.debian.org/changelogs/pool/main/g/ghc/ghc_7.0.4-4/changelog
+
+But I think David is suggesting to adapt a similarly formatted changelog
+file for Cabal packages, e.g. to display them on hackage. I am all for
+that, as long as it does not prevent the introduction of changelogs
+(e.g. by excessive bikeshedding or by having people lose interest
+again).
+
+Greetings,
+Joachim
+
+
+-- 
+Joachim "nomeata" Breitner
+  mail at joachim-breitner.de  |  nomeata at debian.org  |  GPG: 0x4743206C
+  xmpp: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110813/17b27cac/attachment.pgp>
+

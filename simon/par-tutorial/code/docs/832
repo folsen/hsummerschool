@@ -1,0 +1,22 @@
+From malcolm.wallace at me.com  Thu Apr 28 17:23:33 2011
+From: malcolm.wallace at me.com (malcolm.wallace)
+Date: Thu, 28 Apr 2011 15:23:33 +0000 (GMT)
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <20110428150502.GA2484@elliptictech.com>
+Message-ID: <c1af5782-ef43-e377-e7d4-a401588b4cbd@me.com>
+
+Unfortunately, sharing a build directory between separate repositories
+does not work. After a build from one repository, all the outputs from
+that build will have modification times more recent than all the files
+in the other repository.
+?
+Then I suggest that your build tools are broken. ?Rebuilding should not depend on an _ordering_ between modification times of source and object, merely on whether the timestamp of the source file is different to its timestamp the last time we looked. ?(This requires your build tools to keep a journal/log, yes, but it is the only safe way to do it.)
+
+It is relatively common to change source files to have an older timestamp rather than a newer one. ?This should not cause your build system to ignore them. ?It can happen for any number of reasons: restoring from backup, switching repository, bisecting the history of a repo, clock skew on different machines, ....
+
+Regards,
+?? ?Malcolm
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110428/a3bc7509/attachment.htm>
+

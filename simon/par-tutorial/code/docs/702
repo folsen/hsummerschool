@@ -1,0 +1,36 @@
+From stephen.tetley at gmail.com  Mon Apr 25 15:21:46 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Mon, 25 Apr 2011 14:21:46 +0100
+Subject: [Haskell-cafe] Trouble with currying and uncurrying...
+In-Reply-To: <4DB57318.4040509@iac.es>
+References: <4DB57318.4040509@iac.es>
+Message-ID: <BANLkTimpvBGo-XzUPHHg6hO9jFd=1otTyQ@mail.gmail.com>
+
+On 25 April 2011 14:11, Angel de Vicente <angelv at iac.es> wrote:
+
+> curry :: ((a,b) -> c) -> (a -> b -> c)
+> curry g x y = g (x,y)
+
+Is expressing curry this way more illuminating?
+
+curry :: ((a,b) -> c) -> (a -> b -> c)
+curry g = \x y -> g (x,y)
+
+That is, curry is a function taking one argument that produces a
+result function taking two arguments.
+
+In Haskell - the type signature:
+
+> curry :: ((a,b) -> c) -> (a -> b -> c)
+
+... can mean either form.
+
+Though this is a "quirk" of Haskell, in the language Clean, for
+example, the parens in the type signature "mean what they" say so only
+only my second definition is allowed, the first version won't compile.
+
+Best wishes
+
+Stephen
+
+

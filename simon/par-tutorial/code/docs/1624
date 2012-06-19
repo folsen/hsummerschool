@@ -1,0 +1,23 @@
+From hvr at gnu.org  Sat Dec  3 10:18:03 2011
+From: hvr at gnu.org (Herbert Valerio Riedel)
+Date: Sat, 03 Dec 2011 10:18:03 +0100
+Subject: [Haskell-cafe] ANNOUNCE: monad-control-0.3
+In-Reply-To: <CADLz5wVs3AGCagikDMJVKVm-RJjgMhCbs7LJtxGPqi_rLbjRqQ@mail.gmail.com>
+References: <CADLz5wW4oZbBtKMb7UQ8qQdn3UayBSQ-TL66VLG3hGXCUk_npg@mail.gmail.com>
+	<CADLz5wVs3AGCagikDMJVKVm-RJjgMhCbs7LJtxGPqi_rLbjRqQ@mail.gmail.com>
+Message-ID: <1322903883.2138.2.camel@duo>
+
+On Sat, 2011-12-03 at 01:35 +0100, Bas van Dijk wrote:
+> Here are some benchmark results that compare the original monad-peel,
+> the previous monad-control-0.2.0.3 and the new monad-control-0.3:
+> 
+> http://basvandijk.github.com/monad-control.html
+> 
+> Note that the benchmarks use Bryan O'Sullivan's excellent new
+> criterion-0.6 package.
+
+btw, how did you manage to get measurements from 2 different versions of
+the same library (monad-control 0.3 and 0.2.0.3) into a single report?
+
+
+

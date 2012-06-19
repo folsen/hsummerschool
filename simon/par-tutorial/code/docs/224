@@ -1,0 +1,78 @@
+From es at ertes.de  Thu Apr  7 19:35:06 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Thu, 7 Apr 2011 19:35:06 +0200
+Subject: [Haskell-cafe] Stateful iteratees
+References: <20110407190452.356fcca6@angst.streitmacht.eu>
+	<BANLkTikE_5XoYE7-no9aGuTXhs91xMHmGQ@mail.gmail.com>
+Message-ID: <20110407193506.7711d387@angst.streitmacht.eu>
+
+Gregory Collins <greg at gregorycollins.net> wrote:
+
+> > I'm trying to solve a very practical problem: ?I need a stateful
+> > iteratee monad transformer. ?Explicit state passing is very
+> > inconvenient and would destroy the elegance of my library.
+> >
+> > There are two approaches to this:
+> >
+> >   1. type MyT a m = Iteratee a (StateT MyConfig m)
+> >   2. type MyT a m = StateT MyConfig (Iteratee a m)
+> >
+> > Both work well except in two very specific corner cases:
+> >
+> >   - I need to convert the transformer to 'Iteratee a m', i.e. remove
+> >     the state layer. ?This is obviously trivial with the second
+> >     variant, but seems very difficult with the first one, if it's
+> >     possible at all.
+>
+> Why can't you use #1 and do this when you call "run_"?
+
+Because that runs the iteratee and leaves me with a StateT.  Even though
+I use a CPS-based StateT, I doubt that it can be converted back to
+Iteratee easily.
+
+With the first variant, I would need a function like this:
+
+    runMyApp :: Iteratee a (StateT MyConfig m) b -> Iteratee a m b
+
+I think, this function is impossible to write.  The reason behind this
+requirement is that I have multiple monad transformers of this kind,
+each in different libraries, each with different state types, and I need
+to compose them.
+
+But I have another idea in mind.  I could do the following instead:
+
+    -- First library.
+    class Monad m => OneStateMonad m where
+        mapOneConfig :: (OneConfig -> OneConfig) -> m OneConfig
+
+    oneComp :: OneStateMonad m => Iteratee Input m Output
+
+    -- Second library.
+    class TwoStateMonad m where
+        mapTwoConfig :: (TwoConfig -> TwoConfig) -> m TwoConfig
+
+    twoComp :: TwoStateMonad m => Iteratee Input m Output
+
+Then the user of the library has to build the monad transformer stack by
+themselves, like this:
+
+    instance Monad m => OneStateMonad (StateT (OneConfig, TwoConfig) m)
+    instance Monad m => TwoStateMonad (StateT (OneConfig, TwoConfig) m)
+
+    appComp :: Monad m =>
+               Iteratee Input (StateT (OneConfig, TwoConfig) m) Output
+
+That might work, but it seems to be cumbersome.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

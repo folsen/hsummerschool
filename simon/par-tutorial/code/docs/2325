@@ -1,0 +1,22 @@
+From mike at mike-burns.com  Tue Dec 27 18:19:17 2011
+From: mike at mike-burns.com (Mike Burns)
+Date: Tue, 27 Dec 2011 12:19:17 -0500
+Subject: [Haskell-cafe] [ANNOUNCEMENT] github 0.1.1
+Message-ID: <20111227171917.GU87097@jack.mike-burns.com>
+
+The Github API now has a fancy Haskell library for accessing it, and
+this library is named: github.
+
+  http://hackage.haskell.org/package/github
+  https://github.com/mike-burns/github
+
+The module structure reflects the Github API v3 documentation.
+
+It currently only supports the non-authenticated parts of the API.
+
+It does not support a few API endpoints which are documented by Github
+but which don't work under a command-line curl.
+
+I love pull requests, so send 'em!
+
+

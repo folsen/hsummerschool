@@ -1,0 +1,54 @@
+From nick.smallbone at gmail.com  Wed Apr 20 17:36:01 2011
+From: nick.smallbone at gmail.com (Nick Smallbone)
+Date: Wed, 20 Apr 2011 17:36:01 +0200
+Subject: [Haskell-cafe] QuickCheck, (Ord a)=> [a] -> Property problem
+References: <78a0d4c2-d239-490c-a490-491f0dcabfd5@f11g2000vbx.googlegroups.com>
+Message-ID: <87k4ep540u.fsf@eee.8325.org>
+
+"larry.liuxinyu" <liuxinyu95 at gmail.com> writes:
+
+> prop_foo :: (Ord a) => [a] -> Property
+> prop_foo xs = not (null xs) ==> maximum xs == minimum xs
+>
+> This is an extreme case that the property is always wrong.
+>
+> However, QuickCheck produces:
+> *Main> test prop_foo
+> OK, passed 100 tests.
+>
+> Why this happen? If I use verboseCheck, I can find the sample test
+> data are as the following:
+> *Main>verboseCheck prop_foo
+> ...
+> 97:
+> [(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),()]
+> 98:
+> [(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),
+> (),(),(),(),(),(),()]
+> 99:
+> [(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),
+> (),(),()]
+> OK, passed 100 tests.
+
+This is an unfortunate feature of GHCi: if the thing you want to
+evaluate has a polymorphic type then all the type variables default to
+(), see:
+  http://www.haskell.org/ghc/docs/7.0.3/html/users_guide/interactive-evaluation.html#extended-default-rules
+So prop_foo is only tested for lists of (). Nasty.
+
+The usual way to work around it is to declare all your properties
+monomorphic, so write:
+  prop_foo :: [Integer] -> Property
+
+> This works at least, However, since 'a'<'b', they are order-able, what
+> if I want to test prop_foo works for char?
+
+Testing with Integers should always[*] be enough because of
+parametricity.
+
+Nick
+
+[*] For certain values of "always" :)
+
+
+

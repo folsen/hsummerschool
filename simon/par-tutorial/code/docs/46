@@ -1,0 +1,26 @@
+From 2haskell at pkturner.org  Sat Apr  2 04:39:34 2011
+From: 2haskell at pkturner.org (Scott Turner)
+Date: Fri, 01 Apr 2011 22:39:34 -0400
+Subject: [Haskell-cafe] Asynchronous Arrows need Type Specialization -
+ Help!
+In-Reply-To: <AANLkTi=p=Zi=k32sAROAiC7Ea4SRiSbzTqAp+B2YF7CS@mail.gmail.com>
+References: <AANLkTi=p=Zi=k32sAROAiC7Ea4SRiSbzTqAp+B2YF7CS@mail.gmail.com>
+Message-ID: <4D968C66.3010300@pkturner.org>
+
+On 2011-03-21 01:18, David Barbour wrote:
+> I was giving Control.Arrow a try for a reactive programming system.
+> The arrows are agents that communicate by sending and returning
+> time-varying state. Different agents may live in different 'vats'
+> (event-driven threads) to roughly model distributed computing. For the
+> most part, the state varies asynchronously - i.e. a file updates at a
+> different rate than the mouse position. Anyhow, I ran into a problem:
+> The (***) and (&&&) operations, as specified in Control.Arrow, are
+> inherently synchronization points.
+
+Hughes's remark in his original paper may be relevant:
+"In a deep sense, then, the Either type behaves more like a product than
+the pair type does, when we work with stream processors.  And indeed, a
+channel carrying a sum type corresponds much more closely to a pair of
+channels than does a channel carrying pairs."
+
+

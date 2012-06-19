@@ -1,0 +1,30 @@
+From stephen.tetley at gmail.com  Mon Apr  4 11:26:57 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Mon, 4 Apr 2011 10:26:57 +0100
+Subject: [Haskell-cafe] ANNOUNCE: FreeType 2 Bindings
+In-Reply-To: <BANLkTim8RNFWM+S7RaU4-y3x4bAyaYrNNg@mail.gmail.com>
+References: <BANLkTimnPNvTqDYK1OcGvFV0MwCtF0CPzg@mail.gmail.com>
+	<BANLkTim8RNFWM+S7RaU4-y3x4bAyaYrNNg@mail.gmail.com>
+Message-ID: <BANLkTimiO53pbx0NAPyxAJdETT14URrW7w@mail.gmail.com>
+
+Hi Jason
+
+Good luck - I worked on a binding a couple of years ago, but decided
+that FreeType is really a framework rather than a library. Thus, I
+felt it would be more pragmatic to write a intermediate C library
+doing exactly what you need and bind to that rather than bind directly
+to FreeType. Naturally, I'm not suggesting that you should agree with
+my analysis - but I would flag a caution that FreeType is very
+problematic to bind to.
+
+The abandoned code is in Copperbox:
+
+http://code.google.com/p/copperbox/source/checkout
+
+path in the trunk: libs/graphics/FreeType
+
+Best wishes
+
+Stephen
+
+

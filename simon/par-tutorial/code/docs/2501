@@ -1,0 +1,62 @@
+From cdsmith at gmail.com  Fri Dec 30 20:49:51 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Fri, 30 Dec 2011 12:49:51 -0700
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <7F9B78C4-0AED-45F5-8DA9-D7F407B4F70E@mobileink.com>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org> <4EFB8DFE.1060805@blueyonder.co.uk>
+	<jdh9h6$gba$1@dough.gmane.org> <4EFCA66D.4060609@blueyonder.co.uk>
+	<jdiesl$5sp$1@dough.gmane.org> <4EFCCA86.4020709@blueyonder.co.uk>
+	<jdjtv1$6r0$1@dough.gmane.org>
+	<CAD6SzRLxjE7Xgi6dXMknwt0oFRN_m3Z868jAKnsayR=w1=Se6w@mail.gmail.com>
+	<FD41967A-36F7-4203-87E3-D4392146C53D@mobileink.com>
+	<1325265063.16545.189.camel@godel>
+	<CAD6SzRK5fGhGFiXm_r-K_bmQwF1W9FKAURuhnxjpKdfbW1Ma6A@mail.gmail.com>
+	<7F9B78C4-0AED-45F5-8DA9-D7F407B4F70E@mobileink.com>
+Message-ID: <1325274591.16545.204.camel@godel>
+
+On Fri, 2011-12-30 at 12:45 -0600, Gregg Reynolds wrote:
+> I spent some time sketching out ideas for using random variables to provide
+> definitions (or at least notation) for stuff like IO.  I'm not sure I could
+> even find the notes now, but my recollection is that it seemed like a
+> promising approach.  One advantage is that this eliminates the kind of informal
+> language (like "user input") that seems unavoidable in talking about IO.
+> Instead of defining e.g. readChar or the like as an "action" that does
+> something and returns an char (or however standard Haskell idiom puts it),
+> you can just say that readChar is a random char variable and be done with
+> it.  The notion of "doing an action" goes away.  The side-effect of actually
+> reading the input or the like can be defined generically by saying that
+> evaluating a random variable always has some side-effect; what specifically
+> the side effect is does not matter.
+
+Isn't this just another way of saying the same thing that's been said
+already?  It's just that you're saying "random variable" instead of "I/O
+action".  But you don't really mean random variable, because there's all
+this stuff about side effects thrown in which certainly isn't part of
+any idea of random variables that anyone else uses.  What you really
+mean is, apparently, I/O action, and you're still left with all the
+actual issues that have been discussed here, such as when two I/O
+actions (aka random variables) are the same.
+
+There is one difference, and it's that you're still using the term
+"evaluation" to mean performing an action.  That's still a mistake.
+Evaluation is an idea from operational semantics, and it has nothing to
+do with performing effects.  The tying of effects to evaluation is
+precisely why it's so hard to reason about programs in, say, C
+denotationally, because once there is no such thing as an evaluation
+process, modeling the meaning of terms becomes much more complex and
+amounts to reinventing operational semantics in denotational clothing)\.
+
+I'd submit that it is NOT an advantage to any approach that the notion
+of doing an action goes away.  That notion is *precisely* what programs
+are trying to accomplish, and obscuring it inside functions and
+evaluation rather than having a way to talk about it is handicapping
+yourself from a denotational perspective.  Rather, what would be an
+advantage (but also rather hopeless) would be to define the notion of
+doing an action more precisely.
+
+-- 
+Chris Smith
+
+
+

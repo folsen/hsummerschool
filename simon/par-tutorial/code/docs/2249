@@ -1,0 +1,41 @@
+From miguelimo38 at yandex.ru  Sat Dec 24 09:29:03 2011
+From: miguelimo38 at yandex.ru (MigMit)
+Date: Sat, 24 Dec 2011 12:29:03 +0400
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+In-Reply-To: <4EF57FC9.1030505@vex.net>
+References: <4EF57FC9.1030505@vex.net>
+Message-ID: <41730B61-AEF6-4EF4-9299-F5665FF1E639@yandex.ru>
+
+
+On 24 Dec 2011, at 11:31, Albert Y. C. Lai wrote:
+> So, on IRC in #haskell, from the same person, speaking on the same topic in the same context, in the same interval of 3 minutes (the first two sentences in the same minute):
+> 
+> 1. a function f is strict if  f ? = ?
+> 2. ? represents any computation which does not terminate, i.e. an exception or an infinite loop
+> 3. "strict" describes the denotational semantics
+
+What's wrong with that?
+
+> Denotational semantics:
+> A. There are no computational steps. There is no termination, and there is no non-termination, since there are no steps to finish, and no steps to keep going.
+
+Incorrect. There ARE computational steps, of course, we just agree not to mention them when we talk about denotational semantics. Not mentioning something is not the same as stating that it doesn't exist.
+
+> B. ? represents "no information", not "non-termination". There is no "non-termination" to represent.
+
+There is, as there are computational steps. And the statement (2) above is not about denotational semantics only, so it's OK to talk about non-termination. Don't you know that you are allowed to use both semantics at the same time?
+
+> C. fix id = ? because ? is the least fixed point of id, not because fix id non-terminates.
+
+There is nothing more obscure in science then the notion of "because". fix id = (_|_) for the reason that suits your purposes.
+
+> D. You say strict, more strict, less strict; non-strict, more non-strict, less non-strict. You don't say eager, and you don't say lazy.
+
+Oh, right, there is nothing more important then using the words properly.
+
+> Operational semantics:
+> A. There is no ?; it does not appear in any sequence of computational steps, finitely long or infinitely long.
+> B. You say eager, more eager, less eager; lazy, more lazy, less lazy; or speculative, more speculative, less speculative; or any other adjectives for evaluation strategies. You don't say strict, and you don't say non-strict.
+
+See above.
+

@@ -1,0 +1,71 @@
+From joelburget at gmail.com  Tue Apr 12 16:20:06 2011
+From: joelburget at gmail.com (Joel Burget)
+Date: Tue, 12 Apr 2011 10:20:06 -0400
+Subject: [Haskell-cafe] Assimp FFI Library
+In-Reply-To: <BANLkTinZj+Mmq2PDyMS-=Mc7w7+xriR0jg@mail.gmail.com>
+References: <BANLkTinZj+Mmq2PDyMS-=Mc7w7+xriR0jg@mail.gmail.com>
+Message-ID: <BANLkTimM-uK3JjMi9C95k4pdU=GiVbPBCQ@mail.gmail.com>
+
+John and Stephen,
+
+Thanks for the suggestions! I'm going to evaluate them more fully to see if
+they're what I'm looking for. Even though I tried looking through the vector
+packages I managed to miss those (there are a lot of packages with "vec" in
+their name).
+
+Jason,
+
+Wow, great suggestions! To address a few questions you raised, instead of
+{-# UNPACK #-} pragmas, I used {-# OPTIONS_GHC -funbox-strict-fields #-}. I
+believe this is equivalent to using the pragma on all of the strict fields.
+It seems my operators aren't quite as intuitive as I hoped they would be,
+The three examples I provided would be: (|*|) :: Vec n a t1 -> Vec n a t2 ->
+Vec n a t3, (|*||) :: Vec n a t -> Mat n a -> Vec n a t, (||*) :: Mat n a ->
+a -> Mat n a. These represent componentwise vector multiplication, plain
+vector-matrix multiplication, and matrix-scalar multiplication. The idea is
+that "||" represents a matrix, "|" represents a vector, and "" represents a
+scalar. Also, I currently have a macro for the three sizes of vector and the
+three sizes of matrix. I'm not going to mess around with it for now.
+
+-Joel
+
+On Tue, Apr 12, 2011 at 9:14 AM, John Lato <jwlato at gmail.com> wrote:
+
+> From: Joel Burget <joelburget at gmail.com>
+>> Subject: [Haskell-cafe] Assimp FFI Library
+>> To: haskell-cafe at haskell.org
+>> Message-ID: <BANLkTimW-71NcBRqnr68kRAvKZytE1uVwA at mail.gmail.com>
+>> Content-Type: text/plain; charset="iso-8859-1"
+>
+>
+>> 5. I've reduced a lot of boilerplate in Vec.hs by using the CPP
+>> preprocessor
+>> extension. I could reduce the boilerplate by another factor of 3 if I
+>> could
+>> recursively call templates but that's not allowed. I would like to have
+>> one
+>> template to generate both of these lines:
+>>
+>> > data Vec N2 Double t = Vec2D !Double !Double deriving (Show, Eq)
+>> > data Vec N3 Double t = Vec3D !Double !Double !Double deriving (Show, Eq)
+>>
+>> Notice there is an extra !Double in the second. Is there an easy way to do
+>> this? I don't know much about Template Haskell, would that work? Would it
+>> be
+>> easy?
+>>
+>
+> Yes, it works, and it's pretty easy.  My adaptive-tuple package,
+> http://hackage.haskell.org/package/adaptive-tuple, provides this (as well
+> as strict vectors up to 20 elements).  Tuple is a bit of a misnomer.  You'll
+> need to download the source to get the Template Haskell splices because they
+> aren't exported (tarball from hackage, or via
+> http://www.tiresiaspress.us/haskell/adaptive-tuple/)
+>
+> John L.
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110412/a76872de/attachment.htm>
+

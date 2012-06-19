@@ -1,0 +1,23 @@
+From ok at cs.otago.ac.nz  Fri Apr  1 00:47:36 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Fri, 1 Apr 2011 11:47:36 +1300
+Subject: [Haskell-cafe] Encoding-aware System.Directory functions
+In-Reply-To: <87ei5nwvus.fsf@malde.org>
+References: <87633.63.1301543492257.JavaMail.geo-discussion-forums@prfx36>
+	<87ei5nwvus.fsf@malde.org>
+Message-ID: <67785F97-3E52-4B5D-9A1E-55FC11A2E7E4@cs.otago.ac.nz>
+
+
+On 31/03/2011, at 9:13 PM, Ketil Malde wrote:
+
+> John Millikin <jmillikin at gmail.com> writes:
+> 
+>> OSX's chief weirdness is that its GUI programs swap ':' and '/' when 
+>> displaying filenames. 
+> 
+> A remnant from the bad old days of MacOS <10, where : was the path
+> separator, and / was a perfectly good character to use in filenames.
+
+And indeed very frequently used for dates.  There had to be _some_ way
+to deal with old file names in the new OS.
+

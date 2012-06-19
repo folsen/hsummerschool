@@ -1,0 +1,30 @@
+From dokondr at gmail.com  Sun Dec 11 19:19:01 2011
+From: dokondr at gmail.com (dokondr)
+Date: Sun, 11 Dec 2011 21:19:01 +0300
+Subject: [Haskell-cafe] Tracing Prelude.read exceptions
+Message-ID: <CAMXF=YAirXjOETJcvbOFCTbxdmJaVmkr7bK3eQhZdBkTEpOSKw@mail.gmail.com>
+
+Hi,
+I got quite used to a sequence providing simple data persistence :
+1) Store my data to a file:
+writeFile fileName (show someData)
+
+2) Some time later read this data back:
+line <- readFile fileName
+let someData = read line :: SomeDataType
+
+Having this done hundreds of times I now got stuck with step 2)  trying to
+read moderately complex structure back. I get read exception in run-time:
+fromList *** Exception: Prelude.read: no parse
+
+I have checked and rechecked my types, data files, etc. - and still no idea.
+
+So my question:
+Is there any way to trace Prelude.read exceptions to see exactly on what
+data element read fails in run-time?
+
+Thanks!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111211/a7cf0f79/attachment.htm>
+

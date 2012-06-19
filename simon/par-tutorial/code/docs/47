@@ -1,0 +1,24 @@
+From wren at freegeek.org  Sat Apr  2 05:48:06 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Fri, 01 Apr 2011 23:48:06 -0400
+Subject: [Haskell-cafe] using IO monad in Iteratee
+In-Reply-To: <AANLkTim6SoSVFZ+AGH23okAZs2h1RvyGLvekxPKbtno9@mail.gmail.com>
+References: <AANLkTim6SoSVFZ+AGH23okAZs2h1RvyGLvekxPKbtno9@mail.gmail.com>
+Message-ID: <4D969C76.9090308@freegeek.org>
+
+On 4/1/11 3:59 PM, Dmitry Olshansky wrote:
+> But enumFile use IO monad instead of MonadIO class.
+> [...]
+> Is it possible to change enumFile to using MonadIO class?
+
+Unless its changed significantly since I looked at it last (which it may 
+well have), it's not possible. The problem is that what we'd really need 
+is lowerIO :: m a -> IO a for the m in question; liftIO goes the wrong 
+way. Of course, getting a lowerIO with the right semantics will be 
+tricky for most monads.
+
+-- 
+Live well,
+~wren
+
+

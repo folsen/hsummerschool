@@ -1,0 +1,47 @@
+From ketil at malde.org  Fri Aug 26 06:20:25 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Fri, 26 Aug 2011 06:20:25 +0200
+Subject: [Haskell-cafe] ping haskell.org timeout
+In-Reply-To: <CAJ-DSyzj92O-h=ApUKceUcQM4JOHKyJZQXwHQy8WunKjOsuynQ@mail.gmail.com>
+	(Jason Dagit's message of "Thu, 25 Aug 2011 15:11:51 -0700")
+References: <CAFLa5WPXwUP=tGWc1ubAAa3NUhWvAYx-bhFNKydFFS1tpMO+UQ@mail.gmail.com>
+	<CAJ-DSyzj92O-h=ApUKceUcQM4JOHKyJZQXwHQy8WunKjOsuynQ@mail.gmail.com>
+Message-ID: <87zkiw248m.fsf@malde.org>
+
+Jason Dagit <dagitj at gmail.com> writes:
+
+> On Thu, Aug 25, 2011 at 2:39 PM, Greg Fitzgerald <garious at gmail.com> wrote:
+>> "cabal update" hangs. ?"ping haskell.org" times out. ?But haskell.org and
+>> hackage webpages are loading just fine. ?What's going on?
+
+> Lots of servers turn off ICMP packet responses these days 
+
+Because users don't really need error messages, that's privileged
+information for system administrators.
+
+> so ping isn't as reliable as it once was for detecting when a server is
+> running.
+
+Looks like haskell.org isn't one of them.
+
+CON:~ % ping haskell.org
+PING haskell.org (78.46.100.180) 56(84) bytes of data.
+64 bytes from lambda.haskell.org (78.46.100.180): icmp_req=1 ttl=48 time=53.8 ms
+64 bytes from lambda.haskell.org (78.46.100.180): icmp_req=2 ttl=48 time=52.4 ms
+64 bytes from lambda.haskell.org (78.46.100.180): icmp_req=3 ttl=48 time=52.5 ms
+^C
+--- haskell.org ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2000ms
+rtt min/avg/max/mdev = 52.451/52.935/53.804/0.670 ms
+
+> I'm not sure why cabal update would hang.
+
+It takes a while to complete with no visual feedback.  Perhaps the
+network is just slow?  Or perhaps the web pages are cached somewhere
+along the way?
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

@@ -1,0 +1,37 @@
+From michael at snoyman.com  Thu Apr  7 11:03:08 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Thu, 7 Apr 2011 12:03:08 +0300
+Subject: [Haskell-cafe] ANNOUNCE: DocTest-0.2.0
+In-Reply-To: <20110407084344.GA2273@x200>
+References: <20110406164647.GA7363@x200>
+	<BANLkTi=mTPfLkU-++DY5kPKcgb_83Vf2HA@mail.gmail.com>
+	<20110406205305.GA31747@x200>
+	<BANLkTi=5rhVDfLY+anNaF_50Q8C+omcUzg@mail.gmail.com>
+	<20110407084344.GA2273@x200>
+Message-ID: <BANLkTimjQuPjkKeCXvdxEpWjGxsj--pxtg@mail.gmail.com>
+
+On Thu, Apr 7, 2011 at 11:43 AM, Simon Hengel <simon.hengel at wiktory.org>wrote:
+
+> > I like the idea of a getDocTests function. In theory, it could take a
+> cabal
+> > file as an argument, and use the Cabal library to get a list of all
+> modules to
+> > be checked. It would also be convenient if it automatically passed in GHC
+> > options correlating to each LANGUAGE pragma found on a module.
+>
+> If you open up a ticket, I'll give it a try when I have a less tight
+> schedule.
+>
+> Cheers,
+> Simon
+>
+
+Done: https://github.com/sol/doctest-haskell/issues/1
+
+Thanks, a let me know if I can help with this.
+
+Michael
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110407/583d200c/attachment.htm>
+

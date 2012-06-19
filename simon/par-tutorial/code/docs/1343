@@ -1,0 +1,77 @@
+From michael at orlitzky.com  Wed Aug 24 23:15:41 2011
+From: michael at orlitzky.com (Michael Orlitzky)
+Date: Wed, 24 Aug 2011 17:15:41 -0400
+Subject: [Haskell-cafe] (Repa) hFlush: illegal operation
+Message-ID: <4E5569FD.9040209@orlitzky.com>
+
+I'm using Repa to process a ton of MRI data. The basic process is,
+
+  * Read in the data
+  * Create a big 'ol data structure (grid) from it
+  * Compute the output in parallel using 'traverse'
+  * Write the output to file
+
+However, during the last step, I'm getting,
+
+  $ ./bin/spline3 +RTS -N4
+  spline3: output.txt: hFlush: illegal operation (handle is closed)
+
+Here's the entirety of my Main.hs:
+
+> module Main
+> where
+>
+> import Data.Array.Repa (
+>   DIM3,
+>   Z(..),
+>   (:.)(..),
+>   )
+>
+> import Values
+> import Grid(make_grid, zoom)
+>
+> mri_shape :: DIM3
+> mri_shape = (Z :. 256 :. 256 :. 109)
+>
+> main :: IO ()
+> main = do
+>   mridata <- read_values_3d mri_shape "./data/mridata.txt"
+>   let g = make_grid 1 mridata
+>   let output = zoom g 1
+>   write_values_1d output "output.txt"
+
+
+And the two functions used from the Values module,
+
+> type Values1D = Array DIM1 Double
+> type Values3D = Array DIM3 Double
+>
+> read_values_1d :: FilePath -> IO Values1D
+> read_values_1d path = readVectorFromTextFile path
+>
+>
+> read_values_3d :: DIM3 -> FilePath -> IO Values3D
+> read_values_3d sh path = do
+>   one_d <- read_values_1d path
+>   return $ reshape sh one_d
+>
+>
+> write_values_1d :: Values3D -> FilePath -> IO ()
+> write_values_1d v3d path = do
+>   let size3d = size $ extent v3d
+>   let shape1d = (Z :. size3d)
+>   let v1d = reshape shape1d v3d
+>   writeVectorToTextFile v1d path
+
+
+Am I doing something obviously wrong here? It takes about 45 minutes to
+run up to the point of failure, so I haven't attempted much trial & error.
+
+Packages:
+
+  * ghc-7.2.1
+  * repa-2.1.1.6
+  * repa-io-2.1.0.1
+
+
+

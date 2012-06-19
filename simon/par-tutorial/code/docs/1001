@@ -1,0 +1,55 @@
+From bos at serpentine.com  Tue Aug  9 20:16:41 2011
+From: bos at serpentine.com (Bryan O'Sullivan)
+Date: Tue, 9 Aug 2011 11:16:41 -0700
+Subject: [Haskell-cafe] Analyzing slow performance of a Haskell program
+In-Reply-To: <CAKaDkC6ZVxsqLFKMCTa+hB-UZM7JBNoB+SiU+M9qCeQaEeCs1w@mail.gmail.com>
+References: <CAKaDkC7-vQo_AXRRX6-+P+PKV87b54D21k6bSnub=JYvH_mnRQ@mail.gmail.com>
+	<CAGXzfB60BDXV6vOJfk6YVBG7xjyhhmTDn=+ax6mjLBx5kY6B=A@mail.gmail.com>
+	<201108071120.18563.daniel.is.fischer@googlemail.com>
+	<CAKaDkC40kbdfEinqsUuoaexpD4JCmfX-wTvt5MZt9NPdU--ELA@mail.gmail.com>
+	<CANVKUrXxHLgmGcYwk+hJHyME22TUDVoZ2n4K0T7afqH1LHZqpg@mail.gmail.com>
+	<CAKaDkC4Ab3yoG0UoaN9C4CM+1-goZ_yswqOLcBz7ejE6LfLg8w@mail.gmail.com>
+	<CACw0niLT_DORERkF0PqQMephH1-h7pYS1ajT-Vsk3S6v9tOHMw@mail.gmail.com>
+	<CABjzJLA5HCOziGokibZuWWdf3jNXB5rad+=67tB-E_cYF+MN0Q@mail.gmail.com>
+	<CAKaDkC6ZVxsqLFKMCTa+hB-UZM7JBNoB+SiU+M9qCeQaEeCs1w@mail.gmail.com>
+Message-ID: <CACw0niLc-CmMeP0KEksjWGTtkQBOTNqKiytMOy=4ni2Hg+5AbQ@mail.gmail.com>
+
+On Tue, Aug 9, 2011 at 9:47 AM, Chris Yuen <kizzx2+haskell at gmail.com> wrote:
+
+>
+> - I was using GHC 32-bit. Int is 32-bit there, so I needed Int64. It turns
+> out 64-bit operations in 32-bit programs are just darn slow. Maybe it's a
+> Windows problem.
+
+
+No, GHC calls out to C for 64-bit integer ops on all 32-bit platforms.
+
+
+> On Linux 64 bit GHC Int is 64 bit so everything just works. Changing Int64
+> to Int liberates me from many `fromIntegral` which saved 20%
+>
+
+Actually, fromIntegral is usually a no-op, so chances are you're seeing the
+effect of something else.
+
+
+> - Changing `divMod` to `quotRem` saved another 20%
+>
+
+It's cheaper again to use quotInt# and remInt# as I did in my code.
+
+
+> 1. Why are bangs needed on the length arrays?
+
+
+GHC has to deconstruct the Vector in order to get at the real underlying
+array, so that unsafeIndex can perform the actual index into the real
+underlying array.
+
+Without bang patterns, the code performs at least one deconstruction on
+every iteration through the loop. Each deconstruction has a cost. With the
+bang patterns, they're all hoisted out and performed just once.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110809/7ed1916e/attachment.htm>
+

@@ -1,0 +1,39 @@
+From gcrosswhite at gmail.com  Tue Dec 20 11:34:36 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Tue, 20 Dec 2011 20:34:36 +1000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CAF1yvAQJX+f-MigNFF=6be12Uka6y45QD6oys_NQpxgREkRbaQ@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAF1yvAQJX+f-MigNFF=6be12Uka6y45QD6oys_NQpxgREkRbaQ@mail.gmail.com>
+Message-ID: <653CD606-D8B6-4BD8-AFD4-46738AF49DB3@gmail.com>
+
+
+On Dec 20, 2011, at 8:30 PM, Jesse Schalken wrote:
+
+> 
+> 
+> On Tue, Dec 20, 2011 at 8:46 PM, Ben Lippmeier <benl at ouroborus.net> wrote:
+> 
+> On 20/12/2011, at 6:06 PM, Roman Cheplyaka wrote:
+> 
+> > In denotational semantics, every well-formed term in the language must
+> > have a value. So, what is a value of "fix id"?
+> 
+> There isn't one!
+> 
+> Bottoms will be the null pointers of the 2010's, you watch.
+> 
+> This ?1000. Errors go in an error monad.
+
+Including all possible manifestations of infinite loops?
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111220/d22fcd48/attachment.htm>
+

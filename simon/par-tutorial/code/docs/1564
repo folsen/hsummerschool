@@ -1,0 +1,17 @@
+From bogus@does.not.exist.com  Fri Aug 26 17:16:24 2011
+From: bogus@does.not.exist.com ()
+Date: Fri, 26 Aug 2011 15:16:24 -0000
+Subject: No subject
+Message-ID: <mailman.3.1314814453.22581.haskell-cafe@haskell.org>
+
+unit :: x -> M x
+join :: M (M x) -> M x
+
+For example, unit 3 = [3] and join [[1,2], [3]] = [1,2,3]
+(iii) map f . unit = unit . f
+(iv)  map f . join = join . map (map f)
+
+Laws (iii) and (iv) may be derived by systematic transformations of
+the polymorphic types of unit and join.
+
+

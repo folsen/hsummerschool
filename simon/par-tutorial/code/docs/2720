@@ -1,0 +1,31 @@
+From marco-oweber at gmx.de  Fri Feb  4 23:35:53 2011
+From: marco-oweber at gmx.de (Marc Weber)
+Date: Fri, 04 Feb 2011 22:35:53 +0000
+Subject: [Haskell-cafe] community server & hasktags learned recursing into
+	directories
+Message-ID: <1296858891-sup-7850@localhost.localdomain>
+
+hasktags learned about how to recurse into subdirectories itself.
+
+This is especially useful for windows because writing scripts can be
+done but is less well known (http://stackoverflow.com/questions/4865391/answer/submit)
+
+Now I'd like to push the latest changes to the community server which
+was hosting the repo in the past but my account does no longer work?
+
+  Also there are some dead links now. Eg
+  http://www.haskell.org/haskellwiki/Haskell.org_domain
+  still references
+  http://community.haskell.org/admin/ (404)
+
+Do you know what happened and where I should host the repo now?
+(uploading it to github would take seconds only)
+
+Moreover I fonud that I was no longer subscribed to haskell-cafe. I
+can't remember having unsubscribed ?
+
+Let's hope this mail get's through now after having resubscribed.
+
+Marc Weber
+
+

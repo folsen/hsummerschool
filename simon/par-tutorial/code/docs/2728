@@ -1,0 +1,44 @@
+From ok at cs.otago.ac.nz  Sat Feb  5 05:17:11 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Sat, 5 Feb 2011 17:17:11 +1300
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTi=O-hT+T6ZLrMVWdyU+qio--Wcx-zqB5Zs4-3gG@mail.gmail.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+	<AANLkTi=O-hT+T6ZLrMVWdyU+qio--Wcx-zqB5Zs4-3gG@mail.gmail.com>
+Message-ID: <5B0C0682-0A36-43DA-B483-2D56C14DC40E@cs.otago.ac.nz>
+
+
+On 4/02/2011, at 8:26 PM, Johan Tibell wrote:
+
+> --show-iface HI_FILE
+
+sort.hs has 50 top level functions.
+One of them is main, and the others are all reachable from it.
+
+ghc -O sort.hs
+ghc --show-iface sort.hi
+
+The only functions listed are variants of main.
+Dropping -O leaves one variant of main only;
+the other 49 functions have disappeared.
+
+It is, by the way, something of a nuisance that if you do
+	ghc sort.hs
+	...
+	ghc -O sort.hs
+it insists "compilation NOT required" despite the fact that
+the previous compilation was with materially *different* options.
+(GHC 6.12.3)
+
+Given this clue I was able to get the information I wanted by
+exporting all the functions.
+
+This is the wrong interface.  If a programmer is concerned that
+strictness analysis might not be finding something they thought
+was strict, they would ideally like to have *all* the functions
+reported, but at a minimum, all of the top level functions.
+
+
+
+

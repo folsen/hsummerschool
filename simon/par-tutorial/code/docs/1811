@@ -1,0 +1,75 @@
+From eric2.71828 at gmail.com  Sat Dec 10 19:38:46 2011
+From: eric2.71828 at gmail.com (thinkingeric)
+Date: Sat, 10 Dec 2011 10:38:46 -0800 (PST)
+Subject: [Haskell-cafe] Hexpat: Lazy I/O problem with huge input files
+In-Reply-To: <AANLkTinwH+CceSvQmo3eA9awFy-EiTB4jAotxjC+kOxw@mail.gmail.com>
+References: <AANLkTik+AkcavtsAGwJcQM03yhwfZTLnfvzXKL08CB_a@mail.gmail.com>
+	<201010132323.20318.daniel.is.fischer@web.de>
+	<AANLkTinwH+CceSvQmo3eA9awFy-EiTB4jAotxjC+kOxw@mail.gmail.com>
+Message-ID: <1323542326223-5064790.post@n5.nabble.com>
+
+Hi Aleks, 
+Did you (or anyone) ever resolve this? I'm having precisely the same
+problem. 
+
+Eric
+
+
+
+Aleksandar Dimitrov wrote
+> 
+> Hello Daniel,
+> 
+>> I don't know Hexpat at all, so I can only guess.
+>>
+>> Perhaps due to the laziness of let-bindings, mError keeps a reference to
+>> the entire tuple, thus preventing tree from being garbage collected as it
+>> is consumed by print.
+> 
+> Thanks for your input. I think you are right, the parse tree isn't
+> freed as the parse proceeds if mError is forced later on in the
+> program (anywhere.) I don't think it has something to do with the
+> tuple constructor or 'let' itself, but I'm also not very proficient at
+> figuring these kinds of things out, so I may be very wrong. I did do
+> the following test to support my hypothesis:
+> 
+>> import Text.XML.Expat.Tree
+>> import System.Environment (getArgs)
+>> import Control.Monad (liftM)
+>> import qualified Data.ByteString.Lazy as C
+>>?
+>> -- This is the recommended way to handle errors in lazy parses
+>> main = do
+>>     f <- liftM head getArgs >>= C.readFile
+>>     let (_, mError) = parse defaultParseOptions f :: (UNode String, Maybe
+>> XMLParseError)
+> 
+>>     case mError of
+>>          Just err -> putStrLn $ "It failed : "++show err
+>>          Nothing -> putStrLn "Success!"
+> 
+> I.e., keeping the parse tree is forced by the evaluation of mError.
+> There is not a single reference to the parse tree within the program
+> itself (unless I'm not noticing some sort of do-notation magic in the
+> whole thing here...) It is interesting (and rather unfortunate) that
+> just evaluating a potential error seems to block garbage collection.
+> 
+> If I'm correct (and I hope I'm not!) this seems to prevent using lazy
+> I/O in Hexpat if you want to know if there's a parse error (and if so,
+> what that would be.) I'll contact the author, maybe it's a genuine
+> bug?
+> 
+> Thanks again :-)
+> Aleks
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe@
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+> 
+
+
+--
+View this message in context: http://haskell.1045720.n5.nabble.com/Hexpat-Lazy-I-O-problem-with-huge-input-files-tp3211223p5064790.html
+Sent from the Haskell - Haskell-Cafe mailing list archive at Nabble.com.
+
+

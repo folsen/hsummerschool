@@ -1,0 +1,41 @@
+From mail at joachim-breitner.de  Sat Apr  2 20:23:57 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Sat, 02 Apr 2011 23:53:57 +0530
+Subject: [Haskell-cafe] darcs repo browser
+In-Reply-To: <AANLkTintHCYs=kK3Q3RCQsGHH4irz2DwkzGg94=f-fKB@mail.gmail.com>
+References: <AANLkTintHCYs=kK3Q3RCQsGHH4irz2DwkzGg94=f-fKB@mail.gmail.com>
+Message-ID: <1301768637.10557.30.camel@kirk>
+
+Hi,
+
+Am Samstag, den 02.04.2011, 01:51 +0200 schrieb Radoslav Dorcik:
+> there is one haskell web application based on happstack for viewing
+> foreign darcs repos exposed only on pure HTTP servers.
+> I need that for checking status of some repositories when I don't have
+> access to darcs binary/shell... maybe it can be useful for somebody
+> else too.
+> 
+> Service is running on following URL: http://handra.rampa.sk/dawb/changes
+> See more comments on http://rampa.sk/static/dawb.html
+
+nice! Are you going to provide the above URL as a public service (which
+might or might not produce a lot of load), or only as a preview? In the
+former case, it would be nice to link to that on
+http://darcswatch.nomeata.de/
+
+Greetings,
+Joachim
+
+-- 
+Joachim "nomeata" Breitner
+  mail: mail at joachim-breitner.de | ICQ# 74513189 | GPG-Key: 4743206C
+  JID: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+  Debian Developer: nomeata at debian.org
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110402/1abfdb7b/attachment.pgp>
+

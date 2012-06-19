@@ -1,0 +1,23 @@
+From trebla at vex.net  Wed Aug 17 20:39:51 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Wed, 17 Aug 2011 14:39:51 -0400
+Subject: [Haskell-cafe] Overloading in a sub-class
+In-Reply-To: <4E4BE7EE.6060801@dit.ie>
+References: <4E4BE7EE.6060801@dit.ie>
+Message-ID: <4E4C0AF7.6020607@vex.net>
+
+On 11-08-17 12:10 PM, Patrick Browne wrote:
+> -- Are  + and negate part of the signature of Numb1?
+> class Numb0 a  =>  Numb1 a where
+
+No.
+
+> -- Is it possible to override these operations in instances of Numb1?
+> -- Something like:
+> -- instance Numb1 Float where
+> --    x + y = y
+> --    negate x =  x
+
+No.
+
+

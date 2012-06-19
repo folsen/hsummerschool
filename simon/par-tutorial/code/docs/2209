@@ -1,0 +1,14 @@
+From da.waterworth at gmail.com  Wed Dec 21 19:34:15 2011
+From: da.waterworth at gmail.com (Daniel Waterworth)
+Date: Wed, 21 Dec 2011 18:34:15 +0000
+Subject: [Haskell-cafe] State Machine Composition
+Message-ID: <CAP6oseSLBuHBobxGH291dR=hFFjkGVG8XMTSzFaLoVG3GumVOQ@mail.gmail.com>
+
+I made this simple state machine combinator library today. I think it
+works as a simple example of a good use for GADTs.
+
+https://gist.github.com/1507107
+
+Daniel
+
+

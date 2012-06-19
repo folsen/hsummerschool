@@ -1,0 +1,31 @@
+From will.t.murphy at gmail.com  Wed Aug 24 01:50:05 2011
+From: will.t.murphy at gmail.com (william murphy)
+Date: Tue, 23 Aug 2011 19:50:05 -0400
+Subject: [Haskell-cafe] Conflict with Network.CGI and System.Random
+Message-ID: <CAAXYtEcNU4bxEGCs6RRF-HgiuPy1LoXB6P6St=LfS40fwW-25A@mail.gmail.com>
+
+Hello all,
+
+I'm trying to write a program to be converted into a cgi file using
+Network.CGI and Text.Xhtml, and I want to have random numbers in it. Sounds
+simple, but I need to call the global random generator (I think) and I can't
+do that in the CGI block, i.e.
+
+cgiTMain = do
+            gen <- getStdGen
+            ...
+
+simply doesn't work, nor an variation of calling a function in the
+cgiTMainblock with a type of IO(), which is what I need to get the
+generator. Is it
+impossible both to write a program using Network.CGI and have random values?
+That seems very limiting, the people that wrote Haskell were smarter than
+that...
+
+Thanks,
+
+Will
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110823/e0210c2c/attachment.htm>
+

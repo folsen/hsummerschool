@@ -1,0 +1,33 @@
+From gcrosswhite at gmail.com  Tue Dec 20 11:52:29 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Tue, 20 Dec 2011 20:52:29 +1000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <805BC021-352F-4FFF-81E5-966E67FF362B@ouroborus.net>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAF1yvAQJX+f-MigNFF=6be12Uka6y45QD6oys_NQpxgREkRbaQ@mail.gmail.com>
+	<653CD606-D8B6-4BD8-AFD4-46738AF49DB3@gmail.com>
+	<805BC021-352F-4FFF-81E5-966E67FF362B@ouroborus.net>
+Message-ID: <AB9A308B-2896-47EB-B576-77D5DFC6917A@gmail.com>
+
+
+On Dec 20, 2011, at 8:38 PM, Ben Lippmeier wrote:
+
+> Some would say that non-termination is a computational effect, and I can argue either way depending on the day of the week.
+
+*shrug*  I figure that whether you call _|_ a value is like whether you accept the Axiom of Choice:  it is a situational decision that depends on what you are trying to learn more about.
+
+> Of course, the history books show that monads were invented *after* it was decided that Haskell would be a lazy language. Talk about selection bias.
+
+True, but I am not quite sure how that is relevant to _|_...
+
+Cheers,
+Greg
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111220/d9f131b5/attachment.htm>
+

@@ -1,0 +1,52 @@
+From es at ertes.de  Mon Apr 18 22:49:39 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Mon, 18 Apr 2011 22:49:39 +0200
+Subject: [Haskell-cafe] select(2) or poll(2)-like function?
+References: <20110417202902.GA7656@nutty.outback.escape.de>
+	<BANLkTikg=DFzHqm6qwdnxui7dkH8-Zz-7w@mail.gmail.com>
+	<BANLkTikRwK-Xo2fubid32+pyo7vubi9BPQ@mail.gmail.com>
+	<20110418060108.GA28930@login.cse.iitk.ac.in.cse.iitk.ac.in>
+	<20110418031317.41afd6f9@bhuda.mired.org>
+	<BANLkTin29BVd=+u0TisYBj7itd8PSTrhLw@mail.gmail.com>
+	<20110418060024.2785d3c3@bhuda.mired.org>
+	<20110418125639.047707c7@angst.streitmacht.eu>
+	<20110418075557.08f999d1@bhuda.mired.org>
+	<20110418175439.32a11749@angst.streitmacht.eu>
+	<BANLkTin9cS6OUqTg4avRpcET4DS_oBFLUg@mail.gmail.com>
+	<BANLkTinWP+kbBRVG5iVrcK80MU4V4_XpfQ@mail.gmail.com>
+Message-ID: <20110418224939.661b0e5c@angst.streitmacht.eu>
+
+Don Stewart <dons00 at gmail.com> wrote:
+
+> Redirecting to haskell-cafe@, where this kind of long discussion belongs.
+
+Answering to Mike Meyer here, because it has been requested multiple
+times that we move the discussion to the cafe.
+
+What you described about Eiffel didn't sound very different from what
+Haskell does, but in Haskell the OOP part is missing.  You can very well
+pass MVars as arguments to a concurrent thread.  This is the usual way
+to tell a thread to do something and wait for its answer.  Of course you
+don't have to wait right away.  You can command multiple threads to do
+something and then collect the answers pretty straightforwardly both
+with little programming and with little execution overhead.
+
+However, as STM gains more popularity you generally don't use the old
+fashioned command/wait concept.  You would rather have a certain number
+of threads running all the time and communicating through transactions
+in variables.  Threads with shorter lifetimes (for example for client
+connections) would not know about the other threads.  They just know
+about the variables they need to use.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

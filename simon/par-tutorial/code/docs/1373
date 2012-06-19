@@ -1,0 +1,56 @@
+From daniel.is.fischer at googlemail.com  Thu Aug 25 20:38:12 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Thu, 25 Aug 2011 20:38:12 +0200
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <4E568D11.30800@btinternet.com>
+References: <4E568D11.30800@btinternet.com>
+Message-ID: <201108252038.13242.daniel.is.fischer@googlemail.com>
+
+On Thursday 25 August 2011, 19:57:37, Andrew Coppin wrote:
+> Quoting the Haddock documentation for Data.Bits.bitSize:
+> 
+> "Return the number of bits in the type of the argument. The actual value
+> of the argument is ignored. The function bitSize is undefined for types
+> that do not have a fixed bitsize, like Integer."
+> 
+> Does anybody else think it would be *far* more useful if bitSize applied
+> to an Integer would tell you how many bits that particular Integer is
+> using? Especially given that it can vary?
+
+I'm not sure about that.
+
+> 
+> Is there a way to actually determine how many bits are in an Integer?
+> 
+
+Sure. The exact method depends on what result you want and which integer-* 
+package you use.
+
+You have to handle 0 and negative n first (how to treat negative n is not 
+obvious).
+
+Then, for n > 0, f you want 'index of highest set bit' (+1),
+
+(1 +) integerLogBase 2 n
+
+does the trick (integerLogBase is available from GHC.Float, as of 7.2.1, 
+it's decently fast).
+
+If you want 'WORD_SIZE_IN_BITS * number of words used', you could use the 
+above and round up to the next multiple of WORD_SIZE_IN_BITS, or you could 
+make use of the representation of Integers; with integer-gmp,
+
+data Integer
+    = S# Int#
+    | J# Int# ByteArray#
+
+so
+
+usedWords (S# _) = 1
+usedWords (J# s# _) = I# s#
+
+(nota bene, I don't think it's positively guaranteed that the highest order 
+word in a (J# _ _) is nonzero, so usedWords could give a higher answer than 
+rounding up from integerLogBase 2 n).
+
+

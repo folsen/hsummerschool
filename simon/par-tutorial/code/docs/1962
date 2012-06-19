@@ -1,0 +1,45 @@
+From aslatter at gmail.com  Thu Dec 15 05:49:40 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Wed, 14 Dec 2011 22:49:40 -0600
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <430054FA-800C-408C-8B75-9C3422293133@gmail.com>
+References: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+	<CAKjSnQFvJrz1iFd8XsGbK4q7ZK9F0qjXXUHdoTn1XVmeeAm+OQ@mail.gmail.com>
+	<430054FA-800C-408C-8B75-9C3422293133@gmail.com>
+Message-ID: <CAKjSnQFUxUbDAen_p7DPobzusVo30_6q=x2yzQejsnWe914ZnQ@mail.gmail.com>
+
+On Wed, Dec 14, 2011 at 10:33 PM, Gregory Crosswhite
+<gcrosswhite at gmail.com> wrote:
+>
+> On Dec 15, 2011, at 2:13 PM, Antoine Latter wrote:
+>
+> Isn't this what Ross previously suggested? I think his suggested
+> instance methods for Maybe return the elements of the lists
+> incrementally.
+>
+>
+> Yes and no. ?Yes, his excellent suggestion?is one of my favorite ideas for
+> what we should do with Alternative that I have seen so far and was?the
+> inspiration for my proposal, but no it is not the same idea at all. ?Whereas
+> his suggestion keeps the types and generic definitions of some and many the
+> way that they are but overrides them manually to work for types such as
+> Maybe, my proposal is that we instead change the types and generic
+> definitions of some and many themselves so that they automatically do the
+> right thing for the Maybe and List types.
+>
+
+Unless the Alternative and Applicative type classes offer class
+methods to guarantee laziness, we'll have a hard time writing
+functions with those guarantees. Such is the cost of parametric
+polymorphism! But also the beauty - in the absence of any laziness
+guaranteeing functions on the class, we are promised that a
+polymorphic function can't be using magic fairy dust behind our back.
+
+We could add some sort of laziness guaranteeing combinators to the
+class interface, but that would restrict its membership even further.
+
+Or we could not use 'some' and 'many' with list and maybe :-)
+
+Antoine
+
+

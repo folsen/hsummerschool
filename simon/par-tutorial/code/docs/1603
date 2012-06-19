@@ -1,0 +1,82 @@
+From mail at joachim-breitner.de  Thu Dec  1 21:44:56 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Thu, 01 Dec 2011 21:44:56 +0100
+Subject: [Haskell-cafe] List Fusion of concatMap
+Message-ID: <1322772296.2990.60.camel@kirk>
+
+Hi,
+
+in further attempts to get a better understanding of list fusion, I am
+investigating under what conditions, calls to concat and concatMap
+succesfully fusion away. Here is my test code:
+
+import System.Exit 
+
+func0 :: Int -> Bool
+func0 n = any (>5) [1..n]
+{-# NOINLINE func0 #-}
+
+func1 :: Int -> Bool
+func1 n = any (>5) (concatMap (\m -> [1..m]) [1..n])
+{-# NOINLINE func1 #-}
+
+func2 :: Int -> Bool
+func2 n = any (>5) (concat (map (\m -> [1..m]) [1..n]))
+{-# NOINLINE func2 #-}
+
+func3 :: Int -> Bool
+func3 n = any (>5) [ i | m <- [1..n] , i <- [1..m]]
+{-# NOINLINE func3 #-}
+
+func4 :: Int -> Bool
+func4 n = any (>5) (
+    let ok m = [ i | i <- [1..m] ]
+    in concatMap ok [1..n]
+    )
+{-# NOINLINE func4 #-}
+
+main = if func0 10 && func1 10 && func2 10 && func3 10 && func4 10
+       then exitSuccess else exitFailure
+
+I deliberately did not use any putStr statements in main, so that I can
+easily spot list types in the output of ghc -fext-core. The use of "any"
+and "[...]" represent any fusion-enabled producers or consumers; these
+are just very well-behaving and easy to spot in the core output. Here
+are my obeservations:
+
+      * The code generated for func0 does not use any lists at all, but
+        rather one recursive (even tail-recursive) function, as
+        expected. This was basically a test whether I am indeed able to
+        observe list fusion.
+      * func1 and func2 are not fused successfully; both core outputs
+        still contain mentions of [] (search for ZMZN; is there a tool
+        that does this unescaping for me? ghc-core does not, it seems.)
+      * Now the surprising fact: func3 does without any lists! The code
+        generated contains two nested recursive functions, the inner one
+        even tail recursive (and the outer one could have been made
+        tail-recursive, it seems, but that would be a different issue).
+      * func4, which is a direct one-step translation of func3 according
+        to the semantic rules of list comprehension in the haskell
+        report, again is not fused completely.
+
+Now I wonder: How do I need to phrase the function with concatMap such
+that fusion works? Does ghc treat list comprehensions differently here?
+Do the rewrite rules need work so that func1 and func2 do fuse
+correctly?
+
+Thanks for your attention,
+Joachim
+
+-- 
+Joachim "nomeata" Breitner
+  mail at joachim-breitner.de  |  nomeata at debian.org  |  GPG: 0x4743206C
+  xmpp: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111201/b5a2b2be/attachment.pgp>
+

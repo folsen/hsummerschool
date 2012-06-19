@@ -1,0 +1,22 @@
+From ckkashyap at gmail.com  Fri Feb 11 05:31:10 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Fri, 11 Feb 2011 10:01:10 +0530
+Subject: [Haskell-cafe] Data.ByteString.Lazy.ByteString vs
+	Data.ByteString.Lazy.Internal.ByteString
+In-Reply-To: <20110211042622.GV14969@whirlpool.galois.com>
+References: <AANLkTi=G-6ftfBTwZHZfFt9n43H7dTZfrf57ZgZUmJFm@mail.gmail.com>
+	<20110211042622.GV14969@whirlpool.galois.com>
+Message-ID: <AANLkTikARUD+uGtaDP_nHRb98=6FmHVyogBPA15sTq2X@mail.gmail.com>
+
+>
+>
+> Yep, the 'Internal' module is where the type is defined, and then
+> re-exported through the regular module.
+>
+> Thanks Don ... good to know.
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110211/5c0f3e9c/attachment.htm>
+

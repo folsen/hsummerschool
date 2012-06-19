@@ -1,0 +1,45 @@
+From bos at serpentine.com  Tue Aug  9 02:06:02 2011
+From: bos at serpentine.com (Bryan O'Sullivan)
+Date: Mon, 8 Aug 2011 17:06:02 -0700
+Subject: [Haskell-cafe] Analyzing slow performance of a Haskell program
+In-Reply-To: <CAKaDkC4Ab3yoG0UoaN9C4CM+1-goZ_yswqOLcBz7ejE6LfLg8w@mail.gmail.com>
+References: <CAKaDkC7-vQo_AXRRX6-+P+PKV87b54D21k6bSnub=JYvH_mnRQ@mail.gmail.com>
+	<CAGXzfB60BDXV6vOJfk6YVBG7xjyhhmTDn=+ax6mjLBx5kY6B=A@mail.gmail.com>
+	<201108071120.18563.daniel.is.fischer@googlemail.com>
+	<CAKaDkC40kbdfEinqsUuoaexpD4JCmfX-wTvt5MZt9NPdU--ELA@mail.gmail.com>
+	<CANVKUrXxHLgmGcYwk+hJHyME22TUDVoZ2n4K0T7afqH1LHZqpg@mail.gmail.com>
+	<CAKaDkC4Ab3yoG0UoaN9C4CM+1-goZ_yswqOLcBz7ejE6LfLg8w@mail.gmail.com>
+Message-ID: <CACw0niLT_DORERkF0PqQMephH1-h7pYS1ajT-Vsk3S6v9tOHMw@mail.gmail.com>
+
+On Mon, Aug 8, 2011 at 9:24 AM, Chris Yuen <kizzx2+haskell at gmail.com> wrote:
+
+>
+> For reference I have asked the same question on StackOverflow. One person
+> suggested that the reason might be that Int64 on Windows is broken (
+> http://stackoverflow.com/questions/6970904/analyzing-slow-performance-of-a-haskell-program/6976448#6976448
+> ).
+>
+
+No, they're barking up the wrong tree.
+
+I've put an idiomatic Haskell translation of your C++ algorithm at
+https://gist.github.com/1133048#file_wordy.hs
+
+(I've also included a copy of your original C++, with a bug fixed, in the
+same gist.)
+
+As you can see, the two are almost identical. Not surprisingly, each one
+spends the bulk of its time computing word lengths.
+
+GHC simply doesn't do a great job of compiling fairly tight code like this.
+gcc generates about 100 lines of assembly that's mostly easy to follow
+(except for some bit-twiddling tricks to avoid div instructions). Although
+the Core it generates looks fine, GHC spends quite a bit of time in its
+generated assembly on what looks to me like STG housekeeping (it spends only
+0.3% of its time in the garbage collector, because it doesn't allocate
+memory). The overall result is that the Haskell code runs about 5x more
+slowly than the C++ code.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110808/bf73770a/attachment.htm>
+

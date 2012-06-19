@@ -1,0 +1,24 @@
+From christopher.j.wilson at gmail.com  Tue Aug 16 19:46:28 2011
+From: christopher.j.wilson at gmail.com (Christopher Wilson)
+Date: Tue, 16 Aug 2011 12:46:28 -0500
+Subject: [Haskell-cafe] Getting segmentation fault when profiling,
+	despite `-K100M'.
+In-Reply-To: <CACG=oWE-+nW6p0wErUbC5_Ag1gZBhuW41B84fvCczsFJVcGDhw@mail.gmail.com>
+References: <1313503012.9770.9.camel@dbanas-eeepc>
+	<CACG=oWE-+nW6p0wErUbC5_Ag1gZBhuW41B84fvCczsFJVcGDhw@mail.gmail.com>
+Message-ID: <CAOxF3fGXQ_rWQJLbE8T5z3q5HvgGb4yJZDJ0Hyhh1LRVJ+7M_Q@mail.gmail.com>
+
+On Tue, Aug 16, 2011 at 12:42 PM, Niklas Larsson <metaniklas at gmail.com> wrote:
+> If you want to call a Haskell function from C you should do a "foreign
+> export" of the function, that will create a stub function with C
+> calling convention that you can call.
+
+
+I put an example of how to do this on Rosetta Code:
+
+http://rosettacode.org/wiki/Use_another_language_to_call_a_function#Haskell
+
+-- 
+Chris Wilson <christopher.j.wilson at gmail.com>
+
+

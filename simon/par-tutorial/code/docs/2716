@@ -1,0 +1,23 @@
+From jake.mcarthur at gmail.com  Fri Feb  4 17:59:46 2011
+From: jake.mcarthur at gmail.com (Jake McArthur)
+Date: Fri, 04 Feb 2011 10:59:46 -0600
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4B19DB.5000907@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>
+Message-ID: <4D4C3082.8030307@gmail.com>
+
+On 02/03/2011 03:10 PM, Andrew Coppin wrote:
+> (Unless you're seriously going to suggest that GHC's native code
+> generator is any match for the might of a half-decent C compiler...)
+
+I don't know enough about the native code generator to make a claim like 
+that, but we're not comparing the native code generator against a C 
+compiler; we're comparing it against a C code generator whose output is 
+fed through a C compiler. These are very different things, and I think 
+it gives the native code generator an edge. My own observations from 
+immediately before the C backend was deprecated was that the native code 
+generator averaged slightly better performing code.
+
+- Jake
+
+

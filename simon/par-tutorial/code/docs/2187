@@ -1,0 +1,68 @@
+From michael at snoyman.com  Wed Dec 21 12:26:48 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 21 Dec 2011 13:26:48 +0200
+Subject: [Haskell-cafe] "mapping" an Enumerator
+In-Reply-To: <jcse6q$ao6$1@dough.gmane.org>
+References: <loom.20111221T112258-628@post.gmane.org>
+	<CAKA2JgJaWC6DeFn5x33Ux7oWOK9rwtFe0CE=z+hixZrC079PtA@mail.gmail.com>
+	<jcse6q$ao6$1@dough.gmane.org>
+Message-ID: <CAKA2Jg+92Jq=Jo72n3LBoGdj_x9qb9uPC8FzQFVi+xvudByspw@mail.gmail.com>
+
+On Wed, Dec 21, 2011 at 12:59 PM, Kannan Goundan <kannan at cakoose.com> wrote:
+> Michael Snoyman wrote:
+>
+>> On Wed, Dec 21, 2011 at 12:35 PM, Kannan Goundan <kannan at cakoose.com>
+>> wrote:
+>>> I'm using the Data.Enumerator library. ?I'm trying to write a "map"
+>>> function that converts an Enumerator of one type to another. Something
+>>> like:
+>>>
+>>> ? mapEnum :: Monad m =>
+>>> ? ? ? ? ?(a -> b) ->
+>>> ? ? ? ? ?Enumerator a m r ->
+>>> ? ? ? ? ?Enumerator b m r
+>>>
+>>> Any hints?
+>>>
+>>> (My exact use case is that I have a ByteString enumerator and I need to
+>>> pass it to something that requires a Blaze.Builder enumerator.)
+>>>
+>>>
+>>> _______________________________________________ Haskell-Cafe mailing
+>>> list
+>>> Haskell-Cafe at haskell.org
+>>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+>> You can use the Data.Enumerator.List.map function to create an
+>> Enumeratee, and then the Data.Enumerator.$= operators to join them
+>> together. Something like:
+>>
+>> mapEnum f enum = enum $= EL.map f
+>
+> I tried something like that but the resulting type isn't quite what I'm
+> looking for.
+>
+> ? mapEnum :: Monad m =>
+> ? ? ? ? (a -> b) ->
+> ? ? ? ? Enumerator a m (Step b m r) ->
+> ? ? ? ? Enumerator a m r
+>
+> (BTW, Michael, my exact use case is that I have ByteString enumerators,
+> but your HTTP-Enumerator library wants Blaze.Builder enumerators :-)
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+Huh, I'm stumped ;). John: is this possible in enumerator?
+
+In general though: do you need precisely that type signature? Most of
+the time, Enumerators have polymorphic return types. It might be a
+problem from http-enumerator requiring (), but I *think* we can work
+around that.
+
+Michael
+
+

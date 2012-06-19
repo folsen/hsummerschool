@@ -1,0 +1,16 @@
+From daniel.is.fischer at googlemail.com  Fri Apr  8 14:19:21 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Fri, 8 Apr 2011 14:19:21 +0200
+Subject: [Haskell-cafe] fmap and LaTeX
+In-Reply-To: <BANLkTikhJJEUp3DWjXGxOKSo1gWed1AM9A@mail.gmail.com>
+References: <BANLkTikhJJEUp3DWjXGxOKSo1gWed1AM9A@mail.gmail.com>
+Message-ID: <201104081419.22114.daniel.is.fischer@googlemail.com>
+
+On Friday 08 April 2011 14:05:46, Mitar wrote:
+> 
+> I have also tried \mathbin{<\$>} but it adds space around $ (at least
+> in lhs2tex), so it looks ugly.
+
+Would \mathbin{\langle\$\rangle} look better?
+
+

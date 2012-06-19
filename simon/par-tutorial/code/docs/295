@@ -1,0 +1,25 @@
+From mmitar at gmail.com  Mon Apr 11 11:56:13 2011
+From: mmitar at gmail.com (Mitar)
+Date: Mon, 11 Apr 2011 11:56:13 +0200
+Subject: [Haskell-cafe] Generating random graph
+In-Reply-To: <4DA29355.2080309@uni-bonn.de>
+References: <BANLkTikuGdF_zEOSZ23S=W8QgmmAtWzJeA@mail.gmail.com>
+	<4DA29355.2080309@uni-bonn.de>
+Message-ID: <BANLkTingx9QGugrK93xer==7B5RDm=Kb-A@mail.gmail.com>
+
+Hi!
+
+On Mon, Apr 11, 2011 at 7:36 AM, Steffen Schuldenzucker
+<sschuldenzucker at uni-bonn.de> wrote:
+> So when using randomRs, the state of the global random number generator is
+> not updated, but it is used again in the next iteration of the toplevel forM
+> [1..graphSize] loop.
+
+I thought it would be interleaved.
+
+Thanks.
+
+
+Mitar
+
+

@@ -1,0 +1,40 @@
+From miguelimo38 at yandex.ru  Thu Dec 22 05:39:31 2011
+From: miguelimo38 at yandex.ru (MigMit)
+Date: Thu, 22 Dec 2011 08:39:31 +0400
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+	<BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+	<CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+Message-ID: <654DA160-C961-44AA-B420-0DEE81A5CB0B@yandex.ru>
+
+
+On 22 Dec 2011, at 06:25, Alexander Solla wrote:
+
+> Denotational semantics is unrealistic.
+
+And so are imaginary numbers. But they are damn useful for electrical circuits calculations, so who cares?
+
+> The /defining/ feature of a bottom is that it doesn't have an interpretation.
+
+What do you mean by "interpretation"?
+
+> They should all be treated alike, and be treated differently from every other Haskell value.
+
+But they ARE very similar to other values. They can be members of otherwise meaningful structures, and you can do calculations with these structures. "fst (1, _|_)" is a good and meaningful calculation.
+
+>  Every other Haskell value /does/ have an interpretation.
+
+So, (_|_) is bad, but (1, _|_) is good?
+
+You know, my scientific advisor used to say "math is about calling different things by the same name; philosophy is about calling the same thing by different names". It seems to me that philosophy is something you're doing now, whereas programming is all about math.
+
+> I happen to only write Haskell programs that terminate.
+
+Sure, but if you've ever used recursion, then you do have bottoms in your program.
+

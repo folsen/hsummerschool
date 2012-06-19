@@ -1,0 +1,19 @@
+From mxcantor at gmail.com  Thu Feb  3 16:48:18 2011
+From: mxcantor at gmail.com (Max Cantor)
+Date: Thu, 3 Feb 2011 23:48:18 +0800
+Subject: [Haskell-cafe] OSX i386/x86 and x86_64 - time to switch supported
+	platforms?
+References: <801E1648-B34B-4F93-9BAB-9A05EC77D747@gmail.com>
+Message-ID: <C9311AB9-65D8-4ACE-B20B-F429039934CB@gmail.com>
+
+I originally posted this on haskell-GHC-users, but was curious how the wider community felt.
+
+The last 32-bit, Intel Mac was the Mac Mini, discontinued in August 2007. The bulk of them were discontinued in 2006, along with PowerPC Macs.  Does it make sense to relegate OSX x86_64 to community status while the 32-bit version is considered a supported platform?  
+
+Given that I'm far from experienced enough to be able to contribute meaningfully to GHC, I'm not complaining about anyone's efforts, just that those efforts might be a bit misallocated.  I'd venture a guess that far more people are interested in running 64-bit GHC on OSX than in running GHC on what is now fairly antiquated hardware.
+
+mc
+
+
+
+

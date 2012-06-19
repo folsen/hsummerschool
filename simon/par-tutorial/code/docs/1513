@@ -1,0 +1,61 @@
+From conrad at metadecks.org  Tue Aug 30 01:26:25 2011
+From: conrad at metadecks.org (Conrad Parker)
+Date: Tue, 30 Aug 2011 07:26:25 +0800
+Subject: [Haskell-cafe] Decompressing and http-enumerator
+In-Reply-To: <CAKA2JgJVLxsF3U4_zfMro=erD1tNiK88y+tVs5PkJrkPPQeMvg@mail.gmail.com>
+References: <CAKA2Jg+u_BtN5WKrTc4T_mgmuxP5==ASbsh5rvxJaQhVK64MTg@mail.gmail.com>
+	<CAHZrzdqdDtoPa+eQS5XtyRFx-2=1WtOQf=eDERvQuzu_dsMwAw@mail.gmail.com>
+	<CAKA2JgJVLxsF3U4_zfMro=erD1tNiK88y+tVs5PkJrkPPQeMvg@mail.gmail.com>
+Message-ID: <CA+FqJiFLaaEX2gR5V-qvg30oB8r1GHLRO5Mqss7RBgED8BE2eA@mail.gmail.com>
+
+On Aug 29, 2011 9:39 PM, "Michael Snoyman" <michael at snoyman.com> wrote:
+>
+> On Mon, Aug 29, 2011 at 2:21 PM, Gregory Collins
+> <greg at gregorycollins.net> wrote:
+> > On Mon, Aug 29, 2011 at 10:08 AM, Michael Snoyman <michael at snoyman.com>
+wrote:
+> >> Hi all,
+> >>
+> >> Erik just opened an issue on Github[1] that affected me very recently
+> >> as well when writing some automated Hackage checking code[2]. The
+> >> issue is that http-enumerator sees the content-encoding header and
+> >> decompresses the tarball, returning an uncompressed tarfile. I can
+> >> avoid this with rawBody = False, but that's not a real solution, since
+> >> that also disables chunked response handling.
+> >
+> > A web server should not be setting "Content-encoding: gzip" on a
+> > .tar.gz file. I agree that http-enumerator is correctly following the
+> > spec by decompressing.
+> >
+> > If you decide to implement a workaround for this, the only reasonable
+> > thing I can think of is adding a "ignoreContentEncoding" knob the user
+> > can twiddle to violate spec.
+>
+> I'm wondering what the most appropriate way to handle this is. Maybe a
+> dontDecompress record, looking like:
+>
+>    type ContentType = ByteString
+>    dontDecompress :: ContentType -> Bool
+>
+> Then browser behavior would be:
+>
+>    browserDecompress = (== "application/x-tar")
+>
+> and current behavior would be:
+>
+>    defaultDecompress = const False
+>
+> I don't have any strong opinions here...
+>
+
+I agree with Gregory's suggestion of an API that allows an application to
+see the data prior to decoding the Content-Encoding. It could be tagged with
+the name of the content-coding, and there could be a generic decode function
+(ie. the library already knows what needs to be done to decode, so there's
+no need for the application to go looking up the decode  function by name).
+
+Conrad.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110830/f3a7fabb/attachment.htm>
+

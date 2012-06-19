@@ -1,0 +1,41 @@
+From thomas.dubuisson at gmail.com  Fri Aug 26 10:01:49 2011
+From: thomas.dubuisson at gmail.com (Thomas DuBuisson)
+Date: Fri, 26 Aug 2011 01:01:49 -0700
+Subject: [Haskell-cafe] hoogle data no connection to host
+ http://code.galois.com/darcs/haskell-platform ...
+In-Reply-To: <20110826073922.GA23687@sirch>
+References: <20110826073922.GA23687@sirch>
+Message-ID: <CAOk36JgYs-Zpci8=gbeWZG2DXHFWDc50yMsdPXwKb-yyhM0-Dg@mail.gmail.com>
+
+The Galois link works fine for me now - it also worked for me earlier
+today when I ran hoogle data for my own system.  I suggest you try
+again, possibly with a better internet connection?
+
+Cheers,
+Thomas
+
+On Fri, Aug 26, 2011 at 12:39 AM, informationen <informationen at gmx.de> wrote:
+> Hi,
+>
+> i installed Hoogle succesfullly with
+> cabal install hoogle
+>
+> then i try to run
+> hoogle data
+>
+> but the connection to
+> http://code.galois.com/darcs/haskell-platform/haskell-platform.cabal
+> times out.
+> How can i download the data needed for the hoogle command line
+> tool?
+>
+> Greetings
+> Chris
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

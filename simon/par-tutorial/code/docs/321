@@ -1,0 +1,185 @@
+From dagitj at gmail.com  Tue Apr 12 06:07:23 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Mon, 11 Apr 2011 21:07:23 -0700
+Subject: [Haskell-cafe] Assimp FFI Library
+In-Reply-To: <BANLkTimW-71NcBRqnr68kRAvKZytE1uVwA@mail.gmail.com>
+References: <BANLkTimW-71NcBRqnr68kRAvKZytE1uVwA@mail.gmail.com>
+Message-ID: <BANLkTi=y8+2YbTT1k0jiZHtCr6TKFNoDcw@mail.gmail.com>
+
+On Mon, Apr 11, 2011 at 8:38 PM, Joel Burget <joelburget at gmail.com> wrote:
+
+> Hello,
+>
+> I've been working on an ffi library for the Assimp asset import library(
+> http://assimp.sourceforge.net). It should be useful for people doing
+> graphics in Haskell. I've been working on it so I can import models into a
+> ray-tracer I've been working on. My current progress is here:
+> https://github.com/joelburget/assimp. A couple weeks ago I managed to
+> import models and do some simple (and slightly buggy) renders, but since
+> then I've been redoing a lot of the guts of the library. At this moment it
+> doesn't build because of the changes I'm in the middle of. Hopefully I'll be
+> able to release the first version in the next week or so.
+>
+
+That's very cool!
+
+
+>
+> I've run into a few roadblocks that I would be thankful for help with.
+>
+> 1. In Graphics.Formats.Assimp.Vec I'm trying to get the fastest and
+> smallest possible vector types since a program could easily have millions of
+> vectors in memory and operations on them take a huge fraction of the time in
+> an average program. One problem I ran into is how to make the vectors
+> type-safe. The assimp library has separate data types for colors and
+> vectors, but represented the same in memory. I have a few ideas about how to
+> represent these:
+>
+> a. The way I've been doing it:
+>
+> >data N2
+> >data N3
+> >data N4
+> >data Color
+>
+> >class Num a => Vector n a where
+> >  data Vec n a :: * -> *
+> >  ... rest of class
+>
+> >-- A 3-dimensional vector of doubles. t is the (phantom) tag type, like
+> Color, Direction, etc
+> >-- This is meant to improve type safety
+> >instance Vector N3 Double where
+> >  data Vec N3 Double t = Vec3D !Double !Double !Double deriving (Show, Eq)
+>
+
+I think you'll want to add {-# UNPACK #-} pragmas in there.  You can use
+vacuum to figure out the size of the representation:
+http://hackage.haskell.org/package/vacuum-1.0.0
+
+<http://hackage.haskell.org/package/vacuum-1.0.0>
+
+> >  ... rest of instance
+>
+> This seems very close to what I want, but it presents a few problems.
+> First, I create matrices from vectors, so the matrix must have an implicit
+> type, the type of the tags from the vectors it is made of. I made this () by
+> convention but then to multiply a vector by this matrix I have to use the
+> dot product and other vector operations, but then the tag type from the
+> matrix is different from that of the matrix I am multiplying. This leads to
+> the type `dot :: Vec n a t1 -> Vec n a t2 -> a`. Notice how there are two
+> different tag types, reducing type safety. Another problem is importing
+> vectors from the library. I would like to have different tags for distance
+> and direction, again to increase type safety, but they are both represented
+> the same way in the library, so the Storable instance can't always know what
+> type to create. I would probably always have to return a vector with tag
+> type ().
+>
+> b. Just create separate Vec and Color datatypes. I would be mirroring the
+> library directly. Both would be instances of Vector.
+>
+> c. Use newtype wrappers around Vec to represent the different types. I
+> don't really like this solution because the newtypes are too painful to use.
+>
+> d. I've thought about some other solutions that I've forgotten now. Maybe
+> you have something better!
+>
+
+If you have the time to spare, I would try it multiple ways and write some
+code using each.  See what feels natural, see what stops errors in your
+programs, and see what is just cumbersome.
+
+Is it actually important to keep color vectors and direction vectors
+separate?  If so, you might consider that at a higher level than the
+representation level.  For example, what if I want to render vectors of
+colors as directional vectors or vice versa as part of a scientific
+visualization?  I would have to either pick the "wrong" representation
+initially or use the right one and convert them at the end?  What bugs are
+you preventing by not allowing me to multiply colors and directions?
+
+
+>
+> Remember, I would like to have a high degree of type safety if possible,
+> but the top consideration is performance. Another thing I've been wondering
+> about: could I use overlapping instances to allow the vectors to be of any
+> numeric type, but specialize and unbox them for the common ones? I'm
+> assuming unboxing can't be done unless we have a specific type because the
+> compiler won't know how large the type is.
+>
+> 2. How do people feel about the vector and matrix operators (eg |*|, |*||,
+> ||*)? I like them a lot but I would like to see how other people feel about
+> them.
+>
+
+I would assume that's matrix |*| matrix, matrix |*|| vector, and vector ||*|
+matrix.  Is that right?
+
+
+>
+> 3. Do I have to worry about marshalling float, double, and int straight to
+> Haskell? The report says Float and Double should conform to the IEEE
+> standard. I'm more interested in Int since the report only requires a 30 bit
+> Int. On my computer they appear to be 64 bits. Does this vary on 32 bit
+> computers?
+>
+
+There are size specific types in Data.Int, such as Int16 and Int32.
+ Similarly we have unsigned types in Data.Word.
+
+
+>
+> 4. There are several places the original library uses unsigned ints.
+> Obviously they can't be negative so I used CUInt in the Haskell code. I
+> never see CUInt instead of Int in real code. Should I change these?
+>
+
+CUInt is fine.  You could also use Data.Word.
+
+
+> 5. I've reduced a lot of boilerplate in Vec.hs by using the CPP
+> preprocessor extension. I could reduce the boilerplate by another factor of
+> 3 if I could recursively call templates but that's not allowed. I would like
+> to have one template to generate both of these lines:
+>
+> > data Vec N2 Double t = Vec2D !Double !Double deriving (Show, Eq)
+> > data Vec N3 Double t = Vec3D !Double !Double !Double deriving (Show, Eq)
+>
+> Notice there is an extra !Double in the second. Is there an easy way to do
+> this? I don't know much about Template Haskell, would that work? Would it be
+> easy?
+>
+
+I think so, although I tend to avoid TH just to keep things simple.  How
+many N* do you have?
+
+
+>
+>
+> I should mention that I'm going to convert all the Storable instances from
+> something like this:
+> >  peek p = do
+> >    w <- (#peek aiQuaternion, w) p
+> >    x <- (#peek aiQuaternion, x) p
+> >    y <- (#peek aiQuaternion, y) p
+> >    z <- (#peek aiQuaternion, z) p
+> >    return $ Quaternion w x y z
+>
+> to something like this:
+>
+> >  peek p = Quaternion <$> (#peek aiQuaternion, w) p
+> >                      <*> (#peek aiQuaternion, w) p
+> >                      <*> (#peek aiQuaternion, w) p
+> >                      <*> (#peek aiQuaternion, w) p
+>
+
+Nice.  I should do that in some of my storable instances.
+
+As food for thought, I recommend you read this paper:
+http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.102.108
+
+I hope that helps!
+Jason
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110411/7345ca4c/attachment.htm>
+

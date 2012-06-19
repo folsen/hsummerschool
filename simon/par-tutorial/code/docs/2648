@@ -1,0 +1,43 @@
+From daniel.is.fischer at googlemail.com  Thu Feb  3 20:54:23 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Thu, 3 Feb 2011 20:54:23 +0100
+Subject: [Haskell-cafe] Reader monad wrapping State monad
+In-Reply-To: <24103.19922.qm@web31103.mail.mud.yahoo.com>
+References: <24103.19922.qm@web31103.mail.mud.yahoo.com>
+Message-ID: <201102032054.24988.daniel.is.fischer@googlemail.com>
+
+On Thursday 03 February 2011 20:18:43, michael rice wrote:
+> Given the first program, it seems that the unchanging first element of
+> the tuple could be handled by a Reader monad, leading to the second
+> program, where b becomes the state, but how do I get the constant a from
+> the Reader monad?
+
+You need a monad-transformer to use both, Reader and State.
+You can use either
+
+ReaderT Double (State Double)
+
+or
+
+StateT Double (Reader Double)
+
+(they're isomorphic).
+
+Then you can query the modifiable state with get (from the MonadState 
+class) and the immutable with ask (from the MonadReader class)
+
+type Heron = StateT Double (Reader Double)
+
+sqrtH :: Heron Double
+sqrtH = do
+  a <- ask
+  b <- get
+  let c = 0.5*(b + a/b)
+  if (good enough)
+    then return c
+    else put c >> sqrtH
+
+mySqrt a = runReader (evalStateT sqrtH (a*0.5)) a
+
+
+

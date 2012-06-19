@@ -1,0 +1,163 @@
+From sschuldenzucker at uni-bonn.de  Sun Dec  4 19:00:08 2011
+From: sschuldenzucker at uni-bonn.de (Steffen Schuldenzucker)
+Date: Sun, 04 Dec 2011 19:00:08 +0100
+Subject: [Haskell-cafe] Anonymous, Unique Types, maybe
+In-Reply-To: <4EDB0ABC.10705@gmail.com>
+References: <4EDB0ABC.10705@gmail.com>
+Message-ID: <4EDBB528.7010200@uni-bonn.de>
+
+
+Hi Scott,
+
+a good idea. Why not use an existential to encode your types like
+
+myMap :: (a -> b) -> a-list of length n
+     -> b-list of length n
+myFilter :: (a -> Bool) -> a-list of length n
+     -> exists m. a-list of length m
+
+, where the first case is modeled using a type annotation and the second 
+using an existential:
+
+ >
+ > {-# LANGUAGE ExistentialQuantification #-}
+ >
+ > -- just for @data S@ at the very end.
+ > {-# LANGUAGE EmptyDataDecls #-}
+ >
+ > -- don't export the LList constructor!
+ > data LList n a = LList [a]
+ >
+ > llist2List :: LList n a -> [a]
+ > llist2List (LList xs) = xs
+ >
+ > unsafeList2LList :: [a] -> LList n a
+ > unsafeList2LList = LList
+ >
+ > unsafeWrapLList :: ([a] -> [b]) -> LList n a -> LList m b
+ > unsafeWrapLList f = unsafeList2LList . f . llist2List
+ >
+ > unsafeCoerceLList :: LList n a -> LList m a
+ > unsafeCoerceLList = unsafeWrapLList id
+ >
+ > mapLList :: (a -> b) -> LList n a -> LList n b
+ > mapLList f = unsafeList2LList . map f . llist2List
+ >
+ >
+ > -- should be exported.
+ > data SomeLList a = forall n. SomeLList (LList n a)
+ >
+ > -- this is safe again! (SomeLList a) is a lot like [a].
+ > list2SomeLList :: [a] -> SomeLList a
+ > list2SomeLList = SomeLList . unsafeList2LList
+ >
+ > wrapSomeLList :: ([a] -> [b]) -> SomeLList a -> SomeLList b
+ > wrapSomeLList f (SomeLList ll) = list2SomeLList . f . llist2List $ ll
+ >
+ > myFilter :: (a -> Bool) -> LList n a -> SomeLList a
+ > myFilter p = list2SomeLList . filter p . llist2List
+ >
+ > -- NOTE that we're being extremely imprecise about the length of
+ > -- lists. We don't say "one less", but just "potentially different".
+ > myTail :: LList n a -> SomeLList a
+ > myTail lst = case llist2List lst of
+ >     []     -> error "myTail: empty list"
+ >     (_:xs) -> list2SomeLList xs
+ >
+ > myMap :: (a -> b) -> LList n a -> LList n b
+ > myMap = mapLList
+ >
+ > myMatchingZip :: LList n a -> LList n b -> LList n (a, b)
+ > myMatchingZip xs ys = unsafeList2LList $
+ >     zip (llist2List xs) (llist2List ys)
+ >
+ > -- test:
+ >
+ > test_input :: (Num a, Enum a) => [a]
+ > test_input = [1..10]
+ >
+ > test_works :: (Num a, Enum a) => SomeLList (a, a)
+ > test_works = SomeLList $ case list2SomeLList test_input of
+ >     (SomeLList il) -> myMatchingZip il (myMap (*2) il)
+ >     -- ^ It's important to have the input bound to /one/ variable
+ >     -- of type LList n a ('il' here).
+ >     -- Otherwise, we don't get enough type equality.
+ >
+ > {-
+ > -- @myMatchingZip il (myFilter isEven il)@ plus type safety.
+ > -- Gives a "Couldn't match type `n1' with `n'" type error, which is 
+correct.
+ > test_illegal = SomeLList $ case list2SomeLList test_input of
+ >     (SomeLList il)    -> case myFilter isEven il of
+ >       (SomeLList evens) -> myMatchingZip il evens
+ >     where isEven x = x `mod` 2 == 0
+ > -}
+ >
+
+So 'n' here corresponds to what your 'a' is below, and 'a' here is 
+always 'Event' below.
+
+Note that you don't have to actually encode the length of lists in the 
+type system using this approach. I hit a similar problem some months ago 
+when trying to model financial contracts:
+Prices are only comparable when they are given at the same time and in 
+the same currency, but I wasn't going to encode currencies or times in 
+the type system. I just wanted the compiler to check if it could prove 
+two prices are compatible and if not, I would convert them (which was 
+cheap).
+
+Using more sophisticated types for 'n', we can express richer 
+properties. For example:
+
+ > data S n
+ >
+ > myBetterTail :: LList (S n) a -> LList n a
+ > myBetterTail l = case myTail l of
+ >     (SomeLList ll) -> unsafeCoerceLList ll
+ >
+ > myBetterCons :: a -> LList n a -> LList (S n) a
+ > myBetterCons x = unsafeWrapLList (x:)
+ >
+ > test_do_nothing :: a -> LList n a -> LList n a
+ > test_do_nothing x = myBetterTail . myBetterCons x
+
+Cheers, Steffen
+
+On 12/04/2011 06:53 AM, Scott Lawrence wrote:
+> (Sorry if this email is rather unclear - I know my desired end result,
+> but neither how to acheive nor explain it well. Here goes.)
+>
+> I'm processing lists, using them sortof as streams. (Whether that's a
+> good idea isn't the issue here - but let me know if it isn't!)
+> Fundamentally, there are two types of operations (at least, that are
+> relevant here) - those that change the length of the list and those that
+> don't.
+>
+> Some operators might take more than one list/stream as an argument,
+> combining them in some way or another. Obviously, if the lists were
+> different lengths, the operator would fail. I don't want that to happen
+> at run time, so I want to check for it statically, presumably via the
+> type system. I could do this manually:
+>
+> type AList = [Event]
+> type BList = [Event]
+> type CList = [Event]
+>
+> myMapish :: AList -> AList
+> mySelect :: AList -> (Event -> Bool) -> BList
+> myOtherSelect :: BList -> CList
+>
+> but I'd rather not have to manually define a new type for every new list
+> length:
+>
+> myMapish :: List a -> List a
+> mySelect :: List a -> List ?
+>
+> The '?' would be an anonymous, unique type - unless there's a better way
+> to accomplish this.
+>
+> Hope that was clear, and thanks (as always) for the help (and being
+> awesome).
+>
+
+

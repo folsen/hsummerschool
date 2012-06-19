@@ -1,0 +1,46 @@
+From allbery.b at gmail.com  Wed Apr 27 01:30:02 2011
+From: allbery.b at gmail.com (Brandon S Allbery KF8NH)
+Date: Tue, 26 Apr 2011 19:30:02 -0400
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+In-Reply-To: <201104261515.44280.daniel.is.fischer@googlemail.com>
+References: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>	<201104260103.51102.daniel.is.fischer@googlemail.com>	<1303776032428-4339787.post@n5.nabble.com>
+	<201104261515.44280.daniel.is.fischer@googlemail.com>
+Message-ID: <4DB7557A.5000803@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 4/26/11 09:15 , Daniel Fischer wrote:
+> On Tuesday 26 April 2011 02:00:32, jutaro wrote:
+>> Well, it is a bit more intricate to invert the sides. After
+>> * swapping LeftP and RightP in Edit Prefs -> Initial Pane positions
+>> * Close all panes and pane groups. (You may leave an editor window open,
+>> so that you better see what happens in the next steps).
+>> * Collapse all (Hit Ctrl-1 - 2 times)
+>> * Split vertical (Hit Ctrl-2), put the focus to the left, split
+>> horizontal (Hit Ctrl-3)
+>> * Go to Panes Menu and reopen the Log and the Browser and an editor
+>> Window * Configure tabs as you like
+>> * Save the session or restart Leksah
+> 
+> Intricate indeed. If some day you have too much time, consider adding 
+> configuration options for that. Until then, how about putting that in the 
+> docs?
+
+How about a "layout editor" mode where you can drag panes around,
+double-click somewhere to split at that point (hold shift for horizontal
+split, maybe?), and a window palette to drag windows into panes?
+
+- -- 
+brandon s. allbery     [linux,solaris,freebsd,perl]    allbery.b at gmail.com
+system administrator  [openafs,heimdal,too many hats]                kf8nh
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk23VXoACgkQIn7hlCsL25X/0gCgpKLaNqOeHbgO8D4ZQ38y1EQV
+ZisAnik6XZHVPGs3k50xGZ+MEJCaAfZC
+=P0vf
+-----END PGP SIGNATURE-----
+
+

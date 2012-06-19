@@ -1,0 +1,49 @@
+From Tillmann.Vogt at rwth-aachen.de  Sat Aug  6 19:32:48 2011
+From: Tillmann.Vogt at rwth-aachen.de (Tillmann Vogt)
+Date: Sat, 06 Aug 2011 19:32:48 +0200
+Subject: [Haskell-cafe] Rotating calipers
+In-Reply-To: <2a65257e-8039-48ce-85af-39d5a2b2494c@u28g2000prm.googlegroups.com>
+References: <2a65257e-8039-48ce-85af-39d5a2b2494c@u28g2000prm.googlegroups.com>
+Message-ID: <4E3D7AC0.9040205@rwth-aachen.de>
+
+Am 06.08.2011 13:12, schrieb mukesh tiwari:
+> Hello all ,
+Hi
+>   I am trying to understand rotating calipers [
+> http://en.wikipedia.org/wiki/Rotating_calipers ] but i am not sure if
+> understood this algorithm correctly . I tried to use the almost same
+> algorithm given on wiki but with four calipers to solve the problem
+> [ http://cgm.cs.mcgill.ca/~orm/rotcal.html ].
+There are several algorithms mentioned on that page. Do you need the 
+diameter, width, or something else?
+
+>   My approach is find
+> xminP, xmaxP, yminP ymaxP and their corresponding calipers will be ( 0
+> * i - j ) , ( o * i + j ) , ( i + 0 * j ) and ( -i + 0 * j ). I
+> implemented the algorithm in Haskell but its not working . I am not
+> sure if i have followed the wiki algorithm correctly and could some
+> one please tell me what is wrong with implementation. It would be
+> great if some one can explain this algorithm in   pseudo  code which
+> explains the rotating caliper and their implementation details . In
+> case of indentation , see here [ http://hpaste.org/49907 ] .
+> Thank you
+> Mukesh Tiwari
+
+I tried your code on one of my libraries. The convex hull function seems 
+to works correctly (I could send you a screenshot). I hope this narrows 
+the search down. Do you have some example data and what wrong result you 
+get?
+
+In one of my libraries 
+(http://hackage.haskell.org/packages/archive/collada-types/0.3/doc/html/Graphics-Formats-Collada-GenerateObjects.html) 
+there is a function:
+
+streamAnimation :: [(Float,Float,Float)] -> [SceneNode] -> [Animation]
+
+that can visualize a stream of points by an animation. I use this 
+sometimes for debugging.
+
+
+-Tillmann
+
+

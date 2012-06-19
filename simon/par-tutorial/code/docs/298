@@ -1,0 +1,30 @@
+From serguei.son at gmail.com  Mon Apr 11 14:09:35 2011
+From: serguei.son at gmail.com (Serguei Son)
+Date: Mon, 11 Apr 2011 12:09:35 +0000 (UTC)
+Subject: [Haskell-cafe] Foreign function performance: monadic vs pure
+Message-ID: <loom.20110411T135905-625@post.gmane.org>
+
+Consider two versions of sin wrapped:
+foreign import ccall "math.h sin"
+    c_sin_m :: CDouble -> IO CDouble
+and
+foreign import ccall "math.h sin"
+    c_sin :: CDouble -> CDouble
+
+One can invoke them so:
+
+mapM c_sin_m [1..n]
+mapM (return . c_sin) [1..n]
+
+On my computer with n = 10^7 the first
+version never finishes, whereas the second
+one calculates the result within seconds.
+
+To give you my context, I need to call
+a random variable generator multiple times,
+so that it must return IO a.
+
+Any explanation for this behavior?
+
+
+

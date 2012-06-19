@@ -1,0 +1,98 @@
+From jason.dusek at gmail.com  Wed Dec 21 06:11:45 2011
+From: jason.dusek at gmail.com (Jason Dusek)
+Date: Wed, 21 Dec 2011 05:11:45 +0000
+Subject: [Haskell-cafe] Partial statical linking
+In-Reply-To: <0284E8E8-CEED-4E06-AAF0-788B8CA900D5@gmail.com>
+References: <CAO3NbwMyvBkEwc0_v9DGztFrMx1vaw0f69jvRphTRqgcpKuCYQ@mail.gmail.com>
+	<1322726819-sup-1706@ezyang>
+	<0284E8E8-CEED-4E06-AAF0-788B8CA900D5@gmail.com>
+Message-ID: <CAO3NbwN_40vxwLtuo3HaRpBnwJ81PV3K1io-pAR088ZX2vqy+Q@mail.gmail.com>
+
+One thing I don't get is how, for GHC on Mac, this seems to work
+with out any fiddling at all; but on Linux it's really quite
+challenging.
+
+--
+Jason Dusek
+() ?ascii ribbon campaign - against html e-mail
+/\ ?www.asciiribbon.org ? - against proprietary attachments
+
+
+
+2011/12/1 Irene Knapp <ireney.knapp at gmail.com>:
+> Please note that when we build with in-tree GMP, we statically link it into libHSinteger-GMP.a. ?Also, again only with in-tree, we patch it first to use our allocator. ?Both of these things are to make life easier for users creating hybrid Haskell/C executables who need to use GMP from the C side, which is possible only by linking in a second copy of it.
+>
+> The typical trick to force GHC to statically link a C library is to give the full path to the .a of it as one of the object files in the GHC invocation that does the final linking. ?This means you don't need any -l or -L flags pertaining to that library. ?Some libraries are very particular about the order you list them in when doing this, but I don't really understand the issues there. ?You usually will also have to chase dependencies by hand and list them in the same fashion.
+>
+> Good luck!
+>
+> Sent from my iPhone
+>
+> On Dec 1, 2011, at 3:08 AM, "Edward Z. Yang" <ezyang at MIT.EDU> wrote:
+>
+>> libgmp and libffi are external libraries not associated with
+>> Haskell, so I don't think -static (which is for Haskell libraries)
+>> applies to them. ?You'll have the same problem with any other
+>> sort of library of this type, like libdl and friends ;-)
+>>
+>> Edward
+>>
+>> Excerpts from Jason Dusek's message of Sat Nov 26 01:59:18 -0500 2011:
+>>> Some time ago, I wrote to this list about making shared
+>>> libraries with GHC, in such a way that the RTS was linked and
+>>> ready to go. Recently, I've been looking a similar but, in a
+>>> sense, opposite problem: linking Haskell executables with some
+>>> of their non-Haskell dependencies, for distribution.
+>>>
+>>> I tried passing a few different sets of options to the linker
+>>> through GHC, with -optl:
+>>>
+>>> ?-optl'-Wl,-r'
+>>> ?-optl'-Wl,-r,-dy'
+>>> ?-optl'-Wl,-static,-lffi,-lgmp,-dy'
+>>>
+>>> None of these had the desired effect. In the end, running GHC
+>>> with -v and carefully editing the linker line produced the
+>>> desired change (I have linked to and provided the diff below).
+>>>
+>>> The effect -optl seems to be to introduce options in the linker
+>>> line just before -lHSrtsmain, which would seem to prevent one
+>>> from linking libffi and libgmp differently. Is editing and
+>>> storing away the linker script the best option at present for
+>>> partially static linking?
+>>>
+>>> --
+>>> Jason Dusek
+>>> () ?ascii ribbon campaign - against html e-mail
+>>> /\ ?www.asciiribbon.org ? - against proprietary attachments
+>>>
+>>>
+>>>
+>>>
+>>> https://github.com/solidsnack/arx/commit/90ec5efdb0e991344aa9a4ad29456d466e022c3e
+>>> #@@ -122,10 +122,8 @@
+>>> # ? -lHSarray-0.3.0.2 \
+>>> # ? -lHSbase-4.3.1.0 \
+>>> # ? -lHSinteger-gmp-0.2.0.3 \
+>>> #- ?-lgmp \
+>>> # ? -lHSghc-prim-0.2.0.0 \
+>>> # ? -lHSrts \
+>>> #- ?-lffi \
+>>> # ? -lm \
+>>> # ? -lrt \
+>>> # ? -ldl \
+>>> #@@ -136,4 +134,7 @@
+>>> # ? -lgcc_s --no-as-needed \
+>>> # ? /usr/lib/gcc/x86_64-linux-gnu/4.6.1/crtend.o \
+>>> # ? /usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../x86_64-linux-gnu/crtn.o \
+>>> #+ ?-static \
+>>> #+ ?-lgmp \
+>>> #+ ?-lffi \
+>>>
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

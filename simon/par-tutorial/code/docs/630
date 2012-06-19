@@ -1,0 +1,34 @@
+From lemming at henning-thielemann.de  Fri Apr 22 19:57:47 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Fri, 22 Apr 2011 19:57:47 +0200 (CEST)
+Subject: [Haskell-cafe] naming convention for maybes?
+In-Reply-To: <4DB1BFAD.6070401@gmail.com>
+References: <BANLkTi=ftrj1T4RHbHg0ETJRZMNbLH-uRQ@mail.gmail.com>
+	<D9258BBD-CF3E-4165-9981-C37A3E2DC439@alum.mit.edu>
+	<4DB1BFAD.6070401@gmail.com>
+Message-ID: <alpine.DEB.2.00.1104221952160.28351@anubis>
+
+
+On Fri, 22 Apr 2011, Evgeny Tarasov wrote:
+
+> I do it in a similar way, not just for maybes:
+>
+> paramMay <- getHTTPPostParam "Param"
+> paramStr <- maybe (throwError "No Param parameter") return paramMay
+> let paramE = parseParam paramStr
+> param <- case paramE of
+> Left e -> throwError $ "Error while parsing Param: " ++ show e
+> Right p -> return p
+>
+> It'd be great, if there was a "centralised" naming convention guide.
+
+Of course, naming will always be a matter of taste. For instance I would 
+not write maybe_something, because I prefer camel case, that is, 
+maybeSomething. On the other hand, I already wrote some Wiki articles that 
+you may read as suggestions for certain naming conventions:
+   http://www.haskell.org/haskellwiki/Qualified_names
+   http://www.haskell.org/haskellwiki/Pairs_of_identifiers
+  and other articles in Category:Style. You may add an article for 
+suggestions of how to name lists, maybes, eithers etc.
+
+

@@ -1,0 +1,41 @@
+From wren at freegeek.org  Wed Dec 21 19:04:13 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Wed, 21 Dec 2011 13:04:13 -0500
+Subject: [Haskell-cafe] guided seq (Was: Interruptible threads with IO
+ loops)
+In-Reply-To: <1324459870.3833.9.camel@kirk>
+References: <CAH-sQ5jrocgiuXiOmDaoaajkn7HRF5XWaXJK9kA2sE_cj4P0cQ@mail.gmail.com>
+	<D90F9E28-E21D-4630-8BA2-D3F04E491F3D@gmail.com>
+	<1324459870.3833.9.camel@kirk>
+Message-ID: <4EF21F9D.8090101@freegeek.org>
+
+On 12/21/11 4:31 AM, Joachim Breitner wrote:
+> This would be particularly handy when with, for example
+>          snd tuple `evaluateUntilItDoesNotNeed` tuple
+> where the tuple is unevaluated in the right component (and where we
+> don?t want to force this just now), but retains something large in the
+> left component (that we want to become GCable).
+
+Can't you already do that with:
+
+     let (_,x) = tuple in ...x...
+
+or
+
+     case tuple of (_,x) -> ...x...
+
+?
+
+The tuple will be evaluated far enough that we can access its second 
+component, and then we're free to discard the tuple itself provided it's 
+not referenced elsewhere. The above would only be strict in x if the use 
+sites are strict.
+
+Or do you mean that you want something with the semantics of the above, 
+but with a syntactic form that enables us to abstract out the ellipses?
+
+-- 
+Live well,
+~wren
+
+

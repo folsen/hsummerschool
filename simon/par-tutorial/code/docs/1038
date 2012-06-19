@@ -1,0 +1,29 @@
+From jmillikin at gmail.com  Thu Aug 11 16:36:34 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Thu, 11 Aug 2011 07:36:34 -0700
+Subject: [Haskell-cafe] ANNOUNCE: Chell: A quiet test runner (low-output
+	alternative to test-framework)
+In-Reply-To: <CAKRanNDhqzL-t1z-ykP0sHY1ktQqOLX6JwAONsCzHxRJhsNF8A@mail.gmail.com>
+References: <CAKRanNDhqzL-t1z-ykP0sHY1ktQqOLX6JwAONsCzHxRJhsNF8A@mail.gmail.com>
+Message-ID: <CAL1ky9qJ2v=+QHYbLDiAfR9m4TdxBjKNa_mTLq_MDFFAVBB4Og@mail.gmail.com>
+
+I have, but it's not quite what I'm looking for:
+
+- I don't want to silence HUnit's output, I just don't want anything
+to show on the console when a test *passes*. Showing output on a
+failure is good.
+
+- I'm not interested in BDD. Not to say it's not useful, but it
+doesn't match my style of testing (which uses mostly pass/fail
+assertions and properties).
+
+On Thu, Aug 11, 2011 at 07:18, Greg Weber <greg at gregweber.info> wrote:
+> Hi John,
+> I am wondering if you have seen the hspec package? [1] It seems to solve all
+> the problems you are with chell, including that it silences Hunit output. We
+> are using it for all the Yesod tests now.
+> Thanks,
+> Greg Weber
+> [1]:?http://hackage.haskell.org/packages/archive/hspec/0.6.1/doc/html/Test-Hspec.html
+
+

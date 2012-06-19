@@ -1,0 +1,77 @@
+From d.kahlenberg at googlemail.com  Tue Apr 26 18:18:04 2011
+From: d.kahlenberg at googlemail.com (Daniel Kahlenberg)
+Date: Tue, 26 Apr 2011 18:18:04 +0200
+Subject: [Haskell-cafe] How to update the RNG per call (State monad)
+ when generating QuickCheck arbitraries?
+In-Reply-To: <BANLkTinDU2Bx3+uNWDpyMLe0ZesT6wY3iQ@mail.gmail.com>
+References: <BANLkTin-L8vXn70e=UBTtNGr5z=wHD1ZfA@mail.gmail.com>
+	<BANLkTinDU2Bx3+uNWDpyMLe0ZesT6wY3iQ@mail.gmail.com>
+Message-ID: <BANLkTinrM4cc_DiPEHuJkmwFdwty=u6ygg@mail.gmail.com>
+
+Oh thanks,
+
+hold on I'd like to have the genArray call generating distinctive
+results in one IO execution (meaning when
+I load the .lhs file in ghci):
+
+Prelude> genArray
+[ThingK True,Thing1 False]
+
+and when calling immediately again e. g.
+
+Prelude> genArray
+[Thing1 True]
+
+By now I only get one and the same again, i. e.:
+
+Prelude> genArray
+[ThingK True]
+
+Prelude> genArray
+[ThingK True]
+
+...
+
+so I thought an adaptation of the `runTwoRandoms` approach as described
+in the RWH book could help.
+
+In other words the genArray should have similar behaviour as e. g. a
+`runOneRandom` function defined like:
+
+> getOneRandom :: Random a => RandomState a
+> getOneRandom = getRandom
+
+> runOneRandom :: IO Int
+> runOneRandom = do
+>   oldState <- getStdGen
+>   let (result, newState) = S.runState getOneRandom oldState
+>   setStdGen newState
+>   return result
+
+... the rest of the code as in my first post...
+
+Testing it, different numbers expected as the RNG is updated each call:
+
+Prelude> runOneRandom
+2033303743
+
+Prelude> runOneRandom
+-566930973
+
+...
+
+Cheers
+Daniel
+
+2011/4/26 Bryan O'Sullivan <bos at serpentine.com>:
+> On Tue, Apr 26, 2011 at 3:04 AM, Daniel Kahlenberg
+> <d.kahlenberg at googlemail.com> wrote:
+>>
+>> Thought getRandom function would be the best place to inject my unGen
+>> function
+>> call, but cannot get it to type-check:
+>
+> You haven't described what it is you're actually trying to do, and I'm
+> afraid your code doesn't help to understand that.
+
+

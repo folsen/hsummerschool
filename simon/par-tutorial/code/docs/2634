@@ -1,0 +1,30 @@
+From Christian.Maeder at dfki.de  Thu Feb  3 16:50:28 2011
+From: Christian.Maeder at dfki.de (Christian Maeder)
+Date: Thu, 03 Feb 2011 16:50:28 +0100
+Subject: [Haskell-cafe] Review request for "platform independent
+ interactive graphics" with VNC
+In-Reply-To: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>
+References: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>
+Message-ID: <4D4ACEC4.3050608@dfki.de>
+
+Am 03.02.2011 12:15, schrieb C K Kashyap:
+> Hi,
+> I've been working on a Haskell based platform independent graphics rendering
+> using VNC. I'd like it very much if you could take a look at it and give me
+> feedback. Using it is straight forward -
+> 
+> git clone git at github.com:ckkashyap/Chitra.git
+
+This step failed for me with:
+
+maeder at leibniz:/local/maeder> git clone git at github.com:ckkashyap/Chitra.git
+Initialized empty Git repository in /local/maeder/Chitra/.git/
+Permission denied (publickey).
+fatal: The remote end hung up unexpectedly
+maeder at leibniz:/local/maeder> git --version
+git version 1.7.1
+
+What permission is needed?
+Christian
+
+

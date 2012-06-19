@@ -1,0 +1,59 @@
+From ekirpichov at gmail.com  Sat Apr 30 13:02:11 2011
+From: ekirpichov at gmail.com (Eugene Kirpichov)
+Date: Sat, 30 Apr 2011 15:02:11 +0400
+Subject: [Haskell-cafe] ANN: timeplot-0.3.0 - the analyst's swiss army knife
+ for visualizing ad-hoc log files
+Message-ID: <BANLkTinkWRuBQrEUGc6TJ5kqtRZVx_cw+g@mail.gmail.com>
+
+ Hello fellow haskellers,
+
+I announce the release of timeplot-0.3.0, the "analyst's swiss army
+knife for visualizing ad-hoc log files".
+
+Links:
+ * http://jkff.info/presentation/two-visualization-tools - a
+presentation saying what the tools are all about and giving plenty of
+graphical examples on cluster computing use cases. At the end of the
+presentation there's also a couple of slides about installation. It is
+a little bit outdated, it corresponds to versions just before 0.3.0.
+ * http://hackage.haskell.org/package/timeplot
+ * http://github.com/jkff/timeplot
+ * The sibling tool, splot - for visualizing the activity of many
+concurrent processes - http://hackage.haskell.org/package/splot and
+http://github.com/jkff/splot . It has also gotten a couple of new
+features since my last announcement.
+
+The major new feature of tplot is the introduction of subplots, the
+<<'within' plots>>.
+It allows one to plot data from several sub-tracks on one track of the graph:
+ - several line- or dot-plots
+ - several plots of sums or cumulative sums, perhaps stacked (to see
+how the sub-tracks contribute to the total sum - e.g. if your log
+speaks about different types of overhead and you wish to see how they
+contribute to the total)
+ - stacked "activity count" plot - a generalization of the previous
+"activity count" plot, which allows you to, given a log saying like
+"Machine started servicing job JOB1 ... Machine finished servicing job
+JOB1" etc, plot how many machines are servicing each job at any
+moment, in a stacked fashion - so, how loads by different jobs
+contribute to the whole cluster's load. The "activity frequency" plot
+plots the same on a relative scale.
+
+The syntax is, for example: "within[.] dots" or "within[.] acount" or
+even "within[.] duration cumsum stacked" etc.
+
+Note that these are of course just example use cases and the tool is
+universal, it is not in any sense specialized to clusters, jobs,
+overheads or actually even to logs.
+I'd like to encourage you to give it a try and look around for a use case :)
+
+If you do give the tool a try, please tell me if something goes wrong,
+be it an installation problem or a bug (the version is fresh released,
+so this is quite possible).
+
+-- 
+Eugene Kirpichov
+Principal Engineer, Mirantis Inc. http://www.mirantis.com/
+Editor, http://fprog.ru/
+
+

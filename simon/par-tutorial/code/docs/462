@@ -1,0 +1,55 @@
+From wren at freegeek.org  Mon Apr 18 03:35:00 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sun, 17 Apr 2011 21:35:00 -0400
+Subject: [Haskell-cafe] "import" functionality in DSLs
+In-Reply-To: <BANLkTi=ObTp+_VtiZ1rTBuov-33qYXUDUA@mail.gmail.com>
+References: <20110416132930.GA20119@ece.utexas.edu>
+	<BANLkTi=ObTp+_VtiZ1rTBuov-33qYXUDUA@mail.gmail.com>
+Message-ID: <4DAB9544.4070605@freegeek.org>
+
+On 4/16/11 9:55 AM, Felipe Almeida Lessa wrote:
+> On Sat, Apr 16, 2011 at 10:29 AM, Nikhil A. Patil
+> <patil.nikhil at gmail.com>  wrote:
+>>> doit :: DSL Term
+>>> doit = do (+)<- (+)
+>>>            n0<- n0
+>>>            k<- k
+>>>            -- begin beautiful DSL code
+>>>            let x = k + n0
+>>>            return $ x + x
+>
+> I guess the core problem is that on each time you say '(+)<- (+)',
+> you may actually get something different depending on what
+> 'define_function' does.  You say yourself that these functions change
+> a hidden state.  So, without any internal changes, I doubt you could
+> do something better.
+
+That really depends. For example, first assume we've hoisted things out:
+
+     module DSLPrelude where
+         import qualified Prelude
+         (+) = define_function (Prelude.+) 2
+         ...
+
+Now, rather than having the define_* functions perform side effects 
+themselves, instead we could have the generated (+) register itself in 
+the state the first time it's called in each DSL, assuming the DSL has 
+(or can have) a way to keep a log of which things it has used (i.e., 
+could run when executed). This also has the benefit that the DSL can 
+prune out definitions that are unused, and collapse any duplicate 
+definitions it detects.
+
+Of course, the downside is that it means (+) is monadic now, which may 
+get in the way of your beautiful DSL code. Whether it's worth it or not 
+depends on what the DSL is for. If it's pseudo-assembly, then it should 
+be fine; if it aims to be more of a high-level mathematical notation, 
+then not so much.
+
+
+Though Luke's -XRecordWildCards approach was my first thought.
+
+-- 
+Live well,
+~wren
+
+

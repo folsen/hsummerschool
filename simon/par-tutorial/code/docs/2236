@@ -1,0 +1,89 @@
+From sameer at sundresh.org  Fri Dec 23 03:41:54 2011
+From: sameer at sundresh.org (Sameer Sundresh)
+Date: Thu, 22 Dec 2011 18:41:54 -0800
+Subject: [Haskell-cafe] The Riddle of the Buddhist Monk
+In-Reply-To: <7480f80755aa.4ef2219f@dit.ie>
+References: <7460b8a53dc3.4ef0ab07@dit.ie>
+	<160418E5-29C2-4827-B7A0-5BC5CAE0E105@cs.otago.ac.nz>
+	<7480f80755aa.4ef2219f@dit.ie>
+Message-ID: <CACJBq-z_QwWpaR0yX8O-pMxdSr10n0LyCBDSgfi+ByaPxxNS7A@mail.gmail.com>
+
+On Wed, Dec 21, 2011 at 10:12 AM, Patrick Browne <patrick.browne at dit.ie>wrote:
+
+>
+> On 21/12/11, *Richard O'Keefe * <ok at cs.otago.ac.nz> wrote:
+>
+> So what exactly is the program supposed to do?
+>
+> I am trying to see whether Haskell modules can be used for blending[1].  The
+> original MAUDE [2,3] program just sets up an arbitrary meeting point, which
+> is assumed to be time-2 and location-2. Then in MONK_MEETS_HIMSELF the up
+> and down versions of these are made match. To do this I wish to declare the
+> function location in MONK_ON_MOVE. Then I require different equations for
+> that same location function in MONK_ON_MOVE_DOWN and MONK_ON_MOVE_UP  both
+> of which  import MONK_ON_MOVE. Finally, I wish to import MONK_ON_MOVE_DOWN
+> and MONK_ON_MOVE_UP into MONK_MEETS_HIMSELF and use the combined set of
+> equations to check locations.
+>
+
+You can't do that in Haskell.  All equations defining a function must occur
+contiguously in the same Haskell module.  You've actually defined two
+separate functions, MONK_ON_MOVE_DOWN.location and
+MONK_ON_MOVE_UP.location.  If you want to define a single function that
+blends their behaviors, you need to do that explicitly.  For example, you
+might define these as partial functions, returning type "Maybe
+LocationOnPath", and then try each implementation (in your case, 2 tries),
+until one of them returns a non-Nothing result.
+
+You could use type classes with overlapping instances to try to merge two
+different definitions of location, but it wouldn't work the way you want.
+ The compiler would statically choose one implementation of location that
+would be used for a given type, rather than trying equations from both (as
+you desire, and as would happen in Maude).
+
+So far I cannot figure out how the location function and the constructors
+> can be shared in this way using Haskell modules.
+>
+> I have tried various combination import/export options, type classes, and
+> newtype. I have also tried to use Strings instead of constructors.
+>
+>
+>
+> I had trouble using Haskell equations with pure constructors. Due to my
+> ignorance of Haskell semantics I am not sure what Constructor1 =
+> Constructor2 means. But in the original Maude there are constructor only
+> equations such as Timed2 = Timeu2 which in Maude means that the constructor
+> Timed2 could be replaced with Timeu2. I wrote Haskell functions to try to
+> achieve a similar effect e.g.
+>
+> timed2 :: TimeOfDay -> TimeOfDay
+>
+> timed2  Timed2 = Timeu2
+>
+
+I'm not sure why top-level equations like "Timed2 = Timeu2" (or even "Just
+() = Nothing") aren't an error in GHC (or even a -Wall warning), but, as
+you've observed, this won't cause Timed2 to rewrite to Timeu2.
+ Constructors in Haskell truly are constructors, they don't rewrite to
+something else (similar to the intention of the [ctor] annotation in Maude).
+
+To make it work, you'd have to manually separate out which of your terms
+are truly constructors and which ones are functions.  Then write equations
+defining the functions.  Be sure that all equations for a given function
+are in a given place.
+
+You could of course implement a rewrite system on top of Haskell, and the
+syntax probably wouldn't be that bad (someone's probably already done it).
+ But you can't directly write Maude-style rewrite systems in Haskell; the
+two languages just work differently.
+
+[1] http://cseweb.ucsd.edu/~goguen/pps/taspm.pdf
+> [2]
+> http://lists.cs.uiuc.edu/pipermail/maude-help/2010-December/000456.html
+> [3]
+> http://lists.cs.uiuc.edu/pipermail/maude-help/2010-December/000462.html
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111222/77bfdfbc/attachment.htm>
+

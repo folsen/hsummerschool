@@ -1,0 +1,35 @@
+From schlepptop at henning-thielemann.de  Fri Apr 22 09:46:31 2011
+From: schlepptop at henning-thielemann.de (Henning Thielemann)
+Date: Fri, 22 Apr 2011 09:46:31 +0200
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <BANLkTi=RKS3Bnk30HMyD=LG8ZowXCy5dog@mail.gmail.com>
+References: <BANLkTingNDExfXWS43FmdyMhrKjj+1S6BQ@mail.gmail.com>
+	<22296892.1880.1303443738742.JavaMail.geo-discussion-forums@prhx20>
+	<BANLkTi=RKS3Bnk30HMyD=LG8ZowXCy5dog@mail.gmail.com>
+Message-ID: <4DB13257.9060606@henning-thielemann.de>
+
+Jason Dagit schrieb:
+
+>         * Every commit needs --ask-deps , because the automatic
+>           dependency detector can only detect automatic changes (and not
+>           things like adding a new function in a different module)
+> 
+> 
+> You mean it can only detect dependencies that depend on each other with
+> respect to a diff of the changes.  Detecting most anything else would be
+> undecidable in the general case.  As a divergent data point, I've been
+> using darcs since 2003 and I have yet to use --ask-deps except to learn
+> how it works.
+
+I think that other version control systems just assume that a new patch
+depends on _all_ existing patches.
+
+
+
+Mentally I am still comparing Darcs with Subversion, that is, what my
+colleagues use. Thus I am even happy with Darcs-1. :-) Sure, sometimes I
+have to re-record several patches, when I forgot to download latest
+patches from a repository before recording my own ones. My rule of thumb
+is, that I must avoid merges at all costs.
+
+

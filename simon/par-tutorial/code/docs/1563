@@ -1,0 +1,18 @@
+From abm221617 at gmail.com  Wed Aug 31 20:14:05 2011
+From: abm221617 at gmail.com (Armando Blancas)
+Date: Wed, 31 Aug 2011 11:14:05 -0700
+Subject: [Haskell-cafe] Deriving laws by systematic transformations
+Message-ID: <CAHjViWJ5F-HzZQd==hNsjL=4d272JYDkXY_iBRjpYahkVhSv9A@mail.gmail.com>
+
+Studying Wadler's "Comprehending Monads" and "Theorems for free!",
+I've been unable to derive law (iv) and I'm not sure about (iii). Will
+appreciate a pointer to similar examples or a massive hint. Here's my
+attempt at (iii):
+
+map f . unit x = map f [x]
+                     = [f x]
+                     = unit (f x)
+                     = (unit . f) x
+map f . unit = unit .f
+
+

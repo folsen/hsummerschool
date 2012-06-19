@@ -1,0 +1,46 @@
+From travitch at cs.wisc.edu  Mon Aug 15 16:55:18 2011
+From: travitch at cs.wisc.edu (Tristan Ravitch)
+Date: Mon, 15 Aug 2011 09:55:18 -0500
+Subject: [Haskell-cafe] ANNOUNCE: taffybar: an alternative status bar
+ for xmonad
+In-Reply-To: <20110815065544.GA18554@snarc.org>
+References: <20110813155648.GE13469@cs.wisc.edu>
+	<20110815065544.GA18554@snarc.org>
+Message-ID: <20110815145516.GK30981@cs.wisc.edu>
+
+On Mon, Aug 15, 2011 at 08:55:44AM +0200, Vincent Hanquez wrote:
+> On Sat, Aug 13, 2011 at 10:56:49AM -0500, Tristan Ravitch wrote:
+> > I've wanted a slightly fancier status bar than xmobar for a while, so
+> > I finally made one.  It uses gtk2hs and dbus extensively, so if you
+> > hate either of those things it probably isn't for you.  Being written
+> > in gtk, though, it can have more graphical widgets.
+> >
+> >   http://hackage.haskell.org/package/taffybar
+>
+> Hi Tristan,
+>
+> Thanks for this new status bar, this is exactly what i've been looking for
+> xmonad !
+>
+> A word of warning though, it seems to wakeup a bit too much (and do too much work
+> at wakeup) with the example configuration and make a laptop great for winter
+> as a hand warmer :-)
+>
+> I ended up with just the clock widget (setup to update every minute instead of
+> every second), the system tray, and the logwidget, and the wakeup rate is
+> completely acceptable, and the cpu time stays low.
+>
+
+
+Ah the config I gave has the CPU graph update every half second.  That
+can be dialed back to anything (or, as you did, just dropped
+entirely).  The bar itself doesn't have any wakeups to speak of, but
+some widgets are a little more aggressive.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110815/99f82115/attachment.pgp>
+

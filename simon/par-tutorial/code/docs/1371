@@ -1,0 +1,19 @@
+From andrewcoppin at btinternet.com  Thu Aug 25 19:57:37 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Thu, 25 Aug 2011 18:57:37 +0100
+Subject: [Haskell-cafe] bitSize
+Message-ID: <4E568D11.30800@btinternet.com>
+
+Quoting the Haddock documentation for Data.Bits.bitSize:
+
+"Return the number of bits in the type of the argument. The actual value 
+of the argument is ignored. The function bitSize is undefined for types 
+that do not have a fixed bitsize, like Integer."
+
+Does anybody else think it would be *far* more useful if bitSize applied 
+to an Integer would tell you how many bits that particular Integer is 
+using? Especially given that it can vary?
+
+Is there a way to actually determine how many bits are in an Integer?
+
+

@@ -1,0 +1,96 @@
+From daniel.is.fischer at googlemail.com  Fri Dec 30 01:24:02 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Fri, 30 Dec 2011 01:24:02 +0100
+Subject: [Haskell-cafe] Text.Regex.Base throws exceptions with
+	makeRegexOptsM
+In-Reply-To: <20111229225246.GB13805@barry.normanonet.net>
+References: <20111229225246.GB13805@barry.normanonet.net>
+Message-ID: <201112300124.02713.daniel.is.fischer@googlemail.com>
+
+On Thursday 29 December 2011, 23:52:46, Omari Norman wrote:
+> Hi folks,
+> 
+> I'm using Text.Regex.Base with the TDFA and PCRE backends. I want to
+> compile regular expressions first and make sure the patterns were
+> actually valid, so I used makeRegexOptsM, which indicates a bad regular
+> expression by calling fail. That allows you to use makeRegexOptsM with
+> Maybe or with (Either String) (assuming that Either String is an
+> instance of Monad, which of course is defined in Control.Monad.Error.)
+> 
+> Doing this with Maybe Regex works like it should--bad pattern gives you
+> a Nothing. But if you want to see the error message by using Either
+> String, an exception gets thrown with the bad pattern, rather than
+> getting a Left String.
+> 
+> Why is this?
+
+The cause is that a pattern-match failure in a do-block or equivalent 
+causes the Monad's 'fail' method to be invoked.
+
+For Maybe, we have
+
+fail _ = Nothing
+
+For Either, there used to be
+
+instance Error e => Monad (Either e) where
+    ...
+    fail s = Left (strMsg s)
+
+in mtl's Control.Monad.error, and all was fine if one used the regex 
+functions with e.g. (Either String) as the Monad.
+
+Recently, however, it was decided to have
+
+instance Monad (Either e) where
+    ...
+    fail s = error s -- not explicitly, but by Monad's default method
+
+in Control.Monad.Instances. So now, if you have a pattern-match failure 
+using (Either String), you don't get a nice 'Left message' but an error.
+
+So why was it decided to have that change?
+
+'fail' doesn't properly belong in the Monad class, it was added for the 
+purpose of dealing with pattern-match failures, but most monads can't do 
+anything better than abort with an error in such cases.
+'fail' is widely considered a wart.
+
+On the other hand, the restriction to Either's first parameter to belong to 
+the Error class is artificial, mathematically, (Either e) is a Monad for 
+every type e. And (Either e) has use-cases as a Monad for types which 
+aren't Error members.
+
+So the general consensus was that it was better to get rid of the arbitrary 
+(Error e) restriction.
+
+Now, what can you do to get the equivalent of the old (Either String)?
+
+Use 'ErrorT String Identity'.
+
+It's a bit more cumbersome to get at the result,
+
+foo = runidentity . runErrorT $ bar
+
+but it's clean.
+
+> Seems like an odd bug somewhere.
+
+A change in behaviour that was accepted as the price of fixing what was 
+widely considered a mistake.
+
+> I am a Haskell novice, but
+> I looked at the code for Text.Regex.Base and for the TDFA and PCRE
+> backends and there's nothing in there to suggest this kind of
+> behavior--it should work with Either String.
+
+It used to.
+
+> 
+> The attached code snippet demonstrates the problem. I'm on GHC 7.0.3
+> (though I also got the problem with 6.12.3) and regex-base-0.93.2 and
+> regex-tdfa-1.1.8 and regex-pcre-0.94.2. Thanks very much for any tips or
+> ideas. --Omari
+
+
+

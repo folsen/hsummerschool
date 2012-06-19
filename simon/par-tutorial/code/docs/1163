@@ -1,0 +1,77 @@
+From metaniklas at gmail.com  Tue Aug 16 19:42:44 2011
+From: metaniklas at gmail.com (Niklas Larsson)
+Date: Tue, 16 Aug 2011 19:42:44 +0200
+Subject: [Haskell-cafe] Getting segmentation fault when profiling,
+	despite `-K100M'.
+In-Reply-To: <1313503012.9770.9.camel@dbanas-eeepc>
+References: <1313503012.9770.9.camel@dbanas-eeepc>
+Message-ID: <CACG=oWE-+nW6p0wErUbC5_Ag1gZBhuW41B84fvCczsFJVcGDhw@mail.gmail.com>
+
+If you want to call a Haskell function from C you should do a "foreign
+export" of the function, that will create a stub function with C
+calling convention that you can call.
+
+Regards,
+Niklas
+
+2011/8/16 David Banas <dbanas at banasfamily.net>:
+> Hi all,
+>
+> I'm trying to profile a mixed language program, in which Haskell is NOT
+> the top layer and does not contain the `main' function. (C is/does.)
+>
+> Is this effort doomed to fail?
+>
+> I'm getting a segmentation fault, as soon as the first Haskell function
+> is called, despite having included `-K100M' in my list of +RTS args:
+>
+> ?19 ? ? int argc = 5;
+> ?20 ? ? char* argv[] = {"ghcDll",
+> ?21 ? ? ? ? ? ? ? ? ? ? "+RTS",
+> ?22 ? ? ? ? ? ? ? ? ? ? "-hc",
+> ?23 ? ? ? ? ? ? ? ? ? ? "-p",
+> ?24 ? ? ? ? ? ? ? ? ? ? "-K100M",
+> ?25 ? ? ? ? ? ? ? ? ? ? NULL}; // argv must end with NULL
+> ?26
+> ?27 ? ? // Initialize Haskell runtime
+> ?28 ? ? char** args = argv;
+> ?29 ? ? hs_init(&argc, &args);
+>
+> Using gdb to trace through the C-code, up until the first call to
+> Haskell, I get to here:
+>
+> ?64 ? ? // Call the Haskell function.
+> ?65 ? ? res = amiInit(
+> ?66 ? ? ? ? impulse_matrix,
+> ?67 ? ? ? ? row_size,
+>
+> Here's the beginning of `amiInit':
+>
+> ?41 -- Our Haskell implementation of `AMI_Init'.
+> ?42 amiInit :: Ptr CDouble -> CInt -> CInt -> CDouble -> CDouble ->
+> ?43 ? ? ? ? ? ?CString -> Ptr CString -> Ptr (StablePtr AmiModel) -> Ptr
+> CString -> IO Int
+> ?44 amiInit impulse_matrix row_size aggressors sample_interval bit_time
+> ?45 ? ? ? ? ami_parameters_in ami_parameters_out ami_memory_handle
+> msgHndl
+> ?46 ? ? | impulse_matrix == nullPtr = return 0
+> ?47 ? ? | otherwise = do
+> ?48 ? ? ? ? putStrLn "I'm here."
+>
+> I never see "I'm here." printed to my console, before I get the
+> segmentation fault.
+>
+> Any thoughts?
+>
+> Thanks,
+> -db
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

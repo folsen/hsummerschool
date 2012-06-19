@@ -1,0 +1,79 @@
+From clemmer.alexander at gmail.com  Mon Aug  1 18:38:06 2011
+From: clemmer.alexander at gmail.com (Alex Clemmer)
+Date: Mon, 1 Aug 2011 12:38:06 -0400
+Subject: [Haskell-cafe] Regular Expression Parsing via derivatives
+In-Reply-To: <CAKjSnQFRUK=Y0adyWHVGF+_z3OonfWAW_YTeCpLqNOrkFN_bVg@mail.gmail.com>
+References: <CACYWy82xwE0aZvGt_yuVuejyhKvafvg8Ekod0q9trJzG1ub3VQ@mail.gmail.com>
+	<CAKjSnQFRUK=Y0adyWHVGF+_z3OonfWAW_YTeCpLqNOrkFN_bVg@mail.gmail.com>
+Message-ID: <CACYWy82BhLuDE7CYR0P_0jWGDsDvMji8i4-f+OfPuyXTZo7BWg@mail.gmail.com>
+
+Hmm. Not sure how I missed that. And, I also inquired about developing a
+"core featre" instead of a library -- implying disparity where in retrospect
+there doesn't appear to be any.
+
+That's too bad, but thanks for the helpful response!
+
+On Mon, Aug 1, 2011 at 12:26 PM, Antoine Latter <aslatter at gmail.com> wrote:
+
+> On Mon, Aug 1, 2011 at 10:51 AM, Alex Clemmer
+> <clemmer.alexander at gmail.com> wrote:
+> > Hi Haskell people,
+> >
+> > I've been snooping through various mailing lists and the current Haskell
+> > implementation of regular expressions and I was wondering if there has
+> been
+> > a discussion about implementing regex parsing with derivatives. If so, I
+> > haven't seen it. If not, I'd like to have a discussion about it -- if for
+> no
+> > other reason than to decide whether I should implement it as a library,
+> or
+> > (to attempt to implement it) as a core feature.
+> >
+> > For those of you who don't know, recent work by Might and Darais
+> indicates
+> > that parsing CFGs can be done better (i.e., significantly faster) than
+> more
+> > "traditional" approaches. Might's presenting at ICFP later in September
+> > about it.
+> >
+> > I guess the first thing I should ask is, which mailing list is actually
+> the
+> > right place to field this inquiry. I considered dropping it in the main
+> > haskell list, but wasn't sure how people would respond.
+> >
+>
+> This is probably the right list to ask.
+>
+> I don't know much about the topic, a a quick Google search turned up:
+>
+> http://hackage.haskell.org/package/regex-pderiv
+>
+> which has the right keywords.
+>
+> More discussion on related (or not!) here:
+>
+>
+> http://www.google.com/search?q=Regular+Expression+derivative+haskell&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:unofficial&client=firefox-a
+>
+> Antoine
+>
+> > --
+> > Alex
+> >
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >
+> >
+>
+
+
+
+-- 
+Alex
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110801/01add08f/attachment.htm>
+

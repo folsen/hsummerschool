@@ -1,0 +1,69 @@
+From iusty at k1024.org  Sun Feb 13 11:29:26 2011
+From: iusty at k1024.org (Iustin Pop)
+Date: Sun, 13 Feb 2011 11:29:26 +0100
+Subject: [Haskell-cafe] Why is there no "splitSeperator" function in
+ Data.List
+In-Reply-To: <AANLkTin4hH0PxknY-CjxBCubdV-R9gGJOponOSB7M0Pq@mail.gmail.com>
+References: <1297526447.2361.4.camel@robert-desktop>
+	<AANLkTim+z3eNe_s4xR4YBz95o6ArXGWzA-VUMsW7ExqS@mail.gmail.com>
+	<20110213095016.GA6508@teal.hq.k1024.org>
+	<AANLkTin4hH0PxknY-CjxBCubdV-R9gGJOponOSB7M0Pq@mail.gmail.com>
+Message-ID: <20110213102926.GC6508@teal.hq.k1024.org>
+
+On Sun, Feb 13, 2011 at 06:01:01PM +0800, Lyndon Maydwell wrote:
+> Does the Python implementation operate on Strings, or all lists?
+
+Of course, just on strings.
+
+> I think this could be quite important as many split implementations
+> take regular expressions as arguments. This could be quite challenging
+> for general lists.
+
+Agreed. But (in Python at least), split via re and split via (static)
+element are two separate functions, and split via element can be nicely
+replicated in Haskell.
+
+regards,
+iustin
+
+> That said, I would like to see some of these features in the split package.
+> 
+> On Sun, Feb 13, 2011 at 5:50 PM, Iustin Pop <iusty at k1024.org> wrote:
+> > On Sat, Feb 12, 2011 at 11:21:37AM -0500, Gwern Branwen wrote:
+> >> On Sat, Feb 12, 2011 at 11:00 AM, Robert Clausecker <fuzxxl at gmail.com> wrote:
+> >> > Is there any reason, that one can't find a function that splits a list
+> >> > at a seperator in the standard library? I imagined something like this:
+> >> >
+> >> >
+> >> > ? ?splitSeperator :: Eq a => a -> [a] -> [[a]]
+> >> >
+> >> > ? ?splitSeperator ',' "foo,bar,baz"
+> >> > ? ? ?--> ["foo","bar","baz"]
+> >> >
+> >> > Or something similar? This is needed so often, even if I can implement
+> >> > it in one line, is there any reason why it's not in the libs?
+> >>
+> >> See http://hackage.haskell.org/package/split
+> >>
+> >> The reason it's not in Data.List is because there are a bazillion
+> >> different splits one might want (when I was pondering the issue before
+> >> Brent released it, I had collected something like 8 different proposed
+> >> splits), so no agreement could ever be reached.
+> >
+> > It is curious though that the Python community managed to agree on a
+> > single implementation and include that in the standard library? So it is
+> > possible :)
+> >
+> > I also needed a split function and ended up with coding one that behaves
+> > like the Python one for my project.
+> >
+> > regards,
+> > iustin
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >
+
+

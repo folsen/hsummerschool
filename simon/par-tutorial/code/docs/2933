@@ -1,0 +1,249 @@
+From oleg at okmij.org  Fri Feb 11 05:34:40 2011
+From: oleg at okmij.org (oleg at okmij.org)
+Date: Thu, 10 Feb 2011 20:34:40 -0800 (PST)
+Subject: [Haskell-cafe] How to write type-level lambda-abstractions at the
+	value level
+Message-ID: <20110211043440.4A9E817196@Adric.ern.nps.edu>
+
+
+HList programming -- as programming with too revealing type systems in
+general -- is quite tedious. Since the type of an HList value reveals
+its structure, including the number of the elements and their
+sequence, we often have to write an HList algorithm twice. We have to
+program the operation on HList values, using ordinary Haskell. We also
+have to write the corresponding operation on types, using this time
+the emergent programming language built, by accident, into the type
+system. In HList programming, the value- and type- operations are
+almost the same. For example, to take the head of an HList, we have to
+extract the first element of the value-level and of the type-level
+cons-cells. It offends the lazy programmer having to implement the
+same algorithm twice. What adds injury to the insult is that the
+type-level language is quite different from the value-level one. The
+type-level language is untyped, leading to difficult-to-find errors
+and puzzling error messages. Second, it is not quite higher-order:
+there seem to be no type-level lambdas.
+
+We offer a sedative, showing how to write even higher-order HList
+operations only once, in one piece of code, from which value- and
+type- level transformations are derived by the compiler. The key was
+to bring the type-level language closer to Haskell, in particular, by
+using lambda-abstractions with named, humanly readable variables. Our
+unified type-value code relies on the applicative notation, taking it
+to unintended extremes (hence we call it ultra-applicative).  Along
+the way we find that a form of the first-class, bounded polymorphism
+has existed in Haskell all along.
+
+The goals of unifying value- and type-level HList programming and
+improving error diagnosis have been set and achieved (albeit perhaps a
+bit painfully) in Jeff Polakow's recent article:
+  Improving HList programming/debugging (longish)
+  http://www.haskell.org/pipermail/haskell-cafe/2011-January/088168.html
+which has been the inspiration for the present message. The main
+difference is ours use of lambda-calculus with named variables to
+program HList operations. Jeff Polakow has used combinator calculus
+(the point-free notation), which may become abstruse. Whereas
+Jeff Polakow relied on GADTs to add a compiler-run--time checking, we
+avoid GADTs, using the standard tagging approach. At least on Jeff
+Polakow's examples, GHC reports the same error diagnostics.
+
+We borrow Jeff Polakow's main example, writing filter in terms of
+fold. Here is the (value-level) code for ordinary Haskell lists:
+
+> vfilter :: (a -> Bool) -> [a] -> [a]
+> vfilter p = foldr f []
+>  where f x v = if p x then x : v else v
+
+
+Here is Jeff Polakow's filter code for HLists:
+> hFltr p = hFoldr ((Uncurry :$ (HIf Fst Snd)) :. (p :&&& (Cons :&&&
+>                   (Flip  :$ Const)))) Nil
+
+
+Here is our filter for HLists:
+> hFilter3 p = hFoldr f nil
+>  where f = lam (X,(V,())) 
+>              (HIF (p <$> var X)
+>                   (HCONS <$> var X <*> var V)
+>                   (var V))
+
+The code ostensibly specifies the operation on HList values. However,
+it also specifies the corresponding operation on HList types, which we
+can see from the inferred type of hFliter3:
+
+> *TypeLambdaVal> :t hFilter3
+> hFilter3
+>   :: (HFOLDR
+>         (LAM
+>            (X, (V, ()))
+>            (HIF
+>               (A (HConst x) (Lookp X))
+>               (A (A (HConst HCONS) (Lookp X)) (Lookp V))
+>               (Lookp V)))
+>         (HList Nil)
+>         xs
+>         res) =>
+>      x -> HList xs -> res
+
+
+Here is the sample application, to the HList
+
+> l1 = (hTrue *: "a" *: () *: nil) *: 
+>      (hFalse *: 'b' *: nil) *: 
+>      (hTrue *: nil) *: 
+>      nil
+
+with the following type and printed value
+
+> *TypeLambdaVal> :t l1
+> l1
+>   :: HList
+>        (HList (HBool HTrue :* ([Char] :* (() :* Nil)))
+>         :* (HList (HBool HFalse :* (Char :* Nil))
+>             :* (HList (HBool HTrue :* Nil) :* Nil)))
+> *TypeLambdaVal> l1
+> [<[<HTrue, "a", ()>], [<HFalse, 'b'>], [<HTrue>]>]
+
+The result of filtering has the different printed value, and the matching,
+also filtered, type:
+
+> thF3 = hFilter3 HHead l1
+>
+> *TypeLambdaVal> :t thF3
+> thF3
+>   :: HList
+>        (HList (HBool HTrue :* ([Char] :* (() :* Nil)))
+>         :* (HList (HBool HTrue :* Nil) :* Nil))
+> *TypeLambdaVal> thF3
+> [<[<HTrue, "a", ()>], [<HTrue>]>]
+
+The complete code of the article is available at
+	http://okmij.org/ftp/Haskell/TypeLambdaVal.hs
+
+We comment on the salient points below. We skip the discussion of
+error diagnostics; please see the comments in the code.
+
+
+Our workhorse is the class Apply, which has been defined and used 
+already in the HList library. Its other notable applications are 
+  second-order typeclass programming
+      http://okmij.org/ftp/Haskell/types.html#poly2
+  type-level lambda-calculus
+      http://okmij.org/ftp/Haskell/types.html#computable-types
+
+> class Apply f x res | f x -> res where
+>     apply :: f -> x -> res
+
+
+Jeff Polakow's message also relies on Apply, calling it HEval.
+ We prefer the name Apply, because of the following, `natural' instance
+
+> instance a ~ a' => Apply (a -> b) a' b where
+>     apply = ($)
+
+
+We starts with a simpler example, of
+
+> safe_head :: [a] -> Maybe a
+> safe_head lst = if null lst then Nothing else Just (head lst)
+
+and its implementation for HLists, which is subtle.  The standard
+Haskell function `head' is partial, which is a source of much grief --
+but also permitting the simple safe_head code above, which includes
+(head lst) as a sub-expression.  The argument lst may well be the
+empty list. The type checker does permit applications of `head' to a
+potentially empty list.  That application is guarded by the 'null lst'
+test and so it will not be executed, and so safe_head is safe indeed.
+At type-level, things are different: hHead is the total function.  The
+application to the empty HList won't type, regardless of whether it
+will be executed. We solve the problem with the applicative IF
+expression, and write hsafe_head simply as
+
+> hsafe_head lst =
+>                hif HNull (const HNothing)
+>                          (\lst -> HJust (apply HHead lst))
+>                      lst
+
+
+When it comes to iterative computations, we have no such
+luck. We try
+
+> hFilter1 p = hFoldr f nil
+>  where
+>  f (x,(v,())) = hif p (\x -> x *: v) (const v) x
+
+(assuming the appropriately defined foldr on HList), which does type
+check. The inferred type however
+
+hFilter1
+  :: (Apply test t (HBool b),
+      Apply
+        (HIF' (x -> HList (x :* xs)) (b1 -> HList xs)) (HBool b, t) res,
+      HFOLDR ((t, (HList xs, ())) -> res) (HList Nil) xs1 res1) =>
+     test -> HList xs1 -> res1
+
+points out the problem, which shows up we try to apply hFilter1:
+
+> thF1 = hFilter1 HHead l1
+>     Couldn't match expected type `HFalse' against inferred type `HTrue'
+
+The type of hFilter1 can be written as
+
+  hFilter1 :: forall t x xs b1 b test xs1 res1. 
+    (Apply test t (Bool b), ...) =>
+    test -> HList xs1 -> res1
+
+or, in other words,
+
+ hFilter1 :: forall test xs1 res1. 
+    (exists t x xs b1 b. Apply test t (Bool b), ...) =>
+    test -> HList xs1 -> res1
+
+But we need
+
+ hFilter1 :: forall test xs1 res1. 
+    (forall t x xs b1 b. Apply test t (Bool b), ...) =>
+    test -> HList xs1 -> res1
+
+We need first-class polymorphism. Moreover, we need first-class
+bounded polymorphism, a first-class polymorphic value with type-class
+constraints. We eventually get it, by programming the lambda-calculus
+interpreter with human-readable variable names. The result,
+the hFilter3 code, was shown at the beginning of the message.
+
+Please see the complete code for further details. We only mention 
+the implementation of the beta-reduction:
+
+> instance Apply body (ENV v arg) res => Apply (LAM v body) arg res where
+>     apply (LAM body) arg = apply body ((ENV arg) :: ENV v arg)
+
+
+
+We have confirmed that everything is indeed up to interpretation. We
+may introduce any notation so long as we could interpret it.
+
+Solving a problem in an unusual language by first writing a
+lambda-calculus interpreter in that language is a good strategy.
+Interpreting lambda-calculus is sure subtle, yet can be done in many
+languages, even the ones that were never intended as programming
+languages, such as C++ templates, Haskell multi-parameter type
+classes with functional dependencies, or Scheme syntax-rules.
+
+Scheme syntax-rules is another example of making use of an odd-ball
+language by first writing a lambda-calculus interpreter for it. The
+approach was taken quite far, to the Scheme -to- syntax-rules compiler
+	http://okmij.org/ftp/Scheme/macros.html#Macro-CPS-programming
+
+Given (a well-tested) procedure written in a subset of Scheme, the
+compiler outputs a syntax-rule macro that effects the same computation
+at the compile-time. Syntax-rules macros are _nothing_ like
+value-level Scheme code (for example, syntax-rule macros are not
+applicative). The only publicly known practical application is
+stress-testing macro-expanders:
+   http://okmij.org/ftp/Scheme/macros.html#syntax-rule-stress-test
+executing the (compiled from Scheme) syntax-rule that tests if 5 is
+prime. The macro implements the sieve of Eratosthenes. There
+has been one macro-expander that crashed, taking down the OS, FreeBSD,
+with it. That is the only case known to me of a macro and a primality
+test crashing the operating system.
+
+

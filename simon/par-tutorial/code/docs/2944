@@ -1,0 +1,25 @@
+From dominique.devriese at cs.kuleuven.be  Fri Feb 11 17:09:05 2011
+From: dominique.devriese at cs.kuleuven.be (Dominique Devriese)
+Date: Fri, 11 Feb 2011 17:09:05 +0100
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+Message-ID: <AANLkTimzz4ZJ+-ZbTCQnPNMHbn24Rbk+PiLTKjA89P5z@mail.gmail.com>
+
+Kashyap,
+
+2011/2/11 C K Kashyap <ckkashyap at gmail.com>:
+> I've come across this a few times - "In Haskell, once can prove the
+> correctness of the code" - Is this true?
+> I know that static typing and strong typing of Haskell eliminate a whole
+> class of problems - is that related to the proving correctness?
+> Is it about Quickcheck - if so, how is it different from having test sutites
+> in projects using mainstream languages?
+
+You may be confusing Haskell with dependently typed programming languages such
+as Coq or Agda, where formal proofs of correctness properties of
+programs can be verified by the type checker.
+
+Dominique
+
+

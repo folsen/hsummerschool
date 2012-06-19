@@ -1,0 +1,37 @@
+From aslatter at gmail.com  Sun Dec 11 16:44:02 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Sun, 11 Dec 2011 09:44:02 -0600
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+In-Reply-To: <CAKFCL4VhQe89QZmTM6Wxm+7KR6KOT7+qQe-xYCNBt8i3fR+zjg@mail.gmail.com>
+References: <87k464b870.fsf@gnu.org> <87d3bw102d.fsf@write-only.cryp.to>
+	<CAKFCL4VhQe89QZmTM6Wxm+7KR6KOT7+qQe-xYCNBt8i3fR+zjg@mail.gmail.com>
+Message-ID: <CAKjSnQEW6=iXAvRNPyGRHppv50papjAwvnp0DoeaBn-TEVf2VQ@mail.gmail.com>
+
+On Sat, Dec 10, 2011 at 5:31 PM, Brandon Allbery <allbery.b at gmail.com> wrote:
+> On Sat, Dec 10, 2011 at 18:25, Peter Simons <simons at cryp.to> wrote:
+>>
+>> previous versions of xmobar used to compile fine with GHC 6.10.4, but
+>> the new version no longer does:
+>>
+>> ? ?src/Parsers.hs:163:52:
+>> ? ? ? ?Couldn't match expected type `Char' against inferred type `[Char]'
+>> ? ? ? ? ?Expected type: GenParser Char st Char
+>> ? ? ? ? ?Inferred type: GenParser Char st String
+>> ? ? ? ?In the second argument of `($)', namely `wrapSkip $ string "Run"'
+>> ? ? ? ?In a stmt of a 'do' expression:
+>> ? ? ? ? ? ? ?notFollowedBy $ wrapSkip $ string "Run"
+>
+>
+> xmobar currently requires parsec 3.x; the above is the symptom of building
+> it against 2.x.
+>
+
+It's not clear to me from reading the sources and type signatures of
+'notFollowedBy' why this is different in parsec 2 vs. parsec 3.
+
+Am I missing something easy? Because if it isn't obvious perhaps it
+wasn't on purpose.
+
+Antoine
+
+

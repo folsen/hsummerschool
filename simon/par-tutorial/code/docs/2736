@@ -1,0 +1,30 @@
+From jv at informatik.uni-bonn.de  Sat Feb  5 11:12:00 2011
+From: jv at informatik.uni-bonn.de (=?ISO-8859-1?Q?Janis_Voigtl=E4nder?=)
+Date: Sat, 05 Feb 2011 11:12:00 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <mailman.2145.1296897910.2828.haskell-cafe@haskell.org>
+References: <mailman.2145.1296897910.2828.haskell-cafe@haskell.org>
+Message-ID: <4D4D2270.3000900@informatik.uni-bonn.de>
+
+On 2/5/11 4:26 AM, Claus Reinke wrote:
+>> Lately I've been trying to go the other direction: make a large
+>> section of formerly strict code lazy.
+>
+> There used to be a couple of tools trying to make suggestions when a
+> function could be made less strict (Olaf Chitil's StrictCheck and
+> another that escapes memory at the moment).
+
+Probably Sloth:
+
+http://korsika.informatik.uni-kiel.de/~jac/wordpress/
+http://korsika.informatik.uni-kiel.de/~jac/wordpress/wp-content/uploads/PADL2011.pdf
+
+Best,
+Janis.
+
+-- 
+Jun.-Prof. Dr. Janis Voigtl?nder
+http://www.iai.uni-bonn.de/~jv/
+mailto:jv at iai.uni-bonn.de
+
+

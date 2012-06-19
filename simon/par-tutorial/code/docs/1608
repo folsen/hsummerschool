@@ -1,0 +1,42 @@
+From ozgurakgun at gmail.com  Fri Dec  2 01:27:03 2011
+From: ozgurakgun at gmail.com (Ozgur Akgun)
+Date: Fri, 2 Dec 2011 00:27:03 +0000
+Subject: [Haskell-cafe] Using QuickCheck to test against a database
+In-Reply-To: <87mxbbu9g7.fsf@googlemail.com>
+References: <87mxbbu9g7.fsf@googlemail.com>
+Message-ID: <CALzazPCn-AVqqjcOFgdCHgffTCKvdLY0_Ztq9AopjwBYt1WF+Q@mail.gmail.com>
+
+Hi!
+
+This looks cool indeed.
+
+On 2 December 2011 00:02, Oliver Charles <haskell-cafe at ocharles.org.uk>wrote:
+
+> [snip] You have to remember to apply all of
+> the states of your arbitrary instances, which is a pain, and guaranteed
+> to be missed.
+
+
+Why can't you define a helper function which runs the initDb action while
+picking the entity? Something like:
+
+pickDB = do DBState act e <- pick arbitrary; act; return e
+
+(placing calls to "monadicIO" and "run" appropriately, I am not familiar
+enough with the monadic API)
+
+Secondly, the initDb action is sensitive to the order actions are
+> sequenced.
+
+
+Do you mean with respect to other initDb actions?
+Why is this? I thought you were using QuickCheck in order not to assume
+things about the state of the DB and that the necessary state is prepared
+solely by running the initDb action. Is this not the case then?
+
+Cheers,
+Ozgur
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111202/55d20b3b/attachment.htm>
+

@@ -1,0 +1,16 @@
+From olshanskydr at gmail.com  Mon Feb  7 16:53:01 2011
+From: olshanskydr at gmail.com (Dmitry Olshansky)
+Date: Mon, 7 Feb 2011 18:53:01 +0300
+Subject: [Haskell-cafe] fetching BLOBs
+Message-ID: <AANLkTinLmORMzLzNHaz-Q_mfh=X5vPQTp2gyS-PfimRW@mail.gmail.com>
+
+Hello, cafe,
+
+Is there a way to get BLOB fields from OracleDB using Takusen?
+What about other possibilities (through HDBC - ODBC)?
+
+Dima
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110207/ee3d3764/attachment.htm>
+

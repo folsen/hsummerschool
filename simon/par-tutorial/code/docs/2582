@@ -1,0 +1,38 @@
+From qdunkan at gmail.com  Wed Feb  2 08:09:52 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Tue, 1 Feb 2011 23:09:52 -0800
+Subject: [Haskell-cafe] Instancing "Typeable" for monad transformers?
+In-Reply-To: <AANLkTimSRmKMaYe05YtKAyEQCsZ6Wb=RZOqCxZYmQ3AU@mail.gmail.com>
+References: <AANLkTimSRmKMaYe05YtKAyEQCsZ6Wb=RZOqCxZYmQ3AU@mail.gmail.com>
+Message-ID: <AANLkTimePVP89Ze_gbjDVN6RG0ko74qrWQc01MxsitFK@mail.gmail.com>
+
+On Tue, Feb 1, 2011 at 10:02 PM, John Millikin <jmillikin at gmail.com> wrote:
+> Is there any reasonable way to do this if I want to cast a monadic
+> value? For example:
+>
+>> castState :: (Typeable a, Typeable s, Typeable1 m, Typeable b) => a -> Maybe (StateT s m b)
+>> castState = Data.Typeable.cast
+>
+> None of the common monad transformers declare instances of Typeable,
+> so I don't know if the concept itself even works.
+>
+> The use case here is one of my library users wants to return an
+> Iteratee from code running in "hint", which requires any extracted
+> values be typeable. My first attempt at an extension-free instance is
+> something like this:
+
+I don't know if this helps in your case, but I get around this by
+having the actual interpreted type be 'State1 -> State2 -> Result',
+where the States are the arguments to run the monad stack, and Result
+is what happens when you run it.  Then I mangle the input from the
+user (which should be 'MyMonad val') by wrapping a 'run' function
+around it so now it has the non-monadic type.  Then I just run the
+function 'interpret' returns as a sub-monad: pull my state, pass it to
+run, and re-inject the state it returns or rethrow any exceptions it
+returns.
+
+Should work, as long as you can do the 'sub-run' thing (is there an
+official name for that?), it's certainly possibly with all the
+"standard" monads but I don't know about iteratee.
+
+

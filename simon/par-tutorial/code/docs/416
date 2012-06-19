@@ -1,0 +1,70 @@
+From mikkonecny at googlemail.com  Fri Apr 15 01:15:02 2011
+From: mikkonecny at googlemail.com (Michal =?utf-8?q?Kone=C4=8Dn=C3=BD?=)
+Date: Fri, 15 Apr 2011 00:15:02 +0100
+Subject: [Haskell-cafe] ghc7 bug?  associated type + implicit parameters
+Message-ID: <201104150015.05830.mikkonecny@googlemail.com>
+
+Hi,
+
+I have stumbled across some strange behaviour in ghc7.
+
+The following compiles fine with ghc 6.12.3:
+
+{-# LANGUAGE ImplicitParams #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE NoMonomorphismRestriction #-}
+
+module Test where
+
+class C t where
+    type TF t
+    ttt :: TF t -> t
+
+b :: (C t, ?x :: TF t) => t
+b = ttt ?x 
+
+but ghc7 says:
+
+    Could not deduce (?x::TF t)
+      arising from a use of implicit parameter `?x'
+    from the context (C t, ?x::TF t)
+      bound by the type signature for b :: (C t, ?x::TF t) => t
+      at Test.hs:13:1-10
+    In the first argument of `ttt', namely `?x'
+    In the expression: ttt ?x
+    In an equation for `b': b = ttt ?x
+
+Moreover, when I comment out the type declaration for b, it compiles and the 
+inferred type for b is identical to the one in the above program:
+
+*Test> :t b
+b :: (C t, ?x::TF t) => t
+
+It feels to me like a bug but I am not entirely confident.  Any ideas?
+
+Michal
+-- 
+|o| Michal Konecny <mikkonecny at gmail.com>
+|o|    http://www-users.aston.ac.uk/~konecnym/
+|o|    office: (+42) (0)121 204 3462 
+|o| PGP key http://www-users.aston.ac.uk/~konecnym/ki.aston
+
+-- 
+|o| Michal Konecny <mikkonecny at gmail.com>
+|o|    http://www-users.aston.ac.uk/~konecnym/
+|o|    office: (+42) (0)121 204 3462 
+|o| PGP key http://www-users.aston.ac.uk/~konecnym/ki.aston
+
+-- 
+|o| Michal Konecny <mikkonecny at gmail.com>
+|o|    http://www-users.aston.ac.uk/~konecnym/
+|o|    office: (+42) (0)121 204 3462 
+|o| PGP key http://www-users.aston.ac.uk/~konecnym/ki.aston
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part.
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110415/571e4709/attachment.pgp>
+

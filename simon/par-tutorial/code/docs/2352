@@ -1,0 +1,20 @@
+From evohunz at gmail.com  Wed Dec 28 16:27:54 2011
+From: evohunz at gmail.com (Thiago Negri)
+Date: Wed, 28 Dec 2011 13:27:54 -0200
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+In-Reply-To: <wfipl0iut8.fsf@calligramme.charmers>
+References: <4EF57FC9.1030505@vex.net> <4EFAD085.8000605@vex.net>
+	<CACqaG6xKd+-szRC9tjTZsgH-fq_HwDnUwV2LbX8n1hHs60SdxQ@mail.gmail.com>
+	<CACqaG6wUApJdbOQMJqGkTURBLMS-hS2jGLJweOpDWEa+gQBWeQ@mail.gmail.com>
+	<CABLneZub4hpR+XLESBS8W6Y3mfXXJHgE6wJ6VWW0htS2O+D-jg@mail.gmail.com>
+	<CABLneZsjT5gJ0ReC4OYK7K482Zs+VvWp5RpTo7ANgfC3W0pNzg@mail.gmail.com>
+	<wfipl0iut8.fsf@calligramme.charmers>
+Message-ID: <CABLneZvmR8utD8fRcpBijRMHwxEvugTuitqWWA07Jfryf9GH3w@mail.gmail.com>
+
+2011/12/28 Jon Fairbairn <jon.fairbairn at cl.cam.ac.uk>:
+> * non-strict semantics require that no argument is evaluated
+> ?unless needed.
+
+That's not the case on optimistic evaluation.
+
+

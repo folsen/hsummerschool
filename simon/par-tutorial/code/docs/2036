@@ -1,0 +1,50 @@
+From andrewcoppin at btinternet.com  Fri Dec 16 21:51:32 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Fri, 16 Dec 2011 20:51:32 +0000
+Subject: [Haskell-cafe] What happens if you get hit by a bus?
+In-Reply-To: <jcg4q4$559$1@dough.gmane.org>
+References: <CAEzeKYpOsDqafSoJFQkYioSg-0LTJaFY8WCUBkH2RiXOCZypjQ@mail.gmail.com>
+	<jcg4q4$559$1@dough.gmane.org>
+Message-ID: <4EEBAF54.8040605@btinternet.com>
+
+On 16/12/2011 07:05 PM, Bardur Arantsson wrote:
+> Michael Litchard wrote:
+>
+> [--snip--]
+>
+> If getting hit by a bus is a significant factor in the overall outcome of
+> the project then I think those are pretty good odds, aren't they?
+>
+> (I do realize that traffic accidents are a lot more frequent than we like to
+> think, but still...)
+
+The /actual/ probability of being hit by a bus is irrelevant. The only 
+thing of concequence is the /percieved/ probability. This latter 
+quantity is not related to the former in any meaningful way. In fact, 
+due to an effect known as availability bias, the probability of any 
+potential threat varies depending on how long you spend thinking about it.
+
+(In other words, if you've never even considered what would happen if 
+your sole developer got hit by a bus, your estimate of the probability 
+of this will be very low. If you sit down and think about how much 
+trouble you'd be in if this actually happened, suddenly your estimate of 
+the probability starts increasing. This is completely illogical - which 
+is why it's called a cognitive bias.)
+
+Ever heard the phrase "fear, uncertainty and doubt"? It's a killer in a 
+business context.
+
+It seems clear [to me] that there are actually quite a few Haskell 
+programmers around, and it's not especially hard to find them. The 
+question is how many "good" ones there are. "Good" is all vague and 
+subjective and hard to measure, unfortunately.
+
+On the other hand, if you just start the project with more than one 
+developer on board in the first place, then the possibility of just one 
+of them being killed prematurely becomes drastically less serious. (For 
+the business. I'm sure it's still fairly serious for the person who just 
+DIED...)
+
+PS. Kudos to Ketil Malde for the best link I've seen today.
+
+

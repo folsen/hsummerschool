@@ -1,0 +1,42 @@
+From marcot at marcot.eti.br  Tue Apr  5 15:17:55 2011
+From: marcot at marcot.eti.br (=?utf-8?q?Marco_T=C3=BAlio_Gontijo_e_Silva?=)
+Date: Tue, 05 Apr 2011 10:17:55 -0300
+Subject: [Haskell-cafe] ANN: Google Summer of Code student application
+	period opens today
+In-Reply-To: <AANLkTi=UBbYgQMeKsPGo2S9JxoG=1_OABB7hsZ7nmn5q@mail.gmail.com>
+References: <AANLkTi=UBbYgQMeKsPGo2S9JxoG=1_OABB7hsZ7nmn5q@mail.gmail.com>
+Message-ID: <1302008756-sup-3765@zezinho>
+
+Hi Johan.
+
+Excerpts from Johan Tibell's message of Seg Mar 28 10:58:16 -0300 2011:
+(...)
+> If you're a student and like to get paid to work on a Haskell project this
+> summer I recommend you go find an interesting project [1] and start working
+> on your application.
+
+I plan to apply to the Google Summer of Code, to work on the parallelization of
+Cabal Install.  As stated in some comments, this project may be too small for
+three months, so I included some other things in my proposal.  The first is to
+work on making GHC parallel while building different modules.  The second is to
+make a tool that I'm creating, hackage-debian, parallel.  I intend to
+hackage-debian before the deadline for project submissions.  It's a tool to
+create a debian repository with as much as possible hackage libraries.
+
+I've writed a draft of the proposal at
+http://www2.dcc.ufmg.br/laboratorios/llp/wiki/doku.php?id=marco_soc2011 .  If
+you have any comments, I'll be glad to receive them.
+
+Greetings.
+(...)
+-- 
+marcot
+http://marcot.eti.br/
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110405/5dd2fbc8/attachment.pgp>
+

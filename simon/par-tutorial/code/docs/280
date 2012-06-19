@@ -1,0 +1,54 @@
+From hjgtuyl at chello.nl  Mon Apr 11 00:29:23 2011
+From: hjgtuyl at chello.nl (Henk-Jan van Tuyl)
+Date: Mon, 11 Apr 2011 00:29:23 +0200
+Subject: [Haskell-cafe] Tuple
+In-Reply-To: <93578.14795.qm@web33505.mail.mud.yahoo.com>
+References: <93578.14795.qm@web33505.mail.mud.yahoo.com>
+Message-ID: <op.vtqt29svpz0j5l@zen5.arnhem.chello.nl>
+
+On Sun, 10 Apr 2011 18:49:59 +0200, Anwar Bari <noor2004 at yahoo.com> wrote:
+
+> HI Cafe
+>      I have to make a function to check that I have one occurrence of  
+> the last
+> element (z) of the same list [a,b] in the tuple
+>
+>  [([a,b],z)]
+> For example
+> [([1,2],3),([1,1],5),([1,3],6).......]  this is true because there is  
+> one single
+> z for each single list.
+>
+> while this one is false
+> [([1,2],3),([1,2],5),([1,3],6).......] because 3&5 were found for the  
+> same list
+> [1,2]
+>
+
+
+   import Data.Function (on)
+   import Data.List     (groupBy, nub, sort)
+
+   a = [([1,2],3),([1,1],5),([1,3],6)]
+   b = [([1,2],3),([1,2],5),([1,3],6)]
+
+   check = all ((< 2) . length . nub) . groupBy ((==) `on` fst) . sort
+
+   main = print $ check a && not (check b)
+
+I don't know if I interpreted your specifications correctly;
+this program ignores identical tuples, so
+   check [([1,2],3), ([1,2],3), ([1,3],6)]
+returns True; if this is not what you meant, remove the " . nub" from the  
+program.
+
+Regards,
+Henk-Jan van Tuyl
+
+
+-- 
+http://Van.Tuyl.eu/
+http://members.chello.nl/hjgtuyl/tourdemonad.html
+--
+
+

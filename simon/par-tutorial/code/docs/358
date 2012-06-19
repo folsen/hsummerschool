@@ -1,0 +1,16 @@
+From svante.signell at telia.com  Wed Apr 13 08:59:37 2011
+From: svante.signell at telia.com (Svante Signell)
+Date: Wed, 13 Apr 2011 08:59:37 +0200
+Subject: [Haskell-cafe] Debugging with gdb?
+Message-ID: <1302677977.7958.22.camel@hp.my.own.domain>
+
+Hi,
+
+As I don't know anything about Haskell, can I make a stupid question: Is
+there any method to create debug symbols for a Haskell program, and is
+it possible to debug with gdb?
+
+Thanks!
+
+
+

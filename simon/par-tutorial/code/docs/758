@@ -1,0 +1,45 @@
+From carter.schonwald at gmail.com  Tue Apr 26 17:31:26 2011
+From: carter.schonwald at gmail.com (Carter Schonwald)
+Date: Tue, 26 Apr 2011 11:31:26 -0400
+Subject: [Haskell-cafe] typing hmatrix expressions
+Message-ID: <BANLkTim9p5hbHQg-ppr6rR6csjDmRs0PBw@mail.gmail.com>
+
+hello alberto,
+i've had some funny issues with using the cmap function, and i'd like
+understand what i'm doing wrong
+namely it wont correctly instantiate for vectors or matrices and I don't
+understand why.
+
+basically my question  is:
+
+what is the correct type for the hmatrix expression
+
+mapMat f  =liftMatrix $! cmap f
+
+
+I'd like to just give it a type like
+Storable a => (a->a)-> Matrix a -> Matrix a
+
+but i get an error message like
+Electrical.lhs:89:29:
+    No instance for (Container Vector e0)
+      arising from a use of `cmap'
+    Possible fix: add an instance declaration for (Container Vector e0)
+    In the second argument of `($!)', namely `cmap f'
+    In the expression: liftMatrix $! cmap f
+    In an equation for `mapMat': mapMat f = liftMatrix $! cmap f
+
+which i feel shouldn't be happening.
+
+is the type of cmap in some way too polymorphic, or am I just not turning on
+the right ghc type extensions for this to work,
+or is this something that would have been well typed prior to ghc 7? Or am i
+just not correctly understanding this type error and i'm making a simple
+mistake?
+
+thanks!
+-Carter
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110426/dd1ff610/attachment.htm>
+

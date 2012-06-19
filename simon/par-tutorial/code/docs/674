@@ -1,0 +1,33 @@
+From andrewcoppin at btinternet.com  Sun Apr 24 11:05:44 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Sun, 24 Apr 2011 10:05:44 +0100
+Subject: [Haskell-cafe] A small Darcs anomoly
+In-Reply-To: <4DB093A6.8000303@btinternet.com>
+References: <4DB093A6.8000303@btinternet.com>
+Message-ID: <4DB3E7E8.8000907@btinternet.com>
+
+I've discovered something interesting.
+
+Darcs stores history as a partially-ordered set of changes. This is a 
+beautiful and elegant idea. In theory, this lets me apply any 
+combination of changes, possibly generating file "versions" which have 
+never actually existed before. (E.g., the new type checker from GHC 7.0 
+embedded in the GHC 6.6 codebase - not that I imagine it would compile, 
+but in principle I can do it.)
+
+So I was a little surprised to discover that... Darcs doesn't actually 
+support doing this. Darcs is only really interested in the result of 
+applying *all* changes in a repo. If you want to apply some subset of 
+changes, you need to make a seperate repo containing only the changes 
+you want applied.
+
+It seems daft to me that you would design a sophisticated system for 
+splitting history into independent chunks, and then not let me 
+manipulate them independently.
+
+(If you think about it, the difference between, say, GHC 7.0 and GHC 6.6 
+is which set of changes are applied. Yet because Darcs doesn't support 
+looking at it like this, you must have a completely seperate repo for 
+each one...)
+
+

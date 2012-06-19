@@ -1,0 +1,47 @@
+From simon at joyful.com  Fri Aug 26 02:22:14 2011
+From: simon at joyful.com (Simon Michael)
+Date: Thu, 25 Aug 2011 17:22:14 -0700
+Subject: [Haskell-cafe] hledger subcommand detection, RFC
+Message-ID: <C25C6A8C-5F36-41FC-9AEB-E8055D00B77D@joyful.com>
+
+When I split up the hledger package, I always intended to make the hledger program act as a single front end for hledger-* executables. I finally got around to trying that, just pushed to darcs [1]. So hledger now searches your PATH at startup and offer any hledger-* executables as subcommands. To make this fully modular, so that options can be reused and third-party add-ons don't need to be baked in to hledger in any way, there has also been a rather extensive options overhaul, using cmdargs. Below is an example [2] of the new help output with all hledger-* packages plus a local hledger-report.hs script installed.
+
+I'm not sure if this is fully safe, cross-platform, robust, quick enough to be unnoticeable, etc. I have about 20 dirs and 4k files in my PATH. I haven't noticed a slowdown on macbook or vps, but have not measured. More testing of this on diverse platforms and machines, or code review, would be very welcome.
+
+-Simon
+
+[1] http://joyful.com/darcsden/simon/hledger/browse/hledger/Hledger/Cli/Options.hs#L-330
+
+[2]
+$ hledger
+hledger [COMMAND] ... [OPTIONS]
+  run the specified hledger command. hledger COMMAND --help for more detail.
+  In general, COMMAND should precede OPTIONS.
+
+Misc commands:
+  add       prompt for new transactions and append them to the journal
+  convert   show the specified CSV file as hledger journal entries
+  test      run self-tests, or just the ones matching REGEXPS
+
+Report commands:
+  accounts  (or balance) show matched accounts and their balances
+  entries   (or print) show matched journal entries
+  postings  (or register) show matched postings and running total
+  activity  show a barchart of transactions per interval
+  stats     show quick statistics for a journal (or part of it)
+
+Add-on commands found:
+  chart     [-- OPTIONS]   run the hledger-chart program
+  interest  [-- OPTIONS]   run the hledger-interest program
+  report    [-- OPTIONS]   run the hledger-report program
+  vty       [-- OPTIONS]   run the hledger-vty program
+  web       [-- OPTIONS]   run the hledger-web program
+
+  -? --help     Display help message
+     --debug    Show extra debug output
+  -V --version  Print version information
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110825/373862a9/attachment.htm>
+

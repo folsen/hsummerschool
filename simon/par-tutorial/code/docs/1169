@@ -1,0 +1,34 @@
+From allbery.b at gmail.com  Tue Aug 16 23:19:16 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Tue, 16 Aug 2011 17:19:16 -0400
+Subject: [Haskell-cafe] why is Random in System?
+In-Reply-To: <A320995A-2DDA-4147-B804-098623C26914@deepbondi.net>
+References: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+	<A320995A-2DDA-4147-B804-098623C26914@deepbondi.net>
+Message-ID: <CAKFCL4UtZAKrw-KazZtmCSi6cDZmb1mtm9of4E=0Ugr_9GXXvA@mail.gmail.com>
+
+On Tue, Aug 16, 2011 at 17:07, James Cook <mokus at deepbondi.net> wrote:
+
+> On Aug 16, 2011, at 4:04 PM, Evan Laforge wrote:
+> > I've noticed there's a convention to put modules having to deal with
+> > randomness into System.Random.  I thought System was for OS
+> > interaction?  Granted getting a random seed usually means going to the
+> > OS, but isn't the rest of it, like generating random sequences,
+> > distributions, selecting based on probability, shuffling, etc. all
+> > non-OS related algorithms?
+>
+> System definitely does seem like an odd choice.  In most cases the only
+> interaction any PRNG, even when accessed via the FFI, has with the "system"
+> is - as you say - to get an initial seed value for a global instance.
+>
+
+I'd be tempted to guess that the whole reason it's under System is the IO
+component.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110816/fda23e9f/attachment.htm>
+

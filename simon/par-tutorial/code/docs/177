@@ -1,0 +1,85 @@
+From david.hotham at blueyonder.co.uk  Wed Apr  6 21:21:37 2011
+From: david.hotham at blueyonder.co.uk (David Hotham)
+Date: Wed, 6 Apr 2011 20:21:37 +0100
+Subject: [Haskell-cafe] 'Progress bar' enumeratee
+In-Reply-To: <20110406182931.0238561f@angst.streitmacht.eu>
+References: <inhd6m$h2n$1@dough.gmane.org><20110406163105.13cbc9a3@angst.streitmacht.eu><inhv6r$n8$1@dough.gmane.org>
+	<20110406182931.0238561f@angst.streitmacht.eu>
+Message-ID: <inieg7$38g$1@dough.gmane.org>
+
+The desired behaviour (certainly my desired behaviour, but I think also the 
+most useful behaviour generally) is that the enumeratee passes n bytes to 
+its iteratee, prints a dot, and repeats.
+
+Given that, printing the dots all in one bunch after passing bytes to the 
+iteratee isn't any improvement over printing the dots all in one bunch 
+before passing them to the iteratee.
+
+I think that mostly I want it the way that I want it because that's the bit 
+that I struggled most over and I'm now reluctant to give it up!  However 
+this might actually make a useful difference to behaviour in the case of an 
+iteratee that did very expensive processing, or that itself performed IO. 
+In such cases, my behaviour could be expected to give a more accurate 
+indication of how far through processing we'd actually got.
+
+David
+
+
+PS Yes, I already tried out the code ;-).  You'll see that both of my 
+versions did indeed hFlush stdout.
+
+
+
+
+"Ertugrul Soeylemez" <es at ertes.de> wrote in message 
+news:20110406182931.0238561f at angst.streitmacht.eu...
+> "David Hotham" <david.hotham at blueyonder.co.uk> wrote:
+>
+>> I did have a version along those lines at some point, but I felt it
+>> was cheating rather to print the dots not at the correct point in the
+>> stream.
+>>
+>> Perhaps I've over-complicated for the sake of the learning experience,
+>> but I do like to have a version that passes on the correct number of
+>> bytes, then prints the ".", and then continues.
+>
+> Well, then just do the printing after calling the continuation:
+>
+>    dotsAt :: forall b m. MonadPeelIO m => Int ->
+>              Enumeratee ByteString ByteString m b
+>    dotsAt n =
+>        loop 0
+>
+>        where
+>        loop :: Int -> Enumeratee ByteString ByteString m b
+>        loop i' step@(Continue k) =
+>            continue go
+>
+>            where
+>            go :: Stream ByteString ->
+>                  Iteratee ByteString m (Step ByteString m b)
+>            go EOF = return step
+>            go ch@(Chunks strs) = do
+>                let (numDots, i) = divMod (i' + sum (L.map BC.length strs)) 
+> n
+>                    printDots = tryIO $ BC.putStr (BC.replicate numDots 
+> '.') >>
+>                                        hFlush stdout
+>                k ch >>== (\step -> printDots >> loop i step)
+>        loop i' step = return step
+>
+> By the way, after trying out the code, I found that you should use
+> hFlush after printing.  Otherwise you may see the dots delayed.
+>
+>
+> Greets,
+> Ertugrul
+>
+>
+> -- 
+> nightmare = unsafePerformIO (getWrongWife >>= sex)
+> http://ertes.de/ 
+
+
+
+

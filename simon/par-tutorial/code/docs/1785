@@ -1,0 +1,37 @@
+From aslatter at gmail.com  Fri Dec  9 14:56:10 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Fri, 9 Dec 2011 07:56:10 -0600
+Subject: [Haskell-cafe] Cabal issue
+In-Reply-To: <CAMtV1SGHTbEvS2RY65bzVVwtudvrjt0S51suc_DvPizQgdUBcg@mail.gmail.com>
+References: <CAMtV1SGHTbEvS2RY65bzVVwtudvrjt0S51suc_DvPizQgdUBcg@mail.gmail.com>
+Message-ID: <CAKjSnQHfUpsGruPnadkGo-DG2uYpmF1M9BOy84xpCjVTw1RN3Q@mail.gmail.com>
+
+On Fri, Dec 9, 2011 at 5:20 AM, Kevin Jardine <kevinjardine at gmail.com> wrote:
+> I understand that this may have been addressed before on this list in some
+> form, so I'll be brief:
+>
+> Had problem with deprecated package, was told my only option was to wipe my
+> Haskell install and start over. Is this true and if so, doesn't this mean
+> that Cabal (or the package management system that it is a part of) is
+> broken?
+>
+
+It's hard to say for sure what the fix is without knowing what the error is.
+
+Wiping your installed packages db is easy, so it is often recommended.
+
+> Details here:
+>
+> https://plus.google.com/u/0/111705054912446689620/posts/V1186HGWEap
+>
+> Kevin
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

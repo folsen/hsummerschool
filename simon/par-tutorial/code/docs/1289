@@ -1,0 +1,90 @@
+From carette at mcmaster.ca  Tue Aug 23 19:52:36 2011
+From: carette at mcmaster.ca (Jacques Carette)
+Date: Tue, 23 Aug 2011 13:52:36 -0400
+Subject: [Haskell-cafe] Post-doc position
+Message-ID: <4E53E8E4.10801@mcmaster.ca>
+
+People interested in (typed) code generation might be interested (or 
+know people who are) in the following post-doc position. While the 
+'topic' is design for multiple visual scales, the tools used in practice 
+will be DSLs and (typed) code generators. We use Haskell for 
+implementing all of our DSLs (see [1] for details of part of the ongoing 
+work).
+
+Feel free to contact me for further details.
+Jacques
+[1] http://www.cas.mcmaster.ca/~carette/SAGA/
+
+[Sorry for the bad formatting, this 'ad' was unfortunately born as a 
+Word document. Not my choice.]
+=============
+
+Council on Library and Information Resources (CLIR) Postdoctoral 
+Fellowship in Design for Multiple Visual Scales at McMaster University
+
+The Computing and Software Department and the University Library at 
+McMaster University in Hamilton, Ontario, Canada invite applications for 
+a two-year CLIR Postdoctoral Fellowship in software design, with an 
+emphasis on games, for multiple visual scales, from the iPod Touch to 
+60inch high-resolution screen panels. The Fellowship is part of the 
+Gaming Scalability Environment (G-ScalE) project involving Dr. Jacques 
+Carette (Computing and Software, Faculty of Engineering), Dr. Andrew 
+Mactavish (Multimedia, Faculty of Humanities), and Jeff Trzeciak 
+(University Librarian). The fellow will start immediately and report to 
+Dr. Carette but also work closely with the library on certain projects.
+
+Duties
+? Work with Dr. Carette and his students to identify all of the issues 
+relating to usability at different scales, then help design (and 
+implement) a set of domain-specific languages which capture the 
+constraints of user-interface features with respect to scale.
+o From the psychology and user-interface literature, identify cognitive 
+issues relating to scale perception, and capture these in a formal 
+model. Examples: Fitts? Law, Hick?s Law and the Steering Law;
+o Identify examples of such concerns, and pre-existing solutions, from 
+existing software which works at multiple scales; put an emphasis on 
+solutions concerning gaming software;
+o Relate these models and solutions to design constraints for features 
+in software;
+o Embody these design constraint into a set of domain specific 
+languages; and
+o Provide interpreters for these languages.
+? The above work will be done in conjunction with a number of other 
+researchers and students, and is expected to lead to several 
+peer-reviewed publications, as well as working software.
+? The candidate will be expected to teach one course (in the CAS 
+department).
+? The candidate will be expected to work with the library to:
+o Identify the current and future library needs of Engineering faculty 
+and students;
+o Assess current state of library resources, services and facilities in 
+support of Engineering;
+o Make recommendations to the library administration for improvement;
+o Promote greater awareness of library resources, services and 
+facilities within Engineering;
+o Promote greater awareness within the library of the faculty?s teaching 
+and research priorities ; and
+o Provide support as needed to students and faculty within Engineering.
+
+Required Skills:
+? Ph.D. in Computer Science or Software Engineering is preferred, but a 
+Ph.D. in psychology, human factors, or mathematics accompanied by a 
+demonstrable expertise in software development and mathematical modelling.
+? Interest in multi-disciplinary work.
+? Capable of understanding the requirements of faculty and students in 
+Engineering with regards to library resources, services and facilities.
+
+How to Apply
+If you have received your Ph.D. within the last five years and are 
+interested in this fellowship, please email your curriculum vitae to 
+abishop at clir.org.
+The Council on Library and Information Resources (CLIR) is an 
+independent, nonprofit organization that forges strategies to enhance 
+research, teaching, and learning environments in collaboration with 
+libraries, cultural institutions, and communities of higher learning. 
+CLIR promotes forward-looking collaborative solutions that transcend 
+disciplinary, institutional, professional, and geographic boundaries in 
+support of the public good.
+
+
+

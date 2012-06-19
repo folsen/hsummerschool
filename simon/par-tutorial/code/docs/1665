@@ -1,0 +1,116 @@
+From dokondr at gmail.com  Mon Dec  5 14:52:52 2011
+From: dokondr at gmail.com (dokondr)
+Date: Mon, 5 Dec 2011 16:52:52 +0300
+Subject: [Haskell-cafe] writeFile: commitBuffer: invalid argument
+ (Illegal byte sequence)
+In-Reply-To: <CAPeieQEQdyUGBpZ2SNSWQf0ocZg1YWyozuXWF4YxwF=hp0XHcA@mail.gmail.com>
+References: <CAMXF=YDO52dMscP8VTCJ3h6ZmLzS4JtC0jxymf2423zX+ZPBfw@mail.gmail.com>
+	<CAMXF=YDU9Xdq_gVC1ah+-Xv7JvHFaZfZOFe_FGZ7ZX6Brx7jtQ@mail.gmail.com>
+	<CAPeieQGV2h7swAyY-9ZtinC6V=iK5gtsG7+QKvVLK3xWD4GuoQ@mail.gmail.com>
+	<CAMXF=YADUOiWkBdyYm3g+oQBmQqKRm_x5M1QJD8RgqOtX6XgnA@mail.gmail.com>
+	<CAPeieQEQdyUGBpZ2SNSWQf0ocZg1YWyozuXWF4YxwF=hp0XHcA@mail.gmail.com>
+Message-ID: <CAMXF=YBwsnaqOOdAGaJ7nds2nn3QcM26L40R+Tij_jEKcdENcA@mail.gmail.com>
+
+I don't actually need UTF-16 code in these strings. I would rather filter
+them out before writing such strings to a file.
+What would be a simple filter to do this?
+
+*Albert Y. C. Lai* trebla at vex.net
+<haskell-cafe%40haskell.org?Subject=Re%3A%20%5BHaskell-cafe%5D%20writeFile%3A%20commitBuffer%3A%20invalid%20argument%0A%20%28Illegal%20byte%20sequence%29&In-Reply-To=%3C4EDBBEB6.3050201%40vex.net%3E>
+wrote:
+
+On 11-12-04 07:08 AM, dokondr wrote: >* In GHC 7.0.3 / Mac OS X when trying
+to: *>* *>* writeFile "someFile" "(Hoping You Have A iPhone When I Do This)
+Lol *>* Sleep Is When You Close These ---&gt; \55357\56384" *>* *>* I get: *
+>* commitBuffer: invalid argument (Illegal byte sequence) *>* *>* The
+string I am trying to write can also be seen here: *>*
+http://twitter.com/#!/search/Hoping%20You%20Have%20A%20iPhone%20When%20I%20Do%20This%20lang%3Aen<http://twitter.com/#%21/search/Hoping%20You%20Have%20A%20iPhone%20When%20I%20Do%20This%20lang%3Aen>
+*>* <
+http://twitter.com/#%21/search/Hoping%20You%20Have%20A%20iPhone%20When%20I%20Do%20This%20lang%3Aen>
+*
+
+\55357 and \56384 would be surrogates D83D and DC40 for use in UTF-16 only.
+Haskell's Char is not a UTF-16 code unit (unlike early versions of Java and
+probably current ones). GHC is correct in rejecting them. Haskell's Char is
+a Unicode character directly. If you want the character U+1F440 "EYES",
+write \128064 directly (or \x1f440, or \x1F440). Use
+http://www.unicode.org/charts/ to find out what you are getting into. You
+can enter a hexadecimal number or choose a category.
+
+On Sun, Dec 4, 2011 at 11:43 PM, Erik Hesselink <hesselink at gmail.com> wrote:
+
+> Yes, you can set the text encoding on the handle you're reading this
+> text from [1]. The default text encoding is determined by the
+> environment, which is why I asked about LANG.
+>
+> If you're entering literal strings, see Albert Lai's answer.
+>
+> Erik
+>
+> [1]
+> http://hackage.haskell.org/packages/archive/base/latest/doc/html/System-IO.html#g:23
+>
+> On Sun, Dec 4, 2011 at 19:13, dokondr <dokondr at gmail.com> wrote:
+> > Is there any other way to solve this problem without changing LANG
+> > environment variable?
+> >
+> >
+> > On Sun, Dec 4, 2011 at 8:27 PM, Erik Hesselink <hesselink at gmail.com>
+> wrote:
+> >>
+> >> What is the value of your LANG environment variable? Does it still
+> >> give the error if you set it to e.g. "en_US.UTF-8"?
+> >>
+> >> Erik
+> >>
+> >> On Sun, Dec 4, 2011 at 13:12, dokondr <dokondr at gmail.com> wrote:
+> >> > Correct url of a "bad" string:
+> >> >
+> >> >
+> http://twitter.com/#!/search/Hoping%20You%20Have%20A%20iPhone%20When%20I%20Do%20This%20lang%3Aen<http://twitter.com/#%21/search/Hoping%20You%20Have%20A%20iPhone%20When%20I%20Do%20This%20lang%3Aen>
+> >> >
+> >> >
+> >> > On Sun, Dec 4, 2011 at 3:08 PM, dokondr <dokondr at gmail.com> wrote:
+> >> >>
+> >> >> Hi,
+> >> >> In  GHC 7.0.3 / Mac OS X when trying to:
+> >> >>
+> >> >> writeFile  "someFile" "(Hoping You Have A iPhone When I Do This) Lol
+> >> >> Sleep
+> >> >> Is When You Close These ---&gt; \55357\56384"
+> >> >>
+> >> >> I get:
+> >> >> commitBuffer: invalid argument (Illegal byte sequence)
+> >> >>
+> >> >> The string I am trying to write can also be seen here:
+> >> >>
+> >> >>
+> >> >>
+> http://twitter.com/#!/search/Hoping%20You%20Have%20A%20iPhone%20When%20I%20Do%20This%20lang%3Aen<http://twitter.com/#%21/search/Hoping%20You%20Have%20A%20iPhone%20When%20I%20Do%20This%20lang%3Aen>
+> >> >>
+> >> >> It looks like 'writeFile' can not write unicode characters.
+> >> >> Any workarounds?
+> >> >>
+> >> >> Thanks!
+> >> >> Dmitri
+> >> >>
+> >> >>
+> >> >
+> >> >
+> >> >
+> >> >
+> >> >
+> >> > _______________________________________________
+> >> > Haskell-Cafe mailing list
+> >> > Haskell-Cafe at haskell.org
+> >> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >> >
+> >
+> >
+> >
+> >
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111205/c1b63f8c/attachment.htm>
+

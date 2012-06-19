@@ -1,0 +1,31 @@
+From mdmkolbe at gmail.com  Fri Dec 30 03:51:05 2011
+From: mdmkolbe at gmail.com (Michael D. Adams)
+Date: Thu, 29 Dec 2011 18:51:05 -0800
+Subject: [Haskell-cafe] Overloaded Quotes for Template Haskell
+Message-ID: <CAHD+Q6GarSHnn0wGjvtZ747Cdp5ShXj48YFO_vtZj7Xs_BCWTA@mail.gmail.com>
+
+What would it take to get an "-XOverloadedQuotes" flag of the same
+sort as the "-XOverloadedStrings" flag?  I.e. "[| ... |]" would have
+type "Quasi m => m Exp" instead of "Q Exp" and any splices in that
+quotation expect the contents of that splice to have type "m Exp".
+(Obviously, top level splices would still have type "Q Exp" otherwise
+the compiler wouldn't know how to evaluate the monad.)
+
+I ran into this problem when writing a Template Haskell program in
+which part of it operates in a "StateT S Q a" monad instead of the
+usual "Q a" monad.  (The "S" type stores the state of a memoization
+table of code fragments already generated.  Without it, the code would
+loop infinitely when processing certain recursive structures.)
+
+It is fairly easy to declare an instance of "Quasi" for "StateT S Q",
+so in order to keep the code clean, I'd like to use quotations with
+splices in them (i.e. [| ... $( ... ) ... |] ) for expressing the
+generated code.  However, quotations and splices are tied to the "Q"
+monad which means that as it is now I have to manually write "LamE ...
+VarP ... VarE ... etc." instead of using the much nicer quotation
+syntax.
+
+Michael D. Adams
+mdmkolbe at gmail.com
+
+

@@ -1,0 +1,77 @@
+From daniel.is.fischer at googlemail.com  Fri Feb 11 20:00:11 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Fri, 11 Feb 2011 20:00:11 +0100
+Subject: [Haskell-cafe] Is Show special? Of course not but...
+In-Reply-To: <AANLkTikfYO9WjuHe0QiygJsGFYZq5nswK6barGgpci5f@mail.gmail.com>
+References: <AANLkTikfYO9WjuHe0QiygJsGFYZq5nswK6barGgpci5f@mail.gmail.com>
+Message-ID: <201102112000.12131.daniel.is.fischer@googlemail.com>
+
+On Friday 11 February 2011 19:33:27, Cristiano Paris wrote:
+> Hi caf?,
+>
+> given the following toy code:
+>
+> ---------------
+> module Main where
+>
+> class Dumb p where
+> 	dumb :: p -> String
+>
+> newtype Branded a b = Branded b
+>
+> unbrand :: Branded a b -> b
+> unbrand (Branded x) = x
+>
+> wrong :: Dumb a => b -> Branded a b
+> wrong = Branded
+>
+> right :: Show a => b -> Branded a b
+> right = Branded
+> ---------------
+>
+> Why:
+>
+> ---------------
+> quarry:Haskell paris$ ghci -O1
+> GHCi, version 6.12.3: http://www.haskell.org/ghc/  :? for help
+> *Main> unbrand $ right True
+> True
+> *Main> unbrand $ right "Foo"
+> "Foo"
+> ---------------
+>
+> but:
+>
+> ---------------
+> *Main> unbrand $ wrong True
+>
+> <interactive>:1:10:
+>     Ambiguous type variable `a' in the constraint:
+>       `Dumb a' arising from a use of `wrong' at <interactive>:1:10-19
+>     Probable fix: add a type signature that fixes these type variable(s)
+> ---------------
+>
+> ?
+>
+> Maybe it's a dumb question but... thank you for any explanation...
+
+It's because there's no way to determine the type variable a (in either 
+wrong or right).
+In such cases, under some circumstances, the type variable gets defaulted 
+(the ambiguous contexts all must have the form (C a), at least one numeric 
+class [Num, Integral, Fractional, ...] is involved, all involved classes 
+come from the Prelude or the standard libraries) as specified in the report 
+(section 4.3, iirc).
+
+These conditions are not met by your 'right' function, but ghci uses 
+extended default rules, a type variable a with a Show constraint [and no 
+other] gets defaulted to (). But ghci has no rule how to default your Dumb 
+class, so it reports the ambiguous type variable there.
+[Without extended defaulting rules, ambiguous type variable errors would be 
+too frequent at the ghci prompt.]
+
+If you try to compile the module, both should raise an ambiguous type 
+variable error, since the compiler follows the standard defaulting rules 
+(unless you enable -XExtendedDefaultRules).
+
+

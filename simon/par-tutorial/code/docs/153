@@ -1,0 +1,29 @@
+From chrisdone at googlemail.com  Tue Apr  5 18:13:07 2011
+From: chrisdone at googlemail.com (Christopher Done)
+Date: Tue, 5 Apr 2011 18:13:07 +0200
+Subject: [Haskell-cafe] Using _ on the RHS of an equation?
+In-Reply-To: <3578A9AB-46B7-47D5-9BC8-850C4E2EFA84@deepbondi.net>
+References: <8294B695F1501F49AE7B527CBB3C5B852157090BDE@ex3.ad.dcs.gla.ac.uk>
+	<3578A9AB-46B7-47D5-9BC8-850C4E2EFA84@deepbondi.net>
+Message-ID: <BANLkTikMXU618LMXMcL-6UP1N0Vyo5fqKQ@mail.gmail.com>
+
+On 5 April 2011 18:00, James Cook <mokus at deepbondi.net> wrote:
+
+> It's quite hacky, but this can be done with CPP and quasiquoting
+> (incidentally, it would be _REALLY_ nice if 'undefined' and 'error' had
+> similar source-location-dependent error messages by default):
+>
+>
+> https://github.com/mokus0/junkbox/commit/bad59f486c3457f1d880a1cfa5b1baa33aff4ade
+
+
+#define undefined   [underscore|"undefined" at line __LINE__ in __FILE__|]
+
+That's nice, I like it. Wanted something like this for a while. I rarely get
+exceptions in Haskell so that it's not even a bother when I don't know what
+line number an exception came from, even undefined, but it's nice to have
+it.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110405/135d1bd7/attachment.htm>
+

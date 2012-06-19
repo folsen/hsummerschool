@@ -1,0 +1,72 @@
+From dave at zednenem.com  Wed Dec 21 19:08:20 2011
+From: dave at zednenem.com (David Menendez)
+Date: Wed, 21 Dec 2011 13:08:20 -0500
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <9BFF699B-2316-4615-8FCD-A34569181316@strictlypositive.org>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+	<20111216042614.GB15053@seas.upenn.edu>
+	<CADLz5wVmAYTjGq1+ST87=0oGmUoYdZUTCj=Xcv=u_5_8D3hWvQ@mail.gmail.com>
+	<CACqaG6wdMU=8+SH+n-cNmaPMHKEuv6UiWW3t6rFSYK06sw1t1Q@mail.gmail.com>
+	<CADLz5wWsWghpJim+28FtPy+RSXWjXvboX_KqNLmcho3Ugjno7w@mail.gmail.com>
+	<CAPeieQGPN34wzUQHjsJM3xo3ysm3DFMcNh6mAkji9cfev2gsvw@mail.gmail.com>
+	<9BFF699B-2316-4615-8FCD-A34569181316@strictlypositive.org>
+Message-ID: <CAOv7PypOJ=QaU-H1iTprWLgXDSujivfvkT_fKt3HdP6z+XFZTw@mail.gmail.com>
+
+On Wed, Dec 21, 2011 at 12:20 PM, Conor McBride
+<conor at strictlypositive.org> wrote:
+>
+> On 21 Dec 2011, at 14:07, Erik Hesselink <hesselink at gmail.com> wrote:
+>
+>> On Wed, Dec 21, 2011 at 14:10, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+>
+>
+>> ?The semantics of Maybe are
+>>>
+>>>
+>>> clear: it's failure-and-prioritized-choice.
+>>
+>>
+>> Are you sure?
+>
+>
+> Yes.
+>
+>
+>> There are (at least) four Monoid instances for Maybe
+>> [1]. With a direct instance for Maybe and its Dual you have only
+>> covered two.
+>
+>
+> Types don't just give data a representation: types evoke structure. The data
+> stored by Maybe can be made into a monoid in several ways, but the
+> failure-management role of Maybe makes just one of them appropriate.
+
+This is my view as well.
+
+While it's true that the current Monoid instance for Maybe is the only
+one that isn't captured by an obvious adaptor, I think we'd be better
+off with a dedicated type for that sort of semigroup-to-monoid
+transformation.
+
+
+Those obvious adaptors, by the way:
+
+newtype MPlus m a = MPlus (m a)
+
+instance MonadPlus m => Monoid (MPlus m a) where
+    mempty = MPlus mzero
+    mappend (MPlus x) (MPlus y) = MPlus (mplus x y)
+
+newtype LiftA2 m a = LiftA2 (m a)
+
+instance (Applicative m, Monoid a) => Monoid (LiftA2 m a) where
+    mempty = LiftA2 (pure mempty)
+    mappend (LiftA2 x) (LiftA2 y) = LiftA2 (liftA2 mappend x y)
+
+-- 
+Dave Menendez <dave at zednenem.com>
+<http://www.eyrie.org/~zednenem/>
+
+

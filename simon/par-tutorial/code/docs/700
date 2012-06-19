@@ -1,0 +1,50 @@
+From angelv at iac.es  Mon Apr 25 15:11:52 2011
+From: angelv at iac.es (Angel de Vicente)
+Date: Mon, 25 Apr 2011 14:11:52 +0100
+Subject: [Haskell-cafe] Trouble with currying and uncurrying...
+Message-ID: <4DB57318.4040509@iac.es>
+
+Hi,
+
+I'm reading "The Craft of Functional Programming" and I found something 
+I don't understand in page 185.
+
+It says:
+
+"Suppose first that we want to write a curried version of a function g, 
+which is itself uncurried and of type (a,b) -> c.
+
+curry g
+
+This funtion expects its arguments as a pair, but its curried version, 
+curry g, will take them separately - we therefore have to form them into 
+a pair before applying g to them:
+
+curry :: ((a,b) -> c) -> (a -> b -> c)
+curry g x y = g (x,y)
+
+curry multiplyUC will be exactly the same function as multiply."
+
+OK, I have tried it and it works, but I don't understand the syntax for 
+curry. Until now I have encountered only functions that take the same 
+number of arguments as the function definition or less (partial 
+application), but this syntax looks a bit new to me. curry is supposed 
+to have as its argument one function of type (a,b) -> c and produce 
+another function, but then the second line gives three arguments to 
+curry, the function itself and the variables x and y.
+
+What I'm missing here?
+
+Thanks a lot,
+?ngel de Vicente
+-- 
+http://www.iac.es/galeria/angelv/
+
+High Performance Computing Support PostDoc
+Instituto de Astrof?sica de Canarias
+---------------------------------------------------------------------------------------------
+ADVERTENCIA: Sobre la privacidad y cumplimiento de la Ley de Protecci?n de Datos, acceda a http://www.iac.es/disclaimer.php
+WARNING: For more information on privacy and fulfilment of the Law concerning the Protection of Data, consult http://www.iac.es/disclaimer.php?lang=en
+
+
+

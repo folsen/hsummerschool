@@ -1,0 +1,20 @@
+From bos at serpentine.com  Fri Apr 22 17:50:24 2011
+From: bos at serpentine.com (Bryan O'Sullivan)
+Date: Fri, 22 Apr 2011 08:50:24 -0700
+Subject: [Haskell-cafe] Is Hugs dead?
+In-Reply-To: <1303474568.13029.4.camel@fuzxxl>
+References: <1303474568.13029.4.camel@fuzxxl>
+Message-ID: <BANLkTinbLtVzZKDvPbA38j+6BZBeiG1rWA@mail.gmail.com>
+
+On Fri, Apr 22, 2011 at 5:16 AM, Robert Clausecker <fuzxxl at gmail.com> wrote:
+
+>
+> Now my question is: Is Hugs dead? What's the status of development of
+> hugs?
+>
+
+It's been unmaintained for years now.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110422/dc60ae5b/attachment.htm>
+

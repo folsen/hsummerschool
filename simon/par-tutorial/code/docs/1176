@@ -1,0 +1,28 @@
+From v.dijk.bas at gmail.com  Wed Aug 17 10:17:06 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Wed, 17 Aug 2011 10:17:06 +0200
+Subject: [Haskell-cafe] ANNOUNCE: TKYProf
+In-Reply-To: <CAKA2JgKtbWECa-yZni3boH3CnaR-E5CrJRaAgOy6HZx=iw6Qsw@mail.gmail.com>
+References: <96BB3D35-27F0-456B-B0CC-8EDE541C8347@foldr.in>
+	<CALoEywOuRx5kX4PxFehspuP2kVZ9b-g6Vi1u2UYM1F10Wc4=NQ@mail.gmail.com>
+	<CAKA2JgKtbWECa-yZni3boH3CnaR-E5CrJRaAgOy6HZx=iw6Qsw@mail.gmail.com>
+Message-ID: <CADLz5wWvUMr5OaiO-PWzoz-+5+ZK+=gtxovqPUcmj77fsSDFpw@mail.gmail.com>
+
+On 17 August 2011 07:16, Michael Snoyman <michael at snoyman.com> wrote:
+> There's a bug in GHC that prevents C++ code from working correctly with Template Haskell
+
+For reference this is the bug Michael is talking about:
+
+http://hackage.haskell.org/trac/ghc/ticket/5289
+
+As explained by Sebastian and the ticket, to work around this you need
+to perform the following steps:
+
+$ sudo ln -vs $(gcc --print-file-name=libstdc++.so) /usr/local/lib/
+$ sudo ldconfig
+
+Regards,
+
+Bas
+
+

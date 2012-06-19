@@ -1,0 +1,60 @@
+From aristidb at googlemail.com  Wed Dec 28 00:45:44 2011
+From: aristidb at googlemail.com (Aristid Breitkreuz)
+Date: Wed, 28 Dec 2011 00:45:44 +0100
+Subject: [Haskell-cafe] Conduits: Is Source a valid instance of Monad?
+Message-ID: <CADXS2CsYZJOL5KJgOaHxNbgodDKOVxfoccwe0gEeXq4ANFPddA@mail.gmail.com>
+
+Hi all,
+
+As you may have noticed, Michael Snoyman has been working on an
+alternative approach to I/O, called conduits. You can find it here:
+
+https://github.com/snoyberg/conduit
+
+When looking at the Source type (explained here:
+http://www.yesodweb.com/blog/2011/12/conduits), I noticed that they
+seem to behave "like lists", and naturally wondered if I could write a
+Monad instance for them. But first, let's have a brief look at the
+definition of Source:
+
+data SourceResult a = Open a | Closed
+
+data PreparedSource m a = PreparedSource
+????{ sourcePull :: ResourceT m (SourceResult a)
+????, sourceClose :: ResourceT m ()
+????}
+
+newtype Source m a = Source { prepareSource :: ResourceT m
+(PreparedSource m a) }
+
+ResourceT deals with resource acquisition and releasing (making sure
+that all resources are released), and provides a an abstraction over
+IORef/STRef. For our purposes here, ResourceT is probably close enough
+to IO.
+
+
+So now the question again is, can we write a Monad instance for this?
+I have been able to write join (concatenate) and return (a source with
+a single non-repeated) element.
+
+https://gist.github.com/1525471
+
+I _think_ it behaves properly like a Monad, but I'm not quite sure,
+and neither was Michael. Greg Weber then suggested bringing the
+question to this forum. What made the question difficult for me is
+that this would be a stateful Monad transformer, so I'm not quite sure
+how to test the Monad laws properly.
+
+
+There's a second part to this question: If Source turns out not to be
+a Monad, is it possibly a ZipList-like Applicative? And either way,
+which is more useful: The list-like or the ziplist-like instances (of
+Applicative/Monad)?
+
+
+
+Thank you,
+
+Aristid
+
+

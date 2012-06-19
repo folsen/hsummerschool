@@ -1,0 +1,50 @@
+From jaskalnik at gmail.com  Fri Apr 15 13:31:37 2011
+From: jaskalnik at gmail.com (Jiri Skala)
+Date: Fri, 15 Apr 2011 13:31:37 +0200
+Subject: [Haskell-cafe] build fails due to sem_close...
+Message-ID: <1302867097.3047.14.camel@skalniknb>
+
+Hi all,
+I've got error listed below when I've tried to build ghc-7.0.2 on ppc64
+arch. I 've tested patch from Debian (-pthread option) but this didn't
+fix the issue.
+
+Any idea what's wrong?
+
+Thanks for any tip/help.
+
+Jiri
+
+
+used packages:
+
+glibc: 2.12.90, 2.13.90 (tested for both)
+gcc: 4.6.0
+
+
+I use these options for ppc64 arch in build.mk
+
+%ifarch ppc64
+GhcUnregisterised=YES
+GhcWithNativeCodeGen=NO
+SplitObjs=NO
+GhcWithInterpreter=NO
+GhcNotThreaded=YES
+SRC_HC_OPTS+=-optc-mminimal-toc
+SRC_CC_OPTS+=-mminimal-toc -Wa,--noexecstack
+%endif
+
+
+error log:
+
+configure: Building in-tree ghc-pwd
+/usr/bin/ld: /usr/lib64/ghc-7.0.2/unix-2.4.2.0/libHSunix-2.4.2.0.a(Semaphore.o): undefined reference to symbol 'sem_close@@GLIBC_2.3'
+/usr/bin/ld: note: 'sem_close@@GLIBC_2.3' is defined in
+DSO /lib64/libpthread.so.0 so try adding it to the linker command line
+/lib64/libpthread.so.0: could not read symbols: Invalid operation
+collect2: ld returned 1 exit status
+configure: error: Building ghc-pwd failed
+
+
+
+

@@ -1,0 +1,54 @@
+From lrpalmer at gmail.com  Fri Feb 11 22:25:07 2011
+From: lrpalmer at gmail.com (Luke Palmer)
+Date: Fri, 11 Feb 2011 14:25:07 -0700
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+Message-ID: <AANLkTinRwfq-hikWx=U-1hZvvyEwG=U4oL_ZypiayRye@mail.gmail.com>
+
+On Fri, Feb 11, 2011 at 4:06 AM, C K Kashyap <ckkashyap at gmail.com> wrote:
+> Hi Folks,
+> I've come across this a few times - "In Haskell, once can prove the
+> correctness of the code" - Is this true?
+
+You can prove the correctness of code for any language that has
+precise semantics.  Which is basically none of them (I believe a
+dialect of ML has one).  But many languages come very close, and
+Haskell is one of them.  In particular, Haskell's laziness allows very
+liberal use of equational reasoning, which is much more approachable
+as a technique for correctness proofs than operational semantics.
+
+The compiler is not able to verify your proofs, as Coq and Agda can,
+except in very simple cases.  On the other hand, real-world
+programmers the advantage of not being forced to prove the correctness
+of their code because proofs are hard (technically Coq and Agda only
+require you to prove termination, but many times termination proofs
+require knowing most properties of your program so you have to
+essentially prove correctness anyway).  I would like to see a language
+that allowed optional verification, but that is a hard balance to make
+because of the interaction of non-termination and the evaluation that
+needs to happen when verifying a proof.
+
+I have proved the correctness of Haskell code before.  Mostly I prove
+that monads I define satisfy the monad laws when I am not sure whether
+they will.  It is usually a pretty detailed process, and I only do it
+when I am feeling adventurous.  I am not at home and I don't believe
+I've published any of my proofs, so you'll have to take my word for it
+:-P
+
+There is recent research on automatically proving (not just checking
+like QuickCheck, but formal proofs) stated properties in Haskell
+programs.  It's very cool. http://www.doc.ic.ac.uk/~ws506/tryzeno/
+
+I would not characterize "provable code" as an essential defining
+property of Haskell, though it is easier than in imperative and in
+strict functional languages.  Again, Agda and Coq are really the ones
+that stand out in the provable code arena.  And certainly I have an
+easier time mentally informally verifying the correctness of Haskell
+code than in other languages, because referential transparency removes
+many of the subtleties encountered in the process.  I am often 100%
+sure of the correctness of my refactors.
+
+Luke
+
+

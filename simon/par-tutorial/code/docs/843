@@ -1,0 +1,43 @@
+From trebla at vex.net  Thu Apr 28 20:56:38 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Thu, 28 Apr 2011 14:56:38 -0400
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <BANLkTin5wkhqk_XO5qqrvn=7D_ZLOiPFwA@mail.gmail.com>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>	<34E1B523-F2C9-4875-98D2-728D5178DC89@gmail.com>	<4DB80841.8040304@gmail.com>
+	<4DB81521.50800@unicaen.fr>	<BANLkTikupnpPXpHKs0-29kycVf9784waXw@mail.gmail.com>	<4DB88BA5.9090805@unicaen.fr>
+	<BANLkTin5wkhqk_XO5qqrvn=7D_ZLOiPFwA@mail.gmail.com>
+Message-ID: <4DB9B866.8030609@vex.net>
+
+On 11-04-27 05:44 PM, serialhex wrote:
+> in ruby they use what some call "duck typing"  if it looks
+> like a duck and quacks like a duck... it's a duck.
+
+Python and Javascript also do duck typing.
+
+Haskell does Functor typing. A Functor is something that provides an 
+"fmap" method. List does it, so you can do
+
+   fmap not [True,False]
+
+Maybe also does it, so you can also do
+
+   fmap not (Just False)
+
+Your own data type could also do it. Suppose your data type is (binary tree)
+
+   data BT a = Z | Y a (BT a) (BT a)
+     deriving Show
+
+then you add
+
+   instance Functor BT where
+     fmap f Z = Z
+     fmap f (Y x t0 t1) = Y (f x) (fmap f t0) (fmap f t1)
+
+then BT provides an "fmap" method too, and so you can also do
+
+   fmap not (Y True (Y False Z Z) Z)
+
+If it fmaps like a Functor, it is a Functor. That is Functor typing.
+
+

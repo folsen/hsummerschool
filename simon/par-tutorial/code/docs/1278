@@ -1,0 +1,21 @@
+From barendventer at gmail.com  Tue Aug 23 04:17:26 2011
+From: barendventer at gmail.com (Barend Venter)
+Date: Mon, 22 Aug 2011 19:17:26 -0700
+Subject: [Haskell-cafe] Why no Monoid, Num, Integral,
+	or Floating RVarT instances?
+Message-ID: <CAJAU91d-nAxJFjyN3M3jFTTqjAhaCDnf2hYnBUx8rVWn0O=_4A@mail.gmail.com>
+
+It seems like you should be able to get instances for:
+
+(Monoid m) => Monoid (RVarT n m)
+(Num m) => Num (RVarT n m)
+
+and so forth for integral and floating
+
+Just wondering if I am missing something here or if there is any
+particular thing I'm missing. I am aware you would probably not be
+able to do an Eq or Show instance but me understanding was that in the
+case of the (Num b) => Num (a -> b) instance the solution was simply
+to leave those things undefined.
+
+

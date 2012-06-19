@@ -1,0 +1,25 @@
+From kc1956 at gmail.com  Mon Apr 18 19:30:29 2011
+From: kc1956 at gmail.com (KC)
+Date: Mon, 18 Apr 2011 10:30:29 -0700
+Subject: [Haskell-cafe] Adjoint Folds and Unfolds Or: Scything through the
+	Thicket of Morphisms
+Message-ID: <BANLkTineFjYXf_rWGO+N-Lt1xm0E-hhcbw@mail.gmail.com>
+
+Just tripped over this:
+
+Adjoint Folds and Unfolds
+Or: Scything through the Thicket of Morphisms
+
+Folds and unfolds are at the heart of the algebra of programming. They
+allow the cognoscenti to derive and manipulate programs rigorously...
+Ralf Hinze
+
+Lecture Notes in Computer Science, 2010, Volume 6120, Mathematics of
+Program Construction, Pages 195-228
+
+-- 
+--
+Regards,
+KC
+
+

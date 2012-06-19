@@ -1,0 +1,79 @@
+From michael at snoyman.com  Wed Apr  6 20:46:34 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 6 Apr 2011 21:46:34 +0300
+Subject: [Haskell-cafe] ANNOUNCE: DocTest-0.2.0
+In-Reply-To: <20110406164647.GA7363@x200>
+References: <20110406164647.GA7363@x200>
+Message-ID: <BANLkTi=mTPfLkU-++DY5kPKcgb_83Vf2HA@mail.gmail.com>
+
+Hi Simon,
+
+Looking into DocTest has been something on my TODO list for a few months
+now. After this email, I finally started looking into it. I was very
+impressed to see that, with the optghc option, I'm even able to test
+QuasiQuotes. Very impressive!
+
+I would like to integrate DocTest into my normal test suite procedures. Do
+you have a recommended approach for this? I think I have projects using all
+of test-framework[1], HTF[2] and hspect[3], so I'm not picky here.
+
+Michael
+
+[1] http://hackage.haskell.org/package/test-framework
+[2] http://hackage.haskell.org/package/HTF
+[3] http://hackage.haskell.org/package/hspec
+
+On Wed, Apr 6, 2011 at 7:46 PM, Simon Hengel <simon.hengel at wiktory.org>wrote:
+
+> I just uploaded a new version of DocTest[1] to Hackage.
+>
+>
+> WHAT IS DocTest?
+> ================
+>
+> DocTest is a port of Python's doctest[2] to Haskell.  It can be used to
+> verify, that examples in Haddock comments[3] do still work.  This also
+> provides you with a simple mechanism to write unit test, without the
+> burden of maintaining a dedicated test suite.
+>
+> A basic example of usage is at [4].
+>
+>
+> WHAT'S NEW IN THIS VERSION?
+> ===========================
+>
+> Support for blank lines in the result of an expression (analogous to the
+> <BLANKLINE>-feature of Python's doctest).  Here is an example of usage:
+>
+>    -- |
+>    -- Some example:
+>    --
+>    -- >>> putStrLn "foo\n\nbar"
+>    -- foo
+>    -- <BLANKLINE>
+>    -- bar
+>
+> Currently this is implemented in DocTest, but we will move it to Haddock
+> with the next release.
+>
+> Cheers,
+> Simon
+>
+> [1] http://hackage.haskell.org/cgi-bin/hackage-scripts/package/DocTest
+> [2] http://docs.python.org/library/doctest.html
+> [3] http://www.haskell.org/haddock/doc/html/ch03s08.html#id566093
+> [4] http://haskell.org/haskellwiki/DocTest
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110406/7b9292b7/attachment.htm>
+

@@ -1,0 +1,22 @@
+From johan.tibell at gmail.com  Wed Feb  2 23:02:48 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Wed, 2 Feb 2011 23:02:48 +0100
+Subject: [Haskell-cafe] timely shutdown of timer threads
+In-Reply-To: <11F6D72C-5841-4FFF-B3B6-7B5C1DDC5C5E@gmail.com>
+References: <84DE9201-9822-4A1A-A17A-682C146C771C@gmail.com>
+	<4D48C09E.2050001@vex.net>
+	<11F6D72C-5841-4FFF-B3B6-7B5C1DDC5C5E@gmail.com>
+Message-ID: <AANLkTinCr3q_1VmqiEp0EwxoGvt8+a17ktmpqeNOTvF1@mail.gmail.com>
+
+On Wed, Feb 2, 2011 at 10:42 PM, Warren Harris <warrensomebody at gmail.com> wrote:
+> Interesting. I hadn't thought of this solution. You're forking the timer to yet a third thread so that if it continues waiting beyond the checkpoint thread shutdown it doesn't really matter. I guess that works as long as the main thread doesn't wait for all other threads to terminate before terminating the app.
+>
+> It still seems to me that haskell is lacking when it comes to operations that can wait for multiple conditions.
+
+I think we can make waiting for both I/O activity and timers at the
+same time using the I/O manager. I will need to do this for my planned
+timeout support in the network package.
+
+Johan
+
+

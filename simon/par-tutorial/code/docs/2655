@@ -1,0 +1,41 @@
+From daniel.is.fischer at googlemail.com  Thu Feb  3 22:15:22 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Thu, 3 Feb 2011 22:15:22 +0100
+Subject: [Haskell-cafe] Reader monad wrapping State monad
+In-Reply-To: <924708.31951.qm@web31101.mail.mud.yahoo.com>
+References: <924708.31951.qm@web31101.mail.mud.yahoo.com>
+Message-ID: <201102032215.22368.daniel.is.fischer@googlemail.com>
+
+On Thursday 03 February 2011 21:40:13, michael rice wrote:
+> Hi Daniel,
+>
+> Ok, but what I was looking for was ReaderT on top, State on the bottom.
+
+No problem, just change the definition of the Heron type synonym and swap 
+the applcations of runReader[T] and evalState[T] in mySqrt, the monadic 
+sqrtH can remain unchanged :)
+
+> This is very confusing material, with no apparent conceptual commonality
+> (ad hoc comes to mind) among the many examples I've looked at. Sometimes
+> lift is used, other times a lift helper function, and in this case no
+> use of lift at all.
+
+That's because only methods of the MonadState and the MonadReader class are 
+used and instances of MonadState are propagated/lifted through ReaderT, 
+instance of MonadReader are propagated/lifted through StateT.
+
+(
+instance MonadReader r m => MonadReader r (StateT s m) where
+    ask = lift ask
+    local = ...
+instance MonadState s m => MonadState (ReaderT r m) where
+    get = lift get
+    put = ...
+)
+
+If you use a function on the inner monad which is not propagated to the 
+entire transformer stack via class instances, you have to use lift (if you 
+have a MonadTrans instance) or something similar.
+
+
+

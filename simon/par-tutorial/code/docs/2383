@@ -1,0 +1,42 @@
+From andrewcoppin at btinternet.com  Thu Dec 29 14:12:11 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Thu, 29 Dec 2011 13:12:11 +0000
+Subject: [Haskell-cafe] Windows: openFile gives permission denied when
+ file in use
+In-Reply-To: <20111229122843.GW17094@google.com>
+References: <CAKA2JgLc1Q-Lf_yOuhQdb1JKuUkiRYuS=hQ7wQw_+jqCMQOEYQ@mail.gmail.com>
+	<CAKjSnQH=mNONY7mC7-nEt-R51A0PULg-GhPvWiQ59vrOxpznuw@mail.gmail.com>
+	<4EFC53B7.2010806@btinternet.com>
+	<20111229120637.GV17094@google.com>
+	<4EFC5B02.1080908@btinternet.com>
+	<20111229122843.GW17094@google.com>
+Message-ID: <4EFC672B.3010605@btinternet.com>
+
+>> I
+>> gather that Linux does now support real locking though. (And file
+>> update notifications, and ACLs, and lots of other things that
+>> Windows has had for far longer.)
+>
+> Hrmm: "Mandatory File Locking For The Linux Operating System, 15 April
+> 1996" :)
+
+Have a reference for when it was actually implemented?
+
+I tried to look this up, and got this:
+
+http://0pointer.de/blog/projects/locking.html
+
+Sounds like it's not so "solved" after all. (Or perhaps the author just 
+doesn't know enough about it, it's hard to say...) The Wikipedia page on 
+file locking also points out a list of Unix-related locking problems. 
+(But again, that might just be editor bias.)
+
+>> I'm just saying it would be nice if Haskell could support
+>> more of what these two OSes have to offer.
+>
+> Totally agreed!
+
+Good, that was my main point. Now, who's volunteering to implement all 
+this? :-}
+
+

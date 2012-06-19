@@ -1,0 +1,45 @@
+From hvr at gnu.org  Mon Aug 29 16:28:53 2011
+From: hvr at gnu.org (Herbert Valerio Riedel)
+Date: Mon, 29 Aug 2011 16:28:53 +0200
+Subject: [Haskell-cafe] Decompressing and http-enumerator
+In-Reply-To: <CAHZrzdqdDtoPa+eQS5XtyRFx-2=1WtOQf=eDERvQuzu_dsMwAw@mail.gmail.com>
+References: <CAKA2Jg+u_BtN5WKrTc4T_mgmuxP5==ASbsh5rvxJaQhVK64MTg@mail.gmail.com>
+	<CAHZrzdqdDtoPa+eQS5XtyRFx-2=1WtOQf=eDERvQuzu_dsMwAw@mail.gmail.com>
+Message-ID: <1314628133.4827.61.camel@duo>
+
+On Mon, 2011-08-29 at 13:21 +0200, Gregory Collins wrote:
+> A web server should not be setting "Content-encoding: gzip" on a
+> .tar.gz file.
+
+Why not? From RFC2616 compliant servers I'd expect a .tar.gz file to
+have the Content-* headers provide meta-information about the
+content[1], e.g.
+
+ Content-Type: application/x-tar
+ Content-Encoding: gzip
+ Transfer-Encoding: chunked
+
+
+If I want to detach the gzip encoding from the "content" (or "entity"),
+I'd move it to the Transfer-Encoding header[2], e.g.:
+
+ Content-Type: application/x-tar
+ Transfer-Encoding: gzip, chunked
+
+
+
+
+
+[1]: See RFC2616 sec7.2.1: "Content-Type specifies the media type of the
+underlying data. Content-Encoding may be used to indicate any additional
+content codings applied to the data, usually for the purpose of data
+compression, that are a property of the requested resource."
+
+[2]: See RFC2616 sec4.3: "Transfer-Encoding is a property of the
+message, not of the entity, and thus MAY be added or removed by any
+application along the request/response chain."
+
+
+
+
+

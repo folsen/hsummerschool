@@ -1,0 +1,41 @@
+From duncan.coutts at googlemail.com  Mon Feb  7 20:37:58 2011
+From: duncan.coutts at googlemail.com (Duncan Coutts)
+Date: Mon, 07 Feb 2011 19:37:58 +0000
+Subject: [Haskell-cafe] Status update on {code, trac, projects, planet,
+ community}.haskell.org
+In-Reply-To: <1296610402.8387.1874.camel@localhost>
+References: <1296610402.8387.1874.camel@localhost>
+Message-ID: <1297107478.26187.163.camel@localhost>
+
+On Wed, 2011-02-02 at 01:33 +0000, Duncan Coutts wrote:
+
+> As you will be aware, some of the *.haskell.org websites have been down
+> recently, specifically:
+> 
+> code.haskell.org
+> trac.haskell.org
+> projects.haskell.org
+> planet.haskell.org
+> community.haskell.org
+
+[...]
+
+> We have not yet re-enabled user login accounts, nor re-enabled access to
+> code repositories. The support ticket system is not yet enabled.
+> 
+> We will send a further update when these are re-enabled, or procedures
+> for people to re-enable them are finalised.
+
+We have restored read-only access to the majority of projects on:
+code.haskell.org		(code repositories)
+projects.haskell.org		(project webspace)
+
+A small number have been held back because they contain .js, .html
+or .tar.gz snapshots that are not recorded in any repository. We will
+ask project owners to check these before they are restored.
+
+Duncan
+(On behalf of the Haskell infrastructure team)
+
+
+

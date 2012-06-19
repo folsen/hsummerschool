@@ -1,0 +1,46 @@
+From allbery.b at gmail.com  Sat Aug 27 21:57:40 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Sat, 27 Aug 2011 15:57:40 -0400
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <4E58CDB5.2010900@btinternet.com>
+References: <4E568D11.30800@btinternet.com> <4E56CD99.6050703@vex.net>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+	<nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+	<4E57F43A.9030800@btinternet.com>
+	<b25g57lk7fbp5td6lp31qigptnr6rvfh67@4ax.com>
+	<4E58CDB5.2010900@btinternet.com>
+Message-ID: <CAKFCL4VsuQrdmfM5EfBK_DBokMTC7SVP=u_UTJZV+17vABOvCg@mail.gmail.com>
+
+On Sat, Aug 27, 2011 at 06:57, Andrew Coppin <andrewcoppin at btinternet.com>wrote:
+
+> On 26/08/2011 10:51 PM, Steve Schafer wrote:
+>
+>> On Fri, 26 Aug 2011 20:30:02 +0100, you wrote:
+>>
+>>> You wouldn't want to know how many bits you need to store on disk to
+>>> reliably recreate the value?
+>>>
+>>
+>> I can't say that I have cared about that sort of thing in a very long
+>> time. Bits are rather cheap these days. I store data on disk, and the
+>> space it occupies is whatever it is; I don't worry about it.
+>>
+>
+> I meant if you're trying to *implement* serialisation. The Bits class
+> allows you to access bits one by one, but surely you'd want some way to know
+> how many bits you need to keep?
+>
+
+I think that falls into the realm of protocol design; if you're doing it in
+your program at runtime, you're probably doing it wrong.  (The fixed size
+version makes sense for marshaling; it's *dynamic* sizes that need to be
+thought out beforehand.)
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110827/923b15e9/attachment.htm>
+

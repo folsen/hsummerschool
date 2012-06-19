@@ -1,0 +1,54 @@
+From lrpalmer at gmail.com  Sun Apr 10 01:38:30 2011
+From: lrpalmer at gmail.com (Luke Palmer)
+Date: Sat, 9 Apr 2011 17:38:30 -0600
+Subject: [Haskell-cafe] Deciding equality of functions.
+In-Reply-To: <829991302369988@web85.yandex.ru>
+References: <829991302369988@web85.yandex.ru>
+Message-ID: <BANLkTiksP0diahrv0MBtF9ZFXNPF6U+-RQ@mail.gmail.com>
+
+On Sat, Apr 9, 2011 at 11:26 AM, Grigory Sarnitskiy <sargrigory at ya.ru>wrote:
+
+> I guess that deciding whether two functions are equal in most cases is
+> algorithmically impossible. However maybe there exists quite a large domain
+> of decidable cases? If so, how can I employ that in Haskell?
+>
+> It is a common situation when one has two implementations of the same
+> function, one being straightforward but slow, and the other being fast but
+> complex. It would be nice to be able to check if these two versions are
+> equal to catch bugs in the more complex implementation.
+>
+
+Every function with a "searchable" domain and a decidable codomain has
+decidable equality.  The classic example of a big searchable domain is the
+cantor space:
+
+import Data.Searchable
+
+type Nat = Int      -- works with Integer too
+type Cantor = Nat -> Bool
+bit :: Set Bool
+bit = doubleton True
+
+cantor :: Set Cantor
+cantor = fmap (!!) . sequence . repeat $ bit
+
+decEq :: (Eq a) => (Cantor -> a) -> (Cantor -> a) -> Bool
+decEq f g = forEvery (\c -> f c == g c)
+
+So for example:
+
+ghci> decEq ($ 4) ($ 4)
+True
+ghci> decEq ($ 4) ($ 100)
+False
+ghci> decEq (\c -> c 4 && c 42) (\c -> not (not (c 4) || not (c 42)))
+True
+
+Searchable is based on work by Martin Escardo, very cool stuff.
+ Data.Searchable comes from the infinite-search package.
+
+Luke
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110409/f9988c5b/attachment.htm>
+

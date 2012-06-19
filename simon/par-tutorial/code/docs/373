@@ -1,0 +1,49 @@
+From dstcruz at gmail.com  Thu Apr 14 02:03:41 2011
+From: dstcruz at gmail.com (Daniel Santa Cruz)
+Date: Wed, 13 Apr 2011 20:03:41 -0400
+Subject: [Haskell-cafe] Haskell Weekly News: Issue 177
+Message-ID: <BANLkTi=cL-AvZJO2mto1wOA_jmEK=rfR2Q@mail.gmail.com>
+
+   Welcome to issue 177 of the HWN, a newsletter covering developments in
+   the [1]Haskell community. This release covers the week of April 3 to 9,
+   2011.
+
+   You can find a HTML rendition of this issue at: http://bit.ly/hR2sMB
+
+Announcements
+
+   Brent Yorgey [2]sent out a call for contributions for the second
+   edition of Typeclassopedia.
+
+   Roel van Dijk started what became a popular[3]thread on the mailing
+   list about encodings of Haskell source files.
+
+   What would you like to see here? I have gotten mixed feedback on what
+   constitutes interesting items for the "announcements" section of the
+   mailing list. Some have pointed out that package announcements tend to
+   be noisy and not all that interesting to the community at large, or
+   that have a bias towards only pointing out packages where the
+   maintainer decides to send an email to the mailing list. What do *you*
+   think? How about the "calls for papers"? Do those catch your attention?
+   Let me hear what you think.
+
+Quotes of the Week
+
+     * ion: It?s a well-known historical fact cave men writing Haskell
+       hated the ASCII pseudoglyphs.
+
+     * shapr: I persuaded academics to show up and hang out. [...] I told
+       the academics that there were academics worth chatting with on
+       #haskell :-)
+
+     * pjscott: If you really want to see something ridiculous, try
+       looking at the auto-generated library documentation for anything
+       involving regular expressions. The type declarations in
+       Text.Regex.TDFA are like something H. P. Lovecraft might write
+       about.
+
+     * monochrom: the road to haskell is paved with good abstractions
+
+Top Reddit Stories
+
+     * Typeclassopedia second edition: call for contributions

@@ -1,0 +1,40 @@
+From uzytkownik2 at gmail.com  Fri Apr 22 10:54:49 2011
+From: uzytkownik2 at gmail.com (Maciej Marcin Piechotka)
+Date: Fri, 22 Apr 2011 10:54:49 +0200
+Subject: [Haskell-cafe] Question about the Monad instance for Iteratee
+ (from the enumerator package)
+In-Reply-To: <BANLkTi=BaTrE8PqH0M=5=CNbwxqWRZRbeA@mail.gmail.com>
+References: <201104191427.47873.anotheraddress@gmx.de>
+	<BANLkTi=BaTrE8PqH0M=5=CNbwxqWRZRbeA@mail.gmail.com>
+Message-ID: <1303462490.3329.22.camel@localhost.localdomain>
+
+On Tue, 2011-04-19 at 10:02 -0300, Felipe Almeida Lessa wrote:
+> 
+> Now, that's what I get from reading the code.  I don't remember if it
+> is explicitly allowed or forbidden for an iteratee to generate
+> leftovers out of nowhere.  My guess is that it doesn't make much sense
+> to allow it. 
+
+For the record: such code is therefore illegal
+
+abab :: Iteratee Char Identity ()
+abab = continue parseA
+       where parseA (Chunks ('a':'b':xs)) = parseA (Chunks xs)
+             parseA (Chunks ('a':[])) = continue parseB
+             parseA (Chunks xs@(_:_)) = yield () xs
+             parseA (Chunks []) = continue parseA
+             parseA EOF = yield () EOF
+             parseB (Chunks ('b':xs)) = parseA (Chunks xs)
+             parseB (Chunks xs@(_:_)) = yield () (a:xs)
+             parseB (Chunks []) = continue parseB
+             parseB EOF = yield () ['a']
+
+Regards
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110422/4815f978/attachment.pgp>
+

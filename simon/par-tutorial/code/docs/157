@@ -1,0 +1,56 @@
+From wren at freegeek.org  Wed Apr  6 03:35:54 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Tue, 05 Apr 2011 21:35:54 -0400
+Subject: [Haskell-cafe] ANN: stm-chans: Additional types of channels for
+	STM.
+In-Reply-To: <BANLkTi=xQDTLaTKnu5ZJkSzXhrwZWXfW6g@mail.gmail.com>
+References: <4D993C84.8080501@freegeek.org>
+	<BANLkTi=xQDTLaTKnu5ZJkSzXhrwZWXfW6g@mail.gmail.com>
+Message-ID: <4D9BC37A.9080305@freegeek.org>
+
+On 4/3/11 11:58 PM, Thomas DuBuisson wrote:
+> Wren,
+> Glad to see someone is doing a more complete packaging of STM helpers
+> and derivatives!
+>
+> I've done a little work on bounded TChans[1] (hackage "bounded-tchan"
+> package) and I think you should consider a few things:
+
+Ah, somehow I missed that in my searching. I'll give it a look and try 
+to integrate things.
+
+
+> 1) Split the reader counter and writer counters as I've done in
+> bounded-tchan.  This gives 2-5 times better performance (I benchmarked
+> using Criterion, a single reader, a single writer, and tested channels
+> with bounds of 10, 100, and 1000 elements).
+
+That's crazy. I wonder why... must be a contention issue...
+
+> 2) Implement a "tryWriteTBChan" for obvious reasons.
+
+Good idea.
+
+> 4) Help me figure out a good way to build dupTBChan [2].  It's not easy.
+
+I've yet to figure out a way of doing this that has the right semantics. 
+Perhaps splitting the reader and writer counters will help, though it 
+sounds like you haven't had much luck either.
+
+
+> [2] http://stackoverflow.com/questions/5446484/how-to-add-a-finalizer-on-a-tvar
+
+Have you taken a look at TwilightSTM?
+
+     http://proglang.informatik.uni-freiburg.de/projects/syncstm/
+     http://hackage.haskell.org/package/twilight-stm
+
+Since I'm aiming to have stm-chans eventually incorporated into stm 
+proper, that wouldn't work for me, though it sounds like it might solve 
+the ideological question about adding finalizers to TVars
+
+-- 
+Live well,
+~wren
+
+

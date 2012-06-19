@@ -1,0 +1,193 @@
+From fischer at nii.ac.jp  Mon Dec 26 16:56:51 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Mon, 26 Dec 2011 16:56:51 +0100
+Subject: [Haskell-cafe] Reifying case expressions [was: Re: On stream
+ processing, and a new release of timeplot coming]
+In-Reply-To: <jd6tmi$5qd$1@dough.gmane.org>
+References: <CANVKUrWrvDiG7=vfDf=8Zn5_TFQtjawtYxMT6nGh7mroAJZR6w@mail.gmail.com>
+	<jd6tmi$5qd$1@dough.gmane.org>
+Message-ID: <CALoEywPthWO=P-10hbo_VPQ894B5n1FN2WKJoGqFQkUGoYWsTA@mail.gmail.com>
+
+On Sun, Dec 25, 2011 at 11:25 AM, Heinrich Apfelmus <
+apfelmus at quantentunnel.de> wrote:
+>
+> Your  StreamSummary  type has a really nice interpretation: it's a
+> reification of  case  expressions [on lists].
+>
+
+nice observation!
+
+
+> For instance, consider the following simple function from lists to integers
+>
+>    length :: [a] -> Int
+>    length xs = case xs of
+>        []     -> 0
+>        (y:ys) -> 1 + length ys
+>
+> We want to reify the case expression as constructor of a data type. [...]
+>
+>    data ListTo a r = CaseOf r (a -> ListTo a r)
+>
+>    interpret :: ListTo a r -> ([a] -> r)
+>    interpret (CaseOf nil cons) xs =
+>        case xs of
+>            []     -> nil
+>            (y:ys) -> interpret (cons y) ys
+>
+> [...]
+>
+> Likewise, each function from lists can be represented in terms of our new
+> data type [...]
+>
+>    length' :: ListTo a Int
+>    length' = CaseOf
+>        (0)
+>        (\x -> fmap (1+) length')
+>
+>    length = interpret length'
+>
+
+This version of `length` is tail recursive while the previous version is
+not. In general, all functions defined in terms of `ListTo` and `interpret`
+are spine strict - they return a result only after consuming all input list
+constructors.
+
+This is what Eugene observed when defining the identity function as
+
+    idC = CaseOf [] (\x -> (x:) <$> idC)
+
+This version does not work for infinite lists. Similarly, `head` and `take`
+cannot be defined as lazily as in the standard libraries.
+
+We can support lazier list consumers by adding a case to the ListTo type
+that allows to stop consuming the list. To avoid confusion, I chose new
+names for my new types.
+
+    data ListConsumer a b
+      = Done !b
+      | Continue !b (a -> ListConsumer a b)
+
+The interpretation function just ignores the remaining input in the case of
+`Done`:
+
+    consumeList :: ListConsumer a b -> [a] -> b
+    consumeList (Done b)       _      = b
+    consumeList (Continue b _) []     = b
+    consumeList (Continue _ f) (x:xs) = consumeList (f x) xs
+
+We can define lazier versions of `head` and `take` as follows:
+
+    headC :: ListConsumer a a
+    headC = Continue (error "head of empty list") Done
+
+    takeC :: Int -> ListConsumer a [a]
+    takeC 0 = Done []
+    takeC n = Continue [] (\x -> (x:) <$> takeC (n-1))
+
+However, we still cannot define a lazy version of the identity funtion with
+list consumers.
+
+The identity function and `takeC` belong to a special case of a list
+consumers because they also *produce* lists. We can define a specialized
+type for list transformers that consume and produce lists. One advantage of
+this specialization will be that we can define a lazy version of the
+identity function. The transformer type can have functor and applicative
+instances similar to the consumer type to compose transformers in parallel.
+Additionally, it can have category and arrow instances to compose
+transformers sequentially.
+
+Here is a type for lazy list transformers:
+
+    data ListTransformer a b
+      = Cut
+      | Put b (ListTransformer a b)
+      | Get (a -> ListTransformer a b)
+
+A transformer can either cut off the input list and return the empty list,
+output a new element before transforming the input, or consume one element
+from the input list and transform the remaining elements. The
+interpretation function should make this clearer:
+
+    transformList :: ListTransformer a b -> [a] -> [b]
+    transformList Cut       _      = []
+    transformList (Put b t) xs     = b : transformList t xs
+    transformList (Get _)   []     = []
+    transformList (Get f)   (x:xs) = transformList (f x) xs
+
+Note that, if the transformer wants to read another element that is not
+there, it simply returns the empty list.
+
+Now we can define a lazy identity function and another version of `take`:
+
+    idT :: ListTransformer a a
+    idT = Get (\x -> Put x idT)
+
+    takeT :: Int -> ListTransformer a a
+    takeT 0 = Cut
+    takeT n = Get (\x -> Put x (takeT (n-1)))
+
+Here is another translation of a common list function:
+
+    filterT :: (a -> Bool) -> ListTransformer a a
+    filterT p = Get (\x -> if p x then Put x (filterT p) else filterT p)
+
+`filterT` is an example for a function that can consume several input
+elements before producing an output element. Other examples for functions
+of this kind are chunking functions:
+
+    pairsT :: ListTransformer a (a,a)
+    pairsT = Get (\x -> Get (\y -> Put (x,y) pairsT))
+
+    chunks :: Int -> ListTransformer a [a]
+    chunks n = collect n
+     where
+      collect 0 = Put [] (chunks n)
+      collect m = Get (\x -> collect (m-1) >>> Get (\xs -> Put (x:xs) id))
+
+Here are some example calls in GHCi that demonstrate the category and
+applicative instances for sequential and parallel composition (see below
+for a link to the complete source code):
+
+    ghci> transformList pairsT [1..5]
+    [(1,2),(3,4)]                                    -- 5 is ignored
+    ghci> transformList pairsT [1..6]
+    [(1,2),(3,4),(5,6)]
+    ghci> transformList (chunks 2) [1..5]
+    [[1,2],[3,4]]                                    -- similar to pairsT
+    ghci> transformList (chunks 3) [1..6]
+    [[1,2,3],[4,5,6]]
+    ghci> transformList (takeT 3 . chunks 3) [1..]         -- infinite input
+    [[1,2,3],[4,5,6],[7,8,9]]
+    ghci> transformList ((,) <$> takeT 3 . chunks 3 <*> chunks 2 . filterT
+even) [1..]
+    [([1,2,3],[2,4]),([4,5,6],[6,8]),([7,8,9],[10,12])]
+
+When we compose transformers in parallel, the memory requirements depend on
+how far they run out of sync. If they consume elements at the same pace,
+memory requirements should be constant. Otherwise, some part of the input
+is retained to satisfy all transformers. In the final call above bigger and
+bigger parts are retained because the first transformer is slower than the
+second.
+
+As transformers are a special case of consumers, we can compose a consumer
+and a transformer to give a new consumer:
+
+    (<.) :: ListConsumer b c -> ListTransformer a b -> ListConsumer a c
+    Done c       <. _       = Done c
+    Continue c _ <. Cut     = Done c
+    Continue _ f <. Put x t = f x <. t
+    Continue c f <. Get g   = Continue c (\a -> Continue c f <. g a)
+
+Using the instances for parallel and sequential transformer composition as
+well as the instances for parallel consumer composition, we can build
+complex consumers that still execute in lockstep and consume their input
+lazily.
+
+Sebastian
+
+P.S. https://gist.github.com/1521467
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111226/5b9bc02d/attachment.htm>
+

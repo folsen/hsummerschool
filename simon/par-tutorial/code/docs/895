@@ -1,0 +1,46 @@
+From ezyang at MIT.EDU  Sat Apr 30 21:01:30 2011
+From: ezyang at MIT.EDU (Edward Z. Yang)
+Date: Sat, 30 Apr 2011 15:01:30 -0400
+Subject: [Haskell-cafe] GHC optimizer consuming memory
+In-Reply-To: <BANLkTi=-mFbehCgix0kVXms+J17=tjKBZg@mail.gmail.com>
+References: <BANLkTik9W9crNT_MBTLM0aSK=xUzDjZGpg@mail.gmail.com>
+	<BANLkTi=-mFbehCgix0kVXms+J17=tjKBZg@mail.gmail.com>
+Message-ID: <1304189895-sup-2456@ezyang>
+
+Hello Mike,
+
+I cannot reproduce using GHC HEAD (though it seems to hang on GHC 7.0.3),
+so my guess is the bug has been fixed.
+
+cvs-ghc, any guesses which patch this might have been?
+
+Cheers,
+Edward
+
+Excerpts from mike frai's message of Sat Apr 30 14:50:17 -0400 2011:
+> Hi,
+> 
+> While using Michael Snoyman's persistent package, I discovered that a
+> certain bit of code generated from it made the GHC optimizer consume a
+> ridiculous amount of memory (ie. only when using the "-O" flag). I
+> know very little about the GHC compiler and Michael Snoyman
+> recommended I post my findings here to see what others thought.
+> 
+> I've done what I can to extract the code generated from the persistent
+> package and simplify/strip it down to the bare minimum of what's
+> needed to cause this issue. You can find it in the attachment
+> FromTest.hs. From my testing, removing five fields from Rec and the
+> equivalent from the fromValue function - the memory consumption drops
+> dramatically and I am able to compile.
+> 
+> For your convenience, I've also attached FromTest.out, which is the
+> output I get when compiling FromTest.hs using "ghc -O -v3". This is
+> just the output up to the point it starts consuming a lot of memory.
+> I've never seen anything after this point because my system slows down
+> to a crawl (due to swapping) and I end up killing the process.
+> 
+> Please let me know what you guys think or if you need any more
+> information about this. Thanks,
+> - Mike
+
+

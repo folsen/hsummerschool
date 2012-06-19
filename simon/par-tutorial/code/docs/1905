@@ -1,0 +1,22 @@
+From shayan.njp at gmail.com  Tue Dec 13 18:16:17 2011
+From: shayan.njp at gmail.com (Sh NJP)
+Date: Tue, 13 Dec 2011 18:16:17 +0100
+Subject: [Haskell-cafe] Typechecking Using GHC API
+Message-ID: <CAAN2PXNTn6g_baMPDwOgiEfF0zO6KeE+PaF_NwwuwtS11T1+=w@mail.gmail.com>
+
+Hi,
+
+I do some pre-processing on a normal Haskell code ( -F ). The pre-processor
+needs to know the type of each expression.
+What are the possibilities to do so?
+Can I use GHC API to employ GHC type checker? If yes, any good tutorial?
+Is it too naive to think of a function, f :: String -> AnnotatedAST , that
+takes Haskell code and returns its corresponding abstract syntax tree
+annotated with types?
+
+Thanks,
+ /shayan
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111213/5ac36831/attachment.htm>
+

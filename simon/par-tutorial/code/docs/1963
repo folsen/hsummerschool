@@ -1,0 +1,26 @@
+From allbery.b at gmail.com  Thu Dec 15 05:57:58 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Wed, 14 Dec 2011 23:57:58 -0500
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <CAKjSnQFUxUbDAen_p7DPobzusVo30_6q=x2yzQejsnWe914ZnQ@mail.gmail.com>
+References: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+	<CAKjSnQFvJrz1iFd8XsGbK4q7ZK9F0qjXXUHdoTn1XVmeeAm+OQ@mail.gmail.com>
+	<430054FA-800C-408C-8B75-9C3422293133@gmail.com>
+	<CAKjSnQFUxUbDAen_p7DPobzusVo30_6q=x2yzQejsnWe914ZnQ@mail.gmail.com>
+Message-ID: <CAKFCL4U+wDf69+D6fz-hiBRJcHCUK4tB0pJ_nuZB-z3nucwxDQ@mail.gmail.com>
+
+On Wed, Dec 14, 2011 at 23:49, Antoine Latter <aslatter at gmail.com> wrote:
+
+> Or we could not use 'some' and 'many' with list and maybe :-)
+
+
+Yes, yes, we get the message, a wink and a nod is all that's needed to
+discard the nonsensical notion that types and typeclasses *mean* something.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111214/184b522a/attachment.htm>
+

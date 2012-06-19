@@ -1,0 +1,31 @@
+From felipe.lessa at gmail.com  Mon Apr  4 13:38:56 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Mon, 4 Apr 2011 11:38:56 +0000
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <BANLkTi=fK3MfxL6Qhfak1A7Eb0-JzpWBCg@mail.gmail.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+	<BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+	<BANLkTimG9VyfjaNqN1khd89dyz8aNsV8cw@mail.gmail.com>
+	<BANLkTi=fK3MfxL6Qhfak1A7Eb0-JzpWBCg@mail.gmail.com>
+Message-ID: <BANLkTiksQzpczbmjvDqgkdjTwuAXnLaMEg@mail.gmail.com>
+
+2011/4/4 Roel van Dijk <vandijk.roel at gmail.com>:
+> On 4 April 2011 12:22, Michael Snoyman <michael at snoyman.com> wrote:
+>> Firstly, I personally would love to insist on using UTF-8 and be done with
+>> it. I see no reason to bother with other character encodings.
+>
+> This is also my preferred choice.
+
++1
+
+I'm also in favor of sticking with UTF-8 and being done with it.  All
+of Hackage *today* is UTF-8 (ASCII included), why open a can of worms?
+ Also, this means that we would be standardizing the current practice.
+
+Cheers,
+
+-- 
+Felipe.
+
+

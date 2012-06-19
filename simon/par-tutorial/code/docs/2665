@@ -1,0 +1,35 @@
+From lrpalmer at gmail.com  Thu Feb  3 23:03:36 2011
+From: lrpalmer at gmail.com (Luke Palmer)
+Date: Thu, 3 Feb 2011 15:03:36 -0700
+Subject: [Haskell-cafe] ($) not as transparent as it seems
+In-Reply-To: <4D4B1396.6070501@uni-bonn.de>
+References: <4D4B1396.6070501@uni-bonn.de>
+Message-ID: <AANLkTin-M1Z8Ee-fSEarauMZC99Gv8wsFviQDK4WtBoe@mail.gmail.com>
+
+This is probably a result of strictness analysis.  error is
+technically strict, so it is reasonable to optimize to:
+
+    let e = error "foo" in e `seq` error e
+
+On Thu, Feb 3, 2011 at 1:44 PM, Steffen Schuldenzucker
+<sschuldenzucker at uni-bonn.de> wrote:
+>
+> Dear cafe,
+>
+> does anyone have an explanation for this?:
+>
+>>>> error (error "foo")
+> *** Exception: foo
+>
+>>>> error $ error "foo"
+> *** Exception: *** Exception: foo
+>
+> -- Steffen
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

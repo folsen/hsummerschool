@@ -1,0 +1,23 @@
+From wren at freegeek.org  Sat Apr 23 05:52:32 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Fri, 22 Apr 2011 23:52:32 -0400
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <ios7f9$c3$1@dough.gmane.org>
+References: <4DB093A6.8000303@btinternet.com>	<2413044.1630.1303424178223.JavaMail.geo-discussion-forums@prcm34>	<BANLkTingNDExfXWS43FmdyMhrKjj+1S6BQ@mail.gmail.com>	<ioqpd7$qjo$1@dough.gmane.org>	<4DB10F23.90802@freegeek.org>
+	<ios7f9$c3$1@dough.gmane.org>
+Message-ID: <4DB24D00.5060200@freegeek.org>
+
+On 4/22/11 11:39 AM, Simon Michael wrote:
+> On 4/21/11 10:16 PM, wren ng thornton wrote:
+>> rather, what I'd like is someplace to keep my code which also provides a
+>> good bugtracker. Unfortunately, neither darcsden nor patchtag offer
+>
+> darcsden does include a simple issue tracker now.
+
+Ah, excellent. I'll have to take a look again.
+
+-- 
+Live well,
+~wren
+
+

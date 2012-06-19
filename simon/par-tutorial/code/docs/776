@@ -1,0 +1,38 @@
+From tab at snarc.org  Wed Apr 27 00:31:56 2011
+From: tab at snarc.org (Vincent Hanquez)
+Date: Tue, 26 Apr 2011 23:31:56 +0100
+Subject: [Haskell-cafe] Can't install haskellnet with ghc7
+In-Reply-To: <BANLkTi=nXEOT=tgMcXXmNzagNAjej+8c8w@mail.gmail.com>
+References: <BANLkTi=nXEOT=tgMcXXmNzagNAjej+8c8w@mail.gmail.com>
+Message-ID: <4DB747DC.7090102@snarc.org>
+
+  On 04/26/2011 10:17 PM, Charles-Pierre Astolfi wrote:
+> Hi -cafe,
+>
+> Did anybody managed to install haskellnet from hackage with ghc7?
+> I tried on windows and mac and I get the following type error:
+>
+> [ 4 of 11] Compiling Network.HaskellNet.SMTP (
+> Network/HaskellNet/SMTP.hs, dist/build/Network/HaskellNet/SMTP.o )
+> Network/HaskellNet/SMTP.hs:269:25:
+>      Couldn't match expected type `Data.Text.Internal.Text'
+>                  with actual type `[Char]'
+>      Expected type: Data.Text.Internal.Text
+>        Actual type: String
+>      In the first argument of `simpleMail', namely `to'
+>      In a stmt of a 'do' expression:
+>          myMail<- simpleMail to from subject plainBody htmlBody attachments
+>
+> Am I missing something?
+
+your mime-mail library is too recent.
+the upper version in the cabal file of haskellnet is not limited, so 
+it's picking up the 0.3.0 version which is incompatible with the 0.2.x.
+
+Otherwise it was working for me with the previous version for both ghc6 
+and ghc7.
+
+-- 
+Vincent
+
+

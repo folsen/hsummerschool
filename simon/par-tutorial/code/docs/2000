@@ -1,0 +1,58 @@
+From gcrosswhite at gmail.com  Fri Dec 16 02:38:43 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Fri, 16 Dec 2011 11:38:43 +1000
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <CAECnf4CqkFWf02RaKAD_VaVCS+w3LdBHJ6pYBa=Zd3oqHOAajg@mail.gmail.com>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<5E7ED349-3B28-4BE6-8B47-FBA763712A9E@gmail.com>
+	<CACqaG6xYuFShwXymrU=2pxzzxUsHXe++UtQGVCbT4NwmF-OQ5A@mail.gmail.com>
+	<CAECnf4CqkFWf02RaKAD_VaVCS+w3LdBHJ6pYBa=Zd3oqHOAajg@mail.gmail.com>
+Message-ID: <F310337D-58A1-4D3B-A27E-1770869F640E@gmail.com>
+
+
+On Dec 16, 2011, at 3:59 AM, Carl Howells wrote:
+
+> Monoid and Alternative are not the same.  There is a very important
+> difference between them:
+> 
+> class Alternative f where
+>    (<|>) :: f a -> f a -> f a
+>    ...
+> 
+> class Monoid a where
+>    mappend :: a -> a -> a
+>    ...
+> 
+> The equivalent to Alternative is MonadPlus, not Monoid.  The kinds
+> matter.  In Alternative, you are guaranteed that the type that f is
+> applied to cannot affect the semantics of (<|>).
+
+I understand that one needs to worry about kinds in general, but in this particular case such a subtlety is non-issue because you would always be defining Monad for a particular type.  That is to say, given an alternative f, the instance of Monoid would be
+
+instance Monoid (f a) where { ... }
+
+where in the above a is an arbitrary type variable.
+
+To give you a more concrete example, the following code compiles and runs, producing the output [1,2,3,4,5,6]
+
+================================================
+
+import Data.Monoid
+
+newtype L a = L [a] deriving (Show,Eq)
+
+instance Monoid (L a) where
+   mempty = L []
+   mappend (L x) (L y) = L (x ++ y)
+
+main = putStrLn . show $ (L [1,2,3]) `mappend` (L [4,5,6])
+
+================================================
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111216/2f028818/attachment-0001.htm>
+

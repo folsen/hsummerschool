@@ -1,0 +1,38 @@
+From ketil at malde.org  Mon Apr  4 14:47:06 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Mon, 04 Apr 2011 14:47:06 +0200
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <BANLkTimG9VyfjaNqN1khd89dyz8aNsV8cw@mail.gmail.com> (Michael
+	Snoyman's message of "Mon, 4 Apr 2011 13:22:02 +0300")
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+	<BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+	<BANLkTimG9VyfjaNqN1khd89dyz8aNsV8cw@mail.gmail.com>
+Message-ID: <8762qu2ng5.fsf@malde.org>
+
+Michael Snoyman <michael at snoyman.com> writes:
+
+> My guess is that a large subset of Haskell modules start with one of left
+> brace (starting with comment or language pragma), m (for starting with
+> module), or some whitespace character. So it *might* be feasible to take a
+> guess at things. But as I said before: I like UTF-8. Is there anyone out
+> there who has a compelling reason for writing their Haskell source in
+> EBCDIC?
+
+Probably not EBCDIC. :-)
+
+Correct me if I'm wrong here, but I think nobody has compelling
+reasons for using any other Unicode format than UTF-8.  Although some
+systems use UTF-16 (or some approximation thereof) internally, UTF-8
+seems to be the universal choice external encoding.  However, there
+probably exists a bit of code using Latin-1 and Windows charsets, and
+here leading characters aren't going to help you all that much.
+
+I think the safest thing to do is to require source to be ASCII, and
+provide escapes for code points >127...
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

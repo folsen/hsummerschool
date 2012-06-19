@@ -1,0 +1,24 @@
+From chrisyco+haskell-cafe at gmail.com  Fri Dec 30 04:59:35 2011
+From: chrisyco+haskell-cafe at gmail.com (Chris Wong)
+Date: Fri, 30 Dec 2011 16:59:35 +1300
+Subject: [Haskell-cafe] IO typeclasses
+In-Reply-To: <CAJUDvcjp=y2Tx+vDYXcEVnXEdXD-_5A2fr=mEbN2ozsqjP-9Sw@mail.gmail.com>
+References: <CAJUDvcjp=y2Tx+vDYXcEVnXEdXD-_5A2fr=mEbN2ozsqjP-9Sw@mail.gmail.com>
+Message-ID: <CA+qNEzKzQspo9+LGmHADDkQk=fDW+pWVXRuhRbmWgpj_68uz7w@mail.gmail.com>
+
+On Fri, Dec 30, 2011 at 4:47 PM, David Thomas <davidleothomas at gmail.com> wrote:
+> Is there any particular reason IO functions in the standard libraries aren't
+> grouped into type-classes?
+
+I'm guessing it's to stop the report from getting too complicated. If
+you want an IO abstraction, you can try HVIO:
+
+    http://hackage.haskell.org/packages/archive/MissingH/latest/doc/html/System-IO-HVIO.html
+
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

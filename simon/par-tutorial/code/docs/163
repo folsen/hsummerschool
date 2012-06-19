@@ -1,0 +1,48 @@
+From jaspervdj at gmail.com  Wed Apr  6 09:51:44 2011
+From: jaspervdj at gmail.com (Jasper Van der Jeugt)
+Date: Wed, 6 Apr 2011 09:51:44 +0200
+Subject: [Haskell-cafe] ANN: Hakyll 3.1
+Message-ID: <BANLkTi=Mm1KCJKgk86P3bXp=P0RCuVy=ig@mail.gmail.com>
+
+Hello all,
+
+I've just uploaded Hakyll 3.1.0.0 [1] to Hackage. It contains some
+backwards-incompatible changes (but they are really for the greater
+good).
+
+The most important change is the matching done in the rules DSL. What
+used to be written as:
+
+    route "posts/*" someRoute
+    compile "posts/*" someCompiler
+
+Is now written as:
+
+    match "posts/*" $ do
+        route someRoute
+        compile someCompiler
+
+This new style is way more expressive, as you can define custom
+predicates such as:
+
+    match (predicate (\i -> matches "foo/*" i && not (matches
+"foo/bar" i))) $ do ...
+
+For more information, see the Pattern documentation [2].
+
+Another slight change is that the `Hakyll.Web.Tags` [3] module now
+uses an association list instead of a `Data.Map` -- in case you want
+to change the order in which tags are displayed.
+
+If you have any questions or trouble migrating, feel free to drop a
+mail to me or here [4] or visit us in #hakyll on Freenode.
+
+[1]: http://hackage.haskell.org/package/hakyll
+[2]: http://jaspervdj.be/hakyll/reference/Hakyll-Core-Identifier-Pattern.html
+[3]: http://jaspervdj.be/hakyll/reference/Hakyll-Web-Tags.html
+[4]: https://groups.google.com/forum/#!forum/hakyll
+
+Cheers,
+Jasper
+
+

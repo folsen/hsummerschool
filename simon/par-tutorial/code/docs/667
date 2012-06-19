@@ -1,0 +1,64 @@
+From cdsmith at gmail.com  Sat Apr 23 16:02:09 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Sat, 23 Apr 2011 08:02:09 -0600
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <4DB2BE8D.40701@btinternet.com>
+References: <2413044.1630.1303424178223.JavaMail.geo-discussion-forums@prcm34>
+	<4DB2BE8D.40701@btinternet.com>
+Message-ID: <BANLkTik=2dHHCwi5zEmRUk8QPf0fu_cvEw@mail.gmail.com>
+
+I'm a great fan of darcs, and also have never run into the performance and
+reliability issues that GHC has.  That said, it's clear that they *have* run
+into them, and if something else makes GHC development go more smoothly,
+then I'm 100% supportive of their using it.
+
+It is disappointing, though that (I agree with you here) git and others have
+a fundamentally bad model for performing the task.  They chose that model
+for pragmatic reasons... it's operationally clearer, even if the meaning of
+things is a bit more muddled.  Making a working znd pragmatic version
+control system using a darcs-ish model is simply a harder job than doing the
+same in the git/hg way.  I use darcs whenever I can, and think they have
+done an excellent job by and large; but you won't find a single darcs
+developer who thinks they have completely accomplished the task.
+On Apr 23, 2011 5:57 AM, "Andrew Coppin" <andrewcoppin at btinternet.com>
+wrote:
+> On 21/04/2011 11:16 PM, John Millikin wrote:
+>> My chief complaint is that it's built on "patch theory", which is
+>> ill-defined and doesn't seem particularly useful. The
+>> Bazaar/Git/Mercurial DAG model is much easier to understand and work
+with.
+>>
+>> Possibly as a consequence of its shaky foundation, Darcs is much slower
+>> than the competition -- this becomes noticeable for even very small
+>> repositories, when doing a lot of branching and merging.
+>>
+>> I think it's been kept alive in the Haskell community out of pure "eat
+>> our dogfood" instinct; IMO if having a VCS written in Haskell is
+>> important, it would be better to just write a new implementation of an
+>> existing tool. Of course, nobody cares that much about what language
+>> their VCS is written in, generally.
+>
+> Ah, how silly of me. I should have known a question like this was highly
+> likely to provoke a flamewar.
+>
+> I had assumed that the way Darcs was is *the definition of* what
+> "distributed version control" is. So it was a bit of a shock to read
+> about how Git works, and discovered that it does it totally wrong. So I
+> want and read about Mercural and all the others, and discovered that
+> they all do it wrong too.
+>
+> Given that the way Darcs works is so superior to the way everything else
+> works, I was just puzzled as to why even GHC is trying to get rid of it.
+>
+> It seems the answer is some combination of "performance issues" (I've
+> never seen any) and "reliability issues" (which again I've never come
+> across).
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110423/f3c84a3f/attachment.htm>
+

@@ -1,0 +1,83 @@
+<html><style type="text/css">
+span.lineno { color: white; background: #aaaaaa; border-right: solid white 12px }
+span.nottickedoff { background: yellow}
+span.istickedoff { background: white }
+span.tickonlyfalse { margin: -1px; border: 1px solid #f20913; background: #f20913 }
+span.tickonlytrue  { margin: -1px; border: 1px solid #60de51; background: #60de51 }
+span.funcount { font-size: small; color: orange; z-index: 2; position: absolute; right: 20 }
+span.decl { font-weight: bold }
+span.spaces    { background: white }
+</style>
+<pre>
+<span class="lineno">    1 </span>import System.Environment
+<span class="lineno">    2 </span>import Data.Set hiding (filter, map, null, fromList)
+<span class="lineno">    3 </span>import Data.Char
+<span class="lineno">    4 </span>import Trie
+<span class="lineno">    5 </span>import Test.HUnit
+<span class="lineno">    6 </span>
+<span class="lineno">    7 </span>main :: IO ()
+<span class="lineno">    8 </span><span class="decl"><span class="istickedoff">main = do</span>
+<span class="lineno">    9 </span><span class="spaces">  </span><span class="istickedoff">args &lt;- getArgs</span>
+<span class="lineno">   10 </span><span class="spaces">  </span><span class="istickedoff">spellCheckFiles (args !! 0) (args !! 1)</span>
+<span class="lineno">   11 </span><span class="spaces">  </span><span class="istickedoff">runTestTT tests</span>
+<span class="lineno">   12 </span><span class="spaces">  </span><span class="istickedoff">return <span class="nottickedoff">()</span></span></span>
+<span class="lineno">   13 </span>
+<span class="lineno">   14 </span>type Dictionary = TrieSet Char -- [String]
+<span class="lineno">   15 </span>
+<span class="lineno">   16 </span>sampleDict :: Dictionary
+<span class="lineno">   17 </span><span class="decl"><span class="istickedoff">sampleDict = fromList [(&quot;hello&quot;, <span class="nottickedoff">()</span>), (&quot;i&quot;, <span class="nottickedoff">()</span>), (&quot;am&quot;, <span class="nottickedoff">()</span>), (&quot;here&quot;, <span class="nottickedoff">()</span>)]</span></span>
+<span class="lineno">   18 </span>
+<span class="lineno">   19 </span>-- | Words in string but not in dictionary
+<span class="lineno">   20 </span>spellCheck :: String -&gt; Dictionary -&gt; [(Integer, Int, String)]
+<span class="lineno">   21 </span><span class="decl"><span class="istickedoff">spellCheck s dict = filter (\(i,j,w) -&gt; notTrieSetMember (map toLower w) dict) ((toWords . toLines) s)</span></span>
+<span class="lineno">   22 </span>
+<span class="lineno">   23 </span>toLines :: String -&gt; [(Integer, String)]
+<span class="lineno">   24 </span><span class="decl"><span class="istickedoff">toLines s = zip [1..] (lines s)</span></span>
+<span class="lineno">   25 </span>
+<span class="lineno">   26 </span>toWords :: [(Integer, String)] -&gt; [(Integer, Int, String)]
+<span class="lineno">   27 </span><span class="decl"><span class="istickedoff">toWords lines = [(i, j, w) | (i,l) &lt;- lines, (w,j) &lt;- words' l 0]</span></span>
+<span class="lineno">   28 </span>
+<span class="lineno">   29 </span>words'     :: String -&gt; Int -&gt; [(String, Int)]
+<span class="lineno">   30 </span><span class="decl"><span class="istickedoff">words' s i = case dropWhile {-partain:Char.-}isSpace s of</span>
+<span class="lineno">   31 </span><span class="spaces">              </span><span class="istickedoff">&quot;&quot; -&gt; []</span>
+<span class="lineno">   32 </span><span class="spaces">              </span><span class="istickedoff">s' -&gt; (w, idx): words' s'' (idx+length w)</span>
+<span class="lineno">   33 </span><span class="spaces">                </span><span class="istickedoff">where </span>
+<span class="lineno">   34 </span><span class="spaces">                  </span><span class="istickedoff">(w, s'') = break {-partain:Char.-}isSpace s'</span>
+<span class="lineno">   35 </span><span class="spaces">                  </span><span class="istickedoff">idx =  i+(substring 0 w s)</span></span>
+<span class="lineno">   36 </span>
+<span class="lineno">   37 </span>substring :: Int -&gt; String -&gt; String -&gt; Int
+<span class="lineno">   38 </span><span class="decl"><span class="istickedoff">substring x s1 s2</span>
+<span class="lineno">   39 </span><span class="spaces">  </span><span class="istickedoff">| <span class="tickonlyfalse">null dropped</span> = <span class="nottickedoff">-1</span></span>
+<span class="lineno">   40 </span><span class="spaces">  </span><span class="istickedoff">| taken = x</span>
+<span class="lineno">   41 </span><span class="spaces">  </span><span class="istickedoff">| <span class="tickonlytrue">otherwise</span> = substring (x+1) s1 s2</span>
+<span class="lineno">   42 </span><span class="spaces">  </span><span class="istickedoff">where </span>
+<span class="lineno">   43 </span><span class="spaces">    </span><span class="istickedoff">taken = take (length s1) dropped == s1</span>
+<span class="lineno">   44 </span><span class="spaces">    </span><span class="istickedoff">dropped = drop x s2</span></span>
+<span class="lineno">   45 </span>
+<span class="lineno">   46 </span>
+<span class="lineno">   47 </span>spellCheckFiles :: FilePath -&gt; FilePath -&gt; IO [(Integer, Int, String)]
+<span class="lineno">   48 </span><span class="decl"><span class="istickedoff">spellCheckFiles input dict =</span>
+<span class="lineno">   49 </span><span class="spaces">  </span><span class="istickedoff">do</span>
+<span class="lineno">   50 </span><span class="spaces">    </span><span class="istickedoff">inputTxt &lt;- readFile input</span>
+<span class="lineno">   51 </span><span class="spaces">    </span><span class="istickedoff">dictTxt &lt;- readFile dict</span>
+<span class="lineno">   52 </span><span class="spaces">    </span><span class="istickedoff">let incorrectWords = spellCheck inputTxt (fromList' $ lines dictTxt)</span>
+<span class="lineno">   53 </span><span class="spaces">    </span><span class="istickedoff">mapM_ putStrLn (map show incorrectWords)</span>
+<span class="lineno">   54 </span><span class="spaces">    </span><span class="istickedoff">return incorrectWords</span></span>
+<span class="lineno">   55 </span>
+<span class="lineno">   56 </span>
+<span class="lineno">   57 </span><span class="decl"><span class="istickedoff">test1 = TestCase (assertEqual &quot;spellcheck empty words should be empty list&quot; (spellCheck &quot;helo&quot; sampleDict) [])</span></span>
+<span class="lineno">   58 </span><span class="decl"><span class="istickedoff">test2 = TestCase (do</span>
+<span class="lineno">   59 </span><span class="spaces">                    </span><span class="istickedoff">words &lt;- (spellCheckFiles &quot;./input.txt&quot; &quot;/usr/share/dict/american-english&quot;)</span>
+<span class="lineno">   60 </span><span class="spaces">                    </span><span class="istickedoff">let real = [(1,0,&quot;Hello!&quot;),</span>
+<span class="lineno">   61 </span><span class="spaces">                                </span><span class="istickedoff">(2,21,&quot;computer?&quot;),</span>
+<span class="lineno">   62 </span><span class="spaces">                                </span><span class="istickedoff">(3,0,&quot;Cahn&quot;),</span>
+<span class="lineno">   63 </span><span class="spaces">                                </span><span class="istickedoff">(3,9,&quot;spellcheck&quot;),</span>
+<span class="lineno">   64 </span><span class="spaces">                                </span><span class="istickedoff">(3,25,&quot;prooperly&quot;),</span>
+<span class="lineno">   65 </span><span class="spaces">                                </span><span class="istickedoff">(3,35,&quot;foor&quot;),</span>
+<span class="lineno">   66 </span><span class="spaces">                                </span><span class="istickedoff">(3,40,&quot;me?&quot;)]</span>
+<span class="lineno">   67 </span><span class="spaces">                    </span><span class="istickedoff">assertEqual <span class="nottickedoff">&quot;check files&quot;</span> words real)</span></span>
+<span class="lineno">   68 </span>
+<span class="lineno">   69 </span><span class="decl"><span class="istickedoff">tests = TestList [TestLabel &quot;test1&quot; test1, TestLabel <span class="nottickedoff">&quot;test2&quot;</span> test2]</span></span>
+
+</pre>
+</html>

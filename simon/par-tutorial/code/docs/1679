@@ -1,0 +1,32 @@
+From malcolm.wallace at me.com  Mon Dec  5 22:32:18 2011
+From: malcolm.wallace at me.com (Malcolm Wallace)
+Date: Mon, 05 Dec 2011 21:32:18 +0000
+Subject: [Haskell-cafe] GHCi and Cairo on Windows
+In-Reply-To: <20111205002348.11646cdsx9ebots8@webmail.oregonstate.edu>
+References: <20111205002348.11646cdsx9ebots8@webmail.oregonstate.edu>
+Message-ID: <80D4C6E1-3DC6-4A1B-B7CB-EB3D1EF48695@me.com>
+
+On Windows, it is necessary to add to your PATH variable the bin directory where the gtk+ DLL lives.  Note, this is the C DLL, not the Haskell one produced by gtk2hs.  For instance, on my machine the relevant directory is C:\workspace\ext\gtk+-2.20\bin. It is quite likely different on yours.
+
+
+
+On 5/12/2011, at 8:23, smeltzek at eecs.oregonstate.edu wrote:
+
+> In effort to keep my work cross-platform, I am trying to get GHCi and Cairo working together nicely on Windows (as a back-end to Diagrams, if it matters.) When loading the library in GHCi I get the following error:
+> 
+> Loading package cairo-0.12.2 ... linking ... ghc: unable to load package `cairo-0.12.2'
+> 
+> I am able to build, link, and execute successfully using 'ghc --make' so I know the libraries are installed correctly. I'm using GHC as packaged in the most recent version of the Haskell Platform and the most recent all-in-one Windows bundle of GTK.
+> 
+> I've seen quite similar errors reported months ago with no apparent solution.
+> 
+> Any help would be appreciated!
+> 
+> --Karl
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

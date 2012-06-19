@@ -1,0 +1,18 @@
+From julian.porter at porternet.org  Tue Apr  5 17:36:31 2011
+From: julian.porter at porternet.org (Julian Porter)
+Date: Tue, 5 Apr 2011 16:36:31 +0100
+Subject: [Haskell-cafe] Problems with haskell98 package in GHC
+In-Reply-To: <201104051505.10432.daniel.is.fischer@googlemail.com>
+References: <BANLkTinxDmbWVd8eQSMKNrQHgS7j5+2gMA@mail.gmail.com>
+	<BANLkTi=VhEpHw6d1b+3BMKyf05VnBZe+nw@mail.gmail.com>
+	<5F1FA166-405E-4130-86AA-22D709FC9874@porternet.org>
+	<201104051505.10432.daniel.is.fischer@googlemail.com>
+Message-ID: <6BFAF859-D3E2-4200-A37A-F94008F055D5@porternet.org>
+
+> 
+> Looks like you've done a global install and thus have overwritten the 
+> original. I'm afraid that means you have to reinstall GHC, I know of no way 
+> to fix it.
+
+Thank you for the explanation.  Fortunately, the old version was still there in its own folder, so was able to unregister the new one and re-expose the old.
+

@@ -1,0 +1,31 @@
+From mail at joachim-breitner.de  Sat Dec 17 21:03:25 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Sat, 17 Dec 2011 21:03:25 +0100
+Subject: [Haskell-cafe] gtk2hs: adding widget during runtime
+In-Reply-To: <4EECF0B3.8040706@googlemail.com>
+References: <4EECF0B3.8040706@googlemail.com>
+Message-ID: <1324152205.3684.14.camel@kirk>
+
+Hi,
+
+Am Samstag, den 17.12.2011, 20:42 +0100 schrieb Gary Klindt:
+> That compiles fine, but the GUI never shows a "neues label!".
+
+blind guess: Do you need to call widgetShow on the newly created widget?
+
+Greetings,
+Joachim
+
+-- 
+Joachim "nomeata" Breitner
+  mail at joachim-breitner.de  |  nomeata at debian.org  |  GPG: 0x4743206C
+  xmpp: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111217/d27ed50d/attachment.pgp>
+

@@ -1,0 +1,52 @@
+From magnus at therning.org  Tue Dec 13 12:39:22 2011
+From: magnus at therning.org (Magnus Therning)
+Date: Tue, 13 Dec 2011 12:39:22 +0100
+Subject: [Haskell-cafe] ANNOUNCE: Anansi 0.4.2 (literate programming
+	pre-processor)
+In-Reply-To: <CAL1ky9qKan_3QxOv291H4q8wuCdXwbEeLv4hS5EDBssina12Ww@mail.gmail.com>
+References: <CAL1ky9qKan_3QxOv291H4q8wuCdXwbEeLv4hS5EDBssina12Ww@mail.gmail.com>
+Message-ID: <CAAExw5tkEgwAkx2Ls4WUtg9h+F4tscOGftA+aY6F-hzQ0kveHw@mail.gmail.com>
+
+On Sun, Dec 11, 2011 at 04:22, John Millikin <jmillikin at gmail.com> wrote:
+> Anansi is a preprocessor for literate programs, in the model of NoWeb
+> or nuweb. Literate programming allows both computer code and
+> documentation to be generated from a single unified source.
+>
+> Home page: https://john-millikin.com/software/anansi/
+> Hackage: http://hackage.haskell.org/package/anansi-0.4.2
+>
+> -----
+>
+> This release has a couple cool new features, suggested by Dirk Laurie.
+>
+> Markdown loom
+> ===============
+>
+> Markdown, a lightweight markup language similar to ReStructuredText,
+> is used often on web forums. Use [[ :loom anansi.markdown ]] in your
+> documents to enable.
+
+This announcement made me motivated to finally have a closer look at
+LP.  Thanks for a rather excellent tool :)
+
+There were some things that I bumped into though:
+
+1. What to call files?  I understand (C)WEB suggests using .w, and
+that noweb uses .nw, what should I call anansi files?
+2. Combining anansi and pandoc works quite well for HTML, but it fails
+miserably when trying to use the generated LaTeX:
+
+    > markdown2pdf: ! LaTeX Error: Command \guillemotleft unavailable
+in encoding OT1.
+
+    Is there any good way to get around that?
+3. Is there any editor support for anansi, syntax highlihgting etc?
+
+/M
+
+-- 
+Magnus Therning ? ? ? ? ? ? ? ? ? ? ?OpenPGP: 0xAB4DFBA4
+email: magnus at therning.org ? jabber: magnus at therning.org
+twitter: magthe ? ? ? ? ? ? ? http://therning.org/magnus
+
+

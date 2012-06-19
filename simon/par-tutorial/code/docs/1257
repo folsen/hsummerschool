@@ -1,0 +1,96 @@
+From felipe.lessa at gmail.com  Sun Aug 21 14:18:22 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Sun, 21 Aug 2011 09:18:22 -0300
+Subject: [Haskell-cafe] Existential question
+In-Reply-To: <4E50DC4B.1070703@zwizwa.be>
+References: <20110818052743.3D7181712D@Adric.ern.nps.edu>
+	<4E502694.4090801@zwizwa.be>
+	<CANd=OGGJdZD6gU__K770RYXag=whmuCXDq=WX5C+iF4Bt4fmrw@mail.gmail.com>
+	<4E50DC4B.1070703@zwizwa.be>
+Message-ID: <CANd=OGHkaEYu3ysitmCpM-wpPPMTft9BeJwZ3Hsj4hKsVRoU8A@mail.gmail.com>
+
+(Code from this e-mail attached.)
+
+On Sun, Aug 21, 2011 at 7:22 AM, Tom Schouten <tom at zwizwa.be> wrote:
+> Yes, but I run into the same problem.
+>
+> data Kl i o = forall s. Kl (i -> s -> (s, o))
+
+You actually forgot the 's' field of KI in my e-mail.  If you define
+
+  data KI i o = forall s. KI s (i -> s -> (s, o))
+  instance Category KI where ...
+  instance Arrow KI where ...
+
+You can make
+
+  instance ArrowApply KI where
+      app = KI () $ \(KI s u, b) _ -> ((), snd $ u b s)
+
+But this is probably very uninteresting, since the state is just thrown away.
+
+However, if you used
+
+  data KIT i o = forall s. Typeable s => KIT s (i -> s -> (s, o))
+  instance Category KIT where ...
+  instance Arrow KIT where ...
+
+You could make
+
+  instance ArrowApply KIT where
+      app = KIT (toDyn ()) $
+              \(KIT s u, b) dyn -> first toDyn $ u b (fromDyn dyn s)
+
+This app operator behaves as KI's app when the argument is not very
+well behaving (i.e. changing the state type).  However, when the
+argument does behave well, it is given the associated state only once.
+ All further iterations work as they should.
+
+Note that since ArrowApply is equivalent to Monad, you may also try
+going the other way around.  That is, define
+
+  data KIM o = forall s. KIM s (s -> (s, o))
+
+  instance Monad KIM where
+      return x = KIM () $ \_ -> ((), x)
+      KIM sx ux >>= f = KIM sx u
+          where
+            u sx' = let (tx, i) = ux sx'
+                    in case f i of
+                         KIM sf uf -> let (_, o) = uf sf
+                                      in (tx, o)
+
+I haven't checked, but I think that 'Kleisli KIM' is isomorphic to
+'KI', and that 'ArrowMonad KI' is isomorphic to 'KIM'.
+
+You may also define
+
+  data KIMT o = forall s. Typeable s => KIMT s (s -> (s, o))
+
+  instance Monad KIMT where
+      return x = KIMT () $ \_ -> ((), x)
+      KIMT sx ux >>= f = KIMT (sx, toDyn ()) u
+          where
+            u (sx', dyn) = let (tx, i) = ux sx'
+                           in case f i of
+                                KIMT sf uf ->
+                                    let (tf,  o) = uf (fromDyn dyn sf)
+                                    in ((tx, toDyn tf), o)
+
+And the same conjecture applies between 'Kleisli KIMT' and 'KIT', and
+between 'KIMT' and 'ArrowMonad KIT'.
+
+Conclusion: Data.Typeable lets you cheat =).
+
+Cheers,
+
+-- 
+Felipe.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: T.hs
+Type: text/x-haskell
+Size: 2556 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110821/ca2e82ec/attachment.hs>
+

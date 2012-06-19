@@ -1,0 +1,39 @@
+From mle+hs at mega-nerd.com  Wed Dec 21 01:15:12 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Wed, 21 Dec 2011 11:15:12 +1100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <D659C7E0-D48C-487E-87EC-AC8EE428708C@yandex.ru>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAF1yvAQJX+f-MigNFF=6be12Uka6y45QD6oys_NQpxgREkRbaQ@mail.gmail.com>
+	<653CD606-D8B6-4BD8-AFD4-46738AF49DB3@gmail.com>
+	<CAF1yvAS6hc=tmmW74qvNdVXngCqV0LNNOXn2TUgckWHMJFszUA@mail.gmail.com>
+	<D659C7E0-D48C-487E-87EC-AC8EE428708C@yandex.ru>
+Message-ID: <20111221111512.f4add5067653976c9998996e@mega-nerd.com>
+
+MigMit wrote:
+
+> Dec 20, 2011, ? 14:40, Jesse Schalken <jesseschalken at gmail.com> ???????(?):
+> 
+> > If you think a value might not reduce, return an error in an error monad.
+> > Then the caller is forced to handle the case of an error, or propagate the
+> > error upwards. The error can also be handled in pure code this way, whereas
+> > bottom can only be handled within the IO monad. 
+> 
+> So... this imaginary language of yours would be able to solve the halting problem?
+
+Depends on what you mean "solve" the halting problem.
+
+Agda and Coq are two languages that will only compile programs that
+can be proven to terminate. Non terminating programs are rejected.
+
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

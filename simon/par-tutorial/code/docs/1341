@@ -1,0 +1,37 @@
+From agentm at themactionfaction.com  Wed Aug 24 21:39:54 2011
+From: agentm at themactionfaction.com (A.M.)
+Date: Wed, 24 Aug 2011 15:39:54 -0400
+Subject: [Haskell-cafe] haskell or lazy functional as procedure language
+In-Reply-To: <4E553855.30806@gmail.com>
+References: <4E553855.30806@gmail.com>
+Message-ID: <778E5F34-95F0-4A59-833D-6FDD77F39956@themactionfaction.com>
+
+
+On Aug 24, 2011, at 1:43 PM, Permjacov Evgeniy wrote:
+
+> Ok, I know, I want something strange. But consider situation, when one
+> is starting a project and finds, that he need s
+> 
+> 1) ACID relational storage
+> 2) Power of good RDBMS system (postgresql for example)
+> 3) Power of some very hight level language and compiled (haskell for
+> example) for stored procedures
+> 4) And all data processing MUST be performed inside RDBMS
+> 5) And does not have enough money to by Oracle ore other commercial RDBMS.
+> 
+> 
+> I already considered using ghc with postgresql. It could be very, very
+> good pair, but.... ghc runtime cannot be re-initialized, and reqular way
+> for stored procedures in postgresql is calling function from shared
+> object (meaning, I have to shut down ghc runtime each time stored
+> procedure ended).
+> 
+> What other options do you see?
+
+Take a look at PL/J for postgresql. It runs java as a daemon application server separate from the postgresql backends to process the java procedures while still allowing access to postgresql SPI calls. The procedures are installed into the java app server instead of postgresql directly. I imagine something similar could be created for haskell, but I suspect postgresql's odd type system would pose formidable challenges.
+
+http://plj.codehaus.org/
+
+Cheers,
+M
+

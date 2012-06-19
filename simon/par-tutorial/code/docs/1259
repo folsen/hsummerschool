@@ -1,0 +1,46 @@
+From dbanas at banasfamily.net  Sun Aug 21 19:00:24 2011
+From: dbanas at banasfamily.net (David Banas)
+Date: Sun, 21 Aug 2011 10:00:24 -0700
+Subject: [Haskell-cafe] Failed link to mixed-language shared object
+Message-ID: <1313946024.3727.10.camel@dbanas-eeepc>
+
+
+> ghc -dynamic -o ami_test -L. -lami ami_test.o
+> ./libami.so: undefined reference to `__stginit_haskell98_MarshalArray_'
+> ./libami.so: undefined reference to `__stginit_haskell98_MarshalError_'
+> collect2: ld returned 1 exit status
+
+I was able to solve this by changing these lines:
+
+	import MarshalArray
+	import MarshalError
+
+to read:
+
+	import Foreign.Marshal.Array
+	import Foreign.Marshal.Error
+
+I don't understand why this worked, since the available symbols in the 2 respective libraries appear totally similar:
+
+dbanas at dbanas-eeepc:/usr/lib/ghc-6.12.3$ nm -g haskell98-1.0.1.1/libHShaskell98-1.0.1.1.a | grep 'MarshalArray'
+MarshalArray__1.o:
+00000030 T __stginit_haskell98_MarshalArray
+00000000 T __stginit_haskell98_MarshalArray_
+dbanas at dbanas-eeepc:/usr/lib/ghc-6.12.3$ nm -g -D haskell98-1.0.1.1/libHShaskell98-1.0.1.1-ghc6.12.3.so | grep 'MarshalArray'
+00002b68 T __stginit_haskell98_MarshalArray
+00002b24 T __stginit_haskell98_MarshalArray_dyn
+
+dbanas at dbanas-eeepc:/usr/lib/ghc-6.12.3$ nm -g base-4.2.0.2/libHSbase-4.2.0.2.a | grep '__stginit_.*Foreign.*Marshal.*Array'
+0000006c T __stginit_base_ForeignziMarshalziArray
+00000000 T __stginit_base_ForeignziMarshalziArray_
+{Some output omitted.}
+dbanas at dbanas-eeepc:/usr/lib/ghc-6.12.3$ nm -g -D base-4.2.0.2/libHSbase-4.2.0.2-ghc6.12.3.so | grep '__stginit_.*Foreign.*Marshal.*Array'
+003dc8cc T __stginit_base_ForeignziMarshalziArray
+003dc834 T __stginit_base_ForeignziMarshalziArray_dyn
+
+Can anyone shed some light on this?
+
+Thanks!
+
+
+

@@ -1,0 +1,83 @@
+From greg at gregorycollins.net  Thu Apr  7 21:22:19 2011
+From: greg at gregorycollins.net (Gregory Collins)
+Date: Thu, 7 Apr 2011 21:22:19 +0200
+Subject: [Haskell-cafe] Stateful iteratees
+In-Reply-To: <20110407193506.7711d387@angst.streitmacht.eu>
+References: <20110407190452.356fcca6@angst.streitmacht.eu>
+	<BANLkTikE_5XoYE7-no9aGuTXhs91xMHmGQ@mail.gmail.com>
+	<20110407193506.7711d387@angst.streitmacht.eu>
+Message-ID: <BANLkTinOC_K3MgB+o3V++PSPKzWuMXxeTA@mail.gmail.com>
+
+On Thu, Apr 7, 2011 at 7:35 PM, Ertugrul Soeylemez <es at ertes.de> wrote:
+>> Why can't you use #1 and do this when you call "run_"?
+>
+> Because that runs the iteratee and leaves me with a StateT. ?Even though
+> I use a CPS-based StateT, I doubt that it can be converted back to
+> Iteratee easily.
+>
+> With the first variant, I would need a function like this:
+>
+> ? ?runMyApp :: Iteratee a (StateT MyConfig m) b -> Iteratee a m b
+
+Let me rephrase my question: why do you need a function like this?
+
+Anyways, something like this is definitely doable (using enumerator
+formulation, sorry), but your type needs to be this:
+
+    runStateIteratee :: Monad m => Iteratee a (StateT s m) r -> s ->
+Iteratee a m (r, s)
+
+See runStateT for a parallel. The implementation isn't even too bad:
+
+-----------------------------------------------------------------------------------------------------
+{-# LANGUAGE OverloadedStrings #-}
+
+import qualified Data.ByteString.Char8 as S
+import           Data.ByteString.Char8 (ByteString)
+import           Data.Enumerator       hiding (head)
+import qualified Data.Enumerator.List  as EL
+import           Control.Monad.State
+import           Control.Monad.Trans
+
+
+mapStep :: Monad m => Step a (StateT s m) r -> s -> Step a m (r, s)
+mapStep (Yield x r) st  = Yield (x, st) r
+mapStep (Error e) _     = Error e
+mapStep (Continue k) st = Continue $ \str -> Iteratee $ do
+    (step, st') <- runStateT (runIteratee (k str)) st
+    return $ mapStep step st'
+
+
+runStateIteratee :: Monad m => Iteratee a (StateT s m) r -> s ->
+Iteratee a m (r, s)
+runStateIteratee iter st = do
+    (step, st') <- lift $ runStateT (runIteratee iter) st
+    returnI $ mapStep step st'
+
+-- example
+byteCounter :: Monad m => Iteratee ByteString (StateT Int m) ()
+byteCounter = do
+    EL.head >>= maybe (return ())
+                      (\x -> do
+                           lift $ modify (S.length x +)
+                           byteCounter)
+
+main :: IO ()
+main = do
+    (_, c) <- run_ $ enumList 1 input $$ iter
+    putStrLn $ "count was " ++ show c
+
+  where
+    iter  = runStateIteratee byteCounter 0
+    input = [ "The quick "
+            , "brown fox "
+            , "jumped "
+            , "over the lazy "
+            , "dog" ]
+-----------------------------------------------------------------------------------------------------
+
+G.
+-- 
+Gregory Collins <greg at gregorycollins.net>
+
+

@@ -1,0 +1,41 @@
+From conal at conal.net  Fri Dec 30 17:19:15 2011
+From: conal at conal.net (Conal Elliott)
+Date: Fri, 30 Dec 2011 08:19:15 -0800
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <jdjtv1$6r0$1@dough.gmane.org>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <jdh9h6$gba$1@dough.gmane.org>
+	<4EFCA66D.4060609@blueyonder.co.uk> <jdiesl$5sp$1@dough.gmane.org>
+	<4EFCCA86.4020709@blueyonder.co.uk> <jdjtv1$6r0$1@dough.gmane.org>
+Message-ID: <CAD6SzRLxjE7Xgi6dXMknwt0oFRN_m3Z868jAKnsayR=w1=Se6w@mail.gmail.com>
+
+On Fri, Dec 30, 2011 at 12:49 AM, Heinrich Apfelmus <
+apfelmus at quantentunnel.de> wrote:
+
+>
+> The function
+>
+>  f :: Int -> IO Int
+>  f x = getAnIntFromTheUser >>= \i -> return (i+x)
+>
+> is pure according to the common definition of "pure" in the context of
+> purely functional programming. That's because
+>
+>  f 42 = f (43-1) = etc.
+>
+> Put differently, the function always returns the same IO action, i.e. the
+> same value (of type  IO Int) when given the same parameter.
+>
+
+Two questions trouble me:
+
+How can we know whether this claim is true or not?
+
+What does the claim even mean, i.e., what does "the same IO action" mean,
+considering that we lack a denotational model of IO?
+
+ - Conal
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111230/6497a93e/attachment.htm>
+

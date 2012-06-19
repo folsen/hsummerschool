@@ -1,0 +1,31 @@
+From allbery.b at gmail.com  Fri Aug 19 06:11:51 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Fri, 19 Aug 2011 00:11:51 -0400
+Subject: [Haskell-cafe] Failed link to mixed-language shared object.
+In-Reply-To: <1313724759.23760.4.camel@dbanas-eeepc>
+References: <1313724759.23760.4.camel@dbanas-eeepc>
+Message-ID: <CAKFCL4UoKVj1uW4ARbW1R8YHrNYhx3pEB6eoTDazqKrLRoiX8w@mail.gmail.com>
+
+On Thu, Aug 18, 2011 at 23:32, David Banas <dbanas at banasfamily.net> wrote:
+
+> Does this trigger recollection in anyone:
+>
+> dbanas at dbanas-eeepc:~/prj/haskell/AMIParse/trunk$ make
+> ghc -dynamic -o ami_test -L. -lami ami_test.o
+> ./libami.so: undefined reference to `__stginit_haskell98_MarshalArray_'
+> ./libami.so: undefined reference to `__stginit_haskell98_MarshalError_'
+>
+
+First thing to try is always --make; GHC's default behavior is, shall we
+say, not optimal otherwise.  (I consider it highly broken; somewhere in
+there the default is *supposedly* going to change to --make, I believe.)  If
+you want to try to make it work the ugly old way, the symbol names suggest
+to me that "-package haskell98" would help.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110819/24451ccf/attachment.htm>
+

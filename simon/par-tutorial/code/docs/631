@@ -1,0 +1,25 @@
+From stephen.tetley at gmail.com  Fri Apr 22 19:58:59 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Fri, 22 Apr 2011 18:58:59 +0100
+Subject: [Haskell-cafe] naming convention for maybes?
+In-Reply-To: <BANLkTi=ftrj1T4RHbHg0ETJRZMNbLH-uRQ@mail.gmail.com>
+References: <BANLkTi=ftrj1T4RHbHg0ETJRZMNbLH-uRQ@mail.gmail.com>
+Message-ID: <BANLkTinYY=2YQeT0JV4kVCQ58-urK5Ldug@mail.gmail.com>
+
+Hi Evan
+
+The EHC compiler code base seems to use mbSomething as a convention.
+
+As EHC has quite a lot of textual information in its source - the code
+is Haskell + attribute grammars + Shuffle + plus more - the mb
+convention seems to work well and I adopted it for myself after seeing
+it there.
+
+These days I do like all lower case for variables though (unless the
+variables are functions and need better names than f g or fn).
+
+Best wishes
+
+Stephen
+
+

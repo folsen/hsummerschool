@@ -1,0 +1,118 @@
+From job.vranish at gmail.com  Wed Apr  6 22:53:00 2011
+From: job.vranish at gmail.com (Job Vranish)
+Date: Wed, 6 Apr 2011 16:53:00 -0400
+Subject: [Haskell-cafe] Stacking data types
+In-Reply-To: <BANLkTik=eXn2U5vmbuqZDWwmdcyP+94pcQ@mail.gmail.com>
+References: <BANLkTik=eXn2U5vmbuqZDWwmdcyP+94pcQ@mail.gmail.com>
+Message-ID: <BANLkTin=a7Pf5GKnLk1ZmSFvfohm674Bhw@mail.gmail.com>
+
+I think you want something like this:
+
+{-# Language MultiParamTypeClasses
+           , FlexibleInstances
+           , FunctionalDependencies
+           , UndecidableInstances
+           , FlexibleContexts
+           , OverlappingInstances
+
+           #-}
+data Character a = Character { life :: Int,
+                               charaInner :: a }
+                  deriving (Show)
+
+data Gun a = Gun { firepower :: Int,
+                   gunInner :: a }
+             deriving (Show)
+
+data Armor a = Armor { resistance :: Int,
+                       armorInner :: a }
+               deriving (Show)
+
+
+class HasInner f where
+  getInner :: f a -> a
+
+instance HasInner Character where
+  getInner = charaInner
+
+instance HasInner Gun where
+  getInner = gunInner
+
+instance HasInner Armor where
+  getInner = armorInner
+
+
+class Has b a | a -> b where
+    content :: a -> b
+
+instance (Has b a, HasInner f) => Has b (f a) where
+    content a = content $ getInner a
+
+instance (HasInner f) => Has a (f a) where
+    content a = getInner a
+
+chara = Character 100 $ Armor 40 $ Gun 12 ()
+
+itsGun :: (Has (Gun b) a) => a -> Gun b
+itsGun = content
+
+You were missing a mechanism to extract the inner value from your datatypes.
+
+- Job
+
+
+On Wed, Apr 6, 2011 at 2:57 PM, Yves Par?s <limestrael at gmail.com> wrote:
+
+> Hello Caf?,
+>
+> I'm trying to get some modular data types.
+> The idea that came to me is that I could stack them, for instance :
+>
+> data Character a = Character { life :: Int,
+>                                charaInner :: a }
+>
+> data Gun a = Gun { firepower :: Int,
+>                    gunInner :: a }
+>
+> data Armor a = Armor { resistance :: Int,
+>                        armorInner :: a }
+>
+> Then a character with a gun and an armor can be build this way:
+>
+> chara = Character 100 $ Armor 40 $ Gun 12
+>
+> The idea now is to be able to get some part of the character:
+>
+> itsGun :: Character ?? -> Gun ??
+> itsGun = content
+>
+> Then content would be a class method:
+>
+> class Has b a where
+>     content :: a -> b
+>
+> And it would be recursively defined so that:
+>
+> instance (Has c b, Has b a) => Has c a where
+>     content = (content :: b -> c) . (content :: a -> b)
+>
+> Then itsGun would be more like:
+>
+> itsGun :: (Has Gun a) => a -> Gun ??
+> itsGun = content
+>
+> But after some juggling with extensions (ScopedTypeVariables,
+> UndecidableInstances, IncoherentInstances...) I can't get it working.
+>
+> Has someone a simpler way to achieve modular types?
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110406/6a82649c/attachment-0001.htm>
+

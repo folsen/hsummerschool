@@ -1,0 +1,48 @@
+From gale at sefer.org  Sun Dec 11 19:38:48 2011
+From: gale at sefer.org (Yitzchak Gale)
+Date: Sun, 11 Dec 2011 20:38:48 +0200
+Subject: [Haskell-cafe] Why doesn't this work? (palindrome :: IO)
+In-Reply-To: <CAKFCL4XiSN55t5abyHghGD2sCSkEvywSBui0Pn3XLyaRO4-zvg@mail.gmail.com>
+References: <BAY154-W299CF92BF320D6FE352A08A4B80@phx.gbl>
+	<CAKFCL4URW+=cq7MzWkj=-jJ-eO4_wdHDtAjiDTA=a2-+HX07Jw@mail.gmail.com>
+	<CAO9Q0tW78wLVRnsz4JofQps5UqbAa6k-zb72hCfJV3DZ1J=UFQ@mail.gmail.com>
+	<CAKFCL4XiSN55t5abyHghGD2sCSkEvywSBui0Pn3XLyaRO4-zvg@mail.gmail.com>
+Message-ID: <CAOrUaLZgd4_b=6WSE=KXfz4GR5d0s558mEy1z=iF0KaAS6fUeQ@mail.gmail.com>
+
+Brandon Allbery wrote:
+>>> > case () of
+>>> > ? () | s == reverse s -> putStrLn "palindrome"
+>>> > ? _ ? ? ? ? ? ? ? ? ? -> putStrLn "nope"
+
+Tom Murphy wrote:
+>> This is kind of a hack of case, though. I think what the OP was looking
+>> for is
+>> ?isPalindrome word
+>> ??|?(word == reverse word) = putStrLn (word ++ " is a palindrome")
+>> ??| otherwise ? ? ? ? ? ? ?= putStrLn (word ++ " is not a palindrome")
+
+> Erm? ?It's as much of a hack of case as yours is, since the above is
+> actually using case.
+
+I agree with Tom here. While it's true that the compiler
+internally desugars to case, that low-level compiler
+transformation doesn't have much to do with the
+best way to write clear code.
+
+I find that case often creates code that is more
+confusing and bug-prone. Except when what I
+really want to express is pattern matching, *and*
+there is some specific reason here why I don't
+want to use a named function in a let or where
+binding. Altogether, it doesn't come up very often
+for me.
+
+And even for styles that use case more than I
+do, certainly there is room to call the use of
+the "case ()" idiom a hack. (Even though I'll
+admit that I do use it sometimes.)
+
+Regards,
+Yitz
+
+

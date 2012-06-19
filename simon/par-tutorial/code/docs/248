@@ -1,0 +1,40 @@
+From maydwell at gmail.com  Fri Apr  8 16:41:53 2011
+From: maydwell at gmail.com (Lyndon Maydwell)
+Date: Fri, 8 Apr 2011 22:41:53 +0800
+Subject: [Haskell-cafe] Is there a way to find out the type inferred for
+ a local function inside another function? :)
+In-Reply-To: <20110408.225009.38554614.kazu@iij.ad.jp>
+References: <4D9EFE90.2000106@henning-thielemann.de>
+	<BANLkTi=72-tDEbi5Q+33psAskHFsceAiKw@mail.gmail.com>
+	<20110408.224809.51984762.kazu@iij.ad.jp>
+	<20110408.225009.38554614.kazu@iij.ad.jp>
+Message-ID: <BANLkTi=hR_08dU8Yn2ZhhdxgeWPZ82a0Gw@mail.gmail.com>
+
+Agda's concept of holes seems perfect for this. Does Haskell have
+anything similar?
+
+On Fri, Apr 8, 2011 at 9:50 PM, Kazu Yamamoto <kazu at iij.ad.jp> wrote:
+> I made a mistake. Use M-t instead of C-cC-t.
+>
+>>> Currently what I do is declare a signature for helper, and then if it
+>>> gets a type error try to figure out how to fix it. ?It's usually not
+>>> very hard, but it would be slick to have the signature filled in
+>>> automatically.
+>>
+>> Try ghc-mod on Hackage if you are an Emacs user.
+>>
+>> If GHC can guess the signature of helper function, haskell-mode with
+>> ghc-mod automatically hilights the function. Typing C-cC-t inserts the
+>> guessed signature.
+>>
+>> ? ? ? http://www.mew.org/~kazu/proj/ghc-mod/en/
+>>
+>> --Kazu
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

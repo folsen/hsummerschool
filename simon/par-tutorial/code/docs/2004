@@ -1,0 +1,52 @@
+From erkokl at gmail.com  Fri Dec 16 09:58:04 2011
+From: erkokl at gmail.com (Levent Erkok)
+Date: Fri, 16 Dec 2011 00:58:04 -0800
+Subject: [Haskell-cafe] smt solver bindings
+In-Reply-To: <CAGF=PZLUAOz1kqOL0oFSaFy3t_HAGSjSuYVsVDQrx1vaYWh5ow@mail.gmail.com>
+References: <C0207498A084F14E85CA5D588539FA0F0B81CE80@DB3EX14MBXC311.europe.corp.microsoft.com>
+	<CAGF=PZLUAOz1kqOL0oFSaFy3t_HAGSjSuYVsVDQrx1vaYWh5ow@mail.gmail.com>
+Message-ID: <CACOpX0cbd07wc6Hfq5hu1PXUwmBxnRQP=dJd2R0rMk=qvPKHGA@mail.gmail.com>
+
+Dimitrios:
+
+The SBV library (http://hackage.haskell.org/package/sbv) can indeed
+use Z3 as a backend SBV solver. However, it uses Z3 via SMT-Lib2, not
+via it's C-API. It aims to provide a much higher level interface,
+integrating with Haskell as smoothly as possible, keeping the
+SMT-solver transparent to the user.
+
+I'm actively developing and using SBV
+(http://github.com/LeventErkok/sbv), so any comments/feedback would be
+most welcome. Do let me know if you decide to use it and see any
+issues..
+
+-Levent.
+
+On Thu, Dec 15, 2011 at 12:17 PM, Josef Svenningsson
+<josef.svenningsson at gmail.com> wrote:
+> On Thu, Dec 15, 2011 at 7:04 PM, Dimitrios Vytiniotis
+> <dimitris at microsoft.com> wrote:
+>>
+>>
+>> I've a quick question:
+>>
+>> Are there Haskell wrappers for the Z3 C API around?
+>>
+> I believe sbv recently got support for Z3 but I don't know if it uses the C
+> API. Neither have I tried the Z3 backend, I only played with the Yices
+> backend. If you contact Levent Erk?k, the author of sbv, he should be able
+> to give you more information.
+>
+> ?https://github.com/LeventErkok/sbv
+>
+> Thanks,
+>
+> Josef
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

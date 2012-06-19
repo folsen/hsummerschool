@@ -1,0 +1,37 @@
+From eric at well-typed.com  Fri Dec 16 10:09:24 2011
+From: eric at well-typed.com (Eric Kow)
+Date: Fri, 16 Dec 2011 09:09:24 +0000
+Subject: [Haskell-cafe] Parallel Matrix Multiplication
+In-Reply-To: <CAFHZvE8OMPEicyb0vkrw8Gw9Qs_nuefhu09uBZ5KabFwSyM-Ag@mail.gmail.com>
+References: <CAFHZvE8OMPEicyb0vkrw8Gw9Qs_nuefhu09uBZ5KabFwSyM-Ag@mail.gmail.com>
+Message-ID: <9F098094-B0E9-4C5A-8CC8-ED8F5A6646DF@well-typed.com>
+
+Hi Mukesh,
+
+Great to hear you're trying parallel Haskell! I can't yet help debug your parallel performance, but maybe I can offer something for your last request.
+
+Have you tried the Parallel Haskell portal?
+
+http://www.haskell.org/haskellwiki/Parallel
+
+You will find some links mainly aimed at helping people to get started, and also a list of parallel Haskell readings.
+
+Hope this helps :-)
+
+On 10 Dec 2011, at 18:14, mukesh tiwari wrote:
+> I am trying to learn parallel Haskell and  I have gone through couple of resources ( Real world Haskell and http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/AFP08-notes.pdf ). I understood par and pseq and I wrote matrix multiplication using these two function but it does not look.  Although I did not get all these details but none of the sparks converted which is really important for parallel programming.
+> Could some one please tell me how to improve this.
+
+> Also kindly recommend me some  literature for parallel programming in Haskell.
+
+-- 
+Eric Kow <http://erickow.com>
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 163 bytes
+Desc: Message signed with OpenPGP using GPGMail
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111216/7e557a8f/attachment.pgp>
+

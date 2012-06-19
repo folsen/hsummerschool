@@ -1,0 +1,39 @@
+From wren at freegeek.org  Sun Apr 10 05:22:42 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sat, 09 Apr 2011 23:22:42 -0400
+Subject: [Haskell-cafe] Deciding equality of functions.
+In-Reply-To: <829991302369988@web85.yandex.ru>
+References: <829991302369988@web85.yandex.ru>
+Message-ID: <4DA12282.7030707@freegeek.org>
+
+On 4/9/11 1:26 PM, Grigory Sarnitskiy wrote:
+> I guess that deciding whether two functions are equal in most cases is algorithmically impossible. However maybe there exists quite a large domain of decidable cases? If so, how can I employ that in Haskell?
+>
+> It is a common situation when one has two implementations of the same function, one being straightforward but slow, and the other being fast but complex. It would be nice to be able to check if these two versions are equal to catch bugs in the more complex implementation.
+
+This common situation is often actually one of the harder ones to prove, 
+I say coming from proving a few of them in Coq. The thing is that a lot 
+of the common optimizations (e.g., TCO) completely wreck the inductive 
+structure of the function which, in turn, makes it difficult to say 
+interesting things about them.[1]
+
+The easy path forward for this situation is to demonstrate the 
+correctness of the slow/obvious implementation and then use a 
+combination of lazy SmallCheck, QuickCheck, and HUnit in order to show 
+that the fast implementation produces equal outputs for all small 
+inputs, randomly chosen inputs, and select manually chosen inputs.
+
+Or, if you happen to be working with a nice well-behaved type, then you 
+can use circuit SAT, SMT, and other domain solvers, or Martin Escardo's 
+excellent work on compact spaces.
+
+
+[1] Though if something as simple as TCO is so hard to prove 
+equivalences with, maybe that says something about our current crop of 
+proof assistants and theorem provers.
+
+-- 
+Live well,
+~wren
+
+

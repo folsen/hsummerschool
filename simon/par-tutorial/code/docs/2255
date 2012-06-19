@@ -1,0 +1,35 @@
+From gcrosswhite at gmail.com  Sat Dec 24 10:51:38 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Sat, 24 Dec 2011 19:51:38 +1000
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+In-Reply-To: <20111224084728.GA28337@wavelet>
+References: <4EF57FC9.1030505@vex.net>
+	<CACqaG6yr-PVvri=+2e5rTgXiiHHOoccM2fLaq6CcBMC2Ub1p2g@mail.gmail.com>
+	<20111224084728.GA28337@wavelet>
+Message-ID: <BB305731-490E-41FE-8F0C-9F6140804BFE@gmail.com>
+
+On Dec 24, 2011, at 6:47 PM, Murray Campbell wrote:
+
+> It's too late to avoid success at all costs but please don't banish our
+> precious pedantry!
+> 
+> Scare on!
+
+Please don't misunderstand, I have absolutely no problems at all with people arguing voraciously and pedantically over ideas, as long as they are doing so respectfully, impersonally, politely and open-mindedly.  In fact, like you I welcome such discourse, and the fact that this list provides such a nice environment for it is part of the reason why I like it so much.  :-)  (See, for example, the argument that I started a few days ago over whether some/many belong in Alternative a few days ago.)
+
+Having said that, there is no small difference between
+
+"Hey everyone!  I have been thinking about something for a while, and I have an idea with which many of you will most likely strongly disagree.  Here it is, and I welcome your feedback on it!"
+
+and
+
+"You all have long been maintaining a cognitive dissonance that in some cases turns into plain hypocrisy, and the only reason I hadn't complained about it until now was because I have been waiting for unmistakable evidence, a smoking gun, a red hand so caught that you cannot explain away.  Here it is.  Now people, could you please make up your mind already?  It has been more than 13 years."
+
+The former invites open discussion in a friendly and positive environment, whereas the latter at best turns people off from wanting to respond positively, and at worst provokes angry responses that further poison the well.
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111224/5fdd3279/attachment.htm>
+

@@ -1,0 +1,56 @@
+From ok at cs.otago.ac.nz  Mon Feb  7 23:33:31 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Tue, 8 Feb 2011 11:33:31 +1300
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTimeNvw1r+D6rvtqWj0YvjLRBEMVHDFDZJ+djequ@mail.gmail.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+	<4D4D6B15.2060204@btinternet.com>
+	<AANLkTimj6PQP6o9NCcc+KXHJrc7+RwK3wQmg66KNMKur@mail.gmail.com>
+	<4D4EF972.2060309@btinternet.com>
+	<B7DEC147-6002-49F7-B756-D4CFF93D6625@cs.otago.ac.nz>
+	<4D505D60.3090707@btinternet.com>
+	<AANLkTimeNvw1r+D6rvtqWj0YvjLRBEMVHDFDZJ+djequ@mail.gmail.com>
+Message-ID: <32F54A2A-C402-45BB-915C-CCC9CCE245EC@cs.otago.ac.nz>
+
+
+On 8/02/2011, at 10:43 AM, Roel van Dijk wrote:
+
+> On 7 February 2011 22:00, Andrew Coppin <andrewcoppin at btinternet.com> wrote:
+>> I clearly have my languages mixed up.
+>> 
+>> The language I'm thinking of required all variables (even top-level ones) to
+>> be declared with "let" - unless the definition is recursive, in which case
+>> you have to say "letrec" (i.e., the compiler it too stupid to deduce this
+>> automatically). Apparently that isn't Clean...
+> 
+> You are not necessarily wrong. 
+> The Clean of 1987?1994 sounds a lot like the language you are
+> talking about.
+> 
+> 1 - http://www.cs.ru.nl/~thomas/publications/groj10-exchanging-sources-between.pdf
+
+No, it doesn't.  Here's an example from
+"Clean - A Language for Functional Graph Rewriting",
+T.H. Brus, M.C.J.D. van Eekelen, M.O. van Leer, M.J. Plasmeijer,
+a 1987 paper which I _think_ is the first one about Clean:
+
+Start stdin	-> Double (Add (Succ Zero) Zero);
+Double a	-> Add a a;
+Add Zero n      ->n |
+Add (Succ m) n	->Succ (Add m n);
+
+You will notice
+ - an entire absence of 'let'
+ - an entire absence of any 'letrec'
+
+You'll also discover that Clean was originally
+ - thought of as an intermediate language
+ - a subset of something called LEAN
+
+Clean 1 adopted Haskell-like syntax, but it was lazy from the beginning.
+
+
+
+
+

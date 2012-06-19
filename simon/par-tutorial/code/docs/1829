@@ -1,0 +1,31 @@
+From simons at cryp.to  Sun Dec 11 15:48:57 2011
+From: simons at cryp.to (Peter Simons)
+Date: Sun, 11 Dec 2011 15:48:57 +0100
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+References: <87k464b870.fsf@gnu.org> <87d3bw102d.fsf@write-only.cryp.to>
+	<CAKFCL4VhQe89QZmTM6Wxm+7KR6KOT7+qQe-xYCNBt8i3fR+zjg@mail.gmail.com>
+	<87fwgrblkq.fsf@gnu.org>
+Message-ID: <87vcpn5fl2.fsf@write-only.cryp.to>
+
+Hi Jose,
+
+ > Peter, would using parsec 3.x be an acceptable solution to you?
+
+well, we can link xmobar with parsec 3.x on NixOS. The situation
+is tricky, though, because the latest version of parsec that we
+have, 3.1.2, doesn't compile with GHC 6.10.4 anymore, so we'd
+have to use some older version to work around that problem. That
+kind of setup somewhat complicated to maintain, which is why I
+would prefer to compile xmobar with parsec 2 2 if at all
+possible.
+
+Generally speaking, though, GHC 6.10.4 support is not a high
+priority. I just thought it might be worth pointing out that
+backwards compatibility has been lost in the 0.14 release,
+because earlier versions worked just fine.
+
+Take care,
+Peter
+
+
+

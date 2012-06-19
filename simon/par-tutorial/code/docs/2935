@@ -1,0 +1,78 @@
+From wren at freegeek.org  Fri Feb 11 08:06:24 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Fri, 11 Feb 2011 02:06:24 -0500
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <87bp2mn64t.fsf@malde.org>
+References: <4D4B19DB.5000907@btinternet.com>	<AANLkTimTak3jHpg_RPattKoACvkUU31tQydCsgjjS=Oc@mail.gmail.com>	<4D4D6E48.3000903@btinternet.com>
+	<4D4FC689.1080107@xyxyx.org>	<AANLkTinwgZZ=aTz4mAQiGU2M1j9OuPRnrS9O2Au=K+b3@mail.gmail.com>	<4D4FE75F.1000107@xyxyx.org>	<AANLkTi=5+umqSsdMudWGQgGkNWnp-rnTea+Ao=DZBgNe@mail.gmail.com>	<72E6D6A1-956D-425E-B933-6392C8CAA0F7@cs.otago.ac.nz>	<AANLkTinHKiqD+-ySu2+190JH=tLOO9LUBbndvLJWX15P@mail.gmail.com>
+	<87bp2mn64t.fsf@malde.org>
+Message-ID: <4D54DFF0.1070008@freegeek.org>
+
+On 2/8/11 6:00 AM, Ketil Malde wrote:
+>> This does seem a bit excessive. As a start, I don't remember anyone
+>> asking for control over (un)boxedness, so hopefully we could jettison
+>> that part of it?
+>
+> Uh, you mean like in IOUArrays, the UNPACK pragma, or
+> -funbox-strict-fields?  Unboxing is an important optimization, but
+> perhaps the current feature set suffices.
+
+As another issue to bear in mind, there is a big difference between 
+strict types and unpointed types (either as types themselves, or as 
+function spaces).
+
+Semantically we have lots of reasons for wanting unpointed types--- that 
+is, types which do not have bottom as an inhabitant. And it is clear 
+that pointed and unpointed versions are different types[1]. One of the 
+major issues looming here is the fact that unpointed types may not form 
+domains, wreaks havoc for the domain theory semantics people often use 
+for laziness. But at the same time, removing bottom can make it much 
+easier to reason about things.
+
+Strict types are, semantically, the same as unpointed types. And since 
+Haskell is non-total, strict types are the only possible exact 
+implementation of unpointed types (though decent type-checkable 
+approximations may exist). However, operationally, strict types and 
+unpointed types are quite different. In strict types we know that the 
+value has been evaluated to WHNF (or some other normal form) and 
+therefore we can avoid the computational cost of checking to ensure that 
+it's been evaluated. Whereas unpointed types may not have been evaluated 
+already, we simply know that when we do evaluate them we won't get 
+bottom. Thus, unpointed types can allow us to have our laziness and... 
+er, eat it too.
+
+The arguments for having unpointed types (as opposed to strict types) 
+are the same as the arguments for having laziness in the first place. 
+Conversely, the arguments for having strict types (as opposed to 
+unpointed types) are the same as the arguments for having strictness 
+annotations of any kind. Both have their place, but we should be clear 
+about what our goals are before choosing one or the other. Personally 
+I'd like to have both, because they fill different needs, and because 
+it's easy to automate the conversion between them[2].
+
+
+[1] Though conversion between them is easy. From unpointed to pointed is 
+just a forgetful functor; from pointed to unpointed is the monad of 
+evaluation.
+
+[2] Functions of strict arguments can be lifted to functions of 
+unpointed arguments by simple wrappers to force argument evaluation. 
+With strictness analysis, it can be possible to optimize the wrapper 
+away and to call the strict-typed version directly. This is sort of like 
+the SPECIALIZE pragmas.
+
+We can also lift functions of unpointed arguments into functions of 
+pointed arguments by changing the return type of the function to allow 
+for bottom to be returned. Note that this requires that we distinguish 
+pointed and unpointed types, not just pointed and unpointed function 
+spaces. This is a natural consequence of the fact that evaluation is a 
+monad, but it makes things get really hairy really quickly. Then again, 
+that complexity may be unavoidable since we'd like to be able to have 
+functions return strict and unpointed values just like they can return 
+unboxed values.
+
+-- 
+Live well,
+~wren
+
+

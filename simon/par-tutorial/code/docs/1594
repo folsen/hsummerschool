@@ -1,0 +1,68 @@
+From dokondr at gmail.com  Thu Dec  1 20:26:22 2011
+From: dokondr at gmail.com (dokondr)
+Date: Thu, 1 Dec 2011 22:26:22 +0300
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CANd=OGGXOQYrKrnw9QpDaqgjC-JGsH7jFJB8Hx-OJjCTZP7KGQ@mail.gmail.com>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+	<CANd=OGGcwRC9FfTA8KJQyzsQBDL3YycF2MYx4hMiN7vxeBwTFg@mail.gmail.com>
+	<20111201174112.GA14096@x200>
+	<CANd=OGGXOQYrKrnw9QpDaqgjC-JGsH7jFJB8Hx-OJjCTZP7KGQ@mail.gmail.com>
+Message-ID: <CAMXF=YCD8ODsmF53id9U=h+SsnuN1T8RvcvY2htwBgRFGgW85A@mail.gmail.com>
+
+System.Directory.getCurrentDirectory does not solve the problem.
+System.Directory.getCurrentDirectory returns the directory *from which* the
+program was called, also called "working directory".
+The directory *from which* the program was called is not the same that the
+directory *where the program executable is*, which my program needs to know.
+For example:
+/opt/myApp/test/myProg  - is a program
+One may call it in many ways:
+1)
+cd /opt/myApp/test/
+./myProg
+Current or working directory: ./
+
+or:
+
+2)
+cd /usr/local
+/opt/myApp/test/myProg
+Current or working directory: /usr/local
+
+On the contrary, standard shell variable $0 - contains a full path to the
+program location in the directory structure, no matter from what directory
+the program was called.
+
+How to find this path using GHC libraries?
+
+
+On Thu, Dec 1, 2011 at 8:53 PM, Felipe Almeida Lessa <felipe.lessa at gmail.com
+> wrote:
+
+>
+> Neither does $0, does it?  It depends on how the program is called.
+>
+> You can always use System.Directory.getCurrentDirectory with
+> System.FilePath.{isRelative,replaceDirectory} if you somehow need the
+> full path.  Note, however, that not even this is generally guaranteed
+> to be correct.
+>
+> Cheers,
+>
+> --
+> Felipe.
+>
+
+
+
+-- 
+All the best,
+Dmitri O. Kondratiev
+
+"This is what keeps me going: discovery"
+dokondr at gmail.com
+http://sites.google.com/site/dokondr/welcome
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111201/b6cc67e0/attachment.htm>
+

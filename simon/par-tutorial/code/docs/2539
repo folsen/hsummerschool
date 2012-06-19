@@ -1,0 +1,43 @@
+From arnaud.oqube at gmail.com  Tue Feb  1 08:16:54 2011
+From: arnaud.oqube at gmail.com (Arnaud Bailly)
+Date: Tue, 1 Feb 2011 08:16:54 +0100
+Subject: [Haskell-cafe] Packages all screwed up
+In-Reply-To: <AANLkTikT0Vib4q2P5Ui3iJWnhtF4RcEnuqjsBn2hLVuF@mail.gmail.com>
+References: <AANLkTimOAkVnV=V+Om6_EMFKsGStNuTFxAN+VDvAvUYR@mail.gmail.com>
+	<AANLkTikT0Vib4q2P5Ui3iJWnhtF4RcEnuqjsBn2hLVuF@mail.gmail.com>
+Message-ID: <AANLkTina+VynOfraDbx4WEAPRqwQBUQDZRPESYxD9PNq@mail.gmail.com>
+
+Hi,
+Thanks for your answers.
+
+I did
+
+> cabal upgrade yesod
+
+As for the user/global issue, I think I tried a user install, this is
+default isn't it?
+
+Looks like I will have to reinstall everything :-(
+
+Arnaud
+
+On Tue, Feb 1, 2011 at 1:34 AM, Antoine Latter <aslatter at gmail.com> wrote:
+> On Mon, Jan 31, 2011 at 4:59 PM, Arnaud Bailly <arnaud.oqube at gmail.com> wrote:
+>> Hello,
+>> I recently tried to upgrade some package (eg. yesod) and it seems
+>> that, in the process, I screwed up my Haskell packages setup.
+>> When I am trying to do a simple:
+>>> ghc --make Crete1941
+>
+> What command(s) did you issue to "upgrade some packages?"
+> Were you trying to do a user or global install?
+>
+> When ghc loads packages, I've had cases where packages in the user db
+> would shadow packages in the global db, causing *other* packages in
+> the global db to report as "broken".
+>
+> Thanks,
+> Antoine
+>
+
+

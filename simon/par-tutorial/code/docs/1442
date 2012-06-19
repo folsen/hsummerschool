@@ -1,0 +1,41 @@
+From nomeata at debian.org  Sun Aug 28 21:05:12 2011
+From: nomeata at debian.org (Joachim Breitner)
+Date: Sun, 28 Aug 2011 21:05:12 +0200
+Subject: [Haskell-cafe] Class instances in haddock documentation missing
+In-Reply-To: <1308484808.28648.45.camel@kirk>
+References: <1308484808.28648.45.camel@kirk>
+Message-ID: <1314558312.8803.4.camel@kirk>
+
+Hi again,
+
+sorry for bumping this, but it is really annoying and I don?t even know
+where to start looking for the cause of the problem.
+
+Am Sonntag, den 19.06.2011, 14:00 +0200 schrieb Joachim Breitner:
+> the haddock information generated on hackage lists class instances per
+> class and per data type e.g. on
+> http://hackage.haskell.org/packages/archive/base/4.3.1.0/doc/html/Data-Eq.html
+> or
+> http://hackage.haskell.org/packages/archive/xhtml/3000.2.0.1/doc/html/Text-XHtml-Transitional.html
+> 
+> For some reason, the documentation generated on Debian does not. Does
+> anybody have an idea why that could be? We use
+> 	./Setup haddock --hyperlink-source
+> to build the documentation, using the haddock that is shipped with ghc
+> (2.9.2 at the moment).
+
+Thanks,
+Joachim
+-- 
+Joachim "nomeata" Breitner
+Debian Developer
+  nomeata at debian.org | ICQ# 74513189 | GPG-Keyid: 4743206C
+  JID: nomeata at joachim-breitner.de | http://people.debian.org/~nomeata
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110828/d7cbbdab/attachment.pgp>
+

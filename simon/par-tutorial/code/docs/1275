@@ -1,0 +1,44 @@
+From es at ertes.de  Mon Aug 22 20:33:40 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Mon, 22 Aug 2011 20:33:40 +0200
+Subject: [Haskell-cafe] ANN: Netwire 1.1.0 and instinct 0.1.0
+Message-ID: <20110822203340.5749d73f@angst.streitmacht.eu>
+
+Hello there,
+
+today I have released one new library 'instinct' for neural networks as
+well as a new revision of my AFRP library 'netwire', which comes along
+with many new features, but also with largely incompatible changes.
+
+Instinct is a library for neural networks, which currently features:
+
+  * High performance,
+  * arbitrary network models, as long as they don't loop,
+  * reasonably compact memory representation,
+  * backpropagation learning.
+
+Netwire is an arrowized functional reactive programming library written
+with networking applications in mind.  Changes include:
+
+  * Inhibiting signals now contain a SomeException value,
+  * the Wire type has been generalized over the underlying monad.
+
+The second change brings up two new features:
+
+  * Wires over arbitrary monads, hence
+  * pure wires.
+
+I appreciate constructive feedback.  Enjoy!
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

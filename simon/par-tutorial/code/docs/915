@@ -1,0 +1,21 @@
+From lemming at henning-thielemann.de  Tue Aug  2 16:51:46 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Tue, 02 Aug 2011 16:51:46 +0200 (CEST)
+Subject: [Haskell-cafe] difference between  class context and deriving
+In-Reply-To: <4E37F44A.9070506@dit.ie>
+References: <4E37F44A.9070506@dit.ie>
+Message-ID: <alpine.DEB.2.00.1108021651170.30348@anubis.informatik.uni-halle.de>
+
+
+On Tue, 2 Aug 2011, Patrick Browne wrote:
+
+> What is the difference between using a class context and deriving in
+> data type declaration?
+> Are there certain situations in which one or the other is preferred?
+>
+> data Eq a => Set1 a = NilSet1 | ConsSet1 a (Set1 a)
+
+Note that these contexts might get removed from the language:
+    http://hackage.haskell.org/trac/haskell-prime/wiki/NoDatatypeContexts
+
+

@@ -1,0 +1,28 @@
+From v.dijk.bas at gmail.com  Tue Apr 26 00:38:05 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Tue, 26 Apr 2011 00:38:05 +0200
+Subject: [Haskell-cafe] errors while installing yesod 0.8
+In-Reply-To: <BANLkTinwW=bzHJNAoXjRyRCwo98dkg0kVg@mail.gmail.com>
+References: <BANLkTinnbgfJFA8pFptB9QwOSr3soP4DaQ@mail.gmail.com>
+	<BANLkTi=k0qBmgfW+i3fZO5tvBMjU6nEPYg@mail.gmail.com>
+	<BANLkTimKscipBEAgO0XqAeU8gbE1FenPyg@mail.gmail.com>
+	<201104200145.02246.daniel.is.fischer@googlemail.com>
+	<BANLkTin43RU_5mXfaGDqzQW54KSmgRUq_Q@mail.gmail.com>
+	<BANLkTin_fgR0+jhhKNEkqwG0D34ABt=d1g@mail.gmail.com>
+	<BANLkTinysuJ+B9duFm3zWygQUjB=jRV_+g@mail.gmail.com>
+	<BANLkTikv86DaDqrNVrTUTZ6-Pif1MSCeqA@mail.gmail.com>
+	<BANLkTikf1F24oi5hU1FefYfFZGnN0ARdYg@mail.gmail.com>
+	<BANLkTinwW=bzHJNAoXjRyRCwo98dkg0kVg@mail.gmail.com>
+Message-ID: <BANLkTinkcVEtxA4UUEz8sE85=YrrvHphSQ@mail.gmail.com>
+
+On 26 April 2011 00:20, Rogan Creswick <creswick at gmail.com> wrote:
+> It would be nice to figure out what is depending on that version of
+> JSONb so we could better determine if upgrading will break anything.
+
+Maybe the following helps:
+
+http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/revdeps/JSONb
+
+Bas
+
+

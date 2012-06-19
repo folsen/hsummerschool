@@ -1,0 +1,57 @@
+From jpmoresmau at gmail.com  Thu Aug 11 17:56:53 2011
+From: jpmoresmau at gmail.com (JP Moresmau)
+Date: Thu, 11 Aug 2011 17:56:53 +0200
+Subject: [Haskell-cafe] Generics (SYB) with parametrized types
+Message-ID: <CAAambFQ58bscvvjnQ2a_+21J6WWoURWOLvWOaU9Sf=_+EDs3zQ@mail.gmail.com>
+
+Hello, I'm banging my head against a wall there trying to use the syb
+generics schemes against the GHC API. I'm looking at implementing a
+search mechanism in the AST in the more direct way that what Scion
+does (creating an instance of a TypeClass for each AST node type).
+Since the GHC AST types derive from Data and Typeable, I thought it
+would be possible.
+So the problem is a follows: I have a start type, say
+TypecheckedSource, that derives from Data. What I'd like to do is to
+find all instances of the Located type inside that source that span a
+particular range. The problem is that Located is a parametrized type
+that wraps anything and just add location information. So the result
+of the search could be anything. Ideally, I'd like to restrict my
+search to Located instances that wrap an instance of Outputable,
+pretty print that and output only the result.
+So I'm looking to implement something that would have that signature:
+TypecheckedSource -> (Line,Column) -> [String]
+
+I have written code along these lines:
+everything (++) ([] `mkQ` overlap) ts
+   where
+        overlap :: forall b1 . (Outputable b1, Typeable b1) =>Located
+b1  -> [String]
+        overlap (a::Located b1)= ... trivial code here finding if the
+location overlaps, and if it does, pretty print the object, otherwise
+returns []
+
+And GHC complains:
+ Ambiguous type variable `b10' in the constraints:
+   (Outputable b10) arising from a use of `overlap'
+                    at ...
+   (Typeable b10) arising from a use of `overlap'
+                    at ...
+
+So it doesn't like the fact that I don't know which types my Located
+instances wrap. But that's the point, I don't care, I just want to
+restrict my search to the ones I can pretty print. If I just try the
+code against simple non parametrized types it of course works. If I
+add some forall b1 . (Outputable ... in my main function signature it
+complains that I never use b1 anywhere else in the signature, of
+course.
+
+Is there a way to achieve what I want
+(-XOhPleaseDoWhatIwantEvenIfIamNotSureItMakesSense or something)?
+
+Thanks a million!
+
+-- 
+JP Moresmau
+http://jpmoresmau.blogspot.com/
+
+

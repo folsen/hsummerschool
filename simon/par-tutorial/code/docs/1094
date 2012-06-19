@@ -1,0 +1,44 @@
+From dokondr at gmail.com  Sat Aug 13 13:54:02 2011
+From: dokondr at gmail.com (dokondr)
+Date: Sat, 13 Aug 2011 15:54:02 +0400
+Subject: [Haskell-cafe] Haskell Actors, Linda, publish / subscribe models?
+Message-ID: <CAMXF=YBjfyjA8NqSH9HyngS_UZDr_4cYJiv_8Lh1zNfepJYs9w@mail.gmail.com>
+
+Hi,
+I am trying to figure out what Haskell libraries can be used to build
+publish / subscribe communication between threads running both in the same
+and different address spaces on the net.
+For my needs any of these models will work:
+- Actors [ http://en.wikipedia.org/wiki/Actor_model ]
+- Linda tuple space [
+http://en.wikipedia.org/wiki/Linda_%28coordination_language%29 ]
+- Publish / subscribe [
+http://en.wikipedia.org/wiki/Java_Message_Service#Publish.2Fsubscribe_model]
+
+I need to build a framework to coordinate task producers / consumers
+distributed in the same and different address spaces. I need to scale a data
+processing application somewhat Hadoop-like way yet in more flexible manner,
+without Hadoop-specific distributed FS constraints.
+
+Looking through Applications and libraries/Concurrency and parallelism:
+http://www.haskell.org/haskellwiki/Applications_and_libraries/Concurrency_and_parallelism
+
+I found Haskell actor package [
+http://hackage.haskell.org/cgi-bin/hackage-scripts/package/actor ] that
+fails to build with ghc 7.0.
+
+Please advise on latest working libraries.
+
+Thanks!
+
+-- 
+All the best,
+Dmitri O. Kondratiev
+
+"This is what keeps me going: discovery"
+dokondr at gmail.com
+http://sites.google.com/site/dokondr/welcome
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110813/d1eb5203/attachment.htm>
+

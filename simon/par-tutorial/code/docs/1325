@@ -1,0 +1,28 @@
+From dominic.p.mulligan at googlemail.com  Wed Aug 24 15:20:11 2011
+From: dominic.p.mulligan at googlemail.com (Dominic Mulligan)
+Date: Wed, 24 Aug 2011 14:20:11 +0100
+Subject: [Haskell-cafe] why the name lambda calculus?
+In-Reply-To: <alpine.LSU.2.00.1108241358550.30178@hermes-2.csi.cam.ac.uk>
+References: <CAGdT1gpjdu9+F6QOP0ULtrCS9JKyRT89ZorDf-2tOsavR1poOg@mail.gmail.com>
+	<BFBE5DB6-D4E9-4543-9F57-4576A6B7A3E6@uvm.edu>
+	<CAKWTe25=3Srd3TW_-+K=h+hvUcG9vWx23H7fAwAESHSKrDj2jg@mail.gmail.com>
+	<B8329527-9046-4E47-8B8F-E76C17C9961C@ezrakilty.net>
+	<alpine.LSU.2.00.1108241358550.30178@hermes-2.csi.cam.ac.uk>
+Message-ID: <1314192011.2000.48.camel@dpm-laptop>
+
+On Wed, 2011-08-24 at 14:01 +0100, Tony Finch wrote:
+> Ezra Cooper <ezra at ezrakilty.net> wrote:
+> >
+> > I believe this to be a general trait of things described as
+> > "calculi"--that they have some form of name-binders, but I have never
+> > seen that observation written down.
+> 
+> Combinator calculi are a counter-example.
+
+As is the propositional calculus.  I seem to remember Joe Wells once
+asking Wilfrid Hodges what he thought the definition of a calculus was.
+He didn't provide a convincing definition.
+
+
+
+

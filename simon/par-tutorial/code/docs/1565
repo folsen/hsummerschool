@@ -1,0 +1,180 @@
+From oscarpicasso at gmail.com  Wed Aug 31 22:09:36 2011
+From: oscarpicasso at gmail.com (Oscar Picasso)
+Date: Wed, 31 Aug 2011 16:09:36 -0400
+Subject: [Haskell-cafe] Project Euler: request for comments
+In-Reply-To: <CAMLKXy=4+mH49uhaNb0QewkhiHcnT7ea9XKLdjQ1LgspabxK2Q@mail.gmail.com>
+References: <CAPkMFPnCdD4Od5ff6AZ8pu5peR_puk2y+ygZeuPLPX_Y4tUPhw@mail.gmail.com>
+	<CAMLKXym5FPaWa38+LrrFw7oiLnZtSZq1Kn1zpBwn_udH_L-Drw@mail.gmail.com>
+	<CAPkMFPkSb+b_qfedTSMQKCTHV5GUROZSMVWt0aLNGD5g35XoGQ@mail.gmail.com>
+	<CAMLKXym3VR1EGvXg5n0p1xuH1zbueejdkHLF_aRjkPVerLBzDQ@mail.gmail.com>
+	<CAPkMFPnJ54YhqjGwWURhzX1O_zMsZXDpzwvsU_Npi61O1T_BOQ@mail.gmail.com>
+	<CAMLKXynw0-criA1sCq3CxsdEPpj9SFh+gNpbyEa_eB1C=mzxXQ@mail.gmail.com>
+	<CAPkMFPmB6oHgknOy0vhOCJ50RmdKWP78F7DsmOGquLSvubJT0w@mail.gmail.com>
+	<CAPkMFPmZPxWsCG2Bm6g-4JZf+hoyZnvmf_NTAmQORjc21Gf+=A@mail.gmail.com>
+	<CAMLKXy=jDX0MhBQ-0qpBYBFB9poPgmNTLvdV+F_yttpJ26LnUQ@mail.gmail.com>
+	<CAPkMFP=Py1+Kjin9mFU+-E7cDOwxbyzSyosLuqD1Zhv31ivzfA@mail.gmail.com>
+	<CAMLKXy=4+mH49uhaNb0QewkhiHcnT7ea9XKLdjQ1LgspabxK2Q@mail.gmail.com>
+Message-ID: <CAPkMFPn9V4RwAQ3z-FbOWF22HPrH=eAU=rsQVY_zYKm0bJj5WA@mail.gmail.com>
+
+Very interesting. But for my taste I would do a cosmetic change. I
+tend to find it more readable when function calls are written
+vertically when they have with a great number of parameters or a lot
+of parens like here.
+
+listof4tuples xs = zip4
+                   xs
+                   (tail xs)
+                   (tail (tail xs))
+                   (tail (tail (tail xs)))
+
+
+On Tue, Aug 30, 2011 at 1:41 PM, KC <kc1956 at gmail.com> wrote:
+> You might like this zipping & folding version.
+>
+> Explicit recursion has the disadvantage that one has to read the
+> entire function in order to figure out what's going on; whereas using
+> the higher order functions makes things much easier to grasp.
+>
+> listof4tuples xs = (zip4 xs (tail xs) (tail (tail xs)) (tail (tail (tail xs))))
+>
+> prods xs = map prods4 (listof4tuples xs)
+>
+> prods4 (t,u,v,w) = t*u*v*w
+>
+> maxprods4 xs = maximum $ prods xs
+>
+> On Mon, Aug 29, 2011 at 9:40 AM, Oscar Picasso <oscarpicasso at gmail.com> wrote:
+>> Got it.
+>>
+>> f :: [Int] -> Int
+>> f (t:u:v:xs) = helper t u v xs
+>>
+>> helper :: Int -> Int -> Int -> [Int] -> Int
+>> helper t u v (w:ws)
+>> ?| ws == [] ?= t*u*v*w
+>> ?| otherwise = max (t*u*v*w) (f (u:v:w:ws))
+>>
+>> I tend to overlook mutual recursion in my toolbox.
+>>
+>> Thanks for the nnlightenment.
+>>
+>> On Sun, Aug 28, 2011 at 4:54 PM, KC <kc1956 at gmail.com> wrote:
+>>> Try something like the following:
+>>>
+>>> -- Project Euler 11
+>>>
+>>> -- In the 20?20 grid below, four numbers along a diagonal line have
+>>> been marked in red.
+>>>
+>>> -- <snip>
+>>>
+>>> -- The product of these numbers is 26 ? 63 ? 78 ? 14 = 1788696.
+>>>
+>>> -- What is the greatest product of four adjacent numbers in any
+>>> direction (up, down, left, right, or diagonally) in the 20?20 grid?
+>>>
+>>>
+>>> import Data.List
+>>>
+>>> -- Doing the one dimensional case.
+>>> f011 :: [Int] -> Int
+>>> f011 (t:u:v:xs) = f011helper t u v xs
+>>>
+>>> f011helper :: Int -> Int -> Int -> [Int] -> Int
+>>> f011helper t u v (w:ws)
+>>> ? ?| ws == [] ?= t*u*v*w
+>>> ? ?| otherwise = yada nada mada
+>>>
+>>> -- What are yada nada mada?
+>>>
+>>> -- The 20x20 grid case will become:
+>>> f0112D :: [[Int]] -> Int
+>>> -- where [[Int]] is a list of lists of rows, columns, major diagonals,
+>>> & minor diagonals.
+>>>
+>>>
+>>>
+>>>
+>>> On Sun, Aug 28, 2011 at 5:10 AM, Oscar Picasso <oscarpicasso at gmail.com> wrote:
+>>>> No. The answer I posted is not good.
+>>>> It worked, by chance, on a couple of small examples I tried but it
+>>>> could end up comparing sequence of 4 numbers that where not initially
+>>>> adjacent.
+>>>>
+>>>> On Sun, Aug 28, 2011 at 12:32 AM, Oscar Picasso <oscarpicasso at gmail.com> wrote:
+>>>>> Maybe this?
+>>>>>
+>>>>> f x@(a:b:c:d:[]) = x
+>>>>> f (a:b:c:d:e:ys) ?= if e >= a
+>>>>> ? ? ? ? ? ? ? ? ? then f (b:c:d:e:ys)
+>>>>> ? ? ? ? ? ? ? ? ? else f (a:b:c:d:ys)
+>>>>>
+>>>>> On Sat, Aug 27, 2011 at 8:26 PM, KC <kc1956 at gmail.com> wrote:
+>>>>>> Think of the simplest version of the problem that isn't totally trivial.
+>>>>>>
+>>>>>> e.g. A one dimensional list of numbers.
+>>>>>>
+>>>>>> What would you do?
+>>>>>>
+>>>>>> Note: you only want to touch each element once.
+>>>>>>
+>>>>>> The 2 dimensional case could be handled by putting into lists: rows,
+>>>>>> columns, major diagonals, and minor diagonals.
+>>>>>>
+>>>>>> This isn't the fastest way of doing the problem but it has the
+>>>>>> advantage of avoiding "indexitis".
+>>>>>>
+>>>>>>
+>>>>>> On Fri, Aug 26, 2011 at 6:15 PM, Oscar Picasso <oscarpicasso at gmail.com> wrote:
+>>>>>>> Like:
+>>>>>>> 20*19*21*18
+>>>>>>> is bigger than
+>>>>>>> 100*100*3*2
+>>>>>>> ?
+>>>>>>>
+>>>>>>> If so I need to think about how to formalize it.
+>>>>>>>
+>>>>>>> Thanks for the hint.
+>>>>>>>
+>>>>>>> On Fri, Aug 26, 2011 at 8:55 PM, KC <kc1956 at gmail.com> wrote:
+>>>>>>>> Is Problem 11 the 4 consecutive #'s problem?
+>>>>>>>>
+>>>>>>>> If so what must be true for 4 #'s to have a large product?
+>>>>>>>>
+>>>>>>>> Hint: x * y * z * 2 is that going to be larger?
+>>>>>>>>
+>>>>>>>> --
+>>>>>>>> --
+>>>>>>>> Regards,
+>>>>>>>> KC
+>>>>>>>>
+>>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>> --
+>>>>>> --
+>>>>>> Regards,
+>>>>>> KC
+>>>>>>
+>>>>>
+>>>>
+>>>
+>>>
+>>>
+>>> --
+>>> --
+>>> Regards,
+>>> KC
+>>>
+>>
+>
+>
+>
+> --
+> --
+> Regards,
+> KC
+>
+
+

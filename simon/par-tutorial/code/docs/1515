@@ -1,0 +1,32 @@
+From ok at cs.otago.ac.nz  Tue Aug 30 03:30:49 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Tue, 30 Aug 2011 13:30:49 +1200
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <1314613976.1873.5.camel@picard>
+References: <4E568D11.30800@btinternet.com> <4E56CD99.6050703@vex.net>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+	<nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+	<4E57F43A.9030800@btinternet.com> <1314613976.1873.5.camel@picard>
+Message-ID: <DC21F228-66C0-4022-A0F6-9F69B2DA61E2@cs.otago.ac.nz>
+
+
+On 29/08/2011, at 10:32 PM, Maciej Marcin Piechotka wrote:
+> 
+> According to random side (http://gruntthepeon.free.fr/ssemath/) not so
+> new computers can compute 15.5 milions of serial logarithms per second
+> (62 millions in total). I'd say that overhead of Integer might be much
+> bigger then cost of logarithm.
+
+That's floating-point logarithms, not Integer logarithms.
+Single-precision floats, at that.
+
+The code in question does not link at optimisation level 4.
+At least some of the benchmark results are impossible to believe:
+    benching          cephes_sinf .. 
+    -> 12762.3 millions of vector evaluations/second
+    ->   0 cycles/value on a 2000MHz computer
+
+
+
+

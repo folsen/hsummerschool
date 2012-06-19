@@ -1,0 +1,22 @@
+From miguelimo38 at yandex.ru  Wed Dec 21 06:16:00 2011
+From: miguelimo38 at yandex.ru (MigMit)
+Date: Wed, 21 Dec 2011 09:16:00 +0400
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+Message-ID: <BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+
+
+On 21 Dec 2011, at 08:24, Alexander Solla wrote:
+
+> I would rather have an incomplete semantic, and have all the incomplete parts collapsed into something we call "bottom".
+
+I don't see the reason to limit ourselves to that. Of course, in total languages like Agda there is no need for (_|_). But in a turing-complete lazy language like Haskell we really need it. Of course, it makes not much sense to write "fix id" anywhere in your program; but, for example, lists like "1:2:3:4:5:_|_" can be really useful.
+
+And denotational semantics is not just nice. It is useful. It's the best way to understand why the program we just wrote doesn't terminate.
+

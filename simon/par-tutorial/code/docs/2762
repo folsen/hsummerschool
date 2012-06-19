@@ -1,0 +1,30 @@
+From s.clover at gmail.com  Sun Feb  6 17:24:56 2011
+From: s.clover at gmail.com (Sterling Clover)
+Date: Sun, 6 Feb 2011 11:24:56 -0500
+Subject: [Haskell-cafe] Concurrency best practices?
+In-Reply-To: <AANLkTi=4-qa_Ktg4h=aGOKr2S9RLQdF0k9CgxaHHRSvv@mail.gmail.com>
+References: <4D4D1C63.2000906@freegeek.org>
+	<AANLkTim5x9V+2zAukpwADGeD-6qh6HJF72TbaQcJKbkp@mail.gmail.com>
+	<4D4D770D.8030503@btinternet.com>
+	<AANLkTinas8xxKLSK=3q2_2yxhnmUmK+_0Kr2-JMhQLw0@mail.gmail.com>
+	<AANLkTi=4-qa_Ktg4h=aGOKr2S9RLQdF0k9CgxaHHRSvv@mail.gmail.com>
+Message-ID: <990F0EF5-6A21-4017-9E5D-2CCFA6E582E1@gmail.com>
+
+On Feb 5, 2011, at 2:37 PM, Evan Laforge wrote:
+
+> 
+> I recall reading that clojure has a concept of associative
+> combination.  If you can declare that certain operations are
+> associative then the runtime doesn't have to care if they get out of
+> order.
+
+I think that you're thinking about the "commute" operation: http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/commute
+
+There's more discussion elsewhere on the web, including here: http://squirrel.pl/blog/2010/07/13/clojure-alter-vs-commute/
+
+Cheers,
+Sterl
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110206/ce0d2230/attachment.htm>
+

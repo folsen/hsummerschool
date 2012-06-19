@@ -1,0 +1,68 @@
+From etarasov.ekb at gmail.com  Fri Apr 22 19:49:33 2011
+From: etarasov.ekb at gmail.com (Evgeny Tarasov)
+Date: Fri, 22 Apr 2011 23:49:33 +0600
+Subject: [Haskell-cafe] naming convention for maybes?
+In-Reply-To: <D9258BBD-CF3E-4165-9981-C37A3E2DC439@alum.mit.edu>
+References: <BANLkTi=ftrj1T4RHbHg0ETJRZMNbLH-uRQ@mail.gmail.com>
+	<D9258BBD-CF3E-4165-9981-C37A3E2DC439@alum.mit.edu>
+Message-ID: <4DB1BFAD.6070401@gmail.com>
+
+I do it in a similar way, not just for maybes:
+
+paramMay <- getHTTPPostParam "Param"
+paramStr <- maybe (throwError "No Param parameter") return paramMay
+let paramE = parseParam paramStr
+param <- case paramE of
+Left e -> throwError $ "Error while parsing Param: " ++ show e
+Right p -> return p
+
+It'd be great, if there was a "centralised" naming convention guide.
+
+22.04.2011 23:21, Matthew Steele ?????:
+> In my own code, I usually use a 'mb' prefix with camelCase, like so:
+>
+> case mbStr of
+> Just str -> ...
+> Nothing -> ...
+>
+> But I agree that it doesn't always look very nice. I'm curious what 
+> others do.
+>
+> On Apr 22, 2011, at 1:14 PM, Evan Laforge wrote:
+>
+>> Here's a simple issue that's been with me for a while. As do many
+>> people, I use plural variable names for lists, so if a Block as called
+>> 'block' then [Block] is 'blocks'.
+>>
+>> The other pattern that comes up a lot is 'Maybe Block'. When I have
+>> to name it, I call it 'maybe_block', e.g.
+>>
+>> maybe_block <- lookup something
+>> case maybe_block of
+>> Just block -> ...
+>>
+>> However, this maybe_ prefix is rather long and unwieldy. I have
+>> considered things like 'm' or 'mb' but they don't suggest Maybe to me.
+>> An 'm' prefix or suffix is already implying 'monad'. If '?' were
+>> allowed in identifiers I could use it as a suffix. I could just
+>> append 'q' and get used to it... lispers did it with 'p' after all. I
+>> suppose 'mby' could be ok, but for some reason it just looks ugly to
+>> me. 'opt' looks ok, I suppose, but 'optional' doesn't cover the full
+>> range of Maybe's usage (i.e. it's strange to call a failed lookup
+>> result "optional"). Does anyone else have a nice convention for this?
+>> Hopefully something short but intuitive and nicely reading like the
+>> plural convention?
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+

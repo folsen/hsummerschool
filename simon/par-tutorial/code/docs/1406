@@ -1,0 +1,39 @@
+From bobzhang1988 at gmail.com  Sat Aug 27 04:52:09 2011
+From: bobzhang1988 at gmail.com (bob zhang)
+Date: Fri, 26 Aug 2011 22:52:09 -0400
+Subject: [Haskell-cafe] How to make callCC more dynamic
+In-Reply-To: <20110825055349.C739E17112@Adric.ern.nps.edu>
+References: <20110825055349.C739E17112@Adric.ern.nps.edu>
+Message-ID: <4E585BD9.707@gmail.com>
+
+Thank you, there is also a nice link here :-)
+http://stackoverflow.com/questions/7178919/how-to-make-callcc-more-dynamic
+and for this type,
+ContT {runContT :: forall r1 . (forall r2 . a-> m r2) -> m r1}
+callCC can be defined, however, you can not run it, and reset couldn't
+type check
+? 11-8-25 ??1:53, oleg at okmij.org ??:
+> bob zhang wrote:
+>> I thought the right type for ContT should be
+>> newtype ContT m a = ContT {runContT :: forall r. (a-> m r) -> m r}
+>> and
+>> other control operators
+>> shift :: Monad m => (forall r . (a-> ContT m r) -> ContT m r) -> ContT m a
+>> reset :: Monad m => ContT m a -> ContT m a
+>> callCC :: ((a-> (forall r . ContT m r)) -> ContT m a) -> ContT m a
+>> unfortunately, I can not make callCC type check, and don't know how to
+>> do it.
+> Precisely that problem was discussed in  
+> 	http://okmij.org/ftp/continuations/undelimited.html#proper-contM
+>
+> Your ContT is CPS1 in the above article. The article shows why you
+> cannot write callCC with the above type of ContT. The article talks
+> about other types. BTW, if you faithfully defined the monad for
+> undelimited control than shift/reset cannot be expressed. Undelimited
+> continuations are strictly less expressible than delimited ones. The
+> above page gives the pointers to the papers with the proof.
+>
+>
+
+
+

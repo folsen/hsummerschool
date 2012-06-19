@@ -1,0 +1,30 @@
+From simon.hengel at wiktory.org  Wed Feb  2 12:57:42 2011
+From: simon.hengel at wiktory.org (Simon Hengel)
+Date: Wed, 2 Feb 2011 12:57:42 +0100
+Subject: [Haskell-cafe] ANN: HackageOneFive: Reverse dependency lookup for
+ all packages on Hackage
+Message-ID: <20110202115742.GA5168@x200>
+
+Hello,
+I wrote a tiny Snap app that provides reverse dependency lookup for all
+packages on Hackage.
+
+A git repository is at:
+
+    https://github.com/sol/HackageOneFive
+
+Setup instructions are provide in the README[1] file.
+
+It uses a PostgreSQL database for storage but it should be trivial to
+port this to e.g. SQLite.
+
+As always feedback and patches are gladly welcome!
+
+btw: Is there still progress on Hackage 2.0?
+
+Cheers,
+Simon
+
+[1] https://github.com/sol/HackageOneFive#readme
+
+

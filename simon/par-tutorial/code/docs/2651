@@ -1,0 +1,62 @@
+From nowgate at yahoo.com  Thu Feb  3 21:40:13 2011
+From: nowgate at yahoo.com (michael rice)
+Date: Thu, 3 Feb 2011 12:40:13 -0800 (PST)
+Subject: [Haskell-cafe] Reader monad wrapping State monad
+In-Reply-To: <201102032054.24988.daniel.is.fischer@googlemail.com>
+Message-ID: <924708.31951.qm@web31101.mail.mud.yahoo.com>
+
+Hi Daniel,
+
+Ok, but what I was looking for was ReaderT on top, State on the bottom. This is very confusing material, with no apparent conceptual commonality (ad hoc comes to mind) among the many examples I've looked at. Sometimes lift is used, other times a lift helper function, and in this case no use of lift at all.
+
+Michael
+
+--- On Thu, 2/3/11, Daniel Fischer <daniel.is.fischer at googlemail.com> wrote:
+
+From: Daniel Fischer <daniel.is.fischer at googlemail.com>
+Subject: Re: [Haskell-cafe] Reader monad wrapping State monad
+To: haskell-cafe at haskell.org
+Cc: "michael rice" <nowgate at yahoo.com>
+Date: Thursday, February 3, 2011, 2:54 PM
+
+On Thursday 03 February 2011 20:18:43, michael rice wrote:
+> Given the first program, it seems that the unchanging first element of
+> the tuple could be handled by a Reader monad, leading to the second
+> program, where b becomes the state, but how do I get the constant a from
+> the Reader monad?
+
+You need a monad-transformer to use both, Reader and State.
+You can use either
+
+ReaderT Double (State Double)
+
+or
+
+StateT Double (Reader Double)
+
+(they're isomorphic).
+
+Then you can query the modifiable state with get (from the MonadState 
+class) and the immutable with ask (from the MonadReader class)
+
+type Heron = StateT Double (Reader Double)
+
+sqrtH :: Heron Double
+sqrtH = do
+? a <- ask
+? b <- get
+? let c = 0.5*(b + a/b)
+? if (good enough)
+? ? then return c
+? ? else put c >> sqrtH
+
+mySqrt a = runReader (evalStateT sqrtH (a*0.5)) a
+
+
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/b4cecb93/attachment.htm>
+

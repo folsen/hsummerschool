@@ -1,0 +1,40 @@
+From andrewcoppin at btinternet.com  Sun Apr 24 10:44:23 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Sun, 24 Apr 2011 09:44:23 +0100
+Subject: [Haskell-cafe] http://trac.haskell.org/ not redering correctly
+In-Reply-To: <BANLkTi=16aMjj53QP99LErfxARc0GofHLw@mail.gmail.com>
+References: <20110417202926.0058e617.mle+hs@mega-nerd.com>
+	<4DADF6D0.2060801@btinternet.com>
+	<BANLkTimfgH3ShSwn33KUE9sYUTPJ_aXqpQ@mail.gmail.com>
+	<4DAF4366.50600@btinternet.com>
+	<BANLkTi=16aMjj53QP99LErfxARc0GofHLw@mail.gmail.com>
+Message-ID: <4DB3E2E7.3060805@btinternet.com>
+
+On 21/04/2011 02:36 AM, Conrad Parker wrote:
+>>>> I thought the purpose of filing a bug report was to get things fixed?
+>>>
+>>> The purpose of filing bug reports is to ensure that problems are not
+>>> forgotten. It allows the community (people like you) to have a useful
+>>> understanding of the problems that exist when choosing what tasks to
+>>> put time and effort into fixing.
+>>
+>> *sigh* I guess that means the next step is to figure out if it's broken for
+>> the Linux builds as well, or just for Windows. (Can't test for Mac OS since
+>> I don't have access to the necessary hardware or software...)
+>
+> The first step would be to make a patch that works for you, and to
+> attach it to the ticket.
+
+Wouldn't that require me to somehow get hold of whatever repo contains 
+the script for generating the Windows installer?
+
+> Then again if it's simply a matter of generating additional HTML text
+> (as opposed to styling/rendering issues) then it should be
+> straightforward to verify that the new content is added in the
+> generated files without worrying about other platforms.
+
+I imagine the issue is something utterly trivial list a line of text 
+missing from a file - which is why I'm so surprised that the problem has 
+been reported multiple times and yet not fixed...
+
+

@@ -1,0 +1,47 @@
+From Christian.Maeder at dfki.de  Thu Feb  3 18:43:56 2011
+From: Christian.Maeder at dfki.de (Christian Maeder)
+Date: Thu, 03 Feb 2011 18:43:56 +0100
+Subject: [Haskell-cafe] Review request for "platform independent
+ interactive graphics" with VNC
+In-Reply-To: <AANLkTimecmbjBJm+_b8Mtx43HDcZpmxQdTrrROpGz5oF@mail.gmail.com>
+References: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>	<4D4ACEC4.3050608@dfki.de>	<AANLkTik3OuqBfZ2GVS7J-OJr4XHhXb6RQC=ieUK7aiQP@mail.gmail.com>	<4D4ADBD9.5050504@dfki.de>
+	<AANLkTimecmbjBJm+_b8Mtx43HDcZpmxQdTrrROpGz5oF@mail.gmail.com>
+Message-ID: <4D4AE95C.9030009@dfki.de>
+
+Am 03.02.2011 18:05, schrieb C K Kashyap:
+> ck at ck-desktop:~/lab/Chitra$ telnet localhost 5900
+> Trying ::1...
+> Trying 127.0.0.1...
+> Connected to localhost.
+> Escape character is '^]'.
+> RFB 003.003
+> 
+> After this, you can use vncviewer to connect to localhost (5900 is the
+> default port for vnc)
+
+Right, a window seems to pop up very shortly before it fails for me as
+shown below:
+
+Cheers Christian
+
+maeder at leibniz:~> vncviewer localhost
+Connected to RFB server, using protocol version 3.3
+No authentication needed
+Desktop name "Haskell Framebuffer"
+VNC server default format:
+  32 bits per pixel.
+  Most significant byte first in each pixel.
+  True colour: max red 255 green 255 blue 255, shift red 16 green 8 blue 0
+Warning: Cannot convert string
+"-*-helvetica-bold-r-*-*-16-*-*-*-*-*-*-*" to type FontStruct
+Using default colormap which is TrueColor.  Pixel format:
+  32 bits per pixel.
+  Least significant byte first in each pixel.
+  True colour: max red 255 green 255 blue 255, shift red 16 green 8 blue 0
+ShmCleanup called
+Using shared memory PutImage
+Same machine: preferring raw encoding
+Unknown message type 120 from VNC server
+ShmCleanup called
+
+

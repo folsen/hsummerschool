@@ -1,0 +1,64 @@
+From ok at cs.otago.ac.nz  Wed Aug 31 05:07:53 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Wed, 31 Aug 2011 15:07:53 +1200
+Subject: [Haskell-cafe] bitSize
+In-Reply-To: <66AB8F5D-3904-4872-A91E-EA5D5DBADF24@gmail.com>
+References: <4E568D11.30800@btinternet.com> <4E56CD99.6050703@vex.net>
+	<CANaM3xBnbOBok9Tc_dxS4hPRMGz_6+nd2dHWgNAc_NmyquNY4w@mail.gmail.com>
+	<4E57D6D5.8030407@btinternet.com>
+	<nnpf57dg3stdf9216d2papsgru76kv3vo4@4ax.com>
+	<4E57F43A.9030800@btinternet.com> <1314613976.1873.5.camel@picard>
+	<DC21F228-66C0-4022-A0F6-9F69B2DA61E2@cs.otago.ac.nz>
+	<66AB8F5D-3904-4872-A91E-EA5D5DBADF24@gmail.com>
+Message-ID: <71E7FD45-1F1E-49A0-9765-57237E4EB280@cs.otago.ac.nz>
+
+
+On 30/08/2011, at 7:45 PM, Thomas Davie wrote:
+
+> That's reasonably believable ? streaming units on current CPUs can execute multiple floating point operations per cycle.
+
+The figures for cephes_{sinf,cosf} are difficult to believe
+because they are so extremely at variance with the figures that
+come with the software.
+
+First off, the program as delivered, when compiled, reported that the
+computer was a "2000 MHz" one.  It is in fact a 2.66 GHz one.  That
+figure turns out to be a #define in the code.  Fix that, and the
+report includes
+
+benching          cephes_sinf .. -> 12779.4 millions of vector evaluations/second
+ ->   0 cycles/value on a 2660MHz computer
+benching          cephes_cosf .. -> 12756.8 millions of vector evaluations/second
+ ->   0 cycles/value on a 2660MHz computer
+benching          cephes_expf .. ->    7.7 millions of vector evaluations/second
+ ->  86 cycles/value on a 2660MHz computer
+
+The internal documentation in the program claims the following results
+on a 2.4 GHz machine:
+
+benching cephes_sinf .. -> 11.6 millions of vector evaluations/second
+	->  56 cycles/value on a 2600MHz computer
+benching cephes_cosf .. -> 8.7 millions of vector evaluations/second
+	->  74 cycles/value on a 2600MHz computer
+benching cephes_expf .. -> 3.7 millions of vector evaluations/second
+	-> 172 cycles/value on a 2600MHz computer
+
+It seems surpassing strange that code compiled by gcc 4.2 on a 2.66 GHz
+machine should run more than a thousand times faster than code compiled
+by gcc 4.2 on a 2.60 GHz machine with essentially the same architecture.
+
+Especially as those particular functions are *NOT* vectorised.
+They are foils for comparison with the functions that *ARE* vectorised,
+for which entirely credible 26.5 million vector evaluations per second
+(or 25 cycles per value) are reported.  Considering that sin and cos
+are not single floating point operations, 25 cycles per value is well
+done.
+
+28 cycles per single-precision logarithm is not too shabby either,
+IF one can trust a benchmark that has blown its credibility as badly
+as this one has.  But it's still not an Integer logarithm, just a
+single precision floating point one.
+
+
+
+

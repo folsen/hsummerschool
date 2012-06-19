@@ -1,0 +1,56 @@
+From ekirpichov at gmail.com  Sat Dec 24 07:23:22 2011
+From: ekirpichov at gmail.com (Eugene Kirpichov)
+Date: Sat, 24 Dec 2011 10:23:22 +0400
+Subject: [Haskell-cafe] On stream processing,
+	and a new release of timeplot coming
+Message-ID: <CANVKUrWrvDiG7=vfDf=8Zn5_TFQtjawtYxMT6nGh7mroAJZR6w@mail.gmail.com>
+
+Hi Cafe,
+
+In the last couple of days I completed my quest of making my graphing
+utility timeplot ( http://jkff.info/software/timeplotters ) not load the
+whole input dataset into memory and consequently be able to deal with
+datasets of any size, provided however that the amount of data to *draw* is
+not so large. On the go it also got a huge speedup - previously visualizing
+a cluster activity dataset with a million events took around 15 minutes and
+a gig of memory, now it takes 20 seconds and 6 Mb max residence.
+(I haven't yet uploaded to hackage as I have to give it a bit more testing)
+
+The refactoring involved a number of interesting programming patterns that
+I'd like to share with you and ask for feedback - perhaps something can be
+simplified.
+
+The source is at http://github.com/jkff/timeplot
+
+The datatype of incremental computations is at
+https://github.com/jkff/timeplot/blob/master/Tools/TimePlot/Incremental.hs .
+Strictness is extremely important here - the last memory leak I eliminated
+was lack of bang patterns in teeSummary.
+There's an interesting function statefulSummary that shows how closures
+allow you to achieve encapsulation over an unknown piece of state -
+curiously enough, you can't define StreamSummary a r as StreamSummary {
+init :: s, insert :: a->s->s, finalize :: s->r } (existentially qualified
+over s), as then you can't define summaryByKey - you don't know what type
+to store in the states map.
+
+It is used to incrementally build all plots simultaneously, shown by the
+main loop in makeChart at
+https://github.com/jkff/timeplot/blob/master/Tools/TimePlot.hs
+
+Incremental building of plots of different types is at
+https://github.com/jkff/timeplot/blob/master/Tools/TimePlot/Plots.hs
+There are also a few interesting functions in that file - e.g.
+edges2eventsSummary, which applies a summary over a stream of "long" events
+to a stream of rise/fall edges.
+This means that you can define a "stream transformer" (Stream a -> Stream
+b) as a function (StreamSummary b -> StreamSummary a), which can be much
+easier. I have to think more about this idea.
+
+-- 
+Eugene Kirpichov
+Principal Engineer, Mirantis Inc. http://www.mirantis.com/
+Editor, http://fprog.ru/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111224/de8198a2/attachment.htm>
+

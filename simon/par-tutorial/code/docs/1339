@@ -1,0 +1,36 @@
+From abm221617 at gmail.com  Wed Aug 24 20:24:14 2011
+From: abm221617 at gmail.com (Armando Blancas)
+Date: Wed, 24 Aug 2011 11:24:14 -0700
+Subject: [Haskell-cafe] Using -> as both type and value constructor
+Message-ID: <CAHjViWKoML3hkn+hbOXMY5CZJVHcQ_ho9027J0hM3Pkohk48DQ@mail.gmail.com>
+
+Studying the paper *A Simple Implementation for Priority Search Queues*, by
+Ralf Hinze, I came across the following syntax that I didn't understand and
+I couldn't use in GHCi 7.0.3 for defining a binding data type (page 3):
+
+Bindings are represented by the following data type:
+*data k -> p = k -> p*
+key :: (k -> p) -> k
+key (k -> p) = k
+prio :: (k -> p) -> p
+prio (k -> p) = p
+Note that we use '->' both as a type constructor and value constructor.
+[...] data PSQ k p
+
+The following page has these value constructors:
+
+*0 :: PSQ k p*
+*{.} :: (k -> p) -> PSQ k p*
+
+
+The paper says that's Haskell '98 code. I'll appreciate info on what kind of
+data declaration those are and any pointers to related documentation. Or
+maybe those are deprecated features. I'm stuck in this part.
+
+-armando
+
+www.cs.ox.ac.uk/people/ralf.hinze/talks/ICFP01.pdf
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110824/47b89436/attachment.htm>
+

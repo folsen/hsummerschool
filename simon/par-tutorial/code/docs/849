@@ -1,0 +1,51 @@
+From ryani.spam at gmail.com  Thu Apr 28 23:30:40 2011
+From: ryani.spam at gmail.com (Ryan Ingram)
+Date: Thu, 28 Apr 2011 14:30:40 -0700
+Subject: [Haskell-cafe] Inputs to classic FRP:
+	unsafeInterleaveIO/unsafePerformIO
+In-Reply-To: <ip8e0s$ijh$1@dough.gmane.org>
+References: <BANLkTi=XMKwyeK8VK5kyYJRuP1JS4RZS4g@mail.gmail.com>
+	<ip5s8s$j07$1@dough.gmane.org>
+	<BANLkTi=wwQsj9+QgttPzCE+H1W8RO7yjUw@mail.gmail.com>
+	<ip8e0s$ijh$1@dough.gmane.org>
+Message-ID: <BANLkTikRMf-=cnguQn7k1NWemOiy6rcwCQ@mail.gmail.com>
+
+On Tue, Apr 26, 2011 at 11:44 PM, Heinrich Apfelmus <
+apfelmus at quantentunnel.de> wrote:
+
+> However, even in a demand-driven implementation, there is one optimization
+> that I would like make: when there are multiple external events, say e1 and
+> e2, the network splits into subnetworks that react only to one of the
+> inputs. For instance, your example would split into two graphs
+>
+>  e1               e2
+>  |  \             |  \
+>  e3  e4     and   e3  e4
+>  |   |            |   |
+>  e5  e5           e5  e5
+>
+> that are independent of each other. Unlike successful filters, these
+> subnetworks are known *statically* and it's worth splitting them out.
+>
+
+Yeah, I realize that as well, although you can get the same problem with a
+single source, it just makes the network a bit more complicated:
+
+e0 = source
+e1 = fromLeft <$> filter isLeft e1
+e2 = fromRight <$> filter isRight e1
+-- rest of network the same
+
+Anyways, the problem I was getting at is that lets say that e1 and e2 are
+both Event Bool, and e1 has a True event at the same time that e2 has a
+False event.
+
+Then a behavior derived from e3 is False for that time (assuming behaviors
+take the 'last' event in the list?), and a behavior from e4 is True for that
+time.
+
+  -- ryan
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110428/281c3e5d/attachment.htm>
+

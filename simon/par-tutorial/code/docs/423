@@ -1,0 +1,66 @@
+From fischer at nii.ac.jp  Fri Apr 15 11:51:38 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Fri, 15 Apr 2011 11:51:38 +0200
+Subject: [Haskell-cafe] Programming Chalenges: The 3n+1 problem
+In-Reply-To: <BANLkTimyamji1S+GSpdbw9bk7iT3SDHOTg@mail.gmail.com>
+References: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+	<BANLkTimyamji1S+GSpdbw9bk7iT3SDHOTg@mail.gmail.com>
+Message-ID: <BANLkTinqphU3QB_1zN0yeFQyUAXPE17p9A@mail.gmail.com>
+
+On Thu, Apr 14, 2011 at 8:02 PM, Luke Palmer <lrpalmer at gmail.com> wrote:
+>
+> For this problem, it is too slow to memoize everything; you have to use a
+> bounded memo table.  That's why I use a combinator-based memo approach as
+> opposed to the type-directed approach used in eg. MemoTrie.  The memo table
+> you need is something like
+>
+>     switch (<10^6) integral id
+>
+
+I think because of the definition of `Data.Function.fix`
+
+     fix f = let x = f x in x
+
+which uses sharing, the definition
+
+    fibonacci = fix (switch (<10^6) integral id . fib)
+
+chaches results even of independent global calls. If `fix` would be defined
+as
+
+    fix f = f (fix f)
+
+it would only cache the recursive calls of each individual call.
+
+Do you agree?
+
+Here is a fixpoint combinator that is parameterized by a memo combinator:
+
+    fixmemo :: Memo a -> ((a -> b) -> (a -> b)) -> (a -> b)
+    fixmemo memo f = fix (memo . f)
+
+If I use
+
+    fixmemo (switch (<=10^6) integral id) collatz
+
+the computation of the maximum Collatz length between 1 and 10^6 takes
+around 16 seconds (rather than 4 seconds without memoization). But when
+using
+
+    fixmemo (arrayRange (1,10^6)) collatz
+
+memoization actually pays off and run time goes down to around 3 seconds. I
+uploaded the program underlying my experiments to github (spoiler alert):
+
+    https://gist.github.com/921469
+
+I knew that memocombinators are more flexible than a type-based MemoTrie but
+it is nice to see that they also lead to more efficient implementations and
+allow to define the other array-based implementation from this thread in a
+modular way.
+
+Sebastian
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110415/dfff08d4/attachment.htm>
+

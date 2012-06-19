@@ -1,0 +1,60 @@
+From Christian.Maeder at dfki.de  Fri Feb  4 09:23:18 2011
+From: Christian.Maeder at dfki.de (Christian Maeder)
+Date: Fri, 04 Feb 2011 09:23:18 +0100
+Subject: [Haskell-cafe] Review request for "platform independent
+ interactive graphics" with VNC
+In-Reply-To: <AANLkTimUbrS2cV+GeiDx00MOxo1+pw6Mr7WS0E6AZHei@mail.gmail.com>
+References: <AANLkTimriXKXhgvkG-vGufTnNqVYg9UH-+Cyn-x0iDY5@mail.gmail.com>	<4D4ACEC4.3050608@dfki.de>	<AANLkTik3OuqBfZ2GVS7J-OJr4XHhXb6RQC=ieUK7aiQP@mail.gmail.com>	<4D4ADBD9.5050504@dfki.de>	<AANLkTimecmbjBJm+_b8Mtx43HDcZpmxQdTrrROpGz5oF@mail.gmail.com>	<4D4AE95C.9030009@dfki.de>	<4D4AEA86.1000902@dfki.de>
+	<AANLkTimUbrS2cV+GeiDx00MOxo1+pw6Mr7WS0E6AZHei@mail.gmail.com>
+Message-ID: <4D4BB776.1090501@dfki.de>
+
+Am 04.02.2011 07:27, schrieb C K Kashyap:
+>     FrameBufferUpdateRequest x=0, y=0 width =1, height=1
+>     FrameBufferUpdateRequest x=1, y=0 width =99, height=1
+>     FrameBufferUpdateRequest x=0, y=1 width =100, height=99
+>     Main: <socket: 7>: hPutBuf: resource vanished (Connection reset by peer)
+> 
+> 
+> I was not taking care of partial updates, I've taken care of it now.
+>  Btw, what vncviewer are you using?
+
+After pulling in your changes and recompilation, your application runs
+as expected. Thanks a lot!
+
+Christian
+
+maeder at leibniz:~> uname -a
+Linux [...] 2.6.34.7-0.7-desktop #1 SMP PREEMPT [...] i686 i686 i386
+GNU/Linux
+maeder at leibniz:~> vncviewer -h
+TightVNC Viewer version 1.3.9
+
+Usage: vncviewer [<OPTIONS>] [<HOST>][:<DISPLAY#>]
+       vncviewer [<OPTIONS>] [<HOST>][::<PORT#>]
+       vncviewer [<OPTIONS>] -listen [<DISPLAY#>]
+       vncviewer -help
+
+<OPTIONS> are standard Xt options, or:
+        -via <GATEWAY>
+        -shared (set by default)
+        -noshared
+        -viewonly
+        -fullscreen
+        -noraiseonbeep
+        -passwd <PASSWD-FILENAME> (standard VNC authentication)
+        -encodings <ENCODING-LIST> (e.g. "tight copyrect")
+        -bgr233
+        -owncmap
+        -truecolour
+        -depth <DEPTH>
+        -compresslevel <COMPRESS-VALUE> (0..9: 0-fast, 9-best)
+        -quality <JPEG-QUALITY-VALUE> (0..9: 0-low, 9-high)
+        -nojpeg
+        -nocursorshape
+        -x11cursor
+        -autopass
+
+Option names may be abbreviated, e.g. -bgr instead of -bgr233.
+See the manual page for more information.
+
+

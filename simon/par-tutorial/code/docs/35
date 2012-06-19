@@ -1,0 +1,60 @@
+From ninegua at gmail.com  Fri Apr  1 20:28:45 2011
+From: ninegua at gmail.com (Paul L)
+Date: Fri, 1 Apr 2011 11:28:45 -0700
+Subject: [Haskell-cafe] ArrowLoop and streamprocessors
+In-Reply-To: <AANLkTimM+AfA5+wh9tOnyYDVxFQ3zuUjP+aPQB1NcNxO@mail.gmail.com>
+References: <AANLkTikxquh-8tpOtnOdQygjQVvaV21qBeucNPUaMk+V@mail.gmail.com>
+	<928741C4-271A-4C84-864F-AD6DE65F1855@alum.mit.edu>
+	<AANLkTinXRyf3qX_o=-uZr9yV_sVq4Ob-RzpVS2ecWhAg@mail.gmail.com>
+	<AANLkTimM+AfA5+wh9tOnyYDVxFQ3zuUjP+aPQB1NcNxO@mail.gmail.com>
+Message-ID: <AANLkTikVjoi79JKxiy=Zhb=-c+g5DZxaOnwOzeT-sCkX@mail.gmail.com>
+
+Forgot to CC the list, please see below.
+
+On Wed, Mar 30, 2011 at 2:29 PM, Mathijs Kwik <bluescreen303 at gmail.com> wrote:
+
+> someBox :: Either A B ~> O
+> someBox = handleA ||| handleB
+
+Not sure about this. If you are modeling the input as Either A B, then
+you are excluding the possibility of both A and B occur at the same
+time. I suggest you change the type to:
+
+someBox :: (Maybe A, Maybe B) ~> O
+
+Based on your later comments, you implied that there could be multiple
+B produced from one O. Then I'd suggest the following type:
+
+someBox :: (Maybe A, [B]) ~> O
+
+> otherBox :: O ~> Either C B
+>
+> Also note that in this CPS style streamprocessing, there's no 1-on-1
+> relation between input and output, so on 1 input (O), otherBox might
+> produce 2 outputs (2 times C), or 4 outputs (3 times C and 1 time B).
+
+If the number of inputs do not match the number of outputs, I suggest
+you change the type to:
+
+otherBox :: O ~> [Either C B]
+
+> To "wire back" B's to someBox, I'm pretty sure I need to use ArrowLoop.
+> But (loop :: a (b, d) (c, d) -> a b c) uses tuples, which means the
+> processing will only continue when both inputs are available.
+> So if I turn someBox into (A, B) ~> O and otherBox into O ~> (C, B),
+> the processing will instantly halt, waiting for a B to arrive after
+> the A comes in.
+
+You can do something like this, first, split the B out of the ouput:
+
+split :: [Either C B] ~> ([C], [B])
+
+Then the loop back:
+
+loop (someBox >>> otherBox >>> split) :: Maybe A ~> [C]
+
+--
+Regards,
+Paul Liu
+
+

@@ -1,0 +1,20 @@
+From v.dijk.bas at gmail.com  Mon Aug  8 12:08:39 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Mon, 8 Aug 2011 12:08:39 +0200
+Subject: [Haskell-cafe] How to use cabal macros in .hsc files
+Message-ID: <CADLz5wXV1WA-_EaQuD71SjG44ikrZ+6i0jR-vkMfL0PV5ZA8Lw@mail.gmail.com>
+
+Hello,
+
+Currently it's not possible to use cabal macros like
+MIN_VERSION_base(x,y,z) in .hsc files:
+
+http://hackage.haskell.org/trac/hackage/ticket/870
+
+Is there a workaround to get the same effect?
+
+Regards,
+
+Bas
+
+

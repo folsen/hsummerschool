@@ -1,0 +1,74 @@
+From v.dijk.bas at gmail.com  Tue Dec  6 14:03:18 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Tue, 6 Dec 2011 14:03:18 +0100
+Subject: [Haskell-cafe] ANNOUNCE: monad-control-0.3
+In-Reply-To: <CAKA2JgJz0spJ3WC0bhWGUwaAqpUBy+0YqCptz5M_gPVxUeX3yA@mail.gmail.com>
+References: <CADLz5wW4oZbBtKMb7UQ8qQdn3UayBSQ-TL66VLG3hGXCUk_npg@mail.gmail.com>
+	<CADLz5wVs3AGCagikDMJVKVm-RJjgMhCbs7LJtxGPqi_rLbjRqQ@mail.gmail.com>
+	<20111206030316.GA25805@gnu.kitenet.net>
+	<CAKA2JgL0Mq5OKKMh_jYM+8SvHgHTUQfFgPr2PXTG-Nu162zQ9Q@mail.gmail.com>
+	<20111206040420.GA31124@gnu.kitenet.net>
+	<CAKA2Jg+dtnP87-nr=i9RC-dN2nFPM16HV64VHaZGFK--o5hX_Q@mail.gmail.com>
+	<CADLz5wX2meXyGEADW1-S02i5VdKh7Ns_3VwZKZ=oQWZXj4H1uQ@mail.gmail.com>
+	<CAKA2JgJz0spJ3WC0bhWGUwaAqpUBy+0YqCptz5M_gPVxUeX3yA@mail.gmail.com>
+Message-ID: <CADLz5wUN4on7p2QLnhkyUc23GHmBP32FJkq2tFKK0dZ19283Xw@mail.gmail.com>
+
+On 6 December 2011 12:59, Michael Snoyman <michael at snoyman.com> wrote:
+> On Tue, Dec 6, 2011 at 11:49 AM, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+>> On 6 December 2011 05:06, Michael Snoyman <michael at snoyman.com> wrote:
+>>> Maybe this will help[1]. It's using RWST instead of StateT, but it's
+>>> the same idea.
+>>>
+>>> [1] https://github.com/yesodweb/yesod/commit/7619e4e9dd88c152d1e00b6fea073c3d52dc797f#L0R105
+>>
+>> Hi Michael,
+>>
+>> Note that you can just reuse the MonadTransControl instance of the
+>> RWST transformer:
+>>
+>> instance MonadTransControl (GGWidget master) where
+>> ? ?newtype StT (GGWidget master) a =
+>> ? ? ? ?StWidget {unStWidget :: StT (GWInner master) a}
+>> ? ?liftWith f = GWidget $ liftWith $ \run ->
+>> ? ? ? ? ? ? ? ? ? f $ liftM StWidget . run . unGWidget
+>> ? ?restoreT = GWidget . restoreT . liftM unStWidget
+>>
+>> Cheers,
+>>
+>> Bas
+>
+> Thanks Bas, I was just in the process of converting Widget from being
+> a RWS to a Writer, and your code made it much simpler :).
+>
+> Michael
+
+Do you think it's useful to have the following two utility functions
+for defining a MonadTransControl instance for your own monad
+transformer provided that your transformers is defined in terms of
+another transformer:
+
+defaultLiftWith ? (Monad m, MonadTransControl tInner)
+                ? (tInner m ? ? t m ?)          -- ^ Constructor
+                ? (? ? n. t n ? ? tInner n ?)   -- ^ Deconstructor
+                ? (? ?. StT tInner ? ? StT t ?) -- ^ State constructor
+                ? ((Run t ? m ?) ? t m ?)
+defaultLiftWith con deCon st = \f ? con $ liftWith $ \run ?
+                                      f $ liftM st ? run ? deCon
+
+defaultRestoreT ? (Monad m, MonadTransControl tInner)
+                ? (tInner m ? ? t m ?)      -- ^ Constructor
+                ? (StT t ?  ? StT tInner ?) -- ^ State deconstructor
+                ? (m (StT t ?) ? t m ?)
+defaultRestoreT con unSt = con ? restoreT ? liftM unSt
+
+For example in your case you would use these as follows:
+
+instance MonadTransControl (GGWidget master) where
+    newtype StT (GGWidget master) a =
+        StWidget {unStWidget :: StT (GWInner master) a}
+    liftWith = defaultLiftWith GWidget unGWidget StWidget
+    restoreT = defaultRestoreT GWidget unStWidget
+
+Bas
+
+

@@ -1,0 +1,27 @@
+From malcolm.wallace at me.com  Tue Apr 26 13:03:52 2011
+From: malcolm.wallace at me.com (Malcolm Wallace)
+Date: Tue, 26 Apr 2011 12:03:52 +0100
+Subject: [Haskell-cafe] converting prefixes of CString <-> String
+In-Reply-To: <BANLkTimZA8GuTN2oSWd-juDkbzu8vG_=Rg@mail.gmail.com>
+References: <BANLkTimZA8GuTN2oSWd-juDkbzu8vG_=Rg@mail.gmail.com>
+Message-ID: <8D8D3C31-262C-440E-8D17-7FF1709FB63D@me.com>
+
+
+On 25 Apr 2011, at 08:16, Eric Stansifer wrote:
+
+> Let 'c2h' convert CStrings to Haskell Strings, and 'h2c' convert
+> Haskell Strings to CStrings.  (If I understand correctly, c2h . h2c
+> === id, but h2c . c2h is not the identity on all inputs;
+
+That is correct.  CStrings are 8-bits, and Haskell Strings are 32-bits.  Converting from Haskell to C loses information, unless you use a multi-byte encoding on the C side (for instance, UTF8).
+
+>  or perhaps c2h is not defined for all CStrings.
+
+Rather, h2c is not necessarily well-defined for all Haskell Strings.  In particular, the marshalling functions in Foreign.C.String simply truncate any character larger than one byte, to its lowest byte.
+
+I suggest you look at the utf8-string package, for instance Codec.Binary.UTF8.String.{encode,decode}, which convert Haskell strings to/from a list of Word8, which can then be transferred via the FFI to wherever you like.
+
+Regards,
+    Malcolm
+
+

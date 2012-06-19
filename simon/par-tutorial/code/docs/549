@@ -1,0 +1,15 @@
+From cdsmith at gmail.com  Wed Apr 20 19:26:03 2011
+From: cdsmith at gmail.com (Chris Smith)
+Date: Wed, 20 Apr 2011 11:26:03 -0600
+Subject: [Haskell-cafe] Hackage haddock not running?
+Message-ID: <1303320363.2836.1.camel@godel>
+
+I've noticed a lot of packages recently missing documentation links on
+Hackage.  It looks like the job to build these hasn't been running since
+perhaps about Saturday.  Are appropriate people aware of this?
+
+-- 
+Chris Smith
+
+
+

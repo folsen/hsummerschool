@@ -1,0 +1,80 @@
+From aslatter at gmail.com  Mon Aug 29 05:26:05 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Sun, 28 Aug 2011 22:26:05 -0500
+Subject: [Haskell-cafe] Bug in GC's ordering of ForeignPtr finalization?
+In-Reply-To: <87pqjprzu2.fsf@gmail.com>
+References: <8739h1pbaq.fsf@gmail.com> <87pqjprzu2.fsf@gmail.com>
+Message-ID: <CAKjSnQGPRu7nWbLiuLX4niUyRNNbziNwBsX1s3+WyYx+9aTpcw@mail.gmail.com>
+
+On Sun, Aug 28, 2011 at 4:27 PM, Ben Gamari <bgamari.foss at gmail.com> wrote:
+> On Tue, 16 Aug 2011 12:32:13 -0400, Ben Gamari <bgamari.foss at gmail.com> wrote:
+>> It seems that the notmuch-haskell bindings (version 0.2.2 built against
+>> notmuch from git master; passes notmuch-test) aren't dealing with memory
+>> management properly. In particular, the attached test code[1] causes
+>> talloc to abort. ?Unfortunately, while the issue is consistently
+>> reproducible, it only occurs with some queries (see source[1]). I have
+>> been unable to establish the exact criterion for failure.
+>>
+>> It seems that the crash is caused by an invalid access to a freed Query
+>> object while freeing a Messages object (see Valgrind trace[3]). I've
+>> taken a brief look at the bindings themselves but, being only minimally
+>> familiar with the FFI, there's nothing obviously wrong (the finalizers
+>> passed to newForeignPtr look sane). I was under the impression that
+>> talloc was reference counted, so the Query object shouldn't have been
+>> freed unless if there was still a Messages object holding a
+>> reference. Any idea what might have gone wrong here? ?Thanks!
+>>
+> After looking into this issue in a bit more depth, I'm even more
+> confused. In fact, I would not be surprised if I have stumbled into a
+> bug in the GC. It seems that the notmuch-haskell bindings follow the
+> example of the python bindings in that child objects keep references to
+> their parents to prevent the garbage collector from releasing the
+> parent, which would in turn cause talloc to free the child objects,
+> resulting in odd behavior when the child objects were next accessed. For
+> instance, the Query and Messages objects are defined as follows,
+>
+> ? ?type MessagesPtr = ForeignPtr S__notmuch_messages
+> ? ?type MessagePtr = ForeignPtr S__notmuch_message
+> ? ?newtype Query = Query (ForeignPtr S__notmuch_query)
+> ? ?data MessagesRef = QueryMessages { qmpp :: Query, msp :: MessagesPtr }
+> ? ? ? ? ? ? ? ? ? ? | ThreadMessages { tmpp :: Thread, msp :: MessagesPtr }
+> ? ? ? ? ? ? ? ? ? ? | MessageMessages { mmspp :: Message, msp :: MessagesPtr }
+> ? ?data Message = MessagesMessage { msmpp :: MessagesRef, mp :: MessagePtr }
+> ? ? ? ? ? ? ? ? | Message { mp :: MessagePtr }
+> ? ?type Messages = [Message]
+>
+
+One problem you might be running in to is that the optimization passes
+can notice that a function isn't using all of its arguments, and then
+it won't pass them. These even applies if the arguments are bound
+together in a record type.
+
+So if you have a record type:
+
+> data QueryResult = QR {qrQueryPtr :: ForeignPtr (), qrResultPointer :: Ptr ()}
+
+and a function:
+
+> processQueryResult :: QueryResult -> IO (...)
+
+If the function doesn't use the 'qrQueryPointer' part of the record,
+the compiler may not even pass it in. This might run the finalizer for
+the foreign pointer earlier than you expect. If the result pointer is
+a part of the query foreign pointer, you're in trouble.
+
+I'm not sure if this is what's happening, but it sounds like it could be.
+
+If this is the case you might want to build some helper functions
+using the function 'touchForeignPtr', which does nothing other than
+make it look like the foreign pointer is still in use. In my example
+it might be something like:
+
+> withQueryResultPtr :: QueryResult -> (Ptr QueryResult -> IO a) -> IO a
+> withQueryResultPtr qr k = do
+>    x <- k (qrQueryPtr qr)
+>    touchForeignPtr (qrResultPointer qr)
+>    return x
+
+Antoine
+
+

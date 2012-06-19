@@ -1,0 +1,33 @@
+From ivan.miljenovic at gmail.com  Sat Dec  3 06:55:20 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Sat, 3 Dec 2011 16:55:20 +1100
+Subject: [Haskell-cafe] Weird interaction between literate haskell,
+ ghci and OverloadedStrings
+In-Reply-To: <20111203161824.f134a60f1a8a9ee4ece50ff4@mega-nerd.com>
+References: <20111203161824.f134a60f1a8a9ee4ece50ff4@mega-nerd.com>
+Message-ID: <CA+u6gbzs=1Zt60mixWnKhgc19-ObxB1k_gUgZxcixvX05-Bgdw@mail.gmail.com>
+
+On 3 December 2011 16:18, Erik de Castro Lopo <mle+hs at mega-nerd.com> wrote:
+> Hi,
+>
+> I'm working on a literate haskell document (actually TeX, but the
+> example below is just test) and I'm using ByteStrings in the code.
+> I know I can do:
+>
+> ? ?ghci -XOverloadedStrings file.lhs
+>
+> or, after ghci is running I can do:
+>
+> ? ?Main> :set -XOverloadedStrings
+
+Add ":set -XOverloadedStrings" to a (possibly local) .ghci file?  It
+doesn't contain it within the same document, but then if it's a local
+one you could also add ":load file.lhs" in there so that you just have
+to type ghci.
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

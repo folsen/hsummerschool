@@ -1,0 +1,69 @@
+From alex.solla at gmail.com  Thu Dec 22 03:25:31 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Wed, 21 Dec 2011 18:25:31 -0800
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+	<BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+Message-ID: <CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+
+On Tue, Dec 20, 2011 at 9:16 PM, MigMit <miguelimo38 at yandex.ru> wrote:
+
+>
+> On 21 Dec 2011, at 08:24, Alexander Solla wrote:
+>
+> > I would rather have an incomplete semantic, and have all the incomplete
+> parts collapsed into something we call "bottom".
+>
+> I don't see the reason to limit ourselves to that. Of course, in total
+> languages like Agda there is no need for (_|_). But in a turing-complete
+> lazy language like Haskell we really need it. Of course, it makes not much
+> sense to write "fix id" anywhere in your program; but, for example, lists
+> like "1:2:3:4:5:_|_" can be really useful.
+>
+>
+It is not "limiting" to make distinctions that capture real differences.
+ An overly broad generalization limits what can be proved.  Can we prove
+that every vehicle with wheels has a motor?  Of course not -- bicycles
+exist.  Can we prove every car has a motor?  Yes we can.  Throwing bottoms
+into the collection of values is like throwing bicycles into the collection
+of cars.  We can say /less/ about the collection than we could before,
+/because/ the collection is more general.
+
+
+> And denotational semantics is not just nice. It is useful. It's the best
+> way to understand why the program we just wrote doesn't terminate.
+
+
+Denotational semantics is unrealistic.  It is a Platonic model of
+constructive computation.  Alan Turing introduced the notion of an "oracle"
+to deal with what we are calling bottom.  An oracle is a "thing" that
+(magically) "knows" what a bottom value denotes, without having to wait for
+an infinite number of steps.  Does Haskell offer oracles?  If not, we
+should abandon the use of distinct bottoms.  The /defining/ feature of a
+bottom is that it doesn't have an interpretation.
+
+Note that I am not suggesting abandoning the notion of /a/ bottom.  They
+should all be treated alike, and be treated differently from every other
+Haskell value.  Every other Haskell value /does/ have an interpretation.
+ Bottom is different from every "other value".  We should exclude it from
+the collection of values.  Treating things that are not alike as if they
+are introduces a loss of information.  We can prove useful things about the
+collection "real" values that we cannot prove about bottom, and so, about
+the collection of real values and bottoms.
+
+I happen to only write Haskell programs that terminate.  It is not that
+hard.  We must merely restrict ourselves to the total fragment of the
+language, and there are straight-forward methods to do so.  In particular,
+I suggest the paper "Fast and Loose Reasoning is Morally Correct":
+
+http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.59.8232
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111221/9fa5234e/attachment.htm>
+

@@ -1,0 +1,63 @@
+From ivan.miljenovic at gmail.com  Tue Aug 16 04:49:24 2011
+From: ivan.miljenovic at gmail.com (Ivan Lazar Miljenovic)
+Date: Tue, 16 Aug 2011 12:49:24 +1000
+Subject: [Haskell-cafe] ANNOUNCE: graphviz-2999.12.0.0
+Message-ID: <CA+u6gbz+QV+vxGrTr_MFjvwhfb=KfKuHhnFqFw+UumRK12is3Q@mail.gmail.com>
+
+It's been a while in coming (I started work on this at the end of last
+year!) but I am pleased to announce the latest version of my graphviz
+library [1], which acts as a wrapper around the Graphviz [2] suite of
+graph visualisation utilities.
+
+[1] : http://projects.haskell.org/graphviz/
+http://hackage.haskell.org/package/graphviz
+[2]: http://graphviz.org
+
+Major changes in this release (see the changelog [3] for a complete listing):
+
+* A large focus on increasing usability:
+    - Examples for all Dot representations against an existing Dot graph
+    - Cut-down, easier to use Attribute wrapper (all Attributes still
+available from Data.GraphViz.Attributes.Complete if you need any of
+the others).
+    - graphElemsToDot helps visualise non-FGL graphs (if you can list
+all nodes and edges, you can visualise it!)
+
+* Two new Dot representations:
+    - One that allows graph-based operations (based upon FGL)
+    - Another based upon Andy Gill's dotgen [4] (with permission!) for
+easier embedding of relatively static graphs.
+
+* Pure Haskell implementations of `dot -Tcanon` and `tred`.
+
+* Now based upon Text rather than String, which improves performance
+for both printing and parsing and also enforces UTF-8 encoding.
+
+* Now easier to do custom I/O with Dot graphs.
+
+[3]: http://projects.haskell.org/graphviz/changelog.html
+[4]: http://hackage.haskell.org/package/dotgen
+
+Unfortunately, this release is largely backwards incompatible in some
+ways, but not too much.  Specifically, it didn't take me long to
+migrate over Graphalyze [5] and SourceGraph [6], and most of that time
+was spent changing over to the new, nicer functions for creating
+Attributes.
+
+[5]: http://hackage.haskell.org/package/Graphalyze
+[6]: http://hackage.haskell.org/package/SourceGraph
+
+Please let me know if there are any other API improvements that you'd
+like to see to improve usage.  I am planning a tutorial (half of the
+reason why this release took so long is that I kept thinking "this
+functionality would be useful for the tutorial!"; this includes the
+graph-based representation, the re-implementation of tred and
+canonicalisation, etc.), which should be out in the next month or so
+(I'm considering adding nicer syntax for record labels first).
+
+-- 
+Ivan Lazar Miljenovic
+Ivan.Miljenovic at gmail.com
+IvanMiljenovic.wordpress.com
+
+

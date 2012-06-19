@@ -1,0 +1,33 @@
+From es at ertes.de  Wed Aug 24 15:36:52 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Wed, 24 Aug 2011 15:36:52 +0200
+Subject: [Haskell-cafe] Function composition in run-time?
+References: <CAMXF=YBZRy0t2ffQHAAhqVeNzmODQWLq5-DFa_U43OUbYerjEA@mail.gmail.com>
+	<CAEnSgTnLh4EO1nPE3UxxginFquPovub0M39aKZD0O3aNthhXmg@mail.gmail.com>
+	<CAMXF=YD0i-sHEczSn-TD96uYC69MRf2XM-T83VWx03VcT006pA@mail.gmail.com>
+Message-ID: <20110824153652.47b73cd5@angst.streitmacht.eu>
+
+dokondr <dokondr at gmail.com> wrote:
+
+> This is a nice one, looks already like tiny DSL )
+>
+> I think I've got the main idea - enumerate in my program all function
+> compositions in some data structure for Haskell to compile, and the
+> associate these with parameter values in external file.
+
+In Haskell you get a not-even-too-tiny DSL for free for composing
+functions in arbitrary, dynamic ways.  Hint:  (a ->) is a monad and (->)
+is an ArrowChoice and an ArrowApply.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

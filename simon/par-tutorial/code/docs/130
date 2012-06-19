@@ -1,0 +1,26 @@
+From dagitj at gmail.com  Tue Apr  5 00:12:33 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Mon, 4 Apr 2011 15:12:33 -0700
+Subject: [Haskell-cafe] Using _ on the RHS of an equation?
+In-Reply-To: <BANLkTiki5PpZvPH86kqxWhjEk693TH10Lw@mail.gmail.com>
+References: <BANLkTimKpc4MS6Odkk26OJK_OpNuMhhn8A@mail.gmail.com>
+	<BANLkTiki5PpZvPH86kqxWhjEk693TH10Lw@mail.gmail.com>
+Message-ID: <BANLkTi=uC3bBCsWk5qumwf2o0FBZ78QQYA@mail.gmail.com>
+
+On Mon, Apr 4, 2011 at 2:48 PM, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+
+> On 4 April 2011 22:42, Jason Dagit <dagitj at gmail.com> wrote:
+> > Is this something people would be interested in having as an extension in
+> > GHC?  Or is it just too fluffy for anyone to really care?
+>
+> I wish for having ? available as 'undefined' without needing to write
+> it between parenthesis (currently it is interpreted as an operator).
+>
+
+Slightly harder to locate on the keyboard, but that would be nice!
+
+Jason
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110404/c9908567/attachment.htm>
+

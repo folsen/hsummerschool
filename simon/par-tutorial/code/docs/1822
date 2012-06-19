@@ -1,0 +1,28 @@
+From jao at gnu.org  Sun Dec 11 08:43:01 2011
+From: jao at gnu.org (Jose A. Ortega Ruiz)
+Date: Sun, 11 Dec 2011 08:43:01 +0100
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+In-Reply-To: <CAKFCL4VhQe89QZmTM6Wxm+7KR6KOT7+qQe-xYCNBt8i3fR+zjg@mail.gmail.com>
+	(Brandon Allbery's message of "Sat, 10 Dec 2011 18:31:19 -0500")
+References: <87k464b870.fsf@gnu.org> <87d3bw102d.fsf@write-only.cryp.to>
+	<CAKFCL4VhQe89QZmTM6Wxm+7KR6KOT7+qQe-xYCNBt8i3fR+zjg@mail.gmail.com>
+Message-ID: <87fwgrblkq.fsf@gnu.org>
+
+On Sun, Dec 11 2011, Brandon Allbery wrote:
+
+[...]
+
+> xmobar currently requires parsec 3.x; the above is the symptom of
+> building it against 2.x.
+
+Aha, thanks for pointing this out, guys.
+
+Peter, would using parsec 3.x be an acceptable solution to you?
+
+Cheers,
+jao
+-- 
+Life isn't about finding yourself. Life is about creating yourself.
+   -George Bernard Shaw, writer, Nobel laureate (1856-1950)
+
+

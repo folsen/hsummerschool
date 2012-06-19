@@ -1,0 +1,161 @@
+From liuxinyu95 at gmail.com  Tue Aug 16 03:36:57 2011
+From: liuxinyu95 at gmail.com (Xinyu LIU)
+Date: Tue, 16 Aug 2011 09:36:57 +0800
+Subject: [Haskell-cafe] AVL Tree in a pattern matching way
+In-Reply-To: <5db158ae-2d01-4db5-8835-46251ce81c49@32g2000vbe.googlegroups.com>
+References: <5db158ae-2d01-4db5-8835-46251ce81c49@32g2000vbe.googlegroups.com>
+Message-ID: <CAGD_GFAz9ayoJJxX_4ygqpFr+L=X3Xcux_3DKnmUuwKnF0BRCQ@mail.gmail.com>
+
+Hi,
+
+I summarize the pattern matching method for AVL tree here:
+https://sites.google.com/site/algoxy/avltree
+
+Also the proof of the height boundary and updating of the balancing factors
+are provided.
+
+Regards.
+-- 
+Larry
+
+On Thu, May 12, 2011 at 10:54 AM, larry.liuxinyu <liuxinyu95 at gmail.com>wrote:
+
+> Hi,
+>
+> I browsed the current AVL tree implementation in Hackage
+>
+> http://hackage.haskell.org/packages/archive/AvlTree/4.2/doc/html/src/Data-Tree-AVL-Push.html
+>
+> AVL tree denote the different of height from right sub-tree to left
+> sub-tree as delta, to keep the
+> balance, abs(delta)<=1 is kept as invariant.
+>
+> So the typical implementation define N (Negative), P (Positive), and Z
+> (zero) as the tree valid nodes
+> (and the Empty as the trivial case).
+>
+> When a new element is inserted, the program typically first check if
+> the result will break the balance, and
+> process rotation to keep the balance of the tree. Some other pure
+> functional implementation takes
+> the same approach, for example:
+>
+> Guy Cousineau and Michel Mauny. ``The Functional Approach to
+> Programming''. pp 173 ~ 186
+>
+> Consider the elegant implementation of Red-black tree in pattern
+> matching way by Chris Okasaki, I tried to use the same method in AVL
+> tree, and here is the result.
+>
+> module AVLTree where
+>
+> -- for easy verification, I used Quick Check package.
+> import Test.QuickCheck
+> import qualified Data.List as L -- for verification purpose only
+>
+> -- Definition of AVL tree, it is almost as same as BST, besides a new
+> field to store delta.
+> data AVLTree a = Empty
+>               | Br (AVLTree a) a (AVLTree a) Int
+>
+> insert::(Ord a)=>AVLTree a -> a -> AVLTree a
+> insert t x = fst $ ins t where
+>    -- result of ins is a pair (t, d), t: tree, d: increment of height
+>    ins Empty = (Br Empty x Empty 0, 1)
+>    ins (Br l k r d)
+>        | x < k     = node (ins l) k (r, 0) d
+>        | x == k    = (Br l k r d, 0)  -- For duplicate element, we
+> just ignore it.
+>        | otherwise = node (l, 0) k (ins r) d
+>
+> -- params: (left, increment on left) key (right, increment on right)
+> node::(AVLTree a, Int) -> a -> (AVLTree a, Int) -> Int -> (AVLTree a,
+> Int)
+> node (l, dl) k (r, dr) d = balance (Br l k r d', delta) where
+>    d' = d + dr - dl
+>    delta = deltaH d d' dl dr
+>
+> -- delta(Height) = max(|R'|, |L'|) - max (|R|, |L|)
+> --  where we denote height(R) as |R|
+> deltaH :: Int -> Int -> Int -> Int -> Int
+> deltaH d d' dl dr
+>       | d >=0 && d' >=0 = dr
+>       | d <=0 && d' >=0 = d+dr
+>       | d >=0 && d' <=0 = dl - d
+>       | otherwise = dl
+>
+> -- Here is the core pattern matching part, there are 4 cases need
+> rebalance
+>
+> balance :: (AVLTree a, Int) -> (AVLTree a, Int)
+> balance (Br (Br (Br a x b dx) y c (-1)) z d (-2), _) = (Br (Br a x b
+> dx) y (Br c z d 0) 0, 0)
+> balance (Br a x (Br b y (Br c z d dz)    1)    2, _) = (Br (Br a x b
+> 0) y (Br c z d dz) 0, 0)
+> balance (Br (Br a x (Br b y c dy)    1) z d (-2), _) = (Br (Br a x b
+> dx') y (Br c z d dz') 0, 0) where
+>    dx' = if dy ==  1 then -1 else 0
+>    dz' = if dy == -1 then  1 else 0
+> balance (Br a x (Br (Br b y c dy) z d (-1))    2, _) = (Br (Br a x b
+> dx') y (Br c z d dz') 0, 0) where
+>    dx' = if dy ==  1 then -1 else 0
+>    dz' = if dy == -1 then  1 else 0
+> balance (t, d) = (t, d)
+>
+> -- Here are some auxiliary functions for verification
+>
+> -- check if a AVLTree is valid
+> isAVL :: (AVLTree a) -> Bool
+> isAVL Empty = True
+> isAVL (Br l _ r d) = and [isAVL l, isAVL r, d == (height r - height
+> l), abs d <= 1]
+>
+> height :: (AVLTree a) -> Int
+> height Empty = 0
+> height (Br l _ r _) = 1 + max (height l) (height r)
+>
+> checkDelta :: (AVLTree a) -> Bool
+> checkDelta Empty = True
+> checkDelta (Br l _ r d) = and [checkDelta l, checkDelta r, d ==
+> (height r - height l)]
+>
+> -- Auxiliary functions to build tree from a list, as same as BST
+>
+> fromList::(Ord a)=>[a] -> AVLTree a
+> fromList = foldl insert Empty
+>
+> toList :: (AVLTree a) -> [a]
+> toList Empty = []
+> toList (Br l k r _) = toList l ++ [k] ++ toList r
+>
+> -- test
+> prop_bst :: (Ord a, Num a) => [a] -> Bool
+> prop_bst xs = (L.sort $ L.nub xs) == (toList $ fromList xs)
+>
+> prop_avl :: (Ord a, Num a) => [a] -> Bool
+> prop_avl = isAVL . fromList . L.nub
+>
+> And here are my result in ghci:
+> *AVLTree> test prop_avl
+> OK, passed 100 tests.
+>
+> The program is available in github:
+>
+> http://www.google.com/url?sa=D&q=https://github.com/liuxinyu95/AlgoXY/blob/algoxy/datastruct/tree/AVL-tree/src/AVLTree.hs
+>
+> I haven't provided delete function yet.
+>
+> Cheers.
+> --
+> Larry, LIU
+> https://github.com/liuxinyu95/AlgoXY
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110816/73be7bcc/attachment.htm>
+

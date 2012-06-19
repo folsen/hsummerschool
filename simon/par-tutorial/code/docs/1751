@@ -1,0 +1,15 @@
+From dokondr at gmail.com  Thu Dec  8 14:16:59 2011
+From: dokondr at gmail.com (dokondr)
+Date: Thu, 8 Dec 2011 16:16:59 +0300
+Subject: [Haskell-cafe] Converting string to System.Time.ClockTime
+Message-ID: <CAMXF=YB3WXB=O=g58=tEdprQvrO1peHvm0ntZRvbwvDTSjB9Hg@mail.gmail.com>
+
+Hi,
+What would be the simplest way to convert strings like "Wed, 07 Dec 2011
+10:09:21 +0000" to System.Time.ClockTime ?
+
+Thanks!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/a9ee335f/attachment.htm>
+

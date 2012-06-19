@@ -1,0 +1,50 @@
+From wilfried.kirschenmann at gmail.com  Tue Apr 12 11:32:36 2011
+From: wilfried.kirschenmann at gmail.com (Wilfried Kirschenmann)
+Date: Tue, 12 Apr 2011 11:32:36 +0200
+Subject: [Haskell-cafe] Using DPH
+Message-ID: <BANLkTinHgYaHEVbO0geFP7wTUKQS4TqBiQ@mail.gmail.com>
+
+Hi,
+
+In order to do a performance comparison beetween different approaches for
+our application, I make different implementation of a simple example
+(computing the norm of a vector expression.
+I rely on Repa to do this.
+However, when I tried to build the parallel version (-threaded -fvectorise
+-rtsopts), I got an error specifying that dph-par was not available. Indeed,
+It wasn't.
+
+As explained on the dph webpage, I installed a developpment version of ghc
+(ghc-7.1.20110331).
+However, when I try to build my application, I get the folowing error:
+user error (Pattern match failure in do expression at
+compiler/vectorise/Vectorise/Monad.hs:57:10-20)
+
+My source code is attached and compiled with the following line:
+ghc haskell.hs -O3 -XBangPatterns -msse2 -fforce-recomp -rtsopts -threaded
+-fvectorise
+
+
+So my question is : is the problem concerning the pattern matching known ?
+If yes, is there a workaround ?
+is there an other version of dph that would work with Repa ?
+
+Thank you !
+
+-----
+Wilfried Kirschenmann
+
+"An expert is a person who has made all the mistakes that can be made in a
+very narrow field."*
+*Niels Bohr - *Danish physicist (1885 - 1962)*
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110412/3fa25ec7/attachment.htm>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: haskell.hs
+Type: application/octet-stream
+Size: 1828 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110412/3fa25ec7/attachment.obj>
+

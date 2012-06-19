@@ -1,0 +1,44 @@
+From creswick at gmail.com  Thu Aug 18 10:33:03 2011
+From: creswick at gmail.com (Rogan Creswick)
+Date: Thu, 18 Aug 2011 01:33:03 -0700
+Subject: [Haskell-cafe] conditionally exposing modules in cabal
+Message-ID: <CAHjep=wxNRG1Qxhdo3N+hsfcfHFSacMmob2EnVUdHmxsAfNeKQ@mail.gmail.com>
+
+I would like to conditionally expose a number of internal modules in a
+library depending on a cabal flag - the idea is that new features
+could be implemented externally to the library without contaminating
+the source with undesirable changes.  However, I've been unable to
+find a way to structure a cabal file that does not require repeating
+the list of modules.  For example, this works:
+
+  exposed-modules:
+    Public.Stable.Module
+  if flag(exposeInternals)
+    exposed-modules:
+       <long list of internal modules>
+  else
+    other-modules:
+       <long list of internal modules, identical to above>
+
+But I don't want to maintain two identical lists of modules in the cabal file.
+
+I've tried putting the section headers in the if's, but this doesn't
+appear to work (cabal doesn't complain, but the modules to be exposed
+are not available as expected):
+
+  exposed-modules:
+    Public.Stable.Module
+  if flag(exposeInternals) {
+  exposed-modules:
+  } else {
+  other-modules:
+  }
+    <long list of internal modules>
+
+
+Does anyone have suggestions?
+
+Thanks!
+Rogan
+
+

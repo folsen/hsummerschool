@@ -1,0 +1,44 @@
+From batterseapower at hotmail.com  Fri Feb  4 09:20:45 2011
+From: batterseapower at hotmail.com (Max Bolingbroke)
+Date: Fri, 4 Feb 2011 08:20:45 +0000
+Subject: [Haskell-cafe] How to #include into .lhs files?
+In-Reply-To: <AANLkTinS8UraesSUQ4yt-YMPomOQnbyevdbZZcE4d-0z@mail.gmail.com>
+References: <AANLkTinGuuGe2ihAUZGTkLM+scGYLVp14iXBhU-toA1O@mail.gmail.com>
+	<201102031151.38212.daniel.is.fischer@googlemail.com>
+	<AANLkTin0_JZwZH74CK4Gutu6tNKX6+fsanfyXeX9=8Ph@mail.gmail.com>
+	<AANLkTinS8UraesSUQ4yt-YMPomOQnbyevdbZZcE4d-0z@mail.gmail.com>
+Message-ID: <AANLkTinQk7RpgR12tvPXJqUVg5z28A96qnVkNm2MgVzk@mail.gmail.com>
+
+On 4 February 2011 05:03, Michael Snoyman <michael at snoyman.com> wrote:
+> My guess (a complete guess) is that the deliterate step is creating a
+> temporary .hs file elsewhere on your filesystem, which is why the CPP
+> step can't find B.hs without a fully-qualified path.
+
+That is what is happening (you can confirm with "ghc -v").
+
+Interestingly, you can work around by compiling with -I. on the command line:
+
+{{{
+
+mbolingbroke at equinox ~/Junk/lhscpp
+$ cat Test.lhs Included.h
+> {-# LANGUAGE CPP #-}
+> module Main (main) where
+
+#include "MachDeps.h"
+#include "Included.h"
+
+> main :: IO ()
+> main = print MY_CONSTANT
+#define MY_CONSTANT 2
+mbolingbroke at equinox ~/Junk/lhscpp
+$ ./Test
+2
+}}}
+
+Perhaps worth filing a bug report?
+
+Cheers
+Max
+
+

@@ -1,0 +1,79 @@
+From bobzhang1988 at gmail.com  Tue Aug  9 15:31:29 2011
+From: bobzhang1988 at gmail.com (bobzhang)
+Date: Tue, 09 Aug 2011 09:31:29 -0400
+Subject: [Haskell-cafe] Problems building lambdabot on osx
+In-Reply-To: <AE5F7F3F-61BB-454B-9B5C-AF2E6894D31E@gmail.com>
+References: <AE5F7F3F-61BB-454B-9B5C-AF2E6894D31E@gmail.com>
+Message-ID: <4E4136B1.2090209@gmail.com>
+
+
+Hi, there is a conflict between ghc' libiconv and Ports installed libiconv.
+make sure first sudo port deactivate -f libiconv
+then install again, it should work.
+however, it is very ugly since your other port installed libraries needs 
+libiconv, like gnuplot, so when you need port installed libiconv,
+sudo port activate -f libiconv again.
+
+
+? 11-8-8 ??9:38, Adam Turoff ??:
+> I've tried off and on the last couple of days to build Lambdabot on Mac OS X
+> (before and after the upgrade from 10.6 to 10.7) and I keep running into linker
+> errors with the 64-bit Haskell Platform (ghc 7.0.3).
+>
+> First, there's the issue with linking against libiconv, which is solved this
+> way:
+>
+> 	cabal install --extra-lib-dirs=/usr/lib
+>
+> That leaves a whole mess of link errors against libHSreadline:
+>
+> 	Linking dist/build/lambdabot/lambdabot ...
+> 	ld: warning: could not create compact unwind for _ffi_call_unix64: does not use RBP or RSP based frame
+> 	Undefined symbols for architecture x86_64:
+> 	  "_rl_insert_completions", referenced from:
+> 	      _readlinezm1zi0zi1zi0_SystemziConsoleziReadline_zdwa5_info in libHSreadline-1.0.1.0.a(Readline.o)
+> 	  "_rl_possible_completions", referenced from:
+> 	      _readlinezm1zi0zi1zi0_SystemziConsoleziReadline_zdwa7_info in libHSreadlin
+>
+> (full error report at http://hpaste.org/50036 )
+>
+> I did manage to install readline through macports:
+>
+> 	$ port installed readline
+> 	The following ports are currently installed:
+> 	  readline @6.2.000_0 (active)
+>
+> 	$ file /opt/local/lib/libreadline.dylib
+> 	/opt/local/lib/libreadline.dylib: Mach-O 64-bit dynamically linked shared library x86_64
+>
+> and I did manage to get readline installed properly by specifying the
+> include/lib dirs from macports:
+>
+> 	cabal install readline --configure-option=--with-readline-libraries=/opt/local/lib --configure-option=--with-readline-includes=/opt/local/include
+>
+> and readline does work in ghci:
+>
+> 	$ ghci
+> 	GHCi, version 7.0.3: http://www.haskell.org/ghc/  :? for help
+> 	Prelude>  :m + System.Console.Readline
+> 	Prelude System.Console.Readline>  readline "testing>  "
+> 	testing>  exit
+> 	exit
+> 	Just "exit"
+> 	Prelude System.Console.Readline>
+>
+> The only issue, which has me stumped, is that lambdabot can't seem to find the
+> readline dependency.  Adding the --with-readline options when trying to build
+> lambdabot has no effect.  Neither does adding --extra-lib-dirs=/opt/local/lib
+> to cabal install.
+>
+> Anyone have a clue where to start to work around this?  Would switching to ghc
+> HEAD help here?
+>
+> Thanks,
+>
+> -- Adam
+
+
+
+

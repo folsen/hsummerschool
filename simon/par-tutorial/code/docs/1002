@@ -1,0 +1,52 @@
+From jhenahan at uvm.edu  Tue Aug  9 22:08:30 2011
+From: jhenahan at uvm.edu (Jack Henahan)
+Date: Tue, 9 Aug 2011 16:08:30 -0400
+Subject: [Haskell-cafe] Problems building lambdabot on osx
+In-Reply-To: <CAKFCL4WTr9nW-AhJwb32-xcy6cbQgpRsS-CbFc9m3ZFRRFupYA@mail.gmail.com>
+References: <AE5F7F3F-61BB-454B-9B5C-AF2E6894D31E@gmail.com>
+	<CAKFCL4WTr9nW-AhJwb32-xcy6cbQgpRsS-CbFc9m3ZFRRFupYA@mail.gmail.com>
+Message-ID: <79A3008C-AC61-459C-B7AC-D2DEB041CE2E@uvm.edu>
+
+I didn't have any trouble building lambdabot when linking to readline built through Homebrew. Currently using Lion, Xcode 4.1, and GHC 7.0.4.
+
+
+On Aug 9, 2011, at 11:59 AM, Brandon Allbery wrote:
+
+> On Mon, Aug 8, 2011 at 21:38, Adam Turoff <adam.turoff at gmail.com> wrote:
+> First, there's the issue with linking against libiconv, which is solved this
+> way:
+> 
+>        cabal install --extra-lib-dirs=/usr/lib
+> 
+> That leaves a whole mess of link errors against libHSreadline:
+> 
+> Yes, because now it's finding the system readline, which isn't actually readline (Apple ships a "readline" which is actually BSD "editline", so you get missing symbols for things editline doesn't support such as completion).  I think you'll need to temporarily deactivate MacPorts' iconv instead of using --extra-lib-dirs.
+> 
+> This can't really be fixed by either GHC or MacPorts; there doesn't seem to be a good solution as yet, although the MacPorts folks may end up implementing a hacky solution because Apple has introduced *another* MacPorts-breaking library conflict in Lion (libnotify).
+> 
+> -- 
+> brandon s allbery                                      allbery.b at gmail.com
+> wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+Jack Henahan
+jhenahan at uvm.edu
+==
+Computer science is no more about computers than astronomy is about telescopes.
+-- Edsger Dijkstra
+==
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: 398E692F.gpg
+Type: application/x-apple-msg-attachment
+Size: 17822 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110809/79a6a5bf/attachment.bin>
+-------------- next part --------------
+
+
+

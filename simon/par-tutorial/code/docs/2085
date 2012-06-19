@@ -1,0 +1,39 @@
+From ok at cs.otago.ac.nz  Mon Dec 19 06:49:26 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Mon, 19 Dec 2011 18:49:26 +1300
+Subject: [Haskell-cafe] [Alternative] summary of my understanding so far
+In-Reply-To: <A3C42FF3-85E6-40F4-BEF1-CFB11242D577@gmail.com>
+References: <E6897C72-6886-4B18-9005-E6BDA3E92D76@gmail.com>
+	<CAL3m8eDmauVuJAn_qac7U3Su0A7qMuvPjz0efd7s=coEd6H6rw@mail.gmail.com>
+	<14CB30D2-F2CF-41DF-BBFA-FF9A3923AF67@cs.otago.ac.nz>
+	<CAKFCL4X=ZhpiyMaCci6J5UAa-i-TFy_Tc+LbE37BDPHkepB0Cw@mail.gmail.com>
+	<02D04C33-5E50-4804-89C5-D15F0C2D4AA0@gmail.com>
+	<86C92414-E423-4D48-99B7-49AA60BC77A3@cs.otago.ac.nz>
+	<A3C42FF3-85E6-40F4-BEF1-CFB11242D577@gmail.com>
+Message-ID: <81E640F8-C632-49F3-ACE2-C0BEA5B32029@cs.otago.ac.nz>
+
+
+On 19/12/2011, at 5:46 PM, Gregory Crosswhite wrote:
+[improved Monoid documentation]
+
+I would go so far as to point out that "mappend is a generalisation of
+Data.List.sum, Data.List.product, Data.List.and, and Data.List.or,
+where the initial value and combining rule are implied by the type.
+
+
+> 
+> This additional information unfortunately makes the documentation more verbose,
+
+One man's "more verbose" is another man's "less cryptic".
+
+I really don't like the emphasis on Num, as if it was a bizarre feature of
+Num that there's more than one Monoid reading for it.  This is a *common*
+property of data types.  For example, Sets can be seen as monoids with
+empty and union; and Sets with a universe can also be seen as monoids with
+universe and intersection.
+
+The more I think about it, the less idea I have _what_ to expect for _any_
+instance of Monoid.
+
+
+

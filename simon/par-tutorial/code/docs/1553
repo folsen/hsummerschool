@@ -1,0 +1,19 @@
+From vigalchin at gmail.com  Wed Aug 31 06:32:34 2011
+From: vigalchin at gmail.com (Vasili I. Galchin)
+Date: Tue, 30 Aug 2011 23:32:34 -0500
+Subject: [Haskell-cafe] iOS and Haskell
+Message-ID: <CA+0XtC_yRoFpheQ-gHMVKxSx_hnCiGff7fRUObmBPyP0QZnOpw@mail.gmail.com>
+
+Hello,
+
+
+      I know nothing about the architecture of iOS running on an iPad.
+However, I have a friend who just bought the newer iPad. It seems that
+either C++ or Objective C is available on iPad for development(actually the
+icon says C++). What are the prospects of getting Haskell ported to iOS?
+
+Vasili
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110830/046eeccd/attachment.htm>
+

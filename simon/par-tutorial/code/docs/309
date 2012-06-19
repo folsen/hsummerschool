@@ -1,0 +1,53 @@
+From acowley at seas.upenn.edu  Mon Apr 11 17:17:44 2011
+From: acowley at seas.upenn.edu (Anthony Cowley)
+Date: Mon, 11 Apr 2011 11:17:44 -0400
+Subject: [Haskell-cafe] Foreign function performance: monadic vs pure
+In-Reply-To: <loom.20110411T135905-625@post.gmane.org>
+References: <loom.20110411T135905-625@post.gmane.org>
+Message-ID: <BANLkTin9RVXmcoDUv4vuu4g_+tWHMwcL6A@mail.gmail.com>
+
+On Mon, Apr 11, 2011 at 8:09 AM, Serguei Son <serguei.son at gmail.com> wrote:
+> Consider two versions of sin wrapped:
+> foreign import ccall "math.h sin"
+> ? ?c_sin_m :: CDouble -> IO CDouble
+
+Marking this call as unsafe (i.e. foreign import ccall unsafe "math.h
+sin") can improve performance dramatically. If the FFI call is quick,
+then I believe this is the recommended approach. If you really need
+the imported function to be thread safe, then perhaps you should move
+more of the calculation into C to decrease the granularity of FFI
+calls.
+
+It is remarkably easy to get the meanings of safe and unsafe confused,
+and I can't even see the word "unsafe" in the current FFI user's
+guide! <http://www.haskell.org/ghc/docs/7.0.3/html/users_guide/ffi-ghc.html>
+
+Anthony
+
+> and
+> foreign import ccall "math.h sin"
+> ? ?c_sin :: CDouble -> CDouble
+>
+> One can invoke them so:
+>
+> mapM c_sin_m [1..n]
+> mapM (return . c_sin) [1..n]
+>
+> On my computer with n = 10^7 the first
+> version never finishes, whereas the second
+> one calculates the result within seconds.
+>
+> To give you my context, I need to call
+> a random variable generator multiple times,
+> so that it must return IO a.
+>
+> Any explanation for this behavior?
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

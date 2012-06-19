@@ -1,0 +1,44 @@
+From allbery.b at gmail.com  Sat Aug 20 21:43:01 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Sat, 20 Aug 2011 15:43:01 -0400
+Subject: [Haskell-cafe] custom SQL-to-Haskell type conversion in HDBC
+In-Reply-To: <20110820150102.GC14268@houseag.com>
+References: <20110819052316.GA27130@houseag.com>
+	<CAPeieQEGXOJgfvA+FF2yTbhPnWA9vv7Xk8EghLj-2LiYy1Edyg@mail.gmail.com>
+	<20110819140939.GA27362@houseag.com>
+	<CAKFCL4XDXNGJOWfjNNk3OSFkaojm1A2idcQOPgkCqpA2b9JQ6A@mail.gmail.com>
+	<20110820150102.GC14268@houseag.com>
+Message-ID: <CAKFCL4W86JFvvBUtYsWN68NzGQ0AigeR5JL141AyNBCJ0q1qDA@mail.gmail.com>
+
+On Sat, Aug 20, 2011 at 11:01, Henry House <hajhouse at hajhouse.org> wrote:
+
+> > So you want display format data instead of something that you can do
+> > computations with?  HDBC is giving you the latter; the precision is
+> correct
+> > for computation, although it could be argued that a Fixed type would be
+> > better if you intend to propagate exact precision through operations.
+>  (That
+> > said, I believe Fixed obeys exact mathematical precision instead of
+> > replicating your SQL backend's limitations, so you'd be unhappy again in
+> > case of multiplication or division.)
+>
+> No, I want a data type in Haskell that mirrors the data type in the
+> RDBMS, not conversion of RDBMS fixed-precision data into something else
+> (Rational). If the data in the RDBMS represented a rational number of
+>
+
+OK, so you want my other suggestion (Data.Fixed).  I don't know how
+difficult it would be to add support into HDBC, or how many problems you'll
+run into using it because other functions you might need are too specialized
+(that is, you'd need to marshal to/from Rational anyway, or write your own
+Fixed implementations).  I found it a bit painful last time I used it, but
+the GHC ecosystem has evolved considerably since then (I was using GHC 6.6).
+ At least it now has more than just Nano and Pico precisions predefined....
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110820/457e13a9/attachment.htm>
+

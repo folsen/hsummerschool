@@ -1,0 +1,96 @@
+From michael at snoyman.com  Wed Apr 20 08:22:47 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 20 Apr 2011 09:22:47 +0300
+Subject: [Haskell-cafe] errors while installing yesod 0.8
+In-Reply-To: <BANLkTimhJvb8RH3_GnCR7GZonowCGJ_xDw@mail.gmail.com>
+References: <BANLkTinnbgfJFA8pFptB9QwOSr3soP4DaQ@mail.gmail.com>
+	<BANLkTikrMOrmO-K-HBLTjBT4SCoPsWnJaA@mail.gmail.com>
+	<BANLkTi=oPA=fve0cuGjagQ9zMRpKODRhCw@mail.gmail.com>
+	<BANLkTimhJvb8RH3_GnCR7GZonowCGJ_xDw@mail.gmail.com>
+Message-ID: <BANLkTi==dvx6GAqjH9oY9JrKNRpPe2OkSA@mail.gmail.com>
+
+I got those warnings as well, but I don't think it's anything to be
+particularly concerned about.
+
+On Wed, Apr 20, 2011 at 8:58 AM, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+
+> monad-control builds fine on my system with both GHC 7.0.3 and 6.12.3.
+>
+> $ uname -a
+> Linux notebookbas 2.6.38-8-generic #42-Ubuntu SMP Mon Apr 11 03:31:24
+> UTC 2011 x86_64 x86_64 x86_64 GNU/Linux
+>
+> I do get some "Unrecognised pragma" warnings when building on 6.12.3
+> because I use the new INLINABLE pragma for a bunch of functions. Maybe
+> I can add some CPP magic to only enable that when building on GHC-7.
+>
+> Regards,
+>
+> Bas
+>
+>
+> On 19 April 2011 23:52, Michael Litchard <michael at schmong.org> wrote:
+> > OS
+> >  Linux apotheosis 2.6.35-22-server #33-Ubuntu SMP Sun Sep 19 20:48:58
+> > UTC 2010 x86_64 GNU/Linux
+> >
+> > GHC
+> >
+> > The Glorious Glasgow Haskell Compilation System, version 6.12.3
+> >
+> >
+> > Is the problem here that I'm not using ghc 7? I try to be conservative
+> > with my compiler upgrades. But if this might be the problem it seems
+> > like a simple enough fix.
+> >
+> >
+> > On Tue, Apr 19, 2011 at 2:41 PM, Michael Snoyman <michael at snoyman.com>
+> wrote:
+> >> I haven't seen this error. What version of GHC are you using, and what
+> OS?
+> >> Michael
+> >>
+> >> On Wed, Apr 20, 2011 at 12:18 AM, Michael Litchard <michael at schmong.org
+> >
+> >> wrote:
+> >>>
+> >>> Trying to install yesod 0.8 breaks when it's time to install
+> >>> monad-control. Google wasn't very helpful, nor was the error message I
+> >>> received
+> >>>
+> >>>
+> >>>
+> >>> mlitchard at apotheosis:~/monad-control$ cabal install
+> >>> Resolving dependencies...
+> >>> Configuring monad-control-0.2.0.1...
+> >>> cabal: Error: some packages failed to install:
+> >>> monad-control-0.2.0.1 failed during the configure step. The exception
+> was:
+> >>> ExitFailure 11
+> >>>
+> >>>
+> >>> note: I've been trying to use the cab command to manage my packages, I
+> >>> get the same error as above when I use cab instead of cabal.I mention
+> >>> this just in case there is some unforseen problem having to do with
+> >>> cab/cabal interaction.
+> >>>
+> >>> Has anyone experienced this problem, or know what I can do to get more
+> >>> useful error messages that might reveal the cause of the breakage?
+> >>>
+> >>> _______________________________________________
+> >>> Haskell-Cafe mailing list
+> >>> Haskell-Cafe at haskell.org
+> >>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >>
+> >>
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110420/82166500/attachment.htm>
+

@@ -1,0 +1,51 @@
+From v.dijk.bas at gmail.com  Wed Apr 20 18:11:35 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Wed, 20 Apr 2011 18:11:35 +0200
+Subject: [Haskell-cafe] Need comments on a libusb asynchronous
+	select/poll loop
+In-Reply-To: <BANLkTi=5rFFjMzOisGE2hf8oTMhVxXt6YQ@mail.gmail.com>
+References: <20110419130604.GA26986@X52D.localdomain>
+	<BANLkTikQk4cg0poLVscuj2WW+ORNNNwm2g@mail.gmail.com>
+	<BANLkTi=ZY1rBuK5+c1xK-k+swTwSqgnfnw@mail.gmail.com>
+	<BANLkTinxh+4LutE3OA2hC0_0m0-Nogv8SA@mail.gmail.com>
+	<BANLkTi=5rFFjMzOisGE2hf8oTMhVxXt6YQ@mail.gmail.com>
+Message-ID: <BANLkTinMfjrWLEfie-_xQ_rbmxxxUTJw+g@mail.gmail.com>
+
+On 20 April 2011 17:55, Johan Tibell <johan.tibell at gmail.com> wrote:
+> On Wed, Apr 20, 2011 at 5:22 PM, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+>> On 20 April 2011 17:04, Johan Tibell <johan.tibell at gmail.com> wrote:
+>>> Not that evtRead and evtWrite maps to different things on different platforms.
+>>
+>> Do you mean "Not" or "Note"?
+>
+> Yes, sorry.
+
+Ok thanks.
+
+I still need to add appropriate conditions for checking whether the
+program is using the threaded RTS. What is the recommended approach
+for this?
+
+I see GHC.Conc.IO uses a dynamic check:
+
+foreign import ccall unsafe "rtsSupportsBoundThreads" threaded :: Bool
+
+Is this also available to me as a library author?
+
+
+BTW I have now a complete asynchronous implementation of the existing
+synchronous API:
+https://github.com/basvandijk/usb/blob/async/System/USB/IO/Asynchronous.hs
+
+Be warned, it's still completely untested!
+
+
+Next up are isochronous transfers. When that's done the usb library is
+feature complete (i.e. it supports all the features of the underlying
+libusb)!
+
+Regards,
+
+Bas
+
+

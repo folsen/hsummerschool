@@ -1,0 +1,41 @@
+From nowgate at yahoo.com  Sat Aug 27 22:57:10 2011
+From: nowgate at yahoo.com (michael rice)
+Date: Sat, 27 Aug 2011 13:57:10 -0700 (PDT)
+Subject: [Haskell-cafe] Modules and a main function
+In-Reply-To: <201108272239.40817.daniel.is.fischer@googlemail.com>
+References: <1314473460.932.YahooMailNeo@web31101.mail.mud.yahoo.com>
+	<CAKFCL4WQECmogUVhx+_0z8YdC2qj5ZTQWx4tV73P_1tKuah=cg@mail.gmail.com>
+	<1314476643.89544.YahooMailNeo@web31108.mail.mud.yahoo.com>
+	<201108272239.40817.daniel.is.fischer@googlemail.com>
+Message-ID: <1314478630.17326.YahooMailNeo@web31108.mail.mud.yahoo.com>
+
+Thanks all.
+
+I was trying to use --main-is. I even man-ed ghc and thought I saw a double dash there.
+As they say, believing is seeing.
+
+Michael
+
+
+________________________________
+From: Daniel Fischer <daniel.is.fischer at googlemail.com>
+To: haskell-cafe at haskell.org; michael rice <nowgate at yahoo.com>
+Sent: Saturday, August 27, 2011 4:39 PM
+Subject: Re: [Haskell-cafe] Modules and a main function
+
+On Saturday 27 August 2011, 22:24:03, michael rice wrote:
+> I'm not sure how to do that. Please demonstrate.
+> 
+> Michael
+
+ghc -O -main-is StateGame --make StateGame
+
+more generally,
+
+ghc -O -main-is Foo.bar --make Foo
+
+if the desired main is function bar in module Foo.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110827/f6c81fa4/attachment.htm>
+

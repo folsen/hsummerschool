@@ -1,0 +1,25 @@
+From andrewcoppin at btinternet.com  Tue Apr 19 22:55:44 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Tue, 19 Apr 2011 21:55:44 +0100
+Subject: [Haskell-cafe] http://trac.haskell.org/ not redering correctly
+In-Reply-To: <20110417202926.0058e617.mle+hs@mega-nerd.com>
+References: <20110417202926.0058e617.mle+hs@mega-nerd.com>
+Message-ID: <4DADF6D0.2060801@btinternet.com>
+
+On 17/04/2011 11:29 AM, Erik de Castro Lopo wrote:
+> Hi all,
+>
+> Trac pages aren't rendering correctly. It seems the HTTP server
+> can't find the CSS files. See below.
+>
+> Cheers,
+> Erik
+
+I'm glad it's not just me. Any danger of this being fixed someday?
+
+I notice that there's duplicate reports of the HTML documentation in the 
+Haskell Platform having chunks missing, and yet both HP 2011.2.0.0 and 
+HP 2011.2.0.1 still have this exact same problem. I thought the purpose 
+of filing a bug report was to get things fixed?
+
+

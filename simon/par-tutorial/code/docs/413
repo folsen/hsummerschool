@@ -1,0 +1,57 @@
+From cmsdew at gmail.com  Thu Apr 14 23:02:11 2011
+From: cmsdew at gmail.com (Chris Dew)
+Date: Thu, 14 Apr 2011 22:02:11 +0100
+Subject: [Haskell-cafe] Type Classes in Haskell - how can I make GHC
+ make a choice of types, when the type chosen doesn't matter?
+In-Reply-To: <BANLkTims5R=AbTO5uF0fMeqSYs=vZu9avA@mail.gmail.com>
+References: <BANLkTinPdtvLyNLGA3M7hx8ngUEOec+How@mail.gmail.com>
+	<BANLkTim=kKW3V7vkZ4zs7yeg0Jg-_VEPkg@mail.gmail.com>
+	<BANLkTik7xQmkZ1isBTTOzasR2AF9BB-fFQ@mail.gmail.com>
+	<BANLkTims5R=AbTO5uF0fMeqSYs=vZu9avA@mail.gmail.com>
+Message-ID: <BANLkTikS7DGOpxg3oa8W7yJvvGhZy_KASw@mail.gmail.com>
+
+Thanks, that link's very relevant to what I'm trying.  For the time
+being I'll accept a partial solution where the last two types are now
+the same, and try to improve it when my knowledge of Haskell improves.
+
+I really want ("hello" ->> bracket) in ("hello" ->> bracket ->>
+putStrLn) to have a type of "String".  Using the partial solution
+which Neil Brown proposed, the code will work, but ("hello" ->>
+bracket) will have a type of "IO String" which *seems* like it will be
+less efficient.
+
+All the best,
+
+Chris.
+
+On 14 April 2011 21:22, Stephen Tetley <stephen.tetley at gmail.com> wrote:
+> On 14 April 2011 20:35, Chris Dew <cmsdew at gmail.com> wrote:
+>
+>> Could you suggest how these constraints could be expressed in the
+>> Haskell type system?
+>>
+>
+> Hi Chris
+>
+> I'm afriad I'd have to decline - generally in Haskell implicit
+> "lifters" are problematic, so it isn't something I'd be looking to
+> solve.
+>
+>
+> There was a thread on Haskell Cafe about them last November called
+> "Making monadic code more concise", that you might find interesting -
+> especially Oleg Kiselyov's comments:
+>
+> http://www.haskell.org/pipermail/haskell-cafe/2010-November/086445.html
+>
+> Best wishes
+>
+> Stephen
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

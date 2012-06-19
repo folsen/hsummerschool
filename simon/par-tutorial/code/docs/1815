@@ -1,0 +1,32 @@
+From simons at cryp.to  Sun Dec 11 00:25:30 2011
+From: simons at cryp.to (Peter Simons)
+Date: Sun, 11 Dec 2011 00:25:30 +0100
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+References: <87k464b870.fsf@gnu.org>
+Message-ID: <87d3bw102d.fsf@write-only.cryp.to>
+
+Hi Jose,
+
+ > I'm happy to announce the release of xmobar 0.14.
+
+previous versions of xmobar used to compile fine with GHC 6.10.4, but
+the new version no longer does:
+
+    src/Parsers.hs:163:52:
+        Couldn't match expected type `Char' against inferred type `[Char]'
+          Expected type: GenParser Char st Char
+          Inferred type: GenParser Char st String
+        In the second argument of `($)', namely `wrapSkip $ string "Run"'
+        In a stmt of a 'do' expression:
+              notFollowedBy $ wrapSkip $ string "Run"
+
+The complete log is at <http://hydra.nixos.org/build/1603134/nixlog/1/raw>,
+just in case there happens to be an easy fix for that error.
+
+Thank you very much for your efforts!
+
+Take care,
+Peter
+
+
+

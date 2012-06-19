@@ -1,0 +1,45 @@
+From albzey at googlemail.com  Fri Apr 22 10:50:55 2011
+From: albzey at googlemail.com (Albert Zeyer)
+Date: Fri, 22 Apr 2011 10:50:55 +0200
+Subject: [Haskell-cafe] Global memoization in Haskell
+In-Reply-To: <BANLkTinjxvEKkudVqoeJ7qZwEnvfOow9WQ@mail.gmail.com>
+References: <BANLkTinjxvEKkudVqoeJ7qZwEnvfOow9WQ@mail.gmail.com>
+Message-ID: <BANLkTin6V_yw7SfrWX_=p9mMbavHO+Oy0Q@mail.gmail.com>
+
+Hi,
+
+I thought about implementing memoization which could be applied
+globally to Haskell as an optimization.
+
+I also asked the question (in a bit different way) here:
+http://stackoverflow.com/questions/5749039/automatic-memoizing-in-functional-programming-languages
+
+When you want to do that, the most important bit about the
+implementation is your replacement algorithm (which throws away old
+data -- because you need some sort of memory limit). As it was pointed
+out on StackOverflow, page replacement algorithms address exactly this
+issue. Though, when applied to memoization (esp. in pure functional
+languages), the problem becomes more specific and so maybe even more
+clever methods could be used.
+
+Earlier, I also came up with an own very simple implementation (using
+LRU) which can be seen here:
+http://www.az2000.de/docs/memoization/
+
+I wonder if someone already tried to implement memoization as a global
+optimization for Haskell. And if so, how has it performed?
+
+I would be interested in implementing such thing myself as an addon
+for GHC and doing some benchmarks. Could you maybe:
+- Give me some hints where to start in GHC? I never really have worked
+on GHC so far.
+- Suggest some good benchmark code? I am mostly interesting in how
+this performs in huge real-world applications, so having some toy
+benchmark problems would be nice but some more huge benchmark problems
+would be better. Best would be some pool of both small and big
+benchmark programs.
+
+Thanks,
+Albert
+
+

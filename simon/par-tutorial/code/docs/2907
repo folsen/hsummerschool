@@ -1,0 +1,56 @@
+From ketil at malde.org  Thu Feb 10 08:59:05 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Thu, 10 Feb 2011 08:59:05 +0100
+Subject: [Haskell-cafe] [Cabal-devel] Cabal && license combinations
+In-Reply-To: <AANLkTin-FnLkMpjvPSAOGo+7gS8UWhT2t7GdBiPn1K-u@mail.gmail.com>
+	(Dan Knapp's message of "Wed, 9 Feb 2011 18:35:15 -0500")
+References: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+	<1297178086.2402.5.camel@godel>
+	<AANLkTin-FnLkMpjvPSAOGo+7gS8UWhT2t7GdBiPn1K-u@mail.gmail.com>
+Message-ID: <8739nw9v7a.fsf@malde.org>
+
+Dan Knapp <dankna at gmail.com> writes:
+
+> There is a legal distinction between static and dynamic linking, 
+
+Well, the obvious distinction is that a dynamically linked executable
+doesn't actually contain any code from its libraries, while a statically
+linked one does.
+
+>  In particular, they assert that you are legally creating a "derived
+> work" if you statically link with their library, and that your
+> library, even if it's just a thin bindings wrapper, must therefore
+> comply by their license terms.  
+
+I disagree - the linked executable must, but not the wrapper by itself.
+It's source code, i.e. text, thus a creative work, and therefore
+covered by copyright - on its own.
+
+> Of course, Haskell on most platforms and default configurations
+> links everything statically!  
+
+So this may be a problem for distributions, which ship compiled and
+linked binaries.  But generally not for authors, darcs repositories or
+Hackage, which only ship source code.
+
+I guess you could conceivably say that compiling downloaded source code
+constitutes copying, and is thus limited under copyright.  But I think
+all the relevant licenses would be considered to allow this.
+
+> So I believe this means that you have to
+> comply by the licenses of all your dependencies!  
+
+If, and only if, you wish to distribute the final executable.
+
+> I think it would be a very useful and valuable thing for Cabal to
+> detect this situation and warn appropriately!
+
+Yes.  At least, it'd be nice if Cabal would tell you about the licenses
+involved. But I'd let people do their own interpretations, that's too
+much of a minefield.
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

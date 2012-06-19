@@ -1,0 +1,32 @@
+From stephen.tetley at gmail.com  Thu Feb 10 16:52:48 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Thu, 10 Feb 2011 15:52:48 +0000
+Subject: [Haskell-cafe] MissingH won't upgrade
+In-Reply-To: <AANLkTi=wfCGKY_DUFRObYkUjgQVLOP+EDepAHZ5iKCS3@mail.gmail.com>
+References: <AANLkTi=wfCGKY_DUFRObYkUjgQVLOP+EDepAHZ5iKCS3@mail.gmail.com>
+Message-ID: <AANLkTi=RaCAdTvUysJNyoRnEeyQV+5o9fp9pP-84cAUE@mail.gmail.com>
+
+Maybe the Zord64_HARD.lhs is at fault for not using qualified module
+names? I can't see why this would be the case though, but at look at
+the source shows it doesn't.
+
+In future, please could you put some information about your problem **
+at the top ** of your message rather than burying it many lines down
+in a log. It is then more likely to catch the eye of a relevant party.
+
+On 10 February 2011 15:24, Andrew Pennebaker
+<andrew.pennebaker at gmail.com> wrote:
+[SNIP]
+
+> [ 8 of 47] Compiling Data.Hash.MD5.Zord64_HARD (
+> src/Data/Hash/MD5/Zord64_HARD.lhs, dist/build/Data/Hash/MD5/Zord64_HARD.o )
+> src/Data/Hash/MD5/Zord64_HARD.lhs:4:2:
+> ?? ?Bad interface file:
+> /Users/andrew/.cabal/lib/haskell98-1.1.0.0/ghc-6.12.3/Word.hi
+> ?? ? ? ?Something is amiss; requested module ?haskell98:Word differs from
+> name found in the interface file haskell98-1.1.0.0:Word
+> cabal: Error: some packages failed to install:
+> MissingH-1.1.0.3 failed during the building phase. The exception was:
+> ExitFailure 1
+
+

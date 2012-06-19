@@ -1,0 +1,26 @@
+From lmaury at gmail.com  Mon Aug 22 16:54:15 2011
+From: lmaury at gmail.com (=?ISO-8859-1?Q?Lo=EFc_Maury?=)
+Date: Mon, 22 Aug 2011 16:54:15 +0200
+Subject: [Haskell-cafe] Problem with installing cabal-install on NetBSD.
+Message-ID: <CAFFbn6G4aus9tAjoJvyyeSqDeOJkQ_yxbKE9t9QrGr4sRocVJA@mail.gmail.com>
+
+Hello,
+
+I try to install "cabal-install" on NetBSD.
+
+when I launch the installation (by booststrap.sh)
+
+and it come to Building cabal-install, it say :
+
+Distribution/Compat/FilePerms.hs:33:4 - Not in scope:
+`throwErrnoPathIfMinus1_'
+
+Do you know how I can fix this issue ?
+
+Thank you
+
+Lo?c
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110822/9c81c0aa/attachment.htm>
+

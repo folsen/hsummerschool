@@ -1,0 +1,88 @@
+From kolar at fit.vutbr.cz  Thu Feb 10 13:15:04 2011
+From: kolar at fit.vutbr.cz (=?ISO-8859-2?Q?Du=B9an_Kol=E1=F8?=)
+Date: Thu, 10 Feb 2011 13:15:04 +0100
+Subject: [Haskell-cafe] Building Plaftorm 2010 2 on 64bit Linux
+In-Reply-To: <4D5165E0.5070905@dfki.de>
+References: <4D511D52.90503@fit.vutbr.cz>
+	<4D51316A.5070201@dfki.de>	<4D513575.6000803@fit.vutbr.cz>
+	<4D5136B5.6040608@dfki.de>	<4D513824.4050606@fit.vutbr.cz>
+	<4D51446B.2000804@dfki.de>
+	<Pine.BSF.4.64.1102081505330.3584@kazi.fit.vutbr.cz>
+	<4D5165E0.5070905@dfki.de>
+Message-ID: <4D53D6C8.6020708@fit.vutbr.cz>
+
+Well, that was probably the main problem :-(
+
+Unfortunately, even if, after performing all the stuff once again, I 
+made platform configured, make ended in compilation of happy with "old 
+story":
+
+Configuring happy-1.18.5...
+"./Setup" "build"
+Preprocessing executables for happy-1.18.5...
+Building happy-1.18.5...
+ghc: could not execute: /usr/bin/gcc
+
+Error:
+Building the happy-1.18.5 package failed
+make: *** [build.stamp] Error 2
+
+
+Even if all other items went OK, until happy :-(  and it is called happy 
+;-) :-D
+
+
+Dusan
+
+
+On 02/08/2011 04:48 PM, Christian Maeder wrote:
+> What does "gcc -v" say?
+>
+> Maybe you have to install the 32Bit ghc-6.12.3 that can work together
+> with your gcc.
+>
+> Christian
+>
+> Am 08.02.2011 15:05, schrieb Kolar Dusan:
+>> No :-(
+>>
+>> D.
+>>
+>>
+>>> There seems to be confusion about 32bit and 64bit assembly.
+>>> Can you compile and link without optimization?
+>>>
+>>> C.
+>>>
+>>> Am 08.02.2011 13:33, schrieb Du?an Kol??:
+>>>> Well, it helped, but not getting output anyway:
+>>>>
+>>>> /tmp/ghc32376_0/ghc32376_0.s: Assembler messages:
+>>>>
+>>>> /tmp/ghc32376_0/ghc32376_0.s:35:0:
+>>>>       Error: bad register name `%rbp)'
+>>>>
+>>>> /tmp/ghc32376_0/ghc32376_0.s:36:0:  Error: bad register name `%r15'
+>>>>
+>>>> /tmp/ghc32376_0/ghc32376_0.s:38:0:  Error: bad register name `%r12'
+>>>>
+>>>> /tmp/ghc32376_0/ghc32376_0.s:39:0:
+>>>>       Error: bad register name `%r13)'
+>>>>
+>>>> /tmp/ghc32376_0/ghc32376_0.s:41:0:
+>>>>       Error: bad register name `%r12)'
+>>>>
+>>>> /tmp/ghc32376_0/ghc32376_0.s:42:0:  Error: bad register name `%rbx'
+>>>>
+>>>>
+>>>> ... and many other similar lines
+>>>>
+>>>>
+>>>> Is my installation of gcc broken? :-O
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

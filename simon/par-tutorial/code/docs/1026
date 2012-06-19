@@ -1,0 +1,42 @@
+From anton.kholomiov at gmail.com  Thu Aug 11 09:57:58 2011
+From: anton.kholomiov at gmail.com (Anton Kholomiov)
+Date: Thu, 11 Aug 2011 11:57:58 +0400
+Subject: [Haskell-cafe] library on common sub-expression elimination?
+In-Reply-To: <CAB2TPRBzH8=cH53GrYF6Gp8yFB8tSh7SAgRdiqqrYroWsZbL4A@mail.gmail.com>
+References: <CADDxdqNzqP1cRfqvHpWB30iaB+jpnTiQ6JJOaAZMb-to2h1Baw@mail.gmail.com>
+	<CAB2TPRBzH8=cH53GrYF6Gp8yFB8tSh7SAgRdiqqrYroWsZbL4A@mail.gmail.com>
+Message-ID: <CADDxdqPHqr_Bn+hPAzfJZEW+2a+jPqUP-AaFrRjyPBszLhO_Xg@mail.gmail.com>
+
+Thank you for the reference to Strafunski libraries, I read
+HaskellWiki, but I don't have a permission to visit their site.
+All links are forbidden.
+
+Can it be a function:
+
+fun :: Eq a => Tree a -> [(Int, (a, [Int]))]
+
+where tuple codes nodes, and Int's code edges.
+
+2011/8/11 Stephen Tetley <stephen.tetley at gmail.com>
+
+> Wouldn't this be dependent upon your AST and thus not readily
+> "package-able" as a library?
+>
+> Expression simplification has been a prime example for Strafunski
+> style traversal libraries. You might be able to find examples that you
+> can adapt to your own AST written with Uniplate or similar library.
+>
+> On 11 August 2011 05:00, Anton Kholomiov <anton.kholomiov at gmail.com>
+> wrote:
+> > Is there a library on common sub-expression elimination?
+> >
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110811/b6c3a3b3/attachment.htm>
+

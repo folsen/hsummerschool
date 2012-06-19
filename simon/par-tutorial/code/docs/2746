@@ -1,0 +1,38 @@
+From andrewcoppin at btinternet.com  Sat Feb  5 16:40:58 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Sat, 05 Feb 2011 15:40:58 +0000
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTinzw=jmdocvNM2RkRJotypEjHToduB72EOxeHsO@mail.gmail.com>
+References: <4D4B19DB.5000907@btinternet.com>	<AANLkTi=tyKC19Fvie9c8QYN-P=R3oKM_Pm6zOpcmo4Qk@mail.gmail.com>	<201102032334.19964.daniel.is.fischer@googlemail.com>	<20110204103813.6ffde171.mle+hs@mega-nerd.com>
+	<AANLkTinzw=jmdocvNM2RkRJotypEjHToduB72EOxeHsO@mail.gmail.com>
+Message-ID: <4D4D6F8A.40504@btinternet.com>
+
+On 04/02/2011 07:30 AM, Johan Tibell wrote:
+
+> Right. It can still be tricky. I think we can get rid of a large
+> number of strictness issues by using strict data structures more
+> often, this should help beginners in particular. For the rest better
+> tooling would help. For example, a lint tool that marked up code with
+> the strictness information inferred by the compiler would be useful. I
+> had time to write one I would make the output look like HPC html
+> reports, with one color for strict function arguments and one color
+> for lazy function arguments.
+
+There's the RTS watch that makes it spit out heap profiling information. 
+However, determining what the hell this data actually means is well 
+beyond my powers of comprehension.
+
+I keep hoping that eventually the mechanism used by ThreadScope will 
+eventually allow you to compile a program with profiling, run it, and 
+observe absolutely everything about its execution - how many cores it's 
+using, how much RAM is allocated to each generation, etc.
+
+Then again, if you could actually single-step through a Haskell 
+program's execution, most strictness issues would become quite shallow. 
+Indeed, when I first learned Haskell, the very concept of lazyness ever 
+being "detrimental" was incomprehensible to me. I couldn't imagine why 
+you would ever want to turn it off. But then I built a simple program 
+that single-steps through Haskell(ish) expressions, and suddenly 
+discovered that foldl' needs to exist...
+
+

@@ -1,0 +1,108 @@
+From quick at sparq.org  Thu Apr 21 17:20:54 2011
+From: quick at sparq.org (KQ)
+Date: Thu, 21 Apr 2011 08:20:54 -0700
+Subject: [Haskell-cafe] impoosible dependencies
+In-Reply-To: <BANLkTinqosFOJA_uvaONPYfJDj7iF5srGQ@mail.gmail.com>
+References: <op.vt9azkjijmyckg@boqueron>
+	<BANLkTinBmPhaS+B4qHNjd8FrWSOLarAsuQ@mail.gmail.com>
+	<op.vt9e0fx1jmyckg@boqueron>
+	<BANLkTin8+Xawt60g4JKPCfsE9bF=hqPLgQ@mail.gmail.com>
+	<BANLkTinqosFOJA_uvaONPYfJDj7iF5srGQ@mail.gmail.com>
+Message-ID: <op.vuank4u8it8v9f@chingo.local>
+
+On Wed, 20 Apr 2011 16:45:27 -0700, Carter Schonwald <carter at cs.dartmouth.edu> wrote:
+
+> Kevin,
+> what version of cabal install are you using?
+
+cabal-install version 0.8.2
+using version 1.8.0.6 of the Cabal library
+
+> I ask because prior to the 1.10.* version series, cabal would have a much
+> harder time "correctly" choosing versions of dependencies, which at least
+> for me often manifested as such confusions in caba regarding selecting
+> versions. Prior to said cabal version the solution I'd often do is figure
+> out what the "transitive " dependencies were, recompile them together,
+> iterate that, and that would eventually make the problems  go away.
+>
+> point being: the issue is probably conflicting versions of the same
+> libraries are being used by different libraries that are among the
+> dependencies, and cabal is getting confused
+
+Is it safe to upgrade cabal-install and the cabal library or are those part of the GHC package and I'll end up making things even worse?
+
+I may have corrupted libraries; I think a re-install is in order soon, but I've been avoiding that until I get to the end of my current activities.
+
+-KQ
+
+P.S.  I send Rogan the output he requested below privately to avoid spamming this list.
+
+>
+> On Wed, Apr 20, 2011 at 7:34 PM, Rogan Creswick <creswick at gmail.com> wrote:
+>
+>> On Wed, Apr 20, 2011 at 4:18 PM, Kevin Quick <quick at sparq.org> wrote:
+>> >
+>> > With --verbose=3 this appears to be post-link running cabal-dev itself:
+>> >
+>> > $ cabal install cabal-dev --verbose=3
+>> >
+>>
+>> Could you send me (or post to hpaste) the complete output of 'cabal
+>> install cabal-dev --verbose=3' ?
+>>
+>> --Rogan
+>>
+>> > ...
+>> >
+>> > *** Deleting temp files:
+>> > Deleting:
+>> > link: linkables are ...
+>> > LinkableM (Wed Apr 20 16:14:58 MST 2011) main:Main
+>> >   [DotO /tmp/cabal-dev-0.7.4.113193/cabal-dev-0.7.4.1/dist/setup/Main.o]
+>> > Linking /tmp/cabal-dev-0.7.4.113193/cabal-dev-0.7.4.1/dist/setup/setup
+>> ...
+>> > *** Linker:
+>> > ...[verbose GCC output elided]...
+>> > rtend.o
+>> /nix/store/l8x3fdy1r6zf441vnqa87lzsvxrjbdz9-glibc-2.11.1/lib/crtn.o
+>> > link: done
+>> > *** Deleting temp files:
+>> > Deleting:
+>> > *** Deleting temp dirs:
+>> > Deleting: /tmp/ghc13224_0
+>> > /tmp/cabal-dev-0.7.4.113193/cabal-dev-0.7.4.1/dist/setup/setup configure
+>> > --verbose=3 --ghc --prefix=/home/kquick/.cabal --user
+>> --flags=-build-tests
+>> > --flags=-no-cabal-dev
+>> --extra-include-dirs=/home/kquick/.nix-profile/include
+>> > --extra-lib-dirs=/home/kquick/.nix-profile/lib --constraint=Cabal
+>> ==1.10.1.0
+>> > --constraint=HTTP ==4000.1.1 --constraint=base ==4.2.0.2
+>> > --constraint=bytestring ==0.9.1.9 --constraint=directory ==1.0.1.1
+>> > --constraint=filepath ==1.1.0.4 --constraint=mtl ==2.0.1.0
+>> > --constraint=network ==2.3.0.2 --constraint=pretty ==1.0.1.1
+>> > --constraint=process ==1.0.1.3 --constraint=tar ==0.3.1.0
+>> --constraint=zlib
+>> > ==0.5.3.1
+>> > cabal: Error: some packages failed to install:
+>> > cabal-dev-0.7.4.1 failed during the configure step. The exception was:
+>> > ExitFailure 11
+>> > $
+>> >
+>> >
+>> > --
+>> > -KQ
+>> >
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+>
+
+
+-- 
+-KQ
+
+

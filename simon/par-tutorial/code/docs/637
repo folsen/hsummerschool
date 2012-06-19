@@ -1,0 +1,218 @@
+From chrisdone at googlemail.com  Fri Apr 22 21:13:28 2011
+From: chrisdone at googlemail.com (Christopher Done)
+Date: Fri, 22 Apr 2011 21:13:28 +0200
+Subject: [Haskell-cafe] There is no null; Maybe/Option types
+Message-ID: <BANLkTi=irBB_YvfEm3ms0Vxd6xDb7tcPcg@mail.gmail.com>
+
+Hi C?dric,
+
+I saw your post on Maybe types wondering what the point of it is and why
+anyone would want it. I thought I'd reply by email as I don't want to
+infringe on your freedom of expression. If you find that I'm saying things
+you already know, please scroll down to the bottom, which addresses your
+final question.
+
+I'm CC'ing the Haskell mailing list. I wrote a lot and I might as well share
+it. Quotes below are from:
+http://beust.com/weblog/2010/07/28/why-scalas-option-and-haskells-maybe-types-wont-save-you-from-null/
+
+> If you read the voluminous material that describes the concepts behind the
+> Option class, there are two main benefits:
+>
+>    - It saves you from NullPointerException
+>    - It allows you to tell whether null means ?no object? or ?an object
+>    whose value is null?
+>
+> The second point is true, as you probably already understand:
+
+   - Nothing is different from False.
+   - They also have distinct, completely un-unifiable types. Nothing is type
+   Maybe something, False is type Bool.
+   - Maybe Int is also distinct from Maybe String.
+
+The latter point is true in a sense, but I think the problem and the
+solution aren't the same for Haskell and Java. I can't speak for Java
+because I don't know it, I know C#, which I know from a lot of experience
+does have nullable objects and thus null pointer exceptions. I assume
+everything below can be applied to Java, please tell me if not.
+
+   - *No* value in Haskell can be null/empty.
+   - *All* values in C# can be null/empty.
+   - Therefore if C#'s values were completely explicit, and they might be
+   defined, in Haskell, as:
+      - data CObject a = TheValue a | Null
+      - I'm assuming you know a bit of Haskell or can just figure it out
+      easily enough. Read as: the type CObject, for all types, a, can be
+      represented by either a value of type a, or null.
+      - So a value of type int can be inhabited by either 123 or null.
+      - Notice, of course, that this is the same as the definition of Maybe:
+      data Maybe a = Just a | Nothing.
+      - Therefore, in Haskell's context, it's not that Maybe saves you from
+   null pointers, it's that it *allows you to express* nullability in a
+   language without implicit nullability, which is default for all values in
+   C#. I suspect the crux of the problem is that Java and C# have implicit
+   nullability.
+
+It's also worth noting that the Maybe type in Haskell *can* *also* cause
+something similar "null pointer exceptions"; if you use the function
+fromJust, which just takes from a Maybe value and throws an exception if
+there's nothing in it. And, indeed, this function is a very common cause of
+exceptions in Haskell. A simple Google shows 870 results of this exception:
+http://www.google.com/#q="Exception:+Maybe.fromJust%3A+Nothing"<http://www.google.com/#q=%22Exception:+Maybe.fromJust%3A+Nothing%22>Also
+similar is use of the
+head function, which takes the first element of a list or throws an
+exception is the list is empty:
+http://www.google.com/#q="Exception:+Prelude.head%3A+empty+list"<http://www.google.com/#q=%22Exception:+Prelude.head%3A+empty+list%22>.
+4,610 results.
+
+Most of the (non-IO) runtime errors I get using Haskell software is due to
+head or fromJust, it's actually quite annoying.
+
+That is the technical aspect and some background, for what it's worth.
+
+ val result = map.get( "Hello" )
+>
+> result match {
+>   case None => print "No key with that name!"
+>   case Some(x) => print "Found value" + x
+> }
+>
+> See what?s going on here? You avoid a NullPointerException by? testing
+> against null, except that it's called None. What have we gained, exactly?
+>
+> The worst part about this example is that it forces me to deal with the
+> null case right here. Sometimes, that's what I want to do but what if such
+> an error is a programming error (e.g. an assertion error) that should simply
+> never happen?
+>
+I believe here lies the problem. It's true; if your method expects a value
+not to be null then you shouldn't have to deal with it.
+
+   - If the value is never ever supposed to be null, then you should be
+   given a non-nullable value.
+   - If the value is supposed to be nullable at some point, then your
+   function is explictly giving the opportunity for optionality and should
+   support it. If it barfs on a null value then it's not really satisfying the
+   deal made with the caller that it supports nullable values.
+
+Unfortunately this is impossible in Java and C# because you can't have
+non-nullables. You also can't tell everyone to never use null and use a
+Maybe value, so C# or Java are more or less screwed on this point.
+
+> And you know what construct does exactly this? NullPointerException! Try
+> to reference a null pointer and that exception will be thrown. It will make
+> its way up the stack frames since you probably never catch it anywhere (nor
+> should you) and it will show you a clear stack trace telling you exactly
+> what happened and where.
+>
+The solution proposed for Java is for the method to barf on bad input at
+runtime. The solution of OCaml/Haskell is to barf at the caller of the
+function at development time; you're using the function incorrectly, and the
+developer's realised that he's using it incorrectly and immediately fixes
+it; the code never made it into testing or production. How much time did
+this save? I don't think anyone would argue that finding out later rather
+than now that we screwed up is desirable.
+
+> In this case, I just want to assume that I will never receive null and I
+> don't want to waste time testing for this case: my application should simply
+> blow up if I get a null at this point.
+>
+You can do that with fromJust, but it's generally considered bad practice,
+at least in the Haskell development world. Using fromJust brings enforcing
+constraints away from the compiler and into the hands of the developer who
+is flawed, busy and confused most of the time. These types of functions are
+called partial functions. A total function is a function that handles every
+case of a value given to it. So:
+
+> :t head
+head :: [a] -> a
+> :t listToMaybe
+listToMaybe :: [a] -> Maybe a
+> head []
+*** Exception: Prelude.head: empty list
+> listToMaybe []
+Nothing
+
+The former is partial, the latter is total. Code that uses partial functions
+is inherently partial in its entirety, leaving enforcing invariants on the
+programmer which could otherwise have been done by the compiler.
+
+*Static*: In Fantom, the fact that a variable can be null or not is captured
+> by a question mark appended to its type:
+
+
+Already covered; we both know Option/Maybe do this.
+
+>
+>    - *Runtime*: The second aspect is solved by Fantom's "safe invoke"
+>    operator, ?.. This operator allows you to dereference a null pointer
+>    without receiving a null pointer exception:
+>    // hard way
+>    Str? email := null
+>    if (userList != null)
+>    {
+>      user := userList.findUser("bob")
+>      if (user != null) email = user.email
+>    }
+>
+>    // easy way
+>    email := userList?.findUser("bob")?.email
+>
+>    Note how this second example is semantically equivalent to the first
+>    one but with a lot of needless boiler plate removed.
+>
+> So, can someone explain to me how Option addresses the null pointer
+> problem better than Fantom's approach?
+>
+Use of Fantom's save invoke and Maybe are more or less the same.
+
+-- Hard way
+email = if userList /= Nothing
+           then let user = findUser "bob" (fromJust userList)
+                in if user /= Nothing
+                      then getEmail (fromJust user)
+                      else Nothing
+           else Nothing
+
+Note that I have to use fromJust because there is no implicit nullability.
+
+-- Easy way
+email = userList >>= findUser "bob" >>= getEmail
+
+This is semantically equivalent to the first one. There is also syntactic
+sugar for the above, for when you're not just chaining, but doing something
+complicated:
+
+-- Sugared way
+email = do list <- userList
+           user <- findUser "bob" list
+           email <- getEmail user
+           return email
+
+If I'm using list or user or email more than once, this style is very
+useful.
+
+This is exactly equivalent to the above, it de-sugars into using the
+>>=function, which is pretty much the same as your use of
+?., in this context. Cases and functions are just another way of accessing
+maybe values when you explicitly want to handle the null case.
+
+?> maybe 4 (+2) (Just 5)
+7
+?> maybe 4 (+2) Nothing
+4
+?> case Just 5 of Just x -> x * 2; Nothing -> 0
+10
+
+I'm not saying it's the only way or the best way. It's certainly nice,
+though.
+
+P.S. Question: what would this code do and what would the compiler tell you
+about it?
+
+Str? email := null
+email = userList.findUser("bob").email
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110422/462cb516/attachment-0001.htm>
+

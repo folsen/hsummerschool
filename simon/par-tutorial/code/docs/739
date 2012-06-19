@@ -1,0 +1,41 @@
+From dagitj at gmail.com  Tue Apr 26 12:55:14 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Tue, 26 Apr 2011 03:55:14 -0700
+Subject: [Haskell-cafe] Why does Cabal not choose the latest package?
+In-Reply-To: <4DB69CFD.1070905@chalmers.se>
+References: <4DB69CFD.1070905@chalmers.se>
+Message-ID: <BANLkTikE7oW1O-aZLF2CxiKi9x_qo907sQ@mail.gmail.com>
+
+On Tue, Apr 26, 2011 at 3:22 AM, Emil Axelsson <emax at chalmers.se> wrote:
+
+> Hello!
+>
+> I've had some of the usual problems with packages depending on multiple
+> versions of another package. It seems the root of the hole problem was that
+> I once attempted to run
+>
+>  cabal install cabal-install
+>
+> This brought in a number of older packages (Cabal-1.8.0.6,
+> containers-0.3.0.0, directory-1.0.1.2, filepath-1.1.0.4, process-1.0.1.5) to
+> my local package DB, which led to inconsistencies when trying to install new
+> packages.
+>
+> However, if I run
+>
+>  cabal install cabal-install-0.10.2
+>
+> things work just fine. So the problem is that it wants to install an older
+> version of cabal-install. A session demonstrating the problem is found
+> below.
+>
+> Why doesn't cabal always install the latest packages?
+>
+
+I consider this a bug but it's actually an intentional feature by the cabal
+developers.  I explained it in the past here:
+http://osdir.com/ml/haskell-cafe at haskell.org/2010-09/msg00758.html
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110426/f8d42ab6/attachment.htm>
+

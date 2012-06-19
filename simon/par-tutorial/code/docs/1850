@@ -1,0 +1,88 @@
+From wren at freegeek.org  Mon Dec 12 03:47:50 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sun, 11 Dec 2011 21:47:50 -0500
+Subject: [Haskell-cafe] How did iteratees get their names?
+In-Reply-To: <4EDF8474.1040502@cs.nott.ac.uk>
+References: <CACruqwTG3fOEbwiTMohwTG8Mt-9HR=r+gHKu5BVLg0MT_JnTrQ@mail.gmail.com>
+	<20111207154812.36c674b5@angst.streitmacht.eu>
+	<4EDF8474.1040502@cs.nott.ac.uk>
+Message-ID: <4EE56B56.7090804@freegeek.org>
+
+On 12/7/11 10:21 AM, Henrik Nilsson wrote:
+> I also had a look at John Millikin's page on Understanding Iteratees,
+> which is very good:
+>
+> https://john-millikin.com/articles/understanding-iteratees/
+>
+> But, the intuition that comes across there is:
+>
+> * iteratee: a stream (of sorts) consumer
+>
+> * enumerator: a stream (of sorts) producer
+>
+> * enumeratee: a stream (of sorts) transformer
+>
+> And "iterator" isn't mentioned at all.
+
+The "iterator" terminology is from the object-oriented world; iteratees 
+are explicitly offered as an alternative to the iterator approach, which 
+is why we don't have iterators.
+
+An iterator is something which iterates over a collection--- to produce 
+the elements in that collection. In the iterator approach the sink (the 
+for-loop) is in charge and it pulls the data from the source (the 
+iterator). The problem, of course, is that the source never knows 
+whether the sink will pull the next element or not, so it never knows 
+when it's done.
+
+An iteratee is also something which iterates over a collection--- to 
+consume the elements in that collection. In the iteratee approach the 
+source (the enumerator) is in charge and it pushes the data into the 
+sink (the iteratee) until the sink declares that it's had enough! and 
+then the source knows it's done and it can free whatever resources need 
+freeing.
+
+
+So there are actually two issues going on here: one is the 
+source-vs-sink distinction, and the other is the active-vs-passive or 
+push-vs-pull distinction. Since we have two binary features, we can have 
+them be aligned in parallel or in opposition (which one is which is 
+irrelevant).
+
+     iterator-style --- source : sink :: passive : active
+         iterator = passive source
+         for-loop = active sink (pull)
+
+     iteratee-style --- source : sink :: active : passive
+         enumerator = active source (push)
+         iteratee   = passive sink
+
+The "enumeratee" terminology comes from a pun about something which is 
+both an "enumerat(or)" and also an "(iterat)ee". However, it would have 
+been much clearer IMO if instead we had used this terminology 
+retroactively as a name for the for-loop or other active sink in the 
+iterator style. If this had been done, then we could use the following 
+analysis:
+
+     iterat-   = passive
+     enumerat- = active
+
+     -or = source
+     -ee = sink
+
+Which preserves the analogy you want. "Employers" are the source of 
+employment, and "employees" are the sinks/consumers of employment.
+
+To make sense of the active-vs-passive distinction, rather than thinking 
+about the employers as the ones being active (i.e., thinking of 
+employment as the commodity), we could instead choose to frame our 
+discourse around "workers" as the source of work (i.e., thinking of 
+labor as the commodity). In this case we would expect "workees" to be 
+the consumers of work/labor; but, alas, we have no word for rendering 
+employers as passive participants in the world of economic transactions.
+
+-- 
+Live well,
+~wren
+
+

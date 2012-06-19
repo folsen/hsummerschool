@@ -1,0 +1,56 @@
+From andrew.pennebaker at gmail.com  Fri Apr 15 04:37:27 2011
+From: andrew.pennebaker at gmail.com (Andrew Pennebaker)
+Date: Thu, 14 Apr 2011 22:37:27 -0400
+Subject: [Haskell-cafe] Experimental 64 bit installer fails
+In-Reply-To: <BANLkTikBsXto1Fz+nNz3TSpL4qHpaB_HZg@mail.gmail.com>
+References: <BANLkTimdh5h1e+tEtT7zovj5Lo07TSYQBg@mail.gmail.com>
+	<BANLkTikBsXto1Fz+nNz3TSpL4qHpaB_HZg@mail.gmail.com>
+Message-ID: <BANLkTikLTKsw4UYaOnhz98C2x_9KQ4H8JQ@mail.gmail.com>
+
+I can confirm that Mark's Haskell 2011.2.0.0-x86_64 Mac OS X installer fix
+works :)
+
+cd /Library/Haskell/ghc-7.0.2/lib/registrations
+for c in *.conf; do echo == $c ==; ghc-pkg register --force $c; done
+
+
+My goal is to get Haskell ncurses working. c2hs is required, so I did:
+
+$ cabal --version
+cabal-install version 0.10.2
+using version 1.10.1.0 of the Cabal library
+
+$ cabal install c2hs
+$ c2hs
+-bash: c2hs: command not found
+
+It appears Cabal never added ~/Library/Haskell/ghc-7.0.2/lib/c2hs-0.16.3/bin
+to PATH. It's easy enough for me personally to fix, but Haskell 2010 didn't
+have this problem.
+
+Cheers,
+
+Andrew Pennebaker
+www.yellosoft.us
+
+On Thu, Apr 14, 2011 at 7:28 PM, Mark Lentczner <mark.lentczner at gmail.com>
+wrote:
+
+> Well that's no fun! The install looks like it mostly worked, execept that
+> the final registration of the installed packages failed because for some
+> reason the script has them out of order.
+>
+> You can "fix up" your install by doing this:
+>
+> cd /Library/Haskell/ghc-7.0.2/lib/registrations
+> for c in *.conf; do echo == $c ==; ghc-pkg register --force $c; done
+>
+>
+> I'll have to look into why that build of the package got the files out of
+> order...
+>  - Mark
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110414/b8d74d1e/attachment.htm>
+

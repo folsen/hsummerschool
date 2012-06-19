@@ -1,0 +1,29 @@
+From carette at mcmaster.ca  Mon Apr  4 04:29:59 2011
+From: carette at mcmaster.ca (Jacques Carette)
+Date: Sun, 03 Apr 2011 22:29:59 -0400
+Subject: [Haskell-cafe] llvm package on Windows
+Message-ID: <4D992D27.3090602@mcmaster.ca>
+
+I am trying to install llvm-0.9.0.1 on Windows (through cygwin), on top 
+of a clean install of Haskell Platform 2010.2.0.0.
+
+I do
+cabal install llvm --configure-option --with-llvm-prefix="C:\\llvm"
+(which is where I unpacked llvm-gcc4.2-2.8-x86-mingw43.tar.bz2).  This 
+fails with
+
+.....mingw\bin\ld.exe: cannot find -lLLVMXCoreAsmPrinter
+(which is indeed the first -l option on the gcc line).
+
+[I also tried the llvm-ht package, same issue; I can't tell which of the 
+2 packages is 'best' from the online doc]
+
+Perhaps I need to 'install' llvm more thoroughly?  [Most of the 
+instructions online seem to assume you want to use llvm-gcc, which is 
+not my case]
+
+Any clues?
+
+Jacques
+
+

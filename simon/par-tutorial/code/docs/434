@@ -1,0 +1,24 @@
+From pocmatos at gmail.com  Fri Apr 15 17:39:47 2011
+From: pocmatos at gmail.com (Paulo J. Matos)
+Date: Fri, 15 Apr 2011 16:39:47 +0100
+Subject: [Haskell-cafe] Cairo and Haskell
+In-Reply-To: <BANLkTimyZ9-9Hctzfy1+a9yOPs6LkfJYog@mail.gmail.com>
+References: <io9imb$1n8$1@dough.gmane.org>
+	<BANLkTimyZ9-9Hctzfy1+a9yOPs6LkfJYog@mail.gmail.com>
+Message-ID: <io9os3$9n9$1@dough.gmane.org>
+
+Thanks I will take a look at those.
+
+On 15/04/11 15:12, Robert Wills wrote:
+> Have a look at
+>
+> http://hackage.haskell.org/package/diagrams
+>
+> and
+>
+> http://hackage.haskell.org/package/Hieroglyph
+>
+
+
+
+

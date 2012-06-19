@@ -1,0 +1,31 @@
+From wren at freegeek.org  Sun Dec  4 07:48:54 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sun, 04 Dec 2011 01:48:54 -0500
+Subject: [Haskell-cafe] ANNOUNCE: monad-control-0.3
+In-Reply-To: <CADLz5wVs3AGCagikDMJVKVm-RJjgMhCbs7LJtxGPqi_rLbjRqQ@mail.gmail.com>
+References: <CADLz5wW4oZbBtKMb7UQ8qQdn3UayBSQ-TL66VLG3hGXCUk_npg@mail.gmail.com>
+	<CADLz5wVs3AGCagikDMJVKVm-RJjgMhCbs7LJtxGPqi_rLbjRqQ@mail.gmail.com>
+Message-ID: <4EDB17D6.6040206@freegeek.org>
+
+On 12/2/11 7:35 PM, Bas van Dijk wrote:
+> On 3 December 2011 00:45, Bas van Dijk<v.dijk.bas at gmail.com>  wrote:
+>> * 60 times faster than the previous release!
+>
+> Here are some benchmark results that compare the original monad-peel,
+> the previous monad-control-0.2.0.3 and the new monad-control-0.3:
+>
+> http://basvandijk.github.com/monad-control.html
+>
+> Note that the benchmarks use Bryan O'Sullivan's excellent new
+> criterion-0.6 package.
+
+
+Those are some beautiful benchmarks. Not only is it much faster, but the 
+distribution is much more peaked, which is always a good thing since it 
+makes the performance more predictable. Kudos.
+
+-- 
+Live well,
+~wren
+
+

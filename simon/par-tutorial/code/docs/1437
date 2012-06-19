@@ -1,0 +1,43 @@
+From uzytkownik2 at gmail.com  Sun Aug 28 18:21:41 2011
+From: uzytkownik2 at gmail.com (Maciej Marcin Piechotka)
+Date: Sun, 28 Aug 2011 17:21:41 +0100
+Subject: [Haskell-cafe] Pointed, but not Applicative
+In-Reply-To: <CANd=OGGWDb-+VN9He8PsnfTp1jBQ-o93RCdY_TsZJc3q=5=D4w@mail.gmail.com>
+References: <j3d40s$nb1$1@dough.gmane.org> <4E5A1B5A.5060204@gmail.com>
+	<CANd=OGGWDb-+VN9He8PsnfTp1jBQ-o93RCdY_TsZJc3q=5=D4w@mail.gmail.com>
+Message-ID: <1314548504.7128.12.camel@picard>
+
+On Sun, 2011-08-28 at 11:48 -0300, Felipe Almeida Lessa wrote:
+> On Sun, Aug 28, 2011 at 7:41 AM, Tony Morris <tonymorris at gmail.com> wrote:
+> > Pointed f => Pointed (StateT s f)
+> >
+> > but not
+> >
+> > Applicative f => Applicative (StateT s f)
+> 
+> But we do have
+> 
+>     (Functor m, Monad m) => Applicative (StateT s m)
+> 
+> so I'm not sure if this is a valid example.
+> 
+> Cheers,
+> 
+
+newtype StateT s m a = StateT (s -> m (a, s))
+
+instance Functor m => Functor (StateT s m) where
+  f `fmap` StateT g = StateT $ fmap (first f) . g
+
+instance Pointed m => Pointed (StateT s m) where
+  point x = StateT $ point . (,) x
+
+Regards
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110828/223c1ede/attachment.pgp>
+

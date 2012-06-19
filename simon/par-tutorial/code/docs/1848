@@ -1,0 +1,19 @@
+From jvlask at hotmail.com  Sun Dec 11 23:30:04 2011
+From: jvlask at hotmail.com (John Lask)
+Date: Mon, 12 Dec 2011 09:00:04 +1030
+Subject: [Haskell-cafe] Generating Code
+In-Reply-To: <CAKFCL4VzZ8hr2+LUKnOdzPiwT7msA-KAqo4BdLwj1AoLdwEQNQ@mail.gmail.com>
+References: <CAHTd3sihZABoWe7CoKhfFh-QHQ01PftATrTmiZymE5b-D_YS+Q@mail.gmail.com>	<CAPeieQEdWhripdkdVo-=2ZXbNdgOL7Xq+idrwzTOiZuL=AMtZQ@mail.gmail.com>	<CAKjSnQE2owa4YK0G0MTR0ON1CBqMiuWQntRrqmsxSL1tYjSxxg@mail.gmail.com>
+	<CAKFCL4VzZ8hr2+LUKnOdzPiwT7msA-KAqo4BdLwj1AoLdwEQNQ@mail.gmail.com>
+Message-ID: <BLU0-SMTP445B5E0C3B811C37C8C23A4C6BF0@phx.gbl>
+
+
+>
+> It occurs to me that c2hs (or more appropriately the gtk2hsc2hs fork) is
+> intended to solve this problem; have you looked into it?
+>
+>
+
+hdirect falls into this category as well
+
+

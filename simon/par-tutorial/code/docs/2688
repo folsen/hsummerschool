@@ -1,0 +1,67 @@
+From steve at medwizard.net  Fri Feb  4 03:35:47 2011
+From: steve at medwizard.net (Steve Severance)
+Date: Thu, 3 Feb 2011 18:35:47 -0800
+Subject: [Haskell-cafe] OSX i386/x86 and x86_64 - time to switch
+	supported platforms?
+In-Reply-To: <CB1FAA21-8800-475F-966B-C808DD394960@gmail.com>
+References: <801E1648-B34B-4F93-9BAB-9A05EC77D747@gmail.com>
+	<C9311AB9-65D8-4ACE-B20B-F429039934CB@gmail.com>
+	<4D4B5308.4000009@freegeek.org>
+	<3C972E29-7228-4F5F-84A7-4FC13C938B82@cs.otago.ac.nz>
+	<B34591F6-86C2-471A-9E61-5B609FACF5F3@gmail.com>
+	<4D4B622F.8020501@freegeek.org>
+	<CB1FAA21-8800-475F-966B-C808DD394960@gmail.com>
+Message-ID: <AANLkTimQLoNa9CLAXeR-srtRSKzoN992WesRcAhSWoB5@mail.gmail.com>
+
+Wholly support moving OSX to x64. x86 should be supported only on a
+best effort basis for legacy.
+
+Steve
+
+On Thu, Feb 3, 2011 at 6:28 PM, Max Cantor <mxcantor at gmail.com> wrote:
+> Doesn't 10.5.x have the ability to generate and run 64-bit binaries?
+>
+> mc
+>
+> On Feb 4, 2011, at 10:19 AM, wren ng thornton wrote:
+>
+>> Max Cantor wrote:
+>>> someone? wrote:
+>>>> I think the original poster is saying that the targeted architecture for OS X support
+>>>> should be the architecture that OS X assumes by default, and these days that's x86_64.
+>>
+>> That sounds reasonable to me. The big caveat is that OSX >= 10.5.8 && < 10.6 should still be targeted as well. While non-x86_64 Macs are quite old, OSX 10.6 is still pretty new and so there are a lot of people still using 10.5 (and our department still has a couple boxes running 10.4).
+>>
+>> So even though 10.5.8 defaults to 32-bit, it should still be actively supported (as an x86_64 architecture). Just pass the necessary flags to gcc :)
+>>
+>>
+>>>> It would be really nice for x86 mode to be well supported for a while longer.
+>>
+>> Yes, it'd be really nice to support 32-bit mode for a while yet, even if it isn't actively being targeted for improvements.
+>>
+>> --
+>> Live well,
+>> ~wren
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+
+
+-- 
+------------------------------------
+Steve Severance
+c. 240.472.9645
+e. steve at medwizard.net
+------------------------------------
+
+

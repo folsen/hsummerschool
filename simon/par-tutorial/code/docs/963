@@ -1,0 +1,53 @@
+From nowgate at yahoo.com  Mon Aug  8 02:57:43 2011
+From: nowgate at yahoo.com (michael rice)
+Date: Sun, 7 Aug 2011 17:57:43 -0700 (PDT)
+Subject: [Haskell-cafe] Simple Parsec example
+In-Reply-To: <4E3F2717.3030404@vex.net>
+Message-ID: <1312765063.98570.YahooMailClassic@web31103.mail.mud.yahoo.com>
+
+Thanks, Albert.
+The code is from this page, just below the definition of parse:
+http://hackage.haskell.org/packages/archive/parsec/latest/doc/html/Text-Parsec-Prim.html#v:parse
+Michael
+
+--- On Sun, 8/7/11, Albert Y. C. Lai <trebla at vex.net> wrote:
+
+From: Albert Y. C. Lai <trebla at vex.net>
+Subject: Re: [Haskell-cafe] Simple Parsec example
+To: haskell-cafe at haskell.org
+Date: Sunday, August 7, 2011, 8:00 PM
+
+On 11-08-07 02:44 PM, michael rice wrote:
+> What other imports must I add to get this to run. I can't seem to get it
+> right.
+[...]
+> import Text.ParserCombinators.Parsec.Prim
+> 
+> main = case (parse numbers "" "11, 2, 43") of
+> Left err -> print err
+> Right xs -> print (sum xs)
+> 
+> numbers = commaSep integer
+
+The problem is deeper than imports.
+
+import Text.Parsec.Prim(parse)
+import Text.Parsec.Token(makeTokenParser,
+? GenTokenParser(TokenParser, commaSep, integer))
+import Text.Parsec.Language(emptyDef)
+
+main = case (parse numbers "" "11, 2, 43") of
+? ? ? ???Left err? -> print err
+? ? ? ???Right xs? -> print (sum xs)
+
+numbers = c i where
+? TokenParser{commaSep=c, integer=i} = makeTokenParser emptyDef
+
+_______________________________________________
+Haskell-Cafe mailing list
+Haskell-Cafe at haskell.org
+http://www.haskell.org/mailman/listinfo/haskell-cafe
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110807/0ff7dfe0/attachment.htm>
+

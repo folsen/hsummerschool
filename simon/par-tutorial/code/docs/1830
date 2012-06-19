@@ -1,0 +1,31 @@
+From michael at orlitzky.com  Sun Dec 11 15:56:06 2011
+From: michael at orlitzky.com (Michael Orlitzky)
+Date: Sun, 11 Dec 2011 09:56:06 -0500
+Subject: [Haskell-cafe] HaXml 1.13 -> 1.22 upgrade
+In-Reply-To: <CAKjSnQE23zX7_jn8GnoA3tVABYYAM22CZ-Jqab8+YX3CK5K-fg@mail.gmail.com>
+References: <4EE448DF.9030400@orlitzky.com>
+	<CAKjSnQE23zX7_jn8GnoA3tVABYYAM22CZ-Jqab8+YX3CK5K-fg@mail.gmail.com>
+Message-ID: <4EE4C486.4060206@orlitzky.com>
+
+On 12/11/2011 01:36 AM, Antoine Latter wrote:
+>
+> It looks like the function 'xmlParse' returns a value of type
+> 'Document Posn', according to the API docs. I'm guessing the 'Posn'
+> value is used to annotate the position in the source document a
+> particular piece of XML came from, so you can report errors better.
+>
+> Since the pretty-printing functions ignore it, you can replace it with
+> whatever you want, even with a value of a different type if you have a
+> need to annotate the tree.
+
+Thanks, I was able to get it working after a little sleep/coffee.
+
+The migration guide says to replace all of the 'i' with () if you don't 
+care about them, so I tried that, but it doesn't work in this case: the 
+two 'i' in (CElem (Element i) i) have to match.
+
+The only way I see to construct a Posn is with noPos, so I stuck that in 
+there. It's probably not correct, but it compiles and runs, so it's 
+correct =)
+
+

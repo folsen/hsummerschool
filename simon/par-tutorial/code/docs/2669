@@ -1,0 +1,37 @@
+From johan.tibell at gmail.com  Thu Feb  3 23:15:32 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Thu, 3 Feb 2011 23:15:32 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4B19DB.5000907@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>
+Message-ID: <AANLkTimTak3jHpg_RPattKoACvkUU31tQydCsgjjS=Oc@mail.gmail.com>
+
+Hi,
+
+Thanks for bringing up these issues. It's something we could be better
+at addressing as a community.
+
+First, we need to stop pretending that you can use Haskell effectively
+without first learning to reason about program evaluation order.
+Learning how is not terrible difficult, but there's very little
+material on how to do it [1]. Some of us have learnt it the hard way
+by experimentation or by talking to people who do understand lazy
+evaluation [2] (the Simons, Don, and Bryan to name a few). At the very
+least we need to teach people how to tell which arguments a pure
+function is strict in by looking at its definition.
+
+Second, many of our core data structures are lazy, but most uses are
+strict. That keeping a simple map of counters is tricky should tell us
+that something is wrong (you need to use insertWith'). It wouldn't be
+if Data.Map was strict in the values. Many strictness related problems
+people have are due to common data types like Maybe, tuples, and
+arrays being lazy. This is rarely what you want.
+
+1. I tried to start creating some. For example, by giving a high
+performance Haskell talk at CUFP. Unfortunately the talk wasn't taped.
+2. Haskell is non-strict, which doesn't necessarily imply lazy
+evaluation. However, lazy evaluation is what we actually deal with.
+
+Johan
+
+

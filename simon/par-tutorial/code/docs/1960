@@ -1,0 +1,28 @@
+From gcrosswhite at gmail.com  Thu Dec 15 05:33:30 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Thu, 15 Dec 2011 14:33:30 +1000
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <CAKjSnQFvJrz1iFd8XsGbK4q7ZK9F0qjXXUHdoTn1XVmeeAm+OQ@mail.gmail.com>
+References: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+	<CAKjSnQFvJrz1iFd8XsGbK4q7ZK9F0qjXXUHdoTn1XVmeeAm+OQ@mail.gmail.com>
+Message-ID: <430054FA-800C-408C-8B75-9C3422293133@gmail.com>
+
+
+On Dec 15, 2011, at 2:13 PM, Antoine Latter wrote:
+
+> Isn't this what Ross previously suggested? I think his suggested
+> instance methods for Maybe return the elements of the lists
+> incrementally.
+
+Yes and no.  Yes, his excellent suggestion is one of my favorite ideas for what we should do with Alternative that I have seen so far and was the inspiration for my proposal, but no it is not the same idea at all.  Whereas his suggestion keeps the types and generic definitions of some and many the way that they are but overrides them manually to work for types such as Maybe, my proposal is that we instead change the types and generic definitions of some and many themselves so that they automatically do the right thing for the Maybe and List types.
+
+To justify my idea in a different way, it seems to me that somehow some and many somehow aren't lazy enough, because if they *were* lazy enough then we wouldn't have to hack into them for some types (Maybe and List) in order to get them to generate the infinite lazy lists that we were expecting.
+
+Again, though, this is all crazy talk, and the only way to bring my epic vision into creation might be through abundant use of magic fairy dust.  :-)
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/bdddb405/attachment.htm>
+

@@ -1,0 +1,45 @@
+From dons00 at gmail.com  Sat Apr 16 00:44:41 2011
+From: dons00 at gmail.com (Don Stewart)
+Date: Fri, 15 Apr 2011 15:44:41 -0700
+Subject: [Haskell-cafe] Haskell Platform 2011.2.0.1 now available
+Message-ID: <BANLkTimrpXDe6qpGeTBMCqp8bHk3QimbRw@mail.gmail.com>
+
+We're pleased to announce the 2011.2.0.1 release of the Haskell Platform:
+a single, standard Haskell distribution for everyone.
+
+Download the Haskell Platform 2011.2.0.1:
+
+    http://haskell.org/platform/
+
+This release adds support for GHC 7.0.3, and significant improvements for
+Mac OS X users.
+
+The specification, along with installers (including Windows, Mac and
+Unix installers for a full Haskell environment) are available.
+
+The Haskell Platform is a single, standard Haskell distribution for
+every system, in the form of a blessed library and tool suite for
+Haskell distilled from the thousands of libraries on Hackage, along with
+installers for a wide variety of systems. It saves developers work
+picking and choosing the best Haskell libraries and tools to use for a
+task.
+
+When you install the Haskell Platform, you get the latest stable
+compiler, an expanded set of core libraries, additional development
+tools, and cabal-install ? so you can download anything else you need
+from Hackage.
+
+This release ships with GHC 7.0.3.
+
+What you get is specified here:
+
+    http://hackage.haskell.org/platform/contents.html
+
+Thanks!
+
+-- The Platform Infrastructure Team
+
+P.S. a big thanks to Mark Lentczner and Mikhail Glushenkov who built the Mac
+and Windows installers!
+
+

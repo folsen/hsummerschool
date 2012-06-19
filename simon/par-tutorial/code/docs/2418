@@ -1,0 +1,28 @@
+From leon.v.nikitin at pravmail.ru  Thu Dec 29 20:55:16 2011
+From: leon.v.nikitin at pravmail.ru (=?koi8-r?B?7snLydTJziDsxdc=?=)
+Date: Fri, 30 Dec 2011 02:55:16 +0700
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFCC3CE.7050006@blueyonder.co.uk>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org> <4EFCC3CE.7050006@blueyonder.co.uk>
+Message-ID: <451591325188516@web70.yandex.ru>
+
+If seed depends of psudo random event, for example of current systime,
+we must use IO action.
+
+30.12.2011, 02:47, "Steve Horne" <sh006d3592 at blueyonder.co.uk>:
+
+>
+> BTW - why use an IO action for random number generation? There's a
+> perfectly good pure generator. It's probably handy to treat it
+> monadically to sequence the generator state/seed/whatever but random
+> number generation can be completely pure.
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

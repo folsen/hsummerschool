@@ -1,0 +1,57 @@
+From michael at snoyman.com  Mon Aug 29 17:45:46 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Mon, 29 Aug 2011 18:45:46 +0300
+Subject: [Haskell-cafe] Decompressing and http-enumerator
+In-Reply-To: <1314628133.4827.61.camel@duo>
+References: <CAKA2Jg+u_BtN5WKrTc4T_mgmuxP5==ASbsh5rvxJaQhVK64MTg@mail.gmail.com>
+	<CAHZrzdqdDtoPa+eQS5XtyRFx-2=1WtOQf=eDERvQuzu_dsMwAw@mail.gmail.com>
+	<1314628133.4827.61.camel@duo>
+Message-ID: <CAKA2JgLMewSVmsDKK9R4eDP9zS4f2fZSVA16WP-zhUsLWaoF5Q@mail.gmail.com>
+
+On Mon, Aug 29, 2011 at 5:28 PM, Herbert Valerio Riedel <hvr at gnu.org> wrote:
+> On Mon, 2011-08-29 at 13:21 +0200, Gregory Collins wrote:
+>> A web server should not be setting "Content-encoding: gzip" on a
+>> .tar.gz file.
+>
+> Why not? From RFC2616 compliant servers I'd expect a .tar.gz file to
+> have the Content-* headers provide meta-information about the
+> content[1], e.g.
+>
+> ?Content-Type: application/x-tar
+> ?Content-Encoding: gzip
+> ?Transfer-Encoding: chunked
+>
+>
+> If I want to detach the gzip encoding from the "content" (or "entity"),
+> I'd move it to the Transfer-Encoding header[2], e.g.:
+>
+> ?Content-Type: application/x-tar
+> ?Transfer-Encoding: gzip, chunked
+>
+>
+>
+>
+>
+> [1]: See RFC2616 sec7.2.1: "Content-Type specifies the media type of the
+> underlying data. Content-Encoding may be used to indicate any additional
+> content codings applied to the data, usually for the purpose of data
+> compression, that are a property of the requested resource."
+>
+> [2]: See RFC2616 sec4.3: "Transfer-Encoding is a property of the
+> message, not of the entity, and thus MAY be added or removed by any
+> application along the request/response chain."
+>
+>
+>
+>
+
+"chunked" is the only valid transfer-encoding[1], while gzip must be
+specified on the content-encoding header[2]. For a simple example of
+these two, look at the response headers from Haskellers[3] in
+something like Chrome developer tools.
+
+[1] http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6
+[2] http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5
+[3] http://www.haskellers.com/
+
+

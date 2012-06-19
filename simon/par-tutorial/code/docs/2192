@@ -1,0 +1,56 @@
+From mail at joachim-breitner.de  Wed Dec 21 10:31:10 2011
+From: mail at joachim-breitner.de (Joachim Breitner)
+Date: Wed, 21 Dec 2011 10:31:10 +0100
+Subject: [Haskell-cafe] guided seq (Was: Interruptible threads with IO loops)
+In-Reply-To: <D90F9E28-E21D-4630-8BA2-D3F04E491F3D@gmail.com>
+References: <CAH-sQ5jrocgiuXiOmDaoaajkn7HRF5XWaXJK9kA2sE_cj4P0cQ@mail.gmail.com>
+	<D90F9E28-E21D-4630-8BA2-D3F04E491F3D@gmail.com>
+Message-ID: <1324459870.3833.9.camel@kirk>
+
+Hi,
+
+Am Mittwoch, den 21.12.2011, 19:15 +1000 schrieb Gregory Crosswhite:
+
+> I don't have any tips for cleaning up the code off the top of my head,
+> but I suspect that the memory leak is coming from the fact that the
+> expression (v+1) is not being forced, which means that each iteration
+> of the loop is constructing a new thunk with a reference to the old
+> thunk resulting in a data structure that is growing in memory usage 
+> over time.
+
+this problem comes up in various places; forcing the whole thunk is of
+course an option, but would it be possible ? theoretical, with the GHC
+runtime, or even with current tools ? to have a function
+        evaluateUntilItDoesNotNeed :: a -> b -> a
+such that
+        f x `evaluateUntilItDoesNotNeed` x
+will not retain a reference to x, but is otherwise as lazy as possible?
+
+If thunks retain references to their free variables, and these can be
+introspected, then it should be possible to keep seq?ing those thunks
+that refer to x, until the expression is either fully evaluated or no
+referenced thunk references x.
+
+This would be particularly handy when with, for example
+        snd tuple `evaluateUntilItDoesNotNeed` tuple
+where the tuple is unevaluated in the right component (and where we
+don?t want to force this just now), but retains something large in the
+left component (that we want to become GCable).
+
+Greetings,
+Joachim
+
+
+-- 
+Joachim "nomeata" Breitner
+  mail at joachim-breitner.de  |  nomeata at debian.org  |  GPG: 0x4743206C
+  xmpp: nomeata at joachim-breitner.de | http://www.joachim-breitner.de/
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111221/8be6df5b/attachment.pgp>
+

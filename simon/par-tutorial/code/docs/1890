@@ -1,0 +1,29 @@
+From aeyakovenko at gmail.com  Tue Dec 13 07:55:33 2011
+From: aeyakovenko at gmail.com (Anatoly Yakovenko)
+Date: Mon, 12 Dec 2011 22:55:33 -0800
+Subject: [Haskell-cafe] acid state
+Message-ID: <CAOu_qeEM7ej+AEZVjHMawm2Z0w-We=N4aLt6R6p5oUfqUDFwMg@mail.gmail.com>
+
+So I am trying to understand how acid state works.  The HelloWorld
+example has a
+
+type Message = String
+data Database = Database [Message]
+
+$(deriveSafeCopy 0 'base ''Database)
+
+-- Transactions are defined to run in either the 'Update' monad
+-- or the 'Query' monad.
+addMessage :: Message -> Update Database ()
+addMessage msg
+    = do Database messages <- get
+         put $ Database (msg:messages)
+
+
+It seems to me that since the Dababase is a list of messages every
+update would require acid-state to rewrite the list into the file, so
+each update would get slower as the list gets bigger, but what I am
+seeing is that updates are constant time regardless of the size of the
+list.  So how does it work?
+
+

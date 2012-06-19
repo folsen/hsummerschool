@@ -1,0 +1,40 @@
+From es at ertes.de  Fri Aug 19 14:59:57 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Fri, 19 Aug 2011 14:59:57 +0200
+Subject: [Haskell-cafe] Problem with types
+References: <CAKit5aAe_sZnyq+=F7adYfFobvtvmTu0qzF5Wi18Wn63iDzraw@mail.gmail.com>
+Message-ID: <20110819145957.718b5ada@angst.streitmacht.eu>
+
+Anupam Jain <ajnsit at gmail.com> wrote:
+
+> However, if I try to parameterise over the function 'f' it does not
+> work!  -
+>
+> p f = (m1',m2') where
+>   m1 = M ("1", ())
+>   m2 = M ("2", True)
+>   m1' = f m1
+>   m2' = f m2
+>
+> It doesn't even typecheck, producing the error - "Couldn't match
+> expected type 'Bool' with actual type '()'"
+>
+> Is there a particular reason for this? How can I define a function
+> like 'p' within Haskell?
+
+Try to write the type signature for 'p'.
+
+And as a general advice:  Always write type signatures.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

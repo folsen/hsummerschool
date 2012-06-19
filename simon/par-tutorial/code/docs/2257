@@ -1,0 +1,21 @@
+From ezyang at MIT.EDU  Sat Dec 24 14:41:34 2011
+From: ezyang at MIT.EDU (Edward Z. Yang)
+Date: Sat, 24 Dec 2011 08:41:34 -0500
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+In-Reply-To: <4EF57FC9.1030505@vex.net>
+References: <4EF57FC9.1030505@vex.net>
+Message-ID: <1324734001-sup-8861@ezyang>
+
+> 1. a function f is strict if  f ? = ?
+> 2. ? represents any computation which does not terminate, i.e. an 
+> exception or an infinite loop
+> 3. "strict" describes the denotational semantics
+> 
+> People, could you please make up your mind already? It has been more 
+> than 13 years.
+
+I have to admit, I'm a bit confused what the complaint is.
+
+Edward
+
+

@@ -1,0 +1,54 @@
+From nowgate at yahoo.com  Sat Aug 27 21:31:00 2011
+From: nowgate at yahoo.com (michael rice)
+Date: Sat, 27 Aug 2011 12:31:00 -0700 (PDT)
+Subject: [Haskell-cafe] Modules and a main function
+Message-ID: <1314473460.932.YahooMailNeo@web31101.mail.mud.yahoo.com>
+
+W/r/t the code below, would somebody please explain the sense of having a main function in a module that is not named Main.hs?
+
+Michael
+
+From: http://www.haskell.org/haskellwiki/State_Monad
+
+============
+module StateGame where
+
+?
+import Control.Monad.State
+?
+-- Example use of State monad
+-- Passes a string of dictionary {a,b,c}
+-- Game is to produce a number from the string.
+-- By default the game is off, a C toggles the
+-- game on and off. A 'a' gives +1 and a b gives -1.
+-- E.g?
+-- 'ab' ? ?= 0
+-- 'ca' ? ?= 1
+-- 'cabca' = 0
+-- State = game is on or off & current score
+-- ? ? ? = (Bool, Int)
+?
+type GameValue = Int
+type GameState = (Bool, Int)
+?
+playGame :: String -> State GameState GameValue
+playGame [] ? ? = do
+? ? (_, score) <- get
+? ? return score
+?
+playGame (x:xs) = do
+? ? (on, score) <- get
+? ? case x of
+? ? ? ? ?'a' | on -> put (on, score + 1)
+? ? ? ? ?'b' | on -> put (on, score - 1)
+? ? ? ? ?'c' ? ? ?-> put (not on, score)
+? ? ? ? ?_ ? ? ? ?-> put (on, score)
+? ? playGame xs
+?
+startState = (False, 0)
+?
+main = print $ evalState (playGame "abcaaacbbcabbab") startState
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110827/3861a8af/attachment.htm>
+

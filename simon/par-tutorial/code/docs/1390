@@ -1,0 +1,48 @@
+From nazarenko.sergiy at gmail.com  Fri Aug 26 14:52:22 2011
+From: nazarenko.sergiy at gmail.com (Sergiy Nazarenko)
+Date: Fri, 26 Aug 2011 15:52:22 +0300
+Subject: [Haskell-cafe] Make shared library - questions
+Message-ID: <CAHbuS7++=cJvNq4x8PtzVsyXtOp0tL-A7HgkMW7uB6Wu4R763A@mail.gmail.com>
+
+Hi !
+
+I'm trying to compile shared library. This library will use as part of
+plugin for some program.
+If I compile library with option -dynamic my library has links for HS
+libraries like libHSbase-4.2.0.2-ghc6.12.3.so and so on.
+But program has crashed constantly.
+
+Is it possible to make shared library without -dynamic flag? I want to try
+to make library without dependencies.
+
+According to http://www.well-typed.com/blog/30 theoretically I can do this
+but I found this impossible -
+http://hackage.haskell.org/trac/ghc/ticket/3704
+My options to compile:
+ghc -O2 --make -no-hs-main -dynamic -shared -fPIC -optl '-shared' -optc
+'-DMODULE=MyLib' -o MyLib.so MyLib.hs module_init.c  -optl-Wl
+-lHSrts-ghc6.12.3
+
+If I try compile without -dynamic I get error:
+/usr/bin/ld:
+/usr/local/lib/ghc-6.12.3/base-4.2.0.2/libHSbase-4.2.0.2.a(Conc__270.o):
+relocation R_X86_64_32 against
+`base_GHCziConc_ensureIOManagerIsRunning1_closure' can not be used when
+making a shared object; recompile with -fPIC
+/usr/local/lib/ghc-6.12.3/base-4.2.0.2/libHSbase-4.2.0.2.a: could not read
+symbols: Bad value
+collect2: ld returned 1 exit status
+
+
+
+My system is:
+Cenos 5.6
+ghc6.12.3
+gcc-4.2.1
+
+Cheers,
+Sergiy
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110826/eb8720ad/attachment.htm>
+

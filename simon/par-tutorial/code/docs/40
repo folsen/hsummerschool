@@ -1,0 +1,82 @@
+From ninegua at gmail.com  Fri Apr  1 23:31:04 2011
+From: ninegua at gmail.com (Paul L)
+Date: Fri, 1 Apr 2011 14:31:04 -0700
+Subject: [Haskell-cafe] ArrowLoop and streamprocessors
+In-Reply-To: <AANLkTikOBFO8Bn=E2OSup0kNiwT65Gump5SHLb1qwHqW@mail.gmail.com>
+References: <AANLkTikxquh-8tpOtnOdQygjQVvaV21qBeucNPUaMk+V@mail.gmail.com>
+	<928741C4-271A-4C84-864F-AD6DE65F1855@alum.mit.edu>
+	<AANLkTinXRyf3qX_o=-uZr9yV_sVq4Ob-RzpVS2ecWhAg@mail.gmail.com>
+	<AANLkTimM+AfA5+wh9tOnyYDVxFQ3zuUjP+aPQB1NcNxO@mail.gmail.com>
+	<AANLkTikVjoi79JKxiy=Zhb=-c+g5DZxaOnwOzeT-sCkX@mail.gmail.com>
+	<AANLkTikOBFO8Bn=E2OSup0kNiwT65Gump5SHLb1qwHqW@mail.gmail.com>
+Message-ID: <AANLkTinik0msD8GvAm6cnC2MwEY9Eq53RsKn83CS+i93@mail.gmail.com>
+
+On Fri, Apr 1, 2011 at 1:09 PM, Mathijs Kwik <bluescreen303 at gmail.com> wrote:
+
+> I think this defies the CPS style stream processors goal.
+> In reality, the outputs might be infinite, or just very very many,
+> which will cause space leaks if they need to be buffered.
+
+If the input (and in your case, the output fedback as input) cannot be
+promptly consumed, it's a space/time leak in any real-time system. In
+any case, it is an implementation issue (which hopefully has some
+solution), not a conceptual one.
+
+> The "start" (someBox) will wait before every "run" until it receives
+> the result from the "end", even if this is just [].
+
+In order for it not to deadlock, you need some delay/init primitive so
+that the output is initialized *before* the input is.
+
+> If the loop becomes larger, includes heavy calculations, or has to
+> wait for IO, this might take quite some time. Essentially the loop as
+> a whole will be running as some kind of singleton. It will only
+> restart if the last "run" has fully completed, meaning all inbetween
+> steps are doing no processing in the mean time.
+
+Under the usual arrow abstraction, stream input is processed
+synchronously (next one is not consumed until previous one is). But it
+doesn't mean that you cannot return a value before it is fully
+computed.
+
+For pure computations, you can use "par" to evaluate in parallel and
+return the value from an arrow before it is fully available. For IO
+computations, you may use the hGetContents or getChanContents trick to
+return from IO without waiting.
+
+This way, subsequent arrow computations that do not depend on the full
+availability of their inputs may proceed promptly. Otherwise, you have
+to wait for the computation or IO to complete *anyway*, which is more
+of a data dependency issue that is orthogonal to the abstract model
+you choose to program with.
+
+> Also, the full loop (every step within it) will need to run for every
+> input. If someBox filters its inputs and only acts on 1 in a million
+> of its inputs, it will now have to send [] downstream for every
+> dropped input and wait for the end of the loop to feed-back [] to
+> continue.
+
+It depends on how your program is logically structured. You can filter
+out things by skipping otherBox entirely using ArrowChoice, which
+means otherBox is not run at all when there is no input for it.
+
+On the other hand, if you want otherBox to run constantly (e.g., when
+you do IO or update internal state), then I don't see the issue of
+passing [] to and getting [] from it (which supposely symbolizes no
+input is consumed and no output is produced, and hence no wait for
+heavy computation or IO).
+
+> I must say, you did solve the problem I posted and I am gonna have a
+> look at its implications this weekend.
+> It's probably not gonna work in all situations and in a way defeats
+> stream processing's advantages, but it might still be useful in
+> certain situations.
+
+I'd love to hear back from you, perhaps on a more concrete case where
+things do or do not work out as you intended.
+
+-- 
+Regards,
+Paul Liu
+
+

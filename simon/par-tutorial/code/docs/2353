@@ -1,0 +1,32 @@
+From jon.fairbairn at cl.cam.ac.uk  Wed Dec 28 16:34:26 2011
+From: jon.fairbairn at cl.cam.ac.uk (Jon Fairbairn)
+Date: Wed, 28 Dec 2011 15:34:26 +0000
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+References: <4EF57FC9.1030505@vex.net> <4EFAD085.8000605@vex.net>
+	<CACqaG6xKd+-szRC9tjTZsgH-fq_HwDnUwV2LbX8n1hHs60SdxQ@mail.gmail.com>
+	<CACqaG6wUApJdbOQMJqGkTURBLMS-hS2jGLJweOpDWEa+gQBWeQ@mail.gmail.com>
+	<CABLneZub4hpR+XLESBS8W6Y3mfXXJHgE6wJ6VWW0htS2O+D-jg@mail.gmail.com>
+	<CABLneZsjT5gJ0ReC4OYK7K482Zs+VvWp5RpTo7ANgfC3W0pNzg@mail.gmail.com>
+	<wfipl0iut8.fsf@calligramme.charmers>
+	<CABLneZvmR8utD8fRcpBijRMHwxEvugTuitqWWA07Jfryf9GH3w@mail.gmail.com>
+Message-ID: <wfehvoiubh.fsf@calligramme.charmers>
+
+Thiago Negri <evohunz at gmail.com> writes:
+
+> 2011/12/28 Jon Fairbairn <jon.fairbairn at cl.cam.ac.uk>:
+>> * non-strict semantics require that no argument is evaluated
+>> ?unless needed.
+>
+> That's not the case on optimistic evaluation.
+
+Oops, yes.  I should have said something like ?non-strict
+semantics require that evaluation should terminate if there is a
+terminating reduction order? but went for something snappier
+(and missed).
+
+-- 
+J?n Fairbairn                                 Jon.Fairbairn at cl.cam.ac.uk
+http://www.chaos.org.uk/~jf/Stuff-I-dont-want.html  (updated 2010-09-14)
+
+
+

@@ -1,0 +1,40 @@
+From limestrael at gmail.com  Tue Dec  6 13:43:44 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Tue, 6 Dec 2011 13:43:44 +0100
+Subject: [Haskell-cafe] Haddock and the qualified imports
+Message-ID: <CACqaG6xYok7wr0OBKJa+=ScWYHfY=vefB1z2=Uzyx78EDN+fJg@mail.gmail.com>
+
+Hi,
+
+I noticed some time ago the fact that qualified imports doesn't affect the
+generated documentation.
+It's kind of clumsy in case of libraries that define a lot of synonyms
+(vector and bytestring come in my mind first).
+For instance, in the package utf8-string:
+http://hackage.haskell.org/packages/archive/utf8-string/0.3.7/doc/html/Data-ByteString-UTF8.html
+
+Here, the documentation doesn't say that the
+utf8-string/Data.ByteString.UTF8.ByteString datatype used all along comes
+in fact from Data.ByteString.
+If it were instead a new implementation of ByteString (as for
+bytestring/Data.ByteString.Char8.ByteString) the documentation would look
+exactly the same, so to disambiguate to reader has to crawl through the
+code to get to the initial definition.
+(clicking on a 'ByteString' doesn't even redirect you to the original
+bytestring/Data.ByteString page)
+
+It should be written that this 'ByteString' is not a newly defined type but
+instead a re-exportation.
+
+It's even worse when you see the doc of a module that uses in the meantime
+lazy and strict ByteStrings, or normal and unboxed/storable/<insert flavour
+here> vector: you have to hover the type name to see which haddock page it
+points to.
+
+In that case, a solution might be to indicate on top of the doc page that
+it uses another module as a qualified import, and to keep the prefixes in
+the function signatures.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111206/7200028b/attachment.htm>
+

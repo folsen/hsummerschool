@@ -1,0 +1,25 @@
+From agocorona at gmail.com  Wed Apr 13 08:52:37 2011
+From: agocorona at gmail.com (Alberto G. Corona )
+Date: Wed, 13 Apr 2011 08:52:37 +0200
+Subject: [Haskell-cafe] ANNOUNCE: TCache 0.8
+Message-ID: <BANLkTikJZJfVV4xREX70CO=fZ5kxkKv97g@mail.gmail.com>
+
+Tired of your persistence layer?
+
+Take persistence the haskelll way. Besides the backward compatible stuff,
+TCache now defines persistent STM variables (DBRef's) that  leverages the
+traditional haskell reference syntax to perform fast in-memory database
+transactions and inter-object references. It includes indexing, triggers and
+an straightforward pure-haskell query language based on record field
+relations.
+
+http://hackage.haskell.org/package/TCache-0.8.0.2
+
+This version includes a lot of changes and must be considered beta. Please
+submit any bugs, comments and so on.
+
+Cheers!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110413/7d5faf48/attachment.htm>
+

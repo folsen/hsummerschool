@@ -1,0 +1,66 @@
+From guthrie at mum.edu  Wed Apr 20 00:06:39 2011
+From: guthrie at mum.edu (Gregory Guthrie)
+Date: Tue, 19 Apr 2011 17:06:39 -0500
+Subject: [Haskell-cafe] Haskell from SML - referrential Transparency?!
+In-Reply-To: <201104192228.24087.daniel.is.fischer@googlemail.com>
+References: <08EF9DA445C4B5439C4733E1F35705BAD9080AD1BB@MAIL.cs.mum.edu>
+	<201104192116.17262.daniel.is.fischer@googlemail.com>
+	<08EF9DA445C4B5439C4733E1F35705BAD9080AD1BE@MAIL.cs.mum.edu>
+	<201104192228.24087.daniel.is.fischer@googlemail.com>
+Message-ID: <08EF9DA445C4B5439C4733E1F35705BAD9080AD1CC@MAIL.cs.mum.edu>
+
+Thanks.
+
+It was the "no computation needed" difference that I was missing, and was including (falsely) in my expectations for "same result", i.e. including the same traces.
+
+-------------------------------------------
+Dr. Gregory Guthrie
+
+Computer Science Department
+School of Computer Science & Mathematics
+Maharishi University of Management
+------------------------------------------- 
+
+
+> -----Original Message-----
+> From: Daniel Fischer [mailto:daniel.is.fischer at googlemail.com]
+> Sent: Tuesday, April 19, 2011 3:28 PM
+> To: Gregory Guthrie
+> Cc: haskell-cafe at haskell.org
+> Subject: Re: [Haskell-cafe] Haskell from SML - referrential Transparency?!
+> 
+> On Tuesday 19 April 2011 21:38:18, Gregory Guthrie wrote:
+> > I did post the code - but don't expect anyone to really wade through
+> > and debug for me!  :-)
+> 
+> Oh, wow. Haskell looking like Lisp :(
+> 
+> > (The issues that I am asking about are a9b, a9bb at line 435, 438)
+> > http://hpaste.org/45851/haskell_from_sml_question
+> 
+> Can't reproduce, I get the same result from all invocations.
+> But see below
+> 
+> >
+> > thanks for the help.
+> 
+> <moved from above>
+> >
+> > and it does seem to show every allocation on the first run of f1, but
+> > then nothing on the second. SO it is not just a first call to
+> > allocate, but all calls under an invocation of f1 that don't show.
+> > Makes me wonder if f1 is even being re-evaluated.
+> >
+> 
+> Interpreted or compiled without optimisations, the first invocation of a9b produces debug-
+> output, the second not, both yield the same result, Output (IntValue 11,Halt).
+> The invocation of a9bb produces the same, with the debug output, like the first invocation of
+> a9b.
+> Since a9b is a simple monomorphic value, it is evaluated only once, hence further uses refer
+> simply to the result, not the computation made to achieve it.
+> If you compile with optimisations, a9bb doesn't produce debug output *because it doesn't
+> exist*. The compiler sees that it's the same as a9b and unites them, all references to a9bb
+> are rewritten to references to a9b (that's what referential transparency gives you :).
+> Hence, when that value is asked for, it is already evaluated, no computation needed, no
+> debug- output.
+

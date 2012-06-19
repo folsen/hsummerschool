@@ -1,0 +1,38 @@
+From acowley at seas.upenn.edu  Mon Feb  7 17:26:30 2011
+From: acowley at seas.upenn.edu (Anthony Cowley)
+Date: Mon, 7 Feb 2011 11:26:30 -0500
+Subject: [Haskell-cafe] coding style vs. foreign interfaces
+In-Reply-To: <20110207031018.F30AA276C45@mail.avvanta.com>
+References: <20110207031018.F30AA276C45@mail.avvanta.com>
+Message-ID: <AANLkTin0RLYYepedjidow5LHv5hdky7HDD0cDtwxEXKa@mail.gmail.com>
+
+On Sun, Feb 6, 2011 at 10:10 PM, Donn Cave <donn at avvanta.com> wrote:
+> Of the people who are apt to be interested, a sizeable percentage
+> already will be familiar with ALARM_STUFF_WENT_WRONG, and as the
+> "nice" Haskell spelling offers no practical advantage at all, it's
+> purely a waste of their time to translate from one to the other.
+> Is screenflicker_frequency() going to be screenFlickerFrequency,
+> or screenflickerFrequency? ?gah!
+
+I don't think it's this simple. It is disheartening to innocently
+download a library from Hackage to find that it only supports a very
+non-Haskelly API. Why am I being punished by the history of a library?
+To support both kinds of users, we have designs like that used in the
+OpenGL library: a Foo-Raw library, with a friendlier API layered on
+top, perhaps in a separate package. If the "friendly" API turns out to
+be no friend of yours, you are free to turn to the raw wrappers.
+
+Perhaps we should aim for a more systematic application of this design
+pattern? I know that I appreciate a more idiomatic Haskell API when it
+is available, and certainly do not want library authors discouraged
+from providing such a service solely due to the provenance of the
+functionality. On the other hand, when I am porting, say, C coded
+against a particular API to Haskell, being able to use a more
+symmetric API is beneficial.
+
+One can keep both APIs in the same package until a legitimate desire
+to split them arises (e.g. to provide alternate high-level APIs).
+
+Anthony
+
+

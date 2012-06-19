@@ -1,0 +1,41 @@
+From chbreitkopf at googlemail.com  Fri Dec  9 14:09:32 2011
+From: chbreitkopf at googlemail.com (Christoph Breitkopf)
+Date: Fri, 9 Dec 2011 14:09:32 +0100
+Subject: [Haskell-cafe] Recommended class instances for container type
+In-Reply-To: <CAK-tuPZNHemOeAkAkU=psEh9EpHGEd25HcH3PwMVJeFt7HoYow@mail.gmail.com>
+References: <CAPTT2bbaiCeJWsYPJfufKaRmOBAA7gcsEtbMYzXcZJX5xFvnUw@mail.gmail.com>
+	<CAK-tuPZNHemOeAkAkU=psEh9EpHGEd25HcH3PwMVJeFt7HoYow@mail.gmail.com>
+Message-ID: <CAPTT2bbsKrOs1NJTskSSAEcFG+=+b9YGky_X2Yx8YyXMFCeHLw@mail.gmail.com>
+
+It's just a variant of Data.Map that takes intervals as keys and offers an
+efficient stabbing query. I'm reasonably optimistic on the performance
+front. Will probably release a 0.1 soon.
+
+Thanks again for all opinions,
+Chris
+Am 08.12.2011 20:41 schrieb "Johan Tibell" <johan.tibell at gmail.com>:
+
+> On Thu, Dec 8, 2011 at 8:12 AM, Christoph Breitkopf <
+> chbreitkopf at googlemail.com> wrote:
+>
+>> Hello,
+>>
+>> I'm in the process of implementing a container data type, and wonder what
+>> class instances are generally considered necessary. E.g. is it ok to start
+>> out with a Show that's adequate for debugging, or is it a 'must' to include
+>> instances of everything possible (Eq, Ord if possible, Read, Show, Functor,
+>> ...).
+>>
+>
+> Start out with Show and spend your time making sure that you're container
+> type performs well (unless you're doing this as an exercise of course). A
+> featureful API for something that's as slow as linked lists isn't very
+> useful. ;)
+>
+> -- Johan
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111209/49009ef8/attachment.htm>
+

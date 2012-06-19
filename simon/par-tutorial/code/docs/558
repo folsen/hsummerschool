@@ -1,0 +1,21 @@
+From quick at sparq.org  Wed Apr 20 23:51:10 2011
+From: quick at sparq.org (Kevin Quick)
+Date: Wed, 20 Apr 2011 14:51:10 -0700
+Subject: [Haskell-cafe] impoosible dependencies
+Message-ID: <op.vt9azkjijmyckg@boqueron>
+
+Hmmm...
+
+$ cabal update
+$ cabal install hakyll
+Resolving dependencies...
+cabal: dependencies conflict: ghc-6.12.3 requires unix ==2.4.0.2 however
+unix-2.4.0.2 was excluded because ghc-6.12.3 requires unix ==2.4.1.0
+$
+
+Any advice (other than upgrading to 7.0.3, which is not an option at the moment)?
+
+-- 
+-KQ
+
+

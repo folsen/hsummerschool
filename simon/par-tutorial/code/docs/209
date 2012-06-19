@@ -1,0 +1,24 @@
+From gale at sefer.org  Thu Apr  7 11:25:29 2011
+From: gale at sefer.org (Yitzchak Gale)
+Date: Thu, 7 Apr 2011 12:25:29 +0300
+Subject: [Haskell-cafe] Local copy of hackageDB
+In-Reply-To: <BANLkTi=dXeg+movZswKiaTavDNaJxhHOuQ@mail.gmail.com>
+References: <BANLkTi=dXeg+movZswKiaTavDNaJxhHOuQ@mail.gmail.com>
+Message-ID: <BANLkTimnPo6rEa5bZV8ORez6KJrsvXKM1Q@mail.gmail.com>
+
+Jos? Pedro Magalh?es wrote:
+> I want to use cabal-install on a machine without internet access.
+
+Work is ongoing for a version of hackage that you can just
+install on your own server. Perhaps the people working on that
+can comment about the status.
+
+If all you want is a barebones server that you can upload
+packages to for use via cabal-install, you can get:
+
+http://hackage.haskell.org/package/yackage
+
+Hope this helps,
+Yitz
+
+

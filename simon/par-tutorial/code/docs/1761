@@ -1,0 +1,88 @@
+From dokondr at gmail.com  Thu Dec  8 17:06:59 2011
+From: dokondr at gmail.com (dokondr)
+Date: Thu, 8 Dec 2011 19:06:59 +0300
+Subject: [Haskell-cafe] Converting string to System.Time.ClockTime
+In-Reply-To: <CAKjSnQGUzbiEZQwdXQCZoeT==u5WQ2p-Gp4a46uE-4WYFSNYTA@mail.gmail.com>
+References: <CAMXF=YB3WXB=O=g58=tEdprQvrO1peHvm0ntZRvbwvDTSjB9Hg@mail.gmail.com>
+	<CAPeieQFKXCVqRDEWui7LH89-1aNWm0jKjF5m6DCp2b63Ax2zFw@mail.gmail.com>
+	<CAMXF=YDUDcVCx4izBg-Uczd_k=+Q2SaXJrNSegNxJ6pVVt9Cqg@mail.gmail.com>
+	<CAMXF=YC-vb=FHSmfNEMjuyFJ5OSy6nckSGOJQNM3XU1Sjqrp5w@mail.gmail.com>
+	<CAKjSnQGOqRNhSXFz17fyFQHYZZaF88Sjf7-i0iLQRpehBBDKwg@mail.gmail.com>
+	<CAMXF=YC2vorO4RdbegqgxHOgW_+ihnr+8t8yiio27NJrCy6Z1g@mail.gmail.com>
+	<CAKjSnQGUzbiEZQwdXQCZoeT==u5WQ2p-Gp4a46uE-4WYFSNYTA@mail.gmail.com>
+Message-ID: <CAMXF=YABFAAkCxO0D3-ApxD2gQQY5-xeEu72QSjkuXBRh8EJnA@mail.gmail.com>
+
+On Thu, Dec 8, 2011 at 7:39 PM, Antoine Latter <aslatter at gmail.com> wrote:
+
+> On Thu, Dec 8, 2011 at 9:30 AM, dokondr <dokondr at gmail.com> wrote:
+> > Ok, maybe you could advise what packages to use for this simple scenario:
+> >
+> > I have two text strings with dates:
+> >
+> > s1 = "Wed, 07 Dec 2011 10:09:21 +0000"
+> > s2 = "Wed, 07 Dec 2011 10:11:00 +0000"
+> >
+> > I need:
+> > 1) Find how many seconds are between  these dates
+> > 2) Calculate the date in the middle between these dates
+>
+> It looks like you already have 1) and 2) finished, using the 'time'
+> package.
+>
+> > 3) Print out all three dates in the different format, like these:
+> >  2011,  7 Dec, Wed, 10:11:00
+>
+> If you need to convert into a specific time-zone you can use the
+> 'utcToLocalTime' function in the 'time' package, which takes a UTCTime
+> and a TimeZone to create a 'LocalTime'. I'm just guessing that you
+> might want this, as your output format doesn't include time-zone
+> information.
+>
+> Then for formatting, the 'Data.Time.Format' module in the 'time'
+> package has the function 'formatTime', which uses the same sort of
+> format string used by 'parseTime'.
+>
+> I hope that helps! It took me a while to find my way around the 'time'
+> package properly.
+>
+> Antoine
+>
+
+
+Thanks so much for your help! I think I finally :) solved this problem:
+
+import Data.Time.Format
+import Data.Time.Clock
+import Locale
+import Data.Maybe
+import Data.Time.Clock.POSIX
+
+timeFormat1 = "%a, %d %b %Y %T %z"
+timeFormat2 = "%m/%e/%Y %l:%M:%S %p"
+
+s1 = "Wed, 07 Dec 2011 10:09:21 +0000"
+s2 = "Wed, 07 Dec 2011 10:11:00 +0000"
+t1 = fromJust $ tryParseTime s1 -- :: UTCTime
+t2 = fromJust $ tryParseTime s2
+pt1 = utcTimeToPOSIXSeconds t1  -- :: POSIXTime
+pt2 = utcTimeToPOSIXSeconds t2
+pt3 = pt1 + (pt2 - pt1) / 2
+t3 = posixSecondsToUTCTime pt3  -- :: UTCTime
+
+-- formatTime :: FormatTime t => TimeLocale -> String -> t -> String
+s3 = formatTime defaultTimeLocale timeFormat2 t3
+
+test = (compare t1 t2) == (compare pt1 pt2)
+
+tryParseTime :: String -> Maybe UTCTime
+tryParseTime timeStr = tryFormat (parseTime defaultTimeLocale timeFormat1
+timeStr :: Maybe UTCTime)
+   where
+     tryFormat time
+        | time == Nothing = parseTime defaultTimeLocale timeFormat2 timeStr
+:: Maybe UTCTime
+        | otherwise = time
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/3400b865/attachment.htm>
+

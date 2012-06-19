@@ -1,0 +1,25 @@
+From tsuraan at gmail.com  Fri Feb  4 01:17:02 2011
+From: tsuraan at gmail.com (tsuraan)
+Date: Thu, 3 Feb 2011 18:17:02 -0600
+Subject: [Haskell-cafe] Haskell AES
+Message-ID: <AANLkTim3doL3o0zOELEn6iyAGHsFwBYCcF3fNwhVA_YB@mail.gmail.com>
+
+I'd like to use AES in a haskell program that I'm writing.  I've come
+across three libraries in hackage that do AES: the library named AES,
+the Crypto library, and the SimpleAES library.  The library named AES
+says in its documentation for the "crypt" function that it is not
+thread-safe.  What exactly does this mean in haskell?  Does it mean
+that if you have separate AESCtx instances in different forkIO
+"threads", that things will break?  Or does it just mean that using
+the same AESCtx in multiple forkIO threads is a bad idea?
+
+I'm asking about that one comment because it looks like SimpleAES is
+probably a wrapper around AES, and the Crypto library also says it
+uses a library named AES, although one by an author not listed in the
+hackage AES library entry.
+
+Can anybody shed some light on the state of AES encryption in haskell?
+What is the preferred library, especially for us in a program that has
+many forkIO'd "threads"?
+
+

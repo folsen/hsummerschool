@@ -1,0 +1,49 @@
+From ckkashyap at gmail.com  Mon Feb  7 15:45:05 2011
+From: ckkashyap at gmail.com (Kashyap C)
+Date: Mon, 7 Feb 2011 06:45:05 -0800
+Subject: [Haskell-cafe] Extending GHCi
+Message-ID: <-2068676738119864391@unknownmsgid>
+
+  I tried a fresh install of Haskell platform on my Vista box and I find
+that starting the thread does not return to the   prompt. Is there some
+setting I need to do?
+
+Sent from my Windows Phone
+------------------------------
+From: Steffen Schuldenzucker
+Sent: Monday, 7 February 2011 6:46 PM
+To: C K Kashyap
+Cc: Haskell Cafe
+Subject: Re: [Haskell-cafe] Extending GHCi
+
+   On 02/07/2011 12:45 PM, C K Kashyap wrote:
+
+
+>  $ ghci
+> GHCi, version 6.12.3: http://www.haskell.org/ghc/  :? for help
+> Loading package ghc-prim ... linking ... done.
+> Loading package integer-gmp ... linking ... done.
+> Loading package base ... linking ... done.
+> Loading package ffi-1.0 ... linking ... done.
+>  Prelude> :m +Data.IORef Control.Concurrent Control.Monad
+> Prelude Data.IORef Control.Concurrent Control.Monad> msg <- newIORef
+> "Hello"
+> Prelude Data.IORef Control.Concurrent Control.Monad> let echo =
+> forever $ readIORef msg >>= putStrLn >> threadDelay 3000000
+> Prelude Data.IORef Control.Concurrent Control.Monad> t <- forkIO echo
+> Hello
+> Prelude Data.IORef Control.Concurrent Control.Monad> Hello
+> Hello
+> writeIORefHello msg "World"
+> Prelude Data.IORef Control.Concurrent Control.Monad> World
+> World
+>
+
+On my mac, this works..but on Linux, the moment I do t <- forkIO ... , it
+starts off a thread in the foreground and does not return to the prompt.
+
+Strange. Works for me (ghc 6.12.1 on Debian squeeze).
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110207/3f0d633b/attachment.htm>
+

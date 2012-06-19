@@ -1,0 +1,19 @@
+From lemming at henning-thielemann.de  Mon Dec 19 16:29:46 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Mon, 19 Dec 2011 16:29:46 +0100 (CET)
+Subject: [Haskell-cafe] compare lengths of lists lazily
+Message-ID: <alpine.DEB.2.00.1112191627120.10178@anubis.informatik.uni-halle.de>
+
+
+Shortest and most obfuscating solution I found is:
+
+
+import Data.Ord (comparing)
+import Control.Applicative ((<$))
+
+compareLength :: [a] -> [a] -> Ordering
+compareLength = comparing (()<$)
+
+:-)
+
+

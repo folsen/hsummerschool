@@ -1,0 +1,30 @@
+From paul.r.ml at gmail.com  Fri Apr 22 10:09:02 2011
+From: paul.r.ml at gmail.com (Paul R)
+Date: Fri, 22 Apr 2011 10:09:02 +0200
+Subject: [Haskell-cafe] Why not Darcs?
+In-Reply-To: <1303428842.3329.7.camel@localhost.localdomain> (Maciej Marcin
+	Piechotka's message of "Fri, 22 Apr 2011 01:34:02 +0200")
+References: <4DB093A6.8000303@btinternet.com>
+	<1303428842.3329.7.camel@localhost.localdomain>
+Message-ID: <87wrimn1wh.fsf@gmail.com>
+
+
+Maciej> I believe the biggest problem was (i.e. when migration started)
+Maciej> that there is no big-name-hosting supporting darcs. When
+Maciej> code.haskell.org went down people were cut off from code.
+
+Please forgive me if the answer is obvious : is Darcs storage "backend
+agnostic", or must it really store things in local filesystem ? AFAIK,
+BitBucket team patched (internally) mercurial to allow storage to amz
+s3.
+
+I don't want to advertise for a particular key-value storage provider,
+but most of them are quiet reliable and cheap. Designing a hub that
+would store everything in such a key-value persistent store should not
+be too hard to get right, reliable and distributed. Hosting it would be
+cheap also.
+
+-- 
+  Paul
+
+

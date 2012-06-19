@@ -1,0 +1,27 @@
+From jimbo.massive-haskell at xyxyx.org  Mon Feb  7 13:36:47 2011
+From: jimbo.massive-haskell at xyxyx.org (Jimbo Massive)
+Date: Mon, 07 Feb 2011 12:36:47 +0000
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <AANLkTinwgZZ=aTz4mAQiGU2M1j9OuPRnrS9O2Au=K+b3@mail.gmail.com>
+References: <4D4B19DB.5000907@btinternet.com>	<AANLkTimTak3jHpg_RPattKoACvkUU31tQydCsgjjS=Oc@mail.gmail.com>	<4D4D6E48.3000903@btinternet.com>
+	<4D4FC689.1080107@xyxyx.org>
+	<AANLkTinwgZZ=aTz4mAQiGU2M1j9OuPRnrS9O2Au=K+b3@mail.gmail.com>
+Message-ID: <4D4FE75F.1000107@xyxyx.org>
+
+On 07/02/2011 11:40, Stephen Tetley wrote:
+
+> Interesting point, but excepting that its adding more complexity
+> Haskell type system, the Clean way of putting strictness information
+> into the type system seems preferable don't you think?
+
+If we were starting from a clean sheet (no pun intended) then yes, I
+would say this is unquestionably preferable.
+
+Given the amount of Haskell code out in the world, I'd expect people to
+argue against it, on the basis that fiddling with the types is quite a
+major change. (Though I would not necessarily be one of those people)
+
+Regards,
+Jimbo
+
+

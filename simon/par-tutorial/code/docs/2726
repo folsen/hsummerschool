@@ -1,0 +1,33 @@
+From fischer at nii.ac.jp  Sat Feb  5 03:35:27 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Sat, 5 Feb 2011 11:35:27 +0900
+Subject: [Haskell-cafe] MonadPeelIO instance for monad transformers on
+ top of "forall"
+In-Reply-To: <AANLkTimhhfkBJ3iS6xjgoAnV0dQ5GfG+otb9BDOHp3So@mail.gmail.com>
+References: <AANLkTimhhfkBJ3iS6xjgoAnV0dQ5GfG+otb9BDOHp3So@mail.gmail.com>
+Message-ID: <AANLkTinT+i4dMSzp_xXOJH82oRSF=QWbfQbzRQMq7mPD@mail.gmail.com>
+
+Hi Max,
+
+data M a = M { unM :: forall m. MonadPeelIO m => Reader.ReaderT () m a }
+>
+> It seems "clear" that there should be a MonadPeelIO instance for M,
+> but I can't for the life of me figure it out.
+
+
+> Have you (or the big brains on Haskell-Cafe, who are CCed) come across
+> this before? Is there an obvious solution I am missing?
+
+
+I have not used monad-peel before so please ignore my comment if I am
+missing something obvious. The documentation mentions that "Instances of
+MonadPeelIO should be constructed via MonadTransPeel, using peelIO =
+liftPeel peelIO". I think this would work at least in your simplified
+example as ReaderT is an instance of MonadTransPeel. Maybe you can take the
+same route with your actual transformer?
+
+Sebastian
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110205/88956f96/attachment.htm>
+

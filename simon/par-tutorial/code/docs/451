@@ -1,0 +1,149 @@
+From patil.nikhil at gmail.com  Sun Apr 17 01:22:13 2011
+From: patil.nikhil at gmail.com (Nikhil A. Patil)
+Date: Sat, 16 Apr 2011 18:22:13 -0500
+Subject: [Haskell-cafe] "import" functionality in DSLs
+In-Reply-To: <BANLkTimx037RWH9zkj2RrYEZqh1NOUfR6g@mail.gmail.com>
+References: <20110416132930.GA20119@ece.utexas.edu>
+	<BANLkTimx037RWH9zkj2RrYEZqh1NOUfR6g@mail.gmail.com>
+Message-ID: <20110416232213.GA23469@ece.utexas.edu>
+
+On Sat, Apr 16, 2011 at 13:49 CDT, Luke Palmer wrote:
+> You can get away with this using {-# LANGUAGE RecordWildCards #-}, if you
+> put your prelude into a record.  Here's a test I did to make sure the
+> technique worked:
+> 
+> {-# LANGUAGE RecordWildCards #-}
+> 
+> import Prelude hiding ((+))
+> 
+> data Foo = Foo {
+>     (+) :: Int -> Int -> Int,
+>     n0  :: Int
+> }
+> 
+> prelude :: IO Foo
+> prelude = return $ Foo { (+) = (*), n0 = 1 }
+> 
+> doit :: IO Int
+> doit = do
+>     Foo{..} <- prelude
+>     return $ n0 + 3 + 4
+
+Oh, that's pretty sweet! Thank you very much! :)
+
+nikhil
+
+> 
+> 
+> ghci> doit
+> 12
+> 
+> On Sat, Apr 16, 2011 at 7:29 AM, Nikhil A. Patil <patil.nikhil at gmail.com>wrote:
+> 
+> > Hi,
+> >
+> > I am planning a simple monadic DSL (frankly, calling it a DSL is a bit
+> > of a stretch; it's just a somewhat glorified state monad), and I wish to
+> > implement some kind of "import" functionality for it.
+> >
+> > The DSL code looks something like this:
+> >
+> > > doit :: DSL Term
+> > > doit = do (+) <- define_function "+" 2
+> > >           n0  <- define_constant "0"
+> > >           k   <- define_constant "k"
+> > >           -- begin beautiful DSL code
+> > >           let x = k + n0
+> > >           return $ x + x
+> >
+> > The code above adds identifiers "+", "0", "k" to the DSL monad and
+> > conveniently exposes haskell identifiers (+), n0, k for the user to use
+> > in code that follows. (Note that these define_* functions make state
+> > updates in the underlying state monad.)
+> >
+> > Needless to say, most functions like doit have very similar define_*
+> > calls in the beginning. Thus, I want to implement some kind of import
+> > functionality. Ideally, the code would look like this:
+> >
+> > > module DSLPrelude where
+> > >
+> > > prelude :: DSL ()
+> > > prelude = do (+) <- define_function "+" 2
+> > >              n0  <- define_constant "0"
+> > >              k   <- define_constant "k"
+> > >              return ()
+> >
+> > > module Main where
+> > > import DSLPrelude
+> > >
+> > > doit :: DSL Term
+> > > doit = do prelude
+> > >           -- begin beautiful DSL code
+> > >           let x = k + n0
+> > >           return $ x + x
+> >
+> > ...but of course that won't work since (+), n0, k are not in scope.
+> >
+> > I can think of two solutions, both of which I dislike:
+> >
+> > Solution 1:
+> >
+> > > module DSLPrelude where
+> > >
+> > > prelude :: DSL (Term -> Term -> Term, Term, Term)
+> > > prelude = do (+) <- define_function "+" 2
+> > >              n0  <- define_constant "0"
+> > >              k   <- define_constant "k"
+> > >              return ((+), n0, k)
+> >
+> > > module Main where
+> > > import DSLPrelude
+> > >
+> > > doit :: DSL Term
+> > > doit = do ((+), k, n0) <- prelude
+> > >           -- begin beautiful DSL code
+> > >           let x = k + n0
+> > >           return $ x + x
+> >
+> > This is quite unsafe: I have mistakenly swapped k and n0 in doit,
+> > without failing typecheck.
+> >
+> > Solution 2:
+> >
+> > > module DSLPrelude where
+> > >
+> > > (+) :: DSL (Term -> Term -> Term)
+> > > n0  :: DSL Term
+> > > k   :: DSL Term
+> > > (+) = define_function "+" 2
+> > > n0  = define_constant "0"
+> > > k   = define_constant "k"
+> >
+> > > module Main where
+> > > import DSLPrelude
+> > >
+> > > doit :: DSL Term
+> > > doit = do (+) <- (+)
+> > >           n0  <- n0
+> > >           k   <- k
+> > >           -- begin beautiful DSL code
+> > >           let x = k + n0
+> > >           return $ x + x
+> >
+> > ...which works, but still has quite a bit of boilerplate crap.
+> >
+> > I feel this would be a common problem with a lot of DSLs, so I am
+> > curious to know how others solve it. Any pointers and suggestions are
+> > most welcome and greatly appreciated.
+> >
+> > Thanks!
+> >
+> > nikhil
+> >
+> > _______________________________________________
+> > Haskell-Cafe mailing list
+> > Haskell-Cafe at haskell.org
+> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+> >
+
+

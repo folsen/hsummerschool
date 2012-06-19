@@ -1,0 +1,80 @@
+From quick at sparq.org  Sat Dec 31 16:09:24 2011
+From: quick at sparq.org (Kevin Quick)
+Date: Sat, 31 Dec 2011 08:09:24 -0700
+Subject: [Haskell-cafe] Avoiding parametric function binding
+Message-ID: <op.v7c0dyztjmyckg@boqueron>
+
+I'm having some difficulty avoiding a tight parametric binding of function  
+parameters, which is limiting the (de)composability of my expressions.   
+I'm curious as to whether there is an option or method I haven't tried to  
+achieve this.
+
+Here's an example test case:
+
+> data Var = V1 (Maybe Int)
+>          | V2 (Maybe String)
+>
+> test = V1 (Just 1)
+
+Given this structure, I can do something like this:
+
+> elemStr :: (Show a) => Maybe a -> String
+> elemStr = show
+>
+> varStr (V1 x) = elemStr $ id x
+> varStr (V2 x) = elemStr $ id x
+>
+> main = putStrLn . varStr $ test
+
+This operation extracted the internal value from the Var container, and  
+then passes it to a parametric function (id) and that result to another  
+parametric function with a class restriction on the input.  This is fine  
+so-far.
+
+However, what I'd like to do is decompose this to allow more flexibility  
+(using id is pretty boring) without having to repeat the extraction  
+boilerplate each time.  My first attempt:
+
+> varElem :: forall x . (Show x) => Var -> x
+> varElem (V1 x) = x
+> varElem (V2 x) = x
+>
+> main = putStrLn . elemStr . varElem $ test
+
+This fails because even though I've specified the same class constraint  
+for the output type of varElem that elemStr requires on its input element,  
+the compiler binds the parametric type of x when it processes the first  
+(V1) definition and fails with an error on the second definition because  
+it asserts that x must be an Int and it found a String.
+
+I realized that the parametric output type was awkward, so I tried  
+inverting the design (somewhat similar to fmap):
+
+> onVarElem :: forall a . (Show a) => (Maybe a -> String) -> Var -> String
+> onVarElem f (V1 x) = f x
+> onVarElem f (V2 x) = f x
+>
+> main = putStrLn . onVarElem elemStr $ test
+
+This is probably a better design, but still fails for the same reason:
+
+     Couldn't match expected type `Int' with actual type `[Char]'
+     Expected type: Maybe Int
+       Actual type: Maybe String
+     In the first argument of `f', namely `x'
+     In the expression: f x
+
+Even changing onVarElem so the second parameter was a simple variable and  
+performing the pattern match in an internal where or let binding failed  
+because the first application of f bind its parametric values.
+
+Is there a way to delay this parametric binding to allow composable  
+function specifications?
+
+Thanks,
+   Kevin
+
+-- 
+-KQ
+
+

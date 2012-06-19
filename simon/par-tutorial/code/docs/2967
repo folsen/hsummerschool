@@ -1,0 +1,55 @@
+From daniel.is.fischer at googlemail.com  Sat Feb 12 16:05:21 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sat, 12 Feb 2011 16:05:21 +0100
+Subject: [Haskell-cafe] Beginner: (Another) Binary Search Tree Question
+In-Reply-To: <1297522349134-3382773.post@n5.nabble.com>
+References: <1297522349134-3382773.post@n5.nabble.com>
+Message-ID: <201102121605.22200.daniel.is.fischer@googlemail.com>
+
+On Saturday 12 February 2011 15:52:29, htc2011 wrote:
+> Hi all,
+>
+> I just started learning Haskell but am having some trouble getting the
+> insertion into a binary search tree to
+> work and was hoping that somebody could advise me on a possible
+> solution. Thanks.
+> Given the data type definition of the tree to be:
+>
+> Code:
+>   data Ord a => BST a = EmptyBST | Node ( BST a ) a ( BST a ) deriving
+> (Show,
+>    Eq)
+> And the insertion function to be:
+>
+> Code:
+>  insert v EmptyBST = Node EmptyBST v EmptyBST
+>    insert v (Node b a c)
+>
+>           | v<= a = Node a ( insert v b ) c
+>           | otherwise = Node a b ( insert v c )
+
+You got the argument order wrong here, it should be tree-value-tree, but 
+you wrote value-tree-tree on both right hand sides (that would mean that a 
+and BST a are the same type, which would be an infinite type).
+
+>
+> GHCI keeps telling me that I 'cannot construct an infinite type':
+> ' Occurs check: cannot construct the infinite type: a = BST (BST a)
+> Expected type: BST a -> BST (BST a) -> a
+> Inferred type: BST a -> BST (BST a) -> BST (BST a)
+> In the second argument of `Node', namely `(insert v b)'
+> In the expression: Node a (insert v b) c'
+> Upon adding the following signature:
+>
+> Code:
+>    insert :: Ord a => a -> BST a -> BST a
+>
+> I get: Occurs check: cannot construct the infinite type.
+>
+> Sorry, but I'm quite lost. Any thoughts?
+>
+> Thanks.
+> Benjamin
+
+
+

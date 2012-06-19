@@ -1,0 +1,33 @@
+From joey at kitenet.net  Tue Dec  6 05:04:20 2011
+From: joey at kitenet.net (Joey Hess)
+Date: Tue, 6 Dec 2011 00:04:20 -0400
+Subject: [Haskell-cafe] ANNOUNCE: monad-control-0.3
+In-Reply-To: <CAKA2JgL0Mq5OKKMh_jYM+8SvHgHTUQfFgPr2PXTG-Nu162zQ9Q@mail.gmail.com>
+References: <CADLz5wW4oZbBtKMb7UQ8qQdn3UayBSQ-TL66VLG3hGXCUk_npg@mail.gmail.com>
+	<CADLz5wVs3AGCagikDMJVKVm-RJjgMhCbs7LJtxGPqi_rLbjRqQ@mail.gmail.com>
+	<20111206030316.GA25805@gnu.kitenet.net>
+	<CAKA2JgL0Mq5OKKMh_jYM+8SvHgHTUQfFgPr2PXTG-Nu162zQ9Q@mail.gmail.com>
+Message-ID: <20111206040420.GA31124@gnu.kitenet.net>
+
+Michael Snoyman wrote:
+> I just spent a fair amount of time yesterday upgrading packages to
+> monad-control 0.3. What I had to do was add in the MonadTransControl
+> and MonadBaseControl instances manually. It's actually not too
+> difficult; just copy out the instance for StateT and make a few
+> changes. Be warned that Bas used some tricky CPP stuff, however, which
+> you'll have to unwind ;).
+
+I forgot to mention that I tried doing that, based on the example in the
+haddock, but failed miserably. Care to share a working example, perhaps
+in the form of a patch to the monad-control haddock? :)
+
+-- 
+see shy jo
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 828 bytes
+Desc: Digital signature
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111206/de3e5e31/attachment.pgp>
+

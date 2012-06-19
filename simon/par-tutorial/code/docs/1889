@@ -1,0 +1,52 @@
+From spam at scientician.net  Tue Dec 13 07:00:32 2011
+From: spam at scientician.net (Bardur Arantsson)
+Date: Tue, 13 Dec 2011 07:00:32 +0100
+Subject: [Haskell-cafe] ANNOUNCE: hxournal-0.5.0.0 - A pen notetaking
+ program written in haskell
+In-Reply-To: <CAKFCL4XQceD_Y0Cv4oViYrfCwLRcbeG9EQOjOMScCfDZ=iWq4g@mail.gmail.com>
+References: <CAPNnnrV329dsY_cB=K7q1-REUE5os7+u+psqN=rWeq9Crz6JEQ@mail.gmail.com>
+	<CACZKWEL6=_f+HTckrrgqCZj-EWKHJpw3TSEaBvXOBhZFOeFAOg@mail.gmail.com>
+	<CAPNnnrXoaY36PRRvM3_EtoX+HFLkyRy_F-jtr11qZtW-4izVGQ@mail.gmail.com>
+	<CAKFCL4XQceD_Y0Cv4oViYrfCwLRcbeG9EQOjOMScCfDZ=iWq4g@mail.gmail.com>
+Message-ID: <jc6pm6$q24$1@dough.gmane.org>
+
+On 12/13/2011 02:43 AM, Brandon Allbery wrote:
+> On Mon, Dec 12, 2011 at 19:22, Ian-Woo Kim<ianwookim at gmail.com>  wrote:
+>
+>> A workaround is to make a symbolic link to libstdc++.so.6 with the
+>> name of libstdc++.so in /usr/lib or /usr/local/lib or other dynamic
+>> library path like the following.
+>>
+>> ln -s /usr/lib/libstdc++.so.6 /usr/lib/libstdc++.so
+>>
+
+AFAICT, this is incorrect and should be something like
+
+    ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /usr/lib/libstdc++.so
+
+(where x86_64-linux-gnu depends on your platform).
+
+Normally this isn't a problem since to above-mentioned directory is in 
+ld.so.conf, but that (apparently) isn't handled correctly by GHC.
+
+A less permanent workaround is to just add
+
+    /usr/lib/x86_64-linux-gnu
+
+to your LD_LIBRARY_PATH in your environment before running anything GHC 
+related.
+
+> This is an indication that you have not installed your distribution's -dev
+> package for the library in question.  You should do so instead of making
+> the symlink manually.
+>
+
+Many distros have started to *not* install a /usr/lib/libstdc++.so 
+symlink (nor even any /usr/lib/libstdc++*.so files at all) in /usr/lib,
+preferring to use the above-mentioned directory instead and listing it 
+in /etc/ld.so.conf.
+
+It has something to do with getting saner multilib (and multiarch?) support.
+
+
+

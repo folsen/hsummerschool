@@ -1,0 +1,24 @@
+From mats.rauhala at gmail.com  Tue Apr 19 21:14:00 2011
+From: mats.rauhala at gmail.com (Mats Rauhala)
+Date: Tue, 19 Apr 2011 22:14:00 +0300
+Subject: [Haskell-cafe] Painless parallelization.
+In-Reply-To: <662211303239092@web69.yandex.ru>
+References: <662211303239092@web69.yandex.ru>
+Message-ID: <20110419191400.GA5689@libre.local>
+
+You could look into par and pseq combinators and parallel strategies[1].
+Real world haskell[2] has some examples on the usage.
+
+1. http://hackage.haskell.org/package/parallel
+2. http://book.realworldhaskell.org/read/concurrent-and-multicore-programming.html
+
+-- 
+Mats Rauhala
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110419/4b1cb5db/attachment.pgp>
+

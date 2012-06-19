@@ -1,0 +1,33 @@
+From pumpkingod at gmail.com  Thu Dec 15 21:05:55 2011
+From: pumpkingod at gmail.com (Daniel Peebles)
+Date: Thu, 15 Dec 2011 15:05:55 -0500
+Subject: [Haskell-cafe] smt solver bindings
+In-Reply-To: <C0207498A084F14E85CA5D588539FA0F0B81CE80@DB3EX14MBXC311.europe.corp.microsoft.com>
+References: <C0207498A084F14E85CA5D588539FA0F0B81CE80@DB3EX14MBXC311.europe.corp.microsoft.com>
+Message-ID: <CANaM3xDB+AGFifJ=wCj92EwNF5x=FfxL4_nKbwiXzk-3t0APkQ@mail.gmail.com>
+
+Not that I know of, but I would like them too. There are a few bindings to
+yices, but I don't think yices has the feature I want in it.
+
+On Thu, Dec 15, 2011 at 1:04 PM, Dimitrios Vytiniotis <
+dimitris at microsoft.com> wrote:
+
+>
+> I've a quick question:
+>
+> Are there Haskell wrappers for the Z3 C API around?
+>
+> Thanks!
+> d-
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/bfa7b44e/attachment.htm>
+

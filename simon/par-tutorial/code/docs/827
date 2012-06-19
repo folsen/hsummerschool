@@ -1,0 +1,42 @@
+From qdunkan at gmail.com  Thu Apr 28 17:00:49 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Thu, 28 Apr 2011 20:30:49 +0530
+Subject: [Haskell-cafe] Binary and Serialize classes
+Message-ID: <BANLkTinQ3xKU3Fu5N74oSM36sCDuPd7=rw@mail.gmail.com>
+
+It's been remarked to me that relying on the Binary and Serialize
+classes is dangerous, because there's no guarantee they won't maintain
+a consistent format.  So if my app uses the Serialize instances that
+come with cereal, it could suddenly fail to read old saves after an
+upgrade to cereal.
+
+However, neither binary nor cereal expose the underlying serialization
+algorithms for various types except through the instances, so I would
+have to copy and paste the code over if I want control over it.  If I
+don't trust 'instance Serialize String' to not change behind my back,
+maybe I could at least trust 'Data.Serialize.stringToUtf8' to not
+change since if it did the name would now be wrong.
+
+Are these fears justified?  I imagine if the Int instance for
+Serialize changed there would be an uproar and it would probably have
+to be changed back.  I sent a bug to the maintainers of data-binary a
+long time ago about the Double instance not serializing -0, and they
+ignored it, probably because it would be bad to change the instance.
+So can I use the included instances without fear of them changing
+between releases?  Of course I still run the risk of an instance from
+some other package changing, but I'm less likely to be using those.
+
+
+Speaking of that Double instance... both data-binary and cereal use
+decodeFloat and encodeFloat which mean they suffer from the same
+problems as realToFrac, namely that -0 becomes 0 and NaN becomes
+-Infinity (I'm not sure why the latter happens since the decoded
+values differ... must be a problem with encodeFloat).  It's tempting
+to just get the ieee754 bitmap out and serialize that.  I know I've
+seen this question around before, but is it possible to somehow cast a
+D# directly to bytes?  I know I can write a C function and FFI that
+in, but it would be tidier to do it all in haskell.  I guess I can
+probably use castPtr and memCpy, but I don't see the required
+addressOf.  I.e. how would I write 'memcpy(buf, &d, sizeof(double));'?
+
+

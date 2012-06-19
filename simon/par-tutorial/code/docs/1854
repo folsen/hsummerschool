@@ -1,0 +1,45 @@
+From malcolm.wallace at me.com  Mon Dec 12 08:42:24 2011
+From: malcolm.wallace at me.com (Malcolm Wallace)
+Date: Mon, 12 Dec 2011 07:42:24 +0000
+Subject: [Haskell-cafe] HaXml 1.13 -> 1.22 upgrade
+In-Reply-To: <4EE4C486.4060206@orlitzky.com>
+References: <4EE448DF.9030400@orlitzky.com>
+	<CAKjSnQE23zX7_jn8GnoA3tVABYYAM22CZ-Jqab8+YX3CK5K-fg@mail.gmail.com>
+	<4EE4C486.4060206@orlitzky.com>
+Message-ID: <D93A33CA-12B5-4B89-A78A-88FD4C1BD78D@me.com>
+
+The extra parameter "i" is for "information" attached to each node of the tree.  As you have correctly guessed, the parser fills in this field with positional information relating to the original source document, which is useful for instance if you are validating or checking the original document.  When building new parts of a document, it is perfectly fine to attach "noPos".
+
+You can alternatively replace all of the informational items in the tree, with for instance "fmap (const ())" if you don't care about them.
+
+The information fields are useful for other purposes though, e.g. to hold the relevant xmlns namespace for subtrees; or to distinguish added/removed/modified subtrees in a diff-like viewer.
+
+Regards,
+    Malcolm
+
+
+On 11/12/2011, at 14:56, Michael Orlitzky <michael at orlitzky.com> wrote:
+
+> On 12/11/2011 01:36 AM, Antoine Latter wrote:
+>> 
+>> It looks like the function 'xmlParse' returns a value of type
+>> 'Document Posn', according to the API docs. I'm guessing the 'Posn'
+>> value is used to annotate the position in the source document a
+>> particular piece of XML came from, so you can report errors better.
+>> 
+>> Since the pretty-printing functions ignore it, you can replace it with
+>> whatever you want, even with a value of a different type if you have a
+>> need to annotate the tree.
+> 
+> Thanks, I was able to get it working after a little sleep/coffee.
+> 
+> The migration guide says to replace all of the 'i' with () if you don't care about them, so I tried that, but it doesn't work in this case: the two 'i' in (CElem (Element i) i) have to match.
+> 
+> The only way I see to construct a Posn is with noPos, so I stuck that in there. It's probably not correct, but it compiles and runs, so it's correct =)
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

@@ -1,0 +1,34 @@
+From dons00 at gmail.com  Fri Apr 22 19:15:33 2011
+From: dons00 at gmail.com (Don Stewart)
+Date: Fri, 22 Apr 2011 10:15:33 -0700
+Subject: [Haskell-cafe] Is Hugs dead?
+In-Reply-To: <1303474568.13029.4.camel@fuzxxl>
+References: <1303474568.13029.4.camel@fuzxxl>
+Message-ID: <BANLkTi=BuVvcdD8yDRtC-23WJNN-XC0FhQ@mail.gmail.com>
+
+Strong recommendation is to use the Haskell Platform and GHC as your
+development base, unless you have very specific reasons to use Hugs or
+one of the other compilers.
+
+-- Don
+
+On Fri, Apr 22, 2011 at 5:16 AM, Robert Clausecker <fuzxxl at gmail.com> wrote:
+> Some weeks ago, I mirrored the hugs repo to github.
+> (https://github.com/fuzxxl/Hugs) This was, when I found out, that the
+> last commit was about 2 years ago. Also, since some of the dependencies
+> moved, I was unable to build hugs.
+>
+> Now my question is: Is Hugs dead? What's the status of development of
+> hugs?
+>
+> Yours, Robert Clausecker
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

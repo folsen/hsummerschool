@@ -1,0 +1,32 @@
+From lemming at henning-thielemann.de  Tue Apr 12 11:38:16 2011
+From: lemming at henning-thielemann.de (Henning Thielemann)
+Date: Tue, 12 Apr 2011 11:38:16 +0200 (CEST)
+Subject: [Haskell-cafe] Assimp FFI Library
+In-Reply-To: <BANLkTimW-71NcBRqnr68kRAvKZytE1uVwA@mail.gmail.com>
+References: <BANLkTimW-71NcBRqnr68kRAvKZytE1uVwA@mail.gmail.com>
+Message-ID: <alpine.DEB.2.00.1104121137140.1963@anubis>
+
+
+On Mon, 11 Apr 2011, Joel Burget wrote:
+
+> I should mention that I'm going to convert all the Storable instances from something
+> like this:
+> > ?peek p = do
+> > ? ?w <- (#peek aiQuaternion, w) p
+> > ? ?x <- (#peek aiQuaternion, x) p
+> > ? ?y <- (#peek aiQuaternion, y) p
+> > ? ?z <- (#peek aiQuaternion, z) p
+> > ? ?return $ Quaternion w x y z
+> 
+> to something like this:
+> 
+> > ?peek p = Quaternion <$> (#peek aiQuaternion, w) p?
+> > ? ? ? ? ? ? ? ? ? ? ?<*> (#peek aiQuaternion, w) p?
+> > ? ? ? ? ? ? ? ? ? ? ?<*> (#peek aiQuaternion, w) p
+> > ? ? ? ? ? ? ? ? ? ? ?<*> (#peek aiQuaternion, w) p
+
+
+I think it must be (pure Quaternion). I have written storable-record 
+package that assists with writing such instances.
+
+

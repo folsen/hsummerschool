@@ -1,0 +1,82 @@
+From limestrael at gmail.com  Sat Dec 24 16:54:53 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Sat, 24 Dec 2011 16:54:53 +0100
+Subject: [Haskell-cafe] strict, lazy, non-strict, eager
+In-Reply-To: <BB305731-490E-41FE-8F0C-9F6140804BFE@gmail.com>
+References: <4EF57FC9.1030505@vex.net>
+	<CACqaG6yr-PVvri=+2e5rTgXiiHHOoccM2fLaq6CcBMC2Ub1p2g@mail.gmail.com>
+	<20111224084728.GA28337@wavelet>
+	<BB305731-490E-41FE-8F0C-9F6140804BFE@gmail.com>
+Message-ID: <CACqaG6yZQ19o5VHSoCBqUuOS5QcXzxSNAyS1gzhsmcgHVpWztg@mail.gmail.com>
+
+I'm gonna clarify my point a little ^^.
+
+In fact pedantry was involved. The way Albert started his original post was
+pedantic.
+The scaring effect was mostly caused by such discourse showing two things:
+- Haskellers make use of obscure terms and distinctions (e.g. "denotational
+semantics")
+- ...whose meaning does not make a consensus amongst Haskellers *themselves*
+!
+Seeing that from an outsider point of view kind of makes you think: "OMG,
+what are those hairy guys inventing weird concepts they're not even capable
+to agree upon!" ^^
+
+And to prove my second post -- as I expected -- has come someone (MigMit)
+to question Albert's statements.
+
+Plus no one is really stating clearly at which level the terms "eager",
+"strict" and "lazy" should be involved (for instance in Haskell's
+specification or in GHC's implementation).
+
+2011/12/24 Gregory Crosswhite <gcrosswhite at gmail.com>
+
+> On Dec 24, 2011, at 6:47 PM, Murray Campbell wrote:
+>
+> It's too late to avoid success at all costs but please don't banish our
+> precious pedantry!
+>
+> Scare on!
+>
+>
+> Please don't misunderstand, I have absolutely no problems at all with
+> people arguing voraciously and pedantically over ideas, as long as they are
+> doing so respectfully, impersonally, politely and open-mindedly.  In fact,
+> like you I welcome such discourse, and the fact that this list provides
+> such a nice environment for it is part of the reason why I like it so much.
+>  :-)  (See, for example, the argument that I started a few days ago over
+> whether some/many belong in Alternative a few days ago.)
+>
+> Having said that, there is no small difference between
+>
+> "Hey everyone!  I have been thinking about something for a while, and I
+> have an idea with which many of you will most likely strongly disagree.
+>  Here it is, and I welcome your feedback on it!"
+>
+> and
+>
+> "You all have long been maintaining a cognitive dissonance that in some
+> cases turns into plain hypocrisy, and the only reason I hadn't complained
+> about it until now was because I have been waiting for unmistakable
+> evidence, a smoking gun, a red hand so caught that you cannot explain away.
+>  Here it is.  Now people, could you please make up your mind already?  It
+> has been more than 13 years."
+>
+> The former invites open discussion in a friendly and positive environment,
+> whereas the latter at best turns people off from wanting to respond
+> positively, and at worst provokes angry responses that further poison the
+> well.
+>
+> Cheers,
+> Greg
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111224/b361b8be/attachment.htm>
+

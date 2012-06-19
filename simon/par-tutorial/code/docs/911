@@ -1,0 +1,48 @@
+From fischer at nii.ac.jp  Tue Aug  2 06:16:07 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Tue, 2 Aug 2011 13:16:07 +0900
+Subject: [Haskell-cafe] strictness properties of monoidal folds
+Message-ID: <CALoEywNW_WZuu+xnQsenNyo_cDnyiZF9Dcpn5CcO73YaZDbgYQ@mail.gmail.com>
+
+Hello Cafe,
+
+left- and rightwards folds come in strict and lazy variants foldl/fold' and
+foldr/foldr' which makes sense because strict versions sometimes use less
+stack space while lazy versions support infinite data. For example,
+
+    head (foldr (:) [] [1..])
+
+returns in an instant while
+
+    head (foldr' (:) [] [1..])
+
+diverges. On the other hand
+
+    foldl' (flip (:)) 0 [1..10^9]
+
+runs in constant space while
+
+    foldl (flip (:)) 0 [1..10^9]
+
+consumes all memory available on my machine (at least without optimizations.
+With optimizations GHC's strictness analyzer seems to be smart enough to
+make the accumulator strict.)
+
+Data.Foldable also provides the monoidal fold function foldMap. It is left
+unspecified whether the elements are accumulated leftwards, rightwards or in
+some other way, which is possible because the combining function is required
+to be associative. Does this additional freedom for implementors go so far
+as to allow for strict accumulation? Is it safe to implement foldMap
+(without prime) with a strict accumulator or are there examples where lazy
+accumulation is useful like in the above foldr example and distinguishable
+from strict accumulation without breaking the monoid laws?
+
+Sebastian
+
+P.S. I thought the `Last` monoid would be an example that requires a lazy
+accumulator but it is not because the `Just` constructor guards list
+elements.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110802/6bdaf59e/attachment.htm>
+

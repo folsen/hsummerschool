@@ -1,0 +1,50 @@
+From liuxinyu95 at gmail.com  Fri Apr 22 10:28:48 2011
+From: liuxinyu95 at gmail.com (larry.liuxinyu)
+Date: Fri, 22 Apr 2011 01:28:48 -0700 (PDT)
+Subject: [Haskell-cafe] QuickCheck, (Ord a)=> [a] -> Property problem
+In-Reply-To: <87ei4vl13w.fsf@eee.8325.org>
+References: <78a0d4c2-d239-490c-a490-491f0dcabfd5@f11g2000vbx.googlegroups.com>
+	<87k4ep540u.fsf@eee.8325.org>
+	<8d6edbcb-16f1-4501-b790-f45835c1c001@d12g2000vbz.googlegroups.com>
+	<87ei4vl13w.fsf@eee.8325.org>
+Message-ID: <3cb0685d-258a-40e9-bc57-2414e0e17fcc@o26g2000vby.googlegroups.com>
+
+Hi,
+
+I tested with Haskell platform 2011 with QuickCheck 2.4.0.1.
+It produced 100 cases passed, but can't report failed case.
+verboseCheck still told me that [(), (), ... ()] are generated as
+instance to (Ord a)
+
+The only way is to specify the non-ambitious type for example, Int,
+like below:
+
+test (prop_foo::[Int]->Property)
+
+Cheers.
+--
+Larry.
+
+On Apr 22, 5:56?am, Nick Smallbone <nick.smallb... at gmail.com> wrote:
+> "larry.liuxinyu" <liuxiny... at gmail.com> writes:
+> > Somebody told me that:
+> > Eduard Sergeev ? BTW, more recent QuickCheck (from Haskell Platform
+> > 2011.2.0.X - contains QuickCheck-2.4.0.1) seems to identifies the
+> > problem correctly:
+>
+> > *** Failed! Falsifiable (after 3 tests and 2 shrinks):
+> > [0,1]
+> > False
+>
+> I don't think this can be true: the problem occurs in GHCi and there's
+> no way for QuickCheck to detect it. And when I tested it I got the same
+> problem. There must be some difference between the properties you both
+> tested...
+>
+> Nick
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-C... at haskell.orghttp://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

@@ -1,0 +1,29 @@
+From michael at snoyman.com  Mon Aug  1 05:08:10 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Mon, 1 Aug 2011 06:08:10 +0300
+Subject: [Haskell-cafe] A language that runs on the JVM or .NET has the
+ advantage of Oracle & Microsoft making those layers more parallelizable.
+In-Reply-To: <CACG=oWE8Bh3ueZRtomxLEX_FEewz2UbfOsfb1dH+t5xssgiGfA@mail.gmail.com>
+References: <CAMLKXynsdeGg1eLoNGihp-Md8ACPKdZpa=VNMZMr+Z8ZMvtBLA@mail.gmail.com>
+	<1312143078.2097.2.camel@picard>
+	<CACG=oWE8Bh3ueZRtomxLEX_FEewz2UbfOsfb1dH+t5xssgiGfA@mail.gmail.com>
+Message-ID: <CAKA2JgLXio5wjemsEuP9JGyf3xoOEmaRYUkCjOpi32YsKXtGPA@mail.gmail.com>
+
+On Sun, Jul 31, 2011 at 11:33 PM, Niklas Larsson <metaniklas at gmail.com> wrote:
+>>
+>> I m not GHC developer but wouldn't JVM LLVM backend be sufficient? Since
+>> new GHC AFAIK uses LLVM then it would allow compiling Haskell to LLVM
+>> and LLVM to JVM.
+>>
+>
+> The hard part wouldn't be the code generation, but the interop with
+> the class libraries, finding a workable way to use Java classes from
+> Haskell and exporting Haskell code masquerading as Java classes.
+
+I personally would be very happy to just get Haskell code to run in
+the JVM, forgetting entirely about interop. It would greatly reduce
+barrier-to-entry when trying to send Haskell code to clients.
+
+Michael
+
+

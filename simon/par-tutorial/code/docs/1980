@@ -1,0 +1,34 @@
+From scpmw at leeds.ac.uk  Thu Dec 15 15:48:01 2011
+From: scpmw at leeds.ac.uk (Peter Wortmann)
+Date: Thu, 15 Dec 2011 14:48:01 +0000
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+Message-ID: <1323960481.2894.10.camel@cslin101.csunix.comp.leeds.ac.uk>
+
+
+Hi
+
+I was running into a similar problem while working on GHC not long ago -
+short version is that it's not even possible to find out the executable
+path portably from C [1]. Using argv[0] just gave me the path of the GHC
+wrapper script, for example - as it uses exec without "-a".
+
+The whole thing is easiest if you're on Linux:
+
+  getExePath = readSymbolicLink "/proc/self/exe"
+
+On all other operation system, one needs to start mucking around with
+custom kernel calls.
+
+Or, more realistically, try to find a way around requiring it...
+
+Greetings,
+  Peter Wortmann
+
+[1] http://stackoverflow.com/questions/1023306
+
+
+
+
+

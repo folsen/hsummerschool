@@ -1,0 +1,18 @@
+From vandijk.roel at gmail.com  Thu Apr 14 11:47:34 2011
+From: vandijk.roel at gmail.com (Roel van Dijk)
+Date: Thu, 14 Apr 2011 11:47:34 +0200
+Subject: [Haskell-cafe] IO and Cont as monads
+In-Reply-To: <BANLkTi=USNYyegHZ3i5kkfxh_Ta41xb4gA@mail.gmail.com>
+References: <COL123-W183410A2B76C9121FE8797CDAB0@phx.gbl>
+	<BANLkTi=USNYyegHZ3i5kkfxh_Ta41xb4gA@mail.gmail.com>
+Message-ID: <BANLkTi=TJKeJds0E3e-MSUBTEd1tKb64Qg@mail.gmail.com>
+
+On 13 April 2011 21:26, Tim Chevalier <catamorphism at gmail.com> wrote:
+> IO doesn't obey the monad laws, due to the presence of seq in Haskell.
+> Sad but true...
+
+See also a previous discussion about IO and the Monad laws:
+
+http://www.haskell.org/pipermail/haskell-cafe/2010-March/074001.html
+
+

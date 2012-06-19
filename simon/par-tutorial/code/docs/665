@@ -1,0 +1,33 @@
+From ketil at malde.org  Sat Apr 23 14:27:58 2011
+From: ketil at malde.org (Ketil Malde)
+Date: Sat, 23 Apr 2011 14:27:58 +0200
+Subject: [Haskell-cafe] There is no null; Maybe/Option types
+In-Reply-To: <BANLkTi=oYmQrjTwnhSZM21qg2OC4oe65hQ@mail.gmail.com> (Evan
+	Laforge's message of "Sat, 23 Apr 2011 11:22:51 +0530")
+References: <BANLkTi=irBB_YvfEm3ms0Vxd6xDb7tcPcg@mail.gmail.com>
+	<BANLkTi=oYmQrjTwnhSZM21qg2OC4oe65hQ@mail.gmail.com>
+Message-ID: <874o5p17ap.fsf@malde.org>
+
+Evan Laforge <qdunkan at gmail.com> writes:
+
+>> Most of the (non-IO) runtime errors I get using Haskell software is
+>> due to head or fromJust, it's actually quite annoying. 
+
+> Just singling this one out because I've heard it before.  I've never
+> gotten a runtime error from these.  It seems quite easy to just not
+> use these functions.
+
+Unfortunately, it is quite easy to just use them, too :-)  Sometimes I
+just *know* that this list will never be empty, or that that Maybe will
+never be nothing - but often I'm wrong.
+
+Maybe is in a sense easier, as 'Maybe a' and 'a' are different types,
+while there isn't a similarly elegant type distinction between lists
+that may be empty and lists with at least one element.  Maybe is really
+quite brilliant.
+
+-k
+-- 
+If I haven't seen further, it is by standing in the footprints of giants
+
+

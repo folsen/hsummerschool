@@ -1,0 +1,47 @@
+From technology at jonkristensen.com  Tue Apr 12 18:40:06 2011
+From: technology at jonkristensen.com (Jon Kristensen)
+Date: Tue, 12 Apr 2011 18:40:06 +0200
+Subject: [Haskell-cafe] RFC: Extendable and Easy-To-Use Logger (HLogger)
+Message-ID: <4DA48066.10805@jonkristensen.com>
+
+Hello Haskellers!
+
+I have developed a very simple logging library to be extendable and 
+easy-to-use. You can see the current release at 
+http://hackage.haskell.org/package/hlogger/. The SimpleHLogger module is 
+an example of what a HLogger implementation could look like. It could be 
+used like this:
+
+    import System.Log.SimpleHLogger
+
+    main = do
+
+       logger<- simpleLogger "test"
+
+       loggerLog logger (Just ("LoggerTest", "main")) Debug "Test"
+
+       loggerStop logger
+
+
+As I have now implemented everything that I could think of, I would like 
+to ask the Haskell community to give some feedback on HLogger so that I 
+can continuing improving it. Some questions:
+
+   1. Do you have any general/architectural thoughts on things I might
+      be doing wrong?
+   2. Is the ease-of-use goal contradicting making this library useful
+      in more complex applications?
+   3. Do I want to redesign HLogger to allow loggers to have a mutable
+      state, and if so, how can I do that?
+   4. Is there a nice way to provide the module and the function than
+      using (Just ("LoggerTest, "main)) (shortening it somehow, I guess)?
+
+
+Thanks!
+
+Warm regards,
+Jon Kristensen
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110412/ebca8dd2/attachment.htm>
+

@@ -1,0 +1,29 @@
+From bos at serpentine.com  Mon Feb  7 23:37:24 2011
+From: bos at serpentine.com (Bryan O'Sullivan)
+Date: Mon, 7 Feb 2011 14:37:24 -0800
+Subject: [Haskell-cafe] [web-devel] http-enumerator: redirects,
+ streaming and keep-alive
+In-Reply-To: <AANLkTiknCH6O20cDakf0jTUh80xP+whqpC20+rvUi=OL@mail.gmail.com>
+References: <AANLkTimXn=Dkb-eAkSUNMnVqs6wsT7DqG_UDBV4qyWzT@mail.gmail.com>
+	<AANLkTimwZVTvrSaTzRGQ+8XqAgL9Lyu3yC2ZaA=RfymD@mail.gmail.com>
+	<AANLkTikidKe2LHUv6Hc_VB5Bg4yH6meusY1hDyq0730z@mail.gmail.com>
+	<AANLkTi=NJNaS7ucqq=mtr0wdZGSLcn6oJdXs4D1jd-WQ@mail.gmail.com>
+	<AANLkTiknCH6O20cDakf0jTUh80xP+whqpC20+rvUi=OL@mail.gmail.com>
+Message-ID: <AANLkTinFVkH0Osz-SMp-zE1UyfJBy81fV43K0sA-AuW7@mail.gmail.com>
+
+On Wed, Feb 2, 2011 at 1:01 PM, Felipe Almeida Lessa <felipe.lessa at gmail.com
+> wrote:
+
+>
+> And what about connection limits?  We shouldn't create a thousand
+> connections to the same host =).
+
+
+For what it's worth, I wrote a connection pool manager for the riak package
+that has to solve some of the same problems.
+
+https://github.com/mailrank/riak-haskell-client/blob/master/src/Network/Riak/Connection/Pool.hs
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110207/dbe6b47a/attachment.htm>
+

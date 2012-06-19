@@ -1,0 +1,48 @@
+From v.dijk.bas at gmail.com  Sat Dec  3 00:45:33 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Sat, 3 Dec 2011 00:45:33 +0100
+Subject: [Haskell-cafe] ANNOUNCE: monad-control-0.3
+Message-ID: <CADLz5wW4oZbBtKMb7UQ8qQdn3UayBSQ-TL66VLG3hGXCUk_npg@mail.gmail.com>
+
+Hello,
+
+I just released monad-control-0.3. The package for lifting control
+operations (like catch, bracket, mask, alloca, timeout, forkIO,
+modifyMVar, etc.) through monad transformers:
+
+http://hackage.haskell.org/package/monad-control-0.3
+
+It has a new and improved API which is:
+
+* easier to understand by explicitly representing the monadic state
+using type families.
+* 60 times faster than the previous release!
+* more general because control operations can now, not only be lifted
+from IO, but from any base monad (ST, STM, etc.)
+
+I also released a new package: lifted-base:
+
+http://hackage.haskell.org/package/lifted-base-0.1
+
+It provides lifted versions of functions from the base library.
+Currently it exports the following modules:
+
+* Control.Exception.Lifted
+* Control.Concurrent.Lifted
+* Control.Concurrent.MVar.Lifted
+* System.Timeout.Lifted
+
+These are just modules which people have needed in the past. If you
+need a lifted version of some function, just ask me to add it or send
+me a patch.
+
+Note that Peter Simons just discovered that these packages don't build
+with GHC-7.0.4 (https://github.com/basvandijk/monad-control/issues/3).
+I just committed some fixes which enable them to be build on GHC >=
+6.12.3. Hopefully I can release these fixes this weekend.
+
+Regards,
+
+Bas
+
+

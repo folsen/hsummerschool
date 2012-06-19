@@ -1,0 +1,34 @@
+From benl at ouroborus.net  Tue Dec 20 11:24:43 2011
+From: benl at ouroborus.net (Ben Lippmeier)
+Date: Tue, 20 Dec 2011 21:24:43 +1100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CABLneZtjwxeZD0-Lkout1vc4Tju8N4Bd8TpQMeX5KS=i9t4xSQ@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CABLneZtjwxeZD0-Lkout1vc4Tju8N4Bd8TpQMeX5KS=i9t4xSQ@mail.gmail.com>
+Message-ID: <1D39392B-1BB5-4FF4-80B1-EDEBE4CF1A52@ouroborus.net>
+
+
+On 20/12/2011, at 9:06 PM, Thiago Negri wrote:
+>> There isn't one!
+>> 
+>> Bottoms will be the null pointers of the 2010's, you watch.
+
+
+> How would you represent it then?
+
+Types probably. In C, the badness of null pointers is that when you inspect an  int*  you don't always find an int. Of course the superior Haskell solution is to use algebraic data types, and represent a possibly exceptional integer by "Maybe Int". But then when you inspect a "Maybe Int" you don't always get an .. ah.
+
+
+> Would it cause a compiler error?
+
+
+Depends whether you really wanted an Int or not.
+
+Ben.
+
+
+

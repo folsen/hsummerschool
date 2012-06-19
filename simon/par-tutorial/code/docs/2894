@@ -1,0 +1,33 @@
+From alexey.skladnoy at gmail.com  Wed Feb  9 19:33:51 2011
+From: alexey.skladnoy at gmail.com (Alexey Khudyakov)
+Date: Wed, 09 Feb 2011 21:33:51 +0300
+Subject: [Haskell-cafe] Synthetic values?
+In-Reply-To: <1297274260.19300.52.camel@godel>
+References: <AANLkTimsWsfdkPLK4yQRHt3OcBGUiN2FGAwG52DvKCpD@mail.gmail.com>
+	<1297274260.19300.52.camel@godel>
+Message-ID: <4D52DE0F.4050400@gmail.com>
+
+On 09.02.2011 20:57, Chris Smith wrote:
+> On Wed, 2011-02-09 at 18:15 +0100, Cristiano Paris wrote:
+>> I've a type problem that I cannot solve and, before I keep banging my
+>> head against an unbreakable wall, I'd like to discuss it with the
+>> list.
+>
+> If I'm understanding your high-level goals correctly, then you're going
+> about things the wrong way.  It looks like in your "Sealed" type, you're
+> accumulating a list of type class constraints that are needed by a
+> phantom type, in order to access the value.  But type classes are open;
+> anyone can make any new type an instance of the type class whenever they
+> want.
+>
+
+It's possible to have closed type classes. Trick consist in adding 
+unsatisfiable constraint. For example:
+
+ > -- This type class is not exported
+ > class Private a
+ > class Private a => PRead a
+
+If Private is not exported one cannot add instances to PRead.
+
+

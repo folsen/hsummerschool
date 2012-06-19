@@ -1,0 +1,40 @@
+From oleg at okmij.org  Sat Aug 27 08:50:36 2011
+From: oleg at okmij.org (oleg at okmij.org)
+Date: Fri, 26 Aug 2011 23:50:36 -0700 (PDT)
+Subject: [Haskell-cafe] How to make callCC more dynamic
+In-Reply-To: <4E585BD9.707@gmail.com>
+Message-ID: <20110827065036.82B6617121@Adric.ern.nps.edu>
+
+
+> ContT {runContT :: forall r1 . (forall r2 . a-> m r2) -> m r1}
+> callCC can be defined, however, you can not run it, and reset couldn't
+> type check
+
+Indeed you cannot. As the articles
+ 	http://okmij.org/ftp/continuations/undelimited.html
+
+explain, the answer of _undelimited_ continuation is not available
+to the program itself. You really cannot write runUndelimitedCont --
+just as you cannot write runIO. Once you in the monad of undelimited
+continuations, you cannot get out of it -- just you cannot get out of
+IO. Since reset is the composition of runCont and return, reset is not
+expressible either.
+
+The article above explains that in detail (see the CPS2 attempt). The
+article also shows how to cheat.
+
+This exercise points out that undelimited continuations are really not
+useful. In fact, I don't know of any practical application of them.
+I'm deeply puzzled why people insist on using callCC given how useless
+it is by itself (without other effects such as mutation). If one uses
+callCC and runCont, one deals with _delimited_ continuation. Why not
+to use shift then, which has a bit more convenient interface.
+
+Do you have a specific code that you want to write using ContT? It
+is generally more productive to discuss a concrete example.
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+From navin_kunta at yahoo.com  Thu Feb  3 08:18:38 2011
+From: navin_kunta at yahoo.com (Navin Rustagi)
+Date: Wed, 2 Feb 2011 23:18:38 -0800 (PST)
+Subject: [Haskell-cafe] Another Question
+Message-ID: <759031.74723.qm@web120215.mail.ne1.yahoo.com>
+
+hi , 
+
+I am stuck in the following problem. 
+
+I am maintaining  a list of  tuples of the form 
+([Char],Int,Int, Int,Int) . The purpose of maintaining the tuples is that the 
+program reads from a file line by line , Matches the contents with the first 
+element of the tuple and updates the tuple respectively.
+
+The precise function I am using is as follows 
+
+
+tupup::Bool->[Char]->Int->Int->Int->Int->Char->([Char],Int,Int,Int,Int) 
+tupup val elf els elr ell elx ys= if val then 
+                                          case ys of  'A'  -> (elf, 
+els+1,elr,ell,elx) 
+                                                      'G'  -> (elf,els, elr 
++1,ell,elx)
+                                                      'C'  -> (elf,els,elr,  ell 
++1,elx) 
+                                                      'T'  -> (elf,els,elr,ell, 
+ elx +1)
+                                           else (elf,els,elr,ell,elx)
+
+
+uptable::[[Char]]->[([Char],Int,Int,Int,Int)]->[([Char],Int,Int,Int,Int)]
+uptable (xf:xs) main_array = map (\(x,y,z,r,t)-> tupup (x==xf) x y z r t 
+(secvalue xs) ) main_array
+   
+ 
+It gives the error ERROR - Control stack overflow. I assume it is because of the 
+lazy evaluation . 
+Is there a way to enforce strict evaluation only for the function tupup. 
+
+
+
+Thanks, 
+
+Navin 
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110202/96f96467/attachment.htm>
+

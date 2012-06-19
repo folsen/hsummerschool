@@ -1,0 +1,52 @@
+From markwright at internode.on.net  Wed Apr 13 02:26:32 2011
+From: markwright at internode.on.net (Mark Wright)
+Date: Wed, 13 Apr 2011 10:26:32 +1000
+Subject: [Haskell-cafe] Problem building qtHaskell
+In-Reply-To: <BANLkTi=utnod6044LUht+0QDoaqoBQd+eA@mail.gmail.com>
+References: <BANLkTi=utnod6044LUht+0QDoaqoBQd+eA@mail.gmail.com>
+Message-ID: <ymad3krnghz.fsf@internode.on.net>
+
+On Tue, 12 Apr 2011 12:14:50 +0200, ?ystein Kolsrud <kolsrud at gmail.com> wrote:
+> Hi! I am trying to install qtHaskell on a Windows 7 machine, but I am
+> running into some problems while running the build script. I believe I
+> have followed all the steps stated in the installation instructions,
+> but get errors of this type:
+> 
+> Creating library file: ..\bin\libqtc_core.a
+> c:\Prog\Qt\2010.05\qt\lib/libQtUiTools.a(quiloader.o):quiloader.cpp:(.text+0x3c3):
+> undefined reference to `_Unwind_Resume'
+
+Hi ?ystein,
+
+Maybe this might give some hints:
+
+http://www.qtcentre.org/threads/33394-Link-errors-undefined-reference-to-_Unwind_Resume-and-__gxx_personality_v0
+ 
+It suggests checking if c:\Prog\Qt\2010.05\qt\lib/libQtUiTools.a was
+built with the same g++ version.
+
+Regards, Mark
+
+> Can anyone help me figure out what is missing? I have the following
+> versions installed which should meet the requirements:
+> 
+> C:\Prog\QTHASK~1.4>g++ --version
+> g++ (GCC) 4.4.3
+> 
+> C:\Prog\QTHASK~1.4>gmake --version
+> GNU Make 3.81
+> This program built for Windows32
+> 
+> C:\Prog\QTHASK~1.4>ghc --version
+> The Glorious Glasgow Haskell Compilation System, version 7.0.2
+> 
+> Thanks!
+> 
+> Best regards, ?ystein Kolsrud
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

@@ -1,0 +1,113 @@
+From limestrael at gmail.com  Wed Dec  7 12:33:28 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Wed, 7 Dec 2011 12:33:28 +0100
+Subject: [Haskell-cafe] More liberal than liberal type synonyms
+In-Reply-To: <CAH_oh=wSOk3mJjtmV3VtWfu5JdvXWUQwtpGzeo23iTgAr=mxDQ@mail.gmail.com>
+References: <CAHEA9tPH_uO0UjQ7yUe8j5fGC=NsqVAsodfVJS+x1e7LOhGxrw@mail.gmail.com>
+	<CAN0wsw=4tK-BLDms1j3_iPz-igVOX=+=SUenh7Le=MGH=dULtw@mail.gmail.com>
+	<CAH_oh=wSOk3mJjtmV3VtWfu5JdvXWUQwtpGzeo23iTgAr=mxDQ@mail.gmail.com>
+Message-ID: <CACqaG6ykwGvGMFnwY43TYt6-HYm6cJ2sVPLff+BrO10XAhS1nQ@mail.gmail.com>
+
+This is impossible:
+in the definition of 'StateT s m a', m must be a monad and then have the *
+-> * kind.
+So you cannot pass (StateA a), because it has simply the * kind.
+
+Dmitry, does your code work with LiberalTypeSynonyms extention activated?
+
+2011/12/7 ?ystein Kolsrud <kolsrud at gmail.com>
+
+> You should be able to write something like this:
+>
+> type StateB a b = StateT SomeOtherState (StateA a) b
+>
+> Best regards, ?ystein Kolsrud
+>
+>
+> On Wed, Dec 7, 2011 at 11:48 AM, Dmitry Kulagin <dmitry.kulagin at gmail.com>wrote:
+>
+>> Hi Dan,
+>>
+>> I am still pretty new in Haskell, but this problem annoys me already.
+>>
+>> If I define certain monad as a type synonym:
+>>
+>>    type StateA a = StateT SomeState SomeMonad a
+>>
+>> Then I can't declare new monad based on the synonym:
+>>
+>>    type StateB a = StateT SomeOtherState StateA a
+>>
+>> The only way I know to overcome is to declare StateA without `a':
+>>
+>>    type StateA = StateT SomeState SomeMonad
+>>
+>> But it is not always possible with existing code base.
+>>
+>> I am sorry, if this is offtopic, but it seemed to me that the problem
+>> is realted to partially applied type synomyms you described.
+>>
+>> Thanks!
+>> Dmitry
+>>
+>> On Tue, Dec 6, 2011 at 10:59 PM, Dan Doel <dan.doel at gmail.com> wrote:
+>> > Greetings,
+>> >
+>> > In the process of working on a Haskell-alike language recently, Ed
+>> > Kmett and I realized that we had (without really thinking about it)
+>> > implemented type synonyms that are a bit more liberal than GHC's. With
+>> > LiberalTypeSynonyms enabled, GHC allows:
+>> >
+>> >    type Foo a b = b -> a
+>> >    type Bar f = f String Int
+>> >
+>> >    baz :: Bar Foo
+>> >    baz = show
+>> >
+>> > because Bar expands to saturate Foo. However, we had also implemented
+>> > the following, which fails in GHC:
+>> >
+>> >    type Foo a b = b -> a
+>> >    type Bar f = f (Foo Int) (Foo Int)
+>> >    type Baz f g = f Int -> g Int
+>> >
+>> >    quux :: Bar Baz
+>> >    quux = id
+>> >
+>> > That is: type synonyms are allowed to be partially applied within
+>> > other type synonyms, as long as similar transitive saturation
+>> > guarantees are met during their use.
+>> >
+>> > I don't know how useful it is, but I was curious if anyone can see
+>> > anything wrong with allowing this (it seems okay to me after a little
+>> > thought), and thought I'd float the idea out to the GHC developers, in
+>> > case they're interested in picking it up.
+>> >
+>> > -- Dan
+>> >
+>> > _______________________________________________
+>> > Haskell-Cafe mailing list
+>> > Haskell-Cafe at haskell.org
+>> > http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+>
+>
+>
+> --
+> Mvh ?ystein Kolsrud
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111207/3ec33e28/attachment.htm>
+

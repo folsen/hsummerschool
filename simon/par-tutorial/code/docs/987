@@ -1,0 +1,71 @@
+From wren at freegeek.org  Tue Aug  9 04:08:57 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Mon, 08 Aug 2011 22:08:57 -0400
+Subject: [Haskell-cafe] extending and reusing cmdargs option specs ?
+In-Reply-To: <80E2AE06-10D5-404D-B08C-C1E14692922C@joyful.com>
+References: <80E2AE06-10D5-404D-B08C-C1E14692922C@joyful.com>
+Message-ID: <4E4096B9.1030903@freegeek.org>
+
+On 8/8/11 1:59 PM, Simon Michael wrote:
+> And, I may have made things worse for myself in the reuse/avoiding
+> boilerplate department: I'm not sure how to reuse a cmdargs options data
+> structure, extending it with a few more options.
+
+This is a big problem I'm dealing with too lately. In particular, what I 
+would like is if cmdargs could do flattening of structures, either 
+automatically or with a new annotation combinator. With this it would be 
+easy to have a basic FooBar program:
+
+     data FooBar = FooBar
+         { foo :: Foo
+         , bar :: Bar
+         }
+         deriving (Data, Typeable,...)
+
+     getFooBarMode :: IO (Mode (CmdArgs FooBar))
+     getFooBarMode = ...
+
+and then extend it to a FooBarBaz program:
+
+     data FooBarBaz = FooBarBaz
+         { fooBar :: FooBar
+         , baz :: Baz
+         }
+         deriving (Data, Typeable,...)
+
+     getFooBarBazMode :: IO (Mode (CmdArgs FooBarBaz))
+     getFooBarBazMode = ...
+
+The big trick is that I should be able to call getFooBarMode from 
+getFooBarBazMode equivalently to if I had defined,
+
+     data FooBarBaz = FooBarBaz
+         { foo :: Foo
+         , bar :: Bar
+         , baz :: Baz
+         }
+         deriving (Data, Typeable,...)
+
+and copied over getFooBarMode inline into getFooBarBazMode. The problem 
+is that the bulk of the code is in the Mode-generating functions, and 
+it's also the sort of code that's hardest to keep in sync 
+documentation-wise.
+
+I don't mind the extra indirection in the Mode structures since I don't 
+actually use them in the program itself; I have an internal 
+configuration type that I compile the FooBarBaz down to, so that I can 
+perform additional semantic consistency checks before execution, as well 
+as precomputing what the commandline arguments dereference into (e.g., 
+functions).
+
+
+> As always, thanks a lot for cmdargs!
+> -Simon
+
+Indeed. Aside from this feature request I've been quite pleased :)
+
+-- 
+Live well,
+~wren
+
+

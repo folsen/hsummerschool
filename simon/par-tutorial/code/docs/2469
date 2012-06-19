@@ -1,0 +1,65 @@
+From jerzy.karczmarczuk at unicaen.fr  Fri Dec 30 16:38:17 2011
+From: jerzy.karczmarczuk at unicaen.fr (Jerzy Karczmarczuk)
+Date: Fri, 30 Dec 2011 16:38:17 +0100
+Subject: [Haskell-cafe] (...) Random generators
+In-Reply-To: <jdk5r8$koe$1@dough.gmane.org>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org> <4EFCC3CE.7050006@blueyonder.co.uk>
+	<451591325188516@web70.yandex.ru> <4EFCCFFD.9080908@unicaen.fr>
+	<jdk5r8$koe$1@dough.gmane.org>
+Message-ID: <4EFDDAE9.7030101@unicaen.fr>
+
+Bardur Arantsson:
+> Random streams are not referentially transparent, though, AFAICT...?
+>
+> Either way this thread has gone on long enough, let's not prolong it 
+> needlessly with this side discussion. 
+
+Sure.
+But the discussion on randomness is /per se/ interesting, especially in 
+a functional setting.
+
+Anyway, nobody can convince Steve Horne. Perhaps as an "unintentional"  
+side-effect...
+
+But random streams, or rather pseudo-random streals (infinite lazy 
+lists, as the example I gave, the `iterate` of `next`) are as 
+referentially transparent as any Haskell data. Really.
+
+What I find really amazing, since I converted my soul from physics to 
+computer since (many, many years ago...) is that most comments about 
+random number generators come from people who don't need them, don't use 
+them, and usually don't care about them...
+I taught random numbers, and I did some Monte-Carlo calculation in High 
+Energy Physics, when many people here were not born. I *NEVER* used 
+"true" random numbers, even to initialize a generator, since in the 
+simulation business it is essential that you can repeat the sequence on 
+some other platform, with some other parameters, etc.
+
+Of course, they are useful (don't need to convince an ancien 
+physicist... And I lied. I used them, e.g. when I programmed some games 
+for my children.) --
+
+> but why should we forget about them? The usual approach(*) is to 
+> gather entropy from a truly(**) random source
+> and use that to seed (and perhaps periodically re-seed) a PRNG.
+So, sorry, I didn't mean really "forget", only to change the subject 
+which was irrelevant for the purity (but somehow has shown once more 
+that Steve Horne had strange ideas about random generators).
+
+The generator of L'Ecuyer, or Mersenne Twister, or anything, don't care 
+about the entropy. For a typical user, the only interesting thing is 
+that the "random" streams pass the usual statistical tests : moments, 
+correlation, spectrum... Otherwise it is as deterministic as 1 2 3 4. 
+(For a typical user from my mafia. The mafia of cryptographists has 
+different criteria ; from time to time we shoot ourselves in the 
+coffee-machine corner of our dept.)
+
+Thank you for the discussion. You are right, I brake.
+
+Jerzy
+
+
+

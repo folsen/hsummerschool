@@ -1,0 +1,61 @@
+From wren at freegeek.org  Thu Apr 28 11:36:11 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Thu, 28 Apr 2011 05:36:11 -0400
+Subject: [Haskell-cafe] There is no null; Maybe/Option types
+In-Reply-To: <20110426155542.2fdf479c@angst.streitmacht.eu>
+References: <BANLkTi=irBB_YvfEm3ms0Vxd6xDb7tcPcg@mail.gmail.com>	<alpine.DEB.2.00.1104222123290.28351@anubis>	<4DB2524C.7040207@freegeek.org>
+	<20110426155542.2fdf479c@angst.streitmacht.eu>
+Message-ID: <4DB9350B.6050903@freegeek.org>
+
+On 4/26/11 9:55 AM, Ertugrul Soeylemez wrote:
+> wren ng thornton<wren at freegeek.org>  wrote:
+>
+>> But the greatest thing about Maybe is that you don't *have* to write
+>> code in monadic style. Because Maybe makes explicit the null-pointer
+>> shenanigans in other languages, you can simply unwrap the Maybe and
+>> pass around the raw value instead of letting Nothing permeate your
+>> whole program. Spending all your time in the Maybe monad is just as
+>> bad as spending all your time in the IO monad.
+>
+> Unless you're saying that I'm one of the worst Haskell programmers in
+> the world,
+
+Hardly. Never having seen your code that would be most uncharitable.
+
+> you are totally wrong.
+
+I'm not sure I see how that follows.
+
+> Monads are an abstraction for convenience and beauty in expression,
+
+This I agree with...
+
+> not for encapsulating bad habits.
+
+...this, not so much. Though I would phrase my negation differently. It 
+is not the habits which are encapsulated, it is merely the effects. And 
+the effects which are encapsulated are not "bad", per se. For example, 
+GHC uses a prodigious amount of mutation under the covers, and we're all 
+glad it does! The point is rather that effects like these make reasoning 
+difficult. Thus, in order to keep our programs reasonable it behooves us 
+to find ways of restricting the scope of these effects ---not because 
+the effects are an evil taint that cannot be allowed to spread, but--- 
+because it is easier to reason about code which does not make excessive 
+use of them.
+
+Effects like mutation, failures, capturing the current continuation, etc 
+are all just tools. And like any tools they can be used both for great 
+good and for great evil. Knowing that some segment of code does not use 
+them means that we needn't worry about there being devils there, but it 
+also means we don't have to worry about there being angels. In my 
+experience, the angels can wreak just as much havoc as the devils. 
+Angels are often inscrutable and too clever to be deciphered by mere 
+mortals; and angels have ingenious ways of working around laws I would 
+like to set in stone. When I would like to exclude certain kinds of 
+behavior, divine grace can be just as damaging as a trickster.
+
+-- 
+Live well,
+~wren
+
+

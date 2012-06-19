@@ -1,0 +1,36 @@
+From felipe.lessa at gmail.com  Sun Aug 21 05:33:10 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Sun, 21 Aug 2011 00:33:10 -0300
+Subject: [Haskell-cafe] Existential question
+In-Reply-To: <4E502694.4090801@zwizwa.be>
+References: <20110818052743.3D7181712D@Adric.ern.nps.edu>
+	<4E502694.4090801@zwizwa.be>
+Message-ID: <CANd=OGGJdZD6gU__K770RYXag=whmuCXDq=WX5C+iF4Bt4fmrw@mail.gmail.com>
+
+On Sat, Aug 20, 2011 at 6:26 PM, Tom Schouten <tom at zwizwa.be> wrote:
+> data Kl i o = forall s. Kl s (i -> ?s -> ?(s, o))
+>
+> This is an Arrow. ?At first I wondered if there was also an associated
+> Monad, hence the iso function.
+
+Given
+
+  data Kl i o = forall s. Kl s (i -> ?s -> ?(s, o))
+
+  instance ArrrowApply KI where
+    ...
+
+then 'ArrowMonad KI' [1] is a monad isomorphic to
+
+  data KIM o = forall s. KIM s (s -> (s, o))
+
+Is this what you are looking for?
+
+Cheers! =)
+
+[1] http://hackage.haskell.org/packages/archive/base/4.3.1.0/doc/html/Control-Arrow.html#t:ArrowMonad
+
+-- 
+Felipe.
+
+

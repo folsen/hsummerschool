@@ -1,0 +1,27 @@
+From dav.vire+haskell at gmail.com  Fri Apr 15 09:09:42 2011
+From: dav.vire+haskell at gmail.com (David Virebayre)
+Date: Fri, 15 Apr 2011 09:09:42 +0200
+Subject: [Haskell-cafe] Programming Chalenges: The 3n+1 problem
+In-Reply-To: <BANLkTi=-k79X6GOJBw43uhPN1N3SwWKkqw@mail.gmail.com>
+References: <BANLkTikPyLvUc26tSS09Oqu6z74rZ9tdNw@mail.gmail.com>
+	<BANLkTimu0cU1OUGaFixx-naids+6A5T0ww@mail.gmail.com>
+	<BANLkTi=_v2FiMMKLSZ6thUpk65dh3EAoNQ@mail.gmail.com>
+	<BANLkTi=-k79X6GOJBw43uhPN1N3SwWKkqw@mail.gmail.com>
+Message-ID: <BANLkTi=9ag9cTANXHk-foiFhvuaERdzZEg@mail.gmail.com>
+
+2011/4/14 Sebastian Fischer <fischer at nii.ac.jp>
+
+>
+> The advantage of this complicated definition is that you get a
+> memoized version of the `fibonacci` function simply by using `fixmemo`
+> instead of `fix`:
+>
+
+Wow. I think something about 'fix' just made sense thanks to your post,
+though I had read a few blog posts about it.
+
+David.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110415/ff7b7642/attachment-0001.htm>
+

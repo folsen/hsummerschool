@@ -1,0 +1,24 @@
+From felipe.lessa at gmail.com  Wed Apr 27 14:52:00 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Wed, 27 Apr 2011 09:52:00 -0300
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <4E0B16A5-F1E0-4CAF-8FFB-BF7DDA43F7CA@yandex.ru>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<4E0B16A5-F1E0-4CAF-8FFB-BF7DDA43F7CA@yandex.ru>
+Message-ID: <BANLkTi=5Vm4LbSsV+_BpnYBaW_-duNqHog@mail.gmail.com>
+
+2011/4/27 MigMit <miguelimo38 at yandex.ru>:
+> It would be, if only it checked the (necessary) types during compile time. As it is now, it seems like a claim that C is lazy just because any pointer can be null.
+
+Strictness analysis is only an optimization, you don't need it to be
+lazy in the term-level.
+
+However Python does check the kinds, the types of the types, at
+compile-time.  Everything is *.  ;-)
+
+Cheers,
+
+-- 
+Felipe.
+
+

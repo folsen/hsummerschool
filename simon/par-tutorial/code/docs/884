@@ -1,0 +1,20 @@
+From the.dead.shall.rise at gmail.com  Sat Apr 30 02:37:13 2011
+From: the.dead.shall.rise at gmail.com (Mikhail Glushenkov)
+Date: Sat, 30 Apr 2011 00:37:13 +0000 (UTC)
+Subject: [Haskell-cafe] How to make ghc 7 with llvm?
+References: <BANLkTim17m2=ymk-f-ZcKQKbwF_Z5z=4Xg@mail.gmail.com>
+	<20110429115800.133733c9.mle+hs@mega-nerd.com>
+	<alpine.DEB.2.00.1104292230420.15203@anubis>
+Message-ID: <loom.20110430T023627-464@post.gmane.org>
+
+Henning Thielemann <lemming <at> henning-thielemann.de> writes:
+>
+> Nontheless it might be interesting to let GHC emit LLVM bitcode. As far as 
+> I understand, this would enable LLVM's Link Time Optimizations.
+
+And if you really need .bc, there is always llvm-as.
+
+
+
+
+

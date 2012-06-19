@@ -1,0 +1,29 @@
+From gcrosswhite at gmail.com  Thu Dec 15 09:20:48 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Thu, 15 Dec 2011 18:20:48 +1000
+Subject: [Haskell-cafe] [Alternative] change some/many semantics
+In-Reply-To: <07ACF6DD-2F8B-4833-8AA1-24864241D6C1@gmail.com>
+References: <EDFC9D1A-0198-4392-ACEA-551EF77F78D6@gmail.com>
+	<CAKjSnQFvJrz1iFd8XsGbK4q7ZK9F0qjXXUHdoTn1XVmeeAm+OQ@mail.gmail.com>
+	<430054FA-800C-408C-8B75-9C3422293133@gmail.com>
+	<CAKjSnQFUxUbDAen_p7DPobzusVo30_6q=x2yzQejsnWe914ZnQ@mail.gmail.com>
+	<CAKFCL4U+wDf69+D6fz-hiBRJcHCUK4tB0pJ_nuZB-z3nucwxDQ@mail.gmail.com>
+	<CAKjSnQE3umAo-aefkTqPjT5+=M9cr=s9e84yKAx-HQx5Qjo_Bg@mail.gmail.com>
+	<9ED90057-4B37-4E6E-A956-5BA2E952E4CB@gmail.com>
+	<CAKjSnQG17eroGuo3w0YMaAesiMPOFuc-ykt_oYBH+BSfL1ocMg@mail.gmail.com>
+	<07ACF6DD-2F8B-4833-8AA1-24864241D6C1@gmail.com>
+Message-ID: <4F9EC2FA-4C8B-4D43-9D6A-9E5E96F59CD0@gmail.com>
+
+
+On Dec 15, 2011, at 6:19 PM, Gregory Crosswhite wrote:
+
+> After all, we already have the Monad typeclass which gives them essentially the same functionality.
+
+Make that the *Monoid* typeclass.  :-)
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111215/0e95bc80/attachment.htm>
+

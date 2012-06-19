@@ -1,0 +1,87 @@
+From david.hotham at blueyonder.co.uk  Wed Apr  6 14:38:57 2011
+From: david.hotham at blueyonder.co.uk (David Hotham)
+Date: Wed, 6 Apr 2011 13:38:57 +0100
+Subject: [Haskell-cafe] 'Progress bar' enumeratee
+In-Reply-To: <inhd6m$h2n$1@dough.gmane.org>
+References: <inhd6m$h2n$1@dough.gmane.org>
+Message-ID: <inhmt3$9ug$1@dough.gmane.org>
+
+An error slipped into the version below.  The line:
+
+E.checkDone (E.continue . dotIn (count - len))
+
+should read
+
+E.checkDone (E.continue . dotIn (need - len))
+
+
+
+"David Hotham" <david.hotham at blueyonder.co.uk> wrote in message 
+news:inhd6m$h2n$1 at dough.gmane.org...
+> Hello,
+>
+> I've spent some time over the last couple of days trying to write an 
+> enumeratee that prints a "." every n bytes (with obvious intended use as a 
+> progress tracker).  Seems like it oughtn't be hard, but it has been a 
+> steep learning curve...
+>
+> I have come up with something that seems to do the job but I don't know 
+> that I'm completely happy with it (or even that I completely understand 
+> it, to be honest).
+>
+> If anyone more expert would be kind enough either to reassure me that I'm 
+> doing it right or - more likely - to offer improvements / suggestions on 
+> what obvious simplifications I have overlooked, I'd be grateful.
+>
+> Thanks
+>
+> David
+>
+>
+> import qualified Data.ByteString.Char8 as B
+> import qualified Data.ByteString.Lazy.Char8 as BL
+> import qualified Data.Enumerator as E
+> import qualified Data.Enumerator.Binary as EB
+> import Control.Monad.IO.Class (liftIO, MonadIO)
+> import System.IO (hFlush, stdout)
+>
+>
+> dotEvery :: MonadIO m => Integer -> E.Enumeratee B.ByteString B.ByteString 
+> m b
+> dotEvery count = E.checkDone $ E.continue . dotIn count where
+>   dotIn need k E.EOF = E.yield (E.Continue k) E.EOF
+>   dotIn need k (E.Chunks []) = E.continue (dotIn need k)
+>   dotIn need k (E.Chunks xs) = iter where
+>     lazy = BL.fromChunks xs
+>     len = toInteger $ BL.length lazy
+>     iter = if len < need
+>               then k (E.Chunks xs) E.>>==
+>                     E.checkDone (E.continue . dotIn (count - len))
+>            else let (x1, x2) = BL.splitAt (fromInteger need) lazy
+>                     s1 = E.Chunks $ BL.toChunks x1
+>                     s2 = E.Chunks $ BL.toChunks x2
+>                     enumee = E.checkDoneEx s2 (\k' -> dotIn count k' s2)
+>                 in E.Iteratee $ do newStep <- E.runIteratee $ k s1
+>                                    liftIO $ putStr "." >> hFlush stdout
+>                                    E.runIteratee $ enumee newStep
+>
+>
+>
+> PS Implementations which involve "EB.take count" seem to me 
+> unsatisfactory; one surely oughtn't need to have a large buffer to solve 
+> this problem
+> PPS I did find an implementation via mapAccumM which I consider pleasing 
+> enough from an aesthetic point of view - but which runs 30x slower
+>
+> dotAt :: MonadIO m => Integer -> Integer -> Word8 -> m (Integer, Word8)
+> dotAt n s w | s >= n    = do liftIO $ putStr "." >> hFlush stdout
+>                             return (1, w)
+>            | otherwise = return (s+1, w)
+>
+> dotEvery' :: MonadIO m => Integer -> E.Enumeratee B.ByteString 
+> B.ByteString m b
+> dotEvery' n = EB.mapAccumM (dotAt n) 1 
+
+
+
+

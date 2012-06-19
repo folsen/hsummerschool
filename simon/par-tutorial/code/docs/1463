@@ -1,0 +1,62 @@
+From allbery.b at gmail.com  Mon Aug 29 05:04:29 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Sun, 28 Aug 2011 23:04:29 -0400
+Subject: [Haskell-cafe] only anecdotal .... not a proof of a trend ...
+In-Reply-To: <CA+0XtC8vLjS6j+aOSpwx=75zGvstF0-mg1c88w9WLN5j1cfrBg@mail.gmail.com>
+References: <CA+0XtC-o7jbZXzrEK+3Rwrx_cfTXLOMZe8yVWn2QciaS4d+H0A@mail.gmail.com>
+	<CAKFCL4VGQ12RgGAqTzO6-XuL-iXCoqs+qP8dHazDxmDMt5eyDg@mail.gmail.com>
+	<CA+0XtC8vLjS6j+aOSpwx=75zGvstF0-mg1c88w9WLN5j1cfrBg@mail.gmail.com>
+Message-ID: <CAKFCL4UnJn=nJ4rd=bYDVvddGT47ewkOwoDTLqGypM+KLxkakw@mail.gmail.com>
+
+On Sun, Aug 28, 2011 at 22:33, Vasili I. Galchin <vigalchin at gmail.com>wrote:
+
+>      1) The reason I said "over the top" is that QNX is highly optimized to
+> bound kernel pathways. I was able to read kernel code. I have also worked on
+> LynxOS and pSOS. Not dissing you [?]
+>
+
+Sure, there are plenty of RTOSes out there.  There were back then, too;
+there are still times when simpler environments are preferred (admittedly,
+some of them are more psychological than justifiable by the intended usage).
+ I still think "over the top" is itself a bit over the top; we are far from
+being able to replace the immense number of traditional PLCs or embedded
+devices out there which nevertheless need to be retrofitted in software to
+support newer technologies.  (See below; you have about 0% chance of getting
+someone to rip out all the existing PLCs on every segment of every track in
+the country and replace it with a computer running QNX or VXWorks.  Even
+ignoring the [mostly labor, but with the number of devices in question even
+the hardware adds up] cost, consider the logistics; the segments that need
+it most are the ones you can't afford to take offline for any significant
+amount of time while refitting and testing the new gear.)
+
+Now imagine that someone has a large deployed base of simple dedicated
+embedded hardware and needs to retrofit SMTP into it.  That's a
+software-only change, and waving a manual while intoning "QNX" won't get you
+anywhere with the hardware.
+
+
+>      2) What is the Haskell package that you are alluding to. I would like
+> to know plus probably others on this list.
+>
+
+Hm, I'm not sure it hit Hackage; I'm not seeing anything obvious there aside
+from vaguely recalling some changes to Atom to make it more suitable for
+code generation for PLCs.  You might, however, take a look at
+http://cs.swan.ac.uk/~cspj/docs/calco.pdf which uses Haskell SAT solvers to
+validate PLC ladder logic for track safety; I don't know how much of the
+rest of the system is in Haskell.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110828/2d8cd0f7/attachment.htm>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: image/gif
+Size: 96 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110828/2d8cd0f7/attachment.gif>
+

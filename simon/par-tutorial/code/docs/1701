@@ -1,0 +1,36 @@
+From david.waern at gmail.com  Tue Dec  6 14:36:08 2011
+From: david.waern at gmail.com (David Waern)
+Date: Tue, 6 Dec 2011 14:36:08 +0100
+Subject: [Haskell-cafe] Haddock and the qualified imports
+In-Reply-To: <CAN8ZjBFBJFziUf2k6qjZqzQ4MxQGLp1gyW_cebh7fEV+wvZN=A@mail.gmail.com>
+References: <CACqaG6xYok7wr0OBKJa+=ScWYHfY=vefB1z2=Uzyx78EDN+fJg@mail.gmail.com>
+	<CAN8ZjBFBJFziUf2k6qjZqzQ4MxQGLp1gyW_cebh7fEV+wvZN=A@mail.gmail.com>
+Message-ID: <CAN8ZjBGoMyawh-atpCA5jjhv5frPv9jB1+P7_XEZjCakm7-uXg@mail.gmail.com>
+
+2011/12/6 David Waern <david.waern at gmail.com>:
+> 2011/12/6 Yves Par?s <limestrael at gmail.com>:
+>> It should be written that this 'ByteString' is not a newly defined type but
+>> instead a re-exportation.
+>
+> It should be simple to add some kind of "Re-export of <link to
+> original thing>" tag to the Haddock documentation. Feel free to add a
+> ticket for this feature to the issue tracker
+> (trac.haskell.org/haddock) with a description of how it should work.
+
+I should really add as well that if you contribute patches that will
+increase the likelyhood of this being added in the near future from
+~0% to 100% :-)
+
+In general I'd like to encourage anyone interesting in hacking on
+small useful projects for the benefit of the Haskell community to take
+a look at the Haddock trac. It's got a lot of nice little feature
+requests that no one is working on.
+
+In general we're not seeing that much new development in Haddock at
+the moment. I am (as the maintainer) mostly spending my time fixing
+bugs, making releases and so on. If anyone feels like helping out,
+please talk to me.
+
+David
+
+

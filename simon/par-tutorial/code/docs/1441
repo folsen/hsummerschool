@@ -1,0 +1,41 @@
+From daniel.is.fischer at googlemail.com  Sun Aug 28 21:02:26 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sun, 28 Aug 2011 21:02:26 +0200
+Subject: [Haskell-cafe] GHCI Feature Request: Last SuccessfulCompilation
+	State Saved
+In-Reply-To: <j3e281$140$1@dough.gmane.org>
+References: <CAJrReygxTo_DVA6B4bNozP0WR+_X7ZqQs=ERdHhuXKJNc-3+0A@mail.gmail.com>
+	<201108272331.01371.daniel.is.fischer@googlemail.com>
+	<j3e281$140$1@dough.gmane.org>
+Message-ID: <201108282102.26409.daniel.is.fischer@googlemail.com>
+
+On Sunday 28 August 2011, 20:43:11, Rene de Visser wrote:
+> "Daniel Fischer" <daniel.is.fischer at googlemail.com> schrieb im
+> Newsbeitrag news:201108272331.01371.daniel.is.fischer at googlemail.com...
+> 
+> > On Saturday 27 August 2011, 23:10:17, David Virebayre wrote:
+> >> 2011/8/27 aditya siram <aditya.siram at gmail.com>:
+> >> > Hi all,
+> >> > I would like for the GHCI interpreter to save its environment
+> >> > before reloading a file and allowed the user to revert back to
+> >> > that state if the compilation was unsuccessful.
+> >> 
+> >> That would be awesome. I would like this too.
+> > 
+> > http://hackage.haskell.org/trac/ghc/ticket/1896
+> 
+> +1 from me too.
+> 
+> How do I go about registering my interest in the ticket?
+> I though there was a way of adding myself on the CC: of the ticket?
+> How does one do this? Does one need some sort of user?
+
+You need to log in to add yourself to the cc.
+If you don't have a trac account and don't want one, at the bottom of the 
+page, on the right hand side, there's a pale text telling you how to log in 
+with the guest account.
+
+Cheers,
+Daniel
+
+

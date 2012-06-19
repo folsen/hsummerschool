@@ -1,0 +1,56 @@
+From jwlato at gmail.com  Fri Feb  4 12:53:13 2011
+From: jwlato at gmail.com (John Lato)
+Date: Fri, 4 Feb 2011 11:53:13 +0000
+Subject: [Haskell-cafe] OSX i386/x86 and x86_64 - time to switch
+	supported platforms?
+Message-ID: <AANLkTi=5Xpe+brJOVyv=d+Ov1xdpff0a4o5cEbMJRy3Q@mail.gmail.com>
+
+>
+> From: Max Bolingbroke <batterseapower at hotmail.com>
+>
+> On 4 February 2011 02:35, Steve Severance <steve at medwizard.net> wrote:
+> > Wholly support moving OSX to x64. x86 should be supported only on a
+> > best effort basis for legacy.
+>
+> Moving from x86 to x64 has advantages and disadvantages from my POV.
+> Advantages:
+>  * Able to address more memory
+>  * More registers for code generation
+>  * Haskell dependencies wouldn't need to be built for x86 on Snow
+> Leopard (though if we swapped to x64 on Leopard as well, the Leopard
+> users would start having to build 64-bit libraries specially)
+>
+> Disadvantages:
+>  * Pointers become wider, and Haskell data structures mostly consist
+> of pointers. This will bloat memory use of Haskell programs.
+>  * Generated binaries won't work on older Macs that don't have a
+> 64-bit OS/CPU. This is important if you are distributing compiled
+> Haskell binaries, which is not something I personally do but which is
+> probably important to support
+>
+> Did I miss anything?
+>
+
+I'm moderately in favor of making the primary supported platform x86_64,
+except for the distribution issue.  If i386 were maintained but not
+necessarily targeted for improvement that would be fine by me.
+
+
+> I don't know if anyone using a 64-bits GHC on e.g. Linux has reported
+> experience of whether moving to 64-bits is a net win or not from a
+> performance perspective. My guess is that it is a win for certain
+> classes of programs (numerically intensive, "high performance
+> Haskell"), and a loss for programs making extensive use of laziness,
+> boxed data structures etc.
+>
+
+For my code, x86_64 (OS X) is a net win.  It's sometimes significantly
+faster, and hasn't ever been noticeably slower. The biggest gains seems to
+be I/O, although I haven't really investigated this.
+
+Cheers,
+John
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110204/ffd07257/attachment.htm>
+

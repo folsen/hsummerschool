@@ -1,0 +1,20 @@
+From kevin at froglingo.com  Tue Feb  8 13:21:09 2011
+From: kevin at froglingo.com (kevin at froglingo.com)
+Date: Tue, 08 Feb 2011 12:21:09 +0000
+Subject: [Haskell-cafe] =?utf-8?q?Froglingo_=E2=80=93_a_functional_program?=
+	=?utf-8?q?ming_language?=
+Message-ID: <W676232255288951297167669@webmail11>
+
+Hi,
+
+I have recently finished a paper about Froglingo, a programming language designed to make it easier to write data-intensive business applications. It is a monolith consolidating programming, database/file management, data exchange, web server, and access control. What makes Froglingo unique is a sub language that is the first known as semantically equivalent to a class of TOTAL recursive functions.
+Froglingo shares with Haskell a declarative approach to programming, and strong mathematical foundations, so I thought that people on this list might find it of some interest. 
+
+You can find the paper at: http://www.froglingo.com/FroglingoPL.pdf. If you have any thoughts about it, I?d love to hear from you.
+
+Thank you for your attention.
+Kevin
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110208/488a0cde/attachment.htm>
+

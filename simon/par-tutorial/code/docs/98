@@ -1,0 +1,138 @@
+From michael at snoyman.com  Mon Apr  4 11:31:48 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Mon, 4 Apr 2011 12:31:48 +0300
+Subject: [Haskell-cafe] Ann: contstuff, dnscache, ihttp, ismtp, netlines,
+	yesod-tableview
+In-Reply-To: <20110403220916.1a9ec28b@angst.streitmacht.eu>
+References: <20110403220916.1a9ec28b@angst.streitmacht.eu>
+Message-ID: <BANLkTikez3USM6XYNcyT+f24UJKi9kOWLw@mail.gmail.com>
+
+Hi Ertugrul,
+
+Looks like some interesting projects. For TLS/SSL support, I would look into
+Vincent Hanquez's tls package[1].
+
+Michael
+
+[1] http://hackage.haskell.org/package/tls
+
+On Sun, Apr 3, 2011 at 11:09 PM, Ertugrul Soeylemez <es at ertes.de> wrote:
+
+> Hello fellow Haskellers,
+>
+> (once again posted to the cafe, because the Haskell mailing list rejects
+> my mails.)
+>
+> I have released quite a few libraries over time on Hackage.  I feel they
+> are stable enough now to announce them here.
+>
+>  * contstuff: Fast and flexible monad transformers based on the CPS
+>    concept.  Mainly it helps getting rid of large transformer stacks,
+>    because it unifies some monad transformers (like StateT and ContT),
+>    and it is also faster than the naive approach.
+>
+>    This library is comparable to a combination of the transformers
+>    package with Edward Kmett's monad-ran package, but without hiding
+>    the CPS transformation.  In early benchmarks ChoiceT turned out to
+>    be twice as fast as normal Haskell lists, and it is also a proper
+>    list monad transformer.
+>
+>    Finally in the Control.ContStuff.Classes module you find lots of
+>    useful utility classes, which seem to be unique to contstuff.
+>
+>  * dnscache: Handy DNS caching library.  This library automatically
+>    manages a set of resolver threads for you, which share a reply
+>    cache.  This allows very fast mass-resolution.
+>
+>    The library also comes with a handy command line utility called
+>    'massdns' for quick resolution of even very large lists of entities.
+>    Call massdns without arguments to get usage help.
+>
+>  * ihttp: This is an HTTP library based on enumerators giving you
+>    maximum flexibility and control over the connection.  Using proper
+>    iteratees you can simply implement e.g. proxy clients (my main use
+>    case), but also HTTP servers.  Using proper enumeratees you can also
+>    encapsulate the connection in an SSL/TLS layer, but unfortunately
+>    there doesn't seem to be such an SSL/TLS implementation yet.
+>
+>  * ismtp: This is an advanced ESMTP library, which allows you to
+>    structure your sessions as you like.  It also features an automated
+>    resolver for MX records using the dnscache library.  Right now there
+>    is support for most of the base functionalities of the protocol as
+>    specified in RFC 821 (SMTP) and RFC 1425 (service extensions).
+>
+>    An update to RFC 2821 is planned, but is not necessary for practical
+>    purposes.  The new RFC mainly removes some unneeded features and
+>    unifies the two mentioned RFCs.
+>
+>    Right now there is no support for SMTL (SASL) authentication, but it
+>    is planned for a near future release.  For the time being you can
+>    implement your own iteratees for this purpose, if you depend on
+>    authentication.
+>
+>  * netlines: This is a library for writing implementations of
+>    text-based protocols.  In particular it allows reading lines safely
+>    from untrusted sources with a maximum length in constant space.
+>
+>  * yesod-tableview: For web applications using Michael Snoyman's Yesod
+>    web framework this library implements an easy to use table renderer
+>    mainly for database records.  It is in an early stage of development
+>    right now, but as the need arises, I will extend it.
+>
+> To use the networking libraries, you should be familiar with John
+> Millikin's 'enumerator' package.  If you're not, I recommend studying
+> it, because it is a useful library for all kinds of stream processing
+> like network connections, files and concurrent channels.
+>
+> All mentioned libraries have been tested extensively for correctness and
+> safety.  Especially the networking libraries have undergone a lot of
+> penetration testing.  However, I'm only one developer, so I would be
+> glad to hear about any vulnerabilities and other shortcomings you find.
+> Usually I have a very short response time to bugs in these libraries, so
+> please don't hesitate to contact me.  Feature requests are also welcome,
+> of course. =)
+>
+> Please note that major version numbers specify interface versions in my
+> libraries.  In other words, a new major version of a package usually
+> means that the API has changed in a way, which is likely to break
+> dependent packages.
+>
+> I would like to use this opportunity to thank a few people in particular
+> (alphabetically):
+>
+>    - Cale Gibbard,
+>    - Edward Kmett,
+>    - John Millikin,
+>    - Bryan O'Sullivan and
+>    - Michael Snoyman.
+>
+> I appreciate your efforts both in libraries and support.  Many thanks,
+> guys!  Thanks also to the rest of the innovative and helpful Haskell
+> community.
+>
+>
+> Greets,
+> Ertugrul
+>
+>
+> --
+> Key-ID: E5DD8D11 "Ertugrul Soeylemez <es at ertes.de>"
+> FPrint: 0F12 0912 DFC8 2FC5 E2B8  A23E 6BAC 998E CE40 2012
+> Keysrv: hkp://subkeys.pgp.net/
+>
+>
+> --
+> nightmare = unsafePerformIO (getWrongWife >>= sex)
+> http://ertes.de/
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110404/a6d76e66/attachment.htm>
+

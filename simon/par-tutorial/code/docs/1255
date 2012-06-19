@@ -1,0 +1,32 @@
+From allbery.b at gmail.com  Sun Aug 21 11:13:18 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Sun, 21 Aug 2011 05:13:18 -0400
+Subject: [Haskell-cafe] Embedding Perl RegEx in Haskell
+In-Reply-To: <CAKFCL4U9oRDUvfKKbrd2FUK3AQabYgXj+juqmHzwtyX+-e=0pg@mail.gmail.com>
+References: <CAGdT1gqMvi3ihocy6Yg4A0z0C0uu0GVzSPStNCzZLrwCAbS=Ew@mail.gmail.com>
+	<CAKFCL4VrTnhzQwbp2N3RTL=4jzQT+6cUF9a814OgeHRSAZ1Adw@mail.gmail.com>
+	<CAGdT1gqXgEej_Z8ELZ8SncRNJ_iOmm92MPjTRP8oC73BY1P7-g@mail.gmail.com>
+	<CAKFCL4Ufy+XjuK8hZz4cA7-PymOaVxq5X3b61_R+kBeF7csjQw@mail.gmail.com>
+	<CAKFCL4U9oRDUvfKKbrd2FUK3AQabYgXj+juqmHzwtyX+-e=0pg@mail.gmail.com>
+Message-ID: <CAKFCL4UGkW0yL+PAMdXOp8d_tVc-86yJ3Wau229rsoorJ6aDww@mail.gmail.com>
+
+It just occurred to me that about half the list thinks I just reinvented
+parser combinators. Not exactly; the thing that distinguishes regexes in
+particular, and the one whose implications I can't quite wrap my brain
+around, is that the "many" combinator is actually
+
+> many' = reverse . many
+
+But is it really that simple, and is an implementation with decent
+performance and space characteristics really that simple?  Or does something
+have to be designed from scratch around longest match semantics to get
+decent behavior?  (There's an analogy to folds here.  Using this in place of
+Parsec would have terrible space leaks....)
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110821/81cbc07d/attachment.htm>
+

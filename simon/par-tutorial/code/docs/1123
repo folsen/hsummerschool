@@ -1,0 +1,52 @@
+From s.w.b.prasetya at uu.nl  Sun Aug 14 20:27:47 2011
+From: s.w.b.prasetya at uu.nl (Wishnu Prasetya)
+Date: Sun, 14 Aug 2011 20:27:47 +0200
+Subject: [Haskell-cafe] how to read CPU time vs wall time report from
+ GHC?
+In-Reply-To: <1313346211-sup-8748@ezyang>
+References: <4E480FD8.7070301@uu.nl> <1313346211-sup-8748@ezyang>
+Message-ID: <4E4813A3.7070305@uu.nl>
+
+Hello Edward,
+
+I'm using Windows 7 on Intel i7 (4 cores with hyperthreading)...
+
+--Wish.
+
+> Hello Wishnu,
+>
+> That is slightly odd. What CPU and operating system are you running on?
+> Include Kernel versions if Linux.
+>
+> Cheers,
+> Edward
+>
+> Excerpts from Wishnu Prasetya's message of Sun Aug 14 14:11:36 -0400 2011:
+>> Hi guys,
+>>
+>> I'm new in parallel programming with Haskell. I made a simple test
+>> program using that par combinator etc, and was a bit unhappy that it
+>> turns out to be  slower than its sequential version. But firstly, I dont
+>> fully understand how to read the runtime report produced by GHC with -s
+>> option:
+>>
+>>     SPARKS: 5 (5 converted, 0 pruned)
+>>
+>>     INIT  time    0.02s  (  0.01s elapsed)
+>>     MUT   time    3.46s  (  0.89s elapsed)
+>>     GC    time    5.49s  (  1.46s elapsed)
+>>     EXIT  time    0.00s  (  0.00s elapsed)
+>>     Total time    8.97s  (  2.36s elapsed)
+>>
+>> As I understand it from the documentation, the left time-column is the
+>> CPU time, whereas the right one is elapses wall time. But how come that
+>> the wall time is less than the CPU time? Isn't wall time = user's
+>> perspective of time; so that is CPU time + IO + etc?
+>>
+>> Any help?
+>>
+>> --Wish.
+>>
+
+
+

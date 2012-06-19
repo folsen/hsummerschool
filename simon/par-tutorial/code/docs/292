@@ -1,0 +1,43 @@
+From ajschylos at mac.com  Mon Apr 11 11:22:51 2011
+From: ajschylos at mac.com (Adam Krauze)
+Date: Mon, 11 Apr 2011 11:22:51 +0200
+Subject: [Haskell-cafe] Fucntion composing
+Message-ID: <DF47C447-E80D-4A31-9655-7CE52D738FFE@mac.com>
+
+Hello,
+as I am newbie to Haskell  and my introductory question is:
+
+given functions say f and g with type signatures
+
+f :: (Num a) => [a] -> [a] -> [(a,a)]  // f takes two lists and zips them into one in some special way
+g :: (Num a) => a -> [(a,a)] -> [a]  // g using some Num value calculates list of singletons from list of pairs
+
+of course  g 0 :: (Num a) => [(a,a)] ->[a]
+
+now I want to create function h :: (Num a) => [a] -> [a] -> [a] in such way
+
+that (g 0) consumes output of f.
+
+But when I try 
+
+Prelude> :t (g 0).f
+
+I get an error:
+
+<interactive>:1:9:
+Couldn't match expected type `[(a0, a0)]'
+                with actual type `[a1] -> [(a1, a1)]'
+    Expected type: [a1] -> [(a0, a0)]
+      Actual type: [a1] -> [a1] -> [(a1, a1)]
+    In the second argument of `(.)', namely `f'
+    In the expression: (g 0) . f
+
+In pointfull representation it works well
+
+Prelude> let h x y = (g 0 (f x y))
+
+How to do pointfree definition of h?
+
+Ajschylos.
+
+

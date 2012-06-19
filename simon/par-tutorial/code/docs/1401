@@ -1,0 +1,37 @@
+From trebla at vex.net  Fri Aug 26 23:36:10 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Fri, 26 Aug 2011 17:36:10 -0400
+Subject: [Haskell-cafe] Dynamic loading of module
+In-Reply-To: <CAL4zPao2eYnWWf1KL-sJ3NrVNw6Ar+eHVgnsDr7KSCikE_TZ4w@mail.gmail.com>
+References: <CAL4zPao2eYnWWf1KL-sJ3NrVNw6Ar+eHVgnsDr7KSCikE_TZ4w@mail.gmail.com>
+Message-ID: <4E5811CA.6050905@vex.net>
+
+On 11-08-26 04:51 AM, Arnaud Bailly wrote:
+> D:\projets\>ghc -package ghc main.hs --make
+> <command line>: cannot satisfy -package ghc:
+>      ghc-7.0.3-fc75cf67c86ba2c0d64b07024a18d3b4 is unusable due to
+> missing or recursive dependencies:
+>        template-haskell-2.5.0.0-7d9b1443ac5ab69e5ed705a487990deb
+>      (use -v for more information)
+>
+> When I run ghc-pkg check, I got which obviously is bad.
+>
+[...]
+> There are problems in package QuickCheck-2.4.0.1:
+>    dependency
+> "template-haskell-2.5.0.0-e5fd973432385747440288b48f6a6a5a" doesn't exist
+
+For a 100%-accurate answer, one would need the full history of what you 
+did to your computer, which no one knows.
+
+For a 99%-accurate answer, the outputs of "ghc -v" and "ghc-pkg list -v" 
+are very good post-mortem information.
+
+A 90%-accurate answer: Given the incomplete information (that's right, 
+"ghc-pkg check" is incomplete), there is 90% probability that you lost 
+template-haskell, and you must reinstall haskell platform. (No, building 
+a new instance of template-haskell is not enough. Generally, replacing 
+or overriding libs that come with GHC does not work. See my 
+http://www.vex.net/~trebla/haskell/sicp.xhtml )
+
+

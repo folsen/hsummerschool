@@ -1,0 +1,21 @@
+From byorgey at seas.upenn.edu  Sun Apr  3 20:58:49 2011
+From: byorgey at seas.upenn.edu (Brent Yorgey)
+Date: Sun, 3 Apr 2011 14:58:49 -0400
+Subject: [Haskell-cafe] Call for contributions: Second edition of the
+	Typeclassopedia
+Message-ID: <20110403185849.GA20570@seas.upenn.edu>
+
+Hi all,
+
+It's time for a second edition of the Typeclassopedia [1], and I'd
+love to have your suggestions and contributions.  You can send me
+suggestions and darcs patches [2] by email.  For more detailed
+information, see my blog post [3].
+
+-Brent
+
+[1] http://www.haskell.org/wikiupload/8/85/TMR-Issue13.pdf
+[2] http://code.haskell.org/~byorgey/typeclassopedia/
+[3] http://byorgey.wordpress.com/2011/04/03/call-for-contributions-second-edition-of-the-typeclassopedia/
+
+

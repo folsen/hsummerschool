@@ -1,0 +1,37 @@
+From qdunkan at gmail.com  Sat Apr 23 17:36:40 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Sat, 23 Apr 2011 21:06:40 +0530
+Subject: [Haskell-cafe] There is no null; Maybe/Option types
+In-Reply-To: <874o5p17ap.fsf@malde.org>
+References: <BANLkTi=irBB_YvfEm3ms0Vxd6xDb7tcPcg@mail.gmail.com>
+	<BANLkTi=oYmQrjTwnhSZM21qg2OC4oe65hQ@mail.gmail.com>
+	<874o5p17ap.fsf@malde.org>
+Message-ID: <BANLkTimwuu0wbWifw2troUgcb-iahDCA2A@mail.gmail.com>
+
+On Sat, Apr 23, 2011 at 5:57 PM, Ketil Malde <ketil at malde.org> wrote:
+> Evan Laforge <qdunkan at gmail.com> writes:
+>
+>>> Most of the (non-IO) runtime errors I get using Haskell software is
+>>> due to head or fromJust, it's actually quite annoying.
+>
+>> Just singling this one out because I've heard it before. ?I've never
+>> gotten a runtime error from these. ?It seems quite easy to just not
+>> use these functions.
+>
+> Unfortunately, it is quite easy to just use them, too :-) ?Sometimes I
+> just *know* that this list will never be empty, or that that Maybe will
+> never be nothing - but often I'm wrong.
+
+That's the thing I was commenting on... I do a lot of things wrong,
+but maybe somewhere I'm doing something right, because for whatever
+reason this never comes up for me.  The only times I can think of are
+'maximum' that I know will complete because I wrote 'maximum (0 :
+stuff)' and "split" functions, which are guaranteed to return at least
+one element.  As Henning points out, (a, [a]) is an explicit type for
+those, but usually I just trust the postcondition of the function and
+match right away on its output.
+
+I have lots of 'maybe [] id' or whatever, but it's always cases where
+I expect a Nothing so I have an escape route planned.
+
+

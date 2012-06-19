@@ -1,0 +1,28 @@
+From permeakra at gmail.com  Wed Aug 24 19:43:49 2011
+From: permeakra at gmail.com (Permjacov Evgeniy)
+Date: Wed, 24 Aug 2011 21:43:49 +0400
+Subject: [Haskell-cafe] haskell or lazy functional as procedure language
+Message-ID: <4E553855.30806@gmail.com>
+
+Ok, I know, I want something strange. But consider situation, when one
+is starting a project and finds, that he need s
+
+1) ACID relational storage
+2) Power of good RDBMS system (postgresql for example)
+3) Power of some very hight level language and compiled (haskell for
+example) for stored procedures
+4) And all data processing MUST be performed inside RDBMS
+5) And does not have enough money to by Oracle ore other commercial RDBMS.
+
+
+I already considered using ghc with postgresql. It could be very, very
+good pair, but.... ghc runtime cannot be re-initialized, and reqular way
+for stored procedures in postgresql is calling function from shared
+object (meaning, I have to shut down ghc runtime each time stored
+procedure ended).
+
+What other options do you see?
+
+
+
+

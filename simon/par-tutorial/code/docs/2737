@@ -1,0 +1,44 @@
+From fischer at nii.ac.jp  Sat Feb  5 11:42:45 2011
+From: fischer at nii.ac.jp (Sebastian Fischer)
+Date: Sat, 5 Feb 2011 19:42:45 +0900
+Subject: [Haskell-cafe] Concurrency best practices?
+In-Reply-To: <4D4D1C63.2000906@freegeek.org>
+References: <4D4D1C63.2000906@freegeek.org>
+Message-ID: <AANLkTinMmSUDZo3oiFWgj_nZ7zwschfVcoOa=XrNSfVo@mail.gmail.com>
+
+Hi Wren,
+
+maybe Twilight STM is for you:
+http://hackage.haskell.org/package/twilight-stm
+
+Sebastian
+
+On Sat, Feb 5, 2011 at 6:46 PM, wren ng thornton <wren at freegeek.org> wrote:
+
+> So I'm working on a project that uses STM to run a lot of things in
+> parallel without the headaches of locks. So far it's working beautifully,
+> STM rocks. But there's one snag...
+>
+> Sometimes I need those threads to do some IO like printing logging info.
+> I'd like to make these IO chunks atomic with respect to one another so that
+> the logging output isn't garbage. Since I'm using STM everywhere else, I'd
+> love to use it for this too (instead of mixing STM and non-STM concurrency)
+> except you can't embed IO in STM.
+>
+> I could just use STM vars as locks to force the atomicity, but locks are
+> ugly and bug-prone. So what's the current best practice for doing this kind
+> of thing?
+>
+> --
+> Live well,
+> ~wren
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110205/5b43ecb7/attachment.htm>
+

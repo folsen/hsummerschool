@@ -1,0 +1,55 @@
+From allbery.b at gmail.com  Thu Aug 18 23:27:07 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Thu, 18 Aug 2011 17:27:07 -0400
+Subject: [Haskell-cafe] Embedding Perl RegEx in Haskell
+In-Reply-To: <CAGdT1gqMvi3ihocy6Yg4A0z0C0uu0GVzSPStNCzZLrwCAbS=Ew@mail.gmail.com>
+References: <CAGdT1gqMvi3ihocy6Yg4A0z0C0uu0GVzSPStNCzZLrwCAbS=Ew@mail.gmail.com>
+Message-ID: <CAKFCL4VrTnhzQwbp2N3RTL=4jzQT+6cUF9a814OgeHRSAZ1Adw@mail.gmail.com>
+
+On Thu, Aug 18, 2011 at 14:01, C K Kashyap <ckkashyap at gmail.com> wrote:
+
+> *Main> let re = listToSequence [ hello, oneOrMore world, hello ]
+> *Main> re
+> hello(world)+hello
+>
+> I am looking for suggestions on how I could encode the anchors - ^ and $
+> and also how I could refer to captures. My goal is to be able to extend the
+> idea to create an EDSL that could be used to build Perl tasks - such as
+> filters, report generators etc
+>
+
+Why not just go with anchorHead and anchorTail or similar?  And a capture
+could simply be
+
+     capture name regularExpression
+
+where name can be an Int or support the newer named capture syntaxes.  I'm
+not sure I would bother with fancy symbols; if anything, I might in your
+position go back to the old v8 regular expressions (or rather Henry
+Spencer's unencumbered reimplementation) and use the symbolic names from
+that; they were actually virtual machine opcodes.
+
+(Or even
+
+    capture (Maybe name) regularExpression
+
+and (capture Nothing ...) could represent grouping.  That's certainly how
+many actual RE implementations define it.)
+
+Arguably this could be seen as a pointless exercise because I could chose to
+> do the scripting in Haskell itself but I have a practical problem that I
+> have to deal with clusters that have a little dated version of Linux where I
+> could not really build the
+>
+
+(Don't even get me started on Linux backward incompatibility... I spent
+years fighting that crap, it's one thing I do not at all miss from my old
+job.)
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110818/f27f5a3f/attachment.htm>
+

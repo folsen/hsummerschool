@@ -1,0 +1,31 @@
+From chrisdone at googlemail.com  Fri Apr 22 21:31:54 2011
+From: chrisdone at googlemail.com (Christopher Done)
+Date: Fri, 22 Apr 2011 21:31:54 +0200
+Subject: [Haskell-cafe] There is no null; Maybe/Option types
+In-Reply-To: <alpine.DEB.2.00.1104222123290.28351@anubis>
+References: <BANLkTi=irBB_YvfEm3ms0Vxd6xDb7tcPcg@mail.gmail.com>
+	<alpine.DEB.2.00.1104222123290.28351@anubis>
+Message-ID: <BANLkTinyyopfdp-rxw6Nub6SnG-hd1Ez3A@mail.gmail.com>
+
+On 22 April 2011 21:26, Henning Thielemann <lemming at henning-thielemann.de>wrote:
+
+>  In idiomatic Haskell you would write
+>
+> case userList of
+>   Nothing -> Nothing
+>   Just plainUserList =
+>      let user = findUser "bob" plainUserList
+>      ...
+>
+> since (userList /= Nothing) requires an Eq instance without need and it
+> requires fromJust. Or was there an educational purpose to write it with (/=
+> Nothing) ?
+>
+
+Educational; it was just to make it look like and have similar meaning (as I
+perceived it) to the Fantom code. (I'd never write code like this; I use
+case analysis and avoid if.)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110422/4eee6bac/attachment.htm>
+

@@ -1,0 +1,43 @@
+From michael at snoyman.com  Tue Feb  8 09:56:33 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Tue, 8 Feb 2011 10:56:33 +0200
+Subject: [Haskell-cafe] Help needed for converting IOArray to ByteString
+In-Reply-To: <AANLkTimFRPKHbpL36uwim2GtTdknVY6pdK2-dJn7FwGU@mail.gmail.com>
+References: <AANLkTimFRPKHbpL36uwim2GtTdknVY6pdK2-dJn7FwGU@mail.gmail.com>
+Message-ID: <AANLkTin5aMcwt7UfP=PHVJOOwya9XttFC=gxDtkfR5nN@mail.gmail.com>
+
+Your array contains machine-sized Ints, which in practice are likely
+either 32-bit or 64-bit, while a ByteString is the equivalent of an
+array or 8-bit values. So you'll need to somehow convert the Ints to
+Word8s. Do you know if you need big or little endian?
+
+A basic approach would be:
+
+* Use freeze to convert your IOArray into an IArray
+* Use putIArrayOf and put (from cereal) to generate a Putter value
+* Use runPut to generate a ByteString from that
+
+Michael
+
+On Tue, Feb 8, 2011 at 10:49 AM, C K Kashyap <ckkashyap at gmail.com> wrote:
+> Hi,
+> I need to convert IOArray to bytestring as shown below -
+> import Data.Array.IO
+> import Data.Binary.Put
+> import qualified Data.ByteString.Lazy as BS
+> import Data.Word
+> main = do
+> arr <- newArray (0,9) 0 :: IO (IOArray Int Int)
+> let bs=toByteString arr
+> return ()
+> How can I implement the 'toByteString' function?
+> Regards,
+> Kashyap
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

@@ -1,0 +1,31 @@
+From joey at kitenet.net  Fri Feb 11 20:44:32 2011
+From: joey at kitenet.net (Joey Hess)
+Date: Fri, 11 Feb 2011 15:44:32 -0400
+Subject: [Haskell-cafe] unicode filenames advice
+Message-ID: <20110211194431.GA8708@gnu.kitenet.net>
+
+I've been trying to deal with how my haskell program handles unicode
+filenames. Been dealing with problems like those described here:
+
+http://hackage.haskell.org/trac/ghc/ticket/3307
+
+Or, simply demonstrated by feeding unicode to getLine >>= readFile
+
+My approach currently is to carefully identify any point where
+a FilePath is output, and run it through a filePathToString (which
+varies by OS), as suggested in the above bug report.
+
+Is there a less tedious and error-prone way? What is the best approach
+to use now, assuming that these issues will be dealt with in some way
+in Haskell, eventually?
+
+-- 
+see shy jo
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 828 bytes
+Desc: Digital signature
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110211/e45c1820/attachment.pgp>
+

@@ -1,0 +1,35 @@
+From sh006d3592 at blueyonder.co.uk  Thu Dec 29 22:04:12 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Thu, 29 Dec 2011 21:04:12 +0000
+Subject: [Haskell-cafe] On the purity of Haskell /Random generators
+In-Reply-To: <4EFCCFFD.9080908@unicaen.fr>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org> <4EFCC3CE.7050006@blueyonder.co.uk>
+	<451591325188516@web70.yandex.ru> <4EFCCFFD.9080908@unicaen.fr>
+Message-ID: <4EFCD5CC.8050803@blueyonder.co.uk>
+
+On 29/12/2011 20:39, Jerzy Karczmarczuk wrote:
+> Still, I dont understand what does S.H.  mean by a "perfectly good 
+> pure generator".
+> Tell more please (unless you just mean a stream, say:
+>
+Probably bad wording, to be honest. I only meant that there's random 
+number handling support in the Haskell library and, and least judging by 
+type signatures, it's pure functional code with no hint of the IO monad.
+
+AFAIK there's no hidden unsafePerformIO sneaking any entropy in behind 
+the scenes. Even if there was, it might be a legitimate reason for 
+unsafePerformIO - random numbers are in principle non-deterministic, not 
+determined by the current state of the outside world and 
+which-you-evaluate-first should be irrelevant. If you have a quantum 
+genuine-random-numbers gadget, the IO monad might be considered 
+redundant for functions that get values from it - though it still isn't 
+referentially transparent as it returns a different value each time even 
+with the same parameters.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111229/0781d49a/attachment.htm>
+

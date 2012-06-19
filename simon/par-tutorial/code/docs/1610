@@ -1,0 +1,26 @@
+From ok at cs.otago.ac.nz  Fri Dec  2 02:07:48 2011
+From: ok at cs.otago.ac.nz (Richard O'Keefe)
+Date: Fri, 2 Dec 2011 14:07:48 +1300
+Subject: [Haskell-cafe] "could not create compact unwind"
+In-Reply-To: <87mxbbu9g7.fsf@googlemail.com>
+References: <87mxbbu9g7.fsf@googlemail.com>
+Message-ID: <D2FB2631-015C-4EE7-B354-B74364238BD9@cs.otago.ac.nz>
+
+I just did
+	cabal install cabal-install
+on a Mac running Mac OS 10.6.8 and got the eventual response
+[44 of 44] Compiling Main             ( Main.hs, dist/build/cabal/cabal-tmp/Main.o )
+Linking dist/build/cabal/cabal ...
+ld: warning: could not create compact unwind for .LFB3: non-standard register 5 being saved in prolog
+Installing executable(s) in /home/cshome/o/ok/.cabal/bin
+
+I also had this problem today:
+m% cabal install quickcheck   
+Resolving dependencies...
+cabal: dependencies conflict: ghc-6.12.3 requires pretty ==1.0.1.2 however
+pretty-1.0.1.2 was excluded because ghc-6.12.3 requires pretty ==1.0.1.1
+
+What's the procedure for wiping everything out and starting again?
+
+
+

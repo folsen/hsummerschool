@@ -1,0 +1,21 @@
+From andersk at MIT.EDU  Fri Feb  4 22:41:39 2011
+From: andersk at MIT.EDU (Anders Kaseorg)
+Date: Fri, 4 Feb 2011 16:41:39 -0500 (EST)
+Subject: [Haskell-cafe] MonadPeelIO instance for monad transformers on
+	top of "forall"
+In-Reply-To: <AANLkTimhhfkBJ3iS6xjgoAnV0dQ5GfG+otb9BDOHp3So@mail.gmail.com>
+References: <AANLkTimhhfkBJ3iS6xjgoAnV0dQ5GfG+otb9BDOHp3So@mail.gmail.com>
+Message-ID: <alpine.DEB.2.02.1102041630280.12561@dr-wily.mit.edu>
+
+On Fri, 4 Feb 2011, Max Bolingbroke wrote:
+> data M a = M { unM :: forall m. MonadPeelIO m => Reader.ReaderT () m a }
+
+Maybe this won?t help in your actual code, but isn?t M isomorphic to IO 
+(via unM :: M a -> IO a, M . liftIO :: IO a -> M a)?
+
+instance MonadPeelIO M where
+  peelIO = M (liftIO (liftM (\k (M mx) -> liftM (\my -> (M (liftIO my))) (k mx)) peelIO))
+
+Anders
+
+

@@ -1,0 +1,39 @@
+From magnus at therning.org  Fri Aug 26 09:05:59 2011
+From: magnus at therning.org (Magnus Therning)
+Date: Fri, 26 Aug 2011 09:05:59 +0200
+Subject: [Haskell-cafe] ANN: shelltestrunner 1.1
+In-Reply-To: <03AFA601-B8A2-4821-AEFA-6DECBE6CD266@joyful.com>
+References: <03AFA601-B8A2-4821-AEFA-6DECBE6CD266@joyful.com>
+Message-ID: <CAAExw5saYQoiH_aXYXyX7uJa12AH=AaNz5mkFOrh6ymCVzVyfw@mail.gmail.com>
+
+On Thu, Aug 25, 2011 at 20:56, Simon Michael <simon at joyful.com> wrote:
+> I'm pleased to announce shelltestrunner 1.1.
+>
+> shelltestrunner tests command-line programs or arbitrary shell
+> commands. ?It reads simple declarative tests specifying a command,
+> some input, and the expected output, error output and exit status.
+> Tests can be run selectively, in parallel, with a timeout, in color,
+> and/or with differences highlighted. Projects using it include
+> hledger, yesod, and berp. shelltestrunner is free software released
+> under GPLv3+.
+>
+> New in 1.1:
+>
+> ?* bump process dependency to allow building with GHC 7.2.1
+>
+> ?* new `-a/--all` flag shows all failure output without truncating
+>
+> Home page: http://joyful.com/shelltestrunner
+>
+> Install: $ cabal install shelltestrunner
+
+Excellent, my strategy worked. I've been expecting this email. ;)
+
+/M
+
+-- 
+Magnus Therning ? ? ? ? ? ? ? ? ? ? ?OpenPGP: 0xAB4DFBA4
+email: magnus at therning.org ? jabber: magnus at therning.org
+twitter: magthe ? ? ? ? ? ? ? http://therning.org/magnus
+
+

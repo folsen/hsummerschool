@@ -1,0 +1,37 @@
+From catamorphism at gmail.com  Thu Feb  3 23:12:54 2011
+From: catamorphism at gmail.com (Tim Chevalier)
+Date: Thu, 3 Feb 2011 14:12:54 -0800
+Subject: [Haskell-cafe] ($) not as transparent as it seems
+In-Reply-To: <AANLkTin-M1Z8Ee-fSEarauMZC99Gv8wsFviQDK4WtBoe@mail.gmail.com>
+References: <4D4B1396.6070501@uni-bonn.de>
+	<AANLkTin-M1Z8Ee-fSEarauMZC99Gv8wsFviQDK4WtBoe@mail.gmail.com>
+Message-ID: <AANLkTimp6PhnOULhyo7ZbEc9ZsCJiX=jUhkRwpaHdt=n@mail.gmail.com>
+
+On Thu, Feb 3, 2011 at 2:03 PM, Luke Palmer <lrpalmer at gmail.com> wrote:
+> This is probably a result of strictness analysis. ?error is
+> technically strict, so it is reasonable to optimize to:
+>
+> ? ?let e = error "foo" in e `seq` error e
+>
+
+Yes, and you can see this in the Core code that Don posted: in version
+(A), GHC optimized away the outer call to error. But in version (B),
+the demand analyzer only knows that ($) is strict in its first
+argument -- it's not strict in its second. So it's not obviously safe
+to do the same optimization: the demand analyzer doesn't "look
+through" higher-order function arguments IIRC. (You can confirm this
+for yourself if you also want to read the demand analyzer output.)
+
+If ($) were getting inlined, the code would look the same coming into
+demand analysis in both cases, so you wouldn't see a difference. So
+I'm guessing you're compiling with -O0.
+
+Cheers,
+Tim
+
+-- 
+Tim Chevalier * http://cs.pdx.edu/~tjc/ * Often in error, never in doubt
+"an intelligent person fights for lost causes,realizing that others
+are merely effects" -- E.E. Cummings
+
+

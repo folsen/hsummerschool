@@ -1,0 +1,29 @@
+From simons at cryp.to  Sun Dec 11 18:43:25 2011
+From: simons at cryp.to (Peter Simons)
+Date: Sun, 11 Dec 2011 18:43:25 +0100
+Subject: [Haskell-cafe] [ANNOUNCEMENT] xmobar 0.14
+References: <87k464b870.fsf@gnu.org> <87d3bw102d.fsf@write-only.cryp.to>
+	<CAKFCL4VhQe89QZmTM6Wxm+7KR6KOT7+qQe-xYCNBt8i3fR+zjg@mail.gmail.com>
+	<87fwgrblkq.fsf@gnu.org> <87vcpn5fl2.fsf@write-only.cryp.to>
+	<CAKjSnQE-eFSEFhbJU9-_LeNiYcPGOi5xiv6eGos3kUWiXkB+2Q@mail.gmail.com>
+Message-ID: <87ipln57ia.fsf@write-only.cryp.to>
+
+Hi Antoine,
+
+ > What errors are you getting compiling with GHC 6.10.4? If its a small
+ > thing I certainly don't mind patching things.
+
+I am sorry, my previous statement was inaccurate. Parsec 3.1.2 compiles
+fine, but the 'text' library -- on which Parsec depends -- does not. We
+can probably avoid that issue by downgrading text to version 0.11.0.6
+for GHC 6.10.4, which builds fine. It's not a pretty solution, but it
+seems to work fine.
+
+So, the good news is that we now have Parsec 3 available for GHC 6.10.4
+in NixOS after all. :-)
+
+Take care,
+Peter
+
+
+

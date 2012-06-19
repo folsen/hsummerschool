@@ -1,0 +1,265 @@
+From andrewcoppin at btinternet.com  Thu Feb  3 22:10:51 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Thu, 03 Feb 2011 21:10:51 +0000
+Subject: [Haskell-cafe] Byte Histogram
+Message-ID: <4D4B19DB.5000907@btinternet.com>
+
+There now follows a small grab-bag of miscelaneous but related thoughts. 
+(Which probably means that this post will spawn a 2000 message thread 
+discussing one tiny side-issue, rather than the main thrust of the 
+message...)
+
+
+
+First of all, benchmarking. We have The Great Language Shootout, which 
+tests how fast solutions implemented in various programming languages 
+can be, given unbounded amounts of time, energy, expertise, and compiler 
+modifications. Which is interesting, from a certain point of view.
+
+In another sense, it's less interesting. For example, a C program can be 
+as fast as any Haskell program, since compiling Haskell entails 
+transforming it *into* C. (Unless you're seriously going to suggest that 
+GHC's native code generator is any match for the might of a half-decent 
+C compiler...)
+
+That got me thinking about a more interesting question: Not *how fast* 
+can it go, but *how easily* can it go fast? People have written fast C 
+programs and fast Haskell programs, but how easy is it to write a 
+"typical" program and have it go fast, without spending years optimising it?
+
+With that in mind, I set of with a plan to do some small-scale 
+benchmarking. Pick a problem, solve it in both Haskell and C++, in the 
+"simplest, most obvious way", and then apply "the simplest, most obvious 
+optimisations". Measure performance and compare.
+
+There are benchmarks that just output some data. ("Find all the prime 
+numbers less than 1000...") I dislike these for a couple of reasons, not 
+least because you can precompute the correct answer and just write a 
+program which outputs that. (!) So I decided that all my benchmark 
+programs should take a variable-sized data file as input, and save the 
+results as output.
+
+There's an old maxim of running benchmarks multiple times, to ensure 
+that whatever time you got wasn't just a fluke. But then, maybe the 
+first run pulls the input file into the file cache, and subsequent runs 
+go faster. If your input data was randomly generated, perhaps you chose 
+a particularly optimal or pessimal data set by accident. So I decided 
+that each test run should use a different input file of approximately 
+the same characteristics (size, random distribution, etc.)
+
+So I ended up picking benchmarks like "sort the lines of this file into 
+ascending order", "count the number of unique words in this file", 
+"produce a histogram of byte values", "compute some statistics of this 
+list of numbers", etc. The tasks are all extremely simple, so that there 
+is some hope of it being possible to also implement them in C++.
+
+
+
+One benchmark turned out to be particularly interesting: I call it "byte 
+histogram". The task is simple:
+- Open a binary input file.
+- Read a stream of bytes from it.
+- Count how many times each of the 256 possible byte values appears.
+The test inputs are binary files of various sizes, some with a uniform 
+distribution, some with variously skewed distributions (so that some 
+bytes have a vastly higher count than others).
+
+Assuming we have some suitable import statements, it's quite easy to do 
+this:
+
+   bytes <- BS.readFile "Input.bin"
+   let out = BS.foldl' (\ map byte -> MAP.insertWith (+) byte 1 map) 
+MAP.empty bytes
+   writeFile "Output.csv" (unlines $ map (\(k,v) -> show k ++ "," ++ 
+show v) $ MAP.toAscList out)
+
+(There is some slight trickiness if you want bytes with zero frequency 
+to still be listed.)
+
+All of this *works* perfectly - i.e., it produces the correct answers. 
+It's also astronomically slow, and it's very easy to make it eat many 
+gigabytes of RAM while it runs. (If the program starts actually 
+swapping, then you will truly know what "slow" is!)
+
+OK, so what happens if we replace Data.Map with Data.IntMap? Well, it 
+goes slightly faster, and consumes slightly less RAM. Inputs which 
+didn't quite complete before will run to completion now. But performance 
+is still abysmal.
+
+Enough with this tree sillyness. What happens if you use an array? Given 
+that the entire program (apart from the last 0.02% of it) spends its 
+time notionally mutating the data, a mutable array would be the logical 
+choise. Dial up an IOArray Word8 Int and the structure of the program 
+changes slightly, but it's still only a handful of lines of code. And 
+the performance? Still glacial.
+
+In particular, suppose we have
+
+   inc :: IOArray Word8 Int -> Word8 -> IO ()
+   inc array byte = do
+     count <- readArray array byte
+     let count' = count + 1
+     writeArray array byte count'
+
+in the main loop. The program is giving us the right answer, but using 
+absurd amounts of time and space to get it. Now watch this:
+
+   inc :: IOArray Word8 Int -> Word8 -> IO ()
+   inc array byte = do
+     count <- readArray array byte
+     let count' = count + 1
+     count' `seq` writeArray array byte count'
+
+And now, suddenly, memory usage becomes constant, regardless of input 
+size, and run-time is slashed. The program goes from taking 50 seconds 
+to process a certain file to taking only 0.02 seconds. And from taking 
+400 MB of RAM to taking... less RAM than I can actually measure properly.
+
+If we now replace the IOArray with an IOUArray then the seq call becomes 
+superfluous, and there's a small performance increase, but nothing major.
+
+
+
+None of this should be any surprise to anybody who actually knows how 
+Haskell works. For anybody not yet expert enough to see the problem: The 
+"inc" function doesn't read the array, see that a given byte has a count 
+of 5, and overwrite that with a 6. It sees a 5 and overwrites it with a 
+5+1. By the end of the main loop, every single array cell contains 
+1+(1+(1+(1+(1+(1+....)))), which takes a stackload of RAM to hold.
+
+That explains why RAM usage is so absurd. On top of all that, creating 
+all this data takes time, and the spiralling RAM usage makes the GC go 
+crazy trying to find garbage to get rid of (when of course there is 
+none). And finally, at the end, you have to unwind all these 
+expressions. (Curiously, I haven't seen a stack overflow yet...)
+
+Adding the seq call forces 5+1 to actually turn into 6, not eventualy 
+but *right now*, and so each array cell ends up actually containing a 
+fully-evaluated integer. (No doubt this change in strictness also 
+triggers an avalanche of optimisation opportunities, but the basic thing 
+of importants is that we're not uselessly delaying evaluation now.)
+
+As I say, none of this is a surprise to anybody who actually knows how 
+to get performance out of Haskell. The strict version is actually faster 
+than the C++ version. (I imagine I'm doing something horribly wrong with 
+C++, of course...) Not drastically faster, but faster. Which probably 
+just means that ByteString is doing nicer buffering than whatever the 
+C++ standard library is called.
+
+The important obsevation is this: One tiny, almost insignificant change 
+can transform a program from taking 50 seconds and 400 MB of RAM into 
+one that takes 0.02 seconds and 0.1 MB of RAM. And, at least in this 
+case, the simpler version is the slow one.
+
+To say that Haskell is "slow" is both a little bit vague, and not really 
+backed up by facts. In about 5 minutes flat, I managed to write a 
+Haskell program that's very simple, and yet faster than a comparably 
+simple C++ program (and C++ is supposed to be "fast"). So it's not that 
+Haskell is "slow". It's that Haskell is *tricky*. Tiny, tiny little 
+changes that look innocuous can have vast effects on performance. And 
+this is a nice little example of that effect.
+
+As we (probably?) all know, strictness is a subtle and fickle thing. 
+Consider:
+
+   or :: Bool -> Bool -> Bool
+   or True  True  = True
+   or True  False = True
+   or False True  = True
+   or False False = False
+
+Overlooking the obvious name clash, this seems like a perfectly 
+legitimate definition for the logical-OR function. But now try this:
+
+   xs `contains` x = foldr or False $ map (x ==) xs
+
+A nice, pretty Haskell definition. But oh dears - this does not have the 
+performance you would expect at all! But if you change the definition 
+above to the apparently equivilent
+
+   or True  _ = True
+   or False x = x
+
+then "contains" becomes much faster. If you saw these two functions side 
+by side, you might well wonder what the hell the difference is. You 
+might even wonder if the compiler would transform one to the other 
+(although I'm not sure in which direction). But there is, in fact, a 
+very, very big difference: one is lazier than the other.
+
+For counting bytes, lazy = bad. For searching for matches, lazy = good. 
+Similarly, if you take the byte histogram program and replace the lazy 
+ByteString with a strict one, RAM usage spikes sharply.
+
+In all, laziness is a tricky, tricky little hobbitses. I wrote a C++ 
+program, in the obvious way, and it was very, very fast. I wrote a 
+Haskell program in several comparably obvious ways, and they were all 
+cripplingly slow. Until I added the magic "seq", and suddenly got 
+blinding speed. So while it is not correct to say "Haskell is slow", one 
+could justifyably say "C++ is fast more reliably than Haskell".
+
+
+
+Consider for a moment the original implementation with Data.Map. Adding 
+a seq or two here will do no good at all; seq reduces to WHNF. What we 
+are wanting is NF, and I can see no way at all of doing that. (Other 
+than doing something very expensive like looking up every possible key, 
+which is far more operations than actually necessary.)
+
+I wrote my own little BST algorithm, customised to the fact that there 
+are always exactly 256 keys of type Word8. It was also nausiatingly 
+slow. And then I did something: I inserted a few strictness annotations 
+on the constructor fields. And (as you already worked out), performance 
+increased drastically.
+
+I can do that if *I* define the data structure. But if it's in a 
+library, I am powerless to make it more strict (or less, if that were 
+what I wanted).
+
+That got me thinking... What would happen if, instead of "Integer", we 
+had two types, "evaluated Integer" and "possibly unevaluated Integer"? 
+What if the strictness or otherwise of a data structure were exposed at 
+the type level?
+
+The general idea here is that anything declared has having type 
+"evaluated Integer" can never contain an unevaluated expression. It must 
+always contain an actual integer. This of course implies that you might 
+be able to unbox it or do other interesting things with it, but it also 
+says something about evaluation.
+
+The principle question is "what happens if you assign an unevaluated 
+Integer to an evaluated Integer?" Is that legal? Do you have to 
+explicitly evaluate it first? Or does that happen implicitly? Presumably 
+"evaluated Integer" means evaluated to WHNF only - which for an integer 
+is the same thing as NF, but for some more complex structure it might 
+not be.
+
+If the type system worked like this, I could do "Data.Map with evaluated 
+integer keys and possibly evaluated integer values", and it would hold 
+its values lazily. Or I could say "Data.Map with evaluated integer keys 
+and evaluated integer values", and the structure would now magically be 
+strict. Which is to say, the type system would ensure that any data 
+passed into the structure was evaluated first, and the compiler could do 
+any applicable optimisations based on the assumption of data being 
+already evaluated. (For primitive types, that might be unboxing or 
+passing in registors. For ADTs, it might just mean skipping an 
+evaluation check.)
+
+Currently, if you want a strict list, you have to implement one 
+yourself. But is that strict in the spine, or the elements, or what? You 
+have to implement every combination that you want. And, let us not 
+forget, then go implement all the functions in Data.List over your new 
+data structure. Not fun.
+
+If, on the other hand, strictness where in the type system, data 
+structures would be *parameterised* over the level of strictness required.
+
+I have no idea what the syntax for that would look like, and backwards 
+compatibility looks like a nightmare. You would need to answer questions 
+like "what does it mean for a function to return an evaluated type?" and 
+"is evaluation implicit or explicit?" But it seems like a rather 
+interesting idea.
+
+(Let us not forget: *Everything* is trivial for the person who doesn't 
+have to write the implementation...)
+
+

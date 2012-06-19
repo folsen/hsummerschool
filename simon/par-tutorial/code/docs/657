@@ -1,0 +1,29 @@
+From uzytkownik2 at gmail.com  Sat Apr 23 12:29:28 2011
+From: uzytkownik2 at gmail.com (Maciej Piechotka)
+Date: Sat, 23 Apr 2011 12:29:28 +0200
+Subject: [Haskell-cafe] ANNOUNCE: iteratee-compress 0.2.0.0
+Message-ID: <1303554570.3911.8.camel@localhost.localdomain>
+
+Iteratee-compress provides compressing and decompressing enumerators
+including flushing (using John Lato's implementation). Currently only
+gzip and bzip is provided but LZMA is planned.
+
+Changes from previous version:
+ - Add BZip support
+
+Next goals:
+ - LZMA support
+ - Generic interface for flushing
+
+To think about:
+ - Should inner iteratee be able to request flushing
+
+Regards
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110423/9d5f0975/attachment.pgp>
+

@@ -1,0 +1,48 @@
+From felipe.lessa at gmail.com  Sun Dec  4 18:01:47 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Sun, 4 Dec 2011 15:01:47 -0200
+Subject: [Haskell-cafe] Anonymous, Unique Types, maybe
+In-Reply-To: <4EDB0ABC.10705@gmail.com>
+References: <4EDB0ABC.10705@gmail.com>
+Message-ID: <CANd=OGGsU5Z+tZuGzkX=Ewa+6--cr34YAMVwUe-eEZNcXiQ3oQ@mail.gmail.com>
+
+On Sun, Dec 4, 2011 at 3:53 AM, Scott Lawrence <bytbox at gmail.com> wrote:
+> type AList = [Event]
+> type BList = [Event]
+> type CList = [Event]
+>
+> myMapish :: AList -> AList
+> mySelect :: AList -> (Event -> Bool) -> BList
+> myOtherSelect :: BList -> CList
+
+A suggestion:
+
+  data Exists f = forall a. Exists f a
+
+  data List a = List [Event] -- your list type
+
+  myMapish :: List a -> List a
+  myDoSomething :: List a -> (List a, List a)
+  myPair :: (Event -> Event -> Event) -> List a -> List a -> List a
+  mySelect :: List a -> Exists List
+
+So the "anonymous, unique type" would be enclosed on the existential.
+Its real type doesn't really matter, it may be always (), but code
+that uses mySelect can't use this fact.  It's not able to do even
+something simple like
+
+  let Exists b = mySelect a
+      Exists c = mySelect a
+  in myPair f b c
+
+even though we know that in this case this is valid =).  But you can always make
+
+  unsafeCastList :: List a -> List b
+  unsafeCastList (List a) = List a
+
+Cheers,
+
+-- 
+Felipe.
+
+

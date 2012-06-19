@@ -1,0 +1,79 @@
+From andrew.pennebaker at gmail.com  Tue Apr 26 22:14:01 2011
+From: andrew.pennebaker at gmail.com (Andrew Pennebaker)
+Date: Tue, 26 Apr 2011 16:14:01 -0400
+Subject: [Haskell-cafe] HipmunkPlayground compile error
+In-Reply-To: <BANLkTikjbKovV3PkRkh6+1190AoCpXeR-g@mail.gmail.com>
+References: <BANLkTikwaNs0eNkrogMadOn00qhFab=AHA@mail.gmail.com>
+	<BANLkTikjbKovV3PkRkh6+1190AoCpXeR-g@mail.gmail.com>
+Message-ID: <BANLkTi=+bey1M4KJz6YDy+xwCWhvckJUpQ@mail.gmail.com>
+
+Thanks for the tip. GHC 7.0.3 does seem to fix a couple bugs, and maybe even
+run faster than GHC 7.0.2.
+
+But it doesn't solve the problem.
+
+$ ghc --version
+The Glorious Glasgow Haskell Compilation System, version 7.0.3
+$ cabal --version
+cabal-install version 0.10.2
+using version 1.10.1.0 of the Cabal library
+$ cabal install hipmunk
+(works)
+$ cabal install hipmunkplayground
+(dozens of GLFW warnings)
+...
+Updating documentation index /Users/andrew/Library/Haskell/doc/index.html
+cabal: Error: some packages failed to install:
+GLFW-0.4.2 failed during the building phase. The exception was:
+ExitFailure 1
+HipmunkPlayground-5.2.0.3 depends on GLFW-0.4.2 which failed to install.
+$ cabal install glfw
+(dozens of GLFW warnings)
+...
+cabal: Error: some packages failed to install:
+GLFW-0.4.2 failed during the building phase. The exception was:
+ExitFailure 1
+
+Cheers,
+
+Andrew Pennebaker
+www.yellosoft.us
+
+On Tue, Apr 26, 2011 at 4:49 AM, Jason Dagit <dagitj at gmail.com> wrote:
+
+>
+>
+> On Tue, Apr 26, 2011 at 1:38 AM, Andrew Pennebaker <
+> andrew.pennebaker at gmail.com> wrote:
+>
+>> $ system_profiler SPSoftwareDataType | grep "System Version"
+>>       System Version: Mac OS X 10.6.7 (10J869)
+>> $ ghc --version
+>> The Glorious Glasgow Haskell Compilation System, version 7.0.2
+>> $ cabal --version
+>> cabal-install version 0.10.2
+>> using version 1.10.1.0 of the Cabal library
+>> $ cabal install hipmunkplayground
+>> ...
+>> Updating documentation index /Users/andrew/Library/Haskell/doc/index.html
+>> cabal: Error: some packages failed to install:
+>> GLFW-0.4.2 failed during the building phase. The exception was:
+>> ExitFailure 1
+>> HipmunkPlayground-5.2.0.3 depends on GLFW-0.4.2 which failed to install.
+>>
+>
+> GLFW is the package that failed to install.  The reason for that should be
+> in the scroll back somewhere but it can often be hard to find when it's
+> buried in a huge list of compilation messages.  If you try with just GLFW,
+> eg., cabal install GLFW, then it should be easier to spot the error.
+>
+> Since you're on a mac, I would highly recommend getting the latest haskell
+> platform.  You're on 7.0.2 which has bug fixes that are relevant to build
+> failures on OSX, as I understand it.
+>
+> Jason
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110426/82a48df5/attachment.htm>
+

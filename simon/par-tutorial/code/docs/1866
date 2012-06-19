@@ -1,0 +1,25 @@
+From chowells79 at gmail.com  Mon Dec 12 18:23:13 2011
+From: chowells79 at gmail.com (Carl Howells)
+Date: Mon, 12 Dec 2011 09:23:13 -0800
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CACw0niK9Bv6q3UxMk8XHtb_=6KsrHTn-4mkjhDDEUX_LdmAqYQ@mail.gmail.com>
+Message-ID: <CAECnf4DtEDnf4Z+Z7MKZ731f+c6t+ZGLDPkTDWt36MSsqXLm4g@mail.gmail.com>
+
+> There is absolutely no implication of consuming anything in the definitions
+> of many or some. This is how they happen to behave when used in the context
+> of some parsing libraries, but that's all. If many or some always go into an
+> infinite loop for some Alternative instance, then I suspect that the
+> instance itself is either broken or shouldn't exist.
+
+So, then...  The instance for Maybe shouldn't exist?
+
+Prelude Control.Applicative> some Nothing
+Nothing
+Prelude Control.Applicative> some $ Just ()
+^CInterrupted.
+
+Carl
+
+

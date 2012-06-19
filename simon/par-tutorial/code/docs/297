@@ -1,0 +1,79 @@
+From dima at simonchik.net  Mon Apr 11 13:27:04 2011
+From: dima at simonchik.net (Dmitry Simonchik)
+Date: Mon, 11 Apr 2011 15:27:04 +0400
+Subject: [Haskell-cafe] Parsing HTML tables with HXT
+In-Reply-To: <4DA25199.6070008@vex.net>
+References: <BANLkTimi4H8j6AmFsbwmHJ1MUHKDd8do9A@mail.gmail.com>
+	<4DA25199.6070008@vex.net>
+Message-ID: <BANLkTingSZU28AsUHUPGjWAN1V02pv=LoA@mail.gmail.com>
+
+Thanks!
+
+I was also able to extract the needed value with the code below:
+
+testArrow :: IOSArrow XmlTree XmlTree
+testArrow =
+    deep (isElem >>> hasName "table" )
+    >>>
+    deep (isElem >>> hasName "tr")
+    >>>
+    (deep isText >>> hasText (=="a"))
+    `guards`
+    (getChildren >>> getChildren >>> isText)
+
+
+2011/4/11 Albert Y. C. Lai <trebla at vex.net>
+
+> On 11-04-08 06:29 AM, Dmitry Simonchik wrote:
+>
+>> Can someone please help me with getting the value of the table cell with
+>> HXT in the following html:
+>>
+>> <table class="tblc">
+>> <tr>
+>> <td class="tdc">x</td>
+>> <td>y</td>
+>> </tr>
+>> <tr>
+>> <td class="tdc">a</td>
+>> <td>b</td>
+>> </tr>
+>> </table>
+>>
+>> I need the value of the second cell in a row that has first cell with
+>> some predefined value (in the example above it can be x or a) I need the
+>> arrow of the type (IOSArrow XmlTree String) How to write it?
+>>
+>
+> import Text.XML.HXT.Core
+>
+> main = do
+>  rs <- runX (readDocument [] "example.xml" >>> example "x")
+>  mapM_ putStrLn rs
+>
+> -- example "blah" reports those 2nd columns such that
+> -- their 1st columns equal "blah"
+> example :: String -> IOSArrow XmlTree String
+> example s = deep (is "table" />
+>                  is "tr" >>>
+>                  listA (getChildren >>> is "td" /> getText) >>>
+>                  arrL get2nd
+>                 )
+>  where get2nd (one:two:_) | one==s = [two]
+>        get2nd _ = []
+>
+> is x = isElem >>> hasName x
+>
+> The important part is using listA at the right point to extract the list of
+> cells (belonging to the same row) so that with a list in your hand you can
+> test the 1st item and find the 2nd item.
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110411/2c1e248c/attachment.htm>
+

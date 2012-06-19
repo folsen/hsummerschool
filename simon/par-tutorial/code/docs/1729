@@ -1,0 +1,46 @@
+From es at ertes.de  Wed Dec  7 15:48:12 2011
+From: es at ertes.de (Ertugrul =?UTF-8?B?U8O2eWxlbWV6?=)
+Date: Wed, 7 Dec 2011 15:48:12 +0100
+Subject: [Haskell-cafe] How did iteratees get their names?
+References: <CACruqwTG3fOEbwiTMohwTG8Mt-9HR=r+gHKu5BVLg0MT_JnTrQ@mail.gmail.com>
+Message-ID: <20111207154812.36c674b5@angst.streitmacht.eu>
+
+Douglas McClean <douglas.mcclean at gmail.com> wrote:
+
+> I love iteratees as a paradigm for IO, but I am having trouble
+> developing a relationship with the names. Could someone explain their
+> origin?
+>
+> It seems like if iteratees consume things, enumerators produce them,
+> andenumeratees do both that names like Sink, Source, and Transformer
+> or Consumer, Producer, and Transformer might be more relatable
+> choices?  Is there some reason apart from convention why these names
+> wouldn't fit the concepts well?
+
+Well, everything in the iteratee concept is an iteratee.  An enumerator
+is itself an iteratee (that usually just isn't fed with input).  Hence
+those clearer names wouldn't really fit.
+
+An enumeratee is an iteratee that takes another iteratee and feeds it
+with input.  It might use its own input for that.  An enumerator is a
+special case of that, which ignores its own input.
+
+Just like chatter and chattee, employer and employee, there is an
+iterator (usually as part of an enumerator/ee) and an iteratee.
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111207/f61da7a6/attachment.pgp>
+

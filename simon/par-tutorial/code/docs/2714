@@ -1,0 +1,80 @@
+From sschuldenzucker at uni-bonn.de  Fri Feb  4 17:26:44 2011
+From: sschuldenzucker at uni-bonn.de (Steffen Schuldenzucker)
+Date: Fri, 04 Feb 2011 17:26:44 +0100
+Subject: [Haskell-cafe] Extending GHCi
+In-Reply-To: <AANLkTimY=7amY-NdvjivHS1RbjCVtL0UyjP=owmcRsNw@mail.gmail.com>
+References: <AANLkTintbzM_qEmFH=ijc5NudTTuk=eHqLYX1SAcXZ__@mail.gmail.com>	<4D4BEE24.1020000@uni-bonn.de>
+	<AANLkTimY=7amY-NdvjivHS1RbjCVtL0UyjP=owmcRsNw@mail.gmail.com>
+Message-ID: <4D4C28C4.8030805@uni-bonn.de>
+
+
+Ok, so someFunction should modify the server's configuration? Maybe you 
+can model it with an IORef like this (untested!):
+
+ > import Data.IORef
+ >
+ > type Config = String  -- String to be prepended to every answer
+ >
+ > someFunction :: String -> IORef Config -> IORef Config
+ > someFunction s r = modifyIORef s (++ s)
+ >
+ > startMyServer :: IO (IORef Config)
+ > startMyServer = do
+ >     r <- newIORef ""
+ >     forkIO $ runServer r
+ >     return r
+ >
+ > runServer :: IORef -> IO ()
+ > runServer r = do
+ >     client <- waitForAndAcceptConnection
+ >     request <- getSomeData client
+ >     prep <- readIORef r
+ >     sendSomeAnswer client $ prep ++ request
+ >     runServer r
+
+And then:
+
+*MyModule> r <- startMyServer
+(plain echo server running)
+*MyModule> someFunction "hello" r
+(now echo server with prepend "hello")
+*MyModule> someFunction "world" r
+(now echo server with prepend "helloworld")
+
+-- Steffen
+
+On 02/04/2011 03:41 PM, C K Kashyap wrote:
+> Thanks Steffen,
+>
+>     Prelude> :l MyModule.hs
+>     *MyModule> conn <- waitForAndAcceptConnection
+>     *MyModule> someData <- getSomeData conn
+>     *MyModule> sendSomeAnswer conn $ processSomeData someData
+>     ...
+>
+>
+> So this cycle of getting data from the connection and writing answer 
+> on the connection should happen concurrently with the ghci interaction 
+> ... so lets say that when the "thread" is forked that listens on 
+> socket behaves like an echo server ... as in, it reads data from the 
+> client till "\n" and echoes it back ... All this would happen without 
+> the intervention of the user using GHCI ... However, using GHCI, the 
+> user should be able to modify the code such that the server returns 
+> "hello" prepended to the input. ..
+>
+> > startMyServer -- at this point the the echo server gets spawned
+> >                       -- echo server continues to run
+> > someFunction "hello" --- now onwards  hello gets prepended
+> >                       --- echo server continues to run returning 
+> "hello" prepended
+> > someFunction "world" --- now onwards "helloworld" get
+>
+> I hope this is possible without having to modify ghci itself.
+>
+> Regards,
+> Kashyap
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110204/5a69a247/attachment.htm>
+

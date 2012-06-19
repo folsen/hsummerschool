@@ -1,0 +1,115 @@
+From johnsneer at operamail.com  Tue Dec  6 14:29:59 2011
+From: johnsneer at operamail.com (John Sneer)
+Date: Tue, 06 Dec 2011 13:29:59 +0000
+Subject: [Haskell-cafe] List x ByteString x Lazy Bytestring
+In-Reply-To: <CAHcAHA1BaUfnVrupie1JeqWa8CnHuPEz-AdWKgB9fBvzd9vvaQ@mail.gmail.com>
+References: <1323090896.3764.140661007583849@webmail.messagingengine.com><20111205134940.GA21037@x200><CACqaG6ypYKCRgJEY7hKnS_nGHLrB7fDdxY5OG4oRUV7KhNTY8A@mail.gmail.com><CAK-tuPZf5CQ41z8O9c-rW4QfyEms_oKKr5xWfUQcj=xWySHO9A@mail.gmail.com><CACqaG6x2XUzNK348fTo3GLB+D=ZuaQM9RrhakwYegPnzUQAvDA@mail.gmail.com>
+	<CAHcAHA1BaUfnVrupie1JeqWa8CnHuPEz-AdWKgB9fBvzd9vvaQ@mail.gmail.com>
+Message-ID: <1323178199.11990.140661008099529@webmail.messagingengine.com>
+
+Thank you for your replies and provided links.
+
+Unfortunately, I cannot provide the code as my boss thinks it
+could provide some extra information - definitely not Haskellish,
+but other.
+
+Nevetheless, your contribution was helpful and I was able to tune
+the code to get even better perofmance.
+
+Moreover, the performance is not big issue - I can process almost
+one million of files from 40 to 120 seconds, where sizes of files
+vary from several hundreds of bytes to several hundred of
+megabytes. I just thought I could improve overall tool-chain
+performance (several such tools are used in a chain).
+
+Thank you very much, I'l try the blaze-builder on the smallest
+tool and if any interesting outcome apperas I'll let you know.
+
+Best regards,
+
+  John
+
+
+On Tue, Dec 6, 2011, at 03:27 PM, Axman wrote:
+
+  I wonder what profiling tells you, you should identify where
+  your performance problems actually are before trying to
+  optimise.
+
+
+
+Some things that might help are using something like
+Blaze-Builder[1] to construct your bytestrings for output. I'm
+hoping that they're sufficiently lazy that you can lazily read in
+the input, and write output as you've made it available. if you
+use the blaze-builder-enumerator package, you should be able to
+get exactly what you want (but probably requires some minor
+knowledge of iteratees).
+Anyway, without seeing your code, we can't easily tell you what's
+wrong.
+
+
+
+Cheers,
+
+Alex
+[1] [1]http://hackage.haskell.org/package/blaze-builder
+
+[2] [2]http://hackage.haskell.org/package/blaze-builder-enumerato
+r
+
+
+On 6 December 2011 02:11, Yves Par?s <[3]limestrael at gmail.com>
+wrote:
+
+  Oh, sorry, my bad.
+  I misunderstood the dependency.
+
+2011/12/5 Johan Tibell <[4]johan.tibell at gmail.com>
+
+On Mon, Dec 5, 2011 at 6:09 AM, Yves Par?s
+<[5]limestrael at gmail.com> wrote:
+
+  However the performance issues seem odd: text is based on
+  bytestring.
+
+
+This is not the case. Text is based on ByteArray#, GHC internal
+type for blocks of bytes. The text package depends on the
+bytestring package because it allows you to encode/decode
+Text<->ByteString.
+
+-- Johan
+
+  _______________________________________________
+  Haskell-Cafe mailing list
+  [6]Haskell-Cafe at haskell.org
+  [7]http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+
+
+--
+-- Alex Mason
+
+_______________________________________________
+Haskell-Cafe mailing list
+Haskell-Cafe at haskell.org
+http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+References
+
+1. http://hackage.haskell.org/package/blaze-builder
+2. http://hackage.haskell.org/package/blaze-builder-enumerator
+3. mailto:limestrael at gmail.com
+4. mailto:johan.tibell at gmail.com
+5. mailto:limestrael at gmail.com
+6. mailto:Haskell-Cafe at haskell.org
+7. http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+-- 
+http://www.fastmail.fm - The professional email service
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111206/c1c0a5a1/attachment.htm>
+

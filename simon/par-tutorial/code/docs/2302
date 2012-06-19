@@ -1,0 +1,32 @@
+From michael at orlitzky.com  Mon Dec 26 22:57:21 2011
+From: michael at orlitzky.com (Michael Orlitzky)
+Date: Mon, 26 Dec 2011 16:57:21 -0500
+Subject: [Haskell-cafe] Non-exhaustive pattern match warning (incorrect?)
+In-Reply-To: <CAKjSnQHtitwjEQd2QzL-YtBpzsLO=JdxjATnZgMdFkoKZ5KxpA@mail.gmail.com>
+References: <4EF8BB12.3010603@orlitzky.com>
+	<CAKjSnQGDkoHbMz0e1-CVTVu-4Lc0ZDy5ZD2Pw-086cciDunFRg@mail.gmail.com>
+	<4EF8C8D4.3090904@orlitzky.com>
+	<CAKjSnQHtitwjEQd2QzL-YtBpzsLO=JdxjATnZgMdFkoKZ5KxpA@mail.gmail.com>
+Message-ID: <4EF8EDC1.2050103@orlitzky.com>
+
+On 12/26/2011 03:17 PM, Antoine Latter wrote:
+>
+> The error is warning you that the record update 'oct { b8 = bit }' can
+> fail at run-time if 'oct' is None.
+>
+> Since it looks like you've checked for that you shouldn't have a
+> problem, but the compiler doesn't know that.
+
+Thanks, that's what I thought but I wanted to make sure I wasn't missing 
+something obvious.
+
+
+> If you decompose your type into 'Octet' without the 'None' case, and
+> 'Maybe Octet' for the times when 'None' is appropriate, the compiler
+> will have enough information to not give warnings like this.
+>
+> I can't be the one to tell you if that is worth it or not.
+
+I must have had a good reason to do it that way, right? =)
+
+

@@ -1,0 +1,31 @@
+From jac at informatik.uni-kiel.de  Sun Feb 13 00:57:22 2011
+From: jac at informatik.uni-kiel.de (Jan Christiansen)
+Date: Sun, 13 Feb 2011 00:57:22 +0100
+Subject: [Haskell-cafe] How large is the Haskell community ?
+In-Reply-To: <AANLkTi=gxXMJxzSj9oYu+NKbRwKeFbg=2=mNLndOQJez@mail.gmail.com>
+References: <AANLkTi=gxXMJxzSj9oYu+NKbRwKeFbg=2=mNLndOQJez@mail.gmail.com>
+Message-ID: <AA90909E-A6A2-40DB-AA92-9253AD2C07ED@informatik.uni-kiel.de>
+
+
+On 12.02.2011, at 21:18, Aaron Gray wrote:
+
+> I was wondering if anyone had an idea or estimate as to how large  
+> the Haskell community is ?
+
+All the answers made me wonder what the criterion is to be a member of  
+the Haskell community. Are you a member if you downloaded ghc, if you  
+have (at least once) defined a Monad instance, if you have written a  
+hackage package, if you have contributed to the Monad.Reader, if you  
+have a github account with at least one Haskell project, if you read  
+at least one of the haskell mailing lists, if you contribute to a  
+haskell mailing list (perhaps on a regular basis), if you post on  
+reddit, if you answer/ask questions on stackoverflow, if you have  
+written at least 10000 lines of code in Haskell, if Haskell is one of  
+the programming languages you use, if Haskell is the one programming  
+language you use, if you have written a PhD thesis related to Haskell,  
+if you have asked a type related question only Oleg Kiselyov was able  
+to answer, if you know what a Monoid is and know how to use it ... ; )
+
+Cheers, Jan
+
+

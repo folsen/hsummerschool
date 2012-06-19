@@ -1,0 +1,61 @@
+From daniel.is.fischer at googlemail.com  Fri Apr 22 23:14:36 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Fri, 22 Apr 2011 23:14:36 +0200
+Subject: [Haskell-cafe] fishing for ST mutable Vector examples
+In-Reply-To: <BANLkTimkfpSqLGnY3FDZWig=z1kT0MM-vw@mail.gmail.com>
+References: <liliz22nuw.fsf@inside.sv3.smugmug.net>
+	<BANLkTimkfpSqLGnY3FDZWig=z1kT0MM-vw@mail.gmail.com>
+Message-ID: <201104222314.36612.daniel.is.fischer@googlemail.com>
+
+On Friday 22 April 2011 20:14:38, Stephen Tetley wrote:
+> Hi Brad
+> 
+> I think all you can do with an ST array is covered by the MArray class
+> and its derived operations - note the class is exported opaquely from
+> Data.Array.MArray - it has these two members that aren't exported so
+> aren't documented:
+> 
+> 
+> unsafeRead  :: Ix i => a i e -> Int -> m e
+> unsafeWrite :: Ix i => a i e -> Int -> e -> m ()
+
+Those are available from Data.Array.Base. I use them a lot, because there's 
+no point in letting the runtime check array bounds after I just did to 
+determine whether the loop is finished.
+
+> 
+> To actually read and write you have to use the safe derived operations
+> which wrap the unsafe versions:
+> 
+> readArray :: (MArray a e m, Ix i) => a i e -> i -> m e
+> writeArray :: (MArray a e m, Ix i) => a i e -> i -> e -> m ()
+> 
+> For practical purposes I've found STArray's a bit of a white elephant
+
+I on the other hand use 'STUArray's very much. When you fill an array with 
+an algorithm which works best with mutation (a sieve for example) and 
+afterwards use it only for querying, runSTUArray (or runSTArray) is a great 
+friend. ST guarantees that no other thread can mess with your array while 
+you build it, when you're done it's immutable. IO doesn't give you these 
+guarantees, you have to ascertain yourself that no other thread can mutate 
+your array.
+
+It's the same for 'Vector's, ST's phantom type parameter isolates you from 
+the outside world, with IOVectors, you have to do the protection yourself. 
+I think vector doesn't provide an analogue to runST(U)Array, but if you 
+need it, you can write
+
+runST (do
+   vec <- stuff
+   frz <- unsafeFreeze vec
+   return frz
+
+yourself.
+
+> - I always use IOArray instead, as I've either needed to initially
+> read an array from file or write one to file at the end.
+
+On the other hand, if you're doing IO, an IOArray is a fairly natural 
+choice.
+
+

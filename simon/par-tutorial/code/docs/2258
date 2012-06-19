@@ -1,0 +1,98 @@
+From alex.solla at gmail.com  Sat Dec 24 15:50:13 2011
+From: alex.solla at gmail.com (Alexander Solla)
+Date: Sat, 24 Dec 2011 06:50:13 -0800
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <654DA160-C961-44AA-B420-0DEE81A5CB0B@yandex.ru>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+	<BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+	<CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+	<654DA160-C961-44AA-B420-0DEE81A5CB0B@yandex.ru>
+Message-ID: <CAO0Ooq1MNJC=pHsgtZYM+56zuBQr23Vb9-ygbRgc8NqbwuJ+aQ@mail.gmail.com>
+
+On Wed, Dec 21, 2011 at 8:39 PM, MigMit <miguelimo38 at yandex.ru> wrote:
+
+>
+> On 22 Dec 2011, at 06:25, Alexander Solla wrote:
+>
+> > Denotational semantics is unrealistic.
+>
+> And so are imaginary numbers. But they are damn useful for electrical
+> circuits calculations, so who cares?
+>
+
+Not a fair comparison.  Quaternions are not particularly useful for
+electrical circuits, because it is unrealistic to apply a four-dimensional
+construct to two-dimensional phase spaces.  In the same way, denotational
+semantics adds features which do not apply to a theory of finite
+computation.
+
+
+>
+> > The /defining/ feature of a bottom is that it doesn't have an
+> interpretation.
+>
+
+> What do you mean by "interpretation"?
+>
+
+You know, the basic notion of a function which maps syntax to concrete
+values.
+
+http://en.wikipedia.org/wiki/Model_theory
+
+
+
+>
+> > They should all be treated alike, and be treated differently from every
+> other Haskell value.
+>
+> But they ARE very similar to other values. They can be members of
+> otherwise meaningful structures, and you can do calculations with these
+> structures. "fst (1, _|_)" is a good and meaningful calculation.
+
+
+Mere syntax.  What is fst doing?  It computes "forall (x,y) |- x".  Using
+the language of model theory, we can say that Haskell computes an
+interpretation "forall (x,y) |= x".  It is _|_ that lacks an intepretation,
+not fst.  We can see that by trying
+"fst  (_|_,1), which reduces to _|_ by the proof rule for fst.  _|_ lacks
+an interpretation, so the run-time either loops forever or throws an error
+(notice  that error throwing is only done with compiler magic -- if you
+define your own undefined = undefined, using it will loop.  GHC is
+specially trained to look for Prelude.undefined to throw the "undefined"
+error.)
+
+
+> >  Every other Haskell value /does/ have an interpretation.
+>
+> So, (_|_) is bad, but (1, _|_) is good?
+
+
+I did not introduce "good" and "bad" into this discussion.  I have merely
+said (in more words) that I want my hypothetical perfect language to prefer
+OPERATIONAL (model) SEMANTICS for a typed PARACONSISTENT LOGIC over the
+DENOTATIONAL SEMANTICS which the official documentation sometimes dips into.
+
+Using examples from denotational semantics is not going to change my mind
+about the applicability of one or the other.  It is clear that denotational
+semantics is a Platonic model of constructive computation.
+
+
+> You know, my scientific advisor used to say "math is about calling
+> different things by the same name; philosophy is about calling the same
+> thing by different names". It seems to me that philosophy is something
+> you're doing now, whereas programming is all about math.
+>
+
+Then you are mistaken.  I am talking about choosing the appropriate
+mathematical model of computation to accurately, clearly, and simply
+describe the language's semantics.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111224/cf071c8c/attachment.htm>
+

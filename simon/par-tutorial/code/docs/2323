@@ -1,0 +1,66 @@
+From limestrael at gmail.com  Tue Dec 27 17:53:15 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Tue, 27 Dec 2011 17:53:15 +0100
+Subject: [Haskell-cafe] MIDI-controlled application
+In-Reply-To: <CAE0Z8DEZwSXUn65q6nEhnHccZuQojg1softo3esh=Hc06yuY=g@mail.gmail.com>
+References: <CAE0Z8DEZwSXUn65q6nEhnHccZuQojg1softo3esh=Hc06yuY=g@mail.gmail.com>
+Message-ID: <CACqaG6wJAPNFzG4a=qsBs=7pqAKQwxOCyx1d9RghU27--NSKeA@mail.gmail.com>
+
+If you're afraid of Yampa (I was ;p), Ertugrul S?ylemez released recently
+the Netwire <http://hackage.haskell.org/package/netwire-3.1.0> library on
+hackage.
+I went through its internals and I find it simpler to grasp and to use than
+Yampa as Ertugrul chose to replace the switch functions by the use of
+ArrowChoice. Yet I don't know if the latter wholly supersedes the former.
+Plus I like the fact it doesn't depend on IO (you can handle automatons in
+pure code).
+
+And if you're to stick with Yampa, you might wanna look at
+Animas.<http://hackage.haskell.org/package/Animas-0.2>
+It's a fork of Yampa. I don't the advantages it brings or what I changes,
+but its documentation on hackage is far more complete.
+
+2011/12/27 Tim Baumgartner <baumgartner.tim at googlemail.com>
+
+> Hi Haskellers!
+>
+> I'm writing my first non-trivial Haskell application. I have an electronic
+> drum set that generates MIDI events that I process with Haskell. A simple
+> application of this kind might have fixed drums associated with fixed
+> commands (I've done that). The next step would be to display menus (with
+> very large font...) that show commands and the associated drums. The menu
+> structure should be derived from the commands active in each context. Up to
+> this point, I implemented this already in Java. But now after some
+> successful attempts in Haskell, I plan for more features: the user should
+> ultimately be able to record his own "triggers", i.e. short drum rhythms,
+> and associate them with actions. Since I'm still a beginner with only some
+> basic experience in Monads, Arrows and their transformers, there is
+> infinite knowledge to be gained by working on this problem (both library
+> and concrete apps).
+>
+> Currently I'm using a monad that combines Parsec (with MIDI event stream)
+> and a Writer (that writes commands that should result in IO). It's done in
+> a way that during running the monad, many parses can be done and failing
+> parses roll back the parser state so that a new parse can be tried.
+>
+> Now my questions:
+> I have read about Yampa, but I have not mastered it yet. E.g. I don't
+> understand switches. Could my "triggers" be realized with Yampa's events
+> and switches?
+> Would you recommend any other approach?
+> Is there something similar somewhere?
+>
+> Regards
+> Tim
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111227/97db3942/attachment.htm>
+

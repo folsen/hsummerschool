@@ -1,0 +1,35 @@
+From michael at snoyman.com  Wed Aug 17 19:06:13 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 17 Aug 2011 20:06:13 +0300
+Subject: [Haskell-cafe] ANNOUNCE: TKYProf
+In-Reply-To: <CADLz5wWvUMr5OaiO-PWzoz-+5+ZK+=gtxovqPUcmj77fsSDFpw@mail.gmail.com>
+References: <96BB3D35-27F0-456B-B0CC-8EDE541C8347@foldr.in>
+	<CALoEywOuRx5kX4PxFehspuP2kVZ9b-g6Vi1u2UYM1F10Wc4=NQ@mail.gmail.com>
+	<CAKA2JgKtbWECa-yZni3boH3CnaR-E5CrJRaAgOy6HZx=iw6Qsw@mail.gmail.com>
+	<CADLz5wWvUMr5OaiO-PWzoz-+5+ZK+=gtxovqPUcmj77fsSDFpw@mail.gmail.com>
+Message-ID: <CAKA2JgKOknonqQ4q+qqVXMZRgBij3fZ0o9s5MfNPQX8XOwhnKw@mail.gmail.com>
+
+I'm not sure I understand the comments there. Does this solve the
+issue for GHC 7.2 only, or for 7.* as well? Yesod is still officially
+supporting 6.12 and 7.0.
+
+On Wed, Aug 17, 2011 at 11:17 AM, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+> On 17 August 2011 07:16, Michael Snoyman <michael at snoyman.com> wrote:
+>> There's a bug in GHC that prevents C++ code from working correctly with Template Haskell
+>
+> For reference this is the bug Michael is talking about:
+>
+> http://hackage.haskell.org/trac/ghc/ticket/5289
+>
+> As explained by Sebastian and the ticket, to work around this you need
+> to perform the following steps:
+>
+> $ sudo ln -vs $(gcc --print-file-name=libstdc++.so) /usr/local/lib/
+> $ sudo ldconfig
+>
+> Regards,
+>
+> Bas
+>
+
+

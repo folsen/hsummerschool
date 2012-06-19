@@ -1,0 +1,104 @@
+From tom at zwizwa.be  Tue Aug 16 11:17:06 2011
+From: tom at zwizwa.be (Tom Schouten)
+Date: Tue, 16 Aug 2011 11:17:06 +0200
+Subject: [Haskell-cafe] Hiding "growing" state using existentials.
+In-Reply-To: <CAB2TPRB_muU=eCduED-3qBn=ScEn1GL5sSaAv_FMgE9B_A2sAw@mail.gmail.com>
+References: <4E49ADCA.9010304@zwizwa.be>
+	<CAB2TPRB_muU=eCduED-3qBn=ScEn1GL5sSaAv_FMgE9B_A2sAw@mail.gmail.com>
+Message-ID: <4E4A3592.6030209@zwizwa.be>
+
+On 08/16/2011 09:23 AM, Stephen Tetley wrote:
+ > {-
+ > I don't think parametric monads will solve your problem though, as you
+ > want a product of the states as the result of bind. Are you really
+ > sure you want this behavior?, I'd imagine it breaks the monad laws
+ > anyway.
+ > -}
+
+It seems that the product is essential to what I want to do.
+The product comes from the property that the states are independent.
+
+Each "Sig" has a state component that is only known to the function (s
+-> (a, s)) that represents a sequence as an iterated function.  This
+iteration is to be seeded with an initial value stored in Sig when
+unfolding the Sig (see _run).
+
+Because this parallel state is completely in the background it thought
+it might be possible to hide it.  What I don't understand is why the
+usage of the existential type breaks at my definition of the Monad
+instance, but not at the Applicative instance.
+
+I.e. My _ap is ::  Sig s1 (x -> y) -> Sig s2 x -> Sig s3 y
+but this doesn't hinder the construction of an Applicative instance
+using the existential type which hides the s parameter (see below).
+
+The problem seems to be to convince the type checker that it's ok to
+unpack the data in the case of the Monad instance.  Or maybe it really
+isn't ok, but then I don't understand why.
+
+
+ > {-# LANGUAGE ExistentialQuantification #-}
+ > import Control.Applicative
+ >
+ > data Sig s a = Sig { sigInit :: s, sigNext :: (s -> (a, s)) }
+ >
+ > _join :: (Sig s1 (Sig s2 a)) -> Sig (s1,s2) a
+ > _join (Sig i1 u1) = Sig (i1, i2) u12 where
+ >   ((Sig i2 _), _) = u1 i1
+ >   u12 (s1, s2) = (a, (s1', s2')) where
+ >     ((Sig _ u2), s1') = u1 s1
+ >     (a, s2')          = u2 s2
+ >
+ > _fmap :: (a -> b) -> Sig s a -> Sig s b
+ > _fmap f (Sig s0 u) = Sig s0 u' where
+ >   u' s = (f a, s') where
+ >     (a, s') = u s
+ >
+ > _return x = Sig () $ \() -> (x, ())
+ >
+ > _bind :: (Sig s1 a) -> (a -> Sig s2 b) -> (Sig (s1,s2) b)
+ > m `_bind` g = _join ((_fmap g) m)
+ >
+ > _ap :: Sig s1 (a -> b) -> Sig s2 a -> Sig (s1, (s2, ())) b
+ > _ap f a = f `_bind` \f' ->
+ >           a `_bind` \a' ->
+ >           _return $ f' a'
+ >
+ > _run :: Sig s a -> [a]
+ > _run (Sig init next) = f init where
+ >   f s = (v:vs) where
+ >     (v, s') = next s
+ >     vs = f s'
+ >
+ > data Signal a = forall s. Signal (Sig s a)
+ >
+ > run (Signal a) = _run a
+
+These work!
+
+ > instance Functor Signal where
+ >   fmap f (Signal a) = Signal $ _fmap f a
+ >
+ > instance Applicative Signal where
+ >   pure  = Signal . _return
+ >   (<*>) (Signal f) (Signal a) = Signal $ _ap f a
+ >
+ > ramp = Signal $ Sig 0 $ \s -> (s, s+1)
+ > disp = (take 10) . run
+ > test1 = disp $ pure 1               -- [1,1,1,1,1,1,1,1,1,1]
+ > test2 = disp $ ramp                 -- [0,1,2,3,4,5,6,7,8,9]
+ > test3 = disp $ pure (1 +) <*> ramp  -- [1,2,3,4,5,6,7,8,9,10]
+
+So why not this one?
+How to unpack the return value of f?
+
+ > {-
+ > instance Monad Signal where
+ >   return = Signal . _return
+ >   (>>=) (Signal ma) f = Signal $ _bind ma f' where
+ >     f' a = case (f a) of
+ >       Signal mb -> mb
+ > -}
+
+
+

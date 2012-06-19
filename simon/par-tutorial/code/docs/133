@@ -1,0 +1,125 @@
+From yugang.bj at gmail.com  Tue Apr  5 03:07:31 2011
+From: yugang.bj at gmail.com (Gang Yu)
+Date: Tue, 5 Apr 2011 09:07:31 +0800
+Subject: [Haskell-cafe] broken on build encoding
+In-Reply-To: <201104041652.56745.daniel.is.fischer@googlemail.com>
+References: <BANLkTinxDmbWVd8eQSMKNrQHgS7j5+2gMA@mail.gmail.com>
+	<201104041652.56745.daniel.is.fischer@googlemail.com>
+Message-ID: <BANLkTikOHvvT2sjXHvV6tY06C6VO4n2eXA@mail.gmail.com>
+
+Hi Daniel,
+
+> To circumvent the build failure, have an mtl-1.*, but no mtl-2.* available,
+> then it should build (or you could edit the source to replace all
+> occurrences of the data constructor State with the function state to make
+> it build with mtl-2.*).
+>
+>   It does not work, I cleaned up my ghc and unregistered the mtl-2.0.1.0,
+then reinstall encoding, it gets the following failure:
+
+[ 6 of 65] Compiling Data.Encoding.ByteSource ( Data/Encoding/ByteSource.hs,
+dist/build/Data/Encoding/ByteSource.o )
+
+Data/Encoding/ByteSource.hs:131:9:
+    No instance for (Monad (Either DecodingException))
+      arising from the superclasses of an instance declaration
+                   at Data/Encoding/ByteSource.hs:131:9-61
+    Possible fix:
+      add an instance declaration for (Monad (Either DecodingException))
+    In the instance declaration for `ByteSource
+                                       (StateT [Char] (Either
+DecodingException))'
+
+Data/Encoding/ByteSource.hs:141:13:
+    No instance for (Monad (Either DecodingException))
+      arising from a use of `get'
+                   at Data/Encoding/ByteSource.hs:141:13-15
+    Possible fix:
+      add an instance declaration for (Monad (Either DecodingException))
+    In a stmt of a 'do' expression: chs <- get
+    In the expression:
+        do { chs <- get;
+             res <- act;
+             put chs;
+             return res }
+    In the definition of `fetchAhead':
+        fetchAhead act
+                     = do { chs <- get;
+                            res <- act;
+                            put chs;
+                            .... }
+
+Data/Encoding/ByteSource.hs:160:9:
+    No instance for (Monad (Either DecodingException))
+      arising from the superclasses of an instance declaration
+                   at Data/Encoding/ByteSource.hs:160:9-68
+    Possible fix:
+      add an instance declaration for (Monad (Either DecodingException))
+    In the instance declaration for `ByteSource
+                                       (StateT BS.ByteString (Either
+DecodingException))'
+
+Data/Encoding/ByteSource.hs:171:9:
+    No instance for (Monad (Either DecodingException))
+      arising from the superclasses of an instance declaration
+                   at Data/Encoding/ByteSource.hs:171:9-69
+    Possible fix:
+      add an instance declaration for (Monad (Either DecodingException))
+    In the instance declaration for `ByteSource
+                                       (StateT LBS.ByteString (Either
+DecodingException))'
+cabal: Error: some packages failed to install:
+encoding-0.6.4 failed during the building phase. The exception was:
+ExitFailure 1
+gang at gang-laptop:~$ ghc-pkg list
+/var/lib/ghc-6.12.1/package.conf.d
+   Cabal-1.8.0.2
+   array-0.3.0.0
+   base-3.0.3.2
+   base-4.2.0.0
+   bin-package-db-0.0.0.0
+   bytestring-0.9.1.5
+   containers-0.3.0.0
+   directory-1.0.1.0
+   dph-base-0.4.0
+   dph-par-0.4.0
+   dph-prim-interface-0.4.0
+   dph-prim-par-0.4.0
+   dph-prim-seq-0.4.0
+   dph-seq-0.4.0
+   extensible-exceptions-0.1.1.1
+   filepath-1.1.0.3
+   ghc-6.12.1
+   ghc-binary-0.5.0.2
+   ghc-prim-0.2.0.0
+   haskell98-1.0.1.1
+   hpc-0.5.0.4
+   integer-gmp-0.2.0.0
+   old-locale-1.0.0.2
+   old-time-1.0.0.3
+   pretty-1.0.1.1
+   process-1.0.1.2
+   random-1.0.0.2
+   rts-1.0
+   syb-0.1.0.2
+   template-haskell-2.4.0.0
+   time-1.1.4
+   unix-2.4.0.0
+   utf8-string-0.3.4
+/home/gang/.ghc/i386-linux-6.12.1/package.conf.d
+   HaXml-1.20.2
+   binary-0.5.0.2
+   directory-1.1.0.0
+   mtl-1.1.0.2
+   polyparse-1.5
+   regex-base-0.93.2
+   regex-compat-0.93.1
+   regex-posix-0.94.4
+   transformers-0.2.2.0
+
+Thanks
+Gang
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110405/baa94dbd/attachment.htm>
+

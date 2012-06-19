@@ -1,0 +1,45 @@
+From batterseapower at hotmail.com  Fri Feb  4 21:19:47 2011
+From: batterseapower at hotmail.com (Max Bolingbroke)
+Date: Fri, 4 Feb 2011 20:19:47 +0000
+Subject: [Haskell-cafe] MonadPeelIO instance for monad transformers on top
+	of "forall"
+Message-ID: <AANLkTimhhfkBJ3iS6xjgoAnV0dQ5GfG+otb9BDOHp3So@mail.gmail.com>
+
+Hi Anders,
+
+I'm using your monad-peel package to good effect in my project, but
+I'm having trouble lifting peelIO through a particular monad. What
+follows is a simplified description of my problem. Say I have this
+monad:
+
+{{{
+data M a = M { unM :: forall m. MonadPeelIO m => Reader.ReaderT () m a }
+
+instance Monad M where
+    return x = M (return x)
+    M mx >>= fxmy = M $ mx >>= unM . fxmy
+
+instance MonadIO M where
+    liftIO io = M (liftIO io)
+}}}
+
+It seems "clear" that there should be a MonadPeelIO instance for M,
+but I can't for the life of me figure it out. I've tried:
+
+{{{
+instance MonadPeelIO M where
+    peelIO = M (fmap (\peel (M mx) -> liftM M (peel mx)) peelIO)
+}}}
+
+But this is not polymorphic enough: the peelIO gives me back a
+function (ReaderT () m a -> IO (ReaderT () m a)) for some *fixed* m,
+so I can't pack the result of that function into an M again using
+(liftM M).
+
+Have you (or the big brains on Haskell-Cafe, who are CCed) come across
+this before? Is there an obvious solution I am missing?
+
+Cheers,
+Max
+
+

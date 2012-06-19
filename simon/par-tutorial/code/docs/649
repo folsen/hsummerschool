@@ -1,0 +1,59 @@
+From wren at freegeek.org  Sat Apr 23 06:15:08 2011
+From: wren at freegeek.org (wren ng thornton)
+Date: Sat, 23 Apr 2011 00:15:08 -0400
+Subject: [Haskell-cafe] There is no null; Maybe/Option types
+In-Reply-To: <alpine.DEB.2.00.1104222123290.28351@anubis>
+References: <BANLkTi=irBB_YvfEm3ms0Vxd6xDb7tcPcg@mail.gmail.com>
+	<alpine.DEB.2.00.1104222123290.28351@anubis>
+Message-ID: <4DB2524C.7040207@freegeek.org>
+
+On 4/22/11 3:26 PM, Henning Thielemann wrote:
+> On Fri, 22 Apr 2011, Christopher Done wrote:
+>
+>> Use of Fantom's save invoke and Maybe are more or less the same.
+>>
+>> -- Hard way
+>> email = if userList /= Nothing
+>>            then let user = findUser "bob" (fromJust userList)
+>>                 in if user /= Nothing
+>>                       then getEmail (fromJust user)
+>>                       else Nothing
+>>            else Nothing
+>
+> In idiomatic Haskell you would write
+>
+> case userList of
+> Nothing -> Nothing
+> Just plainUserList =
+> let user = findUser "bob" plainUserList
+> ...
+
+Well, in *idiomatic* Haskell you'd write:
+
+     plainUserList <- userList
+     user <- findUser "bob" plainUserList
+     getEmail user
+
+Or even just:
+
+     getEmail =<< findUser "bob" =<< userList
+
+(As others have mentioned a few times.)
+
+But the greatest thing about Maybe is that you don't *have* to write 
+code in monadic style. Because Maybe makes explicit the null-pointer 
+shenanigans in other languages, you can simply unwrap the Maybe and pass 
+around the raw value instead of letting Nothing permeate your whole 
+program. Spending all your time in the Maybe monad is just as bad as 
+spending all your time in the IO monad. Purity begets clarity!
+
+Bob Harper has a few things to say[1] about using equality tests instead 
+of case analysis, and I agree with him.
+
+[1] http://existentialtype.wordpress.com/2011/03/15/boolean-blindness/
+
+-- 
+Live well,
+~wren
+
+

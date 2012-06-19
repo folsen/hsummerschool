@@ -1,0 +1,63 @@
+From miguelimo38 at yandex.ru  Tue Dec 20 11:52:45 2011
+From: miguelimo38 at yandex.ru (MigMit)
+Date: Tue, 20 Dec 2011 14:52:45 +0400
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <CAF1yvAS6hc=tmmW74qvNdVXngCqV0LNNOXn2TUgckWHMJFszUA@mail.gmail.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAF1yvAQJX+f-MigNFF=6be12Uka6y45QD6oys_NQpxgREkRbaQ@mail.gmail.com>
+	<653CD606-D8B6-4BD8-AFD4-46738AF49DB3@gmail.com>
+	<CAF1yvAS6hc=tmmW74qvNdVXngCqV0LNNOXn2TUgckWHMJFszUA@mail.gmail.com>
+Message-ID: <D659C7E0-D48C-487E-87EC-AC8EE428708C@yandex.ru>
+
+
+
+?????????? ? iPhone
+
+Dec 20, 2011, ? 14:40, Jesse Schalken <jesseschalken at gmail.com> ???????(?):
+
+> 
+> 
+> On Tue, Dec 20, 2011 at 9:34 PM, Gregory Crosswhite <gcrosswhite at gmail.com> wrote:
+> 
+> On Dec 20, 2011, at 8:30 PM, Jesse Schalken wrote:
+> 
+>> 
+>> 
+>> On Tue, Dec 20, 2011 at 8:46 PM, Ben Lippmeier <benl at ouroborus.net> wrote:
+>> 
+>> On 20/12/2011, at 6:06 PM, Roman Cheplyaka wrote:
+>> 
+>> > In denotational semantics, every well-formed term in the language must
+>> > have a value. So, what is a value of "fix id"?
+>> 
+>> There isn't one!
+>> 
+>> Bottoms will be the null pointers of the 2010's, you watch.
+>> 
+>> This ?1000. Errors go in an error monad.
+> 
+> Including all possible manifestations of infinite loops?
+> 
+> Definitely.
+> 
+> If you think a value might not reduce, return an error in an error monad. Then the caller is forced to handle the case of an error, or propagate the error upwards. The error can also be handled in pure code this way, whereas bottom can only be handled within the IO monad.
+> 
+
+So... this imaginary language of yours would be able to solve the halting problem?
+
+> 
+> Cheers,
+> Greg
+> 
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111220/58376d74/attachment.htm>
+

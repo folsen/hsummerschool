@@ -1,0 +1,88 @@
+From as at hacks.yi.org  Fri Aug 12 18:44:46 2011
+From: as at hacks.yi.org (austin seipp)
+Date: Fri, 12 Aug 2011 11:44:46 -0500
+Subject: [Haskell-cafe] fyi GHC 7.2.1 release on the benchmarks game
+In-Reply-To: <1313162290.59789.YahooMailClassic@web65615.mail.ac4.yahoo.com>
+References: <1313162290.59789.YahooMailClassic@web65615.mail.ac4.yahoo.com>
+Message-ID: <CAEs96n1kyxb20pHM-bwm21seDZH+eFi8m_R3ZKZaE_sSYT9QDw@mail.gmail.com>
+
+Hello Isaac,
+
+On Fri, Aug 12, 2011 at 10:18 AM, Isaac Gouy <igouy2 at yahoo.com> wrote:
+> 1) Some of the GHC programs contributed to the benchmarks game have problems with recent GHC releases
+>
+> - meteor-contest #5 - Ambiguous occurrence `permutations'
+>
+> http://shootout.alioth.debian.org/u64q/program.php?test=meteor&lang=ghc&id=5#log
+
+This can be fixed by changing the line:
+
+import Data.List
+
+to:
+
+import Data.List hiding (permutations)
+
+Also, the program needs to be compiled with -XBangPatterns
+
+> - regex-dna #2 - Precedence parsing error
+>
+> http://shootout.alioth.debian.org/u64q/program.php?test=regexdna&lang=ghc&id=2#log
+
+This can be fixed by changing this line (line 74):
+
+mapM_ putStrLn $ results `using` parList rdeepseq
+
+to:
+
+mapM_ putStrLn (results `using` parList rdeepseq)
+
+There are also some deprecation warnings related to `rwhnf` among
+others being renamed, but those are harmless (may want to fix them
+anyway though.)
+
+> - reverse-complement #2 - parse error on input `->'
+>
+> http://shootout.alioth.debian.org/u64q/program.php?test=revcomp&lang=ghc&id=2#log
+>
+
+You can fix this by adding this pragma:
+
+{-# LANGUAGE MagicHash, UnboxedTuples #-}
+
+or compiling with -XMagicHash and -XUnboxedTuples
+
+Also, this program imports 'GHC.IOBase' which is a warning, that
+import should be changed to 'GHC.IO' instead.
+
+> - reverse-complement #3 - Could not find module `Monad'
+>
+> http://shootout.alioth.debian.org/u64q/program.php?test=revcomp&lang=ghc&id=3#log
+
+You can fix this one by adding this pragma to the top of revcomp.hs
+
+{-# LANGUAGE BangPatterns #-}
+
+Alternatively you can compile with -XBangPatterns. Also, change the line
+
+import Monad
+
+to:
+
+import Control.Monad
+
+> 2) I noticed `-fvia-C` has now gone away and there were half-a-dozen programs that had been written to use `-fvia-C` so how might that effect performance of those programs?
+
+I can't forsee the potential performance ramifications, but frankly
+-fvia-C has been deprecated/not-advised-for-use for quite a while now,
+and I wonder how many of these programs just have not been
+updated/tested with the native code generator since they were written.
+
+In any case it's not an option anymore, so your only choice is to nuke
+it from orbit (orbit being the Makefiles.)
+
+-- 
+Regards,
+Austin
+
+

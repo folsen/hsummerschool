@@ -1,0 +1,30 @@
+From v.dijk.bas at gmail.com  Mon Feb  7 01:06:19 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Mon, 7 Feb 2011 01:06:19 +0100
+Subject: [Haskell-cafe] ANN: case-insensitive-0.1
+Message-ID: <AANLkTin_5Fy2juPCHEc9PLg8-C6Pn3iiDE+mSqHM77pE@mail.gmail.com>
+
+Dear all,
+
+I had this old module laying around that I wrote some time ago. I
+dusted it off and uploaded it to Hackage:
+
+http://hackage.haskell.org/package/case-insensitive-0.1
+
+The package provides the module Data.CaseInsensitive which exports the
+CI type constructor which can be parameterised by a string-like type
+like: String, ByteString, Text, etc.. Comparisons of values of the
+resulting type are then insensitive to cases.
+
+It is my hope that one day packages like snap-core[1], http-types[2]
+or wai[3] all use this common way of making strings case insensitive.
+
+Regards,
+
+Bas
+
+[1] http://hackage.haskell.org/packages/archive/snap-core/latest/doc/html/Data-CIByteString.html
+[2] http://hackage.haskell.org/packages/archive/http-types/0.3.0/doc/html/Network-HTTP-Types.html#t:CIByteString
+[3] http://hackage.haskell.org/packages/archive/wai/latest/doc/html/Network-Wai.html#v:CIByteString
+
+

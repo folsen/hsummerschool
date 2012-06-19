@@ -1,0 +1,37 @@
+From michael at snoyman.com  Wed Dec 21 11:37:50 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 21 Dec 2011 12:37:50 +0200
+Subject: [Haskell-cafe] "mapping" an Enumerator
+In-Reply-To: <loom.20111221T112258-628@post.gmane.org>
+References: <loom.20111221T112258-628@post.gmane.org>
+Message-ID: <CAKA2JgJaWC6DeFn5x33Ux7oWOK9rwtFe0CE=z+hixZrC079PtA@mail.gmail.com>
+
+On Wed, Dec 21, 2011 at 12:35 PM, Kannan Goundan <kannan at cakoose.com> wrote:
+> I'm using the Data.Enumerator library. ?I'm trying to write a "map"
+> function that converts an Enumerator of one type to another.
+> Something like:
+>
+> ? mapEnum :: Monad m =>
+> ? ? ? ? ?(a -> b) ->
+> ? ? ? ? ?Enumerator a m r ->
+> ? ? ? ? ?Enumerator b m r
+>
+> Any hints?
+>
+> (My exact use case is that I have a ByteString enumerator and I
+> need to pass it to something that requires a Blaze.Builder
+> enumerator.)
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+You can use the Data.Enumerator.List.map function to create an
+Enumeratee, and then the Data.Enumerator.$= operators to join them
+together. Something like:
+
+mapEnum f enum = enum $= EL.map f
+
+

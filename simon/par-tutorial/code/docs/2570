@@ -1,0 +1,43 @@
+From warrensomebody at gmail.com  Tue Feb  1 20:58:20 2011
+From: warrensomebody at gmail.com (Warren Harris)
+Date: Tue, 1 Feb 2011 11:58:20 -0800
+Subject: [Haskell-cafe] timely shutdown of timer threads
+Message-ID: <84DE9201-9822-4A1A-A17A-682C146C771C@gmail.com>
+
+I have an application that forks a thread to run an activity on a timer. (The activity happens to be Berkeley DB checkpointing, but that's actually beside the point here.) The problem is that when the application wants to quit, I would like my main thread to be able to tell the timer thread to shut down in a timely way. However, I don't see a primitive in haskell that allows me to both wait for a timeout, or a notification. (If I were to do this in java, I would use wait/notify.) 
+
+Here's the code I wrote to attempt this shutdown procedure:
+
+import Control.Exception
+import Database.Berkeley.Db
+import Data.IORef
+import System.Posix.Unistd
+...
+
+closeEnv :: Env -> IO ()
+closeEnv env = do
+  threadId <- readIORef (envCheckpointThread env)
+  case threadId of
+    Just tid -> killThread tid
+    Nothing -> return ()
+  dbEnv_close [] (envDbEnv env)
+
+startCheckpointing :: Env -> IO ThreadId
+startCheckpointing env = do
+  forkOS run
+  where run = catch checkpoint handler
+        checkpoint = checkpoint1 >> checkpoint
+        checkpoint1 = unblock $ do
+          let dbenv = envDbEnv env
+          _ <- sleep checkpointInterval
+          putStrLn "# checkpoint"
+          dbEnv_txn_checkpoint [] dbenv 0 0
+        handler ThreadKilled = return ()
+        handler exn = throw exn
+
+However, there are several problems here: First, the checkpointInterval is 15 sec, so it takes at least 15 seconds for the thread to wake up and be interrupted. Second, it isn't clear to me whether the killThread call should interrupt the sleep or not. In practice, several checkpoints occur before the ThreadKilled message is delivered, and this can take up to 2 minutes to shut down.
+
+Is there a better way to do this? Suggestions would be greatly appreciated,
+
+Warren
+

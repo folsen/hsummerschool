@@ -1,0 +1,20 @@
+From andrewcoppin at btinternet.com  Fri Apr  1 20:06:11 2011
+From: andrewcoppin at btinternet.com (Andrew Coppin)
+Date: Fri, 01 Apr 2011 19:06:11 +0100
+Subject: [Haskell-cafe] Encoding-aware System.Directory functions
+In-Reply-To: <AANLkTikL=9LK4dUxo+Ej_Yt7x1uyVkMGuS2tqDfG8c3V@mail.gmail.com>
+References: <AANLkTimB2HbJ2HLciOeAaBEBVQBEZOSfoQTySpbQGQQm@mail.gmail.com>	<AANLkTinsaD01PGgw8+nXkmhPLiWo22mSrEL8rPm4X29w@mail.gmail.com>	<AANLkTi=7i1pRLLAbNdQn9c++Gwa4CyLDh+bZVFGpmR0i@mail.gmail.com>
+	<AANLkTikL=9LK4dUxo+Ej_Yt7x1uyVkMGuS2tqDfG8c3V@mail.gmail.com>
+Message-ID: <4D961413.6060704@btinternet.com>
+
+On 30/03/2011 08:18 PM, Bas van Dijk wrote:
+
+> It would also be great to have a package which combines the proper
+> encoding/decoding of filepaths of the system-filepath package with the
+> type-safety of the pathtype package:
+> http://hackage.haskell.org/package/pathtype
+
+Oh sweet! I was just about to write a package exactly like this. 
+Apparently I don't need to. :-)
+
+

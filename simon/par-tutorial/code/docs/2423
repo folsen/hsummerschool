@@ -1,0 +1,26 @@
+From dev at mobileink.com  Thu Dec 29 21:23:45 2011
+From: dev at mobileink.com (Gregg Reynolds)
+Date: Thu, 29 Dec 2011 14:23:45 -0600
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <jdieke$48q$1@dough.gmane.org>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org>
+Message-ID: <4C2D9E5B-8D54-4074-B23B-3CC83DEBB729@mobileink.com>
+
+
+On Dec 29, 2011, at 1:21 PM, Heinrich Apfelmus wrote:
+
+> Why would  IO Int  be something special or mysterious?
+
+I don't know if it is special or mysterious, but I'm pretty sure IO is non-deterministic, non-computable, etc.  In other words not the same as computation.
+
+> It's an ordinary value like everything else; it's on the same footing as [Char], Maybe Int, Int -> String, Bool, and so on. I see no difference between the list  [1,2,3] :: [Int]  and the action  "pick a random number between 1 and 6" :: IO Int  .
+
+We'll have to agree to disagree - I see a fundamental difference.  But that's ok, nothing says everybody has to agree on the One True Way to think about computing.
+
+Cheers,
+
+Gregg
+

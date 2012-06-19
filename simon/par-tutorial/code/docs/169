@@ -1,0 +1,29 @@
+From es at ertes.de  Wed Apr  6 18:38:06 2011
+From: es at ertes.de (Ertugrul Soeylemez)
+Date: Wed, 6 Apr 2011 18:38:06 +0200
+Subject: [Haskell-cafe] 'Progress bar' enumeratee
+References: <inhd6m$h2n$1@dough.gmane.org>
+	<20110406163105.13cbc9a3@angst.streitmacht.eu>
+	<inhv6r$n8$1@dough.gmane.org>
+Message-ID: <20110406183806.22582052@angst.streitmacht.eu>
+
+As a side note, even though GHC seems to handle this properly, I would
+force the value of 'i' before passing data to the continuation.
+Otherwise a less smart compiler may eat memory.  I believe, it can only
+eat memory proportional to 'n', but nevertheless real constant space is
+better:
+
+    seq i $ k ch >>== (\step -> printDots >> loop i step)
+
+
+Greets,
+Ertugrul
+
+
+-- 
+nightmare = unsafePerformIO (getWrongWife >>= sex)
+http://ertes.de/
+
+
+
+

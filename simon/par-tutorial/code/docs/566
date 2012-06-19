@@ -1,0 +1,138 @@
+From dstcruz at gmail.com  Thu Apr 21 03:49:16 2011
+From: dstcruz at gmail.com (Daniel Santa Cruz)
+Date: Wed, 20 Apr 2011 21:49:16 -0400
+Subject: [Haskell-cafe] Haskell Weekly News: Issue 178
+Message-ID: <BANLkTikuDmTioubSMCpueG38xksq6rRUow@mail.gmail.com>
+
+   Welcome to issue 178 of the HWN, a newsletter covering developments in
+   the Haskell community. This release covers the week of April 10 to
+   16, 2011.
+
+   You can find the HTML version at: http://bit.ly/feMLgB
+
+Announcements
+
+   Simon Marlow commented (http://goo.gl/XythI) on plans to have a
+Hackathon at MSR Cambridge
+   this summer.
+
+   Dr. Heinrich Hordegen informed us (http://goo.gl/lQvqw) of the
+creation of a Munich
+   funtional programmers' user group. Help us spread the word to anyone
+   interested in functional programming in general.
+
+   Eric Y. Kow announced (http://goo.gl/PYdKI) the creation of the
+parallel-haskell mailing
+   list. "The group exists to bring together the various groups in the
+   Haskell community that are working on parallelism. It is intended to
+   provide some visibility into the various efforts and to encourage
+   collaboration."
+
+   Don Stewart announced (http://goo.gl/0nWn2) the release of the
+Haskell Platform
+   2011.2.0.1. "This release adds support for GHC 7.0.3, and significant
+   improvements for Mac OS X users."
+
+Quotes of the Week
+
+     * Gregory Collins: "Easy to use" and "high performance" don't have to
+       be contradictory, but you shouldn't neglect the latter.
+
+     * xplat: haskell is good for portability. it can run well on any sort
+       of x86 unix, which is all there is after all.
+
+     * Spockz: it's just that my first name isn't Simon so I'm not allowed
+       to use unsafePerformIO :P
+
+     * djahandarie: Category theorists are morphisms for turning cofree
+       theorems into free theorems.
+
+     * monochrom: lambdabot is partially broken and partially correct when
+       it comes to utf-8
+
+     * mm_freak: > case analysis of syntax -> bullshit <lambdabot> True
+
+Top Reddit Stories
+
+     * Simon Peyton-Jones ? A Taste Of Haskell
+       Domain: ontwik.com, Score: 57, Comments:
+       On Reddit: http://goo.gl/fCxtx
+       Original: http://goo.gl/4LpJQ
+
+     * Really, HaskellWiki, really?
+       Domain: i.imgur.com, Score: 43, Comments: 13
+       On Reddit: http://goo.gl/HTigS
+       Original: http://i.imgur.com/fPpby.png
+
+     * Haskell Platform 2011.2.0.1 is out -- major improvements for Mac users
+       Domain: hackage.haskell.org, Score: 39, Comments: 9
+       On Reddit: http://goo.gl/BJWwp
+       Original: http://goo.gl/5vbN8
+
+     * Tracing the compilation of Hello Factorial in GHC
+       Domain: blog.ezyang.com, Score: 36, Comments: 1
+       On Reddit: http://goo.gl/WNA2Z
+       Original: http://goo.gl/fsVtS
+
+     * acid-state: use regular Haskell data structures without
+worrying about data loss or durability
+       Domain: haskell.org, Score: 32, Comments: 5
+       On Reddit: http://goo.gl/2hgGj
+       Original: http://goo.gl/tKpV2
+
+     * Persistence of Memory: persistent vs ephemeral data structures
+       Domain: existentialtype.wordpress.com, Score: 28, Comments: 5
+       On Reddit: http://goo.gl/Ss70R
+       Original: http://goo.gl/XHdJV
+
+     * Bugs from using the wrong variable
+       Domain: blog.ezyang.com, Score: 26, Comments: 11
+       On Reddit: http://goo.gl/x7RId
+       Original: http://goo.gl/3HJs2
+
+     * Cost of calling Haskell from C?
+       Domain: stackoverflow.com, Score: 20, Comments: 1
+       On Reddit: http://goo.gl/6OiRH
+       Original: http://goo.gl/XfmRe
+
+     * Comparing Snap and Yesod
+       Domain: stackoverflow.com, Score: 19, Comments: 4
+       On Reddit: http://goo.gl/P0Gr6
+       Original: http://goo.gl/dvbEe
+
+     * Announcing: Heist v0.5.1
+       Domain: snapframework.com, Score: 17, Comments:
+       On Reddit: http://goo.gl/cIja8
+       Original: http://goo.gl/d7FWG
+
+Top StackOverflow Questions
+
+     * Comparing Haskell's Snap and Yesod web frameworks
+       votes: 28, answers: 4
+       Read on SO: http://goo.gl/AhFH5
+
+     * Haskell library for 2D drawing
+       votes: 19, answers: 4
+       Read on SO: http://goo.gl/61C4e
+
+     * One REPL to bind them all?
+       votes: 19, answers: 3
+       Read on SO: http://goo.gl/JUFS2
+
+     * Performance considerations of Haskell FFI / C?
+       votes: 16, answers: 4
+       Read on SO: http://goo.gl/tldoX
+
+     * What is Haskell's style of polymorphism?
+       votes: 13, answers: 1
+       Read on SO: http://goo.gl/z3JzT
+
+About the Haskell Weekly News
+
+   To help create new editions of this newsletter, please send stories to
+   dstcruz at gmail.com.
+
+   Until next time,
+   Daniel Santa Cruz
+
+

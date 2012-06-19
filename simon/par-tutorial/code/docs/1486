@@ -1,0 +1,33 @@
+From mle+hs at mega-nerd.com  Mon Aug 29 12:16:09 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Mon, 29 Aug 2011 20:16:09 +1000
+Subject: [Haskell-cafe] Decompressing and http-enumerator
+In-Reply-To: <CAKFCL4XfsUquGU6tBJqTHdaZhb7ONQA6CS4yP21bZDg3H4c+=w@mail.gmail.com>
+References: <CAKA2Jg+u_BtN5WKrTc4T_mgmuxP5==ASbsh5rvxJaQhVK64MTg@mail.gmail.com>
+	<CAKFCL4XfsUquGU6tBJqTHdaZhb7ONQA6CS4yP21bZDg3H4c+=w@mail.gmail.com>
+Message-ID: <20110829201609.92acace39a5d9882c62da214@mega-nerd.com>
+
+Brandon Allbery wrote:
+
+> On Mon, Aug 29, 2011 at 04:08, Michael Snoyman <michael at snoyman.com> wrote:
+> 
+> > So one possible solution is to just add an option to never decompress
+> > response bodies, but that's a bit of a hack. The real question is:
+> > what's the correct way to handle these tarballs? Web browsers seem to
+> > know not to decompress them, but AFAICT http-enumerator is correctly
+> > following the spec by decompressing. Another possibility is to
+> >
+> 
+> "Seem to" is pretty much correct; it took years for some browsers to
+> reliably handle them correctly.  (Anyone else remember Mozilla saving
+> compressed tarballs uncompressed?)
+
+Yes, it was a pain in the neck.
+
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

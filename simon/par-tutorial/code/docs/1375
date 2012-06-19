@@ -1,0 +1,15 @@
+From garious at gmail.com  Thu Aug 25 23:39:58 2011
+From: garious at gmail.com (Greg Fitzgerald)
+Date: Thu, 25 Aug 2011 14:39:58 -0700
+Subject: [Haskell-cafe] ping haskell.org timeout
+Message-ID: <CAFLa5WPXwUP=tGWc1ubAAa3NUhWvAYx-bhFNKydFFS1tpMO+UQ@mail.gmail.com>
+
+"cabal update" hangs.  "ping haskell.org" times out.  But haskell.org and
+hackage webpages are loading just fine.  What's going on?
+
+Thanks,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110825/b8ada4bf/attachment.htm>
+

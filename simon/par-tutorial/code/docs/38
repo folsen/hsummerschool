@@ -1,0 +1,28 @@
+From olshanskydr at gmail.com  Fri Apr  1 21:59:47 2011
+From: olshanskydr at gmail.com (Dmitry Olshansky)
+Date: Fri, 1 Apr 2011 23:59:47 +0400
+Subject: [Haskell-cafe] using IO monad in Iteratee
+Message-ID: <AANLkTim6SoSVFZ+AGH23okAZs2h1RvyGLvekxPKbtno9@mail.gmail.com>
+
+Dear collegues,
+
+I use Iteratee with Monad Transformer stack in this way:
+
+type MyMonad a b = Iteratee a (StateT StateType IO) b
+
+I've wrote some Enumeratees using this type. Then I want to compose it with
+standard enumerator like Data.Enumerator.Binary.enumFile.
+But enumFile use IO monad instead of MonadIO class.
+
+I didn't see (maybe I'm blind...) a way to compose my Enumeratees with
+enumFile.
+
+How I can do that?
+Is it possible to change enumFile to using MonadIO class?
+
+Best regards,
+Dmitry
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110401/31d370f2/attachment.htm>
+

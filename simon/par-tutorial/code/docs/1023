@@ -1,0 +1,38 @@
+From jmillikin at gmail.com  Thu Aug 11 06:17:57 2011
+From: jmillikin at gmail.com (John Millikin)
+Date: Wed, 10 Aug 2011 21:17:57 -0700
+Subject: [Haskell-cafe] ANNOUNCE: Chell: A quiet test runner (low-output
+	alternative to test-framework)
+Message-ID: <CAL1ky9q1t3KnboogKho2ZvsFF1BYF0RhzNZPu66p=ZTngcoB1A@mail.gmail.com>
+
+Homepage: https://john-millikin.com/software/chell/
+Hackage: http://hackage.haskell.org/package/chell
+
+--------
+
+This is just a quick package I whipped up out of frustration with
+test-framework scrolling an error message out of sight, for the
+millionth time.
+
+Chell has the same general purpose (aggregate your assertions +
+properties + whatever into a single executable), but only prints when
+a test fails or aborts.
+
+It also has a small built-in test library, similar to HUnit, so you
+don't need to depend on 2-3 separate libraries if you're just doing
+simple tests. Cool features thereof:
+
+* it reports the line number of failed assertions
+
+* you can use $expect instead of $assert, so even if it fails, the
+test keeps going (all the failures are printed at the end)
+
+* you can add "notes" to a test, which are saved in logs and reports.
+you can put in any sort of metadata you want (nice for figuring out
+why a test is failing)
+
+* assertions for text diffs, so if you're testing two big chunks of
+text for equality you don't have to copy+paste to see what's
+different.
+
+

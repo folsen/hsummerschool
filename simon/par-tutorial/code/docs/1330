@@ -1,0 +1,56 @@
+From jlenz2 at uic.edu  Wed Aug 24 16:19:03 2011
+From: jlenz2 at uic.edu (John Lenz)
+Date: Wed, 24 Aug 2011 09:19:03 -0500
+Subject: [Haskell-cafe] Lifting an enumerator
+In-Reply-To: <CAKA2JgKF0dN4N8Ge1_q-zemLZM93bWg_FjMtbaZGzrC2Gqnq4w@mail.gmail.com>
+References: <CAKA2JgKF0dN4N8Ge1_q-zemLZM93bWg_FjMtbaZGzrC2Gqnq4w@mail.gmail.com>
+Message-ID: <4E550857.4060407@uic.edu>
+
+On 08/24/2011 09:02 AM, Michael Snoyman wrote:
+> Hi all,
+> 
+> Max asked earlier[1] how to create a new instance of a class in
+> Persistent using a monad transformer. Without getting into the
+> specific details of persistent, I wanted to pose a question based on a
+> much more general question: how can we lift the inner monad of an
+> enumerator? We can easily do so for an Iteratee[2], but there is
+> nothing to allow it for an Enumerator.
+
+I faced the same problem a few weeks back, but for ReaderT.
+I tried for a while to get it working for all transformers, but couldn't
+get it to work.  After spending time with this a few weeks ago, I think
+perhaps you could write
+
+liftEnum :: (Monad m, MonadTrans t, MonadCont m) => Enumerator a m b -> Enumerator a (t m) b
+
+That is, use callCC to return the step from the inner iteratee to be able to execute the
+step in the correct monad.  But I didn't take the time to get it to work,
+since I got the ReaderT working.
+
+In any case, here is what I wrote for ReaderT.
+
+John
+
+newtype MemcacheBackend m a = MemcacheBackend { unMemBackend :: ReaderT MemcacheConnection m a }
+    deriving (Monad, MonadIO, MonadTrans, Functor, Applicative, Alternative,
+              MonadPlus, MonadCatchIO, MonadControlIO)
+
+lower :: Monad m => MemcacheConnection -> Iteratee a (MemcacheBackend m) b -> Iteratee a m b
+lower c i = Iteratee $ do step <- runReaderT (unMemBackend $ runIteratee i) c
+                          case step of
+                            (Error ex)   -> return $ Error ex
+                            (Yield b s)  -> return $ Yield b s
+                            (Continue f) -> return $ Continue $ lower c . f
+
+liftEnum :: (Monad m) => Enumerator a m b -> Enumerator a (MemcacheBackend m) b
+liftEnum e (Yield b s)  = liftTrans $ e $ Yield b s
+liftEnum e (Error err)  = liftTrans $ e $ Error err
+liftEnum e (Continue f) = Iteratee $ do
+    r <- MemcacheBackend ask
+    step <- lift $ runIteratee $ e $ Continue $ lower r . f
+    case step of
+        (Yield b s)   -> return $ Yield b s
+        (Error err)   -> return $ Error err
+        (Continue f') -> return $ Continue $ \x -> liftTrans $ f' x
+
+

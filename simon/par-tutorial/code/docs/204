@@ -1,0 +1,21 @@
+From jpm at cs.uu.nl  Thu Apr  7 09:02:22 2011
+From: jpm at cs.uu.nl (=?ISO-8859-1?Q?Jos=E9_Pedro_Magalh=E3es?=)
+Date: Thu, 7 Apr 2011 09:02:22 +0200
+Subject: [Haskell-cafe] Local copy of hackageDB
+Message-ID: <BANLkTi=dXeg+movZswKiaTavDNaJxhHOuQ@mail.gmail.com>
+
+Hi all,
+
+I want to use cabal-install on a machine without internet access. I tried
+downloading http://hackage.haskell.org/cgi-bin/hackage-scripts/archive.tar,
+unpacking it and setting the local-repo field in the config file to this
+location but that doesn't work, as cabal-install says that it is missing the
+package list for the local repo. What should I do?
+
+
+Thanks,
+Pedro
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110407/9ed432b5/attachment.htm>
+

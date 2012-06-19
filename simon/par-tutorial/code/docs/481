@@ -1,0 +1,52 @@
+From kazu at iij.ad.jp  Tue Apr 19 03:20:40 2011
+From: kazu at iij.ad.jp (Kazu Yamamoto (=?iso-2022-jp?B?GyRCOzNLXE9CSScbKEI=?=))
+Date: Tue, 19 Apr 2011 10:20:40 +0900 (JST)
+Subject: [Haskell-cafe] A paper relating to Data.Set and Data.Map
+Message-ID: <20110419.102040.45287750.kazu@iij.ad.jp>
+
+Hello libraries and cafe,
+
+We (Hirai and I) would like to tell you our paper relating to
+Data.Set and Data.Map. "Balancing Weight-Balanced Trees" is now
+accepted and will appear in Journal of Functional Programming.
+The camera-ready version of the paper is available from:
+
+	http://www.mew.org/~kazu/proj/weight-balanced-tree/
+
+Please recall that Taylor Campbell reported a bug of Data.Map in last
+Summer. In some cases, the balance of Data.Map is broken after delete
+operations. This triggered our research.
+
+	http://article.gmane.org/gmane.comp.lang.haskell.libraries/13444
+
+Though Data.Set/Data.Map are based of a variant Weight-Balanced tree
+by Adams, we target the original Weight-Balanced tree by Nievergelt
+and Reingold. They are parameterized algorithms and the difference of
+two algorithms is quite small. But the original has smaller conditions
+which are gentle for proof.
+
+We identified the valid area of two parameters of the original
+Weight-Balanced tree and showed <3,2> is only one integer solution.
+Soundness is proved in Coq and completeness is verified with four
+algorithms to generate counterexamples for the outside of the valid
+area.
+
+"wttree.scm" of MIT/GNU Scheme and slib have already incorporated our
+fixes. When I offered our fixes to MIT/GNU Scheme, Taylor Campbell
+appeared again. I understand that he is an MIT/GNU Scheme guy and
+found the bug of Data.Map when re-implementing "wttree.scm" consulting
+Data.Map. :-)
+
+We think it's Haskell community turn now. Data.Set/Data.Map are still
+based on the variant whose soundness is not proved yet. If interested,
+let's discuss whether or not we should replace the variant with the
+original in Data.Set/Data.Map.
+
+We guess that Milan Straka, a big contributer of the container
+package, has his opinion. We welcome opinions from other people, two.
+
+Regards,
+
+--Kazu
+
+

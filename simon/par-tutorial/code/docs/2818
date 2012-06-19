@@ -1,0 +1,38 @@
+From jwlato at gmail.com  Mon Feb  7 23:57:57 2011
+From: jwlato at gmail.com (John Lato)
+Date: Mon, 7 Feb 2011 22:57:57 +0000
+Subject: [Haskell-cafe] Byte Histogram
+Message-ID: <AANLkTinkP3V6AopOA+CrwkeQCWRMHtTzKzro3VOWxhiS@mail.gmail.com>
+
+From: Johan Tibell <johan.tibell at gmail.com>
+
+>
+> >
+> > (The OOP people, of course, just don't bother trying. They use typecasts
+> > everywhere...)
+> >
+> > Do associated types solve this? Or are there still problems?
+>
+> Duncan showed me a definition using associated types, which I have
+> unfortunately forgotten.
+>
+
+Yes, associated types (or fundeps) solve this problem.  This problem of
+container types is one of the motivating examples behind both extensions.
+
+I think the real problem we have with container classes has a lot more to do
+with what we would use them for.  That is, Haskell already has Monoid,
+Foldable and Traversable.  These three (especially Foldable) cover nearly
+everything OOP programmers would expect out of generic container operations.
+
+What's missing are classes for specific data types.  That is, a Map/Dict
+interface, a Queue interface, and a Heap interface (probably others too, but
+these are the first that come to mind).  But the standard Data.Map and List
+(for a queue) seem good enough for most people, so there seems to be a lot
+of inertia to overcome for these to be popular.
+
+John
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110207/74d69f34/attachment.htm>
+

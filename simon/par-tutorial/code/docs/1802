@@ -1,0 +1,52 @@
+From iusty at k1024.org  Sat Dec 10 10:38:53 2011
+From: iusty at k1024.org (Iustin Pop)
+Date: Sat, 10 Dec 2011 10:38:53 +0100
+Subject: [Haskell-cafe] Generating Code
+In-Reply-To: <CAKjSnQE2owa4YK0G0MTR0ON1CBqMiuWQntRrqmsxSL1tYjSxxg@mail.gmail.com>
+	<CAHTd3sis-hH=mAuQDfOo-1FMOgOPSTs4eFE4f0wLTfx9nXcS8A@mail.gmail.com>
+Message-ID: <20111210093853.GA25302@teal.hq.k1024.org>
+
+On Fri, Dec 09, 2011 at 10:30:18PM +0100, L Corbijn wrote:
+> The major set of problems for using template haskell is that it
+> doesn't have the correct features, or better said it tries to solve
+> another problem. Template haskell generates code into an existing
+> module, while for this problem there is no module yet to generate it
+> into. Of course I could generate those modules and let template
+> haskell make the FFI imports, but then the problem remains how to
+> generate those modules. So template haskell seems (as I see it) to
+> solve the problem of writing almost the same code twice by generating
+> it from some parameters coded in some source file. Another problem is
+> that the export and import lists of the modules need to be generated
+> too and this seems not an option for TH.
+
+On Fri, Dec 09, 2011 at 04:27:31PM -0600, Antoine Latter wrote:
+> For my case, template haskell can't create modules, and template
+> haskell solves a different problem - I've not interested in creating
+> Haskell declarations from Haskell declarations - I'm interested in
+> creating Haskell modules from an external, formal,  specification. In
+> a sense I'm compiling to Haskell.
+
+This answer is for both the above quotes. While TH is not perfect (and
+sometimes tedious/difficult to write in), it's not restricted to simply
+generate code based on some parameters in an existing Haskell file.
+
+It cannot generate modules, true, but other than that you could have a
+module simply like this:
+
+  module Foo where
+
+  import ?
+
+  $(myBuilder)
+
+Where myBuilder doesn't take any parameters, just reads some external
+(XML, text file, whatever) and build the code from scratch.
+
+I might misunderstand the problem, but I think that you _could_ use TH
+for "compiling" to Haskell, as long as you have a Haskell parser for the
+external/formal spec.
+
+regards,
+iustin
+
+

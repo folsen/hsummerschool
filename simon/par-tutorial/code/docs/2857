@@ -1,0 +1,27 @@
+From leimy2k at gmail.com  Tue Feb  8 15:07:39 2011
+From: leimy2k at gmail.com (David Leimbach)
+Date: Tue, 8 Feb 2011 06:07:39 -0800
+Subject: [Haskell-cafe] forkIO on GHCI does not seem to spawn the thread
+ in the background on some OSs
+In-Reply-To: <AANLkTinUd-EV-b6QUuUKmRwMj8qtUrf2=KeakGaEM0Jw@mail.gmail.com>
+References: <AANLkTinUd-EV-b6QUuUKmRwMj8qtUrf2=KeakGaEM0Jw@mail.gmail.com>
+Message-ID: <AANLkTimZkt2pNzw=yPpPYnPAsssUVxVY7iXKsfA1zp4i@mail.gmail.com>
+
+On Monday, February 7, 2011, C K Kashyap <ckkashyap at gmail.com> wrote:
+> Hi,I found that on windows and my ubuntu box, when I did this
+> ghci> t <- forkIO someAction
+> "someAction" started executing in the foreground - as in, the ghci prompt did not come back (until I pressed Ctrl-C)
+>
+> On my mac however, when I ran the same thing, the action started executing in the background and ghci> prompt returned instantaneously.How can I get the thread backgrounded explicitly?
+
+It is not always a thread.  ForkIO creates a spark and then the
+scheduler decides when sparks should be scheduled to threads.  Thus
+you get a guarantee of concurrent but not parallel execution.
+
+Are you running with threads enabled?
+
+>
+> Regards,Kashyap
+>
+
+

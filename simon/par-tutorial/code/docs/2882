@@ -1,0 +1,104 @@
+From v.dijk.bas at gmail.com  Wed Feb  9 14:22:47 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Wed, 9 Feb 2011 14:22:47 +0100
+Subject: [Haskell-cafe] ANN: monad-control-0.2 & a challenge
+Message-ID: <AANLkTinwKR0SSq-8hHJRQXuQzQ7jWEzUsep1LW6GMm4r@mail.gmail.com>
+
+Dear all,
+
+I just released control-monad-0.2 a library for lifting control
+operations, like exception catching, through monad transformers:
+
+http://hackage.haskell.org/package/monad-control-0.2
+
+darcs get http://bifunctor.homelinux.net/~bas/monad-control/
+
+To quote the NEWS file:
+
+* Use RunInBase in the type of idLiftControl.
+
+* Added this NEWS file.
+
+* Only parameterize Run with t and use RankNTypes to quantify n and o
+  -liftControl :: (Monad m, Monad n, Monad o) => (Run t n o -> m a) -> t m a
+  +liftControl :: Monad m => (Run t -> m a) -> t m a
+
+  -type Run t n o = forall b. t n b -> n (t o b)
+  +type Run t = forall n o b. (Monad n, Monad o, Monad (t o)) => t n b
+-> n (t o b)
+
+  Bumped version from 0.1 to 0.2 to indicate this breaking change in API.
+
+* Added example of a derivation of liftControlIO.
+
+This derivation of liftControlIO is really enlightening. It shows the
+recursive structure of liftControlIO applied to a stack of three monad
+transformers with IO as the base monad: t1 (t2 (t3 IO)) a:
+
+(Note that the derivation in the API documentation also shows the
+types of the intermediate computations)
+
+liftControlIO
+ =
+ liftLiftControlBase $      -- instance MonadControlIO t1
+   liftLiftControlBase $    -- instance MonadControlIO t2
+     liftLiftControlBase $  -- instance MonadControlIO t3
+       idLiftControl        -- instance MonadControlIO IO
+  =
+   \f ? liftControl $ \run1 ?     -- Capture state of t1
+          liftControl $ \run2 ?   -- Capture state of t2
+            liftControl $ \run3 ? -- Capture state of t3
+
+              -- At this point we've captured the state of all transformers
+              -- and have landed in the base (IO) monad.
+              -- So we can start executing f:
+
+              let run ? RunInBase (t1 (t2 (t3 IO))) IO
+                  run = -- Restore state
+                        liftM (join ? lift)
+                      ? liftM (join ? lift)
+
+                        -- Identity conversion
+                      ? liftM (join ? lift)
+                      ? liftM return
+
+                        -- Run
+                      ? run3
+                      ? run2
+                      ? run1
+              in f run
+
+This derivation clearly shows what is happening: first the state of
+all transformers is captured using the liftControl operations. Each
+capture supplies us a run function that allows us to run a computation
+of the respected monad transformer. When we arrive in the base (IO)
+monad we can start executing f.
+
+f expects a run function
+:: ? b. t1 (t2 (t3 IO)) b ? IO (t1 (t2 (t3 IO)) b)
+which allows it to run a t1 computation in IO. The IO computation then
+returns a new t1 computation that has the final state of the given t1
+computation. This can later be used to restore that final state.
+
+Although the derivation is correct, I'm not really happy with it from
+a performance perspective. In the created run function there are two
+places where it can do better:
+
+* The identity conversion: (liftM (join ? lift) ? liftM return) could
+be replaced with something more efficient like (liftM (join ? lift ?
+return)) or (liftM id) or just id.
+
+* The restore conversion: (liftM (join ? lift) ? liftM (join ? lift))
+could be replaced with (liftM (join ? lift ? join ? lift)). This
+transformation is correct according to the Functor law: liftM f ?
+liftM g = liftM (f ? g).
+
+I haven't figured out yet how to change monad-control in such a way
+that it generates this more efficient derivation. So I'm posting this
+as a challenge to you!
+
+Good luck,
+
+Bas
+
+

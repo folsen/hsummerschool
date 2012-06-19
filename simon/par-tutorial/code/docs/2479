@@ -1,0 +1,78 @@
+From apfelmus at quantentunnel.de  Fri Dec 30 18:19:20 2011
+From: apfelmus at quantentunnel.de (Heinrich Apfelmus)
+Date: Fri, 30 Dec 2011 18:19:20 +0100
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <CAD6SzRLxjE7Xgi6dXMknwt0oFRN_m3Z868jAKnsayR=w1=Se6w@mail.gmail.com>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<4EFB8DFE.1060805@blueyonder.co.uk>
+	<jdh9h6$gba$1@dough.gmane.org>	<4EFCA66D.4060609@blueyonder.co.uk>
+	<jdiesl$5sp$1@dough.gmane.org>	<4EFCCA86.4020709@blueyonder.co.uk>
+	<jdjtv1$6r0$1@dough.gmane.org>
+	<CAD6SzRLxjE7Xgi6dXMknwt0oFRN_m3Z868jAKnsayR=w1=Se6w@mail.gmail.com>
+Message-ID: <jdkrqo$3cq$1@dough.gmane.org>
+
+Conal Elliott wrote:
+> Heinrich Apfelmus wrote:
+> 
+>> The function
+>>
+>>  f :: Int -> IO Int
+>>  f x = getAnIntFromTheUser >>= \i -> return (i+x)
+>>
+>> is pure according to the common definition of "pure" in the context of
+>> purely functional programming. That's because
+>>
+>>  f 42 = f (43-1) = etc.
+>>
+>> Put differently, the function always returns the same IO action, i.e. the
+>> same value (of type  IO Int) when given the same parameter.
+>>
+> 
+> Two questions trouble me:
+> 
+> How can we know whether this claim is true or not?
+> 
+> What does the claim even mean, i.e., what does "the same IO action" mean,
+> considering that we lack a denotational model of IO?
+
+I think you can put at least these troubles to rest by noting that  f 42 
+  and  f (43-1)  are intentionally equal, even though you're not 
+confident on their extensional meaning.
+
+The idea is to represent IO as an abstract data type
+
+     type IO' a = Program IOInstr a
+
+     data Program instr a where
+         Return :: a -> Program instr a
+         Then   :: instr a -> (a -> Program instr b) -> Program instr b
+
+     instance Monad (Program instr) where
+         return = Return
+         (Return a)   >>= g = g a
+         (i `Then` f) >>= g = i `Then` (\x -> f x >>= g)
+
+     date IOInstr a where
+         PutChar :: Char -> IOInstr ()
+         GetChar :: IOInstr Char
+         etc...
+
+So, two values of type  IO' a  are equal iff their "program codes" are 
+equal (= intensional equality), and this is indeed the case for  f 42 
+and  f (43-1) . Therefore, the (extensional) interpretations of these 
+values by GHC  are equal, too, even though you don't think we know what 
+these interpretations are.
+
+(Of course, programs with different source code may be extensionally 
+equal, i.e. have the same effects. That's something we would need a 
+semantics of IO for.)
+
+
+Best regards,
+Heinrich Apfelmus
+
+--
+http://apfelmus.nfshost.com
+
+
+

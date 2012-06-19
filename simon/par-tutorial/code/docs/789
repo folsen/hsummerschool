@@ -1,0 +1,24 @@
+From sergueyz at gmail.com  Wed Apr 27 11:58:32 2011
+From: sergueyz at gmail.com (Serguey Zefirov)
+Date: Wed, 27 Apr 2011 13:58:32 +0400
+Subject: [Haskell-cafe] Python is lazier than Haskell
+In-Reply-To: <87vcy0vxdq.fsf@malde.org>
+References: <alpine.DEB.2.00.1104271123020.5485@anubis>
+	<87vcy0vxdq.fsf@malde.org>
+Message-ID: <BANLkTikBYt8giEHakZR6_nk6f=rWN9E3ww@mail.gmail.com>
+
+2011/4/27 Ketil Malde <ketil at malde.org>:
+> Henning Thielemann <lemming at henning-thielemann.de> writes:
+> That "Haskell is great because of its laziness" is arguable, see Robert
+> Harper's blog for all the arguing. (http://existentialtype.wordpress.com/)
+
+I think that author sin't quite right there.
+
+http://en.wikipedia.org/wiki/Haskell_%28programming_language%29
+Haskell (pronounced /?h?sk?l/) is a standardized, general-purpose
+purely functional programming language, with *non-strict* semantics
+and strong static typing.
+
+Haskell is great because of non-strictness.
+
+

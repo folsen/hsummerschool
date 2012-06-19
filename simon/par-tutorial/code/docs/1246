@@ -1,0 +1,14 @@
+From my experience such segfaults are usually from buffer overruns (it
+might by as well that it was just in my area) which then destroys the
+malloc inner structures. I'd run program in valgrind and check for
+illegal writes.
+
+Regards
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 836 bytes
+Desc: This is a digitally signed message part
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110820/dafbca4d/attachment.pgp>
+

@@ -1,0 +1,61 @@
+From aspergesoepje at gmail.com  Fri Dec  9 22:30:18 2011
+From: aspergesoepje at gmail.com (L Corbijn)
+Date: Fri, 9 Dec 2011 22:30:18 +0100
+Subject: [Haskell-cafe] Generating Code
+In-Reply-To: <CAPeieQEdWhripdkdVo-=2ZXbNdgOL7Xq+idrwzTOiZuL=AMtZQ@mail.gmail.com>
+References: <CAHTd3sihZABoWe7CoKhfFh-QHQ01PftATrTmiZymE5b-D_YS+Q@mail.gmail.com>
+	<CAPeieQEdWhripdkdVo-=2ZXbNdgOL7Xq+idrwzTOiZuL=AMtZQ@mail.gmail.com>
+Message-ID: <CAHTd3sis-hH=mAuQDfOo-1FMOgOPSTs4eFE4f0wLTfx9nXcS8A@mail.gmail.com>
+
+On Fri, Dec 9, 2011 at 9:17 PM, Erik Hesselink <hesselink at gmail.com> wrote:
+> On Fri, Dec 9, 2011 at 20:45, L Corbijn <aspergesoepje at gmail.com> wrote:
+>> So I'm interested if there are other libraries that are more suitable
+>> to the task of generating haskell code for library use, and thus
+>> generate 'human readable' exported code (so no TH). I'm also
+>> interested in how other projects generate code for their packages.
+>
+> Since you ask how other packages solve this problem, and since most
+> packages use template haskell, I have to ask: why can't you use
+> template haskell for this?
+>
+> Another option (also not code generation, but very useful in reducing
+> boilerplate) is generic programming, for example using the 'regular'
+> package, or the new generics in GHC 7.2.
+>
+> Erik
+
+That's a good question, and maybe I should have answered it the first
+place. The short answer is, I'm trying to generate modules from
+scratch (or spec) so there is no module yet to put the template
+haskell in. But I think, with my limited knowledge of template
+haskell, that it tries to solve a different problem, to explain it
+more detailed I'll first elaborate on the problem that I want to
+solve.
+
+I'm trying to do, in general, is generating a package (almost) from
+scratch by using a specification of what it should be. The specific
+problem is that the OpenGLRaw package is quite out of date and needs
+updating. This package is in essence a large FFI import of the OpenGL
+specification from C. To update it (or recreate it), with it's
+hundreds of functions and enumeration values, is not only boring but
+also tedious and error prone work. As there is a specification of all
+this a better option would be to generate it. The starting point for
+such generator would be only with a few helper functions and the
+OpenGL specification. It would then generate all the enumeration
+values and function imports (split over several modules).
+
+The major set of problems for using template haskell is that it
+doesn't have the correct features, or better said it tries to solve
+another problem. Template haskell generates code into an existing
+module, while for this problem there is no module yet to generate it
+into. Of course I could generate those modules and let template
+haskell make the FFI imports, but then the problem remains how to
+generate those modules. So template haskell seems (as I see it) to
+solve the problem of writing almost the same code twice by generating
+it from some parameters coded in some source file. Another problem is
+that the export and import lists of the modules need to be generated
+too and this seems not an option for TH.
+
+Lars
+
+

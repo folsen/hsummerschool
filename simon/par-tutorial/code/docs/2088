@@ -1,0 +1,67 @@
+From S.J.Thompson at kent.ac.uk  Mon Dec 19 09:00:46 2011
+From: S.J.Thompson at kent.ac.uk (Simon Thompson)
+Date: Mon, 19 Dec 2011 08:00:46 +0000
+Subject: [Haskell-cafe] PEPM'12 - second call for participation
+Message-ID: <EFA2F349-72CF-49B2-9111-A4DCABB8FC54@kent.ac.uk>
+
+
+ACM SIGPLAN 2012 Workshop on Partial Evaluation and Program Manipulation
+      http://www.program-transformation.org/PEPM12
+
+January 23-24, 2012. Philadelphia, PA, USA (co-located with POPL'12)
+
+   Second Call For Participation
+
+   Online registration is open at 
+   https://regmaster3.com/2012conf/POPL12/register.php
+   Early registration deadline is December 24, 2011
+
+   Program is now available
+   http://www.program-transformation.org/PEPM12/Program
+
+
+The PEPM Symposium/Workshop series brings together researchers
+and practitioners working in the broad area of program
+transformation, which spans from refactoring, partial evaluation,
+supercompilation, fusion and other metaprogramming to model-driven
+development, program analyses including termination, inductive
+programming, program generation and applications of machine learning 
+and probabilistic search. PEPM focuses on techniques, supporting
+theory, tools, and applications of the analysis and manipulation of
+programs. 
+
+In addition to the presentations of regular research papers, the PEPM
+program includes tool demonstrations and `short paper' presentations
+of exciting if not fully polished research.
+
+PEPM has established a Best Paper award. The winner will be 
+announced at the workshop.
+
+
+INVITED TALKS
+
+Compiling Math to High Performance Code
+  Markus Pueschel (ETH Zuerich, Switzerland)
+  http://www.inf.ethz.ch/~markusp/index.html
+
+
+Specification and verification of meta-programs
+  Martin Berger (University of Sussex, UK)
+  http://www.informatics.sussex.ac.uk/users/mfb21/
+
+VENUE
+
+The conference is co-located with POPL and will be held at
+the Sheraton Society Hill Hotel in Philadelphia's historic district.
+For hotel rate details and booking please see the POPL webpage:
+  http://www.cse.psu.edu/popl/12/
+
+
+
+
+Simon Thompson | Professor of Logic and Computation 
+School of Computing | University of Kent | Canterbury, CT2 7NF, UK
+s.j.thompson at kent.ac.uk | M +44 7986 085754 | W www.cs.kent.ac.uk/~sjt
+
+
+

@@ -1,0 +1,20 @@
+From pkeir at dcs.gla.ac.uk  Tue Apr  5 15:43:48 2011
+From: pkeir at dcs.gla.ac.uk (Paul Keir)
+Date: Tue, 5 Apr 2011 14:43:48 +0100
+Subject: [Haskell-cafe] Using _ on the RHS of an equation?
+Message-ID: <8294B695F1501F49AE7B527CBB3C5B852157090BDE@ex3.ad.dcs.gla.ac.uk>
+
+Hi Jason,
+
+I like the idea. I've seen some code from Oleg Kiselyov which
+uses __ (two underscores) in this way.
+
+The thing that stops me though, is when I get it wrong, and
+undefined fires somewhere, but I don't know where. Something
+like you propose, but with a line number, would be sweet.
+
+Paul
+
+The University of Glasgow, charity number SC004401
+
+

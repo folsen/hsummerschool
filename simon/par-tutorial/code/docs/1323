@@ -1,0 +1,41 @@
+From dokondr at gmail.com  Wed Aug 24 15:16:57 2011
+From: dokondr at gmail.com (dokondr)
+Date: Wed, 24 Aug 2011 17:16:57 +0400
+Subject: [Haskell-cafe] Function composition in run-time?
+In-Reply-To: <CAEnSgTnLh4EO1nPE3UxxginFquPovub0M39aKZD0O3aNthhXmg@mail.gmail.com>
+References: <CAMXF=YBZRy0t2ffQHAAhqVeNzmODQWLq5-DFa_U43OUbYerjEA@mail.gmail.com>
+	<CAEnSgTnLh4EO1nPE3UxxginFquPovub0M39aKZD0O3aNthhXmg@mail.gmail.com>
+Message-ID: <CAMXF=YD0i-sHEczSn-TD96uYC69MRf2XM-T83VWx03VcT006pA@mail.gmail.com>
+
+On Wed, Aug 24, 2011 at 4:52 PM, Arseniy Alekseyev <
+arseniy.alekseyev at gmail.com> wrote:
+
+> If your functions have the same type, then you can easily collect them
+> in a data structure, say list, and fold that.
+>
+> For example:
+>
+> function :: String -> (String -> String)
+> function "f1" = f1
+> function "f2" = f2
+> function "f3" = f3
+>
+> runAUserSpecifiedComposition :: String -> F
+> runAUserSpecifiedComposition = foldl (.) id . map function . words
+>
+> runAUserSpecifiedComposition "f1 f2 f3" should be equal to (f1 . f2 . f3)
+> now.
+>
+
+This is a nice one, looks already like tiny DSL )
+
+I think I've got the main idea - enumerate in my program all function
+compositions in some data structure for Haskell to compile, and the
+associate these with parameter values in external file.
+
+Thanks everybody!
+dokondr
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110824/fa3e2f50/attachment.htm>
+

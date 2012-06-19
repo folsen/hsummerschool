@@ -1,0 +1,55 @@
+From ezyang at MIT.EDU  Sun Apr 24 14:31:36 2011
+From: ezyang at MIT.EDU (Edward Z. Yang)
+Date: Sun, 24 Apr 2011 08:31:36 -0400
+Subject: [Haskell-cafe] More ideas for controlled mutation
+Message-ID: <1303646089-sup-2399@ezyang>
+
+Laziness can be viewed as a form of controlled mutation, where
+we overwrite a thunk with its actual value, thus only running
+the code once and reaping great time benefits.
+
+I've been toying around with some ideas where we do alternative
+forms of controlled mutation.  One such idea has to do with memoization.
+One way we memoize functions is by building up a data-structure that
+covers the entirety of input domain of the function, with the values
+in each slot being thunks for the corresponding function call.  Now,
+this is all very nice and well, but for some types of inputs (like
+machine integers) we end up making a very big structure for a function for
+which, in practice, we'll only store and retrieve a few values of the domain.
+
+Hash tables take advantage of this fact by simply chaining together values
+in a linked list if they land in the same bucket.  Could we have similarly
+bucketized memoization?  What we want here is for a *thunk to possibly
+evaluate to different values, but calls to the API be observationally
+equivalent.*  That is, if the only way I can inspect a dictionary list
+is do a lookup, I don't care if my representation is [(1,4),(2,2)] or
+[(2,2),(1,4)].  An obvious way to do this is to use unsafePerformIO to
+read out an IORef stating the value currently being looked up, and
+have the thunk evaluate to the pair of that key and the result.  There
+are some synchronization concerns, of course: ideally we would only
+take out a lock on the thunk once we realize that the value doesn't
+already exist in the memotable, but I don't think there's a way in GHC Haskell
+to observe if a value is a thunk or not (maybe such a mechanism would be
+useful?)
+
+This seems related to lazy IO, where thunks are co-opted into performing
+input-output effects.  After all, mutation is just a controlled form of IO.  Is
+lazy IO evil or not?  One consensus is that for operations that involve
+limited resources (file descriptors, etc.) lazy IO is too opaque for its
+own good.  It seems we also haven't cracked it's performance problems either
+(for the relatively un-objectionable generation of an infinite stream of random
+numbers, Don Stewart notes: "There are real overheads here. Consider eagerly
+filling chunks and extracting elements piecewise.").  But code that looks pure
+and can be reasoned about like pure code, but has the efficiency benefits of
+mutation is a very attractive thing indeed.  I think it's worth some thought,
+though the programming world at large has a hard enough time reasoning about
+laziness even when everything is completely pure!
+
+Cheers,
+Edward
+
+P.S. An obvious question is whether or not we could use this technique to
+implement splay heaps or hash tables with pure interfaces.  My opinion is
+no, because these structures demand you be able to *observe* the mutation.
+
+

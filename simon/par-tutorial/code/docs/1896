@@ -1,0 +1,104 @@
+From limestrael at gmail.com  Tue Dec 13 10:21:38 2011
+From: limestrael at gmail.com (=?ISO-8859-1?Q?Yves_Par=E8s?=)
+Date: Tue, 13 Dec 2011 10:21:38 +0100
+Subject: [Haskell-cafe] AFRP is not (necessarily) imperative
+In-Reply-To: <20111212191113.4a213eeb@angst.streitmacht.eu>
+References: <20111212191113.4a213eeb@angst.streitmacht.eu>
+Message-ID: <CACqaG6xwpEuByN_QH6yH6m+Ej1_w8ZUnxJ1cL_DvzrN00EWg6A@mail.gmail.com>
+
+> x = constant 3 ^+^ time
+
+If I understand the rest of your mail, Wire defines an Applicative
+instance, so why not:
+
+x = (+3) <$> time
+
+??
+
+2011/12/12 Ertugrul S?ylemez <es at ertes.de>
+
+> Hello fellows,
+>
+> after a few discussions on IRC and via private mail I feel obligated to
+> point out that arrows and in particular AFRP do not force you to use an
+> imperative style in any way.  You can use a style very similar to SHE's
+> idiom brackets.  I will demonstrate this using the Netwire library.  The
+> following code has a very imperative feel to it and also looks quite
+> ugly:
+>
+>    myWire =
+>        proc _ -> do
+>            fps <- avgFpsInt 1000 100 -< ()
+>            t <- time -< ()
+>            let x = 3 + t
+>            y <- integral 0 -< t
+>            returnA -< printf "%8.2f %8.2f %8.2f" fps x y
+>
+> Let's improve this code.  The magic lies in identifying behaviors from
+> classic FRP.  The arrow variables from the above code can be seen as the
+> behaviors, but that's not very useful for getting rid of the imperative
+> style.  A better way to look at it is that every wire that ignores its
+> input (i.e. has a fully polymorphic input type) is a behavior, so let's
+> find them.
+>
+> First of all it is impossible to write a proper Num instance for wires.
+> The underlying problem is the same as for writing a Num instance for
+> functions.  However, the Wire type forms a vector space, and the next
+> release of Netwire will include the corresponding instances (see the
+> vector-space package by Conal Elliot).  With them we can write:
+>
+>    x = constant 3 ^+^ time
+>
+> The x wire is our first behavior.  Passing x to a generic wire is
+> simply regular arrow composition, giving you behaviors as functions of
+> other behaviors, hence:
+>
+>    y = integral 0 <<< x
+>
+> Also fps is just a simple behavior:
+>
+>    fps = avgFpsInt 1000 100
+>
+> To get to the final output there are multiple ways.  Perhaps the nicest
+> way is to exploit the Applicative instance, giving you:
+>
+>    myWire =
+>        liftA3 (printf "%8.2f %8.2f %8.2f") fps x y
+>
+>        where
+>        fps = avgFpsInt 1000 100
+>        x   = constant 3 ^+^ time
+>        y   = integral 0 <<< x
+>
+> Looks much more declarative, no?  For more complicated compositions or
+> generic wires use banana brackets or the combinator syntax in arrow
+> notation.  Examples:
+>
+>    myWire = proc x ->
+>        (someWire -< x) ^+^ (otherWire -< 15)
+>
+>    myWire = proc x ->
+>        (| f (someWire -< x) (otherWire -< 15) |)
+>
+> This closely resembles idiom bracket notation, but allows you to be
+> explicit about inputs, takes care of creating side channels and gives
+> you the full power of arrows, including ArrowChoice and ArrowLoop.
+>
+>
+> Greets,
+> Ertugrul
+>
+> --
+> nightmare = unsafePerformIO (getWrongWife >>= sex)
+> http://ertes.de/
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111213/274fed0e/attachment.htm>
+

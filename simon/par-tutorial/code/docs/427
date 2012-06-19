@@ -1,0 +1,42 @@
+From wrwills at gmail.com  Fri Apr 15 16:12:34 2011
+From: wrwills at gmail.com (Robert Wills)
+Date: Fri, 15 Apr 2011 15:12:34 +0100
+Subject: [Haskell-cafe] Cairo and Haskell
+In-Reply-To: <io9imb$1n8$1@dough.gmane.org>
+References: <io9imb$1n8$1@dough.gmane.org>
+Message-ID: <BANLkTimyZ9-9Hctzfy1+a9yOPs6LkfJYog@mail.gmail.com>
+
+Have a look at
+
+http://hackage.haskell.org/package/diagrams
+
+and
+
+http://hackage.haskell.org/package/Hieroglyph
+
+
+On Fri, Apr 15, 2011 at 2:54 PM, Paulo J. Matos <pocmatos at gmail.com> wrote:
+> Hi,
+>
+> I would like to use Haskell to generate automatically a poster.
+> I guess that would be using Cairo so I can have a 2d canvas to draw in and
+> maybe even preview before exporting to PDF.
+>
+> However, I can't find any documentation on Cairo with Haskell or any code
+> examples related to what I want to do.
+>
+> Any suggestions?
+>
+> Cheers,
+>
+> --
+> PMatos
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

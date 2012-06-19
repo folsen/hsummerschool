@@ -1,0 +1,91 @@
+From oscarpicasso at gmail.com  Wed Aug 10 00:49:22 2011
+From: oscarpicasso at gmail.com (Oscar Picasso)
+Date: Tue, 9 Aug 2011 18:49:22 -0400
+Subject: [Haskell-cafe] Haskell syntax highlighting in a public blog
+In-Reply-To: <CAKaDkC4X-=zozVMS8TJcLjEwq8u7nUQMP-doVD_89ewU9snZrw@mail.gmail.com>
+References: <CAPkMFP=hAnOKN2sxCB8=RbYwXEfePBRfNEFS_Ru=8WYt=Pif7Q@mail.gmail.com>
+	<4E4095C7.1030808@sairyx.org>
+	<CA+u6gbz=-R4E539vBnOMh0hWAkcGjh53pxSBwCNh0EcQbkL1Kw@mail.gmail.com>
+	<95E1F4E0-0C24-474F-936E-148AEF59301E@dbp.mm.st>
+	<CALjJhjTSFFH=VPfvEH3sfWj+K1qxZ34kegM34404Nq-TayTrOQ@mail.gmail.com>
+	<CAKaDkC4X-=zozVMS8TJcLjEwq8u7nUQMP-doVD_89ewU9snZrw@mail.gmail.com>
+Message-ID: <CAPkMFPkqNFdf=rh7fXKPkJipuTQOSaDwzvntxjeQWZhvoYKxFA@mail.gmail.com>
+
+Thanks for your input.
+
+As stated by Ivan I was looking for a solution to use in a public blog
+like wordpress.com.
+
+I chose Chris Yuen solution with a minor revision because I use
+Posterous. Posterous does not use the embed script but it accepts
+Gists links.
+See: http://blog.posterous.com/posterous-now-supports-traileraddict-embeds-a
+
+On the other hand, Wordpress.com doesn't accept gists, see:
+http://en.forums.wordpress.com/topic/support-gists?replies=2
+
+On Tue, Aug 9, 2011 at 12:52 PM, Chris Yuen <kizzx2+haskell at gmail.com> wrote:
+> You can probably just post your code as Gists in GitHub. They provide an
+> "embed" button to give you a <script> tag pair. See an example of it in
+> action in my blog
+> http://cfc.kizzx2.com/index.php/in-search-of-performance-in-haskell/
+>
+> Chris
+>
+> On Tue, Aug 9, 2011 at 6:07 PM, Bas van Gijzel <nenekotan at gmail.com> wrote:
+>>
+>> Another alternative is to use the HsColour
+>> package:?http://code.haskell.org/~malcolm/hscolour/?and choose html as
+>> output. (This works for me on blogspot.com)
+>>
+>> On 9 August 2011 05:16, Daniel Patterson <lists.haskell at dbp.mm.st> wrote:
+>>>
+>>> On Aug 8, 2011, at 10:26 PM, Ivan Lazar Miljenovic wrote:
+>>>
+>>> On 9 August 2011 12:04, Arlen Cuss <celtic at sairyx.org> wrote:
+>>>
+>>> 9/08/2011 11:54 AM, Oscar Picasso kirjutas:
+>>>
+>>> Hi,
+>>>
+>>> Is there a public blog that that allow syntax highlighting of Haskell
+>>> code?
+>>>
+>>> Are you talking about a plugin for a blog engine? CodeColourer on
+>>>
+>>> WordPress will do it.
+>>>
+>>> I think he meant more along the lines of wordpress.com, which as far
+>>> as I know _doesn't_ support highlighting Haskell.
+>>>
+>>> I haven't done this personally, but here is a javascript based solution
+>>> that should work with any blog that allows you to include custom stylesheets
+>>> /
+>>> javascript:?http://nix-tips.blogspot.com/2010/09/javascript-highlighter-for-haskell-code.html
+>>> _______________________________________________
+>>> Haskell-Cafe mailing list
+>>> Haskell-Cafe at haskell.org
+>>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>>
+>>
+>>
+>>
+>> --
+>> http://adoseoflogic.blogspot.com/
+>>
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-Cafe at haskell.org
+>> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+>
+
+

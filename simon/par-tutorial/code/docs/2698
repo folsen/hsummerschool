@@ -1,0 +1,27 @@
+From johan.tibell at gmail.com  Fri Feb  4 08:26:32 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Fri, 4 Feb 2011 08:26:32 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+References: <4D4B19DB.5000907@btinternet.com>
+	<7ACF878C-A784-408F-A542-2CD5D747341A@cs.otago.ac.nz>
+Message-ID: <AANLkTi=O-hT+T6ZLrMVWdyU+qio--Wcx-zqB5Zs4-3gG@mail.gmail.com>
+
+On Thu, Feb 3, 2011 at 11:40 PM, Richard O'Keefe <ok at cs.otago.ac.nz> wrote:
+> Back in the days when systems other than Wintel and maybe sort of intel Linux were
+> supported by Clean, I used to really love one of the features of the Clean compiler.
+> One simple command line switch and the compiler would list the names of all your
+> top level functions together with their types, and the types included strictness.
+> (Also uniqueness, not relevant to Haskell.)
+>
+> The GHC documentation says the information is in the interface files,
+> but they are binary now, and I can't find it there.
+
+ghc --show-iface HI_FILE
+
+The strictness signatures are a bit hard to parse though. Having a
+cheat sheet would be nice.
+
+Johan
+
+

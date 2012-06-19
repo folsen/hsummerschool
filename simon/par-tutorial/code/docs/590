@@ -1,0 +1,23 @@
+From dagitj at gmail.com  Fri Apr 22 02:27:53 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Thu, 21 Apr 2011 17:27:53 -0700
+Subject: [Haskell-cafe] Question about the Monad instance for Iteratee
+ (from the enumerator package)
+In-Reply-To: <C1BF3801-9C43-48EB-A539-2BC2454FB861@n-brain.net>
+References: <20110421063215.9E9A817116@Adric.ern.nps.edu>
+	<C1BF3801-9C43-48EB-A539-2BC2454FB861@n-brain.net>
+Message-ID: <BANLkTikqY93k8566ew7J4HuDyWZGX-5DEQ@mail.gmail.com>
+
+On Thu, Apr 21, 2011 at 8:36 AM, John A. De Goes <john at n-brain.net> wrote:
+
+>
+> This is a much cleaner definition of Iteratee and I'm happy to see it.
+>
+
+I'm confused by this comment.  Isn't John Lato's implementation of Iteratee
+(on hackage) is based on the example implementation that Oleg pointed you
+towards?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110421/fe99c60c/attachment.htm>
+

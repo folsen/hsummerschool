@@ -1,0 +1,13 @@
+From trebla at vex.net  Thu Apr 28 06:46:03 2011
+From: trebla at vex.net (Albert Y. C. Lai)
+Date: Thu, 28 Apr 2011 00:46:03 -0400
+Subject: [Haskell-cafe] HipmunkPlayground compile error
+In-Reply-To: <BANLkTi=+bey1M4KJz6YDy+xwCWhvckJUpQ@mail.gmail.com>
+References: <BANLkTikwaNs0eNkrogMadOn00qhFab=AHA@mail.gmail.com>	<BANLkTikjbKovV3PkRkh6+1190AoCpXeR-g@mail.gmail.com>
+	<BANLkTi=+bey1M4KJz6YDy+xwCWhvckJUpQ@mail.gmail.com>
+Message-ID: <4DB8F10B.8030601@vex.net>
+
+Perhaps the linker ran out of memory.
+
+
+

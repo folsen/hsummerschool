@@ -1,0 +1,25 @@
+From erkokl at gmail.com  Wed Dec 28 23:11:18 2011
+From: erkokl at gmail.com (Levent Erkok)
+Date: Wed, 28 Dec 2011 14:11:18 -0800
+Subject: [Haskell-cafe] [ANNOUNCEMENT] SBV 0.9.24 is out
+Message-ID: <CACOpX0ecM-_wLNTJcmjepWsr1ScXyeo1b+HPeTcHBWZy4CtV=A@mail.gmail.com>
+
+Hello all,
+
+SBV 0.9.24 is out: http://hackage.haskell.org/package/sbv
+
+In short, SBV allows for scripting SMT solvers directly within
+Haskell, with built-in support for bit-vectors and unbounded integers.
+(Microsoft's Z3 SMT solver, and SRI's Yices can be used as backends.)
+
+New in this release are SMT based optimization (both quantified and
+iterative), and support for explicit domain constraints with vacuity
+check.
+
+Full release notes: http://github.com/LeventErkok/sbv/blob/master/RELEASENOTES
+
+Happy new year!
+
+-Levent.
+
+

@@ -1,0 +1,23 @@
+From eca7215 at cs.rit.edu  Mon Aug  1 17:34:47 2011
+From: eca7215 at cs.rit.edu (Edward Amsden)
+Date: Mon, 01 Aug 2011 11:34:47 -0400
+Subject: [Haskell-cafe] State of play with Haskell-Cocoa (Objective-C)
+ bindings?
+In-Reply-To: <E98DB816-440F-4C10-B560-A921200D6B08@eversosoft.com>
+References: <E98DB816-440F-4C10-B560-A921200D6B08@eversosoft.com>
+Message-ID: <CANqySpAAVV60KFWVD=Y1svG5KyRhqqz5ZjzYGUxaz=U8gX0c0A@mail.gmail.com>
+
+On Sun, Jul 31, 2011, Luke Evans <luke at eversosoft.com> wrote:
+> - HOC seems very close to what I'm looking for, but the project looks pretty 'dormant'.
+
+My last go-round with HOC it failed at parsing Apple's Objective-C
+headers. I've been thinking of digging into it and fixing it, but I'm
+a student with very little time so I've not started yet.
+-- 
+Edward Amsden
+Student
+Computer Science
+Rochester Institute of Technology
+www.edwardamsden.com
+
+

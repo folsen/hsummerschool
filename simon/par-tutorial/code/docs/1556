@@ -1,0 +1,30 @@
+From allbery.b at gmail.com  Wed Aug 31 11:42:09 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Wed, 31 Aug 2011 05:42:09 -0400
+Subject: [Haskell-cafe] Parallel Haskell Digest 5
+In-Reply-To: <20110831073942.GA24751@dewdrop.local>
+References: <20110831073942.GA24751@dewdrop.local>
+Message-ID: <CAKFCL4Vhm9Z9SYytWn7aL4f+F74D_vH_0OEJy7+LXN53WfA=ug@mail.gmail.com>
+
+On Wed, Aug 31, 2011 at 03:39, Eric Y. Kow <eric at well-typed.com> wrote:
+
+> (Food for thought: why `parList rseq` instead of `parList r0`?
+> Reply to the Haskell-Cafe posting if you think you know why!)
+>
+
+Because with `r0` you're liable to just parallel evaluate to the thunk
+containing the computation you're trying to parallelize, and the actual
+computation then takes place later *outside* the parallel section?  (That
+is, what comes out of parList is a list of the thunks passed to `r0`,
+otherwise unevaluated.  You wrapped them in an `id` and then parallel
+evaluated the `id` away, real useful that. :)  You need to go at least to
+WHNF, then it comes down to the strictness specified in what's passed to
+`rseq`.
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110831/eab80fa4/attachment.htm>
+

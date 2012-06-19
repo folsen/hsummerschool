@@ -1,0 +1,41 @@
+From michael at snoyman.com  Tue Feb  8 10:22:44 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Tue, 8 Feb 2011 11:22:44 +0200
+Subject: [Haskell-cafe] Help needed for converting IOArray to ByteString
+In-Reply-To: <AANLkTikhXnwh7FD+nE=tur-qZ5NB_XxaqEQEg+vR7TJS@mail.gmail.com>
+References: <AANLkTimFRPKHbpL36uwim2GtTdknVY6pdK2-dJn7FwGU@mail.gmail.com>
+	<AANLkTin5aMcwt7UfP=PHVJOOwya9XttFC=gxDtkfR5nN@mail.gmail.com>
+	<AANLkTikhXnwh7FD+nE=tur-qZ5NB_XxaqEQEg+vR7TJS@mail.gmail.com>
+Message-ID: <AANLkTi=kOA1NtuVuv=UVLZwmaDk2vE026BWcNPXUs-HS@mail.gmail.com>
+
+On Tue, Feb 8, 2011 at 11:13 AM, C K Kashyap <ckkashyap at gmail.com> wrote:
+>
+>
+> On Tue, Feb 8, 2011 at 2:26 PM, Michael Snoyman <michael at snoyman.com> wrote:
+>>
+>> Your array contains machine-sized Ints, which in practice are likely
+>> either 32-bit or 64-bit, while a ByteString is the equivalent of an
+>> array or 8-bit values. So you'll need to somehow convert the Ints to
+>> Word8s. Do you know if you need big or little endian?
+>>
+>> A basic approach would be:
+>>
+>> * Use freeze to convert your IOArray into an IArray
+>> * Use putIArrayOf and put (from cereal) to generate a Putter value
+>> * Use runPut to generate a ByteString from that
+>>
+>
+> Thanks Michael,
+> Actually, I need an array of 8-bit words - Is that available?
+> Also, would be hard to do it without cereal?
+> Regards,
+> Kashyap
+
+1) Just use Data.Word.Word8 instead of the second Int in your type sig
+for IOArray
+2) Use getElems to get a [Word8]
+3) Data.ByteString.pack converts a [Word8] into a ByteString
+
+Michael
+
+

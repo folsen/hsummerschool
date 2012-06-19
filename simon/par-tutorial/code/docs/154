@@ -1,0 +1,40 @@
+From colinpauladams at googlemail.com  Tue Apr  5 19:58:12 2011
+From: colinpauladams at googlemail.com (Colin Adams)
+Date: Tue, 5 Apr 2011 18:58:12 +0100
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <201104051135.59586.daniel.is.fischer@googlemail.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<201104041224.32058.daniel.is.fischer@googlemail.com>
+	<F229D9AE-0D76-4703-B637-62DD0DA79E0C@cs.otago.ac.nz>
+	<201104051135.59586.daniel.is.fischer@googlemail.com>
+Message-ID: <BANLkTinwWKOmDSFGRqu-wtinFjO3EW+N5A@mail.gmail.com>
+
+On 5 April 2011 10:35, Daniel Fischer <daniel.is.fischer at googlemail.com>wrote:
+
+> On Tuesday 05 April 2011 04:35:39, Richard O'Keefe wrote:
+> > On 4/04/2011, at 10:24 PM, Daniel Fischer wrote:
+> > > Colin spoke of *leading* characters, for .hs files, that drastically
+> > > reduces the possibilities - not for .lhs, though.
+> >
+> > A .hs file can, amongst other things, begin with any "small" letter.
+>
+> D'oh, yes, I always forget that a module declaration isn't required.
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+True, but we could say that UTF-8 is complusory in the absence of a module
+declaration.
+
+-- 
+Colin Adams
+Preston, Lancashire, ENGLAND
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110405/7df2e888/attachment.htm>
+

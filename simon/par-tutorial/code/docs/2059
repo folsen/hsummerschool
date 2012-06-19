@@ -1,0 +1,15 @@
+From artyom.kazak at gmail.com  Sat Dec 17 23:11:03 2011
+From: artyom.kazak at gmail.com (Artyom Kazak)
+Date: Sun, 18 Dec 2011 00:11:03 +0200
+Subject: [Haskell-cafe] I've just heard of a neat security measure that
+ when you compile the code it generates different object code...
+In-Reply-To: <20111217174559.GB8208@ohann>
+References: <CAMLKXy=8OLPP20cUPvATwFRkPbd3S0DOaE2F-kMo7C2vUDKV-w@mail.gmail.com>
+	<CA+qNEzKcBbLF1s1t=HdTPOkNwidWRQ6w555FMyuouJrUiRe-Mg@mail.gmail.com>
+	<20111217174559.GB8208@ohann>
+Message-ID: <op.v6nmkp05shvy2l@artyom-nbook>
+
+I wonder, if there is any example of actual Haskell program cracked /  
+reverse engineered? GHC-generated code is already quite hard to understand?
+
+

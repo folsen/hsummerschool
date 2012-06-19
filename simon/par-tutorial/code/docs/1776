@@ -1,0 +1,25 @@
+From malcolm.wallace at me.com  Fri Dec  9 09:42:48 2011
+From: malcolm.wallace at me.com (Malcolm Wallace)
+Date: Fri, 09 Dec 2011 08:42:48 +0000
+Subject: [Haskell-cafe] Does anyone maintain trac.haskell.org?
+In-Reply-To: <CAKYODbj_HQYi0PjMsW5JHUCcBNzce+D+7UESZt_iJ2K7AdgVGQ@mail.gmail.com>
+References: <CABPxb2kwxxkuvP2RcRqmDbMmVyob1dsxo2=BdOCdCpJ3etY8bQ@mail.gmail.com>
+	<CAKYODbj_HQYi0PjMsW5JHUCcBNzce+D+7UESZt_iJ2K7AdgVGQ@mail.gmail.com>
+Message-ID: <6ECE3E3B-BF4E-4A5E-B798-46FE098E935B@me.com>
+
+>> The community Trac hosting server isn't sending email, which Trac requires.
+>> 
+>> I've submitted several tickets to support at community.haskell.org but
+>> gotten no response.
+>> 
+>> Does anyone maintain that server anymore?
+> 
+> Had the same problem in July. Raised a ticket etc. I don't think there
+> is anyone actually responsible for the trac server.
+
+Indeed, the community server (including trac) is administered on a volunteer best-effort basis.  Unfortunately, we do not have sufficient trac-admin expertise on the volunteer team in order to know what is wrong here, or to fix it.  If there is a trac expert out there who could help us diagnose and fix the problem, we would be glad of their aid.
+
+Regards,
+    Malcolm
+
+

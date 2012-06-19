@@ -1,0 +1,43 @@
+From marlowsd at gmail.com  Wed Aug 10 13:09:06 2011
+From: marlowsd at gmail.com (Simon Marlow)
+Date: Wed, 10 Aug 2011 12:09:06 +0100
+Subject: [Haskell-cafe] alex 3.0 broken with Data.ByteString.Lazy - w2c
+ conversion missing (fix attached)
+In-Reply-To: <CANVKUrUB7oJVjB_y+3YP4ym+kBLnxm9o0GkUDkcR2yXUUd=+Cg@mail.gmail.com>
+References: <CANVKUrUB7oJVjB_y+3YP4ym+kBLnxm9o0GkUDkcR2yXUUd=+Cg@mail.gmail.com>
+Message-ID: <4E4266D2.8050802@gmail.com>
+
+On 09/08/2011 22:24, Eugene Kirpichov wrote:
+> Hi Simon,
+>
+> I found a bug in alex-3.0 and I'm attaching a fixed source file -
+> templates/wrappers.hs (modified against alex-3.0 from cabal unpack).
+>
+>
+> Explanation:
+> I was installing bytestring-lexing 0.2.1 and it failed to install with
+> alex 3.0, which was released on Aug 4.
+> It succeeded, however, with the most recent earlier alex 2.3.5.
+>
+> Turns out that the wrapper for lazy bytestrings (strict are ok) had
+> alexGetByte not doing w2c conversion:
+> alexGetByte (_, cs) | ByteString.null cs = Nothing
+>                      | otherwise          = Just (ByteString.head cs,
+> (ByteString.head cs, ByteString.tail cs))
+>
+> It should say ByteString.w2c $ ByteString.head cs here.
+> With this and an additional import of Data.ByteString.Internal (w2c),
+> the generated code compiles.
+>
+> To reproduce, cabal unpack bytestring-lexing and try installing it.
+> Installation will fail, then manually alex the .x files in
+> Data/ByteString/Lex{,/Lazy} and try ghci'ing to them, doing the
+> modification I did and ghci'ing again.
+
+Thanks!  I've just released alex-3.0.1 on Hackage that fixes this bug.
+
+Cheers,
+	Simon
+
+
+

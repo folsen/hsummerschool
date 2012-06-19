@@ -1,0 +1,23 @@
+From simon.hengel at wiktory.org  Fri Feb  4 17:43:24 2011
+From: simon.hengel at wiktory.org (Simon Hengel)
+Date: Fri, 4 Feb 2011 17:43:24 +0100
+Subject: [Haskell-cafe] ANN: HackageOneFive: Reverse dependency lookup
+ for all packages on Hackage
+In-Reply-To: <AANLkTi=t=-MtogGjCFWzBZMmyCF+mW9OSoHSaGGSRo1c@mail.gmail.com>
+References: <20110202115742.GA5168@x200>
+	<AANLkTi=t=-MtogGjCFWzBZMmyCF+mW9OSoHSaGGSRo1c@mail.gmail.com>
+Message-ID: <20110204164324.GC3829@x200>
+
+> > I wrote a tiny Snap app that provides reverse dependency lookup for all
+> > packages on Hackage.
+> 
+> Are you familiar with Roel van Djik's revdep Hackage?
+> http://bifunctor.homelinux.net/~roel/hackage/packages/hackage.html
+
+Not yet, seems to be exactly what I've been locking for.  Thanks for the
+pointer.
+
+Cheers,
+Simon
+
+

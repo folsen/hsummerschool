@@ -1,0 +1,31 @@
+From mokus at deepbondi.net  Tue Aug 16 23:07:49 2011
+From: mokus at deepbondi.net (James Cook)
+Date: Tue, 16 Aug 2011 17:07:49 -0400
+Subject: [Haskell-cafe] why is Random in System?
+In-Reply-To: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+References: <CACbaDy43kSF_-n+2ER1qfGMZs=BhuM2XZ7mKkWRZw_0cvp3p0w@mail.gmail.com>
+Message-ID: <A320995A-2DDA-4147-B804-098623C26914@deepbondi.net>
+
+On Aug 16, 2011, at 4:04 PM, Evan Laforge wrote:
+
+> I've noticed there's a convention to put modules having to deal with
+> randomness into System.Random.  I thought System was for OS
+> interaction?  Granted getting a random seed usually means going to the
+> OS, but isn't the rest of it, like generating random sequences,
+> distributions, selecting based on probability, shuffling, etc. all
+> non-OS related algorithms?
+> 
+> I'm not sure where I would expect Random to go, perhaps Math or maybe
+> the toplevel, but under System seems, well, random...
+> 
+> I notice random-fu puts it under Data, which is also not where I'd
+> look, except that you always look in Data because everything goes into
+> Data... but algorithms dealing with random numbers aren't really data
+> structures either, are they?
+
+System definitely does seem like an odd choice.  In most cases the only interaction any PRNG, even when accessed via the FFI, has with the "system" is - as you say - to get an initial seed value for a global instance.
+
+When I wrote random-fu I chose to use Data.Random based on the perspective is that a random variable or process _is_ just a mathematical object, and can be represented by an abstract data structure.  I'm sure there's a case to be made against that view too, and if someone were to present a good argument for something better I'd even consider changing it. It seems to me, though, that the line between data and not-data is pretty fuzzy in a functional language (which is one of the many things that makes them great), and for me it seems quite natural to think of random variables as data.  At least, in practice it "feels" a lot more like manipulating data than anything else.  But then I'm one of those weirdos who thinks of "IO t" as "just a data structure" too.
+
+-- James
+

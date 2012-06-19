@@ -1,0 +1,29 @@
+From patrick.browne at dit.ie  Tue Feb  8 16:04:46 2011
+From: patrick.browne at dit.ie (Patrick Browne)
+Date: Tue, 08 Feb 2011 15:04:46 +0000
+Subject: [Haskell-cafe] semantics
+Message-ID: <4D515B8E.4050609@dit.ie>
+
+Consider the following definitions:
+1. Denotational semantics can be considered as relation between syntax
+and mathematical objects (the meaning of the syntax).
+2. Operational semantics can be considered as set of rules for
+performing computation.
+
+Question 1
+Applying these definitions in a Haskell context can I say that the
+lambda calculus provides both the operational and denotational
+semantics for Haskell programs at value level for definition and
+evaluations.
+
+Question 2
+Does it make sense to use these definitions at type level? If so, what
+exactly do they represent?
+
+
+Thanks,
+Pat
+
+This message has been scanned for content and viruses by the DIT Information Services E-Mail Scanning Service, and is believed to be clean. http://www.dit.ie
+
+

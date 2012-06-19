@@ -1,0 +1,30 @@
+From david.waern at gmail.com  Thu Apr 28 09:51:43 2011
+From: david.waern at gmail.com (David Waern)
+Date: Thu, 28 Apr 2011 09:51:43 +0200
+Subject: [Haskell-cafe] ANN: Leksah 0.10.0
+In-Reply-To: <1303974242010-4345891.post@n5.nabble.com>
+References: <B679E9AB-F616-48E0-94B7-74D3EDEACD79@googlemail.com>
+	<201104260103.51102.daniel.is.fischer@googlemail.com>
+	<1303776032428-4339787.post@n5.nabble.com>
+	<201104280200.50065.daniel.is.fischer@googlemail.com>
+	<1303974242010-4345891.post@n5.nabble.com>
+Message-ID: <BANLkTi=U_MuTvwYDH7=cLssCqA3g36j44A@mail.gmail.com>
+
+2011/4/28 jutaro <jnf at arcor.de>:
+> So its a bit like running Haddock on a package, which usually may fail, but
+> it is uncommon to have this kind of problems. (It happened one time before
+> with a type level library, which defined all integers between 1 and several
+> thousands...).
+
+If a package uses template haskell, haddock can slow down
+substantially, as it will compile all the modules of the package
+rather than just typecheck them. See this ticket:
+
+  http://trac.haskell.org/haddock/ticket/101
+
+If anyone would like to work on fixing that, that'd be great of
+course. I don't have much time for Haddock development at the moment.
+
+David
+
+

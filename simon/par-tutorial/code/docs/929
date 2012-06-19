@@ -1,0 +1,39 @@
+From dan.doel at gmail.com  Thu Aug  4 03:46:45 2011
+From: dan.doel at gmail.com (Dan Doel)
+Date: Wed, 3 Aug 2011 21:46:45 -0400
+Subject: [Haskell-cafe] ANNOUNCE: vector-algorithms 0.5.2
+Message-ID: <CAHEA9tOAYecWbFPgTtUkSUJXuow9NLy6U7dYgHyOzQWwMepVCQ@mail.gmail.com>
+
+Greetings,
+
+Following some work at hac-phi, I've finally put together a new
+release of vector-algorithms. It should now be available via hackage,
+or you can pull from code.haskell.org if you prefer:
+
+  hackage: http://hackage.haskell.org/package/vector-algorithms/
+  latest: darcs get http://code.haskell.org/~dolio/vector-algorithms/
+
+The highlights of the new release are as follows:
+
+  - Some bit rot in the test suite has been fixed
+  - Some strictness has been added to the merge sort to improve
+unboxing on current GHCs
+  - A couple out-of-bounds errors have been caught and fixed
+  - An entirely new sort---American flag sort---has been added to the line-up
+    * American flag sort is an in-place bucket sort, which only uses a
+constant amount
+      of auxiliary heap space (determined by the element type). And
+unlike a typical
+      radix sort, it is actually suitable for sorting arrays of
+variable-length (O(1) lookup)
+      strings. To this end, there is a (strict) ByteString instance
+for the relevant class,
+      and possibly more such instances to come.
+
+Bug reports, patches, requests, etc. can be sent to me at this address.
+
+Enjoy,
+
+-- Dan
+
+

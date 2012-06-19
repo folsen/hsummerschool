@@ -1,0 +1,36 @@
+From mokus at deepbondi.net  Tue Aug 23 18:03:42 2011
+From: mokus at deepbondi.net (James Cook)
+Date: Tue, 23 Aug 2011 12:03:42 -0400
+Subject: [Haskell-cafe] Why no Monoid, Num, Integral,
+	or Floating RVarT instances?
+In-Reply-To: <CAJAU91d-nAxJFjyN3M3jFTTqjAhaCDnf2hYnBUx8rVWn0O=_4A@mail.gmail.com>
+References: <CAJAU91d-nAxJFjyN3M3jFTTqjAhaCDnf2hYnBUx8rVWn0O=_4A@mail.gmail.com>
+Message-ID: <984BF6A7-4F17-42EE-9AD2-BFA8C3E2BBC1@deepbondi.net>
+
+On Aug 22, 2011, at 10:17 PM, Barend Venter wrote:
+
+> It seems like you should be able to get instances for:
+> 
+> (Monoid m) => Monoid (RVarT n m)
+> (Num m) => Num (RVarT n m)
+> 
+> and so forth for integral and floating
+> 
+> Just wondering if I am missing something here or if there is any
+> particular thing I'm missing. I am aware you would probably not be
+> able to do an Eq or Show instance but me understanding was that in the
+> case of the (Num b) => Num (a -> b) instance the solution was simply
+> to leave those things undefined.
+
+In the case of Monoid, it's just because nobody has ever asked for it.  I'd be happy to add such an instance if someone finds it useful.  In the case of Num and its relatives, there are many reasons I would be against including such an instance by default.
+
+First, although I don't think Num has any "laws" mandated, a Num instance for RVars would break many laws people rely on in practice.  For example, most people tacitly assume that equalities such as x - x = 0,  x * (y + z) = x * y + x * z, and  2 * x = x + x all hold, at least in some approximate sense.  I don't believe that there is any useful sense in which those laws hold for RVars, or any other law that changes the number of times any subexpression appears.  They may hold for expected values (when they even exist) in the limited case of RVar, but independence can't be assumed in RVarT because the underlying monad will often introduce correlations between successive samples of the same process.
+
+Second, and much more important, there can be no correct implementation of Show or Eq (or Enum, Real, Ord or toInteger for the case of Integral).  Show may not be a big deal since show = const "<RVarT>" isn't really "wrong", just not very useful, and hardly any numerical algorithm is going to use Show anyway.   A great many algorithms operating on Num (and probably the majority of those operating on Integral) actually use Eq though.
+
+Even if it were relatively rare it seems to me "just plain wrong" to claim that a type such as RVarT (or a -> b, for that matter) has decidable equality when it does not.  In my opinion it's almost the same level of abuse as (unjustified) unsafePerformIO - it's lying to the type checker.  It creates land mines for the user - programs that will pass the type checker but fail (or worse, give wrong answers) at runtime due to what amounts to a type error. The primary purpose of static typing in the first place is to avoid exactly that kind of error - errors of attempting an operation on a value that doesn't support it.
+
+There's nothing keeping more adventurous users from defining and using Num, Integral, etc., instances themselves, or even creating their own hackage package to introduce them, but it would take a very strong argument to convince me that it's a good idea to provide them by default.
+
+-- James
+

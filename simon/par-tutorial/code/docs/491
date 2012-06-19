@@ -1,0 +1,112 @@
+From aslatter at gmail.com  Tue Apr 19 16:57:54 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Tue, 19 Apr 2011 09:57:54 -0500
+Subject: [Haskell-cafe] Need comments on a libusb asynchronous
+	select/poll loop
+In-Reply-To: <20110419143534.GB26986@X52D.localdomain>
+References: <20110419130604.GA26986@X52D.localdomain>
+	<BANLkTim866Givw+zukTNXtoDnQBSAMUxeg@mail.gmail.com>
+	<20110419143534.GB26986@X52D.localdomain>
+Message-ID: <BANLkTinZo3vmvu+sWv81vun9e4mJRiSxBw@mail.gmail.com>
+
+On Tue, Apr 19, 2011 at 9:35 AM, John Obbele <john.obbele at gmail.com> wrote:
+> On Tue, Apr 19, 2011 at 08:52:44AM -0500, Antoine Latter wrote:
+>> Maybe I'm misunderstanding something, but why why I want to use epoll
+>> directly instead of just using forkIO plus threadWaitRead and
+>> threadWaitWrite?
+>>
+>> http://hackage.haskell.org/packages/archive/base/latest/doc/html/Control-Concurrent.html#v:threadWaitRead
+>>
+>> As a developer, the concurrency model offered by the
+>> Control.Concurrency module has always been friendly to me.
+>
+> So instead of blindly following the C documentation on how to
+> poll libusb, I should simply spawn a forkIO on each file
+> descriptors and wait for the threadWait{Write,Read} to do their
+> magic ?
+>
+> Something like:
+>
+> readAsyncIO = do $
+> ? ?zipfds <- getLibusbFileDescriptorsStruct
+> ? ?mapM_ (forkIO . monitor) zipfds
+>
+> ?where monitor args@(readOrWrite, fd) = do
+> ? ? ? ?if isRead readOrWrite
+> ? ? ? ? ? ?then threadWaitRead fd
+> ? ? ? ? ? ?else threadWaitWrite fd
+> ? ? ? ?libusbHandleAllPendingsEvents
+> ? ? ? ?monitor args -- loop recursion
+>
+> Of course, I would have to use MVars or libusb lock API to verify
+> that no two Haskell threads were trying to flush the events pool
+> at the same time.
+>
+
+I'm not really familiar at all with libusb, and I'm not fmaliar with
+the application code you're trying to write.
+
+But as a Haskell application developer, the code I would want to write
+to deal with USB devices in Haskell would be:
+
+> handle <- aqcuireUsbDeve someParamsHere
+> data <- getDataFromUsbDevice handle
+>
+> <application level processing>
+>
+> putDataOnUsbDevice handle otherDataFromApp
+>
+> <perhaps some interaction with other devices here>
+>
+> moreData <- getDataFromUsbDevice handle
+> ...
+
+If I wanted to work with multiple devices simultaneously I would use
+'forkIO' around different blocks of code, and then various concurrency
+primitives to communicate between the different 'forkIO' threads
+(IORefs, MVars, Chans and STM).
+
+And I would expect everything to 'just work', because I would expect
+'getDataFromUsbDevice' and 'putDataOnUsbDevice' to internally make
+calls to 'threadWaitRead' and 'threadWaitWrite' which would place my
+application-level code onto an epoll/kqueue/select struct for me, and
+I can write my app-code in terms of idiomatic loops and recursion and
+such.
+
+And since in this example the USB operations are going through the
+same global IO manager as everything else, if I'm working with both
+USB devices and network devices, I will expect the GHC IO manager to
+multiplex all of my 'forkIO' threads effectively, regardless of what
+type of IO they are waiting on (or even if they're waiting on MVars or
+STM or other Haskell things).
+
+> hum ... wait, we don't use locks in Haskell, we use STM, don't we ?
+>
+
+MVars are great at locking things. Once I start needing multiple
+permutations of multiple locks to handle what I want to do I start
+looking at STM, as I'm much less likely to write buggy STM code than
+buggy multiple-MVar code. That doesn't mean that STM doesn't have it's
+own pitfalls.
+
+>> Maybe there was something in the other thread I missed.
+
+> I'm always lost in these long discussions about the overall
+> merits of this one method or this another one.
+>
+> A (real) example helps me better to grasp the notions.
+>
+
+Hopefully what I wrote above helps! Again, I'm not sure wait type of
+application you're trying to write - I don't have much background in
+trying to make, for example, GUI software in Haskell.
+
+> /john
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

@@ -1,0 +1,80 @@
+From haberg-1 at telia.com  Mon Dec 26 18:20:55 2011
+From: haberg-1 at telia.com (Hans Aberg)
+Date: Mon, 26 Dec 2011 18:20:55 +0100
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <20111226161113.696a9ecf@Sedrikov][>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+	<CAL3m8eBx2=RNZJfqBSp=Bds4GXeu8vvAfXR_CPkPGJ+HZ-1-Xg@mail.gmail.com>
+	<1324433118.2665.6.camel@turminder-xuss.roaming.operationaldynamics.com>
+	<CAKFCL4WSnfvq2RBSTGA2drUBvj4kWP3Nej6bKPU2+6xJ=2WBdw@mail.gmail.com>
+	<A297518E-79B4-400B-A5A1-BAED03DD6CE5@telia.com>
+	<20111226161113.696a9ecf@Sedrikov][>
+Message-ID: <9FDB2BDF-9924-4D9C-9FFD-DE9D2F88CB76@telia.com>
+
+On 26 Dec 2011, at 16:11, AUGER C?dric wrote:
+
+>> There is
+>>  http://www.stixfonts.org/
+>> For typesetting with Xe[La]TeX or Lua[La]TeX, use XITS (in the
+>> TeXLive package).
+>> 
+>>> (And then we'll have to deal with folks trying to use the letter,
+>>> because everyone knows the Roman alphabet is the only one that
+>>> matters and of *course* Greek letters are symbol characters....
+>>> Pfeh.)
+>> 
+>> This is the big problem right now: how to enter these symbols
+>> efficiently.
+> 
+> Under Xorg, "XCompose" might be your friend! I have a whole bunch of
+> them for Coq programing.
+> 
+> Having something like:
+> 
+> ---------8<---------------------------------------------------------
+> # ~/.XCompose contents:
+> 
+> # the Compose file of the xorg distribution to have a lot
+> # of useful symbols such as "?" ^^
+> include "/usr/local/lib/X11/locale/en_US.UTF-8/Compose"
+> # the Compose file that could be included in Haskell distributions
+> include "/usr/local/share/haskell/Compose"
+> # other personnal notations
+> ------->8-----------------------------------------------------------
+> # /usr/local/share/haskell/Compose contents:
+> 
+> # maybe to be downloaded via a Hackage cabal package?
+> # of course "<Multi_key> <H>" should be replaced by a
+> # user specified combo
+> <Multi_key> <H> <colon> <colon> : "?"
+> <Multi_key> <H> <greater> <greater> <greater> : "?"
+> <Multi_key> <H> <less> <less> <less> : "?"
+> <Multi_key> <H> <less> <minus> <less> : "?" U2919
+> <Multi_key> <H> <greater> <minus> <greater> : "?" U291A
+> <Multi_key> <H> <minus> <less> <less> : U291B
+> <Multi_key> <H> <greater> <greater> <minus> : U291C
+> <Multi_key> <H> <a> <l> <l> : "?"
+> <Multi_key> <H> <e> <x> : "?"
+> <Multi_key> <H> <a> <n> <d> : "?"
+> <Multi_key> <H> <o> <r> : "?"
+> <Multi_key> <H> <a> <b> <s> <t> : "?"
+> <Multi_key> <H> <c> <o> <m> <p> : "?"
+> <Multi_key> <H> <minus> <greater> : "?"
+> --------8<----------------------------------------------------------
+> 
+> But if you are under Windows, or Mac OS, I cannot tell (as well as I
+> cannot tell if you are under a POSIX system not running xorg, such as
+> the tty1..ttyn consoles)
+
+On OS X one can make ones owns key maps, like with the program on the link below, but it is very time consuming.
+
+Hans
+
+
+http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=ukelele
+
+
+
+

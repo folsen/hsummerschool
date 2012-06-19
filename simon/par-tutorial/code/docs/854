@@ -1,0 +1,30 @@
+From dons00 at gmail.com  Fri Apr 29 03:54:00 2011
+From: dons00 at gmail.com (Don Stewart)
+Date: Thu, 28 Apr 2011 18:54:00 -0700
+Subject: [Haskell-cafe] How to make ghc 7 with llvm?
+In-Reply-To: <BANLkTim17m2=ymk-f-ZcKQKbwF_Z5z=4Xg@mail.gmail.com>
+References: <BANLkTim17m2=ymk-f-ZcKQKbwF_Z5z=4Xg@mail.gmail.com>
+Message-ID: <BANLkTimSFRchdB_gucpL51z2oM2Q4LjUeA@mail.gmail.com>
+
+Use the -fllvm flag.
+
+On Thu, Apr 28, 2011 at 6:49 PM, Magicloud Magiclouds
+<magicloud.magiclouds at gmail.com> wrote:
+> Hi,
+>  As I recalled, ghc started to support llvm from version 7.
+>  But there is a problem: there is no option to make ghc with llvm. So
+> Library within ghc source will be in gcc's binary format. Then when I
+> install other packages, they may complain that the binary format is
+> not llvm, so they install some libraries again.
+>  Any way I could make ghc 7 with llvm?
+> --
+> ???????
+> ???????
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

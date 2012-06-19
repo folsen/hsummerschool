@@ -1,0 +1,38 @@
+From dagitj at gmail.com  Mon Aug 29 21:51:30 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Mon, 29 Aug 2011 12:51:30 -0700
+Subject: [Haskell-cafe] Trouble with Haddock
+In-Reply-To: <CA+MSfs+UnoFU-Ej6np3yKkKz82gyHN5T=KD7j7rrx7Q0pgp_Gw@mail.gmail.com>
+References: <CA+MSfs+UnoFU-Ej6np3yKkKz82gyHN5T=KD7j7rrx7Q0pgp_Gw@mail.gmail.com>
+Message-ID: <CAJ-DSyy5dVB5xN8_wgWgGaYm-yUua-z5oH7shQVHQ23b_gN-aw@mail.gmail.com>
+
+On Sun, Aug 28, 2011 at 6:37 AM, anonymous <qubital at gmail.com> wrote:
+> First time using haddock.
+> I'm unable to include code examples in the module header.
+> Haddock fails with this error:
+> haddock module header parse failed: Cannot parse header
+> documentation paragraphs
+>
+> It's about 12 lines of code, which doesn't seem like much compared to other
+> packages.
+>
+> e.g.
+> -- | describing module
+> --
+> -- > code
+> -- > ...
+> -- > code
+> module Foo
+> ?? ( ....
+>
+>
+> I tried @...@ code blocks, but that didn't work either.
+> If I shorten the code to 3 lines or so, it will work.
+
+You'll probably get better help if you include the failing example.
+Just speaking for myself, I can't spot the problem from the example
+you've included.
+
+Jason
+
+

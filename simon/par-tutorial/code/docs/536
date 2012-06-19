@@ -1,0 +1,52 @@
+From liuxinyu95 at gmail.com  Wed Apr 20 11:43:08 2011
+From: liuxinyu95 at gmail.com (larry.liuxinyu)
+Date: Wed, 20 Apr 2011 02:43:08 -0700 (PDT)
+Subject: [Haskell-cafe] QuickCheck, (Ord a)=> [a] -> Property problem
+Message-ID: <78a0d4c2-d239-490c-a490-491f0dcabfd5@f11g2000vbx.googlegroups.com>
+
+Hi,
+
+I found there is similar question as:
+http://groups.google.com/group/haskell-cafe/browse_thread/thread/7439262e9ac80dd2/91ca18e11ff00649?lnk=gst&q=QuickCheck+Ord+a#91ca18e11ff00649
+
+I am still think it's very strange. For example:
+
+prop_foo :: (Ord a) => [a] -> Property
+prop_foo xs = not (null xs) ==> maximum xs == minimum xs
+
+This is an extreme case that the property is always wrong.
+
+However, QuickCheck produces:
+*Main> test prop_foo
+OK, passed 100 tests.
+
+Why this happen? If I use verboseCheck, I can find the sample test
+data are as the following:
+*Main>verboseCheck prop_foo
+...
+97:
+[(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),()]
+98:
+[(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),
+(),(),(),(),(),(),()]
+99:
+[(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),
+(),(),()]
+OK, passed 100 tests.
+
+So Arbitrary () is generated as the instance of Ord a. I have to
+change the prototype as
+prop_foo :: (Num a) => [a] -> Property
+
+This works at least, However, since 'a'<'b', they are order-able, what
+if I want to test prop_foo works for char?
+
+I am using Haskell Platform (version 6.10.4), with QuickCheck version
+1.2.0.0
+
+Thanks
+--
+Larry, LIU Xinyu
+https://sites.google.com/site/algoxy/home
+
+

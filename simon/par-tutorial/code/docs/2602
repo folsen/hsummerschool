@@ -1,0 +1,34 @@
+From aslatter at gmail.com  Wed Feb  2 23:00:31 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Wed, 2 Feb 2011 16:00:31 -0600
+Subject: [Haskell-cafe] [web-devel] http-enumerator: redirects,
+ streaming and keep-alive
+In-Reply-To: <AANLkTiknCH6O20cDakf0jTUh80xP+whqpC20+rvUi=OL@mail.gmail.com>
+References: <AANLkTimXn=Dkb-eAkSUNMnVqs6wsT7DqG_UDBV4qyWzT@mail.gmail.com>
+	<AANLkTimwZVTvrSaTzRGQ+8XqAgL9Lyu3yC2ZaA=RfymD@mail.gmail.com>
+	<AANLkTikidKe2LHUv6Hc_VB5Bg4yH6meusY1hDyq0730z@mail.gmail.com>
+	<AANLkTi=NJNaS7ucqq=mtr0wdZGSLcn6oJdXs4D1jd-WQ@mail.gmail.com>
+	<AANLkTiknCH6O20cDakf0jTUh80xP+whqpC20+rvUi=OL@mail.gmail.com>
+Message-ID: <AANLkTimVSrVjuuNxXadE=YcCFyQ0c5Nk16Fh8bf36NCr@mail.gmail.com>
+
+On Wed, Feb 2, 2011 at 3:01 PM, Felipe Almeida Lessa
+<felipe.lessa at gmail.com> wrote:
+> On Wed, Feb 2, 2011 at 6:30 PM, Antoine Latter <aslatter at gmail.com> wrote:
+>> Or you could remove the socket from the map while it's in use.
+>
+> And what about connection limits? ?We shouldn't create a thousand
+> connections to the same host =).
+>
+
+Not a bad idea, but that may be creeping outside the scope of the bug
+as reported.
+
+If you're writing a web-scraper/spider, it is true you might need some
+sort of higher-level manager to handle concurrent access. I'm not sure
+what that would look like, though
+
+> --
+> Felipe.
+>
+
+

@@ -1,0 +1,171 @@
+From ninegua at gmail.com  Sat Apr  2 04:10:56 2011
+From: ninegua at gmail.com (Paul L)
+Date: Fri, 1 Apr 2011 19:10:56 -0700
+Subject: [Haskell-cafe] Asynchronous Arrows need Type Specialization -
+	Help!
+In-Reply-To: <AANLkTimoOE32n5wq77BLuofk11Wo0=Cns8=oS5TxvEok@mail.gmail.com>
+References: <AANLkTi=p=Zi=k32sAROAiC7Ea4SRiSbzTqAp+B2YF7CS@mail.gmail.com>
+	<AANLkTi=jizU+TYLiLr7jP10bKdpdBHduDLVaa7svo0fr@mail.gmail.com>
+	<AANLkTinVhEQXVO7UP6xLEtBhM797dhcS5f477HUgV2OF@mail.gmail.com>
+	<AANLkTinst+ut2LN5vZOKEzeGbgummz3nsoZ4kCoS4+UR@mail.gmail.com>
+	<AANLkTimoOE32n5wq77BLuofk11Wo0=Cns8=oS5TxvEok@mail.gmail.com>
+Message-ID: <BANLkTim6CqRWUxShdj-0UJGfWe1J9mRuUQ@mail.gmail.com>
+
+Thanks for the elaboration. I now have a much better understanding.
+
+FIrst of all, I agree that the system model as you laid out do not fit
+into the arrows abstraction with respect to the set of arrow laws.
+Then  the choice is whether to shape the arrows to fit your model, or
+shape your model to fit arrows. You chose the former.
+
+But one thing I want to be clear is that the arrows abstraction didn't
+impose the kind of strictness to your model, your system design did.
+
+If you would like to consider the second approach, I have a few suggestions:
+
+1. Enable a lazy evaluation strategy over a distributed system. This
+can be done by passing place holders between agents, and only fill
+them (either by sending over data or request-by-demand) when value is
+fully computed. There could be other alternatives, but I'm not
+familiar with the set of literatures in this particular area. Maybe
+somebody else could give pointers.
+
+ 2. Statically schedule data availability and delivery from producer
+to consumer. I'm not sure what kind of application you try to model,
+but this would limit the scope to dataflow that can be statically
+analyzed before program runs. On the other hand, the limitation also
+bring benefits because we can be smart about whether to move data or
+to move computation. To do this properly requires a solution to the
+pure function problem.
+
+For the pure function example you gave:
+
+> ?let f = \ (fileState, queryResult) -> combineResponses in
+> ?(a1 *** a2) >>> arr f
+
+Didn't you just mention that you want to tag along the time stamp to
+the values? So fileState is really a lifted value over a plain file
+state, and so is queryResult. This means the combineResponse function
+is also a lifted function. In the actual implementation of such
+lifting (perhaps over multiple type classes), the calculation of the
+time stamp can be made precise.
+
+Only difficulty I see here is that we may need to lift time stamped
+values over tuples. A single Int value wouldn't suffice as the type
+for time stamp because it has to take the max of time stamps of the
+tuple elements (what is exactly what you are criticizing). It may
+require some type level magic, but I am quite positive that
+difficulties can be overcome.
+
+Regards,
+Paul Liu
+
+On Fri, Apr 1, 2011 at 6:00 PM, David Barbour <dmbarbour at gmail.com> wrote:
+> On Fri, Apr 1, 2011 at 2:57 PM, Paul L <ninegua at gmail.com> wrote:
+>> I now understand where you are coming from, but I don't quite get your
+>> motivation to develop new classes for arrows. Tupling is Haskell is of
+>> course very lazy, it does not evaluate any of its element.
+>
+> Assume three machines: Alice, Bob, and Charlie. Bob owns resource a1,
+> and Charlie owns resource a3. Bob and Charlie do not know about one
+> another. Alice runs ?'a1 >>> a3' with some initial inputs. For an
+> 'efficient' implementation, I need the output from a1 to propagate
+> directly as input to a3, directly from Bob to Charlie - do not pass
+> Alice, do not waste precious bandwidth and latency.
+>
+> Now extend the example just a bit:
+>
+> ?(a1 *** a2) >>> first a3
+>
+> Naively, Alice might take the outputs from a1 and a2 and build a tuple
+> (r1,r2), then promptly split the tuple back up and send r1 to Charlie.
+> But this wastes a lot of time and bandwidth and CPU bringing r1 and r2
+> together onto Alice's machine. It doesn't matter that Alice never
+> looks at r1 herself... the fact that she even 'touches' the r1
+> variable is killing performance and requires physical synchronization.
+> ?In short, laziness doesn't help here. What does help is optimizing
+> the above into ((a1 >>> a3) *** a2).
+>
+> I could go into even more reasons. (I.e. I'm actually using streams,
+> not simple values, so tupling and untupling is closer to zipping and
+> unzipping.) But I think the above argument is sufficient by itself.
+>
+> My model is designed for efficient, scalable, open, distributed
+> programming. I currently model distributed machines each as a thread
+> with an event-loop. But this is a proof-of-concept implementation: I'm
+> unwilling to 'cheat' by using any techniques that could not
+> efficiently and securely be implemented for a real open distributed
+> system.
+>
+>>
+>> As for the spatial and logical concepts, don't you think they are
+>> over-specifying what is really necessary for your system model?
+>
+> I do not believe I've overspecified.
+>
+> But I've also avoided explaining the full model. That sort of
+> explanation really requires a conference paper with a lot of
+> motivating examples, and it was not my intent to use Haskell-cafe as a
+> forum.
+>
+>>
+>> So I guess what I'm having trouble with is your arr f example. If f is
+>> sufficiently lazy, it does not evaluate the elements in its input
+>> tuple at all. Most pure functions we use to wire up arrows are like
+>> this: arr fst, arr snd, arr swap, arr (\x -> (x, x)), etc.
+>
+> For simple data plumbing that never needs to touch the input, I
+> currently suggest specialized arrows:
+> ?aconst :: c -> a b c
+>
+> ?afst :: a (b,c) b
+> ?asnd :: a (b,c) c
+> ?adup :: a b (b,b)
+> ?aswap :: a (b,c) (c,b)
+>
+> ?aleft :: a b (Either b c)
+> ?aright :: a c (Either b c)
+> ?amerge :: a (Either b b) b
+> ?amirror :: a (Either b c) (Either c b)
+>
+> Potentially, RULES pragmas could also convert from 'arr fst' to a
+> particular implementation of 'afst', though I'd not recommend RULES at
+> the typeclass level after having been hurt by those in Control.Arrow.
+>
+>>
+>> I also don't quite follow your example of passing a time stamp
+>> together with value.
+>
+> Logically, a 'future' is just a time-stamp paired with a value.
+>
+> ?let f = \ (fileState, queryResult) -> combineResponses in
+> ?(a1 *** a2) >>> arr f
+>
+> Here, 'arr f' is opaque to my implementation. I cannot look inside 'f'
+> and decide whether or not it needs both fileState and queryResult, or
+> just one of them, or none (const). So I must somehow wait for both
+> fileState and queryResult to be available before I can evaluate
+> combineResponses. How long do I wait? Well, until the last response is
+> available.
+>
+> In the reactive context, you don't really have futures, but you still
+> have latency before resource state becomes available, and must wait to
+> combine results.
+>
+>>
+>> If you are getting unwanted results, it is perhaps due to wrong
+>> computation, rather than the composition to a pure functions.
+>> Maybe you want to give a specific example of "f".
+>
+> Regards,
+>
+> David
+>
+
+
+
+-- 
+Regards,
+Paul Liu
+
+

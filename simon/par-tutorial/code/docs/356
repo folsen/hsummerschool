@@ -1,0 +1,31 @@
+From michael at snoyman.com  Wed Apr 13 06:27:03 2011
+From: michael at snoyman.com (Michael Snoyman)
+Date: Wed, 13 Apr 2011 07:27:03 +0300
+Subject: [Haskell-cafe] Request for library recommendations
+In-Reply-To: <20110413.130246.150469304.kazu@iij.ad.jp>
+References: <20110413120719.b09743b6.mle+hs@mega-nerd.com>
+	<20110413.130246.150469304.kazu@iij.ad.jp>
+Message-ID: <BANLkTim_=_Z7auqV63z=5_DQ-zVFSz3imQ@mail.gmail.com>
+
+On Wed, Apr 13, 2011 at 7:02 AM, Kazu Yamamoto <kazu at iij.ad.jp> wrote:
+
+> Erik,
+>
+> > I have done stuff like this before in C++ and Ocaml, so the mechanics
+> > are not a mystery. However I would like as much as possible to make
+> > use of existing Haskell libraries to cut down the development time.
+>
+> I recommend wai and warp which are available on Hackage. I asked
+> Michael, the author of the libraries, to handle absolute URLs in
+> warp. So, you can use it as a platform for HTTP proxies even for
+> HTTP/1.0.
+>
+> And I would throw http-enumerator into that mix: its interface was actually
+designed to work together with WAI, so it should be fairly easy to pair them
+up together.
+
+Michael
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110413/e20c8604/attachment.htm>
+

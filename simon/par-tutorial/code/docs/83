@@ -1,0 +1,33 @@
+From mmitar at gmail.com  Sun Apr  3 22:21:59 2011
+From: mmitar at gmail.com (Mitar)
+Date: Sun, 3 Apr 2011 22:21:59 +0200
+Subject: [Haskell-cafe] [ANNOUNCE] Data-flow based graph algorithms
+Message-ID: <BANLkTimkfvJJKg7O5=saAvcfs-vDv1Uorw@mail.gmail.com>
+
+Hi!
+
+Based on my Etage data-flow framework:
+
+http://hackage.haskell.org/package/Etage
+
+I have made a package to show how to implement graph algorithms on top of it:
+
+http://hackage.haskell.org/package/Etage-Graph
+
+I invite everybody to take a look and see how it is possible to
+implement known control-flow algorithms in a data-flow manner. For
+now, only shortest paths search is implemented (from all to all
+nodes). The nice feature is that such approach is easily parallelized.
+
+It quite heavily uses Haskell threads so it is also useful to
+benchmark and test them, especially for graphs with many nodes (>
+300).
+
+There is documentation, but because of this bug it is not visible:
+
+http://hackage.haskell.org/trac/hackage/ticket/656
+
+
+Mitar
+
+

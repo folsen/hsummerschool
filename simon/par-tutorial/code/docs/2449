@@ -1,0 +1,45 @@
+From sh006d3592 at blueyonder.co.uk  Fri Dec 30 04:12:07 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Fri, 30 Dec 2011 03:12:07 +0000
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <4EFD16A4.6020303@pkturner.org>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <jdh9h6$gba$1@dough.gmane.org>
+	<4EFCA66D.4060609@blueyonder.co.uk>
+	<20111229180451.BFF53F3937@mail.avvanta.com>
+	<1325184067.16545.29.camel@godel> <4EFCBC99.60906@blueyonder.co.uk>
+	<1325193613.16545.57.camel@godel>
+	<4EFCE34B.3010403@blueyonder.co.uk>
+	<1325201417.16545.96.camel@godel>
+	<4EFD097D.3000600@blueyonder.co.uk> <4EFD16A4.6020303@pkturner.org>
+Message-ID: <4EFD2C07.6090606@blueyonder.co.uk>
+
+On 30/12/2011 01:40, Scott Turner wrote:
+> On 2011-12-29 19:44, Steve Horne wrote:
+>> [Interaction with its environment] is as much an aspect of what
+>> Haskell defines as the functional core.
+>>
+>> Switching mental models doesn't change the logic
+> But it does. Other languages do not support the distinction between pure
+> functions and I/O effects.
+Agreed. I said basically the same thing right at the start. This doesn't 
+change any logic, though.
+
+>> Either way, at run-time, Haskell is impure.
+> No big deal. Who would want to use a language that you would call
+> "pure"? Haskell has referential transparency. In Haskell, you have
+> assurance that any function without IO in its type is as pure as the
+> lambda calculus.
+>
+Absolutely. In my original post, of course, I made my "big implicit 
+IORef parameter" argument that says C too is referentially transparent, 
+but I also pointed out another view of transparency - the politician who 
+buries the relevant in a huge pile of the irrelevant is not being 
+transparent - and pointed out that in Haskell you can have zero, one or 
+many IORefs - you can focus in on what is relevant.
+
+I actually thought this point would make Haskell advocates happy, but no 
+sign of that yet.
+
+
+

@@ -1,0 +1,41 @@
+From ckkashyap at gmail.com  Mon Feb  7 05:59:48 2011
+From: ckkashyap at gmail.com (C K Kashyap)
+Date: Mon, 7 Feb 2011 10:29:48 +0530
+Subject: [Haskell-cafe] Extending GHCi
+In-Reply-To: <AANLkTimg6gewbZpTDvfmUAL-7u0-SKcB5NNi0o6-x-JH@mail.gmail.com>
+References: <AANLkTintbzM_qEmFH=ijc5NudTTuk=eHqLYX1SAcXZ__@mail.gmail.com>
+	<4D4BEE24.1020000@uni-bonn.de>
+	<AANLkTimY=7amY-NdvjivHS1RbjCVtL0UyjP=owmcRsNw@mail.gmail.com>
+	<AANLkTimg6gewbZpTDvfmUAL-7u0-SKcB5NNi0o6-x-JH@mail.gmail.com>
+Message-ID: <AANLkTikQ8cOnC=0Z-h3h3bFdJ9Jv=eauhC5CBNcjoZy6@mail.gmail.com>
+
+>
+>
+> $ ghci
+> GHCi, version 6.12.3: http://www.haskell.org/ghc/  :? for help
+> Loading package ghc-prim ... linking ... done.
+> Loading package integer-gmp ... linking ... done.
+> Loading package base ... linking ... done.
+> Loading package ffi-1.0 ... linking ... done.
+> Prelude> :m +Data.IORef Control.Concurrent Control.Monad
+> Prelude Data.IORef Control.Concurrent Control.Monad> msg <- newIORef
+> "Hello"
+> Prelude Data.IORef Control.Concurrent Control.Monad> let echo =
+> forever $ readIORef msg >>= putStrLn >> threadDelay 3000000
+> Prelude Data.IORef Control.Concurrent Control.Monad> t <- forkIO echo
+> Hello
+> Prelude Data.IORef Control.Concurrent Control.Monad> Hello
+> Hello
+> writeIORefHello msg "World"
+> Prelude Data.IORef Control.Concurrent Control.Monad> World
+> World
+>
+
+Thanks ... this is the possibility I was looking for. Btw, I am thinking I'd
+need to use STM to synchronize right?
+Regards,
+Kashyap
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110207/5a986890/attachment-0001.htm>
+

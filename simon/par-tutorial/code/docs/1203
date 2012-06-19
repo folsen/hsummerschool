@@ -1,0 +1,24 @@
+From miguelimo38 at yandex.ru  Thu Aug 18 10:07:25 2011
+From: miguelimo38 at yandex.ru (Miguel Mitrofanov)
+Date: Thu, 18 Aug 2011 12:07:25 +0400
+Subject: [Haskell-cafe] Existential question
+In-Reply-To: <20110818052743.3D7181712D@Adric.ern.nps.edu>
+References: <20110818052743.3D7181712D@Adric.ern.nps.edu>
+Message-ID: <0D20BD15-4CFC-468D-8D9A-F46E2C3B9551@yandex.ru>
+
+> Now, what we can do with kl1? We can feed it an integer, say 1, and
+> obtain function f of the type s -> (s,Bool) for an _unknown_ type s.
+> Informally, that type is different from any concrete type. We can
+> never find the Bool result produced by that function since we can
+> never have any concrete value s. The only applications of f that will
+> type check are
+> 	\s -> f s
+> 	f undefined
+> both of which are useless to obtain f's result.
+
+That's not true. We can tie the knot:
+
+let (s, o) = f s in o
+
+
+

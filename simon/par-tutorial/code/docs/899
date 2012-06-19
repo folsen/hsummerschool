@@ -1,0 +1,71 @@
+From benl at ouroborus.net  Mon Aug  1 03:45:49 2011
+From: benl at ouroborus.net (Ben Lippmeier)
+Date: Mon, 1 Aug 2011 11:45:49 +1000
+Subject: [Haskell-cafe] logic and types
+In-Reply-To: <4E5EBA42.5060805@dit.ie>
+References: <4E5EBA42.5060805@dit.ie>
+Message-ID: <40F9E2D7-417A-4596-A8C6-6C97A5D46F0C@ouroborus.net>
+
+
+On 01/09/2011, at 8:48 , Patrick Browne wrote:
+
+> Hi,
+> Below are some questions about the logical interpretation of types and
+> type classes.
+> 
+> Thanks,
+> Pat
+> 
+> module J where
+> type Id = String
+> type Position = Integer
+> data Person = Person Id Position deriving Show
+> 
+> -- Is this an axiom at type level?
+> class Pos a  where
+>   getPos :: a -> Position
+
+One way to think of a type class is that it defines a set of types. For example, Eq is the set of types that support equality, and Pos is the set of types that have a position. By giving the class definition you've defined what it means to be a member of that set, namely that members must support the 'getPos' method, but without instances that set is empty. Whether you treat this bare class definition as an axiom depends on what you want from your logical system. 
+
+
+> -- The :type command says
+> -- forall a. (Pos a) => a -> Position
+> -- How do I write this in logic? (e.g. implies, and, or, etc)
+
+Type systems are logical systems, there is no difference. Granted, some systems correspond to parts of others, but there is no single logical system that can be considered to be *the logic*. An equivalent question would be: "how do I write this in functional programming?"
+
+
+> -- What exactly is being asserted about the type variable and/or about
+> the class?
+
+If you ignore the possibility that the function could diverge, then it says "For all types a, given that 'a' is a member of the set Pos, and given a value of type 'a', then we can construct a Position".
+
+Note that this doesn't guarantee that there are any types 'a' that are members of Pos. In Haskell you can define a type class, but not give instances for it, and still write functions using the type class methods.
+
+
+> -- I am not sure of the respective roles of => and -> in a logical context
+
+Once again, "which logic?". The type system that checks GHC core is itself a logical system. GHC core has recently ben rejigged so that type class constraints are just the types of dictionaries. In this case we have:
+
+ forall (a: *). Pos a -> a -> Position
+
+In DDC core, there are other sorts of constraints besides type class constraints. In early stages of the compiler we encode type class constraints as dependent kinds, so have this:
+
+ forall (a: *). forall (_: Pos a). a -> Position.
+
+Both are good, depending on how you're transforming the core program.
+
+
+> -- Is the following a fact at type level, class level or both?
+> instance Pos Person where
+>  getPos (Person i p) = p
+
+If you take the GHC approach, a type class declaration and instance is equivalent to this:
+
+data Pos a 
+ = PosDict { getPos :: Pos a -> a -> Position }
+
+dictPosPerson :: Pos Person
+dictPosPerson
+ = PosDict (\d (Person i p) -> p)
+

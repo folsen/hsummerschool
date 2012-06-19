@@ -1,0 +1,55 @@
+From daniel.is.fischer at googlemail.com  Tue Feb  1 00:40:13 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Tue, 1 Feb 2011 00:40:13 +0100
+Subject: [Haskell-cafe] Packages all screwed up
+In-Reply-To: <AANLkTimOAkVnV=V+Om6_EMFKsGStNuTFxAN+VDvAvUYR@mail.gmail.com>
+References: <AANLkTimOAkVnV=V+Om6_EMFKsGStNuTFxAN+VDvAvUYR@mail.gmail.com>
+Message-ID: <201102010040.14073.daniel.is.fischer@googlemail.com>
+
+On Monday 31 January 2011 23:59:57, Arnaud Bailly wrote:
+> Hello,
+> I recently tried to upgrade some package (eg. yesod) and it seems
+> that, in the process, I screwed up my Haskell packages setup.
+
+Big time.
+
+>
+> When I am trying to do a simple:
+> > ghc --make Crete1941
+>
+> It fails with message:
+>
+> Loader\Communication.hs:14:7:
+> ? ? Could not find module `System.Process':
+> ? ? ? Use -v to see a list of the files searched for.
+
+Scary. Does 'ghc-pkg list process' list
+- no package process at all
+- one package process in the global db
+- more than one process (one in the global db)
+- process in user db but not global ?
+
+The first would mean your GHC is really borked and you'd need to reinstall.
+The second and third would mean there's hope, four looks like a reinstall 
+again.
+Unfortunately, the error message lets me fear the first.
+
+>
+> which is quite annoying !
+>
+> Is there a way to reconstruct a sane baseline ?
+
+1. Check whether ghc itself is affected, rename (or move, or delete if you 
+think it's not worth saving) the directory your user db is in (ghc-pkg list 
+process should tell you where if you don't know), so ghc doesn't see it. 
+ghc-pkg check. If nothing is reported as broken, try compiling a programme 
+or two using only the core libs, if it works, you probably don't need to 
+reinstall ghc, if not, you have to start from zero.
+
+2. If ghc itself is okay, you can decide whether you want to start fresh, 
+then delete the old directory and cabal install what you need/want. If you 
+think trying to rescue what you have and is not broken is worth the effort, 
+ghc-pkg unregister the broken packages and cabal install them again.
+
+
+

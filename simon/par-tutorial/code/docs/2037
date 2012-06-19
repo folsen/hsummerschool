@@ -1,0 +1,105 @@
+From bhurt at spnz.org  Fri Dec 16 22:42:03 2011
+From: bhurt at spnz.org (Brian Hurt)
+Date: Fri, 16 Dec 2011 16:42:03 -0500
+Subject: [Haskell-cafe] What happens if you get hit by a bus?
+In-Reply-To: <4EEBAF54.8040605@btinternet.com>
+References: <CAEzeKYpOsDqafSoJFQkYioSg-0LTJaFY8WCUBkH2RiXOCZypjQ@mail.gmail.com>
+	<jcg4q4$559$1@dough.gmane.org> <4EEBAF54.8040605@btinternet.com>
+Message-ID: <CAMSTv-OgXu37qt1oBrRN1TP=rwRi5OPwjiG8t712L=jwebfq1A@mail.gmail.com>
+
+On Fri, Dec 16, 2011 at 3:51 PM, Andrew Coppin
+<andrewcoppin at btinternet.com>wrote:
+
+> On 16/12/2011 07:05 PM, Bardur Arantsson wrote:
+>
+>> Michael Litchard wrote:
+>>
+>> [--snip--]
+>>
+>> If getting hit by a bus is a significant factor in the overall outcome of
+>> the project then I think those are pretty good odds, aren't they?
+>>
+>> (I do realize that traffic accidents are a lot more frequent than we like
+>> to
+>> think, but still...)
+>>
+>
+> The /actual/ probability of being hit by a bus is irrelevant. The only
+> thing of concequence is the /percieved/ probability. This latter quantity
+> is not related to the former in any meaningful way. In fact, due to an
+> effect known as availability bias, the probability of any potential threat
+> varies depending on how long you spend thinking about it.
+>
+> (In other words, if you've never even considered what would happen if your
+> sole developer got hit by a bus, your estimate of the probability of this
+> will be very low. If you sit down and think about how much trouble you'd be
+> in if this actually happened, suddenly your estimate of the probability
+> starts increasing. This is completely illogical - which is why it's called
+> a cognitive bias.
+
+
+There are a lot of ways that, from the perspective of the business, a
+person could get "hit by a bus"- they could get into an accident, including
+getting hit by a bus, die for some other reason, get sick, retire, get
+another job, or even quit to join the Peace Corp and get shipped off to
+Uganda (actually had that happen to me once).  Sooner or later, everyone
+will be metaphorically "hit by a bus", in that they will not be here
+anymore.  Next time this discussion comes up, as the room how many people
+have been at their company for 20 years or more.  Then ask them to guess
+how many people in the room will still be at the company in 20 years time.
+ The high probability is that very few, if any, people will still be at the
+company in 20 years time.
+
+It doesn't matter why Bob is no longer here with his specialized knowledge
+of Bob's code, but the end result is the same.  And the problem is the
+same- someone else has to be brought in to deal with Bob's code.  And that
+someone, even if they know the language the code is written in as well, or
+even better, than Bob, doesn't know the *code*.  And it's just a question
+of when, not if, Bob will no longer be there to maintain the code.
+
+If anything, using Haskell *reduces* the truck-factor compared to other
+languages.  Someone new coming in needs to be able to make small changes
+fairly quickly (major reorganizations and refactorings can generally be
+delayed while the new person comes up to speed, but small bug fix and small
+feature additions are a constant need).  What Nancy the new hire can do, if
+the code is in Haskell, is simply change the function, and let the compiler
+figure out where it's being used.  Also, types are a wonderful bit of
+documentation- see the paper "Theorems for Free" by Phillip Wadler.  This
+makes it easier fo the new person to come up to speed on what the code
+does, if not necessarily how or why.
+
+
+>
+> Ever heard the phrase "fear, uncertainty and doubt"? It's a killer in a
+> business context.
+>
+> It seems clear [to me] that there are actually quite a few Haskell
+> programmers around, and it's not especially hard to find them. The question
+> is how many "good" ones there are. "Good" is all vague and subjective and
+> hard to measure, unfortunately.
+>
+> On the other hand, if you just start the project with more than one
+> developer on board in the first place, then the possibility of just one of
+> them being killed prematurely becomes drastically less serious. (For the
+> business. I'm sure it's still fairly serious for the person who just
+> DIED...)
+>
+>
+Again, it depends.  If there was this large body of code that only one
+developer ever worked on, then you have truck-factor problems.
+
+
+
+> PS. Kudos to Ketil Malde for the best link I've seen today.
+>
+> ______________________________**_________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/**mailman/listinfo/haskell-cafe<http://www.haskell.org/mailman/listinfo/haskell-cafe>
+>
+
+Brian
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111216/ba36d565/attachment.htm>
+

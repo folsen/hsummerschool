@@ -1,0 +1,53 @@
+From strake888 at gmail.com  Sat Dec 17 16:35:32 2011
+From: strake888 at gmail.com (Matthew Farkas-Dyck)
+Date: Sat, 17 Dec 2011 10:35:32 -0500
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <09BAB2A2-F899-43DF-8386-226905D254EF@gmail.com>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+	<CAL3m8eALLyBZ69+uWFMTaiYCkqSNZ+p+2QgT0-YFece-Gxz48w@mail.gmail.com>
+	<09BAB2A2-F899-43DF-8386-226905D254EF@gmail.com>
+Message-ID: <CAL3m8eBD6CakOA1Dafs1MuFdppHgbO=UbK_R15YZtM=dKpALCQ@mail.gmail.com>
+
+On 17/12/2011, Gregory Crosswhite <gcrosswhite at gmail.com> wrote:
+>
+> On Dec 17, 2011, at 12:51 PM, Matthew Farkas-Dyck wrote:
+>
+>> By my reason, the instance (Monoid a => Monoid (Maybe a)) is
+>> appropriate, since we have another class for inner-type-agnostic
+>> choice -- Alternative! (and MonadPlus, but that's essentially the
+>> same, and would be if (Functor m => Applicative m => Monad m), as it
+>> ought).
+>
+> Yes, but the problem here is that having different behavior for Alternative,
+> MonadPlus, and Monoid instances is inherently confusing, in the sense that
+> this would almost certainly surprise someone who wasn't already aware of the
+> difference between the instances.
+
+On 17/12/2011, Conor McBride <conor at strictlypositive.org> wrote:
+> So your argument is to create incoherence because we can. I'm not
+> convinced.
+
+No, my argument is that Monoid and Alternative ought to have nonsame
+semantics, since one is a class of types of kind (*), and the other,
+(* -> *). Thus, Monoid operations ought to mean the whole type, and
+Alternative operations, just the outer type.
+
+It shouldn't be a surprise -- it's impossible to put a constraint on
+the inner type for an Alternative instance, since there is none (^_~)
+
+> > (Functor m => Applicative m => Monad m), as it ought.
+> and as it already is in Strathclyde...
+
+By default superclass instances, you mean? If so (and I understand
+correctly), that's not quite the same; If I write, for (Applicative
+FooBar -> FooBar)
+instance Monad FooBar where x >>= f = ...
+then return would be undefined, despite pure (which ought to be in its
+own class, anyhow (?_?)).
+
+Cheers,
+Matthew Farkas-Dyck
+
+

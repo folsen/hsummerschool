@@ -1,0 +1,20 @@
+From felipe.lessa at gmail.com  Sun Apr 24 13:19:43 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Sun, 24 Apr 2011 08:19:43 -0300
+Subject: [Haskell-cafe] fishing for ST mutable Vector examples
+In-Reply-To: <liliz22nuw.fsf@inside.sv3.smugmug.net>
+References: <liliz22nuw.fsf@inside.sv3.smugmug.net>
+Message-ID: <BANLkTikD=EfZ4H-75azFM7s0sJuL7mZPyQ@mail.gmail.com>
+
+There is vector-algorithms [1] which has lots of mutable code.  Note
+that it uses 'PrimMonad m => m ...', which means that the code may
+work on ST or IO.
+
+Cheers,
+
+[1] http://hackage.haskell.org/package/vector-algorithms
+
+-- 
+Felipe.
+
+

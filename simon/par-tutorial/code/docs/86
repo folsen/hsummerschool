@@ -1,0 +1,43 @@
+From dagitj at gmail.com  Mon Apr  4 01:21:04 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Sun, 3 Apr 2011 16:21:04 -0700
+Subject: [Haskell-cafe] ANNOUNCE: FreeType 2 Bindings
+Message-ID: <BANLkTimnPNvTqDYK1OcGvFV0MwCtF0CPzg@mail.gmail.com>
+
+I'm excited to announce the immediate availability of FreeType 2 bindings on
+hackage.  These bindings are based off the 2.4.4 release of FreeType 2 and
+use the BSD licensing option for FreeType 2.  This package should be of
+interest to OpenGL users as it provides a way to get nice looking fonts into
+your OpenGL programs.
+
+This binding is still in its infancy, hence version 0.0.1, but enough of the
+API is exposed that I was able to convert the example1.c program in the
+FreeType tutorial to Haskell.  Here are a few relevant links:
+
+  * What is FreeType: http://www.freetype.org/freetype2/index.html
+  * Example program and tutorial:
+    * http://www.freetype.org/freetype2/docs/tutorial/step1.html
+    * http://www.freetype.org/freetype2/docs/tutorial/example1.c
+  * Haskell version of tutorial:
+    * https://github.com/dagit/freetype2/blob/cabalization/Main.hs
+  * Example program output (yes, their tutorial example really does draw the
+bitmap as a grid of text, scroll around to find the word "blah"), more
+interesting examples to come later:
+    * http://hpaste.org/45239/aoeu
+
+The current API level is "raw" and makes no attempts to present a good
+Haskell-like interface to the library.  My plan is to build a higher level
+interface on top once a sufficient portion of the API is available to
+Haskell.
+
+You can find the source on github in the cabalization branch:
+  * https://github.com/dagit/freetype2
+
+Patches welcome!
+
+Thanks,
+Jason
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110403/ff4f5839/attachment.htm>
+

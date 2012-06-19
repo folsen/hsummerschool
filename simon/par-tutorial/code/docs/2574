@@ -1,0 +1,29 @@
+From jetkoten at gmail.com  Tue Feb  1 23:52:22 2011
+From: jetkoten at gmail.com (JETkoten)
+Date: Tue, 01 Feb 2011 17:52:22 -0500
+Subject: [Haskell-cafe] Automatically move cursor focus in split window
+ in haskell-mode in emacs on load (C-c C-l) command?
+In-Reply-To: <AANLkTikAgd=YBCYF4dbuPf2wt=j=hr5CBoXH=KYABSEU@mail.gmail.com>
+References: <AANLkTikAgd=YBCYF4dbuPf2wt=j=hr5CBoXH=KYABSEU@mail.gmail.com>
+Message-ID: <4D488EA6.1040705@gmail.com>
+
+On 2/1/11 12:07 AM, Steven Collins wrote:
+> The following elisp code works for me to change the focus to the GHCi 
+> buffer (window) after the C-c C-l command in Haskell Mode.  Try this 
+> in your .emacs file.
+>
+>
+> (defadvice inferior-haskell-load-file (after change-focus-after-load)
+>   "Change focus to GHCi window after C-c C-l command"
+>   (other-window 1))
+>
+> (ad-activate 'inferior-haskell-load-file)
+>
+This worked for me! Thank you so very much for taking the time to send 
+this and include the explanation of how it works. Not only did I get 
+this working with my emacs, but I also got Kazu Yamamoto's ghc-mod 0.5.3 
+working, so now I have Haskell Flymake in my haskell-mode too. Great!
+
+Thanks again.
+
+

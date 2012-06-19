@@ -1,0 +1,30 @@
+From sschuldenzucker at uni-bonn.de  Fri Feb 11 13:17:34 2011
+From: sschuldenzucker at uni-bonn.de (Steffen Schuldenzucker)
+Date: Fri, 11 Feb 2011 13:17:34 +0100
+Subject: [Haskell-cafe] Proving correctness
+In-Reply-To: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+References: <AANLkTi=n4KhFcjcKFjn-K5iwW+GOW+rV3r0VMcGzL6aA@mail.gmail.com>
+Message-ID: <4D5528DE.7040505@uni-bonn.de>
+
+On 02/11/2011 12:06 PM, C K Kashyap wrote:
+> [...]
+> I know that static typing and strong typing of Haskell eliminate a 
+> whole class of problems - is that related to the proving correctness?
+> [...]
+You might have read about "free theorems" arising from types. They are a 
+method to derive certain properties about a value that must hold, only 
+looking at its type. For example, a value
+
+ > x :: a
+
+can't be anything else than bottom, a function
+
+ > f :: [a] -> [a]
+
+must commute with 'map', etc. For more information you may be interested 
+in "Theorems for free"[1] by Philip Wadler.
+
+[1] http://ttic.uchicago.edu/~dreyer/course/papers/wadler.pdf
+
+
+

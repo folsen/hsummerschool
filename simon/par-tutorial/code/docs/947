@@ -1,0 +1,21 @@
+From bos at serpentine.com  Sun Aug  7 06:21:30 2011
+From: bos at serpentine.com (Bryan O'Sullivan)
+Date: Sat, 6 Aug 2011 21:21:30 -0700
+Subject: [Haskell-cafe] trouble using the aeson package
+In-Reply-To: <CA+MSfsLhH4mEd6o9z-m3nufXBvN5q1PNYrMbVT3sp73o5O_2fw@mail.gmail.com>
+References: <CA+MSfsLhH4mEd6o9z-m3nufXBvN5q1PNYrMbVT3sp73o5O_2fw@mail.gmail.com>
+Message-ID: <CACw0niKOu1c=YBXM8L0o_anXtegptmRek48u7xzueXK3JLnucQ@mail.gmail.com>
+
+On Sat, Aug 6, 2011 at 8:55 PM, anonymous <qubital at gmail.com> wrote:
+
+
+> However when I try to use it I receive this error message:
+>
+
+Funny, I just spent some time documenting this earlier today. There are two
+bugs in GHCi that cause the problem you're seeing. They're documented here,
+with a workaround: https://github.com/mailrank/blaze-textual#readme
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110806/095b7c47/attachment.htm>
+

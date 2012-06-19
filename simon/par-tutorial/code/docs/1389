@@ -1,0 +1,267 @@
+From arnaud.oqube at gmail.com  Fri Aug 26 10:51:07 2011
+From: arnaud.oqube at gmail.com (Arnaud Bailly)
+Date: Fri, 26 Aug 2011 10:51:07 +0200
+Subject: [Haskell-cafe] Dynamic loading of module
+Message-ID: <CAL4zPao2eYnWWf1KL-sJ3NrVNw6Ar+eHVgnsDr7KSCikE_TZ4w@mail.gmail.com>
+
+Hello,
+I stumbled upon this blog post describing a method from dynamically loading
+modules using GHC api.
+
+While trying to test the given method, I got the following error which
+obviously tells me my packages are not correctly installed but I have no
+idea how to fix this.
+
+D:\projets\>ghc -package ghc main.hs --make
+<command line>: cannot satisfy -package ghc:
+    ghc-7.0.3-fc75cf67c86ba2c0d64b07024a18d3b4 is unusable due to missing or
+recursive dependencies:
+      template-haskell-2.5.0.0-7d9b1443ac5ab69e5ed705a487990deb
+    (use -v for more information)
+
+When I run ghc-pkg check, I got which obviously is bad.
+
+There are problems in package test-framework-0.3.3:
+  dependency "regex-posix-0.94.4-7963833a181f95ba404a78e3e76d835a" doesn't
+exist
+There are problems in package QuickCheck-2.4.0.1:
+  dependency "template-haskell-2.5.0.0-e5fd973432385747440288b48f6a6a5a"
+doesn't exist
+There are problems in package snap-0.5.1:
+  dependency "attoparsec-0.8.6.1-3d4c24cfa94f97cbeb7d6cf43ef70284" doesn't
+exist
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+  dependency "cereal-0.3.3.0-81dac2655ecff64c5fc69671490df093" doesn't exist
+  dependency "enumerator-0.4.10-d65a90206db2a5203c1c906e6f58a6c9" doesn't
+exist
+There are problems in package snap-server-0.5.1:
+  dependency "attoparsec-0.8.6.1-3d4c24cfa94f97cbeb7d6cf43ef70284" doesn't
+exist
+  dependency
+"attoparsec-enumerator-0.2.0.3-d5a7e5b640b4b27be4c6d0c9a314dd0a" doesn't
+exist
+  dependency "binary-0.5.0.2-72c84eaab351d41e936261d8d5d416f5" doesn't exist
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+  dependency "case-insensitive-0.2.0.1-6cb260512f91ae60284372c0208aa00e"
+doesn't exist
+  dependency "enumerator-0.4.10-d65a90206db2a5203c1c906e6f58a6c9" doesn't
+exist
+There are problems in package snap-core-0.5.1:
+  dependency "attoparsec-0.8.6.1-3d4c24cfa94f97cbeb7d6cf43ef70284" doesn't
+exist
+  dependency
+"attoparsec-enumerator-0.2.0.3-d5a7e5b640b4b27be4c6d0c9a314dd0a" doesn't
+exist
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+  dependency "case-insensitive-0.2.0.1-6cb260512f91ae60284372c0208aa00e"
+doesn't exist
+  dependency "enumerator-0.4.10-d65a90206db2a5203c1c906e6f58a6c9" doesn't
+exist
+There are problems in package heist-0.5.2:
+  dependency "attoparsec-0.8.6.1-3d4c24cfa94f97cbeb7d6cf43ef70284" doesn't
+exist
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+There are problems in package xmlhtml-0.1.5:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+There are problems in package authenticate-0.9.0.1:
+  dependency "attoparsec-0.8.6.1-3d4c24cfa94f97cbeb7d6cf43ef70284" doesn't
+exist
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+  dependency "case-insensitive-0.2.0.1-6cb260512f91ae60284372c0208aa00e"
+doesn't exist
+  dependency "enumerator-0.4.10-d65a90206db2a5203c1c906e6f58a6c9" doesn't
+exist
+There are problems in package http-enumerator-0.6.5.1:
+  dependency "attoparsec-0.8.6.1-3d4c24cfa94f97cbeb7d6cf43ef70284" doesn't
+exist
+  dependency
+"attoparsec-enumerator-0.2.0.3-d5a7e5b640b4b27be4c6d0c9a314dd0a" doesn't
+exist
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+  dependency "case-insensitive-0.2.0.1-6cb260512f91ae60284372c0208aa00e"
+doesn't exist
+  dependency "enumerator-0.4.10-d65a90206db2a5203c1c906e6f58a6c9" doesn't
+exist
+There are problems in package zlib-enum-0.2.1:
+  dependency "enumerator-0.4.10-d65a90206db2a5203c1c906e6f58a6c9" doesn't
+exist
+There are problems in package yesod-static-0.1.0:
+  dependency "cereal-0.3.3.0-81dac2655ecff64c5fc69671490df093" doesn't exist
+  dependency "pureMD5-2.1.0.3-cb7a7a936930b56c62f9207838b99efb" doesn't
+exist
+There are problems in package yesod-form-0.1.0.1:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+  dependency "data-default-0.2.0.1-14197e607852c0357951d749c098bd34" doesn't
+exist
+There are problems in package yesod-core-0.8.2:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+  dependency "case-insensitive-0.2.0.1-6cb260512f91ae60284372c0208aa00e"
+doesn't exist
+  dependency "cereal-0.3.3.0-81dac2655ecff64c5fc69671490df093" doesn't exist
+  dependency "enumerator-0.4.10-d65a90206db2a5203c1c906e6f58a6c9" doesn't
+exist
+There are problems in package warp-0.4.0.1:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+  dependency "case-insensitive-0.2.0.1-6cb260512f91ae60284372c0208aa00e"
+doesn't exist
+  dependency "enumerator-0.4.10-d65a90206db2a5203c1c906e6f58a6c9" doesn't
+exist
+There are problems in package wai-extra-0.4.0.1:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+  dependency "case-insensitive-0.2.0.1-6cb260512f91ae60284372c0208aa00e"
+doesn't exist
+  dependency "enumerator-0.4.10-d65a90206db2a5203c1c906e6f58a6c9" doesn't
+exist
+There are problems in package wai-app-static-0.1.0:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+There are problems in package wai-0.4.0:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+  dependency "enumerator-0.4.10-d65a90206db2a5203c1c906e6f58a6c9" doesn't
+exist
+There are problems in package hjsmin-0.0.14:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+There are problems in package aeson-0.3.2.6:
+  dependency "attoparsec-0.8.6.1-3d4c24cfa94f97cbeb7d6cf43ef70284" doesn't
+exist
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+There are problems in package tls-extra-0.2.3:
+  dependency "crypto-api-0.6.1-6854b68ffc32d8880becebcf8b612932" doesn't
+exist
+There are problems in package tls-0.6.4:
+  dependency "cereal-0.3.3.0-81dac2655ecff64c5fc69671490df093" doesn't exist
+  dependency "crypto-api-0.6.1-6854b68ffc32d8880becebcf8b612932" doesn't
+exist
+There are problems in package cprng-aes-0.2.1:
+  dependency "cereal-0.3.3.0-81dac2655ecff64c5fc69671490df093" doesn't exist
+  dependency "crypto-api-0.6.1-6854b68ffc32d8880becebcf8b612932" doesn't
+exist
+There are problems in package cryptocipher-0.2.12:
+  dependency "cereal-0.3.3.0-81dac2655ecff64c5fc69671490df093" doesn't exist
+  dependency "crypto-api-0.6.1-6854b68ffc32d8880becebcf8b612932" doesn't
+exist
+  dependency "tagged-0.2.2-74797b2dae44925f852c0beab1f9f3e6" doesn't exist
+There are problems in package blaze-textual-0.1.0.0:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+There are problems in package SHA-1.4.1.3:
+  dependency "binary-0.5.0.2-72c84eaab351d41e936261d8d5d416f5" doesn't exist
+There are problems in package RSA-1.0.6.1:
+  dependency "binary-0.5.0.2-72c84eaab351d41e936261d8d5d416f5" doesn't exist
+  dependency "pureMD5-2.1.0.3-cb7a7a936930b56c62f9207838b99efb" doesn't
+exist
+There are problems in package persistent-0.5.0:
+  dependency "enumerator-0.4.10-d65a90206db2a5203c1c906e6f58a6c9" doesn't
+exist
+There are problems in package mime-mail-0.3.0:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+There are problems in package hxt-9.1.1:
+  dependency "binary-0.5.0.2-72c84eaab351d41e936261d8d5d416f5" doesn't exist
+There are problems in package http-types-0.6.4:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+  dependency "case-insensitive-0.2.0.1-6cb260512f91ae60284372c0208aa00e"
+doesn't exist
+There are problems in package hamlet-0.8.2:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+There are problems in package cryptohash-0.7.0:
+  dependency "cereal-0.3.3.0-81dac2655ecff64c5fc69671490df093" doesn't exist
+  dependency "crypto-api-0.6.1-6854b68ffc32d8880becebcf8b612932" doesn't
+exist
+  dependency "tagged-0.2.2-74797b2dae44925f852c0beab1f9f3e6" doesn't exist
+There are problems in package cookie-0.2.1:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+There are problems in package blaze-html-0.4.1.1:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+There are problems in package blaze-builder-enumerator-0.2.0.2:
+  dependency "blaze-builder-0.3.0.1-157e8a92bc5ef27895f938613ecfdcb1"
+doesn't exist
+  dependency "enumerator-0.4.10-d65a90206db2a5203c1c906e6f58a6c9" doesn't
+exist
+There are problems in package attoparsec-text-0.8.5.0:
+  dependency "attoparsec-0.8.6.1-3d4c24cfa94f97cbeb7d6cf43ef70284" doesn't
+exist
+There are problems in package asn1-data-0.5.0:
+  dependency "attoparsec-0.8.6.1-3d4c24cfa94f97cbeb7d6cf43ef70284" doesn't
+exist
+  dependency
+"attoparsec-enumerator-0.2.0.3-d5a7e5b640b4b27be4c6d0c9a314dd0a" doesn't
+exist
+  dependency "enumerator-0.4.10-d65a90206db2a5203c1c906e6f58a6c9" doesn't
+exist
+
+The following packages are broken, either because they have a problem
+listed above, or because they depend on a broken package.
+test-framework-0.3.3
+QuickCheck-2.4.0.1
+snap-0.5.1
+snap-server-0.5.1
+snap-core-0.5.1
+heist-0.5.2
+xmlhtml-0.1.5
+authenticate-0.9.0.1
+http-enumerator-0.6.5.1
+zlib-enum-0.2.1
+yesod-static-0.1.0
+yesod-form-0.1.0.1
+yesod-core-0.8.2
+warp-0.4.0.1
+wai-extra-0.4.0.1
+wai-app-static-0.1.0
+wai-0.4.0
+hjsmin-0.0.14
+aeson-0.3.2.6
+tls-extra-0.2.3
+tls-0.6.4
+cprng-aes-0.2.1
+cryptocipher-0.2.12
+blaze-textual-0.1.0.0
+SHA-1.4.1.3
+RSA-1.0.6.1
+persistent-0.5.0
+mime-mail-0.3.0
+hxt-9.1.1
+http-types-0.6.4
+hamlet-0.8.2
+cryptohash-0.7.0
+cookie-0.2.1
+blaze-html-0.4.1.1
+blaze-builder-enumerator-0.2.0.2
+attoparsec-text-0.8.5.0
+asn1-data-0.5.0
+test-framework-quickcheck2-0.2.10
+test-framework-hunit-0.2.6
+yesod-persistent-0.1.0
+yesod-json-0.1.1
+persistent-template-0.5.0.1
+certificate-0.9.0.1
+haskell-platform-2011.2.0.1
+
+
+Is there anything I can do to fix this without wiping out and reinstalling
+haskell platform ?
+
+THanks in advance
+Arnaud
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110826/8b4679bf/attachment.htm>
+

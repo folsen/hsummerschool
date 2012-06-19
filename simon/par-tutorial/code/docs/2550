@@ -1,0 +1,32 @@
+From stephen.tetley at gmail.com  Tue Feb  1 13:18:53 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Tue, 1 Feb 2011 12:18:53 +0000
+Subject: [Haskell-cafe] Inheritance and Wrappers
+In-Reply-To: <AANLkTimK9ttKW8wv5CK+u4y-DLnBrfNFOg5UvjtnAFBc@mail.gmail.com>
+References: <AANLkTi=3pSG0U+3H+0GU7E3h+0z9nMgbq1YgmKyJauQ5@mail.gmail.com>
+	<AANLkTimK9ttKW8wv5CK+u4y-DLnBrfNFOg5UvjtnAFBc@mail.gmail.com>
+Message-ID: <AANLkTi=5Nk1dLZZVfCmfnHE3pZBaMMmUy1S6jdtSfVvP@mail.gmail.com>
+
+On 1 February 2011 11:47, Ozgur Akgun <ozgurakgun at gmail.com> wrote:
+
+>
+> So, is there a way to declare an AbGroup instance for the types with num
+> instances only?
+
+No - as Henning says its then no more useful than simply a function:
+
+add :: (Num u) => a -> a -> a
+add = (+)
+
+'Overarching instances' i.e. classes with one implementation are a
+design flaw, not a virtue [*] so this hypothetical extension isn't
+welcome...
+
+{-# LANGUAGE OverarchingInstances #-}
+
+
+[*] Of course, there might be some valid cases for things in Oleg
+Kiselyov's typecast style, but modelling numericals doesn't look like
+one of them.
+
+

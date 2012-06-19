@@ -1,0 +1,24 @@
+From daniel.is.fischer at googlemail.com  Sat Aug 27 22:39:40 2011
+From: daniel.is.fischer at googlemail.com (Daniel Fischer)
+Date: Sat, 27 Aug 2011 22:39:40 +0200
+Subject: [Haskell-cafe] Modules and a main function
+In-Reply-To: <1314476643.89544.YahooMailNeo@web31108.mail.mud.yahoo.com>
+References: <1314473460.932.YahooMailNeo@web31101.mail.mud.yahoo.com>
+	<CAKFCL4WQECmogUVhx+_0z8YdC2qj5ZTQWx4tV73P_1tKuah=cg@mail.gmail.com>
+	<1314476643.89544.YahooMailNeo@web31108.mail.mud.yahoo.com>
+Message-ID: <201108272239.40817.daniel.is.fischer@googlemail.com>
+
+On Saturday 27 August 2011, 22:24:03, michael rice wrote:
+> I'm not sure how to do that. Please demonstrate.
+> 
+> Michael
+
+ghc -O -main-is StateGame --make StateGame
+
+more generally,
+
+ghc -O -main-is Foo.bar --make Foo
+
+if the desired main is function bar in module Foo.
+
+

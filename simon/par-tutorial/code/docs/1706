@@ -1,0 +1,18 @@
+From felipe.lessa at gmail.com  Tue Dec  6 17:58:43 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Tue, 6 Dec 2011 14:58:43 -0200
+Subject: [Haskell-cafe] Where threadSleep is defined?
+In-Reply-To: <CAMXF=YDMgcP-Up=ywvLX1y+3vhiseefLSxbDz5Ee4zGUwf5RKQ@mail.gmail.com>
+References: <CAMXF=YDMgcP-Up=ywvLX1y+3vhiseefLSxbDz5Ee4zGUwf5RKQ@mail.gmail.com>
+Message-ID: <CANd=OGHT1nyeaiQyOG_kBULNVXyhj+nUhKC11WLNiYK8FOqwuw@mail.gmail.com>
+
+It's threadDelay on Control.Concurrent [1].
+
+Cheers,
+
+[1] http://hackage.haskell.org/packages/archive/base/4.4.1.0/doc/html/Control-Concurrent.html#v:threadDelay
+
+-- 
+Felipe.
+
+

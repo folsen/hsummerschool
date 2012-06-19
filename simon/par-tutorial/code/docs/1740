@@ -1,0 +1,50 @@
+From danr at student.gu.se  Wed Dec  7 22:54:43 2011
+From: danr at student.gu.se (=?ISO-8859-1?Q?Dan_Ros=E9n?=)
+Date: Wed, 7 Dec 2011 22:54:43 +0100
+Subject: [Haskell-cafe] terminateProcess leaves zombie processes around
+In-Reply-To: <20111207153955.BE6A1F393A@mail.avvanta.com>
+References: <CAN2DD_Ht0gt5p6AOzXB+yMALG=iKsA=Pmq91_amn4+qH7t59SA@mail.gmail.com>
+	<CAKFCL4UMRz2ig9YA8o4FQRCgEsgOdu8RTVKUiMc0ae3egN5OyA@mail.gmail.com>
+	<CANd=OGFTwVzfTE2LyW=oth2u1iXVf1bsPS4=RCxdTHWRf4zk0g@mail.gmail.com>
+	<20111207153955.BE6A1F393A@mail.avvanta.com>
+Message-ID: <CAN2DD_Ho_+EZc9ijyrcaDK+2OH8C-N86nT0GN_NcNj7EQcwrvQ@mail.gmail.com>
+
+Thank you very much for your answers.
+
+Felipe's suggestion to use waitForProcess after terminateProcess did the
+trick. No more zombies around :)
+
+Best regards,
+Dan Ros?n
+
+On Wed, Dec 7, 2011 at 4:39 PM, Donn Cave <donn at avvanta.com> wrote:
+
+> Quoth Felipe Almeida Lessa <felipe.lessa at gmail.com>,
+> > On Wed, Dec 7, 2011 at 1:19 PM, Brandon Allbery <allbery.b at gmail.com>
+> wrote:
+> >> They *do* terminate; a zombie is a dead process waiting for its parent
+> to
+> >> reap it with waitForProcess.  There's also some POSIX stuff you can do
+> to
+> >> have them auto-reaped, but doing that correctly and portably is somewhat
+> >> painful.
+> >
+> > But zombie processes do consume a row in the process table, right?  If
+> > so, then it's bad to have them around.
+>
+> Correct.  As noted above, clean up with waitForProcess to release this
+> resource.  If it's more convenient, that could be done up front, by
+> forking twice and waiting for the intermediate process.  One possibly
+> convenient way to do that might be something like runCommand "eprover &".
+>
+>        Donn
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111207/b4660dea/attachment.htm>
+

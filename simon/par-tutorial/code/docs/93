@@ -1,0 +1,27 @@
+From Tillmann.Vogt at rwth-aachen.de  Mon Apr  4 10:44:04 2011
+From: Tillmann.Vogt at rwth-aachen.de (Tillmann Vogt)
+Date: Mon, 04 Apr 2011 10:44:04 +0200
+Subject: [Haskell-cafe] GSoC Proposal: A 3d visualization of code (packages)
+In-Reply-To: <4D993C84.8080501@freegeek.org>
+References: <4D993C84.8080501@freegeek.org>
+Message-ID: <4D9984D4.5080306@rwth-aachen.de>
+
+Dear Haskell Programmers,
+
+To get some feedback on my proposal here is posting that explains it 
+more detailed:
+http://tillmannvogt.wordpress.com/2011/03/30/gsoc/
+
+If this succeeds it could become the poster child application for WebGL 
+and there will be an immediate value to all Haskell programmers: Get an 
+overview what is happening. In the long term there is the possibility to 
+have a very powerful UI-library and to be able to combine visualizations 
+with Code.
+
+The milestone plan is just to show that it should be doable. The part 
+that is not so clear how to do is the integration with hackage2. It 
+could even be a separate site like haskellers.com that links to various 
+resources. Should a WebGL engine be used (then it should be easy to load 
+a collada file) or can WebGL be integrated in a haskell web framework?
+
+

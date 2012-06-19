@@ -1,0 +1,41 @@
+From chbreitkopf at googlemail.com  Thu Dec  8 18:13:50 2011
+From: chbreitkopf at googlemail.com (Christoph Breitkopf)
+Date: Thu, 8 Dec 2011 18:13:50 +0100
+Subject: [Haskell-cafe] Recommended class instances for container type
+In-Reply-To: <CACw0niLbg6bMWQkEiU9a6yxU11pczyaFX0vKar8LAmi5R+ZCjw@mail.gmail.com>
+References: <CAPTT2bbaiCeJWsYPJfufKaRmOBAA7gcsEtbMYzXcZJX5xFvnUw@mail.gmail.com>
+	<CACw0niLbg6bMWQkEiU9a6yxU11pczyaFX0vKar8LAmi5R+ZCjw@mail.gmail.com>
+Message-ID: <CAPTT2bY8hzwAP2ueNEUXijKnfriNXs7oVAEfSwQF8=wApj5-Uw@mail.gmail.com>
+
+Hello Bryan,
+
+On Thu, Dec 8, 2011 at 6:03 PM, Bryan O'Sullivan <bos at serpentine.com> wrote:
+>
+> And what about the more experimental things? Say, DeepSeq, Typeable, Data?
+>>
+> None of those are experimental. They're all frequently used in production
+> code. DeepSeq is far more important than the other two, though. For
+> Typeable and Data, you could copy the approach taken by Data.Map and be
+> fine.
+>
+
+Well, including a some file via CPP did look experimental enough to me. I'd
+like to stay away from GHC-only code, if possible.
+
+
+> At some point, if you want your container class to be useful to others,
+> you'll want to implement Foldable and Traversable.
+>
+
+Being useful to others would be the whole point in releasing it at all :-)
+
+Thanks for your explanations - I take this as: "Yes, the Haskell community
+is really using all this stuff in production code, so better offer it, or
+your library might not be that usable."
+I'll try to be complete, then.
+
+- Chris
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/e32a6d9f/attachment-0001.htm>
+

@@ -1,0 +1,61 @@
+From iavor.diatchki at gmail.com  Tue Feb  8 08:45:58 2011
+From: iavor.diatchki at gmail.com (Iavor Diatchki)
+Date: Mon, 7 Feb 2011 23:45:58 -0800
+Subject: [Haskell-cafe] Unrecognized function symbols in .prof
+In-Reply-To: <AANLkTikbpo9GbQwVpuwqgpQrjoHcqKAkE+b7X7sU2YV3@mail.gmail.com>
+References: <AANLkTikbpo9GbQwVpuwqgpQrjoHcqKAkE+b7X7sU2YV3@mail.gmail.com>
+Message-ID: <AANLkTik2Q8YNAzau5tv1e5M_S4ORxBK86RZ9JgYGkxuO@mail.gmail.com>
+
+Hi Lee,
+I would also guess that these are probably the implementations of equality
+in the given modules.
+
+One way to test this would be to name the equality function explicitly.  For
+example, something like this:
+
+myEquality x y = ...
+instance Eq MyType where (==) = myEquality
+
+Another option would be to look at the generated core by using -ddump-simpl
+when compiling. This will generate a whole bunch of output, which you can
+redirect to a file and the search for the mysterious symbols inside.
+
+Hope this helps,
+-Iavor
+
+
+On Mon, Feb 7, 2011 at 11:12 PM, Lee Pike <leepike at gmail.com> wrote:
+
+> Hi,
+>
+> I am profiling a Haskell program using GHC, and after executing the
+> program with +RTS -p, I get a .prof file that lists the cost centers
+> of the program.  Some of the cost centers listed are for function
+> symbols that do not exist in the given module.  For example, I have in
+> my .prof file:
+>
+> COST CENTRE              MODULE   %time %alloc
+> ==_a2MT                        Foo           19.8    0.0
+> ==_a2R8                         Foo           17.8    0.0
+> ==_a2Bg                         Bar           13.7    0.0
+>                  ....                     ....
+>
+> It appears these are generated symbols; how do I find out what those
+> function symbols correspond to?  (In this case, my assumption is that
+> these symbols refer to instances of the Eq class, but I'm not sure.)
+>
+> [I couldn't find anything about this in the GHC online documentation
+> or via Googling, but sorry if I missed it.]
+>
+> Thanks,
+> Lee
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110207/46a41bc8/attachment.htm>
+

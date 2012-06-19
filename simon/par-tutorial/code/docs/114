@@ -1,0 +1,29 @@
+From max.rabkin at gmail.com  Mon Apr  4 15:41:04 2011
+From: max.rabkin at gmail.com (Max Rabkin)
+Date: Mon, 4 Apr 2011 15:41:04 +0200
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <8762qu2ng5.fsf@malde.org>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+	<BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+	<BANLkTimG9VyfjaNqN1khd89dyz8aNsV8cw@mail.gmail.com>
+	<8762qu2ng5.fsf@malde.org>
+Message-ID: <BANLkTimezHivY9X_5UdQcNA9HKNSj9Y=vQ@mail.gmail.com>
+
+2011/4/4 Ketil Malde <ketil at malde.org>:
+> I think the safest thing to do is to require source to be ASCII, and
+> provide escapes for code points >127...
+
+I used to think that until I realised it meant having
+
+-- Author: Ma\xef N\xe5me
+
+In code, single characters aren't bad (does Haskell have something
+like Python's named escapes ("\N{small letter a with ring}"?) but
+reading UI strings is less fun.
+
+Also, unicode symbols for -> and the like are becoming more popular.
+
+--Max
+
+

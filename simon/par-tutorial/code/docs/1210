@@ -1,0 +1,47 @@
+From dagitj at gmail.com  Thu Aug 18 22:49:41 2011
+From: dagitj at gmail.com (Jason Dagit)
+Date: Thu, 18 Aug 2011 13:49:41 -0700
+Subject: [Haskell-cafe] Compilation error in Chapter 5 of "Real World
+	Haskell"
+In-Reply-To: <CAGHv16t3VD14HbHu=kro_BoVNJr6DHxm6_9BsiAruwb+ABYVMQ@mail.gmail.com>
+References: <CAGHv16t3VD14HbHu=kro_BoVNJr6DHxm6_9BsiAruwb+ABYVMQ@mail.gmail.com>
+Message-ID: <CAJ-DSyxP5AKAe6Wh4Bn4QePVG770xR81GACqSv+n3VXntxGWEQ@mail.gmail.com>
+
+On Wed, Aug 17, 2011 at 10:37 AM, Paul Reiners <paul.reiners at gmail.com> wrote:
+> I'm trying to do the following from Chapter 5 of "Real World Haskell":
+>
+> Our choice of naming for the source file and function is deliberate. To
+> create an executable, ghc expects a module named Main that contains a
+> function named main. The main function is the one that will be called when
+> we run the program once we've built it. 6 comments
+>
+> ghc -o simple Main.hs SimpleJSON.o
+>
+> ---from
+> http://book.realworldhaskell.org/read/writing-a-library-working-with-json-data.html
+>
+> When I do that, I get this error:
+>
+> C:\ch05>ghc -o simple Main.hs SimpleJSON.o
+> [2 of 2] Compiling Main???????????? ( Main.hs, Main.o )
+> Linking simple.exe ...
+> SimpleJSON.o:fake:(.data+0x0): multiple definition of
+> `SimpleJSON_getArray_closure'
+> .\SimpleJSON.o:fake:(.data+0x0): first defined here
+> SimpleJSON.o:fake:(.text+0x54): multiple definition of
+> `SimpleJSON_getArray_info'
+> .\SimpleJSON.o:fake:(.text+0x54): first defined here
+> SimpleJSON.o:fake:(.data+0x4): multiple definition of
+> `SimpleJSON_getObject_closure'
+> .\SimpleJSON.o:fake:(.data+0x4): first defined here
+>
+> What's going wrong here?
+
+It's hard to say without being able to compile your example locally.
+Could you post the exact files Main.hs and SimpleJSON.hs that you are
+using?  I scanned the linked page but it wasn't obvious to me what was
+in your source files.
+
+Jason
+
+

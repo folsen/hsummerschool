@@ -1,0 +1,26 @@
+From jerzy.karczmarczuk at unicaen.fr  Thu Dec 29 17:51:57 2011
+From: jerzy.karczmarczuk at unicaen.fr (Jerzy Karczmarczuk)
+Date: Thu, 29 Dec 2011 17:51:57 +0100
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <20111229132335.GY17094@google.com>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>
+	<20111229132335.GY17094@google.com>
+Message-ID: <4EFC9AAD.5040906@unicaen.fr>
+
+Iustin Pop::
+> In practice too:
+>
+> bar _ = do
+>     s<- readFile "/tmp/x.txt"
+>     return (read s)
+>
+> Once you're in a monad that has 'state', the return value doesn't
+> strictly depend anymore on the function arguments.
+Nice example. PLEASE, show us the trace of its execution. Then, the 
+discussion might be more fruitful
+
+Jerzy Karczmarczuk
+
+
+

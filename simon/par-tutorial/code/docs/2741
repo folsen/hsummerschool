@@ -1,0 +1,45 @@
+From gwern0 at gmail.com  Sat Feb  5 15:57:58 2011
+From: gwern0 at gmail.com (Gwern Branwen)
+Date: Sat, 5 Feb 2011 09:57:58 -0500
+Subject: [Haskell-cafe] Problem with xhtml 1.5.1.1: html tags are split
+Message-ID: <AANLkTinAgLDDPvjNjHkNqS9oJ04jx33V+OeQbet2gQns@mail.gmail.com>
+
+On Thu, May 13, 2010 at 11:38 AM, Gwern Branwen <gwern0 at gmail.com> wrote:
+> On Tue, May 11, 2010 at 3:00 AM, Bjorn Bringert <bjorn at bringert.net> wrote:
+>> I support finding a new maintainer.
+>
+> Alright; as the old maintainer, I guess it falls on you to advertise
+> on -cafe and libraries.
+
+Has a request gone out yet? I didn't notice anything (maybe it got
+lost in all the recent haskell.org downtime), and the current Hackage
+page of xhtml is still listing Bjorn.
+
+Anyway, John MacFarlane has found a workaround which he's implemented
+in HEAD Pandoc (http://code.google.com/p/pandoc/issues/detail?id=134);
+from http://groups.google.com/group/pandoc-discuss/browse_frm/thread/915586b5c5e264b6#
+:
+
+> Many people have wanted pandoc to produce "more normal" HTML output,
+> without nesting, but with line breaks between block elements (where
+> they aren't semantically significant). Something like this:
+>
+> <ul>
+> <li>a <a href="/foo">link</a></li>
+> <li>another list item</li>
+> </ul>
+>
+> I've found that I can get this kind of output, even using Text.XHtml's
+> renderer, by modifying the writer to insert raw newlines after block
+> elements, and using 'showHtmlFragment' rather than 'prettyHtmlFragment'.
+
+This may be useful for other people to know. (There are quite a few
+users of xhtml:
+http://bifunctor.homelinux.net/~roel/cgi-bin/hackage-scripts/revdeps/xhtml-3000.2.0.1#direct
+)
+
+-- 
+gwern
+http://www.gwern.net
+
+

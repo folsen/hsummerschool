@@ -1,0 +1,26 @@
+From artyom.kazak at gmail.com  Fri Dec 30 17:34:49 2011
+From: artyom.kazak at gmail.com (Artyom Kazak)
+Date: Fri, 30 Dec 2011 18:34:49 +0200
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <ADFFAE52-B3FF-4BFD-B891-78650E8DB9FD@mobileink.com>
+References: <4EFB5468.4000607@blueyonder.co.uk> <jdfv46$7r3$1@dough.gmane.org>
+	<4EFB8DFE.1060805@blueyonder.co.uk> <jdh9h6$gba$1@dough.gmane.org>
+	<4EFCA66D.4060609@blueyonder.co.uk> <jdiesl$5sp$1@dough.gmane.org>
+	<4EFCCA86.4020709@blueyonder.co.uk>
+	<ADFFAE52-B3FF-4BFD-B891-78650E8DB9FD@mobileink.com>
+Message-ID: <op.v7a9obs3shvy2l@artyom-nbook>
+
+Gregg Reynolds <dev at mobileink.com> ?????(?) ? ????? ?????? Fri, 30 Dec  
+2011 17:23:20 +0200:
+
+> Regarding side-effects, they can be (informally) defined pretty simply:   
+> any non-computational effect caused by a computation is a side-effect.
+
+I wonder: can writing to memory be called a ?computational effect?? If  
+yes, then every computation is impure. If no, then what?s the difference  
+between memory and hard drive?
+
+By the way, the Data.HashTable is in IO monad. Is it impure? Would it be  
+pure if designers had chosen to use ST instead?
+
+

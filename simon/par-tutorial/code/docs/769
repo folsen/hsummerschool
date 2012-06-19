@@ -1,0 +1,90 @@
+From ryani.spam at gmail.com  Tue Apr 26 20:22:23 2011
+From: ryani.spam at gmail.com (Ryan Ingram)
+Date: Tue, 26 Apr 2011 11:22:23 -0700
+Subject: [Haskell-cafe] Inputs to classic FRP:
+	unsafeInterleaveIO/unsafePerformIO
+In-Reply-To: <ip5s8s$j07$1@dough.gmane.org>
+References: <BANLkTi=XMKwyeK8VK5kyYJRuP1JS4RZS4g@mail.gmail.com>
+	<ip5s8s$j07$1@dough.gmane.org>
+Message-ID: <BANLkTi=wwQsj9+QgttPzCE+H1W8RO7yjUw@mail.gmail.com>
+
+Apfelmus, I hope you don't abandon your efforts, at least for the selfish
+reason that I enjoy reading your blog entries about trying to implement it!
+
+I was looking at your last entry and trying to understand if/how you solve
+the order-dependency problem for events.  In particular:
+
+source events e1, e2
+
+e3 = e1 union e2
+e4 = e2 union e1
+
+e5 = e3 union e4
+
+The graph from your description would look something like
+
+
+e1      e2
+| \-A  / \   A-\
+e3    e3 e4    e4
+|     |   |    |
+e5    e5 e5    e5
+
+When I was looking at the FRP problem before, it felt a lot like the
+'adaptive' problem, so I was looking at Umut Acar's papers and trying to
+build something along those lines.  But perhaps your API is simple enough
+that you don't need that degree of complexity.
+
+  -- ryan
+
+On Tue, Apr 26, 2011 at 12:29 AM, Heinrich Apfelmus <
+apfelmus at quantentunnel.de> wrote:
+
+> Edward Amsden wrote:
+>
+>> As far as I can tell, with classic FRP implementations (those which
+>> use behaviors as a first-class abstraction), the only way to create a
+>> behavior or
+>> event based on some external input (for instance keypresses or
+>> microphone input) is to do something with unsafePerformIO or
+>> unsafeInterleaveIO. A behavior is a value, which when evaluated at a
+>> specific time would have to either block its evaluation until input
+>> could be read, or check the input at that particular time.
+>>
+>> Is there any other way of implementing external behaviors besides that?
+>>
+>
+> Yes, there are other ways, see for example the implementation here:
+> http://tinyurl.com/frp-automaton . This is essentially a pure variant of
+> Ryan's implementation.
+>
+> My implementation has a serious problem, namely that sharing is lost. I
+> think this is the case for Ryan's implementation as well. The state of a
+> behavior will be duplicated and updates multiple times. This can be fixed by
+> observing sharing, of course.
+>
+> I'm currently working on a push-driven FRP implementation. (Though I'm
+> getting second thoughts as to whether the small increase in efficiency is
+> worth the implementation cost.) See also
+>
+> http://apfelmus.nfshost.com/blog/2011/04/24-frp-push-driven-sharing.html
+>
+>
+>
+> Best regards,
+> Heinrich Apfelmus
+>
+> --
+> http://apfelmus.nfshost.com
+>
+>
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110426/de82a917/attachment.htm>
+

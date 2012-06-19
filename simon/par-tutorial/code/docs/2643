@@ -1,0 +1,45 @@
+From andressocrates90 at yahoo.com  Thu Feb  3 19:33:25 2011
+From: andressocrates90 at yahoo.com (Manolache Andrei-Ionut)
+Date: Thu, 3 Feb 2011 10:33:25 -0800 (PST)
+Subject: [Haskell-cafe] Haskell Functions
+Message-ID: <651220.16108.qm@web63407.mail.re1.yahoo.com>
+
+
+
+I need help with two functions....first this is the curent code :http://pastebin.com/UPATJ0r
+->Function 1)removeTautologies :: Formula->Formula 
+If in a clause, a literal and its negation are found, it means that the clause will be true, regardless of the value
+finally assigned to that propositional variable. Consider the following example:
+(A v B v -A) ^ (B v C v A)
+The first clause contains the literals A and -A. This means that the clause will always be true, in which case
+it can be simplify the whole set to simply (B v C v A) .
+I was tinking of using something like
+?removeTautologies (f:fs)=filter rTf:removeTautologies fs
+?????
+ where rT-is supposed to take the firs Literal from the clasue and 
+search for a similar one,if one si found we compare the values if not 
+the we go to the second literal.
+->Function 2)pureLiteralDeletion :: Formula->Formula
+This is a little bit complicate but from What I get this function is suppose to implement a simplification step that assumes 
+as true any atom in a formula that appears exclusively in a positive or
+negative form (not both). Consider the formula:
+(P v Q v R) ^ (P v Q v -R) ^ (-Q v R)
+Note that in this formula P is present but -P is not. Using Pure Literal
+ Deletion  it can be assumed that the value of P will be True thus 
+simplifying the formula to (-Q v R). If the literal were false then the 
+literal would simply be deleted from the clauses it appears in. In that 
+case any satisfying model for the resulting formula would also be a 
+satisfying model for the formula when we assume that the literal is true.
+
+
+      
+
+
+      
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110203/4cfac44d/attachment.htm>
+

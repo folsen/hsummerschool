@@ -1,0 +1,21 @@
+From simons at cryp.to  Thu Aug 11 15:46:03 2011
+From: simons at cryp.to (Peter Simons)
+Date: Thu, 11 Aug 2011 15:46:03 +0200
+Subject: [Haskell-cafe] Distributions link on Hackage
+Message-ID: <87obzwm57o.fsf@write-only.cryp.to>
+
+Hi,
+
+the home page of a package on Hackage links to various distributions to
+show which versions are available, i.e. Fedora, Debian, FreeBSD, etc. In
+NixOS, we have fairly up-to-date package set, and I would like to see
+that distribution included on Hackage.
+
+Now I wonder how to get that done? Can anyone advice on the procedure to
+add support for a distribution to Hackage?
+
+Take care,
+Peter
+
+
+

@@ -1,0 +1,98 @@
+From jaspervdj at gmail.com  Sun Apr  3 10:44:20 2011
+From: jaspervdj at gmail.com (Jasper Van der Jeugt)
+Date: Sun, 3 Apr 2011 10:44:20 +0200
+Subject: [Haskell-cafe] 7th Ghent Functional Programming Group meeting
+ on Tuesday, April 26
+In-Reply-To: <234b231a-950b-4557-af4e-8318dad007e8@a26g2000vbo.googlegroups.com>
+References: <AANLkTinE_UaYSj4piEU4uoMjAYY+Vh4Ss-EbmNjONoAH@mail.gmail.com>
+	<234b231a-950b-4557-af4e-8318dad007e8@a26g2000vbo.googlegroups.com>
+Message-ID: <BANLkTimZwgqxKWrpvGbBrMx9rpA7PpkRnQ@mail.gmail.com>
+
+We probably won't have a video camera, but we can always provide the slides.
+
+Cheers,
+Jasper
+
+On Sat, Apr 2, 2011 at 8:41 PM, oliver mueller <oliver.mueller at gmail.com> wrote:
+> sounds like an interesting program...
+> you should think about making the talks available later for those who
+> can not attend.
+> br,
+> oliver
+>
+> On Apr 1, 7:20?pm, Jasper Van der Jeugt <jasper... at gmail.com> wrote:
+>> Dear all,
+>>
+>> We are very glad to announce an exciting program for the 7th meeting of the
+>> Ghent Functional Programming Group, especially since we are celebrating our
+>> first year of existence today. Our program features no less than three
+>> interesting functional programming languages: Erlang, Haskell and Scheme.
+>>
+>> The meeting will take place on Tuesday, April 26 in the Technicum building of
+>> Ghent University (Sint-Pietersnieuwstraat 41, 9000 Gent) at 19h30. As before, to
+>> enter the building, you should go to the automatic sliding door on the far left
+>> of the building and dial the phone number that is provided on the note taped to
+>> the door. Someone will then open the door for you.
+>>
+>> Our program is as follows:
+>>
+>> 1. Tom Van Custem - Experiments with MapReduce in Erlang
+>>
+>> MapReduce is a programming model for large data processing popularized by, and
+>> in daily use at Google. The MapReduce model builds strongly on key tenets of
+>> functional programming such as higher-order functions and side-effect free
+>> execution. In this talk, we summarize this programming model and describe a
+>> didactic implementation in Erlang. Invented at Ericsson's research labs, Erlang
+>> is known for its massively concurrent programming model, and itself builds on a
+>> functional core language. The talk will not focus on Erlang as such, but we will
+>> describe its key features as needed to understand the MapReduce abstraction.
+>>
+>> 2. Tom Schrijvers - How you could have won the VPW 2011 contest with Haskell
+>>
+>> We all know that Functional Programming is great for writing concise solutions
+>> for programming problems. With some skill this can even be done quickly! Yet,
+>> there was little evidence of this at the 3rd edition of the Flemish
+>> Programming Contest (VPW 2011) that took place on March 23. Not so before
+>> the contest: The jury stress-tested all questions by writing various
+>> solutions in different languages. Haskell was used to solve most problems
+>> and invariably produced short solutions.
+>>
+>> In this talk I present my own Haskell solutions to several of this year's
+>> problems and discuss alternative solution strategies with the audience. After
+>> the talk you will be all set for winning next year's edition -- or at least
+>> enjoying it -- using Haskell.
+>>
+>> 3. Pieter Audenaert - Functional Geometry and a Graphical Language
+>>
+>> We will discuss a simple language for drawing images. During the presentation we
+>> will illustrate the power of data abstraction and algebraic closure, meanwhile
+>> using higher order procedures in an essential manner. The language has been
+>> designed to easy experimenting with patterns such as those appearing in typical
+>> M.C. Escher drawings where the artist repeats the pattern both moving it across
+>> the drawing and scaling it when applicable. In the language we use procedures to
+>> represent the data objects that will be combined in the final drawing and we
+>> make sure that all operations conducted on these procedures are algebraically
+>> closed. These features allow generating patterns of any complexity.
+>>
+>> For our implementation, we use the LISP functional programming language -- more
+>> accurately, the Scheme dialect. The presentation is based on "Structure and
+>> Interpretation of Computer Programs", Abelson & Sussman
+>>
+>> Hope to see you there!
+>>
+>> The GhentFPG organizing committee,
+>> Andy Georges
+>> Jeroen Janssen
+>> Jasper Van der Jeugt
+>>
+>> _______________________________________________
+>> Haskell-Cafe mailing list
+>> Haskell-C... at haskell.orghttp://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+

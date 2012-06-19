@@ -1,0 +1,45 @@
+From allbery.b at gmail.com  Wed Dec 21 04:15:04 2011
+From: allbery.b at gmail.com (Brandon Allbery)
+Date: Tue, 20 Dec 2011 22:15:04 -0500
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+ what would you do different?
+In-Reply-To: <1324433118.2665.6.camel@turminder-xuss.roaming.operationaldynamics.com>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAJN_RF6yRbGfGncjyEjKPs4nsSYfnM-zkXKHLP1EP0p0CXLymg@mail.gmail.com>
+	<CAL3m8eBx2=RNZJfqBSp=Bds4GXeu8vvAfXR_CPkPGJ+HZ-1-Xg@mail.gmail.com>
+	<1324433118.2665.6.camel@turminder-xuss.roaming.operationaldynamics.com>
+Message-ID: <CAKFCL4WSnfvq2RBSTGA2drUBvj4kWP3Nej6bKPU2+6xJ=2WBdw@mail.gmail.com>
+
+On Tue, Dec 20, 2011 at 21:05, Andrew Cowie
+<andrew at operationaldynamics.com>wrote:
+
+> Now we just need ? to replace \, ? to replace ->, and ? to replace /=
+> (which still looks like division assignment no matter how hard I squint
+> my eyes. 25 years of C and C derived languages is hard to forget).
+>
+
+Some of it is already supported.
+http://www.haskell.org/ghc/docs/latest/html/users_guide/syntax-extns.html#unicode-syntax
+
+(? isn't in that list, but it doesn't need to be; just stick it in the
+Prelude if it's not there already, since it's not special syntax, it's just
+another operator.  The * *is* a special case, I suspect, though:  I bet
+it's only supported in kinds, not as the multiplication operator.)
+
+The problem with ? is that it's a perfectly valid Unicode lowercase letter.
+ There is ?
+MATHEMATICAL BOLD SMALL LAMDA U+1D6CC but font support is often lacking,
+and it looks like Unicode categorizes *that* also as a lowercase letter.
+ If you can convince the Unicode Consortium to add a lambda that is of
+class symbol, Haskell can then make use of it ? once there are fonts that
+support it.  (And then we'll have to deal with folks trying to use the
+letter, because everyone knows the Roman alphabet is the only one that
+matters and of *course* Greek letters are symbol characters....  Pfeh.)
+
+-- 
+brandon s allbery                                      allbery.b at gmail.com
+wandering unix systems administrator (available)     (412) 475-9364 vm/sms
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111220/e50aaf77/attachment.htm>
+

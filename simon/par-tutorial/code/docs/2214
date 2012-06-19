@@ -1,0 +1,57 @@
+From strake888 at gmail.com  Wed Dec 21 21:42:54 2011
+From: strake888 at gmail.com (Matthew Farkas-Dyck)
+Date: Wed, 21 Dec 2011 15:42:54 -0500
+Subject: [Haskell-cafe] Alternative versus Monoid
+In-Reply-To: <CAL3m8eA95-4fWNq-Ci6VQS+uTWSMJKW7XHxjx4hs+aztnWSdKg@mail.gmail.com>
+References: <33F6BEF8-7D81-4FBF-A96B-902CA84BC7FF@gmail.com>
+	<20111215151947.GB24931@seas.upenn.edu>
+	<4944A6FD-4D7B-4CE1-8DAF-F9FA1FFD4338@strictlypositive.org>
+	<20111216042614.GB15053@seas.upenn.edu>
+	<CADLz5wVmAYTjGq1+ST87=0oGmUoYdZUTCj=Xcv=u_5_8D3hWvQ@mail.gmail.com>
+	<CACqaG6wdMU=8+SH+n-cNmaPMHKEuv6UiWW3t6rFSYK06sw1t1Q@mail.gmail.com>
+	<CADLz5wWsWghpJim+28FtPy+RSXWjXvboX_KqNLmcho3Ugjno7w@mail.gmail.com>
+	<CAL3m8eA95-4fWNq-Ci6VQS+uTWSMJKW7XHxjx4hs+aztnWSdKg@mail.gmail.com>
+Message-ID: <CAL3m8eBrQT3rVqYfcjohir4GbTNy6X55o2EavvJARV88736eJg@mail.gmail.com>
+
+On 21/12/2011, Bas van Dijk <v.dijk.bas at gmail.com> wrote:
+> On 16 December 2011 16:26, Yves Par?s <limestrael at gmail.com> wrote:
+>> "1) What about the First type? Do we {-# DEPRECATE #-} it?"
+>>
+>> Personnaly, I'm in favor of following the same logic than Int:
+>> Int itself is not a monoid. You have to be specific: it's either Sum or
+>> Mult.
+>>
+>> It should be the same for Maybe: we remove its instance of Monoid, and we
+>> only use First and Last.
+>
+> The reason you need to be specific with Int is that it's not clear
+> which semantics (sum or product) you want. The semantics of Maybe are
+> clear: it's failure-and-prioritized-choice.
+>
+> Changing the order of the arguments of mappend should be the job of Dual.
+>
+> If we really want to drop the Monoid instance for Maybe and keep First
+> and Last and also want to be consistent we should also drop the Monoid
+> instances of [a], a->b, Endo a and of all the tuples. And instead
+> define Monoid instance for First [a], Last [a], First (a->b), Last
+> (a->b), etc. I don't think this is what we want.
+>
+> Regards,
+>
+> Bas
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+>
+
+Fair point. I concede.
+
+If Monoid were necessarily inner-type-gnostic then we'd also have to
+drop instance Monoid [a].
+
+Cheers,
+Matthew Farkas-Dyck
+
+

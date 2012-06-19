@@ -1,0 +1,54 @@
+From aslatter at gmail.com  Mon Dec 26 21:17:25 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Mon, 26 Dec 2011 15:17:25 -0500
+Subject: [Haskell-cafe] Non-exhaustive pattern match warning (incorrect?)
+In-Reply-To: <4EF8C8D4.3090904@orlitzky.com>
+References: <4EF8BB12.3010603@orlitzky.com>
+	<CAKjSnQGDkoHbMz0e1-CVTVu-4Lc0ZDy5ZD2Pw-086cciDunFRg@mail.gmail.com>
+	<4EF8C8D4.3090904@orlitzky.com>
+Message-ID: <CAKjSnQHtitwjEQd2QzL-YtBpzsLO=JdxjATnZgMdFkoKZ5KxpA@mail.gmail.com>
+
+On Mon, Dec 26, 2011 at 2:19 PM, Michael Orlitzky <michael at orlitzky.com> wrote:
+> On 12/26/11 13:42, Antoine Latter wrote:
+>>>
+>>> Am I overlooking something, or did I already match Octet.None?
+>>>
+>>
+>> What is your definition of the 'Octet' type?
+>>
+>
+> -- An Octet consists of eight bits. For our purposes, the most
+> -- significant bit will come "first." That is, b1 is in the 2^7
+> -- place while b8 is in the 2^0 place.
+> data Octet = None | Octet { b1 :: Bit,
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ?b2 :: Bit,
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ?b3 :: Bit,
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ?b4 :: Bit,
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ?b5 :: Bit,
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ?b6 :: Bit,
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ?b7 :: Bit,
+> ? ? ? ? ? ? ? ? ? ? ? ? ? ?b8 :: Bit }
+> ? ? ? ? ? deriving (Eq)
+>
+
+The error is warning you that the record update 'oct { b8 = bit }' can
+fail at run-time if 'oct' is None.
+
+Since it looks like you've checked for that you shouldn't have a
+problem, but the compiler doesn't know that.
+
+If you decompose your type into 'Octet' without the 'None' case, and
+'Maybe Octet' for the times when 'None' is appropriate, the compiler
+will have enough information to not give warnings like this.
+
+I can't be the one to tell you if that is worth it or not.
+
+Antoine
+
+>
+> _______________________________________________
+> Haskell-Cafe mailing list
+> Haskell-Cafe at haskell.org
+> http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+

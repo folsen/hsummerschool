@@ -1,0 +1,59 @@
+From conor at strictlypositive.org  Fri Dec 23 19:46:00 2011
+From: conor at strictlypositive.org (Conor McBride)
+Date: Fri, 23 Dec 2011 18:46:00 +0000
+Subject: [Haskell-cafe] If you'd design a Haskell-like language,
+	what would you do different?
+In-Reply-To: <86689E40-4277-48F0-8100-78CDCC311FBE@yandex.ru>
+References: <1324322427.2233.6.camel@fuzxxl>
+	<CAO0Ooq1vMieSY3cGOpLkgGeDdN1Hpi7xsHCR=nJfEtvg2Axi5g@mail.gmail.com>
+	<20111220070644.GA32105@sniper>
+	<7320B5CF-0DEA-4665-9C33-A73811885264@ouroborus.net>
+	<CAO0Ooq0QYWw2ntFUHd0Rf9Q6zN-p+3ocqGQS=pjeXYQ5vhFOnA@mail.gmail.com>
+	<BB0E5FD7-780F-4D95-975E-40E4C1DEDEEC@yandex.ru>
+	<CAO0Ooq0-Ru4TOdx+gpMRTyVZupFKgRUbbJjyqXKYuE7miTKqAg@mail.gmail.com>
+	<jcvqjs$sb2$1@dough.gmane.org>
+	<3AEE194F-22A4-4E69-9EF3-A9AAB05689CB@strictlypositive.org>
+	<04595744-37C5-40A3-B1EA-DE9E9DA1AA08@yandex.ru>
+	<1833D7B2-62F5-4D63-9BCB-9B8CAB38B6EF@strictlypositive.org>
+	<86689E40-4277-48F0-8100-78CDCC311FBE@yandex.ru>
+Message-ID: <BA99EE5C-74E0-4277-87BA-AFDED9BAC173@strictlypositive.org>
+
+
+On 23 Dec 2011, at 16:16, MigMit wrote:
+
+>
+> On 23 Dec 2011, at 02:11, Conor McBride wrote:
+>
+>>> So... you are developing a programming language with all  
+>>> calculations being automatically lifted to a monad? What if we  
+>>> want to do calculations with monadic values themselves, like, for  
+>>> example, store a few monadic calculations in a list (without  
+>>> joining all there effects as the sequence function does)?
+>>
+>> The plan is to make a clearer distinction between "being" and  
+>> "doing" by
+>> splitting types clearly into an effect part and a value part, in a  
+>> sort
+>> of a Levy-style call-by-push-value way. The notation
+>>
+>> [<list of effects>]<value type>
+>>
+>> is a computation type whose inhabitants might *do* some of the  
+>> effects in
+>> order to produce a value which *is* of the given value type.
+>
+> Oh, so it's not an arbitrary monad, but a single one. That's a bit  
+> disappointing.
+
+The list of effects is arbitrary, and localizable, by means of  
+defining handlers.
+So it's not a single monad.
+
+It's probably still disappointing.
+
+Cheers
+
+Conor
+
+
+

@@ -1,0 +1,53 @@
+From v.dijk.bas at gmail.com  Sat Apr  9 00:49:34 2011
+From: v.dijk.bas at gmail.com (Bas van Dijk)
+Date: Sat, 9 Apr 2011 00:49:34 +0200
+Subject: [Haskell-cafe] erratic behavior for System.Time.diffClockTimes
+In-Reply-To: <7655D7C5-9BB5-42A6-9F8E-FCB472F8BD09@gmail.com>
+References: <7655D7C5-9BB5-42A6-9F8E-FCB472F8BD09@gmail.com>
+Message-ID: <BANLkTikMzDUjZk8+ZdQvPo8Z7MxMCo-rsw@mail.gmail.com>
+
+On 8 April 2011 22:48, Warren Harris <warrensomebody at gmail.com> wrote:
+> I'm trying out GHC-7.0.3-x86_64 for Mac OS X and see what seems to be a bug in System.Time.diffClockTimes. The TimeDiff tdPicosec field returns values that seem to jump around erratically
+
+Strange. This doesn't happen on my Ubuntu x86_64:
+
+*Main> testOLD
+TimeDiff {tdYear = 0, tdMonth = 0, tdDay = 0, tdHour = 0, tdMin = 0,
+tdSec = 0, tdPicosec = 3000000}
+*Main> testOLD
+TimeDiff {tdYear = 0, tdMonth = 0, tdDay = 0, tdHour = 0, tdMin = 0,
+tdSec = 0, tdPicosec = 5000000}
+*Main> testOLD
+TimeDiff {tdYear = 0, tdMonth = 0, tdDay = 0, tdHour = 0, tdMin = 0,
+tdSec = 0, tdPicosec = 5000000}
+*Main> testOLD
+TimeDiff {tdYear = 0, tdMonth = 0, tdDay = 0, tdHour = 0, tdMin = 0,
+tdSec = 0, tdPicosec = 6000000}
+*Main> testOLD
+TimeDiff {tdYear = 0, tdMonth = 0, tdDay = 0, tdHour = 0, tdMin = 0,
+tdSec = 0, tdPicosec = 6000000}
+
+I also tried with the new time library but that also works as expected:
+
+import Data.Time
+
+test = do
+  startTime <- getCurrentTime
+  endTime   <- getCurrentTime
+  let dt = diffUTCTime endTime startTime
+  putStrLn $ show dt
+
+*Main> test
+0.000006s
+*Main> test
+0.000007s
+*Main> test
+0.000006s
+*Main> test
+0.000004s
+*Main> test
+0.000007s
+
+Bas
+
+

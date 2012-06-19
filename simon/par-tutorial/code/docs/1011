@@ -1,0 +1,40 @@
+From oleg at okmij.org  Wed Aug 10 03:40:53 2011
+From: oleg at okmij.org (oleg at okmij.org)
+Date: Tue,  9 Aug 2011 18:40:53 -0700 (PDT)
+Subject: [Haskell-cafe] Continuation Workshop 2011: Call for participation
+Message-ID: <20110810014053.2B6C017120@Adric.ern.nps.edu>
+
+
+       ACM SIGPLAN Continuation Workshop 2011
+	 http://logic.cs.tsukuba.ac.jp/cw2011/
+        co-located with ICFP 2011, Tokyo, Japan
+             Saturday, September 24, 2011
+
+       Call for Participation
+       Early Registration deadline is August 15!
+
+
+Continuations have been discovered many times, which highlights their
+many applications in programming language semantics and program
+analysis, linguistics, logic, parallel processing, compilation and web
+programming.  Recently, there has been a surge of interest
+specifically in delimited continuations: new implementations (in
+Scala, Ruby, OCaml, Haskell), new applications (to probabilistic
+programming, event-driven distributed processing), substructural and
+constructive logics, natural language semantics.
+
+The goal of the Continuation Workshop is to make continuations more
+accessible and useful -- to practitioners and to researchers in
+various areas of computer science and outside computer science. We
+wish to promote communication among the implementors and users in many
+fields. We would like to publicize the applications of continuations
+in academic (logic, linguistics) and practical fields and various
+programming languages (OCaml, Haskell, Scala, Ruby, Scheme, etc.).
+
+Invited talks
+-------------
+Mats Rooth, Cornell University
+http://conf.ling.cornell.edu/mr249/
+
+
+

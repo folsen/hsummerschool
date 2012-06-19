@@ -1,0 +1,77 @@
+From niklas.broberg at gmail.com  Fri Dec 16 18:06:47 2011
+From: niklas.broberg at gmail.com (Niklas Broberg)
+Date: Fri, 16 Dec 2011 18:06:47 +0100
+Subject: [Haskell-cafe] Type checker for haskell-src-exts (was:
+	Typechecking Using GHC API)
+In-Reply-To: <CACz_ru0TWtc5a5ZCtXBXJYG+ikvYWwzGp707weqigNRwS4qfRQ@mail.gmail.com>
+References: <CACz_ru0TWtc5a5ZCtXBXJYG+ikvYWwzGp707weqigNRwS4qfRQ@mail.gmail.com>
+Message-ID: <CAMUA08SHbD4A2hHK9H4kpK-rrktwHqfbmL8FKRPA44K5pEgWXA@mail.gmail.com>
+
+On Thu, Dec 15, 2011 at 5:33 PM, Sean Leather <leather at cs.uu.nl> wrote:
+
+> On Thu, Dec 15, 2011 at 11:07, Niklas Broberg wrote:
+>
+>> Envisioned: The function you ask for can definitely be written for
+>> haskell-src-exts, which I know you are currently using. I just need to
+>> complete my type checker for haskell-src-exts first. Which is not a small
+>> task, but one that has been started.
+>
+>
+> That's good to know! I presume it's something like Haskell98 to start
+> with? I'd be even more impressed (and possibly also concerned for your
+> health) if you were going to tackle all of the extensions!
+>
+
+Actually, no. Starting with Haskell98 would just lead to great pains later
+on, since many of the extensions require very invasive changes compared to
+a H98 checker. My starting point has been to identify the core structural
+and algorithmical requirements for a type checker that would indeed tackle
+"all" of the extensions.
+
+My current checker (which I wouldn't even call half-complete) is based on a
+merge of the algorithms discussed in [1] and [2]. Between the two, they
+give, on the one hand, the bidirectional inference needed to handle
+arbitrary-rank types, and, on the other hand, the power of local
+assumptions needed to handle GADTs and type families.
+
+I thank you for your concerns for my health. However, I assure you they are
+quite misplaced. Typing Haskell-with-extensions in Haskell is not only a
+far smaller beast than what it's made out to be, when walking in the
+well-documented footsteps of giants. It is also lots of fun. :-)
+
+
+> I've been trying to find a student to write a haskell-src-exts type
+> checker for me. It should use a particular kind of mechanism though, using
+> constraints similar to [1]. Then, I want to adapt that to do
+> transformations. What approach are you using? Maybe I can somehow steal
+> your work... ;)
+>
+
+As you note from my starting references, I'm using the same approach and
+base algorithms as GHC does. I looked at some alternatives briefly,
+including the work you reference, but I discarded them all since none of
+them had support for everything I wanted to cover. In particular, it is not
+at all clear how these systems would merge with bi-directional inference or
+local assumptions. Tackling *that* problem would be a large and very
+interesting research topic I'm sure, but not one I have time to dig into at
+the current time. Indeed, the feasibility of my project (and thus the
+sanctity of my health) relies very heavily on the "footsteps-of-giants"
+factor...
+
+So as not to give anyone false hopes, I should point out that I currently
+have next to no time at all to devote to this, and the project has been
+dormant since August. I'll return to it for sure, but at the moment cannot
+tell when.
+
+Cheers,
+
+/Niklas
+
+[1] S. Peyton Jones, D. Vytiniotis, S. Weirich, and M. Shields. Practical
+type inference for arbitrary-rank types.
+[2] D. Vytiniotis, S. Peyton Jones, T. Schrijvers, M. Sulzmann.
+OutsideIn(X) ? Modular type inference with local assumptions
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111216/70af7063/attachment.htm>
+

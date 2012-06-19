@@ -1,0 +1,118 @@
+From haskellsymp at gmail.com  Sun Apr 10 19:36:35 2011
+From: haskellsymp at gmail.com (Haskell Symposium)
+Date: Sun, 10 Apr 2011 19:36:35 +0200
+Subject: [Haskell-cafe] CFP -- Haskell Symposium 2011
+In-Reply-To: <BANLkTim41rgEtrzad1yKH20S63m-8zwqeA@mail.gmail.com>
+References: <BANLkTim41rgEtrzad1yKH20S63m-8zwqeA@mail.gmail.com>
+Message-ID: <BANLkTinkL7Qfs4+hi67GWUMZwb5B2mPmUg@mail.gmail.com>
+
+? ? ? ? ? ? ? ? ? ? ?"Haskell 2011"
+
+? ? ? ? ? ? ?ACM SIGPLAN Haskell Symposium 2011
+? ? ? ? ? ? ? ? ? ? ? Tokyo, Japan
+? ? ? ? ? ? ? ? ? 22nd September, 2011
+
+? ? ? ? ? ? ? ? ? ? ?CALL FOR PAPERS
+
+? ? ? http://www.haskell.org/haskell-symposium/2011/
+
+The ACM SIGPLAN Haskell Symposium 2011 will be co-located with the
+2011 International Conference on Functional Programming (ICFP), in
+Tokyo, Japan.
+
+The purpose of the Haskell Symposium is to discuss experiences with
+Haskell and future developments for the language. The scope of the
+symposium includes all aspects of the design, semantics, theory,
+application, implementation, and teaching of Haskell.
+
+Topics of interest include, but are not limited to:
+
+?* Language Design, with a focus on possible extensions and
+? modifications of Haskell as well as critical discussions of the
+? status quo;
+
+?* Theory, such as formal treatments of the semantics of the present
+? language or future extensions, type systems, and foundations
+? for program analysis and transformation;
+
+?* Implementations, including program analysis and transformation,
+? static and dynamic compilation for sequential, parallel, and
+? distributed architectures, memory management as well as foreign
+? function and component interfaces;
+
+?* Tools, in the form of profilers, tracers, debuggers, pre-processors,
+? testing tools, and suchlike;
+
+?* Functional Pearls, being elegant, instructive examples of using
+? Haskell;
+
+?* Applications, using Haskell for scientific and symbolic computing,
+? database, multimedia, telecom and web applications, and so forth;
+
+?* Practice and Experience, general experience with Haskell in education
+? and industry.
+
+Papers in the latter three categories need not necessarily report
+original research results; they may instead, for example, report
+practical experience that will be useful to others, reusable
+programming idioms, or elegant new ways of approaching a
+problem. (More advice appears on the symposium webpage.)
+The key criterion for such a paper is that it makes a
+contribution from which other Haskellers can benefit. It is not
+enough simply to describe a program!
+
+
+Submission Details
+
+?* Submission Deadline: Monday, 6th June 2011
+?* Author Notification: Friday, 1st July 2011
+?* Final Papers Due ? : Sunday, 10th July 2011
+
+Submitted papers should be in portable document format (PDF),
+formatted using the ACM SIGPLAN style guidelines
+(http://www.acm.org/sigs/sigplan/authorInformation.htm). The text
+should be in a 9pt font in two columns; the length is restricted to
+12 pages, except for "Applications, Practice, and Experience"
+papers, which are restricted to 6 pages. Each submission must
+adhere to SIGPLAN's republication policy, as explained on the web.
+Violation risks summary rejection of the offending submission.
+Accepted papers will be published by the ACM and will appear in the
+ACM Digital Library.
+
+In addition, we solicit proposals for system demonstrations, based
+on running (perhaps prototype) software rather than necessarily on
+novel research results. Proposals are limited to 2-page abstracts,
+in the same ACM format as papers, and should explain why a
+demonstration would be of interest to the Haskell community. They
+will be assessed for relevance by the PC; accepted proposals will
+be published on the Symposium website, but not formally published
+in the proceedings.
+
+
+Links
+
+?* http://www.haskell.org/haskell-symposium,
+? the permanent homepage of the Haskell Symposium.
+?* http://www.haskell.org/haskell-symposium/2011,
+? the 2011 Haskell Symposium web page.
+?* http://www.icfpconference.org/icfp2011,
+? the ICFP 2011 web page.
+
+
+Programme Committee
+
+?* Koen Claessen, Chalmers University of Technology (chair)
+?* Conal Elliott, LambdaPix
+?* Andy Gill, University of Kansas
+?* Ralf Hinze, Oxford University
+?* Graham Hutton, University of Nottingham
+?* John Launchbury, Galois, Inc.
+?* Sam Lindley, University of Edinburgh
+?* Rita Loogen, Philipps-Universit?t Marburg
+?* Neil Mitchell, Standard Chartered
+?* Matthew Naylor, University of York
+?* Bruno Oliveira, Seoul National University
+?* Dimitrios Vytiniotis, Microsoft Research
+?* Steve Zdancewic, University of Pennsylvania
+
+

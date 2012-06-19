@@ -1,0 +1,25 @@
+From waldmann at imn.htwk-leipzig.de  Fri Dec  2 17:13:46 2011
+From: waldmann at imn.htwk-leipzig.de (Johannes Waldmann)
+Date: Fri, 02 Dec 2011 17:13:46 +0100
+Subject: [Haskell-cafe] cabal install --hyperlink-source ?
+Message-ID: <4ED8F93A.1070001@imn.htwk-leipzig.de>
+
+Hello.
+
+I can do "cabal install --enable-documentation"
+which is nice because it does
+configure, build, haddock and copy in one go,
+
+but I don't see how to pass options
+from "cabal install" to  "cabal haddock" (e.g., --hyperlink-source)
+
+Any hints appreciated, J.W.
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 262 bytes
+Desc: OpenPGP digital signature
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111202/d0d01b03/attachment.pgp>
+

@@ -1,0 +1,30 @@
+From warrensomebody at gmail.com  Fri Apr  8 22:48:58 2011
+From: warrensomebody at gmail.com (Warren Harris)
+Date: Fri, 8 Apr 2011 13:48:58 -0700
+Subject: [Haskell-cafe] erratic behavior for System.Time.diffClockTimes
+Message-ID: <7655D7C5-9BB5-42A6-9F8E-FCB472F8BD09@gmail.com>
+
+I'm trying out GHC-7.0.3-x86_64 for Mac OS X and see what seems to be a bug in System.Time.diffClockTimes. The TimeDiff tdPicosec field returns values that seem to jump around erratically: 
+
+test = do
+  startTime <- System.Time.getClockTime
+  endTime <- System.Time.getClockTime
+  let dt = diffClockTimes endTime startTime
+  putStrLn $ show dt
+
+Prelude Test> test
+TimeDiff {tdYear = 0, tdMonth = 0, tdDay = 0, tdHour = 0, tdMin = 0, tdSec = 0, tdPicosec = 0}
+Prelude Test> test
+TimeDiff {tdYear = 0, tdMonth = 0, tdDay = 0, tdHour = 0, tdMin = 0, tdSec = 0, tdPicosec = 3000000}
+Prelude Test> test
+TimeDiff {tdYear = 0, tdMonth = 0, tdDay = 0, tdHour = 0, tdMin = 0, tdSec = 0, tdPicosec = -3329012246138323150000000}
+Prelude Test> test
+TimeDiff {tdYear = 0, tdMonth = 0, tdDay = 0, tdHour = 0, tdMin = 0, tdSec = 0, tdPicosec = 3000000}
+Prelude Test> test
+TimeDiff {tdYear = 0, tdMonth = 0, tdDay = 0, tdHour = 0, tdMin = 0, tdSec = 0, tdPicosec = -3329012246138322851000000}
+Prelude Test> 
+
+I can file a bug, unless I'm overlooking something here.
+
+Warren
+

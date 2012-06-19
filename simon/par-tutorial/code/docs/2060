@@ -1,0 +1,39 @@
+From daniel at schoepe.org  Sat Dec 17 22:39:25 2011
+From: daniel at schoepe.org (Daniel Schoepe)
+Date: Sat, 17 Dec 2011 22:39:25 +0100
+Subject: [Haskell-cafe] Typechecking Using GHC API
+In-Reply-To: <CAAN2PXNTn6g_baMPDwOgiEfF0zO6KeE+PaF_NwwuwtS11T1+=w@mail.gmail.com>
+References: <CAAN2PXNTn6g_baMPDwOgiEfF0zO6KeE+PaF_NwwuwtS11T1+=w@mail.gmail.com>
+Message-ID: <87wr9udgj6.fsf@schoepe.localhost>
+
+On Tue, 13 Dec 2011 18:16:17 +0100, Sh NJP <shayan.njp at gmail.com> wrote:
+> I do some pre-processing on a normal Haskell code ( -F ). The pre-processor
+> needs to know the type of each expression.
+> What are the possibilities to do so?
+> Can I use GHC API to employ GHC type checker? If yes, any good tutorial?
+> Is it too naive to think of a function, f :: String -> AnnotatedAST , that
+> takes Haskell code and returns its corresponding abstract syntax tree
+> annotated with types?
+
+Another, less powerful, but much easier approach would be to use hint,
+which also provides some type-checking functionality. Unfortunately, the
+results seem to be just Strings:
+
+http://hackage.haskell.org/packages/archive/hint/0.3.3.3/doc/html/Language-Haskell-Interpreter.html#g:7
+
+If you want to see more examples of using the GHC API, you could also
+take a look at the ghc-mod repository on github, which uses the GHC API
+to provide type information to Emacs:
+
+https://github.com/kazu-yamamoto/ghc-mod
+
+Cheers,
+Daniel
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 835 bytes
+Desc: not available
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111217/145e9a3a/attachment.pgp>
+

@@ -1,0 +1,34 @@
+From stephen.tetley at gmail.com  Thu Feb 10 09:47:49 2011
+From: stephen.tetley at gmail.com (Stephen Tetley)
+Date: Thu, 10 Feb 2011 08:47:49 +0000
+Subject: [Haskell-cafe] [Cabal-devel] Cabal && license combinations
+In-Reply-To: <AANLkTin-FnLkMpjvPSAOGo+7gS8UWhT2t7GdBiPn1K-u@mail.gmail.com>
+References: <AANLkTimPFKdEzK0jOk856EFEDQujOKU==u0P3R0UkiuX@mail.gmail.com>
+	<1297178086.2402.5.camel@godel>
+	<AANLkTin-FnLkMpjvPSAOGo+7gS8UWhT2t7GdBiPn1K-u@mail.gmail.com>
+Message-ID: <AANLkTimwTVxTAwohQzvqvyY9buiYUQz3gAJ0EG7X6pXL@mail.gmail.com>
+
+On 9 February 2011 23:35, Dan Knapp <dankna at gmail.com> wrote:
+[SNIP]
+
+> I believe this means that if we have a
+> package named "hs-save-the-whales" that is under the GPL, and a
+> front-end package "hs-redeem-them-for-valuable-cash-prizes" which
+> makes use of the functionality in hs-save-the-whales, the front-end
+> MUST be offered under the GPL, and, additionally, CANNOT be offered
+> under BSD (I think).
+
+If you incorporate GPL code into a binary you want to distribute you
+have to comply with the GPL. Static linking a GPL library will
+incorporate GPL code into your binary, ergo you have to comply with
+the GPL.
+
+If you write a client of a GPL library and you want to distribute it,
+your client can be any GPL compatible license - it does not have to be
+GPL. Should you distribute a compiled binary you have to comply with
+the GPL and any additional terms brought in by your GPL-compatible
+license.
+
+Its that simple - until there is a court ruling to decide otherwise.
+
+

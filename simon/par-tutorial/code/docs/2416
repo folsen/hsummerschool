@@ -1,0 +1,31 @@
+From sh006d3592 at blueyonder.co.uk  Thu Dec 29 20:47:26 2011
+From: sh006d3592 at blueyonder.co.uk (Steve Horne)
+Date: Thu, 29 Dec 2011 19:47:26 +0000
+Subject: [Haskell-cafe] On the purity of Haskell
+In-Reply-To: <jdieke$48q$1@dough.gmane.org>
+References: <4EFB5468.4000607@blueyonder.co.uk>
+	<jdfv46$7r3$1@dough.gmane.org>	<CAO40MikNjaUtfFkFE_-TKao0xX=rF3xy36UPoJvgviRar=pdDQ@mail.gmail.com>	<20111229151652.1261E93C2E@mail.avvanta.com>
+	<6B376209-7CEC-467E-9DF7-649426E0B764@mobileink.com>
+	<jdieke$48q$1@dough.gmane.org>
+Message-ID: <4EFCC3CE.7050006@blueyonder.co.uk>
+
+On 29/12/2011 19:21, Heinrich Apfelmus wrote:
+>
+> Why would  IO Int  be something special or mysterious? It's an 
+> ordinary value like everything else; it's on the same footing as 
+> [Char], Maybe Int, Int -> String, Bool, and so on. I see no difference 
+> between the list  [1,2,3] :: [Int]  and the action  "pick a random 
+> number between 1 and 6" :: IO Int  .
+>
+Because performing the action (as part of extracting the result out of 
+it) is relevant to the semantics of the language too, whether an IO 
+monadic random generator or an an interaction with the user via a GUI or 
+whatever.
+
+BTW - why use an IO action for random number generation? There's a 
+perfectly good pure generator. It's probably handy to treat it 
+monadically to sequence the generator state/seed/whatever but random 
+number generation can be completely pure.
+
+
+

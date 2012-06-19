@@ -1,0 +1,15 @@
+From chbreitkopf at googlemail.com  Thu Dec  8 17:30:58 2011
+From: chbreitkopf at googlemail.com (Christoph Breitkopf)
+Date: Thu, 8 Dec 2011 17:30:58 +0100
+Subject: [Haskell-cafe] Recommended class instances for container type
+In-Reply-To: <1323361283-sup-6629@ezyang>
+References: <CAPTT2bbaiCeJWsYPJfufKaRmOBAA7gcsEtbMYzXcZJX5xFvnUw@mail.gmail.com>
+	<1323361283-sup-6629@ezyang>
+Message-ID: <CAPTT2bZxTjM8yQcXUQZbZ2dXa+Lb9RweT_6rJCNHZdPgHTXhYw@mail.gmail.com>
+
+That's what I did, and the reason for my question. 'Cause I was scared off
+by looking at Data.Map (CPP, lots of language extensions).
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111208/41109596/attachment.htm>
+

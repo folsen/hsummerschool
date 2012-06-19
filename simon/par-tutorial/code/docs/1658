@@ -1,0 +1,49 @@
+From scooter.phd at gmail.com  Mon Dec  5 03:34:06 2011
+From: scooter.phd at gmail.com (scooter.phd at gmail.com)
+Date: Sun, 04 Dec 2011 18:34:06 -0800
+Subject: [Haskell-cafe] How to get a file path to the program invoked?
+In-Reply-To: <27FEC170-D5C3-4996-A305-4DBD87C6C334@cs.otago.ac.nz>
+References: <CAMXF=YBsT3fvqcuYG_JUZ_5eS1RVBGXsC2r5oLqH2BvGuhjdMQ@mail.gmail.com>
+	<CANd=OGGcwRC9FfTA8KJQyzsQBDL3YycF2MYx4hMiN7vxeBwTFg@mail.gmail.com>
+	<20111201174112.GA14096@x200>
+	<CANd=OGGXOQYrKrnw9QpDaqgjC-JGsH7jFJB8Hx-OJjCTZP7KGQ@mail.gmail.com>
+	<CAMXF=YCD8ODsmF53id9U=h+SsnuN1T8RvcvY2htwBgRFGgW85A@mail.gmail.com>
+	<4EDB13F7.3020308@freegeek.org>
+	<27FEC170-D5C3-4996-A305-4DBD87C6C334@cs.otago.ac.nz>
+Message-ID: <389209139.245857.1323052433656.JavaMail.webspher@njbbicssmp03>
+
+That's true even for regular fork/exec. 
+
+-----Original message-----
+From: Richard O'Keefe <ok at cs.otago.ac.nz>
+To: wren ng thornton <wren at freegeek.org>
+Cc: haskell-cafe <haskell-cafe at haskell.org>
+Sent: Sun, Dec 4, 2011 15:54:15 PST
+Subject: Re: [Haskell-cafe] How to get a file path to the program invoked?
+
+
+On 4/12/2011, at 7:32 PM, wren ng thornton wrote:
+> Part of the problem is that, as Alexey says, the first element of argv is  
+just whatever is passed to exec, which is not guaranteed to be a complete  
+path, a canonical path, or any other specific thing we'd desire. It's not at  
+all straightforward to determine the actual location of the executable,  
+especially not in a platform-independent manner. argv[0] can't be trusted,  
+scanning through $PATH isn't guaranteed to find it (and even if you find  
+something of the right name, it's not guaranteed to be the correct  
+executable), etc etc.
+
+In particular, with posix_spawnp(), the $PATH that is used to find the  
+executable
+and the $PATH in the environment that the executable starts with can be two  
+different things.
+
+
+_______________________________________________
+Haskell-Cafe mailing list
+Haskell-Cafe at haskell.org
+http://www.haskell.org/mailman/listinfo/haskell-cafe
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111204/03bfcbfd/attachment.htm>
+

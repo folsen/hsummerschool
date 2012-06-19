@@ -1,0 +1,20 @@
+From sschuldenzucker at uni-bonn.de  Thu Feb  3 21:44:06 2011
+From: sschuldenzucker at uni-bonn.de (Steffen Schuldenzucker)
+Date: Thu, 03 Feb 2011 21:44:06 +0100
+Subject: [Haskell-cafe] ($) not as transparent as it seems
+Message-ID: <4D4B1396.6070501@uni-bonn.de>
+
+
+Dear cafe,
+
+does anyone have an explanation for this?:
+
+ >>> error (error "foo")
+*** Exception: foo
+
+ >>> error $ error "foo"
+*** Exception: *** Exception: foo
+
+-- Steffen
+
+

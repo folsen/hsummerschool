@@ -1,0 +1,30 @@
+From felipe.lessa at gmail.com  Tue Apr 26 05:14:02 2011
+From: felipe.lessa at gmail.com (Felipe Almeida Lessa)
+Date: Tue, 26 Apr 2011 00:14:02 -0300
+Subject: [Haskell-cafe] Data.Enumerator.Text.utf8 not constant memory?
+In-Reply-To: <BANLkTik7rDk603uOm58TXRHK73qi7JATtQ@mail.gmail.com>
+References: <BANLkTikvOg3DwT7iuCbkJeju-DsDKyd8xg@mail.gmail.com>
+	<BANLkTim7U2uFxhCXM0S4rKygtNnds34S0g@mail.gmail.com>
+	<BANLkTik7rDk603uOm58TXRHK73qi7JATtQ@mail.gmail.com>
+Message-ID: <BANLkTinh+TzNd=dofvYKj4TLJ-YCPn0d3w@mail.gmail.com>
+
+On Tue, Apr 26, 2011 at 12:06 AM, John Millikin <jmillikin at gmail.com> wrote:
+> *sigh*
+>
+> Another fine entry for john-millikin-is-an-idiot.txt
+>
+> Thank you for the patch Felipe, and for the bug report Skirmantas. I
+> have uploaded 0.4.10 to Hackage.
+>
+> My sincere apologies for the inconvenience.
+
+But I am sure that john-millikin-is-great.txt must be increasing like
+a memory leak ;).  Thanks for the quick upload, and there's no need
+for apologies.
+
+Cheers,
+
+-- 
+Felipe.
+
+

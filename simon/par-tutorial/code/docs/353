@@ -1,0 +1,47 @@
+From mle+hs at mega-nerd.com  Wed Apr 13 04:07:19 2011
+From: mle+hs at mega-nerd.com (Erik de Castro Lopo)
+Date: Wed, 13 Apr 2011 12:07:19 +1000
+Subject: [Haskell-cafe] Request for library recommendations
+Message-ID: <20110413120719.b09743b6.mle+hs@mega-nerd.com>
+
+Hi all,
+
+I'm currently scoping out a project for work that I'd like to do
+in Haskell. Basically its a HTTP proxy (ie like the Squid proxy)
+but with a few wrinkles:
+
+ - Since the connecting clients are untrusted, the incoming
+   connection is HTTP, the header is modified by the proxy to
+   add BasicAuth (credentials known only to the proxy, not the
+   client) and then forwared upstream with responses pass back
+   to the client.
+
+ - Needs to work via upstream Squid proxy (so this proxy needs to
+   be able to requirest a CONNECT from the upstream Squid proxy).
+
+ - In some cases, the client will POST via the proxy and 
+   immediately exit and the proxy will be required to re-try the
+   POST if it fails.
+
+ - Other manipulation of headers and data.
+
+I am aware that Squid can satisfy the first two requirements above
+but not all the others (without actually hacking the Squid code base).
+
+I have done stuff like this before in C++ and Ocaml, so the mechanics
+are not a mystery. However I would like as much as possible to make
+use of existing Haskell libraries to cut down the development time.
+
+Performance is also not critical, so as long as the Haskell version
+can beat a hypothetical Python implementation I'd be happy.
+
+Thanks in advance.
+
+Cheers,
+Erik
+-- 
+----------------------------------------------------------------------
+Erik de Castro Lopo
+http://www.mega-nerd.com/
+
+

@@ -1,0 +1,33 @@
+From gcrosswhite at gmail.com  Wed Dec 14 07:14:59 2011
+From: gcrosswhite at gmail.com (Gregory Crosswhite)
+Date: Wed, 14 Dec 2011 16:14:59 +1000
+Subject: [Haskell-cafe] Splitting off many/some from Alternative
+In-Reply-To: <CAOJG3uCGyf0L9V0zK6GOCMUmsXwfnyDS9UMRqsyubLHpDtyxGg@mail.gmail.com>
+References: <1FA8D361-5F28-4FE4-AAE8-1761B98E6381@gmail.com>
+	<CAM0WKeUf4Y6MgXK1Wvpc=C_ti7okBx_-fyAYjmEuJAMDC2g4PA@mail.gmail.com>
+	<CAKjSnQH34_bAW4Z0QOzctR9v0VRx8FziZvveP-_wjv9KLp4a2w@mail.gmail.com>
+	<CAOJG3uCGyf0L9V0zK6GOCMUmsXwfnyDS9UMRqsyubLHpDtyxGg@mail.gmail.com>
+Message-ID: <69D994E8-6571-4708-8732-5059DE5E3DB4@gmail.com>
+
+
+On Dec 14, 2011, at 8:38 AM, Thomas Schilling wrote:
+
+> On 12 December 2011 22:39, Antoine Latter <aslatter at gmail.com> wrote:
+>> But now they look as if they are of equal importance with the other
+>> class methods, which is not really true.
+> 
+> Maybe, but something like this is best fixed by improving
+> documentation, not by shuffling things around and needlessly breaking
+> APIs.  I also agree that if an Alternative instance doesn't make sense
+> it should be removed.   The current documentation is indeed very terse
+> indeed.  In particular it needs a section on the pitfalls that users
+> are likely to run into (like infinite loops).
+
+It seems that if we go down this route, though, then what we really need is a big, bold warning at the top of the Alternative class saying something like, "Do *not* implement this class for your type unless you *really* know what you are doing, which will probably only true if you are writing a parser.  If you fail to heed this advice, then many and some will almost assuredly be broken for your type, which will cause code using it to have infinite loops."
+
+Cheers,
+Greg
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111214/568fe39e/attachment.htm>
+

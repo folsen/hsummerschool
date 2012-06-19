@@ -1,0 +1,26 @@
+From mark.lentczner at gmail.com  Mon Dec  5 17:04:25 2011
+From: mark.lentczner at gmail.com (Mark Lentczner)
+Date: Mon, 5 Dec 2011 08:04:25 -0800
+Subject: [Haskell-cafe] "could not create compact unwind"
+In-Reply-To: <CAAOoiFb4ODq-ajZpfHRdOuwROU4-nN1gcan+tmJ+mDt34iKruA@mail.gmail.com>
+References: <87mxbbu9g7.fsf@googlemail.com>
+	<D2FB2631-015C-4EE7-B354-B74364238BD9@cs.otago.ac.nz>
+	<CAAOoiFb4ODq-ajZpfHRdOuwROU4-nN1gcan+tmJ+mDt34iKruA@mail.gmail.com>
+Message-ID: <CAAOoiFbmdMeBFj=qk6bSw2DKjii0KDevfm3z8YKF6GV2D6K9Kw@mail.gmail.com>
+
+The ld warning is benign. You can safely ignore it. It is a known
+issue with GHC and the latest Mac OS X tool chain, and we are stuck
+with it for awhile:? http://hackage.haskell.org/trac/ghc/ticket/5019
+The best way to remove versions of Haskell on a Mac is now my shiny
+new Mac uninstaller! I just put out a "release candidate" yesterday.
+You can find it here:
+Source: UninstallHS.hs ?(just runhaskell this)Executable:
+uninstall-hs.tgz ?(unpack and run if your ghc is broken)
+Running without will just list what's there and suggest what to do
+next. It is "dry-run" by default.
+?- Mark
+PS.: "rm -rf ~/.ghc" only removes the package databases, not the
+packages themselves. It also removes your ghci configuration, so I
+don't recommend it.
+
+

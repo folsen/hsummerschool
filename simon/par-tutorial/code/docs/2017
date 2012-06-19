@@ -1,0 +1,42 @@
+From nominolo at googlemail.com  Fri Dec 16 14:53:26 2011
+From: nominolo at googlemail.com (Thomas Schilling)
+Date: Fri, 16 Dec 2011 13:53:26 +0000
+Subject: [Haskell-cafe] [Haskell] Proposal to incorporate Haskell.org
+In-Reply-To: <4EEB4959.9060300@earth.li>
+References: <BANLkTi=Kf8eJAOpTEMo_1CtHCBEjV6-o1g@mail.gmail.com>
+	<4EEB0A89.1090302@earth.li>
+	<CAJ9AoK9nKpaMDRsggYfBUUr85G2p01-Jjwg8Hgs6BeZCVAH6hA@mail.gmail.com>
+	<4EEB273A.7060901@earth.li>
+	<CAOJG3uCnEvcUW+1FDtF+P_35bmo+=YCFEyB2j52HoZvVPVXp9g@mail.gmail.com>
+	<4EEB4959.9060300@earth.li>
+Message-ID: <CAOJG3uDMCqz4wcmWQOQwmch18hsmQYqinupYrvga_tzGPocHUw@mail.gmail.com>
+
+On 16 December 2011 13:36, Ganesh Sittampalam <ganesh at earth.li> wrote:
+
+>> Would a donation to haskell.org include a fee to SPI? ?I couldn't find
+>> any information on their website.
+>
+> Yes - 5% goes to SPI to cover their overheads. It's detailed in
+> http://www.spi-inc.org/projects/associated-project-howto/ but not on
+> their donations page at http://www.spi-inc.org/donations/.
+>
+> 5% seems reasonable to me and in line with what similar "donation
+> aggregators" charge, for example the Charities Aid Foundation in the UK
+> charges 4%:
+> https://www.cafonline.org/my-personal-giving/plan-your-giving/individual-charity-account.aspx
+
+Yes, that sounds reasonable.  Credit cards donations also cause an
+overhead of 4.5% (and the 5% are deducted from the rest), so the total
+overhead for a credit card donation would be: (1 - 0.955 * 0.95) =
+9.3%  That's fairly high, but I don't see a way around that.
+
+> In effect we've been getting the admin for free from Galois up till now,
+> but it's been getting too troublesome for them.
+
+Yes, I certainly understand that.  The other reason are tax-deductible
+donations, which I assume isn't really possible with Galois handling
+all the financials.
+
+/ Thomas
+
+

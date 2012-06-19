@@ -1,0 +1,24 @@
+From roma at ro-che.info  Sat Feb  5 14:43:34 2011
+From: roma at ro-che.info (Roman Cheplyaka)
+Date: Sat, 5 Feb 2011 15:43:34 +0200
+Subject: [Haskell-cafe] community server & hasktags learned recursing
+ into directories
+In-Reply-To: <1296858891-sup-7850@localhost.localdomain>
+References: <1296858891-sup-7850@localhost.localdomain>
+Message-ID: <20110205134334.GA20752@flit>
+
+* Marc Weber <marco-oweber at gmx.de> [2011-02-04 22:35:53+0000]
+> hasktags learned about how to recurse into subdirectories itself.
+> 
+> This is especially useful for windows because writing scripts can be
+> done but is less well known (http://stackoverflow.com/questions/4865391/answer/submit)
+
+Thanks for that! I planned to do this some time ago, but hadn't found a
+way to detect symlink loops portably (or in any way on Windows). Do you
+handle this problem in any way?
+
+-- 
+Roman I. Cheplyaka :: http://ro-che.info/
+Don't worry what people think, they don't do it very often.
+
+

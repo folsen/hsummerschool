@@ -1,0 +1,32 @@
+From yugang.bj at gmail.com  Tue Apr  5 13:27:48 2011
+From: yugang.bj at gmail.com (Gang Yu)
+Date: Tue, 5 Apr 2011 19:27:48 +0800
+Subject: [Haskell-cafe] broken on build encoding
+In-Reply-To: <201104051110.18480.daniel.is.fischer@googlemail.com>
+References: <BANLkTinxDmbWVd8eQSMKNrQHgS7j5+2gMA@mail.gmail.com>
+	<201104041652.56745.daniel.is.fischer@googlemail.com>
+	<BANLkTikOHvvT2sjXHvV6tY06C6VO4n2eXA@mail.gmail.com>
+	<201104051110.18480.daniel.is.fischer@googlemail.com>
+Message-ID: <BANLkTi=VhEpHw6d1b+3BMKyf05VnBZe+nw@mail.gmail.com>
+
+On Tue, Apr 5, 2011 at 5:10 PM, Daniel Fischer <
+daniel.is.fischer at googlemail.com> wrote:
+
+>
+> Short of changing the code, try installing encoding-0.6.3; that built with
+> ghc-6.12 on hackage, so it should work for you.
+>
+>
+Thanks, Daniel, it does work. I summarize as bundle of
+
+ghc-6.12
+mtl-1.1(no mtl-2)
+encoding-0.6.3
+
+works
+
+Gang
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110405/e511392a/attachment.htm>
+

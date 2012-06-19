@@ -1,0 +1,24 @@
+From davidleothomas at gmail.com  Fri Dec 30 04:47:51 2011
+From: davidleothomas at gmail.com (David Thomas)
+Date: Thu, 29 Dec 2011 19:47:51 -0800
+Subject: [Haskell-cafe] IO typeclasses
+Message-ID: <CAJUDvcjp=y2Tx+vDYXcEVnXEdXD-_5A2fr=mEbN2ozsqjP-9Sw@mail.gmail.com>
+
+Is there any particular reason IO functions in the standard libraries
+aren't grouped into type-classes?
+
+This might allow for:
+
+1) Testing IO code without actual input and output. (I have done this on a
+small scale, but it presently involves much ugliness).
+2) Redirecting output of a function that neglects to take a handle without
+a bunch of calls to dup.
+3) Forwarding IO over a connection to a remote system, allowing code
+written to work locally to be applied remotely, or vice-versa.
+4) Wrapping dangerous IO actions in additional sanity checks.
+
+Thoughts?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20111229/ddd8cd6f/attachment.htm>
+

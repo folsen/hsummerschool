@@ -1,0 +1,39 @@
+From colinpauladams at googlemail.com  Mon Apr  4 16:52:10 2011
+From: colinpauladams at googlemail.com (Colin Adams)
+Date: Mon, 4 Apr 2011 15:52:10 +0100
+Subject: [Haskell-cafe] Encoding of Haskell source files
+In-Reply-To: <990986.91623.qm@web45110.mail.sp1.yahoo.com>
+References: <BANLkTimMGbYeP5QwyWFuk=TBdMMqYnZeuQ@mail.gmail.com>
+	<BANLkTikEbWWY=85kw-Ej8XNk6x=qLn=UOg@mail.gmail.com>
+	<BANLkTincbKvdFaHeJAVkE3wfkHYpJwjsTg@mail.gmail.com>
+	<BANLkTimG9VyfjaNqN1khd89dyz8aNsV8cw@mail.gmail.com>
+	<990986.91623.qm@web45110.mail.sp1.yahoo.com>
+Message-ID: <BANLkTinQeOMEie14pDQcYz74CyxEohxm+A@mail.gmail.com>
+
+2011/4/4 Brandon Moore <brandon_m_moore at yahoo.com>
+
+>
+> The rest of the standard already just talks about sequences of unicode
+> characters, so I don't see much to be gained by prohibiting other
+> encodings.
+>
+> In particular, I have read that systems set up for east asian scripts
+> often use UTF-16 as a default encoding.
+>
+>
+Presumably because this will use less disk space on average.
+
+I too don't see any reason to forbid other Unicode encodings. Perhaps
+mandate support for UTF-8, and allow others with a pragma. But unless
+someone adds support to a Haskell compiler for such a pragma, it will be
+fairly pointless putting this in the standard.
+
+-- 
+Colin Adams
+Preston, Lancashire, ENGLAND
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.haskell.org/pipermail/haskell-cafe/attachments/20110404/31da7061/attachment.htm>
+

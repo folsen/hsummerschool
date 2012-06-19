@@ -1,0 +1,51 @@
+From aslatter at gmail.com  Thu Apr 28 17:20:25 2011
+From: aslatter at gmail.com (Antoine Latter)
+Date: Thu, 28 Apr 2011 10:20:25 -0500
+Subject: [Haskell-cafe] Binary and Serialize classes
+In-Reply-To: <BANLkTinQ3xKU3Fu5N74oSM36sCDuPd7=rw@mail.gmail.com>
+References: <BANLkTinQ3xKU3Fu5N74oSM36sCDuPd7=rw@mail.gmail.com>
+Message-ID: <BANLkTikf6VH2UTTnQ11ee5Vo9KYqWWFB0g@mail.gmail.com>
+
+On Thu, Apr 28, 2011 at 10:00 AM, Evan Laforge <qdunkan at gmail.com> wrote:
+> It's been remarked to me that relying on the Binary and Serialize
+> classes is dangerous, because there's no guarantee they won't maintain
+> a consistent format. ?So if my app uses the Serialize instances that
+> come with cereal, it could suddenly fail to read old saves after an
+> upgrade to cereal.
+>
+> However, neither binary nor cereal expose the underlying serialization
+> algorithms for various types except through the instances, so I would
+> have to copy and paste the code over if I want control over it. ?If I
+> don't trust 'instance Serialize String' to not change behind my back,
+> maybe I could at least trust 'Data.Serialize.stringToUtf8' to not
+> change since if it did the name would now be wrong.
+>
+> Are these fears justified? ?I imagine if the Int instance for
+> Serialize changed there would be an uproar and it would probably have
+> to be changed back. ?I sent a bug to the maintainers of data-binary a
+> long time ago about the Double instance not serializing -0, and they
+> ignored it, probably because it would be bad to change the instance.
+> So can I use the included instances without fear of them changing
+> between releases? ?Of course I still run the risk of an instance from
+> some other package changing, but I'm less likely to be using those.
+>
+
+When I need to comply with a specific binary format, I never rely on
+Binary/Serialize class instances - I always fall back on the primitive
+operations on Words of varying sizes (perhaps defining my own type
+classes for convenience). The 'Builder' type makes this pretty easy.
+
+If I were writing binary data to disk, in my mind that would fall
+under "complying with a specific binary format".
+
+I do, however, rely on the SafeCopy class (or the equivalent
+Happstack.Data.Serialize class) to be able to read it's own data back
+from persistent storage - it is a specific design goal of the library
+and the library has version support built in. If the authors of the
+library come up with a better way to store maps, I would expect them
+to bump the version tag for the stored data and provide automatic
+migration for old data.
+
+Antoine
+
+

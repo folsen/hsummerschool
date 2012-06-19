@@ -1,0 +1,31 @@
+From greg at gregorycollins.net  Mon Aug 29 13:21:11 2011
+From: greg at gregorycollins.net (Gregory Collins)
+Date: Mon, 29 Aug 2011 13:21:11 +0200
+Subject: [Haskell-cafe] Decompressing and http-enumerator
+In-Reply-To: <CAKA2Jg+u_BtN5WKrTc4T_mgmuxP5==ASbsh5rvxJaQhVK64MTg@mail.gmail.com>
+References: <CAKA2Jg+u_BtN5WKrTc4T_mgmuxP5==ASbsh5rvxJaQhVK64MTg@mail.gmail.com>
+Message-ID: <CAHZrzdqdDtoPa+eQS5XtyRFx-2=1WtOQf=eDERvQuzu_dsMwAw@mail.gmail.com>
+
+On Mon, Aug 29, 2011 at 10:08 AM, Michael Snoyman <michael at snoyman.com> wrote:
+> Hi all,
+>
+> Erik just opened an issue on Github[1] that affected me very recently
+> as well when writing some automated Hackage checking code[2]. The
+> issue is that http-enumerator sees the content-encoding header and
+> decompresses the tarball, returning an uncompressed tarfile. I can
+> avoid this with rawBody = False, but that's not a real solution, since
+> that also disables chunked response handling.
+
+A web server should not be setting "Content-encoding: gzip" on a
+.tar.gz file. I agree that http-enumerator is correctly following the
+spec by decompressing.
+
+If you decide to implement a workaround for this, the only reasonable
+thing I can think of is adding a "ignoreContentEncoding" knob the user
+can twiddle to violate spec.
+
+G
+-- 
+Gregory Collins <greg at gregorycollins.net>
+
+

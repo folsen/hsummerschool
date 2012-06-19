@@ -1,0 +1,51 @@
+From qdunkan at gmail.com  Sat Feb  5 07:09:13 2011
+From: qdunkan at gmail.com (Evan Laforge)
+Date: Fri, 4 Feb 2011 22:09:13 -0800
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <20110204103813.6ffde171.mle+hs@mega-nerd.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<AANLkTi=tyKC19Fvie9c8QYN-P=R3oKM_Pm6zOpcmo4Qk@mail.gmail.com>
+	<201102032334.19964.daniel.is.fischer@googlemail.com>
+	<20110204103813.6ffde171.mle+hs@mega-nerd.com>
+Message-ID: <AANLkTin1_ErVOfz+_dDD8X-E1N9GapYMygftUyyK=k6C@mail.gmail.com>
+
+On Thu, Feb 3, 2011 at 3:38 PM, Erik de Castro Lopo
+<mle+hs at mega-nerd.com> wrote:
+> I am a relative newcomer to Haskell, but I think I have a reasonable
+> understanding of the executaion model. Enough to fix performance
+> issues in simple code like the example given.
+>
+> However, one of the Haskell projects I work on is Ben Lippmeier's
+> DDC compiler. Thats about 50000 lines of Haskell code and finding
+> performance issues there is really difficult.
+
+Lately I've been trying to go the other direction: make a large
+section of formerly strict code lazy.  I fully agree that once code
+size gets big these problems get a lot harder.  You have to be very
+careful passing around state that you don't do anything that causes
+too much to be evaluated at the wrong time.  E.g., you can put back
+the final result of a mapAccumL into a StateT but you want to make
+sure it doesn't get looked at until the output of the mapAccumL would
+be evaluated.  Even something seemingly innocuous like bundling it
+into a newtype will cause the mapAccumL to run over the entire list
+and evaluate a bunch of stuff too early and probably wind up with a
+bunch of lag.  And the only way I can think of to find out what order
+these things are running is to throw and infinite list and see if they
+hang or put in a bunch of unsafePerformIO logging... not very
+satisfying in either case, especially when trying to inspect things
+can change the evaluation order.
+
+Sometimes I wonder what this would look like if I were generating
+incremental output with python yields... while getting the data
+dependencies right is essential in any case, I'm suspicious it would
+be easier to think about and understand in a strict language.
+
+But there's definitely a knack to be learned, and I think I might
+eventually get better at it.  For example, I realized that the
+criteria to make something non-strict wrt data dependency are the same
+as trying to parallelize.  Sometimes it's easier to think "what do I
+have to do to make these two processes run in parallel" and that's the
+same thing I have to do to make them interleave with each other
+lazily.
+
+

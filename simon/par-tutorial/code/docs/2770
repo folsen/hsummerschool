@@ -1,0 +1,39 @@
+From johan.tibell at gmail.com  Sun Feb  6 21:29:59 2011
+From: johan.tibell at gmail.com (Johan Tibell)
+Date: Sun, 6 Feb 2011 21:29:59 +0100
+Subject: [Haskell-cafe] Byte Histogram
+In-Reply-To: <4D4EFB05.2040902@btinternet.com>
+References: <4D4B19DB.5000907@btinternet.com>
+	<201102032237.33997.daniel.is.fischer@googlemail.com>
+	<4D4D69DF.5050002@btinternet.com>
+	<AANLkTikGbr6o=kU7m4Vubz4NXGKR5uzSBhx01vzLXm02@mail.gmail.com>
+	<4D4EFB05.2040902@btinternet.com>
+Message-ID: <AANLkTik1NpiS-E5xV3hNQFO1-s8Vd4g_CJCPGJXM2J68@mail.gmail.com>
+
+On Sun, Feb 6, 2011 at 8:48 PM, Andrew Coppin
+<andrewcoppin at btinternet.com> wrote:
+> In particular, I get strange looks from people in the OOP community when I
+> say I'm using a language that doesn't have any abstractions at all for
+> dealing polymorphically with containers. In general, it's almost impossible
+> to write a Haskell function that will work with a list, an (immutable)
+> array, a hash table or a map, polymorphically.
+>
+> I guess it's the case that containers has been there so long now that
+> changing it would break everything. Still, I find myself hungry for
+> something better.
+>
+> Than again, the Prelude itself leaves several things to be desired...
+
+I'm working on a new map data type at the moment, which is 2x faster
+than Data.Map for all key types I've tried (i.e. Ints, Strings, and
+ByteStrings). As part of that work I might try to define a map class
+using associated data types. Data.Map can be made an instance of that
+class without breaking any old code.
+
+I think one reason we haven't seen a type class for containers is that
+it isn't easy to create one using vanilla type classes (see Simon PJ's
+paper on the topic.)
+
+Johan
+
+
