@@ -16,7 +16,10 @@ type Value = String
 type Database = ProcessId
 
 createDB :: ProcessM Database
-createDB = error "not implemented!" -- exercise 5.1
+createDB = do
+  node    <- getSelfNode
+  process <- spawn node undefined
+  return process
 
 set :: Database -> Key -> Value -> ProcessM ()
 set db k v = error "not implemented!" -- exercise 5.1

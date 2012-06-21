@@ -161,26 +161,27 @@ talk server@Server{..} handle = do
     hSetNewlineMode handle universalNewlineMode
         -- Swallow carriage returns sent by telnet clients
     hSetBuffering handle LineBuffering
-    readName
+    ran <- timeout (10*10^6) readName
+    case ran of
+      Nothing -> hPrintf handle "Sorry, you didn't put in your name fast enough."
+      Just _  -> hPrintf handle "Goodbye."
   where
 -- <<readName
     readName = do
       hPutStrLn handle "What is your name?"
-      nameM <- timeout (5*10^6) (hGetLine handle)
-      case nameM of
-        Nothing   -> hPrintf handle "Sorry, you didn't put in your name fast enough.\n"
-        Just name -> if null name
-          then readName
-          else mask $ \restore -> do
-                 ok <- checkAddClient server name handle
-                 case ok of
-                   Nothing -> restore $ do
-                      hPrintf handle
-                         "The name %s is in use, please choose another\n" name
-                      readName
-                   Just client ->
-                      restore (runClient server client)
-                        `finally` removeClient server name
+      name <- hGetLine handle
+      if null name
+         then readName
+         else mask $ \restore -> do
+                ok <- checkAddClient server name handle
+                case ok of
+                  Nothing -> restore $ do
+                     hPrintf handle
+                        "The name %s is in use, please choose another\n" name
+                     readName
+                  Just client ->
+                     restore (runClient server client)
+                       `finally` removeClient server name
 -- >>
 
 -- <<checkAddClient
@@ -219,10 +220,8 @@ runClient server@Server{..} client@Client{..}
                     when continue $ send
 
     receive = forever $ do
-       msgM <- timeout (5*10^6) $ hGetLine clientHandle
-       case msgM of
-         Nothing -> atomically $ writeTVar clientKicked (Just "idling")
-         Just msg -> atomically $ sendMessage client $ Command msg
+       msg <- hGetLine clientHandle
+       atomically $ sendMessage client $ Command msg
 -- >>
 
 -- <<handleMessage
