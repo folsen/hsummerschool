@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 import Remote
-import Database  (Database, createDB, get, set, rcdata)
+import Database  (Database, createDB, getDB, set, rcdata)
 import Worker
 import Control.Monad.IO.Class
 import Control.Monad
@@ -21,13 +21,13 @@ master = do
 
   zipWithM_ (set db) ws (tail ws)
 
-  get db "module" >>= liftIO . print
-  get db "xxxx"   >>= liftIO . print
+  getDB db "module" >>= liftIO . print
+  getDB db "xxxx"   >>= liftIO . print
 
   forever $ do
     l <- liftIO $ do putStr "key: "; hFlush stdout; getLine
     when (not (null l)) $ do
-      r <- get db l
+      r <- getDB db l
       liftIO $ putStrLn ("response: " ++ show r)
 
   return ()
